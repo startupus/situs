@@ -1,285 +1,152 @@
-# 📋 TODO - Editor Module
+# Redaktus Editor — План разработки с ReactBricks
 
-**Дата создания:** 16 января 2025  
-**Статус:** 🚧 В разработке  
-**Приоритет:** 🔥 Критический (MVP)
+## 🎯 Цель
 
-## 🎯 Цели модуля
+Интеграция **ReactBricks CMS** с **TailGrids UI компонентами** для создания мощного визуального редактора Redaktus в рамках Situs Service.
 
-- Создать мощный визуальный редактор с drag-and-drop
-- Обеспечить интеграцию с компонентами TailGrids
-- Поддержать систему undo/redo
-- Обеспечить масштабируемость и расширяемость
+## 📋 План разработки
 
-## 📅 План разработки
+### ЭТАП 1: ОСНОВНАЯ ИНТЕГРАЦИЯ REACTBRICKS (2-3 недели)
 
-### 🚀 Этап 1: MVP Foundation (Q1 2025)
+#### 1.1 Настройка ReactBricks
+- [ ] **Установка и конфигурация ReactBricks**
+  - [ ] Установка `react-bricks/frontend` и `react-bricks/renderer`
+  - [ ] Настройка `reactbricks.config.ts`
+  - [ ] Конфигурация API ключей и App ID
+  - [ ] Настройка типов контента
 
-#### 🧠 Core Engine
-- [ ] **EditorEngine** - основной движок редактора
-  - [ ] Базовая архитектура класса
-  - [ ] Система событий (EventEmitter)
-  - [ ] Управление жизненным циклом
-  - [ ] Конфигурация и инициализация
-  - [ ] Unit тесты для core функциональности
+- [ ] **Базовая интеграция**
+  - [ ] Создание `ReactBricksProvider`
+  - [ ] Настройка роутинга
+  - [ ] Базовая структура редактора
+  - [ ] Тестирование подключения
 
-- [ ] **StateManager** - управление состоянием
-  - [ ] Immutable state management
-  - [ ] State subscriptions
-  - [ ] State persistence
-  - [ ] State validation
-  - [ ] Performance optimization
+#### 1.2 TailGrids UI интеграция
+- [ ] **Адаптер для TailGrids компонентов**
+  - [ ] Создание `TailGridsAdapter`
+  - [ ] Маппинг 600+ компонентов
+  - [ ] Регистрация в ReactBricks
+  - [ ] Тестирование компонентов
 
-- [ ] **CommandManager** - система команд
-  - [ ] Command pattern implementation
-  - [ ] Command execution pipeline
-  - [ ] Command validation
-  - [ ] Command batching
-  - [ ] Command serialization
+- [ ] **Темы и стили**
+  - [ ] Интеграция Tailwind CSS
+  - [ ] Настройка тем оформления
+  - [ ] Адаптация компонентов
+  - [ ] Предварительный просмотр
 
-#### 🎨 Canvas System
-- [ ] **Canvas** - основная область редактирования
-  - [ ] HTML5 Canvas или SVG implementation
-  - [ ] Responsive canvas sizing
-  - [ ] Zoom and pan functionality
-  - [ ] Grid and guides
-  - [ ] Canvas events handling
+#### 1.3 Визуальный редактор
+- [ ] **Основной интерфейс**
+  - [ ] Панель инструментов
+  - [ ] Область редактирования
+  - [ ] Боковые панели
+  - [ ] Drag & drop функциональность
 
-- [ ] **CanvasRenderer** - рендеринг элементов
-  - [ ] Element rendering pipeline
-  - [ ] Performance optimization
-  - [ ] Layer management
-  - [ ] Rendering cache
-  - [ ] Visual effects
+### ЭТАП 2: AI ИНТЕГРАЦИЯ (2-3 недели)
 
-- [ ] **CanvasController** - контроллер canvas
-  - [ ] Mouse and keyboard events
-  - [ ] Touch events support
-  - [ ] Event delegation
-  - [ ] Performance monitoring
-  - [ ] Error handling
+#### 2.1 AI предложения
+- [ ] **Интеграция с AI Coordinator**
+  - [ ] Подключение к Hubus через AI Coordinator
+  - [ ] Система AI предложений
+  - [ ] Автодополнение контента
+  - [ ] Умные подсказки
 
-#### 🖱️ Drag & Drop
-- [ ] **DragManager** - менеджер перетаскивания
-  - [ ] Drag initiation logic
-  - [ ] Drag state management
-  - [ ] Drag constraints
-  - [ ] Drag performance
-  - [ ] Cross-browser compatibility
+- [ ] **AI оптимизация**
+  - [ ] Оптимизация структуры сайта
+  - [ ] Улучшение контента
+  - [ ] SEO рекомендации
+  - [ ] Производительность
 
-- [ ] **DropZone** - зоны сброса
-  - [ ] Drop zone detection
-  - [ ] Drop validation
-  - [ ] Drop feedback
-  - [ ] Drop animations
-  - [ ] Drop zone management
+#### 2.2 Умное редактирование
+- [ ] **Smart Layout**
+  - [ ] Автоматическая компоновка
+  - [ ] Адаптивные макеты
+  - [ ] Responsive дизайн
+  - [ ] AI-ассистент
 
-- [ ] **DragPreview** - предпросмотр перетаскивания
-  - [ ] Preview element creation
-  - [ ] Preview positioning
-  - [ ] Preview styling
-  - [ ] Preview performance
-  - [ ] Preview accessibility
+### ЭТАП 3: ЭКСПОРТ И ДЕПЛОЙ (1-2 недели)
 
-#### 🎯 Selection System
-- [ ] **SelectionManager** - менеджер выделения
-  - [ ] Single element selection
-  - [ ] Multi-element selection
-  - [ ] Selection state management
-  - [ ] Selection events
-  - [ ] Selection persistence
+#### 3.1 Экспорт сайтов
+- [ ] **JSON экспорт**
+  - [ ] Генерация JSON структуры
+  - [ ] Совместимость с генератором
+  - [ ] Валидация экспорта
+  - [ ] Оптимизация размера
 
-- [ ] **SelectionBox** - рамка выделения
-  - [ ] Visual selection indicators
-  - [ ] Selection handles
-  - [ ] Selection resizing
-  - [ ] Selection rotation
-  - [ ] Selection constraints
+- [ ] **Статическая генерация**
+  - [ ] Генерация HTML/CSS
+  - [ ] Оптимизация ресурсов
+  - [ ] SEO оптимизация
+  - [ ] Производительность
 
-#### ⏮️ History System
-- [ ] **HistoryManager** - менеджер истории
-  - [ ] Command history tracking
-  - [ ] History state management
-  - [ ] History limits
-  - [ ] History persistence
-  - [ ] History performance
-
-- [ ] **UndoRedo** - undo/redo функциональность
-  - [ ] Undo implementation
-  - [ ] Redo implementation
-  - [ ] Undo/redo UI
-  - [ ] Keyboard shortcuts
-  - [ ] Undo/redo validation
-
-### 🚀 Этап 2: UI Components (Q1 2025)
-
-#### 🛠️ Toolbar System
-- [ ] **MainToolbar** - главная панель инструментов
-  - [ ] Toolbar layout
-  - [ ] Tool buttons
-  - [ ] Tool states
-  - [ ] Tool grouping
-  - [ ] Responsive toolbar
-
-- [ ] **FormatToolbar** - панель форматирования
-  - [ ] Text formatting tools
-  - [ ] Style controls
-  - [ ] Color picker
-  - [ ] Font controls
-  - [ ] Alignment tools
-
-- [ ] **LayoutToolbar** - панель макета
-  - [ ] Layout tools
-  - [ ] Grid controls
-  - [ ] Spacing tools
-  - [ ] Alignment tools
-  - [ ] Distribution tools
-
-#### 📋 Panel System
-- [ ] **PropertiesPanel** - панель свойств
-  - [ ] Element properties display
-  - [ ] Property editing
-  - [ ] Property validation
-  - [ ] Property categories
-  - [ ] Property search
-
-- [ ] **LayersPanel** - панель слоев
-  - [ ] Layer tree view
-  - [ ] Layer visibility
-  - [ ] Layer locking
-  - [ ] Layer reordering
-  - [ ] Layer grouping
-
-- [ ] **ComponentsPanel** - панель компонентов
-  - [ ] Component library display
-  - [ ] Component search
-  - [ ] Component categories
-  - [ ] Component preview
-  - [ ] Component drag
-
-### 🚀 Этап 3: Advanced Features (Q2 2025)
-
-#### 🔌 Plugin System
-- [ ] **PluginManager** - менеджер плагинов
-  - [ ] Plugin loading
-  - [ ] Plugin lifecycle
-  - [ ] Plugin API
-  - [ ] Plugin validation
-  - [ ] Plugin marketplace
-
-#### 🎨 Advanced Tools
-- [ ] **CustomTools** - кастомные инструменты
-  - [ ] Tool creation API
-  - [ ] Tool registration
-  - [ ] Tool configuration
-  - [ ] Tool persistence
-  - [ ] Tool sharing
-
-#### ⌨️ Keyboard & Shortcuts
-- [ ] **KeyboardManager** - менеджер клавиатуры
-  - [ ] Keyboard shortcuts
-  - [ ] Shortcut customization
-  - [ ] Shortcut conflicts
-  - [ ] Shortcut help
-  - [ ] Accessibility
-
-#### 🎯 Context Menus
-- [ ] **ContextMenu** - контекстные меню
-  - [ ] Menu creation
-  - [ ] Menu positioning
-  - [ ] Menu actions
-  - [ ] Menu customization
-  - [ ] Menu accessibility
-
-## 🔗 Интеграции
-
-### С компонентами
-- [ ] **Component Integration** - интеграция с компонентами
-  - [ ] Component rendering
-  - [ ] Component properties
-  - [ ] Component events
-  - [ ] Component validation
-  - [ ] Component performance
-
-### С генератором
-- [ ] **JSON Export** - экспорт в JSON
-  - [ ] State serialization
-  - [ ] JSON validation
-  - [ ] JSON optimization
-  - [ ] JSON versioning
-  - [ ] JSON import
-
-### С платформой
-- [ ] **Platform Integration** - интеграция с платформой
-  - [ ] Hubus AI integration
-  - [ ] Loginus auth integration
-  - [ ] Bilingus billing integration
-  - [ ] Cross-service communication
-  - [ ] Platform events
+#### 3.2 Деплой
+- [ ] **Управление деплоем**
+  - [ ] Интеграция с domains модулем
+  - [ ] Автоматический деплой
+  - [ ] Мониторинг деплоя
+  - [ ] Rollback функциональность
 
 ## 🧪 Тестирование
 
-### Unit Tests
-- [ ] **Core Tests** - тесты ядра
-  - [ ] EditorEngine tests
-  - [ ] StateManager tests
-  - [ ] CommandManager tests
-  - [ ] EventSystem tests
-  - [ ] Performance tests
+### Unit тесты
+- [ ] Тестирование ReactBricks интеграции
+- [ ] Тестирование TailGrids адаптера
+- [ ] Тестирование AI интеграции
+- [ ] Тестирование экспорта
 
-### Integration Tests
-- [ ] **Integration Tests** - интеграционные тесты
-  - [ ] Component integration tests
-  - [ ] Generator integration tests
-  - [ ] Platform integration tests
-  - [ ] End-to-end tests
-  - [ ] Performance tests
+### Integration тесты
+- [ ] Полный цикл редактирования
+- [ ] Интеграция с AI Coordinator
+- [ ] Экспорт сайтов
+- [ ] E2E тесты редактора
 
-### Visual Tests
-- [ ] **Visual Tests** - визуальные тесты
-  - [ ] Canvas rendering tests
-  - [ ] UI component tests
-  - [ ] Drag-and-drop tests
-  - [ ] Responsive tests
-  - [ ] Accessibility tests
+### Performance тесты
+- [ ] Скорость загрузки компонентов
+- [ ] Производительность редактора
+- [ ] Экспорт больших сайтов
+- [ ] Нагрузочное тестирование
 
-## 📊 Метрики
+## 📈 Метрики успеха
 
-### Performance
-- [ ] **Performance Metrics** - метрики производительности
-  - [ ] Canvas rendering time < 16ms
-  - [ ] Drag-and-drop latency < 50ms
-  - [ ] State updates < 10ms
-  - [ ] Memory usage < 100MB
-  - [ ] CPU usage < 30%
+### Качество редактора
+- **Editor Response Time** — время отклика редактора (<100ms)
+- **Component Load Time** — время загрузки компонентов (<2 сек)
+- **Save Success Rate** — успешность сохранения (>99%)
+- **User Satisfaction** — удовлетворённость (>4.5/5)
 
-### Quality
-- [ ] **Quality Metrics** - метрики качества
-  - [ ] Test coverage > 90%
-  - [ ] Bug density < 1 per 1000 LOC
-  - [ ] Code complexity < 10
-  - [ ] Documentation coverage > 95%
-  - [ ] Accessibility score > 95%
+### Производительность
+- **Visual Editor Performance** — производительность визуального редактора
+- **TailGrids Integration** — скорость интеграции с TailGrids
+- **AI Suggestions** — скорость AI предложений
+- **Export Performance** — производительность экспорта
+
+## 🔧 Технические требования
+
+### ReactBricks
+- **Версия**: Последняя стабильная
+- **Поддержка**: TypeScript, Next.js
+- **API**: REST API для контента
+- **Компоненты**: Кастомные React компоненты
+
+### TailGrids UI
+- **Компоненты**: 600+ готовых компонентов
+- **Стили**: Tailwind CSS
+- **Типизация**: TypeScript
+- **Адаптивность**: Mobile-first подход
+
+### AI Integration
+- **Hubus**: 200+ моделей нейросетей
+- **AI Coordinator**: Координация задач
+- **Результаты**: Обработка через ResultProcessor
+- **Оптимизация**: WorkflowManager
 
 ## 🚀 Следующие шаги
 
-### Неделя 1-2
-1. **Research & Selection** готового редактора
-2. **POC разработка** базовой архитектуры
-3. **Выбор технологии** (Canvas vs SVG)
-
-### Неделя 3-4
-1. **Core Engine** разработка
-2. **Canvas System** реализация
-3. **Basic Drag & Drop** функциональность
-
-### Неделя 5-6
-1. **Selection System** реализация
-2. **History System** разработка
-3. **Basic UI** компоненты
+1. **Исследование ReactBricks** — изучение документации и примеров
+2. **Создание прототипа** — базовая интеграция ReactBricks + TailGrids
+3. **Тестирование компонентов** — проверка совместимости
+4. **Планирование архитектуры** — детальная архитектура интеграции
+5. **Начало разработки** — реализация ЭТАПА 1
 
 ---
 
-**Статус:** 🚧 В разработке  
-**Следующий milestone:** Research & Selection готового редактора  
-**Обновлено:** 16 января 2025 
+**Redaktus Editor** — мощный визуальный редактор на основе ReactBricks с интеграцией TailGrids UI и AI возможностями. 
