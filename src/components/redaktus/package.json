@@ -1,0 +1,9 @@
+{
+  "name": "redaktus",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./frontend": "./frontend.ts"
+  }
+} 

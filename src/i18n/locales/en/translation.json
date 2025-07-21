@@ -1,0 +1,93 @@
+{
+  "editor": {
+    "title": "Visual Editor",
+    "tabs": {
+      "editor": "EDITOR",
+      "media": "MEDIA", 
+      "playground": "PLAYGROUND"
+    },
+    "panels": {
+      "pages": "Pages",
+      "entities": "Entities",
+      "page": "Page",
+      "block": "Block",
+      "stories": "Stories"
+    },
+    "buttons": {
+      "addFirstBlock": "Add your first block",
+      "searchPage": "Search page",
+      "viewSite": "VIEW SITE",
+      "currentProps": "CURRENT PROPS",
+      "copy": "Copy",
+      "delete": "Delete Component",
+      "save": "Save Project",
+      "load": "Load Project",
+      "uploadImages": "Upload images",
+      "newFolder": "New Folder",
+      "allMedia": "All media",
+      "selectAll": "Select all",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "addAbove": "Add above",
+      "addBelow": "Add below",
+      "deleteBlock": "Delete block"
+    },
+    "sections": {
+      "text": "TEXT",
+      "background": "BACKGROUND", 
+      "media": "MEDIA",
+                  "addNew": "ADD ELEMENTS...",
+      "statusVisibility": "STATUS AND VISIBILITY",
+      "pageStructure": "PAGE STRUCTURE LOCKED?",
+      "pageAttributes": "PAGE ATTRIBUTES"
+    },
+    "properties": {
+      "fontFamily": "FONT FAMILY",
+      "size": "SIZE",
+      "weight": "WEIGHT",
+      "color": "COLOR",
+      "align": "ALIGN",
+      "type": "TYPE",
+      "opacity": "OPACITY",
+      "visibility": "VISIBILITY", 
+      "schedule": "SCHEDULE PUBLISH (GMT+0)",
+      "mediaType": "MEDIA TYPE",
+      "mediaSide": "MEDIA SIDE",
+      "mediaOnMobile": "MEDIA ON TOP ON MOBILE"
+    },
+    "values": {
+      "published": "Published",
+      "draft": "Draft",
+      "private": "Private",
+      "unlocked": "Unlocked",
+      "locked": "Locked",
+      "left": "Left",
+      "right": "Right",
+      "center": "Center",
+      "normal": "Normal",
+      "bold": "Bold",
+      "light": "Light",
+      "medium": "Medium",
+      "image": "Image",
+      "multipleLogos": "Multiple logos",
+      "videoMp4": "Video (mp4 file)",
+      "videoStreaming": "Video (streaming)",
+      "gradient": "Gradient"
+    },
+    "placeholders": {
+      "searchBricks": "Search bricks...",
+      "searchAssets": "Q Search assets...",
+      "imageUrl": "Image URL",
+      "newBlockHere": "NEW BLOCK HERE: SELECT ON THE RIGHT »"
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "back": "Back",
+    "close": "Close",
+    "run": "Run",
+    "tests": "Tests",
+    "performance": "Performance"
+  }
+} 

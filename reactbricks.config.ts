@@ -1,9 +1,9 @@
-import { types } from 'react-bricks/frontend'
+import { types } from 'redaktus/frontend'
 import React from 'react'
 
-const config: types.ReactBricksConfig = {
-  appId: process.env.REACTBRICKS_APP_ID || 'your-app-id',
-  apiKey: process.env.REACTBRICKS_API_KEY || 'your-api-key',
+const config: types.RedaktusConfig = {
+  appId: 'redaktus-local',
+  apiKey: 'local-development',
   pageTypes: [
     {
       name: 'website',
@@ -26,6 +26,9 @@ const config: types.ReactBricksConfig = {
   enableAutoSave: true,
   disableSaveIfInvalidProps: false,
   enablePreview: true,
+  // Отключаем внешние API
+  enableAPI: false,
+  enableCloud: false,
 }
 
 export default config 

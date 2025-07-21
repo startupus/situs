@@ -13,7 +13,24 @@
     "resolveJsonModule": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "redaktus/frontend": ["src/components/redaktus/frontend.ts"],
+      "redaktus/core": ["src/components/redaktus/core.ts"],
+      "redaktus/types": ["src/components/redaktus/types-only.ts"],
+      "redaktus": ["src/components/redaktus/index.ts"],
+      "website/*": ["src/components/redaktus/website/*"],
+      "blog/*": ["src/components/redaktus/blog/*"],
+      "next/head": ["src/components/redaktus/next-shims/head.tsx"],
+      "next/link": ["src/components/redaktus/next-shims/link.tsx"],
+      "next/router": ["src/components/redaktus/next-shims/router.ts"],
+      "next/app": ["src/components/redaktus/next-shims/app.ts"],
+      "next/font/google": ["src/components/redaktus/next-shims/font.ts"],
+      "next-themes": ["src/components/redaktus/next-shims/themes.tsx"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
