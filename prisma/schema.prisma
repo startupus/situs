@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  status    UserStatus @default(ACTIVE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  balances     Balance[]
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+model Currency {
+  id          String   @id @default(cuid())
+  code        String   @unique  // e.g., "USD", "EUR", "BTC", "GEMS"
+  name        String              // e.g., "US Dollar", "Euro", "Bitcoin", "Game Gems"
+  symbol      String              // e.g., "$", "€", "₿", "💎"
+  decimals    Int      @default(2) // Number of decimal places
+  isActive    Boolean  @default(true)
+  isSystem    Boolean  @default(false) // System currencies vs user-created
+  
+  // Metadata
+  description String?
+  iconUrl     String?
+  color       String?  // Hex color for UI
+  
+  // Audit fields
+  createdBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  balances     Balance[]
+  transactions Transaction[]
+
+  @@map("currencies")
+}
+
+model Balance {
+  id         String   @id @default(cuid())
+  userId     String
+  currencyId String
+  amount     Float    @default(0)
+  reserved   Float    @default(0)
+  lastUpdated DateTime @updatedAt
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency Currency @relation(fields: [currencyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, currencyId])
+  @@map("balances")
+}
+
+model Transaction {
+  id          String            @id @default(cuid())
+  userId      String
+  serviceId   String
+  type        TransactionType
+  amount      Float
+  currencyId  String
+  status      TransactionStatus @default(PENDING)
+  description String?
+  metadata    String?           // JSON string
+  createdAt   DateTime          @default(now())
+  completedAt DateTime?
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency Currency @relation(fields: [currencyId], references: [id], onDelete: Cascade)
+
+  @@map("transactions")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum TransactionType {
+  DEPOSIT
+  CHARGE
+  REFUND
+  TRANSFER
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
