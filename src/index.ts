@@ -242,12 +242,44 @@ app.delete('/api/pages/:pageId/components/:componentId', asyncHandler(async (req
 // API для библиотеки компонентов
 app.get('/api/components', asyncHandler(async (req: express.Request, res: express.Response) => {
   const startTime = Date.now();
-  const category = req.query.category as string;
+  const { category, search } = req.query;
 
-  const components = editorDataService.getComponentLibrary(category);
+  let components;
+  
+  if (search) {
+    components = editorDataService.searchComponents(search as string);
+  } else {
+    components = editorDataService.getComponentsByCategory(category as string);
+  }
+  
   const processingTime = Date.now() - startTime;
-
   res.json(createSuccessResponse(components, processingTime));
+}));
+
+// API для категорий компонентов
+app.get('/api/components/categories', asyncHandler(async (req: express.Request, res: express.Response) => {
+  const startTime = Date.now();
+  
+  const categories = editorDataService.getComponentCategories();
+  const processingTime = Date.now() - startTime;
+  
+  res.json(createSuccessResponse(categories, processingTime));
+}));
+
+// API для загрузки адаптированных компонентов
+app.post('/api/components/load-adapted', asyncHandler(async (req: express.Request, res: express.Response) => {
+  const startTime = Date.now();
+  
+  await editorDataService.loadAdaptedComponents();
+  const processingTime = Date.now() - startTime;
+  
+  const stats = {
+    totalComponents: editorDataService.getStats().totalLibraryComponents,
+    categories: editorDataService.getComponentCategories(),
+    processingTime
+  };
+  
+  res.json(createSuccessResponse(stats, processingTime));
 }));
 
 app.get('/api/components/:type', asyncHandler(async (req: express.Request, res: express.Response) => {

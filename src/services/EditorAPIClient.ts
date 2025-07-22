@@ -236,6 +236,33 @@ export class EditorAPIClient {
     return response.data!;
   }
 
+  /**
+   * Поиск компонентов по тексту
+   */
+  async searchComponents(searchTerm: string): Promise<ComponentLibraryItem[]> {
+    const queryParams = `?search=${encodeURIComponent(searchTerm)}`;
+    const response = await this.request<ComponentLibraryItem[]>(`/api/components${queryParams}`);
+    return response.data!;
+  }
+
+  /**
+   * Получить категории компонентов
+   */
+  async getComponentCategories(): Promise<Array<{ category: string; count: number; components: string[] }>> {
+    const response = await this.request<Array<{ category: string; count: number; components: string[] }>>('/api/components/categories');
+    return response.data!;
+  }
+
+  /**
+   * Загрузить адаптированные TailGrids компоненты
+   */
+  async loadAdaptedComponents(): Promise<{ totalComponents: number; categories: any[]; processingTime: number }> {
+    const response = await this.request<{ totalComponents: number; categories: any[]; processingTime: number }>('/api/components/load-adapted', {
+      method: 'POST'
+    });
+    return response.data!;
+  }
+
   // === API ДЛЯ СТАТИСТИКИ ===
 
   /**

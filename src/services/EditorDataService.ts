@@ -505,4 +505,86 @@ export class EditorDataService {
       }
     };
   }
+
+  /**
+   * Загрузить адаптированные TailGrids компоненты
+   */
+  async loadAdaptedComponents(): Promise<void> {
+    try {
+      const fs = await import('fs');
+      const path = await import('path');
+      
+      const componentsJsonPath = path.join(process.cwd(), 'src', 'data', 'adaptedComponents.json');
+      
+      if (!fs.existsSync(componentsJsonPath)) {
+        console.log('Файл adaptedComponents.json не найден. Запустите: npm run scan:components');
+        return;
+      }
+
+      const componentsData = JSON.parse(fs.readFileSync(componentsJsonPath, 'utf-8'));
+      
+      console.log(`Загружаем ${componentsData.totalComponents} адаптированных компонентов из TailGrids...`);
+      
+      // Добавляем компоненты в библиотеку
+      componentsData.components.forEach((comp: any) => {
+        this.componentLibrary.set(comp.metadata.type, comp.metadata);
+      });
+
+      console.log(`✅ Загружено ${componentsData.totalComponents} адаптированных компонентов`);
+      console.log(`📊 Всего компонентов в библиотеке: ${this.componentLibrary.size}`);
+      
+    } catch (error) {
+      console.warn('⚠️ Не удалось загрузить адаптированные компоненты:', error);
+    }
+  }
+
+  /**
+   * Получить компоненты по категории (включая адаптированные)
+   */
+  getComponentsByCategory(category?: string): ComponentLibraryItem[] {
+    const allComponents = Array.from(this.componentLibrary.values());
+    
+    if (!category) {
+      return allComponents;
+    }
+
+    return allComponents.filter(component => 
+      component.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+
+  /**
+   * Поиск компонентов по тегам или названию
+   */
+  searchComponents(searchTerm: string): ComponentLibraryItem[] {
+    const term = searchTerm.toLowerCase();
+    const allComponents = Array.from(this.componentLibrary.values());
+    
+    return allComponents.filter(component =>
+      component.name.toLowerCase().includes(term) ||
+      component.description.toLowerCase().includes(term) ||
+      component.tags.some(tag => tag.toLowerCase().includes(term))
+    );
+  }
+
+  /**
+   * Получить статистику по категориям компонентов
+   */
+  getComponentCategories(): Array<{ category: string; count: number; components: string[] }> {
+    const categoryMap = new Map<string, ComponentLibraryItem[]>();
+    
+    Array.from(this.componentLibrary.values()).forEach(component => {
+      const category = component.category;
+      if (!categoryMap.has(category)) {
+        categoryMap.set(category, []);
+      }
+      categoryMap.get(category)!.push(component);
+    });
+
+    return Array.from(categoryMap.entries()).map(([category, components]) => ({
+      category,
+      count: components.length,
+      components: components.map(c => c.name)
+    }));
+  }
 }
