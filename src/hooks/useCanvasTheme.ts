@@ -37,6 +37,31 @@ export const useCanvasTheme = () => {
         canvasContainer.classList.remove('dark');
       }
       
+      // ПРИНУДИТЕЛЬНОЕ ПРИМЕНЕНИЕ СТИЛЕЙ ЧЕРЕЗ JavaScript
+      if (newTheme === 'light') {
+        // Светлая тема - принудительно белый фон и темный текст
+        (canvasContainer as HTMLElement).style.setProperty('background-color', 'white', 'important');
+        (canvasContainer as HTMLElement).style.setProperty('color', 'rgb(17 24 39)', 'important');
+        
+        // Применяем ко всем дочерним элементам
+        const allElements = canvasContainer.querySelectorAll('*');
+        allElements.forEach((el) => {
+          (el as HTMLElement).style.setProperty('color', 'rgb(17 24 39)', 'important');
+          (el as HTMLElement).style.setProperty('background-color', 'white', 'important');
+        });
+      } else {
+        // Темная тема - принудительно темный фон и светлый текст
+        (canvasContainer as HTMLElement).style.setProperty('background-color', 'rgb(17 24 39)', 'important');
+        (canvasContainer as HTMLElement).style.setProperty('color', 'rgb(243 244 246)', 'important');
+        
+        // Применяем ко всем дочерним элементам
+        const allElements = canvasContainer.querySelectorAll('*');
+        allElements.forEach((el) => {
+          (el as HTMLElement).style.setProperty('color', 'rgb(243 244 246)', 'important');
+          (el as HTMLElement).style.setProperty('background-color', 'rgb(17 24 39)', 'important');
+        });
+      }
+      
       console.log('🎨 Canvas: Classes after:', canvasContainer.className);
       console.log('🎨 Canvas: Theme applied successfully:', newTheme);
     } else {
