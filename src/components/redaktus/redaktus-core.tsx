@@ -348,8 +348,15 @@ const EditorContent: React.FC = () => {
             onSave={handleSave}
           />
 
-          {/* Область редактирования - тема контролируется CSS */}
-          <div className="flex-1 overflow-y-auto min-w-0 redaktus-canvas bg-white dark:bg-gray-900 transition-colors duration-200">
+          {/* Область редактирования - тема контролируется CSS и canvasResolvedTheme */}
+          <div 
+            className={`flex-1 overflow-y-auto min-w-0 redaktus-canvas transition-colors duration-200 ${canvasResolvedTheme === 'dark' ? 'dark' : ''}`}
+            style={{
+              backgroundColor: canvasResolvedTheme === 'dark' ? '#111827' : '#ffffff',
+              color: canvasResolvedTheme === 'dark' ? '#f9fafb' : '#1f2937',
+              colorScheme: canvasResolvedTheme === 'dark' ? 'dark' : 'light'
+            }}
+          >
             {/* Динамический контент страницы */}
             <div 
               className="min-h-full"

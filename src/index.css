@@ -120,43 +120,56 @@ body {
   color-scheme: dark;
 }
 
-/* КАНВАС - ТОЧЕЧНАЯ ИЗОЛЯЦИЯ */
+/* КАНВАС - МАКСИМАЛЬНАЯ ИЗОЛЯЦИЯ ОТ ИНТЕРФЕЙСА */
 .redaktus-canvas {
+  /* Полная изоляция от родительского контекста */
+  isolation: isolate !important;
+  contain: layout style paint !important;
+  
   /* Восстанавливаем базовые свойства */
   display: block !important;
   overflow-y: auto !important;
   min-width: 0 !important;
   flex: 1 !important;
   
-  /* Принудительная изоляция */
-  isolation: isolate !important;
-  contain: layout style !important;
-  
   /* Защита от внешних стилей */
   position: relative !important;
   z-index: 1 !important;
+  
+  /* Принудительные базовые стили */
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
   
   /* Плавные переходы */
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* ПРИНУДИТЕЛЬНЫЕ СТИЛИ ТОЛЬКО ДЛЯ ОСНОВНЫХ ЦВЕТОВ */
+/* ПРИНУДИТЕЛЬНАЯ ИЗОЛЯЦИЯ - ПЕРЕОПРЕДЕЛЯЕМ ВСЕ ВОЗМОЖНЫЕ НАСЛЕДОВАНИЯ */
 
-/* Светлая тема канваса */
+/* Светлая тема канваса - ПОЛНАЯ ИЗОЛЯЦИЯ */
 .redaktus-canvas:not(.dark) {
   background-color: #ffffff !important;
   color: #1f2937 !important;
   color-scheme: light !important;
 }
 
-/* Темная тема канваса */
+/* Темная тема канваса - ПОЛНАЯ ИЗОЛЯЦИЯ */
 .redaktus-canvas.dark {
   background-color: #111827 !important;
   color: #f9fafb !important;
   color-scheme: dark !important;
 }
 
-/* ТОЧЕЧНЫЕ СТИЛИ ДЛЯ КОНКРЕТНЫХ TAILWIND КЛАССОВ */
+/* ИЗОЛЯЦИЯ ВСЕХ ДОЧЕРНИХ ЭЛЕМЕНТОВ КАНВАСА */
+.redaktus-canvas *,
+.redaktus-canvas *::before,
+.redaktus-canvas *::after {
+  /* Сбрасываем наследование цветов от интерфейса */
+  color: inherit !important;
+}
+
+/* ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ КОНКРЕТНЫХ TAILWIND КЛАССОВ */
 
 /* Светлая тема - переопределяем только критичные классы */
 .redaktus-canvas:not(.dark) .text-dark { 
@@ -167,6 +180,15 @@ body {
 }
 .redaktus-canvas:not(.dark) .text-primary { 
   color: #3c82f6 !important; 
+}
+.redaktus-canvas:not(.dark) .bg-white { 
+  background-color: #ffffff !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-500 { 
+  color: #6b7280 !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-600 { 
+  color: #4b5563 !important; 
 }
 
 /* Темная тема - переопределяем только критичные классы */
@@ -183,6 +205,15 @@ body {
   background-color: #1f2937 !important; 
 }
 .redaktus-canvas.dark .text-dark-6 { 
+  color: #9ca3af !important; 
+}
+.redaktus-canvas.dark .text-white { 
+  color: #ffffff !important; 
+}
+.redaktus-canvas.dark .text-gray-300 { 
+  color: #d1d5db !important; 
+}
+.redaktus-canvas.dark .text-gray-400 { 
   color: #9ca3af !important; 
 }
 
