@@ -2,20 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== СТАНДАРТНЫЙ TAILGRIDS ПОДХОД К ТЕМАМ v2.0 ===== */
+/* ===== CSS ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ ===== */
+:root {
+  --color-primary: #3056d3;
+  --color-secondary: #13c296;
+  --color-body-color: #637381;
+  --color-dark: #1e293b;
+  --color-gray-3: #e2e8f0;
+  --color-dark-5: #64748b;
+  --color-dark-6: #8b9dc3;
+  --color-blue-dark: #1B44C8;
+  --shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.14);
+}
 
-/* Глобальные стили */
-html, body, #root {
-  width: 100vw !important;
-  max-width: none !important;
-  overflow-x: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
+/* ===== TAILWIND УТИЛИТЫ ДЛЯ ЦВЕТОВ ===== */
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+  
+  .text-body-color {
+    color: var(--color-body-color);
+  }
+  
+  .bg-gray-3 {
+    background-color: var(--color-gray-3);
+  }
+  
+  .border-gray-3 {
+    border-color: var(--color-gray-3);
+  }
+  
+  .text-dark-5 {
+    color: var(--color-dark-5);
+  }
+  
+  .text-dark-6 {
+    color: var(--color-dark-6);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .bg-blue-dark {
+    background-color: var(--color-blue-dark);
+  }
+  
+  .hover\:bg-blue-dark:hover {
+    background-color: var(--color-blue-dark);
+  }
+  
+  .bg-dark {
+    background-color: var(--color-dark);
+  }
+  
+  .bg-dark-2 {
+    background-color: #1e293b;
+  }
+  
+  .shadow-2 {
+    box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.10);
+  }
+}
+
+/* Глобальные стили для приложения */
+html {
+  /* Базовые стили - следуют системной теме по умолчанию */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* Базовые стили - следуют системной теме по умолчанию */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ===== ИЗОЛЯЦИЯ БЛОКОВ ОТ СТИЛЕЙ РЕДАКТОРА ===== */
+
+/* Минимальная изоляция блоков - только переключение темы через dark: */
+.redaktus-canvas .block-container {
+  /* Убираем влияние редактора на блоки */
+  isolation: isolate;
 }
 
 /* ===== ИЗОЛЯЦИЯ ТЕМ ИНТЕРФЕЙСА И КАНВАСА ===== */
 
-/* Контейнер интерфейса редактора (левая панель, тулбары) */
+/* Контейнер интерфейса (панели, меню, кнопки) */
 .redaktus-interface {
   /* Базовые стили - следуют системной теме по умолчанию */
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -31,260 +120,115 @@ html, body, #root {
   color-scheme: dark;
 }
 
-/* Контейнер канваса (область редактирования) */
+/* КАНВАС - МАКСИМАЛЬНАЯ ИЗОЛЯЦИЯ ОТ ИНТЕРФЕЙСА */
 .redaktus-canvas {
-  /* Базовые стили - следуют системной теме по умолчанию */
-  transition: background-color 0.2s ease, color 0.2s ease;
+  /* ПОЛНЫЙ СБРОС ВСЕХ НАСЛЕДУЕМЫХ СТИЛЕЙ */
+  all: unset !important;
+  
+  /* Восстанавливаем только необходимые свойства */
+  display: block !important;
+  overflow-y: auto !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  
+  /* Принудительная изоляция */
+  isolation: isolate !important;
+  contain: layout style !important;
+  
+  /* Сброс цветовых схем */
+  color-scheme: light !important;
+  
+  /* Защита от внешних стилей */
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-/* Принудительная светлая тема канваса */
-.redaktus-canvas.canvas-light {
-  color-scheme: light;
-  background-color: white !important;
-  color: rgb(17 24 39) !important; /* text-gray-900 */
+/* ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ ВСЕХ ЭЛЕМЕНТОВ В КАНВАСЕ */
+
+/* Сброс всех возможных наследований для любых элементов внутри канваса */
+.redaktus-canvas *,
+.redaktus-canvas *::before,
+.redaktus-canvas *::after {
+  /* Блокируем наследование цветов от интерфейса */
+  color: inherit !important;
+  background-color: inherit !important;
+  border-color: inherit !important;
 }
 
-/* Принудительная темная тема канваса */
-.redaktus-canvas.canvas-dark {
-  color-scheme: dark;
-  background-color: rgb(17 24 39) !important; /* bg-gray-900 */
-  color: rgb(243 244 246) !important; /* text-gray-100 */
+/* СВЕТЛАЯ ТЕМА КАНВАСА - принудительные стили */
+.redaktus-canvas:not(.dark) {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
 }
 
-/* ===== ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ БЛОКОВ В КАНВАСЕ ===== */
-
-/* Блоки в светлом канвасе - принудительно светлые */
-.redaktus-canvas.canvas-light * {
-  color: rgb(17 24 39) !important; /* text-gray-900 */
+.redaktus-canvas:not(.dark) .text-dark { 
+  color: #1e293b !important; 
+}
+.redaktus-canvas:not(.dark) .text-body-color { 
+  color: #637381 !important; 
+}
+.redaktus-canvas:not(.dark) .bg-white { 
+  background-color: #ffffff !important; 
+}
+.redaktus-canvas:not(.dark) .text-primary { 
+  color: #3c82f6 !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-600 { 
+  color: #4b5563 !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-700 { 
+  color: #374151 !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-800 { 
+  color: #1f2937 !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-900 { 
+  color: #111827 !important; 
 }
 
-.redaktus-canvas.canvas-light h1,
-.redaktus-canvas.canvas-light h2,
-.redaktus-canvas.canvas-light h3,
-.redaktus-canvas.canvas-light h4,
-.redaktus-canvas.canvas-light h5,
-.redaktus-canvas.canvas-light h6 {
-  color: rgb(17 24 39) !important; /* text-gray-900 */
+/* ТЕМНАЯ ТЕМА КАНВАСА - принудительные стили */
+.redaktus-canvas.dark {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
 }
 
-.redaktus-canvas.canvas-light p {
-  color: rgb(55 65 81) !important; /* text-gray-700 */
+.redaktus-canvas.dark .text-dark { 
+  color: #f9fafb !important; 
+}
+.redaktus-canvas.dark .text-body-color { 
+  color: #9ca3af !important; 
+}
+.redaktus-canvas.dark .bg-white { 
+  background-color: #1f2937 !important; 
+}
+.redaktus-canvas.dark .text-primary { 
+  color: #60a5fa !important; 
+}
+.redaktus-canvas.dark .bg-dark-2 { 
+  background-color: #1f2937 !important; 
+}
+.redaktus-canvas.dark .text-dark-6 { 
+  color: #9ca3af !important; 
+}
+.redaktus-canvas.dark .text-gray-600 { 
+  color: #9ca3af !important; 
+}
+.redaktus-canvas.dark .text-gray-700 { 
+  color: #d1d5db !important; 
+}
+.redaktus-canvas.dark .text-gray-800 { 
+  color: #e5e7eb !important; 
+}
+.redaktus-canvas.dark .text-gray-900 { 
+  color: #f9fafb !important; 
 }
 
-/* Блоки в темном канвасе - принудительно темные */
-.redaktus-canvas.canvas-dark * {
-  color: rgb(243 244 246) !important; /* text-gray-100 */
-}
+/* ===== TAILGRIDS БЛОКИ ИСПОЛЬЗУЮТ СТАНДАРТНЫЕ TAILWINDCSS КЛАССЫ ===== */
 
-.redaktus-canvas.canvas-dark h1,
-.redaktus-canvas.canvas-dark h2,
-.redaktus-canvas.canvas-dark h3,
-.redaktus-canvas.canvas-dark h4,
-.redaktus-canvas.canvas-dark h5,
-.redaktus-canvas.canvas-dark h6 {
-  color: rgb(243 244 246) !important; /* text-gray-100 */
-}
-
-.redaktus-canvas.canvas-dark p {
-  color: rgb(209 213 219) !important; /* text-gray-300 */
-}
-
-/* ===== ПРЕДОТВРАЩЕНИЕ ВЛИЯНИЯ ТЕМ ДРУГ НА ДРУГА ===== */
-
-/* Канвас в темном интерфейсе может быть светлым */
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light {
-  color-scheme: light;
-  background-color: white !important;
-  color: rgb(17 24 39) !important;
-}
-
-/* Канвас в светлом интерфейсе может быть темным */
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark {
-  color-scheme: dark;
-  background-color: rgb(17 24 39) !important;
-  color: rgb(243 244 246) !important;
-}
-
-/* ===== ПРИНУДИТЕЛЬНОЕ ПЕРЕОПРЕДЕЛЕНИЕ СТИЛЕЙ БЛОКОВ ===== */
-
-/* Блоки в светлом канвасе (даже в темном интерфейсе) */
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light * {
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h1,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h2,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h3,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h4,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h5,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h6 {
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light p {
-  color: rgb(55 65 81) !important;
-}
-
-/* Блоки в темном канвасе (даже в светлом интерфейсе) */
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark * {
-  color: rgb(243 244 246) !important;
-}
-
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h1,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h2,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h3,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h4,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h5,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h6 {
-  color: rgb(243 244 246) !important;
-}
-
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark p {
-  color: rgb(209 213 219) !important;
-}
-
-/* ===== ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ КОНКРЕТНЫХ БЛОКОВ ===== */
-
-/* Hero Block - принудительные стили */
-.redaktus-canvas.canvas-light .hero-block,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .hero-block {
-  background-color: white !important;
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-canvas.canvas-light .hero-block h1,
-.redaktus-canvas.canvas-light .hero-block h2,
-.redaktus-canvas.canvas-light .hero-block h3,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .hero-block h1,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .hero-block h2,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .hero-block h3 {
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-canvas.canvas-light .hero-block p,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .hero-block p {
-  color: rgb(55 65 81) !important;
-}
-
-.redaktus-canvas.canvas-dark .hero-block,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .hero-block {
-  background-color: rgb(17 24 39) !important;
-  color: rgb(243 244 246) !important;
-}
-
-.redaktus-canvas.canvas-dark .hero-block h1,
-.redaktus-canvas.canvas-dark .hero-block h2,
-.redaktus-canvas.canvas-dark .hero-block h3,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .hero-block h1,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .hero-block h2,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .hero-block h3 {
-  color: rgb(243 244 246) !important;
-}
-
-.redaktus-canvas.canvas-dark .hero-block p,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .hero-block p {
-  color: rgb(209 213 219) !important;
-}
-
-/* Services Block - принудительные стили */
-.redaktus-canvas.canvas-light .services-block,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .services-block {
-  background-color: white !important;
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-canvas.canvas-dark .services-block,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .services-block {
-  background-color: rgb(17 24 39) !important;
-  color: rgb(243 244 246) !important;
-}
-
-/* Testimonial Block - принудительные стили */
-.redaktus-canvas.canvas-light .testimonial-block,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light .testimonial-block {
-  background-color: white !important;
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-canvas.canvas-dark .testimonial-block,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark .testimonial-block {
-  background-color: rgb(17 24 39) !important;
-  color: rgb(243 244 246) !important;
-}
-
-/* ===== УНИВЕРСАЛЬНЫЕ СТИЛИ ДЛЯ ЛЮБЫХ БЛОКОВ ===== */
-
-/* Любые блоки в светлом канвасе */
-.redaktus-canvas.canvas-light [class*="block"],
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light [class*="block"] {
-  background-color: white !important;
-  color: rgb(17 24 39) !important;
-}
-
-/* Любые блоки в темном канвасе */
-.redaktus-canvas.canvas-dark [class*="block"],
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark [class*="block"] {
-  background-color: rgb(17 24 39) !important;
-  color: rgb(243 244 246) !important;
-}
-
-/* ===== МАКСИМАЛЬНО АГРЕССИВНЫЕ СТИЛИ ===== */
-
-/* Принудительное переопределение ВСЕХ элементов в канвасе */
-.redaktus-canvas.canvas-light *,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light * {
-  color: rgb(17 24 39) !important;
-  background-color: white !important;
-}
-
-.redaktus-canvas.canvas-dark *,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark * {
-  color: rgb(243 244 246) !important;
-  background-color: rgb(17 24 39) !important;
-}
-
-/* Специально для текстовых элементов */
-.redaktus-canvas.canvas-light h1,
-.redaktus-canvas.canvas-light h2,
-.redaktus-canvas.canvas-light h3,
-.redaktus-canvas.canvas-light h4,
-.redaktus-canvas.canvas-light h5,
-.redaktus-canvas.canvas-light h6,
-.redaktus-canvas.canvas-light p,
-.redaktus-canvas.canvas-light span,
-.redaktus-canvas.canvas-light div,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h1,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h2,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h3,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h4,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h5,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light h6,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light p,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light span,
-.redaktus-interface.interface-dark .redaktus-canvas.canvas-light div {
-  color: rgb(17 24 39) !important;
-}
-
-.redaktus-canvas.canvas-dark h1,
-.redaktus-canvas.canvas-dark h2,
-.redaktus-canvas.canvas-dark h3,
-.redaktus-canvas.canvas-dark h4,
-.redaktus-canvas.canvas-dark h5,
-.redaktus-canvas.canvas-dark h6,
-.redaktus-canvas.canvas-dark p,
-.redaktus-canvas.canvas-dark span,
-.redaktus-canvas.canvas-dark div,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h1,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h2,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h3,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h4,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h5,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark h6,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark p,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark span,
-.redaktus-interface.interface-light .redaktus-canvas.canvas-dark div {
-  color: rgb(243 244 246) !important;
-}
+/* Все блоки в канвасе полагаются на стандартные TailWindCSS классы:
+ * - В светлом канвасе: text-dark, text-body-color, bg-white и т.д.
+ * - В темном канвасе: dark:text-white, dark:text-dark-6, dark:bg-dark-2 и т.д.
+ * Никаких принудительных переопределений! */
 
 /* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ===== */
 

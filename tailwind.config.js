@@ -123,6 +123,8 @@ export default {
         // Добавляем недостающие цвета для полной совместимости с TailGrids
         "body-color": "#637381",
         "dark-6": "#9CA3AF",
+        // Добавляем правильные цвета для тем
+        "blue-dark": "#1B44C8",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

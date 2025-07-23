@@ -14,64 +14,49 @@ export const useCanvasTheme = () => {
     return isDark ? 'dark' : 'light';
   }, []);
 
-  // Применяем тему к канвасу по стандартному TailGrids подходу
+  // Применение темы канваса с максимальной изоляцией от интерфейса
   const applyTheme = useCallback((newTheme: 'light' | 'dark') => {
-    console.log('🎨 Canvas: Attempting to apply theme:', newTheme);
-    const canvasContainer = document.querySelector('.redaktus-canvas');
-    console.log('🎨 Canvas: Container found:', !!canvasContainer);
+    console.log('🎨 Canvas: Applying theme:', newTheme);
+    const canvasContainer = document.querySelector('.redaktus-canvas') as HTMLElement;
     
     if (canvasContainer) {
-      console.log('🎨 Canvas: Classes before:', canvasContainer.className);
+      // МАКСИМАЛЬНАЯ ЗАЩИТА: убираем ВСЕ возможные классы темы
+      canvasContainer.classList.remove('dark', 'light', 'canvas-dark', 'canvas-light', 'interface-dark', 'interface-light');
       
-      // Убираем все темные классы
-      canvasContainer.classList.remove('canvas-light', 'canvas-dark');
+      // Убираем наследуемые атрибуты темы
+      canvasContainer.removeAttribute('data-theme');
+      canvasContainer.removeAttribute('data-color-scheme');
       
-      // Применяем новую тему
-      canvasContainer.classList.add(`canvas-${newTheme}`);
+      // Устанавливаем наш атрибут для отладки
+      canvasContainer.setAttribute('data-canvas-theme', newTheme);
       
-      // Для совместимости с TailWindCSS dark: модификаторами
-      // Добавляем/убираем класс dark на канвас контейнер
       if (newTheme === 'dark') {
+        // Темная тема канваса
         canvasContainer.classList.add('dark');
+        canvasContainer.style.backgroundColor = '#111827';
+        canvasContainer.style.color = '#f9fafb';
+        canvasContainer.style.colorScheme = 'dark';
       } else {
-        canvasContainer.classList.remove('dark');
+        // Светлая тема канваса - принудительно светлая
+        canvasContainer.style.backgroundColor = '#ffffff';
+        canvasContainer.style.color = '#1f2937';
+        canvasContainer.style.colorScheme = 'light';
       }
       
-      // ПРИНУДИТЕЛЬНОЕ ПРИМЕНЕНИЕ СТИЛЕЙ ЧЕРЕЗ JavaScript
-      if (newTheme === 'light') {
-        // Светлая тема - принудительно белый фон и темный текст
-        (canvasContainer as HTMLElement).style.setProperty('background-color', 'white', 'important');
-        (canvasContainer as HTMLElement).style.setProperty('color', 'rgb(17 24 39)', 'important');
-        
-        // Применяем ко всем дочерним элементам
-        const allElements = canvasContainer.querySelectorAll('*');
-        allElements.forEach((el) => {
-          (el as HTMLElement).style.setProperty('color', 'rgb(17 24 39)', 'important');
-          (el as HTMLElement).style.setProperty('background-color', 'white', 'important');
-        });
-      } else {
-        // Темная тема - принудительно темный фон и светлый текст
-        (canvasContainer as HTMLElement).style.setProperty('background-color', 'rgb(17 24 39)', 'important');
-        (canvasContainer as HTMLElement).style.setProperty('color', 'rgb(243 244 246)', 'important');
-        
-        // Применяем ко всем дочерним элементам
-        const allElements = canvasContainer.querySelectorAll('*');
-        allElements.forEach((el) => {
-          (el as HTMLElement).style.setProperty('color', 'rgb(243 244 246)', 'important');
-          (el as HTMLElement).style.setProperty('background-color', 'rgb(17 24 39)', 'important');
-        });
-      }
+      // Принудительная изоляция от родительских стилей
+      canvasContainer.style.isolation = 'isolate';
+      canvasContainer.style.contain = 'layout style';
+      canvasContainer.style.position = 'relative';
+      canvasContainer.style.zIndex = '1';
       
-      console.log('🎨 Canvas: Classes after:', canvasContainer.className);
-      console.log('🎨 Canvas: Theme applied successfully:', newTheme);
+      console.log('🎨 Canvas: Theme applied:', newTheme, 'dark class:', canvasContainer.classList.contains('dark'));
+      console.log('🎨 Canvas: Background:', canvasContainer.style.backgroundColor);
     } else {
-      console.warn('🎨 Canvas: Container (.redaktus-canvas) not found!');
+      console.warn('🎨 Canvas: Container not found!');
     }
   }, []);
 
-
-
-  // Инициализация только один раз
+  // Инициализация только один раз при монтировании
   useEffect(() => {
     console.log('🎨 Canvas: useEffect initialization');
     
@@ -82,8 +67,25 @@ export const useCanvasTheme = () => {
     if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
       console.log('🎨 Canvas: Setting theme to:', savedTheme);
       setTheme(savedTheme);
+      
+      // Определяем resolved тему
+      let resolved: 'light' | 'dark';
+      if (savedTheme === 'system') {
+        resolved = getSystemTheme();
+      } else {
+        resolved = savedTheme;
+      }
+      setResolvedTheme(resolved);
+      applyTheme(resolved);
+    } else {
+      // При первом запуске ВСЕГДА начинаем со светлой темы
+      // чтобы избежать наследования системной темы
+      console.log('🎨 Canvas: First time - starting with light theme');
+      setTheme('light');
+      setResolvedTheme('light');
+      applyTheme('light');
     }
-  }, []);
+  }, [getSystemTheme, applyTheme]);
 
   // Слушаем изменения системной темы
   useEffect(() => {
@@ -92,10 +94,8 @@ export const useCanvasTheme = () => {
       console.log('🎨 Canvas: System theme changed');
       if (theme === 'system') {
         const systemTheme = getSystemTheme();
-        if (systemTheme !== resolvedTheme) {
-          setResolvedTheme(systemTheme);
-          applyTheme(systemTheme);
-        }
+        setResolvedTheme(systemTheme);
+        applyTheme(systemTheme);
       }
     };
     
@@ -104,11 +104,12 @@ export const useCanvasTheme = () => {
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
-  }, [theme, resolvedTheme]);
+  }, [theme, getSystemTheme, applyTheme]);
 
-  // Обновляем тему при изменении
+  // Обновляем тему при изменении theme (НЕ при инициализации!)
   useEffect(() => {
-    console.log('🎨 Canvas: Theme changed to:', theme);
+    // Пропускаем эффект при первом рендере
+    console.log('🎨 Canvas: Theme effect triggered for:', theme);
     
     let newResolvedTheme: 'light' | 'dark';
     
@@ -118,18 +119,17 @@ export const useCanvasTheme = () => {
       newResolvedTheme = theme;
     }
     
-    console.log('🎨 Canvas: Updating resolved theme from', resolvedTheme, 'to', newResolvedTheme);
+    console.log('🎨 Canvas: Updating resolved theme to:', newResolvedTheme);
     
-    if (newResolvedTheme !== resolvedTheme) {
-      setResolvedTheme(newResolvedTheme);
-      applyTheme(newResolvedTheme);
-    }
+    setResolvedTheme(newResolvedTheme);
+    applyTheme(newResolvedTheme);
     
+    // Сохраняем тему в localStorage
     localStorage.setItem('canvas-theme', theme);
-  }, [theme, resolvedTheme]);
+  }, [theme, getSystemTheme, applyTheme]);
 
   // Переключение темы
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     console.log('🎨 Canvas: toggleTheme called! Current theme:', theme);
     const themes: CanvasTheme[] = ['system', 'light', 'dark'];
     const currentIndex = themes.indexOf(theme);
@@ -137,7 +137,7 @@ export const useCanvasTheme = () => {
     const newTheme = themes[nextIndex];
     console.log('🎨 Canvas: Theme toggle:', theme, '->', newTheme);
     setTheme(newTheme);
-  };
+  }, [theme]);
 
   return {
     theme,

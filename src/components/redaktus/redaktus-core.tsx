@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useAutoSave } from '../../hooks/useAutoSave'
+import { useCanvasTheme } from '../../hooks/useCanvasTheme'
 
 import {
   FaCube,
@@ -111,6 +112,21 @@ const blockSchemas = {
         title: '100+ Components',
         details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
         icon: 'components'
+      },
+      {
+        title: 'Speed Optimized',
+        details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+        icon: 'speed'
+      },
+      {
+        title: 'Fully Customizable',
+        details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+        icon: 'customizable'
+      },
+      {
+        title: 'Regular Updates',
+        details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+        icon: 'updates'
       }
     ] }
   },
@@ -160,7 +176,8 @@ const createDefaultProps = (blockType: string) => {
 const EditorContent: React.FC = () => {
   const [currentDevice, setCurrentDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
   
-  // Темы инициализируются автоматически в хуках useTheme и useCanvasTheme
+  // Инициализируем Canvas Theme для переключения темы канваса
+  const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme } = useCanvasTheme()
   
   const [currentPage, setCurrentPage] = useState<any>({
     id: 'home',

@@ -27,7 +27,7 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
   onUpdate
 }) => {
   return (
-    <div className="relative bg-white pb-[110px] pt-[120px] dark:bg-gray-900 lg:pt-[150px]">
+    <div className="relative bg-white pb-[110px] pt-[120px] dark:bg-slate-900 lg:pt-[150px]">
       <div className="container mx-auto px-4">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-5/12">
@@ -39,7 +39,7 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
                 renderBlock={({ children, onDoubleClick, className }) => (
                   <h1
                     onDoubleClick={onDoubleClick}
-                    className={`mb-5 text-4xl font-bold leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl ${className}`}
+                    className={`mb-5 text-4xl font-bold leading-[1.208] text-slate-900 dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl ${className}`}
                   >
                     {children}
                   </h1>
@@ -53,26 +53,27 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
                 renderBlock={({ children, onDoubleClick, className }) => (
                   <p
                     onDoubleClick={onDoubleClick}
-                    className={`mb-8 max-w-[480px] text-base text-body-color dark:text-gray-300 ${className}`}
+                    className={`mb-8 max-w-[480px] text-base text-slate-600 dark:text-slate-400 ${className}`}
                   >
                     {children}
                   </p>
                 )}
               />
               
-              <ul className="flex flex-wrap items-center">
+              <ul className="flex flex-wrap items-center gap-4">
                 <li>
                   <Text
                     propName="primaryButtonText"
                     value={primaryButtonText}
                     onChange={(value) => onUpdate({ primaryButtonText: value })}
                     renderBlock={({ children, onDoubleClick, className }) => (
-                      <span
+                      <a
+                        href="#"
                         onDoubleClick={onDoubleClick}
-                        className={`inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white hover:bg-blue-700 lg:px-7 ${className}`}
+                        className={`inline-flex items-center justify-center rounded-md bg-[#3056D3] px-6 py-3 text-center text-base font-medium text-white shadow-lg hover:bg-[#1B44C8] hover:shadow-xl transition-all duration-200 lg:px-7 ${className}`}
                       >
                         {children}
-                      </span>
+                      </a>
                     )}
                   />
                 </li>
@@ -82,21 +83,22 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
                     value={secondaryButtonText}
                     onChange={(value) => onUpdate({ secondaryButtonText: value })}
                     renderBlock={({ children, onDoubleClick, className }) => (
-                      <span
+                      <a
+                        href="#"
                         onDoubleClick={onDoubleClick}
-                        className={`inline-flex items-center justify-center px-5 py-3 text-center text-base font-medium text-[#464646] hover:text-blue-600 dark:text-white ${className}`}
+                        className={`inline-flex items-center justify-center rounded-md border-2 border-[#3056D3] bg-transparent px-5 py-3 text-center text-base font-medium text-[#3056D3] hover:bg-[#3056D3] hover:text-white transition-all duration-200 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-slate-900 ${className}`}
                       >
                         {children}
-                      </span>
+                      </a>
                     )}
                   />
                 </li>
               </ul>
               
               <div className="clients pt-16">
-                <h6 className="mb-6 flex items-center text-xs font-normal text-body-color dark:text-gray-300">
+                <h6 className="mb-6 flex items-center text-xs font-normal text-slate-600 dark:text-slate-400">
                   Some Of Our Clients
-                  <span className="ml-3 inline-block h-px w-8 bg-body-color"></span>
+                  <span className="ml-3 inline-block h-px w-8 bg-slate-600 dark:bg-slate-400"></span>
                 </h6>
 
                 <div className="flex items-center space-x-4">

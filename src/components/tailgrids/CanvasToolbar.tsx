@@ -88,22 +88,26 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   };
 
   const getThemeIcon = () => {
+    // Показываем иконку для переключения на следующую тему
     if (theme === 'system') {
-      return <FaMoon size={11} />;
-    } else if (resolvedTheme === 'dark') {
+      // Система -> Светлая, показываем солнце 
       return <FaSun size={11} />;
-    } else {
+    } else if (theme === 'light') {
+      // Светлая -> Темная, показываем луну
       return <FaMoon size={11} />;
+    } else {
+      // Темная -> Система, показываем комбинированную иконку (солнце для системы)
+      return <FaSun size={11} />;
     }
   };
 
   const getThemeLabel = () => {
     if (theme === 'system') {
-      return `Система (${resolvedTheme === 'dark' ? 'темная' : 'светлая'})`;
-    } else if (resolvedTheme === 'dark') {
-      return 'Светлая тема';
+      return `Система (${resolvedTheme === 'dark' ? 'темная' : 'светлая'}) → Светлая`;
+    } else if (theme === 'light') {
+      return 'Светлая → Темная';
     } else {
-      return 'Темная тема';
+      return 'Темная → Система';
     }
   };
 

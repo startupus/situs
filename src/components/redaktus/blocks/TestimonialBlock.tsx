@@ -24,7 +24,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
   };
 
   return (
-    <section className="pb-20 pt-20 dark:bg-gray-900 lg:pb-[120px] lg:pt-[120px]">
+    <section className="pb-20 pt-20 dark:bg-slate-900 lg:pb-[120px] lg:pt-[120px]">
       <div className="container mx-auto px-4">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
@@ -67,7 +67,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                       renderBlock={({ children, onDoubleClick, className }) => (
                         <p
                           onDoubleClick={onDoubleClick}
-                          className={`mb-6 text-base text-body-color dark:text-gray-300 ${className}`}
+                          className={`mb-6 text-base text-slate-600 dark:text-slate-400 ${className}`}
                         >
                           "{children}"
                         </p>
@@ -83,7 +83,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                           renderBlock={({ children, onDoubleClick, className }) => (
                             <h4
                               onDoubleClick={onDoubleClick}
-                              className={`text-lg font-semibold text-dark dark:text-white ${className}`}
+                              className={`text-lg font-semibold text-slate-900 dark:text-white ${className}`}
                             >
                               {children}
                             </h4>
@@ -97,7 +97,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                           renderBlock={({ children, onDoubleClick, className }) => (
                             <p
                               onDoubleClick={onDoubleClick}
-                              className={`text-sm text-body-color dark:text-gray-400 ${className}`}
+                              className={`text-sm text-slate-600 dark:text-slate-400 ${className}`}
                             >
                               {children}
                             </p>

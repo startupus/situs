@@ -37,7 +37,7 @@ interface SettingsPanelProps {
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) => {
-  const [activeTab, setActiveTab] = useState<'page' | 'block' | 'item' | 'blocks'>('page');
+  const [activeTab, setActiveTab] = useState<'page' | 'item' | 'blocks'>('page');
 
   return (
     <div 
@@ -68,16 +68,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
               Blocks
             </div>
             <div
-              onClick={() => setActiveTab('block')}
-              className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
-                activeTab === 'block'
-                  ? 'text-gray-700 font-semibold border-b-2 border-gray-700 dark:text-gray-100 dark:border-gray-100'
-                  : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
-              }`}
-            >
-              Block
-            </div>
-            <div
               onClick={() => setActiveTab('item')}
               className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
                 activeTab === 'item'
@@ -94,7 +84,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
         <div className="p-6 flex-1 overflow-y-auto">
           {activeTab === 'page' && <PageTab currentPage={currentPage} />}
           {activeTab === 'blocks' && <BlocksTab />}
-          {activeTab === 'block' && <BlockTab />}
           {activeTab === 'item' && <ItemTab />}
         </div>
       </div>
@@ -278,6 +267,31 @@ const BlocksTab: React.FC = () => {
             title: 'Refreshing Design',
             details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
             icon: 'design'
+          },
+          {
+            title: 'Based on Tailwind CSS',
+            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+            icon: 'tailwind'
+          },
+          {
+            title: '100+ Components',
+            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+            icon: 'components'
+          },
+          {
+            title: 'Speed Optimized',
+            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+            icon: 'speed'
+          },
+          {
+            title: 'Fully Customizable',
+            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+            icon: 'customizable'
+          },
+          {
+            title: 'Regular Updates',
+            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+            icon: 'updates'
           }
         ] }
       }
@@ -393,62 +407,7 @@ const BlocksTab: React.FC = () => {
 };
 
 // Вкладка Block - настройки блока
-const BlockTab: React.FC = () => {
-  return (
-    <div>
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
-          Block Settings
-        </h3>
-        <p className="text-sm mt-1 transition-colors duration-200 text-gray-500 dark:text-gray-400">
-          Configure block properties and styling
-        </p>
-      </div>
 
-      <SettingsSection 
-        title="Block Properties" 
-        icon={<FaCube size={16} />}
-        collapsible
-      >
-        <div className="space-y-4">
-          <InputGroup
-            label="BLOCK TYPE"
-            type="text"
-            value="Hero Section"
-            disabled
-          />
-          <InputGroup
-            label="BLOCK ID"
-            type="text"
-            value="hero-001"
-            disabled
-          />
-        </div>
-      </SettingsSection>
-
-      <SettingsSection 
-        title="Styling" 
-        icon={<FaCog size={16} />}
-        collapsible
-      >
-        <div className="space-y-4">
-          <InputGroup
-            label="BACKGROUND COLOR"
-            type="select"
-            value="Default"
-            options={['Default', 'Light', 'Dark', 'Custom']}
-          />
-          <InputGroup
-            label="TEXT ALIGNMENT"
-            type="select"
-            value="Center"
-            options={['Left', 'Center', 'Right']}
-          />
-        </div>
-      </SettingsSection>
-    </div>
-  );
-};
 
 // Вкладка Item - настройки элемента
 const ItemTab: React.FC = () => {

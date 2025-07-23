@@ -86,8 +86,8 @@ const RedaktusPageViewer: React.FC<RedaktusPageViewerProps> = ({ page, main = fa
           </button>
         </div>
 
-        {/* Сам блок */}
-        <div className="border-0">
+        {/* Сам блок с изоляцией стилей */}
+        <div className="block-container border-0">
           <BlockComponent 
             {...brick.props} 
             onUpdate={handleBlockUpdate}
