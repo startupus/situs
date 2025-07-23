@@ -6,6 +6,80 @@
       "media": "MEDIA", 
       "playground": "PLAYGROUND"
     },
+    "navbar": {
+      "save": "Save",
+      "viewSite": "View Site",
+      "autosaveEnabled": "Autosave enabled",
+      "lastSaved": "Last saved",
+      "saving": "Saving...",
+      "saveError": "Save error",
+      "retry": "Retry"
+    },
+    "canvas": {
+      "toolbar": {
+        "preview": "Preview",
+        "code": "Code",
+        "undo": "Undo",
+        "redo": "Redo",
+        "save": "Save",
+        "device": {
+          "desktop": "Desktop",
+          "tablet": "Tablet",
+          "mobile": "Mobile"
+        },
+        "theme": {
+          "system": "System theme",
+          "light": "Light theme",
+          "dark": "Dark theme",
+          "switchTo": "Switch to {{theme}}"
+        }
+      },
+      "empty": {
+        "title": "Start building your page",
+        "subtitle": "Drag blocks from left panel here"
+      }
+    },
+    "sidebar": {
+      "blocks": {
+        "title": "Block Library",
+        "subtitle": "Drag blocks to add them to your page",
+        "search": "Search blocks...",
+        "categories": {
+          "all": "All Blocks",
+          "hero": "Hero Sections",
+          "content": "Content Blocks",
+          "testimonial": "Testimonials", 
+          "services": "Services",
+          "team": "Team",
+          "pricing": "Pricing",
+          "contact": "Contact",
+          "footer": "Footer",
+          "header": "Header"
+        }
+      },
+      "language": {
+        "title": "Interface Language",
+        "switch": "Switch language",
+        "russian": "Русский",
+        "english": "English"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "page": {
+        "title": "Page Settings",
+        "name": "Page Name",
+        "description": "Description",
+        "keywords": "Keywords"
+      },
+      "block": {
+        "title": "Block Settings",
+        "delete": "Delete block",
+        "duplicate": "Duplicate block",
+        "moveUp": "Move up",
+        "moveDown": "Move down"
+      }
+    },
     "panels": {
       "pages": "Pages",
       "entities": "Entities",
@@ -36,7 +110,7 @@
       "text": "TEXT",
       "background": "BACKGROUND", 
       "media": "MEDIA",
-                  "addNew": "ADD ELEMENTS...",
+      "addNew": "ADD ELEMENTS...",
       "statusVisibility": "STATUS AND VISIBILITY",
       "pageStructure": "PAGE STRUCTURE LOCKED?",
       "pageAttributes": "PAGE ATTRIBUTES"
@@ -76,10 +150,18 @@
     },
     "placeholders": {
       "searchBricks": "Search bricks...",
-      "searchAssets": "Q Search assets...",
+      "searchAssets": "Search assets...",
       "imageUrl": "Image URL",
       "newBlockHere": "NEW BLOCK HERE: SELECT ON THE RIGHT »"
     }
+  },
+  "notifications": {
+    "saved": "Saved at {{time}}",
+    "saveError": "Save error: {{error}}",
+    "autoSaveEnabled": "Autosave enabled",
+    "blockAdded": "Block added",
+    "blockDeleted": "Block deleted",
+    "blockUpdated": "Block updated"
   },
   "common": {
     "cancel": "Cancel",
@@ -88,6 +170,11 @@
     "close": "Close",
     "run": "Run",
     "tests": "Tests",
-    "performance": "Performance"
+    "performance": "Performance",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
   }
 } 

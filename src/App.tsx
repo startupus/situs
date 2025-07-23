@@ -1,6 +1,7 @@
 import React from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import './App.css'
+import './i18n' // Инициализация i18n
 import RedaktusEditor from './components/RedaktusEditor'
 import { useTheme } from './hooks/useTheme'
 

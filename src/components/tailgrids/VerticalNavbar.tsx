@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaSearch, FaFile, FaCube, FaHome, FaCircle, FaChevronDown, FaPlus, FaFolder, FaBlog, FaSun, FaMoon, FaChevronUp } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 interface VerticalNavbarProps {
   availableBricks?: any[]
@@ -9,30 +10,11 @@ interface VerticalNavbarProps {
 const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] }) => {
   const { theme, toggleTheme, resolvedTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<'pages' | 'entities'>('pages');
-  const [interfaceLanguage, setInterfaceLanguage] = useState<'ru' | 'en'>('ru');
-  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   const handleToggleTheme = () => {
     console.log('🎨 VerticalNavbar: handleToggleTheme clicked!');
     toggleTheme();
   };
-
-  const toggleLanguageDropdown = () => {
-    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
-  };
-
-  const selectLanguage = (lang: 'ru' | 'en') => {
-    setInterfaceLanguage(lang);
-    setIsLanguageDropdownOpen(false);
-    // Здесь можно добавить логику для смены языка интерфейса
-  };
-
-  const languages = [
-    { code: 'ru', name: 'RUS', flag: '🇷🇺' },
-    { code: 'en', name: 'ENG', flag: '🇺🇸' },
-  ];
-
-  const currentLanguage = languages.find(lang => lang.code === interfaceLanguage);
 
   return (
     <section 
@@ -121,11 +103,14 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
         </nav>
 
         {/* Нижняя панель с настройками */}
-        <div className={`p-4 border-t flex-shrink-0 ${
+        <div className={`p-4 border-t flex-shrink-0 space-y-3 ${
           resolvedTheme === 'dark' ? '!border-gray-700' : '!border-gray-200'
         }`}>
-          <div className="flex items-center justify-between">
-            {/* Переключатель темы интерфейса редактора */}
+          {/* Переключатель языка интерфейса */}
+          <LanguageSwitcher showLabel={false} size="sm" />
+          
+          {/* Переключатель темы интерфейса редактора */}
+          <div className="flex justify-center">
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -138,37 +123,6 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
             >
               {resolvedTheme === 'dark' ? <FaSun size={14} /> : <FaMoon size={14} />}
             </button>
-
-            {/* Язык интерфейса */}
-            <div className="relative">
-              <button
-                onClick={toggleLanguageDropdown}
-                className="flex items-center space-x-1 px-2 py-1 rounded text-xs font-medium transition-colors text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700"
-              >
-                <span>{currentLanguage?.flag}</span>
-                <span>{currentLanguage?.name}</span>
-                <FaChevronDown size={10} />
-              </button>
-
-              {isLanguageDropdownOpen && (
-                <div className="absolute bottom-full right-0 mb-2 w-24 rounded-md shadow-lg border py-1 z-50 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => selectLanguage(lang.code as 'ru' | 'en')}
-                      className={`w-full flex items-center space-x-2 px-3 py-1 text-xs transition-colors ${
-                        interfaceLanguage === lang.code
-                          ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
-                      }`}
-                    >
-                      <span>{lang.flag}</span>
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>
