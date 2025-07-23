@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Pricing Section Start -->
+    <section
+      x-data="
+        {
+          yearly: false
+        }
+      "
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 lg:pb-[90px] lg:pt-[120px] dark:bg-dark"
+    >
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+          <div class="w-full px-4">
+            <div class="mx-auto mb-[60px] max-w-[510px] text-center">
+              <span class="mb-2 block text-lg font-semibold text-primary">
+                Our Pricing Plans
+              </span>
+              <h2
+                class="mb-3 text-3xl font-bold leading-[1.208] text-dark sm:text-4xl md:text-[40px] dark:text-white"
+              >
+                Pricing and Plans
+              </h2>
+              <p class="text-base text-body-color dark:text-dark-6">
+                There are many variations of passages of Lorem Ipsum available
+                but the majority have suffered alteration in some form.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-10 text-center">
+          <div class="flex items-center justify-center gap-5">
+            <button
+              @click="yearly = false"
+              :class="yearly ? 'text-dark dark:text-white' : 'text-primary' "
+              class="text-base font-medium"
+            >
+              Pay Monthly
+            </button>
+            <span
+              @click="yearly = !yearly"
+              class="flex h-8 w-14 cursor-pointer items-center rounded-full bg-dark px-0.5 py-1 duration-200 dark:bg-white"
+            >
+              <span
+                :class="yearly ? 'translate-x-6' : 'translate-x-0' "
+                class="block aspect-square w-7 rounded-full bg-white duration-200 dark:bg-primary"
+              ></span>
+            </span>
+            <button
+              @click="yearly = true"
+              :class="yearly ? 'text-primary' : 'text-dark dark:text-white' "
+              class="text-base font-medium"
+            >
+              Pay Yearly
+            </button>
+          </div>
+        </div>
+
+        <div class="mx-auto w-full max-w-[1100px]">
+          <div
+            class="grid place-items-end gap-10 md:grid-cols-2 lg:grid-cols-3"
+          >
+            <div
+              class="w-full max-w-[340px] rounded-xl border-2 border-transparent bg-gray-2 p-10 dark:bg-dark-2"
+            >
+              <div class="text-center">
+                <h4
+                  class="mb-4 text-xl font-semibold text-dark dark:text-white"
+                >
+                  Standard Plan
+                </h4>
+
+                <div class="mb-1 flex items-center justify-center gap-1">
+                  <span
+                    class="text-2xl font-semibold text-body-color line-through"
+                  >
+                    $85
+                  </span>
+                  <span class="text-4xl font-bold text-dark dark:text-white">
+                    $38<span class="text-2xl">.89</span>
+                  </span>
+                </div>
+
+                <p class="mb-4 text-sm font-medium text-body-color">
+                  /Month (annually billed)
+                </p>
+
+                <div
+                  class="relative mb-8 inline-flex items-center justify-center overflow-hidden bg-blue-light-5 px-4 py-1 text-xs font-semibold uppercase text-primary"
+                >
+                  <span
+                    class="absolute -right-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
+                  ></span>
+                  SAVE UP TO $54.89
+                  <span
+                    class="absolute -left-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
+                  ></span>
+                </div>
+
+                <button
+                  class="flex w-full items-center justify-center gap-2 rounded-lg bg-dark px-6 py-3 text-base font-medium text-white duration-200 hover:bg-dark/90"
+                >
+                  Choose Plan
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.46875 17.9062C6.28125 17.9062 6.125 17.8438 5.96875 17.7188C5.6875 17.4375 5.6875 17 5.96875 16.7188L12.5312 10L5.96875 3.3125C5.6875 3.03125 5.6875 2.59375 5.96875 2.3125C6.25 2.03125 6.6875 2.03125 6.96875 2.3125L14.0313 9.5C14.3125 9.78125 14.3125 10.2187 14.0313 10.5L6.96875 17.6875C6.84375 17.8125 6.65625 17.9062 6.46875 17.9062Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+
+              <div class="mt-8">
+                <ul class="list-inside list-disc space-y-4 marker:text-primary">
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Priority email & chat support
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Lifetime Access and Free Updates
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Generate 1,000 AI Words/month
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Personal and Commercial Use
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Personal and Commercial Use
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              class="relative w-full max-w-[340px] rounded-xl border-2 border-primary bg-gray-2 p-10 pt-[60px] shadow-md dark:bg-dark-2"
+            >
+              <span
+                class="absolute left-1/2 top-0 inline-flex -translate-x-1/2 items-center justify-center rounded-b-lg bg-primary px-4 py-2 text-sm font-semibold text-white"
+              >
+                BEST CHOICE
+              </span>
+              <div class="text-center">
+                <h4
+                  class="mb-4 text-xl font-semibold text-dark dark:text-white"
+                >
+                  Standard Plan
+                </h4>
+
+                <div class="mb-1 flex items-center justify-center gap-1">
+                  <span
+                    class="text-2xl font-semibold text-body-color line-through"
+                  >
+                    $85
+                  </span>
+                  <span class="text-4xl font-bold text-dark dark:text-white">
+                    $38<span class="text-2xl">.89</span>
+                  </span>
+                </div>
+
+                <p class="mb-4 text-sm font-medium text-body-color">
+                  /Month (annually billed)
+                </p>
+
+                <div
+                  class="relative mb-8 inline-flex items-center justify-center overflow-hidden bg-blue-light-5 px-4 py-1 text-xs font-semibold uppercase text-primary"
+                >
+                  <span
+                    class="absolute -right-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
+                  ></span>
+                  SAVE UP TO $54.89
+                  <span
+                    class="absolute -left-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
+                  ></span>
+                </div>
+
+                <button
+                  class="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90"
+                >
+                  Choose Plan
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.46875 17.9062C6.28125 17.9062 6.125 17.8438 5.96875 17.7188C5.6875 17.4375 5.6875 17 5.96875 16.7188L12.5312 10L5.96875 3.3125C5.6875 3.03125 5.6875 2.59375 5.96875 2.3125C6.25 2.03125 6.6875 2.03125 6.96875 2.3125L14.0313 9.5C14.3125 9.78125 14.3125 10.2187 14.0313 10.5L6.96875 17.6875C6.84375 17.8125 6.65625 17.9062 6.46875 17.9062Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+
+              <div class="mt-8">
+                <ul class="list-inside list-disc space-y-4 marker:text-primary">
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Priority email & chat support
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Lifetime Access and Free Updates
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Generate 1,000 AI Words/month
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Personal and Commercial Use
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Personal and Commercial Use
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div
+              class="w-full max-w-[340px] rounded-xl border-2 border-transparent bg-gray-2 p-10 dark:bg-dark-2"
+            >
+              <div class="text-center">
+                <h4
+                  class="mb-4 text-xl font-semibold text-dark dark:text-white"
+                >
+                  Standard Plan
+                </h4>
+
+                <div class="mb-1 flex items-center justify-center gap-1">
+                  <span
+                    class="text-2xl font-semibold text-body-color line-through"
+                  >
+                    $85
+                  </span>
+                  <span class="text-4xl font-bold text-dark dark:text-white">
+                    $38<span class="text-2xl">.89</span>
+                  </span>
+                </div>
+
+                <p class="mb-4 text-sm font-medium text-body-color">
+                  /Month (annually billed)
+                </p>
+
+                <div
+                  class="relative mb-8 inline-flex items-center justify-center overflow-hidden bg-blue-light-5 px-4 py-1 text-xs font-semibold uppercase text-primary"
+                >
+                  <span
+                    class="absolute -right-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
+                  ></span>
+                  SAVE UP TO $54.89
+                  <span
+                    class="absolute -left-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
+                  ></span>
+                </div>
+
+                <button
+                  class="flex w-full items-center justify-center gap-2 rounded-lg bg-dark px-6 py-3 text-base font-medium text-white duration-200 hover:bg-dark/90"
+                >
+                  Choose Plan
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.46875 17.9062C6.28125 17.9062 6.125 17.8438 5.96875 17.7188C5.6875 17.4375 5.6875 17 5.96875 16.7188L12.5312 10L5.96875 3.3125C5.6875 3.03125 5.6875 2.59375 5.96875 2.3125C6.25 2.03125 6.6875 2.03125 6.96875 2.3125L14.0313 9.5C14.3125 9.78125 14.3125 10.2187 14.0313 10.5L6.96875 17.6875C6.84375 17.8125 6.65625 17.9062 6.46875 17.9062Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+
+              <div class="mt-8">
+                <ul class="list-inside list-disc space-y-4 marker:text-primary">
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Priority email & chat support
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Lifetime Access and Free Updates
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Generate 1,000 AI Words/month
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Personal and Commercial Use
+                  </li>
+                  <li
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
+                  >
+                    <span
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
+                    ></span>
+                    Personal and Commercial Use
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Pricing Section End -->
+  </body>
+</html>

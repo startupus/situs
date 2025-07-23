@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Redaktus } from 'redaktus/core'
+import { useTheme } from '../../../hooks/useTheme'
+import { initEditorTheme, setEditorTheme } from '../editor-theme-utils'
 
 import config from '../config/config'
 
@@ -12,42 +14,29 @@ interface AppProps {
 const RedaktusApp = ({ Component, pageProps }: AppProps) => {
   console.log('RedaktusApp render - Component:', Component, 'pageProps:', pageProps)
 
-  // Color Mode Management для Vite
-  const [colorMode, setColorMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('color-mode') || 'light'
-    }
-    return 'light'
-  })
+  const { resolvedTheme, isDark } = useTheme()
 
-  console.log('RedaktusApp colorMode:', colorMode)
+  console.log('RedaktusApp resolvedTheme:', resolvedTheme, 'isDark:', isDark)
 
-  const toggleColorMode = () => {
-    const newColorMode = colorMode === 'light' ? 'dark' : 'light'
-    setColorMode(newColorMode)
-    localStorage.setItem('color-mode', newColorMode)
-
-    // Обновляем класс на body
-    document.body.className = newColorMode === 'dark' ? 'dark' : 'light'
-  }
-
-  // Применяем тему при загрузке
+  // Синхронизируем тему редактора с основной темой приложения
   useEffect(() => {
-    console.log('RedaktusApp useEffect - setting body class:', colorMode)
-    document.body.className = colorMode === 'dark' ? 'dark' : 'light'
-  }, [colorMode])
+    const editorTheme = isDark ? 'dark' : 'light'
+    setEditorTheme(editorTheme)
+    console.log('🎨 Editor theme synchronized with app theme:', editorTheme)
+  }, [isDark])
 
   const redaktusConfig = {
     ...config,
-    isDarkColorMode: colorMode === 'dark',
-    toggleColorMode,
-    contentClassName: `antialiased font-sans ${colorMode} ${
-      colorMode === 'dark' ? 'dark bg-gray-900' : 'light bg-white'
-    }`,
+    isDarkColorMode: isDark, // Используем тему из основного приложения
+    contentClassName: `antialiased font-inter ${isDark ? 'dark bg-dark text-gray-1' : 'light bg-gray text-black'}`,
   }
 
   console.log('RedaktusApp redaktusConfig:', redaktusConfig)
   console.log('About to render Redaktus provider')
+
+  useEffect(() => {
+    initEditorTheme();
+  }, []);
 
   return (
     <Redaktus {...redaktusConfig}>

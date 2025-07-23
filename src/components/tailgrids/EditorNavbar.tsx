@@ -7,6 +7,7 @@ import {
   FaCalendarDay
 } from 'react-icons/fa'
 
+
 interface EditorNavbarProps {
   currentPage?: string;
   onSave?: () => void;
@@ -24,14 +25,18 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
   console.log('🎯 EditorNavbar rendering - should be visible at top');
 
   return (
-    <header className="flex w-full items-center bg-white border-b border-gray-200 h-14 shadow-sm z-50 relative">
+    <header 
+      className="redaktus-editor-navbar flex w-full items-center border-b h-14 shadow-sm z-50 relative transition-colors duration-200 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+    >
       <div className="w-full px-6">
         <div className="flex items-center justify-between h-full">
           {/* Left Section - Logo */}
           <div className="flex items-center">
             <div className="flex items-center space-x-3">
-              <FaCube className="text-blue-600 text-xl" />
-              <span className="text-lg font-bold text-gray-900 tracking-wide">REDAKTUS</span>
+              <FaCube className="text-gray-600 text-xl" />
+              <span className="text-lg font-bold tracking-wide transition-colors duration-200 text-gray-900 dark:text-gray-100">
+                REDAKTUS
+              </span>
             </div>
           </div>
 
@@ -60,13 +65,13 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
           {/* Right Section - Controls & User */}
           <div className="flex items-center space-x-4">
             {/* View Site Button */}
-            <button className="inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-50 focus:outline-none transition-colors">
+            <button className="inline-flex items-center space-x-2 px-4 py-2 border rounded-md text-sm font-medium focus:outline-none transition-colors border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">
               <FaExternalLinkAlt size={12} />
               <span>VIEW SITE</span>
             </button>
 
             {/* Calendar/Date */}
-            <button className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-md transition-colors">
+            <button className="p-2 rounded-md transition-colors text-gray-600 hover:text-gray-800 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700">
               <FaCalendarDay size={16} />
             </button>
 
@@ -74,7 +79,7 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="flex items-center space-x-2 p-1 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-md transition-colors"
+                className="flex items-center space-x-2 p-1 rounded-md transition-colors text-gray-600 hover:text-gray-800 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700"
               >
                 <div className="h-8 w-8 rounded-full bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
                   <span className="text-white font-medium text-sm">RU</span>
@@ -84,9 +89,9 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
 
               {/* User Dropdown Menu */}
               {userDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                <div className="absolute right-0 top-full mt-2 w-48 rounded-lg shadow-lg border py-2 z-50 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                   <DropdownItem icon={<FaUser size={14} />}>Profile</DropdownItem>
-                  <div className="border-t border-gray-100 my-2"></div>
+                  <div className="border-t my-2 border-gray-100 dark:border-gray-700"></div>
                   <DropdownItem>Sign out</DropdownItem>
                 </div>
               )}
@@ -98,27 +103,25 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
   );
 };
 
-// Компонент для навигационного таба - простой текст без кнопок
 const NavTab: React.FC<{ 
   children: React.ReactNode; 
   active?: boolean;
   onClick?: () => void;
 }> = ({ children, active = false, onClick }) => {
   return (
-    <span
+    <button
       onClick={onClick}
-      className={`text-sm cursor-pointer transition-colors ${
+      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
         active
-          ? 'text-gray-900 font-bold'
-          : 'text-gray-500 hover:text-gray-700 font-normal'
+                          ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
+          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
       }`}
     >
       {children}
-    </span>
+    </button>
   );
 };
 
-// Компонент для элемента выпадающего меню
 const DropdownItem: React.FC<{
   children: React.ReactNode;
   icon?: React.ReactNode;
@@ -127,7 +130,7 @@ const DropdownItem: React.FC<{
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors text-left"
+      className="w-full flex items-center space-x-2 px-4 py-2 text-sm transition-colors text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700"
     >
       {icon && <span className="text-gray-400">{icon}</span>}
       <span>{children}</span>

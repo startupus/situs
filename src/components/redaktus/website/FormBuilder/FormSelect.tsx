@@ -4,6 +4,7 @@ import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 import blockNames from '../blockNames'
 
+
 export interface FormSelectProps {
   register: UseFormRegister<any>
   fieldName?: string
@@ -36,12 +37,15 @@ const FormSelect: types.Brick<FormSelectProps> = ({
         columns === 'two' && 'col-span-2'
       )}
     >
-      <span className="block text-gray-400 group-hover:text-sky-600 dark:group-hover:text-sky-300 font-medium uppercase tracking-widest text-sm peer-focus:text-sky-700">
+      <span className="block font-medium uppercase tracking-widest text-sm peer-focus:text-sky-700 transition-colors duration-200 text-gray-400 group-hover:text-sky-600 dark:text-gray-300 dark:group-hover:text-sky-300">
         {label}
         {isRequired && <span className="text-red-600 ml-2">*</span>}
       </span>
       <select
-        className="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-1 ring-sky-500 focus:shadow-sky-200 dark:focus:shadow-sky-900 focus:shadow-lg"
+        className={clsx(
+          'block w-full mt-1 px-4 py-2 border rounded-lg outline-none focus:ring-1 ring-sky-500 focus:shadow-sky-200 focus:shadow-lg transition-colors duration-200',
+          'border-gray-300 text-gray-900 focus:shadow-sky-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:shadow-sky-900'
+        )}
         {...register(fieldName?.replace(/\s/g, '').toLowerCase() || key)}
       >
         {values?.split('\n').map((valuelabel, index) => {

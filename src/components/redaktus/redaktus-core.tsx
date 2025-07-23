@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+
 import {
   FaCube,
   FaSearch,
@@ -50,7 +52,7 @@ export const Admin: React.FC<{ children: React.ReactNode; isLogin?: boolean }> =
 // Импорт конфигурации блоков
 import config from './config/config'
 
-export const Editor: React.FC = () => {
+const EditorContent: React.FC = () => {
   console.log('🎯 Editor component render - START')
   console.log('🎯 Editor component - rendering area should be visible')
 
@@ -86,7 +88,10 @@ export const Editor: React.FC = () => {
   }
 
   return (
-    <div className="redaktus-editor h-screen flex flex-col bg-gray-50">
+    <div 
+      className="redaktus-editor h-screen flex flex-col transition-colors duration-200 bg-gray-50 dark:bg-gray-900"
+      data-editor-container
+    >
       {/* Верхняя панель над всем редактором */}
       <EditorNavbar 
         currentPage="Home"
@@ -99,7 +104,7 @@ export const Editor: React.FC = () => {
         <VerticalNavbar availableBricks={allBricks} />
 
         {/* Центральная область с холстом */}
-        <div className="flex-1 flex flex-col bg-gray-100">
+        <div className="flex-1 flex flex-col transition-colors duration-200 bg-gray-100 dark:bg-gray-800">
           {/* Вторая панель ТОЛЬКО над холстом */}
           <CanvasToolbar
             currentDevice={currentDevice}
@@ -111,123 +116,84 @@ export const Editor: React.FC = () => {
             onSave={handleSave}
           />
 
-          {/* Область редактирования */}
-          <div className="flex-1 overflow-y-auto bg-white">
+          {/* Область редактирования - ВСЕГДА СВЕТЛАЯ */}
+          <div className="flex-1 overflow-y-auto !bg-white">
             {/* Редактируемая страница - с улучшенным дизайном */}
             <div 
               className="min-h-full"
               onDragOver={(e) => {
                 e.preventDefault()
-                e.currentTarget.classList.add('ring-2', 'ring-blue-400', 'ring-opacity-50')
+                e.currentTarget.classList.add('ring-2', 'ring-gray-400', 'ring-opacity-50')
               }}
               onDragLeave={(e) => {
-                e.currentTarget.classList.remove('ring-2', 'ring-blue-400', 'ring-opacity-50')
+                e.currentTarget.classList.remove('ring-2', 'ring-gray-400', 'ring-opacity-50')
               }}
               onDrop={(e) => {
                 e.preventDefault()
-                e.currentTarget.classList.remove('ring-2', 'ring-blue-400', 'ring-opacity-50')
+                e.currentTarget.classList.remove('ring-2', 'ring-gray-400', 'ring-opacity-50')
 
-                try {
-                  const data = JSON.parse(e.dataTransfer.getData('application/json'))
-                  console.log('Block dropped:', data)
+                const brickType = e.dataTransfer.getData('text/plain')
+                console.log('🎯 Dropped brick type:', brickType)
 
-                  // Улучшенная демонстрация добавления блока
-                  const dropZone = e.currentTarget
-                  const newBlock = document.createElement('div')
-                  newBlock.className = 'border-2 border-dashed border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 hover:border-blue-400 transition-all duration-200'
-                  newBlock.innerHTML = `
-                    <div class="flex items-center justify-between mb-4 p-4">
-                      <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-blue-500 flex items-center justify-center">
-                          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                          </svg>
-                        </div>
-                        <div>
-                          <h3 class="font-semibold text-gray-800">${data.label}</h3>
-                          <p class="text-sm text-gray-500">Новый блок добавлен</p>
-                        </div>
-                      </div>
-                      <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">
-                        Активен
-                      </span>
-                    </div>
-                    <div class="bg-white p-4 border-t border-gray-200">
-                      <p class="text-gray-700 leading-relaxed">
-                        Это новый блок "${data.label}". Кликните здесь для редактирования содержимого. 
-                        Вы можете изменить текст, добавить изображения и настроить стили.
-                      </p>
-                    </div>
-                  `
-                  newBlock.addEventListener('click', () => {
-                    const content = newBlock.querySelector('p')
-                    if (content) {
-                      content.contentEditable = 'true'
-                      content.focus()
-                      content.style.outline = '2px solid #3B82F6'
-                      content.style.outlineOffset = '2px'
-                    }
-                  })
-
-                  dropZone.appendChild(newBlock)
-                } catch (error) {
-                  console.error('Error handling drop:', error)
+                if (brickType) {
+                  // Здесь будет логика добавления блока
+                  console.log('🎯 Adding brick to canvas:', brickType)
                 }
               }}
             >
-              {/* Hero секция с улучшенным дизайном */}
-              <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-                <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-                <div className="relative max-w-7xl mx-auto px-8 py-20">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div className="space-y-8">
-                      <div className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                        <FaCube className="mr-2" size={12} />
-                        Visual Website Builder
-                      </div>
-                      
-                      <h1 
-                        className="text-5xl lg:text-6xl font-bold leading-tight hover:outline hover:outline-2 hover:outline-blue-400 hover:outline-offset-4 cursor-text transition-all p-2 -m-2"
-                        contentEditable
-                        suppressContentEditableWarning={true}
-                        onClick={(e) => e.currentTarget.focus()}
-                      >
-                        Great <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">DX</span> for
-                        <br />
-                        Developers, great
-                        <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">UX</span> for Content
-                        <br />
-                        editors.
-                      </h1>
-                      
-                      <p 
-                        className="text-xl text-gray-300 leading-relaxed hover:outline hover:outline-2 hover:outline-blue-400 hover:outline-offset-4 cursor-text transition-all p-2 -m-2"
-                        contentEditable
-                        suppressContentEditableWarning={true}
-                        onClick={(e) => e.currentTarget.focus()}
-                      >
-                        Redaktus provides a powerful visual editor that makes content management 
-                        intuitive and efficient. Build beautiful websites with ease.
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-4">
-                        <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors">
-                          Get Started
-                        </button>
-                        <button className="px-8 py-4 border border-gray-600 hover:bg-gray-800 text-white font-semibold transition-colors">
-                          Learn More
-                        </button>
-                      </div>
+              {/* Пример контента страницы */}
+              <div className="p-8">
+                <div className="max-w-4xl mx-auto">
+                  {/* Hero Section */}
+                  <div className="text-center mb-16">
+                    <h1 className="text-5xl font-bold text-gray-900 mb-6">
+                      Great <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">DX</span> for Developers, great <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">UX</span> for Content editors.
+                    </h1>
+                    <p className="text-xl text-gray-600 mb-8">
+                      Redaktus provides a powerful visual editor that makes content management intuitive and
+                    </p>
+                    <div className="flex justify-center space-x-4">
+                              <button className="px-6 py-2.5 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
+          Visual Website Builder
+        </button>
                     </div>
-                    
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-200 via-pink-200 to-purple-200 blur-2xl opacity-70"></div>
-                      <div className="relative bg-gradient-to-br from-orange-100 via-pink-100 to-purple-100 h-80 flex items-center justify-center border border-gray-200 hover:outline hover:outline-2 hover:outline-blue-400 hover:outline-offset-4 cursor-pointer transition-all">
-                        <div className="text-center">
-                          <FaPalette className="text-6xl text-orange-500 mx-auto mb-4" />
-                          <p className="text-gray-700 font-medium">Visual Content Management</p>
+                  </div>
+
+                  {/* Feature Section */}
+                  <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                      <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                        Visual Content Management
+                      </h2>
+                      <p className="text-lg text-gray-600 mb-6">
+                        Create and edit content visually with our intuitive drag-and-drop interface. No coding required.
+                      </p>
+                      <ul className="space-y-3">
+                        <li className="flex items-center text-gray-600">
+                          <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
+                          Drag and drop components
+                        </li>
+                        <li className="flex items-center text-gray-600">
+                          <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
+                          Real-time preview
+                        </li>
+                        <li className="flex items-center text-gray-600">
+                          <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
+                          Responsive design
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="bg-gradient-to-br from-orange-100 to-purple-100 p-8 rounded-lg">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <span className="text-white text-2xl">🎨</span>
                         </div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                          Visual Content Management
+                        </h3>
+                        <p className="text-gray-600">
+                          Create beautiful content without touching code
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -244,18 +210,23 @@ export const Editor: React.FC = () => {
   )
 }
 
+export const Editor: React.FC = () => {
+  return <EditorContent />
+}
+
 console.log('🎯 Editor component render - END')
 
 export const Login: React.FC = () => {
   console.log('Login component render')
+  
   return (
-    <div className="redaktus-login h-screen flex items-center justify-center bg-gray-50">
+    <div className="redaktus-login h-screen flex items-center justify-center transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-md w-full space-y-8">
         <div>
           <div className="mx-auto h-12 w-12 flex items-center justify-center">
-            <FaCube className="text-blue-600" size={32} />
+            <FaCube className="text-gray-600 dark:text-gray-300" size={32} />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-extrabold transition-colors duration-200 text-gray-900 dark:text-gray-100">
             Sign in to Redaktus
           </h2>
         </div>
@@ -265,7 +236,7 @@ export const Login: React.FC = () => {
               <input
                 type="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border transition-colors duration-200 focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm border-gray-300 bg-white text-gray-900 placeholder-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 rounded-t-md"
                 placeholder="Email address"
               />
             </div>
@@ -273,7 +244,7 @@ export const Login: React.FC = () => {
               <input
                 type="password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border transition-colors duration-200 focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm border-gray-300 bg-white text-gray-900 placeholder-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 rounded-b-md"
                 placeholder="Password"
               />
             </div>
@@ -281,7 +252,7 @@ export const Login: React.FC = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
             >
               Sign in
             </button>
@@ -294,12 +265,13 @@ export const Login: React.FC = () => {
 
 export const Playground: React.FC = () => {
   console.log('Playground component render')
+  
   return (
-    <div className="redaktus-playground h-screen flex items-center justify-center bg-gray-50">
+    <div className="redaktus-playground h-screen flex items-center justify-center transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
       <div className="text-center">
         <FaWrench className="mx-auto h-12 w-12 text-gray-400" size={48} />
-        <h3 className="mt-2 text-sm font-medium text-gray-900">Playground</h3>
-        <p className="mt-1 text-sm text-gray-500">Test your blocks here</p>
+        <h3 className="mt-2 text-sm font-medium transition-colors duration-200 text-gray-900 dark:text-gray-100">Playground</h3>
+        <p className="mt-1 text-sm transition-colors duration-200 text-gray-500 dark:text-gray-400">Test your blocks here</p>
       </div>
     </div>
   )
@@ -307,12 +279,13 @@ export const Playground: React.FC = () => {
 
 export const AppSettings: React.FC = () => {
   console.log('AppSettings component render')
+  
   return (
-    <div className="redaktus-app-settings h-screen flex items-center justify-center bg-gray-50">
+    <div className="redaktus-app-settings h-screen flex items-center justify-center transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
       <div className="text-center">
         <FaWrench className="mx-auto h-12 w-12 text-gray-400" size={48} />
-        <h3 className="mt-2 text-sm font-medium text-gray-900">App Settings</h3>
-        <p className="mt-1 text-sm text-gray-500">Configure your application</p>
+        <h3 className="mt-2 text-sm font-medium transition-colors duration-200 text-gray-900 dark:text-gray-100">App Settings</h3>
+        <p className="mt-1 text-sm transition-colors duration-200 text-gray-500 dark:text-gray-400">Configure your application</p>
       </div>
     </div>
   )
@@ -320,12 +293,13 @@ export const AppSettings: React.FC = () => {
 
 export const MediaLibrary: React.FC = () => {
   console.log('MediaLibrary component render')
+  
   return (
-    <div className="redaktus-media h-screen flex items-center justify-center bg-gray-50">
+    <div className="redaktus-media h-screen flex items-center justify-center transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
       <div className="text-center">
         <FaLink className="mx-auto h-12 w-12 text-gray-400" size={48} />
-        <h3 className="mt-2 text-sm font-medium text-gray-900">Media Library</h3>
-        <p className="mt-1 text-sm text-gray-500">Manage your media files</p>
+        <h3 className="mt-2 text-sm font-medium transition-colors duration-200 text-gray-900 dark:text-gray-100">Media Library</h3>
+        <p className="mt-1 text-sm transition-colors duration-200 text-gray-500 dark:text-gray-400">Manage your media files</p>
       </div>
     </div>
   )

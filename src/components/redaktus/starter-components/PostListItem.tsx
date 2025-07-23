@@ -3,6 +3,7 @@ import { Image } from 'redaktus/frontend'
 import * as types from 'redaktus/types'
 import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
+import { useEditorTheme } from '../editor-theme-context'
 
 interface PostListItemProps {
   title: string
@@ -21,11 +22,10 @@ const PostListItem: React.FC<PostListItemProps> = ({
   date,
   featuredImg,
 }) => {
+  const { isEditorDarkMode } = useEditorTheme();
+  
   return (
-    <Link
-      href={`/blog/post/${href}`}
-      className="flex flex-col hover:-translate-y-2 transition-transform duration-300"
-    >
+    <div className="flex flex-col hover:-translate-y-2 transition-transform duration-300">
       <Image
         readonly
         source={featuredImg}
@@ -36,8 +36,12 @@ const PostListItem: React.FC<PostListItemProps> = ({
       {/* justify-between */}
       <div className="flex flex-col h-full">
         <div className="my-6">
-          <h3 className="font-bold text-xl dark:text-white">{title}</h3>
-          <p className="mt-2 leading-6 text-gray-800 dark:text-gray-100">
+          <h3 className={`font-bold text-xl transition-colors duration-200 ${
+            isEditorDarkMode ? '!text-gray-100' : '!text-gray-900'
+          }`}>{title}</h3>
+          <p className={`mt-2 leading-6 transition-colors duration-200 ${
+            isEditorDarkMode ? '!text-gray-100' : '!text-gray-800'
+          }`}>
             {content}
           </p>
         </div>
@@ -49,16 +53,20 @@ const PostListItem: React.FC<PostListItemProps> = ({
             className="w-8 rounded-full"
           />
           <div>
-            <div className="text-sm text-gray-800 dark:text-gray-100">
+            <div className={`text-sm transition-colors duration-200 ${
+              isEditorDarkMode ? '!text-gray-100' : '!text-gray-800'
+            }`}>
               {author.firstName} {author.lastName}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className={`text-xs transition-colors duration-200 ${
+              isEditorDarkMode ? '!text-gray-400' : '!text-gray-500'
+            }`}>
               {dayjs(date).format('DD MMM YYYY')}
             </div>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 

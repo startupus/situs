@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertical Navbar | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="./../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+
+    <script defer src="./../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Vertical Navbar Section Start -->
+    <section x-data="{openDropDown: false}" class="h-screen bg-gray-2 dark:bg-dark">
+      <div
+        class="flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white dark:bg-dark-2 shadow-testimonial-6 dark:shadow-box-dark"
+      >
+        <div>
+          <div class="px-9 pt-10 pb-9">
+            <a href="javascript:void(0)">
+              <img src="./../assets/images/logo/logo-primary.svg" alt="logo" class="dark:hidden" />
+              <img src="./../assets/images/logo/logo-white.svg" alt="logo" class="hidden dark:block" />
+            </a>
+          </div>
+          <nav>
+            <ul>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li class="relative">
+                <a
+                  href="javascript:void(0)"
+                  @click="openDropDown = !openDropDown"
+                  class="relative flex items-center border-r-4 py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                  :class="openDropDown ? 'border-primary bg-primary/5' : 'border-transparent' "
+                >
+                  Products
+                  <span
+                    class="absolute top-1/2 right-10 -translate-y-1/2"
+                    :class="openDropDown ? 'rotate-0' : 'rotate-180' "
+                  >
+                    <svg 
+                      width="20" 
+                      height="20" 
+                      viewBox="0 0 20 20" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="fill-current"
+                    >
+                      <path 
+                        d="M10 14.25C9.8125 14.25 9.65625 14.1875 9.5 14.0625L2.3125 7C2.03125 6.71875 2.03125 6.28125 2.3125 6C2.59375 5.71875 3.03125 5.71875 3.3125 6L10 12.5312L16.6875 5.9375C16.9688 5.65625 17.4062 5.65625 17.6875 5.9375C17.9688 6.21875 17.9688 6.65625 17.6875 6.9375L10.5 14C10.3437 14.1562 10.1875 14.25 10 14.25Z" 
+                      />
+                    </svg>                    
+                  </span>
+                </a>
+                <div x-show="openDropDown">
+                  <ul class="py-[6px] pl-[50px] pr-10">
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex items-center border-r-4 border-transparent py-[9px] text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:text-primary"
+                      >
+                        Dropdown One
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex items-center border-r-4 border-transparent py-[9px] text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:text-primary"
+                      >
+                        Dropdown Two
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex items-center border-r-4 border-transparent py-[9px] text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:text-primary"
+                      >
+                        Dropdown Three
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Messages
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Order
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Calendar
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Static
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Documents
+                </a>
+              </li>
+              <li>
+                <div class="mx-9 my-5 h-px bg-stroke dark:bg-dark-3"></div>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Chat
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color dark:text-dark-6 duration-200 hover:border-primary hover:bg-primary/5"
+                >
+                  Log out
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="p-9">
+          <div class="flex items-center">
+            <div class="mr-4 h-[50px] w-full max-w-[50px] rounded-full">
+              <img
+                src="./../assets/images/avatar/image-05.jpg"
+                alt="profile"
+                class="h-full w-full rounded-full object-cover object-center"
+              />
+            </div>
+            <div>
+              <h6 class="text-base font-medium text-dark dark:text-white">Musharof</h6>
+              <p class="text-sm text-body-color dark:text-dark-6">hello@tailgrids.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Vertical Navbar Section End -->
+  </body>
+</html>

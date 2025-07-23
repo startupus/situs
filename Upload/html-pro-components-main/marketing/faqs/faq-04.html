@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== FAQ Section Start -->
+    <section
+      x-data="
+        {
+          openTab: 1,
+          activeClasses: 'bg-primary/[.13] dark:bg-dark-2 dark:text-white text-dark border-primary',
+          inactiveClasses: 'text-body-color border-transparent dark:text-dark-6 dark:hover:text-white hover:text-dark hover:border-primary'
+        }
+      "
+      class="relative z-20 overflow-hidden bg-white py-20 lg:py-[120px] dark:bg-dark"
+    >
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+          <div class="w-full px-4 lg:w-4/12">
+            <div
+              class="mb-10 overflow-hidden rounded-sm bg-[#F3F6FF] lg:mb-0 dark:bg-dark-3"
+            >
+              <a
+                href="javascript:void(0)"
+                @click="openTab = 1"
+                :class="openTab === 1 ? activeClasses : inactiveClasses"
+                class="block w-full border-l-4 px-7 py-6 text-base font-medium md:px-10 lg:px-7 xl:px-10"
+              >
+                Payment Method
+              </a>
+              <a
+                href="javascript:void(0)"
+                @click="openTab = 2"
+                :class="openTab === 2 ? activeClasses : inactiveClasses"
+                class="block w-full border-l-4 px-7 py-6 text-base font-medium md:px-10 lg:px-7 xl:px-10"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="javascript:void(0)"
+                @click="openTab = 3"
+                :class="openTab === 3 ? activeClasses : inactiveClasses"
+                class="block w-full border-l-4 px-7 py-6 text-base font-medium md:px-10 lg:px-7 xl:px-10"
+              >
+                Orders
+              </a>
+              <a
+                href="javascript:void(0)"
+                @click="openTab = 4"
+                :class="openTab === 4 ? activeClasses : inactiveClasses"
+                class="block w-full border-l-4 px-7 py-6 text-base font-medium md:px-10 lg:px-7 xl:px-10"
+              >
+                Product & Stock
+              </a>
+              <a
+                href="javascript:void(0)"
+                @click="openTab = 5"
+                :class="openTab === 5 ? activeClasses : inactiveClasses"
+                class="block w-full border-l-4 px-7 py-6 text-base font-medium md:px-10 lg:px-7 xl:px-10"
+              >
+                My Account
+              </a>
+              <a
+                href="javascript:void(0)"
+                @click="openTab = 6"
+                :class="openTab === 6 ? activeClasses : inactiveClasses"
+                class="block w-full border-l-4 px-7 py-6 text-base font-medium md:px-10 lg:px-7 xl:px-10"
+              >
+                Refund Policy
+              </a>
+            </div>
+          </div>
+          <div class="w-full px-4 lg:w-8/12 xl:w-7/12">
+            <div class="lg:pl-8 2xl:pl-[60px]">
+              <div x-show="openTab === 1">
+                <h2
+                  class="mb-6 text-3xl font-semibold text-dark dark:text-white"
+                >
+                  Payment Method
+                </h2>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum, sometimes referred to as 'lipsum', is the
+                  placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content to be written and approved.
+                </p>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content.
+                </p>
+                <div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      1
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      Long established fact that a reader will be distracted.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      2
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      There are many variations of Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      3
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      The standard chunk of Lorem Ipsum used since for those
+                      interested.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div x-show="openTab === 2">
+                <h2
+                  class="mb-6 text-3xl font-semibold text-dark dark:text-white"
+                >
+                  Privacy Policy
+                </h2>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum, sometimes referred to as 'lipsum', is the
+                  placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content to be written and approved.
+                </p>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content.
+                </p>
+                <div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      1
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      Long established fact that a reader will be distracted.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      2
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      There are many variations of Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      3
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      The standard chunk of Lorem Ipsum used since for those
+                      interested.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div x-show="openTab === 3">
+                <h2
+                  class="mb-6 text-3xl font-semibold text-dark dark:text-white"
+                >
+                  Orders
+                </h2>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum, sometimes referred to as 'lipsum', is the
+                  placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content to be written and approved.
+                </p>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content.
+                </p>
+                <div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      1
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      Long established fact that a reader will be distracted.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      2
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      There are many variations of Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      3
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      The standard chunk of Lorem Ipsum used since for those
+                      interested.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div x-show="openTab === 4">
+                <h2
+                  class="mb-6 text-3xl font-semibold text-dark dark:text-white"
+                >
+                  Product & Stocks
+                </h2>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum, sometimes referred to as 'lipsum', is the
+                  placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content to be written and approved.
+                </p>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content.
+                </p>
+                <div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      1
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      Long established fact that a reader will be distracted.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      2
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      There are many variations of Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      3
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      The standard chunk of Lorem Ipsum used since for those
+                      interested.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div x-show="openTab === 5">
+                <h2
+                  class="mb-6 text-3xl font-semibold text-dark dark:text-white"
+                >
+                  My Account
+                </h2>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum, sometimes referred to as 'lipsum', is the
+                  placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content to be written and approved.
+                </p>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content.
+                </p>
+                <div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      1
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      Long established fact that a reader will be distracted.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      2
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      There are many variations of Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      3
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      The standard chunk of Lorem Ipsum used since for those
+                      interested.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div x-show="openTab === 6">
+                <h2
+                  class="mb-6 text-3xl font-semibold text-dark dark:text-white"
+                >
+                  Refund Policy
+                </h2>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum, sometimes referred to as 'lipsum', is the
+                  placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content to be written and approved.
+                </p>
+                <p
+                  class="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6"
+                >
+                  Placeholder text used in design when creating content. It
+                  helps designers plan out where the content will sit, without
+                  needing to wait for the content.
+                </p>
+                <div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      1
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      Long established fact that a reader will be distracted.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      2
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      There are many variations of Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="mb-4 flex">
+                    <span
+                      class="mr-5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+                    >
+                      3
+                    </span>
+                    <p
+                      class="text-base leading-relaxed text-body-color dark:text-dark-6"
+                    >
+                      The standard chunk of Lorem Ipsum used since for those
+                      interested.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== FAQ Section End -->
+  </body>
+</html>

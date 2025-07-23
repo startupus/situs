@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Section | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Navbar Section Start -->
+    <header
+      x-data="
+      {
+        navbarOpen: false,
+      }
+    "
+      class="absolute left-0 top-0 z-50 w-full"
+    >
+      <div class="container mx-auto">
+        <div class="relative z-40 -mx-4 flex items-center justify-between">
+          <div class="w-60 max-w-full px-4">
+            <a href="javascript:void(0)" class="block w-full py-5">
+              <img
+                src="../../assets/images/logo/logo.svg"
+                alt="logo"
+                class="block w-full dark:hidden"
+              />
+              <img
+                src="../../assets/images/logo/logo-white.svg"
+                alt="logo"
+                class="hidden w-full dark:block"
+              />
+            </a>
+          </div>
+          <div class="flex w-full items-center justify-between px-4">
+            <div>
+              <button
+                @click="navbarOpen = !navbarOpen"
+                :class="navbarOpen && 'navbarTogglerActive'"
+                id="navbarToggler"
+                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+              >
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                ></span>
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                ></span>
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                ></span>
+              </button>
+              <nav
+                :class="!navbarOpen && 'hidden' "
+                id="navbarCollapse"
+                class="absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none xl:ml-11 dark:bg-dark-2"
+              >
+                <ul class="block lg:flex">
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      About Us
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      Services
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      Blog
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
+              <a
+                href="javascript:void(0)"
+                class="rounded-md bg-transparent px-7 py-3 text-base font-medium text-primary duration-300 hover:bg-primary/5"
+              >
+                Sign In
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ====== Navbar Section End -->
+
+    <!-- ====== Hero Section Start -->
+    <div
+      x-data="
+        {
+          navbarOpen: false
+        }
+      "
+      class="relative z-10 overflow-hidden bg-white pb-[110px] pt-[120px] md:pt-[150px] lg:pt-[180px] dark:bg-dark"
+    >
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap justify-center">
+          <div class="w-full px-4">
+            <div class="hero-content mx-auto max-w-[666px] text-center">
+              <span
+                class="mb-5 block text-base font-semibold text-primary sm:text-lg md:text-xl"
+              >
+                Built With TailGrids Components
+              </span>
+              <h1
+                class="mb-5 text-3xl font-bold capitalize leading-[1.208]! text-dark sm:text-[42px] xl:text-5xl dark:text-white"
+              >
+                Ready for Any Websites Crafted by TailGrids
+              </h1>
+              <p
+                class="mb-9 text-base font-medium text-body-color md:text-lg dark:text-dark-6"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                at egestas tortor. Morbi sed odio id purus pellentesque iaculis.
+              </p>
+              <ul class="flex flex-wrap items-center justify-center gap-4">
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark"
+                  >
+                    Know More
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-flex items-center justify-center rounded-md border border-primary px-7 py-3 text-center text-base font-medium text-primary transition hover:border-primary hover:bg-primary hover:text-white dark:border-white dark:text-white"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="absolute left-0 top-0 -z-10">
+          <svg
+            width="784"
+            height="619"
+            viewBox="0 0 784 619"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              opacity="0.05"
+              x="343.762"
+              y="-429.286"
+              width="681.025"
+              height="859.911"
+              rx="101"
+              transform="rotate(45 343.762 -429.286)"
+              fill="url(#paint0_linear_1414_1006)"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_1414_1006"
+                x1="684.275"
+                y1="-429.286"
+                x2="650.39"
+                y2="509.923"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#3056D3" />
+                <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+
+        <span class="absolute right-0 top-0 -z-10">
+          <svg
+            width="577"
+            height="606"
+            viewBox="0 0 577 606"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              opacity="0.05"
+              x="880.642"
+              y="206.506"
+              width="619.809"
+              height="680.424"
+              rx="94"
+              transform="rotate(135 880.642 206.506)"
+              fill="url(#paint0_linear_1414_1005)"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_1414_1005"
+                x1="1190.55"
+                y1="206.506"
+                x2="1167.23"
+                y2="949.912"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#3056D3" />
+                <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+
+        <span class="absolute bottom-0 left-1/2 -z-10">
+          <svg
+            width="695"
+            height="363"
+            viewBox="0 0 695 363"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              opacity="0.05"
+              x="719.109"
+              y="488.892"
+              width="325.482"
+              height="726.494"
+              rx="60"
+              transform="rotate(135 719.109 488.892)"
+              fill="url(#paint0_linear_1414_1009)"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_1414_1009"
+                x1="881.85"
+                y1="488.892"
+                x2="831.383"
+                y2="1280.2"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#3056D3" />
+                <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+
+        <span class="absolute bottom-0 left-1/4 -z-10">
+          <svg
+            width="469"
+            height="139"
+            viewBox="0 0 469 139"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              opacity="0.05"
+              width="353.669"
+              height="342.737"
+              rx="30"
+              transform="matrix(0.707107 0.707107 0.707107 -0.707107 -12 230.352)"
+              fill="url(#paint0_linear_1414_1011)"
+            />
+            <defs>
+              <linearGradient
+                id="paint0_linear_1414_1011"
+                x1="176.834"
+                y1="3.18915e-07"
+                x2="166.463"
+                y2="374.543"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#3056D3" />
+                <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+      </div>
+    </div>
+    <!-- ====== Hero Section End -->
+  </body>
+</html>

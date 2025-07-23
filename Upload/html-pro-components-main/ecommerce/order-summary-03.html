@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Summary | TailGrids</title>
+  <link rel="shortcut icon" href="./../assets/images/favicon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+
+  <script defer src="./../assets/js/alpine.min.js"></script>
+</head>
+
+<body>
+  <!-- ====== Order Summary Start -->
+  <section class="bg-white dark:bg-dark py-20 lg:py-[120px]">
+    <div class="container mx-auto">
+      <div class="-mx-4 flex flex-wrap">
+        <div class="w-full px-4 md:w-1/2">
+          <div class="mb-[50px]">
+            <h2 class="text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
+              Order Summary
+            </h2>
+          </div>
+        </div>
+        <div class="w-full px-4 md:w-1/2">
+          <div class="mb-[50px] md:text-right">
+            <h3 class="text-xl font-semibold text-dark dark:text-white sm:text-2xl">
+              Order #15478
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-2 dark:bg-dark-2 mb-[50px] py-[50px]">
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+          <div class="w-full px-4 md:w-1/2 lg:w-4/12">
+            <div class="mb-8 max-w-[270px]">
+              <h4 class="mb-[10px] text-base font-medium text-dark dark:text-white">Note:</h4>
+              <p class="text-body-color dark:text-dark-6 text-base">
+                Your order has been confirmed and will be shipping soon.
+              </p>
+            </div>
+          </div>
+          <div class="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-4/12">
+            <div class="mb-12">
+              <h4 class="mb-[10px] text-base font-medium text-dark dark:text-white">
+                Receiver Details
+              </h4>
+              <p class="text-body-color dark:text-dark-6 mb-1 text-base">
+                Name: Jhon Smith
+              </p>
+              <p class="text-body-color dark:text-dark-6 mb-1 text-base">
+                Email: contact@yourmail.com
+              </p>
+              <p class="text-body-color dark:text-dark-6 text-base">
+                Address: New York, USA 2707 Davis Anenue
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-md border-[.5px] border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 pl-5 pr-8">
+          <div class="items-center sm:flex">
+            <div class="mb-3 mr-6 h-20 w-full max-w-[80px] sm:mb-0 rounded-sm overflow-hidden">
+              <img src="./images/order-summaries/order-summary-03/image-01.jpg" alt="product"
+                class="h-full w-full object-cover object-center" />
+            </div>
+            <div class="w-full items-center justify-between md:flex">
+              <div class="mb-3 md:mb-0">
+                <a href="javascript:void(0)"
+                  class="hover:text-primary inline-block text-base font-medium text-dark dark:text-white mb-1">
+                  Mist Black Triblend
+                </a>
+
+                <p class="text-body-color dark:text-dark-6 flex text-sm">
+                  <span class="mr-5"> Color: White </span>
+                  <span class="mr-5"> Size: Medium </span>
+                </p>
+              </div>
+
+              <div class="flex items-center md:justify-end">
+                <p class="mr-20 text-base font-medium text-dark dark:text-white">
+                  Qty: 01
+                </p>
+                <p class="mr-5 text-base font-medium text-dark dark:text-white">$120.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto">
+      <div class="-mx-4 flex flex-wrap">
+        <div class="w-full px-4 sm:w-1/2 lg:w-3/12">
+          <div class="mb-10">
+            <h3 class="mb-[18px] text-xl font-semibold text-dark dark:text-white md:text-2xl">
+              Shipping Method
+            </h3>
+            <p class="text-body-color dark:text-dark-6 text-base">
+              FedEx - Take up to 3 <br />
+              working days.
+            </p>
+          </div>
+        </div>
+        <div class="w-full px-4 sm:w-1/2 lg:w-3/12">
+          <div class="mb-10">
+            <h3 class="mb-[18px] text-xl font-semibold text-dark dark:text-white md:text-2xl">
+              Payment Method
+            </h3>
+            <p class="text-body-color dark:text-dark-6 text-base">
+              Apply Pay Mastercard <br />
+              **** **** **** 5874
+            </p>
+          </div>
+        </div>
+
+        <div class="w-full px-4 lg:w-6/12">
+          <div class="mr-10 text-right md:ml-auto md:max-w-[370px] lg:max-w-[270px]">
+            <p class="mb-4 flex justify-between text-base text-dark dark:text-white">
+              <span> Subtotal </span>
+              <span class="font-semibold"> $120.00 </span>
+            </p>
+            <p class="mb-6 flex justify-between text-base text-dark dark:text-white">
+              <span> Shipping Cost (+) </span>
+              <span class="font-semibold"> $10.00 </span>
+            </p>
+            <p
+              class="mb-[18px] flex justify-between border-t border-stroke dark:border-dark-3 pt-6 text-base text-dark dark:text-white">
+              <span> Total Payable </span>
+              <span class="font-semibold"> $130.00 </span>
+            </p>
+            <button
+              class="flex w-full items-center justify-center rounded-md bg-dark dark:bg-dark-2 py-[10px] px-10 text-center text-base font-semibold text-white hover:bg-dark/90 dark:hover:bg-dark-2/90">
+              Continue Shopping
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ====== Order Summary End -->
+</body>
+
+</html>

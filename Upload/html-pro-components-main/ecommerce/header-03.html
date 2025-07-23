@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eCommerce Header | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="./../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+
+    <script defer src="./../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== eCommerce Header Section Start -->
+
+    <section
+      x-data="
+        {
+          slides: ['1', '2'],
+          activeSlide: 1
+        }
+      "
+      class="relative bg-white dark:bg-dark py-20 lg:py-[120px]"
+    >
+      <div
+        class="flex-no-wrap snap mx-auto flex h-auto w-full max-w-[100vw] overflow-hidden py-7 transition-all"
+        x-ref="carousel"
+      >
+        <div
+          class="bg-gray dark:bg-dark-2 relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden"
+        >
+          <div class="container mx-auto">
+            <div class="flex flex-wrap items-center -mx-4">
+              <div class="w-full px-4 lg:w-1/2">
+                <div class="mt-20 max-w-[570px] lg:mt-0">
+                  <span
+                    class="text-primary mb-[14px] block text-lg font-semibold"
+                  >
+                    Start From $299
+                  </span>
+                  <h2
+                    class="mb-[18px] text-2xl font-bold text-dark dark:text-white xl:text-4xl leading-[1.25]!"
+                  >
+                    Ultra HD Quality Bluetooth Sound Speakers
+                  </h2>
+                  <p class="text-base text-body-color dark:text-dark-6 mb-9">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vestibulum ornare vestibulum mollis. Nam vitae augue purus.
+                  </p>
+
+                  <a
+                    href="javascript:void(0)"
+                    class="bg-primary inline-flex items-center justify-center rounded-full py-[13px] px-7 text-center text-base font-medium text-white hover:bg-blue-dark"
+                  >
+                    Shop Now
+                  </a>
+                </div>
+              </div>
+
+              <div class="w-full px-4 lg:w-1/2">
+                <div class="py-20 text-center">
+                  <img
+                    src="./images/headers/header-03/image-01.jpg"
+                    alt="product"
+                    class="max-w-full mx-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute top-0 right-0 -z-10">
+            <svg
+              width="620"
+              height="560"
+              viewBox="0 0 620 560"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 560L256.5 0H620V560H0Z"
+                fill="url(#paint0_linear_2066_370)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_2066_370"
+                  x1="100.001"
+                  y1="280"
+                  x2="535.002"
+                  y2="280"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#3056D3" stop-opacity="0.08" />
+                  <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="absolute top-0 right-0 -z-10">
+            <svg
+              width="536"
+              height="560"
+              viewBox="0 0 536 560"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.998535 560L257.499 0H535.999V560H0.998535Z"
+                fill="url(#paint0_linear_2066_368)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_2066_368"
+                  x1="101"
+                  y1="280"
+                  x2="536"
+                  y2="280"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#3056D3" stop-opacity="0.08" />
+                  <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div
+          class="bg-gray dark:bg-dark-2 relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden"
+        >
+          <div class="container mx-auto">
+            <div class="flex flex-wrap items-center -mx-4">
+              <div class="w-full px-4 lg:w-1/2">
+                <div class="mt-20 max-w-[570px] lg:mt-0">
+                  <span
+                    class="text-primary mb-[14px] block text-lg font-semibold"
+                  >
+                    Start From $299
+                  </span>
+                  <h2
+                    class="mb-[18px] text-2xl font-bold text-dark dark:text-white xl:text-4xl leading-[1.25]!"
+                  >
+                    Ultra HD Quality Bluetooth Sound Speakers
+                  </h2>
+                  <p class="text-base text-body-color dark:text-dark-6 mb-9">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vestibulum ornare vestibulum mollis. Nam vitae augue purus.
+                  </p>
+
+                  <a
+                    href="javascript:void(0)"
+                    class="bg-primary inline-flex items-center justify-center rounded-full py-[13px] px-7 text-center text-base font-medium text-white hover:bg-blue-dark"
+                  >
+                    Shop Now
+                  </a>
+                </div>
+              </div>
+
+              <div class="w-full px-4 lg:w-1/2">
+                <div class="py-20 text-center">
+                  <img
+                    src="./images/headers/header-03/image-01.jpg"
+                    alt="product"
+                    class="max-w-full mx-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute top-0 right-0 -z-10">
+            <svg
+              width="620"
+              height="560"
+              viewBox="0 0 620 560"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 560L256.5 0H620V560H0Z"
+                fill="url(#paint0_linear_2066_370)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_2066_370"
+                  x1="100.001"
+                  y1="280"
+                  x2="535.002"
+                  y2="280"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#3056D3" stop-opacity="0.08" />
+                  <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="absolute top-0 right-0 -z-10">
+            <svg
+              width="536"
+              height="560"
+              viewBox="0 0 536 560"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.998535 560L257.499 0H535.999V560H0.998535Z"
+                fill="url(#paint0_linear_2066_368)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_2066_368"
+                  x1="101"
+                  y1="280"
+                  x2="536"
+                  y2="280"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#3056D3" stop-opacity="0.08" />
+                  <stop offset="1" stop-color="#3056D3" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button
+          class="border-body-color dark:border-dark-6 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary absolute top-1/2 left-4 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-transparent transition-all hover:text-white"
+          @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft - ($refs.carousel.scrollWidth / slides.length); activeSlide -= 1"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="fill-current"
+          >
+            <path
+              d="M14.8845 19.6969C14.6782 19.6969 14.472 19.6281 14.3345 19.4562L6.56571 11.55C6.25634 11.2406 6.25634 10.7594 6.56571 10.45L14.3345 2.54374C14.6438 2.23436 15.1251 2.23436 15.4345 2.54374C15.7438 2.85311 15.7438 3.33436 15.4345 3.64374L8.21571 11L15.4688 18.3562C15.7782 18.6656 15.7782 19.1469 15.4688 19.4562C15.2626 19.5937 15.0907 19.6969 14.8845 19.6969Z"
+            />
+          </svg>
+        </button>
+        <button
+          class="border-body-color dark:border-dark-6 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary absolute left-auto top-1/2 right-4 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-transparent transition-all hover:text-white"
+          @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft + ($refs.carousel.scrollWidth / slides.length); activeSlide += 1"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="fill-current"
+          >
+            <path
+              d="M7.11571 19.6969C6.90946 19.6969 6.73759 19.6281 6.56571 19.4906C6.25634 19.1812 6.25634 18.7 6.56571 18.3906L13.7845 11L6.56571 3.64374C6.25634 3.33436 6.25634 2.85311 6.56571 2.54374C6.87509 2.23436 7.35634 2.23436 7.66571 2.54374L15.4345 10.45C15.7438 10.7594 15.7438 11.2406 15.4345 11.55L7.66571 19.4562C7.52821 19.5937 7.32196 19.6969 7.11571 19.6969Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====== eCommerce Header Section End -->
+  </body>
+</html>

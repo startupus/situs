@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eCommerce Navbar | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="./../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+
+    <script defer src="./../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Navbar Section Start -->
+    <header
+      x-data="
+        {
+          navbarOpen: false,
+          searchForm: false,
+          cartOpen: false
+        }
+      "
+      class="flex w-full items-center bg-white dark:bg-dark"
+    >
+      <div class="container mx-auto">
+        <div class="relative -mx-4 flex items-center justify-between">
+          <div class="w-60 max-w-full px-4">
+            <a href="javascript:void(0)" class="block w-full py-5 lg:py-3">
+              <img
+                src="./../assets/images/logo/logo.svg"
+                alt="logo"
+                class="w-full dark:hidden"
+              />
+              <img
+                src="./../assets/images/logo/logo-white.svg"
+                alt="logo"
+                class="w-full hidden dark:block"
+              />
+            </a>
+          </div>
+          <div class="flex w-full items-center justify-between px-4">
+            <div class="w-full">
+              <button
+                @click="navbarOpen = !navbarOpen"
+                :class="navbarOpen && 'navbarTogglerActive' "
+                id="navbarToggler"
+                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+              >
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
+                ></span>
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
+                ></span>
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
+                ></span>
+              </button>
+              <nav
+                :class="!navbarOpen && 'hidden' "
+                id="navbarCollapse"
+                class="absolute right-4 top-full w-full max-w-[250px] justify-center rounded-lg bg-white dark:bg-dark-2 py-5 px-6 shadow lg:static lg:flex lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none"
+              >
+                <ul class="block lg:flex">
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark dark:text-white hover:text-primary lg:mx-5 lg:inline-flex lg:py-6"
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark dark:text-white hover:text-primary lg:mx-5 lg:inline-flex lg:py-6"
+                    >
+                      Men
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark dark:text-white hover:text-primary lg:mx-5 lg:inline-flex lg:py-6"
+                    >
+                      Women
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark dark:text-white hover:text-primary lg:mx-5 lg:inline-flex lg:py-6"
+                    >
+                      Accessories
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div
+              class="relative right-16 hidden items-center justify-end sm:flex gap-6 lg:right-0"
+            >
+              <div class="relative">
+                <div class="flex max-w-[200px] justify-end">
+                  <button
+                    @click="searchForm = !searchForm"
+                    class="flex items-center justify-center text-dark dark:text-white"
+                  >
+                    <svg 
+                      width="26" 
+                      height="26" 
+                      viewBox="0 0 26 26" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      class="fill-current"
+                    >
+                      <path 
+                        d="M24.9437 22.6281L18.2406 17.1843C21.0031 13.4062 20.7187 8.00308 17.2656 4.59058C15.4375 2.76245 13 1.74683 10.4 1.74683C7.79999 1.74683 5.36249 2.76245 3.53437 4.59058C-0.243756 8.3687 -0.243756 14.5437 3.53437 18.3218C5.36249 20.15 7.79999 21.1656 10.4 21.1656C12.8781 21.1656 15.1937 20.2312 17.0219 18.5656L23.8062 24.05C23.9687 24.1718 24.1719 24.2531 24.375 24.2531C24.6594 24.2531 24.9031 24.1312 25.0656 23.9281C25.3906 23.5218 25.35 22.9531 24.9437 22.6281ZM10.4 19.3375C8.28749 19.3375 6.33749 18.525 4.83437 17.0218C1.74687 13.9343 1.74687 8.93745 4.83437 5.89058C6.33749 4.38745 8.28749 3.57495 10.4 3.57495C12.5125 3.57495 14.4625 4.38745 15.9656 5.89058C19.0531 8.97808 19.0531 13.975 15.9656 17.0218C14.5031 18.525 12.5125 19.3375 10.4 19.3375Z" 
+                      />
+                    </svg>                    
+                  </button>
+                </div>
+                <div
+                  x-show="searchForm"
+                  @click.outside="searchForm = false"
+                  class="absolute top-full right-0 mt-[23px] w-[330px]"
+                >
+                  <form class="flex items-center justify-between">
+                    <input
+                      type="text"
+                      placeholder="Search Components or UI"
+                      class="w-full rounded-md border border-transparent bg-white dark:bg-dark-2 text-body-color dark:text-dark-6 py-4 pl-5 pr-8 shadow-1 dark:shadow-none outline-hidden focus:border-primary focus-visible:shadow-none"
+                    />
+                    <button
+                      class="absolute right-5 top-1/2 -translate-y-1/2 text-body-color"
+                    >
+                      <svg 
+                        width="26" 
+                        height="26" 
+                        viewBox="0 0 26 26" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        class="fill-current"
+                      >
+                        <path 
+                          d="M24.9437 22.6281L18.2406 17.1843C21.0031 13.4062 20.7187 8.00308 17.2656 4.59058C15.4375 2.76245 13 1.74683 10.4 1.74683C7.79999 1.74683 5.36249 2.76245 3.53437 4.59058C-0.243756 8.3687 -0.243756 14.5437 3.53437 18.3218C5.36249 20.15 7.79999 21.1656 10.4 21.1656C12.8781 21.1656 15.1937 20.2312 17.0219 18.5656L23.8062 24.05C23.9687 24.1718 24.1719 24.2531 24.375 24.2531C24.6594 24.2531 24.9031 24.1312 25.0656 23.9281C25.3906 23.5218 25.35 22.9531 24.9437 22.6281ZM10.4 19.3375C8.28749 19.3375 6.33749 18.525 4.83437 17.0218C1.74687 13.9343 1.74687 8.93745 4.83437 5.89058C6.33749 4.38745 8.28749 3.57495 10.4 3.57495C12.5125 3.57495 14.4625 4.38745 15.9656 5.89058C19.0531 8.97808 19.0531 13.975 15.9656 17.0218C14.5031 18.525 12.5125 19.3375 10.4 19.3375Z" 
+                        />
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="relative">
+                <div class="flex max-w-[200px] justify-end">
+                  <button
+                    @click="cartOpen = !cartOpen"
+                    class="relative flex items-center justify-center text-dark dark:text-white"
+                  >
+                    <svg 
+                      width="26" 
+                      height="26" 
+                      viewBox="0 0 26 26" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      class="fill-current"
+                    >
+                      <path 
+                        d="M15.0719 19.4187C13.4469 19.4187 12.1469 20.7187 12.1469 22.3437C12.1469 23.9687 13.4469 25.2687 15.0719 25.2687C16.6969 25.2687 17.9969 23.9687 17.9969 22.3437C17.9969 20.7593 16.6562 19.4187 15.0719 19.4187ZM15.0719 23.4812C14.4625 23.4812 13.975 22.9937 13.975 22.3843C13.975 21.775 14.4625 21.2875 15.0719 21.2875C15.6812 21.2875 16.1687 21.775 16.1687 22.3843C16.1687 22.9531 15.6406 23.4812 15.0719 23.4812Z" 
+                      />
+                      <path 
+                        d="M7.3531 19.4187C5.7281 19.4187 4.4281 20.7187 4.4281 22.3437C4.4281 23.9687 5.7281 25.2687 7.3531 25.2687C8.9781 25.2687 10.2781 23.9687 10.2781 22.3437C10.2781 20.7593 8.93748 19.4187 7.3531 19.4187ZM7.3531 23.4812C6.74373 23.4812 6.25623 22.9937 6.25623 22.3843C6.25623 21.775 6.74373 21.2875 7.3531 21.2875C7.96248 21.2875 8.44998 21.775 8.44998 22.3843C8.44998 22.9531 7.96248 23.4812 7.3531 23.4812Z" 
+                      />
+                      <path 
+                        d="M23.6437 0.731201H21.45C20.475 0.731201 19.6219 1.46245 19.5 2.43745L18.85 7.10933H2.80311C2.39686 7.10933 1.99061 7.31245 1.70623 7.63745C1.46248 7.96245 1.34061 8.40933 1.46249 8.81558C1.46249 8.8562 1.46249 8.8562 1.46249 8.89683L3.98124 16.4937C4.14374 17.0624 4.67186 17.4687 5.28124 17.4687H16.4937C17.9969 17.4687 19.2969 16.3312 19.5 14.8281L21.2062 2.6812C21.2062 2.59995 21.2875 2.55933 21.3687 2.55933H23.5625C24.05 2.55933 24.4969 2.15308 24.4969 1.62495C24.4969 1.09683 24.1312 0.731201 23.6437 0.731201ZM17.7531 14.5437C17.6719 15.1531 17.1437 15.6 16.5344 15.6H5.64686L3.45311 8.93745H18.5656L17.7531 14.5437Z" 
+                      />
+                    </svg>                      
+
+                    <span
+                      class="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-primary text-[10px] font-semibold text-white"
+                    >
+                      3
+                    </span>
+                  </button>
+                </div>
+                <div
+                  x-show="cartOpen"
+                  @click.outside="cartOpen = false"
+                  class="absolute top-full right-0 mt-5 w-[330px]"
+                >
+                  <div
+                    class="overflow-hidden rounded-lg bg-white dark:bg-dark-2 p-8 shadow-1 dark:shadow-box-dark"
+                  >
+                    <div class="mb-5 border-b border-stroke dark:border-dark-3 pb-3">
+                      <div class="-mx-1 flex items-center justify-between pb-4">
+                        <div class="flex items-center px-1">
+                          <div
+                            class="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-sm"
+                          >
+                            <img
+                              src="./images/checkout/checkout-02/image-02.jpg"
+                              alt="product image"
+                              class="w-full"
+                            />
+                          </div>
+                          <div>
+                            <a
+                              href="javascript:void(0)"
+                              class="text-sm font-medium text-dark dark:text-white hover:text-primary"
+                            >
+                              Circular Sienna
+                            </a>
+                            <p
+                              class="truncate text-xs font-medium text-body-color dark:text-dark-6"
+                            >
+                              Awesome white shirt
+                            </p>
+                          </div>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-semibold text-dark dark:text-white">
+                            $36.00
+                          </p>
+                        </div>
+                      </div>
+                      <div class="-mx-1 flex items-center justify-between py-4">
+                        <div class="flex items-center px-1">
+                          <div
+                            class="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-sm"
+                          >
+                            <img
+                              src="./images/checkout/checkout-02/image-03.jpg"
+                              alt="product image"
+                              class="w-full"
+                            />
+                          </div>
+                          <div>
+                            <a
+                              href="javascript:void(0)"
+                              class="text-sm font-medium text-dark dark:text-white hover:text-primary"
+                            >
+                              Black T-shirt
+                            </a>
+                            <p
+                              class="truncate text-xs font-medium text-body-color dark:text-dark-6"
+                            >
+                              It's a nice black t-shirt
+                            </p>
+                          </div>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-semibold text-dark dark:text-white">
+                            $36.00
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="-mx-1 border-b border-stroke dark:border-dark-3 pb-5">
+                      <div class="mb-3 flex items-center justify-between">
+                        <div class="px-1">
+                          <p class="text-base text-dark dark:text-white">
+                            Subtotal
+                          </p>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-medium text-dark dark:text-white">$108</p>
+                        </div>
+                      </div>
+                      <div class="mb-3 flex items-center justify-between">
+                        <div class="px-1">
+                          <p class="text-base text-dark dark:text-white">
+                            Shipping Cost (+)
+                          </p>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-medium text-dark dark:text-white">
+                            $10.85
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="px-1">
+                          <p class="text-base text-dark dark:text-white">
+                            Discount (-)
+                          </p>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-medium text-dark dark:text-white">
+                            $9.00
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="-mx-1 flex items-center justify-between pt-5 pb-6"
+                    >
+                      <div class="px-1">
+                        <p class="text-base text-dark dark:text-white">
+                          Total Payable
+                        </p>
+                      </div>
+                      <div class="px-1">
+                        <p class="text-base font-medium text-dark dark:text-white">$88.15</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        href="javascript:void(0)"
+                        class="flex w-full items-center justify-center rounded-md bg-primary py-[13px] px-10 text-center text-base font-medium text-white hover:bg-blue-dark"
+                      >
+                        Place Order
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ====== Navbar Section End -->
+  </body>
+</html>

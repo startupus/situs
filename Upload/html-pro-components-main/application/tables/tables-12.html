@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Table Section Start -->
+    <section class="bg-gray-2 py-20 lg:py-[120px] dark:bg-dark">
+      <div class="mx-auto px-4 lg:container">
+        <div
+          class="mx-auto w-full max-w-[850px] rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
+        >
+          <div class="max-w-full overflow-x-auto">
+            <table class="w-full table-auto">
+              <thead>
+                <tr class="border-b border-stroke dark:border-dark-3">
+                  <th class="min-w-[300px] py-5 pl-8 pr-4">
+                    <p
+                      class="text-left text-base font-medium text-dark dark:text-white"
+                    >
+                      Product Name
+                    </p>
+                  </th>
+                  <th class="min-w-[90px] px-4 py-5">
+                    <p
+                      class="text-left text-base font-medium text-dark dark:text-white"
+                    >
+                      Category
+                    </p>
+                  </th>
+                  <th class="min-w-[90px] px-4 py-5">
+                    <p
+                      class="text-left text-base font-medium text-dark dark:text-white"
+                    >
+                      Price
+                    </p>
+                  </th>
+                  <th class="min-w-[90px] px-4 py-5">
+                    <p
+                      class="text-left text-base font-medium text-dark dark:text-white"
+                    >
+                      Sold
+                    </p>
+                  </th>
+                  <th class="min-w-[90px] py-5 pl-4 pr-8">
+                    <p
+                      class="text-left text-base font-medium text-dark dark:text-white"
+                    >
+                      Profit
+                    </p>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
+                >
+                  <td class="py-[18px] pl-6 pr-3">
+                    <div class="flex items-center">
+                      <div class="relative">
+                        <input
+                          type="checkbox"
+                          name="tableCheckbox"
+                          id="checkbox-2"
+                          class="tableCheckbox sr-only"
+                        />
+
+                        <label
+                          for="checkbox-2"
+                          class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
+                        >
+                          <span
+                            class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 10 10"
+                              class="icon opacity-0"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M8.62796 2.20602C8.79068 2.36874 8.79068 2.63256 8.62796 2.79528L4.04463 7.37861C3.88191 7.54133 3.61809 7.54133 3.45537 7.37861L1.37204 5.29528C1.20932 5.13256 1.20932 4.86874 1.37204 4.70602C1.53476 4.5433 1.79858 4.5433 1.96129 4.70602L3.75 6.49473L8.03871 2.20602C8.20142 2.0433 8.46524 2.0433 8.62796 2.20602Z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </span>
+                        </label>
+                      </div>
+
+                      <div class="flex items-center">
+                        <img
+                          src="../images/tables/table-12/image-01.jpg"
+                          alt="product"
+                          class="mr-4 h-[50px] w-[60px] rounded-sm object-cover object-center"
+                        />
+                        <p class="text-base text-body-color dark:text-dark-6">
+                          Apple Watch Series 7
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Electronics
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $269
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">22</p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $45
+                    </p>
+                  </td>
+                  <td class="py-[18px] pl-4 pr-6">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr
+                  class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
+                >
+                  <td class="py-[18px] pl-6 pr-3">
+                    <div class="flex items-center">
+                      <div class="relative">
+                        <input
+                          type="checkbox"
+                          name="tableCheckbox"
+                          id="checkbox-3"
+                          class="tableCheckbox sr-only"
+                        />
+
+                        <label
+                          for="checkbox-3"
+                          class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
+                        >
+                          <span
+                            class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 10 10"
+                              class="icon opacity-0"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M8.62796 2.20602C8.79068 2.36874 8.79068 2.63256 8.62796 2.79528L4.04463 7.37861C3.88191 7.54133 3.61809 7.54133 3.45537 7.37861L1.37204 5.29528C1.20932 5.13256 1.20932 4.86874 1.37204 4.70602C1.53476 4.5433 1.79858 4.5433 1.96129 4.70602L3.75 6.49473L8.03871 2.20602C8.20142 2.0433 8.46524 2.0433 8.62796 2.20602Z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </span>
+                        </label>
+                      </div>
+
+                      <div class="flex items-center">
+                        <img
+                          src="../images/tables/table-12/image-02.jpg"
+                          alt="product"
+                          class="mr-4 h-[50px] w-[60px] rounded-sm object-cover object-center"
+                        />
+                        <p class="text-base text-body-color dark:text-dark-6">
+                          Macbook Pro M1
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Electronics
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $546
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">34</p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $125
+                    </p>
+                  </td>
+                  <td class="py-[18px] pl-4 pr-6">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr
+                  class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
+                >
+                  <td class="py-[18px] pl-6 pr-3">
+                    <div class="flex items-center">
+                      <div class="relative">
+                        <input
+                          type="checkbox"
+                          name="tableCheckbox"
+                          id="checkbox-4"
+                          class="tableCheckbox sr-only"
+                        />
+
+                        <label
+                          for="checkbox-4"
+                          class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
+                        >
+                          <span
+                            class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 10 10"
+                              class="icon opacity-0"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M8.62796 2.20602C8.79068 2.36874 8.79068 2.63256 8.62796 2.79528L4.04463 7.37861C3.88191 7.54133 3.61809 7.54133 3.45537 7.37861L1.37204 5.29528C1.20932 5.13256 1.20932 4.86874 1.37204 4.70602C1.53476 4.5433 1.79858 4.5433 1.96129 4.70602L3.75 6.49473L8.03871 2.20602C8.20142 2.0433 8.46524 2.0433 8.62796 2.20602Z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </span>
+                        </label>
+                      </div>
+
+                      <div class="flex items-center">
+                        <img
+                          src="../images/tables/table-12/image-03.jpg"
+                          alt="product"
+                          class="mr-4 h-[50px] w-[60px] rounded-sm object-cover object-center"
+                        />
+                        <p class="text-base text-body-color dark:text-dark-6">
+                          Dell Inspiron 15
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Electronics
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $444
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">64</p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $247
+                    </p>
+                  </td>
+                  <td class="py-[18px] pl-4 pr-6">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr
+                  class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
+                >
+                  <td class="py-[18px] pl-6 pr-3">
+                    <div class="flex items-center">
+                      <div class="relative">
+                        <input
+                          type="checkbox"
+                          name="tableCheckbox"
+                          id="checkbox-5"
+                          class="tableCheckbox sr-only"
+                        />
+
+                        <label
+                          for="checkbox-5"
+                          class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
+                        >
+                          <span
+                            class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 10 10"
+                              class="icon opacity-0"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M8.62796 2.20602C8.79068 2.36874 8.79068 2.63256 8.62796 2.79528L4.04463 7.37861C3.88191 7.54133 3.61809 7.54133 3.45537 7.37861L1.37204 5.29528C1.20932 5.13256 1.20932 4.86874 1.37204 4.70602C1.53476 4.5433 1.79858 4.5433 1.96129 4.70602L3.75 6.49473L8.03871 2.20602C8.20142 2.0433 8.46524 2.0433 8.62796 2.20602Z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </span>
+                        </label>
+                      </div>
+
+                      <div class="flex items-center">
+                        <img
+                          src="../images/tables/table-12/image-04.jpg"
+                          alt="product"
+                          class="mr-4 h-[50px] w-[60px] rounded-sm object-cover object-center"
+                        />
+                        <p class="text-base text-body-color dark:text-dark-6">
+                          HP Probook 450
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Electronics
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $499
+                    </p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">72</p>
+                  </td>
+                  <td class="px-4 py-[18px]">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      $103
+                    </p>
+                  </td>
+                  <td class="py-[18px] pl-4 pr-6">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Table Section End -->
+  </body>
+</html>

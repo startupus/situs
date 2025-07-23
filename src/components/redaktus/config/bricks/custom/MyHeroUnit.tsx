@@ -1,6 +1,7 @@
 import { Image, RichText, Text } from 'redaktus/frontend'
 import * as types from 'redaktus/types'
 
+
 //=============================
 // Local Types
 //=============================
@@ -32,7 +33,7 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
         />
         <Text
           renderBlock={(props) => (
-            <h1 className="text-3xl sm:text-4xl text-center font-black text-gray-900 dark:text-white leading-tight mb-3">
+            <h1 className="text-3xl sm:text-4xl text-center font-black leading-tight mb-3 transition-colors duration-200 text-gray-900 dark:text-gray-100">
               {props.children}
             </h1>
           )}
@@ -41,21 +42,21 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
         />
         <RichText
           renderBlock={(props) => (
-            <p className="text-xl text-center leading-relaxed text-gray-700 dark:text-gray-100">
+            <p className="text-xl text-center leading-relaxed transition-colors duration-200 text-gray-700 dark:text-gray-100">
               {props.children}
             </p>
           )}
           placeholder="Type a text..."
           propName="text"
           allowedFeatures={[
-            types.RichTextFeatures.Bold,
-            types.RichTextFeatures.Italic,
-            types.RichTextFeatures.Highlight,
-            types.RichTextFeatures.Code,
-            types.RichTextFeatures.Link,
+            types.RichTextFeatures.bold,
+            types.RichTextFeatures.italic,
+            types.RichTextFeatures.highlight,
+            types.RichTextFeatures.code,
+            types.RichTextFeatures.link,
           ]}
           renderCode={(props) => (
-            <code className="text-sm py-1 px-2 bg-gray-200 dark:bg-gray-700 rounded-sm">
+            <code className="text-sm py-1 px-2 rounded-sm transition-colors duration-200 bg-gray-200 dark:bg-gray-700">
               {props.children}
             </code>
           )}

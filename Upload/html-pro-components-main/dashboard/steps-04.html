@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steps (Progress) | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="./../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./../assets/css/apexcharts.css" />
+    <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+  </head>
+  <body>
+    <!-- ====== Steps Section Start -->
+    <section class="min-h-screen overflow-hidden bg-white dark:bg-dark py-20 lg:py-[120px]">
+      <div class="mx-auto px-4 md:container">
+        <div class="flex items-center justify-center">
+          <div>
+            <div id="chartOne" class="-ml-5"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Steps Section End -->
+
+    <!-- ====== ApexCharts JS ========== -->
+    <script src="./../assets/js/apexcharts.min.js"></script>
+    <script>
+      // ===== chartOne
+      const chartOneOptions = {
+        series: [72],
+        chart: {
+          height: 200,
+          type: "radialBar",
+        },
+
+        plotOptions: {
+          radialBar: {
+            hollow: {
+              size: "66%",
+            },
+            dataLabels: {
+              name: {
+                show: true,
+                fontSize: "16px",
+                fontFamily: '"Inter"',
+                offsetY: -12,
+              },
+              value: {
+                fontSize: "28px",
+                fontWeight: "bold",
+                fontFamily: "inter",
+                offsetY: 2,
+              },
+              total: {
+                show: true,
+                fontFamily: "inter",
+                fontSize: "12px",
+                label: "complete",
+                offsetY: -16,
+              },
+            },
+          },
+        },
+        dataLabels: {
+          enabled: true,
+        },
+        colors: ["#3056D3"],
+        legend: {
+          show: false,
+          position: "bottom",
+        },
+      };
+
+      const chartOne = new ApexCharts(
+        document.querySelector("#chartOne"),
+        chartOneOptions
+      );
+      chartOne.render();
+    </script>
+  </body>
+</html>

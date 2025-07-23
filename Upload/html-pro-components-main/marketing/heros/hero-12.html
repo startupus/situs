@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Section | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Navbar Section Start -->
+    <header
+      x-data="
+      {
+        navbarOpen: false,
+      }
+    "
+      class="absolute left-0 top-0 z-50 w-full"
+    >
+      <div class="container mx-auto">
+        <div class="relative z-40 -mx-4 flex items-center justify-between">
+          <div class="w-60 max-w-full px-4">
+            <a href="javascript:void(0)" class="block w-full py-5">
+              <img
+                src="../../assets/images/logo/logo.svg"
+                alt="logo"
+                class="block w-full dark:hidden"
+              />
+              <img
+                src="../../assets/images/logo/logo-white.svg"
+                alt="logo"
+                class="hidden w-full dark:block"
+              />
+            </a>
+          </div>
+          <div class="flex w-full items-center justify-between px-4">
+            <div>
+              <button
+                @click="navbarOpen = !navbarOpen"
+                :class="navbarOpen && 'navbarTogglerActive'"
+                id="navbarToggler"
+                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+              >
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                ></span>
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                ></span>
+                <span
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                ></span>
+              </button>
+              <nav
+                :class="!navbarOpen && 'hidden' "
+                id="navbarCollapse"
+                class="absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none xl:ml-11 dark:bg-dark-2"
+              >
+                <ul class="block lg:flex">
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      About Us
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      Features
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary lg:ml-10 lg:inline-flex dark:text-white"
+                    >
+                      Support
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
+              <a
+                href="javascript:void(0)"
+                class="rounded-md bg-dark px-7 py-3 text-base font-medium text-white hover:bg-body-color dark:bg-dark-2 dark:hover:bg-dark-3"
+              >
+                Get Started
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ====== Navbar Section End -->
+
+    <!-- ====== Hero Section Start -->
+    <div class="relative pb-[110px] pt-[150px] lg:pt-[170px] dark:bg-dark">
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap items-center">
+          <div class="w-full px-4 lg:w-1/2">
+            <div class="mb-12 lg:mb-0">
+              <h2
+                class="mb-5 text-3xl font-bold leading-[1.208] text-dark lg:text-[38px] xl:text-[40px] dark:text-white"
+              >
+                Build beautiful website with TailGrids blocks.
+              </h2>
+              <p
+                class="mb-8 max-w-[485px] text-base text-body-color dark:text-dark-6"
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                at egestas tortor. Morbi sed odio id purus pellentesque iaculis
+                nulla facilisi.
+              </p>
+
+              <p class="mb-5 text-base font-medium text-dark dark:text-white">
+                Subscribe to get notified when we launch 🎉
+              </p>
+
+              <form class="mb-7 flex max-w-[455px] flex-wrap">
+                <input
+                  type="email"
+                  class="mb-3 mr-3 h-[52px] w-full rounded-md border border-stroke bg-white px-5 text-base text-body-color outline-hidden placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none sm:max-w-[220px] md:max-w-[315px] lg:max-w-[250px] xl:max-w-[300px] dark:border-dark-3 dark:bg-dark-2"
+                  placeholder="Your work mail"
+                />
+                <button
+                  class="mb-3 h-[52px] rounded-md bg-primary px-7 text-base font-medium text-white transition hover:bg-blue-dark"
+                >
+                  Notify Me!
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="w-full px-4 lg:w-1/2">
+            <div class="-mx-2 flex flex-wrap sm:-mx-4">
+              <div class="w-1/2 px-2 sm:px-4">
+                <div
+                  class="mb-4 h-[256px] sm:mb-8 sm:h-[442px] lg:h-[332px] xl:h-[442px]"
+                >
+                  <img
+                    src="../images/hero/hero-12/image-1.jpg"
+                    alt="hero image"
+                    class="h-full w-full object-cover object-center"
+                  />
+                </div>
+              </div>
+              <div class="w-1/2 px-2 sm:px-4">
+                <div
+                  class="mb-4 h-[120px] sm:mb-8 sm:h-[205px] lg:h-[150px] xl:h-[205px]"
+                >
+                  <img
+                    src="../images/hero/hero-12/image-2.jpg"
+                    alt="hero image"
+                    class="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div
+                  class="mb-4 h-[120px] sm:mb-8 sm:h-[205px] lg:h-[150px] xl:h-[205px]"
+                >
+                  <img
+                    src="../images/hero/hero-12/image-3.jpg"
+                    alt="hero image"
+                    class="h-full w-full object-cover object-center"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ====== Hero Section End -->
+  </body>
+</html>

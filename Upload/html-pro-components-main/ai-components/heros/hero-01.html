@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Navbar Section Start -->
+    <header
+      x-data="
+        {
+          navbarOpen: false
+        }
+      "
+      class="border-b border-stroke dark:border-dark-3"
+    >
+      <div class="bg-dark-2">
+        <div class="container">
+          <p class="py-3 text-center text-sm font-semibold text-white">
+            Create an account to avail a 50% bonus discount at checkout.
+            <a href="javascript:void(0)" class="pl-1">Learn More→</a>
+          </p>
+        </div>
+      </div>
+      <div class="relative z-20 bg-dark-2 pt-[18px]">
+        <div class="-mt-[18px] rounded-t-xl bg-white dark:bg-dark">
+          <div class="container mx-auto">
+            <div class="relative -mx-4 flex items-center justify-between">
+              <div class="w-60 max-w-full px-4">
+                <a href="javascript:void(0)" class="block w-full py-5">
+                  <img
+                    src="https://cdn.tailgrids.com/2.2/assets/images/logo/logo-primary.svg"
+                    alt="logo"
+                    class="dark:hidden"
+                  />
+                  <img
+                    src="https://cdn.tailgrids.com/2.2/assets/images/logo/logo-white.svg"
+                    alt="logo"
+                    class="hidden dark:block"
+                  />
+                </a>
+              </div>
+              <div class="flex w-full items-center justify-between px-4">
+                <div>
+                  <button
+                    @click="navbarOpen = !navbarOpen"
+                    :class="navbarOpen && 'navbarTogglerActive' "
+                    id="navbarToggler"
+                    class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                  >
+                    <span
+                      class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                    ></span>
+                    <span
+                      class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                    ></span>
+                    <span
+                      class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                    ></span>
+                  </button>
+                  <nav
+                    :class="!navbarOpen && 'hidden' "
+                    id="navbarCollapse"
+                    class="absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none dark:bg-dark-2 lg:dark:bg-transparent"
+                  >
+                    <ul class="block lg:flex">
+                      <li>
+                        <a
+                          href="javascript:void(0)"
+                          class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        >
+                          Home
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="javascript:void(0)"
+                          class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        >
+                          Payment
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="javascript:void(0)"
+                          class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        >
+                          Features
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+                <div class="hidden justify-end gap-3 pr-16 sm:flex lg:pr-0">
+                  <a
+                    href="javascript:void(0)"
+                    class="rounded-lg bg-gray-2 px-5 py-2.5 text-base font-medium text-dark hover:text-primary dark:bg-white/5 dark:text-white"
+                  >
+                    Login
+                  </a>
+                  <a
+                    href="javascript:void(0)"
+                    class="rounded-lg bg-primary px-5 py-2.5 text-base font-medium text-white hover:bg-primary/90"
+                  >
+                    Sign Up
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ====== Navbar Section End -->
+
+    <!-- ====== Hero Section Start -->
+    <section class="relative z-10 overflow-hidden bg-white dark:bg-black">
+      <div class="container">
+        <div class="relative">
+          <div class="mx-auto w-full max-w-[725px] pt-[76px] text-center">
+            <div class="relative inline-flex">
+              <span class="absolute -left-5 -top-4">
+                <svg
+                  width="25"
+                  height="26"
+                  viewBox="0 0 25 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22.9416 17.8206C23.3028 16.4115 23.4236 11.1442 21.0174 1.34855"
+                    stroke="#3758F9"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M18.4497 20.1009C16.4202 16.7823 10.1542 8.86717 1.32593 3.75581"
+                    stroke="#3758F9"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M13.2325 23.3676C11.4024 22.2892 6.60438 20.2261 2.05347 20.6008"
+                    stroke="#3758F9"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+              <h1
+                class="mb-4 text-3xl font-extrabold leading-tight text-dark sm:text-4xl md:text-5xl dark:text-white"
+              >
+                Unlock The Power Of Artificial Intelligence With
+                <span
+                  class="bg-linear-to-l from-[#f566d5] to-primary bg-clip-text text-transparent"
+                >
+                  AIBot
+                </span>
+              </h1>
+            </div>
+
+            <p
+              class="mb-9 text-base text-body-color sm:text-lg dark:text-dark-6"
+            >
+              AI content generation website is a platform that utilizes
+              artificial intelligegnce technologies, such as natural
+            </p>
+
+            <a
+              href="javascript:void(0)"
+              class="mb-4 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary/90"
+            >
+              Start A Free Trial
+            </a>
+
+            <p class="mb-10 text-sm text-dark dark:text-white">
+              No credit card required. Free 14-days trial
+            </p>
+
+            <div
+              class="aspect-670/302 overflow-hidden rounded-t-2xl border-8 border-b-0 border-dark-3 bg-gray-1 dark:border-dark-4 dark:bg-dark-3"
+            >
+              <img
+                src="../images/hero/hero-01/image-1.jpg"
+                alt="hero image"
+                class="w-full"
+              />
+            </div>
+          </div>
+
+          <!-- graphics -->
+          <div class="absolute left-0 top-36 hidden items-center gap-3 xl:flex">
+            <span
+              class="rounded-2xl rounded-tr-none bg-[#000]/[.05] py-1.5 pl-4 pr-8 text-xs font-medium text-dark dark:bg-white/5 dark:text-white"
+            >
+              Research
+            </span>
+            <span
+              class="h-11 w-11 overflow-hidden rounded-full border-2 border-white dark:border-dark-3"
+            >
+              <img src="../images/hero/hero-01/person-1.png" alt="person" />
+            </span>
+          </div>
+
+          <div
+            class="absolute left-20 top-[313px] hidden items-center gap-3 xl:flex"
+          >
+            <span
+              class="rounded-2xl rounded-tr-none bg-[#000]/[.05] py-1.5 pl-4 pr-8 text-xs font-medium text-dark dark:bg-white/5 dark:text-white"
+            >
+              MLA & APA
+            </span>
+            <span
+              class="h-11 w-11 overflow-hidden rounded-full border-2 border-white dark:border-dark-3"
+            >
+              <img src="../images/hero/hero-01/person-2.png" alt="person" />
+            </span>
+          </div>
+
+          <div
+            class="absolute right-0 top-36 hidden items-center gap-3 xl:flex"
+          >
+            <span
+              class="h-11 w-11 overflow-hidden rounded-full border-2 border-white dark:border-dark-3"
+            >
+              <img src="../images/hero/hero-01/person-3.png" alt="person" />
+            </span>
+            <span
+              class="rounded-2xl rounded-tl-none bg-[#000]/[.05] py-1.5 pl-4 pr-8 text-xs font-medium text-dark dark:bg-white/5 dark:text-white"
+            >
+              Assistant
+            </span>
+          </div>
+
+          <div
+            class="absolute right-20 top-[313px] hidden items-center gap-3 xl:flex"
+          >
+            <span
+              class="h-11 w-11 overflow-hidden rounded-full border-2 border-white dark:border-dark-3"
+            >
+              <img src="../images/hero/hero-01/person-4.png" alt="person" />
+            </span>
+            <span
+              class="rounded-2xl rounded-tl-none bg-[#000]/[.05] py-1.5 pl-4 pr-8 text-xs font-medium text-dark dark:bg-white/5 dark:text-white"
+            >
+              AI chatbot
+            </span>
+          </div>
+
+          <div
+            class="absolute bottom-0 left-1/2 -z-10 flex w-full -translate-x-1/2 items-center justify-center"
+          >
+            <div
+              class="aspect-square w-full max-w-[256px] rounded-full bg-primary blur-[200px]"
+            ></div>
+            <div
+              class="aspect-square w-full max-w-[256px] rounded-full bg-[#F566D5] blur-[200px]"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- dots shape -->
+      <div class="absolute bottom-24 left-0 -z-10">
+        <img src="../images/hero/hero-01/dot-shape-1.svg" alt="dot shape" />
+      </div>
+      <div class="absolute right-0 top-0 -z-10">
+        <img src="../images/hero/hero-01/dot-shape-2.svg" alt="dot shape" />
+      </div>
+    </section>
+    <!-- ====== Hero Section End -->
+  </body>
+</html>

@@ -2,15 +2,153 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Version: 2.0 - Fixed blue button styles */
+
+/* Основные переменные для тем */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-color: #6B7280; /* Изменено с синего на серый */
+  --primary-hover: #4B5563;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --border-color: #E5E7EB;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Светлая тема */
+[data-editor-theme="light"] {
+  color-scheme: light;
+}
+
+[data-editor-theme="light"] * {
+  color-scheme: light;
+}
+
+/* Темная тема */
+[data-editor-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-editor-theme="dark"] * {
+  color-scheme: dark;
+}
+
+/* Canvas стили */
+.redaktus-canvas {
+  color-scheme: light dark;
+}
+
+.redaktus-canvas * {
+  color-scheme: light dark;
+}
+
+/* Темная тема для редактора */
+[data-editor-theme="dark"] .redaktus-editor {
+  background-color: #111827;
+  color: #F9FAFB;
+}
+
+/* Светлая тема для редактора */
+[data-editor-theme="light"] .redaktus-editor {
+  background-color: #FFFFFF;
+  color: #111827;
+}
+
+/* Темная тема для вертикальной навигации */
+[data-editor-theme="dark"] .redaktus-vertical-navbar {
+  background-color: #1F2937;
+  border-right-color: #374151;
+}
+
+/* Светлая тема для вертикальной навигации */
+[data-editor-theme="light"] .redaktus-vertical-navbar {
+  background-color: #F9FAFB;
+  border-right-color: #E5E7EB;
+}
+
+/* Темная тема для навигации редактора */
+[data-editor-theme="dark"] .redaktus-editor-navbar {
+  background-color: #1F2937;
+  border-bottom-color: #374151;
+}
+
+/* Светлая тема для навигации редактора */
+[data-editor-theme="light"] .redaktus-editor-navbar {
+  background-color: #FFFFFF;
+  border-bottom-color: #E5E7EB;
+}
+
+/* Темная тема для панели инструментов холста */
+[data-editor-theme="dark"] .redaktus-canvas-toolbar {
+  background-color: #1F2937;
+  border-bottom-color: #374151;
+}
+
+/* Светлая тема для панели инструментов холста */
+[data-editor-theme="light"] .redaktus-canvas-toolbar {
+  background-color: #FFFFFF;
+  border-bottom-color: #E5E7EB;
+}
+
+/* Темная тема для панели настроек */
+[data-editor-theme="dark"] .redaktus-settings-panel {
+  background-color: #1F2937;
+  border-left-color: #374151;
+}
+
+/* Светлая тема для панели настроек */
+[data-editor-theme="light"] .redaktus-settings-panel {
+  background-color: #FFFFFF;
+  border-left-color: #E5E7EB;
+}
+
+/* Темная тема для логина */
+[data-editor-theme="dark"] .redaktus-login {
+  background-color: #111827;
+}
+
+/* Светлая тема для логина */
+[data-editor-theme="light"] .redaktus-login {
+  background-color: #FFFFFF;
+}
+
+/* Темная тема для playground */
+[data-editor-theme="dark"] .redaktus-playground {
+  background-color: #111827;
+}
+
+/* Светлая тема для playground */
+[data-editor-theme="light"] .redaktus-playground {
+  background-color: #FFFFFF;
+}
+
+/* Темная тема для настроек приложения */
+[data-editor-theme="dark"] .redaktus-app-settings {
+  background-color: #111827;
+}
+
+/* Светлая тема для настроек приложения */
+[data-editor-theme="light"] .redaktus-app-settings {
+  background-color: #FFFFFF;
+}
+
+/* Темная тема для медиа */
+[data-editor-theme="dark"] .redaktus-media {
+  background-color: #111827;
+}
+
+/* Светлая тема для медиа */
+[data-editor-theme="light"] .redaktus-media {
+  background-color: #FFFFFF;
+}
+
+/* Основные стили */
+:root {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,26 +156,46 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* Светлая тема */
+:root.light {
+  color: #212B36;
+  background-color: #F9FAFB;
+}
+
+/* Темная тема */
+:root.dark {
+  color: #F9FAFB;
+  background-color: #111928;
+}
+
+/* Ссылки */
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
+/* Основной контент */
 body {
   margin: 0;
+  display: flex;
+  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
+/* Заголовки */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+/* Кнопки - УБИРАЕМ ГЛОБАЛЬНЫЕ СТИЛИ */
+/* Все кнопки теперь используют только Tailwind классы */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -45,36 +203,64 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color: white;
+  background-color: transparent;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* УБИРАЕМ ГЛОБАЛЬНЫЕ СТИЛИ КНОПОК - ВСЕ КНОПКИ ИСПОЛЬЗУЮТ ТОЛЬКО TAILWIND */
+/* :root.light button {
+  background-color: #3758F9;
+  color: white;
+}
+
+:root.dark button {
+  background-color: #3758F9;
+  color: white;
+} */
+
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+  :root:not(.dark):not(.light) {
+    color: #212B36;
+    background-color: #F9FAFB;
   }
-  a:hover {
-    color: #747bff;
+  
+  :root:not(.dark):not(.light) a:hover {
+    color: #2A47E8;
   }
-  button {
-    background-color: #f9f9f9;
-    color: #213547;
+  
+  /* УБИРАЕМ ГЛОБАЛЬНЫЕ СТИЛИ КНОПОК */
+  /* :root:not(.dark):not(.light) button {
+    background-color: #3758F9;
+    color: white;
+  } */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.dark):not(.light) {
+    color: #F9FAFB;
+    background-color: #111928;
   }
+  
+  /* УБИРАЕМ ГЛОБАЛЬНЫЕ СТИЛИ КНОПОК */
+  /* :root:not(.dark):not(.light) button {
+    background-color: #3758F9;
+    color: white;
+  } */
 }
 
 /* Стили для продвинутого редактора */
 .advanced-editor {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .text-media-component {
@@ -98,89 +284,117 @@ button:focus-visible {
 .text-content p {
   font-size: 1.1rem;
   line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
 .media-content {
-  flex-shrink: 0;
+  flex: 1;
+  max-width: 50%;
 }
 
 .hero-component {
+  position: relative;
   width: 100%;
-  min-height: 400px;
+  height: 400px;
   background-size: cover;
   background-position: center;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  text-align: center;
 }
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
   padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
 }
 
 .hero-overlay h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 .hero-overlay p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
 .cta-component {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #3758F9 0%, #9055FD 100%);
+  color: white;
 }
 
 .cta-component h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .cta-component button {
+  background: white;
+  color: #3758F9;
+  border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  font-weight: 600;
-  border: none;
+  font-weight: bold;
   border-radius: 8px;
-  color: white;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
 .cta-component button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для панелей */
 .component-panel {
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e0 #f7fafc;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: white;
 }
 
 .component-panel::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .component-panel::-webkit-scrollbar-track {
-  background: #f7fafc;
+  background: #F3F4F6;
+  border-radius: 4px;
 }
 
 .component-panel::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
-  border-radius: 3px;
+  background: #D1D5DB;
+  border-radius: 4px;
 }
 
 .component-panel::-webkit-scrollbar-thumb:hover {
-  background: #a0aec0;
+  background: #9CA3AF;
+}
+
+/* Темная тема для панели компонентов */
+:root.dark .component-panel {
+  background: #1F2A37;
+  border-color: #374151;
+}
+
+:root.dark .component-panel::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+:root.dark .component-panel::-webkit-scrollbar-thumb {
+  background: #6B7280;
+}
+
+:root.dark .component-panel::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
 } 

@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Pricing Section Start -->
+    <section
+      x-data="
+        {
+          yearly: false
+        }
+      "
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 lg:pb-[90px] lg:pt-[120px] dark:bg-dark"
+    >
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+          <div class="w-full px-4">
+            <div class="mx-auto mb-[60px] max-w-[510px] text-center">
+              <span class="mb-2 block text-lg font-semibold text-primary">
+                Our Pricing Plans
+              </span>
+              <h2
+                class="mb-3 text-3xl font-bold leading-[1.208] text-dark sm:text-4xl md:text-[40px] dark:text-white"
+              >
+                Pricing and Plans
+              </h2>
+              <p class="text-base text-body-color dark:text-dark-6">
+                There are many variations of passages of Lorem Ipsum available
+                but the majority have suffered alteration in some form.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-10 text-center">
+          <div class="flex items-center justify-center">
+            <button
+              @click="yearly = false"
+              :class="!yearly ? 'text-primary border-primary' : 'text-dark dark:text-white border-[#E9EEFF]' "
+              class="border-b-[3px] px-6 py-4 text-lg font-semibold"
+            >
+              Monthly
+            </button>
+            <button
+              @click="yearly = true"
+              :class="yearly ? 'text-primary border-primary' : 'text-dark dark:text-white border-[#E9EEFF]' "
+              class="relative border-b-[3px] px-6 py-4 text-lg font-semibold"
+            >
+              Yearly
+              <span
+                class="absolute -right-14 top-0 whitespace-nowrap rounded-full bg-[#F47070] px-[10px] py-1 text-[10px] font-semibold leading-[15px] text-white"
+              >
+                Save 40%
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="-mx-4 flex flex-wrap justify-center">
+          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+            <div
+              class="relative z-10 mb-10 rounded-[15px] border-2 border-stroke bg-white px-8 py-11 sm:px-11 md:px-9 lg:px-8 xl:px-11 dark:border-dark-3 dark:bg-dark-2"
+            >
+              <span class="absolute right-6 top-6 -z-10">
+                <svg
+                  viewBox="0 0 60 60"
+                  class="h-12 w-12 fill-current 2xl:h-14 2xl:w-14"
+                >
+                  <g opacity="0.20">
+                    <path
+                      d="M57.1875 28.4062C56.25 28.4062 55.5 29.1562 55.5 30.0937V48.375C55.5 52.5 52.5 55.6875 48.6562 55.6875H11.3437C7.5 55.6875 4.5 52.5 4.5 48.375V30C4.5 29.0625 3.75 28.3125 2.8125 28.3125C1.875 28.3125 1.21875 29.0625 1.21875 30V48.2812C1.21875 54.0938 5.8125 58.875 11.3437 58.875H48.6562C54.2812 58.875 58.7812 54.0938 58.7812 48.2812V30C58.875 29.0625 58.125 28.4062 57.1875 28.4062Z"
+                      fill="#3056D3"
+                    />
+                    <path
+                      d="M26.9062 39.0938C27.75 39.9375 28.875 40.3125 30 40.3125C31.125 40.3125 32.1562 39.9375 33 39.0938L41.0625 31.125C41.7187 30.4688 41.7187 29.4375 41.0625 28.7812C40.4062 28.125 39.375 28.125 38.7187 28.7812L31.6875 35.8125V2.8125C31.6875 1.875 30.9375 1.125 30 1.125C29.0625 1.125 28.4062 1.875 28.4062 2.8125V35.9062L21.2812 28.7812C20.625 28.125 19.5937 28.125 18.9375 28.7812C18.2813 29.4375 18.2813 30.4688 18.9375 31.125L26.9062 39.0938Z"
+                      fill="#3056D3"
+                    />
+                  </g>
+                </svg>
+              </span>
+
+              <div>
+                <h3
+                  class="mb-2 text-xl font-semibold text-dark sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                >
+                  Free Lite
+                </h3>
+                <p
+                  class="mb-8 max-w-[185px] text-sm text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum simply dummy text of the printing.
+                </p>
+              </div>
+              <div
+                class="mb-9 rounded-[10px] bg-[#F1F4FF] py-[18px] text-center dark:bg-dark"
+              >
+                <h2
+                  class="text-3xl font-bold text-dark sm:text-4xl lg:text-3xl xl:text-[38px] xl:leading-[46px] dark:text-white"
+                >
+                  <sup
+                    class="text-xl font-medium text-body-color dark:text-dark-6"
+                    >$</sup
+                  >
+                  <span x-text="yearly ? '59.00' : '29.99'  "></span>
+                  <span
+                    class="text-base font-medium text-body-color dark:text-dark-6"
+                    x-text="yearly ? '/year' : '/month' "
+                  ></span>
+                </h2>
+              </div>
+
+              <h5 class="mb-6 text-lg font-medium text-dark dark:text-white">
+                Plan Includes:
+              </h5>
+              <div class="mb-9 space-y-[14px]">
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Core UI Components
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Use on Unlimited Projects
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Personal and Commercial Use
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Lifetime Free Updates
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Figma Source File
+                </p>
+              </div>
+
+              <button
+                class="flex w-full items-center justify-center rounded-md border border-transparent bg-primary p-3 text-base font-medium capitalize text-white hover:bg-blue-dark"
+              >
+                Start 14 days Free Trial
+              </button>
+            </div>
+          </div>
+          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+            <div
+              class="relative z-10 mb-10 rounded-[15px] border-2 border-stroke bg-white px-8 py-11 sm:px-11 md:px-9 lg:px-8 xl:px-11 dark:border-dark-3 dark:bg-dark-2"
+            >
+              <span class="absolute right-6 top-6 -z-10">
+                <svg
+                  viewBox="0 0 60 60"
+                  class="h-12 w-12 fill-current 2xl:h-14 2xl:w-14"
+                >
+                  <g opacity="0.20">
+                    <path
+                      d="M23.5312 21C23.5312 24.6562 26.5313 27.6562 30.1875 27.6562C33.8438 27.6562 36.8438 24.6562 36.8438 21C36.8438 17.3437 33.8438 14.3438 30.1875 14.3438C26.5313 14.4375 23.5312 17.4375 23.5312 21ZM33.4688 21C33.4688 22.875 31.9688 24.375 30.0938 24.375C28.2187 24.375 26.7188 22.875 26.7188 21C26.7188 19.125 28.2187 17.625 30.0938 17.625C31.9688 17.625 33.4688 19.2187 33.4688 21Z"
+                      fill="#3056D3"
+                    />
+                    <path
+                      d="M58.3122 38.4375L53.906 34.0312C53.4372 33.5625 52.6872 33.375 52.031 33.6563L47.156 35.8125C46.3122 36.1875 45.9372 37.125 46.3122 37.9688C46.6872 38.8125 47.6247 39.1875 48.4685 38.8125L50.4372 37.9688C48.656 42.5625 45.3747 46.3125 41.2497 48.75V39.375C41.2497 34.5938 37.781 30.75 33.3747 30.75H26.2497C21.9372 30.75 18.3747 34.5938 18.3747 39.375V48.4688C14.156 45.8438 10.8747 41.7188 9.28098 36.75C8.99973 35.9063 8.06223 35.4375 7.21848 35.7187C6.37473 36 5.90598 36.9375 6.18723 37.7812C9.56223 48.1875 19.2185 55.125 30.0935 55.125C40.781 55.125 50.156 48.4688 53.8122 38.4375L55.9685 40.5938C56.2497 40.875 56.7185 41.0625 57.0935 41.0625C57.4685 41.0625 57.9372 40.875 58.2185 40.5938C58.9685 40.125 58.9685 39.0938 58.3122 38.4375ZM21.7497 50.25V39.4687C21.7497 36.5625 23.8122 34.125 26.3435 34.125H29.4372L27.8435 38.625C27.656 39.1875 27.656 39.75 27.8435 40.2188L29.156 44.5313C29.4372 45.375 30.5622 45.375 30.8435 44.5313L32.156 40.2188C32.3435 39.6563 32.3435 39.0938 32.156 38.625L30.5622 34.125H33.656C36.1872 34.125 38.2497 36.4687 38.2497 39.4687V50.4375C35.7185 51.375 32.9997 51.9375 30.1872 51.9375C27.1872 51.9375 24.3747 51.375 21.7497 50.25Z"
+                      fill="#3056D3"
+                    />
+                    <path
+                      d="M7.96875 28.6875L13.2188 25.875C14.0625 25.4063 14.3438 24.4688 13.875 23.625C13.4062 22.875 12.4687 22.5 11.625 22.9688L9 24.375C11.5312 14.8125 20.1563 8.0625 30.1875 8.0625C40.3125 8.0625 49.0312 14.9063 51.5625 24.75C51.75 25.5938 52.6875 26.1563 53.5312 25.9688C54.375 25.7813 54.9375 24.8438 54.75 24C51.9375 12.75 41.8125 4.875 30.1875 4.875C18.75 4.875 8.8125 12.5625 5.8125 23.625L3.9375 21.75C3.28125 21.0938 2.25 21.0938 1.59375 21.75C0.9375 22.4063 0.9375 23.4375 1.59375 24.0938L6 28.5C6.28125 28.7813 6.75 28.9688 7.125 28.9688C7.5 28.875 7.6875 28.7813 7.96875 28.6875Z"
+                      fill="#3056D3"
+                    />
+                  </g>
+                </svg>
+              </span>
+
+              <div>
+                <h3
+                  class="mb-2 text-xl font-semibold text-dark sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                >
+                  Business Plan
+                </h3>
+                <p
+                  class="mb-8 max-w-[185px] text-sm text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum simply dummy text of the printing.
+                </p>
+              </div>
+              <div
+                class="mb-9 rounded-[10px] bg-[#F1F4FF] py-[18px] text-center dark:bg-dark"
+              >
+                <h2
+                  class="text-3xl font-bold text-dark sm:text-4xl lg:text-3xl xl:text-[38px] xl:leading-[46px] dark:text-white"
+                >
+                  <sup
+                    class="text-xl font-medium text-body-color dark:text-dark-6"
+                    >$</sup
+                  >
+                  <span x-text="yearly ? '99.00' : '59.00'  "></span>
+                  <span
+                    class="text-base font-medium text-body-color dark:text-dark-6"
+                    x-text="yearly ? '/year' : '/month' "
+                  ></span>
+                </h2>
+              </div>
+
+              <h5 class="mb-6 text-lg font-medium text-dark dark:text-white">
+                Plan Includes:
+              </h5>
+              <div class="mb-9 space-y-[14px]">
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Core UI Components
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Use on Unlimited Projects
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Personal and Commercial Use
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Lifetime Free Updates
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Figma Source File
+                </p>
+              </div>
+
+              <button
+                class="flex w-full items-center justify-center rounded-md border border-primary p-3 text-base font-medium capitalize text-primary hover:bg-primary hover:text-white"
+              >
+                Get the plan now
+              </button>
+            </div>
+          </div>
+          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+            <div
+              class="relative z-10 mb-10 rounded-[15px] border-2 border-stroke bg-white px-8 py-11 sm:px-11 md:px-9 lg:px-8 xl:px-11 dark:border-dark-3 dark:bg-dark-2"
+            >
+              <span class="absolute right-6 top-6 -z-10">
+                <svg
+                  viewBox="0 0 60 60"
+                  class="h-12 w-12 fill-current 2xl:h-14 2xl:w-14"
+                >
+                  <g opacity="0.20">
+                    <path
+                      d="M34.7812 45.1875C31.0312 45.1875 28.0312 48.2813 28.0312 52.0313C28.0312 55.7813 31.0312 58.875 34.7812 58.875C38.5313 58.875 41.5313 55.7813 41.5313 52.0313C41.5313 48.2813 38.5313 45.1875 34.7812 45.1875ZM34.7812 55.5938C32.8125 55.5938 31.3125 54 31.3125 52.0313C31.3125 50.0625 32.9062 48.4688 34.7812 48.4688C36.75 48.4688 38.25 50.0625 38.25 52.0313C38.25 54 36.75 55.5938 34.7812 55.5938Z"
+                      fill="#3056D3"
+                    />
+                    <path
+                      d="M16.7812 45.1875C13.0312 45.1875 10.0312 48.2813 10.0312 52.0313C10.0312 55.7813 13.0312 58.875 16.7812 58.875C20.5312 58.875 23.5312 55.7813 23.5312 52.0313C23.5312 48.2813 20.5312 45.1875 16.7812 45.1875ZM16.7812 55.5938C14.8125 55.5938 13.3125 54 13.3125 52.0313C13.3125 50.0625 14.9062 48.4688 16.7812 48.4688C18.75 48.4688 20.25 50.0625 20.25 52.0313C20.25 54 18.75 55.5938 16.7812 55.5938Z"
+                      fill="#3056D3"
+                    />
+                    <path
+                      d="M54.7496 1.21875H49.6871C47.6246 1.21875 45.8433 2.71875 45.5621 4.78125L43.9683 16.125H39.0933V8.625C39.0933 7.21875 37.9683 6.09375 36.5621 6.09375H29.1558C29.0621 4.6875 28.0308 3.65625 26.7183 3.65625H18.5621C17.1558 3.65625 16.0308 4.875 16.0308 6.375V8.625H8.62458C7.21833 8.625 6.09333 9.65625 6.09333 11.0625V16.125C5.34333 16.2188 4.59333 16.5 4.12458 17.1563C3.65583 17.8125 3.46834 18.6563 3.65584 19.4063V19.5L9.46833 37.2188C9.74958 38.3438 10.8746 39.1875 12.0933 39.1875H38.2496C41.5308 39.1875 44.3433 36.75 44.8121 33.4688L48.8433 5.25C48.9371 4.875 49.2183 4.5 49.6871 4.5H54.7496C55.6871 4.5 56.4371 3.75 56.4371 2.8125C56.4371 1.875 55.6871 1.21875 54.7496 1.21875ZM35.8121 16.0313H29.1558V9.375H35.8121V16.0313ZM19.3121 6.9375H25.9683V8.625V16.0313H19.3121V11.0625V6.9375ZM9.37458 11.9063H16.0308V16.0313H9.37458V11.9063ZM41.5308 33C41.3433 34.5938 39.8433 35.9063 38.2496 35.9063H12.5621L7.12458 19.3125H16.0308H19.3121H25.9683H29.2496H39.1871H43.5933L41.5308 33Z"
+                      fill="#3056D3"
+                    />
+                  </g>
+                </svg>
+              </span>
+
+              <div>
+                <h3
+                  class="mb-2 text-xl font-semibold text-dark sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                >
+                  Extended Plan
+                </h3>
+                <p
+                  class="mb-8 max-w-[185px] text-sm text-body-color dark:text-dark-6"
+                >
+                  Lorem Ipsum simply dummy text of the printing.
+                </p>
+              </div>
+              <div
+                class="mb-9 rounded-[10px] bg-[#F1F4FF] py-[18px] text-center dark:bg-dark"
+              >
+                <h2
+                  class="text-3xl font-bold text-dark sm:text-4xl lg:text-3xl xl:text-[38px] xl:leading-[46px] dark:text-white"
+                >
+                  <sup
+                    class="text-xl font-medium text-body-color dark:text-dark-6"
+                    >$</sup
+                  >
+                  <span x-text="yearly ? '179.00' : '229.99'  "></span>
+                  <span
+                    class="text-base font-medium text-body-color dark:text-dark-6"
+                    x-text="yearly ? '/year' : '/month' "
+                  ></span>
+                </h2>
+              </div>
+
+              <h5 class="mb-6 text-lg font-medium text-dark dark:text-white">
+                Plan Includes:
+              </h5>
+              <div class="mb-9 space-y-[14px]">
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Core UI Components
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Use on Unlimited Projects
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Personal and Commercial Use
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Lifetime Free Updates
+                </p>
+                <p
+                  class="flex items-center gap-3 text-base text-body-color dark:text-dark-6"
+                >
+                  <span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
+                        fill="#13C296"
+                      />
+                    </svg>
+                  </span>
+                  Figma Source File
+                </p>
+              </div>
+
+              <button
+                class="flex w-full items-center justify-center rounded-md border border-primary p-3 text-base font-medium capitalize text-primary hover:bg-primary hover:text-white"
+              >
+                Get the plan now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Pricing Section End -->
+  </body>
+</html>

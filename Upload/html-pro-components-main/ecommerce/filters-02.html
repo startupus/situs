@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filters | TailGrids</title>
+  <link rel="shortcut icon" href="./../assets/images/favicon.svg" type="image/x-icon" />
+
+  <link rel="stylesheet" href="./../assets/css/nouislider.min.css" />
+  <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+
+  <script defer src="./../assets/js/alpine.min.js"></script>
+</head>
+
+<body>
+  <!-- ====== Filters Section Start -->
+  <section class="bg-white dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <div class="container mx-auto">
+      <div class="-mx-4 flex">
+        <div class="w-full px-4">
+          <div class="mb-[60px]">
+            <h2 class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl">
+              New Arrivals
+            </h2>
+            <p class="text-body-color text-base dark:text-dark-6">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit
+              amet molestie nunc. Vestibulum tempus justo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="-mx-4 flex flex-wrap">
+        <div class="w-full px-4 lg:w-4/12">
+          <div
+            class="bg-white dark:bg-dark-2 mb-9 rounded-[10px] border border-stroke dark:border-dark-3 shadow-testimonial-6 dark:shadow-box-dark pt-6 pb-8 px-8 lg:px-6 xl:px-8">
+            <h3
+              class="border-b border-stroke dark:border-dark-3 pb-[18px] text-lg font-semibold text-dark dark:text-white">
+              Categories
+            </h3>
+            <ul class="pt-6">
+              <li class="mb-3">
+                <a href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6 hover:text-primary block text-base font-medium">
+                  T-shirt
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6 hover:text-primary block text-base font-medium">
+                  Jacket
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6 hover:text-primary block text-base font-medium">
+                  Jeans
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6 hover:text-primary block text-base font-medium">
+                  Sweat shirts
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6 hover:text-primary block text-base font-medium">
+                  Trousers
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6 hover:text-primary block text-base font-medium">
+                  Kitwears
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="bg-white dark:bg-dark-2 mb-9 rounded-[10px] border border-stroke dark:border-dark-3 shadow-testimonial-6 dark:shadow-box-dark pt-6 pb-8 px-8 lg:px-6 xl:px-8">
+            <h3
+              class="border-b border-stroke dark:border-dark-3 pb-[18px] text-lg font-semibold text-dark dark:text-white">
+              Shop By Price
+            </h3>
+
+            <div class="w-full">
+              <div class="priceSlideOne" id="pricingOne">
+                <div class="price-range">
+                  <div class="price-amount flex items-center justify-between pt-6">
+                    <div class="amount-input w-1/2">
+                      <label class="text-body-color block text-xs dark:text-dark-6">
+                        Minimum Price
+                      </label>
+
+                      <span type="text" id="minAmount"
+                        class="text-block text-base font-semibold text-dark dark:text-white"></span>
+                    </div>
+                    <div class="amount-input w-1/2 text-right">
+                      <label class="text-body-color block text-xs dark:text-dark-6">
+                        Maximum Price
+                      </label>
+
+                      <span type="text" id="maxAmount"
+                        class="text-block text-base font-semibold text-dark dark:text-white"></span>
+                    </div>
+                  </div>
+                  <div id="slider-range" class="slider-range"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white dark:bg-dark-2 mb-9 rounded-[10px] border border-stroke dark:border-dark-3 shadow-testimonial-6 dark:shadow-box-dark pt-6 pb-8 px-8 lg:px-6 xl:px-8">
+            <h3
+              class="border-b border-stroke dark:border-dark-3 pb-[18px] text-lg font-semibold text-dark dark:text-white">
+              Select Size
+            </h3>
+
+            <div class="flex flex-wrap items-center pt-6">
+              <div class="mr-3 mb-3">
+                <input type="radio" name="size" id="s" class="filter-size sr-only" />
+                <label for="s"
+                  class="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-4 py-1 px-3 text-base font-medium hover:text-white">
+                  S
+                </label>
+              </div>
+              <div class="mr-3 mb-3">
+                <input type="radio" name="size" id="m" class="filter-size sr-only" />
+                <label for="m"
+                  class="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-4 py-1 px-3 text-base font-medium hover:text-white">
+                  M
+                </label>
+              </div>
+              <div class="mr-3 mb-3">
+                <input type="radio" name="size" id="l" class="filter-size sr-only" />
+                <label for="l"
+                  class="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-4 py-1 px-3 text-base font-medium hover:text-white">
+                  L
+                </label>
+              </div>
+              <div class="mr-3 mb-3">
+                <input type="radio" name="size" id="xl" class="filter-size sr-only" />
+                <label for="xl"
+                  class="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-4 py-1 px-3 text-base font-medium hover:text-white">
+                  XL
+                </label>
+              </div>
+              <div class="mb-3">
+                <input type="radio" name="size" id="xxl" class="filter-size sr-only" />
+                <label for="xxl"
+                  class="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-4 py-1 px-3 text-base font-medium hover:text-white">
+                  XXL
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full px-4 lg:w-8/12">
+          <div
+            class="bg-white dark:bg-dark-2 mb-10 rounded-[10px] border border-stroke dark:border-dark-3 p-5 shadow-testimonial-6 dark:shadow-box-dark">
+            <div class="-mx-4 flex flex-wrap items-center justify-between">
+              <div class="w-full px-4 md:w-9/12 lg:w-9/12 xl:w-8/12">
+                <div class="items-center sm:flex">
+                  <div class="mb-4 mr-8 inline-flex items-center md:mb-0 lg:mr-5 xl:mr-9">
+                    <span for="" class="mr-4 text-base font-medium text-dark dark:text-white">
+                      Show :
+                    </span>
+                    <div x-data="{dropdown: false}" class="relative">
+                      <button
+                        class="inline-flex items-center gap-2 py-[7px] pl-4 pr-[14px] rounded-[5px] border border-stroke dark:border-dark-3 font-medium text-base text-dark dark:text-white bg-transparent"
+                        @click="dropdown = !dropdown">
+                        09
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                          class="fill-current ease-out duration-200" :class="dropdown && 'rotate-180'">
+                          <path
+                            d="M7.00001 9.97495C6.86876 9.97495 6.75938 9.9312 6.65001 9.8437L1.61876 4.89995C1.42188 4.70308 1.42188 4.39683 1.61876 4.19995C1.81563 4.00308 2.12188 4.00308 2.31876 4.19995L7.00001 8.77183L11.6813 4.1562C11.8781 3.95933 12.1844 3.95933 12.3813 4.1562C12.5781 4.35308 12.5781 4.65933 12.3813 4.8562L7.35001 9.79995C7.24063 9.90933 7.13126 9.97495 7.00001 9.97495Z"
+                            fill="" />
+                        </svg>
+                      </button>
+
+                      <div
+                        class="mt-2 absolute top-full left-0 max-w-[150px] w-full bg-white dark:bg-dark-2 border border-stroke dark:border-dark-3 rounded-[5px] py-5"
+                        x-show="dropdown" @click.outside="dropdown = false">
+                        <ul class="flex flex-col">
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            09
+                          </li>
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            10
+                          </li>
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            11
+                          </li>
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            12
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-4 inline-flex items-center md:mb-0">
+                    <span for="" class="mr-4 text-base font-medium text-dark dark:text-white">
+                      Sort By :
+                    </span>
+                    <div x-data="{dropdown: false}" class="relative">
+                      <button
+                        class="inline-flex items-center gap-2 py-[7px] pl-4 pr-[14px] rounded-[5px] border border-stroke dark:border-dark-3 font-medium text-base text-dark dark:text-white bg-transparent"
+                        @click="dropdown = !dropdown">
+                        Best Selling
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                          class="fill-current ease-out duration-200" :class="dropdown && 'rotate-180'">
+                          <path
+                            d="M7.00001 9.97495C6.86876 9.97495 6.75938 9.9312 6.65001 9.8437L1.61876 4.89995C1.42188 4.70308 1.42188 4.39683 1.61876 4.19995C1.81563 4.00308 2.12188 4.00308 2.31876 4.19995L7.00001 8.77183L11.6813 4.1562C11.8781 3.95933 12.1844 3.95933 12.3813 4.1562C12.5781 4.35308 12.5781 4.65933 12.3813 4.8562L7.35001 9.79995C7.24063 9.90933 7.13126 9.97495 7.00001 9.97495Z"
+                            fill="" />
+                        </svg>
+                      </button>
+
+                      <div
+                        class="mt-2 absolute top-full left-0 max-w-[150px] w-full bg-white dark:bg-dark-2 border border-stroke dark:border-dark-3 rounded-[5px] py-5"
+                        x-show="dropdown" @click.outside="dropdown = false">
+                        <ul class="flex flex-col">
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            Featured
+                          </li>
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            Best Selling
+                          </li>
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            Newest Item
+                          </li>
+                          <li
+                            class="cursor-pointer py-[7px] px-5 text-base text-body-color dark:text-dark-6 hover:text-primary hover:bg-[#F5F7FD] dark:hover:bg-dark-3">
+                            Old Items
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full px-4 md:w-3/12 lg:w-3/12 xl:w-4/12">
+                <div class="flex items-center space-x-4 md:justify-end">
+                  <button
+                    class="w-10 h-10 rounded-[5px] border flex items-center justify-center bg-primary border-primary text-white hover:bg-primary hover:border-primary hover:text-white">
+                    <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6.78125 1.0625H2.8125C1.75 1.0625 0.875 1.9375 0.875 3V6.96875C0.875 8.03125 1.75 8.90625 2.8125 8.90625H6.78125C7.84375 8.90625 8.71875 8.03125 8.71875 6.96875V3.03125C8.75 1.9375 7.875 1.0625 6.78125 1.0625ZM7.34375 7C7.34375 7.3125 7.09375 7.5625 6.78125 7.5625H2.8125C2.5 7.5625 2.25 7.3125 2.25 7V3.03125C2.25 2.71875 2.5 2.46875 2.8125 2.46875H6.78125C7.09375 2.46875 7.34375 2.71875 7.34375 3.03125V7Z"
+                        fill="" />
+                      <path
+                        d="M17.1875 1.0625H13.2188C12.1563 1.0625 11.2812 1.9375 11.2812 3V6.96875C11.2812 8.03125 12.1563 8.90625 13.2188 8.90625H17.1875C18.25 8.90625 19.125 8.03125 19.125 6.96875V3.03125C19.125 1.9375 18.25 1.0625 17.1875 1.0625ZM17.75 7C17.75 7.3125 17.5 7.5625 17.1875 7.5625H13.2188C12.9063 7.5625 12.6563 7.3125 12.6563 7V3.03125C12.6563 2.71875 12.9063 2.46875 13.2188 2.46875H17.1875C17.5 2.46875 17.75 2.71875 17.75 3.03125V7Z"
+                        fill="" />
+                      <path
+                        d="M6.78125 11.0312H2.8125C1.75 11.0312 0.875 11.9063 0.875 12.9688V16.9375C0.875 18 1.75 18.875 2.8125 18.875H6.78125C7.84375 18.875 8.71875 18 8.71875 16.9375V13C8.75 11.9062 7.875 11.0312 6.78125 11.0312ZM7.34375 16.9687C7.34375 17.2812 7.09375 17.5312 6.78125 17.5312H2.8125C2.5 17.5312 2.25 17.2812 2.25 16.9687V13C2.25 12.6875 2.5 12.4375 2.8125 12.4375H6.78125C7.09375 12.4375 7.34375 12.6875 7.34375 13V16.9687Z"
+                        fill="" />
+                      <path
+                        d="M17.1875 11.0312H13.2188C12.1563 11.0312 11.2812 11.9063 11.2812 12.9688V16.9375C11.2812 18 12.1563 18.875 13.2188 18.875H17.1875C18.25 18.875 19.125 18 19.125 16.9375V13C19.125 11.9062 18.25 11.0312 17.1875 11.0312ZM17.75 16.9687C17.75 17.2812 17.5 17.5312 17.1875 17.5312H13.2188C12.9063 17.5312 12.6563 17.2812 12.6563 16.9687V13C12.6563 12.6875 12.9063 12.4375 13.2188 12.4375H17.1875C17.5 12.4375 17.75 12.6875 17.75 13V16.9687Z"
+                        fill="" />
+                    </svg>
+                  </button>
+                  <button
+                    class="w-10 h-10 rounded-[5px] border border-stroke dark:border-dark-3 text-dark dark:text-white bg-transparent flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white">
+                    <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M5.03125 4.53125H18.9375C19.3125 4.53125 19.6563 4.21875 19.6563 3.8125C19.6563 3.40625 19.3437 3.09375 18.9375 3.09375H5.03125C4.65625 3.09375 4.3125 3.40625 4.3125 3.8125C4.3125 4.21875 4.625 4.53125 5.03125 4.53125Z"
+                        fill="" />
+                      <path
+                        d="M18.9063 9.3125H5.03125C4.65625 9.3125 4.3125 9.625 4.3125 10.0312C4.3125 10.4062 4.625 10.75 5.03125 10.75H18.9375C19.3125 10.75 19.6563 10.4375 19.6563 10.0312C19.625 9.625 19.3125 9.3125 18.9063 9.3125Z"
+                        fill="" />
+                      <path
+                        d="M18.9063 15.4688H5.03125C4.65625 15.4688 4.3125 15.7812 4.3125 16.1875C4.3125 16.5938 4.625 16.9062 5.03125 16.9062H18.9375C19.3125 16.9062 19.6563 16.5938 19.6563 16.1875C19.6563 15.7812 19.3125 15.4688 18.9063 15.4688Z"
+                        fill="" />
+                      <path
+                        d="M1.9375 4.65625C2.40349 4.65625 2.78125 4.27849 2.78125 3.8125C2.78125 3.34651 2.40349 2.96875 1.9375 2.96875C1.47151 2.96875 1.09375 3.34651 1.09375 3.8125C1.09375 4.27849 1.47151 4.65625 1.9375 4.65625Z"
+                        fill="" />
+                      <path
+                        d="M1.9375 10.8438C2.40349 10.8438 2.78125 10.466 2.78125 10C2.78125 9.53401 2.40349 9.15625 1.9375 9.15625C1.47151 9.15625 1.09375 9.53401 1.09375 10C1.09375 10.466 1.47151 10.8438 1.9375 10.8438Z"
+                        fill="" />
+                      <path
+                        d="M1.9375 17.0312C2.40349 17.0312 2.78125 16.6535 2.78125 16.1875C2.78125 15.7215 2.40349 15.3438 1.9375 15.3438C1.47151 15.3438 1.09375 15.7215 1.09375 16.1875C1.09375 16.6535 1.47151 17.0312 1.9375 17.0312Z"
+                        fill="" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mb-8 flex items-center justify-center rounded-lg bg-gray-2 dark:bg-dark-2 border border-dashed border-stroke dark:border-dark-3 py-[315px]">
+            <span class="text-3xl font-bold text-dark dark:text-white/10 sm:text-4xl md:leading-[55px] md:text-[44px]">
+              Products
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ====== Filters Section End -->
+
+  <script src="./../assets/js/nouislider.min.js"></script>
+  <script>
+    // ========= Pricing range slider one
+    var stepsSlider = document.getElementById("slider-range");
+    var input0 = document.getElementById("minAmount");
+    var input1 = document.getElementById("maxAmount");
+    var inputs = [input0, input1];
+    noUiSlider.create(stepsSlider, {
+      start: [200, 1200],
+      connect: true,
+      step: 1,
+      range: {
+        min: [0],
+        max: 2000,
+      },
+    });
+
+    stepsSlider.noUiSlider.on("update", function (values, handle) {
+      inputs[handle].innerHTML = values[handle];
+    });
+  </script>
+</body>
+
+</html>

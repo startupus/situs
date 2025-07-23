@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
 import { FaMobile, FaDesktop, FaTabletAlt, FaMoon, FaCode, FaPlus } from 'react-icons/fa';
 
+
 interface CanvasToolbarProps {
   currentDevice: 'mobile' | 'tablet' | 'desktop';
   onDeviceChange: (device: 'mobile' | 'tablet' | 'desktop') => void;
+  onPreview?: () => void;
+  onCode?: () => void;
+  onUndo?: () => void;
+  onRedo?: () => void;
+  onSave?: () => void;
 }
 
-const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceChange }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ 
+  currentDevice, 
+  onDeviceChange,
+  onPreview,
+  onCode,
+  onUndo,
+  onRedo,
+  onSave
+}) => {
   const [currentLanguage, setCurrentLanguage] = useState('ru');
   const [showCode, setShowCode] = useState(false);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    // Здесь можно добавить логику для переключения темы контента
-  };
-
   const toggleCodeView = () => {
     setShowCode(!showCode);
-    // Здесь можно добавить логику для показа кода страницы
+    onCode?.();
   };
 
   const languages = [
@@ -28,7 +36,9 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceCh
   ];
 
   return (
-    <div className="bg-gray-100 border-b border-gray-200 px-4 py-2">
+    <div 
+      className="redaktus-canvas-toolbar border-b px-4 py-2 transition-colors duration-200 bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+    >
       <div className="flex items-center justify-between">
         {/* Левая часть - языковые флажки */}
         <div className="flex items-center space-x-2">
@@ -39,8 +49,8 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceCh
                 onClick={() => setCurrentLanguage(lang.code)}
                 className={`flex items-center justify-center w-7 h-7 rounded-md text-sm transition-colors ${
                   currentLanguage === lang.code
-                    ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                    : 'text-gray-600 hover:bg-gray-200 border border-transparent'
+                    ? 'bg-gray-100 text-gray-700 border border-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500'
+                    : 'text-gray-600 hover:bg-gray-200 border border-transparent dark:text-gray-300 dark:hover:bg-gray-700'
                 }`}
                 title={lang.name}
               >
@@ -48,7 +58,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceCh
               </button>
             ))}
             <button
-              className="flex items-center justify-center w-7 h-7 text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md transition-colors border border-gray-400"
+              className="flex items-center justify-center w-7 h-7 rounded-md transition-colors border text-gray-600 hover:text-gray-800 hover:bg-gray-200 border-gray-400 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 dark:border-gray-600"
               title="Add new language"
             >
               <FaPlus size={12} />
@@ -58,7 +68,9 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceCh
 
         {/* Центральная часть - заголовок */}
         <div className="flex-1 text-center">
-          <h2 className="text-base font-semibold text-gray-800">Page Editor</h2>
+          <h2 className="text-base font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
+            Page Editor
+          </h2>
         </div>
 
         {/* Правая часть - варианты демонстрации */}
@@ -81,27 +93,15 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceCh
             onClick={() => onDeviceChange('desktop')}
             title="Desktop view"
           />
-          <div className="w-px h-5 bg-gray-300 mx-1"></div>
-          <button
-            onClick={toggleDarkMode}
-            className={`p-1.5 rounded transition-colors ${
-              isDarkMode 
-                ? 'bg-gray-800 text-white' 
-                : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200'
-            }`}
-            title="Toggle dark mode"
-          >
-            <FaMoon size={11} />
-          </button>
-          <div className="w-px h-5 bg-gray-300 mx-1"></div>
+          <div className="w-px h-5 mx-1 bg-gray-300 dark:bg-gray-600"></div>
           <button
             onClick={toggleCodeView}
             className={`p-1.5 rounded transition-colors ${
               showCode 
-                ? 'bg-blue-100 text-blue-600 border border-blue-300' 
-                : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200'
+                ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200' 
+                : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
             }`}
-            title="Show code"
+            title="Toggle code view"
           >
             <FaCode size={11} />
           </button>
@@ -111,7 +111,6 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ currentDevice, onDeviceCh
   );
 };
 
-// Компонент для кнопки устройства
 const DeviceButton: React.FC<{
   icon: React.ReactNode;
   active?: boolean;
@@ -121,12 +120,12 @@ const DeviceButton: React.FC<{
   return (
     <button
       onClick={onClick}
-      title={title}
       className={`p-1.5 rounded transition-colors ${
         active 
-          ? 'bg-blue-100 text-blue-600 border border-blue-300' 
-          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200'
+                          ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
+          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
       }`}
+      title={title}
     >
       {icon}
     </button>

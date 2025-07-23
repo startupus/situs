@@ -1,0 +1,26 @@
+[2025-07-23T09:07:44.150Z] Starting Browser Tools Server...
+[2025-07-23T09:07:44.151Z] Requested port: 3025
+[2025-07-23T09:07:44.152Z] Port 3025 is in use, trying next port...
+
+====================================
+[2025-07-23T09:07:44.152Z] NOTICE: Requested port 3025 was in use.
+Using port 3026 instead.
+====================================
+
+[2025-07-23T09:07:44.153Z] 
+=== Browser Tools Server Started ===
+[2025-07-23T09:07:44.153Z] Aggregator listening on http://0.0.0.0:3026
+NOTE: Using fallback port 3026 instead of requested port 3025
+[2025-07-23T09:07:44.153Z] 
+Available on the following network addresses:
+[2025-07-23T09:07:44.153Z]   - http://192.168.68.102:3026
+
+For local access use: http://localhost:3026
+[2025-07-23T09:08:10.224Z] 
+Received SIGINT signal. Starting graceful shutdown...
+Shutting down WebSocket server...
+WebSocket server closed gracefully
+[2025-07-23T09:08:10.225Z] HTTP server closed successfully
+Wiping all logs...
+All logs have been wiped
+Shutdown completed successfully

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Select | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="./../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+  </head>
+  <body>
+    <!-- ====== Box Select Section Start -->
+    <section class="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+      <div class="container mx-auto">
+        <div>
+          <h3 class="mb-6 text-lg font-semibold text-dark dark:text-white">
+            Select Delivery Option
+          </h3>
+
+          <div class="flex flex-wrap">
+            <div class="mr-6 w-full max-w-[240px]">
+              <div class="mb-3">
+                <input
+                  type="radio"
+                  name="shippingAddress"
+                  id="shippingAddress1"
+                  class="shipping select-box sr-only"
+                />
+                <label
+                  for="shippingAddress1"
+                  class="block cursor-pointer overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 px-4 lg:px-4 xl:px-6"
+                >
+                  <span
+                    class="title mb-[6px] block text-base font-semibold text-dark dark:text-white"
+                  >
+                    Same as Personal
+                  </span>
+                  <span class="block text-sm text-dark dark:text-white">
+                    New York, USA <br />
+                    2707 Davis Anenue
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="w-full max-w-[240px]">
+              <div class="mb-3">
+                <input
+                  type="radio"
+                  name="shippingAddress"
+                  id="shippingAddress2"
+                  class="shipping select-box sr-only"
+                />
+                <label
+                  for="shippingAddress2"
+                  class="block cursor-pointer overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 px-4 lg:px-4 xl:px-6"
+                >
+                  <span
+                    class="title mb-[6px] block text-base font-semibold text-dark dark:text-white"
+                  >
+                    Register Now
+                  </span>
+                  <span class="block text-sm text-body-color dark:text-dark-6">
+                    Create an account now to have multiple address.
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Box Select Section End -->
+  </body>
+</html>

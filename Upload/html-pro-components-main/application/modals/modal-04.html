@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modal | TailGrids</title>
+  <link rel="shortcut icon" href="../../assets/images/favicon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+  <script defer src="../../assets/js/alpine.min.js"></script>
+</head>
+
+<body>
+  <!-- ====== Modal Section Start -->
+  <section x-data="{modalOpen: false}">
+    <div class="container mx-auto py-20">
+      <button @click="modalOpen = true" class="rounded-full bg-primary px-6 py-3 text-base font-medium text-white">
+        Open Modal
+      </button>
+    </div>
+
+    <div x-show="modalOpen" class="fixed left-0 top-0 h-screen w-full overflow-y-scroll bg-white py-10 dark:bg-dark">
+      <div @click.outside="modalOpen = false"
+        class="mx-auto max-w-[465px] rounded-[10px] bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-three">
+        <div class="mb-9 overflow-hidden rounded-md border border-stroke dark:border-dark-3">
+          <img src="../images/modals/image-01.svg" alt="modal image" class="w-full" />
+        </div>
+        <div class="text-center">
+          <h3 class="mb-2.5 text-2xl font-semibold text-dark sm:text-[28px] dark:text-white">
+            Access has been requested
+          </h3>
+          <p class="mb-6 text-base text-body-color dark:text-dark-6">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry Lorem Ipsum been.
+          </p>
+          <div class="mb-9 flex items-center justify-center space-x-[14px]">
+            <span class="block h-3 w-3 cursor-pointer rounded-full bg-primary hover:bg-primary"></span>
+            <span class="block h-3 w-3 cursor-pointer rounded-full bg-[#DAE6FF] hover:bg-primary"></span>
+            <span class="block h-3 w-3 cursor-pointer rounded-full bg-[#DAE6FF] hover:bg-primary"></span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button @click="modalOpen = false"
+              class="h-12 w-full rounded-md bg-white text-center text-base font-medium text-body-color shadow-1 hover:bg-gray-2 dark:bg-white/5 dark:text-white dark:shadow-3 dark:hover:bg-white/10">
+              Skip
+            </button>
+            <button
+              class="h-12 w-full rounded-md bg-primary text-center text-base font-medium text-white hover:bg-primary/90">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ====== Modal Section End -->
+</body>
+
+</html>

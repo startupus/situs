@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+  </head>
+  <body>
+    <!-- ====== Table Section Start -->
+    <section class="bg-white py-20 lg:py-[120px] dark:bg-dark">
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap">
+          <div class="w-full px-4">
+            <div
+              class="max-w-full overflow-x-auto rounded-xl bg-white shadow-[0px_3px_8px_0px_rgba(0,0,0,0.08)] dark:bg-dark-2"
+            >
+              <table class="w-full table-auto">
+                <thead>
+                  <tr class="bg-primary text-left">
+                    <th
+                      class="min-w-[280px] py-4 pl-11 pr-4 text-base font-medium text-white"
+                    >
+                      Name
+                    </th>
+                    <th
+                      class="min-w-[280px] px-4 py-4 text-base font-medium text-white"
+                    >
+                      Position
+                    </th>
+                    <th
+                      class="min-w-[250px] px-4 py-4 text-base font-medium text-white"
+                    >
+                      EMAIL
+                    </th>
+                    <th
+                      class="min-w-[140px] px-4 py-4 text-base font-medium text-white"
+                    >
+                      ROLE
+                    </th>
+                    <th
+                      class="min-w-[140px] py-4 pl-4 pr-11 text-right text-base font-medium text-white"
+                    >
+                      Edit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3"
+                    >
+                      <h5 class="text-base text-body-color dark:text-dark-6">
+                        Musharof Chowdhury
+                      </h5>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Multidisciplinary Web Entrepreneur
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        musharof@example.com
+                      </p>
+                    </td>
+
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-sm text-body-color dark:text-dark-6">
+                        Owner
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3"
+                    >
+                      <div class="relative">
+                        <select
+                          class="appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 outline-hidden dark:bg-dark-3 dark:text-dark-6 dark:shadow-card"
+                        >
+                          <option value="" selected disabled>Action</option>
+                          <option value="">Edit</option>
+                          <option value="">Delete</option>
+                          <option value="">Details</option>
+                        </select>
+                        <span
+                          class="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7"
+                        >
+                          <svg
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            class="fill-current"
+                          >
+                            <path
+                              d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3"
+                    >
+                      <h5 class="text-base text-body-color dark:text-dark-6">
+                        Naimur Rahman
+                      </h5>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Website Front-end Developer
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        naimurrahman@example.com
+                      </p>
+                    </td>
+
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-sm text-body-color dark:text-dark-6">
+                        Member
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3"
+                    >
+                      <div class="relative">
+                        <select
+                          class="appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 outline-hidden dark:bg-dark-3 dark:text-dark-6 dark:shadow-card"
+                        >
+                          <option value="" selected disabled>Action</option>
+                          <option value="">Edit</option>
+                          <option value="">Delete</option>
+                          <option value="">Details</option>
+                        </select>
+                        <span
+                          class="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7"
+                        >
+                          <svg
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            class="fill-current"
+                          >
+                            <path
+                              d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3"
+                    >
+                      <h5 class="text-base text-body-color dark:text-dark-6">
+                        Shafiq Hammad
+                      </h5>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Regional Paradigm Technician
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        shafiq.hd@example.com
+                      </p>
+                    </td>
+
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-sm text-body-color dark:text-dark-6">
+                        Moderator
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3"
+                    >
+                      <div class="relative">
+                        <select
+                          class="appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 outline-hidden dark:bg-dark-3 dark:text-dark-6 dark:shadow-card"
+                        >
+                          <option value="" selected disabled>Action</option>
+                          <option value="">Edit</option>
+                          <option value="">Delete</option>
+                          <option value="">Details</option>
+                        </select>
+                        <span
+                          class="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7"
+                        >
+                          <svg
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            class="fill-current"
+                          >
+                            <path
+                              d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3"
+                    >
+                      <h5 class="text-base text-body-color dark:text-dark-6">
+                        Alex Semuyel
+                      </h5>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Applications Engineer
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        alex.semuel@example.com
+                      </p>
+                    </td>
+
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-sm text-body-color dark:text-dark-6">
+                        Admin
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3"
+                    >
+                      <div class="relative">
+                        <select
+                          class="appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 outline-hidden dark:bg-dark-3 dark:text-dark-6 dark:shadow-card"
+                        >
+                          <option value="" selected disabled>Action</option>
+                          <option value="">Edit</option>
+                          <option value="">Delete</option>
+                          <option value="">Details</option>
+                        </select>
+                        <span
+                          class="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7"
+                        >
+                          <svg
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            class="fill-current"
+                          >
+                            <path
+                              d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3"
+                    >
+                      <h5 class="text-base text-body-color dark:text-dark-6">
+                        Sulium Keliym
+                      </h5>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Lead Implementation Liaison
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        suliym.info@example.com
+                      </p>
+                    </td>
+
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-sm text-body-color dark:text-dark-6">
+                        Member
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3"
+                    >
+                      <div class="relative">
+                        <select
+                          class="appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 outline-hidden dark:bg-dark-3 dark:text-dark-6 dark:shadow-card"
+                        >
+                          <option value="" selected disabled>Action</option>
+                          <option value="">Edit</option>
+                          <option value="">Delete</option>
+                          <option value="">Details</option>
+                        </select>
+                        <span
+                          class="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7"
+                        >
+                          <svg
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            class="fill-current"
+                          >
+                            <path
+                              d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3"
+                    >
+                      <h5 class="text-base text-body-color dark:text-dark-6">
+                        Devid Deekook
+                      </h5>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Central Security Manager
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        devid.decok@example.com
+                      </p>
+                    </td>
+
+                    <td
+                      class="border-t border-stroke px-4 py-5 dark:border-dark-3"
+                    >
+                      <p class="text-sm text-body-color dark:text-dark-6">
+                        Moderator
+                      </p>
+                    </td>
+                    <td
+                      class="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3"
+                    >
+                      <div class="relative">
+                        <select
+                          class="appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 outline-hidden dark:bg-dark-3 dark:text-dark-6 dark:shadow-card"
+                        >
+                          <option value="" selected disabled>Action</option>
+                          <option value="">Edit</option>
+                          <option value="">Delete</option>
+                          <option value="">Details</option>
+                        </select>
+                        <span
+                          class="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7"
+                        >
+                          <svg
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            class="fill-current"
+                          >
+                            <path
+                              d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Table Section End -->
+  </body>
+</html>

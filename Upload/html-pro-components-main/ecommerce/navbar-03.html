@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eCommerce Navbar | TailGrids</title>
+  <link rel="shortcut icon" href="./../assets/images/favicon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+
+  <script defer src="./../assets/js/alpine.min.js"></script>
+</head>
+
+<body>
+  <!-- ====== Navbar Section Start -->
+  <header x-data="
+        {
+          navbarOpen: false,
+          searchForm: false,
+          wishlistOpen: false,
+          cartOpen: false,
+          submenuOpen: false,
+          categories: false,
+          categoryOne: true,
+        }
+      " class="w-full bg-primary">
+    <div class="hidden border-b border-white/20 sm:block">
+      <div class="container mx-auto">
+        <div class="-mx-4 flex flex-wrap items-center">
+          <div class="w-full px-4 md:w-1/3 lg:w-1/2">
+            <div class="-mx-3 hidden items-center md:flex">
+              <div class="px-3">
+                <div class="relative flex items-center">
+                  <label class="hidden text-base font-medium text-white lg:inline-flex">
+                    Language:
+                  </label>
+                  <select
+                    class="w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white outline-hidden transition">
+                    <option class="bg-dark-2">English</option>
+                    <option class="bg-dark-2">Urdu</option>
+                    <option class="bg-dark-2">Hindi</option>
+                  </select>
+                  <span class="absolute right-0 top-1/2 -translate-y-1/2">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6.99998 9.97501C6.86873 9.97501 6.75935 9.93126 6.64998 9.84376L1.61873 4.90001C1.42185 4.70314 1.42185 4.39689 1.61873 4.20001C1.8156 4.00314 2.12185 4.00314 2.31873 4.20001L6.99998 8.77189L11.6812 4.15626C11.8781 3.95939 12.1843 3.95939 12.3812 4.15626C12.5781 4.35314 12.5781 4.65939 12.3812 4.85626L7.34997 9.80001C7.2406 9.90939 7.13123 9.97501 6.99998 9.97501Z"
+                        fill="white" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div class="px-3">
+                <div class="relative flex items-center">
+                  <label class="hidden text-base font-medium text-white lg:inline-flex">
+                    Currency:
+                  </label>
+                  <select
+                    class="w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white outline-hidden transition">
+                    <option value="" class="bg-dark-2">USD</option>
+                    <option value="" class="bg-dark-2">INR</option>
+                    <option value="" class="bg-dark-2">ERU</option>
+                  </select>
+                  <span class="absolute right-0 top-1/2 -translate-y-1/2">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6.99998 9.97501C6.86873 9.97501 6.75935 9.93126 6.64998 9.84376L1.61873 4.90001C1.42185 4.70314 1.42185 4.39689 1.61873 4.20001C1.8156 4.00314 2.12185 4.00314 2.31873 4.20001L6.99998 8.77189L11.6812 4.15626C11.8781 3.95939 12.1843 3.95939 12.3812 4.15626C12.5781 4.35314 12.5781 4.65939 12.3812 4.85626L7.34997 9.80001C7.2406 9.90939 7.13123 9.97501 6.99998 9.97501Z"
+                        fill="white" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full px-4 md:w-2/3 lg:w-1/2">
+            <ul class="-mx-[10px] flex items-center justify-center md:justify-end">
+              <li>
+                <a href="javascript:void(0)"
+                  class="inline-block py-4 px-[10px] text-base font-medium text-white hover:text-white/90">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  class="inline-block py-4 px-[10px] text-base font-medium text-white hover:text-white/90">
+                  Order Tracking
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  class="inline-block py-4 px-[10px] text-base font-medium text-white hover:text-white/90">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  class="inline-block py-4 px-[10px] text-base font-medium text-white hover:text-white/90">
+                  FAQs
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-b border-white/20 lg:py-4">
+      <div class="container mx-auto">
+        <div class="relative -mx-4 flex items-center justify-between">
+          <div class="w-48 max-w-full px-4 sm:w-60 lg:w-48">
+            <a href="javascript:void(0)" class="block w-full py-5 lg:py-3">
+              <img src="./../assets/images/logo/logo-white.svg" alt="logo" class="w-full" />
+            </a>
+          </div>
+          <div class="hidden w-full items-center justify-end px-4 sm:flex lg:justify-between">
+            <div class="hidden w-full lg:flex">
+              <form class="relative flex w-full items-center rounded-md bg-white dark:bg-dark-2">
+                <div class="relative border-r border-stroke dark:border-dark-3">
+                  <select
+                    class="appearance-none bg-transparent pl-[22px] pr-10 py-[14px] text-base font-medium text-dark dark:text-white outline-hidden">
+                    <option class="dark:bg-dark-2">All categories</option>
+                    <option class="dark:bg-dark-2">Best matches</option>
+                    <option class="dark:bg-dark-2">Newest</option>
+                  </select>
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-dark dark:text-white">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                      class="fill-current">
+                      <path
+                        d="M7.00001 9.97501C6.86876 9.97501 6.75938 9.93126 6.65001 9.84376L1.61876 4.90001C1.42188 4.70314 1.42188 4.39689 1.61876 4.20001C1.81563 4.00314 2.12188 4.00314 2.31876 4.20001L7.00001 8.77189L11.6813 4.15626C11.8781 3.95939 12.1844 3.95939 12.3813 4.15626C12.5781 4.35314 12.5781 4.65939 12.3813 4.85626L7.35001 9.80001C7.24063 9.90939 7.13126 9.97501 7.00001 9.97501Z" />
+                    </svg>
+                  </span>
+                </div>
+                <input type="text" placeholder="I'm shopping for..."
+                  class="w-full bg-transparent py-[14px] pl-6 pr-[58px] text-base text-body-color dark:text-dark-6 outline-hidden" />
+                <button
+                  class="absolute top-0 right-0 flex h-full w-[52px] items-center justify-center rounded-tr-md rounded-br-md border-l border-stroke dark:border-dark-3 bg-white text-dark dark:text-white dark:bg-dark-2">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="fill-current">
+                    <path
+                      d="M23.025 20.8875L16.8375 15.8625C19.3875 12.375 19.125 7.38749 15.9375 4.23749C14.25 2.54999 12 1.61249 9.6 1.61249C7.2 1.61249 4.95 2.54999 3.2625 4.23749C-0.225001 7.72499 -0.225001 13.425 3.2625 16.9125C4.95 18.6 7.2 19.5375 9.6 19.5375C11.8875 19.5375 14.025 18.675 15.7125 17.1375L21.975 22.2C22.125 22.3125 22.3125 22.3875 22.5 22.3875C22.7625 22.3875 22.9875 22.275 23.1375 22.0875C23.4375 21.7125 23.4 21.1875 23.025 20.8875ZM9.6 17.85C7.65 17.85 5.85 17.1 4.4625 15.7125C1.6125 12.8625 1.6125 8.24999 4.4625 5.43749C5.85 4.04999 7.65 3.29999 9.6 3.29999C11.55 3.29999 13.35 4.04999 14.7375 5.43749C17.5875 8.28749 17.5875 12.9 14.7375 15.7125C13.3875 17.1 11.55 17.85 9.6 17.85Z" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+            <div class="flex w-full items-center justify-end space-x-4 pr-16 lg:pr-0">
+              <div class="relative z-20">
+                <button class="hidden items-center pr-1 text-left md:flex" @click="wishlistOpen = !wishlistOpen">
+                  <span class="relative mr-5 flex items-center justify-center">
+                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M13 23.9688C12.4719 23.9688 11.9437 23.7656 11.5375 23.4C10.6031 22.5875 9.75 21.8563 8.97812 21.2063C6.6625 19.2156 4.63125 17.55 3.20937 15.8438C1.54375 13.8125 0.731247 11.9031 0.731247 9.75C0.731247 7.67813 1.4625 5.72813 2.7625 4.30625C4.10312 2.84375 5.97187 2.03125 7.9625 2.03125C9.46562 2.03125 10.8875 2.51875 12.1062 3.45312C12.4312 3.69688 12.7156 3.94062 13 4.26562C13.2844 3.98125 13.5687 3.69688 13.8937 3.45312C15.1125 2.51875 16.4937 2.03125 18.0375 2.03125C20.0687 2.03125 21.8969 2.84375 23.2375 4.30625C24.5781 5.72813 25.2687 7.67813 25.2687 9.75C25.2687 11.9031 24.4969 13.8125 22.7906 15.8438C21.3687 17.55 19.3375 19.2563 17.0219 21.2063C16.25 21.8563 15.3562 22.6281 14.4219 23.4C14.0562 23.7656 13.5281 23.9688 13 23.9688ZM7.9625 3.85938C6.45937 3.85938 5.07812 4.46875 4.0625 5.525C3.0875 6.62188 2.55937 8.125 2.55937 9.75C2.55937 11.4156 3.20937 13 4.59062 14.6656C5.93125 16.25 7.88125 17.9156 10.1156 19.825C10.8875 20.475 11.7812 21.2469 12.7156 22.0594C12.8781 22.1812 13.1219 22.1812 13.2844 22.0594C14.2187 21.2469 15.1125 20.5156 15.8844 19.825C18.1594 17.875 20.1094 16.25 21.4094 14.6656C22.7906 13 23.4406 11.4156 23.4406 9.75C23.4406 8.125 22.8719 6.62187 21.8969 5.56562C20.8812 4.46875 19.5 3.85938 18.0375 3.85938C16.9406 3.85938 15.925 4.225 15.0312 4.875C14.6656 5.15937 14.3406 5.48437 14.0156 5.85C13.7719 6.13437 13.4062 6.3375 13 6.3375C12.5937 6.3375 12.2687 6.175 11.9844 5.85C11.6594 5.48437 11.3344 5.15937 10.9687 4.875C10.1156 4.225 9.1 3.85938 7.9625 3.85938Z"
+                        fill="white" />
+                    </svg>
+                    <span
+                      class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-semibold text-primary">
+                      3
+                    </span>
+                  </span>
+
+                  <span class="text-sm text-white">
+                    <span>Favorite</span>
+                    <br />
+                    <span class="font-medium">My Wishlist</span>
+                  </span>
+                </button>
+
+                <div x-show="wishlistOpen" @click.outside="wishlistOpen = false"
+                  class="absolute top-full right-0 mt-5 w-[330px]">
+                  <div
+                    class="overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-8 px-6 shadow-1 dark:shadow-box-dark">
+                    <div class="border-b border-stroke dark:border-dark-3 pb-3">
+                      <div class="-mx-1 flex items-center justify-between pb-4">
+                        <div class="flex items-center px-1">
+                          <div class="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-sm">
+                            <img src="./images/checkout/checkout-02/image-02.jpg" alt="product image" class="w-full" />
+                          </div>
+                          <div>
+                            <a href="javascript:void(0)"
+                              class="text-sm font-medium text-dark dark:text-white hover:text-primary">
+                              Circular Sienna
+                            </a>
+                            <p class="truncate text-xs font-medium text-body-color dark:text-dark-6">
+                              Awesome white shirt
+                            </p>
+                          </div>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-semibold text-dark dark:text-white">
+                            $36.00
+                          </p>
+                        </div>
+                      </div>
+                      <div class="-mx-1 flex items-center justify-between py-4">
+                        <div class="flex items-center px-1">
+                          <div class="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-sm">
+                            <img src="./images/checkout/checkout-02/image-03.jpg" alt="product image" class="w-full" />
+                          </div>
+                          <div>
+                            <a href="javascript:void(0)"
+                              class="text-sm font-medium text-dark dark:text-white hover:text-primary">
+                              Black T-shirt
+                            </a>
+                            <p class="truncate text-xs font-medium text-body-color dark:text-dark-6">
+                              It's a nice black t-shirt
+                            </p>
+                          </div>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-semibold text-dark dark:text-white">
+                            $36.00
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        class="flex w-full items-center justify-center rounded-md bg-primary py-[10px] px-10 text-center text-base font-medium text-white hover:bg-blue-dark">
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative z-20">
+                <div class="flex max-w-[200px] justify-end">
+                  <button @click="cartOpen = !cartOpen" class="flex items-center pr-1 text-left">
+                    <span class="relative mr-5 flex items-center justify-center">
+                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M22.9125 7.96252H21.9375L19.2969 1.30002C19.0938 0.812515 18.5656 0.60939 18.1188 0.77189C17.6313 0.975015 17.4281 1.50314 17.5906 1.95002L19.9469 7.96252H6.05314L8.40939 1.99064C8.61251 1.50314 8.36876 0.975015 7.88126 0.812515C7.43439 0.60939 6.90626 0.812515 6.70314 1.30002L4.06251 7.96252H3.08751C2.35626 7.96252 1.74689 8.57189 1.74689 9.30314V12.5938C1.74689 13.2844 2.23439 13.8125 2.92501 13.8938L3.94064 22.75C4.10314 24.2125 5.32189 25.3094 6.78439 25.3094H19.2156C20.6781 25.3094 21.8969 24.2125 22.0594 22.75L23.075 13.8938C23.725 13.8125 24.2531 13.2438 24.2531 12.5938V9.26251C24.2531 8.53126 23.6438 7.96252 22.9125 7.96252ZM3.57501 9.79064H22.425V12.1063H3.57501V9.79064ZM19.2156 23.4813H6.78439C6.25626 23.4813 5.80939 23.075 5.72814 22.5469L4.75314 13.9344H21.2469L20.2719 22.5469C20.1906 23.075 19.7438 23.4813 19.2156 23.4813Z"
+                          fill="white" />
+                        <path
+                          d="M8.85625 15.7625C8.36875 15.7625 7.92188 16.1688 7.92188 16.6969V19.7438C7.92188 20.2313 8.32812 20.6781 8.85625 20.6781C9.38437 20.6781 9.79062 20.2719 9.79062 19.7438V16.6563C9.79062 16.1688 9.38437 15.7625 8.85625 15.7625Z"
+                          fill="white" />
+                        <path
+                          d="M17.1438 15.7625C16.6563 15.7625 16.2094 16.1688 16.2094 16.6969V19.7438C16.2094 20.2313 16.6156 20.6781 17.1438 20.6781C17.6719 20.6781 18.0781 20.2719 18.0781 19.7438V16.6563C18.0375 16.1688 17.6313 15.7625 17.1438 15.7625Z"
+                          fill="white" />
+                      </svg>
+
+                      <span
+                        class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-semibold text-primary">
+                        1
+                      </span>
+                    </span>
+
+                    <span class="text-sm text-white">
+                      <span>Login</span>
+                      <br />
+                      <span class="font-medium">My Account</span>
+                    </span>
+                  </button>
+                </div>
+                <div x-show="cartOpen" @click.outside="cartOpen = false"
+                  class="absolute top-full right-0 mt-5 w-[330px]">
+                  <div class="overflow-hidden rounded-lg bg-white dark:bg-dark-2 p-8 shadow-1 dark:shadow-box-dark">
+                    <div class="mb-5 border-b border-stroke dark:border-dark-3 pb-3">
+                      <div class="-mx-1 flex items-center justify-between pb-4">
+                        <div class="flex items-center px-1">
+                          <div class="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-sm">
+                            <img src="./images/checkout/checkout-02/image-02.jpg" alt="product image" class="w-full" />
+                          </div>
+                          <div>
+                            <a href="javascript:void(0)"
+                              class="text-sm font-medium text-dark dark:text-white hover:text-primary">
+                              Circular Sienna
+                            </a>
+                            <p class="truncate text-xs font-medium text-body-color dark:text-dark-6">
+                              Awesome white shirt
+                            </p>
+                          </div>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-semibold text-dark dark:text-white">
+                            $36.00
+                          </p>
+                        </div>
+                      </div>
+                      <div class="-mx-1 flex items-center justify-between py-4">
+                        <div class="flex items-center px-1">
+                          <div class="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-sm">
+                            <img src="./images/checkout/checkout-02/image-03.jpg" alt="product image" class="w-full" />
+                          </div>
+                          <div>
+                            <a href="javascript:void(0)"
+                              class="text-sm font-medium text-dark dark:text-white hover:text-primary">
+                              Black T-shirt
+                            </a>
+                            <p class="truncate text-xs font-medium text-body-color dark:text-dark-6">
+                              It's a nice black t-shirt
+                            </p>
+                          </div>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-semibold text-dark dark:text-white">
+                            $36.00
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="-mx-1 border-b border-stroke dark:border-dark-3 pb-5">
+                      <div class="mb-3 flex items-center justify-between">
+                        <div class="px-1">
+                          <p class="text-base text-dark dark:text-white">
+                            Subtotal
+                          </p>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-medium text-dark dark:text-white">
+                            $108
+                          </p>
+                        </div>
+                      </div>
+                      <div class="mb-3 flex items-center justify-between">
+                        <div class="px-1">
+                          <p class="text-base text-dark dark:text-white">
+                            Shipping Cost (+)
+                          </p>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-medium text-dark dark:text-white">
+                            $10.85
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="px-1">
+                          <p class="text-base text-dark dark:text-white">
+                            Discount (-)
+                          </p>
+                        </div>
+                        <div class="px-1">
+                          <p class="text-base font-medium text-dark dark:text-white">
+                            $9.00
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="-mx-1 flex items-center justify-between pt-5 pb-6">
+                      <div class="px-1">
+                        <p class="text-base text-dark dark:text-white">
+                          Total Payable
+                        </p>
+                      </div>
+                      <div class="px-1">
+                        <p class="text-base font-medium text-dark dark:text-white">
+                          $88.15
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        class="flex w-full items-center justify-center rounded-md bg-primary py-[13px] px-10 text-center text-base font-medium text-white hover:bg-blue-dark">
+                        Place Order
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="container mx-auto">
+        <div class="relative -mx-4 flex items-center justify-between">
+          <div class="flex w-full items-center justify-between px-4">
+            <div class="w-full">
+              <button @click="navbarOpen = !navbarOpen" :class="navbarOpen && 'navbarTogglerActive' " id="navbarToggler"
+                class="absolute right-4 -top-10 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:top-1/2 lg:hidden">
+                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+              </button>
+              <nav :class="!navbarOpen && 'hidden' " id="navbarCollapse"
+                class="absolute right-4 top-full w-full max-w-[250px] justify-center rounded-lg bg-primary py-5 px-6 shadow lg:static lg:flex lg:w-full lg:max-w-full lg:justify-start lg:bg-transparent lg:py-0 lg:px-0 lg:shadow-none">
+                <ul class="block items-center lg:flex">
+                  <li>
+                    <a href="javascript:void(0)"
+                      class="flex justify-between py-2 text-base font-medium text-white hover:opacity-90 lg:mx-5 lg:ml-0! lg:inline-flex lg:py-6 2xl:mx-4">
+                      Mens
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      class="flex justify-between py-2 text-base font-medium text-white hover:opacity-90 lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-4">
+                      Womans
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      class="flex justify-between py-2 text-base font-medium text-white hover:opacity-90 lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-4">
+                      Accessories
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      class="flex justify-between py-2 text-base font-medium text-white hover:opacity-90 lg:mx-5 lg:py-6 xl:inline-flex 2xl:mx-4">
+                      Kids
+                    </a>
+                  </li>
+                  <li class="group relative lg:py-4">
+                    <a href="javascript:void(0)" @click="submenuOpen = !submenuOpen "
+                      class="flex items-center justify-between py-2 text-base font-medium text-white hover:opacity-90 group-hover:opacity-90 lg:mx-4 lg:inline-flex lg:py-2">
+                      More Items
+                      <span class="pl-2">
+                        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                          class="fill-current">
+                          <path
+                            d="M7.00001 10.475C6.86876 10.475 6.75938 10.4313 6.65001 10.3438L1.61876 5.40001C1.42188 5.20314 1.42188 4.89689 1.61876 4.70001C1.81563 4.50314 2.12188 4.50314 2.31876 4.70001L7.00001 9.27189L11.6813 4.65626C11.8781 4.45939 12.1844 4.45939 12.3813 4.65626C12.5781 4.85314 12.5781 5.15939 12.3813 5.35626L7.35001 10.3C7.24063 10.4094 7.13126 10.475 7.00001 10.475Z" />
+                        </svg>
+                      </span>
+                    </a>
+
+                    <div :class="!submenuOpen ? 'hidden lg:block' : 'block' "
+                      class="relative top-full left-0 rounded-lg px-2 transition-all group-hover:opacity-100 lg:invisible lg:absolute lg:top-[115%] lg:w-[250px] lg:border-[.5px] lg:border-primary lg:bg-primary lg:py-4 lg:px-6 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full">
+                      <a href="javascript:void(0)"
+                        class="block rounded-sm py-2 text-sm font-medium text-white hover:opacity-90">
+                        Arts & Crafts
+                      </a>
+                      <a href="javascript:void(0)"
+                        class="block rounded-sm py-2 text-sm font-medium text-white hover:opacity-90">
+                        Fashion
+                      </a>
+                      <a href="javascript:void(0)"
+                        class="block rounded-sm py-2 text-sm font-medium text-white hover:opacity-90">
+                        Bags & Shoes
+                      </a>
+                      <a href="javascript:void(0)"
+                        class="block rounded-sm py-2 text-sm font-medium text-white hover:opacity-90">
+                        Jewelry & Watch
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="px-4">
+            <div class="hidden items-center justify-end pr-1 lg:flex">
+              <div class="mr-4 flex items-center justify-center text-white">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  class="fill-current">
+                  <path
+                    d="M24.4562 22.425L23.725 15.0719C23.6031 13.7313 22.4656 12.7156 21.125 12.7156H4.875C3.53437 12.7156 2.4375 13.7313 2.275 15.0719L1.54375 22.425C1.4625 23.1563 1.70625 23.8875 2.19375 24.4156C2.68125 24.9438 3.37187 25.2688 4.10312 25.2688H21.8156C22.5469 25.2688 23.2375 24.9438 23.725 24.4156C24.2938 23.8875 24.4969 23.1563 24.4562 22.425ZM22.425 23.1969C22.2625 23.3594 22.0594 23.4406 21.8562 23.4406H4.14375C3.94062 23.4406 3.7375 23.3594 3.575 23.1969C3.4125 23.0344 3.37187 22.8313 3.37187 22.5875L4.10312 15.2344C4.14375 14.8281 4.46875 14.5438 4.875 14.5438H21.125C21.5312 14.5438 21.8562 14.8281 21.8969 15.2344L22.6281 22.5875C22.6281 22.8313 22.5875 23.0344 22.425 23.1969Z" />
+                  <path
+                    d="M13 15.9656C11.3344 15.9656 9.95312 17.3469 9.95312 19.0125C9.95312 20.7188 11.3344 22.0594 13 22.0594C14.7062 22.0594 16.0469 20.6781 16.0469 19.0125C16.0469 17.3469 14.7062 15.9656 13 15.9656ZM13 20.2313C12.3094 20.2313 11.7812 19.6625 11.7812 19.0125C11.7812 18.3219 12.35 17.7938 13 17.7938C13.6906 17.7938 14.2188 18.3625 14.2188 19.0125C14.2188 19.7031 13.6906 20.2313 13 20.2313Z" />
+                  <path
+                    d="M2.47812 8.36876C2.55937 10.1563 4.10312 11.0906 5.15937 11.0906H8.00312H8.04374C9.34374 11.0094 10.6437 10.1563 10.6437 8.36876V7.59689C12.025 7.59689 14.6656 7.59689 16.0062 7.59689V8.36876C16.0062 10.1563 17.3062 11.0094 18.6062 11.0906H21.4906C22.5875 11.0906 24.0906 10.1563 24.1719 8.36876C24.1719 8.24689 24.1719 6.78439 24.1719 6.70314C24.1719 6.66251 24.1719 6.62189 24.1719 6.58126C24.05 5.40314 23.6437 4.42814 22.9125 3.65626L22.8719 3.61564C21.8156 2.64064 20.5969 2.11251 19.6625 1.78751C16.9 0.731262 13.4469 0.731262 13.2844 0.731262C10.8469 0.771887 9.30312 0.975012 6.94687 1.78751C5.97187 2.15314 4.75312 2.68126 3.69687 3.61564L3.65624 3.65626C2.92499 4.42814 2.51874 5.40314 2.39687 6.58126C2.39687 6.62189 2.39687 6.66251 2.39687 6.70314C2.43749 6.78439 2.47812 8.20626 2.47812 8.36876ZM4.99687 4.95626C5.80937 4.22501 6.78437 3.81876 7.59687 3.49376C9.70937 2.72189 11.05 2.60001 13.325 2.51876C13.5281 2.51876 16.6156 2.55939 19.0531 3.49376C19.9062 3.81876 20.8812 4.22501 21.6531 4.95626C22.0594 5.40314 22.3031 6.01251 22.3844 6.70314C22.3844 6.82501 22.3844 8.16564 22.3844 8.28751C22.3437 9.14064 21.5312 9.26251 21.5312 9.26251H18.7281C18.3219 9.22189 17.875 9.05939 17.875 8.36876V6.70314C17.875 6.29689 17.6312 5.93126 17.225 5.85001C16.9406 5.68751 9.74999 5.68751 9.46562 5.80939C9.09999 5.93126 8.81562 6.29689 8.81562 6.66251V8.36876C8.81562 9.05939 8.36874 9.22189 7.96249 9.26251H5.15937C5.15937 9.26251 4.34687 9.14064 4.30624 8.32814C4.30624 8.20626 4.30624 7.75939 4.30624 7.35314C4.30624 7.06876 4.30624 6.86564 4.30624 6.74376C4.34687 5.97189 4.59062 5.40314 4.99687 4.95626Z" />
+                </svg>
+              </div>
+
+              <a href="javascript:void(0)" class="whitespace-nowrap text-base font-medium text-white">
+                Need Help? +001 123 456 789
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ====== Navbar Section End -->
+</body>
+
+</html>

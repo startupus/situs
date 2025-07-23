@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Navbar Section Start -->
+    <div
+      x-data="
+      {
+        showAlert: true,
+        navbarOpen: false
+      }
+    "
+    >
+      <div
+        x-show="showAlert"
+        class="w-full bg-linear-to-r from-primary to-secondary py-3"
+      >
+        <div class="container mx-auto">
+          <div class="relative w-full">
+            <p class="text-center text-sm font-medium text-white">
+              50% Flat Discount on TailGrids UI - Grab it Now!
+            </p>
+            <button
+              @click="showAlert = false"
+              class="absolute right-0 top-1/2 -translate-y-1/2"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g opacity="0.8">
+                  <path
+                    d="M17 7L7 17"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7 7L17 17L7 7Z"
+                    fill="white"
+                  />
+                  <path
+                    d="M7 7L17 17"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <header class="flex w-full items-center bg-white dark:bg-dark">
+        <div class="container mx-auto">
+          <div class="relative -mx-4 flex items-center justify-between">
+            <div class="w-60 max-w-full px-4">
+              <a href="javascript:void(0)" class="block w-full py-5 lg:py-3">
+                <img
+                  src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
+                  alt="logo"
+                  class="dark:hidden"
+                />
+                <img
+                  src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
+                  alt="logo"
+                  class="hidden dark:block"
+                />
+              </a>
+            </div>
+            <div class="flex w-full items-center justify-between px-4">
+              <div class="w-full">
+                <button
+                  @click="navbarOpen = !navbarOpen"
+                  :class="navbarOpen && 'navbarTogglerActive' "
+                  id="navbarToggler"
+                  class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-secondary focus:ring-2 lg:hidden"
+                >
+                  <span
+                    class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                  ></span>
+                  <span
+                    class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                  ></span>
+                  <span
+                    class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
+                  ></span>
+                </button>
+                <nav
+                  :class="!navbarOpen && 'hidden' "
+                  id="navbarCollapse"
+                  class="absolute right-4 top-full w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow lg:static lg:flex lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none dark:bg-dark-2"
+                >
+                  <ul class="block lg:flex">
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:mx-6 lg:inline-flex lg:py-6 dark:text-dark-6 dark:hover:text-white"
+                      >
+                        Home
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:mx-6 lg:inline-flex lg:py-6 dark:text-dark-6 dark:hover:text-white"
+                      >
+                        About Us
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:mx-6 lg:inline-flex lg:py-6 dark:text-dark-6 dark:hover:text-white"
+                      >
+                        Services
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:mx-6 lg:inline-flex lg:py-6 dark:text-dark-6 dark:hover:text-white"
+                      >
+                        Blog
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:mx-6 lg:inline-flex lg:py-6 dark:text-dark-6 dark:hover:text-white"
+                      >
+                        Contact
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
+                <div class="flex justify-end">
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block whitespace-nowrap rounded-md border border-secondary px-7 py-3 text-base font-medium text-secondary transition hover:bg-secondary hover:text-white"
+                  >
+                    Sign In
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <!-- ====== Navbar Section End -->
+  </body>
+</html>

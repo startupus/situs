@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatars | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Avatars Section Start -->
+    <section class="bg-white py-[75px] dark:bg-dark">
+      <div class="mx-auto px-4 sm:container">
+        <div x-data="{openDropDown: false}" class="relative inline-block">
+          <button
+            @click="openDropDown = !openDropDown"
+            class="flex items-center text-left"
+          >
+            <div class="relative mr-4 h-[42px] w-[42px] rounded-full">
+              <img
+                src="https://cdn.tailgrids.com/2.2/assets/core-components/images/avatar/image-05.jpg"
+                alt="avatar"
+                class="h-full w-full rounded-full object-cover object-center"
+              />
+              <span
+                class="absolute -right-0.5 -top-0.5 block h-[14px] w-[14px] rounded-full border-[2.3px] border-white bg-[#219653] dark:border-dark"
+              ></span>
+            </div>
+            <span class="text-base font-medium text-dark dark:text-white">
+              Devid Milinear
+            </span>
+          </button>
+          <div
+            x-show="openDropDown"
+            @click.outside="openDropDown = false"
+            class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark-2 dark:shadow-box-dark"
+          >
+            <a
+              href="javascript:void(0)"
+              class="block w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3"
+            >
+              Profile
+            </a>
+            <a
+              href="javascript:void(0)"
+              class="block w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3"
+            >
+              Settings
+            </a>
+            <a
+              href="javascript:void(0)"
+              class="block w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3"
+            >
+              Sign Out
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Avatars Section End -->
+  </body>
+</html>

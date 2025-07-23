@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="../../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+
+    <script defer src="../../assets/js/alpine.min.js"></script>
+  </head>
+  <body>
+    <!-- ====== Table Section Start -->
+    <section class="bg-gray-2 py-20 lg:py-[120px] dark:bg-dark">
+      <div class="mx-auto px-4 lg:container">
+        <div class="rounded-lg bg-white shadow-card dark:bg-dark-2">
+          <div class="max-w-full overflow-x-auto">
+            <table class="w-full table-auto">
+              <thead>
+                <tr class="bg-[#F6F8FB] dark:bg-dark-3">
+                  <th class="min-w-[260px] py-6 pl-10 pr-4">
+                    <p
+                      class="text-left text-base font-medium text-body-color dark:text-dark-7"
+                    >
+                      Name
+                    </p>
+                  </th>
+
+                  <th class="min-w-[150px] px-4 py-6">
+                    <p
+                      class="text-left text-base font-medium text-body-color dark:text-dark-7"
+                    >
+                      Type
+                    </p>
+                  </th>
+
+                  <th class="min-w-[250px] px-4 py-6">
+                    <p
+                      class="text-left text-base font-medium text-body-color dark:text-dark-7"
+                    >
+                      Period
+                    </p>
+                  </th>
+
+                  <th class="min-w-[130px] px-4 py-6">
+                    <p
+                      class="text-left text-base font-medium text-body-color dark:text-dark-7"
+                    >
+                      Duration
+                    </p>
+                  </th>
+
+                  <th class="min-w-[150px] px-4 py-6">
+                    <p
+                      class="text-left text-base font-medium text-body-color dark:text-dark-7"
+                    >
+                      Status
+                    </p>
+                  </th>
+
+                  <th class="min-w-[150px] py-6 pl-4 pr-10">
+                    <p
+                      class="text-right text-base font-medium text-body-color dark:text-dark-7"
+                    >
+                      Actions
+                    </p>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr class="border-b border-stroke dark:border-dark-3">
+                  <td class="py-5 pl-10 pr-3">
+                    <div class="flex items-center space-x-4">
+                      <div
+                        class="flex h-11 w-full max-w-[44px] items-center justify-center rounded-full bg-[#00BFD9] text-base font-medium text-white"
+                      >
+                        NR
+                      </div>
+
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Naimur Rahman
+                      </p>
+                    </div>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Annual Leave
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      25 Dec 2024 - 28 Dec 2024
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      3 Days
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <span
+                      class="inline-flex h-8 items-center justify-center rounded-sm bg-green px-5 text-base text-white"
+                    >
+                      Approved
+                    </span>
+                  </td>
+
+                  <td class="py-5 pl-4 pr-10 text-right">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark dark:shadow-card"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="border-b border-stroke dark:border-dark-3">
+                  <td class="py-5 pl-10 pr-3">
+                    <div class="flex items-center space-x-4">
+                      <div
+                        class="flex h-11 w-full max-w-[44px] items-center justify-center rounded-full bg-[#FFB52B] text-base font-medium text-white"
+                      >
+                        MC
+                      </div>
+
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Musharof Chowdhury
+                      </p>
+                    </div>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Annual Leave
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      25 Dec 2024 - 28 Dec 2024
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      3 Days
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <span
+                      class="inline-flex h-8 items-center justify-center rounded-sm bg-green px-5 text-base text-white"
+                    >
+                      Approved
+                    </span>
+                  </td>
+
+                  <td class="py-5 pl-4 pr-10 text-right">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark dark:shadow-card"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="border-b border-stroke dark:border-dark-3">
+                  <td class="py-5 pl-10 pr-3">
+                    <div class="flex items-center space-x-4">
+                      <div
+                        class="flex h-11 w-full max-w-[44px] items-center justify-center rounded-full bg-[#4926BD] text-base font-medium text-white"
+                      >
+                        SH
+                      </div>
+
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Shafiq Hammad
+                      </p>
+                    </div>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Annual Leave
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      25 Dec 2024 - 28 Dec 2024
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      3 Days
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <span
+                      class="inline-flex h-8 items-center justify-center rounded-sm bg-[#F13426] px-5 text-base text-white"
+                    >
+                      Declined
+                    </span>
+                  </td>
+
+                  <td class="py-5 pl-4 pr-10 text-right">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark dark:shadow-card"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="border-b border-stroke dark:border-dark-3">
+                  <td class="py-5 pl-10 pr-3">
+                    <div class="flex items-center space-x-4">
+                      <div
+                        class="flex h-11 w-full max-w-[44px] items-center justify-center rounded-full bg-[#132D4A] text-base font-medium text-white"
+                      >
+                        AS
+                      </div>
+
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Alex Semuyel
+                      </p>
+                    </div>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Annual Leave
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      25 Dec 2024 - 28 Dec 2024
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      3 Days
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <span
+                      class="inline-flex h-8 items-center justify-center rounded-sm bg-green px-5 text-base text-white"
+                    >
+                      Approved
+                    </span>
+                  </td>
+
+                  <td class="py-5 pl-4 pr-10 text-right">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark dark:shadow-card"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="border-b border-transparent">
+                  <td class="py-5 pl-10 pr-3">
+                    <div class="flex items-center space-x-4">
+                      <div
+                        class="flex h-11 w-full max-w-[44px] items-center justify-center rounded-full bg-[#00BFD9] text-base font-medium text-white"
+                      >
+                        NR
+                      </div>
+
+                      <p class="text-base text-body-color dark:text-dark-6">
+                        Naimur Rahman
+                      </p>
+                    </div>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      Annual Leave
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      25 Dec 2024 - 28 Dec 2024
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <p class="text-base text-body-color dark:text-dark-6">
+                      3 Days
+                    </p>
+                  </td>
+
+                  <td class="px-4 py-5">
+                    <span
+                      class="inline-flex h-8 items-center justify-center rounded-sm bg-green px-5 text-base text-white"
+                    >
+                      Approved
+                    </span>
+                  </td>
+
+                  <td class="py-5 pl-4 pr-10 text-right">
+                    <div x-data="{openDropDown: false}" class="relative">
+                      <button
+                        @click="openDropDown = !openDropDown"
+                        class="text-body-color dark:text-dark-6"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12Z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        x-show="openDropDown"
+                        @click.outside="openDropDown = false"
+                        class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark dark:shadow-card"
+                      >
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Table Section End -->
+  </body>
+</html>

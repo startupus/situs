@@ -1,0 +1,6 @@
+{
+  "browserToolsServerUrl": "http://browser-tools-server:3025",
+  "discoveryEnabled": false,
+  "discoveryHosts": ["browser-tools-server"],
+  "discoveryPorts": [3025]
+} 

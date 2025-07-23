@@ -1,0 +1,46 @@
+services:
+  browser-tools-server:
+    image: node:18-alpine
+    container_name: browser-tools-server
+    working_dir: /app
+    command: npx @agentdeskai/browser-tools-server@latest
+    ports:
+      - "3025:3025"  # BrowserTools Server port
+    volumes:
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    restart: unless-stopped
+    networks:
+      - browser-tools-network
+
+  browser-tools-mcp:
+    image: node:18-alpine
+    container_name: browser-tools-mcp
+    working_dir: /app
+    command: sh -c "echo 'http://browser-tools-server:3025' > /app/server-url.txt && npx @agentdeskai/browser-tools-mcp@latest"
+    ports:
+      - "3001:3001"  # MCP Server port
+    volumes:
+      - ./mcp-config:/app/config
+    environment:
+      - NODE_ENV=production
+      - BROWSER_TOOLS_SERVER_URL=http://browser-tools-server:3025
+      - BROWSER_TOOLS_DISCOVERY_ENABLED=false
+    restart: unless-stopped
+    networks:
+      - browser-tools-network
+    depends_on:
+      - browser-tools-server
+
+networks:
+  browser-tools-network:
+    driver: bridge
+
+volumes:
+  screenshots:
+  logs:
+  mcp-config: 

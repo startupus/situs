@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maps | TailGrids</title>
+    <link
+      rel="shortcut icon"
+      href="./../assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./../assets/css/jsvectormap.min.css" />
+    <link rel="stylesheet" href="./../assets/css/tailwind.css" />
+  </head>
+  <body>
+    <!-- ====== Maps Section Start -->
+    <section class="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+      <div class="mx-auto px-4 md:container">
+        <div
+          class="mx-auto w-full max-w-[770px] overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2"
+        >
+          <div class="p-[30px]">
+            <div class="justify-between sm:flex mb-10">
+              <div class="mb-2">
+                <h3
+                  class="text-lg font-semibold leading-none text-dark dark:text-white sm:text-xl mb-1"
+                >
+                  Sessions by country
+                </h3>
+                <p class="text-sm font-medium text-body-color dark:text-dark-6">
+                  View website visitors by hovering over the map
+                </p>
+              </div>
+              <div class="mb-2">
+                <div class="relative z-20 inline-block ">
+                  <select
+                    name=""
+                    id=""
+                    class="relative z-20 inline-flex appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[9px] pl-3 pr-10 text-sm text-body-color dark:text-dark-6 outline-hidden"
+                  >
+                    <option value="" class="dark:bg-dark-2">Last 7 days</option>
+                    <option value="" class="dark:bg-dark-2">Last 15 days</option>
+                  </select>
+                  <span class="absolute top-1/2 right-3 z-10 -translate-y-1/2 text-body-color dark:text-dark-6">
+                    <svg 
+                      width="18" 
+                      height="18" 
+                      viewBox="0 0 18 18" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="fill-current"
+                    >
+                      <path 
+                        d="M9.00001 12.8251C8.83126 12.8251 8.69064 12.7689 8.55001 12.6564L2.08126 6.30015C1.82814 6.04702 1.82814 5.65327 2.08126 5.40015C2.33439 5.14702 2.72814 5.14702 2.98126 5.40015L9.00001 11.2783L15.0188 5.3439C15.2719 5.09077 15.6656 5.09077 15.9188 5.3439C16.1719 5.59702 16.1719 5.99077 15.9188 6.2439L9.45001 12.6001C9.30939 12.7408 9.16876 12.8251 9.00001 12.8251Z" 
+                      />
+                    </svg>                      
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div id="mapTwo" class="mapTwo h-[260px]"></div>
+          </div>
+
+          <div class="space-y-[14px] border-t border-stroke dark:border-dark-3 p-[30px]">
+            <div class="items-center sm:flex">
+              <div class="flex w-full max-w-[170px] items-center">
+                <img
+                  src="./../assets/images/countries/usa.svg"
+                  alt="usa"
+                  class="mr-[14px] h-[14px]"
+                />
+                <p class="text-base font-medium text-dark dark:text-white">United States</p>
+              </div>
+              <div class="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
+                <div
+                  class="absolute left-0 top-0 flex h-full w-[35%] items-center justify-center rounded-sm bg-primary text-xs font-medium text-white"
+                >
+                  35%
+                </div>
+              </div>
+            </div>
+
+            <div class="items-center sm:flex">
+              <div class="flex w-full max-w-[170px] items-center">
+                <img
+                  src="./../assets/images/countries/canada.svg"
+                  alt="usa"
+                  class="mr-[14px] h-[14px]"
+                />
+                <p class="text-base font-medium text-dark dark:text-white">Canada</p>
+              </div>
+              <div class="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
+                <div
+                  class="absolute left-0 top-0 flex h-full w-[26%] items-center justify-center rounded-sm bg-primary text-xs font-medium text-white"
+                >
+                  26%
+                </div>
+              </div>
+            </div>
+
+            <div class="items-center sm:flex">
+              <div class="flex w-full max-w-[170px] items-center">
+                <img
+                  src="./../assets/images/countries/france.svg"
+                  alt="usa"
+                  class="mr-[14px] h-[14px]"
+                />
+                <p class="text-base font-medium text-dark dark:text-white">France</p>
+              </div>
+              <div class="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
+                <div
+                  class="absolute left-0 top-0 flex h-full w-[18%] items-center justify-center rounded-sm bg-primary text-xs font-medium text-white"
+                >
+                  18%
+                </div>
+              </div>
+            </div>
+
+            <div class="items-center sm:flex">
+              <div class="flex w-full max-w-[170px] items-center">
+                <img
+                  src="./../assets/images/countries/italy.svg"
+                  alt="usa"
+                  class="mr-[14px] h-[14px]"
+                />
+                <p class="text-base font-medium text-dark dark:text-white">Italy</p>
+              </div>
+              <div class="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
+                <div
+                  class="absolute left-0 top-0 flex h-full w-[14%] items-center justify-center rounded-sm bg-primary text-xs font-medium text-white"
+                >
+                  14%
+                </div>
+              </div>
+            </div>
+
+            <div class="items-center sm:flex">
+              <div class="flex w-full max-w-[170px] items-center">
+                <img
+                  src="./../assets/images/countries/australia.svg"
+                  alt="usa"
+                  class="mr-[14px] h-[14px]"
+                />
+                <p class="text-base font-medium text-dark dark:text-white">Australia</p>
+              </div>
+              <div class="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
+                <div
+                  class="absolute left-0 top-0 flex h-full w-[10%] items-center justify-center rounded-sm bg-primary text-xs font-medium text-white"
+                >
+                  10%
+                </div>
+              </div>
+            </div>
+
+            <div class="items-center sm:flex">
+              <div class="flex w-full max-w-[170px] items-center">
+                <img
+                  src="./../assets/images/countries/india.svg"
+                  alt="usa"
+                  class="mr-[14px] h-[14px]"
+                />
+                <p class="text-base font-medium text-dark dark:text-white">India</p>
+              </div>
+              <div class="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
+                <div
+                  class="absolute left-0 top-0 flex h-full w-[7%] items-center justify-center rounded-sm bg-primary text-xs font-medium text-white"
+                >
+                  7%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Maps Section End -->
+
+    <!-- ====== Maps JS ========== -->
+    <script src="./../assets/js/jsvectormap.min.js"></script>
+    <script src="./../assets/maps/world.js"></script>
+    <script>
+      const jvm = new jsVectorMap({
+        map: "world",
+        selector: "#mapTwo",
+        zoomButtons: true,
+
+        regionStyle: {
+          initial: {
+            fill: "#A9BDFF",
+          },
+          hover: {
+            fillOpacity: 1,
+            fill: "#3056D3",
+          },
+        },
+
+        onRegionTooltipShow: function (tooltip, code) {
+          if (code === "EG") {
+            tooltip.selector.innerHTML =
+              tooltip.text() + " <b>(Hello Russia)</b>";
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
