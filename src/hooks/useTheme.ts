@@ -1,72 +1,106 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-type Theme = 'light' | 'dark' | 'system'
+export type Theme = 'light' | 'dark' | 'system';
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as Theme) || 'system'
+  // По умолчанию используем системную тему
+  const [theme, setTheme] = useState<Theme>('system');
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+
+  // Определяем системную тему
+  const getSystemTheme = (): 'light' | 'dark' => {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return isDark ? 'dark' : 'light';
+  };
+
+  // Применяем тему к интерфейсу по стандартному TailGrids подходу
+  const applyTheme = (newTheme: 'light' | 'dark') => {
+    const interfaceContainer = document.querySelector('.redaktus-interface');
+    
+    if (interfaceContainer) {
+      // Убираем все темные классы
+      interfaceContainer.classList.remove('interface-light', 'interface-dark');
+      
+      // Применяем новую тему
+      interfaceContainer.classList.add(`interface-${newTheme}`);
+      
+      // Для совместимости с TailWindCSS dark: модификаторами
+      // Добавляем/убираем класс dark на интерфейс контейнер
+      if (newTheme === 'dark') {
+        interfaceContainer.classList.add('dark');
+      } else {
+        interfaceContainer.classList.remove('dark');
+      }
+      
+      console.log('🎨 Interface theme applied:', newTheme, 'system:', theme === 'system');
+    } else {
+      console.warn('🎨 Interface container (.redaktus-interface) not found!');
     }
-    return 'system'
-  })
+  };
 
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light')
+  // Обновляем разрешенную тему
+  const updateResolvedTheme = () => {
+    let newResolvedTheme: 'light' | 'dark';
+    
+    if (theme === 'system') {
+      newResolvedTheme = getSystemTheme();
+    } else {
+      newResolvedTheme = theme;
+    }
+    
+    if (newResolvedTheme !== resolvedTheme) {
+      setResolvedTheme(newResolvedTheme);
+      applyTheme(newResolvedTheme);
+    }
+  };
 
-  // Определяем реальную тему (учитывая системные настройки)
+  // Инициализация
   useEffect(() => {
-    const getResolvedTheme = (): 'light' | 'dark' => {
-      if (theme === 'system') {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      }
-      return theme
+    // Загружаем сохраненную тему
+    const savedTheme = localStorage.getItem('interface-theme') as Theme;
+    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
+      setTheme(savedTheme);
     }
-
-    const updateResolvedTheme = () => {
-      const newResolvedTheme = getResolvedTheme()
-      setResolvedTheme(newResolvedTheme)
-      
-      // Применяем классы к документу
-      document.documentElement.classList.remove('light', 'dark')
-      document.documentElement.classList.add(newResolvedTheme)
-      
-      // Обновляем meta тег для браузера
-      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
-      if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', newResolvedTheme === 'dark' ? '#1f2937' : '#ffffff')
-      }
-    }
-
-    updateResolvedTheme()
-
+    
+    // Применяем тему
+    updateResolvedTheme();
+    
     // Слушаем изменения системной темы
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       if (theme === 'system') {
-        updateResolvedTheme()
+        updateResolvedTheme();
       }
-    }
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
 
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [theme])
+  // Обновляем тему при изменении
+  useEffect(() => {
+    updateResolvedTheme();
+    localStorage.setItem('interface-theme', theme);
+  }, [theme]);
 
-  const setThemeAndSave = (newTheme: Theme) => {
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-  }
-
+  // Переключение темы
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'
-    setThemeAndSave(newTheme)
-  }
+    console.log('🎨 Interface toggleTheme called!');
+    const themes: Theme[] = ['system', 'light', 'dark'];
+    const currentIndex = themes.indexOf(theme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const newTheme = themes[nextIndex];
+    console.log('🎨 Interface theme toggle:', theme, '->', newTheme);
+    setTheme(newTheme);
+  };
 
   return {
     theme,
     resolvedTheme,
-    setTheme: setThemeAndSave,
     toggleTheme,
-    isDark: resolvedTheme === 'dark',
-    isLight: resolvedTheme === 'light',
-    isSystem: theme === 'system'
-  }
-} 
+    setTheme
+  };
+}; 

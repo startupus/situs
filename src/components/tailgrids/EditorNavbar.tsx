@@ -4,7 +4,10 @@ import {
   FaExternalLinkAlt,
   FaChevronDown,
   FaUser,
-  FaCalendarDay
+  FaCalendarDay,
+  FaSave,
+  FaCheck,
+  FaExclamationTriangle
 } from 'react-icons/fa'
 
 
@@ -12,12 +15,18 @@ interface EditorNavbarProps {
   currentPage?: string;
   onSave?: () => void;
   autosaveEnabled?: boolean;
+  isSaving?: boolean;
+  lastSaved?: Date | null;
+  saveError?: string | null;
 }
 
 const EditorNavbar: React.FC<EditorNavbarProps> = ({
   currentPage = "Home",
   onSave,
-  autosaveEnabled = true
+  autosaveEnabled = true,
+  isSaving = false,
+  lastSaved = null,
+  saveError = null
 }) => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'media' | 'playground'>('editor');
@@ -64,6 +73,44 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
 
           {/* Right Section - Controls & User */}
           <div className="flex items-center space-x-4">
+            {/* Save Status */}
+            <div className="flex items-center space-x-2">
+              {isSaving && (
+                <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
+                  <span className="text-sm">Saving...</span>
+                </div>
+              )}
+              
+              {saveError && (
+                <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
+                  <FaExclamationTriangle size={14} />
+                  <span className="text-sm">Save failed</span>
+                </div>
+              )}
+              
+              {lastSaved && !isSaving && !saveError && (
+                <div className="flex items-center space-x-2 text-green-600 dark:text-green-400">
+                  <FaCheck size={14} />
+                  <span className="text-sm">Saved {lastSaved.toLocaleTimeString()}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Manual Save Button */}
+            <button 
+              onClick={onSave}
+              disabled={isSaving}
+              className={`inline-flex items-center space-x-2 px-4 py-2 border rounded-md text-sm font-medium focus:outline-none transition-colors ${
+                isSaving
+                  ? 'border-gray-300 text-gray-400 cursor-not-allowed dark:border-gray-600 dark:text-gray-500'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700'
+              }`}
+            >
+              <FaSave size={12} />
+              <span>SAVE</span>
+            </button>
+
             {/* View Site Button */}
             <button className="inline-flex items-center space-x-2 px-4 py-2 border rounded-md text-sm font-medium focus:outline-none transition-colors border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">
               <FaExternalLinkAlt size={12} />

@@ -4,7 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', // Включаем поддержку темной темы через классы
+  darkMode: 'class', // Для поддержки изолированных тем интерфейса и канваса
   theme: {
     screens: {
       xs: "400px",
@@ -116,9 +116,19 @@ export default {
           "light-4": "#FCD6F0",
           "light-5": "#FDE8F5",
         },
+        // Добавляем цвета для TailGrids
+        body: {
+          color: "#637381",
+        },
+        // Добавляем недостающие цвета для полной совместимости с TailGrids
+        "body-color": "#637381",
+        "dark-6": "#9CA3AF",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+      },
+      boxShadow: {
+        '2': '0px 5px 12px 0px rgba(0, 0, 0, 0.10)',
       },
     },
   },

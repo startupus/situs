@@ -3,7 +3,7 @@ import { Image } from 'redaktus/frontend'
 import * as types from 'redaktus/types'
 import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
-import { useEditorTheme } from '../editor-theme-context'
+import { useTheme } from '../../../hooks/useTheme'
 
 interface PostListItemProps {
   title: string
@@ -22,7 +22,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
   date,
   featuredImg,
 }) => {
-  const { isEditorDarkMode } = useEditorTheme();
+  const { resolvedTheme } = useTheme();
   
   return (
     <div className="flex flex-col hover:-translate-y-2 transition-transform duration-300">
@@ -37,10 +37,10 @@ const PostListItem: React.FC<PostListItemProps> = ({
       <div className="flex flex-col h-full">
         <div className="my-6">
           <h3 className={`font-bold text-xl transition-colors duration-200 ${
-            isEditorDarkMode ? '!text-gray-100' : '!text-gray-900'
+            resolvedTheme === 'dark' ? '!text-gray-100' : '!text-gray-900'
           }`}>{title}</h3>
           <p className={`mt-2 leading-6 transition-colors duration-200 ${
-            isEditorDarkMode ? '!text-gray-100' : '!text-gray-800'
+            resolvedTheme === 'dark' ? '!text-gray-100' : '!text-gray-800'
           }`}>
             {content}
           </p>
@@ -54,12 +54,12 @@ const PostListItem: React.FC<PostListItemProps> = ({
           />
           <div>
             <div className={`text-sm transition-colors duration-200 ${
-              isEditorDarkMode ? '!text-gray-100' : '!text-gray-800'
+              resolvedTheme === 'dark' ? '!text-gray-100' : '!text-gray-800'
             }`}>
               {author.firstName} {author.lastName}
             </div>
             <div className={`text-xs transition-colors duration-200 ${
-              isEditorDarkMode ? '!text-gray-400' : '!text-gray-500'
+              resolvedTheme === 'dark' ? '!text-gray-400' : '!text-gray-500'
             }`}>
               {dayjs(date).format('DD MMM YYYY')}
             </div>

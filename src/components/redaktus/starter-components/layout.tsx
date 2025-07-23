@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Nunito_Sans } from 'next/font/google'
-import { useEditorTheme } from '../editor-theme-context'
+import { useTheme } from '../../../hooks/useTheme'
 
 interface LayoutProps {
   children?: ReactNode
@@ -16,14 +16,14 @@ const nunito = Nunito_Sans({
 })
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isEditorDarkMode } = useEditorTheme();
+  const { resolvedTheme } = useTheme();
   
   return (
     <div
       className={`flex flex-col h-screen justify-between font-sans antialiased`}
     >
       <main className={`mb-auto transition-colors duration-200 ${
-        isEditorDarkMode ? '!bg-gray-900' : '!bg-white'
+        resolvedTheme === 'dark' ? '!bg-gray-900' : '!bg-white'
       }`}>{children}</main>
     </div>
   )

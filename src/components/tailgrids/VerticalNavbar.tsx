@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { FaSearch, FaFile, FaCube, FaHome, FaCircle, FaChevronDown, FaPlus, FaFolder, FaBlog, FaSun, FaMoon, FaChevronUp } from 'react-icons/fa';
-import { toggleEditorTheme, getEditorTheme } from '../redaktus/editor-theme-utils';
+import { useTheme } from '../../hooks/useTheme';
 
 interface VerticalNavbarProps {
   availableBricks?: any[]
 }
 
 const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] }) => {
-  const [isEditorDarkMode, setIsEditorDarkMode] = useState(getEditorTheme() === 'dark');
+  const { theme, toggleTheme, resolvedTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<'pages' | 'entities'>('pages');
   const [interfaceLanguage, setInterfaceLanguage] = useState<'ru' | 'en'>('ru');
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   const handleToggleTheme = () => {
-    toggleEditorTheme();
-    // Обновляем состояние после небольшой задержки, чтобы DOM успел обновиться
-    setTimeout(() => {
-      setIsEditorDarkMode(getEditorTheme() === 'dark');
-    }, 10);
+    console.log('🎨 VerticalNavbar: handleToggleTheme clicked!');
+    toggleTheme();
   };
 
   const toggleLanguageDropdown = () => {
@@ -40,7 +37,6 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
   return (
     <section 
       className="redaktus-vertical-navbar h-full border-r w-40 flex flex-col transition-colors duration-200 bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-      data-editor-container
     >
       <div className="flex flex-col h-full">
         {/* Навигационные табы */}
@@ -82,7 +78,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
         </div>
 
         {/* Навигация по секциям - с прокруткой */}
-        <nav className="flex-1 overflow-y-auto min-h-0 bg-gray-100 dark:bg-gray-800">
+        <nav className="flex-1 overflow-y-auto min-h-0">
           <ul className="p-4 space-y-2">
             {/* PAGES Section */}
             <NavSection 
@@ -126,16 +122,21 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
 
         {/* Нижняя панель с настройками */}
         <div className={`p-4 border-t flex-shrink-0 ${
-          isEditorDarkMode ? '!border-gray-700' : '!border-gray-200'
+          resolvedTheme === 'dark' ? '!border-gray-700' : '!border-gray-200'
         }`}>
           <div className="flex items-center justify-between">
             {/* Переключатель темы интерфейса редактора */}
             <button
-              onClick={handleToggleTheme}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('🎨 VerticalNavbar: Button clicked!');
+                handleToggleTheme();
+              }}
               className="p-2 rounded-md transition-colors text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700"
               title="Toggle editor theme"
             >
-              {isEditorDarkMode ? <FaSun size={14} /> : <FaMoon size={14} />}
+              {resolvedTheme === 'dark' ? <FaSun size={14} /> : <FaMoon size={14} />}
             </button>
 
             {/* Язык интерфейса */}
@@ -228,16 +229,33 @@ const PageItem: React.FC<{ name: string; active?: boolean }> = ({
   active = false
 }) => {
   return (
-    <div
-      className={`flex items-center space-x-2 p-2 rounded-md cursor-pointer transition-colors ${
-        active
-                          ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
-          : 'text-gray-600 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
-      }`}
+    <li className={`px-2 py-1 rounded text-sm transition-colors cursor-pointer ${
+      active 
+        ? 'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-200' 
+        : 'text-gray-600 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700'
+    }`}>
+      {name}
+    </li>
+  );
+};
+
+const DraggableBlock: React.FC<{ name: string; type: string }> = ({ 
+  name, 
+  type 
+}) => {
+  const handleDragStart = (e: React.DragEvent) => {
+    e.dataTransfer.setData('text/plain', type)
+    e.dataTransfer.effectAllowed = 'copy'
+  }
+
+  return (
+    <li 
+      draggable
+      onDragStart={handleDragStart}
+      className="px-2 py-1 rounded text-sm transition-colors cursor-move text-gray-600 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"
     >
-      <FaCircle size={6} className={active ? 'text-current' : 'text-gray-400'} />
-      <span className="text-sm">{name}</span>
-    </div>
+      {name}
+    </li>
   );
 };
 

@@ -1,11 +1,44 @@
 // Redaktus Config - скопировано с ReactBricks
-import { types } from 'redaktus/core'
+// import { types } from 'redaktus/core'
 
 import NextLink from './NextLink'
 import bricks from './bricks'
 import pageTypes from './pageTypes'
 
-const config: types.RedaktusConfig = {
+// Простая типизация для конфигурации
+interface RedaktusConfig {
+  appId: string;
+  apiKey: string;
+  environment: string;
+  bricks: any;
+  pageTypes: any;
+  customFields: any[];
+  logo: string;
+  loginUI: any;
+  contentClassName: string;
+  renderLocalLink: any;
+  navigate: (path: string) => void;
+  loginPath: string;
+  editorPath: string;
+  playgroundPath: string;
+  appSettingsPath: string;
+  previewPath: string;
+  isDarkColorMode: boolean;
+  toggleColorMode: () => void;
+  useCssInJs: boolean;
+  appRootElement: string;
+  clickToEditSide: string;
+  enableAutoSave: boolean;
+  disableSaveIfInvalidProps: boolean;
+  enablePreview: boolean;
+  blockIconsPosition: string;
+  enableUnsplash: boolean;
+  unsplashApiKey: string;
+  enablePreviewImage: boolean;
+  enableDefaultEmbedBrick: boolean;
+}
+
+const config: RedaktusConfig = {
   appId: 'redaktus-demo',
   apiKey: 'redaktus-demo-key',
   environment: 'development',
@@ -32,12 +65,12 @@ const config: types.RedaktusConfig = {
   toggleColorMode: () => {},
   useCssInJs: false,
   appRootElement: '#__next',
-  clickToEditSide: types.ClickToEditSide.BottomRight,
+  clickToEditSide: 'bottom-right',
   //responsiveBreakpoints: [{ type: types.DeviceType.Phone, width: 480, label: "Smartphone" },],
   enableAutoSave: true,
   disableSaveIfInvalidProps: false,
   enablePreview: true,
-  blockIconsPosition: types.BlockIconsPosition.OutsideBlock,
+  blockIconsPosition: 'outside-block',
   enableUnsplash: true,
   unsplashApiKey: '',
   enablePreviewImage: true,

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useAutoSave } from '../../hooks/useAutoSave'
 
 import {
   FaCube,
@@ -33,6 +34,7 @@ import VerticalNavbar from '../tailgrids/VerticalNavbar'
 import EditorNavbar from '../tailgrids/EditorNavbar'
 import CanvasToolbar from '../tailgrids/CanvasToolbar'
 import SettingsPanel from '../tailgrids/SettingsPanel'
+import RedaktusPageViewer from './PageViewer'
 
 // Redaktus Core - полностью независимое решение без react-bricks
 
@@ -43,7 +45,7 @@ export const Admin: React.FC<{ children: React.ReactNode; isLogin?: boolean }> =
 }) => {
   console.log('Admin component render - isLogin:', isLogin)
   return (
-    <div className="redaktus-admin w-full h-full" data-login={isLogin}>
+    <div className="redaktus-admin w-full max-w-none h-full" data-login={isLogin}>
       {children}
     </div>
   )
@@ -52,23 +54,201 @@ export const Admin: React.FC<{ children: React.ReactNode; isLogin?: boolean }> =
 // Импорт конфигурации блоков
 import config from './config/config'
 
+// Система схем блоков - только TailGrids
+const blockSchemas = {
+  'hero-block': {
+    title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
+    subtitle: { type: 'string', default: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.' },
+    primaryButtonText: { type: 'string', default: 'Get Started' },
+    primaryButtonUrl: { type: 'string', default: '#' },
+    secondaryButtonText: { type: 'string', default: 'Download App' },
+    secondaryButtonUrl: { type: 'string', default: '#' },
+    heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
+    clientLogos: { type: 'array', default: [
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+    ] }
+  },
+  'testimonial-block': {
+    testimonials: { type: 'array', default: [
+      {
+        image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+        name: 'Larry Diamond',
+        position: 'Chief Executive Officer',
+        details: 'Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id! Mollitia perspiciatis est asperiores commodi labore!'
+      },
+      {
+        image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+        name: 'Sarah Johnson',
+        position: 'Marketing Director',
+        details: 'Excellent service and amazing results! The team delivered exactly what we needed and exceeded our expectations.'
+      },
+      {
+        image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+        name: 'Michael Chen',
+        position: 'Product Manager',
+        details: 'Working with this platform has transformed our workflow. Highly recommended for any business looking to improve their online presence.'
+      }
+    ] }
+  },
+  'services-block': {
+    sectionTitle: { type: 'string', default: 'What We Offer' },
+    sectionSubtitle: { type: 'string', default: 'Our Services' },
+    sectionDescription: { type: 'string', default: 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.' },
+    services: { type: 'array', default: [
+      {
+        title: 'Refreshing Design',
+        details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+        icon: 'design'
+      },
+      {
+        title: 'Based on Tailwind CSS',
+        details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+        icon: 'tailwind'
+      },
+      {
+        title: '100+ Components',
+        details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+        icon: 'components'
+      }
+    ] }
+  },
+  'image-block': {
+    imageUrl: { type: 'string', default: '' },
+    alt: { type: 'string', default: 'Image description' },
+    caption: { type: 'string', default: '' },
+    alignment: { type: 'select', options: ['left', 'center', 'right'], default: 'center' },
+    size: { type: 'select', options: ['small', 'medium', 'large', 'full'], default: 'medium' }
+  },
+  'gallery-block': {
+    images: { type: 'array', default: [] },
+    columns: { type: 'select', options: ['2', '3', '4'], default: '3' },
+    gap: { type: 'select', options: ['small', 'medium', 'large'], default: 'medium' }
+  },
+  'video-block': {
+    videoUrl: { type: 'string', default: '' },
+    title: { type: 'string', default: 'Video Title' },
+    autoplay: { type: 'boolean', default: false },
+    controls: { type: 'boolean', default: true }
+  },
+  'container-block': {
+    maxWidth: { type: 'select', options: ['sm', 'md', 'lg', 'xl', 'full'], default: 'lg' },
+    padding: { type: 'select', options: ['none', 'small', 'medium', 'large'], default: 'medium' },
+    background: { type: 'select', options: ['transparent', 'light', 'dark'], default: 'transparent' }
+  },
+  'columns-block': {
+    columns: { type: 'select', options: ['2', '3', '4'], default: '2' },
+    gap: { type: 'select', options: ['small', 'medium', 'large'], default: 'medium' },
+    alignment: { type: 'select', options: ['top', 'center', 'bottom'], default: 'top' }
+  }
+};
+
+// Функция для создания дефолтных пропсов из схемы
+const createDefaultProps = (blockType: string) => {
+  const schema = blockSchemas[blockType as keyof typeof blockSchemas];
+  if (!schema) return {};
+  
+  const defaultProps: any = {};
+  Object.entries(schema).forEach(([key, config]) => {
+    defaultProps[key] = config.default;
+  });
+  
+  return defaultProps;
+};
+
 const EditorContent: React.FC = () => {
+  const [currentDevice, setCurrentDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
+  
+  // Темы инициализируются автоматически в хуках useTheme и useCanvasTheme
+  
+  const [currentPage, setCurrentPage] = useState<any>({
+    id: 'home',
+    type: 'page',
+    slug: 'home',
+    title: 'Home Page',
+    content: [],
+    meta: {}
+  })
+
+  // Функция сохранения страницы
+  const savePage = async (pageData: any) => {
+    // Здесь будет реальная логика сохранения в API
+    console.log('💾 Saving page:', pageData);
+    
+    // Имитация API запроса
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // В реальном приложении здесь будет fetch или axios запрос
+    // const response = await fetch('/api/pages', {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(pageData)
+    // });
+    
+    return pageData;
+  };
+
+  // Автосохранение
+  const { isSaving, lastSaved, saveError, saveNow } = useAutoSave(currentPage, {
+    delay: 3000, // 3 секунды
+    onSave: savePage,
+    enabled: true
+  });
+
+  const addBrickToCanvas = (brickType: string) => {
+    console.log('🎯 Adding brick to canvas:', brickType)
+    
+    // Создаем блок с дефолтными пропсами из схемы
+    const defaultProps = createDefaultProps(brickType);
+    
+    const newBrick = {
+      id: `brick-${Date.now()}`,
+      type: brickType,
+      props: defaultProps
+    }
+    
+    setCurrentPage((prev: any) => ({
+      ...prev,
+      content: [...prev.content, newBrick]
+    }))
+  }
+
+  const handleBlockUpdate = (blockId: string, newProps: any) => {
+    console.log('🎯 Updating block:', blockId, newProps)
+    
+    setCurrentPage((prev: any) => ({
+      ...prev,
+      content: prev.content.map((brick: any) => 
+        brick.id === blockId 
+          ? { ...brick, props: { ...brick.props, ...newProps } }
+          : brick
+      )
+    }))
+  }
+
+  const handleBlockDelete = (blockId: string) => {
+    console.log('🎯 Deleting block:', blockId)
+    
+    setCurrentPage((prev: any) => ({
+      ...prev,
+      content: prev.content.filter((brick: any) => brick.id !== blockId)
+    }))
+  }
+
   console.log('🎯 Editor component render - START')
   console.log('🎯 Editor component - rendering area should be visible')
 
-  // Состояние для второй панели
-  const [currentDevice, setCurrentDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
-
   // Получаем все доступные блоки из конфигурации
-  const allBricks = config.bricks?.flatMap(theme =>
-    theme.categories?.flatMap(category => category.bricks || []) || []
+  const allBricks = config.bricks?.flatMap((theme: any) =>
+    theme.categories?.flatMap((category: any) => category.bricks || []) || []
   ) || []
 
   console.log('🎯 Available bricks:', allBricks.length)
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log('Saving page...')
-    // Здесь будет логика сохранения
+    await saveNow();
   }
 
   const handlePreview = () => {
@@ -88,23 +268,58 @@ const EditorContent: React.FC = () => {
   }
 
   return (
-    <div 
-      className="redaktus-editor h-screen flex flex-col transition-colors duration-200 bg-gray-50 dark:bg-gray-900"
-      data-editor-container
-    >
-      {/* Верхняя панель над всем редактором */}
+    <div className="redaktus-editor h-screen w-screen max-w-none flex flex-col transition-colors duration-200 redaktus-interface" style={{ width: '100vw', maxWidth: 'none' }}>
+      {/* Верхняя панель над всем редактором - часть интерфейса */}
       <EditorNavbar 
         currentPage="Home"
         onSave={handleSave}
         autosaveEnabled={true}
+        isSaving={isSaving}
+        lastSaved={lastSaved}
+        saveError={saveError}
       />
 
+      {/* Индикатор автосохранения */}
+      {isSaving && (
+        <div className="fixed top-4 right-4 z-50 bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg">
+          <div className="flex items-center space-x-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+            <span>Saving...</span>
+          </div>
+        </div>
+      )}
+
+      {saveError && (
+        <div className="fixed top-4 right-4 z-50 bg-red-500 text-white px-4 py-2 rounded-md shadow-lg">
+          <div className="flex items-center space-x-2">
+            <span>Save failed: {saveError}</span>
+            <button 
+              onClick={() => saveNow()}
+              className="text-xs underline hover:no-underline"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
+
+      {lastSaved && !isSaving && !saveError && (
+        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg opacity-0 animate-fade-in">
+          <div className="flex items-center space-x-2">
+            <span>✓ Saved at {lastSaved.toLocaleTimeString()}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Основная область редактора */}
       <div className="flex-1 flex overflow-hidden">
         {/* Левая панель с компонентами */}
-        <VerticalNavbar availableBricks={allBricks} />
+        <div>
+          <VerticalNavbar availableBricks={allBricks} />
+        </div>
 
-        {/* Центральная область с холстом */}
-        <div className="flex-1 flex flex-col transition-colors duration-200 bg-gray-100 dark:bg-gray-800">
+        {/* Центральная область с холстом - КАНВАС */}
+        <div className="flex-1 flex flex-col min-w-0 transition-colors duration-200">
           {/* Вторая панель ТОЛЬКО над холстом */}
           <CanvasToolbar
             currentDevice={currentDevice}
@@ -116,21 +331,21 @@ const EditorContent: React.FC = () => {
             onSave={handleSave}
           />
 
-          {/* Область редактирования - ВСЕГДА СВЕТЛАЯ */}
-          <div className="flex-1 overflow-y-auto !bg-white">
-            {/* Редактируемая страница - с улучшенным дизайном */}
+          {/* Область редактирования - тема контролируется CSS */}
+          <div className="flex-1 overflow-y-auto min-w-0 redaktus-canvas bg-white dark:bg-gray-900 transition-colors duration-200">
+            {/* Динамический контент страницы */}
             <div 
               className="min-h-full"
               onDragOver={(e) => {
                 e.preventDefault()
-                e.currentTarget.classList.add('ring-2', 'ring-gray-400', 'ring-opacity-50')
+                e.currentTarget.classList.add('ring-2', 'ring-blue-400', 'ring-opacity-50')
               }}
               onDragLeave={(e) => {
-                e.currentTarget.classList.remove('ring-2', 'ring-gray-400', 'ring-opacity-50')
+                e.currentTarget.classList.remove('ring-2', 'ring-blue-400', 'ring-opacity-50')
               }}
               onDrop={(e) => {
                 e.preventDefault()
-                e.currentTarget.classList.remove('ring-2', 'ring-gray-400', 'ring-opacity-50')
+                e.currentTarget.classList.remove('ring-2', 'ring-blue-400', 'ring-opacity-50')
 
                 const brickType = e.dataTransfer.getData('text/plain')
                 console.log('🎯 Dropped brick type:', brickType)
@@ -138,67 +353,18 @@ const EditorContent: React.FC = () => {
                 if (brickType) {
                   // Здесь будет логика добавления блока
                   console.log('🎯 Adding brick to canvas:', brickType)
+                  addBrickToCanvas(brickType)
                 }
               }}
             >
-              {/* Пример контента страницы */}
-              <div className="p-8">
-                <div className="max-w-4xl mx-auto">
-                  {/* Hero Section */}
-                  <div className="text-center mb-16">
-                    <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                      Great <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">DX</span> for Developers, great <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">UX</span> for Content editors.
-                    </h1>
-                    <p className="text-xl text-gray-600 mb-8">
-                      Redaktus provides a powerful visual editor that makes content management intuitive and
-                    </p>
-                    <div className="flex justify-center space-x-4">
-                              <button className="px-6 py-2.5 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
-          Visual Website Builder
-        </button>
-                    </div>
-                  </div>
-
-                  {/* Feature Section */}
-                  <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                      <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                        Visual Content Management
-                      </h2>
-                      <p className="text-lg text-gray-600 mb-6">
-                        Create and edit content visually with our intuitive drag-and-drop interface. No coding required.
-                      </p>
-                      <ul className="space-y-3">
-                        <li className="flex items-center text-gray-600">
-                          <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
-                          Drag and drop components
-                        </li>
-                        <li className="flex items-center text-gray-600">
-                          <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
-                          Real-time preview
-                        </li>
-                        <li className="flex items-center text-gray-600">
-                          <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
-                          Responsive design
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="bg-gradient-to-br from-orange-100 to-purple-100 p-8 rounded-lg">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <span className="text-white text-2xl">🎨</span>
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                          Visual Content Management
-                        </h3>
-                        <p className="text-gray-600">
-                          Create beautiful content without touching code
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* PageViewer для отображения блоков */}
+              <RedaktusPageViewer 
+                page={currentPage} 
+                main 
+                className="min-h-full"
+                onBlockUpdate={handleBlockUpdate}
+                onBlockDelete={handleBlockDelete}
+              />
             </div>
           </div>
         </div>
