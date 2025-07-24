@@ -3,6 +3,7 @@ import { useSite } from '../contexts/SiteContext';
 import { useLanguage } from '../hooks/useLanguage';
 import { useTheme } from '../hooks/useTheme';
 import { useCanvasTheme } from '../hooks/useCanvasTheme';
+import RedaktusEditor from './RedaktusEditor';
 
 export function StudioInterface() {
   const { state, actions } = useSite();
@@ -36,6 +37,15 @@ export function StudioInterface() {
             Повторить попытку
           </button>
         </div>
+      </div>
+    );
+  }
+
+  // Если включен режим редактирования, показываем полный редактор
+  if (isEditMode) {
+    return (
+      <div className="min-h-screen bg-white">
+        <RedaktusEditor mode="editor" />
       </div>
     );
   }
@@ -189,36 +199,18 @@ export function StudioInterface() {
               
               <div className="flex items-center space-x-2">
                 {state.currentPage && (
-                  <>
-                    {isEditMode ? (
-                      <>
-                        <button 
-                          onClick={() => setIsEditMode(false)}
-                          className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200"
-                        >
-                          👁️ Просмотр
-                        </button>
-                        <button className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 rounded">💻 Desktop</button>
-                        <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded">📱 Mobile</button>
-                        <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded">🖥️ Tablet</button>
-                      </>
-                    ) : (
-                      <>
-                        <button 
-                          onClick={() => setIsEditMode(true)}
-                          className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
-                        >
-                          ✏️ Редактировать
-                        </button>
-                      </>
-                    )}
-                  </>
+                  <button 
+                    onClick={() => setIsEditMode(true)}
+                    className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    ✏️ Открыть редактор
+                  </button>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Канвас редактирования */}
+          {/* Канвас просмотра */}
           <div 
             className={`flex-1 redaktus-canvas transition-colors duration-200 ${
               canvasResolvedTheme === 'dark' ? 'dark' : ''
@@ -272,28 +264,7 @@ export function StudioInterface() {
                     }`}>
                       <div className="text-4xl mb-4">📝</div>
                       <h3 className="text-xl font-semibold mb-2">Страница пуста</h3>
-                      <p>Добавьте блоки для создания контента</p>
-                      {isEditMode && (
-                        <button
-                          onClick={() => {
-                            // Добавим простой блок для демонстрации
-                            const newContent = [
-                              {
-                                id: `block-${Date.now()}`,
-                                type: 'hero-unit',
-                                props: {
-                                  title: 'Добро пожаловать!',
-                                  text: 'Это ваш первый блок на странице'
-                                }
-                              }
-                            ];
-                            actions.savePageContent(state.currentPage!.id, newContent);
-                          }}
-                          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                        >
-                          Добавить первый блок
-                        </button>
-                      )}
+                      <p>Нажмите "Открыть редактор" для создания контента</p>
                     </div>
                   )}
                 </div>
