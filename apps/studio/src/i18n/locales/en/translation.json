@@ -1,0 +1,180 @@
+{
+  "editor": {
+    "title": "Visual Editor",
+    "tabs": {
+      "editor": "EDITOR",
+      "media": "MEDIA", 
+      "playground": "PLAYGROUND"
+    },
+    "navbar": {
+      "save": "Save",
+      "viewSite": "View Site",
+      "autosaveEnabled": "Autosave enabled",
+      "lastSaved": "Last saved",
+      "saving": "Saving...",
+      "saveError": "Save error",
+      "retry": "Retry"
+    },
+    "canvas": {
+      "toolbar": {
+        "preview": "Preview",
+        "code": "Code",
+        "undo": "Undo",
+        "redo": "Redo",
+        "save": "Save",
+        "device": {
+          "desktop": "Desktop",
+          "tablet": "Tablet",
+          "mobile": "Mobile"
+        },
+        "theme": {
+          "system": "System theme",
+          "light": "Light theme",
+          "dark": "Dark theme",
+          "switchTo": "Switch to {{theme}}"
+        }
+      },
+      "empty": {
+        "title": "Start building your page",
+        "subtitle": "Drag blocks from left panel here"
+      }
+    },
+    "sidebar": {
+      "blocks": {
+        "title": "Block Library",
+        "subtitle": "Drag blocks to add them to your page",
+        "search": "Search blocks...",
+        "categories": {
+          "all": "All Blocks",
+          "hero": "Hero Sections",
+          "content": "Content Blocks",
+          "testimonial": "Testimonials", 
+          "services": "Services",
+          "team": "Team",
+          "pricing": "Pricing",
+          "contact": "Contact",
+          "footer": "Footer",
+          "header": "Header"
+        }
+      },
+      "language": {
+        "title": "Interface Language",
+        "switch": "Switch language",
+        "russian": "Русский",
+        "english": "English"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "page": {
+        "title": "Page Settings",
+        "name": "Page Name",
+        "description": "Description",
+        "keywords": "Keywords"
+      },
+      "block": {
+        "title": "Block Settings",
+        "delete": "Delete block",
+        "duplicate": "Duplicate block",
+        "moveUp": "Move up",
+        "moveDown": "Move down"
+      }
+    },
+    "panels": {
+      "pages": "Pages",
+      "entities": "Entities",
+      "page": "Page",
+      "block": "Block",
+      "stories": "Stories"
+    },
+    "buttons": {
+      "addFirstBlock": "Add your first block",
+      "searchPage": "Search page",
+      "viewSite": "VIEW SITE",
+      "currentProps": "CURRENT PROPS",
+      "copy": "Copy",
+      "delete": "Delete Component",
+      "save": "Save Project",
+      "load": "Load Project",
+      "uploadImages": "Upload images",
+      "newFolder": "New Folder",
+      "allMedia": "All media",
+      "selectAll": "Select all",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "addAbove": "Add above",
+      "addBelow": "Add below",
+      "deleteBlock": "Delete block"
+    },
+    "sections": {
+      "text": "TEXT",
+      "background": "BACKGROUND", 
+      "media": "MEDIA",
+      "addNew": "ADD ELEMENTS...",
+      "statusVisibility": "STATUS AND VISIBILITY",
+      "pageStructure": "PAGE STRUCTURE LOCKED?",
+      "pageAttributes": "PAGE ATTRIBUTES"
+    },
+    "properties": {
+      "fontFamily": "FONT FAMILY",
+      "size": "SIZE",
+      "weight": "WEIGHT",
+      "color": "COLOR",
+      "align": "ALIGN",
+      "type": "TYPE",
+      "opacity": "OPACITY",
+      "visibility": "VISIBILITY", 
+      "schedule": "SCHEDULE PUBLISH (GMT+0)",
+      "mediaType": "MEDIA TYPE",
+      "mediaSide": "MEDIA SIDE",
+      "mediaOnMobile": "MEDIA ON TOP ON MOBILE"
+    },
+    "values": {
+      "published": "Published",
+      "draft": "Draft",
+      "private": "Private",
+      "unlocked": "Unlocked",
+      "locked": "Locked",
+      "left": "Left",
+      "right": "Right",
+      "center": "Center",
+      "normal": "Normal",
+      "bold": "Bold",
+      "light": "Light",
+      "medium": "Medium",
+      "image": "Image",
+      "multipleLogos": "Multiple logos",
+      "videoMp4": "Video (mp4 file)",
+      "videoStreaming": "Video (streaming)",
+      "gradient": "Gradient"
+    },
+    "placeholders": {
+      "searchBricks": "Search bricks...",
+      "searchAssets": "Search assets...",
+      "imageUrl": "Image URL",
+      "newBlockHere": "NEW BLOCK HERE: SELECT ON THE RIGHT »"
+    }
+  },
+  "notifications": {
+    "saved": "Saved at {{time}}",
+    "saveError": "Save error: {{error}}",
+    "autoSaveEnabled": "Autosave enabled",
+    "blockAdded": "Block added",
+    "blockDeleted": "Block deleted",
+    "blockUpdated": "Block updated"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "back": "Back",
+    "close": "Close",
+    "run": "Run",
+    "tests": "Tests",
+    "performance": "Performance",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  }
+} 

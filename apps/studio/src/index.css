@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== CSS ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ ===== */
+:root {
+  --color-primary: #3056d3;
+  --color-secondary: #13c296;
+  --color-body-color: #637381;
+  --color-dark: #1e293b;
+  --color-gray-3: #e2e8f0;
+  --color-dark-5: #64748b;
+  --color-dark-6: #8b9dc3;
+  --color-blue-dark: #1B44C8;
+  --shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.14);
+}
+
+/* ===== TAILWIND УТИЛИТЫ ДЛЯ ЦВЕТОВ ===== */
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+  
+  .text-body-color {
+    color: var(--color-body-color);
+  }
+  
+  .bg-gray-3 {
+    background-color: var(--color-gray-3);
+  }
+  
+  .border-gray-3 {
+    border-color: var(--color-gray-3);
+  }
+  
+  .text-dark-5 {
+    color: var(--color-dark-5);
+  }
+  
+  .text-dark-6 {
+    color: var(--color-dark-6);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .bg-blue-dark {
+    background-color: var(--color-blue-dark);
+  }
+  
+  .hover\:bg-blue-dark:hover {
+    background-color: var(--color-blue-dark);
+  }
+  
+  .bg-dark {
+    background-color: var(--color-dark);
+  }
+  
+  .bg-dark-2 {
+    background-color: #1e293b;
+  }
+  
+  .shadow-2 {
+    box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.10);
+  }
+}
+
+/* Глобальные стили для приложения */
+html {
+  /* Базовые стили - следуют системной теме по умолчанию */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* Базовые стили - следуют системной теме по умолчанию */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ===== ИЗОЛЯЦИЯ БЛОКОВ ОТ СТИЛЕЙ РЕДАКТОРА ===== */
+
+/* Минимальная изоляция блоков - только переключение темы через dark: */
+.redaktus-canvas .block-container {
+  /* Убираем влияние редактора на блоки */
+  isolation: isolate;
+}
+
+/* ===== ИЗОЛЯЦИЯ ТЕМ ИНТЕРФЕЙСА И КАНВАСА ===== */
+
+/* Контейнер интерфейса (панели, меню, кнопки) */
+.redaktus-interface {
+  /* Базовые стили - следуют системной теме по умолчанию */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Принудительная светлая тема интерфейса */
+.redaktus-interface.interface-light {
+  color-scheme: light;
+}
+
+/* Принудительная темная тема интерфейса */
+.redaktus-interface.interface-dark {
+  color-scheme: dark;
+}
+
+/* КАНВАС - МАКСИМАЛЬНАЯ ИЗОЛЯЦИЯ ОТ ИНТЕРФЕЙСА */
+.redaktus-canvas {
+  /* Полная изоляция от родительского контекста */
+  isolation: isolate !important;
+  contain: layout style paint !important;
+  
+  /* Восстанавливаем базовые свойства */
+  display: block !important;
+  overflow-y: auto !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  
+  /* Защита от внешних стилей */
+  position: relative !important;
+  z-index: 1 !important;
+  
+  /* Принудительные базовые стили */
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  
+  /* Плавные переходы */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ПРИНУДИТЕЛЬНАЯ ИЗОЛЯЦИЯ - ПЕРЕОПРЕДЕЛЯЕМ ВСЕ ВОЗМОЖНЫЕ НАСЛЕДОВАНИЯ */
+
+/* Светлая тема канваса - ПОЛНАЯ ИЗОЛЯЦИЯ */
+.redaktus-canvas:not(.dark) {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+  color-scheme: light !important;
+}
+
+/* Темная тема канваса - ПОЛНАЯ ИЗОЛЯЦИЯ */
+.redaktus-canvas.dark {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
+  color-scheme: dark !important;
+}
+
+/* ИЗОЛЯЦИЯ ВСЕХ ДОЧЕРНИХ ЭЛЕМЕНТОВ КАНВАСА */
+.redaktus-canvas *,
+.redaktus-canvas *::before,
+.redaktus-canvas *::after {
+  /* Сбрасываем наследование цветов от интерфейса */
+  color: inherit !important;
+}
+
+/* ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ КОНКРЕТНЫХ TAILWIND КЛАССОВ */
+
+/* Светлая тема - переопределяем только критичные классы */
+.redaktus-canvas:not(.dark) .text-dark { 
+  color: #1e293b !important; 
+}
+.redaktus-canvas:not(.dark) .text-body-color { 
+  color: #637381 !important; 
+}
+.redaktus-canvas:not(.dark) .text-primary { 
+  color: #3c82f6 !important; 
+}
+.redaktus-canvas:not(.dark) .bg-white { 
+  background-color: #ffffff !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-500 { 
+  color: #6b7280 !important; 
+}
+.redaktus-canvas:not(.dark) .text-gray-600 { 
+  color: #4b5563 !important; 
+}
+
+/* Темная тема - переопределяем только критичные классы */
+.redaktus-canvas.dark .text-dark { 
+  color: #f9fafb !important; 
+}
+.redaktus-canvas.dark .text-body-color { 
+  color: #9ca3af !important; 
+}
+.redaktus-canvas.dark .text-primary { 
+  color: #60a5fa !important; 
+}
+.redaktus-canvas.dark .bg-dark-2 { 
+  background-color: #1f2937 !important; 
+}
+.redaktus-canvas.dark .text-dark-6 { 
+  color: #9ca3af !important; 
+}
+.redaktus-canvas.dark .text-white { 
+  color: #ffffff !important; 
+}
+.redaktus-canvas.dark .text-gray-300 { 
+  color: #d1d5db !important; 
+}
+.redaktus-canvas.dark .text-gray-400 { 
+  color: #9ca3af !important; 
+}
+
+/* ===== TAILGRIDS БЛОКИ ИСПОЛЬЗУЮТ СТАНДАРТНЫЕ TAILWINDCSS КЛАССЫ ===== */
+
+/* Все блоки в канвасе полагаются на стандартные TailWindCSS классы:
+ * - В светлом канвасе: text-dark, text-body-color, bg-white и т.д.
+ * - В темном канвасе: dark:text-white, dark:text-dark-6, dark:bg-dark-2 и т.д.
+ * Никаких принудительных переопределений! */
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ===== */
+
+/* Стили для пустого канваса */
+.canvas-empty-state {
+  @apply flex flex-col items-center justify-center min-h-[400px] text-gray-500 dark:text-gray-400;
+}
+
+/* Стили для блоков в канвасе */
+.canvas-block {
+  @apply relative;
+}
+
+/* Стили для тулбаров */
+.redaktus-canvas-toolbar {
+  @apply border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800;
+}
+
+.redaktus-vertical-navbar {
+  @apply border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800;
+} 

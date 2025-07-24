@@ -1,0 +1,180 @@
+{
+  "editor": {
+    "title": "Визуальный редактор",
+    "tabs": {
+      "editor": "РЕДАКТОР",
+      "media": "МЕДИА", 
+      "playground": "ПЛОЩАДКА"
+    },
+    "navbar": {
+      "save": "Сохранить",
+      "viewSite": "Просмотр сайта",
+      "autosaveEnabled": "Автосохранение включено",
+      "lastSaved": "Последнее сохранение",
+      "saving": "Сохранение...",
+      "saveError": "Ошибка сохранения",
+      "retry": "Повторить"
+    },
+    "canvas": {
+      "toolbar": {
+        "preview": "Предпросмотр",
+        "code": "Код",
+        "undo": "Отменить",
+        "redo": "Повторить",
+        "save": "Сохранить",
+        "device": {
+          "desktop": "Рабочий стол",
+          "tablet": "Планшет", 
+          "mobile": "Мобильный"
+        },
+        "theme": {
+          "system": "Системная тема",
+          "light": "Светлая тема",
+          "dark": "Темная тема",
+          "switchTo": "Переключить на {{theme}}"
+        }
+      },
+      "empty": {
+        "title": "Начните создание страницы",
+        "subtitle": "Перетащите блоки из левой панели сюда"
+      }
+    },
+    "sidebar": {
+      "blocks": {
+        "title": "Библиотека блоков",
+        "subtitle": "Перетащите блоки для добавления на страницу",
+        "search": "Поиск блоков...",
+        "categories": {
+          "all": "Все блоки",
+          "hero": "Героические секции",
+          "content": "Контентные блоки", 
+          "testimonial": "Отзывы",
+          "services": "Услуги",
+          "team": "Команда",
+          "pricing": "Цены",
+          "contact": "Контакты",
+          "footer": "Подвал",
+          "header": "Заголовок"
+        }
+      },
+      "language": {
+        "title": "Язык интерфейса",
+        "switch": "Переключить язык",
+        "russian": "Русский",
+        "english": "English"
+      }
+    },
+    "settings": {
+      "title": "Настройки",
+      "page": {
+        "title": "Настройки страницы",
+        "name": "Название страницы",
+        "description": "Описание",
+        "keywords": "Ключевые слова"
+      },
+      "block": {
+        "title": "Настройки блока",
+        "delete": "Удалить блок",
+        "duplicate": "Дублировать блок",
+        "moveUp": "Переместить вверх",
+        "moveDown": "Переместить вниз"
+      }
+    },
+    "panels": {
+      "pages": "Страницы",
+      "entities": "Сущности",
+      "page": "Страница",
+      "block": "Блок",
+      "stories": "Истории"
+    },
+    "buttons": {
+      "addFirstBlock": "Добавить первый блок",
+      "searchPage": "Поиск страницы",
+      "viewSite": "ПРОСМОТР САЙТА",
+      "currentProps": "ТЕКУЩИЕ СВОЙСТВА",
+      "copy": "Копировать",
+      "delete": "Удалить компонент",
+      "save": "Сохранить проект",
+      "load": "Загрузить проект",
+      "uploadImages": "Загрузить изображения",
+      "newFolder": "Новая папка",
+      "allMedia": "Все медиа",
+      "selectAll": "Выбрать все",
+      "moveUp": "Переместить вверх",
+      "moveDown": "Переместить вниз",
+      "addAbove": "Добавить выше",
+      "addBelow": "Добавить ниже",
+      "deleteBlock": "Удалить блок"
+    },
+    "sections": {
+      "text": "ТЕКСТ",
+      "background": "ФОН", 
+      "media": "МЕДИА",
+      "addNew": "ДОБАВИТЬ ЭЛЕМЕНТЫ...",
+      "statusVisibility": "СТАТУС И ВИДИМОСТЬ",
+      "pageStructure": "СТРУКТУРА СТРАНИЦЫ ЗАБЛОКИРОВАНА?",
+      "pageAttributes": "АТРИБУТЫ СТРАНИЦЫ"
+    },
+    "properties": {
+      "fontFamily": "СЕМЕЙСТВО ШРИФТОВ",
+      "size": "РАЗМЕР",
+      "weight": "ТОЛЩИНА",
+      "color": "ЦВЕТ",
+      "align": "ВЫРАВНИВАНИЕ",
+      "type": "ТИП",
+      "opacity": "ПРОЗРАЧНОСТЬ",
+      "visibility": "ВИДИМОСТЬ", 
+      "schedule": "ЗАПЛАНИРОВАТЬ ПУБЛИКАЦИЮ (GMT+0)",
+      "mediaType": "ТИП МЕДИА",
+      "mediaSide": "СТОРОНА МЕДИА",
+      "mediaOnMobile": "МЕДИА СВЕРХУ НА МОБИЛЬНОМ"
+    },
+    "values": {
+      "published": "Опубликовано",
+      "draft": "Черновик",
+      "private": "Приватно",
+      "unlocked": "Разблокировано",
+      "locked": "Заблокировано",
+      "left": "Слева",
+      "right": "Справа",
+      "center": "По центру",
+      "normal": "Обычный",
+      "bold": "Жирный",
+      "light": "Тонкий",
+      "medium": "Средний",
+      "image": "Изображение",
+      "multipleLogos": "Несколько логотипов",
+      "videoMp4": "Видео (mp4 файл)",
+      "videoStreaming": "Видео (стриминг)",
+      "gradient": "Градиент"
+    },
+    "placeholders": {
+      "searchBricks": "Поиск блоков...",
+      "searchAssets": "Поиск ресурсов...",
+      "imageUrl": "URL изображения",
+      "newBlockHere": "НОВЫЙ БЛОК ЗДЕСЬ: ВЫБЕРИТЕ СПРАВА »"
+    }
+  },
+  "notifications": {
+    "saved": "Сохранено в {{time}}",
+    "saveError": "Ошибка сохранения: {{error}}",
+    "autoSaveEnabled": "Автосохранение включено",
+    "blockAdded": "Блок добавлен",
+    "blockDeleted": "Блок удален",
+    "blockUpdated": "Блок обновлен"
+  },
+  "common": {
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "back": "Назад",
+    "close": "Закрыть",
+    "run": "Запустить",
+    "tests": "Тесты",
+    "performance": "Производительность",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "warning": "Внимание",
+    "info": "Информация"
+  }
+} 
