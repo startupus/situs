@@ -190,7 +190,7 @@ export function StudioInterface() {
 
           {/* Канвас редактирования */}
           <div 
-            className={`flex-1 transition-colors duration-200 ${
+            className={`flex-1 redaktus-canvas transition-colors duration-200 ${
               canvasResolvedTheme === 'dark' ? 'dark' : ''
             }`}
             style={{
