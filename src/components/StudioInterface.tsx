@@ -10,6 +10,7 @@ export function StudioInterface() {
   const { theme, toggleTheme, resolvedTheme } = useTheme();
   const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme, toggleTheme: toggleCanvasTheme } = useCanvasTheme();
   const [selectedPageId, setSelectedPageId] = useState<string | null>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   if (state.loading) {
     return (
@@ -106,7 +107,10 @@ export function StudioInterface() {
                       ? 'bg-blue-100 dark:bg-blue-900'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
-                  onClick={() => actions.selectSite(site.id)}
+                  onClick={() => {
+                    actions.selectSite(site.id);
+                    setIsEditMode(false); // Сбрасываем режим редактирования при смене сайта
+                  }}
                 >
                   <div className="font-medium">{site.name}</div>
                   <div className="text-sm text-gray-500">{site.domain || 'Нет домена'}</div>
@@ -128,7 +132,10 @@ export function StudioInterface() {
                           ? 'bg-blue-100 dark:bg-blue-900'
                           : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                       }`}
-                      onClick={() => actions.selectPage(page.id)}
+                      onClick={() => {
+                        actions.selectPage(page.id);
+                        setIsEditMode(false); // По умолчанию показываем просмотр
+                      }}
                     >
                       <div className="font-medium text-sm">{page.title}</div>
                       <div className="text-xs text-gray-500">
@@ -181,9 +188,32 @@ export function StudioInterface() {
               </div>
               
               <div className="flex items-center space-x-2">
-                <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded">📱 Mobile</button>
-                <button className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 rounded">💻 Desktop</button>
-                <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded">🖥️ Tablet</button>
+                {state.currentPage && (
+                  <>
+                    {isEditMode ? (
+                      <>
+                        <button 
+                          onClick={() => setIsEditMode(false)}
+                          className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200"
+                        >
+                          👁️ Просмотр
+                        </button>
+                        <button className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 rounded">💻 Desktop</button>
+                        <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded">📱 Mobile</button>
+                        <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded">🖥️ Tablet</button>
+                      </>
+                    ) : (
+                      <>
+                        <button 
+                          onClick={() => setIsEditMode(true)}
+                          className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                        >
+                          ✏️ Редактировать
+                        </button>
+                      </>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -243,25 +273,27 @@ export function StudioInterface() {
                       <div className="text-4xl mb-4">📝</div>
                       <h3 className="text-xl font-semibold mb-2">Страница пуста</h3>
                       <p>Добавьте блоки для создания контента</p>
-                      <button
-                        onClick={() => {
-                          // Добавим простой блок для демонстрации
-                          const newContent = [
-                            {
-                              id: `block-${Date.now()}`,
-                              type: 'hero-unit',
-                              props: {
-                                title: 'Добро пожаловать!',
-                                text: 'Это ваш первый блок на странице'
+                      {isEditMode && (
+                        <button
+                          onClick={() => {
+                            // Добавим простой блок для демонстрации
+                            const newContent = [
+                              {
+                                id: `block-${Date.now()}`,
+                                type: 'hero-unit',
+                                props: {
+                                  title: 'Добро пожаловать!',
+                                  text: 'Это ваш первый блок на странице'
+                                }
                               }
-                            }
-                          ];
-                          actions.savePageContent(state.currentPage!.id, newContent);
-                        }}
-                        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                      >
-                        Добавить первый блок
-                      </button>
+                            ];
+                            actions.savePageContent(state.currentPage!.id, newContent);
+                          }}
+                          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        >
+                          Добавить первый блок
+                        </button>
+                      )}
                     </div>
                   )}
                 </div>
@@ -271,7 +303,7 @@ export function StudioInterface() {
                 }`}>
                   <div className="text-4xl mb-4">🎨</div>
                   <h3 className="text-xl font-semibold mb-2">Выберите страницу</h3>
-                  <p>Выберите страницу из левой панели для начала редактирования</p>
+                  <p>Выберите страницу из левой панели для начала работы</p>
                 </div>
               )}
             </div>
