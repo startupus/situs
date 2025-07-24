@@ -1,0 +1,205 @@
+// Расширение Prisma схемы для Situs Platform
+// Добавить к существующей схеме в prisma/schema.prisma
+
+// ==================== ПРОЕКТЫ И СТРАНИЦЫ ====================
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  slug        String   @unique
+  
+  // Домены
+  domain       String?  @unique  // situs-generated domain (e.g., project123.situs.com)
+  customDomain String?  @unique  // user's custom domain (e.g., mysite.com)
+  
+  // Статус и настройки
+  status      ProjectStatus @default(DRAFT)
+  isPublished Boolean      @default(false)
+  
+  // Владелец и права доступа
+  ownerId     String
+  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  // Настройки проекта
+  settings    Json?        // ProjectSettings в JSON формате
+  
+  // Связанные данные
+  pages       Page[]
+  menus       Menu[]
+  mediaFiles  MediaFile[]
+  
+  // Аудит
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("projects")
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   // URL slug для страницы
+  
+  // Содержимое страницы (Redaktus JSON)
+  content     Json     // Структура блоков Redaktus
+  
+  // Метаданные
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // Настройки страницы
+  isHomePage      Boolean @default(false)
+  isPublished     Boolean @default(false)
+  publishedAt     DateTime?
+  
+  // Связи
+  projectId   String
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  // Аудит
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([projectId, slug])
+  @@map("pages")
+}
+
+model Menu {
+  id        String   @id @default(cuid())
+  name      String
+  position  String   // header, footer, sidebar
+  
+  // Структура меню в JSON
+  items     Json     // MenuItems структура
+  
+  // Настройки
+  isActive  Boolean  @default(true)
+  
+  // Связи
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  // Аудит
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("menus")
+}
+
+model MediaFile {
+  id        String   @id @default(cuid())
+  filename  String
+  originalName String
+  mimeType  String
+  size      Int      // размер в байтах
+  
+  // Пути к файлам
+  url       String   // публичный URL
+  path      String   // путь в файловой системе
+  
+  // Метаданные для изображений
+  width     Int?
+  height    Int?
+  alt       String?
+  
+  // Организация
+  folder    String?  // папка в медиабиблиотеке
+  tags      String[] // теги для поиска
+  
+  // Связи
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  // Аудит
+  uploadedBy String
+  uploader   User     @relation(fields: [uploadedBy], references: [id])
+  createdAt  DateTime @default(now())
+  
+  @@map("media_files")
+}
+
+// ==================== ДОМЕНЫ И DNS ====================
+
+model Domain {
+  id          String   @id @default(cuid())
+  domain      String   @unique
+  
+  // Статус домена
+  status      DomainStatus @default(PENDING)
+  isVerified  Boolean      @default(false)
+  
+  // SSL сертификат
+  sslStatus   SSLStatus    @default(PENDING)
+  sslExpiry   DateTime?
+  
+  // DNS записи
+  dnsRecords  Json?        // DNS настройки в JSON
+  
+  // Связи
+  projectId   String?      @unique
+  project     Project?     @relation(fields: [projectId], references: [id])
+  
+  // Аудит
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("domains")
+}
+
+// ==================== АНАЛИТИКА ====================
+
+model Analytics {
+  id        String   @id @default(cuid())
+  
+  // Основные метрики
+  pageViews Int      @default(0)
+  visitors  Int      @default(0)
+  
+  // Дата метрики
+  date      DateTime @db.Date
+  
+  // Связи
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  pageId    String?
+  page      Page?    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  
+  @@unique([projectId, pageId, date])
+  @@map("analytics")
+}
+
+// ==================== ENUMS ====================
+
+enum ProjectStatus {
+  DRAFT
+  DEVELOPMENT
+  STAGING
+  PUBLISHED
+  ARCHIVED
+}
+
+enum DomainStatus {
+  PENDING
+  VERIFIED
+  FAILED
+  EXPIRED
+}
+
+enum SSLStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  FAILED
+}
+
+// ==================== СВЯЗИ ДЛЯ СУЩЕСТВУЮЩИХ МОДЕЛЕЙ ====================
+
+// Добавить к модели User:
+// projects    Project[]
+// mediaFiles  MediaFile[]
+
+// Добавить связи к проектам:
+// domain      Domain?
+// analytics   Analytics[] 
