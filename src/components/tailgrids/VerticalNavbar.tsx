@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaSearch, FaFile, FaCube, FaHome, FaCircle, FaChevronDown, FaPlus, FaFolder, FaBlog, FaSun, FaMoon, FaChevronUp } from 'react-icons/fa';
 import { useTheme } from '../../hooks/useTheme';
+import { useLanguage } from '../../hooks/useLanguage';
 import LanguageSwitcher from '../LanguageSwitcher';
 
 interface VerticalNavbarProps {
@@ -9,6 +10,7 @@ interface VerticalNavbarProps {
 
 const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] }) => {
   const { theme, toggleTheme, resolvedTheme } = useTheme();
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'pages' | 'entities'>('pages');
 
   const handleToggleTheme = () => {
@@ -32,7 +34,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
                   : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
               }`}
             >
-              Pages
+              {t('editor.panels.pages')}
             </div>
             <div
               onClick={() => setActiveTab('entities')}
@@ -42,7 +44,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
                   : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
               }`}
             >
-              Entities
+              {t('editor.panels.entities')}
             </div>
           </nav>
         </div>
@@ -52,7 +54,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
           <div className="relative">
             <input 
               type="text" 
-              placeholder="Search page"
+              placeholder={t('editor.buttons.searchPage')}
               className="w-full pl-8 pr-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors border-gray-300 text-gray-900 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
             />
             <FaSearch className="absolute left-2.5 top-2.5 text-gray-400" size={14} />
@@ -64,7 +66,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
           <ul className="p-4 space-y-2">
             {/* PAGES Section */}
             <NavSection 
-              title="Pages" 
+              title={t('editor.panels.pages')} 
               icon={<FaFile size={12} />} 
               count={4}
               submenu
@@ -78,7 +80,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
 
             {/* BLOG Section */}
             <NavSection 
-              title="Blog Posts" 
+              title={t('editor.panels.stories')} 
               icon={<FaBlog size={12} />} 
               count={12}
               submenu
@@ -90,7 +92,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
 
             {/* ENTITIES Section */}
             <NavSection 
-              title="Entities" 
+              title={t('editor.panels.entities')} 
               icon={<FaCube size={12} />} 
               count={8}
               submenu
@@ -103,11 +105,13 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
         </nav>
 
         {/* Нижняя панель с настройками */}
-        <div className={`p-4 border-t flex-shrink-0 space-y-3 ${
+        <div className={`p-4 border-t flex-shrink-0 ${
           resolvedTheme === 'dark' ? '!border-gray-700' : '!border-gray-200'
         }`}>
           {/* Переключатель языка интерфейса */}
-          <LanguageSwitcher showLabel={false} size="sm" />
+          <div className="mb-3">
+            <LanguageSwitcher showLabel={false} size="sm" />
+          </div>
           
           {/* Переключатель темы интерфейса редактора */}
           <div className="flex justify-center">

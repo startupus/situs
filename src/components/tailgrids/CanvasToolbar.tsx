@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaMobile, FaTabletAlt, FaDesktop, FaCode, FaSun, FaMoon } from 'react-icons/fa';
 import { useCanvasTheme } from '../../hooks/useCanvasTheme';
+import { useLanguage } from '../../hooks/useLanguage';
 
 interface Language {
   id: string;
@@ -32,6 +33,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   onSave
 }) => {
   const { theme, resolvedTheme, toggleTheme } = useCanvasTheme();
+  const { t } = useLanguage();
   const [showCode, setShowCode] = useState(false);
   const [currentLanguageId, setCurrentLanguageId] = useState('ru');
 
@@ -172,7 +174,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
         {/* Центральная часть - заголовок */}
         <div className="flex-1 text-center">
           <h2 className="text-base font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
-            Page Editor
+            {t('editor.title')}
           </h2>
         </div>
 
@@ -182,19 +184,19 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
             icon={<FaMobile size={11} />}
             active={currentDevice === 'mobile'}
             onClick={() => onDeviceChange('mobile')}
-            title="Mobile view"
+            title={t('editor.canvas.toolbar.device.mobile')}
           />
           <DeviceButton
             icon={<FaTabletAlt size={11} />}
             active={currentDevice === 'tablet'}
             onClick={() => onDeviceChange('tablet')}
-            title="Tablet view"
+            title={t('editor.canvas.toolbar.device.tablet')}
           />
           <DeviceButton
             icon={<FaDesktop size={11} />}
             active={currentDevice === 'desktop'}
             onClick={() => onDeviceChange('desktop')}
-            title="Desktop view"
+            title={t('editor.canvas.toolbar.device.desktop')}
           />
           <div className="w-px h-5 mx-1 bg-gray-300 dark:bg-gray-600"></div>
           <button

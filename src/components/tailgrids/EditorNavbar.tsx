@@ -9,6 +9,7 @@ import {
   FaCheck,
   FaExclamationTriangle
 } from 'react-icons/fa'
+import { useLanguage } from '../../hooks/useLanguage'
 
 
 interface EditorNavbarProps {
@@ -28,6 +29,7 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
   lastSaved = null,
   saveError = null
 }) => {
+  const { t } = useLanguage()
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'media' | 'playground'>('editor');
 
@@ -55,19 +57,19 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
               active={activeTab === 'editor'} 
               onClick={() => setActiveTab('editor')}
             >
-              EDITOR
+              {t('editor.tabs.editor')}
             </NavTab>
             <NavTab 
               active={activeTab === 'media'} 
               onClick={() => setActiveTab('media')}
             >
-              MEDIA
+              {t('editor.tabs.media')}
             </NavTab>
             <NavTab 
               active={activeTab === 'playground'} 
               onClick={() => setActiveTab('playground')}
             >
-              PLAYGROUND
+              {t('editor.tabs.playground')}
             </NavTab>
           </div>
 
@@ -78,21 +80,21 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
               {isSaving && (
                 <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
-                  <span className="text-sm">Saving...</span>
+                  <span className="text-sm">{t('editor.navbar.saving')}</span>
                 </div>
               )}
               
               {saveError && (
                 <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
                   <FaExclamationTriangle size={14} />
-                  <span className="text-sm">Save failed</span>
+                  <span className="text-sm">{t('editor.navbar.saveError')}</span>
                 </div>
               )}
               
               {lastSaved && !isSaving && !saveError && (
                 <div className="flex items-center space-x-2 text-green-600 dark:text-green-400">
                   <FaCheck size={14} />
-                  <span className="text-sm">Saved {lastSaved.toLocaleTimeString()}</span>
+                  <span className="text-sm">{t('notifications.saved', { time: lastSaved.toLocaleTimeString() })}</span>
                 </div>
               )}
             </div>
@@ -108,13 +110,13 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
               }`}
             >
               <FaSave size={12} />
-              <span>SAVE</span>
+              <span>{t('editor.navbar.save').toUpperCase()}</span>
             </button>
 
             {/* View Site Button */}
             <button className="inline-flex items-center space-x-2 px-4 py-2 border rounded-md text-sm font-medium focus:outline-none transition-colors border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">
               <FaExternalLinkAlt size={12} />
-              <span>VIEW SITE</span>
+              <span>{t('editor.navbar.viewSite').toUpperCase()}</span>
             </button>
 
             {/* Calendar/Date */}
