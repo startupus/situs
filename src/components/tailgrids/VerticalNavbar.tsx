@@ -108,13 +108,12 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
         <div className={`p-4 border-t flex-shrink-0 ${
           resolvedTheme === 'dark' ? '!border-gray-700' : '!border-gray-200'
         }`}>
-          {/* Переключатель языка интерфейса */}
-          <div className="mb-3">
+          {/* Переключатели языка и темы в одну строку */}
+          <div className="flex items-center justify-between space-x-2">
+            {/* Переключатель языка интерфейса */}
             <LanguageSwitcher showLabel={false} size="sm" />
-          </div>
-          
-          {/* Переключатель темы интерфейса редактора */}
-          <div className="flex justify-center">
+            
+            {/* Переключатель темы интерфейса редактора */}
             <button
               onClick={(e) => {
                 e.preventDefault();
