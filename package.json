@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:situs": "vite --port 5177",
+    "dev:redaktus": "vite --port 5178",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
