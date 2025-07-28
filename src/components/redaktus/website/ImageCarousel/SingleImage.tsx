@@ -3,7 +3,10 @@ import { Image } from 'redaktus/core'
 import * as types from 'redaktus/types'
 import blockNames from '../blockNames'
 
-interface SingleImageProps {}
+export interface SingleImageProps {
+  image?: any
+  altText?: string
+}
 
 const SingleImage: types.Brick<SingleImageProps> = () => {
   return (

@@ -72,16 +72,8 @@ MapBrick.schema = {
     lng: 9.5669407,
   }),
   sideEditProps: [
+    BackgroundColorsSideEditProps,
     {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps],
-    },
-    {
-      groupName: 'Coordinates',
-      defaultOpen: true,
-      props: [
-        {
           name: 'zoom',
           label: 'Zoom',
           type: types.SideEditPropType.Number,
@@ -95,9 +87,6 @@ MapBrick.schema = {
           name: 'lng',
           label: 'Longitude',
           type: types.SideEditPropType.Number,
-        },
-      ],
-    },
-  ],
+        }],
 }
 export default MapBrick

@@ -52,7 +52,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
             ? 'w-24 md:w-auto h-auto md:h-24'
             : 'w-12 md:w-auto h-auto md:h-12'
         }
-        renderWrapper={({ children }) => {
+        renderWrapper={({ children }: any) => {
           return <div className="my-auto mr-6 md:mr-0 md:mb-5">{children}</div>
         }}
       />
@@ -61,7 +61,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
         <Text
           propName="title"
           placeholder="title..."
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <h3 className={classNames(getFontSize(screenLayout))}>
               {props.children}
             </h3>
@@ -70,7 +70,7 @@ const FeatureItem: types.Brick<FeatureItemProps> = ({
         <RichText
           propName="text"
           placeholder="text..."
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <p className="text-gray-500 dark:text-gray-200 font-normal leading-6 text-base text">
               {props.children}
             </p>

@@ -1,0 +1,187 @@
+// Расширение схемы пользователей для системы Situs
+// Добавляется к основной schema.prisma
+
+// Расширенная модель пользователя
+model SitusUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  avatar    String?
+  
+  // Контактная информация
+  phone     String?
+  company   String?
+  position  String?
+  notes     String?
+  
+  // Система ролей и доступа
+  role        SitusUserRole   @default(CLIENT)
+  status      SitusUserStatus @default(PENDING)
+  permissions String[]        // JSON массив прав доступа
+  
+  // Аутентификация
+  password         String
+  isEmailVerified  Boolean @default(false)
+  emailVerifiedAt  DateTime?
+  lastLoginAt      DateTime?
+  passwordResetToken String?
+  passwordResetExpires DateTime?
+  
+  // Статистика
+  projectsCount Int @default(0)
+  ordersCount   Int @default(0)
+  
+  // Клиентская информация
+  clientBalance     Float?  @default(0)
+  clientCurrency    String? @default("RUB")
+  clientTotalSpent  Float?  @default(0)
+  registrationSource String? @default("Website")
+  
+  // Аудит
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+  
+  // Связи
+  createdProjects Project[] @relation("ProjectOwner")
+  assignedProjects Project[] @relation("ProjectAssignee")
+  userSessions    UserSession[]
+  userActivities  UserActivity[]
+  
+  @@map("situs_users")
+}
+
+// Роли пользователей
+enum SitusUserRole {
+  SUPER_ADMIN    // Полный доступ ко всем функциям системы
+  COMPANY_ADMIN  // Управление проектами и пользователями компании
+  ADMIN          // Управление проектами и контентом
+  MODERATOR      // Модерация контента и пользователей
+  EDITOR         // Создание и редактирование контента
+  CLIENT         // Просмотр собственных проектов
+}
+
+// Статусы пользователей
+enum SitusUserStatus {
+  ACTIVE      // Активный пользователь
+  INACTIVE    // Неактивный пользователь
+  SUSPENDED   // Заблокированный пользователь
+  PENDING     // Ожидает активации
+}
+
+// Модель прав доступа
+model Permission {
+  id          String @id @default(cuid())
+  name        String @unique
+  displayName String
+  description String
+  category    PermissionCategory
+  isActive    Boolean @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("permissions")
+}
+
+// Категории прав доступа
+enum PermissionCategory {
+  PROJECTS   // Управление проектами
+  USERS      // Управление пользователями
+  ORDERS     // Управление заказами
+  MARKETING  // Маркетинговые функции
+  SETTINGS   // Настройки системы
+  REPORTS    // Отчеты и аналитика
+}
+
+// Сессии пользователей
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  userAgent String?
+  ipAddress String?
+  expiresAt DateTime
+  isActive  Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  
+  user SitusUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("user_sessions")
+}
+
+// Логи активности пользователей
+model UserActivity {
+  id          String           @id @default(cuid())
+  userId      String
+  action      UserActionType
+  description String
+  metadata    String?          // JSON данные
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt DateTime @default(now())
+  
+  user SitusUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("user_activities")
+}
+
+// Типы действий пользователей
+enum UserActionType {
+  LOGIN
+  LOGOUT
+  CREATE_PROJECT
+  UPDATE_PROJECT
+  DELETE_PROJECT
+  CREATE_USER
+  UPDATE_USER
+  DELETE_USER
+  CHANGE_PERMISSIONS
+  CREATE_ORDER
+  UPDATE_ORDER
+  VIEW_REPORTS
+  CHANGE_SETTINGS
+}
+
+// Расширение модели Project для связи с пользователями
+// (добавляется к существующей модели Project)
+/*
+model Project {
+  // ... existing fields ...
+  
+  // Дополнительные связи с пользователями
+  assigneeId String?
+  assignee   SitusUser? @relation("ProjectAssignee", fields: [assigneeId], references: [id])
+  
+  // Команда проекта
+  teamMembers ProjectTeamMember[]
+}
+
+// Команда проекта
+model ProjectTeamMember {
+  id        String @id @default(cuid())
+  projectId String
+  userId    String
+  role      ProjectRole @default(MEMBER)
+  
+  createdAt DateTime @default(now())
+  
+  project Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    SitusUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([projectId, userId])
+  @@map("project_team_members")
+}
+
+enum ProjectRole {
+  OWNER     // Владелец проекта
+  ADMIN     // Администратор проекта
+  EDITOR    // Редактор проекта
+  VIEWER    // Просмотр проекта
+  MEMBER    // Участник команды
+}
+*/ 

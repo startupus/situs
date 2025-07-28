@@ -1,29 +1,28 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import * as types from 'redaktus/types'
 
 const NextLink: types.RenderLocalLink = ({
   href,
-  target,
-  rel,
+  // target,
+  // rel,
   className,
   activeClassName,
   children,
 }) => {
-  const router = useRouter()
+  const location = useLocation()
 
   let anchorClassName = ''
 
-  if (router.asPath === href) {
+  if (location.pathname === href) {
     anchorClassName = `${className} ${activeClassName}`
   } else {
-    anchorClassName = className
+    anchorClassName = className || ""
   }
 
   return (
-    <Link href={href} target={target} rel={rel} className={anchorClassName}>
+    <RouterLink to={href} className={anchorClassName}>
       {children}
-    </Link>
+    </RouterLink>
   )
 }
 

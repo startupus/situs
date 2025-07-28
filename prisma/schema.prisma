@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -23,6 +23,7 @@ model User {
   // Relations
   balances     Balance[]
   transactions Transaction[]
+  projects     Project[]
 
   @@map("users")
 }
@@ -112,4 +113,125 @@ enum TransactionStatus {
   COMPLETED
   FAILED
   CANCELLED
+}
+
+// Projects and Content Management
+model Project {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  type        ProjectType @default(WEBSITE)
+  status      ProjectStatus @default(DRAFT)
+  domain      String?
+  subdomain   String?
+  
+  // SEO Settings
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // Theme and Design
+  primaryColor   String? @default("#3B82F6")
+  secondaryColor String? @default("#8B5CF6")
+  fontFamily     String? @default("Inter")
+  
+  // Features
+  hasEcommerce   Boolean @default(false)
+  hasAnalytics   Boolean @default(false)
+  hasBlog        Boolean @default(false)
+  hasContactForm Boolean @default(false)
+  
+  // Ownership
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  pages Page[]
+  
+  @@map("projects")
+}
+
+model Page {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String
+  content     Json?      // Redaktus content blocks
+  pageType    PageType   @default(PAGE)
+  status      PageStatus @default(DRAFT)
+  isHomePage  Boolean    @default(false)
+  
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // Template and Layout
+  template    String?
+  layout      String?
+  
+  // Project relation
+  projectId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@unique([projectId, slug])
+  @@map("pages")
+}
+
+model Media {
+  id          String    @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  width       Int?
+  height      Int?
+  url         String
+  alt         String?
+  caption     String?
+  
+  // Organization
+  projectId   String?
+  folder      String?
+  tags        String[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("media")
+}
+
+enum ProjectType {
+  WEBSITE
+  ECOMMERCE
+  LANDING
+  BLOG
+  APP
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  MAINTENANCE
+}
+
+enum PageType {
+  PAGE
+  POST
+  PRODUCT
+  CATEGORY
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
 }

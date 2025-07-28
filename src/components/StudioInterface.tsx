@@ -77,6 +77,14 @@ export function StudioInterface() {
               🏢 Situs Platform
             </a>
 
+            {/* Ссылка на прямой редактор */}
+            <a
+              href="/redaktus"
+              className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+            >
+              🎨 Redaktus Editor
+            </a>
+
             {/* Переключатель языка */}
             <button
               onClick={() => setLanguage(language === 'ru' ? 'en' : 'ru')}

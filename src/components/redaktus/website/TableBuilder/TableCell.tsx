@@ -13,7 +13,7 @@ const TableCell: types.Brick<TableCellProps> = ({ isHeader }) => {
       <Text
         propName="cellText"
         placeholder="Insert text"
-        renderBlock={({ children }) => (
+        renderBlock={({ children }: { children: any }) => (
           <span className="title-font tracking-wider font-medium text-gray-900 dark:text-white text-sm">
             {children}
           </span>
@@ -25,7 +25,7 @@ const TableCell: types.Brick<TableCellProps> = ({ isHeader }) => {
       <Text
         propName="cellText"
         placeholder="Insert text"
-        renderBlock={({ children }) => <span>{children}</span>}
+        renderBlock={({ children }: { children: any }) => <span>{children}</span>}
       />
     </td>
   )

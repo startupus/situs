@@ -13,7 +13,7 @@ const Quote: types.Brick = () => {
           <RichText
             propName="quote"
             placeholder="Insert a quote"
-            renderBlock={({ children }) => (
+            renderBlock={({ children }: { children: any }) => (
               <p className="text-2xl italic text-gray-500 dark:text-gray-200">
                 {children}
               </p>

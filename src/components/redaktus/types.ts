@@ -68,6 +68,8 @@ export interface SideEditProp {
   groupName?: string
   defaultOpen?: boolean
   component?: React.ComponentType<any>
+  shouldRefreshText?: boolean
+  show?: (props: any) => boolean
 }
 
 export enum SideEditPropType {
@@ -87,14 +89,15 @@ export enum SideEditPropType {
 
 export interface SelectOptions {
   display: OptionsDisplay
-  options: { value: string; label: string }[]
+  options: { value: string | Color['value']; label: string }[]
 }
 
 export enum OptionsDisplay {
   Dropdown = 'dropdown',
   Radio = 'radio',
   Buttons = 'buttons',
-  Select = 'select'
+  Select = 'select',
+  Color = 'color'
 }
 
 export interface RepeaterItem {
@@ -244,4 +247,24 @@ export interface Tag {
   id: string
   name: string
   slug: string
+} 
+
+// Добавляем недостающие типы для совместимости
+export interface ISideEditProp extends SideEditProp {}
+
+export interface IImageSource {
+  src: string
+  alt?: string
+  width?: number
+  height?: number
+  seoName?: string
+}
+
+export interface Color {
+  value: {
+    color: string
+    className: string
+    className2?: string
+  }
+  label: string
 } 

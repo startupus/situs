@@ -39,7 +39,7 @@ const Features: types.Brick<FeaturesProps> = ({
       >
         <Repeater
           propName="feature-item"
-          renderWrapper={(items) => (
+          renderWrapper={(items: any) => (
             <div
               className={classNames(
                 'flex flex-wrap justify-between mx-auto px-6 md:px-0',
@@ -108,42 +108,31 @@ Features.schema = {
             'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
       srcSet: '',
         },
-      },
-    ],
+      }],
   }),
   repeaterItems: [
     {
       name: 'feature-item',
+      label: 'Feature-item',
       itemType: blockNames.FeatureItem,
       itemLabel: 'Feature',
       min: 0,
       max: 4,
-    },
-  ],
-  sideEditProps: [
+    }],
+    sideEditProps: [
+    BackgroundColorsSideEditProps,
     {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps],
-    },
-    {
-      groupName: 'Columns',
-      defaultOpen: true,
-      props: [
-        {
-          name: 'screenLayout',
-          label: 'Screen Layout',
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Select,
-            options: [
-              { value: 'base', label: 'Two columns' },
-              { value: 'small', label: 'Small two columns' },
-              { value: 'small-3cols', label: 'Three columns' },
-            ],
-          },
-        },
-      ],
+      name: 'screenLayout',
+      label: 'Screen Layout',
+      type: types.SideEditPropType.Select,
+      selectOptions: {
+        display: types.OptionsDisplay.Select,
+        options: [
+          { value: 'base', label: 'Two columns' },
+          { value: 'small', label: 'Small two columns' },
+          { value: 'small-3cols', label: 'Three columns' },
+        ],
+      },
     },
   ],
 }

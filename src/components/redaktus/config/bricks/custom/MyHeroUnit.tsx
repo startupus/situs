@@ -32,7 +32,7 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
           imageClassName="w-20 mb-5 mx-auto"
         />
         <Text
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <h1 className="text-3xl sm:text-4xl text-center font-black leading-tight mb-3 transition-colors duration-200 text-gray-900 dark:text-gray-100">
               {props.children}
             </h1>
@@ -41,7 +41,7 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
           propName="title"
         />
         <RichText
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <p className="text-xl text-center leading-relaxed transition-colors duration-200 text-gray-700 dark:text-gray-100">
               {props.children}
             </p>
@@ -55,12 +55,12 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
             types.RichTextFeatures.code,
             types.RichTextFeatures.link,
           ]}
-          renderCode={(props) => (
+          renderCode={(props: any) => (
             <code className="text-sm py-1 px-2 rounded-sm transition-colors duration-200 bg-gray-200 dark:bg-gray-700">
               {props.children}
             </code>
           )}
-          renderLink={(props) => (
+          renderLink={(props: any) => (
             <a
               href={props.href}
               target={props.target}
@@ -82,7 +82,7 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
 MyHeroUnit.schema = {
   name: 'my-hero-unit',
   label: 'Custom Hero Unit',
-  previewImageUrl: `/bricks-preview-images/custom-hero-unit.png`,
+  // previewImageUrl: `/bricks-preview-images/custom-hero-unit.png`,
   getDefaultProps: () => ({
     padding: 'big',
     title: 'This is a custom Hero Unit',

@@ -22,8 +22,8 @@ const FormButton: types.Brick<FormButtonProps> = ({ type, color }) => {
       <Text
         propName="buttonLabel"
         placeholder="Type a button label..."
-        renderBlock={({ children }) => <span>{children}</span>}
-        renderPlaceholder={({ children }) => (
+        renderBlock={({ children }: { children: any }) => <span>{children}</span>}
+        renderPlaceholder={({ children }: { children: any }) => (
           <span className="block text-inherit">{children}</span>
         )}
       />

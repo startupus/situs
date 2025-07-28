@@ -24,7 +24,7 @@ const TeamItem: types.Brick<TeamItemProps> = ({
         // containerClassName="w-12 h-12 lg:w-16 lg:h-16 mx-4 mb-8 bg-white rounded-full p-2 shadow-md flex justify-center items-center"
         // imageClassName="w-6 h-6 lg:w-10 lg:h-10"
         imageClassName="w-24 h-24 rounded-full"
-        renderWrapper={({ children }) => (
+        renderWrapper={({ children }: any) => (
           <div className="w-24 h-24 mb-6 flex justify-center items-center bg-white rounded-full shadow-xl mx-auto">
             {children}
           </div>
@@ -32,14 +32,14 @@ const TeamItem: types.Brick<TeamItemProps> = ({
       />
       <div className="text-center dark:text-gray-200 text-gray-500">
         <Text
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <div className="text-sm font-bold">{props.children}</div>
           )}
           placeholder="Member name..."
           propName="memberName"
         />
         <Text
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <div className="text-xs">{props.children}</div>
           )}
           placeholder="Role"
@@ -120,10 +120,6 @@ TeamItem.schema = {
   }),
   sideEditProps: [
     {
-      groupName: 'Social Media',
-      defaultOpen: true,
-      props: [
-        {
           name: 'twitter',
           label: 'Twitter UserName',
           type: types.SideEditPropType.Text,
@@ -137,10 +133,7 @@ TeamItem.schema = {
           name: 'github',
           label: 'Github UserName',
           type: types.SideEditPropType.Text,
-        },
-      ],
-    },
-  ],
+        }],
 }
 
 export default TeamItem

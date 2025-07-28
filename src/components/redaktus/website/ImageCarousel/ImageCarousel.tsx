@@ -124,25 +124,19 @@ ImageCarousel.schema = {
           alt: 'altText',
           seoName: '',
         },
-      },
-    ],
+      }],
   }),
   repeaterItems: [
     {
       name: 'singleImage',
+      label: 'SingleImage',
       itemType: blockNames.SingleImage,
       itemLabel: 'Image',
       min: 1,
       max: 5,
-    },
-  ],
+    }],
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: true,
-      props: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-    },
-  ],
+    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
 }
 
 export default ImageCarousel

@@ -11,7 +11,7 @@ const FaqQuestion: types.Brick = () => {
     <div className="leading-6 mb-12">
       <Text
         propName="question"
-        renderBlock={(props) => (
+        renderBlock={(props: any) => (
           <p
             className={classNames(textColors.gray900, 'font-extrabold mb-1')}
             {...props.attributes}
@@ -23,7 +23,7 @@ const FaqQuestion: types.Brick = () => {
       />
       <RichText
         propName="answer"
-        renderBlock={(props) => (
+        renderBlock={(props: any) => (
           <p className={textColors.gray800} {...props.attributes}>
             {props.children}
           </p>

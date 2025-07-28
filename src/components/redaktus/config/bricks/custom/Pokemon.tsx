@@ -41,27 +41,27 @@ const Pokemon: types.Brick<PokemonProps> = ({
 Pokemon.schema = {
   name: 'pokemon',
   label: 'Pokemon',
-  previewImageUrl: `/bricks-preview-images/pokemon.png`,
+  // previewImageUrl: `/bricks-preview-images/pokemon.png`,
   getDefaultProps: () => ({}),
-  getExternalData: (page, brickProps) =>
-    fetch(`https://pokeapi.co/api/v2/pokemon/${brickProps.pokemonName}`)
-      .then((response) => response.json())
-      .then((data) => ({
-        id: data.id,
-        name: data.name,
-        height: data.height,
-        weight: data.weight,
-        imageUrl: `https://img.pokemondb.net/artwork/large/${data.name}.jpg`,
-      }))
-      .catch((error) => {
-        return {
-          id: 0,
-          name: '',
-          height: 0,
-          weight: 0,
-          imageUrl: '',
-        }
-      }),
+  // getExternalData: (page: any, brickProps: any) =>
+  //   fetch(`https://pokeapi.co/api/v2/pokemon/${brickProps.pokemonName}`)
+  //     .then((response) => response.json())
+  //     .then((data) => ({
+  //       id: data.id,
+  //       name: data.name,
+  //       height: data.height,
+  //       weight: data.weight,
+  //       imageUrl: `https://img.pokemondb.net/artwork/large/${data.name}.jpg`,
+  //     }))
+  //     .catch((error) => {
+  //       return {
+  //         id: 0,
+  //         name: '',
+  //         height: 0,
+  //         weight: 0,
+  //         imageUrl: '',
+  //       }
+  //     }),
 
   // Sidebar Edit controls for props
   sideEditProps: [
@@ -69,8 +69,7 @@ Pokemon.schema = {
       name: 'pokemonName',
       label: 'Pokemon Name',
       type: types.SideEditPropType.Text,
-      helperText:
-        'Enter a valid Pokemon name, like "pikachu" or "charizard" and save.',
+      // helperText: 'Enter a valid Pokemon name, like "pikachu" or "charizard" and save.',
     },
   ],
 }

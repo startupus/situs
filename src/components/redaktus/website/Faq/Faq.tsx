@@ -47,23 +47,17 @@ Faq.schema = {
         question: 'Why you should change your CMS today?',
         answer:
           'Because you want to have top user experience and top developer experience.',
-      },
-    ],
+      }],
   }),
   repeaterItems: [
     {
       name: 'faqs',
+      label: 'Faqs',
       itemType: blockNames.Faq,
       itemLabel: 'Question',
-    },
-  ],
+    }],
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: true,
-      props: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-    },
-  ],
+    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
 }
 
 export default Faq

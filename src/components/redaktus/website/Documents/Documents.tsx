@@ -25,10 +25,10 @@ const Documents: types.Brick<DocumentsProps> = ({ bg, width }) => {
       >
         <Repeater
           propName="files"
-          renderWrapper={(items) => (
+          renderWrapper={(items: any) => (
             <ul className="w-full p-6 grid grid-cols-3 gap-6 ">{items}</ul>
           )}
-          renderItemWrapper={(item) => <li>{item}</li>}
+          renderItemWrapper={(item: any) => <li>{item}</li>}
         />
       </Container>
     </Section>
@@ -71,6 +71,7 @@ Documents.schema = {
   repeaterItems: [
     {
       name: 'files',
+      label: 'Files',
       itemType: blockNames.Document,
       itemLabel: 'Document',
     },

@@ -51,6 +51,7 @@ TableRow.schema = {
   repeaterItems: [
     {
       name: 'cells',
+      label: 'Cells',
       itemType: blockNames.TableCell,
       min: 1,
     },

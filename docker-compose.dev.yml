@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: situs-postgres
+    environment:
+      POSTGRES_DB: situs_db
+      POSTGRES_USER: situs
+      POSTGRES_PASSWORD: situs123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U situs -d situs_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: situs-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  prisma-studio:
+    image: timothyjmiller/prisma-studio:latest
+    container_name: situs-prisma-studio
+    ports:
+      - "5555:5555"
+    environment:
+      DATABASE_URL: "postgresql://situs:situs123@postgres:5432/situs_db"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data: 

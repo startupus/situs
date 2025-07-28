@@ -19,7 +19,7 @@ const Badge: types.Brick<BadgeProps> = ({
   return (
     <div className="flex justify-center items-center">
       <Text
-        renderBlock={(props) => (
+        renderBlock={(props: any) => (
           <span
             className={classNames(
               'text-sm font-black uppercase text-center',

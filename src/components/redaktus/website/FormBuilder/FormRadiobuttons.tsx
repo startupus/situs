@@ -62,6 +62,7 @@ FormRadiobuttons.schema = {
   repeaterItems: [
     {
       name: 'radiobuttons',
+      label: 'Radiobuttons',
       itemType: blockNames.FormSingleRadio,
       min: 1,
     },

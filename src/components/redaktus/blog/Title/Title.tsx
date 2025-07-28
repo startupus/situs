@@ -13,7 +13,7 @@ export interface TitleProps {
 }
 
 const Title: types.Brick<TitleProps> = ({ size = 'large' }) => {
-  const [pageValues] = usePageValues()
+  const pageValues = usePageValues() as any
   return (
     <Section>
       <Container>
@@ -26,7 +26,7 @@ const Title: types.Brick<TitleProps> = ({ size = 'large' }) => {
         >
           <Text
             propName="title"
-            renderBlock={(prop) => {
+            renderBlock={(prop: any) => {
               return (
                 <h1
                   className={classNames(
@@ -42,9 +42,9 @@ const Title: types.Brick<TitleProps> = ({ size = 'large' }) => {
         </div>
 
         <div className="flex items-center space-x-2">
-          {pageValues.author.avatarUrl ? (
+          {pageValues?.author?.avatarUrl ? (
             <img
-              src={pageValues.author.avatarUrl}
+              src={pageValues?.author?.avatarUrl}
               alt="Author"
               className="rounded-full w-12 h-12"
             />
@@ -52,12 +52,12 @@ const Title: types.Brick<TitleProps> = ({ size = 'large' }) => {
             <DefaultAvatar className="rounded-full w-12 h-12" />
           )}
           <div className="text-gray-700 dark:text-gray-200">
-            {pageValues.author.firstName || 'John'}{' '}
-            {pageValues.author.lastName || 'Doe'}
+            {pageValues?.author?.firstName || 'John'}{' '}
+            {pageValues?.author?.lastName || 'Doe'}
             <span className="text-sm text-gray-300 dark:text-gray-500 px-2">
               •
             </span>
-            {dayjs(pageValues.publishedAt || new Date()).format(
+            {dayjs(pageValues?.publishedAt || new Date()).format(
               'MMMM DD, YYYY'
             )}
           </div>

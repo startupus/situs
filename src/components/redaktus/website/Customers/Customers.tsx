@@ -112,6 +112,7 @@ Customers.schema = {
   repeaterItems: [
     {
       name: 'customers',
+      label: 'Customers',
       itemType: blockNames.Customer,
       itemLabel: 'Customer',
       // addItemText: 'Add customer',
@@ -121,21 +122,14 @@ Customers.schema = {
     },
   ],
   sideEditProps: [
+    BackgroundColorsSideEditProps,
+    ContainerSizeSideEditProps,
     {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-    },
-    {
+      name: 'grayscale',
+      label: 'Greyscale',
+      type: types.SideEditPropType.Boolean,
       groupName: 'Logos',
       defaultOpen: true,
-      props: [
-        {
-          name: 'grayscale',
-          label: 'Greyscale',
-          type: types.SideEditPropType.Boolean,
-        },
-      ],
     },
   ],
 }

@@ -19,7 +19,7 @@ const Document: types.Brick<DocumentProps> = ({ color }) => {
     >
       <File
         propName="file"
-        renderBlock={(file) => {
+        renderBlock={(file: any) => {
           return file ? (
             <div className="flex font-semibold h-full items-center">
               <FiFile className="mr-2" />

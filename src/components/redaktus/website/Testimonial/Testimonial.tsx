@@ -37,7 +37,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
         )}
       >
         <Text
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <div
               className={classNames(
                 'flex-1 leading-relaxed text-center mb-6 text-gray-700 dark:text-gray-200 max-w-lg',
@@ -48,7 +48,7 @@ const Testimonial: types.Brick<TestimonialProps> = ({
             </div>
           )}
           placeholder="Quote..."
-          renderPlaceholder={(props) => {
+          renderPlaceholder={(props: any) => {
             return <span>{props.children}</span>
           }}
           propName="quote"
@@ -75,14 +75,14 @@ const Testimonial: types.Brick<TestimonialProps> = ({
           )}
           <div className="ml-3 dark:text-gray-200">
             <Text
-              renderBlock={(props) => (
+              renderBlock={(props: any) => (
                 <div className="text-sm font-bold">{props.children}</div>
               )}
               placeholder="Author name..."
               propName="authorName"
             />
             <Text
-              renderBlock={(props) => (
+              renderBlock={(props: any) => (
                 <div className="text-xs">{props.children}</div>
               )}
               placeholder="Job title..."
@@ -136,12 +136,7 @@ Testimonial.schema = {
     },
   }),
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: true,
-      props: [BackgroundColorsSideEditProps],
-    },
-  ],
+    BackgroundColorsSideEditProps],
 }
 
 export default Testimonial

@@ -31,7 +31,7 @@ const HeroUnit: types.Brick<HeroUnitProps> = ({
         <div className="max-w-xl mx-auto px-5">
           <Repeater
             propName="badge"
-            renderWrapper={(items) => <div className="mb-4">{items}</div>}
+            renderWrapper={(items: any) => <div className="mb-4">{items}</div>}
           />
 
           <div
@@ -45,7 +45,7 @@ const HeroUnit: types.Brick<HeroUnitProps> = ({
             style={titleStyle}
           >
             <RichText
-              renderBlock={(props) => (
+              renderBlock={(props: any) => (
                 <h1
                   className={classNames(
                     'text-center font-black mb-4 pb-1 bg-clip-text bg-gradient-to-r',
@@ -59,8 +59,8 @@ const HeroUnit: types.Brick<HeroUnitProps> = ({
               )}
               placeholder="Type a title..."
               propName="title"
-              allowedFeatures={[types.RichTextFeatures.Highlight]}
-              renderHighlight={(props) => (
+              allowedFeatures={[types.RichTextFeatures.highlight]}
+              renderHighlight={(props: any) => (
                 <span className={highlightColor} {...props.attributes}>
                   {props.children}
                 </span>
@@ -69,7 +69,7 @@ const HeroUnit: types.Brick<HeroUnitProps> = ({
           </div>
 
           <RichText
-            renderBlock={(props) => (
+            renderBlock={(props: any) => (
               <p
                 className={classNames(
                   'text-lg sm:text-xl text-center leading-7 sm:leading-8',
@@ -83,13 +83,12 @@ const HeroUnit: types.Brick<HeroUnitProps> = ({
             placeholder="Type a text..."
             propName="text"
             allowedFeatures={[
-              types.RichTextFeatures.Bold,
-              types.RichTextFeatures.Link,
-            ]}
+              types.RichTextFeatures.bold,
+              types.RichTextFeatures.link]}
           />
           <Repeater
             propName="buttons"
-            renderWrapper={(items) => (
+            renderWrapper={(items: any) => (
               <div className="flex justify-center items-center flex-col sm:flex-row mt-6">
                 {items}
               </div>
@@ -124,8 +123,7 @@ HeroUnit.schema = {
           color: '#90cdf4',
           className: 'text-blue-400 dark:text-blue-300',
         },
-      },
-    ],
+      }],
     buttons: [
       {
         text: 'Get Started',
@@ -140,12 +138,12 @@ HeroUnit.schema = {
         isTargetBlank: false,
         variant: 'sky',
         type: 'outline',
-      },
-    ],
+      }],
   }),
   repeaterItems: [
     {
       name: 'badge',
+      label: 'Badge',
       itemType: blockNames.Badge,
       itemLabel: 'Badge',
       min: 0,
@@ -153,49 +151,39 @@ HeroUnit.schema = {
     },
     {
       name: 'buttons',
+      label: 'Buttons',
       itemType: blockNames.Button,
       itemLabel: 'Button',
       min: 0,
       max: 2,
-    },
-  ],
+    }],
   sideEditProps: [
+    BackgroundColorsSideEditProps,
     {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps],
+      name: 'textGradient',
+      label: 'Text gradient',
+      type: types.SideEditPropType.Select,
+      selectOptions: {
+        display: types.OptionsDisplay.Select,
+        options: [
+          { value: 'none', label: 'None' },
+          { value: 'ocean', label: 'Ocean' },
+          { value: 'violet', label: 'Violet' },
+          { value: 'sun', label: 'Sunset' },
+        ],
+      },
     },
     {
-      groupName: 'Title',
-      defaultOpen: true,
-      props: [
-        {
-          name: 'textGradient',
-          label: 'Text gradient',
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Select,
-            options: [
-              { value: 'none', label: 'None' },
-              { value: 'ocean', label: 'Ocean' },
-              { value: 'violet', label: 'Violet' },
-              { value: 'sun', label: 'Sunset' },
-            ],
-          },
-        },
-        {
-          name: 'size',
-          label: 'Title size',
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Radio,
-            options: [
-              { value: 'medium', label: 'Medium' },
-              { value: 'large', label: 'Large' },
-            ],
-          },
-        },
-      ],
+      name: 'size',
+      label: 'Title size',
+      type: types.SideEditPropType.Select,
+      selectOptions: {
+        display: types.OptionsDisplay.Radio,
+        options: [
+          { value: 'medium', label: 'Medium' },
+          { value: 'large', label: 'Large' },
+        ],
+      },
     },
   ],
 }

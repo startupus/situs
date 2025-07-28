@@ -31,7 +31,7 @@ const CallToAction: types.Brick<CallToActionProps> = ({
         <div className="flex-1 sm:pr-12 mb-4 sm:mb-0">
           <RichText
             propName="text"
-            renderBlock={(props) => (
+            renderBlock={(props: any) => (
               <span
                 className={classNames(
                   'font-extrabold text-xl sm:text-2xl leading-6 sm:leading-8',
@@ -78,25 +78,19 @@ CallToAction.schema = {
         href: '',
         isTargetBlank: false,
         isBigButton: false,
-      },
-    ],
+      }],
   }),
   repeaterItems: [
     {
       name: 'buttons',
+      label: 'Buttons',
       itemType: blockNames.Button,
       itemLabel: 'Button',
       min: 0,
       max: 1,
-    },
-  ],
+    }],
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: true,
-      props: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-    },
-  ],
+    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
 }
 
 export default CallToAction

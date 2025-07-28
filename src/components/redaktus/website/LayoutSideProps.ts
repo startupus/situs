@@ -1,7 +1,7 @@
 import { types } from 'redaktus/frontend'
 import { badgeColors, bgColors, bulletColors } from './colors'
 
-export const BackgroundColorsSideEditProps: types.ISideEditProp = {
+export const BackgroundColorsSideEditProps: types.SideEditProp = {
   name: 'bg',
   label: 'Background',
   type: types.SideEditPropType.Select,
@@ -20,7 +20,7 @@ export const BackgroundColorsSideEditProps: types.ISideEditProp = {
   },
 }
 
-export const ContainerSizeSideEditProps: types.ISideEditProp = {
+export const ContainerSizeSideEditProps: types.SideEditProp = {
   name: 'width',
   label: 'Width',
   type: types.SideEditPropType.Select,

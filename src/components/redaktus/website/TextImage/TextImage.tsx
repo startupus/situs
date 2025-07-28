@@ -63,7 +63,7 @@ const TextImage: types.Brick<TextImageProps> = ({
         >
           <Repeater
             propName="badge"
-            renderWrapper={(items) => (
+            renderWrapper={(items: any) => (
               <div
                 className={classNames('mb-4 flex', {
                   'justify-center md:justify-start': mobileTextCenter,
@@ -76,7 +76,7 @@ const TextImage: types.Brick<TextImageProps> = ({
 
           <RichText
             propName="title"
-            renderBlock={(props) => (
+            renderBlock={(props: any) => (
               <h2
                 className={classNames(
                   'mt-0 mb-4',
@@ -95,8 +95,8 @@ const TextImage: types.Brick<TextImageProps> = ({
               </h2>
             )}
             placeholder="Type a title..."
-            allowedFeatures={[types.RichTextFeatures.Highlight]}
-            renderHighlight={(props) => (
+            allowedFeatures={[types.RichTextFeatures.highlight]}
+            renderHighlight={(props: any) => (
               <span className={highlightColor} {...props.attributes}>
                 {props.children}
               </span>
@@ -105,7 +105,7 @@ const TextImage: types.Brick<TextImageProps> = ({
 
           <RichText
             propName="text"
-            renderBlock={(props) => (
+            renderBlock={(props: any) => (
               <p
                 className={classNames('text-lg sm:text-xl mb-3', textColor, {
                   'text-center md:text-left': mobileTextCenter,
@@ -118,10 +118,9 @@ const TextImage: types.Brick<TextImageProps> = ({
             )}
             placeholder="Type a text..."
             allowedFeatures={[
-              types.RichTextFeatures.Bold,
-              types.RichTextFeatures.Link,
-            ]}
-            renderLink={(props) => (
+              types.RichTextFeatures.bold,
+              types.RichTextFeatures.link]}
+            renderLink={(props: any) => (
               <Link {...props} className="text-lg">
                 {props.children}
               </Link>
@@ -133,7 +132,7 @@ const TextImage: types.Brick<TextImageProps> = ({
             itemProps={{
               className: 'lg:w-2/5 text-lg',
             }}
-            renderWrapper={(items) => (
+            renderWrapper={(items: any) => (
               <div className="mt-4 w-full flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
                 {items}
               </div>
@@ -141,7 +140,7 @@ const TextImage: types.Brick<TextImageProps> = ({
           />
           <Repeater
             propName="buttons"
-            renderWrapper={(items) => (
+            renderWrapper={(items: any) => (
               <div className="flex items-center flex-col sm:flex-row mt-4">
                 {items}
               </div>
@@ -212,79 +211,65 @@ TextImage.schema = {
     isRounded: false,
   }),
   sideEditProps: [
+    BackgroundColorsSideEditProps,
+    ContainerSizeSideEditProps,
     {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
+      name: 'heroTitle',
+      label: 'Hero-size Title',
+      type: types.SideEditPropType.Boolean,
+      shouldRefreshText: true,
     },
     {
-      groupName: 'Text',
-      defaultOpen: false,
-      props: [
-        {
-          name: 'heroTitle',
-          label: 'Hero-size Title',
-          type: types.SideEditPropType.Boolean,
-          shouldRefreshText: true,
-        },
-        {
-          name: 'mobileTextCenter',
-          label: 'Text centered on mobile',
-          type: types.SideEditPropType.Boolean,
-          shouldRefreshText: true,
-        },
-      ],
+      name: 'mobileTextCenter',
+      label: 'Text centered on mobile',
+      type: types.SideEditPropType.Boolean,
+      shouldRefreshText: true,
     },
     {
-      groupName: 'Image',
-      defaultOpen: false,
-      props: [
-        {
-          name: 'multiple',
-          label: 'Multiple logos',
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: 'imageSide',
-          label: 'Image side',
-          type: types.SideEditPropType.Select,
-          selectOptions: {
-            display: types.OptionsDisplay.Radio,
-            options: [
-              { value: 'left', label: 'Left' },
-              { value: 'right', label: 'Right' },
-            ],
-          },
-        },
-        {
-          name: 'mobileImageTop',
-          label: 'Image on top on mobile',
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: 'mobileIcon',
-          label: 'Show as icon on mobile',
-          type: types.SideEditPropType.Boolean,
-          show: (props) => !props.multiple,
-        },
-        {
-          name: 'hasShadow',
-          label: 'Image shadow',
-          type: types.SideEditPropType.Boolean,
-          show: (props) => !props.multiple,
-        },
-        {
-          name: 'isRounded',
-          label: 'Image rounded corners',
-          type: types.SideEditPropType.Boolean,
-          show: (props) => !props.multiple,
-        },
-      ],
+      name: 'multiple',
+      label: 'Multiple logos',
+      type: types.SideEditPropType.Boolean,
+    },
+    {
+      name: 'imageSide',
+      label: 'Image side',
+      type: types.SideEditPropType.Select,
+      selectOptions: {
+        display: types.OptionsDisplay.Radio,
+        options: [
+          { value: 'left', label: 'Left' },
+          { value: 'right', label: 'Right' },
+        ],
+      },
+    },
+    {
+      name: 'mobileImageTop',
+      label: 'Image on top on mobile',
+      type: types.SideEditPropType.Boolean,
+    },
+    {
+      name: 'mobileIcon',
+      label: 'Show as icon on mobile',
+      type: types.SideEditPropType.Boolean,
+      show: (props: any) => !props.multiple,
+    },
+    {
+      name: 'hasShadow',
+      label: 'Image shadow',
+      type: types.SideEditPropType.Boolean,
+      show: (props: any) => !props.multiple,
+    },
+    {
+      name: 'isRounded',
+      label: 'Image rounded corners',
+      type: types.SideEditPropType.Boolean,
+      show: (props: any) => !props.multiple,
     },
   ],
   repeaterItems: [
     {
       name: 'badge',
+      label: 'Badge',
       itemType: blockNames.Badge,
       itemLabel: 'Badge',
       min: 0,
@@ -292,6 +277,7 @@ TextImage.schema = {
     },
     {
       name: 'bulletListItems',
+      label: 'BulletListItems',
       itemType: blockNames.BulletListItem,
       itemLabel: 'Feature',
       min: 0,
@@ -299,6 +285,7 @@ TextImage.schema = {
     },
     {
       name: 'buttons',
+      label: 'Buttons',
       itemType: blockNames.Button,
       itemLabel: 'Button',
       min: 0,
@@ -306,12 +293,12 @@ TextImage.schema = {
     },
     {
       name: 'logos',
+      label: 'Logos',
       itemType: blockNames.TextImageLogo,
       itemLabel: 'Logo',
       min: 0,
       max: 6,
-    },
-  ],
+    }],
 }
 
 export default TextImage

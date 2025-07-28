@@ -10,7 +10,7 @@ const TextImageLogo: types.Brick = () => {
         propName="imageSource"
         alt="logo"
         imageClassName="w-12 h-12 lg:w-16 lg:h-16"
-        renderWrapper={({ children }) => (
+        renderWrapper={({ children }: any) => (
           <div className="w-16 h-16 lg:w-24 lg:h-24 mx-3 mb-6 p-2 flex justify-center items-center bg-white rounded-full shadow-xl">
             {children}
           </div>

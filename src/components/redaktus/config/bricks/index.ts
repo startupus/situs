@@ -2,12 +2,10 @@ import { types } from 'redaktus/frontend'
 
 import HeroUnit from './custom/MyHeroUnit'
 import Pokemon from './custom/Pokemon'
-import reactBricksUITheme from './react-bricks-ui'
 
 const bricks: types.Theme[] = [
-  reactBricksUITheme, // Redaktus UI
   {
-    themeName: 'Default',
+    themeName: 'Redaktus UI',
     categories: [
       {
         categoryName: 'Hero sections',

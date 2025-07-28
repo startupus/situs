@@ -9,7 +9,7 @@ interface PostListItemProps {
   title: string
   href: string
   content: string
-  author: types.Author
+  author: any
   date: string
   featuredImg?: types.IImageSource
 }

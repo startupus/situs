@@ -25,7 +25,7 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({ bg }) => {
         <Text
           propName="formTitle"
           placeholder="Type a Title..."
-          renderBlock={({ children }) => (
+          renderBlock={({ children }: { children: any }) => (
             <div className="flex justify-center">
               <h1 className="text-2xl w-auto font-medium text-gray-900 dark:text-white">
                 {children}
@@ -41,7 +41,7 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({ bg }) => {
           <Repeater propName="form-elements" itemProps={{ register, errors }} />
           <Repeater
             propName="form-buttons"
-            renderWrapper={(items) => (
+            renderWrapper={(items: any) => (
               <div className="w-full flex justify-center space-x-6 col-span-2">
                 {items}
               </div>
@@ -62,19 +62,19 @@ FormBuilder.schema = {
   repeaterItems: [
     {
       name: 'form-elements',
-      positionLabel: 'Form elements',
-      items: [
-        { type: blockNames.FormInput },
-        { type: blockNames.FormTextArea },
-        { type: blockNames.FormCheckbox },
-        { type: blockNames.FormSelect },
-        { type: blockNames.FormRadiobuttons, max: 1 },
-      ],
+      label: 'Form Elements',
+      itemType: blockNames.FormInput,
+      itemLabel: 'Form Element',
+      min: 0,
+      max: 10,
     },
     {
       name: 'form-buttons',
-      itemLabel: 'Form Buttons',
-      items: [{ type: blockNames.FormButton }],
+      label: 'Form Buttons',
+      itemType: blockNames.FormButton,
+      itemLabel: 'Form Button',
+      min: 0,
+      max: 3,
     },
   ],
 
@@ -111,11 +111,7 @@ FormBuilder.schema = {
   }),
 
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps],
-    },
+    BackgroundColorsSideEditProps,
   ],
 }
 

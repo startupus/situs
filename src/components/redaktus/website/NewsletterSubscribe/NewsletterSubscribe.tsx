@@ -107,7 +107,7 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
         })}
       >
         <Text
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <h1 className="text-2xl mb-4 font-extrabold" {...props.attributes}>
               {props.children}
             </h1>
@@ -116,7 +116,7 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
           propName="title"
         />
         <Text
-          renderBlock={(props) => (
+          renderBlock={(props: any) => (
             <p className="mb-2" {...props.attributes}>
               {props.children}
             </p>
@@ -171,10 +171,6 @@ NewsletterSubscribe.schema = {
   }),
   sideEditProps: [
     {
-      groupName: 'Newsletter',
-      defaultOpen: true,
-      props: [
-        {
           name: 'centered',
           label: 'Centered',
           type: types.SideEditPropType.Boolean,
@@ -183,9 +179,9 @@ NewsletterSubscribe.schema = {
           name: 'mailchimpUrl',
           label: 'Mailchimp Form URL',
           type: types.SideEditPropType.Text,
-          validate: (value) =>
-            value && value.length > 10 && value.indexOf('https://') !== -1,
-          //&& value.indexOf('list-manage.com/subscribe/post?') !== -1,
+          // validate: (value: any) =>
+          //   value && value.length > 10 && value.indexOf('https://') !== -1,
+          //   //&& value.indexOf('list-manage.com/subscribe/post?') !== -1,
         },
         {
           name: 'buttonText',
@@ -196,10 +192,7 @@ NewsletterSubscribe.schema = {
           name: 'resultOkText',
           label: 'Result OK text',
           type: types.SideEditPropType.Text,
-        },
-      ],
-    },
-  ],
+        }],
 }
 
 export default NewsletterSubscribe

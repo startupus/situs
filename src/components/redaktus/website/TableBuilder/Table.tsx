@@ -39,8 +39,7 @@ Table.schema = {
           {
             cellText: 'Cell text default',
             text: 'Cell',
-          },
-        ],
+          }],
       },
       {
         cells: [
@@ -51,8 +50,7 @@ Table.schema = {
           {
             cellText: 'Cell text default',
             text: 'Cell',
-          },
-        ],
+          }],
       },
       {
         cells: [
@@ -63,28 +61,21 @@ Table.schema = {
           {
             cellText: 'Cell text default',
             text: 'Cell',
-          },
-        ],
-      },
-    ],
+          }],
+      }],
   }),
 
   repeaterItems: [
     {
       name: 'rows',
+      label: 'Rows',
       itemType: blockNames.TableRow,
       min: 1,
-    },
-  ],
+    }],
 
   // Sidebar Edit controls for props
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: false,
-      props: [BackgroundColorsSideEditProps],
-    },
-  ],
+    BackgroundColorsSideEditProps],
 }
 
 export default Table

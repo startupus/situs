@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { Site, Page, MockAPI } from '../api/mockData';
+import RealDataAPI from '../api/realDataAPI';
 
 // Типы для состояния
 interface SiteState {
@@ -153,7 +154,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
   const loadSites = async () => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const sites = await MockAPI.getSites();
+      // Используем реальные данные проекта Стартапус
+      const sites = await RealDataAPI.getSites();
       dispatch({ type: 'SET_SITES', payload: sites });
       
       // Автоматически выбираем первый сайт и его первую страницу
@@ -173,7 +175,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
   const selectSite = async (siteId: string) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const site = await MockAPI.getSite(siteId);
+      const site = await RealDataAPI.getSite(siteId);
       if (site) {
         dispatch({ type: 'SET_CURRENT_SITE', payload: site });
         // Выбираем домашнюю страницу или первую доступную
@@ -203,7 +205,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
   const createSite = async (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const newSite = await MockAPI.createSite(data);
+      const newSite = await RealDataAPI.createSite(data);
       dispatch({ type: 'ADD_SITE', payload: newSite });
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: 'Ошибка создания сайта' });
@@ -217,7 +219,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
 
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const newPage = await MockAPI.createPage(state.currentSite.id, data);
+      const newPage = await RealDataAPI.createPage(state.currentSite.id, data);
       dispatch({ type: 'ADD_PAGE', payload: newPage });
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: 'Ошибка создания страницы' });
@@ -228,7 +230,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
   // Обновление страницы
   const updatePage = async (pageId: string, data: Partial<Page>) => {
     try {
-      const updatedPage = await MockAPI.updatePage(pageId, data);
+      const updatedPage = await RealDataAPI.updatePage(pageId, data);
       if (updatedPage) {
         dispatch({ type: 'UPDATE_PAGE', payload: updatedPage });
       }
@@ -242,7 +244,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
   const deletePage = async (pageId: string) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const success = await MockAPI.deletePage(pageId);
+      const success = await RealDataAPI.deletePage(pageId);
       if (success) {
         dispatch({ type: 'DELETE_PAGE', payload: pageId });
       }

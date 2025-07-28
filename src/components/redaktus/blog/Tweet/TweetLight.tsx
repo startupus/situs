@@ -21,11 +21,11 @@ const TweetLight: types.Brick<TweetLightProps> = ({
   tweetLink,
   authorLink,
 }) => {
-  const { isAdmin, previewMode } = useAdminContext()
+  const { isAdmin } = useAdminContext()
   const [isMouseOver, setIsMouseOver] = useState(false)
 
   const handleClick = (tweetLink: string) => (event: React.MouseEvent) => {
-    if (isAdmin && !previewMode) {
+    if (isAdmin) {
       return event.preventDefault()
     }
     if (typeof window !== undefined) {
@@ -59,7 +59,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
                 <Text
                   propName="authorName"
                   placeholder="Author Name"
-                  renderBlock={({ children }) => (
+                  renderBlock={({ children }: { children: any }) => (
                     <div className="text-md text-gray-900 font-bold leading-tight group-hover:underline dark:text-neutral-300">
                       {children}
                     </div>
@@ -68,7 +68,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
                 <Text
                   propName="authorTwitterHandle"
                   placeholder="Author @"
-                  renderBlock={({ children }) => (
+                  renderBlock={({ children }: { children: any }) => (
                     <div className="text-sm text-gray-500 font-medium tracking-tight">
                       {children}
                     </div>
@@ -86,13 +86,13 @@ const TweetLight: types.Brick<TweetLightProps> = ({
           <RichText
             propName="tweetContent"
             placeholder="tweet content"
-            renderBlock={({ children }) => (
+            renderBlock={({ children }: { children: any }) => (
               <div className="mb-2 text-xl font-medium leading-tight dark:text-neutral-300">
                 {children}
               </div>
             )}
-            allowedFeatures={[types.RichTextFeatures.Link]}
-            renderLink={({ children, href, attributes }) => (
+            allowedFeatures={[types.RichTextFeatures.link]}
+            renderLink={({ children, href, attributes }: { children: any; href: any; attributes: any }) => (
               <a
                 {...attributes}
                 href={href}
@@ -112,7 +112,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
           <Text
             propName="date"
             placeholder="Date"
-            renderBlock={({ children }) => (
+            renderBlock={({ children }: { children: any }) => (
               <div className="inline-block font-normal text-gray-500 tracking-tight hover:underline">
                 {children}
               </div>

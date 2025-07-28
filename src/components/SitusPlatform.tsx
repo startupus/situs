@@ -161,7 +161,7 @@ export function SitusPlatform() {
                   
                   <div className="flex space-x-2">
                     <a
-                      href={`/redaktus?site=${site.id}`}
+                      href={`/studio?site=${site.id}`}
                       className="flex-1 px-3 py-2 bg-purple-600 text-white text-center rounded hover:bg-purple-700 transition-colors"
                     >
                       🎨 Редактировать

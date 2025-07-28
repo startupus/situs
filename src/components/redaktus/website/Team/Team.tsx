@@ -123,24 +123,18 @@ Team.schema = {
       srcSet:
             'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
         },
-      },
-    ],
+      }],
   }),
   repeaterItems: [
     {
       name: 'teamItem',
+      label: 'TeamItem',
       itemType: blockNames.TeamItem,
       itemLabel: 'Member',
       min: 0,
       max: 5,
-    },
-  ],
+    }],
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: true,
-      props: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-    },
-  ],
+    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
 }
 export default Team

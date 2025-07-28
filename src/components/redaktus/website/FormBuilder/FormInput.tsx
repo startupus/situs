@@ -74,8 +74,7 @@ const FormInput: types.Brick<FormInputProps> = ({
           required: isRequired,
           valueAsNumber: inputType === 'number',
           valueAsDate: inputType === 'date',
-          pattern: strToRegex(pattern),
-        })}
+        } as any)}
       />
       {errors[fieldName] && (
         <span className="block mt-2 text-xs text-red-500 font-bold">
@@ -156,7 +155,7 @@ FormInput.schema = {
       name: 'pattern',
       type: types.SideEditPropType.Text,
       label: 'Pattern',
-      validate: (value: string) => isRegex(value) || 'Invalid RegEx',
+
     },
     {
       name: 'patternError',

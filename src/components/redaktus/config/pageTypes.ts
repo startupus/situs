@@ -1,6 +1,6 @@
 import { types } from 'redaktus/frontend'
 
-const pageTypes: types.IPageType[] = [
+const pageTypes: types.PageType[] = [
   {
     name: 'page',
     pluralName: 'pages',
@@ -32,7 +32,7 @@ const pageTypes: types.IPageType[] = [
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
     getDefaultContent: () => [],
-    isEntity: true,
+    // isEntity: true,
     allowedBlockTypes: ['header', 'footer'],
   },
 ]

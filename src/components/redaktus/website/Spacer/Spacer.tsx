@@ -55,25 +55,18 @@ Spacer.schema = {
     range: '5',
   }),
   sideEditProps: [
-    {
-      groupName: 'Layout',
-      defaultOpen: true,
-      props: [
-        BackgroundColorsSideEditProps,
+    BackgroundColorsSideEditProps,
         {
           name: 'range',
           label: 'Height',
           shouldRefreshText: true,
           type: types.SideEditPropType.Range,
-          rangeOptions: {
-            min: 0,
-            max: 10,
-            step: 1,
-          },
-        },
-      ],
-    },
-  ],
+          // rangeOptions: {
+          //   min: 0,
+          //   max: 10,
+          //   step: 1,
+          // },
+        }],
 }
 
 export default Spacer
