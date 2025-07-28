@@ -120,10 +120,14 @@ model Project {
   id          String      @id @default(cuid())
   name        String
   description String?
+  slug        String      @unique  // Генерируется из названия
   type        ProjectType @default(WEBSITE)
   status      ProjectStatus @default(DRAFT)
-  domain      String?
-  subdomain   String?
+  
+  // Domain settings
+  domain       String?     // situs subdomain (example.situs.com)
+  customDomain String?     // custom domain (example.com)
+  isPublished  Boolean     @default(false)
   
   // SEO Settings
   metaTitle       String?
@@ -134,6 +138,9 @@ model Project {
   primaryColor   String? @default("#3B82F6")
   secondaryColor String? @default("#8B5CF6")
   fontFamily     String? @default("Inter")
+  
+  // Project Settings JSON
+  settings Json? @default("{\"theme\":\"auto\",\"language\":\"ru\",\"creationType\":\"manual\"}")
   
   // Features
   hasEcommerce   Boolean @default(false)
@@ -217,9 +224,10 @@ enum ProjectType {
 
 enum ProjectStatus {
   DRAFT
+  DEVELOPMENT
+  STAGING
   PUBLISHED
   ARCHIVED
-  MAINTENANCE
 }
 
 enum PageType {

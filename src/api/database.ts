@@ -7,7 +7,15 @@ const prisma = new PrismaClient();
 export interface CreateProjectData {
   name: string;
   description?: string;
+  slug?: string;
   type?: 'WEBSITE' | 'ECOMMERCE' | 'LANDING' | 'BLOG' | 'APP';
+  domain?: string;
+  customDomain?: string;
+  settings?: {
+    theme?: 'light' | 'dark' | 'auto';
+    language?: 'ru' | 'en';
+    creationType?: 'manual' | 'ai';
+  };
   ownerId: string;
 }
 
@@ -23,10 +31,47 @@ export interface CreatePageData {
 
 export class DatabaseAPI {
   // Projects
-  static async getProjects(ownerId: string) {
+  static async getProjects(ownerId: string, filters?: {
+    search?: string;
+    status?: string;
+    sortBy?: 'name' | 'updated' | 'created';
+    sortOrder?: 'asc' | 'desc';
+  }) {
     try {
+      const whereClause: any = { ownerId };
+      
+      // Добавляем поиск
+      if (filters?.search) {
+        whereClause.OR = [
+          { name: { contains: filters.search, mode: 'insensitive' } },
+          { description: { contains: filters.search, mode: 'insensitive' } }
+        ];
+      }
+      
+      // Добавляем фильтр по статусу
+      if (filters?.status) {
+        whereClause.status = filters.status.toUpperCase();
+      }
+      
+      // Определяем сортировку
+      let orderBy: any = { updatedAt: 'desc' };
+      if (filters?.sortBy) {
+        const sortOrder = filters.sortOrder || 'desc';
+        switch (filters.sortBy) {
+          case 'name':
+            orderBy = { name: sortOrder };
+            break;
+          case 'created':
+            orderBy = { createdAt: sortOrder };
+            break;
+          case 'updated':
+            orderBy = { updatedAt: sortOrder };
+            break;
+        }
+      }
+
       const projects = await prisma.project.findMany({
-        where: { ownerId },
+        where: whereClause,
         include: {
           pages: {
             orderBy: { createdAt: 'desc' }
@@ -35,17 +80,20 @@ export class DatabaseAPI {
             select: { pages: true }
           }
         },
-        orderBy: { updatedAt: 'desc' }
+        orderBy
       });
 
       return projects.map(project => ({
         id: project.id,
         name: project.name,
         description: project.description,
+        slug: project.slug,
         type: project.type.toLowerCase(),
-        status: project.status.toLowerCase(),
+        status: project.status,
         domain: project.domain,
-        subdomain: project.subdomain,
+        customDomain: project.customDomain,
+        isPublished: project.isPublished,
+        settings: project.settings,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString(),
         pages: project.pages.map(page => ({
@@ -122,16 +170,65 @@ export class DatabaseAPI {
 
   static async createProject(data: CreateProjectData) {
     try {
+      // Генерируем slug если не предоставлен
+      const slug = data.slug || DatabaseAPI.generateSlug(data.name);
+      
+      // Проверяем уникальность slug
+      const existingProject = await prisma.project.findUnique({
+        where: { slug }
+      });
+      
+      if (existingProject) {
+        throw new Error('Проект с таким названием уже существует');
+      }
+      
+      // Создаем проект
       const project = await prisma.project.create({
         data: {
           name: data.name,
           description: data.description,
+          slug,
           type: data.type || 'WEBSITE',
+          domain: data.domain,
+          customDomain: data.customDomain,
           ownerId: data.ownerId,
-          status: 'DRAFT'
+          status: 'DRAFT',
+          settings: data.settings || {
+            theme: 'auto',
+            language: 'ru',
+            creationType: 'manual'
+          }
         },
         include: {
           pages: true
+        }
+      });
+
+      // Создаем домашнюю страницу автоматически
+      await prisma.page.create({
+        data: {
+          title: 'Главная',
+          slug: '/',
+          projectId: project.id,
+          isHomePage: true,
+          status: 'DRAFT',
+          content: {
+            blocks: [
+              {
+                type: 'heading',
+                data: {
+                  text: `Добро пожаловать на ${data.name}`,
+                  level: 1
+                }
+              },
+              {
+                type: 'paragraph',
+                data: {
+                  text: 'Это ваша новая домашняя страница. Начните редактирование!'
+                }
+              }
+            ]
+          }
         }
       });
 
@@ -139,17 +236,20 @@ export class DatabaseAPI {
         id: project.id,
         name: project.name,
         description: project.description,
+        slug: project.slug,
         type: project.type.toLowerCase(),
-        status: project.status.toLowerCase(),
+        status: project.status,
         domain: project.domain,
-        subdomain: project.subdomain,
+        customDomain: project.customDomain,
+        isPublished: project.isPublished,
+        settings: project.settings,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString(),
         pages: []
       };
     } catch (error) {
       console.error('Error creating project:', error);
-      throw new Error('Failed to create project');
+      throw new Error(error instanceof Error ? error.message : 'Failed to create project');
     }
   }
 
@@ -321,7 +421,123 @@ export class DatabaseAPI {
     }
   }
 
+  // Новые методы для управления проектами
+  static async publishProject(projectId: string, ownerId: string) {
+    try {
+      const project = await prisma.project.updateMany({
+        where: { id: projectId, ownerId },
+        data: { 
+          isPublished: true,
+          status: 'PUBLISHED'
+        }
+      });
+      
+      if (project.count === 0) {
+        throw new Error('Проект не найден или нет прав доступа');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error publishing project:', error);
+      throw new Error('Failed to publish project');
+    }
+  }
+
+  static async unpublishProject(projectId: string, ownerId: string) {
+    try {
+      const project = await prisma.project.updateMany({
+        where: { id: projectId, ownerId },
+        data: { 
+          isPublished: false,
+          status: 'DRAFT'
+        }
+      });
+      
+      if (project.count === 0) {
+        throw new Error('Проект не найден или нет прав доступа');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error unpublishing project:', error);
+      throw new Error('Failed to unpublish project');
+    }
+  }
+
+  static async updateProjectStatus(projectId: string, ownerId: string, status: string) {
+    try {
+      const validStatuses = ['DRAFT', 'DEVELOPMENT', 'STAGING', 'PUBLISHED', 'ARCHIVED'];
+      if (!validStatuses.includes(status)) {
+        throw new Error('Недопустимый статус проекта');
+      }
+
+      const project = await prisma.project.updateMany({
+        where: { id: projectId, ownerId },
+        data: { status: status as any }
+      });
+      
+      if (project.count === 0) {
+        throw new Error('Проект не найден или нет прав доступа');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error updating project status:', error);
+      throw new Error('Failed to update project status');
+    }
+  }
+
+  static async checkSlugAvailability(slug: string, excludeProjectId?: string) {
+    try {
+      const whereClause: any = { slug };
+      if (excludeProjectId) {
+        whereClause.id = { not: excludeProjectId };
+      }
+
+      const existingProject = await prisma.project.findFirst({
+        where: whereClause
+      });
+      
+      return !existingProject;
+    } catch (error) {
+      console.error('Error checking slug availability:', error);
+      return false;
+    }
+  }
+
+  static async checkDomainAvailability(domain: string, excludeProjectId?: string) {
+    try {
+      const whereClause: any = {
+        OR: [
+          { domain },
+          { customDomain: domain }
+        ]
+      };
+      
+      if (excludeProjectId) {
+        whereClause.id = { not: excludeProjectId };
+      }
+
+      const existingProject = await prisma.project.findFirst({
+        where: whereClause
+      });
+      
+      return !existingProject;
+    } catch (error) {
+      console.error('Error checking domain availability:', error);
+      return false;
+    }
+  }
+
   // Utility methods
+  static generateSlug(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .trim();
+  }
+
   static async disconnect() {
     await prisma.$disconnect();
   }
