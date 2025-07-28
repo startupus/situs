@@ -1,37 +1,39 @@
 import { z } from 'zod';
 
-// Схема валидации окружения для Gateway Service
+// Схема валидации окружения для Projects Service
 const environmentSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  PORT: z.string().transform(Number).default('3000'),
+  PORT: z.string().transform(Number).default('3009'),
+  DATABASE_URL: z.string().url('Некорректный DATABASE_URL'),
   JWT_SECRET: z.string().min(32, 'JWT_SECRET должен быть не менее 32 символов'),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
   CORS_ORIGIN: z.string().default('*'),
   
-  // Service URLs
-  HUBUS_PROXY_URL: z.string().url(),
-  HUBUS_AGENTS_URL: z.string().url(),
-  HUBUS_PROVIDER_URL: z.string().url(),
-  HUBUS_CLIENT_URL: z.string().url(),
-  LOGINUS_URL: z.string().url(),
-  BILINGUS_URL: z.string().url(),
-  PROJECTS_URL: z.string().url(),
-  SITUS_URL: z.string().url(),
-  DASHBOARD_URL: z.string().url(),
-  CHAT_URL: z.string().url(),
+  // Service URLs для взаимодействия
+  LOGINUS_URL: z.string().url().default('http://localhost:3001'),
+  BILINGUS_URL: z.string().url().default('http://localhost:3003'),
+  GATEWAY_URL: z.string().url().default('http://localhost:3000'),
   
   // Rate limiting
-  RATE_LIMIT_WINDOW: z.string().transform(Number).default('900000'),
+  RATE_LIMIT_WINDOW: z.string().transform(Number).default('900000'), // 15 минут
   RATE_LIMIT_MAX: z.string().transform(Number).default('1000'),
   
   // Security
-  SESSION_SECRET: z.string().min(32).default('default-session-secret-min-32-chars'),
+  SESSION_SECRET: z.string().min(32).default('default-session-secret-min-32-chars-projects'),
   COOKIE_SECURE: z.string().transform(val => val === 'true').default('false'),
+  
+  // Domain settings
+  DEFAULT_SITUS_DOMAIN: z.string().default('situs.com'),
+  ENABLE_CUSTOM_DOMAINS: z.string().transform(val => val === 'true').default('true'),
+  
+  // Storage
+  UPLOAD_PATH: z.string().default('./uploads'),
+  MAX_FILE_SIZE: z.string().transform(Number).default('10485760'), // 10MB
 });
 
 type Environment = z.infer<typeof environmentSchema>;
 
-class GatewayEnvironmentConfig {
+class ProjectsEnvironmentConfig {
   private config: Environment;
 
   constructor() {
@@ -43,7 +45,7 @@ class GatewayEnvironmentConfig {
       return environmentSchema.parse(process.env);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        console.error('❌ Ошибка валидации окружения Gateway Service:');
+        console.error('❌ Ошибка валидации окружения Projects Service:');
         error.errors.forEach(err => {
           console.error(`  - ${err.path.join('.')}: ${err.message}`);
         });
@@ -61,6 +63,10 @@ class GatewayEnvironmentConfig {
     return this.config.PORT;
   }
 
+  getDatabaseUrl(): string {
+    return this.config.DATABASE_URL;
+  }
+
   getJwtSecret(): string {
     return this.config.JWT_SECRET;
   }
@@ -74,22 +80,6 @@ class GatewayEnvironmentConfig {
   }
 
   // Service URLs
-  getProxyUrl(): string {
-    return this.config.HUBUS_PROXY_URL;
-  }
-
-  getAgentsUrl(): string {
-    return this.config.HUBUS_AGENTS_URL;
-  }
-
-  getProviderUrl(): string {
-    return this.config.HUBUS_PROVIDER_URL;
-  }
-
-  getClientUrl(): string {
-    return this.config.HUBUS_CLIENT_URL;
-  }
-
   getLoginusUrl(): string {
     return this.config.LOGINUS_URL;
   }
@@ -98,20 +88,8 @@ class GatewayEnvironmentConfig {
     return this.config.BILINGUS_URL;
   }
 
-  getProjectsUrl(): string {
-    return this.config.PROJECTS_URL;
-  }
-
-  getSitusUrl(): string {
-    return this.config.SITUS_URL;
-  }
-
-  getDashboardUrl(): string {
-    return this.config.DASHBOARD_URL;
-  }
-
-  getChatUrl(): string {
-    return this.config.CHAT_URL;
+  getGatewayUrl(): string {
+    return this.config.GATEWAY_URL;
   }
 
   // Проверки окружения
@@ -144,11 +122,29 @@ class GatewayEnvironmentConfig {
     return this.config.COOKIE_SECURE;
   }
 
+  // Domain settings
+  getDefaultSitusDomain(): string {
+    return this.config.DEFAULT_SITUS_DOMAIN;
+  }
+
+  isCustomDomainsEnabled(): boolean {
+    return this.config.ENABLE_CUSTOM_DOMAINS;
+  }
+
+  // Storage
+  getUploadPath(): string {
+    return this.config.UPLOAD_PATH;
+  }
+
+  getMaxFileSize(): number {
+    return this.config.MAX_FILE_SIZE;
+  }
+
   // Полная конфигурация для тестов
   getAllConfig() {
     return this.config;
   }
 }
 
-export const config = new GatewayEnvironmentConfig();
-export default config; 
+export const config = new ProjectsEnvironmentConfig();
+export default config;

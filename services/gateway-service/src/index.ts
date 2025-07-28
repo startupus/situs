@@ -97,6 +97,14 @@ app.use('/api/billing', createProxyMiddleware({
   }
 }));
 
+app.use('/api/projects', createProxyMiddleware({
+  target: config.getProjectsUrl(),
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/projects': '/api/projects'
+  }
+}));
+
 // Error handling
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Gateway error:', err);
