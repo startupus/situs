@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Project, ProjectPage, CreatePageData, UpdatePageData } from '../types/project';
+import { projectsApi, ProjectFilters } from '../api/services/projects.api';
+import { ApiUtils } from '../api/client';
 
 interface ProjectContextType {
   currentProject: Project | null;
@@ -60,63 +62,18 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
     setError(null);
     
     try {
-      // В реальном приложении здесь будет API вызов
-      // Пока используем моковые данные
-      const mockProject: Project = {
-        id: projectId,
-        name: 'Мой Сайт',
-        description: 'Описание проекта',
-        domain: 'my-site.com',
-        template: 'business',
-        settings: {
-          theme: 'auto',
-          primaryColor: '#3B82F6',
-          favicon: '/favicon.ico',
-          logo: '/logo.svg'
-        },
-        pages: [
-          {
-            id: '1',
-            title: 'Главная страница',
-            slug: 'home',
-            content: { blocks: [] },
-            meta: {
-              description: 'Добро пожаловать на наш сайт',
-              keywords: ['главная', 'сайт', 'компания']
-            },
-            status: 'published',
-            createdAt: new Date('2024-01-01'),
-            updatedAt: new Date(),
-            publishedAt: new Date('2024-01-01')
-          },
-          {
-            id: '2',
-            title: 'О нас',
-            slug: 'about',
-            content: { blocks: [] },
-            meta: {
-              description: 'Информация о нашей компании'
-            },
-            status: 'draft',
-            createdAt: new Date('2024-01-02'),
-            updatedAt: new Date()
-          }
-        ],
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date(),
-        owner: 'user-1',
-        isPublic: false
-      };
-
-      setCurrentProject(mockProject);
-      setPages(mockProject.pages);
+      const project = await projectsApi.getProject(projectId);
+      
+      setCurrentProject(project);
+      setPages(project.pages || []);
       
       // Автоматически загружаем первую страницу
-      if (mockProject.pages.length > 0) {
-        setCurrentPage(mockProject.pages[0]);
+      if (project.pages && project.pages.length > 0) {
+        setCurrentPage(project.pages[0]);
       }
     } catch (err) {
-      setError('Ошибка загрузки проекта');
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
       console.error('Load project error:', err);
     } finally {
       setIsLoading(false);
@@ -128,17 +85,15 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
     if (!currentProject) return;
     
     setIsLoading(true);
+    setError(null);
+    
     try {
-      const updatedProject = {
-        ...currentProject,
-        ...updates,
-        updatedAt: new Date()
-      };
-      
+      const updatedProject = await projectsApi.updateProject(currentProject.id, updates);
       setCurrentProject(updatedProject);
       console.log('Project updated:', updates);
     } catch (err) {
-      setError('Ошибка обновления проекта');
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
       console.error('Update project error:', err);
     } finally {
       setIsLoading(false);
