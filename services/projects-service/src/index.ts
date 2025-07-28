@@ -79,18 +79,8 @@ if (!config.isTest()) {
 
 // Body parsing
 app.use(express.json({ 
-  limit: '10mb',
-  verify: (req, res, buf) => {
-    try {
-      JSON.parse(buf.toString());
-    } catch (e) {
-      res.status(400).json({
-        error: 'Bad Request',
-        message: 'Некорректный JSON'
-      });
-      throw new Error('Invalid JSON');
-    }
-  }
+  limit: '10mb'
+  // Express автоматически обработает некорректный JSON с правильным статусом 400
 }));
 
 app.use(express.urlencoded({ 

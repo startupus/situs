@@ -4,7 +4,7 @@ import { z } from 'zod';
 const environmentSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().transform(Number).default('3009'),
-  DATABASE_URL: z.string().url('Некорректный DATABASE_URL'),
+  DATABASE_URL: z.string().min(1, 'DATABASE_URL обязателен для заполнения'),
   JWT_SECRET: z.string().min(32, 'JWT_SECRET должен быть не менее 32 символов'),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug']).default('info'),
   CORS_ORIGIN: z.string().default('*'),

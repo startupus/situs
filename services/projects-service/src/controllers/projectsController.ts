@@ -54,15 +54,11 @@ export class ProjectsController {
    */
   static async getProject(req: Request, res: Response) {
     try {
-      if (!req.user) {
-        return res.status(401).json({
-          error: 'Unauthorized',
-          message: 'Пользователь не аутентифицирован'
-        });
-      }
-
+      // Права доступа уже проверены в middleware requireProjectOwnership
       const projectId = req.params.id;
-      const project = await ProjectsService.getProject(projectId, req.user.id);
+      
+      // Получаем проект без дополнительной проверки ownerId, так как права уже проверены
+      const project = await ProjectsService.getProject(projectId);
 
       if (!project) {
         return res.status(404).json({

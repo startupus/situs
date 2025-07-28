@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ProjectsController } from '../controllers/projectsController.js';
-import { authenticateToken, logRequest } from '../middleware/auth.js';
+import { authenticateToken, logRequest, requireProjectOwnership } from '../middleware/auth.js';
 import { 
   validateRequest, 
   validateQuery,
@@ -105,7 +105,7 @@ router.get('/',
  *       401:
  *         description: Не авторизован
  */
-router.get('/:id', ProjectsController.getProject);
+router.get('/:id', requireProjectOwnership(), ProjectsController.getProject);
 
 /**
  * @swagger
@@ -235,6 +235,7 @@ router.post('/',
  *         description: Не авторизован
  */
 router.put('/:id', 
+  requireProjectOwnership(),
   validateRequest(updateProjectSchema),
   ProjectsController.updateProject
 );
@@ -262,7 +263,7 @@ router.put('/:id',
  *       401:
  *         description: Не авторизован
  */
-router.delete('/:id', ProjectsController.deleteProject);
+router.delete('/:id', requireProjectOwnership(), ProjectsController.deleteProject);
 
 /**
  * @swagger
@@ -287,7 +288,7 @@ router.delete('/:id', ProjectsController.deleteProject);
  *       401:
  *         description: Не авторизован
  */
-router.patch('/:id/publish', ProjectsController.publishProject);
+router.patch('/:id/publish', requireProjectOwnership(), ProjectsController.publishProject);
 
 /**
  * @swagger
@@ -312,7 +313,7 @@ router.patch('/:id/publish', ProjectsController.publishProject);
  *       401:
  *         description: Не авторизован
  */
-router.patch('/:id/unpublish', ProjectsController.unpublishProject);
+router.patch('/:id/unpublish', requireProjectOwnership(), ProjectsController.unpublishProject);
 
 /**
  * @swagger
@@ -352,6 +353,7 @@ router.patch('/:id/unpublish', ProjectsController.unpublishProject);
  *         description: Не авторизован
  */
 router.patch('/:id/status', 
+  requireProjectOwnership(),
   validateRequest(updateProjectStatusSchema),
   ProjectsController.updateProjectStatus
 );
@@ -362,6 +364,8 @@ router.patch('/:id/status',
  *   get:
  *     summary: Проверить доступность слага
  *     tags: [Projects]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: slug
@@ -377,8 +381,10 @@ router.patch('/:id/status',
  *     responses:
  *       200:
  *         description: Результат проверки доступности
+ *       401:
+ *         description: Не авторизован
  */
-router.get('/check-slug/:slug', ProjectsController.checkSlugAvailability);
+router.get('/check-slug/:slug', authenticateToken, ProjectsController.checkSlugAvailability);
 
 /**
  * @swagger
@@ -386,6 +392,8 @@ router.get('/check-slug/:slug', ProjectsController.checkSlugAvailability);
  *   get:
  *     summary: Проверить доступность домена
  *     tags: [Projects]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: domain
@@ -401,7 +409,9 @@ router.get('/check-slug/:slug', ProjectsController.checkSlugAvailability);
  *     responses:
  *       200:
  *         description: Результат проверки доступности
+ *       401:
+ *         description: Не авторизован
  */
-router.get('/check-domain/:domain', ProjectsController.checkDomainAvailability);
+router.get('/check-domain/:domain', authenticateToken, ProjectsController.checkDomainAvailability);
 
 export default router;

@@ -157,6 +157,15 @@ model Project {
   owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   pages Page[]
   
+  // Индексы для производительности
+  @@index([ownerId, status])           // Для фильтрации проектов пользователя по статусу
+  @@index([ownerId, updatedAt])        // Для сортировки проектов пользователя
+  @@index([domain])                    // Для проверки уникальности situs доменов
+  @@index([customDomain])              // Для проверки уникальности кастомных доменов
+  @@index([slug])                      // Уже есть unique, но добавляем для явности
+  @@index([ownerId, name])             // Для поиска по названию в рамках пользователя
+  @@index([type, status])              // Для фильтрации по типу и статусу
+  
   @@map("projects")
 }
 

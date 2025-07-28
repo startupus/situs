@@ -94,10 +94,10 @@ export const requireRole = (roles: string | string[]) => {
 };
 
 /**
- * Middleware для проверки владельца ресурса
+ * Middleware для проверки владельца проекта (безопасная версия)
  */
-export const requireOwnership = (resourceUserIdField: string = 'ownerId') => {
-  return (req: Request, res: Response, next: NextFunction) => {
+export const requireProjectOwnership = () => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
       return res.status(401).json({
         error: 'Unauthorized',
@@ -105,13 +105,11 @@ export const requireOwnership = (resourceUserIdField: string = 'ownerId') => {
       });
     }
 
-    // Получаем ID ресурса из параметров или тела запроса
-    const resourceOwnerId = req.body[resourceUserIdField] || req.params[resourceUserIdField];
-    
-    if (!resourceOwnerId) {
+    const projectId = req.params.id;
+    if (!projectId) {
       return res.status(400).json({
         error: 'Bad Request',
-        message: 'ID владельца ресурса не найден'
+        message: 'ID проекта не найден'
       });
     }
 
@@ -120,22 +118,48 @@ export const requireOwnership = (resourceUserIdField: string = 'ownerId') => {
       return next();
     }
 
-    // Проверяем что пользователь является владельцем ресурса
-    if (req.user.id !== resourceOwnerId) {
-      projectsLogger.securityEvent('unauthorized_access_attempt', {
-        userId: req.user.id,
-        resourceOwnerId,
-        url: req.originalUrl,
-        method: req.method
+    try {
+      // Проверяем владельца на уровне базы данных
+      const { PrismaClient } = await import('@prisma/client');
+      const prisma = new PrismaClient();
+      
+      const project = await prisma.project.findFirst({
+        where: { 
+          id: projectId,
+          ownerId: req.user.id 
+        },
+        select: { id: true }
       });
 
-      return res.status(403).json({
-        error: 'Forbidden',
-        message: 'Доступ запрещен: вы не являетесь владельцем этого ресурса'
+      await prisma.$disconnect();
+
+      if (!project) {
+        projectsLogger.securityEvent('unauthorized_project_access', {
+          userId: req.user.id,
+          projectId,
+          url: req.originalUrl,
+          method: req.method
+        });
+
+        return res.status(403).json({
+          error: 'Forbidden',
+          message: 'Доступ запрещен: проект не найден или нет прав доступа'
+        });
+      }
+
+      next();
+    } catch (error) {
+      projectsLogger.error('Error checking project ownership', {
+        userId: req.user.id,
+        projectId,
+        error
+      });
+
+      return res.status(500).json({
+        error: 'Internal Server Error',
+        message: 'Ошибка проверки прав доступа'
       });
     }
-
-    next();
   };
 };
 
