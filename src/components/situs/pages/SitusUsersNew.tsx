@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { User, UserRole, UserStatus, UserFilters, UserStats } from '../../../types/users';
-import { mockUsersApi } from '../../../api/mockUsersData';
+// import { mockUsersApi } from '../../../api/mockUsersData'; // Migrated to new API
+import { usersApi } from '../../../api/services/users.api';
+
+// Временные заглушки для отсутствующих методов
+const tempApi = {
+  getUserStats: () => Promise.resolve({
+    total: 0,
+    active: 0,
+    inactive: 0,
+    pending: 0
+  })
+};
 import UserModal from '../components/UserModal';
 import RolePermissionsModal from '../components/RolePermissionsModal';
 
@@ -49,11 +60,9 @@ const SitusUsersNew: React.FC = () => {
         search: searchTerm || undefined,
       };
       
-      const response = await mockUsersApi.getUsers(searchFilters, currentPage, pageSize);
-      if (response.success) {
-        setUsers(response.data);
-        setPagination(response.pagination);
-      }
+      const response = await usersApi.getUsers({ ...searchFilters, page: currentPage, limit: pageSize });
+      setUsers(response.users);
+      setPagination(response.pagination);
     } catch (error) {
       console.error('Ошибка загрузки пользователей:', error);
     } finally {
