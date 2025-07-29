@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, UserRole, UserStatus, UserFilters, UserStats } from '../../../types/users';
-// import { mockUsersApi } from '../../../api/mockUsersData'; // Migrated to new API
-import { usersApi } from '../../../api/services/users.api';
-
-// Временные заглушки для отсутствующих методов
-const tempApi = {
-  getUserStats: () => Promise.resolve({
-    total: 0,
-    active: 0,
-    inactive: 0,
-    pending: 0
-  })
-};
+import { usersApi, User, UserFilters, UsersListResponse } from '../../../api/services/users.api';
 import UserModal from '../components/UserModal';
 import RolePermissionsModal from '../components/RolePermissionsModal';
 
@@ -29,38 +17,27 @@ const SitusUsersNew: React.FC = () => {
   const [showPermissionsModal, setShowPermissionsModal] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [sortBy, setSortBy] = useState<'createdAt' | 'lastLoginAt' | 'email'>('createdAt');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [stats, setStats] = useState<UserStats | null>(null);
+  const [pageSize] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 10,
     total: 0,
-    totalPages: 0,
+    totalPages: 0
   });
 
-  // Загрузка пользователей при изменении фильтров или страницы
-  useEffect(() => {
-    loadUsers();
-  }, [filters, currentPage, pageSize, sortBy, sortOrder]);
-
-  // Загрузка статистики при монтировании компонента
-  useEffect(() => {
-    loadStats();
-  }, []);
-
-  // Функция загрузки пользователей
+  // Загрузка пользователей
   const loadUsers = async () => {
     setLoading(true);
     try {
       const searchFilters = {
         ...filters,
         search: searchTerm || undefined,
+        page: currentPage,
+        limit: pageSize
       };
       
-      const response = await usersApi.getUsers({ ...searchFilters, page: currentPage, limit: pageSize });
+      const response = await usersApi.getUsers(searchFilters);
       setUsers(response.users);
       setPagination(response.pagination);
     } catch (error) {
@@ -70,19 +47,18 @@ const SitusUsersNew: React.FC = () => {
     }
   };
 
-  // Функция загрузки статистики
+  // Загрузка статистики
   const loadStats = async () => {
     try {
-      const response = await mockUsersApi.getUserStats();
-      if (response.success) {
-        setStats(response.data);
-      }
+      // TODO: Добавить метод getUserStats в users API
+      // const stats = await usersApi.getUserStats();
+      // setStats(stats);
     } catch (error) {
       console.error('Ошибка загрузки статистики:', error);
     }
   };
 
-  // Обработчики действий
+  // Обработчики событий
   const handleCreateUser = () => {
     setEditingUser(null);
     setShowUserModal(true);
@@ -96,11 +72,8 @@ const SitusUsersNew: React.FC = () => {
   const handleDeleteUser = async (userId: string) => {
     if (window.confirm('Вы уверены, что хотите удалить этого пользователя?')) {
       try {
-        const response = await mockUsersApi.deleteUser(userId);
-        if (response.success) {
-          await loadUsers();
-          await loadStats();
-        }
+        await usersApi.deleteUser(userId);
+        await loadUsers();
       } catch (error) {
         console.error('Ошибка удаления пользователя:', error);
       }
@@ -109,40 +82,33 @@ const SitusUsersNew: React.FC = () => {
 
   const handleSaveUser = async (userData: any) => {
     try {
-      const response = editingUser
-        ? await mockUsersApi.updateUser(editingUser.id, userData)
-        : await mockUsersApi.createUser(userData);
-
-      if (response.success) {
-        setShowUserModal(false);
-        setEditingUser(null);
-        await loadUsers();
-        await loadStats();
+      if (editingUser) {
+        await usersApi.updateUser(editingUser.id, userData);
+      } else {
+        await usersApi.createUser(userData);
       }
+      
+      setShowUserModal(false);
+      setEditingUser(null);
+      await loadUsers();
     } catch (error) {
       console.error('Ошибка сохранения пользователя:', error);
     }
   };
 
-  const handleStatusChange = async (userId: string, newStatus: UserStatus) => {
+  const handleStatusChange = async (userId: string, newStatus: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED') => {
     try {
-      const response = await mockUsersApi.updateUser(userId, { status: newStatus });
-      if (response.success) {
-        await loadUsers();
-        await loadStats();
-      }
+      await usersApi.updateUserStatus(userId, newStatus);
+      await loadUsers();
     } catch (error) {
       console.error('Ошибка изменения статуса:', error);
     }
   };
 
-  const handleRoleChange = async (userId: string, newRole: UserRole) => {
+  const handleRoleChange = async (userId: string, newRole: 'ADMIN' | 'USER') => {
     try {
-      const response = await mockUsersApi.updateUser(userId, { role: newRole });
-      if (response.success) {
-        await loadUsers();
-        await loadStats();
-      }
+      await usersApi.updateUser(userId, { role: newRole });
+      await loadUsers();
     } catch (error) {
       console.error('Ошибка изменения роли:', error);
     }
@@ -167,419 +133,233 @@ const SitusUsersNew: React.FC = () => {
   };
 
   const handleSelectAll = () => {
-    setSelectedUsers(
-      selectedUsers.length === users.length 
-        ? [] 
-        : users.map(user => user.id)
+    if (selectedUsers.length === users.length) {
+      setSelectedUsers([]);
+    } else {
+      setSelectedUsers(users.map(user => user.id));
+    }
+  };
+
+  // Вспомогательные функции
+  const getRoleDisplay = (role: 'ADMIN' | 'USER'): string => {
+    const roleMap = {
+      ADMIN: 'Администратор',
+      USER: 'Пользователь'
+    };
+    return roleMap[role] || role;
+  };
+
+  const getStatusDisplay = (status: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED'): string => {
+    const statusMap = {
+      ACTIVE: 'Активен',
+      INACTIVE: 'Неактивен',
+      SUSPENDED: 'Заблокирован'
+    };
+    return statusMap[status] || status;
+  };
+
+  const getStatusColor = (status: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED'): string => {
+    const colorMap = {
+      ACTIVE: 'text-green-600 bg-green-100',
+      INACTIVE: 'text-gray-600 bg-gray-100',
+      SUSPENDED: 'text-red-600 bg-red-100'
+    };
+    return colorMap[status] || 'text-gray-600 bg-gray-100';
+  };
+
+  const getRoleColor = (role: 'ADMIN' | 'USER'): string => {
+    const colorMap = {
+      ADMIN: 'text-purple-600 bg-purple-100',
+      USER: 'text-blue-600 bg-blue-100'
+    };
+    return colorMap[role] || 'text-gray-600 bg-gray-100';
+  };
+
+  // Загрузка данных при монтировании и изменении фильтров
+  useEffect(() => {
+    loadUsers();
+    loadStats();
+  }, [currentPage, filters]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(handleSearch, 500);
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
     );
-  };
-
-  // Функции отображения
-  const getRoleDisplay = (role: UserRole): string => {
-    const roleMap: Record<UserRole, string> = {
-      super_admin: 'Суперадмин',
-      company_admin: 'Админ компании',
-      admin: 'Администратор',
-      moderator: 'Модератор',
-      editor: 'Редактор',
-      client: 'Клиент',
-    };
-    return roleMap[role];
-  };
-
-  const getStatusDisplay = (status: UserStatus): string => {
-    const statusMap: Record<UserStatus, string> = {
-      active: 'Активен',
-      inactive: 'Неактивен',
-      suspended: 'Заблокирован',
-      pending: 'Ожидает',
-    };
-    return statusMap[status];
-  };
-
-  const getStatusColor = (status: UserStatus): string => {
-    const colorMap: Record<UserStatus, string> = {
-      active: 'bg-green-100 text-green-800',
-      inactive: 'bg-gray-100 text-gray-800',
-      suspended: 'bg-red-100 text-red-800',
-      pending: 'bg-yellow-100 text-yellow-800',
-    };
-    return colorMap[status];
-  };
-
-  const getRoleColor = (role: UserRole): string => {
-    const colorMap: Record<UserRole, string> = {
-      super_admin: 'bg-purple-100 text-purple-800',
-      company_admin: 'bg-blue-100 text-blue-800',
-      admin: 'bg-indigo-100 text-indigo-800',
-      moderator: 'bg-orange-100 text-orange-800',
-      editor: 'bg-teal-100 text-teal-800',
-      client: 'bg-gray-100 text-gray-800',
-    };
-    return colorMap[role];
-  };
+  }
 
   return (
-    <div className="p-6">
-      {/* Заголовок страницы */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Управление пользователями
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Управление пользователями платформы, ролями и правами доступа
-        </p>
+    <div className="p-6 bg-white rounded-lg shadow-sm">
+      {/* Заголовок */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Управление пользователями</h1>
+        <button
+          onClick={handleCreateUser}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Добавить пользователя
+        </button>
       </div>
 
-      {/* Статистика */}
-      {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-            <div className="flex items-center">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Всего пользователей</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-            <div className="flex items-center">
-              <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
-                <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Активных</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.active}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-            <div className="flex items-center">
-              <div className="p-2 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-                <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Ожидающих</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.pending}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-            <div className="flex items-center">
-              <div className="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
-                <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L5.636 5.636" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Заблокированных</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.suspended}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Фильтры и поиск */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Поиск
-            </label>
-            <div className="flex">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Имя, email, компания..."
-                className="flex-1 border border-gray-300 dark:border-gray-600 rounded-l-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-              />
-              <button
-                onClick={handleSearch}
-                className="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </div>
+      <div className="mb-6 space-y-4">
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Поиск по имени или email..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Статус
-            </label>
-            <select
-              value={filters.status || ''}
-              onChange={(e) => handleFilterChange({ status: e.target.value as UserStatus || undefined })}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            >
-              <option value="">Все статусы</option>
-              <option value="active">Активные</option>
-              <option value="inactive">Неактивные</option>
-              <option value="suspended">Заблокированные</option>
-              <option value="pending">Ожидающие</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Роль
-            </label>
-            <select
-              value={filters.role || ''}
-              onChange={(e) => handleFilterChange({ role: e.target.value as UserRole || undefined })}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            >
-              <option value="">Все роли</option>
-              <option value="super_admin">Суперадмин</option>
-              <option value="company_admin">Админ компании</option>
-              <option value="admin">Администратор</option>
-              <option value="moderator">Модератор</option>
-              <option value="editor">Редактор</option>
-              <option value="client">Клиент</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Действия
-            </label>
-            <button
-              onClick={handleCreateUser}
-              className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 flex items-center justify-center"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              Добавить пользователя
-            </button>
-          </div>
+          <select
+            value={filters.role || ''}
+            onChange={(e) => handleFilterChange({ role: e.target.value || undefined })}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Все роли</option>
+            <option value="ADMIN">Администратор</option>
+            <option value="USER">Пользователь</option>
+          </select>
+          <select
+            value={filters.status || ''}
+            onChange={(e) => handleFilterChange({ status: e.target.value || undefined })}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Все статусы</option>
+            <option value="ACTIVE">Активен</option>
+            <option value="INACTIVE">Неактивен</option>
+            <option value="SUSPENDED">Заблокирован</option>
+          </select>
         </div>
       </div>
 
       {/* Таблица пользователей */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        {loading ? (
-          <div className="p-8 text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">Загрузка...</p>
-          </div>
-        ) : (
-          <>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-900">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      <input
-                        type="checkbox"
-                        checked={selectedUsers.length === users.length && users.length > 0}
-                        onChange={handleSelectAll}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Пользователь
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Роль
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Статус
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Проекты
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Последний вход
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Действия
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                  {users.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <input
-                          type="checkbox"
-                          checked={selectedUsers.includes(user.id)}
-                          onChange={() => handleSelectUser(user.id)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                        />
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10">
-                            {user.avatar ? (
-                              <img className="h-10 w-10 rounded-full" src={user.avatar} alt="" />
-                            ) : (
-                              <div className="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
-                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                  {user.firstName[0]}{user.lastName[0]}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900 dark:text-white">
-                              {user.firstName} {user.lastName}
-                            </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {user.email}
-                            </div>
-                            {user.company && (
-                              <div className="text-xs text-gray-400 dark:text-gray-500">
-                                {user.company}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getRoleColor(user.role)}`}>
-                          {getRoleDisplay(user.role)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}>
-                          {getStatusDisplay(user.status)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                        {user.projectsCount}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                        {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString('ru-RU') : 'Никогда'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div className="flex items-center space-x-2">
-                          <button
-                            onClick={() => handleEditUser(user)}
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
-                          >
-                            Редактировать
-                          </button>
-                          <button
-                            onClick={() => handleDeleteUser(user.id)}
-                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
-                          >
-                            Удалить
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Пагинация */}
-            {pagination.totalPages > 1 && (
-              <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1 flex justify-between sm:hidden">
-                    <button
-                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                      disabled={currentPage === 1}
-                      className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
-                    >
-                      Предыдущая
-                    </button>
-                    <button
-                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, pagination.totalPages))}
-                      disabled={currentPage === pagination.totalPages}
-                      className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
-                    >
-                      Следующая
-                    </button>
-                  </div>
-                  <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">
-                        Показано <span className="font-medium">{(currentPage - 1) * pageSize + 1}</span> до{' '}
-                        <span className="font-medium">
-                          {Math.min(currentPage * pageSize, pagination.total)}
-                        </span>{' '}
-                        из <span className="font-medium">{pagination.total}</span> результатов
-                      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-200">
+          <thead>
+            <tr className="bg-gray-50">
+              <th className="border border-gray-200 px-4 py-2 text-left">
+                <input
+                  type="checkbox"
+                  checked={selectedUsers.length === users.length && users.length > 0}
+                  onChange={handleSelectAll}
+                  className="rounded border-gray-300"
+                />
+              </th>
+              <th className="border border-gray-200 px-4 py-2 text-left">Пользователь</th>
+              <th className="border border-gray-200 px-4 py-2 text-left">Email</th>
+              <th className="border border-gray-200 px-4 py-2 text-left">Роль</th>
+              <th className="border border-gray-200 px-4 py-2 text-left">Статус</th>
+              <th className="border border-gray-200 px-4 py-2 text-left">Дата регистрации</th>
+              <th className="border border-gray-200 px-4 py-2 text-left">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id} className="hover:bg-gray-50">
+                <td className="border border-gray-200 px-4 py-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedUsers.includes(user.id)}
+                    onChange={() => handleSelectUser(user.id)}
+                    className="rounded border-gray-300"
+                  />
+                </td>
+                <td className="border border-gray-200 px-4 py-2">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-medium text-gray-700">
+                        {user.username.charAt(0).toUpperCase()}
+                      </span>
                     </div>
                     <div>
-                      <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
-                        <button
-                          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                          disabled={currentPage === 1}
-                          className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50"
-                        >
-                          Предыдущая
-                        </button>
-                        {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
-                          .filter(page => 
-                            page === 1 || 
-                            page === pagination.totalPages || 
-                            (page >= currentPage - 1 && page <= currentPage + 1)
-                          )
-                          .map((page, index, array) => (
-                            <React.Fragment key={page}>
-                              {index > 0 && array[index - 1] !== page - 1 && (
-                                <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-                                  ...
-                                </span>
-                              )}
-                              <button
-                                onClick={() => setCurrentPage(page)}
-                                className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                                  currentPage === page
-                                    ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
-                                    : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                                }`}
-                              >
-                                {page}
-                              </button>
-                            </React.Fragment>
-                          ))}
-                        <button
-                          onClick={() => setCurrentPage(prev => Math.min(prev + 1, pagination.totalPages))}
-                          disabled={currentPage === pagination.totalPages}
-                          className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50"
-                        >
-                          Следующая
-                        </button>
-                      </nav>
+                      <div className="font-medium text-gray-900">{user.username}</div>
+                      {user.profile?.firstName && user.profile?.lastName && (
+                        <div className="text-sm text-gray-500">
+                          {user.profile.firstName} {user.profile.lastName}
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
-          </>
-        )}
+                </td>
+                <td className="border border-gray-200 px-4 py-2 text-gray-900">{user.email}</td>
+                <td className="border border-gray-200 px-4 py-2">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(user.role)}`}>
+                    {getRoleDisplay(user.role)}
+                  </span>
+                </td>
+                <td className="border border-gray-200 px-4 py-2">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}>
+                    {getStatusDisplay(user.status)}
+                  </span>
+                </td>
+                <td className="border border-gray-200 px-4 py-2 text-gray-500">
+                  {new Date(user.createdAt).toLocaleDateString('ru-RU')}
+                </td>
+                <td className="border border-gray-200 px-4 py-2">
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEditUser(user)}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Редактировать
+                    </button>
+                    <button
+                      onClick={() => handleDeleteUser(user.id)}
+                      className="text-red-600 hover:text-red-800 text-sm"
+                    >
+                      Удалить
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
+      {/* Пагинация */}
+      {pagination.totalPages > 1 && (
+        <div className="flex justify-between items-center mt-6">
+          <div className="text-sm text-gray-700">
+            Показано {((pagination.page - 1) * pagination.limit) + 1} - {Math.min(pagination.page * pagination.limit, pagination.total)} из {pagination.total}
+          </div>
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={pagination.page === 1}
+              className="px-3 py-1 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Назад
+            </button>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(pagination.totalPages, prev + 1))}
+              disabled={pagination.page === pagination.totalPages}
+              className="px-3 py-1 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Вперед
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Модальные окна */}
       {showUserModal && (
         <UserModal
-          user={editingUser}
           isOpen={showUserModal}
           onClose={() => {
             setShowUserModal(false);
             setEditingUser(null);
           }}
+          user={editingUser}
           onSave={handleSaveUser}
         />
       )}
@@ -588,6 +368,8 @@ const SitusUsersNew: React.FC = () => {
         <RolePermissionsModal
           isOpen={showPermissionsModal}
           onClose={() => setShowPermissionsModal(false)}
+          userId=""
+          onSave={() => {}}
         />
       )}
     </div>

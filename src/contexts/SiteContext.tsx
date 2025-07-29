@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { Site, Page, MockAPI } from '../api/mockData';
-import RealDataAPI from '../api/realDataAPI';
+import { sitesApi, Site, Page, CreateSiteData } from '../api/services/sites.api';
 
 // Типы для состояния
 interface SiteState {
@@ -52,11 +51,7 @@ function siteReducer(state: SiteState, action: SiteAction): SiteState {
       return { ...state, currentPage: action.payload };
 
     case 'ADD_SITE':
-      return { 
-        ...state, 
-        sites: [...state.sites, action.payload],
-        currentSite: action.payload
-      };
+      return { ...state, sites: [...state.sites, action.payload] };
 
     case 'UPDATE_SITE':
       return {
@@ -68,64 +63,65 @@ function siteReducer(state: SiteState, action: SiteAction): SiteState {
       };
 
     case 'ADD_PAGE':
-      const updatedSitesAdd = state.sites.map(site => {
-        if (site.id === action.payload.siteId) {
-          return { ...site, pages: [...site.pages, action.payload] };
-        }
-        return site;
-      });
-      
-      return {
-        ...state,
-        sites: updatedSitesAdd,
-        currentSite: state.currentSite?.id === action.payload.siteId 
-          ? { ...state.currentSite, pages: [...state.currentSite.pages, action.payload] }
-          : state.currentSite,
-        currentPage: action.payload
-      };
+      if (state.currentSite) {
+        const updatedSite = {
+          ...state.currentSite,
+          pages: [...state.currentSite.pages, action.payload]
+        };
+        return {
+          ...state,
+          currentSite: updatedSite,
+          sites: state.sites.map(site => 
+            site.id === updatedSite.id ? updatedSite : site
+          )
+        };
+      }
+      return state;
 
     case 'UPDATE_PAGE':
-      const updatedSitesUpdate = state.sites.map(site => ({
-        ...site,
-        pages: site.pages.map(page => 
+      if (state.currentSite) {
+        const updatedPages = state.currentSite.pages.map(page => 
           page.id === action.payload.id ? action.payload : page
-        )
-      }));
-
-      return {
-        ...state,
-        sites: updatedSitesUpdate,
-        currentSite: state.currentSite ? {
+        );
+        const updatedSite = {
           ...state.currentSite,
-          pages: state.currentSite.pages.map(page => 
-            page.id === action.payload.id ? action.payload : page
+          pages: updatedPages
+        };
+        return {
+          ...state,
+          currentSite: updatedSite,
+          currentPage: state.currentPage?.id === action.payload.id ? action.payload : state.currentPage,
+          sites: state.sites.map(site => 
+            site.id === updatedSite.id ? updatedSite : site
           )
-        } : null,
-        currentPage: state.currentPage?.id === action.payload.id ? action.payload : state.currentPage
-      };
+        };
+      }
+      return state;
 
     case 'DELETE_PAGE':
-      const updatedSitesDelete = state.sites.map(site => ({
-        ...site,
-        pages: site.pages.filter(page => page.id !== action.payload)
-      }));
-
-      return {
-        ...state,
-        sites: updatedSitesDelete,
-        currentSite: state.currentSite ? {
+      if (state.currentSite) {
+        const updatedPages = state.currentSite.pages.filter(page => page.id !== action.payload);
+        const updatedSite = {
           ...state.currentSite,
-          pages: state.currentSite.pages.filter(page => page.id !== action.payload)
-        } : null,
-        currentPage: state.currentPage?.id === action.payload ? null : state.currentPage
-      };
+          pages: updatedPages
+        };
+        return {
+          ...state,
+          currentSite: updatedSite,
+          currentPage: state.currentPage?.id === action.payload ? null : state.currentPage,
+          sites: state.sites.map(site => 
+            site.id === updatedSite.id ? updatedSite : site
+          )
+        };
+      }
+      return state;
 
     default:
       return state;
   }
 }
 
-// Контекст
+// Типы для контекста
 interface SiteContextType {
   state: SiteState;
   actions: {
@@ -133,16 +129,17 @@ interface SiteContextType {
     selectSite: (siteId: string) => Promise<void>;
     selectPage: (pageId: string) => void;
     createSite: (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>) => Promise<void>;
-    createPage: (data: Omit<Page, 'id' | 'siteId' | 'createdAt' | 'updatedAt'>) => Promise<void>;
+    createPage: (data: Omit<Page, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
     updatePage: (pageId: string, data: Partial<Page>) => Promise<void>;
     deletePage: (pageId: string) => Promise<void>;
     savePageContent: (pageId: string, content: any[]) => Promise<void>;
   };
 }
 
-const SiteContext = createContext<SiteContextType | null>(null);
+// Создание контекста
+const SiteContext = createContext<SiteContextType | undefined>(undefined);
 
-// Provider компонент
+// Провайдер контекста
 interface SiteProviderProps {
   children: ReactNode;
 }
@@ -152,42 +149,27 @@ export function SiteProvider({ children }: SiteProviderProps) {
 
   // Загрузка сайтов
   const loadSites = async () => {
+    dispatch({ type: 'SET_LOADING', payload: true });
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      // Используем реальные данные проекта Стартапус
-      const sites = await RealDataAPI.getSites();
-      dispatch({ type: 'SET_SITES', payload: sites });
-      
-      // Автоматически выбираем первый сайт и его первую страницу
-      if (sites.length > 0) {
-        dispatch({ type: 'SET_CURRENT_SITE', payload: sites[0] });
-        if (sites[0].pages.length > 0) {
-          dispatch({ type: 'SET_CURRENT_PAGE', payload: sites[0].pages[0] });
-        }
-      }
+      const response = await sitesApi.getSites();
+      dispatch({ type: 'SET_SITES', payload: response.sites });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Ошибка загрузки сайтов' });
-      console.error('Error loading sites:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка загрузки сайтов' });
     }
   };
 
   // Выбор сайта
   const selectSite = async (siteId: string) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const site = await RealDataAPI.getSite(siteId);
-      if (site) {
-        dispatch({ type: 'SET_CURRENT_SITE', payload: site });
-        // Выбираем домашнюю страницу или первую доступную
-        const homePage = site.pages.find(p => p.isHomePage) || site.pages[0];
-        if (homePage) {
-          dispatch({ type: 'SET_CURRENT_PAGE', payload: homePage });
-        }
+      const site = await sitesApi.getSite(siteId);
+      dispatch({ type: 'SET_CURRENT_SITE', payload: site });
+      
+      // Выбираем первую страницу, если есть
+      if (site.pages.length > 0) {
+        dispatch({ type: 'SET_CURRENT_PAGE', payload: site.pages[0] });
       }
-      dispatch({ type: 'SET_LOADING', payload: false });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Ошибка загрузки сайта' });
-      console.error('Error loading site:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка выбора сайта' });
     }
   };
 
@@ -204,63 +186,79 @@ export function SiteProvider({ children }: SiteProviderProps) {
   // Создание сайта
   const createSite = async (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const newSite = await RealDataAPI.createSite(data);
+      const siteData: CreateSiteData = {
+        name: data.name,
+        description: data.description,
+        domain: data.domain,
+        template: data.template,
+        settings: data.settings
+      };
+      
+      const newSite = await sitesApi.createSite(siteData);
       dispatch({ type: 'ADD_SITE', payload: newSite });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Ошибка создания сайта' });
-      console.error('Error creating site:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка создания сайта' });
     }
   };
 
   // Создание страницы
-  const createPage = async (data: Omit<Page, 'id' | 'siteId' | 'createdAt' | 'updatedAt'>) => {
-    if (!state.currentSite) return;
+  const createPage = async (data: Omit<Page, 'id' | 'createdAt' | 'updatedAt'>) => {
+    if (!state.currentSite) {
+      dispatch({ type: 'SET_ERROR', payload: 'Сайт не выбран' });
+      return;
+    }
 
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const newPage = await RealDataAPI.createPage(state.currentSite.id, data);
+      const pageData = {
+        title: data.title,
+        slug: data.slug,
+        content: data.content || [],
+        meta: data.meta || {
+          description: '',
+          keywords: [],
+          ogImage: ''
+        },
+        status: data.status || 'draft'
+      };
+
+      const newPage = await sitesApi.createPage(state.currentSite.id, pageData);
       dispatch({ type: 'ADD_PAGE', payload: newPage });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Ошибка создания страницы' });
-      console.error('Error creating page:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка создания страницы' });
     }
   };
 
   // Обновление страницы
   const updatePage = async (pageId: string, data: Partial<Page>) => {
     try {
-      const updatedPage = await RealDataAPI.updatePage(pageId, data);
-      if (updatedPage) {
-        dispatch({ type: 'UPDATE_PAGE', payload: updatedPage });
-      }
+      const updatedPage = await sitesApi.updatePage(pageId, data);
+      dispatch({ type: 'UPDATE_PAGE', payload: updatedPage });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Ошибка обновления страницы' });
-      console.error('Error updating page:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка обновления страницы' });
     }
   };
 
   // Удаление страницы
   const deletePage = async (pageId: string) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const success = await RealDataAPI.deletePage(pageId);
-      if (success) {
-        dispatch({ type: 'DELETE_PAGE', payload: pageId });
-      }
-      dispatch({ type: 'SET_LOADING', payload: false });
+      await sitesApi.deletePage(pageId);
+      dispatch({ type: 'DELETE_PAGE', payload: pageId });
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Ошибка удаления страницы' });
-      console.error('Error deleting page:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка удаления страницы' });
     }
   };
 
-  // Сохранение контента страницы (для автосохранения)
+  // Сохранение контента страницы
   const savePageContent = async (pageId: string, content: any[]) => {
     try {
-      await updatePage(pageId, { content });
+      await sitesApi.savePageContent(pageId, content);
+      // Обновляем локальное состояние
+      if (state.currentPage && state.currentPage.id === pageId) {
+        const updatedPage = { ...state.currentPage, content };
+        dispatch({ type: 'UPDATE_PAGE', payload: updatedPage });
+      }
     } catch (error) {
-      console.error('Error saving page content:', error);
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка сохранения контента' });
     }
   };
 
@@ -293,10 +291,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
 // Хук для использования контекста
 export function useSite() {
   const context = useContext(SiteContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useSite must be used within a SiteProvider');
   }
   return context;
-}
-
-export default SiteContext; 
+} 
