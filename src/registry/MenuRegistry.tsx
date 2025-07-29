@@ -17,7 +17,7 @@ import {
   FiZap,
   FiPackage,
   FiMail,
-  FiBarChart3,
+  FiBarChart,
   FiTarget,
   FiShare2
 } from 'react-icons/fi';
@@ -149,7 +149,7 @@ class SitusMenuRegistry {
           id: 'orders-analytics',
           title: 'Аналитика заказов',
           path: '/orders/analytics',
-          icon: FiBarChart3,
+          icon: FiBarChart,
           component: this.createPlaceholderComponent('Аналитика заказов', 'Статистика и анализ заказов')
         }
       ]
@@ -185,7 +185,7 @@ class SitusMenuRegistry {
           id: 'marketing-analytics',
           title: 'Аналитика маркетинга',
           path: '/marketing/analytics',
-          icon: FiBarChart3,
+          icon: FiBarChart,
           component: this.createPlaceholderComponent('Аналитика маркетинга', 'Анализ эффективности и поведения пользователей')
         },
         {

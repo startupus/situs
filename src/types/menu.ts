@@ -6,6 +6,7 @@ export interface MenuItem {
   icon?: React.ComponentType<any>;
   iconSvg?: string;
   children?: MenuItem[];
+  component?: React.ComponentType;
   isActive?: boolean;
   badge?: string | number;
   permission?: string;
