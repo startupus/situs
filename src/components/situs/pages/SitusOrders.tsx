@@ -1,508 +1,352 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-interface Order {
-  id: string;
-  orderNumber: string;
-  projectName: string;
-  projectId: string;
-  customerName: string;
-  customerEmail: string;
-  type: 'product' | 'service' | 'form';
-  status: 'new' | 'processing' | 'completed' | 'cancelled' | 'paid';
-  amount: number;
-  currency: string;
-  date: Date;
-  description: string;
-  items?: {
-    name: string;
-    quantity: number;
-    price: number;
-  }[];
-}
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ordersApi, Order, OrderFilters, OrdersListResponse } from '../../../api/services/orders.api';
+import { ApiUtils } from '../../../api/client';
 
 const SitusOrders: React.FC = () => {
-  const [orders] = useState<Order[]>([
-    {
-      id: "1",
-      orderNumber: "#ORD-2024-001",
-      projectName: "Интернет-магазин электроники",
-      projectId: "project-1",
-      customerName: "Иван Петров",
-      customerEmail: "ivan@example.com",
-      type: "product",
-      status: "new",
-      amount: 45000,
-      currency: "RUB",
-      date: new Date("2024-01-15T10:30:00"),
-      description: "Заказ смартфона и аксессуаров",
-      items: [
-        { name: "iPhone 15 Pro", quantity: 1, price: 42000 },
-        { name: "Чехол", quantity: 1, price: 3000 }
-      ]
-    },
-    {
-      id: "2",
-      orderNumber: "#ORD-2024-002",
-      projectName: "Студия веб-разработки",
-      projectId: "project-2",
-      customerName: "Анна Сидорова",
-      customerEmail: "anna@company.com",
-      type: "service",
-      status: "processing",
-      amount: 120000,
-      currency: "RUB",
-      date: new Date("2024-01-14T14:20:00"),
-      description: "Разработка корпоративного сайта"
-    },
-    {
-      id: "3",
-      orderNumber: "#FORM-2024-003",
-      projectName: "Лендинг консультации",
-      projectId: "project-3",
-      customerName: "Михаил Козлов",
-      customerEmail: "mikhail@domain.com",
-      type: "form",
-      status: "new",
-      amount: 0,
-      currency: "RUB",
-      date: new Date("2024-01-15T12:00:00"),
-      description: "Заявка на бесплатную консультацию"
-    },
-    {
-      id: "4",
-      orderNumber: "#ORD-2024-004",
-      projectName: "Интернет-магазин одежды",
-      projectId: "project-4",
-      customerName: "Елена Волкова",
-      customerEmail: "elena@mail.ru",
-      type: "product",
-      status: "paid",
-      amount: 15600,
-      currency: "RUB",
-      date: new Date("2024-01-13T09:15:00"),
-      description: "Заказ зимней коллекции"
-    },
-    {
-      id: "5",
-      orderNumber: "#SRV-2024-005",
-      projectName: "Агентство маркетинга",
-      projectId: "project-5",
-      customerName: "ООО Успех",
-      customerEmail: "order@success.com",
-      type: "service",
-      status: "completed",
-      amount: 85000,
-      currency: "RUB",
-      date: new Date("2024-01-10T16:45:00"),
-      description: "SMM продвижение на 3 месяца"
-    }
-  ]);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 20,
+    total: 0,
+    totalPages: 0
+  });
+  const [filters, setFilters] = useState<OrderFilters>({
+    search: '',
+    status: '',
+    type: '',
+    sortBy: 'date',
+    sortOrder: 'desc',
+    page: 1,
+    limit: 20
+  });
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
-  const [selectedProject, setSelectedProject] = useState<string>('all');
-  const [selectedType, setSelectedType] = useState<string>('all');
-  const [selectedStatus, setSelectedStatus] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const projects = [
-    { id: 'all', name: 'Все проекты' },
-    { id: 'project-1', name: 'Интернет-магазин электроники' },
-    { id: 'project-2', name: 'Студия веб-разработки' },
-    { id: 'project-3', name: 'Лендинг консультации' },
-    { id: 'project-4', name: 'Интернет-магазин одежды' },
-    { id: 'project-5', name: 'Агентство маркетинга' }
-  ];
-
-  const getTypeText = (type: string) => {
-    switch (type) {
-      case 'product': return 'Товар';
-      case 'service': return 'Услуга';
-      case 'form': return 'Форма';
-      default: return type;
+  // Загрузка заказов
+  const loadOrders = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await ordersApi.getOrders(filters);
+      setOrders(response.orders);
+      setPagination(response.pagination);
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
+      console.error('Load orders error:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'new': return 'Новый';
-      case 'processing': return 'Обработка';
-      case 'completed': return 'Завершен';
-      case 'cancelled': return 'Отменен';
-      case 'paid': return 'Оплачен';
-      default: return status;
+  // Загрузка при изменении фильтров
+  useEffect(() => {
+    loadOrders();
+  }, [filters]);
+
+  const handleFilterChange = (newFilters: Partial<OrderFilters>) => {
+    setFilters(prev => ({
+      ...prev,
+      ...newFilters,
+      page: 1 // Сбрасываем страницу при изменении фильтров
+    }));
+  };
+
+  const handlePageChange = (page: number) => {
+    setFilters(prev => ({ ...prev, page }));
+  };
+
+  const handleViewOrder = (order: Order) => {
+    setSelectedOrder(order);
+    setIsOrderModalOpen(true);
+  };
+
+  const handleUpdateOrderStatus = async (orderId: string, status: Order['status']) => {
+    try {
+      await ordersApi.updateOrderStatus(orderId, status);
+      await loadOrders(); // Перезагружаем список
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
     }
+  };
+
+  const getStatusDisplayName = (status: string) => {
+    const statusNames = {
+      new: 'Новый',
+      processing: 'В обработке',
+      completed: 'Завершен',
+      cancelled: 'Отменен',
+      refunded: 'Возврат'
+    };
+    return statusNames[status as keyof typeof statusNames] || status;
   };
 
   const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'new':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'processing':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
-      case 'completed':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'paid':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'cancelled':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400';
-      default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-    }
+    const colors = {
+      new: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+      processing: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+      completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+      cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+      refunded: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+    };
+    return colors[status as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'product':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400';
-      case 'service':
-        return 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400';
-      case 'form':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-      default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-    }
+  const getTypeDisplayName = (type: string) => {
+    const typeNames = {
+      product: 'Товар',
+      service: 'Услуга',
+      form: 'Форма',
+      subscription: 'Подписка'
+    };
+    return typeNames[type as keyof typeof typeNames] || type;
   };
 
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('ru-RU', {
       year: 'numeric',
+      month: 'short',
+      day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
     });
   };
 
-  const formatAmount = (amount: number, currency: string) => {
-    if (amount === 0) return 'Бесплатно';
+  const formatCurrency = (amount: number, currency: string) => {
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
-      currency: currency
+      currency: currency || 'RUB'
     }).format(amount);
   };
 
-  const filteredOrders = orders.filter(order => {
-    const matchesProject = selectedProject === 'all' || order.projectId === selectedProject;
-    const matchesType = selectedType === 'all' || order.type === selectedType;
-    const matchesStatus = selectedStatus === 'all' || order.status === selectedStatus;
-    const matchesSearch = 
-      order.orderNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.customerEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.description.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesProject && matchesType && matchesStatus && matchesSearch;
-  });
-
-  const getStatistics = () => {
-    const total = orders.length;
-    const newOrders = orders.filter(o => o.status === 'new').length;
-    const processing = orders.filter(o => o.status === 'processing').length;
-    const completed = orders.filter(o => o.status === 'completed' || o.status === 'paid').length;
-    const totalRevenue = orders
-      .filter(o => o.status === 'completed' || o.status === 'paid')
-      .reduce((sum, o) => sum + o.amount, 0);
-
-    return { total, newOrders, processing, completed, totalRevenue };
-  };
-
-  const stats = getStatistics();
+  if (loading && orders.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      {/* Заголовок и статистика */}
-      <div className="mb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-dark dark:text-white">
-              Заказы
-            </h1>
-            <p className="mt-2 text-body-color dark:text-dark-6">
-              Управление заказами из всех проектов
-            </p>
-          </div>
-          <div className="mt-4 sm:mt-0">
-            <Link
-              to="/orders/analytics"
-              className="rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
-            >
-              Аналитика заказов
-            </Link>
-          </div>
+    <div className="p-6 space-y-6">
+      {/* Заголовок */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Заказы
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Всего заказов: {pagination.total}
+          </p>
         </div>
+      </div>
 
-        {/* Статистика */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <div className="rounded-lg bg-white p-6 shadow dark:bg-dark-2">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/20">
-                  <svg className="h-5 w-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-body-color dark:text-dark-6">Всего заказов</p>
-                <p className="text-2xl font-semibold text-dark dark:text-white">{stats.total}</p>
-              </div>
-            </div>
-          </div>
+      {/* Ошибка */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          {error}
+        </div>
+      )}
 
-          <div className="rounded-lg bg-white p-6 shadow dark:bg-dark-2">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-yellow-100 dark:bg-yellow-900/20">
-                  <svg className="h-5 w-5 text-yellow-600 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-body-color dark:text-dark-6">Новые</p>
-                <p className="text-2xl font-semibold text-dark dark:text-white">{stats.newOrders}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-lg bg-white p-6 shadow dark:bg-dark-2">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-900/20">
-                  <svg className="h-5 w-5 text-orange-600 dark:text-orange-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-body-color dark:text-dark-6">В обработке</p>
-                <p className="text-2xl font-semibold text-dark dark:text-white">{stats.processing}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-lg bg-white p-6 shadow dark:bg-dark-2">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/20">
-                  <svg className="h-5 w-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-body-color dark:text-dark-6">Завершено</p>
-                <p className="text-2xl font-semibold text-dark dark:text-white">{stats.completed}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-lg bg-white p-6 shadow dark:bg-dark-2">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/20">
-                  <svg className="h-5 w-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-body-color dark:text-dark-6">Выручка</p>
-                <p className="text-2xl font-semibold text-dark dark:text-white">
-                  {formatAmount(stats.totalRevenue, 'RUB')}
-                </p>
-              </div>
-            </div>
-          </div>
+      {/* Статистика */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Всего заказов</h3>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{pagination.total}</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Новые</h3>
+          <p className="text-2xl font-bold text-blue-600">
+            {orders.filter(o => o.status === 'new').length}
+          </p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">В обработке</h3>
+          <p className="text-2xl font-bold text-yellow-600">
+            {orders.filter(o => o.status === 'processing').length}
+          </p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Завершено</h3>
+          <p className="text-2xl font-bold text-green-600">
+            {orders.filter(o => o.status === 'completed').length}
+          </p>
         </div>
       </div>
 
       {/* Фильтры */}
-      <div className="mb-8 rounded-lg bg-white p-6 shadow dark:bg-dark-2">
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold text-dark dark:text-white">Фильтры</h3>
-        </div>
-        
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
-          {/* Поиск */}
-          <div className="relative">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Поиск
+            </label>
             <input
               type="text"
-              placeholder="Поиск по номеру, клиенту..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-[50px] w-full rounded-lg border border-stroke bg-white pl-14 pr-6 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+              value={filters.search || ''}
+              onChange={(e) => handleFilterChange({ search: e.target.value })}
+              placeholder="Номер заказа, клиент..."
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
-            <span className="absolute left-6 top-1/2 -translate-y-1/2">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M8.25 3C5.3505 3 3 5.3505 3 8.25C3 11.1495 5.3505 13.5 8.25 13.5C11.1495 13.5 13.5 11.1495 13.5 8.25C13.5 5.3505 11.1495 3 8.25 3ZM1.5 8.25C1.5 4.52208 4.52208 1.5 8.25 1.5C11.9779 1.5 15 4.52208 15 8.25C15 11.9779 11.9779 15 8.25 15C4.52208 15 1.5 11.9779 1.5 8.25Z"
-                  fill="#637381"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M11.957 11.958C12.2499 11.6651 12.7247 11.6651 13.0176 11.958L16.2801 15.2205C16.573 15.5133 16.573 15.9882 16.2801 16.2811C15.9872 16.574 15.5124 16.574 15.2195 16.2811L11.957 13.0186C11.6641 12.7257 11.6641 12.2508 11.957 11.958Z"
-                  fill="#637381"
-                />
-              </svg>
-            </span>
           </div>
-
-          {/* Проект */}
           <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Статус
+            </label>
             <select
-              value={selectedProject}
-              onChange={(e) => setSelectedProject(e.target.value)}
-              className="h-[50px] w-full rounded-lg border border-stroke bg-white px-6 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+              value={filters.status || ''}
+              onChange={(e) => handleFilterChange({ status: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
-              {projects.map((project) => (
-                <option key={project.id} value={project.id}>
-                  {project.name}
-                </option>
-              ))}
+              <option value="">Все статусы</option>
+              <option value="new">Новый</option>
+              <option value="processing">В обработке</option>
+              <option value="completed">Завершен</option>
+              <option value="cancelled">Отменен</option>
+              <option value="refunded">Возврат</option>
             </select>
           </div>
-
-          {/* Тип */}
           <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Тип
+            </label>
             <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              className="h-[50px] w-full rounded-lg border border-stroke bg-white px-6 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+              value={filters.type || ''}
+              onChange={(e) => handleFilterChange({ type: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
-              <option value="all">Все типы</option>
-              <option value="product">Товары</option>
-              <option value="service">Услуги</option>
-              <option value="form">Обратная связь</option>
+              <option value="">Все типы</option>
+              <option value="product">Товар</option>
+              <option value="service">Услуга</option>
+              <option value="form">Форма</option>
+              <option value="subscription">Подписка</option>
             </select>
           </div>
-
-          {/* Статус */}
           <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Сортировка
+            </label>
             <select
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
-              className="h-[50px] w-full rounded-lg border border-stroke bg-white px-6 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
-            >
-              <option value="all">Все статусы</option>
-              <option value="new">Новые</option>
-              <option value="processing">Обработка</option>
-              <option value="paid">Оплачены</option>
-              <option value="completed">Завершены</option>
-              <option value="cancelled">Отменены</option>
-            </select>
-          </div>
-
-          {/* Сброс */}
-          <div>
-            <button
-              onClick={() => {
-                setSelectedProject('all');
-                setSelectedType('all');
-                setSelectedStatus('all');
-                setSearchQuery('');
+              value={`${filters.sortBy}_${filters.sortOrder}`}
+              onChange={(e) => {
+                const [sortBy, sortOrder] = e.target.value.split('_');
+                handleFilterChange({ sortBy: sortBy as any, sortOrder: sortOrder as any });
               }}
-              className="h-[50px] w-full rounded-lg border border-stroke bg-white px-6 text-body-color hover:border-primary hover:text-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
-              Сбросить
-            </button>
+              <option value="date_desc">Новые сначала</option>
+              <option value="date_asc">Старые сначала</option>
+              <option value="amount_desc">По сумме (убыв.)</option>
+              <option value="amount_asc">По сумме (возр.)</option>
+            </select>
           </div>
         </div>
       </div>
 
       {/* Таблица заказов */}
-      <div className="rounded-lg bg-white shadow dark:bg-dark-2">
-        <div className="overflow-hidden">
-          <table className="min-w-full divide-y divide-stroke dark:divide-dark-3">
-            <thead className="bg-gray-50 dark:bg-dark-3">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Заказ
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Клиент
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
-                  Проект
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Тип
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
-                  Статус
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Сумма
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-body-color dark:text-dark-6">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Статус
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Дата
                 </th>
-                <th className="relative px-6 py-3">
-                  <span className="sr-only">Действия</span>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Действия
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stroke bg-white dark:divide-dark-3 dark:bg-dark-2">
-              {filteredOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-dark-3">
-                  <td className="px-6 py-4">
+            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              {orders.map((order) => (
+                <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-dark dark:text-white">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">
                         {order.orderNumber}
                       </div>
-                      <div className="text-sm text-body-color dark:text-dark-6 line-clamp-2">
-                        {order.description}
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        {order.projectName}
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-dark dark:text-white">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">
                         {order.customerName}
                       </div>
-                      <div className="text-sm text-body-color dark:text-dark-6">
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
                         {order.customerEmail}
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-body-color dark:text-dark-6">
-                    <Link
-                      to={`/projects/${order.projectId}`}
-                      className="text-primary hover:text-primary/80"
-                    >
-                      {order.projectName}
-                    </Link>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getTypeColor(order.type)}`}>
-                      {getTypeText(order.type)}
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                      {getTypeDisplayName(order.type)}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getStatusColor(order.status)}`}>
-                      {getStatusText(order.status)}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                    {formatCurrency(order.amount, order.currency)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}>
+                      {getStatusDisplayName(order.status)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm font-medium text-dark dark:text-white">
-                    {formatAmount(order.amount, order.currency)}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-body-color dark:text-dark-6">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                     {formatDate(order.date)}
                   </td>
-                  <td className="px-6 py-4 text-right text-sm font-medium">
-                    <button className="text-primary hover:text-primary/80">
-                      Открыть
-                    </button>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => handleViewOrder(order)}
+                        className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                      >
+                        Просмотр
+                      </button>
+                      {order.status === 'new' && (
+                        <button
+                          onClick={() => handleUpdateOrderStatus(order.id, 'processing')}
+                          className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
+                        >
+                          Принять
+                        </button>
+                      )}
+                      {order.status === 'processing' && (
+                        <button
+                          onClick={() => handleUpdateOrderStatus(order.id, 'completed')}
+                          className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
+                        >
+                          Завершить
+                        </button>
+                      )}
+                      <Link
+                        to={`/projects/${order.projectId}`}
+                        className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300"
+                      >
+                        Проект
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -510,30 +354,142 @@ const SitusOrders: React.FC = () => {
           </table>
         </div>
 
-        {filteredOrders.length === 0 && (
-          <div className="py-12 text-center">
-            <svg
-              className="mx-auto h-12 w-12 text-body-color dark:text-dark-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <h3 className="mt-2 text-sm font-medium text-dark dark:text-white">
-              Заказы не найдены
-            </h3>
-            <p className="mt-1 text-sm text-body-color dark:text-dark-6">
-              Попробуйте изменить фильтры или параметры поиска.
-            </p>
+        {/* Пагинация */}
+        {pagination.totalPages > 1 && (
+          <div className="bg-gray-50 dark:bg-gray-700 px-6 py-3 flex items-center justify-between">
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Показано {orders.length} из {pagination.total} заказов
+            </div>
+            <div className="flex space-x-1">
+              <button
+                onClick={() => handlePageChange(pagination.page - 1)}
+                disabled={pagination.page === 1}
+                className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Назад
+              </button>
+              {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
+                const page = i + Math.max(1, pagination.page - 2);
+                return (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm ${
+                      page === pagination.page
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-600'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+              <button
+                onClick={() => handlePageChange(pagination.page + 1)}
+                disabled={pagination.page === pagination.totalPages}
+                className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Вперед
+              </button>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Модальное окно детального просмотра заказа */}
+      {isOrderModalOpen && selectedOrder && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-2xl max-h-screen overflow-y-auto">
+            <div className="flex justify-between items-start mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                Детали заказа {selectedOrder.orderNumber}
+              </h2>
+              <button
+                onClick={() => setIsOrderModalOpen(false)}
+                className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Проект</h3>
+                  <p className="text-gray-900 dark:text-white">{selectedOrder.projectName}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Статус</h3>
+                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(selectedOrder.status)}`}>
+                    {getStatusDisplayName(selectedOrder.status)}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Клиент</h3>
+                  <p className="text-gray-900 dark:text-white">{selectedOrder.customerName}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{selectedOrder.customerEmail}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Сумма</h3>
+                  <p className="text-lg font-bold text-gray-900 dark:text-white">
+                    {formatCurrency(selectedOrder.amount, selectedOrder.currency)}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Описание</h3>
+                <p className="text-gray-900 dark:text-white">{selectedOrder.description}</p>
+              </div>
+
+              {selectedOrder.items && selectedOrder.items.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Товары/Услуги</h3>
+                  <div className="border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                      <thead className="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Название</th>
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Кол-во</th>
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Цена</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+                        {selectedOrder.items.map((item, index) => (
+                          <tr key={index}>
+                            <td className="px-4 py-2 text-sm text-gray-900 dark:text-white">{item.name}</td>
+                            <td className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">{item.quantity}</td>
+                            <td className="px-4 py-2 text-sm text-gray-900 dark:text-white">
+                              {formatCurrency(item.price, selectedOrder.currency)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex justify-end space-x-3 pt-4">
+                <button
+                  onClick={() => setIsOrderModalOpen(false)}
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                >
+                  Закрыть
+                </button>
+                <Link
+                  to={`/projects/${selectedOrder.projectId}`}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Перейти к проекту
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

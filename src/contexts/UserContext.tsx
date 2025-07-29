@@ -1,75 +1,141 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User } from '../types';
+import { usersApi, User, AuthCredentials, CreateUserData } from '../api/services/users.api';
+import { ApiUtils } from '../api/client';
 
 interface UserContextType {
   user: User | null;
   loading: boolean;
-  updateBalance: (amount: number) => void;
-  updateUser: (userData: Partial<User>) => void;
+  error: string | null;
+  login: (credentials: AuthCredentials) => Promise<void>;
+  register: (userData: CreateUserData) => Promise<void>;
   logout: () => void;
+  updateProfile: (profileData: any) => Promise<void>;
+  uploadAvatar: (file: File) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// Моковые данные пользователя
-const mockUser: User = {
-  id: '1',
-  email: 'user@example.com',
-  name: 'Дмитрий Петров',
-  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-  balance: {
-    monetus: 1250,
-    currency: 'USD'
-  },
-  subscription: {
-    plan: 'pro',
-    expiresAt: new Date('2024-12-31')
-  }
-};
-
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  // Проверяем аутентификацию при загрузке
   useEffect(() => {
-    // Имитация загрузки пользователя
-    setTimeout(() => {
-      setUser(mockUser);
-      setLoading(false);
-    }, 1000);
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+          const currentUser = await usersApi.getCurrentUser();
+          setUser(currentUser);
+        }
+      } catch (err) {
+        // Токен недействителен, удаляем его
+        localStorage.removeItem('auth_token');
+        console.log('Auth check failed:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
   }, []);
 
-  const updateBalance = (amount: number) => {
-    if (user) {
-      setUser({
-        ...user,
-        balance: {
-          ...user.balance,
-          monetus: user.balance.monetus + amount
-        }
-      });
+  const login = async (credentials: AuthCredentials) => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const authResponse = await usersApi.login(credentials);
+      setUser(authResponse.user);
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
-  const updateUser = (userData: Partial<User>) => {
-    if (user) {
-      setUser({
-        ...user,
-        ...userData
-      });
+  const register = async (userData: CreateUserData) => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const authResponse = await usersApi.register(userData);
+      setUser(authResponse.user);
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
   const logout = () => {
+    usersApi.logout();
     setUser(null);
+    setError(null);
+  };
+
+  const updateProfile = async (profileData: any) => {
+    setError(null);
+    
+    try {
+      const updatedUser = await usersApi.updateProfile(profileData);
+      setUser(updatedUser);
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
+      throw err;
+    }
+  };
+
+  const uploadAvatar = async (file: File) => {
+    setError(null);
+    
+    try {
+      const result = await usersApi.uploadAvatar(file);
+      if (user) {
+        setUser({
+          ...user,
+          profile: {
+            ...user.profile,
+            avatar: result.url
+          }
+        });
+      }
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
+      throw err;
+    }
+  };
+
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    setError(null);
+    
+    try {
+      await usersApi.changePassword(currentPassword, newPassword);
+    } catch (err) {
+      const errorMessage = ApiUtils.handleError(err);
+      setError(errorMessage);
+      throw err;
+    }
   };
 
   const value: UserContextType = {
     user,
     loading,
-    updateBalance,
-    updateUser,
-    logout
+    error,
+    login,
+    register,
+    logout,
+    updateProfile,
+    uploadAvatar,
+    changePassword
   };
 
   return (
