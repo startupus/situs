@@ -128,7 +128,7 @@ interface SiteContextType {
     loadSites: () => Promise<void>;
     selectSite: (siteId: string) => Promise<void>;
     selectPage: (pageId: string) => void;
-    createSite: (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>) => Promise<void>;
+    createSite: (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>) => Promise<Site>;
     createPage: (data: Omit<Page, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
     updatePage: (pageId: string, data: Partial<Page>) => Promise<void>;
     deletePage: (pageId: string) => Promise<void>;
@@ -152,7 +152,25 @@ export function SiteProvider({ children }: SiteProviderProps) {
     dispatch({ type: 'SET_LOADING', payload: true });
     try {
       const response = await sitesApi.getSites();
-      dispatch({ type: 'SET_SITES', payload: response.sites });
+      
+      // Если нет проектов, создаем демо проект
+      if (response.sites.length === 0) {
+        const demoSite = await sitesApi.createSite({
+          name: 'Стартапус - Демо проект',
+          description: 'Демонстрационный проект экосистемы Стартапус',
+          template: 'website',
+          settings: {
+            theme: 'auto',
+            primaryColor: '#3B82F6',
+            favicon: '/favicon.ico',
+            logo: '/logo.svg'
+          }
+        });
+        
+        dispatch({ type: 'ADD_SITE', payload: demoSite });
+      } else {
+        dispatch({ type: 'SET_SITES', payload: response.sites });
+      }
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка загрузки сайтов' });
     }
@@ -184,7 +202,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
   };
 
   // Создание сайта
-  const createSite = async (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>) => {
+  const createSite = async (data: Omit<Site, 'id' | 'createdAt' | 'updatedAt' | 'pages'>): Promise<Site> => {
     try {
       const siteData: CreateSiteData = {
         name: data.name,
@@ -196,8 +214,10 @@ export function SiteProvider({ children }: SiteProviderProps) {
       
       const newSite = await sitesApi.createSite(siteData);
       dispatch({ type: 'ADD_SITE', payload: newSite });
+      return newSite;
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка создания сайта' });
+      throw error;
     }
   };
 
@@ -225,6 +245,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
       dispatch({ type: 'ADD_PAGE', payload: newPage });
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка создания страницы' });
+      throw error;
     }
   };
 

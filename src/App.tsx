@@ -6,11 +6,11 @@ import './i18n' // Инициализация i18n
 import { SiteProvider } from './contexts/SiteContext'
 import { UserProvider } from './contexts/UserContext'
 import { ProjectProvider } from './contexts/ProjectContext'
-import { StudioInterface } from './components/StudioInterface'
-import { SitusPlatform } from './components/SitusPlatform'
-import RedaktusEditor from './components/RedaktusEditor'
+// Legacy components moved to legacy folder
+import { StudioInterface } from './components/legacy/StudioInterface'
+import RedaktusEditor from './components/legacy/RedaktusEditor'
+import ProjectWorkspace from './components/legacy/ProjectWorkspace'
 import ProjectSelector from './pages/ProjectSelector'
-import ProjectWorkspace from './components/ProjectWorkspace'
 import { useTheme } from './hooks/useTheme'
 import SitusApp from './components/situs/SitusApp'
 
@@ -60,7 +60,11 @@ function App() {
               } />
               
               {/* Основной интерфейс Situs на основе Admino - обрабатывает все остальные роуты */}
-              <Route path="/*" element={<SitusApp />} />
+              <Route path="/*" element={
+                <SiteProvider>
+                  <SitusApp />
+                </SiteProvider>
+              } />
             </Routes>
           </div>
         </Router>

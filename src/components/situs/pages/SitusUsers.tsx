@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { usersApi, User, UserFilters, UsersListResponse } from '../../../api/services/users.api';
+import { usersApi, UserFilters, UsersListResponse } from '../../../api/services/users.api';
+import { User } from '../../../types/users';
 import { ApiUtils } from '../../../api/client';
 import UserModal from '../components/UserModal';
 import RolePermissionsModal from '../components/RolePermissionsModal';
@@ -55,13 +56,17 @@ const SitusUsers: React.FC = () => {
   const stats = useMemo(() => {
     return {
       total: pagination.total,
-      active: users.filter(u => u.status === 'ACTIVE').length,
-      inactive: users.filter(u => u.status === 'INACTIVE').length,
-      suspended: users.filter(u => u.status === 'SUSPENDED').length,
-      pending: users.filter(u => u.status === 'PENDING').length,
+      active: users.filter(u => u.status === 'active').length,
+      inactive: users.filter(u => u.status === 'inactive').length,
+      suspended: users.filter(u => u.status === 'suspended').length,
+      pending: users.filter(u => u.status === 'pending').length,
       byRole: {
-        ADMIN: users.filter(u => u.role === 'ADMIN').length,
-        USER: users.filter(u => u.role === 'USER').length,
+        super_admin: users.filter(u => u.role === 'super_admin').length,
+        company_admin: users.filter(u => u.role === 'company_admin').length,
+        admin: users.filter(u => u.role === 'admin').length,
+        moderator: users.filter(u => u.role === 'moderator').length,
+        editor: users.filter(u => u.role === 'editor').length,
+        client: users.filter(u => u.role === 'client').length,
       },
       newThisMonth: 0, // Будет вычисляться на бэкенде
       newThisWeek: 0, // Будет вычисляться на бэкенде
@@ -70,53 +75,63 @@ const SitusUsers: React.FC = () => {
 
   const getRoleDisplayName = (role: string) => {
     const roleNames = {
-      ADMIN: 'Администратор',
-      USER: 'Пользователь',
+      super_admin: 'Супер администратор',
+      company_admin: 'Администратор компании',
+      admin: 'Администратор',
+      moderator: 'Модератор',
+      editor: 'Редактор',
+      client: 'Клиент',
     };
     return roleNames[role as keyof typeof roleNames] || role;
   };
 
   const getStatusDisplayName = (status: string) => {
     const statusNames = {
-      ACTIVE: 'Активен',
-      INACTIVE: 'Неактивен', 
-      SUSPENDED: 'Заблокирован',
-      PENDING: 'Ожидает',
+      active: 'Активен',
+      inactive: 'Неактивен', 
+      suspended: 'Заблокирован',
+      pending: 'Ожидает',
     };
     return statusNames[status as keyof typeof statusNames] || status;
   };
 
   const getStatusColor = (status: string) => {
     const colors = {
-      ACTIVE: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-      INACTIVE: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
-      SUSPENDED: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-      PENDING: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+      active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+      inactive: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
+      suspended: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+      pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
     };
     return colors[status as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
   const getRoleColor = (role: string) => {
     const colors = {
-      ADMIN: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
-      USER: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+      super_admin: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+      company_admin: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+      admin: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200',
+      moderator: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+      editor: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+      client: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
     };
     return colors[role as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ru-RU', {
+  const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('ru-RU', {
+      day: '2-digit',
+      month: '2-digit',
       year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(date);
   };
 
   const handleFilterChange = (newFilters: Partial<UserFilters>) => {
     setFilters(prev => ({
       ...prev,
       ...newFilters,
-      page: 1 // Сбрасываем страницу при изменении фильтров
+      page: 1 // Сбрасываем на первую страницу при изменении фильтров
     }));
   };
 
@@ -142,20 +157,30 @@ const SitusUsers: React.FC = () => {
   const handleUserSave = async (userData: any) => {
     try {
       if (selectedUser) {
-        // Обновление существующего пользователя
         await usersApi.updateUser(selectedUser.id, userData);
       } else {
-        // Создание нового пользователя
         await usersApi.createUser(userData);
       }
-      
-      // Перезагружаем список пользователей
-      await loadUsers();
+      loadUsers();
       setIsUserModalOpen(false);
       setSelectedUser(null);
-    } catch (err) {
-      const errorMessage = ApiUtils.handleError(err);
-      setError(errorMessage);
+    } catch (error) {
+      console.error('Save user error:', error);
+      alert('Ошибка сохранения пользователя');
+    }
+  };
+
+  const handlePermissionsSave = async (permissions: string[]) => {
+    try {
+      if (selectedUserId) {
+        // Здесь будет обновление прав пользователя
+        console.log('Saving permissions for user:', selectedUserId, permissions);
+      }
+      setIsRoleModalOpen(false);
+      setSelectedUserId(null);
+    } catch (error) {
+      console.error('Save permissions error:', error);
+      alert('Ошибка сохранения прав доступа');
     }
   };
 
@@ -166,14 +191,14 @@ const SitusUsers: React.FC = () => {
 
     try {
       await usersApi.deleteUser(userId);
-      await loadUsers();
-    } catch (err) {
-      const errorMessage = ApiUtils.handleError(err);
-      setError(errorMessage);
+      loadUsers();
+    } catch (error) {
+      console.error('Delete user error:', error);
+      alert('Ошибка удаления пользователя');
     }
   };
 
-  if (loading && users.length === 0) {
+  if (loading && users.length === 0 && !error) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
@@ -190,7 +215,7 @@ const SitusUsers: React.FC = () => {
             Управление пользователями
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Всего пользователей: {pagination.total}
+            Управление пользователями платформы, ролями и правами доступа
           </p>
         </div>
         <button
@@ -211,7 +236,7 @@ const SitusUsers: React.FC = () => {
       {/* Статистика */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Всего</h3>
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Всего пользователей</h3>
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
@@ -219,12 +244,12 @@ const SitusUsers: React.FC = () => {
           <p className="text-2xl font-bold text-green-600">{stats.active}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Админов</h3>
-          <p className="text-2xl font-bold text-purple-600">{stats.byRole.ADMIN}</p>
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Новых за месяц</h3>
+          <p className="text-2xl font-bold text-blue-600">{stats.newThisMonth}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Заблокировано</h3>
-          <p className="text-2xl font-bold text-red-600">{stats.suspended}</p>
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Ожидают активации</h3>
+          <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
         </div>
       </div>
 
@@ -239,7 +264,7 @@ const SitusUsers: React.FC = () => {
               type="text"
               value={filters.search || ''}
               onChange={(e) => handleFilterChange({ search: e.target.value })}
-              placeholder="Имя, email, компания..."
+              placeholder="Поиск пользователей..."
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -253,8 +278,12 @@ const SitusUsers: React.FC = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
               <option value="">Все роли</option>
-              <option value="ADMIN">Администратор</option>
-              <option value="USER">Пользователь</option>
+              <option value="super_admin">Супер администратор</option>
+              <option value="company_admin">Администратор компании</option>
+              <option value="admin">Администратор</option>
+              <option value="moderator">Модератор</option>
+              <option value="editor">Редактор</option>
+              <option value="client">Клиент</option>
             </select>
           </div>
           <div>
@@ -267,10 +296,10 @@ const SitusUsers: React.FC = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             >
               <option value="">Все статусы</option>
-              <option value="ACTIVE">Активен</option>
-              <option value="INACTIVE">Неактивен</option>
-              <option value="SUSPENDED">Заблокирован</option>
-              <option value="PENDING">Ожидает</option>
+              <option value="active">Активен</option>
+              <option value="inactive">Неактивен</option>
+              <option value="suspended">Заблокирован</option>
+              <option value="pending">Ожидает</option>
             </select>
           </div>
           <div>
@@ -287,8 +316,8 @@ const SitusUsers: React.FC = () => {
             >
               <option value="created_desc">Новые сначала</option>
               <option value="created_asc">Старые сначала</option>
-              <option value="name_asc">По имени А-Я</option>
-              <option value="name_desc">По имени Я-А</option>
+              <option value="username_asc">По имени А-Я</option>
+              <option value="username_desc">По имени Я-А</option>
             </select>
           </div>
         </div>
@@ -310,7 +339,10 @@ const SitusUsers: React.FC = () => {
                   Статус
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                  Дата создания
+                  Проекты
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Последний вход
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Действия
@@ -324,12 +356,15 @@ const SitusUsers: React.FC = () => {
                     <div className="flex items-center">
                       <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center">
                         <span className="text-white font-medium">
-                          {user.username[0].toUpperCase()}
+                          {user.firstName?.[0]?.toUpperCase() || user.email[0].toUpperCase()}
                         </span>
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          {user.username}
+                          {user.firstName && user.lastName 
+                            ? `${user.firstName} ${user.lastName}`
+                            : user.email
+                          }
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
                           {user.email}
@@ -348,7 +383,10 @@ const SitusUsers: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                    {formatDate(user.createdAt)}
+                    {user.projectsCount} проектов
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    {user.lastLoginAt ? formatDate(user.lastLoginAt) : 'Никогда'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex space-x-2">
@@ -437,7 +475,8 @@ const SitusUsers: React.FC = () => {
           setIsRoleModalOpen(false);
           setSelectedUserId(null);
         }}
-        userId={selectedUserId}
+        userId={selectedUserId || ''}
+        onSave={handlePermissionsSave}
       />
     </div>
   );

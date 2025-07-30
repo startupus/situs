@@ -6,7 +6,7 @@
 
 import { apiClient, ApiResponse, ApiUtils } from '../client';
 import { projectsApi } from './projects.api';
-import { Project, ProjectPage, CreatePageData, UpdatePageData } from '../../types/project';
+import { Project, ProjectPage, CreateProjectData } from '../../types/project';
 
 // Адаптер типов для совместимости с существующим SiteContext
 export interface Site {
@@ -81,6 +81,27 @@ export interface UpdateSiteData {
   settings?: Partial<Site['settings']>;
 }
 
+export interface CreatePageData {
+  title: string;
+  slug?: string;
+  content?: any[];
+  meta?: {
+    description?: string;
+    keywords?: string[];
+    ogImage?: string;
+  };
+  status?: 'draft' | 'published' | 'archived';
+}
+
+export interface UpdatePageData {
+  title?: string;
+  slug?: string;
+  content?: any[];
+  meta?: Partial<Page['meta']>;
+  status?: Page['status'];
+  publishedAt?: Date;
+}
+
 class SitesApiService {
   private readonly baseEndpoint = '/api/projects';
 
@@ -122,7 +143,7 @@ class SitesApiService {
    */
   async createSite(data: CreateSiteData): Promise<Site> {
     try {
-      const projectData = {
+      const projectData: CreateProjectData = {
         name: data.name,
         description: data.description,
         domain: data.domain,
@@ -188,13 +209,13 @@ class SitesApiService {
         id: `page_${Date.now()}`,
         title: data.title,
         slug: data.slug || this.generateSlug(data.title),
-        content: [],
-        meta: {
+        content: data.content || [],
+        meta: data.meta || {
           description: '',
           keywords: [],
           ogImage: ''
         },
-        status: 'draft',
+        status: data.status || 'draft',
         createdAt: new Date(),
         updatedAt: new Date()
       };

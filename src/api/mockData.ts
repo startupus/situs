@@ -6,10 +6,17 @@ export interface Site {
   description: string;
   domain?: string;
   customDomain?: string;
+  template?: string;
   status: 'draft' | 'published' | 'archived';
   createdAt: string;
   updatedAt: string;
   pages: Page[];
+  settings?: {
+    theme: 'light' | 'dark' | 'auto';
+    primaryColor?: string;
+    favicon?: string;
+    logo?: string;
+  };
 }
 
 export interface Page {
@@ -22,6 +29,7 @@ export interface Page {
   metaDescription?: string;
   isHomePage: boolean;
   isPublished: boolean;
+  status: 'draft' | 'published' | 'archived';
   createdAt: string;
   updatedAt: string;
 }
@@ -36,13 +44,63 @@ export interface BlockContent {
 // Моковые данные сайтов
 export const mockSites: Site[] = [
   {
+    id: 'startapus-ecosystem',
+    name: 'Стартапус - Демо проект',
+    description: 'Официальный сайт экосистемы Стартапус - инновационная платформа для создания и управления веб-проектами',
+    domain: 'startapus.com',
+    template: 'website',
+    status: 'published',
+    createdAt: '2024-01-01T10:00:00Z',
+    updatedAt: '2024-12-23T15:30:00Z',
+    settings: {
+      theme: 'auto',
+      primaryColor: '#3B82F6',
+      favicon: '/favicon.ico',
+      logo: '/logo.svg'
+    },
+    pages: [
+      {
+        id: 'startapus-home',
+        siteId: 'startapus-ecosystem',
+        title: 'Главная',
+        slug: '',
+        content: [
+          {
+            id: 'hero-1',
+            type: 'hero-section',
+            props: {
+              title: 'Создавайте будущее веба с экосистемой Стартапус',
+              subtitle: 'Полный набор инструментов для создания современных веб-сайтов без программирования',
+              buttonText: 'Начать бесплатно',
+              buttonLink: '/situs',
+              backgroundImage: '/images/hero-bg.jpg',
+              overlayOpacity: 0.4
+            }
+          }
+        ],
+        metaTitle: 'Стартапус - Главная',
+        metaDescription: 'Инновационная платформа для создания и управления веб-проектами',
+        isHomePage: true,
+        isPublished: true,
+        status: 'published',
+        createdAt: '2024-01-01T10:00:00Z',
+        updatedAt: '2024-12-23T15:30:00Z'
+      }
+    ]
+  },
+  {
     id: 'site-1',
     name: 'Мой первый сайт',
     description: 'Тестовый сайт для разработки Redaktus',
     domain: 'site1.situs.com',
+    template: 'website',
     status: 'draft',
     createdAt: '2024-12-01T10:00:00Z',
     updatedAt: '2024-12-23T15:30:00Z',
+    settings: {
+      theme: 'auto',
+      primaryColor: '#3B82F6'
+    },
     pages: []
   },
   {
@@ -51,9 +109,14 @@ export const mockSites: Site[] = [
     description: 'Профессиональное портфолио с галереей работ',
     domain: 'portfolio.situs.com',
     customDomain: 'designer.com',
+    template: 'portfolio',
     status: 'published',
     createdAt: '2024-11-15T09:00:00Z',
     updatedAt: '2024-12-20T12:15:00Z',
+    settings: {
+      theme: 'auto',
+      primaryColor: '#8B5CF6'
+    },
     pages: []
   },
   {
@@ -61,15 +124,101 @@ export const mockSites: Site[] = [
     name: 'Бизнес лендинг',
     description: 'Одностраничник для продвижения услуг',
     domain: 'business.situs.com',
+    template: 'landing',
     status: 'draft',
     createdAt: '2024-12-10T14:20:00Z',
     updatedAt: '2024-12-22T16:45:00Z',
+    settings: {
+      theme: 'auto',
+      primaryColor: '#10B981'
+    },
     pages: []
   }
 ];
 
 // Моковые данные страниц
 export const mockPages: Page[] = [
+  // Страницы для Стартапус
+  {
+    id: 'startapus-home',
+    siteId: 'startapus-ecosystem',
+    title: 'Главная',
+    slug: '',
+    content: [
+      {
+        id: 'hero-1',
+        type: 'hero-section',
+        props: {
+          title: 'Создавайте будущее веба с экосистемой Стартапус',
+          subtitle: 'Полный набор инструментов для создания современных веб-сайтов без программирования',
+          buttonText: 'Начать бесплатно',
+          buttonLink: '/situs',
+          backgroundImage: '/images/hero-bg.jpg',
+          overlayOpacity: 0.4
+        }
+      },
+      {
+        id: 'products-1',
+        type: 'products-section',
+        props: {
+          title: 'Наши продукты',
+          subtitle: 'Каждый инструмент создан для решения конкретных задач',
+          products: [
+            {
+              name: 'Situs',
+              description: 'Визуальный конструктор сайтов',
+              icon: '🏗️',
+              features: ['Drag & Drop редактор', 'Готовые блоки', 'Адаптивный дизайн']
+            },
+            {
+              name: 'Redaktus',
+              description: 'Продвинутый контент-редактор',
+              icon: '✏️',
+              features: ['Блочный редактор', 'Совместная работа', 'История изменений']
+            },
+            {
+              name: 'Hubus',
+              description: 'AI-помощник для контента',
+              icon: '🤖',
+              features: ['Генерация текстов', 'Оптимизация SEO', 'Перевод контента']
+            }
+          ]
+        }
+      }
+    ],
+    metaTitle: 'Стартапус - Инновационная экосистема для веб-разработки',
+    metaDescription: 'Создавайте профессиональные веб-сайты с экосистемой Стартапус. Визуальный редактор, AI-помощник и мощные инструменты.',
+    isHomePage: true,
+    isPublished: true,
+    status: 'published',
+    createdAt: '2024-01-01T10:30:00Z',
+    updatedAt: '2024-12-23T15:45:00Z'
+  },
+  {
+    id: 'startapus-about',
+    siteId: 'startapus-ecosystem',
+    title: 'О компании',
+    slug: 'about',
+    content: [
+      {
+        id: 'about-hero',
+        type: 'text-section',
+        props: {
+          title: 'О компании Стартапус',
+          content: 'Мы создаем инновационные инструменты для веб-разработки, которые делают создание сайтов простым и доступным для всех.',
+          layout: 'centered'
+        }
+      }
+    ],
+    metaTitle: 'О компании Стартапус - Наша миссия и команда',
+    metaDescription: 'Узнайте больше о команде Стартапус, нашей миссии и видении будущего веб-разработки.',
+    isHomePage: false,
+    isPublished: true,
+    status: 'published',
+    createdAt: '2024-01-01T11:00:00Z',
+    updatedAt: '2024-12-20T14:20:00Z'
+  },
+  // Страницы для других сайтов
   {
     id: 'page-1',
     siteId: 'site-1',
@@ -97,6 +246,7 @@ export const mockPages: Page[] = [
     metaDescription: 'Описание главной страницы для SEO',
     isHomePage: true,
     isPublished: true,
+    status: 'published',
     createdAt: '2024-12-01T10:30:00Z',
     updatedAt: '2024-12-23T15:45:00Z'
   },
@@ -119,6 +269,7 @@ export const mockPages: Page[] = [
     metaDescription: 'Информация о нашей компании',
     isHomePage: false,
     isPublished: false,
+    status: 'draft',
     createdAt: '2024-12-02T11:00:00Z',
     updatedAt: '2024-12-20T14:20:00Z'
   },
@@ -145,6 +296,7 @@ export const mockPages: Page[] = [
     metaDescription: 'Галерея моих лучших работ',
     isHomePage: true,
     isPublished: true,
+    status: 'published',
     createdAt: '2024-11-15T09:30:00Z',
     updatedAt: '2024-12-18T10:15:00Z'
   }
@@ -184,7 +336,11 @@ export class MockAPI {
       id: `site-${Date.now()}`,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      pages: []
+      pages: [],
+      settings: data.settings || {
+        theme: 'auto',
+        primaryColor: '#3B82F6'
+      }
     };
     mockSites.push(newSite);
     return newSite;
@@ -197,7 +353,8 @@ export class MockAPI {
       id: `page-${Date.now()}`,
       siteId,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
+      status: data.status || 'draft'
     };
     mockPages.push(newPage);
     

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSite } from "../../../contexts/SiteContext";
+import { useUser } from "../../../contexts/UserContext";
 
 // Компонент левой панели с подменю
 const ProjectsSidebar: React.FC = () => {
@@ -195,14 +197,66 @@ const mockProjects = [
 ];
 
 const SitusProjects: React.FC = () => {
+  const { state, actions } = useSite();
+  const { user } = useUser();
+  const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [selectedProjectType, setSelectedProjectType] = useState<'website' | 'ecommerce' | 'landing' | 'blog'>('website');
 
-  const filteredProjects = mockProjects.filter(project => {
+  // Объединяем реальные проекты из SiteContext с моковыми данными для демонстрации
+  const allProjects = [
+    ...state.sites.map(site => ({
+      id: site.id,
+      name: site.name,
+      type: site.template || 'website',
+      status: site.pages.some(page => page.status === 'published') ? 'active' : 'development',
+      url: site.domain || `https://${site.id}.situs.ru`,
+      createdAt: site.createdAt,
+      visitors: Math.floor(Math.random() * 5000) + 500,
+      orders: Math.floor(Math.random() * 500) + 50,
+      revenue: Math.floor(Math.random() * 500000) + 50000,
+      image: "/images/projects/website.png"
+    })),
+    ...mockProjects
+  ];
+
+  const filteredProjects = allProjects.filter(project => {
     const matchesType = selectedType === "all" || project.type === selectedType;
     const matchesSearch = project.name.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesType && matchesSearch;
   });
+
+  const handleCreateProject = async () => {
+    try {
+      const projectName = `Новый ${selectedProjectType === 'website' ? 'сайт' : 
+        selectedProjectType === 'ecommerce' ? 'магазин' : 
+        selectedProjectType === 'landing' ? 'лендинг' : 'блог'}`;
+      
+      const newSite = await actions.createSite({
+        name: projectName,
+        description: `Описание для ${projectName}`,
+        template: selectedProjectType,
+        settings: {
+          theme: 'auto',
+          primaryColor: '#3B82F6',
+          favicon: '',
+          logo: ''
+        },
+        owner: user?.id || 'default-user',
+        isPublic: false
+      });
+      
+      setShowCreateModal(false);
+      
+      // Переходим к новому проекту
+      navigate(`/situs/project/${newSite.id}`);
+    } catch (error) {
+      console.error('Ошибка создания проекта:', error);
+      alert('Ошибка создания проекта. Попробуйте еще раз.');
+    }
+  };
 
   const getTypeLabel = (type: string) => {
     switch (type) {
@@ -280,15 +334,15 @@ const SitusProjects: React.FC = () => {
                 Управление всеми вашими проектами
               </p>
             </div>
-            <Link
-              to="/projects/new"
+            <button
+              onClick={() => setShowCreateModal(true)}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
                 <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
               </svg>
               Создать проект
-            </Link>
+            </button>
           </div>
 
           {/* Фильтры */}
@@ -463,16 +517,83 @@ const SitusProjects: React.FC = () => {
               }
             </p>
             {!searchTerm && selectedType === "all" && (
-              <Link
-                to="/projects/new"
+              <button
+                onClick={() => setShowCreateModal(true)}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
                   <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
                 </svg>
                 Создать проект
-              </Link>
+              </button>
             )}
+          </div>
+        )}
+
+        {/* Модальное окно создания проекта */}
+        {showCreateModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-md mx-4">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-dark dark:text-white">
+                  Создать новый проект
+                </h2>
+                <button
+                  onClick={() => setShowCreateModal(false)}
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" className="fill-current">
+                    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Тип проекта
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { id: 'website', name: 'Сайт', icon: '🌐' },
+                      { id: 'ecommerce', name: 'Магазин', icon: '🛒' },
+                      { id: 'landing', name: 'Лендинг', icon: '📄' },
+                      { id: 'blog', name: 'Блог', icon: '📝' }
+                    ].map((type) => (
+                      <button
+                        key={type.id}
+                        onClick={() => setSelectedProjectType(type.id as any)}
+                        className={`p-4 border rounded-lg text-center transition-colors ${
+                          selectedProjectType === type.id
+                            ? 'border-primary bg-primary/10 dark:bg-primary/20'
+                            : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'
+                        }`}
+                      >
+                        <div className="text-2xl mb-2">{type.icon}</div>
+                        <div className="text-sm font-medium text-dark dark:text-white">
+                          {type.name}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end space-x-3 mt-6">
+                <button
+                  onClick={() => setShowCreateModal(false)}
+                  className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                >
+                  Отмена
+                </button>
+                <button
+                  onClick={handleCreateProject}
+                  className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+                >
+                  Создать проект
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>

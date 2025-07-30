@@ -1,6 +1,6 @@
 import React from 'react';
 import { useProject } from '../contexts/ProjectContext';
-import RedaktusEditor from './RedaktusEditor';
+import RedaktusEditor from './legacy/RedaktusEditor';
 
 interface ProjectEditorViewProps {
   onBack: () => void;

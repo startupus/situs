@@ -16,9 +16,9 @@ const ProjectSelector: React.FC = () => {
   // Статистика проектов
   const projectStats = {
     total: state.sites.length,
-    published: state.sites.filter(site => site.status === 'published').length,
-    draft: state.sites.filter(site => site.status === 'draft').length,
-    archived: state.sites.filter(site => site.status === 'archived').length,
+    published: state.sites.filter(site => site.pages.some(page => page.status === 'published')).length,
+    draft: state.sites.filter(site => site.pages.some(page => page.status === 'draft')).length,
+    archived: state.sites.filter(site => site.pages.some(page => page.status === 'archived')).length,
     totalPages: state.sites.reduce((acc, site) => acc + site.pages.length, 0),
     totalVisitors: state.sites.reduce((acc, site) => acc + (site.pages.length * 150), 0), // Моковые данные
     // Моковые данные о заказах для демонстрации
@@ -28,16 +28,34 @@ const ProjectSelector: React.FC = () => {
   };
 
   const handleCreateProject = async () => {
-    const projectName = `Новый ${selectedProjectType === 'website' ? 'сайт' : 
-      selectedProjectType === 'ecommerce' ? 'магазин' : 
-      selectedProjectType === 'landing' ? 'лендинг' : 'блог'}`;
-    
-    await actions.createSite({
-      name: projectName,
-      description: `Описание для ${projectName}`,
-      status: 'draft'
-    });
-    setShowCreateModal(false);
+    try {
+      const projectName = `Новый ${selectedProjectType === 'website' ? 'сайт' : 
+        selectedProjectType === 'ecommerce' ? 'магазин' : 
+        selectedProjectType === 'landing' ? 'лендинг' : 'блог'}`;
+      
+      const newSite = await actions.createSite({
+        name: projectName,
+        description: `Описание для ${projectName}`,
+        template: selectedProjectType,
+        settings: {
+          theme: 'auto',
+          primaryColor: '#3B82F6',
+          favicon: '',
+          logo: ''
+        },
+        owner: user?.id || 'default-user',
+        isPublic: false
+      });
+      
+      setShowCreateModal(false);
+      
+      // Переходим к новому проекту
+      navigate(`/situs/project/${newSite.id}`);
+    } catch (error) {
+      console.error('Ошибка создания проекта:', error);
+      // Показать уведомление об ошибке
+      alert('Ошибка создания проекта. Попробуйте еще раз.');
+    }
   };
 
   const getProjectTypeIcon = (type: string) => {
@@ -190,14 +208,14 @@ const ProjectSelector: React.FC = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      site.status === 'published' 
+                      site.pages.some(page => page.status === 'published')
                         ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                        : site.status === 'draft'
+                        : site.pages.some(page => page.status === 'draft')
                         ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                         : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
                     }`}>
-                      {site.status === 'published' ? 'Опубликован' : 
-                       site.status === 'draft' ? 'Черновик' : 'Архив'}
+                      {site.pages.some(page => page.status === 'published') ? 'Опубликован' : 
+                       site.pages.some(page => page.status === 'draft') ? 'Черновик' : 'Архив'}
                     </span>
                   </div>
                 </div>
@@ -231,7 +249,7 @@ const ProjectSelector: React.FC = () => {
                   </div>
                   
                   <div className="flex items-center space-x-2">
-                    {site.status === 'published' && (
+                    {site.pages.some(page => page.status === 'published') && site.domain && (
                       <a
                         href={`https://${site.domain}`}
                         target="_blank"

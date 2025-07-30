@@ -33,13 +33,23 @@ export default defineConfig({
       port: 5177,
       host: 'localhost',
     },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      }
+    },
     watch: {
       usePolling: true,
       ignored: [
         '**/react-bricks-ui-source/**',
-        '**/temp-inline-edit/**',
         '**/Upload/**',
-        '**/node_modules/**'
+        '**/node_modules/**',
+        '**/docs/archives/**',
+        '**/docs/templates-archive/**',
+        '**/logs/**',
+        '**/backend/**'
       ]
     },
   },

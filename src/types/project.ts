@@ -47,4 +47,21 @@ export interface UpdatePageData {
   meta?: Partial<ProjectPage['meta']>;
   status?: ProjectPage['status'];
   publishedAt?: Date;
+}
+
+export interface CreateProjectData {
+  name: string;
+  description?: string;
+  domain?: string;
+  template?: string;
+  settings?: Partial<Project['settings']>;
+}
+
+export interface UpdateProjectData {
+  name?: string;
+  description?: string;
+  domain?: string;
+  template?: string;
+  settings?: Partial<Project['settings']>;
+  pages?: ProjectPage[];
 } 
