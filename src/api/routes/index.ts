@@ -37,11 +37,12 @@ router.use('/analytics', analyticsRoutes);
  */
 router.get('/', (req, res) => {
   res.json({
-    name: 'Redaktus API',
+    name: 'Situs API Server',
     version: '1.0.0',
-    description: 'RESTful API для CMS платформы Redaktus',
+    description: 'RESTful API для платформы Situs (Strapi-inspired)',
     documentation: '/api/docs', // Будущий Swagger endpoint
     endpoints: {
+      health: '/api/health',
       auth: '/api/auth',
       users: '/api/users',
       projects: '/api/projects',
@@ -49,6 +50,7 @@ router.get('/', (req, res) => {
       analytics: '/api/analytics'
     },
     status: 'active',
+    environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString()
   });
 });

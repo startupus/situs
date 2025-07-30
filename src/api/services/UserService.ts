@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { security } from '../config/environment';
 
 const prisma = new PrismaClient();
 
@@ -623,7 +624,7 @@ class UserService {
    */
   async verifyToken(token: string) {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret') as { userId: string };
+      const decoded = jwt.verify(token, security.jwt.secret) as { userId: string };
       
       const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
@@ -660,8 +661,7 @@ class UserService {
    * Хеширование пароля
    */
   private async hashPassword(password: string): Promise<string> {
-    const saltRounds = 12;
-    return await bcrypt.hash(password, saltRounds);
+    return await bcrypt.hash(password, security.bcrypt.saltRounds);
   }
 
   /**
@@ -677,8 +677,8 @@ class UserService {
   private generateToken(userId: string): string {
     return jwt.sign(
       { userId },
-      process.env.JWT_SECRET || 'default-secret',
-      { expiresIn: '7d' }
+      security.jwt.secret,
+      { expiresIn: security.jwt.expiresIn }
     );
   }
 

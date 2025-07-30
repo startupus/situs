@@ -5,30 +5,34 @@ import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import apiRoutes from './routes';
 import { errorHandler, notFoundHandler, handleUncaughtExceptions } from './middleware/error.middleware';
+import { env, server, validateCriticalEnv, getConfigInfo } from './config/environment';
 
 /**
  * Основной файл сервера API
- * Настройка Express приложения и middleware
+ * Настройка Express приложения и middleware по образцу Strapi
  */
+
+// Проверяем критически важные переменные окружения
+validateCriticalEnv();
 
 // Настройка обработки исключений
 handleUncaughtExceptions();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = server.port;
 
 // Базовая конфигурация middleware
 app.use(helmet());
 app.use(compression());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
+  origin: server.cors.origin,
+  credentials: server.cors.credentials
 }));
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 минут
-  max: 100, // максимум 100 запросов за окно
+  windowMs: server.rateLimit.windowMs,
+  max: server.rateLimit.max,
   message: 'Слишком много запросов с этого IP',
   standardHeaders: true,
   legacyHeaders: false,
@@ -49,16 +53,25 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 // Запуск сервера
-const server = app.listen(PORT, () => {
-  console.log(`🚀 API сервер запущен на порту ${PORT}`);
-  console.log(`📖 API документация: http://localhost:${PORT}/api`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+const appServer = app.listen(PORT, () => {
+  const config = getConfigInfo();
+  console.log(`🚀 Situs API Server запущен (на основе Strapi архитектуры)`);
+  console.log(`📍 URL: ${server.url}`);
+  console.log(`🌍 Окружение: ${config.environment}`);
+  console.log(`🗄️  База данных: ${config.database}`);
+  console.log(`🔒 CORS: ${config.cors ? 'включен' : 'отключен'}`);
+  console.log(`📚 Swagger: ${config.swagger ? 'включен' : 'отключен'}`);
+  console.log(`📖 API документация: ${server.url}/api`);
+  console.log(`🔗 Health check: ${server.url}/api/health`);
+  if (env.DEV_MODE) {
+    console.log(`🔧 Режим разработки активен`);
+  }
 });
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM получен. Закрытие HTTP сервера...');
-  server.close(() => {
+  appServer.close(() => {
     console.log('HTTP сервер закрыт.');
     process.exit(0);
   });
@@ -66,7 +79,7 @@ process.on('SIGTERM', () => {
 
 process.on('SIGINT', () => {
   console.log('SIGINT получен. Закрытие HTTP сервера...');
-  server.close(() => {
+  appServer.close(() => {
     console.log('HTTP сервер закрыт.');
     process.exit(0);
   });
