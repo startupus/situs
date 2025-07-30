@@ -10,6 +10,16 @@ import { ValidationError } from './error.middleware';
 // Тип для определения источника данных для валидации
 type ValidationSource = 'body' | 'query' | 'params' | 'headers';
 
+// Расширяем интерфейс Request для добавления поддержки файлов
+declare global {
+  namespace Express {
+    interface Request {
+      files?: any;
+      file?: any;
+    }
+  }
+}
+
 /**
  * Создает middleware для валидации данных
  * @param schema - Zod схема для валидации
@@ -64,7 +74,7 @@ export const validate = (schema: z.ZodSchema, source: ValidationSource = 'body')
         const formattedErrors = error.errors.map(err => ({
           field: err.path.join('.'),
           message: err.message,
-          value: err.input
+          value: (err as any).input || 'invalid'
         }));
 
         const validationError = new ValidationError(
@@ -128,7 +138,7 @@ export const validateMultiple = (schemas: {
                 source: 'body',
                 field: err.path.join('.'),
                 message: err.message,
-                value: err.input
+                value: (err as any).input || 'invalid'
               });
             });
           }
@@ -145,7 +155,7 @@ export const validateMultiple = (schemas: {
                 source: 'query',
                 field: err.path.join('.'),
                 message: err.message,
-                value: err.input
+                value: (err as any).input || 'invalid'
               });
             });
           }
@@ -162,7 +172,7 @@ export const validateMultiple = (schemas: {
                 source: 'params',
                 field: err.path.join('.'),
                 message: err.message,
-                value: err.input
+                value: (err as any).input || 'invalid'
               });
             });
           }
@@ -179,7 +189,7 @@ export const validateMultiple = (schemas: {
                 source: 'headers',
                 field: err.path.join('.'),
                 message: err.message,
-                value: err.input
+                value: (err as any).input || 'invalid'
               });
             });
           }
@@ -213,8 +223,8 @@ export const validateFile = (options: {
 }) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      const files = req.files as any;
-      const file = req.file as any;
+      const files = req.files;
+      const file = req.file;
 
       // Проверяем обязательность файла
       if (options.required && !file && (!files || files.length === 0)) {

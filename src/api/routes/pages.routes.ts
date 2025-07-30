@@ -4,6 +4,7 @@ import { validateBody, validateQuery, validateParams } from '../middleware/valid
 import { asyncHandler } from '../middleware/error.middleware';
 import { requireAuth } from '../middleware/auth.middleware';
 import { PageSchemas, ParamSchemas } from '../validation/schemas';
+import { z } from 'zod';
 
 /**
  * Pages Routes - Маршруты для управления страницами
@@ -109,7 +110,7 @@ router.put(
 router.get(
   '/projects/:projectId/statistics',
   ...requireAuth,
-  validateParams(ParamSchemas.id.shape),
+  validateParams(z.object({ projectId: z.string().uuid() })),
   asyncHandler(PageController.getStatistics)
 );
 
