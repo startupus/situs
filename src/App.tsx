@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
@@ -57,6 +57,28 @@ function App() {
                 <SiteProvider>
                   <StudioInterface />
                 </SiteProvider>
+              } />
+              
+              {/* Демо-страница нового интерфейса Situs */}
+              <Route path="/situs-new-demo" element={
+                <div className="min-h-screen">
+                  {React.createElement(
+                    React.lazy(() => import('./pages/SitusNewDemo'))
+                  )}
+                </div>
+              } />
+              
+              {/* Новый интерфейс Situs (situs-new) */}
+              <Route path="/situs-new/*" element={
+                <Suspense fallback={
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                  </div>
+                }>
+                  {React.createElement(
+                    React.lazy(() => import('./components/situs-new/SitusApp'))
+                  )}
+                </Suspense>
               } />
               
               {/* Основной интерфейс Situs на основе Admino - обрабатывает все остальные роуты */}

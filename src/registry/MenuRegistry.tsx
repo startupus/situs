@@ -1,352 +1,492 @@
 import React from 'react';
-import { MenuSection, MenuItem, RouteConfig } from '../types/menu';
-
-// Иконки для меню
-import { 
-  FiHome, 
-  FiBriefcase, 
-  FiShoppingCart, 
-  FiMessageCircle, 
-  FiTrendingUp, 
-  FiUsers, 
-  FiSettings,
+import {
+  FiHome,
   FiUser,
-  FiSliders,
-  FiGlobe,
-  FiSmartphone,
-  FiZap,
-  FiPackage,
+  FiSettings,
+  FiLayout,
+  FiShoppingCart,
+  FiMessageSquare,
+  FiTrendingUp,
+  FiBarChart,
+  FiShield,
   FiMail,
-  FiBarChart3,
+  FiUsers,
+  FiGrid,
+  FiCompass,
+  FiPhone,
+  FiBookmark,
+  FiEye,
+  FiSearch,
   FiTarget,
-  FiShare2
+  FiShare2,
+  FiCamera,
+  FiEdit,
+  FiBell,
+  FiStar,
+  FiHeart,
+  FiActivity,
+  FiMapPin,
+  FiLock,
+  FiClock,
+  FiFlag,
+  FiZap,
+  FiGift,
+  FiTool,
+  FiRefreshCw,
+  FiBox,
+  FiCpu,
+  FiWifi,
+  FiGlobe,
+  FiSun,
+  FiMoon,
+  FiPlayCircle,
+  FiPauseCircle,
+  FiStopCircle,
+  FiShuffle,
+  FiRepeat,
+  FiMic,
+  FiHeadphones,
+  FiRadio,
+  FiPhoneCall,
+  FiVideoOff,
+  FiAlignLeft,
+  FiDownload,
+  FiUpload,
+  FiCloudRain,
 } from 'react-icons/fi';
 
-// Импорт компонентов страниц
-import SitusDashboard from '../components/situs/pages/SitusDashboard';
-import SitusProjects from '../components/situs/pages/SitusProjects';
-import SitusWebsites from '../components/situs/pages/SitusWebsites';
-import SitusStores from '../components/situs/pages/SitusStores';
-import SitusChatbots from '../components/situs/pages/SitusChatbots';
-import SitusOrders from '../components/situs/pages/SitusOrders';
-import SitusOrdersProducts from '../components/situs/pages/SitusOrdersProducts';
-import SitusOrdersServices from '../components/situs/pages/SitusOrdersServices';
-import SitusMarketing from '../components/situs/pages/SitusMarketing';
-import SitusUsers from '../components/situs/pages/SitusUsers';
-import SitusUsersNew from '../components/situs/pages/SitusUsersNew';
-import SitusSupport from '../components/situs/pages/SitusSupport';
-import SitusProfileSettings from '../components/situs/pages/SitusProfileSettings';
-import SitusSectionSettings from '../components/situs/pages/SitusSectionSettings';
+import SitusDashboard from '../components/situs-new/pages/SitusDashboard';
+import SitusProjects from '../components/situs-new/pages/SitusProjects';
+import SitusWebsites from '../components/situs-new/pages/SitusWebsites';
+import SitusStores from '../components/situs-new/pages/SitusStores';
+import SitusChatbots from '../components/situs-new/pages/SitusChatbots';
+import SitusOrders from '../components/situs-new/pages/SitusOrders';
+import SitusOrdersProducts from '../components/situs-new/pages/SitusOrdersProducts';
+import SitusOrdersServices from '../components/situs-new/pages/SitusOrdersServices';
+import SitusMarketing from '../components/situs-new/pages/SitusMarketing';
+import SitusUsersNew from '../components/situs-new/pages/SitusUsersNew';
+import SitusProfileSettings from '../components/situs-new/pages/SitusProfileSettings';
+import SitusSectionSettings from '../components/situs-new/pages/SitusSectionSettings';
+import SitusSupport from '../components/situs-new/pages/SitusSupport';
 
-class SitusMenuRegistry {
-  private sections: MenuSection[] = [];
-  private routes: RouteConfig[] = [];
+/**
+ * Интерфейс элемента меню
+ */
+export interface MenuItem {
+  id: string;
+  title: string;
+  icon?: React.ComponentType;
+  path?: string;
+  component?: React.ComponentType;
+  children?: MenuItem[];
+  badge?: string | number;
+  isActive?: boolean;
+  isNew?: boolean;
+  permission?: string;
+}
 
-  constructor() {
-    this.initializeDefaultMenu();
+/**
+ * Интерфейс группы меню
+ */
+export interface MenuGroup {
+  id: string;
+  title: string;
+  items: MenuItem[];
+}
+
+/**
+ * Реестр меню системы
+ */
+class MenuRegistry {
+  private static instance: MenuRegistry;
+  private menuItems: MenuGroup[] = [];
+
+  private constructor() {
+    this.initializeMenu();
   }
 
-  private initializeDefaultMenu() {
-    // Главное меню
-    this.addSection({
-      id: 'main',
-      title: 'Основные',
-      items: [
-        {
-          id: 'dashboard',
-          title: 'Дашборд',
-          path: '/',
-          icon: FiHome,
-          component: SitusDashboard
-        }
-      ]
-    });
-
-    // Проекты
-    this.addSection({
-      id: 'projects',
-      title: 'Проекты',
-      items: [
-        {
-          id: 'projects',
-          title: 'Все проекты',
-          path: '/projects',
-          icon: FiBriefcase,
-          component: SitusProjects
-        },
-        {
-          id: 'websites',
-          title: 'Веб-сайты',
-          path: '/projects/websites',
-          icon: FiGlobe,
-          component: SitusWebsites
-        },
-        {
-          id: 'stores',
-          title: 'Интернет-магазины',
-          path: '/projects/stores',
-          icon: FiShoppingCart,
-          component: SitusStores
-        },
-        {
-          id: 'chatbots',
-          title: 'Чат-боты',
-          path: '/projects/chatbots',
-          icon: FiMessageCircle,
-          component: SitusChatbots
-        },
-        {
-          id: 'landings',
-          title: 'Лендинги',
-          path: '/projects/landings',
-          icon: FiZap,
-          component: this.createPlaceholderComponent('Лендинги', 'Управление лендинг-страницами')
-        },
-        {
-          id: 'apps',
-          title: 'Приложения',
-          path: '/projects/apps',
-          icon: FiSmartphone,
-          component: this.createPlaceholderComponent('Приложения', 'Управление мобильными приложениями')
-        }
-      ]
-    });
-
-    // Заказы
-    this.addSection({
-      id: 'orders',
-      title: 'Заказы',
-      items: [
-        {
-          id: 'orders-all',
-          title: 'Все заказы',
-          path: '/orders',
-          icon: FiPackage,
-          component: SitusOrders
-        },
-        {
-          id: 'orders-products',
-          title: 'Товары',
-          path: '/orders/products',
-          icon: FiPackage,
-          component: SitusOrdersProducts
-        },
-        {
-          id: 'orders-services',
-          title: 'Услуги',
-          path: '/orders/services',
-          icon: FiPackage,
-          component: SitusOrdersServices
-        },
-        {
-          id: 'orders-forms',
-          title: 'Обратная связь',
-          path: '/orders/forms',
-          icon: FiMail,
-          component: this.createPlaceholderComponent('Обратная связь', 'Заявки из форм обратной связи')
-        },
-        {
-          id: 'orders-analytics',
-          title: 'Аналитика заказов',
-          path: '/orders/analytics',
-          icon: FiBarChart3,
-          component: this.createPlaceholderComponent('Аналитика заказов', 'Статистика и анализ заказов')
-        }
-      ]
-    });
-
-    // Маркетинг
-    this.addSection({
-      id: 'marketing',
-      title: 'Маркетинг',
-      items: [
-        {
-          id: 'marketing-all',
-          title: 'Обзор',
-          path: '/marketing',
-          icon: FiTrendingUp,
-          component: SitusMarketing
-        },
-        {
-          id: 'marketing-seo',
-          title: 'SEO продвижение',
-          path: '/marketing/seo',
-          icon: FiTarget,
-          component: this.createPlaceholderComponent('SEO продвижение', 'Оптимизация для поисковых систем')
-        },
-        {
-          id: 'marketing-advertising',
-          title: 'Реклама',
-          path: '/marketing/advertising',
-          icon: FiTarget,
-          component: this.createPlaceholderComponent('Реклама', 'Управление рекламными кампаниями')
-        },
-        {
-          id: 'marketing-analytics',
-          title: 'Аналитика маркетинга',
-          path: '/marketing/analytics',
-          icon: FiBarChart3,
-          component: this.createPlaceholderComponent('Аналитика маркетинга', 'Анализ эффективности и поведения пользователей')
-        },
-        {
-          id: 'marketing-email',
-          title: 'Email маркетинг',
-          path: '/marketing/email',
-          icon: FiMail,
-          component: this.createPlaceholderComponent('Email маркетинг', 'Автоматизация email-рассылок')
-        },
-        {
-          id: 'marketing-social',
-          title: 'Социальные сети',
-          path: '/marketing/social',
-          icon: FiShare2,
-          component: this.createPlaceholderComponent('Социальные сети', 'SMM и продвижение в социальных сетях')
-        }
-      ]
-    });
-
-    // Пользователи
-    this.addSection({
-      id: 'users',
-      title: 'Пользователи',
-      items: [
-        {
-          id: 'users-new',
-          title: 'Управление пользователями',
-          path: '/users-new',
-          icon: FiUsers,
-          component: SitusUsersNew
-        }
-      ]
-    });
-
-    // Настройки
-    this.addSection({
-      id: 'settings',
-      title: 'Настройки',
-      items: [
-        {
-          id: 'profile-settings',
-          title: 'Профиль',
-          path: '/profile-settings',
-          icon: FiUser,
-          component: SitusProfileSettings
-        },
-        {
-          id: 'section-settings',
-          title: 'Разделы',
-          path: '/section-settings',
-          icon: FiSliders,
-          component: SitusSectionSettings
-        },
-        {
-          id: 'users-settings',
-          title: 'Пользователи',
-          path: '/users-new',
-          icon: FiUsers,
-          component: SitusUsersNew
-        }
-      ]
-    });
-
-    // Поддержка
-    this.addSection({
-      id: 'support',
-      title: 'Поддержка',
-      items: [
-        {
-          id: 'support',
-          title: 'Техподдержка',
-          path: '/support',
-          icon: FiMessageCircle,
-          component: SitusSupport
-        }
-      ]
-    });
-
-    this.generateRoutes();
-  }
-
-  private createPlaceholderComponent(title: string, description: string) {
-    return () => (
-      <div className="p-6">
-        <h1 className="text-2xl font-semibold text-dark dark:text-white">{title}</h1>
-        <p className="text-body-color dark:text-dark-6 mt-2">{description}</p>
-      </div>
-    );
-  }
-
-  addSection(section: MenuSection) {
-    this.sections.push(section);
-  }
-
-  addMenuItem(sectionId: string, item: MenuItem & { component?: React.ComponentType }) {
-    const section = this.sections.find(s => s.id === sectionId);
-    if (section) {
-      section.items.push(item);
-      if (item.component) {
-        this.routes.push({
-          path: item.path,
-          component: item.component
-        });
-      }
+  public static getInstance(): MenuRegistry {
+    if (!MenuRegistry.instance) {
+      MenuRegistry.instance = new MenuRegistry();
     }
+    return MenuRegistry.instance;
   }
 
-  getSections(): MenuSection[] {
-    return this.sections;
+  /**
+   * Создание компонента-заглушки для страниц в разработке
+   */
+  private createPlaceholderComponent(title: string, description: string): React.ComponentType {
+    return function PlaceholderComponent() {
+      return (
+        <div className="flex items-center justify-center min-h-96 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="text-center">
+            <div className="mb-4">
+              <FiTool className="mx-auto h-12 w-12 text-gray-400" />
+            </div>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+              {title}
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400 max-w-sm">
+              {description}
+            </p>
+          </div>
+        </div>
+      );
+    };
   }
 
-  getRoutes(): RouteConfig[] {
-    return this.routes;
+  /**
+   * Инициализация структуры меню
+   */
+  private initializeMenu(): void {
+    this.menuItems = [
+      // Основное
+      {
+        id: 'main',
+        title: 'Основное',
+        items: [
+          {
+            id: 'dashboard',
+            title: 'Дашборд',
+            icon: FiHome,
+            path: '/dashboard',
+            component: SitusDashboard
+          },
+          {
+            id: 'projects',
+            title: 'Проекты',
+            icon: FiLayout,
+            path: '/projects',
+            component: SitusProjects
+          },
+          {
+            id: 'websites',
+            title: 'Сайты',
+            icon: FiGlobe,
+            path: '/websites',
+            component: SitusWebsites
+          },
+          {
+            id: 'stores',
+            title: 'Интернет-магазины',
+            icon: FiShoppingCart,
+            path: '/stores',
+            component: SitusStores
+          },
+          {
+            id: 'chatbots',
+            title: 'Чат-боты',
+            icon: FiMessageSquare,
+            path: '/chatbots',
+            component: SitusChatbots
+          },
+          {
+            id: 'landings',
+            title: 'Лендинги',
+            icon: FiCompass,
+            path: '/landings',
+            component: this.createPlaceholderComponent('Лендинги', 'Управление лендинг-страницами')
+          },
+          {
+            id: 'apps',
+            title: 'Приложения',
+            icon: FiGrid,
+            path: '/apps',
+            component: this.createPlaceholderComponent('Приложения', 'Управление мобильными приложениями')
+          }
+        ]
+      },
+
+      // Продажи и заказы
+      {
+        id: 'sales',
+        title: 'Продажи и заказы',
+        items: [
+          {
+            id: 'orders',
+            title: 'Заказы',
+            icon: FiShoppingCart,
+            path: '/orders',
+            component: SitusOrders
+          },
+          {
+            id: 'products',
+            title: 'Товары',
+            icon: FiBox,
+            path: '/products',
+            component: SitusOrdersProducts
+          },
+          {
+            id: 'services',
+            title: 'Услуги',
+            icon: FiTool,
+            path: '/services',
+            component: SitusOrdersServices
+          },
+          {
+            id: 'feedback',
+            title: 'Обратная связь',
+            icon: FiMail,
+            path: '/feedback',
+            component: this.createPlaceholderComponent('Обратная связь', 'Заявки из форм обратной связи')
+          },
+          {
+            id: 'analytics-orders',
+            title: 'Аналитика заказов',
+            icon: FiBarChart,
+            path: '/analytics/orders',
+            component: this.createPlaceholderComponent('Аналитика заказов', 'Статистика и анализ заказов')
+          }
+        ]
+      },
+
+      // Маркетинг
+      {
+        id: 'marketing',
+        title: 'Маркетинг',
+        items: [
+          {
+            id: 'marketing-dashboard',
+            title: 'Маркетинг дашборд',
+            icon: FiTrendingUp,
+            path: '/marketing',
+            component: SitusMarketing
+          },
+          {
+            id: 'seo',
+            title: 'SEO продвижение',
+            icon: FiSearch,
+            path: '/seo',
+            component: this.createPlaceholderComponent('SEO продвижение', 'Оптимизация для поисковых систем')
+          },
+          {
+            id: 'advertising',
+            title: 'Реклама',
+            icon: FiTarget,
+            path: '/advertising',
+            component: this.createPlaceholderComponent('Реклама', 'Управление рекламными кампаниями')
+          },
+          {
+            id: 'analytics-marketing',
+            title: 'Аналитика маркетинга',
+            icon: FiActivity,
+            path: '/analytics/marketing',
+            component: this.createPlaceholderComponent('Аналитика маркетинга', 'Анализ эффективности и поведения пользователей')
+          },
+          {
+            id: 'email-marketing',
+            title: 'Email маркетинг',
+            icon: FiMail,
+            path: '/email-marketing',
+            component: this.createPlaceholderComponent('Email маркетинг', 'Автоматизация email-рассылок')
+          },
+          {
+            id: 'social-media',
+            title: 'Социальные сети',
+            icon: FiShare2,
+            path: '/social-media',
+            component: this.createPlaceholderComponent('Социальные сети', 'SMM и продвижение в социальных сетях')
+          }
+        ]
+      },
+
+      // Пользователи и настройки
+      {
+        id: 'users-settings',
+        title: 'Пользователи и настройки',
+        items: [
+          {
+            id: 'users',
+            title: 'Пользователи',
+            icon: FiUsers,
+            path: '/users',
+            component: SitusUsersNew
+          },
+          {
+            id: 'profile',
+            title: 'Мой профиль',
+            icon: FiUser,
+            path: '/profile',
+            component: SitusProfileSettings
+          },
+          {
+            id: 'settings',
+            title: 'Настройки',
+            icon: FiSettings,
+            path: '/settings',
+            component: SitusSectionSettings
+          },
+          {
+            id: 'permissions',
+            title: 'Права доступа',
+            icon: FiShield,
+            path: '/permissions',
+            component: SitusUsersNew
+          }
+        ]
+      },
+
+      // Поддержка
+      {
+        id: 'support',
+        title: 'Поддержка',
+        items: [
+          {
+            id: 'support-center',
+            title: 'Центр поддержки',
+            icon: FiHeart,
+            path: '/support',
+            component: SitusSupport
+          }
+        ]
+      }
+    ];
   }
 
-  private generateRoutes() {
-    this.routes = [];
-    this.sections.forEach(section => {
-      section.items.forEach(item => {
-        if ((item as any).component) {
-          this.routes.push({
-            path: item.path,
-            component: (item as any).component
-          });
-        }
-      });
-    });
+  /**
+   * Получение всех групп меню
+   */
+  public getMenuGroups(): MenuGroup[] {
+    return this.menuItems;
   }
 
-  getMenuByPath(path: string): MenuItem | null {
-    for (const section of this.sections) {
-      for (const item of section.items) {
+  /**
+   * Получение группы меню по ID
+   */
+  public getMenuGroup(groupId: string): MenuGroup | undefined {
+    return this.menuItems.find(group => group.id === groupId);
+  }
+
+  /**
+   * Получение элемента меню по пути
+   */
+  public getMenuItemByPath(path: string): MenuItem | undefined {
+    for (const group of this.menuItems) {
+      for (const item of group.items) {
         if (item.path === path) {
           return item;
         }
+        if (item.children) {
+          const childItem = this.findInChildren(item.children, path);
+          if (childItem) return childItem;
+        }
       }
     }
-    return null;
+    return undefined;
   }
 
-  getActiveMenu(currentPath: string): MenuItem | null {
-    return this.getMenuByPath(currentPath);
+  /**
+   * Поиск в дочерних элементах
+   */
+  private findInChildren(children: MenuItem[], path: string): MenuItem | undefined {
+    for (const child of children) {
+      if (child.path === path) {
+        return child;
+      }
+      if (child.children) {
+        const found = this.findInChildren(child.children, path);
+        if (found) return found;
+      }
+    }
+    return undefined;
   }
 
-  // Метод для получения меню для сайдбара (совместимость со старым форматом)
-  getSidebarMenu() {
-    return this.sections.map(section => ({
-      ...section,
-      items: section.items.map(item => ({
-        divider: false,
-        link: item.path,
-        text: item.title,
-        icon: item.icon ? React.createElement(item.icon, { width: 18, height: 18, className: "fill-current" }) : null,
-        hasSubmenu: false,
-        submenu: []
-      }))
-    }));
+  /**
+   * Получение активных элементов меню
+   */
+  public getActiveMenuItems(): MenuItem[] {
+    const activeItems: MenuItem[] = [];
+    
+    for (const group of this.menuItems) {
+      for (const item of group.items) {
+        if (item.isActive) {
+          activeItems.push(item);
+        }
+        if (item.children) {
+          const activeChildren = item.children.filter(child => child.isActive);
+          activeItems.push(...activeChildren);
+        }
+      }
+    }
+    
+    return activeItems;
+  }
+
+  /**
+   * Обновление статуса активности элемента меню
+   */
+  public setActiveMenuItem(path: string): void {
+    // Сначала деактивируем все элементы
+    this.deactivateAllItems();
+    
+    // Затем активируем нужный
+    const item = this.getMenuItemByPath(path);
+    if (item) {
+      item.isActive = true;
+    }
+  }
+
+  /**
+   * Деактивация всех элементов меню
+   */
+  private deactivateAllItems(): void {
+    for (const group of this.menuItems) {
+      for (const item of group.items) {
+        item.isActive = false;
+        if (item.children) {
+          item.children.forEach(child => {
+            child.isActive = false;
+          });
+        }
+      }
+    }
+  }
+
+  /**
+   * Добавление нового элемента меню
+   */
+  public addMenuItem(groupId: string, menuItem: MenuItem): boolean {
+    const group = this.getMenuGroup(groupId);
+    if (group) {
+      group.items.push(menuItem);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Удаление элемента меню
+   */
+  public removeMenuItem(groupId: string, itemId: string): boolean {
+    const group = this.getMenuGroup(groupId);
+    if (group) {
+      const index = group.items.findIndex(item => item.id === itemId);
+      if (index !== -1) {
+        group.items.splice(index, 1);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Получение flat списка всех элементов меню для поиска
+   */
+  public getAllMenuItems(): MenuItem[] {
+    const allItems: MenuItem[] = [];
+    
+    for (const group of this.menuItems) {
+      for (const item of group.items) {
+        allItems.push(item);
+        if (item.children) {
+          allItems.push(...item.children);
+        }
+      }
+    }
+    
+    return allItems;
   }
 }
 
-// Singleton экземпляр
-export const menuRegistry = new SitusMenuRegistry();
-
-export default menuRegistry; 
+// Экспорт singleton instance
+export default MenuRegistry.getInstance(); 
