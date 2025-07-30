@@ -415,6 +415,37 @@ class ApiClient {
     return this.put(`/pages/${id}/unpublish`);
   }
 
+  // === ANALYTICS API ===
+
+  /**
+   * Получение данных роста пользователей
+   */
+  async getUserGrowthAnalytics(period: '7d' | '30d' | '90d' | '1y' = '30d'): Promise<ApiResponse<any>> {
+    return this.get(`/analytics/user-growth?period=${period}`);
+  }
+
+  /**
+   * Получение распределения проектов по типам
+   */
+  async getProjectDistributionAnalytics(period: '7d' | '30d' | '90d' | '1y' = '30d'): Promise<ApiResponse<any>> {
+    return this.get(`/analytics/project-distribution?period=${period}`);
+  }
+
+  /**
+   * Получение данных о доходах
+   */
+  async getRevenueAnalytics(period: '7d' | '30d' | '90d' | '1y' = '30d'): Promise<ApiResponse<any>> {
+    return this.get(`/analytics/revenue?period=${period}`);
+  }
+
+  /**
+   * Получение последней активности
+   */
+  async getActivityAnalytics(params?: { limit?: number; type?: 'user' | 'project' | 'page' | 'all' }): Promise<ApiResponse<any>> {
+    const queryParams = params ? `?${new URLSearchParams(params as any).toString()}` : '';
+    return this.get(`/analytics/activity${queryParams}`);
+  }
+
   // === UTILITY METHODS ===
 
   /**

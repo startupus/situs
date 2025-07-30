@@ -58,11 +58,14 @@ const SitusDashboard: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      // Параллельно загружаем статистику
-      const [usersStats, projectsStats, userGrowthData] = await Promise.all([
+      // Параллельно загружаем статистику и аналитические данные
+      const [usersStats, projectsStats, userGrowthData, projectDistribution, revenueData, activityData] = await Promise.all([
         apiClient.getUsersStatistics(),
         apiClient.getProjectsStatistics(),
-        generateMockChartData() // Пока используем mock данные для графиков
+        apiClient.getUserGrowthAnalytics('30d'),
+        apiClient.getProjectDistributionAnalytics('30d'),
+        apiClient.getRevenueAnalytics('30d'),
+        apiClient.getActivityAnalytics({ limit: 5 })
       ]);
 
       // Обрабатываем ошибки API
@@ -71,6 +74,18 @@ const SitusDashboard: React.FC = () => {
       }
       if (projectsStats.error) {
         console.warn('Projects API error:', projectsStats.error);
+      }
+      if (userGrowthData.error) {
+        console.warn('User growth API error:', userGrowthData.error);
+      }
+      if (projectDistribution.error) {
+        console.warn('Project distribution API error:', projectDistribution.error);
+      }
+      if (revenueData.error) {
+        console.warn('Revenue API error:', revenueData.error);
+      }
+      if (activityData.error) {
+        console.warn('Activity API error:', activityData.error);
       }
 
       // Формируем данные дашборда (с fallback на mock данные)
@@ -95,8 +110,12 @@ const SitusDashboard: React.FC = () => {
             thisMonth: 450000
           }
         },
-        charts: userGrowthData,
-        recentActivity: generateMockActivity()
+        charts: {
+          userGrowth: userGrowthData.data || generateMockUserGrowth(),
+          projectActivity: projectDistribution.data || generateMockProjectDistribution(),
+          revenueChart: revenueData.data || generateMockRevenue()
+        },
+        recentActivity: activityData.data || generateMockActivity()
       };
 
       setDashboardData(dashboardData);
@@ -108,43 +127,47 @@ const SitusDashboard: React.FC = () => {
     }
   };
 
-  // Генерация mock данных для графиков (временно)
-  const generateMockChartData = () => {
+  // Генерация fallback данных для графиков
+  const generateMockUserGrowth = () => {
     return {
-      userGrowth: {
-        labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
-        datasets: [{
-          label: 'Новые пользователи',
-          data: [12, 19, 15, 25, 22, 30],
-          backgroundColor: 'rgba(59, 130, 246, 0.1)',
-          borderColor: 'rgba(59, 130, 246, 1)',
-          fill: true
-        }]
-      },
-      projectActivity: {
-        labels: ['Сайты', 'Магазины', 'Лендинги', 'Чат-боты', 'Приложения'],
-        datasets: [{
-          label: 'Количество проектов',
-          data: [15, 8, 12, 6, 4],
-          backgroundColor: [
-            'rgba(59, 130, 246, 0.8)',
-            'rgba(16, 185, 129, 0.8)',
-            'rgba(245, 158, 11, 0.8)',
-            'rgba(239, 68, 68, 0.8)',
-            'rgba(139, 92, 246, 0.8)'
-          ]
-        }]
-      },
-      revenueChart: {
-        labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
-        datasets: [{
-          label: 'Доходы (тыс. руб.)',
-          data: [320, 450, 380, 520, 670, 450],
-          backgroundColor: 'rgba(16, 185, 129, 0.1)',
-          borderColor: 'rgba(16, 185, 129, 1)',
-          fill: true
-        }]
-      }
+      labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
+      datasets: [{
+        label: 'Новые пользователи',
+        data: [12, 19, 15, 25, 22, 30],
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderColor: 'rgba(59, 130, 246, 1)',
+        fill: true
+      }]
+    };
+  };
+
+  const generateMockProjectDistribution = () => {
+    return {
+      labels: ['Сайты', 'Магазины', 'Лендинги', 'Чат-боты', 'Приложения'],
+      datasets: [{
+        label: 'Количество проектов',
+        data: [15, 8, 12, 6, 4],
+        backgroundColor: [
+          'rgba(59, 130, 246, 0.8)',
+          'rgba(16, 185, 129, 0.8)',
+          'rgba(245, 158, 11, 0.8)',
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(139, 92, 246, 0.8)'
+        ]
+      }]
+    };
+  };
+
+  const generateMockRevenue = () => {
+    return {
+      labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
+      datasets: [{
+        label: 'Доходы (тыс. руб.)',
+        data: [320, 450, 380, 520, 670, 450],
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        borderColor: 'rgba(16, 185, 129, 1)',
+        fill: true
+      }]
     };
   };
 
