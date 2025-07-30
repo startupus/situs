@@ -3,6 +3,7 @@ import PageController from '../controllers/PageController';
 import { validateBody, validateQuery, validateParams } from '../middleware/validation.middleware';
 import { asyncHandler } from '../middleware/error.middleware';
 import { requireAuth } from '../middleware/auth.middleware';
+import { requirePageOwnership } from '../middleware/resourceOwnership.middleware';
 import { PageSchemas, ParamSchemas } from '../validation/schemas';
 import { z } from 'zod';
 
@@ -43,6 +44,7 @@ router.get(
   '/:id',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requirePageOwnership,
   asyncHandler(PageController.findOne)
 );
 
@@ -54,6 +56,7 @@ router.put(
   '/:id',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requirePageOwnership,
   validateBody(PageSchemas.update),
   asyncHandler(PageController.update)
 );
@@ -66,6 +69,7 @@ router.delete(
   '/:id',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requirePageOwnership,
   asyncHandler(PageController.delete)
 );
 
@@ -77,6 +81,7 @@ router.post(
   '/:id/duplicate',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requirePageOwnership,
   validateBody(PageSchemas.duplicate),
   asyncHandler(PageController.duplicate)
 );
@@ -89,6 +94,7 @@ router.put(
   '/:id/publish',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requirePageOwnership,
   asyncHandler(PageController.publish)
 );
 
@@ -100,6 +106,7 @@ router.put(
   '/:id/unpublish',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requirePageOwnership,
   asyncHandler(PageController.unpublish)
 );
 

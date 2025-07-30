@@ -3,6 +3,7 @@ import ProjectController from '../controllers/ProjectController';
 import { validateBody, validateQuery, validateParams } from '../middleware/validation.middleware';
 import { asyncHandler } from '../middleware/error.middleware';
 import { requireAuth } from '../middleware/auth.middleware';
+import { requireProjectOwnership } from '../middleware/resourceOwnership.middleware';
 import { ProjectSchemas, ParamSchemas } from '../validation/schemas';
 
 /**
@@ -52,6 +53,7 @@ router.get(
   '/:id',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requireProjectOwnership,
   asyncHandler(ProjectController.findOne)
 );
 
@@ -63,6 +65,7 @@ router.put(
   '/:id',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requireProjectOwnership,
   validateBody(ProjectSchemas.update),
   asyncHandler(ProjectController.update)
 );
@@ -75,6 +78,7 @@ router.delete(
   '/:id',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requireProjectOwnership,
   asyncHandler(ProjectController.delete)
 );
 
@@ -86,6 +90,7 @@ router.put(
   '/:id/publish',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requireProjectOwnership,
   asyncHandler(ProjectController.publish)
 );
 
@@ -97,6 +102,7 @@ router.put(
   '/:id/unpublish',
   ...requireAuth,
   validateParams(ParamSchemas.id),
+  requireProjectOwnership,
   asyncHandler(ProjectController.unpublish)
 );
 

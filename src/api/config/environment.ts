@@ -14,8 +14,8 @@ const envSchema = z.object({
   // Database
   DATABASE_URL: z.string().url('DATABASE_URL должен быть валидным URL'),
   
-  // JWT
-  JWT_SECRET: z.string().min(32, 'JWT_SECRET должен быть минимум 32 символа'),
+  // JWT - КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ
+  JWT_SECRET: z.string().min(64, 'JWT_SECRET должен быть минимум 64 символа для production').optional(),
   JWT_EXPIRES_IN: z.string().default('7d'),
   
   // Server
@@ -61,7 +61,35 @@ const parseEnv = () => {
 };
 
 // Экспортируем конфигурацию
-export const env = parseEnv();
+const baseEnv = parseEnv();
+
+// КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Обработка JWT_SECRET
+const getJWTSecret = (): string => {
+  // 1. Попытка получить из переменных окружения
+  if (process.env.JWT_SECRET) {
+    if (process.env.JWT_SECRET.length < 64) {
+      console.warn('⚠️  SECURITY WARNING: JWT_SECRET слишком короткий для production');
+    }
+    return process.env.JWT_SECRET;
+  }
+
+  // 2. Для development - временный секрет с предупреждением
+  if (baseEnv.NODE_ENV === 'development') {
+    console.warn('🚨 SECURITY WARNING: Используется временный JWT_SECRET для разработки');
+    console.warn('   Для production установите: export JWT_SECRET=$(openssl rand -hex 64)');
+    return 'dev-temporary-jwt-secret-this-is-not-secure-for-production-use-openssl-rand-hex-64-instead';
+  }
+
+  // 3. Production без секрета - критическая ошибка
+  console.error('🔥 CRITICAL SECURITY ERROR: JWT_SECRET не установлен в production!');
+  console.error('   Установите: export JWT_SECRET=$(openssl rand -hex 64)');
+  process.exit(1);
+};
+
+export const env = {
+  ...baseEnv,
+  JWT_SECRET: getJWTSecret()
+};
 
 // Конфигурация по разделам (как в Strapi)
 export const database = {
