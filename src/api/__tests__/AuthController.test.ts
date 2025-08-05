@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import AuthController from '../controllers/AuthController';
 import UserService from '../services/UserService';
 

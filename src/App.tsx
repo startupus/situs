@@ -13,6 +13,7 @@ import ProjectWorkspace from './components/legacy/ProjectWorkspace'
 import ProjectSelector from './pages/ProjectSelector'
 import { useTheme } from './hooks/useTheme'
 import SitusApp from './components/situs/SitusApp'
+import SitusNewApp from './components/situs-new/SitusApp'
 
 function App() {
   const { resolvedTheme } = useTheme()
@@ -56,6 +57,13 @@ function App() {
               <Route path="/studio/*" element={
                 <SiteProvider>
                   <StudioInterface />
+                </SiteProvider>
+              } />
+              
+              {/* Новый интерфейс Situs (situs-new) */}
+              <Route path="/situs-new/*" element={
+                <SiteProvider>
+                  <SitusNewApp />
                 </SiteProvider>
               } />
               

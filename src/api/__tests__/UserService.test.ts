@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import UserService from '../services/UserService';
 
 // Мокаем зависимости

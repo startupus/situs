@@ -54,12 +54,45 @@
   - 📄 Конфигурация Vitest для Node.js окружения
   - 📄 Setup файл с переменными окружения и моками
 
-### 🔄 **СЛЕДУЮЩИЙ ЭТАП - ИНТЕГРАЦИЯ REDAKTUS В SITUS:**
-- [ ] **Интегрировать Redaktus в Situs:**
-  - 📄 Создать `src/components/situs/pages/SitusEditor.tsx`
-  - 📄 Добавить роут `/editor` в `SitusApp.tsx` 
-  - 📄 Импортировать `RedaktusCore` в Situs интерфейс
-  - 📄 Создать переходы Project → Editor из `SitusProjects.tsx`
+### ✅ **РЕВЬЮ КОДА И ИНТЕГРАЦИЯ ПОЛЕЗНЫХ КОМПОНЕНТОВ - ЗАВЕРШЕНО**
+- ✅ **Проведен анализ ветки cursor/continue-development-and-refactor-code-5a40:**
+  - 📄 Создан документ `docs/CODE_REVIEW_AND_INTEGRATION_PLAN.md`
+  - 📄 Выявлены ценные компоненты для интеграции
+  - 📄 Определен план поэтапной интеграции
+
+### ✅ **ЭТАП 1: ИНТЕГРАЦИЯ API CLIENT И КОМПОНЕНТОВ - ЗАВЕРШЕНО**
+- ✅ **Интегрирован ApiClient:**
+  - 📄 `src/api/client/ApiClient.ts` - единая точка доступа к REST API
+  - 📄 Автоматическое управление токенами авторизации
+  - 📄 Типизированные интерфейсы и обработка ошибок
+  - 📄 Методы для всех API endpoints (auth, users, projects, analytics)
+
+- ✅ **Интегрирован компонент графиков:**
+  - 📄 `src/components/charts/StatsChart.tsx` - универсальный компонент для графиков
+  - 📄 Поддержка Line, Bar, Doughnut графиков с Chart.js
+  - 📄 Темная/светлая тема и адаптивность
+  - 📄 Установлены зависимости: chart.js, react-chartjs-2
+
+- ✅ **Интегрирован новый интерфейс Situs:**
+  - 📄 `src/components/situs-new/` - современный интерфейс с аналитикой
+  - 📄 `SitusApp.tsx` - главный компонент с роутингом
+  - 📄 `SitusDashboard.tsx` - дашборд с графиками и статистикой
+  - 📄 `SitusProjects.tsx`, `SitusUsersNew.tsx`, `SitusAnalytics.tsx` - страницы
+  - 📄 `SitusMainLayout.tsx` - основной layout
+  - 📄 Добавлен роут `/situs-new/*` в `App.tsx`
+
+### 🔄 **СЛЕДУЮЩИЙ ЭТАП - ИСПРАВЛЕНИЕ ТЕСТОВ И ДОРАБОТКА:**
+- [ ] **Исправить проблемы с тестами:**
+  - 📄 Проблемы с моками Prisma (TypeError: Invalid enum value: __esModule)
+  - 📄 Проблемы с JWT моками (Failed to load url jsonwebtoken)
+  - 📄 Несоответствие сигнатур методов в контроллерах и тестах
+  - 📄 Обновить тесты под реальную архитектуру API
+
+- [ ] **Доработать новый интерфейс:**
+  - 📄 Добавить недостающие компоненты (Header, Sidebar, UI)
+  - 📄 Настроить интеграцию с реальным API
+  - 📄 Добавить error boundaries и loading states
+  - 📄 Протестировать все страницы интерфейса
 
 ### 📁 **ПРАВИЛЬНАЯ СТРУКТУРА ПРОЕКТА**
 ```

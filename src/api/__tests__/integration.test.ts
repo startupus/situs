@@ -8,6 +8,7 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 // Мокаем зависимости
 vi.mock('@prisma/client');

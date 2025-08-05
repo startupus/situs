@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import ProjectService from '../services/ProjectService';
 
 // Мокаем Prisma
