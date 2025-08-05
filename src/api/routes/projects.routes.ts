@@ -1,103 +1,42 @@
 import { Router } from 'express';
 import ProjectController from '../controllers/ProjectController';
-import { validateBody, validateQuery, validateParams } from '../middleware/validation.middleware';
-import { asyncHandler } from '../middleware/error.middleware';
-import { requireAuth } from '../middleware/auth.middleware';
-import { ProjectSchemas, ParamSchemas } from '../validation/schemas';
-
-/**
- * Projects Routes - Маршруты для управления проектами
- * Включают авторизацию, валидацию и проверку владения ресурсами
- */
 
 const router = Router();
 
 /**
- * GET /api/projects/statistics
- * Получение статистики проектов пользователя
+ * Маршруты проектов
+ * GET /api/projects - Получение всех проектов
+ * GET /api/projects/:id - Получение проекта по ID
+ * POST /api/projects - Создание проекта
+ * PUT /api/projects/:id - Обновление проекта
+ * DELETE /api/projects/:id - Удаление проекта
+ * PUT /api/projects/:id/publish - Публикация проекта
+ * PUT /api/projects/:id/unpublish - Снятие с публикации
+ * GET /api/projects/statistics - Статистика проектов
  */
-router.get(
-  '/statistics',
-  ...requireAuth,
-  asyncHandler(ProjectController.getStatistics)
-);
 
-/**
- * GET /api/projects
- * Получение всех проектов пользователя с фильтрацией
- */
-router.get(
-  '/',
-  ...requireAuth,
-  validateQuery(ProjectSchemas.filters),
-  asyncHandler(ProjectController.find)
-);
+// Получение всех проектов пользователя
+router.get('/', ProjectController.find);
 
-/**
- * POST /api/projects
- * Создание нового проекта
- */
-router.post(
-  '/',
-  ...requireAuth,
-  validateBody(ProjectSchemas.create),
-  asyncHandler(ProjectController.create)
-);
+// Получение статистики проектов
+router.get('/statistics', ProjectController.getStatistics);
 
-/**
- * GET /api/projects/:id
- * Получение проекта по ID
- */
-router.get(
-  '/:id',
-  ...requireAuth,
-  validateParams(ParamSchemas.id),
-  asyncHandler(ProjectController.findOne)
-);
+// Получение проекта по ID
+router.get('/:id', ProjectController.findOne);
 
-/**
- * PUT /api/projects/:id
- * Обновление проекта
- */
-router.put(
-  '/:id',
-  ...requireAuth,
-  validateParams(ParamSchemas.id),
-  validateBody(ProjectSchemas.update),
-  asyncHandler(ProjectController.update)
-);
+// Создание нового проекта
+router.post('/', ProjectController.create);
 
-/**
- * DELETE /api/projects/:id
- * Удаление проекта
- */
-router.delete(
-  '/:id',
-  ...requireAuth,
-  validateParams(ParamSchemas.id),
-  asyncHandler(ProjectController.delete)
-);
+// Обновление проекта
+router.put('/:id', ProjectController.update);
 
-/**
- * PUT /api/projects/:id/publish
- * Публикация проекта
- */
-router.put(
-  '/:id/publish',
-  ...requireAuth,
-  validateParams(ParamSchemas.id),
-  asyncHandler(ProjectController.publish)
-);
+// Удаление проекта
+router.delete('/:id', ProjectController.delete);
 
-/**
- * PUT /api/projects/:id/unpublish
- * Снятие проекта с публикации
- */
-router.put(
-  '/:id/unpublish',
-  ...requireAuth,
-  validateParams(ParamSchemas.id),
-  asyncHandler(ProjectController.unpublish)
-);
+// Публикация проекта
+router.put('/:id/publish', ProjectController.publish);
+
+// Снятие проекта с публикации
+router.put('/:id/unpublish', ProjectController.unpublish);
 
 export default router;

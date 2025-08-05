@@ -11,25 +11,21 @@ export interface CreateProjectData {
   name: string;
   description?: string;
   slug?: string;
-  type?: 'WEBSITE' | 'ECOMMERCE' | 'LANDING' | 'BLOG' | 'APP';
+  type?: string;
   domain?: string;
   customDomain?: string;
-  settings?: {
-    theme?: 'light' | 'dark' | 'auto';
-    language?: 'ru' | 'en';
-    creationType?: 'manual' | 'ai';
-  };
+  settings?: any;
   ownerId: string;
 }
 
 export interface UpdateProjectData {
   name?: string;
   description?: string;
-  type?: 'WEBSITE' | 'ECOMMERCE' | 'LANDING' | 'BLOG' | 'APP';
+  type?: string;
   domain?: string;
   customDomain?: string;
   settings?: any;
-  status?: string;
+  status?: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
   isPublished?: boolean;
 }
 
@@ -44,11 +40,13 @@ class ProjectService {
   /**
    * Получение всех проектов пользователя с фильтрацией
    */
-  async findMany(ownerId: string, filters?: ProjectFilters) {
+  async findMany(userId: string, filters?: ProjectFilters) {
     try {
-      const whereClause: any = { ownerId };
+      const whereClause: any = {
+        ownerId: userId
+      };
       
-      // Добавляем поиск
+      // Поиск по названию или описанию
       if (filters?.search) {
         whereClause.OR = [
           { name: { contains: filters.search, mode: 'insensitive' } },
@@ -56,7 +54,7 @@ class ProjectService {
         ];
       }
       
-      // Добавляем фильтр по статусу
+      // Фильтр по статусу
       if (filters?.status) {
         whereClause.status = filters.status.toUpperCase();
       }
@@ -69,21 +67,30 @@ class ProjectService {
           case 'name':
             orderBy = { name: sortOrder };
             break;
-          case 'created':
-            orderBy = { createdAt: sortOrder };
-            break;
           case 'updated':
             orderBy = { updatedAt: sortOrder };
+            break;
+          case 'created':
+            orderBy = { createdAt: sortOrder };
             break;
         }
       }
 
       const projects = await prisma.project.findMany({
         where: whereClause,
-        include: {
-          pages: {
-            orderBy: { createdAt: 'desc' }
-          },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          slug: true,
+          type: true,
+          domain: true,
+          customDomain: true,
+          settings: true,
+          status: true,
+          isPublished: true,
+          createdAt: true,
+          updatedAt: true,
           _count: {
             select: { pages: true }
           }
@@ -96,23 +103,14 @@ class ProjectService {
         name: project.name,
         description: project.description,
         slug: project.slug,
-        type: project.type.toLowerCase(),
-        status: project.status,
+        type: project.type,
         domain: project.domain,
         customDomain: project.customDomain,
-        isPublished: project.isPublished,
         settings: project.settings,
+        status: project.status.toLowerCase(),
+        isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString(),
-        pages: project.pages.map(page => ({
-          id: page.id,
-          title: page.title,
-          slug: page.slug,
-          isHomePage: page.isHomePage,
-          status: page.status,
-          createdAt: page.createdAt.toISOString(),
-          updatedAt: page.updatedAt.toISOString()
-        })),
         pageCount: project._count.pages
       }));
     } catch (error) {
@@ -128,12 +126,37 @@ class ProjectService {
     try {
       const project = await prisma.project.findUnique({
         where: { id: projectId },
-        include: {
-          pages: {
-            orderBy: { createdAt: 'desc' }
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          slug: true,
+          type: true,
+          domain: true,
+          customDomain: true,
+          settings: true,
+          status: true,
+          isPublished: true,
+          createdAt: true,
+          updatedAt: true,
+          owner: {
+            select: {
+              id: true,
+              email: true,
+              firstName: true,
+              lastName: true
+            }
           },
-          _count: {
-            select: { pages: true }
+          pages: {
+            select: {
+              id: true,
+              title: true,
+              slug: true,
+              status: true,
+              isPublished: true,
+              createdAt: true
+            },
+            orderBy: { updatedAt: 'desc' }
           }
         }
       });
@@ -147,27 +170,29 @@ class ProjectService {
         name: project.name,
         description: project.description,
         slug: project.slug,
-        type: project.type.toLowerCase(),
-        status: project.status,
+        type: project.type,
         domain: project.domain,
         customDomain: project.customDomain,
-        isPublished: project.isPublished,
         settings: project.settings,
+        status: project.status.toLowerCase(),
+        isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString(),
+        owner: {
+          id: project.owner.id,
+          email: project.owner.email,
+          firstName: project.owner.firstName,
+          lastName: project.owner.lastName,
+          fullName: this.getFullName(project.owner.firstName, project.owner.lastName)
+        },
         pages: project.pages.map(page => ({
           id: page.id,
           title: page.title,
           slug: page.slug,
-          isHomePage: page.isHomePage,
-          status: page.status,
-          metaTitle: page.metaTitle,
-          metaDescription: page.metaDescription,
-          content: page.content,
-          createdAt: page.createdAt.toISOString(),
-          updatedAt: page.updatedAt.toISOString()
-        })),
-        pageCount: project._count.pages
+          status: page.status.toLowerCase(),
+          isPublished: page.isPublished,
+          createdAt: page.createdAt.toISOString()
+        }))
       };
     } catch (error) {
       console.error('Ошибка при получении проекта:', error);
@@ -182,17 +207,19 @@ class ProjectService {
     try {
       // Генерируем slug если не предоставлен
       const slug = data.slug || this.generateSlug(data.name);
-      
-      // Проверяем уникальность slug
-      const existingProject = await prisma.project.findUnique({
-        where: { slug }
+
+      // Проверяем уникальность slug для пользователя
+      const existingProject = await prisma.project.findFirst({
+        where: {
+          slug,
+          ownerId: data.ownerId
+        }
       });
-      
+
       if (existingProject) {
-        throw new Error('Проект с таким названием уже существует');
+        throw new Error('Проект с таким slug уже существует');
       }
-      
-      // Создаем проект
+
       const project = await prisma.project.create({
         data: {
           name: data.name,
@@ -201,44 +228,24 @@ class ProjectService {
           type: data.type || 'WEBSITE',
           domain: data.domain,
           customDomain: data.customDomain,
-          ownerId: data.ownerId,
+          settings: data.settings || {},
           status: 'DRAFT',
-          settings: data.settings || {
-            theme: 'auto',
-            language: 'ru',
-            creationType: 'manual'
-          }
+          isPublished: false,
+          ownerId: data.ownerId
         },
-        include: {
-          pages: true
-        }
-      });
-
-      // Создаем домашнюю страницу автоматически
-      await prisma.page.create({
-        data: {
-          title: 'Главная',
-          slug: '/',
-          projectId: project.id,
-          isHomePage: true,
-          status: 'DRAFT',
-          content: {
-            blocks: [
-              {
-                type: 'heading',
-                data: {
-                  text: `Добро пожаловать на ${data.name}`,
-                  level: 1
-                }
-              },
-              {
-                type: 'paragraph',
-                data: {
-                  text: 'Это ваша новая домашняя страница. Начните редактирование!'
-                }
-              }
-            ]
-          }
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          slug: true,
+          type: true,
+          domain: true,
+          customDomain: true,
+          settings: true,
+          status: true,
+          isPublished: true,
+          createdAt: true,
+          updatedAt: true
         }
       });
 
@@ -247,12 +254,12 @@ class ProjectService {
         name: project.name,
         description: project.description,
         slug: project.slug,
-        type: project.type.toLowerCase(),
-        status: project.status,
+        type: project.type,
         domain: project.domain,
         customDomain: project.customDomain,
-        isPublished: project.isPublished,
         settings: project.settings,
+        status: project.status.toLowerCase(),
+        isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString()
       };
@@ -267,11 +274,32 @@ class ProjectService {
    */
   async update(projectId: string, data: UpdateProjectData) {
     try {
+      const updateData: any = {
+        ...data,
+        updatedAt: new Date()
+      };
+
+      // Если изменяется название, генерируем новый slug
+      if (data.name) {
+        updateData.slug = this.generateSlug(data.name);
+      }
+
       const project = await prisma.project.update({
         where: { id: projectId },
-        data: {
-          ...data,
-          updatedAt: new Date()
+        data: updateData,
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          slug: true,
+          type: true,
+          domain: true,
+          customDomain: true,
+          settings: true,
+          status: true,
+          isPublished: true,
+          createdAt: true,
+          updatedAt: true
         }
       });
 
@@ -280,12 +308,12 @@ class ProjectService {
         name: project.name,
         description: project.description,
         slug: project.slug,
-        type: project.type.toLowerCase(),
-        status: project.status,
+        type: project.type,
         domain: project.domain,
         customDomain: project.customDomain,
-        isPublished: project.isPublished,
         settings: project.settings,
+        status: project.status.toLowerCase(),
+        isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString()
       };
@@ -305,7 +333,7 @@ class ProjectService {
         where: { projectId }
       });
 
-      // Затем удаляем сам проект
+      // Затем удаляем проект
       await prisma.project.delete({
         where: { id: projectId }
       });
@@ -325,16 +353,25 @@ class ProjectService {
       const project = await prisma.project.update({
         where: { id: projectId },
         data: {
-          isPublished: true,
           status: 'PUBLISHED',
+          isPublished: true,
           updatedAt: new Date()
+        },
+        select: {
+          id: true,
+          name: true,
+          status: true,
+          isPublished: true,
+          updatedAt: true
         }
       });
 
       return {
         id: project.id,
+        name: project.name,
+        status: project.status.toLowerCase(),
         isPublished: project.isPublished,
-        status: project.status
+        updatedAt: project.updatedAt.toISOString()
       };
     } catch (error) {
       console.error('Ошибка при публикации проекта:', error);
@@ -350,16 +387,25 @@ class ProjectService {
       const project = await prisma.project.update({
         where: { id: projectId },
         data: {
-          isPublished: false,
           status: 'DRAFT',
+          isPublished: false,
           updatedAt: new Date()
+        },
+        select: {
+          id: true,
+          name: true,
+          status: true,
+          isPublished: true,
+          updatedAt: true
         }
       });
 
       return {
         id: project.id,
+        name: project.name,
+        status: project.status.toLowerCase(),
         isPublished: project.isPublished,
-        status: project.status
+        updatedAt: project.updatedAt.toISOString()
       };
     } catch (error) {
       console.error('Ошибка при снятии проекта с публикации:', error);
@@ -368,43 +414,47 @@ class ProjectService {
   }
 
   /**
-   * Генерация уникального slug из названия
-   */
-  private generateSlug(name: string): string {
-    return name
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '') // Удаляем специальные символы
-      .replace(/[\s_-]+/g, '-') // Заменяем пробелы и подчеркивания на дефисы
-      .replace(/^-+|-+$/g, ''); // Удаляем дефисы в начале и конце
-  }
-
-  /**
    * Получение статистики проектов пользователя
    */
-  async getStatistics(ownerId: string) {
+  async getStatistics(userId: string) {
     try {
-      const [totalProjects, publishedProjects, draftProjects, totalPages] = await Promise.all([
-        prisma.project.count({ where: { ownerId } }),
-        prisma.project.count({ where: { ownerId, isPublished: true } }),
-        prisma.project.count({ where: { ownerId, status: 'DRAFT' } }),
-        prisma.page.count({
-          where: {
-            project: { ownerId }
-          }
-        })
+      const [totalProjects, publishedProjects, draftProjects, archivedProjects] = await Promise.all([
+        prisma.project.count({ where: { ownerId: userId } }),
+        prisma.project.count({ where: { ownerId: userId, status: 'PUBLISHED' } }),
+        prisma.project.count({ where: { ownerId: userId, status: 'DRAFT' } }),
+        prisma.project.count({ where: { ownerId: userId, status: 'ARCHIVED' } })
       ]);
 
       return {
         totalProjects,
         publishedProjects,
         draftProjects,
-        totalPages,
-        averagePagesPerProject: totalProjects > 0 ? Math.round(totalPages / totalProjects) : 0
+        archivedProjects
       };
     } catch (error) {
-      console.error('Ошибка при получении статистики:', error);
-      throw new Error('Не удалось получить статистику');
+      console.error('Ошибка при получении статистики проектов:', error);
+      throw new Error('Не удалось получить статистику проектов');
     }
+  }
+
+  /**
+   * Генерация slug из названия
+   */
+  private generateSlug(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  }
+
+  /**
+   * Получение полного имени
+   */
+  private getFullName(firstName?: string | null, lastName?: string | null): string {
+    const parts = [firstName, lastName].filter(Boolean);
+    return parts.join(' ') || 'Без имени';
   }
 }
 

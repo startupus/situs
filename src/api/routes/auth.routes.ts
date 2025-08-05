@@ -1,81 +1,38 @@
 import { Router } from 'express';
 import AuthController from '../controllers/AuthController';
-import { validateBody } from '../middleware/validation.middleware';
-import { asyncHandler } from '../middleware/error.middleware';
-import { UserSchemas } from '../validation/schemas';
-
-/**
- * Auth Routes - Маршруты для аутентификации и регистрации
- * Все маршруты включают валидацию и обработку ошибок
- */
 
 const router = Router();
 
 /**
- * POST /api/auth/login
- * Авторизация пользователя
+ * Маршруты аутентификации
+ * POST /api/auth/login - Авторизация
+ * POST /api/auth/register - Регистрация
+ * POST /api/auth/verify-token - Проверка токена
+ * POST /api/auth/refresh-token - Обновление токена
+ * POST /api/auth/logout - Выход
+ * POST /api/auth/forgot-password - Восстановление пароля
+ * POST /api/auth/reset-password - Сброс пароля
  */
-router.post(
-  '/login',
-  validateBody(UserSchemas.login),
-  asyncHandler(AuthController.login)
-);
 
-/**
- * POST /api/auth/register
- * Регистрация нового пользователя
- */
-router.post(
-  '/register',
-  validateBody(UserSchemas.register),
-  asyncHandler(AuthController.register)
-);
+// Авторизация пользователя
+router.post('/login', AuthController.login);
 
-/**
- * POST /api/auth/verify-token
- * Проверка валидности JWT токена
- */
-router.post(
-  '/verify-token',
-  asyncHandler(AuthController.verifyToken)
-);
+// Регистрация нового пользователя
+router.post('/register', AuthController.register);
 
-/**
- * POST /api/auth/refresh-token
- * Обновление JWT токена
- */
-router.post(
-  '/refresh-token',
-  asyncHandler(AuthController.refreshToken)
-);
+// Проверка валидности JWT токена
+router.post('/verify-token', AuthController.verifyToken);
 
-/**
- * POST /api/auth/logout
- * Выход из системы
- */
-router.post(
-  '/logout',
-  asyncHandler(AuthController.logout)
-);
+// Обновление JWT токена
+router.post('/refresh-token', AuthController.refreshToken);
 
-/**
- * POST /api/auth/forgot-password
- * Восстановление пароля
- */
-router.post(
-  '/forgot-password',
-  validateBody(UserSchemas.forgotPassword),
-  asyncHandler(AuthController.forgotPassword)
-);
+// Выход из системы
+router.post('/logout', AuthController.logout);
 
-/**
- * POST /api/auth/reset-password
- * Сброс пароля
- */
-router.post(
-  '/reset-password',
-  validateBody(UserSchemas.resetPassword),
-  asyncHandler(AuthController.resetPassword)
-);
+// Восстановление пароля
+router.post('/forgot-password', AuthController.forgotPassword);
+
+// Сброс пароля
+router.post('/reset-password', AuthController.resetPassword);
 
 export default router;
