@@ -61,6 +61,34 @@
   - `details` - описание услуги
   - `icon` - тип иконки
 
+### 4. Hero1OriginalBlock (React Pro Components)
+**Файл:** `Hero1OriginalBlock.tsx`
+**Категория:** Hero Sections
+
+Оригинальный статичный Hero блок из React Pro Components:
+- Статичный контент без inline редактирования
+- Профессиональный дизайн TailGrids
+- Навигационное меню
+- Hero изображение и логотипы клиентов
+- Кнопки действий
+- **Оригинальные изображения:** Использует изображения из `/public/images/brands/` (ayroui.svg, graygrids.svg, uideck.svg)
+- **Исправленные стили:** Корректные стили кнопок для светлой и темной тем
+
+**Пропсы:**
+- `title` - основной заголовок (по умолчанию: "Creative Digital Agency Landing Page")
+- `subtitle` - подзаголовок (по умолчанию: "Lorem ipsum...")
+- `primaryButtonText` - текст основной кнопки (по умолчанию: "Get Started")
+- `primaryButtonUrl` - ссылка основной кнопки (по умолчанию: "#")
+- `secondaryButtonText` - текст вторичной кнопки (по умолчанию: "Download App")
+- `secondaryButtonUrl` - ссылка вторичной кнопки (по умолчанию: "#")
+
+**Недавние изменения (05.08.2025):**
+- ✅ Заменены изображения на оригинальные из react-pro-components
+- ✅ Исправлены стили кнопок - возвращены оригинальные `hover:bg-blue-dark` стили
+- ✅ Убраны конфликтующие CSS переопределения
+- ✅ Добавлены правильные стили для `hover:bg-blue-dark` в канвасе
+- ✅ Использованы оригинальные логотипы: ayroui.svg, graygrids.svg, uideck.svg
+
 ## Архитектура
 
 ### Inline Editing

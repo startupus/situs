@@ -33,13 +33,13 @@ export declare class DatabaseAPI {
         id: string;
         name: string;
         description: string | null;
-        slug: any;
+        slug: string;
         type: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         domain: string | null;
-        customDomain: any;
-        isPublished: any;
-        settings: any;
+        customDomain: string | null;
+        isPublished: boolean;
+        settings: import("@prisma/client/runtime/library").JsonValue;
         createdAt: string;
         updatedAt: string;
         pages: {
@@ -64,7 +64,6 @@ export declare class DatabaseAPI {
         type: string;
         status: string;
         domain: string | null;
-        subdomain: string | null;
         createdAt: string;
         updatedAt: string;
         pages: {
@@ -90,13 +89,13 @@ export declare class DatabaseAPI {
         id: string;
         name: string;
         description: string | null;
-        slug: any;
+        slug: string;
         type: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         domain: string | null;
-        customDomain: any;
-        isPublished: any;
-        settings: any;
+        customDomain: string | null;
+        isPublished: boolean;
+        settings: import("@prisma/client/runtime/library").JsonValue;
         createdAt: string;
         updatedAt: string;
         pages: never[];
@@ -108,7 +107,6 @@ export declare class DatabaseAPI {
         type: string;
         status: string;
         domain: string | null;
-        subdomain: string | null;
         createdAt: string;
         updatedAt: string;
         pages: {

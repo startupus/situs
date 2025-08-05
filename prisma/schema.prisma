@@ -17,6 +17,10 @@ model User {
   password  String
   role      Role     @default(USER)
   status    UserStatus @default(ACTIVE)
+  
+  // Profile data
+  profile   Json?    @default("{\"name\":\"\",\"avatar\":\"\",\"bio\":\"\"}")
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -240,6 +244,10 @@ enum PageType {
 enum PageStatus {
   DRAFT
   PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
   SCHEDULED
   ARCHIVED
 }

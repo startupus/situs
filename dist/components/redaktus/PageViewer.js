@@ -2,8 +2,13 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import HeroBlock from './blocks/HeroBlock';
 import TestimonialBlock from './blocks/TestimonialBlock';
 import ServicesBlock from './blocks/ServicesBlock';
-// Реестр блоков - только TailGrids блоки
+// Оригинальный блок из React Pro Components
+import { Hero1OriginalBlock } from './blocks/Hero1OriginalBlock';
+// Реестр блоков - оригинальные React Pro Components + TailGrids
 const blockRegistry = {
+    // Оригинальный блок из React Pro Components
+    'hero-1-original': Hero1OriginalBlock,
+    // Старые блоки для совместимости
     'hero-block': HeroBlock,
     'testimonial-block': TestimonialBlock,
     'services-block': ServicesBlock,

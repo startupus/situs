@@ -1,1 +1,11 @@
 node_modules
+dist/
+*.log
+*.tsbuildinfo
+.env
+.DS_Store
+coverage/
+.vite/
+temp*/
+.vscode/
+.idea/

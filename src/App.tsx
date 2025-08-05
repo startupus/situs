@@ -26,7 +26,7 @@ function App() {
           <Router>
           <div 
             className={`min-h-screen w-screen max-w-none overflow-x-hidden transition-colors duration-200 ${
-              resolvedTheme === 'dark' ? 'bg-dark text-gray-1' : 'bg-gray text-black'
+              resolvedTheme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'
             }`}
             style={{ width: '100vw', maxWidth: 'none' }}
           >

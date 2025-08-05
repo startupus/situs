@@ -106,7 +106,6 @@ export class DatabaseAPI {
                 type: project.type.toLowerCase(),
                 status: project.status.toLowerCase(),
                 domain: project.domain,
-                subdomain: project.subdomain,
                 createdAt: project.createdAt.toISOString(),
                 updatedAt: project.updatedAt.toISOString(),
                 pages: project.pages.map(page => ({
@@ -230,7 +229,6 @@ export class DatabaseAPI {
                 type: project.type.toLowerCase(),
                 status: project.status.toLowerCase(),
                 domain: project.domain,
-                subdomain: project.subdomain,
                 createdAt: project.createdAt.toISOString(),
                 updatedAt: project.updatedAt.toISOString(),
                 pages: project.pages.map(page => ({

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -8,38 +8,42 @@ export const useTheme = () => {
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
   // Определяем системную тему
-  const getSystemTheme = (): 'light' | 'dark' => {
+  const getSystemTheme = useCallback((): 'light' | 'dark' => {
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     return isDark ? 'dark' : 'light';
-  };
+  }, []);
 
-  // Применяем тему к интерфейсу по стандартному TailGrids подходу
-  const applyTheme = (newTheme: 'light' | 'dark') => {
-    const interfaceContainer = document.querySelector('.redaktus-interface');
+  // Применяем тему ГЛОБАЛЬНО к HTML элементу для полного контроля
+  const applyTheme = useCallback((newTheme: 'light' | 'dark') => {
+    const htmlElement = document.documentElement;
     
+    // ПРИНУДИТЕЛЬНОЕ ПРИМЕНЕНИЕ ТЕМЫ К КОРНЕВОМУ ЭЛЕМЕНТУ
+    if (newTheme === 'dark') {
+      htmlElement.classList.add('dark');
+      console.log('🎨 GLOBAL: Dark theme applied to HTML root');
+    } else {
+      htmlElement.classList.remove('dark');
+      console.log('🎨 GLOBAL: Light theme applied to HTML root');
+    }
+    
+    // Также применяем к интерфейсу для совместимости
+    const interfaceContainer = document.querySelector('.redaktus-interface');
     if (interfaceContainer) {
-      // Убираем все темные классы
       interfaceContainer.classList.remove('interface-light', 'interface-dark');
-      
-      // Применяем новую тему
       interfaceContainer.classList.add(`interface-${newTheme}`);
       
-      // Для совместимости с TailWindCSS dark: модификаторами
-      // Добавляем/убираем класс dark на интерфейс контейнер
       if (newTheme === 'dark') {
         interfaceContainer.classList.add('dark');
       } else {
         interfaceContainer.classList.remove('dark');
       }
-      
-      console.log('🎨 Interface theme applied:', newTheme, 'system:', theme === 'system');
-    } else {
-      console.warn('🎨 Interface container (.redaktus-interface) not found!');
     }
-  };
+    
+    console.log('🎨 Theme system:', theme, '-> resolved:', newTheme);
+  }, [theme]);
 
   // Обновляем разрешенную тему
-  const updateResolvedTheme = () => {
+  const updateResolvedTheme = useCallback(() => {
     let newResolvedTheme: 'light' | 'dark';
     
     if (theme === 'system') {
@@ -52,7 +56,7 @@ export const useTheme = () => {
       setResolvedTheme(newResolvedTheme);
       applyTheme(newResolvedTheme);
     }
-  };
+  }, [theme, resolvedTheme, getSystemTheme, applyTheme]);
 
   // Инициализация
   useEffect(() => {

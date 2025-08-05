@@ -2,6 +2,8 @@ import React from 'react'
 import HeroBlock from './blocks/HeroBlock'
 import TestimonialBlock from './blocks/TestimonialBlock'
 import ServicesBlock from './blocks/ServicesBlock'
+// Оригинальный блок из React Pro Components
+import { Hero1OriginalBlock } from './blocks/Hero1OriginalBlock'
 
 interface RedaktusPageViewerProps {
   page: any
@@ -11,8 +13,12 @@ interface RedaktusPageViewerProps {
   onBlockDelete?: (blockId: string) => void
 }
 
-// Реестр блоков - только TailGrids блоки
+// Реестр блоков - оригинальные React Pro Components + TailGrids
 const blockRegistry: Record<string, React.ComponentType<any>> = {
+  // Оригинальный блок из React Pro Components
+  'hero-1-original': Hero1OriginalBlock,
+  
+  // Старые блоки для совместимости
   'hero-block': HeroBlock,
   'testimonial-block': TestimonialBlock,
   'services-block': ServicesBlock,

@@ -55,7 +55,7 @@ export const Admin: React.FC<{ children: React.ReactNode; isLogin?: boolean }> =
 // Импорт конфигурации блоков
 import config from './config/config'
 
-// Система схем блоков - только TailGrids
+// Система схем блоков - оригинальные React Pro Components + TailGrids
 const blockSchemas = {
   'hero-block': {
     title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
@@ -64,29 +64,43 @@ const blockSchemas = {
     primaryButtonUrl: { type: 'string', default: '#' },
     secondaryButtonText: { type: 'string', default: 'Download App' },
     secondaryButtonUrl: { type: 'string', default: '#' },
-    heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
+    heroImage: { type: 'string', default: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center' },
     clientLogos: { type: 'array', default: [
-      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
-      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
-      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+      '/images/brands/ayroui.svg',
+      '/images/brands/graygrids.svg',
+      '/images/brands/uideck.svg'
+    ] }
+  },
+  'hero-1-original': {
+    title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
+    subtitle: { type: 'string', default: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.' },
+    primaryButtonText: { type: 'string', default: 'Get Started' },
+    primaryButtonUrl: { type: 'string', default: '#' },
+    secondaryButtonText: { type: 'string', default: 'Download App' },
+    secondaryButtonUrl: { type: 'string', default: '#' },
+    heroImage: { type: 'string', default: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center' },
+    clientLogos: { type: 'array', default: [
+      '/images/brands/ayroui.svg',
+      '/images/brands/graygrids.svg',
+      '/images/brands/uideck.svg'
     ] }
   },
   'testimonial-block': {
     testimonials: { type: 'array', default: [
       {
-        image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
         name: 'Larry Diamond',
         position: 'Chief Executive Officer',
         details: 'Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id! Mollitia perspiciatis est asperiores commodi labore!'
       },
       {
-        image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
         name: 'Sarah Johnson',
         position: 'Marketing Director',
         details: 'Excellent service and amazing results! The team delivered exactly what we needed and exceeded our expectations.'
       },
       {
-        image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
         name: 'Michael Chen',
         position: 'Product Manager',
         details: 'Working with this platform has transformed our workflow. Highly recommended for any business looking to improve their online presence.'
@@ -184,7 +198,44 @@ const EditorContent: React.FC = () => {
     type: 'page',
     slug: 'home',
     title: 'Home Page',
-    content: [],
+    content: [
+      {
+        id: 'hero-block-default',
+        type: 'hero-block',
+        props: {
+          title: 'Kickstart Startup Website with TailGrids',
+          subtitle: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.',
+          primaryButtonText: 'Get Started',
+          primaryButtonUrl: '#',
+          secondaryButtonText: 'Download App',
+          secondaryButtonUrl: '#',
+          heroImage: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png',
+          clientLogos: [
+            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+          ]
+        }
+      },
+      {
+        id: 'hero-1-original-default',
+        type: 'hero-1-original',
+        props: {
+          title: 'ОРИГИНАЛЬНЫЙ TailGrids Hero 1',
+          subtitle: 'Это полная копия оригинального Hero1.jsx из react-pro-components-main без изменений стилей.',
+          primaryButtonText: 'Get Started',
+          primaryButtonUrl: '#',
+          secondaryButtonText: 'Download App',
+          secondaryButtonUrl: '#',
+          heroImage: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png',
+          clientLogos: [
+            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+          ]
+        }
+      }
+    ],
     meta: {}
   })
 
@@ -723,4 +774,4 @@ export const Redaktus: React.FC<any> = ({
       </div>
     </RedaktusContext.Provider>
   )
-} 
+}

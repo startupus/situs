@@ -16,7 +16,35 @@ export const mockSites = [
             favicon: '/favicon.ico',
             logo: '/logo.svg'
         },
-        pages: []
+        pages: [
+            {
+                id: 'startapus-home',
+                siteId: 'startapus-ecosystem',
+                title: 'Главная',
+                slug: '',
+                content: [
+                    {
+                        id: 'hero-1',
+                        type: 'hero-section',
+                        props: {
+                            title: 'Создавайте будущее веба с экосистемой Стартапус',
+                            subtitle: 'Полный набор инструментов для создания современных веб-сайтов без программирования',
+                            buttonText: 'Начать бесплатно',
+                            buttonLink: '/situs',
+                            backgroundImage: '/images/hero-bg.jpg',
+                            overlayOpacity: 0.4
+                        }
+                    }
+                ],
+                metaTitle: 'Стартапус - Главная',
+                metaDescription: 'Инновационная платформа для создания и управления веб-проектами',
+                isHomePage: true,
+                isPublished: true,
+                status: 'published',
+                createdAt: '2024-01-01T10:00:00Z',
+                updatedAt: '2024-12-23T15:30:00Z'
+            }
+        ]
     },
     {
         id: 'site-1',

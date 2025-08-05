@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест темы и изображений</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+</head>
+<body class="min-h-screen transition-colors duration-300">
+    <div class="container mx-auto p-8">
+        <div class="mb-8">
+            <button id="themeToggle" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Toggle Theme
+            </button>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Тест темы</h1>
+            <p class="text-gray-600 dark:text-gray-300">
+                Этот текст должен меняться при переключении темы.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Тест изображений</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-semibold mb-2 text-gray-900 dark:text-white">Логотипы</h3>
+                    <img src="/images/logos/logo.svg" alt="Logo Light" class="mb-2 dark:hidden">
+                    <img src="/images/logos/logo-white.svg" alt="Logo Dark" class="mb-2 hidden dark:block">
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2 text-gray-900 dark:text-white">Hero</h3>
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center" alt="Hero" class="w-32 h-24 rounded object-cover">
+                </div>
+            </div>
+            <div class="mt-4">
+                <h3 class="font-semibold mb-2 text-gray-900 dark:text-white">Бренды</h3>
+                <div class="flex space-x-4">
+                    <img src="/images/brands/ayroui.svg" alt="AyroUI" class="h-8 object-contain">
+                    <img src="/images/brands/graygrids.svg" alt="GrayGrids" class="h-8 object-contain">
+                    <img src="/images/brands/uideck.svg" alt="UIDeck" class="h-8 object-contain">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const html = document.documentElement;
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        
+        function updateTheme(isDark) {
+            if (isDark) {
+                html.classList.add('dark');
+                body.className = 'min-h-screen transition-colors duration-300 bg-gray-900 text-white';
+            } else {
+                html.classList.remove('dark');
+                body.className = 'min-h-screen transition-colors duration-300 bg-gray-50 text-gray-900';
+            }
+        }
+        
+        // Определяем системную тему
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        updateTheme(prefersDark);
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            updateTheme(!isDark);
+        });
+        
+        // Слушаем изменения системной темы
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            updateTheme(e.matches);
+        });
+    </script>
+</body>
+</html>

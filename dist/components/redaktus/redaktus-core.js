@@ -17,9 +17,23 @@ export const Admin = ({ children, isLogin = false }) => {
 };
 // Импорт конфигурации блоков
 import config from './config/config';
-// Система схем блоков - только TailGrids
+// Система схем блоков - оригинальные React Pro Components + TailGrids
 const blockSchemas = {
     'hero-block': {
+        title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
+        subtitle: { type: 'string', default: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.' },
+        primaryButtonText: { type: 'string', default: 'Get Started' },
+        primaryButtonUrl: { type: 'string', default: '#' },
+        secondaryButtonText: { type: 'string', default: 'Download App' },
+        secondaryButtonUrl: { type: 'string', default: '#' },
+        heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
+        clientLogos: { type: 'array', default: [
+                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+            ] }
+    },
+    'hero-1-original': {
         title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
         subtitle: { type: 'string', default: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.' },
         primaryButtonText: { type: 'string', default: 'Get Started' },
@@ -141,7 +155,44 @@ const EditorContent = () => {
         type: 'page',
         slug: 'home',
         title: 'Home Page',
-        content: [],
+        content: [
+            {
+                id: 'hero-block-default',
+                type: 'hero-block',
+                props: {
+                    title: 'Kickstart Startup Website with TailGrids',
+                    subtitle: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.',
+                    primaryButtonText: 'Get Started',
+                    primaryButtonUrl: '#',
+                    secondaryButtonText: 'Download App',
+                    secondaryButtonUrl: '#',
+                    heroImage: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png',
+                    clientLogos: [
+                        'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+                        'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+                        'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+                    ]
+                }
+            },
+            {
+                id: 'hero-1-original-default',
+                type: 'hero-1-original',
+                props: {
+                    title: 'ОРИГИНАЛЬНЫЙ TailGrids Hero 1',
+                    subtitle: 'Это полная копия оригинального Hero1.jsx из react-pro-components-main без изменений стилей.',
+                    primaryButtonText: 'Get Started',
+                    primaryButtonUrl: '#',
+                    secondaryButtonText: 'Download App',
+                    secondaryButtonUrl: '#',
+                    heroImage: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png',
+                    clientLogos: [
+                        'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+                        'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+                        'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+                    ]
+                }
+            }
+        ],
         meta: {}
     });
     // Функция сохранения страницы

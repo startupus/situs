@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useProject } from '../contexts/ProjectContext';
-import RedaktusEditor from './RedaktusEditor';
+import RedaktusEditor from './legacy/RedaktusEditor';
 const ProjectEditorView = ({ onBack }) => {
     const { currentPage, currentProject } = useProject();
     if (!currentProject) {

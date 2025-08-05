@@ -82,15 +82,29 @@
   }
 }
 
-/* Глобальные стили для приложения */
+/* ПРИНУДИТЕЛЬНЫЕ ГЛОБАЛЬНЫЕ СТИЛИ - ПОЛНЫЙ КОНТРОЛЬ НАД ТЕМОЙ */
 html {
-  /* Базовые стили - следуют системной теме по умолчанию */
+  /* ПОЛНАЯ ИЗОЛЯЦИЯ ОТ БРАУЗЕРНЫХ СТИЛЕЙ */
+  color-scheme: light !important;
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Поддержка темной темы через Tailwind dark: класс на root */
+html.dark {
+  color-scheme: dark !important;
+  background-color: #111827 !important;
+  color: #f9fafb !important;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  /* Базовые стили - следуют системной теме по умолчанию */
+  /* ПРИНУДИТЕЛЬНЫЕ СТИЛИ - ИЗОЛИРУЕМ ОТ СИСТЕМЫ */
+  background-color: inherit !important;
+  color: inherit !important;
+  margin: 0 !important;
+  padding: 0 !important;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -171,6 +185,11 @@ body {
 
 /* ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ КОНКРЕТНЫХ TAILWIND КЛАССОВ */
 
+/* Стили для hover:bg-blue-dark */
+.redaktus-canvas .hover\:bg-blue-dark:hover {
+  background-color: #1B44C8 !important;
+}
+
 /* Светлая тема - переопределяем только критичные классы */
 .redaktus-canvas:not(.dark) .text-dark { 
   color: #1e293b !important; 
@@ -179,8 +198,9 @@ body {
   color: #637381 !important; 
 }
 .redaktus-canvas:not(.dark) .text-primary { 
-  color: #3c82f6 !important; 
+  color: #3056d3 !important; 
 }
+
 .redaktus-canvas:not(.dark) .bg-white { 
   background-color: #ffffff !important; 
 }
@@ -201,6 +221,7 @@ body {
 .redaktus-canvas.dark .text-primary { 
   color: #60a5fa !important; 
 }
+
 .redaktus-canvas.dark .bg-dark-2 { 
   background-color: #1f2937 !important; 
 }

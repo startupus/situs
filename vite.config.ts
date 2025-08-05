@@ -30,7 +30,7 @@ export default defineConfig({
     port: 5177,
     host: true,
     hmr: {
-      port: 5177,
+      port: 24678, // Используем отдельный порт для HMR
       host: 'localhost',
     },
     proxy: {

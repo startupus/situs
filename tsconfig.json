@@ -32,6 +32,6 @@
       "next-themes": ["src/components/redaktus/next-shims/themes.tsx"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "vite-env.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

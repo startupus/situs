@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import Sidebar from "../Sidebar/SitusSidebar.jsx";
-import DarkModeToggle from "../DarkModeToggle.jsx";
-import Header from "../Header/index.jsx";
+import Sidebar from "../Sidebar";
+import DarkModeToggle from "../DarkModeToggle";
+import Header from "../Header/index";
 import { Outlet } from "react-router-dom";
 import { useTheme } from "../../../hooks/useTheme";
 const SitusLayout = () => {
