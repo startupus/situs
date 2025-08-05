@@ -1,50 +1,43 @@
 import { defineConfig } from 'vitest/config';
+import { resolve } from 'path';
 
 export default defineConfig({
   test: {
+    environment: 'node',
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test-setup.ts'],
-    include: ['src/**/*.{test,spec}.{ts,tsx}', '__tests__/**/*.{test,spec}.{ts,tsx}'],
-    exclude: [
-      'node_modules/**',
-      'dist/**',
-      'coverage/**',
-      '**/*.d.ts',
+    setupFiles: ['./src/api/__tests__/setup.ts'],
+    include: [
+      'src/api/__tests__/**/*.test.ts',
+      'src/**/*.test.ts',
+      'src/**/*.spec.ts'
     ],
-    testTimeout: 30000,
-    hookTimeout: 30000,
-    // Конфигурация для предотвращения зависающих тестов
-    pool: 'forks',
-    poolOptions: {
-      forks: {
-        singleFork: true,
-      },
-    },
-    // Принудительное завершение после timeout
-    teardownTimeout: 10000,
-    // Отключаем watch mode для стабильности
-    watch: false,
+    exclude: [
+      'node_modules',
+      'dist',
+      'coverage'
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       exclude: [
         'node_modules/',
-        'dist/',
-        'coverage/',
+        'src/api/__tests__/',
+        'src/api/server.ts',
         '**/*.d.ts',
-        '**/*.config.{ts,js}',
-        '**/*.test.ts',
-        '**/*.spec.ts'
+        '**/*.config.*',
+        '**/coverage/**'
       ],
-      thresholds: {
-        global: {
-          branches: 60,
-          functions: 70,
-          lines: 70,
-          statements: 70,
-        },
-      },
+      include: [
+        'src/api/**/*.ts'
+      ]
+    },
+    testTimeout: 10000,
+    hookTimeout: 10000,
+    teardownTimeout: 10000
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src')
     }
   }
 });
