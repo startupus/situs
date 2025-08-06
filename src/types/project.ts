@@ -17,12 +17,23 @@ export interface ProjectPage {
 export interface ProjectProduct {
   id: string;
   name: string;
-  type: 'website' | 'store' | 'school' | 'chatbot' | 'blog';
-  status: 'draft' | 'published' | 'archived';
+  type: 'WEBSITE' | 'STORE' | 'BLOG' | 'APP' | 'LANDING';
+  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
   description?: string;
-  settings?: Record<string, any>;
-  url?: string; // URL продукта
-  editorUrl?: string; // URL редактора (для сайтов)
+  settings?: {
+    theme: 'light' | 'dark' | 'auto';
+    primaryColor?: string;
+    favicon?: string;
+    logo?: string;
+    domain?: string;
+  };
+  pages?: ProjectPage[];
+  analytics?: {
+    visitors: number;
+    pageViews: number;
+    conversionRate: number;
+    revenue: number;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
@@ -41,13 +52,13 @@ export interface Project {
     favicon?: string;
     logo?: string;
   };
-  pages: ProjectPage[];
+  pages?: ProjectPage[]; // Опционально для обратной совместимости
   products: ProjectProduct[]; // Продукты проекта
   createdAt: Date;
   updatedAt: Date;
-  owner: string;
+  owner?: string;
   collaborators?: string[];
-  isPublic: boolean;
+  isPublic?: boolean;
 }
 
 export interface CreatePageData {

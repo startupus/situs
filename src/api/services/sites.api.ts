@@ -320,6 +320,21 @@ class SitesApiService {
    * Преобразование Project в Site
    */
   private projectToSite(project: Project): Site {
+    // Получаем страницы из первого продукта проекта
+    let pages: ProjectPage[] = [];
+    if (project.products && project.products.length > 0) {
+      const firstProduct = project.products[0];
+      // Если у продукта есть страницы, используем их
+      if (firstProduct.pages) {
+        pages = firstProduct.pages;
+      }
+    }
+    
+    // Fallback на старые страницы проекта если есть
+    if (pages.length === 0 && project.pages) {
+      pages = project.pages;
+    }
+
     return {
       id: project.id,
       name: project.name,
@@ -327,7 +342,7 @@ class SitesApiService {
       domain: project.domain,
       template: project.template,
       settings: project.settings,
-      pages: project.pages.map(page => this.projectPageToPage(page)),
+      pages: pages.map(page => this.projectPageToPage(page)),
       createdAt: project.createdAt,
       updatedAt: project.updatedAt,
       owner: project.owner,
