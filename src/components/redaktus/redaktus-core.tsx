@@ -205,11 +205,44 @@ const EditorContent: React.FC = () => {
   
   console.log('🎨 EditorContent themes - Canvas:', canvasTheme, 'Interface:', interfaceTheme)
   
+  // Функция переключения языка страницы
+  const handlePageLanguageChange = (languageCode: string) => {
+    console.log('🌍 Переключение языка страницы:', languageCode);
+    setCurrentPageLanguage(languageCode);
+    
+    // Обновляем заголовок страницы в зависимости от выбранного языка
+    if (currentPage.languages[languageCode]) {
+      setCurrentPage(prev => ({
+        ...prev,
+        title: prev.languages[languageCode].title,
+        content: prev.languages[languageCode].content || prev.content
+      }));
+    }
+  };
+  
+  const [currentPageLanguage, setCurrentPageLanguage] = useState<string>('ru'); // Язык текущей страницы
+  
   const [currentPage, setCurrentPage] = useState<any>({
     id: 'home',
     type: 'page',
     slug: 'home',
-    title: 'Home Page',
+    languages: {
+      ru: {
+        title: 'Главная страница',
+        content: []
+      },
+      en: {
+        title: 'Home Page',
+        content: []
+      },
+      de: {
+        title: 'Startseite',
+        content: []
+      }
+    },
+    availableLanguages: ['ru', 'en', 'de'], // Доступные языки для этой страницы
+    defaultLanguage: 'ru',
+    title: 'Главная страница', // Заголовок на текущем языке
     content: [
       {
         id: 'hero-block-default',
@@ -410,6 +443,10 @@ const EditorContent: React.FC = () => {
             <CanvasToolbar
               currentDevice={currentDevice}
               onDeviceChange={setCurrentDevice}
+              currentPageTitle={currentPage?.title || 'Home Page'}
+              currentPageLanguage={currentPageLanguage}
+              availablePageLanguages={currentPage?.availableLanguages || ['ru']}
+              onLanguageChange={handlePageLanguageChange}
               onPreview={handlePreview}
               onCode={handleCode}
               onUndo={handleUndo}

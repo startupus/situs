@@ -14,7 +14,10 @@ interface Language {
 interface CanvasToolbarProps {
   currentDevice: 'mobile' | 'tablet' | 'desktop';
   onDeviceChange: (device: 'mobile' | 'tablet' | 'desktop') => void;
-  onLanguageChange?: (languageCode: string) => void;
+  currentPageTitle?: string; // Название текущей страницы
+  currentPageLanguage?: string; // Текущий язык страницы
+  availablePageLanguages?: string[]; // Доступные языки для страницы
+  onLanguageChange?: (languageCode: string) => void; // Переключение языка страницы
   onPreview?: () => void;
   onCode?: () => void;
   onUndo?: () => void;
@@ -25,6 +28,9 @@ interface CanvasToolbarProps {
 const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ 
   currentDevice, 
   onDeviceChange,
+  currentPageTitle,
+  currentPageLanguage = 'ru',
+  availablePageLanguages = ['ru', 'en', 'de'],
   onLanguageChange,
   onPreview,
   onCode,
@@ -49,7 +55,8 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   };
 
   const handleLanguageChange = (languageCode: string) => {
-    setLanguage(languageCode as any);
+    // Переключаем язык страницы, а не интерфейса
+    console.log('🌍 CanvasToolbar: Переключение языка страницы на', languageCode);
     if (onLanguageChange) {
       onLanguageChange(languageCode);
     }
@@ -77,28 +84,37 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
       style={{ zIndex: 10 }}
     >
       <div className="flex items-center justify-between">
-        {/* Левая часть - компактные языковые вкладки */}
+        {/* Левая часть - языковые версии страницы */}
         <div className="flex items-center space-x-1">
-          {languages.map((lang) => (
+          {languages
+            .filter(lang => availablePageLanguages.includes(lang.code))
+            .map((lang) => (
             <button
               key={lang.id}
               onClick={() => handleLanguageChange(lang.code)}
               className={`flex items-center justify-center w-8 h-8 rounded text-sm transition-colors ${
-                language === lang.code
+                currentPageLanguage === lang.code
                   ? 'bg-white text-gray-700 shadow-sm dark:bg-gray-600 dark:text-gray-200'
                   : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
               }`}
-              title={lang.name}
+              title={`${lang.name} version`}
             >
               <span>{lang.flag}</span>
             </button>
           ))}
+          {/* Кнопка добавления языковой версии */}
+          <button
+            className="flex items-center justify-center w-8 h-8 rounded text-sm transition-colors text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+            title="Добавить языковую версию"
+          >
+            <span>+</span>
+          </button>
         </div>
 
         {/* Центральная часть - заголовок */}
         <div className="flex-1 text-center">
           <h2 className="text-base font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
-            {t('editor.title')}
+            {currentPageTitle || t('editor.title')}
           </h2>
         </div>
 
