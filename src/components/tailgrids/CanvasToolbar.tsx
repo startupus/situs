@@ -73,7 +73,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
 
   return (
     <div 
-      className="redaktus-canvas-toolbar border-b px-4 py-3 transition-colors duration-200 bg-white dark:bg-gray-800 shadow-sm border-gray-200 dark:border-gray-700"
+      className="redaktus-canvas-toolbar border-b px-4 py-3 transition-colors duration-200 bg-white dark:bg-gray-800 shadow-sm border-gray-200 dark:border-gray-700 font-inter"
       style={{ zIndex: 10 }}
     >
       <div className="flex items-center justify-between">

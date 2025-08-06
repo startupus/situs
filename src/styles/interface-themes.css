@@ -26,8 +26,8 @@
 
 /* Контейнер интерфейса */
 .redaktus-interface {
-  /* Базовые стили интерфейса */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  /* Базовые стили интерфейса - используем Inter как в @admino/ */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
   
@@ -385,7 +385,7 @@
   /* Настройки типографики */
   --interface-font-size: 14px !important;
   --interface-line-height: 1.5 !important;
-  --interface-font-family: 'Inter, system-ui, sans-serif' !important;
+  --interface-font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   
   /* Настройки макета */
   --interface-sidebar-width: 280px !important;

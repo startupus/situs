@@ -38,7 +38,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
       <div className="mx-auto max-w-lg px-6">
         <div
           onClick={handleClick(tweetLink)}
-          className="block font-sans p-4 bg-white hover:bg-gray-50 border dark:bg-black border-gray-300 dark:border-gray-800 hover:shadow-lg transition-shadow duration-200 rounded-xl"
+          className="block font-inter p-4 bg-white hover:bg-gray-50 border dark:bg-black border-gray-300 dark:border-gray-800 hover:shadow-lg transition-shadow duration-200 rounded-xl"
         >
           <div className="flex items-start justify-between mb-3">
             <a

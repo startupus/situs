@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   
   return (
     <div
-      className={`flex flex-col h-screen justify-between font-sans antialiased`}
+      className={`flex flex-col h-screen justify-between font-inter antialiased`}
     >
       <main className={`mb-auto transition-colors duration-200 ${
         resolvedTheme === 'dark' ? '!bg-gray-900' : '!bg-white'

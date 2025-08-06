@@ -8,8 +8,8 @@
   /* Сброс всех наследуемых стилей темы интерфейса */
   all: initial;
   
-  /* Базовые стили для канваса */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Базовые стили для канваса - используем Inter как в @admino/ */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #1f2937;
