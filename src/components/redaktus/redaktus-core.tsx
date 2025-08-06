@@ -540,12 +540,54 @@ const EditorContent: React.FC = () => {
     }
   };
 
-  const handleCreatePage = () => {
+  const handleCreatePage = async () => {
     console.log('➕ Создание новой страницы');
-    // Здесь будет логика создания новой страницы
-    // Пока что просто открываем админку проектов для создания страницы
-    const adminUrl = `/projects/${currentProject?.id}`;
-    window.open(adminUrl, '_blank');
+    
+    if (!currentProject || !urlParams.productId) {
+      console.error('Не удалось создать страницу: отсутствует проект или продукт');
+      return;
+    }
+
+    try {
+      // Создаем новую страницу
+      const newPage = {
+        id: `page-${Date.now()}`,
+        title: `Новая страница ${Date.now()}`,
+        slug: `new-page-${Date.now()}`,
+        type: 'page',
+        status: 'draft',
+        content: [],
+        meta: {
+          title: `Новая страница ${Date.now()}`,
+          description: '',
+          keywords: ''
+        },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        availableLanguages: ['ru']
+      };
+
+      // Добавляем страницу в текущий продукт
+      if (currentProject.products) {
+        const productIndex = currentProject.products.findIndex(p => p.id === urlParams.productId);
+        if (productIndex !== -1) {
+          if (!currentProject.products[productIndex].pages) {
+            currentProject.products[productIndex].pages = [];
+          }
+          currentProject.products[productIndex].pages!.push(newPage);
+          
+          // Обновляем состояние
+          setCurrentProject({ ...currentProject });
+          
+          // Переключаемся на новую страницу
+          await handlePageSelect(newPage.id);
+          
+          console.log('✅ Новая страница создана:', newPage.id);
+        }
+      }
+    } catch (error) {
+      console.error('❌ Ошибка при создании страницы:', error);
+    }
   };
 
   // Показываем лоадер пока загружаются данные

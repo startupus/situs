@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSite } from '../../../contexts/SiteContext';
-import { ProjectData, ProjectProduct } from '../../../types/project';
-import ProjectProducts from './ProjectProducts';
+import { ProjectData } from '../../../types/project';
 import { projectsApi } from '../../../api/services/projects.api';
 
-const ProjectsList: React.FC = () => {
+interface ProjectsListProps {
+  onCreateProject: () => void;
+}
+
+const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject }) => {
   const { state } = useSite();
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [projectsData, setProjectsData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -43,28 +45,30 @@ const ProjectsList: React.FC = () => {
 
   const error = state.error;
 
-  const handleProductCreated = (product: ProjectProduct) => {
-    // Обновляем проект с новым продуктом
-    if (selectedProject) {
-      const updatedProject = {
-        ...selectedProject,
-        products: [...(selectedProject.products || []), product]
-      };
-      setSelectedProject(updatedProject);
-    }
-  };
+
 
   if (loading) {
     return (
       <div className="space-y-6">
-        {/* Заголовок */}
-        <div>
-          <h1 className="text-2xl font-bold text-dark dark:text-white">
-            Проекты
-          </h1>
-          <p className="text-body-color dark:text-dark-6 mt-1">
-            Управляйте всеми своими проектами в одном месте
-          </p>
+        {/* Заголовок с кнопкой создания */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-dark dark:text-white">
+              Проекты
+            </h1>
+            <p className="text-body-color dark:text-dark-6 mt-1">
+              Управляйте всеми своими проектами в одном месте
+            </p>
+          </div>
+          <button
+            onClick={onCreateProject}
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
+              <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+            </svg>
+            Создать проект
+          </button>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,14 +91,25 @@ const ProjectsList: React.FC = () => {
   if (error) {
     return (
       <div className="space-y-6">
-        {/* Заголовок */}
-        <div>
-          <h1 className="text-2xl font-bold text-dark dark:text-white">
-            Проекты
-          </h1>
-          <p className="text-body-color dark:text-dark-6 mt-1">
-            Управляйте всеми своими проектами в одном месте
-          </p>
+        {/* Заголовок с кнопкой создания */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-dark dark:text-white">
+              Проекты
+            </h1>
+            <p className="text-body-color dark:text-dark-6 mt-1">
+              Управляйте всеми своими проектами в одном месте
+            </p>
+          </div>
+          <button
+            onClick={onCreateProject}
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
+              <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+            </svg>
+            Создать проект
+          </button>
         </div>
         
         <div className="text-center py-12">
@@ -125,14 +140,25 @@ const ProjectsList: React.FC = () => {
   if (projects.length === 0) {
     return (
       <div className="space-y-6">
-        {/* Заголовок */}
-        <div>
-          <h1 className="text-2xl font-bold text-dark dark:text-white">
-            Проекты
-          </h1>
-          <p className="text-body-color dark:text-dark-6 mt-1">
-            Управляйте всеми своими проектами в одном месте
-          </p>
+        {/* Заголовок с кнопкой создания */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-dark dark:text-white">
+              Проекты
+            </h1>
+            <p className="text-body-color dark:text-dark-6 mt-1">
+              Управляйте всеми своими проектами в одном месте
+            </p>
+          </div>
+          <button
+            onClick={onCreateProject}
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
+              <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+            </svg>
+            Создать проект
+          </button>
         </div>
         
         <div className="text-center py-12">
@@ -157,27 +183,29 @@ const ProjectsList: React.FC = () => {
     );
   }
 
-  // Если выбран проект для просмотра продуктов
-  if (selectedProject) {
-    return (
-      <ProjectProducts
-        project={selectedProject}
-        onBack={() => setSelectedProject(null)}
-        onProductCreated={handleProductCreated}
-      />
-    );
-  }
+
 
   return (
     <div className="space-y-6">
-      {/* Заголовок */}
-      <div>
-        <h1 className="text-2xl font-bold text-dark dark:text-white">
-          Проекты
-        </h1>
-        <p className="text-body-color dark:text-dark-6 mt-1">
-          Управляйте всеми своими проектами в одном месте
-        </p>
+      {/* Заголовок с кнопкой создания */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-dark dark:text-white">
+            Проекты
+          </h1>
+          <p className="text-body-color dark:text-dark-6 mt-1">
+            Управляйте всеми своими проектами в одном месте
+          </p>
+        </div>
+        <button
+          onClick={onCreateProject}
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
+            <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+          </svg>
+          Создать проект
+        </button>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -216,15 +244,15 @@ const ProjectsList: React.FC = () => {
               {/* Кнопки действий */}
               <div className="flex gap-2">
                 {productCount > 0 && (
-                  <button
-                    onClick={() => setSelectedProject(project)}
+                  <Link
+                    to={`/projects/${project.id}`}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors"
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
                       <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
                     </svg>
                     Продукты
-                  </button>
+                  </Link>
                 )}
                 
                 {firstProduct && (

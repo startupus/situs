@@ -18,11 +18,9 @@ const ProjectsMain: React.FC = () => {
 
   return (
     <div className="p-6">
-      <ProjectsFilters
-        onCreateProject={handleCreateProject}
-      />
+      <ProjectsFilters />
       
-      <ProjectsList />
+      <ProjectsList onCreateProject={handleCreateProject} />
 
       {showCreateModal && (
         <CreateProjectModal
