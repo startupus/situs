@@ -37,15 +37,26 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
 
   return (
     <header 
-      className="redaktus-editor-navbar flex w-full items-center border-b h-14 shadow-sm z-50 relative transition-colors duration-200 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+      className="redaktus-editor-navbar flex w-full items-center border-b h-14 shadow-sm z-50 relative transition-colors duration-200 bg-white dark:bg-dark border-stroke dark:border-dark-3"
+      style={{
+        backgroundColor: 'var(--interface-bg, var(--color-gray-50, #ffffff))',
+        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))',
+        color: 'var(--interface-text, var(--color-body-color, #1f2937))'
+      }}
     >
       <div className="w-full px-6">
         <div className="flex items-center justify-between h-full">
           {/* Left Section - Logo */}
           <div className="flex items-center">
             <div className="flex items-center space-x-3">
-              <FaCube className="text-gray-600 dark:text-gray-300 text-xl transition-colors duration-200" />
-              <span className="text-lg font-bold tracking-wide transition-colors duration-200 text-gray-900 dark:text-gray-100">
+              <FaCube 
+                className="text-xl transition-colors duration-200" 
+                style={{ color: 'var(--interface-primary, var(--color-primary, #1E40AF))' }}
+              />
+              <span 
+                className="text-lg font-bold tracking-wide transition-colors duration-200 font-inter"
+                style={{ color: 'var(--interface-text, var(--color-body-color, #1f2937))' }}
+              >
                 REDAKTUS
               </span>
             </div>
@@ -103,18 +114,32 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
             <button 
               onClick={onSave}
               disabled={isSaving}
-              className={`inline-flex items-center space-x-2 px-4 py-2 border rounded-md text-sm font-medium focus:outline-none transition-colors ${
+              className={`inline-flex items-center space-x-2 px-4 py-2 border rounded-lg text-sm font-medium focus:outline-none transition-all duration-200 font-inter ${
                 isSaving
-                  ? 'border-gray-300 text-gray-400 cursor-not-allowed dark:border-gray-600 dark:text-gray-500'
-                  : 'border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700'
+                  ? 'border-stroke text-body-color/50 cursor-not-allowed dark:border-dark-3 dark:text-dark-6/50'
+                  : 'border-stroke text-body-color hover:bg-primary hover:text-white hover:border-primary dark:border-dark-3 dark:text-dark-6 dark:hover:bg-primary dark:hover:text-white'
               }`}
+              style={{
+                borderColor: isSaving 
+                  ? 'var(--interface-border, var(--color-stroke, #e5e7eb))'
+                  : 'var(--interface-border, var(--color-stroke, #e5e7eb))',
+                color: isSaving 
+                  ? 'var(--interface-text-disabled, var(--color-body-color, #64748b))50'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))'
+              }}
             >
               <FaSave size={12} />
               <span>{t('editor.navbar.save').toUpperCase()}</span>
             </button>
 
             {/* View Site Button */}
-            <button className="inline-flex items-center space-x-2 px-4 py-2 border rounded-md text-sm font-medium focus:outline-none transition-colors border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">
+            <button 
+              className="inline-flex items-center space-x-2 px-4 py-2 border rounded-lg text-sm font-medium focus:outline-none transition-all duration-200 font-inter border-stroke text-body-color hover:bg-primary hover:text-white hover:border-primary dark:border-dark-3 dark:text-dark-6 dark:hover:bg-primary dark:hover:text-white"
+              style={{
+                borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))',
+                color: 'var(--interface-text, var(--color-body-color, #64748b))'
+              }}
+            >
               <FaExternalLinkAlt size={12} />
               <span>{t('editor.navbar.viewSite').toUpperCase()}</span>
             </button>
@@ -160,11 +185,22 @@ const NavTab: React.FC<{
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-        active
-                          ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
-          : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
+      className={`border-b-2 py-2 px-4 text-sm font-medium transition-all duration-200 font-inter ${
+        active 
+          ? 'border-primary text-primary'
+          : 'border-transparent text-body-color hover:border-primary hover:text-primary'
       }`}
+      style={{
+        borderBottomColor: active 
+          ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+          : 'transparent',
+        color: active 
+          ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+          : 'var(--interface-text, var(--color-body-color, #64748b))',
+        backgroundColor: active 
+          ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+          : 'transparent'
+      }}
     >
       {children}
     </button>

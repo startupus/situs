@@ -47,11 +47,11 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
 
   return (
     <div 
-      className="redaktus-settings-panel w-80 flex-shrink-0 overflow-y-auto transition-colors duration-200 border-l h-full"
+      className="redaktus-settings-panel w-80 flex-shrink-0 overflow-y-auto transition-colors duration-200 border-l h-full bg-white dark:bg-dark border-stroke dark:border-dark-3"
       style={{
-        backgroundColor: 'var(--interface-bg)',
-        color: 'var(--interface-text)',
-        borderColor: 'var(--interface-border)'
+        backgroundColor: 'var(--interface-bg, var(--color-gray-50, #ffffff))',
+        color: 'var(--interface-text, var(--color-body-color, #64748b))',
+        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))'
       }}
     >
       <div 
@@ -72,31 +72,64 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
           <nav className="flex">
             <button
               onClick={() => setActiveTab('page')}
-              className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-4 px-6 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'page'
-                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
-                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
               }`}
+              style={{
+                borderBottomColor: activeTab === 'page' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'transparent',
+                color: activeTab === 'page' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor: activeTab === 'page' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  : 'transparent'
+              }}
             >
               {t('editor.panels.page')}
             </button>
             <button
               onClick={() => setActiveTab('blocks')}
-              className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-4 px-6 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'blocks'
-                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
-                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
               }`}
+              style={{
+                borderBottomColor: activeTab === 'blocks' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'transparent',
+                color: activeTab === 'blocks' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor: activeTab === 'blocks' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  : 'transparent'
+              }}
             >
               {t('editor.panels.block')}
             </button>
             <button
               onClick={() => setActiveTab('item')}
-              className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-4 px-6 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'item'
-                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
-                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
               }`}
+              style={{
+                borderBottomColor: activeTab === 'item' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'transparent',
+                color: activeTab === 'item' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor: activeTab === 'item' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  : 'transparent'
+              }}
             >
               {t('editor.panels.item')}
             </button>

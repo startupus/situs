@@ -20,11 +20,11 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
 
   return (
     <section 
-      className="redaktus-vertical-navbar h-full border-r w-40 flex flex-col transition-colors duration-200"
+      className="redaktus-vertical-navbar h-full border-r w-40 flex flex-col transition-colors duration-200 bg-white dark:bg-dark border-stroke dark:border-dark-3"
       style={{
-        backgroundColor: 'var(--interface-bg)',
-        color: 'var(--interface-text)',
-        borderColor: 'var(--interface-border)'
+        backgroundColor: 'var(--interface-bg, var(--color-gray-50, #ffffff))',
+        color: 'var(--interface-text, var(--color-body-color, #64748b))',
+        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))'
       }}
     >
       <div className="flex flex-col h-full">
@@ -39,21 +39,43 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
           <nav className="flex">
             <button
               onClick={() => setActiveTab('pages')}
-              className={`border-b-2 py-4 px-4 text-sm font-medium md:text-base flex-1 transition-colors ${
+              className={`border-b-2 py-4 px-4 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'pages'
-                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
-                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
               }`}
+              style={{
+                borderBottomColor: activeTab === 'pages' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'transparent',
+                color: activeTab === 'pages' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor: activeTab === 'pages' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  : 'transparent'
+              }}
             >
               {t('editor.panels.pages')}
             </button>
             <button
               onClick={() => setActiveTab('entities')}
-              className={`border-b-2 py-4 px-4 text-sm font-medium md:text-base flex-1 transition-colors ${
+              className={`border-b-2 py-4 px-4 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'entities'
-                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
-                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
               }`}
+              style={{
+                borderBottomColor: activeTab === 'entities' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'transparent',
+                color: activeTab === 'entities' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor: activeTab === 'entities' 
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  : 'transparent'
+              }}
             >
               {t('editor.panels.entities')}
             </button>
