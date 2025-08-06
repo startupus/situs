@@ -1,140 +1,225 @@
 import express from 'express';
+import { prisma } from '../lib/prisma';
 
 const router = express.Router();
 
-// Моковые данные для проектов
-const mockProjects = [
-  {
-    id: '1',
-    name: 'Стартапус - Демо проект',
-    description: 'Демонстрационный проект экосистемы Стартапус',
-    template: 'website',
-    status: 'published',
-    settings: {
-      theme: 'auto',
-      primaryColor: '#3B82F6',
-      favicon: '/favicon.ico',
-      logo: '/logo.svg'
-    },
-    products: [
-      {
-        id: '1',
-        name: 'Стартапус - Демо проект',
-        description: 'Демонстрационный проект экосистемы Стартапус',
-        type: 'WEBSITE',
-        status: 'PUBLISHED',
-        settings: {
-          theme: 'auto',
-          primaryColor: '#3B82F6',
-          favicon: '/favicon.ico',
-          logo: '/logo.svg',
-          domain: 'startapus.com'
-        },
-        analytics: {
-          visitors: 2890,
-          pageViews: 12450,
-          conversionRate: 3.2,
-          revenue: 184000
-        },
-        createdAt: '2024-01-01T10:00:00Z',
-        updatedAt: '2024-12-23T15:30:00Z'
-      }
-    ],
-    createdAt: '2024-01-01T00:00:00Z',
-    updatedAt: '2024-01-01T00:00:00Z'
-  },
-  {
-    id: '2',
-    name: 'Портфолио агентства',
-    description: 'Сайт-портфолио для креативного агентства',
-    template: 'portfolio',
-    status: 'published',
-    settings: {
-      theme: 'dark',
-      primaryColor: '#8B5CF6',
-      favicon: '/favicon.ico',
-      logo: '/logo.svg'
-    },
-    products: [
-      {
-        id: '2',
-        name: 'Портфолио агентства',
-        description: 'Сайт-портфолио для креативного агентства',
-        type: 'WEBSITE',
-        status: 'PUBLISHED',
-        settings: {
-          theme: 'dark',
-          primaryColor: '#8B5CF6',
-          favicon: '/favicon.ico',
-          logo: '/logo.svg',
-          domain: 'portfolio-agency.com'
-        },
-        analytics: {
-          visitors: 1567,
-          pageViews: 8234,
-          conversionRate: 2.8,
-          revenue: 88000
-        },
-        createdAt: '2024-01-02T09:00:00Z',
-        updatedAt: '2024-12-23T15:30:00Z'
-      }
-    ],
-    createdAt: '2024-01-02T00:00:00Z',
-    updatedAt: '2024-01-02T00:00:00Z'
-  }
-];
-
 // GET /api/projects - получить все проекты
-router.get('/', (req, res) => {
-  res.json({
-    success: true,
-    data: {
-      projects: mockProjects,
-      pagination: {
-        page: 1,
-        limit: 20,
-        total: mockProjects.length,
-        totalPages: 1
-      }
+router.get('/', async (req, res) => {
+  try {
+    const { page = 1, limit = 20, search, type, status } = req.query;
+    
+    const skip = (Number(page) - 1) * Number(limit);
+    
+    // Строим условия поиска
+    const where: any = {};
+    
+    if (search) {
+      where.OR = [
+        { name: { contains: search as string, mode: 'insensitive' } },
+        { description: { contains: search as string, mode: 'insensitive' } }
+      ];
     }
-  });
-});
+    
+    if (type) {
+      where.type = type;
+    }
+    
+    if (status) {
+      where.status = status;
+    }
 
-// GET /api/projects/:id - получить проект по ID
-router.get('/:id', (req, res) => {
-  const project = mockProjects.find(p => p.id === req.params.id);
-  if (project) {
-    res.json({
-      success: true,
-      data: project
+    // Получаем проекты с продуктами и страницами
+    const projects = await prisma.project.findMany({
+      where,
+      include: {
+        products: {
+          include: {
+            project: true
+          }
+        },
+        pages: true,
+        owner: {
+          select: {
+            id: true,
+            username: true,
+            email: true
+          }
+        }
+      },
+      skip,
+      take: Number(limit),
+      orderBy: {
+        createdAt: 'desc'
+      }
     });
-  } else {
-    res.status(404).json({ 
-      success: false,
-      error: 'Проект не найден' 
-    });
-  }
-});
 
-// GET /api/projects/:id/products - получить продукты проекта
-router.get('/:id/products', (req, res) => {
-  const project = mockProjects.find(p => p.id === req.params.id);
-  if (project) {
-    res.json({
+    // Получаем общее количество
+    const total = await prisma.project.count({ where });
+
+    return res.json({
       success: true,
       data: {
-        products: project.products || [],
-        project: {
-          id: project.id,
-          name: project.name,
-          description: project.description
+        projects,
+        pagination: {
+          page: Number(page),
+          limit: Number(limit),
+          total,
+          totalPages: Math.ceil(total / Number(limit))
         }
       }
     });
-  } else {
-    res.status(404).json({ 
+  } catch (error) {
+    console.error('Ошибка при получении проектов:', error);
+    return res.status(500).json({
       success: false,
-      error: 'Проект не найден' 
+      error: 'Внутренняя ошибка сервера'
+    });
+  }
+});
+
+// GET /api/projects/:id - получить проект по ID
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const project = await prisma.project.findUnique({
+      where: { id },
+      include: {
+        products: {
+          include: {
+            project: true
+          }
+        },
+        pages: true,
+        owner: {
+          select: {
+            id: true,
+            username: true,
+            email: true
+          }
+        }
+      }
+    });
+
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        error: 'Проект не найден'
+      });
+    }
+
+    return res.json({
+      success: true,
+      data: project
+    });
+  } catch (error) {
+    console.error('Ошибка при получении проекта:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Внутренняя ошибка сервера'
+    });
+  }
+});
+
+// POST /api/projects - создать новый проект
+router.post('/', async (req, res) => {
+  try {
+    const { name, description, type, status, settings, ownerId } = req.body;
+
+    const project = await prisma.project.create({
+      data: {
+        name,
+        description,
+        type: type || 'WEBSITE',
+        status: status || 'DRAFT',
+        settings: settings ? JSON.stringify(settings) : '{}',
+        ownerId
+      },
+      include: {
+        products: true,
+        pages: true,
+        owner: {
+          select: {
+            id: true,
+            username: true,
+            email: true
+          }
+        }
+      }
+    });
+
+    return res.status(201).json({
+      success: true,
+      data: project
+    });
+  } catch (error) {
+    console.error('Ошибка при создании проекта:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Внутренняя ошибка сервера'
+    });
+  }
+});
+
+// PUT /api/projects/:id - обновить проект
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, type, status, settings } = req.body;
+
+    const project = await prisma.project.update({
+      where: { id },
+      data: {
+        name,
+        description,
+        type,
+        status,
+        settings: settings ? JSON.stringify(settings) : undefined
+      },
+      include: {
+        products: true,
+        pages: true,
+        owner: {
+          select: {
+            id: true,
+            username: true,
+            email: true
+          }
+        }
+      }
+    });
+
+    return res.json({
+      success: true,
+      data: project
+    });
+  } catch (error) {
+    console.error('Ошибка при обновлении проекта:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Внутренняя ошибка сервера'
+    });
+  }
+});
+
+// DELETE /api/projects/:id - удалить проект
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await prisma.project.delete({
+      where: { id }
+    });
+
+    return res.json({
+      success: true,
+      message: 'Проект успешно удален'
+    });
+  } catch (error) {
+    console.error('Ошибка при удалении проекта:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Внутренняя ошибка сервера'
     });
   }
 });

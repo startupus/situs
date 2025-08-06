@@ -1,0 +1,289 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  status    UserStatus @default(ACTIVE)
+  
+  // Profile data
+  profile   String?  @default("{\"name\":\"\",\"avatar\":\"\",\"bio\":\"\"}") // JSON as string
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  balances     Balance[]
+  transactions Transaction[]
+  projects     Project[]
+
+  @@map("users")
+}
+
+model Currency {
+  id          String   @id @default(cuid())
+  code        String   @unique  // e.g., "USD", "EUR", "BTC", "GEMS"
+  name        String              // e.g., "US Dollar", "Euro", "Bitcoin", "Game Gems"
+  symbol      String              // e.g., "$", "€", "₿", "💎"
+  decimals    Int      @default(2) // Number of decimal places
+  isActive    Boolean  @default(true)
+  isSystem    Boolean  @default(false) // System currencies vs user-created
+  
+  // Metadata
+  description String?
+  iconUrl     String?
+  color       String?  // Hex color for UI
+  
+  // Audit fields
+  createdBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  balances     Balance[]
+  transactions Transaction[]
+
+  @@map("currencies")
+}
+
+model Balance {
+  id         String   @id @default(cuid())
+  userId     String
+  currencyId String
+  amount     Float    @default(0)
+  reserved   Float    @default(0)
+  lastUpdated DateTime @updatedAt
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency Currency @relation(fields: [currencyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, currencyId])
+  @@map("balances")
+}
+
+model Transaction {
+  id          String            @id @default(cuid())
+  userId      String
+  serviceId   String
+  type        TransactionType
+  amount      Float
+  currencyId  String
+  status      TransactionStatus @default(PENDING)
+  description String?
+  metadata    String?           // JSON string
+  createdAt   DateTime          @default(now())
+  completedAt DateTime?
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency Currency @relation(fields: [currencyId], references: [id], onDelete: Cascade)
+
+  @@map("transactions")
+}
+
+model Project {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  slug        String      @unique  // Генерируется из названия
+  type        ProjectType @default(WEBSITE)
+  status      ProjectStatus @default(DRAFT)
+  
+  // Domain settings
+  domain       String?     // situs subdomain (example.situs.com)
+  customDomain String?     // custom domain (example.com)
+  isPublished  Boolean     @default(false)
+  
+  // SEO Settings
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // Theme and Design
+  primaryColor   String? @default("#3B82F6")
+  secondaryColor String? @default("#8B5CF6")
+  fontFamily     String? @default("Inter")
+  
+  // Project Settings JSON
+  settings String? @default("{\"theme\":\"auto\",\"language\":\"ru\",\"creationType\":\"manual\"}") // JSON as string
+  
+  // Features
+  hasEcommerce   Boolean @default(false)
+  hasAnalytics   Boolean @default(false)
+  hasBlog        Boolean @default(false)
+  hasContactForm Boolean @default(false)
+  
+  // Ownership
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  pages Page[]
+  products Product[]
+  
+  @@map("projects")
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  type        ProductType
+  status      ProductStatus @default(DRAFT)
+  
+  // URLs
+  url         String?     // URL продукта
+  editorUrl   String?     // URL редактора (для сайтов)
+  
+  // Settings
+  settings    String?     @default("{}") // JSON as string
+  
+  // Project relation
+  projectId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@map("products")
+}
+
+model Page {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String
+  content     String?    // Redaktus content blocks as JSON string
+  pageType    PageType   @default(PAGE)
+  status      PageStatus @default(DRAFT)
+  isHomePage  Boolean    @default(false)
+  
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // Template and Layout
+  template    String?
+  layout      String?
+  
+  // Project relation
+  projectId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@unique([projectId, slug])
+  @@map("pages")
+}
+
+model Media {
+  id          String    @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  width       Int?
+  height      Int?
+  url         String
+  alt         String?
+  caption     String?
+  
+  // Organization
+  projectId   String?
+  folder      String?
+  tags        String?   // JSON string for tags array
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("media")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+  PAYMENT
+  REFUND
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ProjectType {
+  WEBSITE
+  ECOMMERCE
+  LANDING
+  BLOG
+  APP
+}
+
+enum ProjectStatus {
+  DRAFT
+  DEVELOPMENT
+  STAGING
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ProductType {
+  WEBSITE
+  STORE
+  SCHOOL
+  CHATBOT
+  BLOG
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum PageType {
+  PAGE
+  POST
+  PRODUCT
+  CATEGORY
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}

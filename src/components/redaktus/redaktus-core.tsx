@@ -305,27 +305,78 @@ const EditorContent: React.FC = () => {
       try {
         setLoading(true);
         console.log('🚀 Загрузка проекта:', urlParams.projectId);
+        console.log('🚀 Загрузка продукта:', urlParams.productId);
         
-        // Загружаем проект
-        const project = await getProject(urlParams.projectId);
+        // Загружаем проект через новый API
+        const response = await fetch(`http://localhost:3001/api/projects/${urlParams.projectId}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch project: ${response.statusText}`);
+        }
+        
+        const projectData = await response.json();
+        const project = projectData.data;
         console.log('✅ Проект загружен:', project.name);
         setCurrentProject(project);
-        setProjectPages(project.pages);
+
+        // Находим нужный продукт
+        const product = project.products?.find(p => p.id === urlParams.productId);
+        if (!product) {
+          throw new Error(`Product with ID ${urlParams.productId} not found`);
+        }
+        
+        console.log('✅ Продукт найден:', product.name);
+        console.log('📄 Страницы продукта:', product.pages);
+
+        // Устанавливаем страницы продукта
+        const pages = product.pages || [];
+        setProjectPages(pages);
 
         // Определяем какую страницу загрузить
-        let pageToLoad: PageData;
+        let pageToLoad;
         if (urlParams.pageId) {
           // Загружаем конкретную страницу
-          pageToLoad = await getPage(urlParams.pageId);
+          pageToLoad = pages.find(p => p.id === urlParams.pageId);
+          if (!pageToLoad) {
+            throw new Error(`Page with ID ${urlParams.pageId} not found`);
+          }
           console.log('📄 Страница загружена по ID:', pageToLoad.title);
         } else {
-          // Загружаем главную страницу проекта
-          const homePage = project.pages.find(p => p.isHomePage) || project.pages[0];
-          if (homePage) {
-            pageToLoad = await getPage(homePage.id);
-            console.log('🏠 Главная страница загружена:', pageToLoad.title);
+          // Загружаем первую страницу или создаем дефолтную
+          pageToLoad = pages[0];
+          if (!pageToLoad) {
+            // Создаем дефолтную страницу
+            pageToLoad = {
+              id: `page-${Date.now()}`,
+              title: 'Главная страница',
+              slug: 'home',
+              content: {
+                blocks: [
+                  {
+                    id: 'hero-block',
+                    type: 'hero-block',
+                    props: {
+                      title: 'Добро пожаловать',
+                      subtitle: 'Это ваша главная страница',
+                      primaryButtonText: 'Начать',
+                      primaryButtonUrl: '#',
+                      secondaryButtonText: 'Узнать больше',
+                      secondaryButtonUrl: '#',
+                      heroImage: 'https://via.placeholder.com/600x400'
+                    }
+                  }
+                ]
+              },
+              meta: {
+                title: 'Главная страница',
+                description: 'Главная страница сайта',
+                keywords: ''
+              },
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString()
+            };
+            console.log('🏠 Создана дефолтная страница:', pageToLoad.title);
           } else {
-            throw new Error('Нет доступных страниц в проекте');
+            console.log('🏠 Загружена первая страница:', pageToLoad.title);
           }
         }
 
@@ -352,11 +403,11 @@ const EditorContent: React.FC = () => {
           },
           availableLanguages: ['ru', 'en', 'de'],
           defaultLanguage: 'ru',
-          projectId: pageToLoad.projectId,
+          projectId: project.id,
           meta: {
-            title: pageToLoad.metaTitle,
-            description: pageToLoad.metaDescription,
-            keywords: pageToLoad.metaKeywords
+            title: pageToLoad.meta?.title || pageToLoad.title,
+            description: pageToLoad.meta?.description || '',
+            keywords: pageToLoad.meta?.keywords || ''
           }
         };
 
@@ -365,14 +416,59 @@ const EditorContent: React.FC = () => {
         
       } catch (error) {
         console.error('❌ Ошибка загрузки данных проекта:', error);
-        // При ошибке оставляем mock данные
+        // При ошибке создаем дефолтную страницу
+        const defaultPage = {
+          id: 'default-page',
+          type: 'page',
+          slug: 'home',
+          title: 'Главная страница',
+          content: [
+            {
+              id: 'hero-block',
+              type: 'hero-block',
+              props: {
+                title: 'Добро пожаловать в редактор',
+                subtitle: 'Создайте свою первую страницу',
+                primaryButtonText: 'Начать',
+                primaryButtonUrl: '#',
+                secondaryButtonText: 'Узнать больше',
+                secondaryButtonUrl: '#',
+                heroImage: 'https://via.placeholder.com/600x400'
+              }
+            }
+          ],
+          languages: {
+            ru: {
+              title: 'Главная страница',
+              content: []
+            },
+            en: {
+              title: 'Home Page',
+              content: []
+            },
+            de: {
+              title: 'Startseite',
+              content: []
+            }
+          },
+          availableLanguages: ['ru', 'en', 'de'],
+          defaultLanguage: 'ru',
+          projectId: urlParams.projectId,
+          meta: {
+            title: 'Главная страница',
+            description: 'Главная страница сайта',
+            keywords: ''
+          }
+        };
+        setCurrentPage(defaultPage);
+        setProjectPages([defaultPage]);
       } finally {
         setLoading(false);
       }
     };
 
     loadProjectData();
-  }, [urlParams.projectId, urlParams.pageId]);
+  }, [urlParams.projectId, urlParams.productId, urlParams.pageId]);
 
   // Функция сохранения страницы
   const savePage = async (pageData: any) => {
@@ -556,15 +652,30 @@ const EditorContent: React.FC = () => {
         slug: `new-page-${Date.now()}`,
         type: 'page',
         status: 'draft',
-        content: [],
+        content: {
+          blocks: [
+            {
+              id: 'hero-block',
+              type: 'hero-block',
+              props: {
+                title: 'Новая страница',
+                subtitle: 'Это ваша новая страница',
+                primaryButtonText: 'Начать',
+                primaryButtonUrl: '#',
+                secondaryButtonText: 'Узнать больше',
+                secondaryButtonUrl: '#',
+                heroImage: 'https://via.placeholder.com/600x400'
+              }
+            }
+          ]
+        },
         meta: {
           title: `Новая страница ${Date.now()}`,
           description: '',
           keywords: ''
         },
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        availableLanguages: ['ru']
+        updatedAt: new Date().toISOString()
       };
 
       // Добавляем страницу в текущий продукт
@@ -578,6 +689,9 @@ const EditorContent: React.FC = () => {
           
           // Обновляем состояние
           setCurrentProject({ ...currentProject });
+          
+          // Обновляем список страниц
+          setProjectPages([...projectPages, newPage]);
           
           // Переключаемся на новую страницу
           await handlePageSelect(newPage.id);

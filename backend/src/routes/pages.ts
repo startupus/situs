@@ -3,7 +3,7 @@ import { prisma } from '../lib/prisma';
 
 const router = express.Router();
 
-// GET /api/products - получить все продукты
+// GET /api/pages - получить все страницы
 router.get('/', async (req, res) => {
   try {
     const { page = 1, limit = 20, search, type, status, projectId } = req.query;
@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
     
     if (search) {
       where.OR = [
-        { name: { contains: search as string, mode: 'insensitive' } },
-        { description: { contains: search as string, mode: 'insensitive' } }
+        { title: { contains: search as string, mode: 'insensitive' } },
+        { slug: { contains: search as string, mode: 'insensitive' } }
       ];
     }
     
     if (type) {
-      where.type = type;
+      where.pageType = type;
     }
     
     if (status) {
@@ -32,8 +32,8 @@ router.get('/', async (req, res) => {
       where.projectId = projectId;
     }
 
-    // Получаем продукты с проектом
-    const products = await prisma.product.findMany({
+    // Получаем страницы с проектом
+    const pages = await prisma.page.findMany({
       where,
       include: {
         project: true
@@ -46,12 +46,12 @@ router.get('/', async (req, res) => {
     });
 
     // Получаем общее количество
-    const total = await prisma.product.count({ where });
+    const total = await prisma.page.count({ where });
 
     return res.json({
       success: true,
       data: {
-        products,
+        pages,
         pagination: {
           page: Number(page),
           limit: Number(limit),
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Ошибка при получении продуктов:', error);
+    console.error('Ошибка при получении страниц:', error);
     return res.status(500).json({
       success: false,
       error: 'Внутренняя ошибка сервера'
@@ -69,31 +69,31 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/products/:id - получить продукт по ID
+// GET /api/pages/:id - получить страницу по ID
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await prisma.product.findUnique({
+    const page = await prisma.page.findUnique({
       where: { id },
       include: {
         project: true
       }
     });
 
-    if (!product) {
+    if (!page) {
       return res.status(404).json({
         success: false,
-        error: 'Продукт не найден'
+        error: 'Страница не найдена'
       });
     }
 
     return res.json({
       success: true,
-      data: product
+      data: page
     });
   } catch (error) {
-    console.error('Ошибка при получении продукта:', error);
+    console.error('Ошибка при получении страницы:', error);
     return res.status(500).json({
       success: false,
       error: 'Внутренняя ошибка сервера'
@@ -101,19 +101,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /api/products - создать новый продукт
+// POST /api/pages - создать новую страницу
 router.post('/', async (req, res) => {
   try {
-    const { name, description, type, status, settings, projectId } = req.body;
+    const { title, slug, content, pageType, status, metaTitle, metaDescription, metaKeywords, projectId, isHomePage } = req.body;
 
-    const product = await prisma.product.create({
+    const page = await prisma.page.create({
       data: {
-        name,
-        description,
-        type: type || 'WEBSITE',
+        title,
+        slug,
+        content: content ? JSON.stringify(content) : '{}',
+        pageType: pageType || 'PAGE',
         status: status || 'DRAFT',
-        settings: settings ? JSON.stringify(settings) : '{}',
-        projectId
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        projectId,
+        isHomePage: isHomePage || false
       },
       include: {
         project: true
@@ -122,10 +126,10 @@ router.post('/', async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      data: product
+      data: page
     });
   } catch (error) {
-    console.error('Ошибка при создании продукта:', error);
+    console.error('Ошибка при создании страницы:', error);
     return res.status(500).json({
       success: false,
       error: 'Внутренняя ошибка сервера'
@@ -133,20 +137,24 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /api/products/:id - обновить продукт
+// PUT /api/pages/:id - обновить страницу
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, type, status, settings } = req.body;
+    const { title, slug, content, pageType, status, metaTitle, metaDescription, metaKeywords, isHomePage } = req.body;
 
-    const product = await prisma.product.update({
+    const page = await prisma.page.update({
       where: { id },
       data: {
-        name,
-        description,
-        type,
+        title,
+        slug,
+        content: content ? JSON.stringify(content) : undefined,
+        pageType,
         status,
-        settings: settings ? JSON.stringify(settings) : undefined
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        isHomePage
       },
       include: {
         project: true
@@ -155,10 +163,10 @@ router.put('/:id', async (req, res) => {
 
     return res.json({
       success: true,
-      data: product
+      data: page
     });
   } catch (error) {
-    console.error('Ошибка при обновлении продукта:', error);
+    console.error('Ошибка при обновлении страницы:', error);
     return res.status(500).json({
       success: false,
       error: 'Внутренняя ошибка сервера'
@@ -166,21 +174,21 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/products/:id - удалить продукт
+// DELETE /api/pages/:id - удалить страницу
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
-    await prisma.product.delete({
+    await prisma.page.delete({
       where: { id }
     });
 
     return res.json({
       success: true,
-      message: 'Продукт успешно удален'
+      message: 'Страница успешно удалена'
     });
   } catch (error) {
-    console.error('Ошибка при удалении продукта:', error);
+    console.error('Ошибка при удалении страницы:', error);
     return res.status(500).json({
       success: false,
       error: 'Внутренняя ошибка сервера'

@@ -47,10 +47,12 @@ app.get('/health', (req, res) => {
 import projectsRouter from './routes/projects';
 import ordersRouter from './routes/orders';
 import productsRouter from './routes/products';
+import pagesRouter from './routes/pages';
 
 app.use('/api/projects', projectsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/pages', pagesRouter);
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
