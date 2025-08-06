@@ -1,56 +1,57 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProjectProduct } from '../../../types/project';
+import { ProjectProduct, ProjectData } from '../../../types/project';
 import CreateProductModal from './CreateProductModal';
 
 interface ProjectProductsProps {
-  projectId: string;
-  products: ProjectProduct[];
+  project: ProjectData;
+  onBack?: () => void;
   onProductCreated: (product: ProjectProduct) => void;
 }
 
 const ProjectProducts: React.FC<ProjectProductsProps> = ({ 
-  projectId, 
-  products, 
+  project, 
+  onBack,
   onProductCreated 
 }) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  
+  const products = project.products || [];
 
   const getProductTypeIcon = (type: string) => {
     switch (type) {
-      case 'website':
+      case 'WEBSITE':
         return (
           <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
             <path d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM10 16C6.69 16 4 13.31 4 10C4 6.69 6.69 4 10 4C13.31 4 16 6.69 16 10C16 13.31 13.31 16 10 16Z"/>
             <path d="M7 7H13V9H7V7ZM7 11H13V13H7V11Z"/>
           </svg>
         );
-      case 'store':
+      case 'STORE':
         return (
           <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
             <path d="M3 3V5H4V16C4 16.55 4.45 17 5 17H15C15.55 17 16 16.55 16 16V5H17V3H3ZM5 5H15V16H5V5Z"/>
             <path d="M7 7V9H8V7H7ZM10 7V9H11V7H10Z"/>
           </svg>
         );
-      case 'school':
-        return (
-          <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
-            <path d="M10 3L1 9L10 15L19 10.09V17H21V9M3 13.18V17.18L10 21L17 17.18V13.18L10 17L3 13.18Z"/>
-          </svg>
-        );
-      case 'chatbot':
-        return (
-          <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
-            <path d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM10 16C6.69 16 4 13.31 4 10C4 6.69 6.69 4 10 4C13.31 4 16 6.69 16 10C16 13.31 13.31 16 10 16Z"/>
-            <path d="M7 9.5C7 8.67 7.67 8 8.5 8S10 8.67 10 9.5S9.33 11 8.5 11S7 10.33 7 9.5ZM11.5 8C12.33 8 13 8.67 13 9.5S12.33 11 11.5 11S10 10.33 10 9.5S10.67 8 11.5 8Z"/>
-            <path d="M10 17.5C12.33 17.5 14.31 16.04 15.11 14H4.89C5.69 16.04 7.67 17.5 10 17.5Z"/>
-          </svg>
-        );
-      case 'blog':
+      case 'BLOG':
         return (
           <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
             <path d="M19 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.89 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.89 20.11 3 19 3ZM19 19H5V5H19V19Z"/>
             <path d="M7 7H17V9H7V7ZM7 11H17V13H7V11ZM7 15H14V17H7V15Z"/>
+          </svg>
+        );
+      case 'APP':
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
+            <path d="M6 2H14C15.1 2 16 2.9 16 4V16C16 17.1 15.1 18 14 18H6C4.9 18 4 17.1 4 16V4C4 2.9 4.9 2 6 2ZM6 4V16H14V4H6Z"/>
+            <path d="M7 5H13V7H7V5ZM7 9H13V11H7V9Z"/>
+          </svg>
+        );
+      case 'LANDING':
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
+            <path d="M3 3H17V5H3V3ZM3 7H17V9H3V7ZM3 11H17V13H3V11ZM3 15H17V17H3V15Z"/>
           </svg>
         );
       default:
@@ -65,11 +66,11 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'published':
+      case 'PUBLISHED':
         return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'draft':
+      case 'DRAFT':
         return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'archived':
+      case 'ARCHIVED':
         return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
       default:
         return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
@@ -78,11 +79,11 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'published':
+      case 'PUBLISHED':
         return 'Опубликован';
-      case 'draft':
+      case 'DRAFT':
         return 'Черновик';
-      case 'archived':
+      case 'ARCHIVED':
         return 'Архив';
       default:
         return status;
@@ -91,16 +92,16 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
 
   const getProductTypeText = (type: string) => {
     switch (type) {
-      case 'website':
+      case 'WEBSITE':
         return 'Сайт';
-      case 'store':
+      case 'STORE':
         return 'Магазин';
-      case 'school':
-        return 'Школа';
-      case 'chatbot':
-        return 'Чатбот';
-      case 'blog':
+      case 'BLOG':
         return 'Блог';
+      case 'APP':
+        return 'Приложение';
+      case 'LANDING':
+        return 'Лендинг';
       default:
         return type;
     }
@@ -113,6 +114,24 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
 
   return (
     <div className="space-y-6">
+      {/* Кнопка возврата и заголовок */}
+      <div className="flex items-center gap-4">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="inline-flex items-center gap-2 text-body-color dark:text-dark-6 hover:text-primary dark:hover:text-primary transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
+              <path d="M10.5 3.5L5.5 8.5L10.5 13.5L9.5 14.5L3.5 8.5L9.5 2.5L10.5 3.5Z"/>
+            </svg>
+            Назад к проектам
+          </button>
+        )}
+        <h2 className="text-xl font-semibold text-dark dark:text-white">
+          {project.name}
+        </h2>
+      </div>
+
       {/* Заголовок и кнопка создания */}
       <div className="flex items-center justify-between">
         <div>
@@ -203,9 +222,9 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
 
               {/* Действия */}
               <div className="flex gap-2 pt-3 border-t border-stroke dark:border-dark-3">
-                {product.type === 'website' && product.editorUrl && (
+                {product.type === 'WEBSITE' && (
                   <Link
-                    to={product.editorUrl}
+                    to={`/redaktus?project=${project.id}&product=${product.id}`}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" className="fill-current">
@@ -215,9 +234,9 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
                     Редактор
                   </Link>
                 )}
-                {product.url && (
+                {product.settings?.domain && (
                   <a
-                    href={product.url}
+                    href={`https://${product.settings.domain}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-body-color dark:text-dark-6 border border-stroke dark:border-dark-3 rounded-lg hover:border-primary dark:hover:border-primary transition-colors"
@@ -238,7 +257,7 @@ const ProjectProducts: React.FC<ProjectProductsProps> = ({
       {/* Модальное окно создания продукта */}
       {showCreateModal && (
         <CreateProductModal
-          projectId={projectId}
+          projectId={project.id}
           onClose={() => setShowCreateModal(false)}
           onSuccess={handleProductCreated}
         />
