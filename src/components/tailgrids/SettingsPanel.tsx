@@ -63,29 +63,26 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
       >
         {/* Вкладки в стиле TailGrids Tab2 - контрастные и видимые */}
         <div 
-          className="flex-shrink-0 bg-[#FAFAFA] dark:bg-gray-700"
+          className="flex-shrink-0 bg-[#FAFAFA] dark:bg-gray-700 p-1"
           style={{
             backgroundColor: 'var(--interface-surface)',
             borderColor: 'var(--interface-border)'
           }}
         >
-          <nav className="flex">
+          <nav className="flex gap-1">
             <button
               onClick={() => setActiveTab('page')}
-              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`py-1 px-2 text-sm font-medium font-inter flex-1 transition-all duration-200 rounded-sm ${
                 activeTab === 'page'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
+                  ? 'text-primary bg-primary/10'
+                  : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                borderBottomColor: activeTab === 'page' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'transparent',
                 color: activeTab === 'page' 
                   ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
                   : 'var(--interface-text, var(--color-body-color, #64748b))',
                 backgroundColor: activeTab === 'page' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
                   : 'transparent'
               }}
             >
@@ -93,20 +90,17 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
             </button>
             <button
               onClick={() => setActiveTab('blocks')}
-              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`py-1 px-2 text-sm font-medium font-inter flex-1 transition-all duration-200 rounded-sm ${
                 activeTab === 'blocks'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
+                  ? 'text-primary bg-primary/10'
+                  : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                borderBottomColor: activeTab === 'blocks' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'transparent',
                 color: activeTab === 'blocks' 
                   ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
                   : 'var(--interface-text, var(--color-body-color, #64748b))',
                 backgroundColor: activeTab === 'blocks' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
                   : 'transparent'
               }}
             >
@@ -114,20 +108,17 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
             </button>
             <button
               onClick={() => setActiveTab('item')}
-              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`py-1 px-2 text-sm font-medium font-inter flex-1 transition-all duration-200 rounded-sm ${
                 activeTab === 'item'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-body-color hover:border-primary hover:text-primary'
+                  ? 'text-primary bg-primary/10'
+                  : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                borderBottomColor: activeTab === 'item' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'transparent',
                 color: activeTab === 'item' 
                   ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
                   : 'var(--interface-text, var(--color-body-color, #64748b))',
                 backgroundColor: activeTab === 'item' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
+                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
                   : 'transparent'
               }}
             >
@@ -137,7 +128,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
         </div>
 
         {/* Контент вкладок */}
-        <div className="p-6 flex-1 overflow-y-auto">
+        <div className="p-3 flex-1 overflow-y-auto">
           {activeTab === 'page' && <PageTab currentPage={currentPage} />}
           {activeTab === 'blocks' && <BlocksTab />}
           {activeTab === 'item' && <ItemTab />}
@@ -154,7 +145,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
   return (
     <div>
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-3">
         <h3 className="text-lg font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
           {t('editor.settings.page.title')}
         </h3>
@@ -502,7 +493,7 @@ const BlocksTab: React.FC = () => {
   return (
     <div>
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-3">
         <h3 className="text-lg font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
           Block Library
         </h3>
@@ -601,7 +592,7 @@ const BlocksTab: React.FC = () => {
 const ItemTab: React.FC = () => {
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-3">
         <h3 className="text-lg font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
           Item Settings
         </h3>
