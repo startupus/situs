@@ -220,10 +220,10 @@
 
 /* Панели в светлой теме - контрастные */
 .redaktus-interface-panel[data-interface-theme="light"] {
-  --interface-bg: #ffffff !important;
+  --interface-bg: #f8f9fa !important; /* светло-серый фон для отделения от белого канваса */
   --interface-text: #1F2937 !important; /* более темный для контраста */
   --interface-border: #D1D5DB !important; /* более заметная граница */
-  --interface-surface: #F9FAFB !important; /* легкий серый фон */
+  --interface-surface: #ffffff !important; /* белый фон для инпутов - контраст на сером */
   --interface-surface-disabled: #F3F4F6 !important; /* фон для disabled */
   --interface-text-disabled: #9CA3AF !important; /* текст для disabled */
   --interface-primary: #4c1d95 !important;
