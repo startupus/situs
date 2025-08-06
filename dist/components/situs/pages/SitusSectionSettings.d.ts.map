@@ -1,1 +1,1 @@
-{"version":3,"file":"SitusSectionSettings.d.ts","sourceRoot":"","sources":["../../../../src/components/situs/pages/SitusSectionSettings.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAmB,MAAM,OAAO,CAAC;AAaxC;;;GAGG;AACH,QAAA,MAAM,oBAAoB,EAAE,KAAK,CAAC,EAgajC,CAAC;AAEF,eAAe,oBAAoB,CAAC"}
+{"version":3,"file":"SitusSectionSettings.d.ts","sourceRoot":"","sources":["../../../../src/components/situs/pages/SitusSectionSettings.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAmB,MAAM,OAAO,CAAC;AAgBxC;;;GAGG;AACH,QAAA,MAAM,oBAAoB,EAAE,KAAK,CAAC,EAucjC,CAAC;AAEF,eAAe,oBAAoB,CAAC"}

@@ -254,7 +254,7 @@ const SitusSupport: React.FC = () => {
       </div>
 
       {/* Фильтры и поиск */}
-      <div className="mb-6 rounded-lg bg-white p-6 shadow dark:bg-dark-2">
+      <div className="mb-6 rounded-lg bg-surface dark:bg-dark-2 p-6 shadow">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <div>
             <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
@@ -265,7 +265,7 @@ const SitusSupport: React.FC = () => {
               placeholder="Поиск по названию, ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-stroke bg-transparent px-3 py-2 text-dark placeholder-dark-5 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+              className="w-full rounded-lg border border-stroke bg-surface dark:bg-gray-800 px-3 py-2 text-dark dark:text-white placeholder-body-color dark:placeholder-gray-400 outline-hidden focus:border-primary transition-colors"
             />
           </div>
 
@@ -276,7 +276,7 @@ const SitusSupport: React.FC = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full rounded-lg border border-stroke bg-transparent px-3 py-2 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+              className="w-full rounded-lg border border-stroke bg-surface dark:bg-gray-800 px-3 py-2 text-dark dark:text-white outline-hidden focus:border-primary transition-colors"
             >
               <option value="all">Все статусы</option>
               <option value="open">Открытые</option>
@@ -292,7 +292,7 @@ const SitusSupport: React.FC = () => {
             <select
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
-              className="w-full rounded-lg border border-stroke bg-transparent px-3 py-2 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+              className="w-full rounded-lg border border-stroke bg-surface dark:bg-gray-800 px-3 py-2 text-dark dark:text-white outline-hidden focus:border-primary transition-colors"
             >
               <option value="all">Все приоритеты</option>
               <option value="urgent">Срочно</option>

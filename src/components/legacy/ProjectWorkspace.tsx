@@ -135,7 +135,7 @@ const ProjectWorkspace: React.FC = () => {
       value: '892',
       change: { value: '+8.2%', type: 'increase' as const },
       percent: 92,
-      color: '#3758F9',
+              color: '#4C1D95',
       icon: <FiUsers className="w-6 h-6" />
     },
     {

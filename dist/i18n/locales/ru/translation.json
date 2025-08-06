@@ -68,9 +68,44 @@
             "title": "Настройки",
             "page": {
                 "title": "Настройки страницы",
+                "subtitle": "Настройка свойств страницы и SEO",
                 "name": "Название страницы",
                 "description": "Описание",
-                "keywords": "Ключевые слова"
+                "keywords": "Ключевые слова",
+                "statusVisibility": {
+                    "title": "Статус и видимость",
+                    "visibility": "ВИДИМОСТЬ",
+                    "published": "Опубликовано",
+                    "draft": "Черновик",
+                    "private": "Приватно",
+                    "publishedLive": "Опубликовано в сети"
+                },
+                "schedulePublish": {
+                    "title": "Запланировать публикацию",
+                    "publishDate": "ДАТА ПУБЛИКАЦИИ",
+                    "publishTime": "ВРЕМЯ ПУБЛИКАЦИИ"
+                },
+                "pageStructure": {
+                    "title": "Структура страницы",
+                    "structureLocked": "СТРУКТУРА ЗАБЛОКИРОВАНА?",
+                    "unlocked": "Разблокировано",
+                    "locked": "Заблокировано",
+                    "description": "При блокировке структура страницы не может быть изменена редакторами контента"
+                },
+                "pageAttributes": {
+                    "title": "Атрибуты страницы",
+                    "pageSlug": "СЛАГ СТРАНИЦЫ",
+                    "pageSlugPlaceholder": "Введите слаг страницы"
+                },
+                "theme": {
+                    "title": "Тема страницы",
+                    "pageTheme": "ТЕМА СТРАНИЦЫ",
+                    "inheritFromSite": "Наследовать от сайта",
+                    "customTheme": "Пользовательская тема",
+                    "lightTheme": "Светлая тема",
+                    "darkTheme": "Темная тема",
+                    "systemTheme": "Системная тема"
+                }
             },
             "block": {
                 "title": "Настройки блока",
@@ -84,7 +119,8 @@
             "pages": "Страницы",
             "entities": "Сущности",
             "page": "Страница",
-            "block": "Блок",
+            "block": "Блоки",
+            "item": "Элемент",
             "stories": "Истории"
         },
         "buttons": {

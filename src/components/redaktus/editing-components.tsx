@@ -76,14 +76,14 @@ export const RichText: React.FC<RichTextProps> = ({
     return renderBlock({
       children: content,
       onDoubleClick: handleDoubleClick,
-      className: "cursor-pointer hover:bg-blue-50 p-1 rounded"
+      className: ""
     })
   }
 
   return (
     <div
       onDoubleClick={handleDoubleClick}
-      className="cursor-pointer hover:bg-blue-50 p-1 rounded"
+      className=""
     >
       {content}
     </div>
@@ -159,14 +159,14 @@ export const Text: React.FC<TextProps> = ({
     return renderBlock({
       children: content,
       onDoubleClick: handleDoubleClick,
-      className: "cursor-pointer hover:bg-blue-50 p-1 rounded"
+      className: ""
     })
   }
 
   return (
     <span
       onDoubleClick={handleDoubleClick}
-      className="cursor-pointer hover:bg-blue-50 p-1 rounded"
+      className=""
     >
       {content}
     </span>

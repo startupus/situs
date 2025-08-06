@@ -4,21 +4,87 @@
 
 /* ===== CSS ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ ===== */
 :root {
-  --color-primary: #3056d3;
+  /* Основные цвета темы - будут перезаписаны ThemeProvider */
+  --color-primary: #4C1D95;
+  --color-primary-hover: #7C3AED;
+  --color-primary-active: #5B21B6;
   --color-secondary: #13c296;
-  --color-body-color: #637381;
-  --color-dark: #1e293b;
-  --color-gray-3: #e2e8f0;
-  --color-dark-5: #64748b;
-  --color-dark-6: #8b9dc3;
-  --color-blue-dark: #1B44C8;
+  --color-accent: #9055FD;
+  
+  /* Статусные цвета */
+  --color-success: #22AD5C;
+  --color-warning: #FBBF24;
+  --color-error: #F23030;
+  --color-info: #2D68F8;
+  
+  /* Базовые цвета интерфейса */
+  --color-background: #FFFFFF;
+  --color-surface: #F9FAFB;
+  --color-text: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+  
+  /* Совместимость с существующими переменными */
+  --color-body-color: var(--color-text-secondary);
+  --color-dark: var(--color-text);
+  --color-gray-3: var(--color-border-light);
+  --color-dark-5: var(--color-text-secondary);
+  --color-dark-6: var(--color-text-secondary);
+  --color-blue-dark: var(--color-primary-active);
+  
+  /* Тени */
   --shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.14);
+}
+
+/* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
+html.dark {
+  /* Основные цвета темы для темного режима */
+  --color-primary: #7C3AED;
+  --color-primary-hover: #8B5CF6;
+  --color-primary-active: #6D28D9;
+  --color-secondary: #10B981;
+  --color-accent: #A855F7;
+  
+  /* Статусные цвета для темного режима */
+  --color-success: #34D399;
+  --color-warning: #FCD34D;
+  --color-error: #F87171;
+  --color-info: #60A5FA;
+  
+  /* Базовые цвета интерфейса для темного режима */
+  --color-background: #111827;
+  --color-surface: #1F2937;
+  --color-text: #F9FAFB;
+  --color-text-secondary: #9CA3AF;
+  --color-border: #374151;
+  --color-border-light: #4B5563;
+  
+  /* Совместимость с существующими переменными для темного режима */
+  --color-body-color: var(--color-text-secondary);
+  --color-dark: var(--color-text);
+  --color-gray-3: var(--color-border-light);
+  --color-dark-5: var(--color-text-secondary);
+  --color-dark-6: var(--color-text-secondary);
+  --color-blue-dark: var(--color-primary-active);
+  
+  /* Тени для темного режима */
+  --shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== TAILWIND УТИЛИТЫ ДЛЯ ЦВЕТОВ ===== */
 @layer utilities {
+  /* Основные цвета */
   .bg-primary {
     background-color: var(--color-primary);
+  }
+  
+  .bg-primary-hover {
+    background-color: var(--color-primary-hover);
+  }
+  
+  .bg-primary-active {
+    background-color: var(--color-primary-active);
   }
   
   .border-primary {
@@ -37,24 +103,96 @@
     border-color: var(--color-secondary);
   }
   
-  .text-body-color {
-    color: var(--color-body-color);
+  .text-secondary {
+    color: var(--color-secondary);
   }
   
+  /* Статусные цвета */
+  .bg-success {
+    background-color: var(--color-success);
+  }
+  
+  .text-success {
+    color: var(--color-success);
+  }
+  
+  .bg-warning {
+    background-color: var(--color-warning);
+  }
+  
+  .text-warning {
+    color: var(--color-warning);
+  }
+  
+  .bg-error {
+    background-color: var(--color-error);
+  }
+  
+  .text-error {
+    color: var(--color-error);
+  }
+  
+  .bg-info {
+    background-color: var(--color-info);
+  }
+  
+  .text-info {
+    color: var(--color-info);
+  }
+  
+  /* Базовые цвета интерфейса */
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+  
+  .text-body-color {
+    color: var(--color-text-secondary);
+  }
+  
+  .text-dark {
+    color: var(--color-text);
+  }
+  
+  .border-stroke {
+    border-color: var(--color-border);
+  }
+  
+  .border-stroke-light {
+    border-color: var(--color-border-light);
+  }
+  
+  /* Hover состояния */
+  .hover\:bg-primary:hover {
+    background-color: var(--color-primary);
+  }
+  
+  .hover\:bg-primary-hover:hover {
+    background-color: var(--color-primary-hover);
+  }
+  
+  .hover\:text-primary:hover {
+    color: var(--color-primary);
+  }
+  
+  .hover\:border-primary:hover {
+    border-color: var(--color-primary);
+  }
+  
+  /* Совместимость с существующими классами */
   .bg-gray-3 {
-    background-color: var(--color-gray-3);
+    background-color: var(--color-border-light);
   }
   
   .border-gray-3 {
-    border-color: var(--color-gray-3);
+    border-color: var(--color-border-light);
   }
   
   .text-dark-5 {
-    color: var(--color-dark-5);
+    color: var(--color-text-secondary);
   }
   
   .text-dark-6 {
-    color: var(--color-dark-6);
+    color: var(--color-text-secondary);
   }
   
   .shadow-card {
@@ -62,15 +200,15 @@
   }
   
   .bg-blue-dark {
-    background-color: var(--color-blue-dark);
+    background-color: var(--color-primary-active);
   }
   
   .hover\:bg-blue-dark:hover {
-    background-color: var(--color-blue-dark);
+    background-color: var(--color-primary-active);
   }
   
   .bg-dark {
-    background-color: var(--color-dark);
+    background-color: var(--color-text);
   }
   
   .bg-dark-2 {

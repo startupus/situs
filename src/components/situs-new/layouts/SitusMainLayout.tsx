@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import SitusSidebar from '../Sidebar/SitusSidebar';
-import SitusHeader from '../Header/SitusHeader';
+import SitusSidebar from '../../situs/Sidebar/SitusSidebar';
+import SitusHeader from '../../situs/Header/SitusHeader';
 
 /**
  * SitusMainLayout - Главный лейаут приложения Situs

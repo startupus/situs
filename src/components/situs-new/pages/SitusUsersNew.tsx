@@ -354,18 +354,18 @@ const SitusUsersNew: React.FC = () => {
       )}
 
       {/* Фильтры и поиск */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <div className="bg-surface dark:bg-gray-800 rounded-lg border border-stroke dark:border-gray-700 p-4">
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Поиск */}
           <div className="flex-1">
             <div className="relative">
-              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-color h-4 w-4" />
               <input
                 type="text"
                 placeholder="Поиск пользователей..."
                 value={filters.search || ''}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                className="pl-10 pr-4 py-2 w-full border border-stroke dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-dark dark:text-white placeholder-body-color dark:placeholder-gray-400 focus:border-primary focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -374,7 +374,7 @@ const SitusUsersNew: React.FC = () => {
           <select
             value={filters.role || ''}
             onChange={(e) => handleFilter('role', e.target.value || undefined)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="px-3 py-2 border border-stroke dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-dark dark:text-white focus:border-primary focus:outline-none transition-colors"
           >
             <option value="">Все роли</option>
             <option value="admin">Администраторы</option>

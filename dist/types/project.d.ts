@@ -50,7 +50,6 @@ export interface CreateProjectData {
     description?: string;
     domain?: string;
     template?: string;
-    type?: ProjectType;
     settings?: Partial<Project['settings']>;
 }
 export interface UpdateProjectData {

@@ -51,22 +51,12 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
           </button>
           
           {/* Выпадающее меню языков */}
-          <div className="absolute bottom-full left-0 mb-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-            <div className="p-2">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => handleLanguageChange(lang.code)}
-                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                    currentLanguage === lang.code
-                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  <span className="text-lg">{lang.flag}</span>
-                  <span className="text-sm font-medium">{lang.name}</span>
-                </button>
-              ))}
+          <div className="absolute bottom-full left-0 mb-2 w-48 bg-surface dark:bg-gray-800 rounded-lg shadow-xl border border-stroke dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div className="p-3">
+              <h3 className="text-sm font-medium text-dark dark:text-white mb-2">Настройки интерфейса</h3>
+              <p className="text-xs text-body-color dark:text-gray-400 mb-3">
+                Управление темой и языком интерфейса
+              </p>
             </div>
           </div>
         </div>

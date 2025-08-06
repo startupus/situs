@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaMobile, FaTabletAlt, FaDesktop, FaCode, FaSun, FaMoon } from 'react-icons/fa';
 import { useCanvasTheme } from '../../hooks/useCanvasTheme';
-import { useLanguage } from '../../hooks/useLanguage';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface Language {
   id: string;
@@ -32,143 +32,67 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   onRedo,
   onSave
 }) => {
-  const { theme, resolvedTheme, toggleTheme } = useCanvasTheme();
-  const { t } = useLanguage();
+  const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme, toggleTheme: toggleCanvasTheme } = useCanvasTheme();
+  const { language, setLanguage, t } = useLanguage();
   const [showCode, setShowCode] = useState(false);
-  const [currentLanguageId, setCurrentLanguageId] = useState('ru');
 
   // Языки по умолчанию
-  const [languages, setLanguages] = useState<Language[]>([
+  const languages: Language[] = [
     { id: 'ru', code: 'ru', name: 'Russian', flag: '🇷🇺', isDefault: true },
     { id: 'en', code: 'en', name: 'English', flag: '🇺🇸' },
     { id: 'de', code: 'de', name: 'German', flag: '🇩🇪' }
-  ]);
+  ];
 
   const toggleCodeView = () => {
     setShowCode(!showCode);
     onCode?.();
   };
 
-  const handleLanguageChange = (languageId: string) => {
-    setCurrentLanguageId(languageId);
-    const language = languages.find(lang => lang.id === languageId);
-    if (language && onLanguageChange) {
-      onLanguageChange(language.code);
+  const handleLanguageChange = (languageCode: string) => {
+    setLanguage(languageCode as any);
+    if (onLanguageChange) {
+      onLanguageChange(languageCode);
     }
   };
 
-  const addNewLanguage = () => {
-    const newLanguage: Language = {
-      id: `lang-${Date.now()}`,
-      code: 'new',
-      name: 'New Language',
-      flag: '🌐'
-    };
-    setLanguages([...languages, newLanguage]);
-    setCurrentLanguageId(newLanguage.id);
+  const getCanvasThemeIcon = () => {
+    // Простое переключение только между light и dark
+    return canvasResolvedTheme === 'light' ? <FaMoon size={11} /> : <FaSun size={11} />;
   };
 
-  const removeLanguage = (languageId: string, event: React.MouseEvent) => {
-    event.stopPropagation();
-    const languageToRemove = languages.find(lang => lang.id === languageId);
-    
-    if (languageToRemove && !languageToRemove.isDefault) {
-      const updatedLanguages = languages.filter(lang => lang.id !== languageId);
-      setLanguages(updatedLanguages);
-      
-      // Если удаляем текущий язык, переключаемся на дефолтный
-      if (currentLanguageId === languageId) {
-        const defaultLang = updatedLanguages.find(lang => lang.isDefault);
-        if (defaultLang) {
-          setCurrentLanguageId(defaultLang.id);
-          if (onLanguageChange) {
-            onLanguageChange(defaultLang.code);
-          }
-        }
-      }
-    }
+  const getCanvasThemeLabel = () => {
+    // Простое переключение только между light и dark
+    return canvasResolvedTheme === 'light' 
+      ? 'Текущая тема канваса: Светлая → Темная. Нажмите для смены.'
+      : 'Текущая тема канваса: Темная → Светлая. Нажмите для смены.';
   };
 
-  const getThemeIcon = () => {
-    // Показываем иконку для переключения на следующую тему
-    if (theme === 'system') {
-      // Система -> Светлая, показываем солнце 
-      return <FaSun size={11} />;
-    } else if (theme === 'light') {
-      // Светлая -> Темная, показываем луну
-      return <FaMoon size={11} />;
-    } else {
-      // Темная -> Система, показываем комбинированную иконку (солнце для системы)
-      return <FaSun size={11} />;
-    }
-  };
 
-  const getThemeLabel = () => {
-    if (theme === 'system') {
-      return `Система (${resolvedTheme === 'dark' ? 'темная' : 'светлая'}) → Светлая`;
-    } else if (theme === 'light') {
-      return 'Светлая → Темная';
-    } else {
-      return 'Темная → Система';
-    }
-  };
+
+
 
   return (
     <div 
-      className="redaktus-canvas-toolbar border-b px-4 py-2 transition-colors duration-200"
+      className="redaktus-canvas-toolbar border-b px-4 py-3 transition-colors duration-200 bg-white dark:bg-gray-800 shadow-sm border-gray-200 dark:border-gray-700"
+      style={{ zIndex: 10 }}
     >
       <div className="flex items-center justify-between">
         {/* Левая часть - компактные языковые вкладки */}
         <div className="flex items-center space-x-1">
           {languages.map((lang) => (
-            <div
+            <button
               key={lang.id}
-              className="relative group"
+              onClick={() => handleLanguageChange(lang.code)}
+              className={`flex items-center justify-center w-8 h-8 rounded text-sm transition-colors ${
+                language === lang.code
+                  ? 'bg-white text-gray-700 shadow-sm dark:bg-gray-600 dark:text-gray-200'
+                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
+              }`}
+              title={lang.name}
             >
-              <button
-                onClick={() => handleLanguageChange(lang.id)}
-                className={`flex items-center justify-center w-8 h-8 rounded text-sm transition-colors ${
-                  currentLanguageId === lang.id
-                    ? 'bg-white text-gray-700 shadow-sm dark:bg-gray-600 dark:text-gray-200'
-                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
-                }`}
-                title={lang.name}
-              >
-                <span>{lang.flag}</span>
-              </button>
-              
-              {/* Кнопка удаления только для активной не-дефолтной вкладки */}
-              {currentLanguageId === lang.id && !lang.isDefault && (
-                <div
-                  onClick={(e) => removeLanguage(lang.id, e)}
-                  className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 cursor-pointer"
-                  title={`Remove ${lang.name}`}
-                >
-                  <span 
-                    className="text-xs font-bold leading-none" 
-                    style={{ display: 'block', lineHeight: '1' }}
-                  >
-                    ×
-                  </span>
-                </div>
-              )}
-            </div>
+              <span>{lang.flag}</span>
+            </button>
           ))}
-          
-          {/* Кнопка добавления с нормальной иконкой */}
-          <button
-            onClick={addNewLanguage}
-            className="flex items-center justify-center w-8 h-8 rounded transition-colors text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700 border border-dashed border-gray-400 dark:border-gray-500"
-            style={{ minWidth: '32px', minHeight: '32px' }}
-            title="Add new language"
-          >
-            <span 
-              className="text-lg font-bold leading-none" 
-              style={{ display: 'block', lineHeight: '1' }}
-            >
-              +
-            </span>
-          </button>
         </div>
 
         {/* Центральная часть - заголовок */}
@@ -199,23 +123,25 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
             title={t('editor.canvas.toolbar.device.desktop')}
           />
           <div className="w-px h-5 mx-1 bg-gray-300 dark:bg-gray-600"></div>
+          {/* Кнопка переключения темы канваса */}
           <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              console.log('🎨 CanvasToolbar: Theme toggle clicked');
-              toggleTheme();
+              console.log('🎨 CanvasToolbar: Canvas theme toggle clicked');
+              toggleCanvasTheme();
             }}
             className={`p-1.5 rounded transition-colors border border-gray-300 dark:border-gray-600 ${
-              resolvedTheme === 'dark'
+              canvasResolvedTheme === 'dark'
                 ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200' 
                 : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
             }`}
-            title={`Текущая тема канваса: ${getThemeLabel()}. Нажмите для смены.`}
+            title={getCanvasThemeLabel()}
             style={{ minWidth: '32px', minHeight: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            {getThemeIcon()}
+            {getCanvasThemeIcon()}
           </button>
+
           <button
             onClick={toggleCodeView}
             className={`p-1.5 rounded transition-colors ${

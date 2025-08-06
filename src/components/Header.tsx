@@ -44,15 +44,11 @@ const Header: React.FC<HeaderProps> = ({
         {/* Центральная часть - Поиск */}
         <div className="flex-1 max-w-md mx-8">
           <div className="relative">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-color w-4 h-4" />
             <input
               type="text"
               placeholder="Поиск проектов, страниц, компонентов..."
-              className={`w-full pl-10 pr-4 py-2 border rounded-lg transition-colors ${
-                resolvedTheme === 'dark' 
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500' 
-                  : 'bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500'
-              }`}
+              className="w-full pl-10 pr-4 py-2 border border-stroke dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-800 text-dark dark:text-white placeholder-body-color dark:placeholder-gray-400 focus:border-primary focus:outline-none transition-colors"
             />
           </div>
         </div>

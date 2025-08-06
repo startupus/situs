@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaFile, FaCube, FaHome, FaCircle, FaChevronDown, FaPlus, FaFolder, FaBlog, FaSun, FaMoon, FaChevronUp } from 'react-icons/fa';
-import { useTheme } from '../../hooks/useTheme';
+import { useInterfaceTheme } from '../../hooks/useInterfaceTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import LanguageSwitcher from '../LanguageSwitcher';
 
@@ -9,61 +9,87 @@ interface VerticalNavbarProps {
 }
 
 const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] }) => {
-  const { theme, toggleTheme, resolvedTheme } = useTheme();
+  const { theme: interfaceTheme, toggleTheme: toggleInterfaceTheme, resolvedTheme: interfaceResolvedTheme } = useInterfaceTheme();
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'pages' | 'entities'>('pages');
 
   const handleToggleTheme = () => {
-    console.log('🎨 VerticalNavbar: handleToggleTheme clicked!');
-    toggleTheme();
+    console.log('🎨 VerticalNavbar: Interface theme toggle clicked!');
+    toggleInterfaceTheme();
   };
 
   return (
     <section 
-      className="redaktus-vertical-navbar h-full border-r w-40 flex flex-col transition-colors duration-200 bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+      className="redaktus-vertical-navbar h-full border-r w-40 flex flex-col transition-colors duration-200"
+      style={{
+        backgroundColor: 'var(--interface-bg)',
+        color: 'var(--interface-text)',
+        borderColor: 'var(--interface-border)'
+      }}
     >
       <div className="flex flex-col h-full">
-        {/* Навигационные табы */}
-        <div className="border-b flex-shrink-0 border-gray-200 dark:border-gray-700">
+        {/* Навигационные табы - в стиле SettingsPanel */}
+        <div 
+          className="flex-shrink-0"
+          style={{ 
+            backgroundColor: 'var(--interface-surface)',
+            borderColor: 'var(--interface-border)'
+          }}
+        >
           <nav className="flex">
-            <div
+            <button
               onClick={() => setActiveTab('pages')}
-              className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
+              className={`border-b-2 py-4 px-4 text-sm font-medium md:text-base flex-1 transition-colors ${
                 activeTab === 'pages'
-                  ? 'text-gray-700 font-semibold border-b-2 border-gray-700 dark:text-gray-100 dark:border-gray-100'
-                  : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
+                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
               }`}
             >
               {t('editor.panels.pages')}
-            </div>
-            <div
+            </button>
+            <button
               onClick={() => setActiveTab('entities')}
-              className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
+              className={`border-b-2 py-4 px-4 text-sm font-medium md:text-base flex-1 transition-colors ${
                 activeTab === 'entities'
-                  ? 'text-gray-700 font-semibold border-b-2 border-gray-700 dark:text-gray-100 dark:border-gray-100'
-                  : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
+                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
               }`}
             >
               {t('editor.panels.entities')}
-            </div>
+            </button>
           </nav>
         </div>
 
         {/* Поиск */}
-        <div className="p-4 border-b flex-shrink-0 border-gray-200 dark:border-gray-700">
+        <div 
+          className="p-4 border-b flex-shrink-0"
+          style={{ borderColor: 'var(--interface-border)' }}
+        >
           <div className="relative">
             <input 
               type="text" 
               placeholder={t('editor.buttons.searchPage')}
-              className="w-full pl-8 pr-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors border-gray-300 text-gray-900 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
+              className="w-full pl-8 pr-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+              style={{
+                backgroundColor: 'var(--interface-surface)',
+                color: 'var(--interface-text)',
+                borderColor: 'var(--interface-border)'
+              }}
             />
-            <FaSearch className="absolute left-2.5 top-2.5 text-gray-400" size={14} />
+            <FaSearch 
+              className="absolute left-2.5 top-2.5" 
+              size={14}
+              style={{ color: 'var(--interface-text)' }}
+            />
           </div>
         </div>
 
         {/* Навигация по секциям - с прокруткой */}
         <nav className="flex-1 overflow-y-auto min-h-0">
-          <ul className="p-4 space-y-2">
+          <ul 
+            className="p-4 space-y-2"
+            style={{ borderColor: 'var(--interface-border)' }}
+          >
             {/* PAGES Section */}
             <NavSection 
               title={t('editor.panels.pages')} 
@@ -106,7 +132,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
 
         {/* Нижняя панель с настройками */}
         <div className={`p-4 border-t flex-shrink-0 ${
-          resolvedTheme === 'dark' ? '!border-gray-700' : '!border-gray-200'
+          interfaceResolvedTheme === 'dark' ? '!border-gray-700' : '!border-gray-200'
         }`}>
           {/* Переключатели языка и темы в одну строку */}
           <div className="flex items-center justify-between space-x-2">
@@ -122,9 +148,9 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
                 handleToggleTheme();
               }}
               className="p-2 rounded-md transition-colors text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700"
-              title="Toggle editor theme"
+              title={`Переключить тему интерфейса (текущая: ${interfaceResolvedTheme === 'dark' ? 'темная' : 'светлая'})`}
             >
-              {resolvedTheme === 'dark' ? <FaSun size={14} /> : <FaMoon size={14} />}
+              {interfaceResolvedTheme === 'dark' ? <FaSun size={14} /> : <FaMoon size={14} />}
             </button>
           </div>
         </div>
@@ -144,29 +170,47 @@ const NavSection: React.FC<{
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   return (
-    <div>
+    <div 
+      className="border rounded-lg p-2 transition-colors"
+      style={{ 
+        borderColor: 'var(--interface-border)',
+        backgroundColor: 'var(--interface-surface)'
+      }}
+    >
       <div
         onClick={() => submenu && setIsExpanded(!isExpanded)}
         className={`flex items-center justify-between p-2 rounded-md cursor-pointer transition-colors ${
-          submenu ? 'hover:bg-gray-200 dark:hover:bg-gray-700' : ''
+          submenu ? 'hover:bg-opacity-50' : ''
         }`}
+        style={{
+          backgroundColor: submenu ? 'var(--interface-bg)' : 'transparent'
+        }}
       >
         <div className="flex items-center space-x-2">
-          <span className="text-gray-500 dark:text-gray-400">
+          <span style={{ color: 'var(--interface-text)' }}>
             {icon}
           </span>
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+          <span 
+            className="text-sm font-medium"
+            style={{ color: 'var(--interface-text)' }}
+          >
             {title}
           </span>
         </div>
         <div className="flex items-center space-x-2">
           {count && (
-            <span className="text-xs px-2 py-1 rounded-full bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+            <span 
+              className="text-xs px-2 py-1 rounded-full"
+              style={{
+                backgroundColor: 'var(--interface-border)',
+                color: 'var(--interface-text)'
+              }}
+            >
               {count}
             </span>
           )}
           {submenu && (
-            <span className="text-gray-500 dark:text-gray-400">
+            <span style={{ color: 'var(--interface-text)' }}>
               {isExpanded ? <FaChevronUp size={10} /> : <FaChevronDown size={10} />}
             </span>
           )}
@@ -186,11 +230,13 @@ const PageItem: React.FC<{ name: string; active?: boolean }> = ({
   active = false
 }) => {
   return (
-    <li className={`px-2 py-1 rounded text-sm transition-colors cursor-pointer ${
-      active 
-        ? 'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-200' 
-        : 'text-gray-600 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700'
-    }`}>
+    <li 
+      className={`px-2 py-1 rounded text-sm transition-colors cursor-pointer`}
+      style={{
+        backgroundColor: active ? 'var(--interface-primary)' : 'transparent',
+        color: active ? '#ffffff' : 'var(--interface-text)'
+      }}
+    >
       {name}
     </li>
   );
@@ -209,7 +255,11 @@ const DraggableBlock: React.FC<{ name: string; type: string }> = ({
     <li 
       draggable
       onDragStart={handleDragStart}
-      className="px-2 py-1 rounded text-sm transition-colors cursor-move text-gray-600 hover:text-gray-700 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"
+      className="px-2 py-1 rounded text-sm transition-colors cursor-move"
+      style={{
+        color: 'var(--interface-text)',
+        backgroundColor: 'transparent'
+      }}
     >
       {name}
     </li>

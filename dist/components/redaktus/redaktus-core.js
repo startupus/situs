@@ -2,6 +2,9 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useState } from 'react';
 import { useAutoSave } from '../../hooks/useAutoSave';
 import { useCanvasTheme } from '../../hooks/useCanvasTheme';
+import { AdminThemeProvider } from '../../contexts/AdminThemeContext';
+import { EditorThemeProvider } from '../../contexts/EditorThemeContext';
+import { ProjectThemeProvider } from '../../contexts/ProjectThemeContext';
 import { FaCube, FaLink, FaWrench } from 'react-icons/fa';
 // Импорт новых TailGrids компонентов
 import VerticalNavbar from '../tailgrids/VerticalNavbar';
@@ -26,11 +29,11 @@ const blockSchemas = {
         primaryButtonUrl: { type: 'string', default: '#' },
         secondaryButtonText: { type: 'string', default: 'Download App' },
         secondaryButtonUrl: { type: 'string', default: '#' },
-        heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
+        heroImage: { type: 'string', default: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center' },
         clientLogos: { type: 'array', default: [
-                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
-                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
-                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+                '/images/brands/ayroui.svg',
+                '/images/brands/graygrids.svg',
+                '/images/brands/uideck.svg'
             ] }
     },
     'hero-1-original': {
@@ -40,29 +43,29 @@ const blockSchemas = {
         primaryButtonUrl: { type: 'string', default: '#' },
         secondaryButtonText: { type: 'string', default: 'Download App' },
         secondaryButtonUrl: { type: 'string', default: '#' },
-        heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
+        heroImage: { type: 'string', default: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center' },
         clientLogos: { type: 'array', default: [
-                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
-                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
-                'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
+                '/images/brands/ayroui.svg',
+                '/images/brands/graygrids.svg',
+                '/images/brands/uideck.svg'
             ] }
     },
     'testimonial-block': {
         testimonials: { type: 'array', default: [
                 {
-                    image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+                    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
                     name: 'Larry Diamond',
                     position: 'Chief Executive Officer',
                     details: 'Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id! Mollitia perspiciatis est asperiores commodi labore!'
                 },
                 {
-                    image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+                    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
                     name: 'Sarah Johnson',
                     position: 'Marketing Director',
                     details: 'Excellent service and amazing results! The team delivered exactly what we needed and exceeded our expectations.'
                 },
                 {
-                    image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+                    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
                     name: 'Michael Chen',
                     position: 'Product Manager',
                     details: 'Working with this platform has transformed our workflow. Highly recommended for any business looking to improve their online presence.'
@@ -464,6 +467,6 @@ export const Redaktus = ({ children, appId, apiKey, pageTypes, customFields, log
         navigate
     };
     console.log('Redaktus config:', config);
-    return (_jsx(RedaktusContext.Provider, { value: config, children: _jsx("div", { className: "redaktus-provider", ...domProps, children: children }) }));
+    return (_jsx(AdminThemeProvider, { children: _jsx(EditorThemeProvider, { children: _jsx(ProjectThemeProvider, { children: _jsx(RedaktusContext.Provider, { value: config, children: _jsx("div", { className: "redaktus-provider", ...domProps, children: children }) }) }) }) }));
 };
 //# sourceMappingURL=redaktus-core.js.map

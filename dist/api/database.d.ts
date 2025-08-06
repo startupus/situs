@@ -64,6 +64,7 @@ export declare class DatabaseAPI {
         type: string;
         status: string;
         domain: string | null;
+        subdomain: any;
         createdAt: string;
         updatedAt: string;
         pages: {
@@ -107,6 +108,7 @@ export declare class DatabaseAPI {
         type: string;
         status: string;
         domain: string | null;
+        subdomain: any;
         createdAt: string;
         updatedAt: string;
         pages: {

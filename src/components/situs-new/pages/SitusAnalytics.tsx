@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiTrendingUp, FiUsers, FiFolder, FiCalendar, FiBarChart3, FiActivity, FiRefreshCw } from 'react-icons/fi';
+import { FiTrendingUp, FiUsers, FiFolder, FiCalendar, FiBarChart2, FiActivity, FiRefreshCw } from 'react-icons/fi';
 import StatsChart from '../../charts/StatsChart';
 import apiClient from '../../../api/client/ApiClient';
 import type { ChartData } from '../../charts/StatsChart';
@@ -308,7 +308,7 @@ const SitusAnalytics: React.FC = () => {
                 <span className="text-sm text-green-600">+{analyticsData.summary.growthRate}%</span>
               </div>
             </div>
-            <FiBarChart3 className="h-8 w-8 text-purple-600" />
+            <FiBarChart2 className="h-8 w-8 text-purple-600" />
           </div>
         </div>
 
@@ -443,7 +443,7 @@ const SitusAnalytics: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Ключевые показатели
             </h3>
-            <FiBarChart3 className="h-5 w-5 text-gray-400" />
+                            <FiBarChart2 className="h-5 w-5 text-gray-400" />
           </div>
 
           <div className="space-y-6">

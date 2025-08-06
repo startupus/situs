@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import {
   FaChevronDown,
   FaPlay,
@@ -28,8 +29,11 @@ import {
   FaQuoteLeft,
   FaCode,
   FaLink,
-  FaComments
+  FaComments,
+  FaPalette
 } from 'react-icons/fa'
+import PageThemeSettings from '../redaktus/PageThemeSettings'
+import { useLanguage } from '../../contexts/LanguageContext';
 
 
 interface SettingsPanelProps {
@@ -37,46 +41,65 @@ interface SettingsPanelProps {
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) => {
+  const { t } = useTranslation();
+  const { language, setLanguage } = useLanguage();
   const [activeTab, setActiveTab] = useState<'page' | 'item' | 'blocks'>('page');
 
   return (
     <div 
-      className="redaktus-settings-panel w-80 flex-shrink-0 overflow-y-auto transition-colors duration-200 bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-700 border-l h-full"
+      className="redaktus-settings-panel w-80 flex-shrink-0 overflow-y-auto transition-colors duration-200 border-l h-full"
+      style={{
+        backgroundColor: 'var(--interface-bg)',
+        color: 'var(--interface-text)',
+        borderColor: 'var(--interface-border)'
+      }}
     >
-      <div className="bg-gray-100 dark:bg-gray-800 h-full flex flex-col">
-        {/* Вкладки */}
-        <div className="border-b border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800 flex-shrink-0">
+      <div 
+        className="h-full flex flex-col"
+        style={{
+          backgroundColor: 'var(--interface-bg)',
+          color: 'var(--interface-text)'
+        }}
+      >
+        {/* Вкладки в стиле TailGrids Tab2 - контрастные и видимые */}
+        <div 
+          className="flex-shrink-0 bg-[#FAFAFA] dark:bg-gray-700"
+          style={{
+            backgroundColor: 'var(--interface-surface)',
+            borderColor: 'var(--interface-border)'
+          }}
+        >
           <nav className="flex">
-            <div
+            <button
               onClick={() => setActiveTab('page')}
-              className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
+              className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 flex-1 transition-all duration-200 ${
                 activeTab === 'page'
-                  ? 'text-gray-700 font-semibold border-b-2 border-gray-700 dark:text-gray-100 dark:border-gray-100'
-                  : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
+                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
               }`}
             >
-              Page
-            </div>
-            <div
+              {t('editor.panels.page')}
+            </button>
+            <button
               onClick={() => setActiveTab('blocks')}
-              className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
+              className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 flex-1 transition-all duration-200 ${
                 activeTab === 'blocks'
-                  ? 'text-gray-700 font-semibold border-b-2 border-gray-700 dark:text-gray-100 dark:border-gray-100'
-                  : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
+                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
               }`}
             >
-              Blocks
-            </div>
-            <div
+              {t('editor.panels.block')}
+            </button>
+            <button
               onClick={() => setActiveTab('item')}
-              className={`flex-1 px-3 py-3 text-sm cursor-pointer transition-colors ${
+              className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 flex-1 transition-all duration-200 ${
                 activeTab === 'item'
-                  ? 'text-gray-700 font-semibold border-b-2 border-gray-700 dark:text-gray-100 dark:border-gray-100'
-                  : 'text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  ? 'border-primary text-primary bg-[#EDF1FF] dark:bg-primary/20 dark:text-blue-400'
+                  : 'border-[#F1F2F4] dark:border-gray-600 text-body-color dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-[#EDF1FF] dark:hover:bg-primary/10 dark:hover:text-blue-400'
               }`}
             >
-              Item
-            </div>
+              {t('editor.panels.item')}
+            </button>
           </nav>
         </div>
 
@@ -93,56 +116,77 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
 
 // Вкладка Page - настройки страницы
 const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
+  const { t } = useTranslation();
+  
   return (
     <div>
       {/* Header */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
-          Page Settings
+          {t('editor.settings.page.title')}
         </h3>
-        <p className="text-sm mt-1 transition-colors duration-200 text-gray-500 dark:text-gray-400">
-          Configure page properties and SEO
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+          {t('editor.settings.page.subtitle')}
         </p>
       </div>
 
       {/* Status and Visibility */}
       <SettingsSection 
-        title="Status and Visibility" 
+        title={t('editor.settings.page.statusVisibility.title')} 
         icon={<FaEye size={16} />}
         collapsible
       >
         <div className="space-y-4">
           <InputGroup
-            label="VISIBILITY"
+            label={t('editor.settings.page.statusVisibility.visibility')}
             type="select"
-            value="Published"
-            options={['Published', 'Draft', 'Private']}
+            value={t('editor.settings.page.statusVisibility.published')}
+            options={[
+              t('editor.settings.page.statusVisibility.published'),
+              t('editor.settings.page.statusVisibility.draft'),
+              t('editor.settings.page.statusVisibility.private')
+            ]}
           />
           
-          <div className="flex items-center justify-between p-3 rounded-lg border bg-green-50 border-green-200 text-green-700 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-sm font-medium">Published Live</span>
+          <div 
+            className="flex items-center justify-between p-4 rounded-[20px] shadow-2 hover:shadow-lg transition-all duration-200"
+            style={{
+              backgroundColor: 'var(--interface-surface)',
+              border: '1px solid var(--interface-border)',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+            }}
+          >
+            <div className="flex items-center space-x-3">
+              <div 
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: '#10b981' }}
+              ></div>
+              <span 
+                className="text-sm font-medium"
+                style={{ color: '#10b981' }}
+              >
+                {t('editor.settings.page.statusVisibility.publishedLive')}
+              </span>
             </div>
-            <FaPlay size={12} />
+            <FaPlay size={14} style={{ color: '#10b981' }} />
           </div>
         </div>
       </SettingsSection>
 
       {/* Schedule Publish */}
       <SettingsSection 
-        title="Schedule Publish" 
+        title={t('editor.settings.page.schedulePublish.title')} 
         icon={<FaClock size={16} />}
         collapsible
       >
         <div className="space-y-4">
           <InputGroup
-            label="PUBLISH DATE"
+            label={t('editor.settings.page.schedulePublish.publishDate')}
             type="date"
             value="21.01.2025"
           />
           <InputGroup
-            label="PUBLISH TIME"
+            label={t('editor.settings.page.schedulePublish.publishTime')}
             type="time"
             value="00:00"
           />
@@ -151,36 +195,147 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
       {/* Page Structure */}
       <SettingsSection 
-        title="Page Structure" 
+        title={t('editor.settings.page.pageStructure.title')} 
         icon={<FaCogs size={16} />}
         collapsible
       >
         <div className="space-y-4">
           <InputGroup
-            label="STRUCTURE LOCKED?"
+            label={t('editor.settings.page.pageStructure.structureLocked')}
             type="select"
-            value="Unlocked"
-            options={['Unlocked', 'Locked']}
+            value={t('editor.settings.page.pageStructure.unlocked')}
+            options={[
+              t('editor.settings.page.pageStructure.unlocked'),
+              t('editor.settings.page.pageStructure.locked')
+            ]}
           />
           <p className="text-sm transition-colors duration-200 text-gray-500 dark:text-gray-400">
-            When locked, the page structure cannot be modified by content editors
+            {t('editor.settings.page.pageStructure.description')}
           </p>
         </div>
       </SettingsSection>
 
       {/* Page Attributes */}
       <SettingsSection 
-        title="Page Attributes" 
+        title={t('editor.settings.page.pageAttributes.title')} 
         icon={<FaTag size={16} />}
         collapsible
       >
         <div className="space-y-4">
           <InputGroup
-            label="PAGE SLUG"
+            label={t('editor.settings.page.pageAttributes.pageSlug')}
             type="text"
             value="/home"
-            placeholder="Enter page slug"
+            placeholder={t('editor.settings.page.pageAttributes.pageSlugPlaceholder')}
           />
+        </div>
+      </SettingsSection>
+
+      {/* Page Theme Settings */}
+      <SettingsSection 
+        title={t('editor.settings.page.theme.title')} 
+        icon={<FaPalette size={16} />}
+        collapsible
+      >
+        <PageThemeSettings />
+      </SettingsSection>
+
+      {/* Page Stylistic Settings */}
+      <SettingsSection 
+        title="Стилистические настройки" 
+        icon={<FaCog size={16} />}
+        collapsible
+      >
+        <div className="space-y-4">
+          {/* Typography Settings */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Типографика
+            </label>
+            <div className="space-y-3">
+              <InputGroup
+                label="Основной шрифт"
+                type="select"
+                value="Inter"
+                options={['Inter', 'Roboto', 'Open Sans', 'Lato', 'Poppins']}
+              />
+              <InputGroup
+                label="Размер базового шрифта"
+                type="select"
+                value="16px"
+                options={['14px', '16px', '18px', '20px']}
+              />
+              <InputGroup
+                label="Высота строки"
+                type="select"
+                value="1.5"
+                options={['1.2', '1.4', '1.5', '1.6', '1.8']}
+              />
+            </div>
+          </div>
+
+          {/* Spacing Settings */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Отступы и интервалы
+            </label>
+            <div className="space-y-3">
+              <InputGroup
+                label="Базовый отступ"
+                type="select"
+                value="1rem"
+                options={['0.5rem', '0.75rem', '1rem', '1.25rem', '1.5rem']}
+              />
+              <InputGroup
+                label="Межблочный интервал"
+                type="select"
+                value="2rem"
+                options={['1rem', '1.5rem', '2rem', '2.5rem', '3rem']}
+              />
+            </div>
+          </div>
+
+          {/* Layout Settings */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Макет
+            </label>
+            <div className="space-y-3">
+              <InputGroup
+                label="Максимальная ширина контейнера"
+                type="select"
+                value="1200px"
+                options={['1000px', '1200px', '1400px', '1600px', '100%']}
+              />
+              <InputGroup
+                label="Отступы контейнера"
+                type="select"
+                value="1rem"
+                options={['0.5rem', '1rem', '1.5rem', '2rem']}
+              />
+            </div>
+          </div>
+
+          {/* Animation Settings */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Анимации
+            </label>
+            <div className="space-y-3">
+              <InputGroup
+                label="Длительность переходов"
+                type="select"
+                value="0.2s"
+                options={['0.1s', '0.2s', '0.3s', '0.4s']}
+              />
+              <InputGroup
+                label="Функция плавности"
+                type="select"
+                value="ease-in-out"
+                options={['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']}
+              />
+            </div>
+          </div>
         </div>
       </SettingsSection>
     </div>
@@ -468,25 +623,41 @@ const SettingsSection: React.FC<{
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div className="mb-6 border rounded-lg transition-colors duration-200 border-gray-200 dark:border-gray-700">
+    <div 
+      className="mb-6 rounded-[20px] bg-white p-6 shadow-2 hover:shadow-lg dark:bg-dark-2 dark:shadow-dark transition-colors duration-200 border border-stroke dark:border-dark-3"
+      style={{ 
+        borderColor: 'var(--interface-border)',
+        backgroundColor: 'var(--interface-surface)',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+      }}
+    >
       <div
         onClick={() => collapsible && setIsExpanded(!isExpanded)}
-        className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${
-          collapsible ? 'hover:bg-gray-50 dark:hover:bg-gray-700' : ''
+        className={`flex items-center justify-between cursor-pointer transition-colors ${
+          collapsible ? 'hover:bg-opacity-50' : ''
         }`}
+        style={{
+          backgroundColor: collapsible ? 'var(--interface-bg)' : 'transparent'
+        }}
       >
         <div className="flex items-center space-x-3">
           {icon && (
-            <span className="text-gray-500 dark:text-gray-400">
+            <span style={{ color: 'var(--interface-text)' }}>
               {icon}
             </span>
           )}
           <div>
-            <h4 className="font-medium transition-colors duration-200 text-gray-800 dark:text-gray-100">
+            <h4 
+              className="text-lg font-semibold transition-colors duration-200"
+              style={{ color: 'var(--interface-text)' }}
+            >
               {title}
             </h4>
             {subtitle && (
-              <p className="text-sm transition-colors duration-200 text-gray-500 dark:text-gray-400">
+              <p 
+                className="text-sm text-body-color dark:text-dark-6 transition-colors duration-200"
+                style={{ color: 'var(--interface-text)' }}
+              >
                 {subtitle}
               </p>
             )}
@@ -494,20 +665,23 @@ const SettingsSection: React.FC<{
         </div>
         <div className="flex items-center space-x-2">
           {actionIcon && (
-            <span className="text-gray-500 dark:text-gray-400">
+            <span style={{ color: 'var(--interface-text)' }}>
               {actionIcon}
             </span>
           )}
           {collapsible && (
             <FaChevronDown 
               size={12} 
-              className={`transition-transform duration-200 text-gray-500 dark:text-gray-400 ${isExpanded ? 'rotate-180' : ''}`} 
+              className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+              style={{ color: 'var(--interface-text)' }}
             />
           )}
         </div>
       </div>
       {(!collapsible || isExpanded) && (
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+        <div 
+          className="mt-4"
+        >
           {children}
         </div>
       )}
@@ -526,9 +700,21 @@ const InputGroup: React.FC<{
   // Добавляем пустые обработчики для устранения React предупреждений
   const handleChange = () => {};
   
+  const inputStyles = {
+    backgroundColor: disabled ? 'var(--interface-surface-disabled)' : 'var(--interface-surface)',
+    color: disabled ? 'var(--interface-text-disabled)' : 'var(--interface-text)',
+    borderColor: 'var(--interface-border)',
+    borderRadius: '6px',
+    border: '1px solid var(--interface-border)',
+    outline: 'none'
+  };
+  
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium transition-colors duration-200 text-gray-700 dark:text-gray-300">
+      <label 
+        className="mb-[10px] block text-base font-medium transition-colors duration-200"
+        style={{ color: 'var(--interface-text)' }}
+      >
         {label}
       </label>
       {type === 'select' ? (
@@ -536,11 +722,8 @@ const InputGroup: React.FC<{
           value={value}
           onChange={handleChange}
           disabled={disabled}
-          className={`w-full px-3 py-2 border rounded-md text-sm transition-colors ${
-            disabled 
-              ? 'bg-gray-100 text-gray-500 border-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-600'
-              : 'border-gray-300 text-gray-900 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:border-gray-500'
-          } focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50`}
+          className="w-full bg-transparent rounded-md border py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+          style={inputStyles}
         >
           {options.map((option) => (
             <option key={option} value={option}>
@@ -554,12 +737,9 @@ const InputGroup: React.FC<{
           onChange={handleChange}
           placeholder={placeholder}
           disabled={disabled}
-          rows={3}
-          className={`w-full px-3 py-2 border rounded-md text-sm transition-colors resize-none ${
-            disabled 
-              ? 'bg-gray-100 text-gray-500 border-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-600'
-              : 'border-gray-300 text-gray-900 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:border-gray-500'
-          } focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50`}
+          rows={4}
+          className="w-full bg-transparent rounded-md border py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2 resize-none"
+          style={inputStyles}
         />
       ) : (
         <input
@@ -568,11 +748,8 @@ const InputGroup: React.FC<{
           onChange={handleChange}
           placeholder={placeholder}
           disabled={disabled}
-          className={`w-full px-3 py-2 border rounded-md text-sm transition-colors ${
-            disabled 
-              ? 'bg-gray-100 text-gray-500 border-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:border-gray-600'
-              : 'border-gray-300 text-gray-900 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:border-gray-500'
-          } focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50`}
+          className="w-full bg-transparent rounded-md border py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
+          style={inputStyles}
         />
       )}
     </div>

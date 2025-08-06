@@ -68,9 +68,44 @@
       "title": "Settings",
       "page": {
         "title": "Page Settings",
+        "subtitle": "Configure page properties and SEO",
         "name": "Page Name",
         "description": "Description",
-        "keywords": "Keywords"
+        "keywords": "Keywords",
+        "statusVisibility": {
+          "title": "Status and Visibility",
+          "visibility": "VISIBILITY",
+          "published": "Published",
+          "draft": "Draft",
+          "private": "Private",
+          "publishedLive": "Published Live"
+        },
+        "schedulePublish": {
+          "title": "Schedule Publish",
+          "publishDate": "PUBLISH DATE",
+          "publishTime": "PUBLISH TIME"
+        },
+        "pageStructure": {
+          "title": "Page Structure",
+          "structureLocked": "STRUCTURE LOCKED?",
+          "unlocked": "Unlocked",
+          "locked": "Locked",
+          "description": "When locked, the page structure cannot be modified by content editors"
+        },
+        "pageAttributes": {
+          "title": "Page Attributes",
+          "pageSlug": "PAGE SLUG",
+          "pageSlugPlaceholder": "Enter page slug"
+        },
+        "theme": {
+          "title": "Page Theme",
+          "pageTheme": "PAGE THEME",
+          "inheritFromSite": "Inherit from site",
+          "customTheme": "Custom theme",
+          "lightTheme": "Light theme",
+          "darkTheme": "Dark theme",
+          "systemTheme": "System theme"
+        }
       },
       "block": {
         "title": "Block Settings",
@@ -84,7 +119,8 @@
       "pages": "Pages",
       "entities": "Entities",
       "page": "Page",
-      "block": "Block",
+      "block": "Blocks",
+      "item": "Item",
       "stories": "Stories"
     },
     "buttons": {

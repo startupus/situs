@@ -2,251 +2,456 @@
  * Интеграционные тесты для API
  * Проверяют взаимодействие фронтенда с бэкендом
  */
-import { describe, test, expect, beforeAll, afterAll } from 'vitest';
-import { apiClient, ApiClientError } from '../client';
-import { projectsApi } from '../services/projects.api';
-import { usersApi } from '../services/users.api';
-import { analyticsApi } from '../services/analytics.api';
-// Мок-данные для тестов
-const testUser = {
-    username: 'testuser',
-    email: 'test@example.com',
-    password: 'TestPassword123!'
+import request from 'supertest';
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
+// Мокаем зависимости
+vi.mock('@prisma/client');
+vi.mock('bcryptjs');
+vi.mock('jsonwebtoken');
+// Импортируем после моков
+import app from '../server';
+import UserService from '../services/UserService';
+const mockPrisma = {
+    user: {
+        findMany: vi.fn(),
+        findUnique: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+        count: vi.fn()
+    },
+    project: {
+        findMany: vi.fn(),
+        findUnique: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+        count: vi.fn()
+    }
 };
-const testProject = {
-    name: 'Test Project',
-    description: 'Project for testing API integration',
-    type: 'WEBSITE'
-};
-let authToken;
-let userId;
-let projectId;
+PrismaClient.mockImplementation(() => mockPrisma);
 describe('API Integration Tests', () => {
-    beforeAll(async () => {
-        // Настройка тестовой среды
-        process.env.VITE_API_BASE_URL = 'http://localhost:3001';
+    let authToken;
+    let testUserId;
+    beforeEach(() => {
+        vi.clearAllMocks();
+        testUserId = 'test-user-id';
+        authToken = 'mock-jwt-token';
     });
-    afterAll(async () => {
-        // Очистка после тестов
-        if (projectId) {
-            try {
-                await projectsApi.deleteProject(projectId);
-            }
-            catch (error) {
-                console.log('Cleanup project error:', error);
-            }
-        }
-    });
-    describe('API Client', () => {
-        test('должен корректно обрабатывать GET запросы', async () => {
-            const response = await apiClient.get('/health');
-            expect(response).toBeDefined();
-        });
-        test('должен обрабатывать ошибки сети', async () => {
-            // Устанавливаем неверный URL
-            const originalBaseURL = apiClient['baseURL'];
-            apiClient['baseURL'] = 'http://invalid-url';
-            await expect(apiClient.get('/test')).rejects.toThrow(ApiClientError);
-            // Восстанавливаем URL
-            apiClient['baseURL'] = originalBaseURL;
-        });
-        test('должен добавлять токен аутентификации', () => {
-            const testToken = 'test-token';
-            apiClient.setAuthToken(testToken);
-            expect(apiClient['defaultHeaders']['Authorization']).toBe(`Bearer ${testToken}`);
-            apiClient.removeAuthToken();
-        });
-    });
-    describe('Users API', () => {
-        test('должен регистрировать нового пользователя', async () => {
-            const authResponse = await usersApi.register(testUser);
-            expect(authResponse).toBeDefined();
-            expect(authResponse.user).toBeDefined();
-            expect(authResponse.token).toBeDefined();
-            expect(authResponse.user.email).toBe(testUser.email);
-            authToken = authResponse.token;
-            userId = authResponse.user.id;
-        });
-        test('должен входить в систему', async () => {
-            const authResponse = await usersApi.login({
-                email: testUser.email,
-                password: testUser.password
+    describe('Auth Routes', () => {
+        describe('POST /api/auth/register', () => {
+            it('должен зарегистрировать нового пользователя', async () => {
+                const mockUser = {
+                    id: testUserId,
+                    email: 'new@example.com',
+                    firstName: 'New',
+                    lastName: 'User',
+                    role: 'USER',
+                    isActive: true,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                const hashedPassword = 'hashedPassword123';
+                const mockToken = 'mock-jwt-token';
+                const mockRefreshToken = 'mock-refresh-token';
+                bcrypt.hash.mockResolvedValue(hashedPassword);
+                jwt.sign.mockReturnValue(mockToken);
+                mockPrisma.user.findUnique.mockResolvedValue(null); // Пользователь не существует
+                mockPrisma.user.create.mockResolvedValue(mockUser);
+                const response = await request(app)
+                    .post('/api/auth/register')
+                    .send({
+                    email: 'new@example.com',
+                    password: 'password123',
+                    firstName: 'New',
+                    lastName: 'User'
+                })
+                    .expect(201);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.user.email).toBe('new@example.com');
+                expect(response.body.data.token).toBe(mockToken);
+                expect(response.body.data.refreshToken).toBe(mockRefreshToken);
             });
-            expect(authResponse).toBeDefined();
-            expect(authResponse.user.email).toBe(testUser.email);
+            it('должен вернуть ошибку при регистрации с существующим email', async () => {
+                mockPrisma.user.findUnique.mockResolvedValue({
+                    id: 'existing-user',
+                    email: 'existing@example.com'
+                });
+                const response = await request(app)
+                    .post('/api/auth/register')
+                    .send({
+                    email: 'existing@example.com',
+                    password: 'password123',
+                    firstName: 'Test',
+                    lastName: 'User'
+                })
+                    .expect(409);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('уже существует');
+            });
+            it('должен вернуть ошибку при отсутствии обязательных полей', async () => {
+                const response = await request(app)
+                    .post('/api/auth/register')
+                    .send({
+                    email: 'test@example.com'
+                    // password отсутствует
+                })
+                    .expect(400);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('обязательны');
+            });
         });
-        test('должен получать текущего пользователя', async () => {
-            const user = await usersApi.getCurrentUser();
-            expect(user).toBeDefined();
-            expect(user.id).toBe(userId);
-            expect(user.email).toBe(testUser.email);
+        describe('POST /api/auth/login', () => {
+            it('должен успешно авторизовать пользователя', async () => {
+                const mockUser = {
+                    id: testUserId,
+                    email: 'test@example.com',
+                    firstName: 'Test',
+                    lastName: 'User',
+                    role: 'USER',
+                    password: 'hashedPassword123',
+                    isActive: true,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                const mockToken = 'mock-jwt-token';
+                const mockRefreshToken = 'mock-refresh-token';
+                mockPrisma.user.findUnique.mockResolvedValue(mockUser);
+                bcrypt.compare.mockResolvedValue(true);
+                jwt.sign.mockReturnValue(mockToken);
+                const response = await request(app)
+                    .post('/api/auth/login')
+                    .send({
+                    email: 'test@example.com',
+                    password: 'password123'
+                })
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.user.email).toBe('test@example.com');
+                expect(response.body.data.token).toBe(mockToken);
+                expect(response.body.data.refreshToken).toBe(mockRefreshToken);
+            });
+            it('должен вернуть ошибку при неверных учетных данных', async () => {
+                mockPrisma.user.findUnique.mockResolvedValue(null);
+                const response = await request(app)
+                    .post('/api/auth/login')
+                    .send({
+                    email: 'nonexistent@example.com',
+                    password: 'password123'
+                })
+                    .expect(401);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('Неверные учетные данные');
+            });
         });
-        test('должен обновлять профиль пользователя', async () => {
-            const profileUpdate = {
-                firstName: 'Test',
-                lastName: 'User',
-                bio: 'Test bio'
-            };
-            const updatedUser = await usersApi.updateProfile(profileUpdate);
-            expect(updatedUser).toBeDefined();
-            // Проверяем что пользователь обновлен
+        describe('POST /api/auth/verify-token', () => {
+            it('должен успешно проверить валидный токен', async () => {
+                const mockUser = {
+                    id: testUserId,
+                    email: 'test@example.com',
+                    firstName: 'Test',
+                    lastName: 'User',
+                    role: 'USER',
+                    isActive: true
+                };
+                const mockDecoded = { userId: testUserId };
+                jwt.verify.mockReturnValue(mockDecoded);
+                mockPrisma.user.findUnique.mockResolvedValue(mockUser);
+                const response = await request(app)
+                    .post('/api/auth/verify-token')
+                    .send({
+                    token: 'valid-token'
+                })
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.user.email).toBe('test@example.com');
+            });
+            it('должен вернуть ошибку при невалидном токене', async () => {
+                jwt.verify.mockImplementation(() => {
+                    throw new Error('Invalid token');
+                });
+                const response = await request(app)
+                    .post('/api/auth/verify-token')
+                    .send({
+                    token: 'invalid-token'
+                })
+                    .expect(401);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('Невалидный токен');
+            });
         });
     });
-    describe('Projects API', () => {
-        test('должен создавать новый проект', async () => {
-            const project = await projectsApi.createProject(testProject);
-            expect(project).toBeDefined();
-            expect(project.name).toBe(testProject.name);
-            expect(project.description).toBe(testProject.description);
-            projectId = project.id;
+    describe('Projects Routes', () => {
+        beforeEach(() => {
+            // Мокаем middleware аутентификации
+            vi.spyOn(UserService, 'verifyToken').mockResolvedValue({
+                id: testUserId,
+                email: 'test@example.com',
+                role: 'USER',
+                fullName: 'Test User'
+            });
         });
-        test('должен получать список проектов', async () => {
-            const response = await projectsApi.getProjects();
-            expect(response).toBeDefined();
-            expect(response.projects).toBeInstanceOf(Array);
-            expect(response.pagination).toBeDefined();
+        describe('GET /api/projects', () => {
+            it('должен вернуть список проектов пользователя', async () => {
+                const mockProjects = [
+                    {
+                        id: '1',
+                        name: 'Test Project 1',
+                        slug: 'test-project-1',
+                        status: 'DRAFT',
+                        userId: testUserId,
+                        createdAt: new Date(),
+                        updatedAt: new Date()
+                    },
+                    {
+                        id: '2',
+                        name: 'Test Project 2',
+                        slug: 'test-project-2',
+                        status: 'PUBLISHED',
+                        userId: testUserId,
+                        createdAt: new Date(),
+                        updatedAt: new Date()
+                    }
+                ];
+                mockPrisma.project.findMany.mockResolvedValue(mockProjects);
+                mockPrisma.project.count.mockResolvedValue(2);
+                const response = await request(app)
+                    .get('/api/projects')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .query({ page: '1', limit: '10' })
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.projects).toHaveLength(2);
+                expect(response.body.data.total).toBe(2);
+            });
+            it('должен вернуть пустой список если проекты не найдены', async () => {
+                mockPrisma.project.findMany.mockResolvedValue([]);
+                mockPrisma.project.count.mockResolvedValue(0);
+                const response = await request(app)
+                    .get('/api/projects')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.projects).toHaveLength(0);
+                expect(response.body.data.total).toBe(0);
+            });
         });
-        test('должен получать отдельный проект', async () => {
-            const project = await projectsApi.getProject(projectId);
-            expect(project).toBeDefined();
-            expect(project.id).toBe(projectId);
-            expect(project.name).toBe(testProject.name);
+        describe('GET /api/projects/:id', () => {
+            it('должен вернуть проект по ID', async () => {
+                const mockProject = {
+                    id: '1',
+                    name: 'Test Project',
+                    slug: 'test-project',
+                    status: 'DRAFT',
+                    userId: testUserId,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                mockPrisma.project.findUnique.mockResolvedValue(mockProject);
+                const response = await request(app)
+                    .get('/api/projects/1')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.name).toBe('Test Project');
+            });
+            it('должен вернуть 404 если проект не найден', async () => {
+                mockPrisma.project.findUnique.mockResolvedValue(null);
+                const response = await request(app)
+                    .get('/api/projects/999')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(404);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('не найден');
+            });
         });
-        test('должен обновлять проект', async () => {
-            const updateData = {
-                name: 'Updated Test Project',
-                description: 'Updated description'
-            };
-            const updatedProject = await projectsApi.updateProject(projectId, updateData);
-            expect(updatedProject.name).toBe(updateData.name);
-            expect(updatedProject.description).toBe(updateData.description);
+        describe('POST /api/projects', () => {
+            it('должен создать новый проект', async () => {
+                const mockProject = {
+                    id: '1',
+                    name: 'New Project',
+                    slug: 'new-project',
+                    status: 'DRAFT',
+                    userId: testUserId,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                mockPrisma.project.create.mockResolvedValue(mockProject);
+                const response = await request(app)
+                    .post('/api/projects')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .send({
+                    name: 'New Project',
+                    description: 'Test description',
+                    type: 'WEBSITE'
+                })
+                    .expect(201);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.name).toBe('New Project');
+                expect(response.body.data.slug).toBe('new-project');
+            });
+            it('должен вернуть ошибку при отсутствии названия', async () => {
+                const response = await request(app)
+                    .post('/api/projects')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .send({
+                    description: 'Test description'
+                    // name отсутствует
+                })
+                    .expect(400);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('обязательно');
+            });
         });
-        test('должен проверять доступность слага', async () => {
-            const isAvailable = await projectsApi.checkSlugAvailability('unique-test-slug');
-            expect(typeof isAvailable).toBe('boolean');
+        describe('PUT /api/projects/:id', () => {
+            it('должен обновить проект', async () => {
+                const mockProject = {
+                    id: '1',
+                    name: 'Updated Project',
+                    slug: 'updated-project',
+                    status: 'DRAFT',
+                    userId: testUserId,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                mockPrisma.project.update.mockResolvedValue(mockProject);
+                const response = await request(app)
+                    .put('/api/projects/1')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .send({
+                    name: 'Updated Project',
+                    description: 'Updated description'
+                })
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.name).toBe('Updated Project');
+            });
+            it('должен вернуть 404 если проект не найден', async () => {
+                mockPrisma.project.update.mockRejectedValue(new Error('Record not found'));
+                const response = await request(app)
+                    .put('/api/projects/999')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .send({
+                    name: 'Updated Project'
+                })
+                    .expect(404);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('не найден');
+            });
         });
-        test('должен публиковать проект', async () => {
-            await expect(projectsApi.publishProject(projectId)).resolves.not.toThrow();
+        describe('DELETE /api/projects/:id', () => {
+            it('должен удалить проект', async () => {
+                mockPrisma.project.delete.mockResolvedValue({ id: '1' });
+                const response = await request(app)
+                    .delete('/api/projects/1')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.message).toContain('успешно удален');
+            });
+            it('должен вернуть 404 если проект не найден', async () => {
+                mockPrisma.project.delete.mockRejectedValue(new Error('Record not found'));
+                const response = await request(app)
+                    .delete('/api/projects/999')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(404);
+                expect(response.body.success).toBe(false);
+                expect(response.body.error).toContain('не найден');
+            });
         });
-        test('должен снимать с публикации проект', async () => {
-            await expect(projectsApi.unpublishProject(projectId)).resolves.not.toThrow();
+        describe('PUT /api/projects/:id/publish', () => {
+            it('должен опубликовать проект', async () => {
+                const mockProject = {
+                    id: '1',
+                    name: 'Test Project',
+                    slug: 'test-project',
+                    status: 'PUBLISHED',
+                    userId: testUserId,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                mockPrisma.project.update.mockResolvedValue(mockProject);
+                const response = await request(app)
+                    .put('/api/projects/1/publish')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.status).toBe('PUBLISHED');
+            });
         });
-    });
-    describe('Analytics API', () => {
-        test('должен получать статистику дашборда', async () => {
-            const stats = await analyticsApi.getDashboardStats();
-            expect(stats).toBeDefined();
-            expect(stats.projects).toBeDefined();
-            expect(stats.users).toBeDefined();
-            expect(stats.traffic).toBeDefined();
-            expect(stats.revenue).toBeDefined();
+        describe('PUT /api/projects/:id/unpublish', () => {
+            it('должен снять проект с публикации', async () => {
+                const mockProject = {
+                    id: '1',
+                    name: 'Test Project',
+                    slug: 'test-project',
+                    status: 'DRAFT',
+                    userId: testUserId,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                mockPrisma.project.update.mockResolvedValue(mockProject);
+                const response = await request(app)
+                    .put('/api/projects/1/unpublish')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.status).toBe('DRAFT');
+            });
         });
-        test('должен получать данные трафика', async () => {
-            const trafficData = await analyticsApi.getTrafficData();
-            expect(trafficData).toBeDefined();
-            expect(trafficData.labels).toBeInstanceOf(Array);
-            expect(trafficData.datasets).toBeInstanceOf(Array);
-        });
-        test('должен получать данные конверсии', async () => {
-            const conversionData = await analyticsApi.getConversionData();
-            expect(conversionData).toBeDefined();
-            expect(conversionData.labels).toBeInstanceOf(Array);
-            expect(conversionData.datasets).toBeInstanceOf(Array);
-        });
-        test('должен получать метрики проектов', async () => {
-            const metrics = await analyticsApi.getProjectMetrics();
-            expect(metrics).toBeDefined();
-            expect(metrics).toBeInstanceOf(Array);
+        describe('GET /api/projects/statistics', () => {
+            it('должен вернуть статистику проектов', async () => {
+                const mockStats = {
+                    total: 10,
+                    published: 5,
+                    draft: 3,
+                    archived: 2
+                };
+                const mockRecentProjects = [
+                    {
+                        id: '1',
+                        name: 'Recent Project',
+                        status: 'PUBLISHED',
+                        updatedAt: new Date()
+                    }
+                ];
+                mockPrisma.project.count.mockResolvedValueOnce(mockStats.total);
+                mockPrisma.project.count.mockResolvedValueOnce(mockStats.published);
+                mockPrisma.project.count.mockResolvedValueOnce(mockStats.draft);
+                mockPrisma.project.count.mockResolvedValueOnce(mockStats.archived);
+                mockPrisma.project.findMany.mockResolvedValue(mockRecentProjects);
+                const response = await request(app)
+                    .get('/api/projects/statistics')
+                    .set('Authorization', `Bearer ${authToken}`)
+                    .expect(200);
+                expect(response.body.success).toBe(true);
+                expect(response.body.data.total).toBe(10);
+                expect(response.body.data.published).toBe(5);
+                expect(response.body.data.draft).toBe(3);
+                expect(response.body.data.archived).toBe(2);
+                expect(response.body.data.recentProjects).toHaveLength(1);
+            });
         });
     });
     describe('Error Handling', () => {
-        test('должен обрабатывать 404 ошибки', async () => {
-            await expect(projectsApi.getProject('non-existent-id')).rejects.toThrow();
+        it('должен вернуть 404 для несуществующих маршрутов', async () => {
+            const response = await request(app)
+                .get('/api/nonexistent')
+                .expect(404);
+            expect(response.body.message).toContain('не найден');
         });
-        test('должен обрабатывать 401 ошибки', async () => {
-            // Удаляем токен для имитации неавторизованного запроса
-            usersApi.logout();
-            await expect(projectsApi.getProjects()).rejects.toThrow();
-            // Восстанавливаем токен
-            apiClient.setAuthToken(authToken);
+        it('должен обрабатывать внутренние ошибки сервера', async () => {
+            mockPrisma.project.findMany.mockRejectedValue(new Error('Database error'));
+            const response = await request(app)
+                .get('/api/projects')
+                .set('Authorization', `Bearer ${authToken}`)
+                .expect(500);
+            expect(response.body.success).toBe(false);
+            expect(response.body.error).toContain('Ошибка базы данных');
         });
-        test('должен обрабатывать валидационные ошибки', async () => {
-            const invalidProjectData = {
-                name: '', // Пустое название должно вызвать ошибку
-                description: testProject.description
-            };
-            await expect(projectsApi.createProject(invalidProjectData)).rejects.toThrow();
-        });
-    });
-    describe('Performance Tests', () => {
-        test('запросы должны выполняться быстро', async () => {
-            const startTime = Date.now();
-            await projectsApi.getProjects({ limit: 10 });
-            const endTime = Date.now();
-            const duration = endTime - startTime;
-            // Запрос должен выполняться менее чем за 5 секунд
-            expect(duration).toBeLessThan(5000);
-        });
-        test('должен поддерживать параллельные запросы', async () => {
-            const promises = [
-                projectsApi.getProjects({ limit: 5 }),
-                usersApi.getCurrentUser(),
-                analyticsApi.getDashboardStats()
-            ];
-            const results = await Promise.all(promises);
-            expect(results).toHaveLength(3);
-            results.forEach(result => {
-                expect(result).toBeDefined();
-            });
-        });
-    });
-});
-/**
- * E2E тесты для критических пользовательских сценариев
- */
-describe('E2E User Scenarios', () => {
-    test('Полный цикл создания и управления проектом', async () => {
-        // 1. Регистрация пользователя
-        const authResponse = await usersApi.register({
-            username: 'e2euser',
-            email: 'e2e@example.com',
-            password: 'E2EPassword123!'
-        });
-        expect(authResponse.user).toBeDefined();
-        // 2. Создание проекта
-        const project = await projectsApi.createProject({
-            name: 'E2E Test Project',
-            description: 'End-to-end test project',
-            type: 'WEBSITE'
-        });
-        expect(project).toBeDefined();
-        // 3. Обновление проекта
-        const updatedProject = await projectsApi.updateProject(project.id, {
-            name: 'Updated E2E Project'
-        });
-        expect(updatedProject.name).toBe('Updated E2E Project');
-        // 4. Публикация проекта
-        await projectsApi.publishProject(project.id);
-        // 5. Проверка статистики
-        const stats = await analyticsApi.getDashboardStats();
-        expect(stats.projects.total).toBeGreaterThan(0);
-        // 6. Очистка
-        await projectsApi.deleteProject(project.id);
-    });
-    test('Сценарий обновления профиля с аватаром', async () => {
-        // Создание тестового файла (blob)
-        const testFile = new File(['test'], 'avatar.jpg', { type: 'image/jpeg' });
-        // Загрузка аватара
-        const uploadResult = await usersApi.uploadAvatar(testFile);
-        expect(uploadResult.url).toBeDefined();
-        // Обновление профиля
-        const updatedUser = await usersApi.updateProfile({
-            firstName: 'Test',
-            lastName: 'Avatar',
-            bio: 'User with avatar'
-        });
-        expect(updatedUser).toBeDefined();
-        // Проверяем что пользователь обновлен
     });
 });
 //# sourceMappingURL=integration.test.js.map

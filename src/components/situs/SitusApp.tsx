@@ -44,7 +44,7 @@ const SitusApp: React.FC = () => {
         
         {/* Настройки */}
         <Route path="profile-settings" element={<SitusProfileSettings />} />
-        <Route path="section-settings" element={<SitusSectionSettings />} />
+        <Route path="section-settings/*" element={<SitusSectionSettings />} />
         
         {/* Fallback для несуществующих маршрутов */}
         <Route path="*" element={

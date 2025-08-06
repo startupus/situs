@@ -1,0 +1,447 @@
+/* 
+ * Изолированные темы для интерфейса редактора Redaktus
+ * Применяются только к интерфейсу, не влияют на канвас
+ */
+
+/* Глобальные переменные для тем - совместимость с TailGrids */
+:root {
+  /* Классическая синяя тема (по умолчанию) */
+  --color-primary: #1E40AF;
+  --color-secondary: #059669;
+  --color-accent: #7C3AED;
+  --color-success: #22AD5C;
+  --color-warning: #FBBF24;
+  --color-error: #F23030;
+  --color-info: #2D68F8;
+  
+  /* Дублирование без префикса для максимальной совместимости */
+  --primary: #1E40AF;
+  --secondary: #059669;
+  --accent: #7C3AED;
+  --success: #22AD5C;
+  --warning: #FBBF24;
+  --error: #F23030;
+  --info: #2D68F8;
+}
+
+/* Контейнер интерфейса */
+.redaktus-interface {
+  /* Базовые стили интерфейса */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  
+  /* Используем CSS переменные для темы с приоритетом */
+  background-color: var(--interface-bg, #ffffff) !important;
+  color: var(--interface-text, #1f2937) !important;
+  border-color: var(--interface-border, #e5e7eb) !important;
+  
+  /* Изоляция от глобальных стилей */
+  isolation: isolate;
+  position: relative;
+  z-index: 10;
+}
+
+/* Светлая тема интерфейса - контрастная и яркая */
+.redaktus-interface.interface-light {
+  --interface-bg: #ffffff !important;
+  --interface-text: #1F2937 !important; /* более темный для контраста */
+  --interface-border: #D1D5DB !important; /* более заметная граница */
+  --interface-surface: #F9FAFB !important; /* легкий серый фон */
+  --interface-surface-disabled: #F3F4F6 !important; /* фон для disabled */
+  --interface-text-disabled: #9CA3AF !important; /* текст для disabled */
+  --interface-primary: #4c1d95 !important;
+  --interface-secondary: #13c296 !important;
+  --interface-accent: #9055fd !important;
+  --interface-success: #22ad5c !important;
+  --interface-warning: #fbbf24 !important;
+  --interface-error: #f23030 !important;
+  --interface-info: #2d68f8 !important;
+  
+  /* Переменные совместимости с TailGrids */
+  --color-primary: var(--interface-primary) !important;
+  --color-secondary: var(--interface-secondary) !important;
+  --color-accent: var(--interface-accent) !important;
+  --primary: var(--interface-primary) !important;
+  --secondary: var(--interface-secondary) !important;
+  --accent: var(--interface-accent) !important;
+}
+
+/* Темная тема интерфейса - контрастная и выразительная */
+.redaktus-interface.interface-dark {
+  --interface-bg: #111827 !important; /* более темный для контраста */
+  --interface-text: #F3F4F6 !important; /* яркий белый текст */
+  --interface-border: #374151 !important; /* четкие границы */
+  --interface-surface: #1F2937 !important; /* контрастный серый */
+  --interface-surface-disabled: #374151 !important; /* фон для disabled */
+  --interface-text-disabled: #6B7280 !important; /* текст для disabled */
+  --interface-primary: #4C1D95 !important; /* сохраняем админский primary */
+  --interface-secondary: #10b981 !important;
+  --interface-accent: #34d399 !important;
+  --interface-success: #34d399 !important;
+  --interface-warning: #f59e0b !important;
+  --interface-error: #f87171 !important;
+  --interface-info: #60a5fa !important;
+  
+  /* Переменные совместимости с TailGrids */
+  --color-primary: var(--interface-primary) !important;
+  --color-secondary: var(--interface-secondary) !important;
+  --color-accent: var(--interface-accent) !important;
+  --primary: var(--interface-primary) !important;
+  --secondary: var(--interface-secondary) !important;
+  --accent: var(--interface-accent) !important;
+}
+
+/* Админский контейнер */
+.redaktus-admin {
+  /* Базовые стили админки */
+  background-color: var(--interface-bg, #ffffff);
+  color: var(--interface-text, #1f2937);
+  
+  /* Изоляция от глобальных стилей */
+  isolation: isolate;
+  position: relative;
+  z-index: 5;
+}
+
+/* Светлая тема админки */
+.redaktus-admin.admin-light {
+  --interface-bg: #ffffff;
+  --interface-text: #1f2937;
+  --interface-border: #e5e7eb;
+  --interface-surface: #f9fafb;
+}
+
+/* Темная тема админки */
+.redaktus-admin.admin-dark {
+  --interface-bg: #1f2937;
+  --interface-text: #f9fafb;
+  --interface-border: #374151;
+  --interface-surface: #374151;
+}
+
+/* Компоненты интерфейса */
+.redaktus-interface .interface-component {
+  background-color: var(--interface-surface, #f9fafb);
+  color: var(--interface-text, #1f2937);
+  border: 1px solid var(--interface-border, #e5e7eb);
+}
+
+/* Кнопки интерфейса */
+.redaktus-interface .interface-button {
+  background-color: var(--interface-primary, #4c1d95);
+  color: #ffffff;
+  border: 1px solid var(--interface-primary, #4c1d95);
+  transition: all 0.2s ease;
+}
+
+.redaktus-interface .interface-button:hover {
+  background-color: var(--interface-primary, #4c1d95);
+  opacity: 0.9;
+}
+
+/* Навигация интерфейса */
+.redaktus-interface .interface-nav {
+  background-color: var(--interface-surface, #f9fafb);
+  border-bottom: 1px solid var(--interface-border, #e5e7eb);
+}
+
+/* Панели интерфейса */
+.redaktus-interface .interface-panel {
+  background-color: var(--interface-surface, #f9fafb);
+  border: 1px solid var(--interface-border, #e5e7eb);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Формы интерфейса */
+.redaktus-interface .interface-input {
+  background-color: var(--interface-bg, #ffffff);
+  color: var(--interface-text, #1f2937);
+  border: 1px solid var(--interface-border, #e5e7eb);
+}
+
+.redaktus-interface .interface-input:focus {
+  border-color: var(--interface-primary, #4c1d95);
+  box-shadow: 0 0 0 3px rgba(76, 29, 149, 0.1);
+}
+
+/* Изоляция от глобальных Tailwind стилей */
+.redaktus-interface {
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+  --tw-border-opacity: 1;
+}
+
+/* Принудительная изоляция от темной темы документа */
+.redaktus-interface {
+  color-scheme: light;
+}
+
+.redaktus-interface.interface-dark {
+  color-scheme: dark;
+}
+
+/* Панели интерфейса (левая и правая) */
+.redaktus-interface-panel {
+  /* Наследуем тему от parent data-interface-theme */
+  background-color: var(--interface-bg, #ffffff) !important;
+  color: var(--interface-text, #1f2937) !important;
+  border-color: var(--interface-border, #e5e7eb) !important;
+  
+  /* Изоляция от канваса */
+  isolation: isolate;
+  z-index: 20;
+}
+
+/* Все элементы внутри панелей интерфейса наследуют тему, ИСКЛЮЧАЯ канвас */
+.redaktus-interface-panel,
+.redaktus-interface-panel *:not(.redaktus-canvas):not(.redaktus-canvas *) {
+  background-color: inherit !important;
+  color: inherit !important;
+  border-color: var(--interface-border) !important;
+}
+
+/* Панели в темной теме - на основе Admino */
+.redaktus-interface-panel[data-interface-theme="dark"] {
+  --interface-bg: #1C2434 !important; /* dark-2 из Admino */
+  --interface-text: #8A99AF !important; /* dark-6 из Admino */
+  --interface-border: #2E3A47 !important; /* dark-3 из Admino */
+  --interface-surface: #24303F !important; /* между dark-2 и dark-3 */
+  --interface-surface-disabled: #2E3A47 !important; /* фон для disabled */
+  --interface-text-disabled: #6B7280 !important; /* текст для disabled */
+  --interface-primary: #4C1D95 !important; /* сохраняем админский primary */
+  --interface-secondary: #10b981 !important;
+  --interface-accent: #34d399 !important;
+  --interface-success: #34d399 !important;
+  --interface-warning: #f59e0b !important;
+  --interface-error: #f87171 !important;
+  --interface-info: #60a5fa !important;
+}
+
+/* Панели в светлой теме - контрастные */
+.redaktus-interface-panel[data-interface-theme="light"] {
+  --interface-bg: #ffffff !important;
+  --interface-text: #1F2937 !important; /* более темный для контраста */
+  --interface-border: #D1D5DB !important; /* более заметная граница */
+  --interface-surface: #F9FAFB !important; /* легкий серый фон */
+  --interface-surface-disabled: #F3F4F6 !important; /* фон для disabled */
+  --interface-text-disabled: #9CA3AF !important; /* текст для disabled */
+  --interface-primary: #4c1d95 !important;
+  --interface-secondary: #13c296 !important;
+  --interface-accent: #9055fd !important;
+  --interface-success: #22ad5c !important;
+  --interface-warning: #fbbf24 !important;
+  --interface-error: #f23030 !important;
+  --interface-info: #2d68f8 !important;
+}
+
+/* Все дочерние элементы панелей интерфейса */
+.redaktus-interface-panel *:not(.redaktus-canvas):not(.redaktus-canvas *) {
+  background-color: inherit !important;
+  color: inherit !important;
+  border-color: var(--interface-border) !important;
+}
+
+/* ИСКЛЮЧАЕМ КАНВАС из стилей интерфейса */
+.redaktus-interface > *:not(.redaktus-canvas) {
+  background-color: var(--interface-bg) !important;
+  color: var(--interface-text) !important;
+}
+
+.redaktus-interface.interface-dark > *:not(.redaktus-canvas) {
+  background-color: var(--interface-bg, #1f2937) !important;
+  color: var(--interface-text, #f9fafb) !important;
+}
+
+.redaktus-interface.interface-light > *:not(.redaktus-canvas) {
+  background-color: var(--interface-bg, #ffffff) !important;
+  color: var(--interface-text, #1f2937) !important;
+}
+
+/* Применяем стили интерфейса ТОЛЬКО к элементам интерфейса, НЕ к канвасу */
+.redaktus-interface > div:not(.redaktus-canvas),
+.redaktus-interface > nav:not(.redaktus-canvas),
+.redaktus-interface > header:not(.redaktus-canvas),
+.redaktus-interface > aside:not(.redaktus-canvas),
+.redaktus-interface button:not(.redaktus-canvas *),
+.redaktus-interface input:not(.redaktus-canvas *),
+.redaktus-interface textarea:not(.redaktus-canvas *),
+.redaktus-interface select:not(.redaktus-canvas *) {
+  background-color: var(--interface-bg) !important;
+  color: var(--interface-text) !important;
+  border-color: var(--interface-border) !important;
+}
+
+/* =============== ADMINO-СТИЛИ ДЛЯ ИНТЕРФЕЙСА =============== */
+
+/* Правильные границы между панелями как в Admino */
+.redaktus-interface-panel {
+  /* Мягкие тени вместо границ */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+  background-color: var(--interface-bg) !important;
+  color: var(--interface-text) !important;
+  border: none !important; /* убираем только агрессивные границы */
+}
+
+/* Темная тема - тени и цвета для темной темы как в Admino */
+.redaktus-interface-panel[data-interface-theme="dark"] {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4) !important;
+  background-color: var(--interface-bg) !important;
+  color: var(--interface-text) !important;
+}
+
+/* Убираем border у всех дочерних элементов кроме разделителей */
+.redaktus-interface-panel * {
+  border: none !important;
+}
+
+/* Разделительные границы между основными панелями как в Admino */
+.redaktus-interface-panel:first-child {
+  /* Левая панель - правая граница */
+  border-right: 1px solid var(--interface-border) !important;
+}
+
+.redaktus-interface-panel:last-child {
+  /* Правая панель - левая граница */
+  border-left: 1px solid var(--interface-border) !important;
+}
+
+/* Стили кнопок как в Admino - чистые без лишних borders */
+.redaktus-interface-panel button:not(.redaktus-canvas *) {
+  background-color: transparent !important;
+  color: var(--interface-text) !important;
+  border: none !important; /* убираем все borders */
+  border-radius: 6px !important; /* мягкое скругление */
+  padding: 8px 12px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important; /* убираем тени */
+}
+
+/* Hover для кнопок как в Admino - мягкий эффект */
+.redaktus-interface-panel button:not(.redaktus-canvas *):hover {
+  background-color: rgba(76, 29, 149, 0.05) !important; /* primary с прозрачностью */
+  color: var(--interface-primary) !important;
+}
+
+/* Активные кнопки */
+.redaktus-interface-panel button:not(.redaktus-canvas *):active,
+.redaktus-interface-panel button[aria-expanded="true"]:not(.redaktus-canvas *) {
+  background-color: var(--interface-primary) !important;
+  color: #ffffff !important;
+}
+
+/* Мягкие закругления как в Admino */
+.redaktus-interface-panel {
+  border-radius: 8px !important;
+}
+
+/* Инпуты и формы как в Admino - только фокус имеет границу */
+.redaktus-interface-panel input:not(.redaktus-canvas *),
+.redaktus-interface-panel textarea:not(.redaktus-canvas *),
+.redaktus-interface-panel select:not(.redaktus-canvas *) {
+  background-color: var(--interface-surface) !important;
+  color: var(--interface-text) !important;
+  border: 1px solid transparent !important; /* прозрачная граница по умолчанию */
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* Focus для инпутов */
+.redaktus-interface-panel input:focus:not(.redaktus-canvas *),
+.redaktus-interface-panel textarea:focus:not(.redaktus-canvas *),
+.redaktus-interface-panel select:focus:not(.redaktus-canvas *) {
+  border-color: var(--interface-primary) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(76, 29, 149, 0.1) !important;
+}
+
+/* Чистая навигация без обводок */
+.redaktus-interface-panel nav:not(.redaktus-canvas *),
+.redaktus-interface-panel header:not(.redaktus-canvas *) {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* Ссылки и навигация */
+.redaktus-interface-panel a:not(.redaktus-canvas *),
+.redaktus-interface-panel .nav-link:not(.redaktus-canvas *) {
+  color: var(--interface-text) !important;
+  transition: color 0.2s ease !important;
+}
+
+.redaktus-interface-panel a:hover:not(.redaktus-canvas *),
+.redaktus-interface-panel .nav-link:hover:not(.redaktus-canvas *) {
+  color: var(--interface-primary) !important;
+}
+
+/* Настройки интерфейса редактора - CSS переменные */
+.redaktus-interface {
+  /* Настройки границ */
+  --interface-border-width: 1px !important;
+  --interface-border-radius: 8px !important;
+  --interface-border-style: solid !important;
+  
+  /* Настройки типографики */
+  --interface-font-size: 14px !important;
+  --interface-line-height: 1.5 !important;
+  --interface-font-family: 'Inter, system-ui, sans-serif' !important;
+  
+  /* Настройки макета */
+  --interface-sidebar-width: 280px !important;
+  --interface-panel-spacing: 16px !important;
+  --interface-content-padding: 24px !important;
+  
+  /* Настройки анимаций */
+  --interface-animation-duration: 0.2s !important;
+  --interface-animation-easing: ease !important;
+  --interface-reduced-motion: false !important;
+}
+
+/* Применение настроек к компонентам */
+.redaktus-interface-panel {
+  border-width: var(--interface-border-width) !important;
+  border-radius: var(--interface-border-radius) !important;
+  border-style: var(--interface-border-style) !important;
+  font-size: var(--interface-font-size) !important;
+  line-height: var(--interface-line-height) !important;
+  font-family: var(--interface-font-family) !important;
+  padding: var(--interface-content-padding) !important;
+}
+
+.redaktus-interface-panel input,
+.redaktus-interface-panel select,
+.redaktus-interface-panel textarea {
+  border-width: var(--interface-border-width) !important;
+  border-radius: var(--interface-border-radius) !important;
+  border-style: var(--interface-border-style) !important;
+  font-size: var(--interface-font-size) !important;
+  line-height: var(--interface-line-height) !important;
+  font-family: var(--interface-font-family) !important;
+}
+
+.redaktus-interface-panel button {
+  border-width: var(--interface-border-width) !important;
+  border-radius: var(--interface-border-radius) !important;
+  border-style: var(--interface-border-style) !important;
+  font-size: var(--interface-font-size) !important;
+  line-height: var(--interface-line-height) !important;
+  font-family: var(--interface-font-family) !important;
+  transition: all var(--interface-animation-duration) var(--interface-animation-easing) !important;
+}
+
+/* Уменьшенное движение */
+@media (prefers-reduced-motion: reduce) {
+  .redaktus-interface-panel * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Принудительное уменьшенное движение */
+.redaktus-interface[data-reduced-motion="true"] * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}

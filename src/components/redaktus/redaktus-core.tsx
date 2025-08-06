@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useAutoSave } from '../../hooks/useAutoSave'
 import { useCanvasTheme } from '../../hooks/useCanvasTheme'
+import { useInterfaceTheme } from '../../hooks/useInterfaceTheme'
+import { AdminThemeProvider } from '../../contexts/AdminThemeContext'
+import { EditorThemeProvider } from '../../contexts/EditorThemeContext'
+import { ProjectThemeProvider } from '../../contexts/ProjectThemeContext'
+import { LanguageProvider } from '../../contexts/LanguageContext'
+
+// Импорт изолированных CSS тем
+import '../../styles/interface-themes.css'
+import '../../styles/canvas-themes.css'
 
 import {
   FaCube,
@@ -64,11 +73,11 @@ const blockSchemas = {
     primaryButtonUrl: { type: 'string', default: '#' },
     secondaryButtonText: { type: 'string', default: 'Download App' },
     secondaryButtonUrl: { type: 'string', default: '#' },
-    heroImage: { type: 'string', default: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center' },
+    heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
     clientLogos: { type: 'array', default: [
-      '/images/brands/ayroui.svg',
-      '/images/brands/graygrids.svg',
-      '/images/brands/uideck.svg'
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
     ] }
   },
   'hero-1-original': {
@@ -78,11 +87,11 @@ const blockSchemas = {
     primaryButtonUrl: { type: 'string', default: '#' },
     secondaryButtonText: { type: 'string', default: 'Download App' },
     secondaryButtonUrl: { type: 'string', default: '#' },
-    heroImage: { type: 'string', default: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center' },
+    heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
     clientLogos: { type: 'array', default: [
-      '/images/brands/ayroui.svg',
-      '/images/brands/graygrids.svg',
-      '/images/brands/uideck.svg'
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
+      'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
     ] }
   },
   'testimonial-block': {
@@ -190,8 +199,11 @@ const createDefaultProps = (blockType: string) => {
 const EditorContent: React.FC = () => {
   const [currentDevice, setCurrentDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
   
-  // Инициализируем Canvas Theme для переключения темы канваса
-  const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme } = useCanvasTheme()
+  // Используем изолированные хуки тем
+  const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme, toggleTheme: toggleCanvasTheme } = useCanvasTheme()
+  const { theme: interfaceTheme, resolvedTheme: interfaceResolvedTheme, toggleTheme: toggleInterfaceTheme } = useInterfaceTheme()
+  
+  console.log('🎨 EditorContent themes - Canvas:', canvasTheme, 'Interface:', interfaceTheme)
   
   const [currentPage, setCurrentPage] = useState<any>({
     id: 'home',
@@ -336,16 +348,21 @@ const EditorContent: React.FC = () => {
   }
 
   return (
-    <div className="redaktus-editor h-screen w-screen max-w-none flex flex-col transition-colors duration-200 redaktus-interface" style={{ width: '100vw', maxWidth: 'none' }}>
-      {/* Верхняя панель над всем редактором - часть интерфейса */}
-      <EditorNavbar 
-        currentPage="Home"
-        onSave={handleSave}
-        autosaveEnabled={true}
-        isSaving={isSaving}
-        lastSaved={lastSaved}
-        saveError={saveError}
-      />
+    <LanguageProvider>
+      <div 
+        className={`redaktus-editor h-screen w-screen max-w-none flex flex-col transition-colors duration-200 redaktus-interface`} 
+        style={{ width: '100vw', maxWidth: 'none' }}
+        data-interface-theme={interfaceResolvedTheme}
+      >
+        {/* Верхняя панель над всем редактором - часть интерфейса */}
+        <EditorNavbar 
+          currentPage="Home"
+          onSave={handleSave}
+          autosaveEnabled={true}
+          isSaving={isSaving}
+          lastSaved={lastSaved}
+          saveError={saveError}
+        />
 
       {/* Индикатор автосохранения */}
       {isSaving && (
@@ -381,32 +398,32 @@ const EditorContent: React.FC = () => {
 
       {/* Основная область редактора */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Левая панель с компонентами */}
-        <div>
+        {/* Левая панель с компонентами - ЧАСТЬ ИНТЕРФЕЙСА */}
+        <div className="redaktus-interface-panel" data-interface-theme={interfaceResolvedTheme}>
           <VerticalNavbar availableBricks={allBricks} />
         </div>
 
         {/* Центральная область с холстом - КАНВАС */}
         <div className="flex-1 flex flex-col min-w-0 transition-colors duration-200">
-          {/* Вторая панель ТОЛЬКО над холстом */}
-          <CanvasToolbar
-            currentDevice={currentDevice}
-            onDeviceChange={setCurrentDevice}
-            onPreview={handlePreview}
-            onCode={handleCode}
-            onUndo={handleUndo}
-            onRedo={handleRedo}
-            onSave={handleSave}
-          />
+          {/* Панель канваса - ЧАСТЬ ИНТЕРФЕЙСА */}
+          <div className="redaktus-interface-panel" data-interface-theme={interfaceResolvedTheme}>
+            <CanvasToolbar
+              currentDevice={currentDevice}
+              onDeviceChange={setCurrentDevice}
+              onPreview={handlePreview}
+              onCode={handleCode}
+              onUndo={handleUndo}
+              onRedo={handleRedo}
+              onSave={handleSave}
+            />
+          </div>
 
-          {/* Область редактирования - тема контролируется CSS и canvasResolvedTheme */}
+          {/* Область редактирования - изолированная тема канваса */}
           <div 
-            className={`flex-1 overflow-y-auto min-w-0 redaktus-canvas transition-colors duration-200 ${canvasResolvedTheme === 'dark' ? 'dark' : ''}`}
-            style={{
-              backgroundColor: canvasResolvedTheme === 'dark' ? '#111827' : '#ffffff',
-              color: canvasResolvedTheme === 'dark' ? '#f9fafb' : '#1f2937',
-              colorScheme: canvasResolvedTheme === 'dark' ? 'dark' : 'light'
-            }}
+            className={`flex-1 overflow-y-auto min-w-0 redaktus-canvas transition-colors duration-200`}
+            data-device={currentDevice}
+            data-canvas-theme={canvasResolvedTheme}
+            data-canvas-isolated="true"
           >
             {/* Динамический контент страницы */}
             <div 
@@ -444,10 +461,13 @@ const EditorContent: React.FC = () => {
           </div>
         </div>
 
-        {/* Правая панель настроек */}
-        <SettingsPanel currentPage="Home" />
+        {/* Правая панель настроек - ЧАСТЬ ИНТЕРФЕЙСА */}
+        <div className="redaktus-interface-panel" data-interface-theme={interfaceResolvedTheme}>
+          <SettingsPanel currentPage="Home" />
+        </div>
       </div>
     </div>
+    </LanguageProvider>
   )
 }
 
@@ -768,10 +788,16 @@ export const Redaktus: React.FC<any> = ({
   console.log('Redaktus config:', config)
 
   return (
-    <RedaktusContext.Provider value={config}>
-      <div className="redaktus-provider" {...domProps}>
-        {children}
-      </div>
-    </RedaktusContext.Provider>
+    <AdminThemeProvider>
+      <EditorThemeProvider>
+        <ProjectThemeProvider>
+          <RedaktusContext.Provider value={config}>
+            <div className="redaktus-provider" {...domProps}>
+              {children}
+            </div>
+          </RedaktusContext.Provider>
+        </ProjectThemeProvider>
+      </EditorThemeProvider>
+    </AdminThemeProvider>
   )
 }

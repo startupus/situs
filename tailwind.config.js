@@ -21,7 +21,7 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#3758F9",
+          DEFAULT: "#4C1D95", // Фиолетовый для админки
         },
         secondary: {
           DEFAULT: "#13C296",

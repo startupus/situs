@@ -44,7 +44,7 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
           {/* Left Section - Logo */}
           <div className="flex items-center">
             <div className="flex items-center space-x-3">
-              <FaCube className="text-gray-600 text-xl" />
+              <FaCube className="text-gray-600 dark:text-gray-300 text-xl transition-colors duration-200" />
               <span className="text-lg font-bold tracking-wide transition-colors duration-200 text-gray-900 dark:text-gray-100">
                 REDAKTUS
               </span>

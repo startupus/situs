@@ -6,8 +6,6 @@ export interface HeroBlockProps {
     primaryButtonUrl: string;
     secondaryButtonText: string;
     secondaryButtonUrl: string;
-    heroImage: string;
-    clientLogos: string[];
     onUpdate: (updates: Partial<HeroBlockProps>) => void;
 }
 export declare const HeroBlock: React.FC<HeroBlockProps>;
