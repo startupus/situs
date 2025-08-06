@@ -160,7 +160,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
         icon={<FaEye size={16} />}
         collapsible
       >
-        <div className="space-y-4">
+        <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.statusVisibility.visibility')}
             type="select"
@@ -203,7 +203,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
         icon={<FaClock size={16} />}
         collapsible
       >
-        <div className="space-y-4">
+        <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.schedulePublish.publishDate')}
             type="date"
@@ -223,7 +223,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
         icon={<FaCogs size={16} />}
         collapsible
       >
-        <div className="space-y-4">
+        <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.pageStructure.structureLocked')}
             type="select"
@@ -245,7 +245,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
         icon={<FaTag size={16} />}
         collapsible
       >
-        <div className="space-y-4">
+        <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.pageAttributes.pageSlug')}
             type="text"
@@ -270,13 +270,13 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
         icon={<FaCog size={16} />}
         collapsible
       >
-        <div className="space-y-4">
+        <div className="space-y-2">
           {/* Typography Settings */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
               Типографика
             </label>
-            <div className="space-y-3">
+            <div className="space-y-1">
               <InputGroup
                 label="Основной шрифт"
                 type="select"
@@ -300,10 +300,10 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
           {/* Spacing Settings */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
               Отступы и интервалы
             </label>
-            <div className="space-y-3">
+            <div className="space-y-1">
               <InputGroup
                 label="Базовый отступ"
                 type="select"
@@ -321,10 +321,10 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
           {/* Layout Settings */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
               Макет
             </label>
-            <div className="space-y-3">
+            <div className="space-y-1">
               <InputGroup
                 label="Максимальная ширина контейнера"
                 type="select"
@@ -342,10 +342,10 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
           {/* Animation Settings */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
               Анимации
             </label>
-            <div className="space-y-3">
+            <div className="space-y-1">
               <InputGroup
                 label="Длительность переходов"
                 type="select"
@@ -606,7 +606,7 @@ const ItemTab: React.FC = () => {
         icon={<FaFile size={16} />}
         collapsible
       >
-        <div className="space-y-4">
+        <div className="space-y-2">
           <InputGroup
             label="TEXT CONTENT"
             type="textarea"
@@ -721,23 +721,23 @@ const InputGroup: React.FC<{
   options?: string[];
   disabled?: boolean;
 }> = ({ label, type, value, placeholder, options = [], disabled }) => {
-  // Добавляем пустые обработчики для устранения React предупреждений
   const handleChange = () => {};
   
-  const inputStyles = {
-    backgroundColor: disabled ? 'var(--interface-surface-disabled)' : 'var(--interface-surface)',
-    color: disabled ? 'var(--interface-text-disabled)' : 'var(--interface-text)',
-    borderColor: 'var(--interface-border)',
-    borderRadius: '6px',
-    border: '1px solid var(--interface-border)',
+  const compactInputStyles = {
+    backgroundColor: 'transparent',
+    color: 'var(--interface-text)',
+    borderColor: 'rgba(0, 0, 0, 0.08)',
+    border: '1px solid rgba(0, 0, 0, 0.08)',
+    borderRadius: '3px',
+    fontSize: '13px',
     outline: 'none'
   };
   
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <label 
-        className="mb-[10px] block text-base font-medium transition-colors duration-200"
-        style={{ color: 'var(--interface-text)' }}
+        className="text-xs font-medium uppercase tracking-wide text-gray-500"
+        style={{ color: 'var(--interface-text)', opacity: 0.7 }}
       >
         {label}
       </label>
@@ -746,8 +746,8 @@ const InputGroup: React.FC<{
           value={value}
           onChange={handleChange}
           disabled={disabled}
-          className="w-full bg-transparent rounded-md border py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-          style={inputStyles}
+          className="w-full bg-transparent border py-1 px-2 text-sm font-inter"
+          style={compactInputStyles}
         >
           {options.map((option) => (
             <option key={option} value={option}>
@@ -761,9 +761,9 @@ const InputGroup: React.FC<{
           onChange={handleChange}
           placeholder={placeholder}
           disabled={disabled}
-          rows={4}
-          className="w-full bg-transparent rounded-md border py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2 resize-none"
-          style={inputStyles}
+          rows={3}
+          className="w-full bg-transparent border py-1 px-2 text-sm font-inter resize-none"
+          style={compactInputStyles}
         />
       ) : (
         <input
@@ -772,8 +772,8 @@ const InputGroup: React.FC<{
           onChange={handleChange}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full bg-transparent rounded-md border py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
-          style={inputStyles}
+          className="w-full bg-transparent border py-1 px-2 text-sm font-inter"
+          style={compactInputStyles}
         />
       )}
     </div>

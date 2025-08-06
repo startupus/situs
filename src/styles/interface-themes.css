@@ -274,18 +274,16 @@
 
 /* =============== ADMINO-СТИЛИ ДЛЯ ИНТЕРФЕЙСА =============== */
 
-/* Правильные границы между панелями как в Admino */
+/* Минималистичные панели как в ReactBricks */
 .redaktus-interface-panel {
-  /* Мягкие тени вместо границ */
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
   background-color: var(--interface-bg) !important;
   color: var(--interface-text) !important;
-  border: none !important; /* убираем только агрессивные границы */
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* Темная тема - тени и цвета для темной темы как в Admino */
+/* Темная тема - без теней, минималистично */
 .redaktus-interface-panel[data-interface-theme="dark"] {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4) !important;
   background-color: var(--interface-bg) !important;
   color: var(--interface-text) !important;
 }
@@ -295,15 +293,13 @@
   border: none !important;
 }
 
-/* Разделительные границы между основными панелями как в Admino */
+/* Тонкие разделительные линии только между панелями */
 .redaktus-interface-panel:first-child {
-  /* Левая панель - правая граница */
-  border-right: 1px solid var(--interface-border) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
 }
 
 .redaktus-interface-panel:last-child {
-  /* Правая панель - левая граница */
-  border-left: 1px solid var(--interface-border) !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.06) !important;
 }
 
 /* Стили кнопок как в Admino - чистые без лишних borders */
@@ -330,9 +326,9 @@
   color: #ffffff !important;
 }
 
-/* Мягкие закругления как в Admino */
+/* Без закруглений - плоский дизайн как в ReactBricks */
 .redaktus-interface-panel {
-  border-radius: 8px !important;
+  border-radius: 0 !important;
 }
 
 /* Инпуты и формы как в Admino - только фокус имеет границу */
@@ -400,13 +396,12 @@
 
 /* Применение настроек к компонентам */
 .redaktus-interface-panel {
-  border-width: var(--interface-border-width) !important;
-  border-radius: var(--interface-border-radius) !important;
-  border-style: var(--interface-border-style) !important;
+  border-width: 0 !important;
+  border-radius: 0 !important;
   font-size: var(--interface-font-size) !important;
   line-height: var(--interface-line-height) !important;
   font-family: var(--interface-font-family) !important;
-  padding: var(--interface-content-padding) !important;
+  padding: 0 !important;
 }
 
 .redaktus-interface-panel input,
