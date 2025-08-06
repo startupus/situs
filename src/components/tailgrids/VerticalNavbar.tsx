@@ -39,7 +39,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
           <nav className="flex">
             <button
               onClick={() => setActiveTab('pages')}
-              className={`border-b-2 py-4 px-4 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'pages'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color hover:border-primary hover:text-primary'
@@ -60,7 +60,7 @@ const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ availableBricks = [] })
             </button>
             <button
               onClick={() => setActiveTab('entities')}
-              className={`border-b-2 py-4 px-4 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'entities'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color hover:border-primary hover:text-primary'

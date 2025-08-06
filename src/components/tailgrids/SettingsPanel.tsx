@@ -72,7 +72,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
           <nav className="flex">
             <button
               onClick={() => setActiveTab('page')}
-              className={`border-b-2 py-4 px-6 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'page'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color hover:border-primary hover:text-primary'
@@ -93,7 +93,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
             </button>
             <button
               onClick={() => setActiveTab('blocks')}
-              className={`border-b-2 py-4 px-6 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'blocks'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color hover:border-primary hover:text-primary'
@@ -114,7 +114,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
             </button>
             <button
               onClick={() => setActiveTab('item')}
-              className={`border-b-2 py-4 px-6 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
+              className={`border-b-2 py-2 px-3 text-sm font-medium font-inter flex-1 transition-all duration-200 ${
                 activeTab === 'item'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color hover:border-primary hover:text-primary'
