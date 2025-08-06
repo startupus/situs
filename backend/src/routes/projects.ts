@@ -1,313 +1,140 @@
 import express from 'express';
-import { prisma } from '../index';
 
 const router = express.Router();
 
-// GET /api/projects - получить список проектов
-router.get('/', async (req, res) => {
-  try {
-    const { search, status, type, sortBy, sortOrder, page = 1, limit = 10 } = req.query;
-    
-    // Моковые данные для демонстрации
-    const mockProjects = [
+// Моковые данные для проектов
+const mockProjects = [
+  {
+    id: '1',
+    name: 'Стартапус - Демо проект',
+    description: 'Демонстрационный проект экосистемы Стартапус',
+    template: 'website',
+    status: 'published',
+    settings: {
+      theme: 'auto',
+      primaryColor: '#3B82F6',
+      favicon: '/favicon.ico',
+      logo: '/logo.svg'
+    },
+    products: [
       {
-        id: 'startapus-ecosystem',
+        id: '1',
         name: 'Стартапус - Демо проект',
-        description: 'Официальный сайт экосистемы Стартапус - инновационная платформа для создания и управления веб-проектами',
-        domain: 'startapus.com',
-        template: 'website',
+        description: 'Демонстрационный проект экосистемы Стартапус',
+        type: 'WEBSITE',
+        status: 'PUBLISHED',
         settings: {
           theme: 'auto',
           primaryColor: '#3B82F6',
           favicon: '/favicon.ico',
-          logo: '/logo.svg'
+          logo: '/logo.svg',
+          domain: 'startapus.com'
         },
-        pages: [
-          {
-            id: 'startapus-home',
-            title: 'Главная',
-            slug: '',
-            content: [
-              {
-                id: 'hero-1',
-                type: 'hero-section',
-                props: {
-                  title: 'Создавайте будущее веба с экосистемой Стартапус',
-                  subtitle: 'Полный набор инструментов для создания современных веб-сайтов без программирования',
-                  buttonText: 'Начать бесплатно',
-                  buttonLink: '/situs',
-                  backgroundImage: '/images/hero-bg.jpg',
-                  overlayOpacity: 0.4
-                }
-              }
-            ],
-            meta: {
-              description: 'Инновационная платформа для создания и управления веб-проектами',
-              keywords: ['стартапус', 'веб-разработка', 'платформа'],
-              ogImage: '/images/og-startapus.jpg'
-            },
-            status: 'published',
-            createdAt: '2024-01-01T10:00:00Z',
-            updatedAt: '2024-12-23T15:30:00Z',
-            publishedAt: '2024-01-01T10:00:00Z'
-          }
-        ],
+        analytics: {
+          visitors: 2890,
+          pageViews: 12450,
+          conversionRate: 3.2,
+          revenue: 184000
+        },
         createdAt: '2024-01-01T10:00:00Z',
-        updatedAt: '2024-12-23T15:30:00Z',
-        owner: 'default-user',
-        collaborators: [],
-        isPublic: false
-      },
+        updatedAt: '2024-12-23T15:30:00Z'
+      }
+    ],
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z'
+  },
+  {
+    id: '2',
+    name: 'Портфолио агентства',
+    description: 'Сайт-портфолио для креативного агентства',
+    template: 'portfolio',
+    status: 'published',
+    settings: {
+      theme: 'dark',
+      primaryColor: '#8B5CF6',
+      favicon: '/favicon.ico',
+      logo: '/logo.svg'
+    },
+    products: [
       {
-        id: 'site-1',
-        name: 'Мой первый сайт',
-        description: 'Тестовый сайт для разработки Redaktus',
-        domain: 'site1.situs.com',
-        template: 'website',
+        id: '2',
+        name: 'Портфолио агентства',
+        description: 'Сайт-портфолио для креативного агентства',
+        type: 'WEBSITE',
+        status: 'PUBLISHED',
         settings: {
-          theme: 'auto',
-          primaryColor: '#3B82F6',
+          theme: 'dark',
+          primaryColor: '#8B5CF6',
           favicon: '/favicon.ico',
-          logo: '/logo.svg'
+          logo: '/logo.svg',
+          domain: 'portfolio-agency.com'
         },
-        pages: [],
-        createdAt: '2024-12-01T10:00:00Z',
-        updatedAt: '2024-12-23T15:30:00Z',
-        owner: 'default-user',
-        collaborators: [],
-        isPublic: false
+        analytics: {
+          visitors: 1567,
+          pageViews: 8234,
+          conversionRate: 2.8,
+          revenue: 88000
+        },
+        createdAt: '2024-01-02T09:00:00Z',
+        updatedAt: '2024-12-23T15:30:00Z'
       }
-    ];
-
-    let filteredProjects = [...mockProjects];
-    
-    // Фильтрация по поиску
-    if (search) {
-      const searchLower = search.toString().toLowerCase();
-      filteredProjects = filteredProjects.filter(project => 
-        project.name.toLowerCase().includes(searchLower) ||
-        project.description?.toLowerCase().includes(searchLower)
-      );
-    }
-    
-    // Фильтрация по типу
-    if (type) {
-      filteredProjects = filteredProjects.filter(project => 
-        project.template === type
-      );
-    }
-    
-    // Сортировка
-    if (sortBy) {
-      filteredProjects.sort((a, b) => {
-        let aValue, bValue;
-        
-        switch (sortBy) {
-          case 'name':
-            aValue = a.name;
-            bValue = b.name;
-            break;
-          case 'updated':
-            aValue = new Date(a.updatedAt);
-            bValue = new Date(b.updatedAt);
-            break;
-          case 'created':
-            aValue = new Date(a.createdAt);
-            bValue = new Date(b.createdAt);
-            break;
-          default:
-            return 0;
-        }
-        
-        if (sortOrder === 'desc') {
-          return bValue > aValue ? 1 : -1;
-        } else {
-          return aValue > bValue ? 1 : -1;
-        }
-      });
-    }
-    
-    // Пагинация
-    const pageNum = parseInt(page.toString());
-    const limitNum = parseInt(limit.toString());
-    const startIndex = (pageNum - 1) * limitNum;
-    const endIndex = startIndex + limitNum;
-    const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
-    
-    return res.json({
-      success: true,
-      data: {
-        projects: paginatedProjects,
-        pagination: {
-          page: pageNum,
-          limit: limitNum,
-          total: filteredProjects.length,
-          totalPages: Math.ceil(filteredProjects.length / limitNum)
-        }
-      }
-    });
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Ошибка при загрузке проектов'
-    });
+    ],
+    createdAt: '2024-01-02T00:00:00Z',
+    updatedAt: '2024-01-02T00:00:00Z'
   }
+];
+
+// GET /api/projects - получить все проекты
+router.get('/', (req, res) => {
+  res.json({
+    success: true,
+    data: {
+      projects: mockProjects,
+      pagination: {
+        page: 1,
+        limit: 20,
+        total: mockProjects.length,
+        totalPages: 1
+      }
+    }
+  });
 });
 
 // GET /api/projects/:id - получить проект по ID
-router.get('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    
-    // Моковые данные
-    const mockProjects = [
-      {
-        id: 'startapus-ecosystem',
-        name: 'Стартапус - Демо проект',
-        description: 'Официальный сайт экосистемы Стартапус',
-        domain: 'startapus.com',
-        template: 'website',
-        settings: {
-          theme: 'auto',
-          primaryColor: '#3B82F6',
-          favicon: '/favicon.ico',
-          logo: '/logo.svg'
-        },
-        pages: [
-          {
-            id: 'startapus-home',
-            title: 'Главная',
-            slug: '',
-            content: [],
-            meta: {
-              description: 'Инновационная платформа',
-              keywords: ['стартапус', 'веб-разработка'],
-              ogImage: '/images/og-startapus.jpg'
-            },
-            status: 'published',
-            createdAt: '2024-01-01T10:00:00Z',
-            updatedAt: '2024-12-23T15:30:00Z',
-            publishedAt: '2024-01-01T10:00:00Z'
-          }
-        ],
-        createdAt: '2024-01-01T10:00:00Z',
-        updatedAt: '2024-12-23T15:30:00Z',
-        owner: 'default-user',
-        collaborators: [],
-        isPublic: false
-      }
-    ];
-    
-    const project = mockProjects.find(p => p.id === id);
-    
-    if (!project) {
-      return res.status(404).json({
-        success: false,
-        error: 'Проект не найден'
-      });
-    }
-    
-    return res.json({
+router.get('/:id', (req, res) => {
+  const project = mockProjects.find(p => p.id === req.params.id);
+  if (project) {
+    res.json({
       success: true,
       data: project
     });
-  } catch (error) {
-    console.error('Error fetching project:', error);
-    return res.status(500).json({
+  } else {
+    res.status(404).json({ 
       success: false,
-      error: 'Ошибка при загрузке проекта'
+      error: 'Проект не найден' 
     });
   }
 });
 
-// POST /api/projects - создать новый проект
-router.post('/', async (req, res) => {
-  try {
-    const { name, description, domain, template, settings } = req.body;
-    
-    if (!name) {
-      return res.status(400).json({
-        success: false,
-        error: 'Название проекта обязательно'
-      });
-    }
-    
-    const newProject = {
-      id: `project_${Date.now()}`,
-      name,
-      description: description || '',
-      domain: domain || `${name.toLowerCase().replace(/\s+/g, '-')}.situs.com`,
-      template: template || 'website',
-      settings: settings || {
-        theme: 'auto',
-        primaryColor: '#3B82F6',
-        favicon: '/favicon.ico',
-        logo: '/logo.svg'
-      },
-      pages: [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      owner: 'default-user',
-      collaborators: [],
-      isPublic: false
-    };
-    
-    return res.status(201).json({
+// GET /api/projects/:id/products - получить продукты проекта
+router.get('/:id/products', (req, res) => {
+  const project = mockProjects.find(p => p.id === req.params.id);
+  if (project) {
+    res.json({
       success: true,
-      data: newProject
+      data: {
+        products: project.products || [],
+        project: {
+          id: project.id,
+          name: project.name,
+          description: project.description
+        }
+      }
     });
-  } catch (error) {
-    console.error('Error creating project:', error);
-    return res.status(500).json({
+  } else {
+    res.status(404).json({ 
       success: false,
-      error: 'Ошибка при создании проекта'
-    });
-  }
-});
-
-// PUT /api/projects/:id - обновить проект
-router.put('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updateData = req.body;
-    
-    // В реальном приложении здесь была бы логика обновления в БД
-    const updatedProject = {
-      id,
-      ...updateData,
-      updatedAt: new Date().toISOString()
-    };
-    
-    return res.json({
-      success: true,
-      data: updatedProject
-    });
-  } catch (error) {
-    console.error('Error updating project:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Ошибка при обновлении проекта'
-    });
-  }
-});
-
-// DELETE /api/projects/:id - удалить проект
-router.delete('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    
-    // В реальном приложении здесь была бы логика удаления из БД
-    
-    return res.json({
-      success: true,
-      message: 'Проект удален'
-    });
-  } catch (error) {
-    console.error('Error deleting project:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Ошибка при удалении проекта'
+      error: 'Проект не найден' 
     });
   }
 });

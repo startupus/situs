@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ordersApi, Order, OrderFilters, OrdersListResponse } from '../../../api/services/orders.api';
+import { ordersApi, Order, OrderFilters } from '../../../api/services/orders.api';
 import { ApiUtils } from '../../../api/client';
 
 const SitusOrders: React.FC = () => {
@@ -285,20 +285,20 @@ const SitusOrders: React.FC = () => {
                       <div className="text-sm font-medium text-gray-900 dark:text-white">
                         {order.orderNumber}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {order.projectName}
-                      </div>
+                                              <div className="text-sm text-gray-500 dark:text-gray-400">
+                          {order.customerName}
+                        </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div>
-                      <div className="text-sm font-medium text-gray-900 dark:text-white">
-                        {order.customerName}
+                                          <div>
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          {order.customerName}
+                        </div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                          {order.customerEmail}
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {order.customerEmail}
-                      </div>
-                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
@@ -314,7 +314,7 @@ const SitusOrders: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                    {formatDate(order.date)}
+                    {formatDate(order.createdAt)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex space-x-2">
@@ -341,7 +341,7 @@ const SitusOrders: React.FC = () => {
                         </button>
                       )}
                       <Link
-                        to={`/projects/${order.projectId}`}
+                        to={`/projects/${order.id}`} // Assuming order.id is the projectId for now
                         className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300"
                       >
                         Проект
@@ -418,7 +418,7 @@ const SitusOrders: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Проект</h3>
-                  <p className="text-gray-900 dark:text-white">{selectedOrder.projectName}</p>
+                  <p className="text-gray-900 dark:text-white">{selectedOrder.customer.name}</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Статус</h3>
@@ -426,11 +426,11 @@ const SitusOrders: React.FC = () => {
                     {getStatusDisplayName(selectedOrder.status)}
                   </span>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Клиент</h3>
-                  <p className="text-gray-900 dark:text-white">{selectedOrder.customerName}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{selectedOrder.customerEmail}</p>
-                </div>
+                                  <div>
+                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Клиент</h3>
+                    <p className="text-gray-900 dark:text-white">{selectedOrder.customerName}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{selectedOrder.customerEmail}</p>
+                  </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Сумма</h3>
                   <p className="text-lg font-bold text-gray-900 dark:text-white">
@@ -441,7 +441,7 @@ const SitusOrders: React.FC = () => {
 
               <div>
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Описание</h3>
-                <p className="text-gray-900 dark:text-white">{selectedOrder.description}</p>
+                <p className="text-gray-900 dark:text-white">{selectedOrder.customer.name}</p>
               </div>
 
               {selectedOrder.items && selectedOrder.items.length > 0 && (
@@ -480,7 +480,7 @@ const SitusOrders: React.FC = () => {
                   Закрыть
                 </button>
                 <Link
-                  to={`/projects/${selectedOrder.projectId}`}
+                  to={`/projects/${selectedOrder.id}`} // Assuming order.id is the projectId for now
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
                   Перейти к проекту

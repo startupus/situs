@@ -173,6 +173,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
       }
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка загрузки сайтов' });
+    } finally {
+      dispatch({ type: 'SET_LOADING', payload: false });
     }
   };
 

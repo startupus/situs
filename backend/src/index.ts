@@ -6,13 +6,9 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+
 // Загружаем переменные окружения
 dotenv.config();
-
-// Временная замена Prisma для демонстрации
-export const prisma = {
-  $disconnect: async () => console.log('Prisma disconnected')
-};
 
 // Создаем Express приложение
 const app = express();
@@ -21,7 +17,7 @@ const server = createServer(app);
 // Инициализируем Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL || 'http://localhost:4000',
     methods: ['GET', 'POST']
   }
 });
@@ -30,7 +26,7 @@ const io = new Server(server, {
 app.use(helmet());
 app.use(compression());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'http://localhost:4000',
   credentials: true
 }));
 app.use(morgan('combined'));
@@ -48,24 +44,22 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
-import projectsRouter from './api/project/routes/project';
-import usersRouter from './routes/users';
-import authRouter from './routes/auth';
+import projectsRouter from './routes/projects';
+import ordersRouter from './routes/orders';
+import productsRouter from './routes/products';
 
 app.use('/api/projects', projectsRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/auth', authRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/products', productsRouter);
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, shutting down gracefully');
-  await prisma.$disconnect();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('SIGINT received, shutting down gracefully');
-  await prisma.$disconnect();
   process.exit(0);
 });
 

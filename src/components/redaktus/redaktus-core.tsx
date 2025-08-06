@@ -7,6 +7,8 @@ import { AdminThemeProvider } from '../../contexts/AdminThemeContext'
 import { EditorThemeProvider } from '../../contexts/EditorThemeContext'
 import { ProjectThemeProvider } from '../../contexts/ProjectThemeContext'
 import { LanguageProvider } from '../../contexts/LanguageContext'
+import { ProjectManager, useProjectManager } from './ProjectManager'
+import { getProject, getPage, PageData, ProjectData } from '../../services/projectApi'
 
 // Импорт изолированных CSS тем
 import '../../styles/interface-themes.css'
@@ -40,7 +42,7 @@ import {
 } from 'react-icons/fa'
 
 // Импорт новых TailGrids компонентов
-import VerticalNavbar from '../tailgrids/VerticalNavbar'
+import EditorSidebar from '../tailgrids/EditorSidebar'
 import EditorNavbar from '../tailgrids/EditorNavbar'
 import CanvasToolbar from '../tailgrids/CanvasToolbar'
 import SettingsPanel from '../tailgrids/SettingsPanel'
@@ -196,8 +198,18 @@ const createDefaultProps = (blockType: string) => {
   return defaultProps;
 };
 
+// Функция для получения параметров из URL
+const getUrlParams = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return {
+    projectId: urlParams.get('projectId') || 'cme0882ct00029k53akr8qjjv', // По умолчанию проект Стартапус
+    pageId: urlParams.get('pageId') || null
+  };
+};
+
 const EditorContent: React.FC = () => {
   const [currentDevice, setCurrentDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
+  const [urlParams] = useState(getUrlParams);
   
   // Используем изолированные хуки тем
   const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme, toggleTheme: toggleCanvasTheme } = useCanvasTheme()
@@ -221,6 +233,9 @@ const EditorContent: React.FC = () => {
   };
   
   const [currentPageLanguage, setCurrentPageLanguage] = useState<string>('ru'); // Язык текущей страницы
+  const [currentProject, setCurrentProject] = useState<ProjectData | null>(null);
+  const [projectPages, setProjectPages] = useState<PageData[]>([]);
+  const [loading, setLoading] = useState(true);
   
   const [currentPage, setCurrentPage] = useState<any>({
     id: 'home',
@@ -284,22 +299,116 @@ const EditorContent: React.FC = () => {
     meta: {}
   })
 
+  // Загрузка проекта и страниц
+  useEffect(() => {
+    const loadProjectData = async () => {
+      try {
+        setLoading(true);
+        console.log('🚀 Загрузка проекта:', urlParams.projectId);
+        
+        // Загружаем проект
+        const project = await getProject(urlParams.projectId);
+        console.log('✅ Проект загружен:', project.name);
+        setCurrentProject(project);
+        setProjectPages(project.pages);
+
+        // Определяем какую страницу загрузить
+        let pageToLoad: PageData;
+        if (urlParams.pageId) {
+          // Загружаем конкретную страницу
+          pageToLoad = await getPage(urlParams.pageId);
+          console.log('📄 Страница загружена по ID:', pageToLoad.title);
+        } else {
+          // Загружаем главную страницу проекта
+          const homePage = project.pages.find(p => p.isHomePage) || project.pages[0];
+          if (homePage) {
+            pageToLoad = await getPage(homePage.id);
+            console.log('🏠 Главная страница загружена:', pageToLoad.title);
+          } else {
+            throw new Error('Нет доступных страниц в проекте');
+          }
+        }
+
+        // Конвертируем данные из API в формат редактора
+        const editorPage = {
+          id: pageToLoad.id,
+          type: 'page',
+          slug: pageToLoad.slug,
+          title: pageToLoad.title,
+          content: pageToLoad.content?.blocks || [],
+          languages: {
+            ru: {
+              title: pageToLoad.title,
+              content: pageToLoad.content?.blocks || []
+            },
+            en: {
+              title: pageToLoad.title + ' (EN)',
+              content: []
+            },
+            de: {
+              title: pageToLoad.title + ' (DE)',
+              content: []
+            }
+          },
+          availableLanguages: ['ru', 'en', 'de'],
+          defaultLanguage: 'ru',
+          projectId: pageToLoad.projectId,
+          meta: {
+            title: pageToLoad.metaTitle,
+            description: pageToLoad.metaDescription,
+            keywords: pageToLoad.metaKeywords
+          }
+        };
+
+        console.log('🎯 Страница для редактора:', editorPage);
+        setCurrentPage(editorPage);
+        
+      } catch (error) {
+        console.error('❌ Ошибка загрузки данных проекта:', error);
+        // При ошибке оставляем mock данные
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProjectData();
+  }, [urlParams.projectId, urlParams.pageId]);
+
   // Функция сохранения страницы
   const savePage = async (pageData: any) => {
-    // Здесь будет реальная логика сохранения в API
-    console.log('💾 Saving page:', pageData);
-    
-    // Имитация API запроса
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // В реальном приложении здесь будет fetch или axios запрос
-    // const response = await fetch('/api/pages', {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(pageData)
-    // });
-    
-    return pageData;
+    if (!currentPage?.id) {
+      console.error('❌ Нет текущей страницы для сохранения');
+      return { success: false, error: 'Нет страницы для сохранения' };
+    }
+
+    try {
+      console.log('💾 Сохранение страницы:', currentPage.id);
+      
+      // Подготавливаем данные для API
+      const updateData = {
+        title: pageData.title || currentPage.title,
+        content: {
+          blocks: pageData.content || currentPage.content
+        },
+        metaTitle: pageData.meta?.title,
+        metaDescription: pageData.meta?.description,
+        metaKeywords: pageData.meta?.keywords
+      };
+
+      // Импортируем updatePage из API
+      const { updatePage } = await import('../../services/projectApi');
+      const updatedPage = await updatePage(currentPage.id, updateData);
+      
+      console.log('✅ Страница сохранена:', updatedPage.title);
+      return { success: true, data: updatedPage };
+      
+    } catch (error) {
+      console.error('❌ Ошибка сохранения страницы:', error);
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Неизвестная ошибка'
+      };
+    }
   };
 
   // Автосохранение
@@ -380,6 +489,79 @@ const EditorContent: React.FC = () => {
     console.log('Redo...')
   }
 
+  const handlePageSelect = async (pageId: string) => {
+    console.log('🔄 Переключение на страницу:', pageId);
+    
+    try {
+      // Импортируем getPage из API
+      const { getPage } = await import('../../services/projectApi');
+      const pageData = await getPage(pageId);
+      
+      // Конвертируем данные из API в формат редактора
+      const editorPage = {
+        id: pageData.id,
+        type: 'page',
+        slug: pageData.slug,
+        title: pageData.title,
+        content: pageData.content?.blocks || [],
+        languages: {
+          ru: {
+            title: pageData.title,
+            content: pageData.content?.blocks || []
+          },
+          en: {
+            title: pageData.title + ' (EN)',
+            content: []
+          },
+          de: {
+            title: pageData.title + ' (DE)',
+            content: []
+          }
+        },
+        availableLanguages: ['ru', 'en', 'de'],
+        defaultLanguage: 'ru',
+        projectId: pageData.projectId,
+        meta: {
+          title: pageData.metaTitle,
+          description: pageData.metaDescription,
+          keywords: pageData.metaKeywords
+        }
+      };
+
+      setCurrentPage(editorPage);
+      
+      // Обновляем URL без перезагрузки страницы
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('pageId', pageId);
+      window.history.pushState({}, '', newUrl.toString());
+      
+    } catch (error) {
+      console.error('❌ Ошибка загрузки страницы:', error);
+    }
+  };
+
+  const handleCreatePage = () => {
+    console.log('➕ Создание новой страницы');
+    // Здесь будет логика создания новой страницы
+    // Пока что просто открываем админку проектов для создания страницы
+    const adminUrl = `/projects/${currentProject?.id}`;
+    window.open(adminUrl, '_blank');
+  };
+
+  // Показываем лоадер пока загружаются данные
+  if (loading || !currentPage) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">
+            Загрузка проекта {urlParams.projectId}...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <LanguageProvider>
       <div 
@@ -433,7 +615,13 @@ const EditorContent: React.FC = () => {
       <div className="flex-1 flex overflow-hidden">
         {/* Левая панель с компонентами - ЧАСТЬ ИНТЕРФЕЙСА */}
         <div className="redaktus-interface-panel" data-interface-theme={interfaceResolvedTheme}>
-          <VerticalNavbar availableBricks={allBricks} />
+          <EditorSidebar 
+            availableBricks={allBricks} 
+            project={currentProject}
+            currentPageId={currentPage?.id}
+            onPageSelect={handlePageSelect}
+            onCreatePage={handleCreatePage}
+          />
         </div>
 
         {/* Центральная область с холстом - КАНВАС */}
