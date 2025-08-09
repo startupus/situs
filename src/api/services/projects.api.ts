@@ -277,7 +277,14 @@ class ProjectsApiService {
         }, 1500);
         es.onmessage = (ev: MessageEvent) => {
           gotAny = true;
-          try { onEvent(JSON.parse(ev.data)); pushLog({ dir: 'in', transport: 'es', data: ev.data }); } catch { pushLog({ dir: 'warn', note: 'json parse failed (es)' }); }
+          try {
+            const data = JSON.parse(ev.data);
+            if (data?.type === 'sse_connected') pushLog({ dir: 'info', msg: 'sse_connected', sub: subId });
+            onEvent(data);
+            pushLog({ dir: 'in', transport: 'es', data: ev.data });
+          } catch {
+            pushLog({ dir: 'warn', note: 'json parse failed (es)' });
+          }
         };
         es.onerror = () => {
           pushLog({ dir: 'err', transport: 'es' });
@@ -313,9 +320,16 @@ class ProjectsApiService {
                   buffer = buffer.slice(idx + 2);
                   const dataLine = chunk.split('\n').find((l) => l.startsWith('data:')) || '';
                   const payload = dataLine.replace(/^data:\s?/, '');
-                  if (payload) {
-                    try { onEvent(JSON.parse(payload)); pushLog({ dir: 'in', transport: 'fetch', data: payload }); } catch { pushLog({ dir: 'warn', note: 'json parse failed (fetch)' }); }
-                  }
+                   if (payload) {
+                    try {
+                      const data = JSON.parse(payload);
+                      if (data?.type === 'sse_connected') pushLog({ dir: 'info', msg: 'sse_connected', sub: subId });
+                      onEvent(data);
+                      pushLog({ dir: 'in', transport: 'fetch', data: payload });
+                    } catch {
+                      pushLog({ dir: 'warn', note: 'json parse failed (fetch)' });
+                    }
+                   }
                 }
               }
             } catch (e: any) {

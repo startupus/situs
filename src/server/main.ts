@@ -6,6 +6,14 @@ import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 
+// Диагностика необработанных ошибок на этапе запуска
+process.on('uncaughtException', (err) => {
+  try { console.error('[FATAL] uncaughtException:', err); } catch {}
+});
+process.on('unhandledRejection', (reason) => {
+  try { console.error('[FATAL] unhandledRejection:', reason); } catch {}
+});
+
 /**
  * Точка входа в NestJS приложение
  * 
@@ -31,10 +39,11 @@ async function bootstrap() {
 
   // CORS настройки
   app.enableCors({
-    origin: '*',
+    origin: ['http://localhost:5177', 'http://127.0.0.1:5177', 'http://localhost:3000', 'http://127.0.0.1:3000', '*'],
     credentials: false,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    maxAge: 86400,
   });
 
   // Swagger документация (отключена для тестирования)
@@ -52,7 +61,8 @@ async function bootstrap() {
   // const document = SwaggerModule.createDocument(app, config);
   // SwaggerModule.setup('api/docs', app, document);
 
-  const port = process.env.PORT || 3001;
+  const port = Number(process.env.PORT || 3001);
+  try { console.log(`[BOOT] About to listen on port ${port}`); } catch {}
   // Ручной SSE endpoint на уровне приложения (Express)
   const httpAdapter: any = app.getHttpAdapter();
   const instance: any = httpAdapter.getInstance?.();
@@ -85,15 +95,19 @@ async function bootstrap() {
       res.write(`retry: 2000\n\n`);
 
       const send = (data: any) => res.write(`data: ${JSON.stringify(data)}\n\n`);
-      const sub = (events as any).asObservable().subscribe((evt: any) => send(evt.data ?? evt));
+      const subscription = (events as any).asObservable().subscribe((evt: any) => send(evt.data ?? evt));
       // Пульс
       const heartbeat = setInterval(() => { try { res.write(`: ping\n\n`); } catch {} }, 15000);
-      req.on('close', () => { try { sub.unsubscribe(); } catch {}; try { clearInterval(heartbeat); } catch {}; try { res.end(); } catch {} });
+      req.on('close', () => { try { subscription.unsubscribe(); } catch {}; try { clearInterval(heartbeat); } catch {}; try { res.end(); } catch {} });
     });
-  } catch (e) {
-    console.warn('SSE not initialized:', e?.message);
+  } catch (e: any) {
+    console.warn('SSE not initialized:', e && (e.message || e));
   }
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
+  console.log('🚀 Situs NestJS Server запущен и слушает порт', port);
+  console.log(`🔗 API базовый URL: http://localhost:${port}/api`);
+  console.log(`💚 Health: http://localhost:${port}/health`);
+  try { console.log(`[BOOT] Listening on http://localhost:${port}`); } catch {}
 
   console.log('🚀 Situs NestJS Server запущен!');
   console.log(`🔗 API базовый URL: http://localhost:${port}/api`);

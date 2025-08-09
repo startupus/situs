@@ -1,0 +1,99 @@
+# Page snapshot
+
+```yaml
+- link "S":
+  - /url: /
+- navigation:
+  - list:
+    - listitem:
+      - link:
+        - /url: /
+    - listitem:
+      - link:
+        - /url: /projects
+    - listitem:
+      - link:
+        - /url: /orders
+    - listitem:
+      - link:
+        - /url: /marketing
+    - listitem:
+      - link:
+        - /url: /users
+    - listitem:
+      - link:
+        - /url: /support
+    - listitem
+    - listitem:
+      - link:
+        - /url: /section-settings
+- button "АС"
+- banner:
+  - link "Назад":
+    - /url: /
+  - heading "Проекты" [level=1]
+  - button "Поиск"
+  - button "Добавить"
+- button "Стартапус домен не настроен Подробнее":
+  - button "Стартапус домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Стартапус" [level=3]
+    - text: домен не настроен
+    - link "WEBSITE":
+      - /url: /projects/cme2g3is200029knyk51rbe2q
+      - img
+  - link "Подробнее":
+    - /url: /projects/cme2g3is200029knyk51rbe2q
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1754756004285-1 домен не настроен Подробнее":
+  - button "Dev Project 1754756004285-1 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1754756004285-1" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme4gf2de00039kftuy96uiv5
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1754755955415-1 домен не настроен Подробнее":
+  - button "Dev Project 1754755955415-1 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1754755955415-1" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme4ge0nx00039kh8b8xcjpcw
+  - button "Удалить проект":
+    - img
+- button "тест домен не настроен Подробнее":
+  - button "тест домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "тест" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme2q083500049k5lpbxhfnbr
+  - button "Удалить проект":
+    - img
+- button "UI Create Debug домен не настроен Подробнее":
+  - button "UI Create Debug домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "UI Create Debug" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme2gn7bi00039k6qoaur34fv
+  - button "Удалить проект":
+    - img
+- status
+- text: "На странице:"
+- combobox:
+  - option "3"
+  - option "12"
+  - option "24"
+  - option "48"
+  - option "100" [selected]
+  - option "200"
+```

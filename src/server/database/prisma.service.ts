@@ -31,11 +31,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
           update: {},
           create: { username: 'dev', email: devEmail, password: 'dev' },
         });
-      } catch (e) {
-        console.warn('⚠️ Не удалось создать dev-пользователя (можно игнорировать в проде):', e?.message || e);
+      } catch (e: any) {
+        console.warn('⚠️ Не удалось создать dev-пользователя (можно игнорировать в проде):', (e && (e.message || e)));
       }
-    } catch (error) {
-      console.error('❌ Ошибка подключения к базе данных:', error);
+    } catch (error: any) {
+      console.error('❌ Ошибка подключения к базе данных:', (error && (error.message || error)));
       throw error;
     }
   }
@@ -64,8 +64,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       if (tablename !== '_prisma_migrations') {
         try {
           await this.$executeRawUnsafe(`TRUNCATE TABLE "public"."${tablename}" CASCADE;`);
-        } catch (error) {
-          console.log({ error });
+        } catch (error: any) {
+          console.log({ error: (error && (error.message || error)) });
         }
       }
     }

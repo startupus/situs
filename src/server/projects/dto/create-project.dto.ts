@@ -14,7 +14,7 @@ export class CreateProjectDto {
   @IsString({ message: 'Название должно быть строкой' })
   @MinLength(1, { message: 'Название обязательно' })
   @MaxLength(100, { message: 'Название должно содержать максимум 100 символов' })
-  name: string;
+  name!: string;
 
   // @ApiProperty({
   //   description: 'Описание проекта',

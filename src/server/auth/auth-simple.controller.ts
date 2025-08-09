@@ -18,10 +18,10 @@ export class AuthSimpleController {
         success: true,
         data: result,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
-        error: error.message,
+        error: error?.message || 'Auth failed',
       };
     }
   }

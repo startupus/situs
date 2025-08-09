@@ -1,4 +1,5 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Optional, Inject } from '@nestjs/common';
+import { RealtimeEventsService } from '../realtime/realtime-events.service';
 import { Prisma, ProjectStatus, ProductType, PageStatus, PageType } from '@prisma/client';
 import { PrismaService } from '../database/prisma.service';
 import { CreateProjectDto } from './dto/create-project.dto';
@@ -12,7 +13,10 @@ import { ProjectQueryDto } from './dto/project-query.dto';
  */
 @Injectable()
 export class ProjectsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    @Optional() @Inject(RealtimeEventsService) private readonly realtime?: RealtimeEventsService,
+  ) {}
 
   /**
    * Получение всех проектов с пагинацией и фильтрами
@@ -176,12 +180,12 @@ export class ProjectsService {
         },
       });
 
-      // 3) Магазин (STORE)
+      // 3) Магазин (ECOMMERCE)
       await this.prisma.product.create({
         data: {
           name: 'Магазин',
           description: 'Товары и заказы',
-          type: ProductType.STORE,
+          type: ProductType.ECOMMERCE,
           settings: '{}',
           project: { connect: { id: project.id } },
         },
@@ -221,6 +225,14 @@ export class ProjectsService {
     if (updateProjectDto.settings !== undefined) updateData.settings = JSON.stringify(updateProjectDto.settings);
     if (updateProjectDto.status !== undefined) updateData.status = this.mapProjectStatus(updateProjectDto.status);
     const updatedProject = await this.prisma.project.update({ where: { id }, data: updateData });
+
+    // Если изменили статус — публикуем событие реального времени
+    try {
+      if (updateProjectDto.status !== undefined && this.realtime) {
+        const statusText = updatedProject.status?.toString?.() || String(updatedProject.status);
+        this.realtime.publishProjectStatus(updatedProject.id, statusText);
+      }
+    } catch {}
 
     // Если прилетел settings.orderIndex массив — предполагаем, что это массовое сохранение порядка
     // (на будущее; UI сейчас сохраняет поштучно через update).

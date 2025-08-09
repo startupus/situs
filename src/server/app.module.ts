@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AuthSimpleModule } from './auth/auth-simple.module';
+// Dev-slim: оставляем только проекты и realtime
+// import { AuthSimpleModule } from './auth/auth-simple.module';
 import { ProjectsModule } from './projects/projects.module';
-import { UsersModule } from './users/users.module';
-import { SitusMcpModule } from '../mcp/mcp.module';
+// import { UsersModule } from './users/users.module';
+// import { SitusMcpModule } from '../mcp/mcp.module';
 import { DatabaseModule } from './database/database.module';
 import { CommonModule } from './common/common.module';
 import { HealthController } from './health/health.controller';
-import { AuthTestController } from './auth/auth-test.controller';
+// import { AuthTestController } from './auth/auth-test.controller';
 import { ProjectsSimpleController } from './projects/projects-simple.controller';
-import { OrdersController } from './orders/orders.controller';
-import { ProductsController } from './products/products.controller';
-import { ProductsModule } from './products/products.module';
-import { PagesController } from './pages/pages.controller';
+// import { OrdersController } from './orders/orders.controller';
+// import { ProductsController } from './products/products.controller';
+// import { ProductsModule } from './products/products.module';
+// import { PagesController } from './pages/pages.controller';
 import { appConfig } from './config/app.config';
+import { RealtimeModule } from './realtime/realtime.module';
 import { jwtConfig } from './config/jwt.config';
 import { databaseConfig } from './config/database.config';
 
@@ -39,18 +41,17 @@ import { databaseConfig } from './config/database.config';
     // Модули инфраструктуры
     DatabaseModule,
     CommonModule,
+    RealtimeModule,
 
-    // Бизнес-модули
-    AuthSimpleModule,
+    // Бизнес-модули (dev-slim)
     ProjectsModule,
-    UsersModule,
 
     // Бизнес-модули: продукты
-    ProductsModule,
+    // ProductsModule,
 
-    // MCP модуль для AI инструментов
-    SitusMcpModule,
+    // MCP модуль временно отключён в dev, чтобы не блокировать сборку
+    // SitusMcpModule,
   ],
-  controllers: [HealthController, AuthTestController, ProjectsSimpleController, OrdersController, PagesController],
+  controllers: [HealthController, ProjectsSimpleController],
 })
 export class AppModule {}

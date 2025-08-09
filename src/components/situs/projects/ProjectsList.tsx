@@ -184,20 +184,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     return () => { window.removeEventListener('storage', onStorage); try { bc?.close(); } catch {}; try { unsubscribe(); } catch {} };
   }, []);
 
-  // Подписка на серверные события (SSE) — мгновенная синхронизация между устройствами
-  useEffect(() => {
-    const unsubscribe = projectsApi.subscribeEvents((event: any) => {
-      if (event?.type === 'project_status') {
-        const id = event?.payload?.id;
-        const status = (event?.payload?.status || '').toString().toUpperCase();
-        const active = status === 'ACTIVE';
-        if (id) {
-          setOrderedProjects((prev) => prev.map(p => p.id === id ? { ...p, status: active ? 'active' : 'inactive' } : p));
-        }
-      }
-    });
-    return () => { try { unsubscribe(); } catch {} };
-  }, []);
+  // (удалено) Дублирующая подписка на SSE была объединена в единый эффект выше
 
   const SortableCard: React.FC<{ project: any }> = ({ project }) => {
     const navigate = useNavigate();

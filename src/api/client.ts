@@ -36,13 +36,12 @@ class ApiClient {
   }
 
   private getBaseURL(): string {
-    // Проверяем переменные окружения
+    // В браузере по умолчанию работаем через тот же origin, чтобы избежать CORS и использовать Vite proxy
     if (typeof window !== 'undefined') {
-      // Frontend environment
-      // Базовый URL БЕЗ суффикса /api — суффикс добавляется в endpoint (например, '/api/projects')
-      return import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+      const envBase = (import.meta as any)?.env?.VITE_API_BASE_URL as string | undefined;
+      return envBase && envBase.trim().length > 0 ? envBase : window.location.origin;
     }
-    // Fallback for server-side
+    // На сервере читаем из переменных окружения, иначе localhost (используется редко)
     return process.env.API_BASE_URL || 'http://localhost:3001';
   }
 

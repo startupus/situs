@@ -15,13 +15,12 @@ import {
 import { Observable, Subscription } from 'rxjs';
 // import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProjectsService } from './projects.service';
-import { PrismaService } from '../database/prisma.service';
 import { Optional } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ProjectQueryDto } from './dto/project-query.dto';
 import { UpdateProjectStatusDto } from './dto/update-project-status.dto';
-import { ProjectsEventsService } from './projects-events.service';
+import { RealtimeEventsService } from '../realtime/realtime-events.service';
 import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard';
 
 /**
@@ -34,10 +33,7 @@ import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard';
 // @UseGuards(SimpleJwtGuard) // Временно отключено
 // @ApiBearerAuth()
 export class ProjectsController {
-  private readonly projectsService?: ProjectsService;
-  constructor(@Optional() projectsService?: ProjectsService, private readonly events?: ProjectsEventsService) {
-    this.projectsService = projectsService;
-  }
+  constructor(private readonly projectsService: ProjectsService, private readonly realtime?: RealtimeEventsService) {}
 
   /**
    * Получение всех проектов с пагинацией и фильтрами
@@ -52,17 +48,16 @@ export class ProjectsController {
         query.ownerId = req.user.id;
       }
       
-      const svc = this.projectsService ?? new ProjectsService(new PrismaService());
-      const result = await svc.findAll(query);
+      const result = await this.projectsService.findAll(query);
       return {
         success: true,
         data: result,
       };
-    } catch (error) {
-      console.error('Projects findAll error:', error);
+    } catch (error: any) {
+      console.error('Projects findAll error:', error?.message || error);
       return {
         success: false,
-        error: error.message,
+        error: error?.message || String(error || 'unknown'),
         data: {
           projects: [],
           pagination: { page: 1, limit: 20, total: 0, totalPages: 0 }
@@ -76,10 +71,7 @@ export class ProjectsController {
    */
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return {
-      success: true,
-      data: await (this.projectsService ?? new ProjectsService(new PrismaService())).findOne(id),
-    };
+    return { success: true, data: await this.projectsService.findOne(id) };
   }
 
   /**
@@ -87,10 +79,7 @@ export class ProjectsController {
    */
   @Post()
   async create(@Body() createProjectDto: CreateProjectDto, @Request() req: any) {
-    return {
-      success: true,
-      data: await (this.projectsService ?? new ProjectsService(new PrismaService())).create(createProjectDto, req.user?.id ?? 'owner-dev'),
-    };
+    return { success: true, data: await this.projectsService.create(createProjectDto, req.user?.id ?? 'owner-dev') };
   }
 
   /**
@@ -98,10 +87,7 @@ export class ProjectsController {
    */
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
-    return {
-      success: true,
-      data: await (this.projectsService ?? new ProjectsService(new PrismaService())).update(id, updateProjectDto, req.user?.id ?? 'owner-dev'),
-    };
+    return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
   }
 
   /**
@@ -109,9 +95,12 @@ export class ProjectsController {
    */
   @Patch(':id/status')
   async updateStatus(@Param('id') id: string, @Body() dto: UpdateProjectStatusDto, @Request() req: any) {
-    const svc = this.projectsService ?? new ProjectsService(new PrismaService());
-    const result = await svc.update(id, { status: dto.status } as any, req.user?.id ?? 'owner-dev');
-    try { this.events?.emitStatus(id, dto.status); } catch {}
+    const result = await this.projectsService.update(id, { status: dto.status } as any, req.user?.id ?? 'owner-dev');
+    try {
+      // eslint-disable-next-line no-console
+      console.log('[RT] controller publish project_status', { id, status: dto.status });
+      this.realtime?.publishProjectStatus(id, dto.status);
+    } catch {}
     return { success: true, data: result };
   }
 
@@ -120,10 +109,7 @@ export class ProjectsController {
    */
   @Delete(':id')
   async remove(@Param('id') id: string, @Request() req: any) {
-    return {
-      success: true,
-      data: await (this.projectsService ?? new ProjectsService(new PrismaService())).remove(id, req.user?.id ?? 'owner-dev'),
-    };
+    return { success: true, data: await this.projectsService.remove(id, req.user?.id ?? 'owner-dev') };
   }
 
   /**
@@ -131,10 +117,7 @@ export class ProjectsController {
    */
   @Post(':id/publish')
   async publish(@Param('id') id: string, @Request() req: any) {
-    return {
-      success: true,
-      data: await (this.projectsService ?? new ProjectsService(new PrismaService())).publish(id, req.user?.id ?? 'owner-dev'),
-    };
+    return { success: true, data: await this.projectsService.publish(id, req.user?.id ?? 'owner-dev') };
   }
 
   /**
@@ -142,10 +125,7 @@ export class ProjectsController {
    */
   @Post(':id/duplicate')
   async duplicate(@Param('id') id: string, @Request() req: any) {
-    return {
-      success: true,
-      data: await (this.projectsService ?? new ProjectsService(new PrismaService())).duplicate(id, req.user?.id ?? 'owner-dev'),
-    };
+    return { success: true, data: await this.projectsService.duplicate(id, req.user?.id ?? 'owner-dev') };
   }
 
   /**
@@ -154,12 +134,11 @@ export class ProjectsController {
   @Post('seed/dev/:count')
   async seedDev(@Param('count') count: string, @Request() req: any) {
     const n = Math.max(1, Math.min(20, parseInt(count, 10) || 5));
-    const svc = this.projectsService ?? new ProjectsService(new PrismaService());
     const created = [] as any[];
     for (let i = 0; i < n; i++) {
       const name = `Dev Project ${Date.now()}-${i + 1}`;
       const dto: any = { name, settings: { orderIndex: i } };
-      created.push(await svc.create(dto, req.user?.id ?? 'owner-dev'));
+      created.push(await this.projectsService.create(dto, req.user?.id ?? 'owner-dev'));
     }
     return { success: true, data: created };
   }

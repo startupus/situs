@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "es2020",
-    "lib": ["es2020"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -15,7 +16,7 @@
     "resolveJsonModule": true,
     "declaration": false,
     "removeComments": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "allowImportingTsExtensions": false,
     "noEmit": false
   },
@@ -27,6 +28,11 @@
     "dist",
     "**/*.test.ts",
     "**/*.spec.ts",
-    "src/!(server)/**/*"
+    "src/!(server)/**/*",
+    "src/server/auth/**",
+    "src/server/users/**",
+    "src/server/products/**",
+    "src/server/pages/**",
+    "src/mcp/**"
   ]
 }
