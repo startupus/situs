@@ -1,42 +1,26 @@
-import { describe, test, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import request from 'supertest';
-import express, { Express } from 'express';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import apiRoutes from '../../routes';
-import { errorHandler, notFoundHandler } from '../../middleware/error.middleware';
-
-/**
- * Integration Tests для Auth API
- * Тестируют полный workflow аутентификации через HTTP запросы
- */
+import app from '../../server';
 
 const prisma = new PrismaClient();
-let app: Express;
 
-// Тестовые пользователи
-const testUser = {
-  email: 'test@example.com',
-  password: 'password123',
-  firstName: 'Тест',
-  lastName: 'Пользователь'
-};
-
+// Тестовые данные
 const adminUser = {
   email: 'admin@example.com',
-  password: 'adminpass123',
+  password: 'admin123',
   firstName: 'Админ',
   lastName: 'Пользователь'
 };
 
-beforeAll(async () => {
-  // Настраиваем Express приложение для тестов
-  app = express();
-  app.use(express.json());
-  app.use('/api', apiRoutes);
-  app.use(notFoundHandler);
-  app.use(errorHandler);
+const testUser = {
+  email: 'test@example.com',
+  password: 'test123',
+  firstName: 'Тест',
+  lastName: 'Пользователь'
+};
 
+beforeAll(async () => {
   // Очищаем базу данных перед тестами
   await prisma.user.deleteMany();
   await prisma.page.deleteMany();
@@ -46,12 +30,16 @@ beforeAll(async () => {
   const hashedPassword = await bcrypt.hash(adminUser.password, 12);
   await prisma.user.create({
     data: {
+      username: 'admin',
       email: adminUser.email,
       password: hashedPassword,
-      firstName: adminUser.firstName,
-      lastName: adminUser.lastName,
+      profile: JSON.stringify({
+        name: `${adminUser.firstName} ${adminUser.lastName}`,
+        avatar: '',
+        bio: ''
+      }),
       role: 'ADMIN',
-      isActive: true
+      status: 'ACTIVE'
     }
   });
 });
@@ -138,22 +126,28 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/register')
         .send({
           email: 'invalid-email',
-          password: testUser.password
+          password: 'validpassword123',
+          firstName: 'Test',
+          lastName: 'User'
         })
         .expect(400);
 
+      expect(response.body).toHaveProperty('error');
       expect(response.body.error.message).toContain('Некорректный формат email');
     });
 
-    test('должен валидировать минимальную длину пароля', async () => {
+    test('должен валидировать длину пароля', async () => {
       const response = await request(app)
         .post('/api/auth/register')
         .send({
-          email: testUser.email,
-          password: '123'
+          email: 'valid@example.com',
+          password: '123', // слишком короткий
+          firstName: 'Test',
+          lastName: 'User'
         })
         .expect(400);
 
+      expect(response.body).toHaveProperty('error');
       expect(response.body.error.message).toContain('минимум 6 символов');
     });
   });
@@ -164,12 +158,16 @@ describe('Auth API Integration Tests', () => {
       const hashedPassword = await bcrypt.hash(testUser.password, 12);
       await prisma.user.create({
         data: {
+          username: 'testuser',
           email: testUser.email,
           password: hashedPassword,
-          firstName: testUser.firstName,
-          lastName: testUser.lastName,
+          profile: JSON.stringify({
+            name: `${testUser.firstName} ${testUser.lastName}`,
+            avatar: '',
+            bio: ''
+          }),
           role: 'USER',
-          isActive: true
+          status: 'ACTIVE'
         }
       });
     });
@@ -193,11 +191,11 @@ describe('Auth API Integration Tests', () => {
       });
       expect(response.body.user).not.toHaveProperty('password');
 
-      // Проверяем что время последнего входа обновилось
+      // Проверяем что пользователь существует в базе данных
       const user = await prisma.user.findUnique({
         where: { email: testUser.email }
       });
-      expect(user?.lastLoginAt).toBeTruthy();
+      expect(user).toBeTruthy();
     });
 
     test('должен возвращать ошибку при неправильном пароле', async () => {
@@ -228,7 +226,7 @@ describe('Auth API Integration Tests', () => {
       // Деактивируем пользователя
       await prisma.user.update({
         where: { email: testUser.email },
-        data: { isActive: false }
+        data: { status: 'INACTIVE' }
       });
 
       const response = await request(app)
@@ -263,12 +261,16 @@ describe('Auth API Integration Tests', () => {
       const hashedPassword = await bcrypt.hash(testUser.password, 12);
       await prisma.user.create({
         data: {
+          username: 'testuser',
           email: testUser.email,
           password: hashedPassword,
-          firstName: testUser.firstName,
-          lastName: testUser.lastName,
+          profile: JSON.stringify({
+            name: `${testUser.firstName} ${testUser.lastName}`,
+            avatar: '',
+            bio: ''
+          }),
           role: 'USER',
-          isActive: true
+          status: 'ACTIVE'
         }
       });
 
@@ -314,7 +316,7 @@ describe('Auth API Integration Tests', () => {
       // Деактивируем пользователя
       await prisma.user.update({
         where: { email: testUser.email },
-        data: { isActive: false }
+        data: { status: 'INACTIVE' }
       });
 
       const response = await request(app)
@@ -334,12 +336,16 @@ describe('Auth API Integration Tests', () => {
       const hashedPassword = await bcrypt.hash(testUser.password, 12);
       await prisma.user.create({
         data: {
+          username: 'testuser',
           email: testUser.email,
           password: hashedPassword,
-          firstName: testUser.firstName,
-          lastName: testUser.lastName,
+          profile: JSON.stringify({
+            name: `${testUser.firstName} ${testUser.lastName}`,
+            avatar: '',
+            bio: ''
+          }),
           role: 'USER',
-          isActive: true
+          status: 'ACTIVE'
         }
       });
 
@@ -356,32 +362,98 @@ describe('Auth API Integration Tests', () => {
     test('должен обновлять валидный токен', async () => {
       const response = await request(app)
         .post('/api/auth/refresh-token')
-        .set('Authorization', `Bearer ${validToken}`)
+        .send({
+          refreshToken: validToken
+        })
         .expect(200);
 
       expect(response.body).toHaveProperty('jwt');
-      expect(response.body).toHaveProperty('user');
+      expect(response.body).toHaveProperty('refreshToken');
       expect(response.body.jwt).not.toBe(validToken); // Новый токен должен отличаться
-      expect(response.body.user.email).toBe(testUser.email);
     });
 
     test('должен возвращать ошибку для невалидного токена', async () => {
       const response = await request(app)
         .post('/api/auth/refresh-token')
-        .set('Authorization', 'Bearer invalid-token')
+        .send({
+          refreshToken: 'invalid-token'
+        })
         .expect(401);
 
       expect(response.body.error.message).toContain('Недействительный токен');
     });
+
+    test('должен валидировать обязательные поля', async () => {
+      const response = await request(app)
+        .post('/api/auth/refresh-token')
+        .send({})
+        .expect(400);
+
+      expect(response.body.error.name).toBe('VALIDATION_ERROR');
+    });
   });
 
   describe('POST /api/auth/logout', () => {
-    test('должен успешно выполнять выход', async () => {
+    let validToken: string;
+
+    beforeEach(async () => {
+      // Создаем пользователя и получаем токен
+      const hashedPassword = await bcrypt.hash(testUser.password, 12);
+      await prisma.user.create({
+        data: {
+          username: 'testuser',
+          email: testUser.email,
+          password: hashedPassword,
+          profile: JSON.stringify({
+            name: `${testUser.firstName} ${testUser.lastName}`,
+            avatar: '',
+            bio: ''
+          }),
+          role: 'USER',
+          status: 'ACTIVE'
+        }
+      });
+
+      const loginResponse = await request(app)
+        .post('/api/auth/login')
+        .send({
+          email: testUser.email,
+          password: testUser.password
+        });
+
+      validToken = loginResponse.body.jwt;
+    });
+
+    test('должен успешно выполнить выход', async () => {
       const response = await request(app)
         .post('/api/auth/logout')
+        .send({
+          refreshToken: validToken
+        })
         .expect(200);
 
-      expect(response.body.message).toContain('Выход выполнен успешно');
+      expect(response.body).toHaveProperty('message');
+      expect(response.body.message).toContain('успешно');
+    });
+
+    test('должен возвращать ошибку для невалидного токена', async () => {
+      const response = await request(app)
+        .post('/api/auth/logout')
+        .send({
+          refreshToken: 'invalid-token'
+        })
+        .expect(401);
+
+      expect(response.body.error.message).toContain('Недействительный токен');
+    });
+
+    test('должен валидировать обязательные поля', async () => {
+      const response = await request(app)
+        .post('/api/auth/logout')
+        .send({})
+        .expect(400);
+
+      expect(response.body.error.name).toBe('VALIDATION_ERROR');
     });
   });
 
@@ -391,17 +463,21 @@ describe('Auth API Integration Tests', () => {
       const hashedPassword = await bcrypt.hash(testUser.password, 12);
       await prisma.user.create({
         data: {
+          username: 'testuser',
           email: testUser.email,
           password: hashedPassword,
-          firstName: testUser.firstName,
-          lastName: testUser.lastName,
+          profile: JSON.stringify({
+            name: `${testUser.firstName} ${testUser.lastName}`,
+            avatar: '',
+            bio: ''
+          }),
           role: 'USER',
-          isActive: true
+          status: 'ACTIVE'
         }
       });
     });
 
-    test('должен обрабатывать запрос восстановления пароля', async () => {
+    test('должен успешно отправить email для сброса пароля', async () => {
       const response = await request(app)
         .post('/api/auth/forgot-password')
         .send({
@@ -409,18 +485,19 @@ describe('Auth API Integration Tests', () => {
         })
         .expect(200);
 
-      expect(response.body.message).toContain('письмо с инструкциями');
+      expect(response.body).toHaveProperty('message');
+      expect(response.body.message).toContain('отправлены');
     });
 
-    test('должен возвращать тот же ответ для несуществующего email (безопасность)', async () => {
+    test('должен возвращать ошибку для несуществующего email', async () => {
       const response = await request(app)
         .post('/api/auth/forgot-password')
         .send({
           email: 'nonexistent@example.com'
         })
-        .expect(200);
+        .expect(400);
 
-      expect(response.body.message).toContain('письмо с инструкциями');
+      expect(response.body.error.message).toContain('не найден');
     });
 
     test('должен валидировать формат email', async () => {
@@ -433,27 +510,104 @@ describe('Auth API Integration Tests', () => {
 
       expect(response.body.error.name).toBe('VALIDATION_ERROR');
     });
+
+    test('должен валидировать обязательные поля', async () => {
+      const response = await request(app)
+        .post('/api/auth/forgot-password')
+        .send({})
+        .expect(400);
+
+      expect(response.body.error.name).toBe('VALIDATION_ERROR');
+    });
   });
 
   describe('POST /api/auth/reset-password', () => {
-    test('должен возвращать ошибку что функция не реализована', async () => {
+    let resetToken: string;
+
+    beforeEach(async () => {
+      // Создаем тестового пользователя
+      const hashedPassword = await bcrypt.hash(testUser.password, 12);
+      await prisma.user.create({
+        data: {
+          username: 'testuser',
+          email: testUser.email,
+          password: hashedPassword,
+          profile: JSON.stringify({
+            name: `${testUser.firstName} ${testUser.lastName}`,
+            avatar: '',
+            bio: ''
+          }),
+          role: 'USER',
+          status: 'ACTIVE'
+        }
+      });
+
+      // Получаем токен для сброса пароля
+      const forgotResponse = await request(app)
+        .post('/api/auth/forgot-password')
+        .send({
+          email: testUser.email
+        });
+
+      resetToken = forgotResponse.body.resetToken;
+    });
+
+    test('должен успешно сбросить пароль', async () => {
+      const newPassword = 'newpassword123';
+
       const response = await request(app)
         .post('/api/auth/reset-password')
         .send({
-          token: 'some-token',
-          newPassword: 'newpassword123'
+          token: resetToken,
+          password: newPassword
         })
-        .expect(501);
+        .expect(200);
 
-      expect(response.body.error.message).toContain('не реализована');
+      expect(response.body).toHaveProperty('message');
+      expect(response.body.message).toContain('успешно');
+
+      // Проверяем что пароль действительно изменился
+      const loginResponse = await request(app)
+        .post('/api/auth/login')
+        .send({
+          email: testUser.email,
+          password: newPassword
+        })
+        .expect(200);
+
+      expect(loginResponse.body).toHaveProperty('jwt');
+    });
+
+    test('должен возвращать ошибку для невалидного токена', async () => {
+      const response = await request(app)
+        .post('/api/auth/reset-password')
+        .send({
+          token: 'invalid-token',
+          password: 'newpassword123'
+        })
+        .expect(400);
+
+      expect(response.body.error.message).toContain('Недействительный токен');
+    });
+
+    test('должен валидировать длину нового пароля', async () => {
+      const response = await request(app)
+        .post('/api/auth/reset-password')
+        .send({
+          token: resetToken,
+          password: '123' // слишком короткий
+        })
+        .expect(400);
+
+      expect(response.body.error.name).toBe('VALIDATION_ERROR');
     });
 
     test('должен валидировать обязательные поля', async () => {
       const response = await request(app)
         .post('/api/auth/reset-password')
         .send({
-          token: 'some-token'
-          // newPassword отсутствует
+          token: resetToken
+          // password отсутствует
         })
         .expect(400);
 

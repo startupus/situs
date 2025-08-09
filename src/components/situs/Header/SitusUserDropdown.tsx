@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 const navList = [
   {
+    link: "#",
+    text: "Уведомления",
+  },
+  {
     link: "/profile-settings",
     text: "Настройки профиля",
   },
@@ -17,21 +21,16 @@ const navList = [
 ];
 
 const SitusUserDropdown: React.FC = () => {
+  const userName = "Администратор Системы";
+  const userRole = "Системный администратор";
   return (
     <div className="group relative">
       <Link to="#" className="flex items-center">
-        <p className="mr-4 text-right text-sm font-medium text-dark dark:text-white">
-          Администратор Системы
-          <span className="block text-xs font-normal text-body-color dark:text-dark-6">
-            Системный администратор
-          </span>
-        </p>
-
-        <div className="h-[46px] w-[46px] rounded-full bg-primary flex items-center justify-center text-white font-semibold">
+        <div className="h-[40px] w-[40px] rounded-full bg-gray-200 dark:bg-dark-3 flex items-center justify-center text-dark dark:text-white font-semibold">
           АС
         </div>
 
-        <span className="ml-[10px] text-body-color dark:text-dark-6">
+        <span className="ml-[8px] text-body-color dark:text-dark-6">
           <svg
             width="20"
             height="20"
@@ -49,7 +48,12 @@ const SitusUserDropdown: React.FC = () => {
         </span>
       </Link>
 
-      <div className="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
+      <div className="invisible absolute right-0 top-[120%] mt-3 w-[220px] rounded-sm bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
+        <div className="px-3 py-2 border-b border-stroke dark:border-dark-3 mb-2">
+          <div className="text-sm font-medium text-dark dark:text-white">{userName}</div>
+          <div className="text-xs text-body-color dark:text-dark-6">{userRole}</div>
+        </div>
+        <div className="space-y-2">
         {navList.map((item, index) => (
           <Link
             key={index}
@@ -59,6 +63,7 @@ const SitusUserDropdown: React.FC = () => {
             {item.text}
           </Link>
         ))}
+        </div>
       </div>
     </div>
   );

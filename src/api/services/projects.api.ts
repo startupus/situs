@@ -96,7 +96,7 @@ class ProjectsApiService {
    */
   async updateProject(projectId: string, data: UpdateProjectData): Promise<Project> {
     try {
-      const response = await apiClient.put<ApiResponse<Project>>(
+      const response = await apiClient.patch<ApiResponse<Project>>(
         `${this.baseEndpoint}/${projectId}`,
         data
       );
@@ -226,6 +226,154 @@ class ProjectsApiService {
     } catch (error) {
       console.error('Check Domain Availability API Error:', error);
       return false;
+    }
+  }
+
+  /**
+   * Подписка на серверные события проектов (SSE)
+   * Возвращает функцию отписки
+   */
+  subscribeEvents(onEvent: (e: any) => void): () => void {
+    try {
+      const base = (apiClient as any).getBaseURL?.() || (typeof window !== 'undefined' ? `${window.location.protocol}//localhost:3001` : 'http://localhost:3001');
+      // Генерируем/получаем ID подписчика (для отладки кросс-сессий)
+      const getSubId = () => {
+        try {
+          const w: any = typeof window !== 'undefined' ? window : {};
+          if (w.__situsSubId) return w.__situsSubId as string;
+          const stored = (typeof localStorage !== 'undefined') ? localStorage.getItem('situs:sub-id') : null;
+          const id = stored || `sub_${Math.random().toString(36).slice(2)}_${Date.now().toString(36)}`;
+          if (typeof localStorage !== 'undefined' && !stored) localStorage.setItem('situs:sub-id', id);
+          w.__situsSubId = id;
+          return id;
+        } catch {
+          return `sub_${Date.now()}`;
+        }
+      };
+      const subId = getSubId();
+      const url = `${base}/api/projects/events?sub=${encodeURIComponent(subId)}`;
+      // Локальный журнал событий для отладки
+      const pushLog = (entry: any) => {
+        try {
+          const w: any = typeof window !== 'undefined' ? window : {};
+          const log = (w.__situsEventLog = w.__situsEventLog || []);
+          log.push({ t: new Date().toISOString(), sub: subId, ...entry });
+          // Ограничиваем размер
+          if (log.length > 500) log.splice(0, log.length - 500);
+        } catch {}
+      };
+      pushLog({ dir: 'info', msg: 'subscribe start', url });
+      // 1) Сначала пробуем EventSource (стандартный путь для Chromium/обычных вкладок)
+      try {
+        const es = new EventSource(url);
+        let usedES = true;
+        let gotAny = false;
+        const to = setTimeout(() => {
+          if (!gotAny) {
+            // не получили ничего быстро — переключаемся на fetch-стрим
+            try { es.close(); } catch {}
+            usedES = false;
+          }
+        }, 1500);
+        es.onmessage = (ev: MessageEvent) => {
+          gotAny = true;
+          try { onEvent(JSON.parse(ev.data)); pushLog({ dir: 'in', transport: 'es', data: ev.data }); } catch { pushLog({ dir: 'warn', note: 'json parse failed (es)' }); }
+        };
+        es.onerror = () => {
+          pushLog({ dir: 'err', transport: 'es' });
+          // первый error — переключаемся на fetch
+          try { es.close(); } catch {}
+          usedES = false;
+        };
+        pushLog({ dir: 'info', msg: 'EventSource attempt' });
+        // Возвращаем комбинированную отписку, которая закрывает ES и возможный fetch
+        const closeFns: Array<() => void> = [];
+        const startFetchFallback = () => {
+          // запустим fallback только один раз
+          if ((window as any).__situsFetchStarted) return;
+          (window as any).__situsFetchStarted = true;
+          const controller = new AbortController();
+          let cancelled = false;
+          const abortOnUnload = () => { cancelled = true; try { controller.abort(); } catch {} };
+          if (typeof window !== 'undefined') window.addEventListener('beforeunload', abortOnUnload);
+          (async () => {
+            try {
+              const resp = await fetch(url, { mode: 'cors', cache: 'no-store', signal: controller.signal } as RequestInit);
+              const reader = (resp.body as any)?.getReader?.();
+              if (!reader) return;
+              const decoder = new TextDecoder('utf-8');
+              let buffer = '';
+              while (!cancelled) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buffer += decoder.decode(value, { stream: true });
+                let idx;
+                while ((idx = buffer.indexOf('\n\n')) !== -1) {
+                  const chunk = buffer.slice(0, idx);
+                  buffer = buffer.slice(idx + 2);
+                  const dataLine = chunk.split('\n').find((l) => l.startsWith('data:')) || '';
+                  const payload = dataLine.replace(/^data:\s?/, '');
+                  if (payload) {
+                    try { onEvent(JSON.parse(payload)); pushLog({ dir: 'in', transport: 'fetch', data: payload }); } catch { pushLog({ dir: 'warn', note: 'json parse failed (fetch)' }); }
+                  }
+                }
+              }
+            } catch (e: any) {
+              pushLog({ dir: 'err', transport: 'fetch', error: e?.message });
+            }
+          })();
+          closeFns.push(() => { cancelled = true; try { controller.abort(); } catch {}; if (typeof window !== 'undefined') window.removeEventListener('beforeunload', abortOnUnload); });
+        };
+        // Таймер проверит, нужен ли fallback
+        setTimeout(() => { if (!usedES || !gotAny) startFetchFallback(); }, 1600);
+        closeFns.push(() => { try { clearTimeout(to); } catch {}; try { es.close(); } catch {} });
+        return () => { pushLog({ dir: 'info', msg: 'subscription closed' }); closeFns.forEach((fn) => fn()); };
+      } catch {
+        // упадём на fetch-стрим сразу
+      }
+
+      // 2) Надёжный fallback: fetch + ReadableStream (работает в FF/инкогнито)
+      const controller = new AbortController();
+      let cancelled = false;
+      const abortOnUnload = () => { cancelled = true; try { controller.abort(); } catch {} };
+      if (typeof window !== 'undefined') {
+        window.addEventListener('beforeunload', abortOnUnload);
+      }
+      (async () => {
+        try {
+          const resp = await fetch(url, { mode: 'cors', cache: 'no-store', signal: controller.signal } as RequestInit);
+          if (!(resp as any).body) return;
+          const reader = (resp.body as any).getReader();
+          const decoder = new TextDecoder('utf-8');
+          let buffer = '';
+          while (!cancelled) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            let idx;
+            while ((idx = buffer.indexOf('\n\n')) !== -1) {
+              const chunk = buffer.slice(0, idx);
+              buffer = buffer.slice(idx + 2);
+              const dataLine = chunk.split('\n').find((l) => l.startsWith('data:')) || '';
+              const payload = dataLine.replace(/^data:\s?/, '');
+              if (payload) {
+                try { onEvent(JSON.parse(payload)); pushLog({ dir: 'in', transport: 'fetch', data: payload }); } catch { pushLog({ dir: 'warn', note: 'json parse failed' }); }
+              }
+            }
+          }
+        } catch (e: any) {
+          pushLog({ dir: 'err', transport: 'fetch', error: e?.message });
+        }
+      })();
+      return () => {
+        cancelled = true;
+        try { controller.abort(); } catch {}
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('beforeunload', abortOnUnload);
+        }
+      };
+    } catch {
+      return () => {};
     }
   }
 }

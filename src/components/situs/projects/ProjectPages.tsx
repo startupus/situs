@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProjectData, PageData } from '../../../services/projectApi';
+import { ProjectData } from '../../../services/projectApi';
+import { FiHome, FiFileText, FiBookOpen, FiPhone, FiInfo, FiPlus, FiSearch, FiEdit, FiEye, FiX, FiSettings } from 'react-icons/fi';
 
 interface ProjectPagesProps {
   project: ProjectData;
@@ -45,19 +46,18 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
   };
 
   const getPageTypeIcon = (pageType: string, isHomePage: boolean) => {
-    if (isHomePage) return '🏠';
-    
+    if (isHomePage) return <FiHome className="text-lg" aria-hidden />;
     switch (pageType.toLowerCase()) {
       case 'page':
-        return '📄';
+        return <FiFileText className="text-lg" aria-hidden />;
       case 'blog':
-        return '📝';
+        return <FiBookOpen className="text-lg" aria-hidden />;
       case 'contact':
-        return '📞';
+        return <FiPhone className="text-lg" aria-hidden />;
       case 'about':
-        return 'ℹ️';
+        return <FiInfo className="text-lg" aria-hidden />;
       default:
-        return '📄';
+        return <FiFileText className="text-lg" aria-hidden />;
     }
   };
 
@@ -77,16 +77,13 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
             to={`/redaktus?projectId=${project.id}`}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
           >
-            ✏️ Открыть редактор
+            <FiEdit aria-hidden /> Открыть редактор
           </Link>
           <button
             onClick={() => setShowCreateModal(true)}
             className="inline-flex items-center gap-2 rounded-lg bg-gray-100 dark:bg-dark-3 px-4 py-2 text-sm font-medium text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-4 transition-colors"
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
-              <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
-            </svg>
-            Добавить страницу
+            <FiPlus aria-hidden /> Добавить страницу
           </button>
         </div>
       </div>
@@ -104,14 +101,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white placeholder-body-color dark:placeholder-dark-6 focus:border-primary focus:outline-none transition-colors"
               />
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 fill-current text-body-color dark:text-dark-6"
-              >
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg>
+              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6" aria-hidden />
             </div>
           </div>
 
@@ -133,8 +123,8 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
 
       {/* Список страниц */}
       {filteredPages.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="text-4xl mb-4">📄</div>
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4 flex items-center justify-center"><FiFileText aria-hidden /></div>
           <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
             {searchTerm || statusFilter !== 'all' ? 'Страницы не найдены' : 'Нет страниц'}
           </h3>
@@ -145,12 +135,12 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
             }
           </p>
           {!searchTerm && statusFilter === 'all' && (
-            <Link
-              to={`/redaktus?projectId=${project.id}`}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-            >
-              ✏️ Открыть редактор
-            </Link>
+                  <Link
+                    to={`/redaktus?projectId=${project.id}`}
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+                  >
+                    <FiEdit aria-hidden /> Открыть редактор
+                  </Link>
           )}
         </div>
       ) : (
@@ -204,13 +194,13 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
                     to={`/redaktus?projectId=${project.id}&pageId=${page.id}`}
                     className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-white hover:bg-primary/90 transition-colors"
                   >
-                    ✏️ Редактировать
+                    <FiEdit aria-hidden /> Редактировать
                   </Link>
                   <button className="inline-flex items-center gap-1 rounded-lg bg-gray-100 dark:bg-dark-4 px-3 py-2 text-xs font-medium text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-5 transition-colors">
-                    👁️ Просмотр
+                    <FiEye aria-hidden /> Просмотр
                   </button>
                   <button className="inline-flex items-center gap-1 rounded-lg bg-gray-100 dark:bg-dark-4 px-3 py-2 text-xs font-medium text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-5 transition-colors">
-                    ⚙️
+                    <FiSettings aria-hidden />
                   </button>
                 </div>
               </div>
@@ -230,10 +220,9 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
               <button
                 onClick={() => setShowCreateModal(false)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                aria-label="Закрыть"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-                  <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/>
-                </svg>
+                <FiX aria-hidden />
               </button>
             </div>
 

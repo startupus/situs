@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -15,8 +15,12 @@ model User {
   username  String   @unique
   email     String   @unique
   password  String
-  role      Role     @default(USER)
+  role      UserRole @default(BUSINESS)
   status    UserStatus @default(ACTIVE)
+  
+  // Subscription and limits
+  subscriptionPlan String? @default("basic")
+  limits          String? @default("{\"projects\":1,\"products\":2,\"aiTokens\":1000}") // JSON as string
   
   // Profile data
   profile   String?  @default("{\"name\":\"\",\"avatar\":\"\",\"bio\":\"\"}") // JSON as string
@@ -25,73 +29,12 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  balances     Balance[]
-  transactions Transaction[]
-  projects     Project[]
+  ownedProjects    Project[] @relation("ProjectOwner")
+  projectAccesses  ProjectAccess[]
+  grantedAccesses  ProjectAccess[] @relation("GrantedAccess")
+  media            Media[]
 
   @@map("users")
-}
-
-model Currency {
-  id          String   @id @default(cuid())
-  code        String   @unique  // e.g., "USD", "EUR", "BTC", "GEMS"
-  name        String              // e.g., "US Dollar", "Euro", "Bitcoin", "Game Gems"
-  symbol      String              // e.g., "$", "€", "₿", "💎"
-  decimals    Int      @default(2) // Number of decimal places
-  isActive    Boolean  @default(true)
-  isSystem    Boolean  @default(false) // System currencies vs user-created
-  
-  // Metadata
-  description String?
-  iconUrl     String?
-  color       String?  // Hex color for UI
-  
-  // Audit fields
-  createdBy   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  // Relations
-  balances     Balance[]
-  transactions Transaction[]
-
-  @@map("currencies")
-}
-
-model Balance {
-  id         String   @id @default(cuid())
-  userId     String
-  currencyId String
-  amount     Float    @default(0)
-  reserved   Float    @default(0)
-  lastUpdated DateTime @updatedAt
-
-  // Relations
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  currency Currency @relation(fields: [currencyId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, currencyId])
-  @@map("balances")
-}
-
-model Transaction {
-  id          String            @id @default(cuid())
-  userId      String
-  serviceId   String
-  type        TransactionType
-  amount      Float
-  currencyId  String
-  status      TransactionStatus @default(PENDING)
-  description String?
-  metadata    String?           // JSON string
-  createdAt   DateTime          @default(now())
-  completedAt DateTime?
-
-  // Relations
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  currency Currency @relation(fields: [currencyId], references: [id], onDelete: Cascade)
-
-  @@map("transactions")
 }
 
 model Project {
@@ -99,44 +42,47 @@ model Project {
   name        String
   description String?
   slug        String      @unique  // Генерируется из названия
-  type        ProjectType @default(WEBSITE)
-  status      ProjectStatus @default(DRAFT)
   
-  // Domain settings
+  // Domain settings - ключевое отличие от старой схемы
   domain       String?     // situs subdomain (example.situs.com)
   customDomain String?     // custom domain (example.com)
   isPublished  Boolean     @default(false)
   
-  // SEO Settings
-  metaTitle       String?
-  metaDescription String?
-  metaKeywords    String?
+  // Project-level settings (общие для всех продуктов)
+  settings String? @default("{\"theme\":\"auto\",\"language\":\"ru\"}") // JSON as string
+  theme    String? @default("{\"primaryColor\":\"#3B82F6\",\"secondaryColor\":\"#8B5CF6\"}") // JSON as string
   
-  // Theme and Design
-  primaryColor   String? @default("#3B82F6")
-  secondaryColor String? @default("#8B5CF6")
-  fontFamily     String? @default("Inter")
-  
-  // Project Settings JSON
-  settings String? @default("{\"theme\":\"auto\",\"language\":\"ru\",\"creationType\":\"manual\"}") // JSON as string
-  
-  // Features
-  hasEcommerce   Boolean @default(false)
-  hasAnalytics   Boolean @default(false)
-  hasBlog        Boolean @default(false)
-  hasContactForm Boolean @default(false)
-  
-  // Ownership
+  // Ownership and access
   ownerId   String
+  status    ProjectStatus @default(ACTIVE)
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
   // Relations
-  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  pages Page[]
-  products Product[]
+  owner     User   @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  products  Product[]
+  accesses  ProjectAccess[]
+  media     Media[]
   
   @@map("projects")
+}
+
+model ProjectAccess {
+  id        String           @id @default(cuid())
+  projectId String
+  userId    String
+  role      ProjectRole
+  grantedBy String
+  grantedAt DateTime         @default(now())
+  
+  // Relations
+  project       Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  grantedByUser User    @relation("GrantedAccess", fields: [grantedBy], references: [id])
+  
+  @@unique([projectId, userId])
+  @@map("project_accesses")
 }
 
 model Product {
@@ -146,12 +92,13 @@ model Product {
   type        ProductType
   status      ProductStatus @default(DRAFT)
   
-  // URLs
-  url         String?     // URL продукта
-  editorUrl   String?     // URL редактора (для сайтов)
+  // URL structure within project
+  subdomain    String?     // shop.domain.com
+  pathPrefix   String?     // /shop, /blog
   
-  // Settings
-  settings    String?     @default("{}") // JSON as string
+  // Product settings and pricing
+  settings     String?     @default("{}") // JSON as string
+  pricingPlan  String?     @default("basic")
   
   // Project relation
   projectId   String
@@ -160,7 +107,9 @@ model Product {
   
   // Relations
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  pages   Page[]
   
+  @@unique([projectId, name])
   @@map("products")
 }
 
@@ -182,15 +131,15 @@ model Page {
   template    String?
   layout      String?
   
-  // Project relation
-  projectId String
+  // Product relation
+  productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
   // Relations
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   
-  @@unique([projectId, slug])
+  @@unique([productId, slug])
   @@map("pages")
 }
 
@@ -200,90 +149,83 @@ model Media {
   originalName String
   mimeType    String
   size        Int
-  width       Int?
-  height      Int?
   url         String
-  alt         String?
-  caption     String?
-  
-  // Organization
-  projectId   String?
-  folder      String?
-  tags        String?   // JSON string for tags array
+  thumbnailUrl String?
   
   // Metadata
+  alt         String?
+  title       String?
+  description String?
+  
+  // Project relation
+  projectId   String
+  uploadedBy  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
   
   @@map("media")
 }
 
-enum Role {
-  ADMIN
-  USER
+// Enums
+enum UserRole {
+  BUSINESS    // Бизнес-пользователь: 1 проект, простой интерфейс
+  AGENCY      // Агентство: много проектов для клиентов
+  ADMIN       // Системный администратор
 }
 
 enum UserStatus {
   ACTIVE
   INACTIVE
   SUSPENDED
-}
-
-enum TransactionType {
-  DEPOSIT
-  WITHDRAWAL
-  TRANSFER
-  PAYMENT
-  REFUND
-}
-
-enum TransactionStatus {
-  PENDING
-  COMPLETED
-  FAILED
-  CANCELLED
-}
-
-enum ProjectType {
-  WEBSITE
-  ECOMMERCE
-  LANDING
-  BLOG
-  APP
+  BANNED
 }
 
 enum ProjectStatus {
-  DRAFT
-  DEVELOPMENT
-  STAGING
-  PUBLISHED
-  ARCHIVED
+  ACTIVE      // Активный проект
+  SUSPENDED   // Приостановлен (неоплата)
+  ARCHIVED    // Архивный
+  DELETED     // Помечен к удалению
+}
+
+enum ProjectRole {
+  OWNER       // Владелец проекта
+  ADMIN       // Администратор проекта
+  EDITOR      // Редактор контента
+  VIEWER      // Только просмотр
 }
 
 enum ProductType {
-  WEBSITE
-  STORE
-  SCHOOL
-  CHATBOT
-  BLOG
+  WEBSITE     // Корпоративный сайт
+  ECOMMERCE   // Интернет-магазин
+  BLOG        // Блог
+  LANDING     // Лендинг
+  API         // API сервис
 }
 
 enum ProductStatus {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
+  DRAFT       // Черновик
+  ACTIVE      // Активный
+  ARCHIVED    // Архивный
+  DELETED     // Помечен к удалению
 }
 
 enum PageType {
-  PAGE
-  POST
-  PRODUCT
-  CATEGORY
+  HOME        // Главная страница
+  PAGE        // Обычная страница
+  POST        // Пост блога
+  LANDING     // Лендинг
+  PRODUCT     // Страница товара
+  CATEGORY    // Страница категории
 }
 
 enum PageStatus {
-  DRAFT
-  PUBLISHED
-  SCHEDULED
-  ARCHIVED
+  DRAFT       // Черновик
+  PUBLISHED   // Опубликована
+  SCHEDULED   // Запланирована к публикации
+  ARCHIVED    // Архивная
+  DELETED     // Помечена к удалению
 }

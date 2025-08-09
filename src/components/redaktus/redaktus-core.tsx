@@ -202,7 +202,8 @@ const createDefaultProps = (blockType: string) => {
 const getUrlParams = () => {
   const urlParams = new URLSearchParams(window.location.search);
   return {
-    projectId: urlParams.get('projectId') || 'cme0882ct00029k53akr8qjjv', // По умолчанию проект Стартапус
+    projectId: urlParams.get('project') || urlParams.get('projectId') || null, // Убираем жестко заданный fallback
+    productId: urlParams.get('product') || urlParams.get('productId') || null,
     pageId: urlParams.get('pageId') || null
   };
 };
@@ -238,237 +239,114 @@ const EditorContent: React.FC = () => {
   const [loading, setLoading] = useState(true);
   
   const [currentPage, setCurrentPage] = useState<any>({
-    id: 'home',
+    id: null,
     type: 'page',
-    slug: 'home',
+    slug: '',
     languages: {
       ru: {
-        title: 'Главная страница',
+        title: '',
         content: []
       },
       en: {
-        title: 'Home Page',
+        title: '',
         content: []
       },
       de: {
-        title: 'Startseite',
+        title: '',
         content: []
       }
     },
-    availableLanguages: ['ru', 'en', 'de'], // Доступные языки для этой страницы
+    availableLanguages: ['ru', 'en', 'de'],
     defaultLanguage: 'ru',
-    title: 'Главная страница', // Заголовок на текущем языке
-    content: [
-      {
-        id: 'hero-block-default',
-        type: 'hero-block',
-        props: {
-          title: 'Kickstart Startup Website with TailGrids',
-          subtitle: 'With TailGrids, business and students thrive together. Business can perfectly match their staffing to changing demand throughout the dayed.',
-          primaryButtonText: 'Get Started',
-          primaryButtonUrl: '#',
-          secondaryButtonText: 'Download App',
-          secondaryButtonUrl: '#',
-          heroImage: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png',
-          clientLogos: [
-            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
-            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
-            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
-          ]
-        }
-      },
-      {
-        id: 'hero-1-original-default',
-        type: 'hero-1-original',
-        props: {
-          title: 'ОРИГИНАЛЬНЫЙ TailGrids Hero 1',
-          subtitle: 'Это полная копия оригинального Hero1.jsx из react-pro-components-main без изменений стилей.',
-          primaryButtonText: 'Get Started',
-          primaryButtonUrl: '#',
-          secondaryButtonText: 'Download App',
-          secondaryButtonUrl: '#',
-          heroImage: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png',
-          clientLogos: [
-            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/ayroui.svg',
-            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/graygrids.svg',
-            'https://cdn.tailgrids.com/2.0/image/assets/images/brands/uideck.svg'
-          ]
-        }
-      }
-    ],
-    meta: {}
-  })
+    title: '',
+    content: [],
+    meta: {
+      title: '',
+      description: '',
+      keywords: ''
+    }
+  });
 
-  // Загрузка проекта и страниц
+  // Загрузка данных проекта
   useEffect(() => {
     const loadProjectData = async () => {
+      if (!urlParams.projectId) {
+        console.log('❌ Не указан ID проекта в URL');
+        setLoading(false);
+        return;
+      }
+
       try {
-        setLoading(true);
         console.log('🚀 Загрузка проекта:', urlParams.projectId);
-        console.log('🚀 Загрузка продукта:', urlParams.productId);
-        
-        // Загружаем проект через новый API
-        const response = await fetch(`http://localhost:3001/api/projects/${urlParams.projectId}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch project: ${response.statusText}`);
+
+        // Загружаем проект
+        const projectResponse = await fetch(`http://localhost:3001/api/projects/${urlParams.projectId}`);
+        if (!projectResponse.ok) {
+          throw new Error(`Failed to fetch project: ${projectResponse.statusText}`);
         }
         
-        const projectData = await response.json();
+        const projectData = await projectResponse.json();
         const project = projectData.data;
-        console.log('✅ Проект загружен:', project.name);
         setCurrentProject(project);
+        console.log('✅ Проект загружен:', project.name);
 
-        // Находим нужный продукт
-        const product = project.products?.find(p => p.id === urlParams.productId);
-        if (!product) {
-          throw new Error(`Product with ID ${urlParams.productId} not found`);
-        }
-        
-        console.log('✅ Продукт найден:', product.name);
-        console.log('📄 Страницы продукта:', product.pages);
+        // Загружаем страницы проекта
+        const pagesResponse = await fetch(`http://localhost:3001/api/projects/${urlParams.projectId}/pages`);
+        if (pagesResponse.ok) {
+          const pagesData = await pagesResponse.json();
+          const pages = pagesData.data.pages || [];
+          console.log('📄 Загружены страницы проекта:', pages.length, 'страниц');
+          setProjectPages(pages);
 
-        // Устанавливаем страницы продукта
-        const pages = product.pages || [];
-        setProjectPages(pages);
-
-        // Определяем какую страницу загрузить
-        let pageToLoad;
-        if (urlParams.pageId) {
-          // Загружаем конкретную страницу
-          pageToLoad = pages.find(p => p.id === urlParams.pageId);
-          if (!pageToLoad) {
-            throw new Error(`Page with ID ${urlParams.pageId} not found`);
-          }
-          console.log('📄 Страница загружена по ID:', pageToLoad.title);
-        } else {
-          // Загружаем первую страницу или создаем дефолтную
-          pageToLoad = pages[0];
-          if (!pageToLoad) {
-            // Создаем дефолтную страницу
-            pageToLoad = {
-              id: `page-${Date.now()}`,
-              title: 'Главная страница',
-              slug: 'home',
-              content: {
-                blocks: [
-                  {
-                    id: 'hero-block',
-                    type: 'hero-block',
-                    props: {
-                      title: 'Добро пожаловать',
-                      subtitle: 'Это ваша главная страница',
-                      primaryButtonText: 'Начать',
-                      primaryButtonUrl: '#',
-                      secondaryButtonText: 'Узнать больше',
-                      secondaryButtonUrl: '#',
-                      heroImage: 'https://via.placeholder.com/600x400'
-                    }
+          // Загружаем конкретную страницу, если указана
+          if (urlParams.pageId) {
+            const pageToLoad = pages.find(p => p.id === urlParams.pageId);
+            if (pageToLoad) {
+              console.log('📄 Загружена страница по ID:', pageToLoad.title);
+              // Конвертируем данные из API в формат редактора
+              const editorPage = {
+                id: pageToLoad.id,
+                type: 'page',
+                slug: pageToLoad.slug,
+                title: pageToLoad.title,
+                content: pageToLoad.content?.blocks || [],
+                languages: {
+                  ru: {
+                    title: pageToLoad.title,
+                    content: pageToLoad.content?.blocks || []
+                  },
+                  en: {
+                    title: pageToLoad.title + ' (EN)',
+                    content: []
+                  },
+                  de: {
+                    title: pageToLoad.title + ' (DE)',
+                    content: []
                   }
-                ]
-              },
-              meta: {
-                title: 'Главная страница',
-                description: 'Главная страница сайта',
-                keywords: ''
-              },
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString()
-            };
-            console.log('🏠 Создана дефолтная страница:', pageToLoad.title);
-          } else {
-            console.log('🏠 Загружена первая страница:', pageToLoad.title);
+                },
+                availableLanguages: ['ru', 'en', 'de'],
+                defaultLanguage: 'ru',
+                projectId: project.id,
+                meta: {
+                  title: pageToLoad.meta?.title || pageToLoad.title,
+                  description: pageToLoad.meta?.description || '',
+                  keywords: pageToLoad.meta?.keywords || ''
+                }
+              };
+              setCurrentPage(editorPage);
+            }
           }
         }
 
-        // Конвертируем данные из API в формат редактора
-        const editorPage = {
-          id: pageToLoad.id,
-          type: 'page',
-          slug: pageToLoad.slug,
-          title: pageToLoad.title,
-          content: pageToLoad.content?.blocks || [],
-          languages: {
-            ru: {
-              title: pageToLoad.title,
-              content: pageToLoad.content?.blocks || []
-            },
-            en: {
-              title: pageToLoad.title + ' (EN)',
-              content: []
-            },
-            de: {
-              title: pageToLoad.title + ' (DE)',
-              content: []
-            }
-          },
-          availableLanguages: ['ru', 'en', 'de'],
-          defaultLanguage: 'ru',
-          projectId: project.id,
-          meta: {
-            title: pageToLoad.meta?.title || pageToLoad.title,
-            description: pageToLoad.meta?.description || '',
-            keywords: pageToLoad.meta?.keywords || ''
-          }
-        };
-
-        console.log('🎯 Страница для редактора:', editorPage);
-        setCurrentPage(editorPage);
-        
+        setLoading(false);
       } catch (error) {
         console.error('❌ Ошибка загрузки данных проекта:', error);
-        // При ошибке создаем дефолтную страницу
-        const defaultPage = {
-          id: 'default-page',
-          type: 'page',
-          slug: 'home',
-          title: 'Главная страница',
-          content: [
-            {
-              id: 'hero-block',
-              type: 'hero-block',
-              props: {
-                title: 'Добро пожаловать в редактор',
-                subtitle: 'Создайте свою первую страницу',
-                primaryButtonText: 'Начать',
-                primaryButtonUrl: '#',
-                secondaryButtonText: 'Узнать больше',
-                secondaryButtonUrl: '#',
-                heroImage: 'https://via.placeholder.com/600x400'
-              }
-            }
-          ],
-          languages: {
-            ru: {
-              title: 'Главная страница',
-              content: []
-            },
-            en: {
-              title: 'Home Page',
-              content: []
-            },
-            de: {
-              title: 'Startseite',
-              content: []
-            }
-          },
-          availableLanguages: ['ru', 'en', 'de'],
-          defaultLanguage: 'ru',
-          projectId: urlParams.projectId,
-          meta: {
-            title: 'Главная страница',
-            description: 'Главная страница сайта',
-            keywords: ''
-          }
-        };
-        setCurrentPage(defaultPage);
-        setProjectPages([defaultPage]);
-      } finally {
         setLoading(false);
       }
     };
 
     loadProjectData();
-  }, [urlParams.projectId, urlParams.productId, urlParams.pageId]);
+  }, [urlParams.projectId, urlParams.pageId]);
 
   // Функция сохранения страницы
   const savePage = async (pageData: any) => {
@@ -479,16 +357,15 @@ const EditorContent: React.FC = () => {
 
     try {
       console.log('💾 Сохранение страницы:', currentPage.id);
+      console.log('📄 Контент для сохранения:', currentPage.content);
       
       // Подготавливаем данные для API
       const updateData = {
         title: pageData.title || currentPage.title,
-        content: {
-          blocks: pageData.content || currentPage.content
-        },
-        metaTitle: pageData.meta?.title,
-        metaDescription: pageData.meta?.description,
-        metaKeywords: pageData.meta?.keywords
+        content: currentPage.content, // Передаем контент напрямую
+        metaTitle: pageData.meta?.title || currentPage.metaTitle,
+        metaDescription: pageData.meta?.description || currentPage.metaDescription,
+        metaKeywords: pageData.meta?.keywords || currentPage.metaKeywords
       };
 
       // Импортируем updatePage из API

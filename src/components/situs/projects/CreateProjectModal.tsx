@@ -10,7 +10,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ onClose, onSucc
   const [projectData, setProjectData] = useState<CreateProjectData>({
     name: '',
     description: '',
-    type: 'WEBSITE',
     domain: ''
   });
   const [loading, setLoading] = useState(false);
@@ -79,27 +78,12 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ onClose, onSucc
     setError(null);
 
     try {
-      // Здесь будет API вызов для создания проекта
-      const response = await fetch('http://localhost:3001/api/projects', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: projectData.name,
-          description: projectData.description,
-          type: projectData.type,
-          domain: projectData.domain || `${projectData.name.toLowerCase().replace(/\s+/g, '-')}.situs.com`,
-          slug: projectData.name.toLowerCase().replace(/\s+/g, '-'),
-          ownerId: 'cme0882cl00009k53y3u03m2h' // Временно используем ID из базы
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Ошибка создания проекта');
-      }
-
+      // Используем централизованный API клиент
+      const { projectsApi } = await import('../../../api/services/projects.api');
+      await projectsApi.createProject({
+        name: projectData.name,
+        description: projectData.description,
+      } as any);
       onSuccess();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Неизвестная ошибка');
@@ -157,41 +141,9 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ onClose, onSucc
             />
           </div>
 
-          {/* Тип проекта */}
-          <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-3">
-              Тип проекта *
-            </label>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {projectTypes.map((type) => (
-                <label
-                  key={type.id}
-                  className={`flex items-start gap-3 p-4 border rounded-lg cursor-pointer transition-all ${
-                    projectData.type === type.id
-                      ? 'border-primary bg-primary/5'
-                      : 'border-stroke dark:border-dark-3 hover:border-primary/50'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="projectType"
-                    value={type.id}
-                    checked={projectData.type === type.id}
-                    onChange={(e) => setProjectData({ ...projectData, type: e.target.value as any })}
-                    className="sr-only"
-                  />
-                  <div className="text-primary flex-shrink-0">{type.icon}</div>
-                  <div className="flex-1">
-                    <div className="font-medium text-dark dark:text-white mb-1">
-                      {type.name}
-                    </div>
-                    <div className="text-sm text-body-color dark:text-dark-6">
-                      {type.description}
-                    </div>
-                  </div>
-                </label>
-              ))}
-            </div>
+          {/* Информация о структуре проекта */}
+          <div className="p-4 border rounded-lg text-sm text-body-color dark:text-dark-6">
+            Проект — контейнер: домен, владельцы и доступы. Продукты (сайт, магазин, блог) добавляются внутри проекта.
           </div>
 
           {/* Домен */}

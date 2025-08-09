@@ -18,6 +18,7 @@ import { useAdminTheme } from './contexts/AdminThemeContext'
 import SitusApp from './components/situs/SitusApp'
 import SitusNewApp from './components/situs-new/SitusApp'
 import EnhancedThemeSettings from './components/admin/EnhancedThemeSettings'
+import { McpTestPanel } from './components/mcp/McpTestPanel'
 
 function App() {
   return (
@@ -86,6 +87,9 @@ function AppContent() {
             <SitusNewApp />
           </SiteProvider>
         } />
+        
+        {/* Тестовая страница MCP */}
+        <Route path="/mcp-test" element={<McpTestPanel />} />
         
         {/* Основной интерфейс Situs на основе Admino - обрабатывает все остальные роуты */}
         <Route path="/*" element={

@@ -44,7 +44,7 @@ export interface Project {
   description?: string;
   domain?: string; // Домен для публикации
   template?: string;
-  type: 'WEBSITE' | 'ECOMMERCE' | 'LANDING' | 'BLOG' | 'APP';
+  // Проект не имеет типа. Типы у продуктов.
   status: 'draft' | 'published' | 'archived';
   settings: {
     theme: 'light' | 'dark' | 'auto';
@@ -97,7 +97,6 @@ export interface CreateProjectData {
   description?: string;
   domain?: string;
   template?: string;
-  type: Project['type'];
   settings?: Partial<Project['settings']>;
 }
 

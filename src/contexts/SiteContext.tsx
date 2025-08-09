@@ -152,25 +152,8 @@ export function SiteProvider({ children }: SiteProviderProps) {
     dispatch({ type: 'SET_LOADING', payload: true });
     try {
       const response = await sitesApi.getSites();
-      
-      // Если нет проектов, создаем демо проект
-      if (response.sites.length === 0) {
-        const demoSite = await sitesApi.createSite({
-          name: 'Стартапус - Демо проект',
-          description: 'Демонстрационный проект экосистемы Стартапус',
-          template: 'website',
-          settings: {
-            theme: 'auto',
-            primaryColor: '#3B82F6',
-            favicon: '/favicon.ico',
-            logo: '/logo.svg'
-          }
-        });
-        
-        dispatch({ type: 'ADD_SITE', payload: demoSite });
-      } else {
-        dispatch({ type: 'SET_SITES', payload: response.sites });
-      }
+      // Не автосоздаем демо‑проект, просто показываем пустое состояние
+      dispatch({ type: 'SET_SITES', payload: response.sites });
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Ошибка загрузки сайтов' });
     } finally {

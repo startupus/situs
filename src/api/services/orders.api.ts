@@ -114,7 +114,7 @@ export interface OrderStats {
 }
 
 class OrdersApiService {
-  private readonly baseEndpoint = '/api/orders';
+  private readonly baseEndpoint = '/orders';
 
   /**
    * Получить список заказов

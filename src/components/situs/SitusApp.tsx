@@ -13,8 +13,6 @@ import SitusUsersNew from "./pages/SitusUsersNew";
 import SitusSupport from "./pages/SitusSupport";
 import SitusProfileSettings from "./pages/SitusProfileSettings";
 import SitusSectionSettings from "./pages/SitusSectionSettings";
-import SitusProjectDetail from "./pages/SitusProjectDetail";
-import SitusProjectWebsite from "./pages/SitusProjectWebsite";
 import ProjectPage from "./projects/ProjectPage";
 
 const SitusApp: React.FC = () => {
@@ -28,8 +26,7 @@ const SitusApp: React.FC = () => {
         
         {/* Проекты */}
         <Route path="projects" element={<SitusProjects />} />
-        <Route path="projects/:projectId" element={<ProjectPage onCreateProduct={() => {}} />} />
-        <Route path="projects/:projectId/website" element={<SitusProjectWebsite />} />
+        <Route path="projects/:projectId" element={<ProjectPage />} />
         <Route path="projects/websites" element={<SitusWebsites />} />
         <Route path="projects/stores" element={<SitusStores />} />
         <Route path="projects/chatbots" element={<SitusChatbots />} />

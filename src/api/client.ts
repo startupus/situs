@@ -39,6 +39,7 @@ class ApiClient {
     // Проверяем переменные окружения
     if (typeof window !== 'undefined') {
       // Frontend environment
+      // Базовый URL БЕЗ суффикса /api — суффикс добавляется в endpoint (например, '/api/projects')
       return import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
     }
     // Fallback for server-side
@@ -76,7 +77,10 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const url = `${this.baseURL}${endpoint}`;
+    // Для health endpoint используем прямой путь
+    const isHealthCheck = endpoint.startsWith('/health');
+    const baseUrl = this.baseURL; // базовый URL без /api — endpoint включает нужный префикс
+    const url = `${baseUrl}${endpoint}`;
     
     // Автоматически добавляем токен если он есть
     const token = this.getStoredToken();

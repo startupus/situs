@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaPlus, FaGlobe, FaCog, FaEye, FaEdit, FaTrash, FaSearch, FaSort } from 'react-icons/fa'
+import projectsApi from '../api/services/projects.api'
 
 interface Project {
   id: string
@@ -30,16 +31,8 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({ user }) => {
 
   const loadProjects = async () => {
     try {
-      const response = await fetch('/api/projects', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
-        }
-      })
-      
-      if (response.ok) {
-        const data = await response.json()
-        setProjects(data)
-      }
+      const result = await projectsApi.getProjects({ page: 1, limit: 50 })
+      setProjects(result.projects as any)
     } catch (error) {
       console.error('Ошибка загрузки проектов:', error)
     } finally {

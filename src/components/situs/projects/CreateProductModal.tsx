@@ -84,22 +84,9 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
     setError(null);
 
     try {
-      // Здесь будет API вызов для создания продукта
-      const response = await fetch(`http://localhost:3001/api/projects/${projectId}/products`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Ошибка создания продукта');
-      }
-
-      const newProduct = await response.json();
-      onSuccess(newProduct);
+      const { productsApi } = await import('../../../api/services/products.api');
+      const created = await productsApi.createProjectProduct(projectId, productData as any);
+      onSuccess(created);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Неизвестная ошибка');
     } finally {

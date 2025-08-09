@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Git pre-commit hook для обеспечения качества кода
+# Проверяет TypeScript, Prisma схему и другие стандарты
+
+echo "🔍 Pre-commit checks..."
+
+# Цвета
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+log_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+log_success() {
+    echo -e "${GREEN}[SUCCESS]${NC} $1"
+}
+
+log_info() {
+    echo -e "${YELLOW}[INFO]${NC} $1"
+}
+
+# 1. Синхронизация Prisma схемы
+log_info "Syncing Prisma schemas..."
+if ! npm run schema:sync; then
+    log_error "Schema sync failed"
+    exit 1
+fi
+
+# 2. Проверка безопасности разработки
+log_info "Running development safety checks..."
+if ! npm run dev:safe -- --check-only; then
+    log_error "Development safety checks failed"
+    exit 1
+fi
+
+log_success "All pre-commit checks passed! ✅"

@@ -103,7 +103,7 @@ export interface UpdatePageData {
 }
 
 class SitesApiService {
-  private readonly baseEndpoint = '/api/projects';
+  private readonly baseEndpoint = '/projects';
 
   /**
    * Получить список сайтов (проектов)

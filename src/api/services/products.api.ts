@@ -81,7 +81,7 @@ export interface ProductsListResponse {
 }
 
 class ProductsApiService {
-  private readonly baseEndpoint = '/api/products';
+  private readonly baseEndpoint = '/products';
 
   /**
    * Получить список продуктов
@@ -110,7 +110,7 @@ class ProductsApiService {
   async getProjectProducts(projectId: string): Promise<{ products: Product[]; project: any }> {
     try {
       const response = await apiClient.get<ApiResponse<{ products: Product[]; project: any }>>(
-        `/api/projects/${projectId}/products`
+        `/projects/${projectId}/products`
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -120,6 +120,25 @@ class ProductsApiService {
       throw new Error(response.error || 'Ошибка при загрузке продуктов проекта');
     } catch (error) {
       console.error('Get Project Products API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
+   * Создать продукт в проекте
+   */
+  async createProjectProduct(projectId: string, data: Omit<CreateProductData, 'projectId'>): Promise<Product> {
+    try {
+      const response = await apiClient.post<ApiResponse<Product>>(
+        `/projects/${projectId}/products`,
+        data
+      );
+      if (ApiUtils.isSuccess(response)) {
+        return response.data;
+      }
+      throw new Error(response.error || 'Ошибка при создании продукта');
+    } catch (error) {
+      console.error('Create Project Product API Error:', error);
       throw new Error(ApiUtils.handleError(error));
     }
   }
@@ -237,6 +256,21 @@ class ProductsApiService {
     } catch (error) {
       console.error('Unpublish Product API Error:', error);
       throw new Error(ApiUtils.handleError(error));
+    }
+  }
+  /** Каталог доступных типов продуктов */
+  async getAvailableProductTypes(): Promise<Array<{ key: string; title: string; type: string; icon: string }>> {
+    try {
+      const response = await apiClient.get<ApiResponse<Array<{ key: string; title: string; type: string; icon: string }>>>(
+        `${this.baseEndpoint}/catalog/types`
+      );
+      if (ApiUtils.isSuccess(response)) {
+        return response.data;
+      }
+      return [];
+    } catch (error) {
+      console.error('Get Product Types API Error:', error);
+      return [];
     }
   }
 }

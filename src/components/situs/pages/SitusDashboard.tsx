@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectOrdersChart from "./ProjectOrdersChart";
 import ProjectTrafficChart from "./ProjectTrafficChart";
@@ -11,6 +11,10 @@ import {
 } from "./dashboardData";
 
 const SitusDashboard: React.FC = () => {
+  useEffect(() => {
+    document.title = "Панель управления Situs";
+  }, []);
+
   const recentProjects = [
     {
       id: 1,
@@ -87,26 +91,7 @@ const SitusDashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Заголовок */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-dark dark:text-white">
-            Панель управления Situs
-          </h1>
-          <p className="text-body-color dark:text-dark-6 mt-1">
-            Добро пожаловать в вашу рабочую область для создания сайтов
-          </p>
-        </div>
-        <Link
-          to="/projects/new"
-          className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white hover:bg-primary/90"
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
-            <path d="M10 2C10.4142 2 10.75 2.33579 10.75 2.75V9.25H17.25C17.6642 9.25 18 9.58579 18 10C18 10.4142 17.6642 10.75 17.25 10.75H10.75V17.25C10.75 17.6642 10.4142 18 10 18C9.58579 18 9.25 17.6642 9.25 17.25V10.75H2.75C2.33579 10.75 2 10.4142 2 10C2 9.58579 2.33579 9.25 2.75 9.25H9.25V2.75C9.25 2.33579 9.58579 2 10 2Z"/>
-          </svg>
-          Новый проект
-        </Link>
-      </div>
+      {/* Заголовок убран — управляется глобальным хедером */}
 
       {/* Статистика */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -160,12 +145,9 @@ const SitusDashboard: React.FC = () => {
           <h5 className="text-xl font-semibold text-dark dark:text-white">
             Недавние проекты
           </h5>
-          <Link
-            to="/projects"
-            className="text-primary hover:text-primary/80 text-sm font-medium"
-          >
-            Посмотреть все
-          </Link>
+            <Link to="/projects" className="text-primary hover:text-primary/80 text-sm font-medium">
+              Открыть раздел проектов
+            </Link>
         </div>
         
         <div className="space-y-4">

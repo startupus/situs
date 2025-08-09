@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SitusSidebar from "../Sidebar/SitusSidebar";
 import SitusHeader from "../Header/SitusHeader";
 import { Outlet } from "react-router-dom";
@@ -16,7 +16,8 @@ const SitusMainLayout: React.FC<SitusMainLayoutProps> = () => {
         <div className="w-full xl:pl-[90px]">
           <SitusHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-          <div className="p-[30px]">
+          {/* Базовый унифицированный внутренний отступ шапки/контента */}
+          <div className="px-6 pt-6 pb-6">
             <Outlet />
           </div>
         </div>

@@ -9,14 +9,14 @@ vi.mock('../services/ProjectService');
 describe('ProjectController', () => {
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
-  let mockProjectService: vi.Mocked<ProjectService>;
+  let mockProjectService: any;
 
   beforeEach(() => {
     mockRequest = {
       body: {},
       params: {},
       query: {},
-      user: { id: '1', email: 'test@example.com' }
+      user: { id: '1', userId: '1', email: 'test@example.com', fullName: 'Test User', role: 'USER', isActive: true }
     };
 
     mockResponse = {
@@ -25,7 +25,7 @@ describe('ProjectController', () => {
       send: vi.fn().mockReturnThis()
     };
 
-    mockProjectService = ProjectService as vi.Mocked<ProjectService>;
+    mockProjectService = ProjectService;
   });
 
   describe('find', () => {
@@ -33,63 +33,51 @@ describe('ProjectController', () => {
       const mockProjects = [
         {
           id: '1',
-          name: 'Test Project 1',
-          slug: 'test-project-1',
-          status: 'DRAFT',
-          userId: '1',
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          id: '2',
-          name: 'Test Project 2',
-          slug: 'test-project-2',
-          status: 'PUBLISHED',
-          userId: '1',
-          createdAt: new Date(),
-          updatedAt: new Date()
+          name: 'Test Project',
+          description: 'Test Description',
+          type: 'WEBSITE',
+          status: 'DRAFT'
         }
       ];
 
-      mockRequest.query = { page: '1', limit: '10' };
-      mockProjectService.findMany = vi.fn().mockResolvedValue({
-        projects: mockProjects,
-        total: 2,
-        page: 1,
-        limit: 10,
-        totalPages: 1
-      });
+      mockRequest.query = {
+        search: 'test',
+        status: 'DRAFT',
+        sortBy: 'name',
+        sortOrder: 'asc'
+      };
+
+      mockProjectService.findMany = vi.fn().mockResolvedValue(mockProjects);
 
       await ProjectController.find(mockRequest as Request, mockResponse as Response);
 
-      expect(mockProjectService.findMany).toHaveBeenCalledWith({
-        userId: '1',
-        page: 1,
-        limit: 10
+      expect(mockProjectService.findMany).toHaveBeenCalledWith('1', {
+        search: 'test',
+        status: 'DRAFT',
+        sortBy: 'name',
+        sortOrder: 'asc'
       });
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
-        data: {
-          projects: mockProjects,
-          total: 2,
-          page: 1,
-          limit: 10,
-          totalPages: 1
+        data: mockProjects,
+        meta: {
+          total: mockProjects.length
         }
       });
     });
 
     it('должен обработать ошибку при получении проектов', async () => {
-      mockRequest.query = { page: '1', limit: '10' };
       mockProjectService.findMany = vi.fn().mockRejectedValue(new Error('Ошибка базы данных'));
 
       await ProjectController.find(mockRequest as Request, mockResponse as Response);
 
       expect(mockResponse.status).toHaveBeenCalledWith(500);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Ошибка базы данных'
+        error: {
+          status: 500,
+          name: 'InternalServerError',
+          message: 'Внутренняя ошибка сервера'
+        }
       });
     });
   });
@@ -99,36 +87,38 @@ describe('ProjectController', () => {
       const mockProject = {
         id: '1',
         name: 'Test Project',
-        slug: 'test-project',
-        status: 'DRAFT',
-        userId: '1',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        description: 'Test Description',
+        type: 'WEBSITE',
+        status: 'DRAFT'
       };
 
       mockRequest.params = { id: '1' };
+
       mockProjectService.findOne = vi.fn().mockResolvedValue(mockProject);
 
       await ProjectController.findOne(mockRequest as Request, mockResponse as Response);
 
-      expect(mockProjectService.findOne).toHaveBeenCalledWith('1', '1');
+      expect(mockProjectService.findOne).toHaveBeenCalledWith('1');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
         data: mockProject
       });
     });
 
     it('должен вернуть 404 если проект не найден', async () => {
       mockRequest.params = { id: '999' };
+
       mockProjectService.findOne = vi.fn().mockResolvedValue(null);
 
       await ProjectController.findOne(mockRequest as Request, mockResponse as Response);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Проект не найден'
+        error: {
+          status: 404,
+          name: 'NotFoundError',
+          message: 'Проект не найден'
+        }
       });
     });
   });
@@ -138,11 +128,9 @@ describe('ProjectController', () => {
       const mockProject = {
         id: '1',
         name: 'New Project',
-        slug: 'new-project',
-        status: 'DRAFT',
-        userId: '1',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        description: 'Test description',
+        type: 'WEBSITE',
+        status: 'DRAFT'
       };
 
       mockRequest.body = {
@@ -159,11 +147,14 @@ describe('ProjectController', () => {
         name: 'New Project',
         description: 'Test description',
         type: 'WEBSITE',
-        userId: '1'
+        slug: undefined,
+        domain: undefined,
+        customDomain: undefined,
+        settings: undefined,
+        ownerId: '1'
       });
       expect(mockResponse.status).toHaveBeenCalledWith(201);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
         data: mockProject
       });
     });
@@ -178,8 +169,11 @@ describe('ProjectController', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Название проекта обязательно'
+        error: {
+          status: 400,
+          name: 'ValidationError',
+          message: 'Название проекта обязательно'
+        }
       });
     });
   });
@@ -189,11 +183,9 @@ describe('ProjectController', () => {
       const mockProject = {
         id: '1',
         name: 'Updated Project',
-        slug: 'updated-project',
-        status: 'DRAFT',
-        userId: '1',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        description: 'Updated description',
+        type: 'WEBSITE',
+        status: 'DRAFT'
       };
 
       mockRequest.params = { id: '1' };
@@ -208,18 +200,26 @@ describe('ProjectController', () => {
 
       expect(mockProjectService.update).toHaveBeenCalledWith('1', {
         name: 'Updated Project',
-        description: 'Updated description'
-      }, '1');
+        description: 'Updated description',
+        slug: undefined,
+        domain: undefined,
+        customDomain: undefined,
+        settings: undefined,
+        status: undefined,
+        type: undefined,
+        isPublished: undefined
+      });
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
         data: mockProject
       });
     });
 
     it('должен вернуть 404 если проект не найден', async () => {
       mockRequest.params = { id: '999' };
-      mockRequest.body = { name: 'Updated Project' };
+      mockRequest.body = {
+        name: 'Updated Project'
+      };
 
       mockProjectService.update = vi.fn().mockResolvedValue(null);
 
@@ -227,37 +227,46 @@ describe('ProjectController', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Проект не найден'
+        error: {
+          status: 404,
+          name: 'NotFoundError',
+          message: 'Проект не найден'
+        }
       });
     });
   });
 
   describe('delete', () => {
     it('должен успешно удалить проект', async () => {
+      const mockProject = { id: '1' };
+
       mockRequest.params = { id: '1' };
-      mockProjectService.delete = vi.fn().mockResolvedValue(true);
+
+      mockProjectService.delete = vi.fn().mockResolvedValue(mockProject);
 
       await ProjectController.delete(mockRequest as Request, mockResponse as Response);
 
-      expect(mockProjectService.delete).toHaveBeenCalledWith('1', '1');
+      expect(mockProjectService.delete).toHaveBeenCalledWith('1');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Проект успешно удален'
+        data: mockProject
       });
     });
 
     it('должен вернуть 404 если проект не найден', async () => {
       mockRequest.params = { id: '999' };
-      mockProjectService.delete = vi.fn().mockResolvedValue(false);
+
+      mockProjectService.delete = vi.fn().mockResolvedValue(null);
 
       await ProjectController.delete(mockRequest as Request, mockResponse as Response);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Проект не найден'
+        error: {
+          status: 404,
+          name: 'NotFoundError',
+          message: 'Проект не найден'
+        }
       });
     });
   });
@@ -267,36 +276,36 @@ describe('ProjectController', () => {
       const mockProject = {
         id: '1',
         name: 'Test Project',
-        slug: 'test-project',
-        status: 'PUBLISHED',
-        userId: '1',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        status: 'PUBLISHED'
       };
 
       mockRequest.params = { id: '1' };
+
       mockProjectService.publish = vi.fn().mockResolvedValue(mockProject);
 
       await ProjectController.publish(mockRequest as Request, mockResponse as Response);
 
-      expect(mockProjectService.publish).toHaveBeenCalledWith('1', '1');
+      expect(mockProjectService.publish).toHaveBeenCalledWith('1');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
         data: mockProject
       });
     });
 
     it('должен вернуть 404 если проект не найден', async () => {
       mockRequest.params = { id: '999' };
+
       mockProjectService.publish = vi.fn().mockResolvedValue(null);
 
       await ProjectController.publish(mockRequest as Request, mockResponse as Response);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Проект не найден'
+        error: {
+          status: 404,
+          name: 'NotFoundError',
+          message: 'Проект не найден'
+        }
       });
     });
   });
@@ -306,36 +315,36 @@ describe('ProjectController', () => {
       const mockProject = {
         id: '1',
         name: 'Test Project',
-        slug: 'test-project',
-        status: 'DRAFT',
-        userId: '1',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        status: 'DRAFT'
       };
 
       mockRequest.params = { id: '1' };
+
       mockProjectService.unpublish = vi.fn().mockResolvedValue(mockProject);
 
       await ProjectController.unpublish(mockRequest as Request, mockResponse as Response);
 
-      expect(mockProjectService.unpublish).toHaveBeenCalledWith('1', '1');
+      expect(mockProjectService.unpublish).toHaveBeenCalledWith('1');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
         data: mockProject
       });
     });
 
     it('должен вернуть 404 если проект не найден', async () => {
       mockRequest.params = { id: '999' };
+
       mockProjectService.unpublish = vi.fn().mockResolvedValue(null);
 
       await ProjectController.unpublish(mockRequest as Request, mockResponse as Response);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: false,
-        error: 'Проект не найден'
+        error: {
+          status: 404,
+          name: 'NotFoundError',
+          message: 'Проект не найден'
+        }
       });
     });
   });
@@ -346,15 +355,7 @@ describe('ProjectController', () => {
         total: 10,
         published: 5,
         draft: 3,
-        archived: 2,
-        recentProjects: [
-          {
-            id: '1',
-            name: 'Recent Project',
-            status: 'PUBLISHED',
-            updatedAt: new Date()
-          }
-        ]
+        archived: 2
       };
 
       mockProjectService.getStatistics = vi.fn().mockResolvedValue(mockStats);
@@ -364,7 +365,6 @@ describe('ProjectController', () => {
       expect(mockProjectService.getStatistics).toHaveBeenCalledWith('1');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        success: true,
         data: mockStats
       });
     });

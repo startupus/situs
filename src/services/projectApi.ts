@@ -111,12 +111,18 @@ export async function getPage(pageId: string): Promise<PageData> {
  * Обновить страницу
  */
 export async function updatePage(pageId: string, updateData: Partial<PageData>): Promise<PageData> {
+  // Преобразуем контент в JSON строку, если он передан как объект
+  const processedData = { ...updateData };
+  if (updateData.content && typeof updateData.content === 'object') {
+    processedData.content = JSON.stringify(updateData.content);
+  }
+  
   const response = await fetch(`${API_BASE_URL}/api/pages/${pageId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(updateData),
+    body: JSON.stringify(processedData),
   });
   
   if (!response.ok) {

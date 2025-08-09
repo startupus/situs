@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProjectsFilters from './ProjectsFilters';
 import ProjectsList from './ProjectsList';
 import CreateProjectModal from './CreateProjectModal';
 
 const ProjectsMain: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [refreshTick, setRefreshTick] = useState(0);
 
   const handleCreateProject = () => {
     setShowCreateModal(true);
@@ -12,15 +13,21 @@ const ProjectsMain: React.FC = () => {
 
   const handleProjectCreated = () => {
     setShowCreateModal(false);
-    // Здесь можно добавить обновление списка проектов
-    window.location.reload();
+    setRefreshTick((x) => x + 1);
   };
 
+  // Поддержка глобальной кнопки "+" в хедере
+  useEffect(() => {
+    const onCreate = () => setShowCreateModal(true);
+    window.addEventListener('situs:create-project', onCreate as EventListener);
+    return () => window.removeEventListener('situs:create-project', onCreate as EventListener);
+  }, []);
+
   return (
-    <div className="p-6">
+    <div>
       <ProjectsFilters />
       
-      <ProjectsList onCreateProject={handleCreateProject} />
+      <ProjectsList onCreateProject={handleCreateProject} refreshKey={refreshTick} />
 
       {showCreateModal && (
         <CreateProjectModal
