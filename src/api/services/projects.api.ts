@@ -186,6 +186,86 @@ class ProjectsApiService {
   }
 
   /**
+   * Обновить домены проекта (base domain / customDomain)
+   */
+  async updateProjectDomains(projectId: string, data: { domain?: string; customDomain?: string }): Promise<void> {
+    try {
+      const response = await apiClient.patch<ApiResponse<void>>(
+        `${this.baseEndpoint}/${projectId}/domains`,
+        data
+      );
+      if (!ApiUtils.isSuccess(response)) {
+        throw new Error(response.error || 'Ошибка при обновлении доменных настроек');
+      }
+    } catch (error) {
+      console.error('Update Project Domains API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
+   * Доступы к проекту (список)
+   */
+  async listAccesses(projectId: string): Promise<Array<{ id: string; userId: string; role: string; grantedAt?: string; user?: { email?: string; username?: string } }>> {
+    try {
+      const response = await apiClient.get<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses`);
+      if (ApiUtils.isSuccess(response)) {
+        return response.data as any[];
+      }
+      throw new Error(response.error || 'Ошибка при загрузке доступов');
+    } catch (error) {
+      console.error('List Project Accesses API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
+   * Выдать/обновить доступ
+   */
+  async grantAccess(projectId: string, data: { userId?: string; userEmail?: string; role: string }) {
+    try {
+      const response = await apiClient.post<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses`, data);
+      if (ApiUtils.isSuccess(response)) {
+        return response.data;
+      }
+      throw new Error(response.error || 'Ошибка при выдаче доступа');
+    } catch (error) {
+      console.error('Grant Project Access API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
+   * Изменить роль доступа
+   */
+  async updateAccess(projectId: string, accessId: string, role: string) {
+    try {
+      const response = await apiClient.patch<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses/${accessId}`, { role });
+      if (ApiUtils.isSuccess(response)) {
+        return response.data;
+      }
+      throw new Error(response.error || 'Ошибка при изменении роли');
+    } catch (error) {
+      console.error('Update Project Access API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
+   * Отозвать доступ
+   */
+  async revokeAccess(projectId: string, accessId: string) {
+    try {
+      const response = await apiClient.delete<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses/${accessId}`);
+      if (!ApiUtils.isSuccess(response)) {
+        throw new Error(response.error || 'Ошибка при отзыве доступа');
+      }
+    } catch (error) {
+      console.error('Revoke Project Access API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+  /**
    * Проверить доступность слага
    */
   async checkSlugAvailability(slug: string, excludeProjectId?: string): Promise<boolean> {
