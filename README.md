@@ -78,8 +78,8 @@ Situs/
 #### Frontend: источник правды
 - Используется интерфейс в `src/components/situs/**` (страницы — `src/components/situs/pages/**`)
 - Заголовок раздела теперь живёт в верхней панели (Header); дублирующий заголовок внутри страниц удалён
-- UI‑библиотека: `src/components/ui/**` (импорт как `@/components/ui/...`) 
-- Папка `src/components/situs-new/**` не используется в текущем приложении (готовится к архивированию для исключения путаницы)
+- UI‑библиотека: `src/components/ui/**` (импорт как `@/components/ui/...`). Сюда перенесён `SitusDarkModeToggle`.
+- Папка `src/components/situs-new/**` удалена из исходников; маршруты удалены из `src/App.tsx`.
 
 #### Realtime события (SSE)
 - Endpoint: `GET /api/projects/events` (type: `text/event-stream`)
