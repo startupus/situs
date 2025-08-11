@@ -24,6 +24,8 @@ import { UpdateProjectDomainDto } from './dto/update-project-domain.dto';
 import { ProjectQueryDto } from './dto/project-query.dto';
 import { UpdateProjectStatusDto } from './dto/update-project-status.dto';
 import { RealtimeEventsService } from '../realtime/realtime-events.service';
+import { GrantProjectAccessDto } from './dto/grant-project-access.dto';
+import { UpdateProjectAccessDto } from './dto/update-project-access.dto';
 // import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard'; // Временно отключено
 
 /**
@@ -187,6 +189,29 @@ export class ProjectsController {
   @Post(':id/duplicate')
   async duplicate(@Param('id') id: string, @Request() req: any) {
     return { success: true, data: await this.projectsService.duplicate(id, req.user?.id ?? 'owner-dev') };
+  }
+
+  /**
+   * Доступы к проекту
+   */
+  @Get(':id/accesses')
+  async listAccesses(@Param('id') id: string) {
+    return { success: true, data: await this.projectsService.listAccesses(id) };
+  }
+
+  @Post(':id/accesses')
+  async grantAccess(@Param('id') id: string, @Body() dto: GrantProjectAccessDto, @Request() req: any) {
+    return { success: true, data: await this.projectsService.grantAccess(id, dto, req.user?.id ?? 'owner-dev') };
+  }
+
+  @Patch(':id/accesses/:accessId')
+  async updateAccess(@Param('id') id: string, @Param('accessId') accessId: string, @Body() dto: UpdateProjectAccessDto) {
+    return { success: true, data: await this.projectsService.updateAccessRole(id, accessId, dto.role) };
+  }
+
+  @Delete(':id/accesses/:accessId')
+  async revokeAccess(@Param('id') id: string, @Param('accessId') accessId: string) {
+    return { success: true, data: await this.projectsService.revokeAccess(id, accessId) };
   }
 
   /**
