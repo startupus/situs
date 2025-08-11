@@ -38,7 +38,10 @@ test.describe('Situs Projects Page', () => {
 
   test('navigate to project detail', async ({ page }) => {
     await page.goto('http://localhost:5177/projects');
-    await page.getByRole('link', { name: 'Подробнее' }).first().click();
+    // Уточняем локатор: кликаем по ссылке внутри активной карточки
+    const link = page.locator('div.rounded-xl.border:not(.pointer-events-none) a[href^="/projects/"]').first();
+    await link.click({ trial: true }).catch(() => {});
+    await link.click({ timeout: 15000 });
     // URL перешёл на детальную страницу
     await expect(page).toHaveURL(/\/projects\/[^/]+$/);
     // В верхней панели больше нет заголовка "Проекты"

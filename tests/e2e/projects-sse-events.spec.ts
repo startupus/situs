@@ -50,11 +50,10 @@ test.describe('Projects SSE', () => {
     }, { timeout: 8000 }).toBe(true);
 
     // Проверяем, что событие пришло в клиент
-    const sseArrived = await expect.poll(async () => {
+    await expect.poll(async () => {
       const tail = await page.evaluate(() => (window as any).__situsEventLog?.slice(-10) || []);
       return tail.some((e: any) => e?.data?.type === 'project_status' && (e?.data?.payload?.id));
-    }, { timeout: 10000 });
-    await sseArrived.toBe(true);
+    }, { timeout: 10000 }).toBe(true);
   });
 });
 
