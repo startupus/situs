@@ -16,7 +16,6 @@ import ProjectWorkspace from './components/legacy/ProjectWorkspace'
 import ProjectSelector from './pages/ProjectSelector'
 import { useAdminTheme } from './contexts/AdminThemeContext'
 import SitusApp from './components/situs/SitusApp'
-import SitusNewApp from './components/situs-new/SitusApp'
 import EnhancedThemeSettings from './components/admin/EnhancedThemeSettings'
 import { McpTestPanel } from './components/mcp/McpTestPanel'
 
@@ -81,12 +80,7 @@ function AppContent() {
           </SiteProvider>
         } />
         
-        {/* Новый интерфейс Situs (situs-new) */}
-        <Route path="/situs-new/*" element={
-          <SiteProvider>
-            <SitusNewApp />
-          </SiteProvider>
-        } />
+        {/* Роуты situs-new удалены: используем единый интерфейс из src/components/situs/** */}
         
         {/* Тестовая страница MCP */}
         <Route path="/mcp-test" element={<McpTestPanel />} />
