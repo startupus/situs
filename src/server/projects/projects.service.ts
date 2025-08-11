@@ -275,6 +275,20 @@ export class ProjectsService {
     if (updateProjectDto.settings !== undefined) updateData.settings = JSON.stringify(updateProjectDto.settings);
     if (updateProjectDto.status !== undefined) updateData.status = this.mapProjectStatus(updateProjectDto.status);
     if ((updateProjectDto as any).isPublished !== undefined) updateData.isPublished = Boolean((updateProjectDto as any).isPublished);
+    // Доменные поля (могут приходить из специализированного DTO)
+    const domain = (updateProjectDto as any).domain as string | undefined;
+    const customDomain = (updateProjectDto as any).customDomain as string | undefined;
+    if (typeof domain === 'string') updateData.domain = domain || null;
+    if (typeof customDomain === 'string') {
+      // Проверяем, что customDomain уникален среди проектов
+      if (customDomain) {
+        const duplicate = await this.prisma.project.findFirst({ where: { id: { not: id }, customDomain: customDomain } });
+        if (duplicate) {
+          throw new BadRequestException('Этот пользовательский домен уже привязан к другому проекту');
+        }
+      }
+      updateData.customDomain = customDomain || null;
+    }
     const updatedProject = await this.prisma.project.update({ where: { id }, data: updateData });
 
     // Если изменили статус — публикуем событие реального времени

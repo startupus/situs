@@ -20,6 +20,7 @@ import { ProjectsService } from './projects.service';
 import { Optional, Inject } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { UpdateProjectDomainDto } from './dto/update-project-domain.dto';
 import { ProjectQueryDto } from './dto/project-query.dto';
 import { UpdateProjectStatusDto } from './dto/update-project-status.dto';
 import { RealtimeEventsService } from '../realtime/realtime-events.service';
@@ -120,6 +121,16 @@ export class ProjectsController {
   @Put(':id')
   async updatePut(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
     return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
+  }
+
+  /**
+   * Обновление доменов проекта (сервисный роут)
+   * - При указании customDomain — включаем 301 редирект с базового домена
+   */
+  @Patch(':id/domains')
+  async updateDomains(@Param('id') id: string, @Body() dto: UpdateProjectDomainDto, @Request() req: any) {
+    const result = await this.projectsService.update(id, dto as any, req.user?.id ?? 'owner-dev');
+    return { success: true, data: { ...result, title: result.name } };
   }
 
   /**
