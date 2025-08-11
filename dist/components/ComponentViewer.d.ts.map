@@ -1,1 +1,0 @@
-{"version":3,"file":"ComponentViewer.d.ts","sourceRoot":"","sources":["../../src/components/ComponentViewer.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAmB,MAAM,OAAO,CAAC;AAGxC,UAAU,oBAAoB;IAC5B,WAAW,EAAE,MAAM,CAAC;IACpB,aAAa,EAAE,MAAM,CAAC;IACtB,OAAO,EAAE,MAAM,IAAI,CAAC;CACrB;AAED,QAAA,MAAM,eAAe,EAAE,KAAK,CAAC,EAAE,CAAC,oBAAoB,CA2UnD,CAAC;AAEF,eAAe,eAAe,CAAC"}

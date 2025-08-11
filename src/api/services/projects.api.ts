@@ -135,7 +135,7 @@ class ProjectsApiService {
    */
   async publishProject(projectId: string): Promise<void> {
     try {
-      const response = await apiClient.patch<ApiResponse<void>>(
+      const response = await apiClient.put<ApiResponse<void>>(
         `${this.baseEndpoint}/${projectId}/publish`
       );
 
@@ -153,7 +153,7 @@ class ProjectsApiService {
    */
   async unpublishProject(projectId: string): Promise<void> {
     try {
-      const response = await apiClient.patch<ApiResponse<void>>(
+      const response = await apiClient.put<ApiResponse<void>>(
         `${this.baseEndpoint}/${projectId}/unpublish`
       );
 
@@ -251,7 +251,9 @@ class ProjectsApiService {
         }
       };
       const subId = getSubId();
-      const url = `${base}/api/projects/events?sub=${encodeURIComponent(subId)}`;
+      // Всегда используем тот же origin, чтобы сработал Vite proxy для /api
+      const origin = (typeof window !== 'undefined') ? window.location.origin : base;
+      const url = `${origin}/api/projects/events?sub=${encodeURIComponent(subId)}`;
       // Локальный журнал событий для отладки
       const pushLog = (entry: any) => {
         try {

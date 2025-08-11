@@ -1,9 +1,11 @@
+/// <reference lib="decorators.legacy" />
 import {
   Controller,
   Get,
   Post,
   Body,
   Patch,
+  Put,
   Param,
   Delete,
   Query,
@@ -15,13 +17,13 @@ import {
 import { Observable, Subscription } from 'rxjs';
 // import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProjectsService } from './projects.service';
-import { Optional } from '@nestjs/common';
+import { Optional, Inject } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ProjectQueryDto } from './dto/project-query.dto';
 import { UpdateProjectStatusDto } from './dto/update-project-status.dto';
 import { RealtimeEventsService } from '../realtime/realtime-events.service';
-import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard';
+// import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard'; // Временно отключено
 
 /**
  * Контроллер проектов
@@ -33,7 +35,17 @@ import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard';
 // @UseGuards(SimpleJwtGuard) // Временно отключено
 // @ApiBearerAuth()
 export class ProjectsController {
-  constructor(private readonly projectsService: ProjectsService, private readonly realtime?: RealtimeEventsService) {}
+  private readonly projectsService: ProjectsService;
+  private readonly realtime?: RealtimeEventsService;
+
+  constructor(
+    projectsService: ProjectsService, 
+    @Optional() @Inject(RealtimeEventsService) realtime?: RealtimeEventsService
+  ) {
+    this.projectsService = projectsService;
+    this.realtime = realtime;
+    console.log('[BOOT] ProjectsController manual injection, projectsService:', !!this.projectsService, 'realtime:', !!this.realtime);
+  }
 
   /**
    * Получение всех проектов с пагинацией и фильтрами
@@ -43,15 +55,30 @@ export class ProjectsController {
   // @ApiResponse({ status: 200, description: 'Список проектов с пагинацией' })
   async findAll(@Query() query: ProjectQueryDto, @Request() req: any) {
     try {
+      console.log('[DEBUG] Controller findAll called, projectsService:', !!this.projectsService, typeof this.projectsService);
       // Для обычных пользователей показываем только их проекты
       if (!query.ownerId && req.user?.id) {
         query.ownerId = req.user.id;
       }
       
       const result = await this.projectsService.findAll(query);
+      
+      // Адаптируем данные для совместимости с фронтом: name -> title
+      const adaptedProjects = result.projects.map((project: any) => ({
+        ...project,
+        title: project.name, // Добавляем title для совместимости с новым интерфейсом
+      }));
+      
       return {
         success: true,
-        data: result,
+        data: {
+          projects: adaptedProjects,
+          total: result.pagination.total,
+          page: result.pagination.page,
+          limit: result.pagination.limit,
+          totalPages: result.pagination.totalPages,
+        },
+        meta: result.pagination,
       };
     } catch (error: any) {
       console.error('Projects findAll error:', error?.message || error);
@@ -90,18 +117,34 @@ export class ProjectsController {
     return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
   }
 
+  @Put(':id')
+  async updatePut(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
+    return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
+  }
+
   /**
    * Смена статуса проекта (активен/неактивен и пр.)
    */
   @Patch(':id/status')
   async updateStatus(@Param('id') id: string, @Body() dto: UpdateProjectStatusDto, @Request() req: any) {
-    const result = await this.projectsService.update(id, { status: dto.status } as any, req.user?.id ?? 'owner-dev');
-    try {
-      // eslint-disable-next-line no-console
-      console.log('[RT] controller publish project_status', { id, status: dto.status });
-      this.realtime?.publishProjectStatus(id, dto.status);
-    } catch {}
-    return { success: true, data: result };
+    // 1) Нормализуем статус и синхронизируем булевый флаг публикации
+    //    Статусы на вход могут быть в любом регистре: ACTIVE / active / published и т.д.
+    const normalizedStatus = (dto.status || '').toString().toUpperCase();
+    const isPublished = normalizedStatus === 'ACTIVE' || normalizedStatus === 'PUBLISHED';
+
+    // 2) Обновляем проект через доменный сервис, передаём и enum-статус, и производный флаг публикации
+    const result = await this.projectsService.update(
+      id,
+      { status: normalizedStatus as any, isPublished } as any,
+      req.user?.id ?? 'owner-dev',
+    );
+
+    // 3) Совместимость с фронтом: добавляем поле title
+    const adaptedResult = { ...result, title: result.name };
+
+    // 4) Публикацию события оставляем на уровне сервиса (ProjectsService.update),
+    //    чтобы избежать дублирования project_status
+    return { success: true, data: adaptedResult };
   }
 
   /**
@@ -115,9 +158,16 @@ export class ProjectsController {
   /**
    * Публикация проекта
    */
-  @Post(':id/publish')
-  async publish(@Param('id') id: string, @Request() req: any) {
-    return { success: true, data: await this.projectsService.publish(id, req.user?.id ?? 'owner-dev') };
+  // Совместимость с фронтом: PUT /projects/:id/publish и /projects/:id/unpublish
+  @Put(':id/publish')
+  async publishPut(@Param('id') id: string, @Request() req: any) {
+    const result = await this.projectsService.publish(id, req.user?.id ?? 'owner-dev');
+    return { success: true, data: { ...result, title: result.name } };
+  }
+  @Put(':id/unpublish')
+  async unpublishPut(@Param('id') id: string, @Request() req: any) {
+    const result = await this.projectsService.update(id, { isPublished: false } as any, req.user?.id ?? 'owner-dev');
+    return { success: true, data: { ...result, title: result.name } };
   }
 
   /**
@@ -145,3 +195,5 @@ export class ProjectsController {
 
   // SSE endpoint перенесён на уровень приложения в main.ts для совместимости
 }
+
+//

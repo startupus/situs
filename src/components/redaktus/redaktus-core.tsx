@@ -8,7 +8,8 @@ import { EditorThemeProvider } from '../../contexts/EditorThemeContext'
 import { ProjectThemeProvider } from '../../contexts/ProjectThemeContext'
 import { LanguageProvider } from '../../contexts/LanguageContext'
 import { ProjectManager, useProjectManager } from './ProjectManager'
-import { getProject, getPage, PageData, ProjectData } from '../../services/projectApi'
+import { PageData, ProjectData } from '../../types/project'
+import { projectsApi } from '../../api/services/projects.api'
 
 // Импорт изолированных CSS тем
 import '../../styles/interface-themes.css'
@@ -280,21 +281,13 @@ const EditorContent: React.FC = () => {
         console.log('🚀 Загрузка проекта:', urlParams.projectId);
 
         // Загружаем проект
-        const projectResponse = await fetch(`http://localhost:3001/api/projects/${urlParams.projectId}`);
-        if (!projectResponse.ok) {
-          throw new Error(`Failed to fetch project: ${projectResponse.statusText}`);
-        }
-        
-        const projectData = await projectResponse.json();
-        const project = projectData.data;
+        const project = await projectsApi.getProject(urlParams.projectId);
         setCurrentProject(project);
         console.log('✅ Проект загружен:', project.name);
 
         // Загружаем страницы проекта
-        const pagesResponse = await fetch(`http://localhost:3001/api/projects/${urlParams.projectId}/pages`);
-        if (pagesResponse.ok) {
-          const pagesData = await pagesResponse.json();
-          const pages = pagesData.data.pages || [];
+        try {
+          const pages = await fetch(`/api/projects/${urlParams.projectId}/pages`).then(r=>r.json()).then(d=>d.data?.pages||[]);
           console.log('📄 Загружены страницы проекта:', pages.length, 'страниц');
           setProjectPages(pages);
 
@@ -336,7 +329,7 @@ const EditorContent: React.FC = () => {
               setCurrentPage(editorPage);
             }
           }
-        }
+        } catch {}
 
         setLoading(false);
       } catch (error) {
@@ -369,8 +362,7 @@ const EditorContent: React.FC = () => {
       };
 
       // Импортируем updatePage из API
-      const { updatePage } = await import('../../services/projectApi');
-      const updatedPage = await updatePage(currentPage.id, updateData);
+      const updatedPage = await fetch(`/api/pages/${currentPage.id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updateData)}).then(r=>r.json()).then(d=>d.data);
       
       console.log('✅ Страница сохранена:', updatedPage.title);
       return { success: true, data: updatedPage };
@@ -467,8 +459,7 @@ const EditorContent: React.FC = () => {
     
     try {
       // Импортируем getPage из API
-      const { getPage } = await import('../../services/projectApi');
-      const pageData = await getPage(pageId);
+      const pageData = await fetch(`/api/pages/${pageId}`).then(r=>r.json()).then(d=>d.data);
       
       // Конвертируем данные из API в формат редактора
       const editorPage = {

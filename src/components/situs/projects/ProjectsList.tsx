@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaPlus, FaGlobe, FaStore, FaBlog, FaCubes, FaFileAlt, FaFolderOpen } from 'react-icons/fa';
 import { FiTrash2 } from 'react-icons/fi';
@@ -39,6 +39,16 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
 
     loadProjects();
   }, [refreshKey]);
+
+  // Перезагрузка данных по требованию (для SSE)
+  const reloadProjects = useCallback(async () => {
+    try {
+      const response = await projectsApi.getProjects();
+      setProjectsData(response.projects || []);
+    } catch (e) {
+      // глушим
+    }
+  }, []);
 
   // Используем данные из API вместо SiteContext
   const projects = useMemo(() => {
@@ -90,6 +100,20 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
   }, [pageSize]);
 
   const error = state.error;
+
+  // Утилита сортировки по orderIndex с сохранением относительного порядка прочих элементов
+  const sortByOrderIndex = useCallback((arr: any[]) => {
+    return arr
+      .map((p: any, i: number) => ({ ...p, __orig: i }))
+      .sort((a: any, b: any) => {
+        const ai = a.orderIndex; const bi = b.orderIndex;
+        if (ai == null && bi == null) return a.__orig - b.__orig;
+        if (ai == null) return 1;
+        if (bi == null) return -1;
+        return ai - bi;
+      })
+      .map(({ __orig, ...rest }: any) => rest);
+  }, []);
 
   const handleDelete = async (projectId: string, projectName: string) => {
     const confirmName = window.prompt(`Для удаления проекта введите его точное название:\n${projectName}`);
@@ -165,6 +189,15 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
   // Sync между вкладками/окнами
   useEffect(() => {
     const apply = (id: string, active: boolean) => setOrderedProjects((prev) => prev.map(p => p.id === id ? { ...p, status: active ? 'active' : 'inactive' } : p));
+    // Дебаунс общего обновления по SSE
+    const reloadTimerRef = { current: 0 as any } as React.MutableRefObject<any>;
+    const scheduleReload = () => {
+      if (reloadTimerRef.current) return;
+      reloadTimerRef.current = window.setTimeout(async () => {
+        reloadTimerRef.current = 0;
+        await reloadProjects();
+      }, 300);
+    };
     const onStorage = (e: StorageEvent) => {
       if (e.key !== 'situs:project-status' || !e.newValue) return;
       try { const { id, active } = JSON.parse(e.newValue); apply(id, active); } catch {}
@@ -177,11 +210,24 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     }
     // Универсальная подписка на SSE/Fetch-стрим (работает в Chrome и FF)
     const unsubscribe = projectsApi.subscribeEvents((evt: any) => {
-      if (evt?.type === 'project_status') {
+      const t = (evt?.type || '').toString();
+      if (t === 'project_status') {
         apply(evt.payload?.id, (evt.payload?.status || '').toUpperCase() === 'ACTIVE');
+        return;
+      }
+      if (t === 'project_reordered') {
+        const id = evt?.payload?.id as string;
+        const orderIndex = evt?.payload?.orderIndex as number | undefined;
+        if (id && typeof orderIndex === 'number') {
+          setOrderedProjects((prev) => sortByOrderIndex(prev.map((p) => p.id === id ? { ...p, orderIndex } : p)));
+        }
+        return;
+      }
+      if (t === 'project_created' || t === 'project_updated' || t === 'project_deleted') {
+        scheduleReload();
       }
     });
-    return () => { window.removeEventListener('storage', onStorage); try { bc?.close(); } catch {}; try { unsubscribe(); } catch {} };
+    return () => { window.removeEventListener('storage', onStorage); try { bc?.close(); } catch {}; try { unsubscribe(); } catch {}; if (reloadTimerRef.current) { try { clearTimeout(reloadTimerRef.current); } catch {} } };
   }, []);
 
   // (удалено) Дублирующая подписка на SSE была объединена в единый эффект выше
@@ -208,7 +254,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
               className="sr-only peer"
             />
             <div className="block h-6 w-10 rounded-full border border-[#BFCEFF] bg-[#EAEEFB] peer-checked:bg-green-500/90 transition-colors"></div>
-            <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4" />
+            <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4 pointer-events-none" />
           </div>
         </label>
       );

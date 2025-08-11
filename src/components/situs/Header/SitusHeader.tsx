@@ -152,7 +152,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                     <FiArrowLeft aria-hidden />
                   </Link>
                 )}
-                <h1 className="text-base font-semibold text-dark dark:text-white truncate">
+                <h1 className="text-xl md:text-2xl font-semibold text-dark dark:text-white truncate">
                   {sectionTitle}
                 </h1>
               </div>

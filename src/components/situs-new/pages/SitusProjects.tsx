@@ -7,7 +7,8 @@ import apiClient from '../../../api/client/ApiClient';
  */
 interface Project {
   id: string;
-  title: string;
+  name: string; // Используем name вместо title для соответствия с backend
+  title?: string; // Оставляем title для совместимости
   description?: string;
   slug: string;
   category?: string;
@@ -291,7 +292,7 @@ const SitusProjects: React.FC = () => {
                       <FiFolder className="h-5 w-5 text-gray-400 mr-3" />
                       <div>
                         <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          {project.title}
+                          {project.title || project.name}
                         </div>
                         {project.description && (
                           <div className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">
