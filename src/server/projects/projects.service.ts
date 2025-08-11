@@ -386,6 +386,67 @@ export class ProjectsService {
     return duplicatedProject;
   }
 
+  /**
+   * Доступы к проекту
+   */
+  async listAccesses(projectId: string) {
+    return this.prisma.projectAccess.findMany({
+      where: { projectId },
+      select: { id: true, userId: true, role: true, grantedAt: true, user: { select: { email: true, username: true } } },
+      orderBy: { grantedAt: 'desc' },
+    });
+  }
+
+  async grantAccess(projectId: string, dto: { userId?: string; userEmail?: string; role: string }, grantedBy: string) {
+    const project = await this.prisma.project.findUnique({ where: { id: projectId } });
+    if (!project) throw new NotFoundException('Проект не найден');
+    const role = (dto.role || '').toUpperCase();
+    if (!['OWNER', 'ADMIN', 'EDITOR', 'VIEWER'].includes(role)) {
+      throw new BadRequestException('Некорректная роль');
+    }
+    let userId = dto.userId;
+    if (!userId && dto.userEmail) {
+      // Находим или создаём пользователя по email
+      const email = dto.userEmail.toLowerCase();
+      const user = await this.prisma.user.upsert({
+        where: { email },
+        update: {},
+        create: { email, username: email.split('@')[0], password: 'set-by-auth' },
+      });
+      userId = user.id;
+    }
+    if (!userId) throw new BadRequestException('Нужно указать userId или userEmail');
+    // Уникальная связка projectId+userId обеспечена в схеме
+    const access = await this.prisma.projectAccess.upsert({
+      where: { projectId_userId: { projectId, userId } as any },
+      update: { role: role as any },
+      create: { projectId, userId, role: role as any, grantedBy },
+      select: { id: true, userId: true, role: true },
+    });
+    return access;
+  }
+
+  async updateAccessRole(projectId: string, accessId: string, role: string) {
+    const normalized = (role || '').toUpperCase();
+    if (!['ADMIN', 'EDITOR', 'VIEWER'].includes(normalized)) {
+      throw new BadRequestException('Недопустимая роль');
+    }
+    const access = await this.prisma.projectAccess.update({
+      where: { id: accessId },
+      data: { role: normalized as any },
+      select: { id: true, userId: true, role: true },
+    });
+    return access;
+  }
+
+  async revokeAccess(projectId: string, accessId: string) {
+    // Проверяем, что доступ относится к проекту
+    const access = await this.prisma.projectAccess.findUnique({ where: { id: accessId } });
+    if (!access || access.projectId !== projectId) throw new NotFoundException('Доступ не найден');
+    await this.prisma.projectAccess.delete({ where: { id: accessId } });
+    return { success: true };
+  }
+
   private mapProjectStatus(status: string): ProjectStatus {
     const upper = status.toUpperCase();
     if ((ProjectStatus as any)[upper]) return (ProjectStatus as any)[upper] as ProjectStatus;
