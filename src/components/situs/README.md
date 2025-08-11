@@ -28,9 +28,10 @@
 - **SitusNotifications** - Система уведомлений с dropdown
 - **SitusUserDropdown** - Меню пользователя
 
-### UI элементы
+### UI слой
 
-- **SitusDarkModeToggle** - Переключатель темной темы
+- Общие UI компоненты вынесены в `src/components/ui/*`. Импортируйте через `@/components/ui`.
+- Переключатель темной темы: `SitusDarkModeToggle` теперь находится в `src/components/ui/SitusDarkModeToggle`.
 
 ## Особенности
 

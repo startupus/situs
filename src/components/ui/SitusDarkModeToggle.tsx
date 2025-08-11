@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCanvasTheme } from "../../../hooks/useCanvasTheme";
+import { useCanvasTheme } from "../../hooks/useCanvasTheme";
 
 const SitusDarkModeToggle: React.FC = () => {
   const { theme, setTheme } = useCanvasTheme();
@@ -71,4 +71,6 @@ const SitusDarkModeToggle: React.FC = () => {
   );
 };
 
-export default SitusDarkModeToggle; 
+export default SitusDarkModeToggle;
+
+
