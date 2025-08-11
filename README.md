@@ -91,6 +91,13 @@ Situs/
   - `project_status` — смена статуса (payload: id, status)
   - `project_reordered` — изменён порядок (payload: id, orderIndex)
 
+### Проект: модель и изоляция
+- Проект — изолированная единица; действия внутри проекта не влияют на другие проекты
+- Владение/доступы: `ownerId` и `ProjectAccess` (OWNER/ADMIN/EDITOR/VIEWER)
+- Домены: `domain` (базовый субдомен), `customDomain` (кастом). При кастоме — 301 с базового домена
+- Компоненты: `ProductType` (WEBSITE, ECOMMERCE, BLOG, LANDING)
+- API: `PATCH /api/projects/:id/domains` для обновления доменных полей
+
 #### API (основное)
 - `GET /api/projects` — список (пагинация/фильтры)
 - `GET /api/projects/:id` — один проект
