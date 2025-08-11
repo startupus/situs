@@ -11,5 +11,5 @@ export * from './data-display'
 export * from './navigation'
 
 // Existing components
-export { default as StatsCard } from './ui/StatsCard'
+export { default as StatsCard } from '@/components/ui/StatsCard'
 export { default as PagesSection } from './sections/PagesSection' 
