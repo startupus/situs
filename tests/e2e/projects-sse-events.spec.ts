@@ -14,6 +14,16 @@ test.describe('Projects SSE', () => {
     await page.goto('http://localhost:5177/projects', { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('.grid .rounded-xl.border', { timeout: 30000 });
 
+    // Ждём рукопожатие SSE, чтобы быть уверенными, что подписка активна
+    await expect.poll(async () => {
+      const tail = await page.evaluate(() => (window as any).__situsEventLog?.slice(-10) || []);
+      return tail.some((e: any) => {
+        const dataStr = e?.data;
+        if (!dataStr || typeof dataStr !== 'string') return false;
+        try { return JSON.parse(dataStr)?.type === 'sse_connected'; } catch { return false; }
+      });
+    }, { timeout: 8000 }).toBe(true);
+
     // Берём первый проект
     const href = await page.locator('.grid .rounded-xl.border a[href^="/projects/"]').first().getAttribute('href');
     expect(href).toBeTruthy();
@@ -51,8 +61,15 @@ test.describe('Projects SSE', () => {
 
     // Проверяем, что событие пришло в клиент
     await expect.poll(async () => {
-      const tail = await page.evaluate(() => (window as any).__situsEventLog?.slice(-10) || []);
-      return tail.some((e: any) => e?.data?.type === 'project_status' && (e?.data?.payload?.id));
+      const tail = await page.evaluate(() => (window as any).__situsEventLog?.slice(-20) || []);
+      return tail.some((e: any) => {
+        const dataStr = e?.data;
+        if (!dataStr || typeof dataStr !== 'string') return false;
+        try {
+          const obj = JSON.parse(dataStr);
+          return obj?.type === 'project_status' && !!obj?.payload?.id;
+        } catch { return false; }
+      });
     }, { timeout: 10000 }).toBe(true);
   });
 });
