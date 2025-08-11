@@ -26,6 +26,16 @@ export class ProjectQueryDto {
   @IsString({ message: 'Статус должен быть строкой' })
   status?: string;
 
+  // Поисковая строка (по name/description/slug)
+  @IsOptional()
+  @IsString({ message: 'Поиск должен быть строкой' })
+  search?: string;
+
+  // Публикация: 'true' | 'false'
+  @IsOptional()
+  @IsString({ message: 'isPublished должен быть строкой true|false' })
+  isPublished?: string;
+
   // @ApiProperty
   @IsOptional()
   @IsString({ message: 'Тип должен быть строкой' })

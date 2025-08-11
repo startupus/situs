@@ -3,7 +3,7 @@ import { FaSearch, FaFile, FaCube, FaHome, FaCircle, FaChevronDown, FaPlus, FaFo
 import { useInterfaceTheme } from '../../hooks/useInterfaceTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import LanguageSwitcher from '../LanguageSwitcher';
-import { PageData, ProjectData } from '../../services/projectApi';
+import { PageData, ProjectData } from '../../types/project';
 
 interface EditorSidebarProps {
   availableBricks?: any[];

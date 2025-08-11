@@ -28,6 +28,7 @@ export default defineConfig({
   },
   server: {
     port: 5177,
+    strictPort: true,
     host: true,
     hmr: {
       port: 24678, // Используем отдельный порт для HMR

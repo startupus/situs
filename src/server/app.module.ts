@@ -1,19 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-// Dev-slim: оставляем только проекты и realtime
-// import { AuthSimpleModule } from './auth/auth-simple.module';
-import { ProjectsModule } from './projects/projects.module';
-// import { UsersModule } from './users/users.module';
-// import { SitusMcpModule } from '../mcp/mcp.module';
 import { DatabaseModule } from './database/database.module';
 import { CommonModule } from './common/common.module';
 import { HealthController } from './health/health.controller';
-// import { AuthTestController } from './auth/auth-test.controller';
-import { ProjectsSimpleController } from './projects/projects-simple.controller';
-// import { OrdersController } from './orders/orders.controller';
-// import { ProductsController } from './products/products.controller';
-// import { ProductsModule } from './products/products.module';
-// import { PagesController } from './pages/pages.controller';
+import { ProjectsModule } from './projects/projects.module';
 import { appConfig } from './config/app.config';
 import { RealtimeModule } from './realtime/realtime.module';
 import { jwtConfig } from './config/jwt.config';
@@ -41,10 +31,12 @@ import { databaseConfig } from './config/database.config';
     // Модули инфраструктуры
     DatabaseModule,
     CommonModule,
-    RealtimeModule,
+    RealtimeModule, // Нужен для SSE
+
+    // Бизнес-модули
+    ProjectsModule,
 
     // Бизнес-модули (dev-slim)
-    ProjectsModule,
 
     // Бизнес-модули: продукты
     // ProductsModule,
@@ -52,6 +44,7 @@ import { databaseConfig } from './config/database.config';
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
   ],
-  controllers: [HealthController, ProjectsSimpleController],
+  controllers: [HealthController],
+  providers: [],
 })
 export class AppModule {}

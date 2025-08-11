@@ -1,27 +1,28 @@
-// import { PartialType } from '@nestjs/swagger';
-import { CreateProjectDto } from './create-project.dto';
-// import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsDateString } from 'class-validator';
+// Обновление проекта должно быть частичным и не требовать name
+import { IsOptional, IsString, IsDateString, MaxLength, IsObject } from 'class-validator';
 
 /**
  * DTO для обновления проекта
  */
-export class UpdateProjectDto extends CreateProjectDto {
-  // @ApiProperty({
-  //   description: 'Статус проекта',
-  //   example: 'published',
-  //   required: false,
-  //   enum: ['draft', 'published', 'archived'],
-  // })
+export class UpdateProjectDto {
+  @IsOptional()
+  @IsString({ message: 'Название должно быть строкой' })
+  @MaxLength(100, { message: 'Название должно содержать максимум 100 символов' })
+  name?: string;
+
+  @IsOptional()
+  @IsString({ message: 'Описание должно быть строкой' })
+  @MaxLength(500, { message: 'Описание должно содержать максимум 500 символов' })
+  description?: string;
+
+  @IsOptional()
+  @IsObject({ message: 'Настройки должны быть объектом' })
+  settings?: Record<string, any>;
+
   @IsOptional()
   @IsString({ message: 'Статус должен быть строкой' })
   status?: string;
 
-  // @ApiProperty({
-  //   description: 'Дата публикации',
-  //   example: '2024-01-01T00:00:00.000Z',
-  //   required: false,
-  // })
   @IsOptional()
   @IsDateString({}, { message: 'Некорректная дата публикации' })
   publishedAt?: string;

@@ -10,34 +10,56 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor() {
+    // Диагностика долгого старта: логируем конструктор
+    console.log('[Prisma] constructor start');
     super({
       log: process.env.NODE_ENV === 'development' ? ['query', 'info', 'warn', 'error'] : ['error'],
     });
+    console.log('[Prisma] constructor end');
   }
 
   /**
    * Подключение к базе данных при инициализации модуля
    */
   async onModuleInit() {
+    console.log('[Prisma] onModuleInit start');
     try {
-      await this.$connect();
+      // Уменьшенные таймауты для dev-режима, чтобы избежать зависания
+      const connectTimeout = process.env.NODE_ENV === 'production' ? 10000 : 3000;
+      
+      await Promise.race([
+        this.$connect(),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('DB connect timeout')), connectTimeout)
+        )
+      ]);
+      
       console.log('✅ Подключение к базе данных установлено');
 
-      // Dev-seed: гарантируем наличие пользователя-владельца для локальной разработки
-      try {
-        const devEmail = 'dev@situs.local';
-        await this.user.upsert({
-          where: { email: devEmail },
-          update: {},
-          create: { username: 'dev', email: devEmail, password: 'dev' },
+      // Dev-seed: не блокируем запуск приложения. Выполняем best-effort без await.
+      if (process.env.NODE_ENV !== 'production') {
+        setImmediate(async () => {
+          try {
+            const devEmail = 'dev@situs.local';
+            await this.user.upsert({
+              where: { email: devEmail },
+              update: {},
+              create: { username: 'dev', email: devEmail, password: 'dev' },
+            });
+            console.log('👤 dev-пользователь готов (best-effort)');
+          } catch (e: any) {
+            console.warn('⚠️ Не удалось создать dev-пользователя (не критично):', (e && (e.message || e)));
+          }
         });
-      } catch (e: any) {
-        console.warn('⚠️ Не удалось создать dev-пользователя (можно игнорировать в проде):', (e && (e.message || e)));
       }
     } catch (error: any) {
       console.error('❌ Ошибка подключения к базе данных:', (error && (error.message || error)));
-      throw error;
+      // В dev-режиме не блокируем запуск: API/health должны быть доступны
+      if (process.env.NODE_ENV === 'production') {
+        throw error;
+      }
     }
+    console.log('[Prisma] onModuleInit end');
   }
 
   /**

@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
@@ -24,86 +23,42 @@ process.on('unhandledRejection', (reason) => {
  * - Глобальные фильтры и интерцепторы
  */
 async function bootstrap() {
+  console.log('[BOOT] Creating Nest application...');
   const app = await NestFactory.create(AppModule);
+  console.log('[BOOT] Nest application created');
 
-  // Глобальная валидация
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    transform: true,
-  }));
+  // Минимальная конфигурация для стабильного запуска
 
-  // Глобальные фильтры и интерцепторы
+  // CORS настройки - минимальные
+  app.enableCors();
+  console.log('[BOOT] CORS enabled');
+
+  // Глобальные пайпы/фильтры/интерцепторы
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useGlobalFilters(new GlobalExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
 
-  // CORS настройки
-  app.enableCors({
-    origin: ['http://localhost:5177', 'http://127.0.0.1:5177', 'http://localhost:3000', 'http://127.0.0.1:3000', '*'],
-    credentials: false,
-    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    maxAge: 86400,
-  });
+  // Грейсфул-шатдаун
+  app.enableShutdownHooks();
 
-  // Swagger документация (отключена для тестирования)
-  // const config = new DocumentBuilder()
-  //   .setTitle('Situs API')
-  //   .setDescription('API для платформы визуального создания сайтов Situs')
-  //   .setVersion('1.0')
-  //   .addBearerAuth()
-  //   .addTag('auth', 'Аутентификация')
-  //   .addTag('projects', 'Проекты')
-  //   .addTag('users', 'Пользователи')
-  //   .addTag('mcp', 'Model Context Protocol')
-  //   .build();
+  // Базовые Express routes
+  try {
+    const httpAdapter: any = app.getHttpAdapter();
+    const instance: any = httpAdapter.getInstance?.();
+    instance?.get?.('/', (_req: any, res: any) => res.json({ ok: true, service: 'situs-api' }));
+    instance?.get?.('/health', (_req: any, res: any) => res.json({ status: 'ok', ts: new Date().toISOString() }));
+  } catch (e) {
+    console.warn('[BOOT] Failed to register early routes:', (e as any)?.message || e);
+  }
 
-  // const document = SwaggerModule.createDocument(app, config);
-  // SwaggerModule.setup('api/docs', app, document);
+  // Swagger отключён
+
+  // Удалены временные Express-ручки /api/projects — используем ProjectsController
 
   const port = Number(process.env.PORT || 3001);
   try { console.log(`[BOOT] About to listen on port ${port}`); } catch {}
-  // Ручной SSE endpoint на уровне приложения (Express)
-  const httpAdapter: any = app.getHttpAdapter();
-  const instance: any = httpAdapter.getInstance?.();
-  try {
-    const { ProjectsEventsService } = await import('./projects/projects-events.service');
-    const events = app.get(ProjectsEventsService);
-    // Preflight для FF (на всякий случай)
-    instance.options('/api/projects/events', (req: any, res: any) => {
-      const origin = req.headers.origin || '*';
-      res.setHeader('Access-Control-Allow-Origin', origin);
-      res.setHeader('Vary', 'Origin');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-      res.status(204).end();
-    });
-
-    instance.get('/api/projects/events', (req: any, res: any) => {
-      const origin = req.headers.origin || '*';
-      res.setHeader('Access-Control-Allow-Origin', origin);
-      res.setHeader('Vary', 'Origin');
-      res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
-      res.setHeader('Cache-Control', 'no-cache, no-transform');
-      res.setHeader('Connection', 'keep-alive');
-      res.setHeader('X-Accel-Buffering', 'no');
-      res.flushHeaders?.();
-
-      // Отправляем стартовый комментарий, чтобы FF зафиксировал открытие потока
-      const subId = (req.query?.sub as string) || 'unknown';
-      res.write(`: connected sub=${subId}\n`);
-      res.write(`retry: 2000\n\n`);
-
-      const send = (data: any) => res.write(`data: ${JSON.stringify(data)}\n\n`);
-      const subscription = (events as any).asObservable().subscribe((evt: any) => send(evt.data ?? evt));
-      // Пульс
-      const heartbeat = setInterval(() => { try { res.write(`: ping\n\n`); } catch {} }, 15000);
-      req.on('close', () => { try { subscription.unsubscribe(); } catch {}; try { clearInterval(heartbeat); } catch {}; try { res.end(); } catch {} });
-    });
-  } catch (e: any) {
-    console.warn('SSE not initialized:', e && (e.message || e));
-  }
-  await app.listen(port, '0.0.0.0');
+  await app.listen(port);
+  console.log(`[BOOT] Listening OK on http://localhost:${port}`);
   console.log('🚀 Situs NestJS Server запущен и слушает порт', port);
   console.log(`🔗 API базовый URL: http://localhost:${port}/api`);
   console.log(`💚 Health: http://localhost:${port}/health`);
@@ -112,7 +67,27 @@ async function bootstrap() {
   console.log('🚀 Situs NestJS Server запущен!');
   console.log(`🔗 API базовый URL: http://localhost:${port}/api`);
   console.log(`💚 Health: http://localhost:${port}/health`);
+
+  // SSE реализован в RealtimeController (@Sse('projects/events'))
+
+  // Дублирующие endpoints удалены - перенесены в начало main.ts перед app.listen()
 }
+
+// Обработка сигналов для корректного завершения
+function setupSignalHandlers() {
+  const shutdown = async (signal: string) => {
+    try { console.log(`[SHUTDOWN] Received ${signal}`); } catch {}
+    try {
+      // В Nest 11 рекомендуется закрывать приложение через app.close(), но у нас нет app в этой области.
+      // Поэтому полагаемся на enableShutdownHooks + OnModuleDestroy у PrismaService.
+    } catch {}
+    process.exit(0);
+  };
+  process.on('SIGINT', () => shutdown('SIGINT'));
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+}
+
+setupSignalHandlers();
 
 bootstrap().catch((error) => {
   console.error('❌ Ошибка запуска сервера:', error);

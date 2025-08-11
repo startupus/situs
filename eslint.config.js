@@ -50,6 +50,18 @@ export default [
       '@typescript-eslint/no-misused-promises': 'warn',
     },
   },
+  // NestJS сервер: используем отдельный tsconfig с поддержкой декораторов
+  {
+    files: ['src/server/**/*.ts'],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        project: './tsconfig.nestjs.json',
+      },
+    },
+  },
   // Игнорируемые файлы и папки
   {
     ignores: [
