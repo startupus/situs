@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FiPlus, FiEdit3, FiTrash2, FiEye, FiGlobe, FiClock, FiCheck, FiFileText } from 'react-icons/fi';
 import { useProject } from '../../contexts/ProjectContext';
 import { CreatePageData } from '../../types/project';
-import Button from '../ui/Button';
-import StatsCard, { StatsGrid } from '../ui/StatsCard';
+import Button from '@/components/ui/Button';
+import StatsCard, { StatsGrid } from '@/components/ui/StatsCard';
 
 interface PagesSectionProps {
   onEditPage?: (pageId: string) => void;
