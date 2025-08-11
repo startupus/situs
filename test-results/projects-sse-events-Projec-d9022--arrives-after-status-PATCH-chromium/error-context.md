@@ -1,0 +1,119 @@
+# Page snapshot
+
+```yaml
+- link "S":
+  - /url: /
+- navigation:
+  - list:
+    - listitem:
+      - link:
+        - /url: /
+    - listitem:
+      - link:
+        - /url: /projects
+    - listitem:
+      - link:
+        - /url: /orders
+    - listitem:
+      - link:
+        - /url: /marketing
+    - listitem:
+      - link:
+        - /url: /users
+    - listitem:
+      - link:
+        - /url: /support
+    - listitem
+    - listitem:
+      - link:
+        - /url: /section-settings
+- button "АС"
+- banner:
+  - link "Назад":
+    - /url: /
+  - heading "Проекты" [level=1]
+  - button "Поиск"
+  - button "Добавить"
+- button "Dev Project 1754944405640-1 домен не настроен Подробнее":
+  - button "Dev Project 1754944405640-1 домен не настроен":
+    - img
+    - checkbox
+    - heading "Dev Project 1754944405640-1" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme7kl5sc00049k22vk6y6k7h
+  - button "Удалить проект":
+    - img
+- button "UI Created домен не настроен Подробнее":
+  - button "UI Created домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "UI Created" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme78nutd00049kqr5ud1tjze
+  - button "Удалить проект":
+    - img
+- button "Demo Project 5 домен не настроен Подробнее":
+  - button "Demo Project 5 домен не настроен":
+    - img
+    - checkbox
+    - heading "Demo Project 5" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme6dp5hl000a9km7khhilvf8
+  - button "Удалить проект":
+    - img
+- button "Demo Project 3 домен не настроен Подробнее":
+  - button "Demo Project 3 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Demo Project 3" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme6dp5hi00069km7b8uwqu23
+  - button "Удалить проект":
+    - img
+- button "Demo Project 4 домен не настроен Подробнее":
+  - button "Demo Project 4 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Demo Project 4" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme6dp5hk00089km7gav3ayf3
+  - button "Удалить проект":
+    - img
+- button "Demo Project 2 домен не настроен Подробнее":
+  - button "Demo Project 2 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Demo Project 2" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cme6dp5hh00049km79vez29lk
+  - button "Удалить проект":
+    - img
+- button "Demo домен не настроен Подробнее":
+  - button "Demo домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Demo" [level=3]
+    - text: домен не настроен
+    - link "WEBSITE":
+      - /url: /projects/cme6aku9m00029k4j88ogyxfq
+      - img
+  - link "Подробнее":
+    - /url: /projects/cme6aku9m00029k4j88ogyxfq
+  - button "Удалить проект":
+    - img
+- status
+- text: "На странице:"
+- combobox:
+  - option "3"
+  - option "12"
+  - option "24"
+  - option "48"
+  - option "100" [selected]
+  - option "200"
+```
