@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FiArrowLeft, FiSettings } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 import { projectsApi } from '../../../api/services/projects.api';
 import { ProjectData } from '../../../types/project';
 import { useProject } from '../../../contexts/ProjectContext';
+import { DndContext, PointerSensor, useSensor, useSensors, DragEndEvent, closestCenter, DragOverlay } from '@dnd-kit/core';
+import { SortableContext, rectSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface ProjectPageProps {}
 
@@ -18,7 +21,19 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
       return { loadProject: async () => {} } as any;
     }
   })();
-  // временно: страница очищена до заголовка
+  // DnD sensors
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { delay: 150, tolerance: 5 } })
+  );
+
+  // Локальные списки: верхние плитки (продукты) и виджеты (ниже)
+  const [productsOrder, setProductsOrder] = useState<Array<{ id: string; name: string; type: string }>>([]);
+  const [widgetsOrder, setWidgetsOrder] = useState<Array<{ id: string; title: string }>>([
+    { id: 'w-currency', title: 'Курсы валют' },
+    { id: 'w-weather', title: 'Погода' },
+    { id: 'w-clock-moscow', title: 'Часы: Москва' },
+    { id: 'w-clock-hk', title: 'Часы: Гонконг' },
+  ]);
 
   useEffect(() => {
     const loadProject = async () => {
@@ -27,7 +42,9 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
       setLoading(true);
       try {
         const response = await projectsApi.getProject(projectId);
-        setProject(response);
+        setProject(response as any);
+        const prods = ((response as any)?.products || []).map((p: any) => ({ id: p.id, name: p.type, type: p.type }));
+        setProductsOrder(prods);
       } catch (error) {
         console.error('Ошибка загрузки проекта:', error);
       } finally {
@@ -46,7 +63,45 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     }
   }, [projectId]);
 
-  // все детали/вкладки будут добавлены на следующем шаге согласно ТЗ
+  // DnD компоненты
+  const SortableTile: React.FC<{ item: { id: string; name: string; type?: string } }> = ({ item }) => {
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
+    const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
+    return (
+      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 shadow-sm cursor-grab active:cursor-grabbing">
+        <div className="text-sm text-body-color dark:text-dark-6">Компонент</div>
+        <div className="text-lg font-semibold text-dark dark:text-white">{item.name}</div>
+      </div>
+    );
+  };
+
+  const SortableWidget: React.FC<{ item: { id: string; title: string } }> = ({ item }) => {
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
+    const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
+    return (
+      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 shadow-sm cursor-grab active:cursor-grabbing h-32">
+        <div className="text-sm text-body-color dark:text-dark-6">Виджет</div>
+        <div className="text-lg font-semibold text-dark dark:text-white">{item.title}</div>
+      </div>
+    );
+  };
+
+  const onTilesDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = productsOrder.findIndex((p) => p.id === active.id);
+    const newIndex = productsOrder.findIndex((p) => p.id === over.id);
+    setProductsOrder(arrayMove(productsOrder, oldIndex, newIndex));
+    // TODO: при необходимости сохранение порядка на бэке аналогично списку проектов (settings.orderIndex на уровне продукта)
+  };
+
+  const onWidgetsDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = widgetsOrder.findIndex((w) => w.id === active.id);
+    const newIndex = widgetsOrder.findIndex((w) => w.id === over.id);
+    setWidgetsOrder(arrayMove(widgetsOrder, oldIndex, newIndex));
+  };
 
   if (loading) {
     return (
@@ -84,7 +139,37 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   // временно нет действий в хедере
 
   return (
-    <div className="p-6" />
+    <div className="p-6 space-y-8">
+      {/* Верх: плитки компонентов проекта (перетаскиваемые) */}
+      <section>
+        <h2 className="text-lg font-semibold text-dark dark:text-white mb-4">Компоненты проекта</h2>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onTilesDragEnd}>
+          <SortableContext items={productsOrder.map((p) => p.id)} strategy={rectSortingStrategy}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {productsOrder.map((item) => (
+                <SortableTile key={item.id} item={item} />
+              ))}
+            </div>
+          </SortableContext>
+          <DragOverlay />
+        </DndContext>
+      </section>
+
+      {/* Низ: дашборд‑виджеты с перетаскиванием (референс главной) */}
+      <section>
+        <h2 className="text-lg font-semibold text-dark dark:text-white mb-4">Виджеты</h2>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onWidgetsDragEnd}>
+          <SortableContext items={widgetsOrder.map((w) => w.id)} strategy={rectSortingStrategy}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {widgetsOrder.map((w) => (
+                <SortableWidget key={w.id} item={w} />
+              ))}
+            </div>
+          </SortableContext>
+          <DragOverlay />
+        </DndContext>
+      </section>
+    </div>
   );
 };
 
