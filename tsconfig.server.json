@@ -23,8 +23,6 @@
     "dist",
     "**/*.test.ts",
     "**/*.spec.ts",
-    "src/server/auth/**",
-    "src/server/users/**",
     "src/mcp/**"
   ]
 }

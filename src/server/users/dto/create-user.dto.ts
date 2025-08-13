@@ -10,7 +10,7 @@ export class CreateUserDto {
     example: 'user@example.com',
   })
   @IsEmail({}, { message: 'Некорректный формат email' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'Пароль пользователя',
@@ -19,7 +19,7 @@ export class CreateUserDto {
   @IsString()
   @MinLength(8, { message: 'Пароль должен содержать минимум 8 символов' })
   @MaxLength(50, { message: 'Пароль должен содержать максимум 50 символов' })
-  password: string;
+  password!: string;
 
   @ApiProperty({
     description: 'Имя пользователя',
@@ -27,7 +27,7 @@ export class CreateUserDto {
   })
   @IsString()
   @MaxLength(100, { message: 'Имя должно содержать максимум 100 символов' })
-  name: string;
+  name!: string;
 
   @ApiProperty({
     description: 'Аватар пользователя',

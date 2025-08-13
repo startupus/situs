@@ -14,6 +14,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
+import { Request as ExpressRequest } from 'express';
 
 /**
  * Контроллер аутентификации
@@ -58,8 +59,8 @@ export class AuthController {
     type: AuthResponseDto,
   })
   @ApiResponse({ status: 401, description: 'Неверные учетные данные' })
-  async login(@Body() loginDto: LoginDto, @Request() req): Promise<AuthResponseDto> {
-    return this.authService.login(req.user);
+  async login(@Body() _loginDto: LoginDto, @Request() req: ExpressRequest): Promise<AuthResponseDto> {
+    return this.authService.login((req as any).user);
   }
 
   /**
@@ -71,8 +72,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Получение профиля пользователя' })
   @ApiResponse({ status: 200, description: 'Профиль пользователя' })
   @ApiResponse({ status: 401, description: 'Не авторизован' })
-  async getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req: ExpressRequest) {
+    return (req as any).user;
   }
 
   /**
