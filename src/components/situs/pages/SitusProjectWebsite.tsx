@@ -40,6 +40,16 @@ const SitusProjectWebsite: React.FC = () => {
     loadProject();
   }, [projectId]);
 
+  // Слушатель на иконку настроек сайта из верхней панели — хук должен быть до любых ранних return
+  useEffect(() => {
+    const handler = (e: any) => {
+      const tab = e?.detail?.tab as 'menu' | 'design' | 'seo' | undefined;
+      setActiveTab(tab || 'menu');
+    };
+    window.addEventListener('situs:open-website-settings', handler);
+    return () => window.removeEventListener('situs:open-website-settings', handler);
+  }, []);
+
   if (loading) {
     return (
       <div className="p-6">
@@ -77,15 +87,6 @@ const SitusProjectWebsite: React.FC = () => {
     );
   }
 
-  // Слушатель на иконку настроек сайта из верхней панели
-  useEffect(() => {
-    const handler = (e: any) => {
-      const tab = e?.detail?.tab as 'menu' | 'design' | 'seo' | undefined;
-      setActiveTab(tab || 'menu');
-    };
-    window.addEventListener('situs:open-website-settings', handler);
-    return () => window.removeEventListener('situs:open-website-settings', handler);
-  }, []);
 
   const tabs = [
     { id: 'pages', name: 'Страницы', icon: '📄' },
