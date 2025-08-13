@@ -288,8 +288,13 @@ const EditorContent: React.FC = () => {
         // Загружаем страницы проекта
         try {
           const pages = await fetch(`/api/projects/${urlParams.projectId}/pages`).then(r=>r.json()).then(d=>d.data?.pages||[]);
-          console.log('📄 Загружены страницы проекта:', pages.length, 'страниц');
-          setProjectPages(pages);
+          // Нормализуем content: может быть строкой из БД
+          const normalized = pages.map((p:any)=>({
+            ...p,
+            content: typeof p.content === 'string' && p.content ? JSON.parse(p.content) : (p.content || { blocks: [] })
+          }));
+          console.log('📄 Загружены страницы проекта:', normalized.length, 'страниц');
+          setProjectPages(normalized);
 
           // Загружаем конкретную страницу, если указана
           if (urlParams.pageId) {
@@ -302,11 +307,11 @@ const EditorContent: React.FC = () => {
                 type: 'page',
                 slug: pageToLoad.slug,
                 title: pageToLoad.title,
-                content: pageToLoad.content?.blocks || [],
+                content: (pageToLoad.content?.blocks) || [],
                 languages: {
                   ru: {
                     title: pageToLoad.title,
-                    content: pageToLoad.content?.blocks || []
+                    content: (pageToLoad.content?.blocks) || []
                   },
                   en: {
                     title: pageToLoad.title + ' (EN)',
@@ -460,6 +465,7 @@ const EditorContent: React.FC = () => {
     try {
       // Импортируем getPage из API
       const pageData = await fetch(`/api/pages/${pageId}`).then(r=>r.json()).then(d=>d.data);
+      const contentObj = typeof pageData.content === 'string' && pageData.content ? JSON.parse(pageData.content) : (pageData.content || { blocks: [] });
       
       // Конвертируем данные из API в формат редактора
       const editorPage = {
@@ -467,11 +473,11 @@ const EditorContent: React.FC = () => {
         type: 'page',
         slug: pageData.slug,
         title: pageData.title,
-        content: pageData.content?.blocks || [],
+        content: contentObj.blocks || [],
         languages: {
           ru: {
             title: pageData.title,
-            content: pageData.content?.blocks || []
+            content: contentObj.blocks || []
           },
           en: {
             title: pageData.title + ' (EN)',
@@ -567,7 +573,7 @@ const EditorContent: React.FC = () => {
       >
         {/* Верхняя панель над всем редактором - часть интерфейса */}
         <EditorNavbar 
-          currentPage="Home"
+          currentPage={currentPage?.title || 'Page'}
           onSave={handleSave}
           autosaveEnabled={true}
           isSaving={isSaving}
