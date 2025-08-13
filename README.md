@@ -18,11 +18,16 @@ cd Situs
 # Установка зависимостей
 npm install
 
-# Генерация Prisma клиента
+# Генерация Prisma клиента и синхронизация схемы
 npx prisma generate
+npx prisma db push
 
-# Запуск backend (порт 3001)
-npm run dev:api
+# Демо-данные (проекты + Website + страницы)
+npm run db:seed:demo
+
+# Запуск backend (стабильно из dist, порт 3002)
+npm run nestjs:build
+PORT=3002 npm run serve:api:dist
 
 # В новом терминале — запуск frontend (порт 5177)
 npm run dev:situs
@@ -30,8 +35,8 @@ npm run dev:situs
 
 ### Доступ к приложению
 - **Frontend**: http://localhost:5177
-- **Backend API**: http://localhost:3001
-- **API Health Check**: http://localhost:3001/health
+- **Backend API**: http://localhost:3002
+- **API Health Check**: http://localhost:3002/health
 
 ## 📁 Структура проекта
 
@@ -44,7 +49,8 @@ Situs/
 │   ├── pages/             # Страницы приложения
 │   └── ...
 ├── src/server/            # Backend (NestJS, единый бэкенд)
-│   ├── projects/          # Проекты (CRUD, статус, SSE)
+│   ├── projects/          # Проекты (CRUD, статус, доступы, события)
+│   ├── pages/             # Website Pages API (список/PUT/reorder)
 │   ├── realtime/          # Глобальная шина событий (SSE)
 │   ├── database/          # Prisma service и модуль БД
 │   ├── common/            # Фильтры/интерсепторы/пайпы
@@ -65,15 +71,14 @@ Situs/
 ### Backend
 - **Один бэкенд**: NestJS + TypeScript
 - **Prisma** (SQLite для dev, `prisma/dev.db`)
-- Модульная архитектура (в dev включены: projects, realtime, health, database, common)
+- Модульная архитектура: projects, pages (Website), realtime, health, database, common
 - Реалтайм через SSE: эндпоинт `GET /api/projects/events` (text/event-stream)
 
-### Текущее состояние (2025‑08‑11)
-- Один backend (NestJS, `src/server/**`), временные Express/минимальные сервера удалены из исходников
-- Реалтайм через единый SSE‑эндпоинт: `GET /api/projects/events` (+ `GET /api/projects/heartbeat` для keep‑alive)
-- Данные проектов — Prisma (SQLite dev), сборка `dist/` для стабильного запуска
-- Переключение статуса проекта (`PATCH /api/projects/:id/status`) обновляет `status` и синхронизирует `isPublished`, событие: `project_status`
-- DnD‑порядок карточек сохраняется в `Project.settings.orderIndex` и транслируется событием `project_reordered`
+### Текущее состояние
+- Backend (NestJS, `src/server/**`) — стабильный запуск из `dist/`
+- Реалтайм: `GET /api/projects/events` + `GET /api/projects/heartbeat`
+- Website Pages: `GET /api/projects/:projectId/pages` (фильтр по Product.type='WEBSITE'), `PATCH /api/projects/:projectId/pages/reorder`, `PUT /api/pages/:id`
+- Статусы проектов: `PATCH /api/projects/:id/status` (+ событие `project_status`)
 
 #### Frontend: источник правды
 - Используется интерфейс в `src/components/situs/**` (страницы — `src/components/situs/pages/**`)
@@ -109,9 +114,8 @@ Situs/
 ### API и интеграция
 - Централизованный API‑клиент (`src/api/client.ts`)
 - Сервис проектов (`src/api/services/projects.api.ts`)
-- Проксирование `/api` через Vite (dev)
+- Проксирование `/api` через Vite (dev) на `http://localhost:3002`
 - SSE `/api/projects/events` для реалтайм‑синхронизации
-- Проксирование `/api` через Vite (dev) на `http://localhost:3001`
 
 ## 🔧 Основные функции
 
@@ -126,15 +130,15 @@ Situs/
 
 1) Запуск backend (Nest):
 ```bash
-npm run dev:api
+PORT=3002 npm run serve:api:dist
 ```
-Проверка здоровья: `http://localhost:3001/health`
+Проверка здоровья: `http://localhost:3002/health`
 
 2) Запуск frontend (Vite):
 ```bash
 npm run dev:situs
 ```
-Frontend доступен на `http://localhost:5177`. Все запросы `/api/**` идут через proxy на порт 3001.
+Frontend доступен на `http://localhost:5177`. Все запросы `/api/**` идут через proxy на порт 3002.
 
 3) Реалтайм (SSE):
 ```bash
@@ -150,10 +154,12 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
 
 
 ### 🚧 В разработке
-- **Редактор**: Визуальный конструктор сайтов
-- **Аутентификация**: Система пользователей
-- **Файлы**: Загрузка и управление медиа
-- **PostgreSQL**: Миграция с SQLite на PostgreSQL
+- **Доступы**: GlobalRole, Account/AccountMembership/AgencyClient, Policies/Guards
+- **Website UX**: создание/удаление/редактирование страниц, DnD‑сохранение, поиск/фильтры, пагинация
+- **Shop**: каталог (товар/категория), отдельные API/UI
+- **Домены**: привязка/валидация, sitemap/robots
+- **Тесты**: Playwright E2E для потоков Projects→Website→Pages и SSE
+- **Dev**: стабилизация ts/tsx dev‑рантайма, CI/CD (build + migrate + e2e)
 
 ## 📚 Документация
 
@@ -171,14 +177,14 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
 
 ### Команды
 ```bash
-# Запуск frontend
-npm run dev
+# Frontend (Vite)
+npm run dev:situs
 
-# Запуск backend
-cd backend && npm run dev
+# Backend (NestJS из dist)
+npm run nestjs:build && PORT=3002 npm run serve:api:dist
 
-# Сборка для продакшена
-npm run build
+# Prisma
+npx prisma generate && npx prisma db push && npm run db:seed:demo
 
 # Тесты Playwright
 npx playwright test
