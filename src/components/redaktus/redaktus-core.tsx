@@ -374,19 +374,35 @@ const EditorContent: React.FC = () => {
         metaKeywords: pageData.meta?.keywords || currentPage.meta?.keywords || currentPage.metaKeywords
       } as any;
 
-      // Импортируем updatePage из API
-      const updatedPage = await fetch(`/api/pages/${currentPage.id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updateData)}).then(r=>r.json()).then(d=>d.data);
+      // Импортируем updatePage из API с проверкой статуса
+      const response = await fetch(`/api/pages/${currentPage.id}` ,{
+        method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(updateData)
+      });
+      if (!response.ok) {
+        const text = await response.text().catch(()=> '');
+        throw new Error(`HTTP ${response.status}: ${text || 'Save failed'}`);
+      }
+      const json = await response.json().catch(()=>({}));
+      const updatedPage = json?.data;
+      if (!updatedPage) {
+        throw new Error('Пустой ответ сервера при сохранении страницы');
+      }
       // Обновляем локальное состояние
-      setCurrentPage((prev:any)=>({
-        ...prev,
-        title: updatedPage.title,
-        content: safeJsonParse(updatedPage.content, { blocks: [] })?.blocks || prev.content,
-        meta: {
-          title: updatedPage.metaTitle || prev.meta?.title,
-          description: updatedPage.metaDescription || prev.meta?.description,
-          keywords: updatedPage.metaKeywords || prev.meta?.keywords,
-        }
-      }));
+      setCurrentPage((prev:any)=>{
+        const contentBlocks = safeJsonParse(updatedPage.content, { blocks: [] })?.blocks || prev.content;
+        return {
+          ...prev,
+          title: updatedPage.title ?? prev.title,
+          content: contentBlocks,
+          meta: {
+            title: updatedPage.metaTitle ?? prev.meta?.title,
+            description: updatedPage.metaDescription ?? prev.meta?.description,
+            keywords: updatedPage.metaKeywords ?? prev.meta?.keywords,
+          }
+        };
+      });
       
       console.log('✅ Страница сохранена:', updatedPage.title);
       return { success: true, data: updatedPage };
@@ -483,7 +499,11 @@ const EditorContent: React.FC = () => {
     
     try {
       // Импортируем getPage из API
-      const pageData = await fetch(`/api/pages/${pageId}`).then(r=>r.json()).then(d=>d.data);
+      const res = await fetch(`/api/pages/${pageId}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const payload = await res.json().catch(()=>({}));
+      const pageData = payload?.data;
+      if (!pageData) throw new Error('Страница не найдена');
       const contentObj = safeJsonParse(pageData.content, { blocks: [] });
       
       // Конвертируем данные из API в формат редактора
@@ -509,11 +529,11 @@ const EditorContent: React.FC = () => {
         },
         availableLanguages: ['ru', 'en', 'de'],
         defaultLanguage: 'ru',
-        projectId: pageData.projectId,
+        projectId: pageData.projectId || currentProject?.id,
         meta: {
-          title: pageData.metaTitle,
-          description: pageData.metaDescription,
-          keywords: pageData.metaKeywords
+          title: pageData.metaTitle || '',
+          description: pageData.metaDescription || '',
+          keywords: pageData.metaKeywords || ''
         }
       };
 
