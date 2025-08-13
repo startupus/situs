@@ -18,8 +18,13 @@ export class UsersService {
    */
   async create(createUserDto: CreateUserDto): Promise<User> {
     const username = createUserDto.email?.split('@')[0] || 'user';
+    const profile = JSON.stringify({
+      name: createUserDto.name || '',
+      avatar: createUserDto.avatar || '',
+      bio: '',
+    });
     const user = await this.prisma.user.create({
-      data: { ...createUserDto, username },
+      data: { email: createUserDto.email, password: createUserDto.password, username, profile },
     });
 
     return this.excludePassword(user);

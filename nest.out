@@ -1169,3 +1169,81 @@ UnauthorizedException: Unauthorized
     at module.exports [as verify] (/workspace/node_modules/jsonwebtoken/verify.js:70:12)
     at module.exports [as JwtVerifier] (/workspace/node_modules/passport-jwt/lib/verify_jwt.js:4:16)
     at /workspace/node_modules/passport-jwt/lib/strategy.js:104:25
+prisma:query SELECT 1
+prisma:query SELECT `main`.`projects`.`id`, `main`.`projects`.`customDomain`, `main`.`projects`.`domain`, `main`.`projects`.`isPublished`, `main`.`projects`.`settings` FROM `main`.`projects` WHERE (`main`.`projects`.`customDomain` = ? OR `main`.`projects`.`domain` = ?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`projects`.`id`, `main`.`projects`.`name`, `main`.`projects`.`description`, `main`.`projects`.`slug`, `main`.`projects`.`domain`, `main`.`projects`.`customDomain`, `main`.`projects`.`isPublished`, `main`.`projects`.`settings`, `main`.`projects`.`theme`, `main`.`projects`.`ownerId`, `main`.`projects`.`accountId`, `main`.`projects`.`status`, `main`.`projects`.`createdAt`, `main`.`projects`.`updatedAt` FROM `main`.`projects` WHERE (`main`.`projects`.`customDomain` = ? OR `main`.`projects`.`domain` = ?) LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`users`.`id`, `main`.`users`.`username`, `main`.`users`.`email`, `main`.`users`.`password`, `main`.`users`.`role`, `main`.`users`.`globalRole`, `main`.`users`.`status`, `main`.`users`.`subscriptionPlan`, `main`.`users`.`limits`, `main`.`users`.`profile`, `main`.`users`.`createdAt`, `main`.`users`.`updatedAt` FROM `main`.`users` WHERE (`main`.`users`.`email` = ? AND 1=1) LIMIT ? OFFSET ?
+prisma:error 
+Invalid `this.prisma.user.create()` invocation in
+/workspace/dist/server/users/users.service.js:29:45
+
+  26  */
+  27 async create(createUserDto) {
+  28     const username = createUserDto.email?.split('@')[0] || 'user';
+→ 29     const user = await this.prisma.user.create({
+           data: {
+             email: "fix@ex.com",
+             password: "$2b$12$qwDTE36sDPrQcKvYavqewuDrzOTD2Lx24Kk7RPYHzeX49UA71VFNi",
+             name: "Fix",
+             ~~~~
+             username: "fix",
+         ?   id?: String,
+         ?   role?: UserRole,
+         ?   globalRole?: GlobalRole,
+         ?   status?: UserStatus,
+         ?   subscriptionPlan?: String | Null,
+         ?   limits?: String | Null,
+         ?   profile?: String | Null,
+         ?   createdAt?: DateTime,
+         ?   updatedAt?: DateTime,
+         ?   ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput,
+         ?   ownedAccounts?: AccountCreateNestedManyWithoutOwnerInput,
+         ?   projectAccesses?: ProjectAccessCreateNestedManyWithoutUserInput,
+         ?   grantedAccesses?: ProjectAccessCreateNestedManyWithoutGrantedByUserInput,
+         ?   accountMemberships?: AccountMembershipCreateNestedManyWithoutUserInput,
+         ?   media?: MediaCreateNestedManyWithoutUserInput
+           }
+         })
+
+Unknown argument `name`. Did you mean `role`? Available options are marked with ?.
+[31m[Nest] 28379  - [39m08/13/2025, 5:49:09 PM [31m  ERROR[39m [38;5;3m[GlobalExceptionFilter] [39m[31mPOST /auth/register - 500 - Внутренняя ошибка сервера [traceId=mea9lmer-s5kd0kxjz4][39m
+PrismaClientValidationError: 
+Invalid `this.prisma.user.create()` invocation in
+/workspace/dist/server/users/users.service.js:29:45
+
+  26  */
+  27 async create(createUserDto) {
+  28     const username = createUserDto.email?.split('@')[0] || 'user';
+→ 29     const user = await this.prisma.user.create({
+           data: {
+             email: "fix@ex.com",
+             password: "$2b$12$qwDTE36sDPrQcKvYavqewuDrzOTD2Lx24Kk7RPYHzeX49UA71VFNi",
+             name: "Fix",
+             ~~~~
+             username: "fix",
+         ?   id?: String,
+         ?   role?: UserRole,
+         ?   globalRole?: GlobalRole,
+         ?   status?: UserStatus,
+         ?   subscriptionPlan?: String | Null,
+         ?   limits?: String | Null,
+         ?   profile?: String | Null,
+         ?   createdAt?: DateTime,
+         ?   updatedAt?: DateTime,
+         ?   ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput,
+         ?   ownedAccounts?: AccountCreateNestedManyWithoutOwnerInput,
+         ?   projectAccesses?: ProjectAccessCreateNestedManyWithoutUserInput,
+         ?   grantedAccesses?: ProjectAccessCreateNestedManyWithoutGrantedByUserInput,
+         ?   accountMemberships?: AccountMembershipCreateNestedManyWithoutUserInput,
+         ?   media?: MediaCreateNestedManyWithoutUserInput
+           }
+         })
+
+Unknown argument `name`. Did you mean `role`? Available options are marked with ?.
+    at _n (/workspace/node_modules/@prisma/client/runtime/library.js:29:1363)
+    at ri.handleRequestError (/workspace/node_modules/@prisma/client/runtime/library.js:121:7102)
+    at ri.handleAndLogRequestError (/workspace/node_modules/@prisma/client/runtime/library.js:121:6784)
+    at ri.request (/workspace/node_modules/@prisma/client/runtime/library.js:121:6491)
+    at async l (/workspace/node_modules/@prisma/client/runtime/library.js:130:9812)
+    at async UsersService.create (/workspace/dist/server/users/users.service.js:29:22)
+    at async AuthService.register (/workspace/dist/server/auth/auth.service.js:79:22)

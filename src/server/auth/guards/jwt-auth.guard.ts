@@ -22,13 +22,16 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const req = context.switchToHttp().getRequest();
     const url: string = req.originalUrl || req.url || '';
 
-    // Dev/test token bypass: Authorization or query ?token=
-    const authHeader: string | undefined = req.headers?.authorization;
-    const qToken: string | undefined = (req.query?.token as string) || undefined;
-    const token = (authHeader && authHeader.startsWith('Bearer ')) ? authHeader.substring(7) : qToken;
-    if (token === 'test-token-12345') {
-      (req as any).user = { id: 'test-user-id', email: 'test@example.com', name: 'Test User', globalRole: 'SUPER_ADMIN', scopes: [] };
-      return true;
+    // Dev/test token bypass (only in test env)
+    if (process.env.NODE_ENV === 'test') {
+      const expected = process.env.AUTH_TEST_TOKEN || 'test-token-12345';
+      const authHeader: string | undefined = req.headers?.authorization;
+      const qToken: string | undefined = (req.query?.token as string) || undefined;
+      const token = (authHeader && authHeader.startsWith('Bearer ')) ? authHeader.substring(7) : qToken;
+      if (token === expected) {
+        (req as any).user = { id: 'test-user-id', email: 'test@example.com', name: 'Test User', globalRole: 'SUPER_ADMIN', scopes: [] };
+        return true;
+      }
     }
 
     // Allowlist для публичных эндпоинтов
