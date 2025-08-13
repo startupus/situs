@@ -13,10 +13,12 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
+    "composite": true,
     "useDefineForClassFields": false,
     "outDir": "./dist",
     "rootDir": ".",
-    "declaration": false,
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": false
   },
   "include": ["./**/*.ts"],
