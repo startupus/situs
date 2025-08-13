@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Put } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 
 /**
@@ -24,22 +24,22 @@ export class PagesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return {
-      success: true,
-      data: {
-        id,
-        name: 'Страница ' + id,
-        slug: 'page-' + id,
-        content: { blocks: [] },
-        status: 'active'
-      }
-    };
+  async findOne(@Param('id') id: string) {
+    const page = await this.prisma.page.findUnique({
+      where: { id },
+    });
+    return { success: true, data: page };
   }
 
   @Post()
   async create(@Body() createPageDto: any) {
     const created = await this.prisma.page.create({ data: createPageDto });
     return { success: true, data: created };
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() body: any) {
+    const updated = await this.prisma.page.update({ where: { id }, data: body });
+    return { success: true, data: updated };
   }
 }

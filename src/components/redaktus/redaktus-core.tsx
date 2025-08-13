@@ -507,66 +507,38 @@ const EditorContent: React.FC = () => {
   const handleCreatePage = async () => {
     console.log('➕ Создание новой страницы');
     
-    if (!currentProject || !urlParams.productId) {
-      console.error('Не удалось создать страницу: отсутствует проект или продукт');
-      return;
-    }
+    if (!currentProject) return;
 
     try {
-      // Создаем новую страницу
-      const newPage = {
-        id: `page-${Date.now()}`,
-        title: `Новая страница ${Date.now()}`,
-        slug: `new-page-${Date.now()}`,
-        type: 'page',
-        status: 'draft',
-        content: {
-          blocks: [
-            {
-              id: 'hero-block',
-              type: 'hero-block',
-              props: {
-                title: 'Новая страница',
-                subtitle: 'Это ваша новая страница',
-                primaryButtonText: 'Начать',
-                primaryButtonUrl: '#',
-                secondaryButtonText: 'Узнать больше',
-                secondaryButtonUrl: '#',
-                heroImage: 'https://via.placeholder.com/600x400'
-              }
-            }
-          ]
-        },
-        meta: {
-          title: `Новая страница ${Date.now()}`,
-          description: '',
-          keywords: ''
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
+      // Определяем Website продукт
+      const website = currentProject.products?.find(p => p.type === 'WEBSITE');
+      if (!website) throw new Error('Website продукт не найден');
 
-      // Добавляем страницу в текущий продукт
-      if (currentProject.products) {
-        const productIndex = currentProject.products.findIndex(p => p.id === urlParams.productId);
-        if (productIndex !== -1) {
-          if (!currentProject.products[productIndex].pages) {
-            currentProject.products[productIndex].pages = [];
-          }
-          currentProject.products[productIndex].pages!.push(newPage);
-          
-          // Обновляем состояние
-          setCurrentProject({ ...currentProject });
-          
-          // Обновляем список страниц
-          setProjectPages([...projectPages, newPage]);
-          
-          // Переключаемся на новую страницу
-          await handlePageSelect(newPage.id);
-          
-          console.log('✅ Новая страница создана:', newPage.id);
-        }
-      }
+      // Создаём через API
+      const payload = {
+        title: 'Новая страница',
+        slug: `new-page-${Date.now()}`,
+        content: { blocks: [] },
+        status: 'DRAFT',
+        productId: website.id,
+        orderIndex: projectPages.length
+      };
+      const created = await fetch('/api/pages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(r=>r.json()).then(d=>d.data);
+
+      const newPage = {
+        id: created.id,
+        title: created.title,
+        slug: created.slug,
+        content: created.content,
+        status: created.status,
+        meta: {},
+        createdAt: created.createdAt,
+        updatedAt: created.updatedAt
+      } as any;
+
+      setProjectPages([...projectPages, newPage]);
+      await handlePageSelect(newPage.id);
+      console.log('✅ Новая страница создана:', newPage.id);
     } catch (error) {
       console.error('❌ Ошибка при создании страницы:', error);
     }
@@ -713,7 +685,7 @@ const EditorContent: React.FC = () => {
 
         {/* Правая панель настроек - ЧАСТЬ ИНТЕРФЕЙСА */}
         <div className="redaktus-interface-panel" data-interface-theme={interfaceResolvedTheme}>
-          <SettingsPanel currentPage="Home" />
+          <SettingsPanel currentPage={currentPage?.title || 'Page'} />
         </div>
       </div>
     </div>
