@@ -13,6 +13,7 @@ import {
   Request,
   Res,
   Req,
+  BadRequestException,
 } from '@nestjs/common';
 import { Observable, Subscription } from 'rxjs';
 // import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
@@ -58,43 +59,41 @@ export class ProjectsController {
   // @ApiOperation({ summary: 'Получение списка проектов' })
   // @ApiResponse({ status: 200, description: 'Список проектов с пагинацией' })
   async findAll(@Query() query: ProjectQueryDto, @Request() req: any) {
-    try {
-      console.log('[DEBUG] Controller findAll called, projectsService:', !!this.projectsService, typeof this.projectsService);
-      // Для обычных пользователей показываем только их проекты
-      if (!query.ownerId && req.user?.id) {
-        query.ownerId = req.user.id;
-      }
-      
-      const result = await this.projectsService.findAll(query);
-      
-      // Адаптируем данные для совместимости с фронтом: name -> title
-      const adaptedProjects = result.projects.map((project: any) => ({
-        ...project,
-        title: project.name, // Добавляем title для совместимости с новым интерфейсом
-      }));
-      
-      return {
-        success: true,
-        data: {
-          projects: adaptedProjects,
-          total: result.pagination.total,
-          page: result.pagination.page,
-          limit: result.pagination.limit,
-          totalPages: result.pagination.totalPages,
-        },
-        meta: result.pagination,
-      };
-    } catch (error: any) {
-      console.error('Projects findAll error:', error?.message || error);
-      return {
-        success: false,
-        error: error?.message || String(error || 'unknown'),
-        data: {
-          projects: [],
-          pagination: { page: 1, limit: 20, total: 0, totalPages: 0 }
-        }
-      };
-    }
+    const result = await this.projectsService.findAll(query);
+    // Адаптируем данные для совместимости с фронтом: name -> title
+    const adaptedProjects = result.projects.map((project: any) => ({
+      ...project,
+      title: project.name,
+    }));
+    return {
+      success: true,
+      data: {
+        projects: adaptedProjects,
+        total: result.pagination.total,
+        page: result.pagination.page,
+        limit: result.pagination.limit,
+        totalPages: result.pagination.totalPages,
+      },
+      meta: result.pagination,
+    };
+  }
+
+  /**
+   * Проверка доступности slug
+   */
+  @Get('check-slug/:slug')
+  async checkSlug(@Param('slug') slug: string, @Query('exclude') excludeProjectId?: string) {
+    const existing = await this.projectsService['prisma'].project.findFirst({ where: { slug, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any });
+    return { success: true, data: { slug, available: !existing } };
+  }
+
+  /**
+   * Проверка доступности домена (customDomain)
+   */
+  @Get('check-domain/:domain')
+  async checkDomain(@Param('domain') domain: string, @Query('exclude') excludeProjectId?: string) {
+    const existing = await this.projectsService['prisma'].project.findFirst({ where: { customDomain: domain, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any });
+    return { success: true, data: { domain, available: !existing } };
   }
 
   /**
@@ -141,23 +140,14 @@ export class ProjectsController {
    */
   @Patch(':id/status')
   async updateStatus(@Param('id') id: string, @Body() dto: UpdateProjectStatusDto, @Request() req: any) {
-    // 1) Нормализуем статус и синхронизируем булевый флаг публикации
-    //    Статусы на вход могут быть в любом регистре: ACTIVE / active / published и т.д.
     const normalizedStatus = (dto.status || '').toString().toUpperCase();
     const isPublished = normalizedStatus === 'ACTIVE' || normalizedStatus === 'PUBLISHED';
-
-    // 2) Обновляем проект через доменный сервис, передаём и enum-статус, и производный флаг публикации
     const result = await this.projectsService.update(
       id,
       { status: normalizedStatus as any, isPublished } as any,
       req.user?.id ?? 'owner-dev',
     );
-
-    // 3) Совместимость с фронтом: добавляем поле title
     const adaptedResult = { ...result, title: result.name };
-
-    // 4) Публикацию события оставляем на уровне сервиса (ProjectsService.update),
-    //    чтобы избежать дублирования project_status
     return { success: true, data: adaptedResult };
   }
 

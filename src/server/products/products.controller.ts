@@ -1,6 +1,9 @@
 import { Controller, Get, Post, Body, Param, Query, Put, Delete, Optional } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { PrismaService } from '../database/prisma.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductQueryDto } from './dto/product-query.dto';
 
 /**
  * Контроллер продуктов (глобальные маршруты)
@@ -23,22 +26,10 @@ export class ProductsController {
   }
 
   @Get()
-  async findAll(
-    @Query('page') page?: string,
-    @Query('limit') limit?: string,
-    @Query('type') type?: string,
-    @Query('status') status?: string,
-    @Query('projectId') projectId?: string,
-  ) {
+  async findAll(@Query() query: ProductQueryDto) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());
-      const result = await svc.findAll({
-        page: page ? parseInt(page, 10) : undefined,
-        limit: limit ? parseInt(limit, 10) : undefined,
-        type,
-        status,
-        projectId,
-      });
+      const result = await svc.findAll(query);
       return { success: true, data: result };
     } catch (error: any) {
       return {
@@ -70,7 +61,7 @@ export class ProductsController {
   }
 
   @Post()
-  async create(@Body() createDto: { name: string; description?: string; type: string; projectId: string; settings?: string }) {
+  async create(@Body() createDto: CreateProductDto) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());
       const result = await svc.create(createDto);
@@ -83,7 +74,7 @@ export class ProductsController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() body: Partial<{ name: string; description?: string; type: string; status: string; settings?: string }>,
+    @Body() body: UpdateProductDto,
   ) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());

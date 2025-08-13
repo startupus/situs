@@ -46,6 +46,18 @@ export class RealtimeController {
   heartbeat() {
     return { success: true, ts: new Date().toISOString() };
   }
+
+  /**
+   * Общий прогресс/статус долгих операций через событийную шину
+   * Клиент может инициировать проверку на фронте и слушать через SSE
+   */
+  @Get('realtime/progress')
+  progress(@Query('taskId') taskId?: string) {
+    if (taskId) {
+      this.realtime.publish('task_progress_check', { taskId, ts: new Date().toISOString() });
+    }
+    return { success: true };
+  }
 }
 
 

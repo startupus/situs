@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Req } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 
 /**
@@ -21,6 +21,15 @@ export class PagesController {
       this.prisma.page.count({ where }),
     ]);
     return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
+  }
+
+  @Get('preview')
+  async preview(@Req() req: any) {
+    const tenant = req.tenant as { projectId?: string; productId?: string } | undefined;
+    const projectId = tenant?.projectId;
+    if (!projectId) return { success: true, data: { pages: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } } };
+    const pages = await this.prisma.page.findMany({ where: { product: { projectId, type: 'WEBSITE' } }, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] });
+    return { success: true, data: { pages } };
   }
 
   @Get(':id')

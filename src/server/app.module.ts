@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { CommonModule } from './common/common.module';
@@ -9,6 +9,11 @@ import { RealtimeModule } from './realtime/realtime.module';
 import { jwtConfig } from './config/jwt.config';
 import { databaseConfig } from './config/database.config';
 import { PagesModule } from './pages/pages.module';
+import { ProductsModule } from './products/products.module';
+import { AnalyticsModule } from './analytics/analytics.module';
+import { TenantResolverMiddleware } from './common/middleware/tenant-resolver.middleware';
+import { SeoModule } from './seo/seo.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 /**
  * Основной модуль приложения
@@ -38,10 +43,17 @@ import { PagesModule } from './pages/pages.module';
     // Бизнес-модули
     ProjectsModule,
 
-    // Бизнес-модули (dev-slim)
-
     // Бизнес-модули: продукты
-    // ProductsModule,
+    ProductsModule,
+
+    // Аналитика (мок эндпоинты для фронта)
+    AnalyticsModule,
+
+    // Публичные SEO-эндпоинты (robots/sitemap)
+    SeoModule,
+
+    // Аккаунты и членства
+    AccountsModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
@@ -49,4 +61,8 @@ import { PagesModule } from './pages/pages.module';
   controllers: [HealthController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(TenantResolverMiddleware).forRoutes('*');
+  }
+}

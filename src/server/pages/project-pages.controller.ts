@@ -1,5 +1,6 @@
 import { BadRequestException, Body, Controller, Get, Param, Patch, Query } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
+import { ReorderPagesDto } from './dto/reorder-pages.dto';
 
 @Controller('api')
 export class ProjectPagesController {
@@ -24,7 +25,7 @@ export class ProjectPagesController {
   }
 
   @Patch('projects/:projectId/pages/reorder')
-  async reorder(@Param('projectId') projectId: string, @Body() body: { ids: string[] }) {
+  async reorder(@Param('projectId') projectId: string, @Body() body: ReorderPagesDto) {
     if (!body?.ids?.length) throw new BadRequestException('ids: string[] is required');
     const pages = await this.prisma.page.findMany({ where: { id: { in: body.ids }, product: { projectId } }, select: { id: true } });
     const valid = new Set(pages.map((p) => p.id));
