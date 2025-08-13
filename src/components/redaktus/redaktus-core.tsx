@@ -645,6 +645,7 @@ const EditorContent: React.FC = () => {
             currentPageId={currentPage?.id}
             onPageSelect={handlePageSelect}
             onCreatePage={handleCreatePage}
+            pages={projectPages}
           />
         </div>
 

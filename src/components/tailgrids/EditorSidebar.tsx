@@ -11,6 +11,7 @@ interface EditorSidebarProps {
   currentPageId?: string;
   onPageSelect?: (pageId: string) => void;
   onCreatePage?: () => void;
+  pages?: PageData[]; // Явный список страниц, если проект не содержит pages
 }
 
 interface NavSectionProps {
@@ -124,7 +125,8 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
   project,
   currentPageId,
   onPageSelect,
-  onCreatePage
+  onCreatePage,
+  pages
 }) => {
   const { theme: interfaceTheme, toggleTheme: toggleInterfaceTheme, resolvedTheme: interfaceResolvedTheme } = useInterfaceTheme();
   const { t } = useLanguage();
@@ -136,7 +138,8 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
     toggleInterfaceTheme();
   };
 
-  const filteredPages = project?.pages?.filter(page => 
+  const allPages: PageData[] = (pages && pages.length > 0) ? pages : (project?.pages || []);
+  const filteredPages = allPages.filter(page => 
     page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     page.slug.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];
