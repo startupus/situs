@@ -13,9 +13,9 @@ export class RealtimeController {
    * GET /api/realtime/test?type=foo => publish({ type: 'foo', payload: { ts } })
    */
   @Get('realtime/test')
-  test(@Query('type') type = 'test') {
+  test(@Query('type') type: any = 'project_updated') {
     const payload = { ts: new Date().toISOString() };
-    this.realtime.publish(type, payload);
+    this.realtime.publish(type as any, payload);
     return { success: true, type, payload };
   }
 

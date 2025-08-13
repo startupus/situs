@@ -24,6 +24,25 @@ export class ProjectPagesController {
     return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
   }
 
+  @Get('projects/:projectId/products/:productId/pages')
+  async listByProduct(
+    @Param('projectId') projectId: string,
+    @Param('productId') productId: string,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    const p = Math.max(1, parseInt(page || '1', 10) || 1);
+    const l = Math.max(1, Math.min(100, parseInt(limit || '20', 10) || 20));
+    const skip = (p - 1) * l;
+
+    const where = { productId, product: { projectId } } as const;
+    const [pages, total] = await Promise.all([
+      this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
+      this.prisma.page.count({ where }),
+    ]);
+    return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
+  }
+
   @Patch('projects/:projectId/pages/reorder')
   async reorder(@Param('projectId') projectId: string, @Body() body: ReorderPagesDto) {
     if (!body?.ids?.length) throw new BadRequestException('ids: string[] is required');

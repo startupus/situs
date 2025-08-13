@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Body, Param, Query, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Req, Put } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
+import { CreatePageDto } from './dto/create-page.dto';
+import { UpdatePageDto } from './dto/update-page.dto';
 
 /**
  * Простой контроллер страниц
@@ -33,22 +35,40 @@ export class PagesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return {
-      success: true,
-      data: {
-        id,
-        name: 'Страница ' + id,
-        slug: 'page-' + id,
-        content: { blocks: [] },
-        status: 'active'
-      }
-    };
+  async findOne(@Param('id') id: string) {
+    const page = await this.prisma.page.findUnique({ where: { id } });
+    return { success: true, data: page };
   }
 
   @Post()
-  async create(@Body() createPageDto: any) {
-    const created = await this.prisma.page.create({ data: createPageDto });
+  async create(@Body() dto: CreatePageDto) {
+    const created = await this.prisma.page.create({
+      data: {
+        title: dto.title,
+        slug: dto.slug,
+        content: dto.content,
+        pageType: (dto.pageType as any) ?? 'PAGE',
+        status: (dto.status as any) ?? 'DRAFT',
+        isHomePage: !!dto.isHomePage,
+        product: { connect: { id: dto.productId } },
+      },
+    });
     return { success: true, data: created };
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() dto: UpdatePageDto) {
+    const updated = await this.prisma.page.update({
+      where: { id },
+      data: {
+        title: dto.title,
+        slug: dto.slug,
+        content: dto.content,
+        pageType: (dto.pageType as any) ?? undefined,
+        status: (dto.status as any) ?? undefined,
+        isHomePage: dto.isHomePage,
+      },
+    });
+    return { success: true, data: updated };
   }
 }

@@ -14,6 +14,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { TenantResolverMiddleware } from './common/middleware/tenant-resolver.middleware';
 import { SeoModule } from './seo/seo.module';
 import { AccountsModule } from './accounts/accounts.module';
+import { DomainRedirectMiddleware } from './common/middleware/domain-redirect.middleware';
 
 /**
  * Основной модуль приложения
@@ -63,6 +64,7 @@ import { AccountsModule } from './accounts/accounts.module';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer.apply(DomainRedirectMiddleware).forRoutes('*');
     consumer.apply(TenantResolverMiddleware).forRoutes('*');
   }
 }
