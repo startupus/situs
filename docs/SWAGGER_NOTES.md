@@ -1,16 +1,15 @@
-# Swagger/OpenAPI Notes
+# Swagger setup notes
 
-- Подключить `@nestjs/swagger` в `main.ts` при необходимости:
-  ```ts
-  import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-  const config = new DocumentBuilder()
-    .setTitle('Situs API')
-    .setDescription('API docs')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
-  ```
-- Включить контроллеры: Auth, Projects, Pages, Products, Accounts, Domains, Realtime (описать SSE как текстовый stream).
-- DTO уже аннотированы частью `@ApiProperty` (в users/auth); при необходимости добавить описания в созданные DTO.
+- Подключение в `main.ts` (по флагу), генерировать схему только в dev.
+- Описать контроллеры: Auth, Users, Projects, Pages, Products, Accounts, Domains, SEO.
+- DTO: включить `class-validator` описания.
+
+## Особенности
+
+- Пользователь: `profile` — JSON‑строка с полями `name`, `avatar`, `bio`.
+- Auth payload включает `globalRole`, `scopes`.
+- Публичные маршруты помечены `@Public()`.
+
+## Тестовая конфигурация
+
+- В `NODE_ENV=test` доступен `AUTH_TEST_TOKEN` для e2e (обход `JwtAuthGuard`), в проде не активен.

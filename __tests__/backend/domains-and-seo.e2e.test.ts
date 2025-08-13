@@ -7,6 +7,7 @@ async function get(path: string, headers: Record<string,string> = {}) {
   return { status: res.status, text: await res.text(), res };
 }
 
+// SEO endpoints basic behaviour
 describe('SEO endpoints', () => {
   it('robots.txt returns plain text', async () => {
     const { status, text } = await get('/robots.txt');
@@ -20,9 +21,15 @@ describe('SEO endpoints', () => {
   });
 });
 
+// Domain redirect behaviour depends on publication+verification
 describe('Domain redirect (simple)', () => {
   it('no redirect for unknown host', async () => {
-    const { status, res } = await get('/health', { Host: 'unknown.local' });
+    const { status } = await get('/health', { Host: 'unknown.local' });
+    expect(status).toBe(200);
+  });
+  it('no redirect without verification/publication (placeholder)', async () => {
+    // For now we just verify that /health still OK even with Host header simulating project domain
+    const { status } = await get('/health', { Host: 'project.situs.local' });
     expect(status).toBe(200);
   });
 });
