@@ -68,6 +68,14 @@ export const Admin: React.FC<{ children: React.ReactNode; isLogin?: boolean }> =
 import config from './config/config'
 
 // Система схем блоков - оригинальные React Pro Components + TailGrids
+const safeJsonParse = (value: any, fallback: any) => {
+  try {
+    if (typeof value !== 'string') return value ?? fallback;
+    return JSON.parse(value);
+  } catch {
+    return fallback;
+  }
+};
 const blockSchemas = {
   'hero-block': {
     title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
@@ -291,7 +299,7 @@ const EditorContent: React.FC = () => {
           // Нормализуем content: может быть строкой из БД
           const normalized = pages.map((p:any)=>({
             ...p,
-            content: typeof p.content === 'string' && p.content ? JSON.parse(p.content) : (p.content || { blocks: [] })
+            content: safeJsonParse(p.content, { blocks: [] })
           }));
           console.log('📄 Загружены страницы проекта:', normalized.length, 'страниц');
           setProjectPages(normalized);
@@ -372,7 +380,7 @@ const EditorContent: React.FC = () => {
       setCurrentPage((prev:any)=>({
         ...prev,
         title: updatedPage.title,
-        content: (typeof updatedPage.content === 'string' ? JSON.parse(updatedPage.content) : updatedPage.content)?.blocks || prev.content,
+        content: safeJsonParse(updatedPage.content, { blocks: [] })?.blocks || prev.content,
         meta: {
           title: updatedPage.metaTitle || prev.meta?.title,
           description: updatedPage.metaDescription || prev.meta?.description,
@@ -476,7 +484,7 @@ const EditorContent: React.FC = () => {
     try {
       // Импортируем getPage из API
       const pageData = await fetch(`/api/pages/${pageId}`).then(r=>r.json()).then(d=>d.data);
-      const contentObj = typeof pageData.content === 'string' && pageData.content ? JSON.parse(pageData.content) : (pageData.content || { blocks: [] });
+      const contentObj = safeJsonParse(pageData.content, { blocks: [] });
       
       // Конвертируем данные из API в формат редактора
       const editorPage = {
