@@ -357,17 +357,28 @@ const EditorContent: React.FC = () => {
       console.log('💾 Сохранение страницы:', currentPage.id);
       console.log('📄 Контент для сохранения:', currentPage.content);
       
-      // Подготавливаем данные для API
+      // Подготавливаем данные для API (строгий формат)
       const updateData = {
         title: pageData.title || currentPage.title,
-        content: currentPage.content, // Передаем контент напрямую
-        metaTitle: pageData.meta?.title || currentPage.metaTitle,
-        metaDescription: pageData.meta?.description || currentPage.metaDescription,
-        metaKeywords: pageData.meta?.keywords || currentPage.metaKeywords
-      };
+        content: Array.isArray(currentPage.content) ? { blocks: currentPage.content } : (currentPage.content?.blocks ? currentPage.content : { blocks: [] }),
+        metaTitle: pageData.meta?.title || currentPage.meta?.title || currentPage.metaTitle,
+        metaDescription: pageData.meta?.description || currentPage.meta?.description || currentPage.metaDescription,
+        metaKeywords: pageData.meta?.keywords || currentPage.meta?.keywords || currentPage.metaKeywords
+      } as any;
 
       // Импортируем updatePage из API
       const updatedPage = await fetch(`/api/pages/${currentPage.id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updateData)}).then(r=>r.json()).then(d=>d.data);
+      // Обновляем локальное состояние
+      setCurrentPage((prev:any)=>({
+        ...prev,
+        title: updatedPage.title,
+        content: (typeof updatedPage.content === 'string' ? JSON.parse(updatedPage.content) : updatedPage.content)?.blocks || prev.content,
+        meta: {
+          title: updatedPage.metaTitle || prev.meta?.title,
+          description: updatedPage.metaDescription || prev.meta?.description,
+          keywords: updatedPage.metaKeywords || prev.meta?.keywords,
+        }
+      }));
       
       console.log('✅ Страница сохранена:', updatedPage.title);
       return { success: true, data: updatedPage };
