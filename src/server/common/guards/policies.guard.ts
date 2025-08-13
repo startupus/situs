@@ -18,22 +18,24 @@ export class PoliciesGuard implements CanActivate {
     const user = (request as any).user as { id: string; globalRole?: string } | undefined;
     if (!user?.id) return false;
 
-    // SUPER_ADMIN пропускаем
     if (user.globalRole === 'SUPER_ADMIN') return true;
 
-    // Попробуем извлечь идентификаторы из маршрута
     const params = request.params || {};
-    const projectId: string | undefined = params.projectId || params.id;
-    const accountId: string | undefined = params.accountId;
+    const query = request.query || {};
 
-    // Проверяем проектные скоупы через ProjectAccess
+    // projectId: из params (projectId или id), либо из query
+    let projectId: string | undefined = params.projectId || params.id || query.projectId;
+
+    // accountId: из params, либо /api/accounts/:id → трактуем как accountId, либо из query
+    let accountId: string | undefined = params.accountId || query.accountId;
+    if (!accountId && request.originalUrl?.startsWith('/api/accounts/') && params.id) accountId = params.id;
+
     const projectScopes = requiredScopes.filter((s) => String(s).startsWith('PROJECT_')) as ProjectScope[];
     if (projectScopes.length > 0) {
       if (!projectId) return false;
       const access = await this.prisma.projectAccess.findFirst({ where: { projectId, userId: user.id } });
       if (!access) return false;
       const role = access.role as string;
-      // Простая матрица: ADMIN/OWNER → WRITE/READ, EDITOR → WRITE/READ, VIEWER → READ
       const canWrite = role === 'OWNER' || role === 'ADMIN' || role === 'EDITOR';
       const canRead = canWrite || role === 'VIEWER';
       for (const scope of projectScopes) {
@@ -43,7 +45,6 @@ export class PoliciesGuard implements CanActivate {
       }
     }
 
-    // Проверяем аккаунтные скоупы через AccountMembership
     const accountScopes = requiredScopes.filter((s) => String(s).startsWith('ACCOUNT_')) as AccountScope[];
     if (accountScopes.length > 0) {
       if (!accountId) return false;
