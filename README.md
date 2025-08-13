@@ -238,6 +238,24 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
 - [Система роутинга](./docs/ROUTING_ARCHITECTURE.md)
 - [Темизация](./docs/THEME_SYSTEM.md)
 
+### README модулей и разделов
+- Backend:
+  - Pages (Website): `src/server/pages/README.md`
+  - Projects: `src/server/projects/README.md`
+  - Auth: `src/server/auth/README.md`
+  - Products: `src/server/products/README.md`
+  - Database: `src/server/database/README.md`
+  - Common: `src/server/common/README.md`
+  - Realtime: `src/server/realtime/README.md`
+  - Health: `src/server/health/README.md`
+  - Users: `src/server/users/README.md`
+- Frontend:
+  - Redaktus: `src/components/redaktus/README.md`
+  - Situs (экраны): `src/components/situs/README.md`
+  - Sections: `src/components/sections/README.md`
+  - UI: `src/components/ui/README.md`
+  - Frontend API: `src/api/README.md`
+
 ## 🛠️ Разработка
 
 ### Команды
