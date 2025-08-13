@@ -1,5 +1,6 @@
 import { Controller, Get, Header, Query } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
+import { Public } from '../common/decorators/public.decorator';
 
 const cache = new Map<string, { ts: number; value: string }>();
 const TTL = 60 * 1000; // 1m
@@ -8,6 +9,7 @@ const TTL = 60 * 1000; // 1m
 export class PublicSeoController {
   constructor(private readonly prisma: PrismaService) {}
 
+  @Public()
   @Get('robots.txt')
   @Header('Content-Type', 'text/plain; charset=utf-8')
   async robots(@Query('project') projectId?: string, @Query('allow') allow?: string) {
@@ -27,6 +29,7 @@ export class PublicSeoController {
     return text;
   }
 
+  @Public()
   @Get('sitemap.xml')
   @Header('Content-Type', 'application/xml; charset=utf-8')
   async sitemap(@Query('project') projectId?: string) {
@@ -53,7 +56,7 @@ export class PublicSeoController {
       }
     } catch {}
 
-    const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
+    const body = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n${urls
       .map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}\n    ${u.priority ? `<priority>${u.priority}</priority>` : ''}\n  </url>`)
       .join('\n')}\n</urlset>`;
     cache.set(key, { ts: Date.now(), value: body });

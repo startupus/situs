@@ -33,6 +33,13 @@ async function bootstrap() {
   app.enableCors();
   console.log('[BOOT] CORS enabled');
 
+  // Trust proxy для корректного Host/X-Forwarded-Host
+  try {
+    const httpAdapter: any = app.getHttpAdapter();
+    const instance: any = httpAdapter.getInstance?.();
+    instance?.set?.('trust proxy', true);
+  } catch {}
+
   // Глобальные пайпы/фильтры/интерцепторы
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useGlobalFilters(new GlobalExceptionFilter());

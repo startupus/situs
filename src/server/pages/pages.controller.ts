@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Param, Query, Req, Put } from '@nestjs/com
 import { PrismaService } from '../database/prisma.service';
 import { CreatePageDto } from './dto/create-page.dto';
 import { UpdatePageDto } from './dto/update-page.dto';
+import { Scopes } from '../common/decorators/roles.decorator';
+import { Public } from '../common/decorators/public.decorator';
 
 /**
  * Простой контроллер страниц
@@ -11,6 +13,7 @@ export class PagesController {
   constructor(private readonly prisma: PrismaService) {}
 
   @Get()
+  @Scopes('PROJECT_READ')
   async findAll(@Query('projectId') projectId?: string, @Query('page') page?: string, @Query('limit') limit?: string) {
     const p = Math.max(1, parseInt(page || '1', 10) || 1);
     const l = Math.max(1, Math.min(100, parseInt(limit || '20', 10) || 20));
@@ -26,6 +29,7 @@ export class PagesController {
   }
 
   @Get('preview')
+  @Public()
   async preview(@Req() req: any) {
     const tenant = req.tenant as { projectId?: string; productId?: string } | undefined;
     const projectId = tenant?.projectId;
@@ -35,12 +39,14 @@ export class PagesController {
   }
 
   @Get(':id')
+  @Scopes('PROJECT_READ')
   async findOne(@Param('id') id: string) {
     const page = await this.prisma.page.findUnique({ where: { id } });
     return { success: true, data: page };
   }
 
   @Post()
+  @Scopes('PROJECT_WRITE')
   async create(@Body() dto: CreatePageDto) {
     const created = await this.prisma.page.create({
       data: {
@@ -57,6 +63,7 @@ export class PagesController {
   }
 
   @Put(':id')
+  @Scopes('PROJECT_WRITE')
   async update(@Param('id') id: string, @Body() dto: UpdatePageDto) {
     const updated = await this.prisma.page.update({
       where: { id },

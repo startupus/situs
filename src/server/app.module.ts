@@ -19,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
+import { DomainsModule } from './domains/domains.module';
 
 /**
  * Основной модуль приложения
@@ -56,6 +57,9 @@ import { PoliciesGuard } from './common/guards/policies.guard';
 
     // Публичные SEO-эндпоинты (robots/sitemap)
     SeoModule,
+
+    // Домены
+    DomainsModule,
 
     // Аккаунты и членства
     AccountsModule,

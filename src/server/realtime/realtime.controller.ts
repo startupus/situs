@@ -2,6 +2,7 @@ import { Controller, Get, Query, Inject, Sse, MessageEvent } from '@nestjs/commo
 import { RealtimeEventsService } from './realtime-events.service';
 import { map } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
+import { Public } from '../common/decorators/public.decorator';
 
 // Базовый префикс 'api' чтобы упростить маршруты и поддержать /api/projects/events
 @Controller('api')
@@ -28,6 +29,7 @@ export class RealtimeController {
    * SSE поток для проектов
    * Фактический путь: GET /api/projects/events (совместим с фронтом)
    */
+  @Public()
   @Sse('projects/events')
   events(): any {
     const source$ = this.realtime.asObservable();
@@ -42,6 +44,7 @@ export class RealtimeController {
    * Heartbeat для удержания соединения живым через обычный HTTP long-poll совместимый путь
    * Позволяет клиенту периодически дергать endpoint, если сеть/проксирующие балансировщики рвут SSE
    */
+  @Public()
   @Get('projects/heartbeat')
   heartbeat() {
     return { success: true, ts: new Date().toISOString() };

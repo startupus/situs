@@ -1,8 +1,10 @@
 import { Controller, Get, Query } from '@nestjs/common';
+import { Scopes } from '../common/decorators/roles.decorator';
 
 @Controller('api/analytics')
 export class AnalyticsController {
   @Get('dashboard')
+  @Scopes('PROJECT_READ')
   dashboard() {
     return {
       success: true,
@@ -16,6 +18,7 @@ export class AnalyticsController {
   }
 
   @Get('traffic')
+  @Scopes('PROJECT_READ')
   traffic(@Query('period') period?: string) {
     const days = 7;
     const base = new Date();
@@ -32,6 +35,7 @@ export class AnalyticsController {
   }
 
   @Get('conversions')
+  @Scopes('PROJECT_READ')
   conversions() {
     const days = 7;
     const base = new Date();
@@ -46,6 +50,7 @@ export class AnalyticsController {
   }
 
   @Get('projects')
+  @Scopes('PROJECT_READ')
   projects() {
     const data = Array.from({ length: 5 }).map((_, i) => ({
       projectId: `pid_${i + 1}`,
@@ -60,6 +65,7 @@ export class AnalyticsController {
   }
 
   @Get('top-pages')
+  @Scopes('PROJECT_READ')
   topPages() {
     const data = Array.from({ length: 5 }).map((_, i) => ({
       page: `/page-${i + 1}`,
@@ -71,6 +77,7 @@ export class AnalyticsController {
   }
 
   @Get('traffic-sources')
+  @Scopes('PROJECT_READ')
   sources() {
     const data = [
       { source: 'Organic', visitors: 5400, percentage: 45 },
@@ -82,6 +89,7 @@ export class AnalyticsController {
   }
 
   @Get('devices')
+  @Scopes('PROJECT_READ')
   devices() {
     const data = [
       { device: 'Desktop', users: 7200, percentage: 60 },
