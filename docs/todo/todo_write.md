@@ -64,6 +64,7 @@
 - [x] Добавить подробный раздел структуры проекта (папки backend/frontend/шаблоны)
  - [x] Добавить README в `src/server/pages/` (оглавление и контракты API)
  - [x] Обновить `src/components/redaktus/README.md` с навигатором по каталогу
+ - [x] Добавить README в `src/server/{auth,products,database,common,health,users}` и `src/components/sections`
 
 ## Темы/UX
 - [ ] Единые настройки темы в админке, без заглушек
