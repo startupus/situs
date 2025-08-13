@@ -38,8 +38,7 @@
   "include": ["src/**/*", "vite-env.d.ts"],
   "exclude": [
     "node_modules",
-    "dist",
-    "src/server/**/*"
+    "dist"
   ],
   "references": [
     { "path": "./src/server" }
