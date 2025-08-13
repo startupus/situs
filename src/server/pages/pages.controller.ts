@@ -20,19 +20,30 @@ export class PagesController {
       this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
       this.prisma.page.count({ where }),
     ]);
-    const pages = pagesRaw.map((pg) => ({
-      ...pg,
-      content: typeof pg.content === 'string' && pg.content ? safeJsonParse(pg.content, { blocks: [] }) : (pg as any).content ?? { blocks: [] },
-    }));
+    const pages = pagesRaw.map((pg) => {
+      const parsed = typeof pg.content === 'string' && pg.content ? safeJsonParse(pg.content, {}) : (pg as any).content;
+      const content = Array.isArray(parsed)
+        ? { blocks: parsed }
+        : (parsed && typeof parsed === 'object' && 'blocks' in (parsed as any))
+          ? (parsed as any)
+          : { blocks: [] };
+      return { ...pg, content };
+    });
     return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const pg = await this.prisma.page.findUnique({ where: { id } });
-    const page = pg
-      ? { ...pg, content: typeof pg.content === 'string' && pg.content ? safeJsonParse(pg.content, { blocks: [] }) : (pg as any).content ?? { blocks: [] } }
-      : null;
+    const page = pg ? (() => {
+      const parsed = typeof pg.content === 'string' && pg.content ? safeJsonParse(pg.content, {}) : (pg as any).content;
+      const content = Array.isArray(parsed)
+        ? { blocks: parsed }
+        : (parsed && typeof parsed === 'object' && 'blocks' in (parsed as any))
+          ? (parsed as any)
+          : { blocks: [] };
+      return { ...pg, content };
+    })() : null;
     return { success: true, data: page };
   }
 
@@ -46,10 +57,17 @@ export class PagesController {
     if (!payload.status) payload.status = 'DRAFT';
     if (payload.orderIndex === undefined) payload.orderIndex = 0;
     if (payload.content && typeof payload.content !== 'string') {
-      payload.content = JSON.stringify(payload.content);
+      const contentNormalized = Array.isArray(payload.content)
+        ? { blocks: payload.content }
+        : (payload.content.blocks ? payload.content : { blocks: [] });
+      payload.content = JSON.stringify(contentNormalized);
     }
     const created = await this.prisma.page.create({ data: payload });
-    const data = { ...created, content: created.content ? safeJsonParse(created.content as any, { blocks: [] }) : { blocks: [] } };
+    const parsed = created.content ? safeJsonParse(created.content as any, {}) : {};
+    const content = Array.isArray(parsed)
+      ? { blocks: parsed }
+      : (parsed && typeof parsed === 'object' && 'blocks' in (parsed as any)) ? (parsed as any) : { blocks: [] };
+    const data = { ...created, content };
     return { success: true, data };
   }
 
@@ -57,10 +75,17 @@ export class PagesController {
   async update(@Param('id') id: string, @Body() body: any) {
     const payload = { ...body };
     if (payload.content && typeof payload.content !== 'string') {
-      payload.content = JSON.stringify(payload.content);
+      const contentNormalized = Array.isArray(payload.content)
+        ? { blocks: payload.content }
+        : (payload.content.blocks ? payload.content : { blocks: [] });
+      payload.content = JSON.stringify(contentNormalized);
     }
     const updated = await this.prisma.page.update({ where: { id }, data: payload });
-    const data = { ...updated, content: updated.content ? safeJsonParse(updated.content as any, { blocks: [] }) : { blocks: [] } };
+    const parsed = updated.content ? safeJsonParse(updated.content as any, {}) : {};
+    const content = Array.isArray(parsed)
+      ? { blocks: parsed }
+      : (parsed && typeof parsed === 'object' && 'blocks' in (parsed as any)) ? (parsed as any) : { blocks: [] };
+    const data = { ...updated, content };
     return { success: true, data };
   }
 }

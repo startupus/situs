@@ -20,10 +20,13 @@ export class ProjectPagesController {
       this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
       this.prisma.page.count({ where }),
     ]);
-    const pages = pagesRaw.map((pg) => ({
-      ...pg,
-      content: typeof (pg as any).content === 'string' && (pg as any).content ? safeJsonParse((pg as any).content as any, { blocks: [] }) : (pg as any).content ?? { blocks: [] },
-    }));
+    const pages = pagesRaw.map((pg) => {
+      const parsed = typeof (pg as any).content === 'string' && (pg as any).content ? safeJsonParse((pg as any).content as any, {}) : (pg as any).content;
+      const content = Array.isArray(parsed)
+        ? { blocks: parsed }
+        : (parsed && typeof parsed === 'object' && 'blocks' in (parsed as any)) ? (parsed as any) : { blocks: [] };
+      return { ...pg, content };
+    });
     return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
   }
 
