@@ -686,50 +686,8 @@ MIT License - см. файл [LICENSE](LICENSE) для деталей.
 **Situs** — современная платформа управления проектами/продуктами  
 **Статус**: активная разработка
 
-## Backend Enhancements (Strapi-inspired)
+### Config & Env Validation
 
-- Modular architecture per feature (Auth, Projects, Pages, Products, Accounts, Domains, SEO, Realtime)
-- Config registry via `@nestjs/config` with env validation
-- Policies/RBAC with `@Scopes()` and global guards
-- Domain middleware (tenant resolve, redirect) and SEO endpoints
-- SSE event bus and progress endpoints
-
-### New behaviour
-
-- Robots/sitemap caching with ETag/Cache-Control
-  - `GET /robots.txt` and `GET /sitemap.xml` now return `ETag` and `Cache-Control: public, max-age=60`, respond `304` on `If-None-Match`
-- Auth test mode (for e2e only)
-  - When `NODE_ENV=test`, `JwtAuthGuard` accepts `AUTH_TEST_TOKEN` (default `test-token-12345`) for simplified auth in tests
-- Users registration
-  - `name`/`avatar` are stored in `users.profile` JSON; minimal fields: `email`, `password`, `username`
-
-### Roadmap / TODO
-
-- Config
-  - Add env schema validation (zod or `@hapi/joi`) and docs
-  - Split config domains: app, jwt, db, cors, rate-limit
-- Content Type Registry (inspired by Strapi)
-  - Declarative content types → generate DTO/CRUD/routes/validators
-  - Lifecycle hooks (before/after create/update/delete) via Prisma middleware + events
-- RBAC/Policies
-  - Externalize role/scope matrix to config; per-content-type permissions (CRUD)
-  - Add comprehensive e2e for roles (Projects/Accounts) and negative cases
-- Domains & Multitenancy
-  - Full redirect tests (published+verified), `X-Forwarded-Host` matrix
-  - `domainVerified` field separate from `settings`
-- SEO
-  - Add Last-Modified and smarter invalidation on publish/page update
-  - Generate per-locale sitemaps (future i18n)
-- Realtime/Webhooks
-  - Outgoing webhooks registry with retries; events on project/page operations
-  - Client subscriptions by topic (projectId) and auth filtering
-- Media/Storage
-  - Pluggable provider (S3/MinIO/local), signed URLs, access policies
-- DX
-  - CLI scaffolding: `generate:module`, `generate:content-type`, `generate:tests`
-  - Swagger behind flag with complete DTOs
-- Security/Operational
-  - Rate limiting for `/auth/*`, refined CORS, helmet policies
-  - Audit log table with user/scope/resource/traceId/outcome
-
-See `docs/AUTH_AND_DOMAINS.md` and `docs/SWAGGER_NOTES.md` for details.
+- Env schema validation via Joi in `src/server/config/env.validation.ts`.
+- CORS origins: set `CORS_ORIGINS=http://localhost:5177,http://localhost:3000`.
+- Rate limiting knobs (reserved): `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX_REQUESTS`.

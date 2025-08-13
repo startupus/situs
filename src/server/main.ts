@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { ConfigService } from '@nestjs/config';
 
 // Диагностика необработанных ошибок на этапе запуска
 process.on('uncaughtException', (err) => {
@@ -29,9 +30,11 @@ async function bootstrap() {
 
   // Минимальная конфигурация для стабильного запуска
 
-  // CORS настройки - минимальные
-  app.enableCors();
-  console.log('[BOOT] CORS enabled');
+  // CORS настройки
+  const configService = app.get(ConfigService);
+  const origins = (configService.get<string[]>('cors.origins') || []);
+  app.enableCors({ origin: origins.length ? origins : true, credentials: true });
+  console.log('[BOOT] CORS enabled with', origins.length ? origins : 'any');
 
   // Trust proxy для корректного Host/X-Forwarded-Host
   try {

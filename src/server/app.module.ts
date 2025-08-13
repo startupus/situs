@@ -20,6 +20,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
 import { DomainsModule } from './domains/domains.module';
+import { envValidationSchema } from './config/env.validation';
+import { corsConfig } from './config/cors.config';
+import { rateLimitConfig } from './config/rate-limit.config';
+import { accessConfig } from './config/access.config';
 
 /**
  * Основной модуль приложения
@@ -36,8 +40,9 @@ import { DomainsModule } from './domains/domains.module';
     // Конфигурация приложения
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, jwtConfig, databaseConfig],
+      load: [appConfig, jwtConfig, databaseConfig, corsConfig, rateLimitConfig, accessConfig],
       envFilePath: ['.env.local', '.env'],
+      validationSchema: envValidationSchema,
     }),
 
     // Модули инфраструктуры

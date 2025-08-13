@@ -2,10 +2,11 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { SCOPES_KEY, ProjectScope, AccountScope } from '../decorators/roles.decorator';
 import { PrismaService } from '../../database/prisma.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PoliciesGuard implements CanActivate {
-  constructor(private reflector: Reflector, private prisma: PrismaService) {}
+  constructor(private reflector: Reflector, private prisma: PrismaService, private config: ConfigService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const requiredScopes = this.reflector.getAllAndOverride<Array<ProjectScope | AccountScope>>(SCOPES_KEY, [
@@ -29,7 +30,6 @@ export class PoliciesGuard implements CanActivate {
 
     const projectScopes = requiredScopes.filter((s) => String(s).startsWith('PROJECT_')) as ProjectScope[];
     if (projectScopes.length > 0) {
-      // Разрешаем глобальный PROJECT_READ без конкретного projectId (листинг)
       const onlyRead = projectScopes.every((s) => s === 'PROJECT_READ');
       if (!projectId && onlyRead) return true;
 
@@ -37,10 +37,12 @@ export class PoliciesGuard implements CanActivate {
       const access = await this.prisma.projectAccess.findFirst({ where: { projectId, userId: user.id } });
       if (!access) return false;
       const role = access.role as string;
-      const canWrite = role === 'OWNER' || role === 'ADMIN' || role === 'EDITOR';
-      const canRead = canWrite || role === 'VIEWER';
+      const cfg = this.config.get('access.project') as any;
+      const canRead = cfg.read.includes(role);
+      const canWrite = cfg.write.includes(role);
+      const canAdmin = cfg.admin.includes(role);
       for (const scope of projectScopes) {
-        if (scope === 'PROJECT_ADMIN' && !(role === 'OWNER' || role === 'ADMIN')) return false;
+        if (scope === 'PROJECT_ADMIN' && !canAdmin) return false;
         if (scope === 'PROJECT_WRITE' && !canWrite) return false;
         if (scope === 'PROJECT_READ' && !canRead) return false;
       }
@@ -54,10 +56,11 @@ export class PoliciesGuard implements CanActivate {
       if (!accountId) return false;
       const membership = await this.prisma.accountMembership.findFirst({ where: { accountId, userId: user.id } });
       if (!membership) return false;
-      const role = membership.role as string; // OWNER|ADMIN|MANAGER|MEMBER
-      const canAdmin = role === 'OWNER' || role === 'ADMIN';
-      const canWrite = canAdmin || role === 'MANAGER';
-      const canRead = canWrite || role === 'MEMBER';
+      const role = membership.role as string;
+      const cfg = this.config.get('access.account') as any;
+      const canRead = cfg.read.includes(role);
+      const canWrite = cfg.write.includes(role);
+      const canAdmin = cfg.admin.includes(role);
       for (const scope of accountScopes) {
         if (scope === 'ACCOUNT_ADMIN' && !canAdmin) return false;
         if (scope === 'ACCOUNT_WRITE' && !canWrite) return false;
