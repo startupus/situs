@@ -15,6 +15,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { Request as ExpressRequest } from 'express';
+import { Public } from '../common/decorators/public.decorator';
 
 /**
  * Контроллер аутентификации
@@ -33,6 +34,7 @@ export class AuthController {
   /**
    * Регистрация нового пользователя
    */
+  @Public()
   @Post('register')
   @ApiOperation({ summary: 'Регистрация нового пользователя' })
   @ApiResponse({ 
@@ -49,6 +51,7 @@ export class AuthController {
   /**
    * Вход в систему
    */
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -79,6 +82,7 @@ export class AuthController {
   /**
    * Обновление access токена
    */
+  @Public()
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Обновление access токена' })
