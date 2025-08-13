@@ -8,6 +8,7 @@ import { appConfig } from './config/app.config';
 import { RealtimeModule } from './realtime/realtime.module';
 import { jwtConfig } from './config/jwt.config';
 import { databaseConfig } from './config/database.config';
+import { PagesModule } from './pages/pages.module';
 
 /**
  * Основной модуль приложения
@@ -32,6 +33,7 @@ import { databaseConfig } from './config/database.config';
     DatabaseModule,
     CommonModule,
     RealtimeModule, // Нужен для SSE
+    PagesModule,
 
     // Бизнес-модули
     ProjectsModule,

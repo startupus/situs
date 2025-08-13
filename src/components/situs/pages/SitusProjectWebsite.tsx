@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getProject, ProjectData } from '../../../services/projectApi';
+import { getProject, ProjectData, getProjectPages, PageData } from '../../../services/projectApi';
 import SiteMenuSettings from '../projects/SiteMenuSettings';
 
 const SitusProjectWebsite: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const [project, setProject] = useState<ProjectData | null>(null);
+  const [pages, setPages] = useState<PageData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'pages' | 'menu' | 'design' | 'seo'>('pages');
@@ -23,6 +24,8 @@ const SitusProjectWebsite: React.FC = () => {
         setError(null);
         const data = await getProject(projectId);
         setProject(data);
+        const pagesData = await getProjectPages(projectId);
+        setPages(pagesData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Ошибка загрузки проекта');
         console.error('Ошибка загрузки проекта:', err);
@@ -106,8 +109,8 @@ const SitusProjectWebsite: React.FC = () => {
         </p>
         
         <div className="flex items-center gap-4 mt-3 text-sm text-body-color dark:text-dark-6">
-          <span>📄 Страниц: {project.pages?.length || 0}</span>
-          <span>🏠 Главная: {project.pages?.find(p => p.isHomePage)?.title || 'Не настроена'}</span>
+          <span>📄 Страниц: {pages.length}</span>
+          <span>🏠 Главная: {pages.find(p => p.isHomePage)?.title || 'Не настроена'}</span>
           {project.domain && (
             <a
               href={`https://${project.domain}`}
@@ -174,7 +177,7 @@ const SitusProjectWebsite: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {project.pages.map((page) => (
+              {pages.map((page) => (
                 <div
                   key={page.id}
                   className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:border-primary transition-colors"

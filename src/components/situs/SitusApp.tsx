@@ -14,6 +14,7 @@ import SitusSupport from "./pages/SitusSupport";
 import SitusProfileSettings from "./pages/SitusProfileSettings";
 import SitusSectionSettings from "./pages/SitusSectionSettings";
 import ProjectPage from "./projects/ProjectPage";
+import SitusProjectWebsite from "./pages/SitusProjectWebsite";
 
 const SitusApp: React.FC = () => {
   console.log("SitusApp component rendered");
@@ -27,6 +28,7 @@ const SitusApp: React.FC = () => {
         {/* Проекты */}
         <Route path="projects" element={<SitusProjects />} />
         <Route path="projects/:projectId" element={<ProjectPage />} />
+        <Route path="projects/:projectId/website" element={<SitusProjectWebsite />} />
         <Route path="projects/websites" element={<SitusWebsites />} />
         <Route path="projects/stores" element={<SitusStores />} />
         <Route path="projects/chatbots" element={<SitusChatbots />} />

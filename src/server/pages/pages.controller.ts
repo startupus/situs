@@ -1,36 +1,26 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { PrismaService } from '../database/prisma.service';
 
 /**
  * Простой контроллер страниц
  */
 @Controller('api/pages')
 export class PagesController {
+  constructor(private readonly prisma: PrismaService) {}
+
   @Get()
-  findAll() {
-    return {
-      success: true,
-      data: {
-        pages: [
-          {
-            id: '1',
-            name: 'Главная',
-            slug: 'home',
-            content: { blocks: [] },
-            projectId: '1',
-            status: 'published'
-          },
-          {
-            id: '2',
-            name: 'О компании',
-            slug: 'about',
-            content: { blocks: [] },
-            projectId: '1',
-            status: 'draft'
-          }
-        ],
-        pagination: { page: 1, limit: 20, total: 2, totalPages: 1 }
-      }
-    };
+  async findAll(@Query('projectId') projectId?: string, @Query('page') page?: string, @Query('limit') limit?: string) {
+    const p = Math.max(1, parseInt(page || '1', 10) || 1);
+    const l = Math.max(1, Math.min(100, parseInt(limit || '20', 10) || 20));
+    const skip = (p - 1) * l;
+    const where: any = projectId
+      ? { product: { projectId, type: 'WEBSITE' } }
+      : { product: { type: 'WEBSITE' } };
+    const [pages, total] = await Promise.all([
+      this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
+      this.prisma.page.count({ where }),
+    ]);
+    return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
   }
 
   @Get(':id')
@@ -48,14 +38,8 @@ export class PagesController {
   }
 
   @Post()
-  create(@Body() createPageDto: any) {
-    return {
-      success: true,
-      data: {
-        id: Date.now().toString(),
-        ...createPageDto,
-        createdAt: new Date().toISOString()
-      }
-    };
+  async create(@Body() createPageDto: any) {
+    const created = await this.prisma.page.create({ data: createPageDto });
+    return { success: true, data: created };
   }
 }

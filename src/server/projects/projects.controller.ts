@@ -34,6 +34,7 @@ import { UpdateProjectAccessDto } from './dto/update-project-access.dto';
  * Мигрированная логика из Express /api/projects
  */
 // @ApiTags('projects')
+console.log('[BOOT] Loading ProjectsController file');
 @Controller('api/projects')
 // @UseGuards(SimpleJwtGuard) // Временно отключено
 // @ApiBearerAuth()
