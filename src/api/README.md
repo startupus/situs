@@ -18,6 +18,12 @@ src/api/
 
 ## Основные компоненты
 
+### Навигатор
+- `client.ts`, `client/ApiClient.ts` — базовый HTTP‑клиент
+- `services/*.api.ts` — сервисы доменов (`projects.api.ts`, `products.api.ts`, `analytics.api.ts`, и др.)
+- `middleware/`, `validation/`, `routes/`, `controllers/` — вспомогательные части (по мере миграции)
+- `__tests__/` — unit/integration тесты API (Vitest)
+
 ### ApiClient
 Центральный класс для выполнения HTTP запросов:
 - Автоматическая обработка ошибок
@@ -92,7 +98,7 @@ try {
 ```typescript
 proxy: {
   '/api': {
-    target: 'http://localhost:3001',
+    target: 'http://localhost:3002',
     changeOrigin: true
   }
 }
@@ -100,7 +106,7 @@ proxy: {
 
 ### Переменные окружения
 ```env
-VITE_API_BASE_URL=http://localhost:3001
+VITE_API_BASE_URL=http://localhost:3002
 VITE_API_TIMEOUT=10000
 ```
 

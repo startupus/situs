@@ -229,9 +229,13 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
 ## 📚 Документация
 
 ### Документация
-- [Рефакторинг API](./docs/API_STRUCTURE_REFACTORING_REPORT.md)
 - [Архитектура продуктов](./docs/PRODUCT_SCHEMAS.md)
 - [План интеграции NestJS](./docs/NESTJS_INTEGRATION_PLAN.md)
+- [Бизнес‑архитектура](./docs/BUSINESS_ARCHITECTURE.md)
+- [Интеграция MCP](./docs/MCP_INTEGRATION.md)
+- [Стандарты разработки](./docs/DEVELOPMENT_STANDARDS.md)
+- [Техническое задание](./docs/TECHNICAL_SPECIFICATION.md)
+- [Обзор docs](./docs/README.md)
 
 ### Архитектура
 - [Структура компонентов](./src/components/README.md)
