@@ -300,68 +300,54 @@ const EditorContent: React.FC = () => {
         return;
       }
 
+      console.log('🚀 Загрузка проекта:', urlParams.projectId);
+
+      // 1) Пробуем загрузить проект, но не блокируем UI при ошибке
+      let loadedProject: ProjectData | null = null;
       try {
-        console.log('🚀 Загрузка проекта:', urlParams.projectId);
+        loadedProject = await projectsApi.getProject(urlParams.projectId);
+        setCurrentProject(loadedProject);
+        console.log('✅ Проект загружен:', loadedProject.name);
+      } catch (e) {
+        console.error('⚠️ Ошибка загрузки проекта, продолжаю без него:', e);
+        setCurrentProject({ id: urlParams.projectId as string, name: 'Проект', pages: [], type: 'WEBSITE' } as any);
+      }
 
-        // Загружаем проект
-        const project = await projectsApi.getProject(urlParams.projectId);
-        setCurrentProject(project);
-        console.log('✅ Проект загружен:', project.name);
+      // 2) Загружаем страницы проекта всегда, даже если проект не загрузился
+      try {
+        const pages = await fetchApiJson(`/api/projects/${urlParams.projectId}/pages`).then((d)=>d.data?.pages||[]);
+        const normalized = pages.map((p:any)=>({ ...p, content: safeJsonParse(p.content, { blocks: [] }) }));
+        console.log('📄 Загружены страницы проекта:', normalized.length, 'страниц');
+        setProjectPages(normalized);
 
-        // Загружаем страницы проекта
-        try {
-          const pages = await fetchApiJson(`/api/projects/${urlParams.projectId}/pages`).then((d)=>d.data?.pages||[]);
-          // Нормализуем content: может быть строкой из БД
-          const normalized = pages.map((p:any)=>({
-            ...p,
-            content: safeJsonParse(p.content, { blocks: [] })
-          }));
-          console.log('📄 Загружены страницы проекта:', normalized.length, 'страниц');
-          setProjectPages(normalized);
-
-          // Загружаем конкретную страницу, если указана
-          if (urlParams.pageId) {
-            const pageToLoad = pages.find(p => p.id === urlParams.pageId);
-            if (pageToLoad) {
-              console.log('📄 Загружена страница по ID:', pageToLoad.title);
-              // Конвертируем данные из API в формат редактора
-              const editorPage = {
-                id: pageToLoad.id,
-                type: 'page',
-                slug: pageToLoad.slug,
-                title: pageToLoad.title,
-                content: (pageToLoad.content?.blocks) || [],
-                languages: {
-                  ru: {
-                    title: pageToLoad.title,
-                    content: (pageToLoad.content?.blocks) || []
-                  },
-                  en: {
-                    title: pageToLoad.title + ' (EN)',
-                    content: []
-                  },
-                  de: {
-                    title: pageToLoad.title + ' (DE)',
-                    content: []
-                  }
-                },
-                availableLanguages: ['ru', 'en', 'de'],
-                defaultLanguage: 'ru',
-                projectId: project.id,
-                meta: {
-                  title: pageToLoad.meta?.title || pageToLoad.title,
-                  description: pageToLoad.meta?.description || '',
-                  keywords: pageToLoad.meta?.keywords || ''
-                }
-              };
-              setCurrentPage(editorPage);
+        // 3) Определяем текущую страницу: по pageId из URL или первую из списка
+        let initial = normalized.find((p:any)=> p.id === urlParams.pageId) || normalized[0];
+        if (initial) {
+          const editorPage = {
+            id: initial.id,
+            type: 'page',
+            slug: initial.slug,
+            title: initial.title,
+            content: (initial.content?.blocks) || [],
+            languages: {
+              ru: { title: initial.title, content: (initial.content?.blocks) || [] },
+              en: { title: initial.title + ' (EN)', content: [] },
+              de: { title: initial.title + ' (DE)', content: [] },
+            },
+            availableLanguages: ['ru', 'en', 'de'],
+            defaultLanguage: 'ru',
+            projectId: (loadedProject?.id || urlParams.projectId) as string,
+            meta: {
+              title: initial.meta?.title || initial.title,
+              description: initial.meta?.description || '',
+              keywords: initial.meta?.keywords || ''
             }
-          }
-        } catch {}
-
-        setLoading(false);
-      } catch (error) {
-        console.error('❌ Ошибка загрузки данных проекта:', error);
+          };
+          setCurrentPage(editorPage);
+        }
+      } catch (e) {
+        console.error('❌ Ошибка загрузки страниц проекта:', e);
+      } finally {
         setLoading(false);
       }
     };
