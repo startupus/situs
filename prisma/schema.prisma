@@ -16,6 +16,7 @@ model User {
   email     String   @unique
   password  String
   role      UserRole @default(BUSINESS)
+  globalRole GlobalRole @default(BUSINESS)
   status    UserStatus @default(ACTIVE)
   
   // Subscription and limits
@@ -30,8 +31,10 @@ model User {
 
   // Relations
   ownedProjects    Project[] @relation("ProjectOwner")
+  ownedAccounts    Account[] @relation("UserOwnsAccounts")
   projectAccesses  ProjectAccess[]
   grantedAccesses  ProjectAccess[] @relation("GrantedAccess")
+  accountMemberships AccountMembership[]
   media            Media[]
 
   @@map("users")
@@ -54,6 +57,7 @@ model Project {
   
   // Ownership and access
   ownerId   String
+  accountId String?
   status    ProjectStatus @default(ACTIVE)
   
   createdAt DateTime @default(now())
@@ -61,6 +65,7 @@ model Project {
   
   // Relations
   owner     User   @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  account   Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)
   products  Product[]
   accesses  ProjectAccess[]
   media     Media[]
@@ -121,6 +126,7 @@ model Page {
   pageType    PageType   @default(PAGE)
   status      PageStatus @default(DRAFT)
   isHomePage  Boolean    @default(false)
+  orderIndex  Int        @default(0)
   
   // SEO
   metaTitle       String?
@@ -141,6 +147,53 @@ model Page {
   
   @@unique([productId, slug])
   @@map("pages")
+}
+
+/// Мульти-аккаунтная структура и роли
+model Account {
+  id        String      @id @default(cuid())
+  name      String
+  type      AccountType
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User    @relation("UserOwnsAccounts", fields: [ownerId], references: [id], onDelete: Cascade)
+  projects  Project[]
+  members   AccountMembership[]
+  // Связи агентство ↔ клиент
+  clients   AgencyClient[] @relation("AgencyAsAgency")
+  agencies  AgencyClient[] @relation("AgencyAsClient")
+
+  @@map("accounts")
+}
+
+model AccountMembership {
+  id        String       @id @default(cuid())
+  accountId String
+  userId    String
+  role      AccountRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([accountId, userId])
+  @@map("account_memberships")
+}
+
+model AgencyClient {
+  id               String   @id @default(cuid())
+  agencyAccountId  String
+  clientAccountId  String
+  createdAt        DateTime @default(now())
+
+  agency  Account @relation("AgencyAsAgency", fields: [agencyAccountId], references: [id], onDelete: Cascade)
+  client  Account @relation("AgencyAsClient", fields: [clientAccountId], references: [id], onDelete: Cascade)
+
+  @@unique([agencyAccountId, clientAccountId])
+  @@map("agency_clients")
 }
 
 model Media {
@@ -177,6 +230,13 @@ enum UserRole {
   ADMIN       // Системный администратор
 }
 
+enum GlobalRole {
+  SUPER_ADMIN
+  STAFF
+  AGENCY
+  BUSINESS
+}
+
 enum UserStatus {
   ACTIVE
   INACTIVE
@@ -196,6 +256,18 @@ enum ProjectRole {
   ADMIN       // Администратор проекта
   EDITOR      // Редактор контента
   VIEWER      // Только просмотр
+}
+
+enum AccountType {
+  AGENCY
+  BUSINESS
+}
+
+enum AccountRole {
+  OWNER
+  ADMIN
+  MANAGER
+  MEMBER
 }
 
 enum ProductType {

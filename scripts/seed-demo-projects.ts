@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { PrismaClient, ProjectStatus, UserRole, UserStatus } from '@prisma/client';
+import { PrismaClient, ProjectStatus, UserRole, UserStatus, ProductType, PageStatus, PageType } from '@prisma/client';
 
 const prisma = new PrismaClient({ log: ['warn', 'error'] });
 
@@ -50,7 +50,7 @@ async function main() {
       data: {
         name,
         slug,
-        description: null, // требований нет — описания у проектов больше не используем
+        description: null, // описания здесь опциональны
         ownerId: owner.id,
         status: ProjectStatus.ACTIVE,
         isPublished: false,
@@ -58,6 +58,42 @@ async function main() {
       select: { id: true, name: true, slug: true },
     });
     console.log('created', created);
+
+    // Создаём подключаемый продукт WEBSITE для проекта
+    const website = await prisma.product.create({
+      data: {
+        name: 'Website',
+        description: 'Корпоративный сайт проекта',
+        type: ProductType.WEBSITE,
+        status: 'ACTIVE',
+        projectId: created.id,
+        settings: '{}',
+      },
+      select: { id: true },
+    });
+
+    // Создаём базовые страницы для WEBSITE
+    const pages = [
+      { title: 'Главная', slug: 'home', isHomePage: true, orderIndex: 0 },
+      { title: 'О компании', slug: 'about', isHomePage: false, orderIndex: 1 },
+      { title: 'Контакты', slug: 'contacts', isHomePage: false, orderIndex: 2 },
+    ];
+    for (const p of pages) {
+      await prisma.page.upsert({
+        where: { productId_slug: { productId: website.id, slug: p.slug } },
+        update: {},
+        create: {
+          title: p.title,
+          slug: p.slug,
+          content: '{}',
+          pageType: PageType.PAGE,
+          status: PageStatus.DRAFT,
+          isHomePage: p.isHomePage,
+          orderIndex: p.orderIndex,
+          productId: website.id,
+        },
+      });
+    }
   }
 }
 

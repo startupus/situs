@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { projectsApi } from '../../../api/services/projects.api';
 import { ProjectData } from '../../../types/project';
@@ -25,6 +25,8 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { delay: 150, tolerance: 5 } })
   );
+
+  const navigate = useNavigate();
 
   // Локальные списки: верхние плитки (продукты) и виджеты (ниже)
   const [productsOrder, setProductsOrder] = useState<Array<{ id: string; name: string; type: string }>>([]);
@@ -67,10 +69,35 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   const SortableTile: React.FC<{ item: { id: string; name: string; type?: string } }> = ({ item }) => {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
     const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
+    const go = () => {
+      if (!projectId) return;
+      if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/website`);
+      else navigate(`/projects/${projectId}`);
+    };
     return (
-      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 shadow-sm cursor-grab active:cursor-grabbing">
-        <div className="text-sm text-body-color dark:text-dark-6">Компонент</div>
-        <div className="text-lg font-semibold text-dark dark:text-white">{item.name}</div>
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 shadow-sm select-none"
+        onClick={go}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="text-sm text-body-color dark:text-dark-6">Компонент</div>
+            <div className="text-lg font-semibold text-dark dark:text-white">{item.name}</div>
+          </div>
+          {/* Drag handle */}
+          <button
+            type="button"
+            aria-label="Перетащить"
+            className="cursor-grab active:cursor-grabbing text-body-color dark:text-dark-6 p-1 rounded hover:bg-gray-100 dark:hover:bg-dark-3"
+            onClick={(e) => e.stopPropagation()}
+            {...attributes}
+            {...listeners}
+          >
+            ⋮⋮
+          </button>
+        </div>
       </div>
     );
   };
