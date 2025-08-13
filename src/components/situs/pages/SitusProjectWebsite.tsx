@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProject, ProjectData, getProjectPages, PageData } from '../../../services/projectApi';
 import SiteMenuSettings from '../projects/SiteMenuSettings';
+import ProjectTrafficChart from './ProjectTrafficChart';
+import ProjectConversionWidget from './ProjectConversionWidget';
 
 const SitusProjectWebsite: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -10,6 +12,7 @@ const SitusProjectWebsite: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'pages' | 'menu' | 'design' | 'seo'>('pages');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadProject = async () => {
@@ -74,11 +77,18 @@ const SitusProjectWebsite: React.FC = () => {
     );
   }
 
+  // Слушатель на иконку настроек сайта из верхней панели
+  useEffect(() => {
+    const handler = (e: any) => {
+      const tab = e?.detail?.tab as 'menu' | 'design' | 'seo' | undefined;
+      setActiveTab(tab || 'menu');
+    };
+    window.addEventListener('situs:open-website-settings', handler);
+    return () => window.removeEventListener('situs:open-website-settings', handler);
+  }, []);
+
   const tabs = [
     { id: 'pages', name: 'Страницы', icon: '📄' },
-    { id: 'menu', name: 'Меню', icon: '🧭' },
-    { id: 'design', name: 'Дизайн', icon: '🎨' },
-    { id: 'seo', name: 'SEO', icon: '🔍' }
   ];
 
   return (
@@ -96,161 +106,68 @@ const SitusProjectWebsite: React.FC = () => {
         <span className="text-dark dark:text-white">Продукт: Сайт</span>
       </nav>
 
-      {/* Заголовок */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <span className="text-2xl">🌐</span>
-          <h1 className="text-2xl font-bold text-dark dark:text-white">
-            Управление сайтом
-          </h1>
-        </div>
-        <p className="text-body-color dark:text-dark-6">
-          Настройки и управление основным сайтом проекта {project.name}
-        </p>
-        
-        <div className="flex items-center gap-4 mt-3 text-sm text-body-color dark:text-dark-6">
-          <span>📄 Страниц: {pages.length}</span>
-          <span>🏠 Главная: {pages.find(p => p.isHomePage)?.title || 'Не настроена'}</span>
-          {project.domain && (
-            <a
-              href={`https://${project.domain}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-            >
-              🌐 {project.domain} ↗
-            </a>
-          )}
-        </div>
-      </div>
+      {/* Перенос заголовка в верхнюю панель — локальный заголовок убран */}
 
-      {/* Быстрые действия */}
-      <div className="flex gap-2 mb-6">
-        <Link
-          to={`/redaktus?projectId=${project.id}`}
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-        >
-          ✏️ Открыть редактор
-        </Link>
-        <button className="inline-flex items-center gap-2 rounded-lg bg-gray-100 dark:bg-dark-3 px-4 py-2 text-sm font-medium text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-4 transition-colors">
-          👁️ Предпросмотр
-        </button>
-        <button className="inline-flex items-center gap-2 rounded-lg bg-gray-100 dark:bg-dark-3 px-4 py-2 text-sm font-medium text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-4 transition-colors">
-          📊 Аналитика
-        </button>
-      </div>
+      {/* Быстрые действия убраны: аналитика будет встроенными виджетами, редактор открывается при выборе страницы */}
 
-      {/* Вкладки */}
-      <div className="border-b border-stroke dark:border-dark-3 mb-6">
-        <nav className="flex space-x-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
-                activeTab === tab.id
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white hover:border-gray-300'
-              }`}
-            >
-              <span>{tab.icon}</span>
-              <span>{tab.name}</span>
-            </button>
-          ))}
-        </nav>
-      </div>
+      {/* Убираем локальные вкладки: настройки доступны через иконку в верхней панели */}
 
       {/* Содержимое вкладок */}
       <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3">
         {activeTab === 'pages' && (
           <div className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-dark dark:text-white">
-                Страницы сайта
-              </h3>
-              <Link
-                to={`/redaktus?projectId=${project.id}`}
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-              >
-                ✏️ Редактировать страницы
-              </Link>
+            {/* Виджеты аналитики сверху */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+              <ProjectTrafficChart
+                data={[{ projectName: project.name, traffic: pages.map((_, i) => 50 + i * 5) }]}
+                timeLabels={pages.map((_, i) => `День ${i + 1}`)}
+              />
+              <ProjectConversionWidget
+                projects={[{ id: 1, name: project.name, conversionRate: 2.5, visitors: 1240, orders: 36, revenue: 122000, trend: 'up', trendValue: 3.2 }]}
+              />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {pages.map((page) => (
-                <div
-                  key={page.id}
-                  className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:border-primary transition-colors"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">
-                        {page.isHomePage ? '🏠' : '📄'}
-                      </span>
-                      <h4 className="font-medium text-dark dark:text-white">
+            {/* Список страниц (плотный список) */}
+            <div className="rounded-lg border border-stroke dark:border-dark-3 overflow-hidden">
+              <div className="bg-gray-50 dark:bg-dark-3 px-4 py-2 text-xs font-medium text-body-color dark:text-dark-6 grid grid-cols-12 gap-2">
+                <div className="col-span-6">Страница</div>
+                <div className="col-span-2">Статус</div>
+                <div className="col-span-2">Путь</div>
+                <div className="col-span-2 text-right">Действия</div>
+              </div>
+              <ul className="divide-y divide-stroke dark:divide-dark-3">
+                {pages.map((page) => (
+                  <li key={page.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3">
+                    <div className="col-span-6 flex items-center gap-2">
+                      <span className="text-lg">{page.isHomePage ? '🏠' : '📄'}</span>
+                      <button
+                        onClick={() => navigate(`/redaktus?projectId=${project.id}&pageId=${page.id}`)}
+                        className="text-left font-medium text-dark dark:text-white hover:text-primary truncate"
+                      >
                         {page.title}
-                      </h4>
+                      </button>
                     </div>
-                    <span className={`text-xs px-2 py-1 rounded-full ${
-                      page.status === 'PUBLISHED'
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                    }`}>
-                      {page.status === 'PUBLISHED' ? 'Опубликована' : 'Черновик'}
-                    </span>
-                  </div>
-                  <p className="text-sm text-body-color dark:text-dark-6 mb-3">
-                    /{page.slug}
-                  </p>
-                  <Link
-                    to={`/redaktus?projectId=${project.id}&pageId=${page.id}`}
-                    className="text-xs text-primary hover:text-primary/80 transition-colors"
-                  >
-                    Редактировать →
-                  </Link>
-                </div>
-              ))}
+                    <div className="col-span-2">
+                      <span className={`text-xs px-2 py-1 rounded-full ${page.status === 'PUBLISHED' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'}`}>
+                        {page.status === 'PUBLISHED' ? 'Опубликована' : 'Черновик'}
+                      </span>
+                    </div>
+                    <div className="col-span-2 text-sm text-body-color dark:text-dark-6 truncate">/{page.slug}</div>
+                    <div className="col-span-2 text-right">
+                      <button
+                        onClick={() => navigate(`/redaktus?projectId=${project.id}&pageId=${page.id}`)}
+                        className="text-xs text-primary hover:text-primary/80"
+                      >
+                        Открыть редактор
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         )}
-
-        {activeTab === 'menu' && (
-          <SiteMenuSettings project={project} />
-        )}
-
-        {activeTab === 'design' && (
-          <div className="p-6">
-            <div className="text-center py-12">
-              <div className="text-4xl mb-4">🎨</div>
-              <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
-                Настройки дизайна
-              </h3>
-              <p className="text-body-color dark:text-dark-6 mb-4">
-                Управление цветами, шрифтами и стилями сайта
-              </p>
-              <div className="text-sm text-body-color dark:text-dark-6">
-                🚧 В разработке
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'seo' && (
-          <div className="p-6">
-            <div className="text-center py-12">
-              <div className="text-4xl mb-4">🔍</div>
-              <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
-                SEO настройки
-              </h3>
-              <p className="text-body-color dark:text-dark-6 mb-4">
-                Оптимизация сайта для поисковых систем
-              </p>
-              <div className="text-sm text-body-color dark:text-dark-6">
-                🚧 В разработке
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Настройки сайта открываются отдельной страницей/модалкой (иконка в верхней панели), локальные вкладки скрыты */}
       </div>
     </div>
   );

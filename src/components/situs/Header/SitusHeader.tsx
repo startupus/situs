@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useProject } from "../../../contexts/ProjectContext";
-import { FiMenu, FiArrowLeft, FiSearch, FiBell, FiX, FiPlus } from "react-icons/fi";
+import { FiMenu, FiArrowLeft, FiSearch, FiBell, FiX, FiPlus, FiSettings } from "react-icons/fi";
 import { projectsApi } from "../../../api/services/projects.api";
 
 interface SitusHeaderProps {
@@ -49,6 +49,8 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   // Вспомогательные вычисления для заголовка/навигации
   const sectionTitle = useMemo(() => {
+    // Спец-случай: страница продукта Website — показываем "Сайт"
+    if (/^\/projects\/[^/]+\/website/.test(location.pathname)) return 'Сайт';
     if (isProjectPage) return headerProjectName || currentProject?.name || 'Проект';
     const path = location.pathname;
     if (path === '/' || path === '') return 'Панель управления Situs';
@@ -75,6 +77,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
     // можно расширить: orders, users etc.
     return false;
   }, [location.pathname]);
+  const isWebsitePage = useMemo(() => /^\/projects\/[^/]+\/website/.test(location.pathname), [location.pathname]);
 
   // Состояние поиска в верхней панели
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -168,6 +171,17 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                   <FiSearch aria-hidden />
                 </button>
                 {/* Кнопка Добавить в акценте — крайняя справа */}
+                {isWebsitePage && (
+                  <button
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent('situs:open-website-settings', { detail: { tab: 'menu' } }));
+                    }}
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-stroke text-body-color hover:text-primary hover:border-primary dark:border-dark-3 dark:text-dark-6 transition-colors"
+                    title="Настройки сайта"
+                  >
+                    <FiSettings aria-hidden />
+                  </button>
+                )}
                 {canCreateHere && (
                   <button
                     onClick={() => {
