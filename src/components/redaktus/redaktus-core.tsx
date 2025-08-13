@@ -76,6 +76,21 @@ const safeJsonParse = (value: any, fallback: any) => {
     return fallback;
   }
 };
+
+// Универсальный helper: пробуем через Vite proxy (/api), при ошибке бьёмся прямо на NestJS (3001)
+const fetchApiJson = async (path: string, init?: RequestInit): Promise<any> => {
+  const doFetch = async (url: string) => {
+    const res = await fetch(url, init);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  };
+  try {
+    return await doFetch(path);
+  } catch (_) {
+    const fallbackUrl = path.startsWith('/api') ? `http://localhost:3001${path}` : path;
+    return await doFetch(fallbackUrl);
+  }
+};
 const blockSchemas = {
   'hero-block': {
     title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
@@ -295,7 +310,7 @@ const EditorContent: React.FC = () => {
 
         // Загружаем страницы проекта
         try {
-          const pages = await fetch(`/api/projects/${urlParams.projectId}/pages`).then(r=>r.json()).then(d=>d.data?.pages||[]);
+          const pages = await fetchApiJson(`/api/projects/${urlParams.projectId}/pages`).then((d)=>d.data?.pages||[]);
           // Нормализуем content: может быть строкой из БД
           const normalized = pages.map((p:any)=>({
             ...p,
@@ -374,17 +389,12 @@ const EditorContent: React.FC = () => {
         metaKeywords: pageData.meta?.keywords || currentPage.meta?.keywords || currentPage.metaKeywords
       } as any;
 
-      // Импортируем updatePage из API с проверкой статуса
-      const response = await fetch(`/api/pages/${currentPage.id}` ,{
-        method:'PUT',
-        headers:{'Content-Type':'application/json'},
+      // Импортируем updatePage из API с проверкой статуса (с fallback на прямой порт)
+      const json = await fetchApiJson(`/api/pages/${currentPage.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updateData)
       });
-      if (!response.ok) {
-        const text = await response.text().catch(()=> '');
-        throw new Error(`HTTP ${response.status}: ${text || 'Save failed'}`);
-      }
-      const json = await response.json().catch(()=>({}));
       const updatedPage = json?.data;
       if (!updatedPage) {
         throw new Error('Пустой ответ сервера при сохранении страницы');
@@ -499,9 +509,7 @@ const EditorContent: React.FC = () => {
     
     try {
       // Импортируем getPage из API
-      const res = await fetch(`/api/pages/${pageId}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const payload = await res.json().catch(()=>({}));
+      const payload = await fetchApiJson(`/api/pages/${pageId}`);
       const pageData = payload?.data;
       if (!pageData) throw new Error('Страница не найдена');
       const contentObj = safeJsonParse(pageData.content, { blocks: [] });
@@ -568,7 +576,7 @@ const EditorContent: React.FC = () => {
         productId: website.id,
         orderIndex: projectPages.length
       };
-      const created = await fetch('/api/pages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(r=>r.json()).then(d=>d.data);
+      const created = await fetchApiJson('/api/pages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(d=>d.data);
 
       const newPage = {
         id: created.id,
