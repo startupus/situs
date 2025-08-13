@@ -23,15 +23,16 @@ export class PoliciesGuard implements CanActivate {
     const params = request.params || {};
     const query = request.query || {};
 
-    // projectId: из params (projectId или id), либо из query
     let projectId: string | undefined = params.projectId || params.id || query.projectId;
-
-    // accountId: из params, либо /api/accounts/:id → трактуем как accountId, либо из query
     let accountId: string | undefined = params.accountId || query.accountId;
     if (!accountId && request.originalUrl?.startsWith('/api/accounts/') && params.id) accountId = params.id;
 
     const projectScopes = requiredScopes.filter((s) => String(s).startsWith('PROJECT_')) as ProjectScope[];
     if (projectScopes.length > 0) {
+      // Разрешаем глобальный PROJECT_READ без конкретного projectId (листинг)
+      const onlyRead = projectScopes.every((s) => s === 'PROJECT_READ');
+      if (!projectId && onlyRead) return true;
+
       if (!projectId) return false;
       const access = await this.prisma.projectAccess.findFirst({ where: { projectId, userId: user.id } });
       if (!access) return false;
@@ -47,6 +48,9 @@ export class PoliciesGuard implements CanActivate {
 
     const accountScopes = requiredScopes.filter((s) => String(s).startsWith('ACCOUNT_')) as AccountScope[];
     if (accountScopes.length > 0) {
+      const onlyRead = accountScopes.every((s) => s === 'ACCOUNT_READ');
+      if (!accountId && onlyRead) return true;
+
       if (!accountId) return false;
       const membership = await this.prisma.accountMembership.findFirst({ where: { accountId, userId: user.id } });
       if (!membership) return false;
