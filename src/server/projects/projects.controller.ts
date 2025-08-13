@@ -28,6 +28,7 @@ import { RealtimeEventsService } from '../realtime/realtime-events.service';
 import { GrantProjectAccessDto } from './dto/grant-project-access.dto';
 import { UpdateProjectAccessDto } from './dto/update-project-access.dto';
 // import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard'; // Временно отключено
+import { Roles, Scopes } from '../common/decorators/roles.decorator';
 
 /**
  * Контроллер проектов
@@ -56,6 +57,8 @@ export class ProjectsController {
    * Получение всех проектов с пагинацией и фильтрами
    */
   @Get()
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_READ')
   // @ApiOperation({ summary: 'Получение списка проектов' })
   // @ApiResponse({ status: 200, description: 'Список проектов с пагинацией' })
   async findAll(@Query() query: ProjectQueryDto, @Request() req: any) {
@@ -116,6 +119,7 @@ export class ProjectsController {
    * Обновление проекта
    */
   @Patch(':id')
+  @Scopes('PROJECT_WRITE')
   async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
     return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
   }
@@ -155,6 +159,7 @@ export class ProjectsController {
    * Удаление проекта
    */
   @Delete(':id')
+  @Scopes('PROJECT_ADMIN')
   async remove(@Param('id') id: string, @Request() req: any) {
     return { success: true, data: await this.projectsService.remove(id, req.user?.id ?? 'owner-dev') };
   }

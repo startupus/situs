@@ -15,6 +15,10 @@ import { TenantResolverMiddleware } from './common/middleware/tenant-resolver.mi
 import { SeoModule } from './seo/seo.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { DomainRedirectMiddleware } from './common/middleware/domain-redirect.middleware';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { PoliciesGuard } from './common/guards/policies.guard';
 
 /**
  * Основной модуль приложения
@@ -56,11 +60,17 @@ import { DomainRedirectMiddleware } from './common/middleware/domain-redirect.mi
     // Аккаунты и членства
     AccountsModule,
 
+    // Аутентификация
+    AuthModule,
+
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
   ],
   controllers: [HealthController],
-  providers: [],
+  providers: [
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    { provide: APP_GUARD, useClass: PoliciesGuard },
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
