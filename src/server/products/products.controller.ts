@@ -1,6 +1,10 @@
 import { Controller, Get, Post, Body, Param, Query, Put, Delete, Optional } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { PrismaService } from '../database/prisma.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductQueryDto } from './dto/product-query.dto';
+import { Scopes } from '../common/decorators/roles.decorator';
 
 /**
  * Контроллер продуктов (глобальные маршруты)
@@ -23,22 +27,11 @@ export class ProductsController {
   }
 
   @Get()
-  async findAll(
-    @Query('page') page?: string,
-    @Query('limit') limit?: string,
-    @Query('type') type?: string,
-    @Query('status') status?: string,
-    @Query('projectId') projectId?: string,
-  ) {
+  @Scopes('PROJECT_READ')
+  async findAll(@Query() query: ProductQueryDto) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());
-      const result = await svc.findAll({
-        page: page ? parseInt(page, 10) : undefined,
-        limit: limit ? parseInt(limit, 10) : undefined,
-        type,
-        status,
-        projectId,
-      });
+      const result = await svc.findAll(query);
       return { success: true, data: result };
     } catch (error: any) {
       return {
@@ -51,6 +44,7 @@ export class ProductsController {
 
   /** Список доступных к установке типов продуктов (каталог предустановленных сервисов) */
   @Get('catalog/types')
+  @Scopes('PROJECT_READ')
   getProductTypes() {
     return {
       success: true,
@@ -63,6 +57,7 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @Scopes('PROJECT_READ')
   async findOne(@Param('id') id: string) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
     const result = await svc.findOne(id);
@@ -70,7 +65,8 @@ export class ProductsController {
   }
 
   @Post()
-  async create(@Body() createDto: { name: string; description?: string; type: string; projectId: string; settings?: string }) {
+  @Scopes('PROJECT_WRITE')
+  async create(@Body() createDto: CreateProductDto) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());
       const result = await svc.create(createDto);
@@ -81,9 +77,10 @@ export class ProductsController {
   }
 
   @Put(':id')
+  @Scopes('PROJECT_WRITE')
   async update(
     @Param('id') id: string,
-    @Body() body: Partial<{ name: string; description?: string; type: string; status: string; settings?: string }>,
+    @Body() body: UpdateProductDto,
   ) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());
@@ -95,6 +92,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @Scopes('PROJECT_ADMIN')
   async remove(@Param('id') id: string) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());

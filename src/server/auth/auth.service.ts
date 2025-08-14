@@ -49,7 +49,7 @@ export class AuthService {
       email,
       password: hashedPassword,
       name,
-    });
+    } as any);
 
     // Генерация токенов
     return this.generateTokens(user);
@@ -91,7 +91,7 @@ export class AuthService {
         throw new UnauthorizedException('Пользователь не найден');
       }
 
-      return this.generateTokens(user);
+      return this.generateTokens(user as any);
     } catch (error) {
       throw new UnauthorizedException('Невалидный refresh токен');
     }
@@ -100,11 +100,13 @@ export class AuthService {
   /**
    * Генерация JWT токенов
    */
-  private async generateTokens(user: User): Promise<AuthResponseDto> {
+  private async generateTokens(user: any): Promise<AuthResponseDto> {
     const payload = {
       sub: user.id,
       email: user.email,
       name: user.name,
+      globalRole: user.globalRole || 'BUSINESS',
+      scopes: [],
     };
 
     const [accessToken, refreshToken] = await Promise.all([
@@ -128,7 +130,7 @@ export class AuthService {
         accessToken,
         refreshToken,
       },
-    };
+    } as AuthResponseDto;
   }
 
   /**

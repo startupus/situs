@@ -1,8 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, Subject } from 'rxjs';
 
+export type ProjectEventType =
+  | 'sse_connected'
+  | 'project_created'
+  | 'project_updated'
+  | 'project_deleted'
+  | 'project_status'
+  | 'project_reordered'
+  | 'task_progress_check';
+
 export interface RealtimeEvent<T = any> {
-  type: string;
+  type: ProjectEventType;
   payload?: T;
 }
 
@@ -21,14 +30,12 @@ export class RealtimeEventsService {
     return this.subject.asObservable();
   }
 
-  publish<T = any>(type: string, payload?: T): void {
+  publish<T = any>(type: ProjectEventType, payload?: T): void {
     try {
       const evt: RealtimeEvent<T> = { type, payload };
-      // Серверный лог для отладки доставки
       // eslint-disable-next-line no-console
       console.log('[RT] publish', type, { at: new Date().toISOString(), clients: this.clients.size });
       this.subject.next(evt);
-      // Прямой широковещательный канал для подключённых SSE клиентов
       for (const send of this.clients) {
         try { send(evt as RealtimeEvent); } catch {}
       }

@@ -17,8 +17,14 @@ export class UsersService {
    * Создание нового пользователя
    */
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const username = createUserDto.email?.split('@')[0] || 'user';
+    const profile = JSON.stringify({
+      name: createUserDto.name || '',
+      avatar: createUserDto.avatar || '',
+      bio: '',
+    });
     const user = await this.prisma.user.create({
-      data: createUserDto,
+      data: { email: createUserDto.email, password: createUserDto.password, username, profile },
     });
 
     return this.excludePassword(user);
@@ -66,7 +72,7 @@ export class UsersService {
 
     const updatedUser = await this.prisma.user.update({
       where: { id },
-      data: updateUserDto,
+      data: updateUserDto as any,
     });
 
     return this.excludePassword(updatedUser);

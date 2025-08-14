@@ -10,19 +10,19 @@ export class User {
     description: 'Уникальный идентификатор пользователя',
     example: 'clm1234567890',
   })
-  id: string;
+  id!: string;
 
   @ApiProperty({
     description: 'Email пользователя',
     example: 'user@example.com',
   })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'Имя пользователя',
     example: 'Иван Иванов',
   })
-  name: string;
+  name!: string;
 
   @ApiProperty({
     description: 'Аватар пользователя',
@@ -35,11 +35,11 @@ export class User {
     description: 'Дата создания пользователя',
     example: '2024-01-01T00:00:00.000Z',
   })
-  createdAt: Date;
+  createdAt!: Date;
 
   @ApiProperty({
     description: 'Дата последнего обновления',
     example: '2024-01-01T00:00:00.000Z',
   })
-  updatedAt: Date;
+  updatedAt!: Date;
 }

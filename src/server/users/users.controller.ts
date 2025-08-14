@@ -15,6 +15,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { User } from './entities/user.entity';
+import { Request as ExpressRequest } from 'express';
 
 /**
  * Контроллер пользователей
@@ -66,8 +67,8 @@ export class UsersController {
     description: 'Профиль пользователя',
     type: User,
   })
-  getProfile(@Request() req): Promise<User> {
-    return this.usersService.findById(req.user.id);
+  getProfile(@Request() req: ExpressRequest): Promise<User | null> {
+    return this.usersService.findById((req as any).user.id);
   }
 
   /**
@@ -81,7 +82,7 @@ export class UsersController {
     type: User,
   })
   @ApiResponse({ status: 404, description: 'Пользователь не найден' })
-  findOne(@Param('id') id: string): Promise<User> {
+  findOne(@Param('id') id: string): Promise<User | null> {
     return this.usersService.findById(id);
   }
 

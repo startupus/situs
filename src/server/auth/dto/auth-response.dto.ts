@@ -5,27 +5,27 @@ import { ApiProperty } from '@nestjs/swagger';
  */
 export class UserResponseDto {
   @ApiProperty({ description: 'ID пользователя' })
-  id: string;
+  id!: string;
 
   @ApiProperty({ description: 'Email пользователя' })
-  email: string;
+  email!: string;
 
   @ApiProperty({ description: 'Имя пользователя' })
-  name: string;
+  name!: string;
 
   @ApiProperty({ description: 'Дата создания' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @ApiProperty({ description: 'Дата обновления' })
-  updatedAt: Date;
+  updatedAt!: Date;
 }
 
 export class TokensDto {
   @ApiProperty({ description: 'Access токен' })
-  accessToken: string;
+  accessToken!: string;
 
   @ApiProperty({ description: 'Refresh токен' })
-  refreshToken: string;
+  refreshToken!: string;
 }
 
 export class AuthResponseDto {
@@ -33,11 +33,11 @@ export class AuthResponseDto {
     description: 'Данные пользователя',
     type: UserResponseDto,
   })
-  user: UserResponseDto;
+  user!: UserResponseDto;
 
   @ApiProperty({ 
     description: 'JWT токены',
     type: TokensDto,
   })
-  tokens: TokensDto;
+  tokens!: TokensDto;
 }

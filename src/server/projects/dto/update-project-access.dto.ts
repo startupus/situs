@@ -1,11 +1,12 @@
-import { IsString } from 'class-validator';
+import { IsIn, IsString } from 'class-validator';
 
 /**
  * DTO для изменения роли доступа
  */
 export class UpdateProjectAccessDto {
-  @IsString({ message: 'Роль обязательна' })
-  role!: string; // ADMIN | EDITOR | VIEWER (OWNER не изменяется)
+  @IsString({ message: 'Роль должна быть строкой' })
+  @IsIn(['ADMIN', 'EDITOR', 'VIEWER'], { message: 'Недопустимая роль' })
+  role!: string;
 }
 
 

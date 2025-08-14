@@ -14,6 +14,8 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
+import { Request as ExpressRequest } from 'express';
+import { Public } from '../common/decorators/public.decorator';
 
 /**
  * Контроллер аутентификации
@@ -32,6 +34,7 @@ export class AuthController {
   /**
    * Регистрация нового пользователя
    */
+  @Public()
   @Post('register')
   @ApiOperation({ summary: 'Регистрация нового пользователя' })
   @ApiResponse({ 
@@ -48,6 +51,7 @@ export class AuthController {
   /**
    * Вход в систему
    */
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -58,8 +62,8 @@ export class AuthController {
     type: AuthResponseDto,
   })
   @ApiResponse({ status: 401, description: 'Неверные учетные данные' })
-  async login(@Body() loginDto: LoginDto, @Request() req): Promise<AuthResponseDto> {
-    return this.authService.login(req.user);
+  async login(@Body() _loginDto: LoginDto, @Request() req: ExpressRequest): Promise<AuthResponseDto> {
+    return this.authService.login((req as any).user);
   }
 
   /**
@@ -71,13 +75,14 @@ export class AuthController {
   @ApiOperation({ summary: 'Получение профиля пользователя' })
   @ApiResponse({ status: 200, description: 'Профиль пользователя' })
   @ApiResponse({ status: 401, description: 'Не авторизован' })
-  async getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req: ExpressRequest) {
+    return (req as any).user;
   }
 
   /**
    * Обновление access токена
    */
+  @Public()
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Обновление access токена' })
