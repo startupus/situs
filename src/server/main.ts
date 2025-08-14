@@ -55,7 +55,7 @@ async function bootstrap() {
 
   // Удалены временные Express-ручки /api/projects — используем ProjectsController
 
-  const port = Number(process.env.PORT || 3001);
+  const port = Number(process.env.PORT || 3002);
   try { console.log(`[BOOT] About to listen on port ${port}`); } catch {}
   await app.listen(port);
   console.log(`[BOOT] Listening OK on http://localhost:${port}`);

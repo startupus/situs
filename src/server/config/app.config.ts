@@ -6,7 +6,7 @@ import { registerAs } from '@nestjs/config';
  * Содержит основные настройки сервера
  */
 export const appConfig = registerAs('app', () => ({
-  port: parseInt(process.env.PORT || '3001', 10) || 3001,
+  port: parseInt(process.env.PORT || '3002', 10) || 3002,
   nodeEnv: process.env.NODE_ENV || 'development',
   apiPrefix: process.env.API_PREFIX || 'api',
   cors: {
