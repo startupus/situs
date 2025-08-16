@@ -17,6 +17,7 @@
 - [x] Обновить `src/components/ui/README.md` и `src/components/situs/README.md`
 
 ## Архитектура и доступы
+- [x] Интегрировать доработки из ветки `cursor/enhance-project-backend-and-authorization-c0df` (Auth, Guards, Policies, Domains, SEO)
 - [ ] API: CRUD `Account`, `AccountMembership`, `AgencyClient`
 - [ ] Авторизация: Guards/Policies (GlobalRole, Account, ProjectAccess) + декораторы `@Roles()`, `@Scopes()`
 - [ ] Tenant resolver: middleware по Host/домену (projectId, productId) и RequestContext
@@ -77,4 +78,4 @@
 - [ ] Единые настройки темы в админке, без заглушек
 
 ## Лицензии/зависимости
-- [ ] На новые пакеты — license audit и фиксация результата
+- [x] На новые пакеты — license audit и фиксация результата (см. `docs/licenses/AUDIT_$(date +%F).csv`)
