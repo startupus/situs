@@ -57,6 +57,13 @@
 - [ ] CI/CD: сборка NestJS, `prisma migrate deploy`, Playwright test, публикация артефактов
 - [ ] Мониторинг: health, лог‑рутинг, трекинг ошибок
 
+### Dev‑рантайм (tsx) — расследование и фиксы
+- [ ] tsx dev завершается до `listen()`: воспроизвести и зафиксировать причину (beforeExit/exit без открытых хэндлов)
+- [x] Временный фикс: dev keep‑alive таймер до `NestFactory.create()` в `src/server/main.ts`
+- [ ] Устранить первопричину: гарантировать удержание event loop до старта HTTP (проверить поведение tsx v4.20.x + Node 20)
+- [x] Добавить альтернативный dev‑режим без tsx: `scripts/dev-api-watch.sh` (tsc --watch + nodemon)
+- [ ] Прогнать `dev:api:watch`, проверить /health и /api/projects; стабилизировать скрипт (вывод логов, автоперезапуск)
+
 ## Документация
 - [ ] Обновить README архитектуры продуктов/ролей/маршрутов
 - [ ] Зафиксировать ресёрч (research/*), протоколы (precise_triggers)

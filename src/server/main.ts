@@ -13,6 +13,14 @@ process.on('unhandledRejection', (reason) => {
   try { console.error('[FATAL] unhandledRejection:', reason); } catch {}
 });
 
+// Диагностика неожиданных завершений процесса
+process.on('beforeExit', (code) => {
+  try { console.warn('[LIFECYCLE] beforeExit code:', code); } catch {}
+});
+process.on('exit', (code) => {
+  try { console.warn('[LIFECYCLE] exit code:', code); } catch {}
+});
+
 /**
  * Точка входа в NestJS приложение
  * 
@@ -24,6 +32,10 @@ process.on('unhandledRejection', (reason) => {
  */
 async function bootstrap() {
   console.log('[BOOT] Creating Nest application...');
+  // Dev keep-alive, чтобы процесс не завершался до старта HTTP-сервера в окружении tsx/ESM
+  const isProduction = process.env.NODE_ENV === 'production';
+  const devKeepAlive = isProduction ? undefined : setInterval(() => {}, 1000);
+
   const app = await NestFactory.create(AppModule);
   console.log('[BOOT] Nest application created');
 
@@ -37,6 +49,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useGlobalFilters(new GlobalExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
+  console.log('[BOOT] Global pipes/filters/interceptors configured');
 
   // Грейсфул-шатдаун
   app.enableShutdownHooks();
@@ -47,6 +60,7 @@ async function bootstrap() {
     const instance: any = httpAdapter.getInstance?.();
     instance?.get?.('/', (_req: any, res: any) => res.json({ ok: true, service: 'situs-api' }));
     instance?.get?.('/health', (_req: any, res: any) => res.json({ status: 'ok', ts: new Date().toISOString() }));
+    console.log('[BOOT] Early routes registered');
   } catch (e) {
     console.warn('[BOOT] Failed to register early routes:', (e as any)?.message || e);
   }
@@ -67,6 +81,8 @@ async function bootstrap() {
   console.log('🚀 Situs NestJS Server запущен!');
   console.log(`🔗 API базовый URL: http://localhost:${port}/api`);
   console.log(`💚 Health: http://localhost:${port}/health`);
+  // Очищаем dev keep-alive по успешному старту
+  if (devKeepAlive) clearInterval(devKeepAlive);
 
   // SSE реализован в RealtimeController (@Sse('projects/events'))
 
