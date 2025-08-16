@@ -52,6 +52,7 @@
     "db:studio": "prisma studio",
     "db:deploy": "prisma migrate deploy",
     "dev:api": "tsx --tsconfig tsconfig.nestjs.json src/server/main.ts",
+    "dev:api:watch": "bash ./scripts/dev-api-watch.sh",
     "serve:api:dist": "node --experimental-specifier-resolution=node dist/server/main.js",
     "dev:full": "concurrently \"npm run dev:situs\" \"npm run dev:api\"",
     "mcp:start": "tsx scripts/start-mcp.ts",
