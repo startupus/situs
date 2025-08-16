@@ -1,10 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
+import { Public } from '../common/decorators/public.decorator';
 
 /**
  * Контроллер проверки состояния
  */
 @Controller()
 export class HealthController {
+  @Public()
   @Get('health')
   health() {
     return {
@@ -17,6 +19,7 @@ export class HealthController {
     };
   }
 
+  @Public()
   @Get()
   root() {
     return {
