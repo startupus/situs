@@ -13,6 +13,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) { super(); }
 
   canActivate(context: ExecutionContext) {
+    // В dev окружении не блокируем функциональность — пропускаем запросы
+    if (process.env.NODE_ENV !== 'production') {
+      return true;
+    }
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
