@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { ConfigService } from '@nestjs/config';
 
 // Диагностика необработанных ошибок на этапе запуска
 process.on('uncaughtException', (err) => {
@@ -11,14 +12,6 @@ process.on('uncaughtException', (err) => {
 });
 process.on('unhandledRejection', (reason) => {
   try { console.error('[FATAL] unhandledRejection:', reason); } catch {}
-});
-
-// Диагностика неожиданных завершений процесса
-process.on('beforeExit', (code) => {
-  try { console.warn('[LIFECYCLE] beforeExit code:', code); } catch {}
-});
-process.on('exit', (code) => {
-  try { console.warn('[LIFECYCLE] exit code:', code); } catch {}
 });
 
 /**
@@ -32,24 +25,28 @@ process.on('exit', (code) => {
  */
 async function bootstrap() {
   console.log('[BOOT] Creating Nest application...');
-  // Dev keep-alive, чтобы процесс не завершался до старта HTTP-сервера в окружении tsx/ESM
-  const isProduction = process.env.NODE_ENV === 'production';
-  const devKeepAlive = isProduction ? undefined : setInterval(() => {}, 1000);
-
   const app = await NestFactory.create(AppModule);
   console.log('[BOOT] Nest application created');
 
   // Минимальная конфигурация для стабильного запуска
 
-  // CORS настройки - минимальные
-  app.enableCors();
-  console.log('[BOOT] CORS enabled');
+  // CORS настройки
+  const configService = app.get(ConfigService);
+  const origins = (configService.get<string[]>('cors.origins') || []);
+  app.enableCors({ origin: origins.length ? origins : true, credentials: true });
+  console.log('[BOOT] CORS enabled with', origins.length ? origins : 'any');
+
+  // Trust proxy для корректного Host/X-Forwarded-Host
+  try {
+    const httpAdapter: any = app.getHttpAdapter();
+    const instance: any = httpAdapter.getInstance?.();
+    instance?.set?.('trust proxy', true);
+  } catch {}
 
   // Глобальные пайпы/фильтры/интерцепторы
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useGlobalFilters(new GlobalExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
-  console.log('[BOOT] Global pipes/filters/interceptors configured');
 
   // Грейсфул-шатдаун
   app.enableShutdownHooks();
@@ -60,7 +57,6 @@ async function bootstrap() {
     const instance: any = httpAdapter.getInstance?.();
     instance?.get?.('/', (_req: any, res: any) => res.json({ ok: true, service: 'situs-api' }));
     instance?.get?.('/health', (_req: any, res: any) => res.json({ status: 'ok', ts: new Date().toISOString() }));
-    console.log('[BOOT] Early routes registered');
   } catch (e) {
     console.warn('[BOOT] Failed to register early routes:', (e as any)?.message || e);
   }
@@ -69,7 +65,7 @@ async function bootstrap() {
 
   // Удалены временные Express-ручки /api/projects — используем ProjectsController
 
-  const port = Number(process.env.PORT || 3002);
+  const port = Number(process.env.PORT || 3001);
   try { console.log(`[BOOT] About to listen on port ${port}`); } catch {}
   await app.listen(port);
   console.log(`[BOOT] Listening OK on http://localhost:${port}`);
@@ -81,8 +77,6 @@ async function bootstrap() {
   console.log('🚀 Situs NestJS Server запущен!');
   console.log(`🔗 API базовый URL: http://localhost:${port}/api`);
   console.log(`💚 Health: http://localhost:${port}/health`);
-  // Очищаем dev keep-alive по успешному старту
-  if (devKeepAlive) clearInterval(devKeepAlive);
 
   // SSE реализован в RealtimeController (@Sse('projects/events'))
 

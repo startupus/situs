@@ -11,7 +11,7 @@ export class LoginDto {
   })
   @IsEmail({}, { message: 'Некорректный формат email' })
   @IsNotEmpty({ message: 'Email обязателен' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'Пароль пользователя',
@@ -19,5 +19,5 @@ export class LoginDto {
   })
   @IsString({ message: 'Пароль должен быть строкой' })
   @IsNotEmpty({ message: 'Пароль обязателен' })
-  password: string;
+  password!: string;
 }
