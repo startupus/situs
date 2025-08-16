@@ -24,6 +24,7 @@ import { envValidationSchema } from './config/env.validation';
 import { corsConfig } from './config/cors.config';
 import { rateLimitConfig } from './config/rate-limit.config';
 import { accessConfig } from './config/access.config';
+import { RolesGuard } from './common/guards/roles.guard';
 
 /**
  * Основной модуль приложения
@@ -78,6 +79,7 @@ import { accessConfig } from './config/access.config';
   controllers: [HealthController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
+    { provide: APP_GUARD, useClass: RolesGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
   ],
 })
