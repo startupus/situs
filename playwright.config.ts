@@ -6,8 +6,8 @@ export default defineConfig({
   retries: 0,
   webServer: [
     {
-      command: 'npm run dev:api',
-      url: 'http://localhost:3001/health',
+      command: 'PORT=3002 npm run dev:api',
+      url: 'http://localhost:3002/health',
       reuseExistingServer: true,
       timeout: 30_000,
     },

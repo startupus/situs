@@ -1,0 +1,41 @@
+# Page snapshot
+
+```yaml
+- link "S":
+  - /url: /
+- navigation:
+  - list:
+    - listitem:
+      - link:
+        - /url: /
+    - listitem:
+      - link:
+        - /url: /projects
+    - listitem:
+      - link:
+        - /url: /orders
+    - listitem:
+      - link:
+        - /url: /marketing
+    - listitem:
+      - link:
+        - /url: /users
+    - listitem:
+      - link:
+        - /url: /support
+    - listitem
+    - listitem:
+      - link:
+        - /url: /section-settings
+- button "АС"
+- banner:
+  - link "Назад":
+    - /url: /
+  - heading "Проекты" [level=1]
+  - button "Поиск"
+  - button "Добавить"
+- img
+- heading "Ошибка загрузки проектов" [level=3]
+- paragraph: Forbidden resource
+- button "Попробовать снова"
+```
