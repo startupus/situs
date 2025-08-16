@@ -35,5 +35,10 @@ echo "[DEV] Starting nodemon on dist/server/main.js (PORT=$PORT)"
 ) &
 NODE_PID=$!
 
-wait -n "$TSC_PID" "$NODE_PID"
+# На macOS bash 3.2 нет wait -n. Держим цикл пока живы оба процесса.
+while true; do
+  if ! kill -0 "$TSC_PID" >/dev/null 2>&1; then break; fi
+  if ! kill -0 "$NODE_PID" >/dev/null 2>&1; then break; fi
+  sleep 1
+done
 
