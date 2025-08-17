@@ -21,6 +21,8 @@
 - [ ] API: CRUD `Account`, `AccountMembership`, `AgencyClient`
 - [ ] Авторизация: Guards/Policies (GlobalRole, Account, ProjectAccess) + декораторы `@Roles()`, `@Scopes()`
 - [ ] Tenant resolver: middleware по Host/домену (projectId, productId) и RequestContext
+- [ ] Production‑режим: убрать dev‑bypass в `JwtAuthGuard`/`RolesGuard`/`PoliciesGuard`, включить строгую проверку ролей/доступов (UI должен корректно обрабатывать 401/403)
+- [ ] Единый формат ошибок API на фронте (адаптация `apiClient`): человекочитаемые сообщения для 401/403/404/500
 
 ## Продукты
 - [ ] Website: UX “Страницы” — создать/удалить/редактировать, DnD сохранение порядка (PATCH), поиск/фильтры, пагинация
@@ -32,16 +34,20 @@
 - [ ] Единый формат ошибок/логов, привести 404/500 аналитики к реализованным
 - [ ] Домены проекта: валидация, привязка, sitemap/robots генерация
 - [ ] SSE: события статуса/прогресса, heartbeat оставить
+- [ ] Rate limiting: интегрировать `@nestjs/throttler` на основе `rateLimitConfig` (dev выключен, prod включен)
 
 ## Frontend (React + Vite)
 - [x] Роут `projects/:projectId/website`
 - [ ] Навигация к продуктам (магазин и др.)
 - [ ] Website UI: вкладки “Меню”, “Дизайн”, “SEO” — подключить реальные API; убрать заглушки
 - [ ] Редактор: создание страницы, обработка ошибок, переходы
+- [ ] UI для аккаунтов: списки/деталь `Account`, `AccountMembership`, `AgencyClient` + формы CRUD
+- [ ] Обработчики ошибок API: дружелюбные сообщения для Forbidden/Not Found/Validation
 
 ## Мультиарендность и домены
 - [ ] Привязка домена (форма/валидация/статус)
 - [ ] Резолв по домену в предпросмотре Website
+- [ ] E2E тест 301‑редиректов базовый→customDomain
 
 ## База и миграции
 - [x] Prisma db push; добавить индексы и миграции
@@ -52,6 +58,7 @@
 - [ ] E2E: проекты → проект → Website → страницы → DnD reorder → проверка порядка
 - [ ] E2E: SSE `/api/projects/events`, отсутствие ошибок в консоли/сети
 - [ ] E2E: домены (мок), роли (разные сценарии)
+- [ ] Починить селекторы списка проектов (ожидание карточек, рукопожатие SSE) и стабилизировать webServer
 
 ## Dev/операции
 - [ ] Починить ts/tsx dev‑рантайм (после стабилизации)
@@ -73,6 +80,7 @@
  - [x] Добавить README в `src/server/pages/` (оглавление и контракты API)
  - [x] Обновить `src/components/redaktus/README.md` с навигатором по каталогу
  - [x] Добавить README в `src/server/{auth,products,database,common,health,users}` и `src/components/sections`
+- [ ] Документация по доменам/тенантам/ролям: поведение, ограничения, примеры запросов
 
 ## Темы/UX
 - [ ] Единые настройки темы в админке, без заглушек

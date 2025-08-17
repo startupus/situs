@@ -98,13 +98,21 @@ class ApiClient {
       
       // Обработка ответов с ошибками
       if (!response.ok) {
+        const status = response.status;
+        const fallbackMsg = `HTTP ${status}: ${response.statusText}`;
         const errorData: ApiError = await response.json().catch(() => ({
           error: 'Network Error',
-          message: `HTTP ${response.status}: ${response.statusText}`,
-          statusCode: response.status
+          message: fallbackMsg,
+          statusCode: status,
         }));
-        
-        throw new ApiClientError(errorData.message, errorData.statusCode, errorData);
+        const friendly = (() => {
+          if (status === 401) return 'Требуется авторизация';
+          if (status === 403) return 'Недостаточно прав (доступ запрещён)';
+          if (status === 404) return 'Ресурс не найден';
+          if (status >= 500) return 'Ошибка сервера. Попробуйте позже';
+          return errorData.message || fallbackMsg;
+        })();
+        throw new ApiClientError(friendly, errorData.statusCode ?? status, errorData);
       }
 
       const data = await response.json();
