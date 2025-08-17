@@ -35,6 +35,7 @@
 - [ ] Домены проекта: валидация, привязка, sitemap/robots генерация
 - [ ] SSE: события статуса/прогресса, heartbeat оставить
 - [ ] Rate limiting: интегрировать `@nestjs/throttler` на основе `rateLimitConfig` (dev выключен, prod включен)
+  - [x] Подключить ThrottlerGuard глобально (значения из ENV)
 
 ## Frontend (React + Vite)
 - [x] Роут `projects/:projectId/website`
