@@ -13,8 +13,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) { super(); }
 
   canActivate(context: ExecutionContext) {
-    // В dev окружении не блокируем функциональность — пропускаем запросы
-    if (process.env.NODE_ENV !== 'production') {
+    // В development можно упростить доступ, но в test и production применяем строгую проверку
+    if (process.env.NODE_ENV === 'development') {
       return true;
     }
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
@@ -26,7 +26,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const req = context.switchToHttp().getRequest();
     const url: string = req.originalUrl || req.url || '';
 
-    // Dev/test token bypass (only in test env)
+    // Test token bypass (only in test env)
     if (process.env.NODE_ENV === 'test') {
       const expected = process.env.AUTH_TEST_TOKEN || 'test-token-12345';
       const authHeader: string | undefined = req.headers?.authorization;
