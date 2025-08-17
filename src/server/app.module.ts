@@ -25,6 +25,7 @@ import { corsConfig } from './config/cors.config';
 import { rateLimitConfig } from './config/rate-limit.config';
 import { accessConfig } from './config/access.config';
 import { RolesGuard } from './common/guards/roles.guard';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 /**
  * Основной модуль приложения
@@ -75,12 +76,25 @@ import { RolesGuard } from './common/guards/roles.guard';
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
+
+    // Rate limiting (production only рекомендуется)
+    ThrottlerModule.forRootAsync({
+      useFactory: () => ({
+        throttlers: [
+          {
+            ttl: Number(process.env.RATE_LIMIT_WINDOW_MS || 900000) / 1000,
+            limit: Number(process.env.RATE_LIMIT_MAX_REQUESTS || 1000),
+          },
+        ],
+      }),
+    }),
   ],
   controllers: [HealthController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },
     { provide: APP_GUARD, useClass: PoliciesGuard },
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
   ],
 })
 export class AppModule {
