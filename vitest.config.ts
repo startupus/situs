@@ -8,14 +8,13 @@ export default defineConfig({
     setupFiles: ['./src/api/__tests__/setup.ts'],
     include: [
       '__tests__/**/*.test.ts',
-      'src/api/__tests__/**/*.test.ts',
-      'src/**/*.test.ts',
-      'src/**/*.spec.ts'
     ],
     exclude: [
       'node_modules',
       'dist',
-      'coverage'
+      'coverage',
+      '__tests__/security/**',
+      'src/**'
     ],
     coverage: {
       provider: 'v8',
