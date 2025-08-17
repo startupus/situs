@@ -22,7 +22,7 @@
 - [ ] Авторизация: Guards/Policies (GlobalRole, Account, ProjectAccess) + декораторы `@Roles()`, `@Scopes()`
 - [ ] Tenant resolver: middleware по Host/домену (projectId, productId) и RequestContext
 - [ ] Production‑режим: убрать dev‑bypass в `JwtAuthGuard`/`RolesGuard`/`PoliciesGuard`, включить строгую проверку ролей/доступов (UI должен корректно обрабатывать 401/403)
-- [ ] Единый формат ошибок API на фронте (адаптация `apiClient`): человекочитаемые сообщения для 401/403/404/500
+- [x] Единый формат ошибок API на фронте (адаптация `apiClient`): человекочитаемые сообщения для 401/403/404/500
 
 ## Продукты
 - [ ] Website: UX “Страницы” — создать/удалить/редактировать, DnD сохранение порядка (PATCH), поиск/фильтры, пагинация

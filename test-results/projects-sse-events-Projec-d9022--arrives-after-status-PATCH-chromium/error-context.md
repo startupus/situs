@@ -34,8 +34,113 @@
   - heading "Проекты" [level=1]
   - button "Поиск"
   - button "Добавить"
-- img
-- heading "Ошибка загрузки проектов" [level=3]
-- paragraph: Forbidden resource
-- button "Попробовать снова"
+- button "Dev Project 1755416459620-1 домен не настроен Подробнее":
+  - button "Dev Project 1755416459620-1 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459620-1" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmwyw00039k9z2ddowjmt
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459655-2 домен не настроен Подробнее":
+  - button "Dev Project 1755416459655-2 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459655-2" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmwzu000e9k9z8dfxlt4d
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459704-3 домен не настроен Подробнее":
+  - button "Dev Project 1755416459704-3 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459704-3" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx16000p9k9zhorj44vm
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459741-4 домен не настроен Подробнее":
+  - button "Dev Project 1755416459741-4 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459741-4" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx2700109k9zizxtey5d
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459772-5 домен не настроен Подробнее":
+  - button "Dev Project 1755416459772-5 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459772-5" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx32001b9k9zv4b4so3p
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459821-6 домен не настроен Подробнее":
+  - button "Dev Project 1755416459821-6 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459821-6" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx4f001m9k9z58bb2u3u
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459849-7 домен не настроен Подробнее":
+  - button "Dev Project 1755416459849-7 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459849-7" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx58001x9k9zhwht2v5b
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459897-8 домен не настроен Подробнее":
+  - button "Dev Project 1755416459897-8 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459897-8" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx6j00289k9zfnipw9u2
+  - button "Удалить проект":
+    - img
+- button "Dev Project 1755416459927-9 домен не настроен Подробнее":
+  - button "Dev Project 1755416459927-9 домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Dev Project 1755416459927-9" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/cmefdmx7d002j9k9zyiqoy1cv
+  - button "Удалить проект":
+    - img
+- button "Сайт экосистемы Стартапус домен не настроен Подробнее":
+  - button "Сайт экосистемы Стартапус домен не настроен":
+    - img
+    - checkbox [checked]
+    - heading "Сайт экосистемы Стартапус" [level=3]
+    - text: домен не настроен
+  - link "Подробнее":
+    - /url: /projects/startapus-ecosystem
+  - button "Удалить проект":
+    - img
+- status
+- text: "На странице:"
+- combobox:
+  - option "3"
+  - option "12"
+  - option "24"
+  - option "48"
+  - option "100" [selected]
+  - option "200"
 ```
