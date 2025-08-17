@@ -23,6 +23,7 @@
 - [ ] Tenant resolver: middleware по Host/домену (projectId, productId) и RequestContext
 - [ ] Production‑режим: убрать dev‑bypass в `JwtAuthGuard`/`RolesGuard`/`PoliciesGuard`, включить строгую проверку ролей/доступов (UI должен корректно обрабатывать 401/403)
 - [x] Единый формат ошибок API на фронте (адаптация `apiClient`): человекочитаемые сообщения для 401/403/404/500
+ - [x] JwtAuthGuard: bypass только в development; в test строгий режим с поддержкой `AUTH_TEST_TOKEN` для e2e
 
 ## Продукты
 - [ ] Website: UX “Страницы” — создать/удалить/редактировать, DnD сохранение порядка (PATCH), поиск/фильтры, пагинация
@@ -60,6 +61,12 @@
 - [ ] E2E: SSE `/api/projects/events`, отсутствие ошибок в консоли/сети
 - [ ] E2E: домены (мок), роли (разные сценарии)
 - [ ] Починить селекторы списка проектов (ожидание карточек, рукопожатие SSE) и стабилизировать webServer
+ - [x] Базовые сценарии проектов и SSE проходят (искл. incognito sync)
+ - [ ] Incognito realtime sync: исправить `Failed to fetch` в `tests/e2e/chrome-incognito-sync.spec.ts` (проверить CORS/SSE контекст)
+
+## Тестирование (Backend / Vitest)
+- [x] Импортированы backend e2e (auth/domains/SSE), обновлён `vitest.config.ts`, добавлен `scripts/test-backend.mjs`
+- [ ] Подключить запуск backend e2e в CI
 
 ## Dev/операции
 - [ ] Починить ts/tsx dev‑рантайм (после стабилизации)
