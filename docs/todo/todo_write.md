@@ -5,7 +5,7 @@
 - [x] Добавить heartbeat `/api/projects/heartbeat` и README для realtime/projects
 - [x] Добавить глобальные пайпы/фильтры/интерцептор и graceful shutdown
 - [x] Добавить pm2 конфиг и npm-скрипты деплоя
-- [ ] Прогнать e2e Playwright: status toggle + SSE sync
+- [x] Прогнать e2e Playwright: status toggle + SSE sync
 - [ ] Создать unit-тесты для `ProjectsService.update` (без Jest)
 - [ ] Документация: обновить корневой README архитектуры, добавить Swagger
 - [ ] Очистить корень от артефактов компиляции и дублирующих конфигов TS
@@ -18,12 +18,13 @@
 
 ## Архитектура и доступы
 - [x] Интегрировать доработки из ветки `cursor/enhance-project-backend-and-authorization-c0df` (Auth, Guards, Policies, Domains, SEO)
-- [ ] API: CRUD `Account`, `AccountMembership`, `AgencyClient`
+- [x] API: CRUD `Account`, `AccountMembership`, `AgencyClient`
 - [ ] Авторизация: Guards/Policies (GlobalRole, Account, ProjectAccess) + декораторы `@Roles()`, `@Scopes()`
-- [ ] Tenant resolver: middleware по Host/домену (projectId, productId) и RequestContext
+- [x] Tenant resolver: middleware по Host/домену (projectId, productId) и RequestContext
 - [ ] Production‑режим: убрать dev‑bypass в `JwtAuthGuard`/`RolesGuard`/`PoliciesGuard`, включить строгую проверку ролей/доступов (UI должен корректно обрабатывать 401/403)
 - [x] Единый формат ошибок API на фронте (адаптация `apiClient`): человекочитаемые сообщения для 401/403/404/500
  - [x] JwtAuthGuard: bypass только в development; в test строгий режим с поддержкой `AUTH_TEST_TOKEN` для e2e
+ - [x] @Scopes() добавлены для `Accounts`, `AccountMemberships`, `AgencyClient`
 
 ## Продукты
 - [ ] Website: UX “Страницы” — создать/удалить/редактировать, DnD сохранение порядка (PATCH), поиск/фильтры, пагинация
@@ -67,6 +68,7 @@
 ## Тестирование (Backend / Vitest)
 - [x] Импортированы backend e2e (auth/domains/SSE), обновлён `vitest.config.ts`, добавлен `scripts/test-backend.mjs`
 - [ ] Подключить запуск backend e2e в CI
+ - [x] CRUD `Accounts`/`AccountMemberships`/`AgencyClient` покрыты e2e
 
 ## Dev/операции
 - [ ] Починить ts/tsx dev‑рантайм (после стабилизации)
