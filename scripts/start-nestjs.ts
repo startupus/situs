@@ -4,7 +4,7 @@ import { spawn } from 'child_process';
 
 console.log('🚀 Запуск NestJS сервера...');
 
-const server = spawn('npx', ['tsx', '--tsconfig', 'tsconfig.nestjs.json', 'src/server/main.ts'], {
+const server = spawn('npx', ['tsx', '--tsconfig', 'tsconfig.server.json', 'src/server/main.ts'], {
   stdio: 'inherit',
   cwd: process.cwd(),
 });

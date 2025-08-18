@@ -54,6 +54,44 @@ async function run() {
     });
     console.log('🧩 Product WEBSITE ready:', website.id);
 
+    // ECOMMERCE product (магазин)
+    const store = await prisma.product.upsert({
+      where: { projectId_name: { projectId: project.id, name: 'Магазин' } as any },
+      update: { type: ProductType.ECOMMERCE },
+      create: {
+        name: 'Магазин',
+        description: 'Интернет-магазин проекта',
+        type: ProductType.ECOMMERCE,
+        projectId: project.id,
+        settings: JSON.stringify({ currency: 'RUB', paymentMethods: ['card', 'cash'] }),
+      },
+    });
+    console.log('🛒 Product ECOMMERCE ready:', store.id);
+
+    // Создаем демо-категории для магазина
+    const categories = [
+      { name: 'Электроника', slug: 'electronics', description: 'Смартфоны, ноутбуки, аксессуары' },
+      { name: 'Одежда', slug: 'clothing', description: 'Мужская и женская одежда' },
+      { name: 'Дом и сад', slug: 'home-garden', description: 'Товары для дома и дачи' },
+    ];
+
+    for (let i = 0; i < categories.length; i++) {
+      const cat = categories[i];
+      await prisma.category.upsert({
+        where: { productId_slug: { productId: store.id, slug: cat.slug } as any },
+        update: {},
+        create: {
+          name: cat.name,
+          slug: cat.slug,
+          description: cat.description,
+          orderIndex: i,
+          isActive: true,
+          productId: store.id,
+        },
+      });
+      console.log('📂 Category ready:', cat.name);
+    }
+
     // Pages
     const seedPages = [
       { title: 'Главная', slug: 'home', isHomePage: true },

@@ -198,6 +198,43 @@ class ApiClient {
       body: formData,
     });
   }
+
+  // === PAGES API ===
+
+  /**
+   * Получение списка страниц
+   */
+  async getPages(params?: any): Promise<ApiResponse<any[]>> {
+    return this.get('/api/pages', params);
+  }
+
+  /**
+   * Получение страницы по ID
+   */
+  async getPage(id: string): Promise<ApiResponse<any>> {
+    return this.get(`/api/pages/${id}`);
+  }
+
+  /**
+   * Создание страницы
+   */
+  async createPage(pageData: any): Promise<ApiResponse<any>> {
+    return this.post('/api/pages', pageData);
+  }
+
+  /**
+   * Обновление страницы
+   */
+  async updatePage(id: string, pageData: any): Promise<ApiResponse<any>> {
+    return this.put(`/api/pages/${id}`, pageData);
+  }
+
+  /**
+   * Удаление страницы
+   */
+  async deletePage(id: string): Promise<ApiResponse<any>> {
+    return this.delete(`/api/pages/${id}`);
+  }
 }
 
 /**

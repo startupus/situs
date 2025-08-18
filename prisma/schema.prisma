@@ -69,6 +69,7 @@ model Project {
   products  Product[]
   accesses  ProjectAccess[]
   media     Media[]
+  menuTypes MenuType[] // Универсальная система меню
   
   @@map("projects")
 }
@@ -113,6 +114,8 @@ model Product {
   // Relations
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   pages   Page[]
+  categories Category[] // Для ECOMMERCE продуктов
+  items   Item[]      // Для ECOMMERCE продуктов
   
   @@unique([projectId, name])
   @@map("products")
@@ -223,6 +226,159 @@ model Media {
   @@map("media")
 }
 
+/// Shop/E-commerce модели
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  slug        String
+  image       String?
+  
+  // Иерархия категорий
+  parentId    String?
+  parent      Category? @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryHierarchy")
+  
+  // Настройки отображения
+  orderIndex  Int      @default(0)
+  isActive    Boolean  @default(true)
+  
+  // Product relation - категории привязаны к продукту ECOMMERCE
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  // Relations
+  items       Item[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([productId, slug])
+  @@map("categories")
+}
+
+model Item {
+  id           String      @id @default(cuid())
+  name         String
+  description  String?
+  slug         String
+  
+  // Цены и наличие
+  price        Decimal     @default(0)
+  comparePrice Decimal?    // Цена до скидки
+  costPrice    Decimal?    // Себестоимость
+  sku          String?     // Артикул
+  barcode      String?     // Штрихкод
+  
+  // Инвентарь
+  trackQuantity Boolean    @default(true)
+  quantity     Int         @default(0)
+  lowStockThreshold Int?   // Минимальный остаток
+  
+  // Контент
+  images       String      @default("[]") // JSON массив URL изображений
+  content      String?     // Описание товара (JSON блоки)
+  
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // Настройки
+  status       ItemStatus  @default(DRAFT)
+  isDigital    Boolean     @default(false) // Цифровой товар
+  weight       Decimal?    // Вес для доставки
+  dimensions   String?     // Размеры (JSON)
+  
+  // Категория
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  // Product relation
+  productId    String
+  product      Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  // Настройки отображения
+  orderIndex   Int         @default(0)
+  isFeatured   Boolean     @default(false)
+  
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  
+  @@unique([productId, slug])
+  @@map("items")
+}
+
+/// Универсальная система меню (по принципу Joomla)
+model MenuType {
+  id          String     @id @default(cuid())
+  name        String     // "main", "footer", "sidebar"
+  title       String     // "Главное меню"
+  description String?
+  isActive    Boolean    @default(true)
+  
+  // Привязка к проекту
+  projectId   String
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  // Relations
+  items       MenuItem[]
+  
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  
+  @@unique([projectId, name])
+  @@map("menu_types")
+}
+
+model MenuItem {
+  id          String       @id @default(cuid())
+  title       String       // "Каталог товаров"
+  alias       String       // "catalog"
+  type        MenuItemType @default(COMPONENT)
+  
+  // Иерархия (как в Joomla)
+  level       Int          @default(1)
+  parentId    String?
+  parent      MenuItem?    @relation("MenuHierarchy", fields: [parentId], references: [id])
+  children    MenuItem[]   @relation("MenuHierarchy")
+  orderIndex  Int          @default(0)
+  
+  // Привязка к компоненту (универсальная как в Joomla)
+  component   String?      // "Website", "Store", "Blog", "Landing"
+  view        String?      // "page", "category", "item", "list"
+  layout      String?      // "default", "blog", "grid", "form"
+  targetId    String?      // pageId, categoryId, itemId
+  externalUrl String?      // Для type = URL
+  
+  // Настройки отображения
+  isPublished Boolean      @default(true)
+  accessLevel AccessLevel  @default(PUBLIC)
+  language    String       @default("*")  // "*", "ru-RU", "en-GB"
+  
+  // Параметры (JSON как в Joomla)
+  parameters  String       @default("{}")  // menu_show, menu_image, css_class, etc.
+  
+  // SEO метаданные
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  
+  // CSS и стили
+  cssClass        String?
+  menuImage       String?
+  
+  // Связи
+  menuTypeId  String
+  menuType    MenuType     @relation(fields: [menuTypeId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  
+  @@unique([menuTypeId, alias])
+  @@map("menu_items")
+}
+
 // Enums
 enum UserRole {
   BUSINESS    // Бизнес-пользователь: 1 проект, простой интерфейс
@@ -300,4 +456,26 @@ enum PageStatus {
   SCHEDULED   // Запланирована к публикации
   ARCHIVED    // Архивная
   DELETED     // Помечена к удалению
+}
+
+enum ItemStatus {
+  DRAFT       // Черновик
+  ACTIVE      // Активный товар
+  OUT_OF_STOCK // Нет в наличии
+  DISCONTINUED // Снят с продажи
+  ARCHIVED    // Архивный
+}
+
+enum MenuItemType {
+  COMPONENT   // Ссылка на компонент
+  SEPARATOR   // Разделитель
+  HEADING     // Заголовок группы
+  URL         // Внешняя ссылка
+}
+
+enum AccessLevel {
+  PUBLIC      // Публичный доступ
+  REGISTERED  // Зарегистрированные пользователи
+  SPECIAL     // Специальный уровень
+  CUSTOM      // Пользовательский уровень
 }

@@ -58,7 +58,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
-        project: './tsconfig.nestjs.json',
+        project: './tsconfig.server.json',
       },
     },
   },
