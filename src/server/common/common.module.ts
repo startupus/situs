@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { GlobalExceptionFilter } from './filters/global-exception.filter';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { ValidationPipe } from './pipes/validation.pipe';
+import { RolesGuard } from './guards/roles.guard';
 
 /**
  * Модуль общих утилит
@@ -14,11 +15,13 @@ import { ValidationPipe } from './pipes/validation.pipe';
     GlobalExceptionFilter,
     LoggingInterceptor,
     ValidationPipe,
+    RolesGuard,
   ],
   exports: [
     GlobalExceptionFilter,
     LoggingInterceptor,
     ValidationPipe,
+    RolesGuard,
   ],
 })
 export class CommonModule {}

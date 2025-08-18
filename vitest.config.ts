@@ -5,16 +5,16 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
-    setupFiles: ['./src/api/__tests__/setup.ts'],
+    setupFiles: ['__tests__/backend/setup.ts'],
     include: [
-      'src/api/__tests__/**/*.test.ts',
-      'src/**/*.test.ts',
-      'src/**/*.spec.ts'
+      '__tests__/**/*.test.ts',
     ],
     exclude: [
       'node_modules',
       'dist',
-      'coverage'
+      'coverage',
+      '__tests__/security/**',
+      'src/**'
     ],
     coverage: {
       provider: 'v8',

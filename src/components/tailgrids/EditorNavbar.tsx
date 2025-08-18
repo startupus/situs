@@ -86,6 +86,10 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
 
           {/* Right Section - Controls & User */}
           <div className="flex items-center space-x-4">
+            {/* Текущий заголовок страницы по центру в навигации */}
+            <div className="hidden sm:block text-sm font-semibold opacity-80">
+              {currentPage}
+            </div>
             {/* Save Status */}
             <div className="flex items-center space-x-2">
               {isSaving && (

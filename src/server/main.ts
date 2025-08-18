@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { ConfigService } from '@nestjs/config';
 
 // Диагностика необработанных ошибок на этапе запуска
 process.on('uncaughtException', (err) => {
@@ -29,9 +30,18 @@ async function bootstrap() {
 
   // Минимальная конфигурация для стабильного запуска
 
-  // CORS настройки - минимальные
-  app.enableCors();
-  console.log('[BOOT] CORS enabled');
+  // CORS настройки
+  const configService = app.get(ConfigService);
+  const origins = (configService.get<string[]>('cors.origins') || []);
+  app.enableCors({ origin: origins.length ? origins : true, credentials: true });
+  console.log('[BOOT] CORS enabled with', origins.length ? origins : 'any');
+
+  // Trust proxy для корректного Host/X-Forwarded-Host
+  try {
+    const httpAdapter: any = app.getHttpAdapter();
+    const instance: any = httpAdapter.getInstance?.();
+    instance?.set?.('trust proxy', true);
+  } catch {}
 
   // Глобальные пайпы/фильтры/интерцепторы
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
@@ -55,7 +65,7 @@ async function bootstrap() {
 
   // Удалены временные Express-ручки /api/projects — используем ProjectsController
 
-  const port = Number(process.env.PORT || 3001);
+  const port = Number(process.env.PORT || 3002);
   try { console.log(`[BOOT] About to listen on port ${port}`); } catch {}
   await app.listen(port);
   console.log(`[BOOT] Listening OK on http://localhost:${port}`);

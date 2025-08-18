@@ -40,23 +40,23 @@ test.describe('Chrome normal vs incognito realtime sync', () => {
     // Вместо клика по UI — вызываем API напрямую, чтобы исключить влияние DnD/оверлеев
     const projectId = (href || '').split('/').pop();
     const targetStatus = wasChecked ? 'SUSPENDED' : 'ACTIVE';
-    const ok = await pageNormal.evaluate(async ({ projectId, targetStatus }) => {
-      const res = await fetch(`http://localhost:3001/api/projects/${projectId}/status`, {
+    const ok = await pageNormal.evaluate(async ({ projectId, targetStatus, API_BASE }) => {
+      const res = await fetch(`${API_BASE}/api/projects/${projectId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: targetStatus }),
       });
       return res.ok;
-    }, { projectId, targetStatus });
+    }, { projectId, targetStatus, API_BASE: process.env.API_BASE || 'http://localhost:3002' });
     expect(ok).toBeTruthy();
 
     // Подтверждаем, что сервер действительно поменял статус (перед тем как ждать фронт)
     await expect.poll(async () => {
-      const changed = await pageNormal.evaluate(async ({ projectId, targetStatus }) => {
-        const res = await fetch(`http://localhost:3001/api/projects/${projectId}`);
+      const changed = await pageNormal.evaluate(async ({ projectId, targetStatus, API_BASE }) => {
+        const res = await fetch(`${API_BASE}/api/projects/${projectId}`);
         const json = await res.json();
         return (json?.data?.status || '').toUpperCase() === targetStatus;
-      }, { projectId, targetStatus });
+      }, { projectId, targetStatus, API_BASE: process.env.API_BASE || 'http://localhost:3002' });
       return changed;
     }, { timeout: 8000 }).toBe(true);
 

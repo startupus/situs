@@ -68,6 +68,29 @@ export const Admin: React.FC<{ children: React.ReactNode; isLogin?: boolean }> =
 import config from './config/config'
 
 // Система схем блоков - оригинальные React Pro Components + TailGrids
+const safeJsonParse = (value: any, fallback: any) => {
+  try {
+    if (typeof value !== 'string') return value ?? fallback;
+    return JSON.parse(value);
+  } catch {
+    return fallback;
+  }
+};
+
+// Универсальный helper: пробуем через Vite proxy (/api), при ошибке бьёмся прямо на NestJS (3001)
+const fetchApiJson = async (path: string, init?: RequestInit): Promise<any> => {
+  const doFetch = async (url: string) => {
+    const res = await fetch(url, init);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  };
+  try {
+    return await doFetch(path);
+  } catch (_) {
+    const fallbackUrl = path.startsWith('/api') ? `http://localhost:3001${path}` : path;
+    return await doFetch(fallbackUrl);
+  }
+};
 const blockSchemas = {
   'hero-block': {
     title: { type: 'string', default: 'Kickstart Startup Website with TailGrids' },
@@ -277,63 +300,54 @@ const EditorContent: React.FC = () => {
         return;
       }
 
+      console.log('🚀 Загрузка проекта:', urlParams.projectId);
+
+      // 1) Пробуем загрузить проект, но не блокируем UI при ошибке
+      let loadedProject: ProjectData | null = null;
       try {
-        console.log('🚀 Загрузка проекта:', urlParams.projectId);
+        loadedProject = await projectsApi.getProject(urlParams.projectId);
+        setCurrentProject(loadedProject);
+        console.log('✅ Проект загружен:', loadedProject.name);
+      } catch (e) {
+        console.error('⚠️ Ошибка загрузки проекта, продолжаю без него:', e);
+        setCurrentProject({ id: urlParams.projectId as string, name: 'Проект', pages: [], type: 'WEBSITE' } as any);
+      }
 
-        // Загружаем проект
-        const project = await projectsApi.getProject(urlParams.projectId);
-        setCurrentProject(project);
-        console.log('✅ Проект загружен:', project.name);
+      // 2) Загружаем страницы проекта всегда, даже если проект не загрузился
+      try {
+        const pages = await fetchApiJson(`/api/projects/${urlParams.projectId}/pages`).then((d)=>d.data?.pages||[]);
+        const normalized = pages.map((p:any)=>({ ...p, content: safeJsonParse(p.content, { blocks: [] }) }));
+        console.log('📄 Загружены страницы проекта:', normalized.length, 'страниц');
+        setProjectPages(normalized);
 
-        // Загружаем страницы проекта
-        try {
-          const pages = await fetch(`/api/projects/${urlParams.projectId}/pages`).then(r=>r.json()).then(d=>d.data?.pages||[]);
-          console.log('📄 Загружены страницы проекта:', pages.length, 'страниц');
-          setProjectPages(pages);
-
-          // Загружаем конкретную страницу, если указана
-          if (urlParams.pageId) {
-            const pageToLoad = pages.find(p => p.id === urlParams.pageId);
-            if (pageToLoad) {
-              console.log('📄 Загружена страница по ID:', pageToLoad.title);
-              // Конвертируем данные из API в формат редактора
-              const editorPage = {
-                id: pageToLoad.id,
-                type: 'page',
-                slug: pageToLoad.slug,
-                title: pageToLoad.title,
-                content: pageToLoad.content?.blocks || [],
-                languages: {
-                  ru: {
-                    title: pageToLoad.title,
-                    content: pageToLoad.content?.blocks || []
-                  },
-                  en: {
-                    title: pageToLoad.title + ' (EN)',
-                    content: []
-                  },
-                  de: {
-                    title: pageToLoad.title + ' (DE)',
-                    content: []
-                  }
-                },
-                availableLanguages: ['ru', 'en', 'de'],
-                defaultLanguage: 'ru',
-                projectId: project.id,
-                meta: {
-                  title: pageToLoad.meta?.title || pageToLoad.title,
-                  description: pageToLoad.meta?.description || '',
-                  keywords: pageToLoad.meta?.keywords || ''
-                }
-              };
-              setCurrentPage(editorPage);
+        // 3) Определяем текущую страницу: по pageId из URL или первую из списка
+        let initial = normalized.find((p:any)=> p.id === urlParams.pageId) || normalized[0];
+        if (initial) {
+          const editorPage = {
+            id: initial.id,
+            type: 'page',
+            slug: initial.slug,
+            title: initial.title,
+            content: (initial.content?.blocks) || [],
+            languages: {
+              ru: { title: initial.title, content: (initial.content?.blocks) || [] },
+              en: { title: initial.title + ' (EN)', content: [] },
+              de: { title: initial.title + ' (DE)', content: [] },
+            },
+            availableLanguages: ['ru', 'en', 'de'],
+            defaultLanguage: 'ru',
+            projectId: (loadedProject?.id || urlParams.projectId) as string,
+            meta: {
+              title: initial.meta?.title || initial.title,
+              description: initial.meta?.description || '',
+              keywords: initial.meta?.keywords || ''
             }
-          }
-        } catch {}
-
-        setLoading(false);
-      } catch (error) {
-        console.error('❌ Ошибка загрузки данных проекта:', error);
+          };
+          setCurrentPage(editorPage);
+        }
+      } catch (e) {
+        console.error('❌ Ошибка загрузки страниц проекта:', e);
+      } finally {
         setLoading(false);
       }
     };
@@ -352,17 +366,39 @@ const EditorContent: React.FC = () => {
       console.log('💾 Сохранение страницы:', currentPage.id);
       console.log('📄 Контент для сохранения:', currentPage.content);
       
-      // Подготавливаем данные для API
+      // Подготавливаем данные для API (строгий формат)
       const updateData = {
         title: pageData.title || currentPage.title,
-        content: currentPage.content, // Передаем контент напрямую
-        metaTitle: pageData.meta?.title || currentPage.metaTitle,
-        metaDescription: pageData.meta?.description || currentPage.metaDescription,
-        metaKeywords: pageData.meta?.keywords || currentPage.metaKeywords
-      };
+        content: Array.isArray(currentPage.content) ? { blocks: currentPage.content } : (currentPage.content?.blocks ? currentPage.content : { blocks: [] }),
+        metaTitle: pageData.meta?.title || currentPage.meta?.title || currentPage.metaTitle,
+        metaDescription: pageData.meta?.description || currentPage.meta?.description || currentPage.metaDescription,
+        metaKeywords: pageData.meta?.keywords || currentPage.meta?.keywords || currentPage.metaKeywords
+      } as any;
 
-      // Импортируем updatePage из API
-      const updatedPage = await fetch(`/api/pages/${currentPage.id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updateData)}).then(r=>r.json()).then(d=>d.data);
+      // Импортируем updatePage из API с проверкой статуса (с fallback на прямой порт)
+      const json = await fetchApiJson(`/api/pages/${currentPage.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updateData)
+      });
+      const updatedPage = json?.data;
+      if (!updatedPage) {
+        throw new Error('Пустой ответ сервера при сохранении страницы');
+      }
+      // Обновляем локальное состояние
+      setCurrentPage((prev:any)=>{
+        const contentBlocks = safeJsonParse(updatedPage.content, { blocks: [] })?.blocks || prev.content;
+        return {
+          ...prev,
+          title: updatedPage.title ?? prev.title,
+          content: contentBlocks,
+          meta: {
+            title: updatedPage.metaTitle ?? prev.meta?.title,
+            description: updatedPage.metaDescription ?? prev.meta?.description,
+            keywords: updatedPage.metaKeywords ?? prev.meta?.keywords,
+          }
+        };
+      });
       
       console.log('✅ Страница сохранена:', updatedPage.title);
       return { success: true, data: updatedPage };
@@ -459,7 +495,10 @@ const EditorContent: React.FC = () => {
     
     try {
       // Импортируем getPage из API
-      const pageData = await fetch(`/api/pages/${pageId}`).then(r=>r.json()).then(d=>d.data);
+      const payload = await fetchApiJson(`/api/pages/${pageId}`);
+      const pageData = payload?.data;
+      if (!pageData) throw new Error('Страница не найдена');
+      const contentObj = safeJsonParse(pageData.content, { blocks: [] });
       
       // Конвертируем данные из API в формат редактора
       const editorPage = {
@@ -467,11 +506,11 @@ const EditorContent: React.FC = () => {
         type: 'page',
         slug: pageData.slug,
         title: pageData.title,
-        content: pageData.content?.blocks || [],
+        content: contentObj.blocks || [],
         languages: {
           ru: {
             title: pageData.title,
-            content: pageData.content?.blocks || []
+            content: contentObj.blocks || []
           },
           en: {
             title: pageData.title + ' (EN)',
@@ -484,11 +523,11 @@ const EditorContent: React.FC = () => {
         },
         availableLanguages: ['ru', 'en', 'de'],
         defaultLanguage: 'ru',
-        projectId: pageData.projectId,
+        projectId: pageData.projectId || currentProject?.id,
         meta: {
-          title: pageData.metaTitle,
-          description: pageData.metaDescription,
-          keywords: pageData.metaKeywords
+          title: pageData.metaTitle || '',
+          description: pageData.metaDescription || '',
+          keywords: pageData.metaKeywords || ''
         }
       };
 
@@ -507,66 +546,38 @@ const EditorContent: React.FC = () => {
   const handleCreatePage = async () => {
     console.log('➕ Создание новой страницы');
     
-    if (!currentProject || !urlParams.productId) {
-      console.error('Не удалось создать страницу: отсутствует проект или продукт');
-      return;
-    }
+    if (!currentProject) return;
 
     try {
-      // Создаем новую страницу
-      const newPage = {
-        id: `page-${Date.now()}`,
-        title: `Новая страница ${Date.now()}`,
-        slug: `new-page-${Date.now()}`,
-        type: 'page',
-        status: 'draft',
-        content: {
-          blocks: [
-            {
-              id: 'hero-block',
-              type: 'hero-block',
-              props: {
-                title: 'Новая страница',
-                subtitle: 'Это ваша новая страница',
-                primaryButtonText: 'Начать',
-                primaryButtonUrl: '#',
-                secondaryButtonText: 'Узнать больше',
-                secondaryButtonUrl: '#',
-                heroImage: 'https://via.placeholder.com/600x400'
-              }
-            }
-          ]
-        },
-        meta: {
-          title: `Новая страница ${Date.now()}`,
-          description: '',
-          keywords: ''
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
+      // Определяем Website продукт
+      const website = currentProject.products?.find(p => p.type === 'WEBSITE');
+      if (!website) throw new Error('Website продукт не найден');
 
-      // Добавляем страницу в текущий продукт
-      if (currentProject.products) {
-        const productIndex = currentProject.products.findIndex(p => p.id === urlParams.productId);
-        if (productIndex !== -1) {
-          if (!currentProject.products[productIndex].pages) {
-            currentProject.products[productIndex].pages = [];
-          }
-          currentProject.products[productIndex].pages!.push(newPage);
-          
-          // Обновляем состояние
-          setCurrentProject({ ...currentProject });
-          
-          // Обновляем список страниц
-          setProjectPages([...projectPages, newPage]);
-          
-          // Переключаемся на новую страницу
-          await handlePageSelect(newPage.id);
-          
-          console.log('✅ Новая страница создана:', newPage.id);
-        }
-      }
+      // Создаём через API
+      const payload = {
+        title: 'Новая страница',
+        slug: `new-page-${Date.now()}`,
+        content: { blocks: [] },
+        status: 'DRAFT',
+        productId: website.id,
+        orderIndex: projectPages.length
+      };
+      const created = await fetchApiJson('/api/pages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(d=>d.data);
+
+      const newPage = {
+        id: created.id,
+        title: created.title,
+        slug: created.slug,
+        content: created.content,
+        status: created.status,
+        meta: {},
+        createdAt: created.createdAt,
+        updatedAt: created.updatedAt
+      } as any;
+
+      setProjectPages([...projectPages, newPage]);
+      await handlePageSelect(newPage.id);
+      console.log('✅ Новая страница создана:', newPage.id);
     } catch (error) {
       console.error('❌ Ошибка при создании страницы:', error);
     }
@@ -595,7 +606,7 @@ const EditorContent: React.FC = () => {
       >
         {/* Верхняя панель над всем редактором - часть интерфейса */}
         <EditorNavbar 
-          currentPage="Home"
+          currentPage={currentPage?.title || 'Page'}
           onSave={handleSave}
           autosaveEnabled={true}
           isSaving={isSaving}
@@ -645,6 +656,7 @@ const EditorContent: React.FC = () => {
             currentPageId={currentPage?.id}
             onPageSelect={handlePageSelect}
             onCreatePage={handleCreatePage}
+            pages={projectPages}
           />
         </div>
 
@@ -712,7 +724,7 @@ const EditorContent: React.FC = () => {
 
         {/* Правая панель настроек - ЧАСТЬ ИНТЕРФЕЙСА */}
         <div className="redaktus-interface-panel" data-interface-theme={interfaceResolvedTheme}>
-          <SettingsPanel currentPage="Home" />
+          <SettingsPanel currentPage={currentPage?.title || 'Page'} />
         </div>
       </div>
     </div>

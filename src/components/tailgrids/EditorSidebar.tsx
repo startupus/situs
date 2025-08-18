@@ -11,6 +11,7 @@ interface EditorSidebarProps {
   currentPageId?: string;
   onPageSelect?: (pageId: string) => void;
   onCreatePage?: () => void;
+  pages?: PageData[]; // Явный список страниц, если проект не содержит pages
 }
 
 interface NavSectionProps {
@@ -106,6 +107,11 @@ const PageItem: React.FC<PageItemProps> = ({ page, active = false, onClick }) =>
           {getPageIcon(page.pageType, page.isHomePage)}
         </span>
         <span className="flex-1 text-left truncate">{page.title}</span>
+        {active && (
+          <span className="text-[10px] px-1 py-0.5 rounded-sm bg-primary/10" style={{color:'var(--interface-primary)'}}>
+            активная
+          </span>
+        )}
         <FaCircle 
           size={6} 
           style={{ 
@@ -124,7 +130,8 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
   project,
   currentPageId,
   onPageSelect,
-  onCreatePage
+  onCreatePage,
+  pages
 }) => {
   const { theme: interfaceTheme, toggleTheme: toggleInterfaceTheme, resolvedTheme: interfaceResolvedTheme } = useInterfaceTheme();
   const { t } = useLanguage();
@@ -136,7 +143,8 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
     toggleInterfaceTheme();
   };
 
-  const filteredPages = project?.pages?.filter(page => 
+  const allPages: PageData[] = (pages && pages.length > 0) ? pages : (project?.pages || []);
+  const filteredPages = allPages.filter(page => 
     page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     page.slug.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];
@@ -174,7 +182,7 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
               className="text-xs mt-1 truncate"
               style={{ color: 'var(--interface-text-muted, #6b7280)' }}
             >
-              {project.pages?.length || 0} страниц • {project.type}
+              {(pages?.length ?? project.pages?.length ?? 0)} страниц • {project.type}
             </p>
           </div>
         )}

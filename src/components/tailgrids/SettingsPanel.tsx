@@ -207,7 +207,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
           <InputGroup
             label={t('editor.settings.page.schedulePublish.publishDate')}
             type="date"
-            value="21.01.2025"
+            value="2025-01-21"
           />
           <InputGroup
             label={t('editor.settings.page.schedulePublish.publishTime')}
