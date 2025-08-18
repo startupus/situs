@@ -68,16 +68,17 @@ async function run() {
     });
     console.log('🛒 Product ECOMMERCE ready:', store.id);
 
-    // Создаем демо-категории для магазина
+    // Создаем демо-категории для магазина (иерархические как в системе меню)
     const categories = [
       { name: 'Электроника', slug: 'electronics', description: 'Смартфоны, ноутбуки, аксессуары' },
       { name: 'Одежда', slug: 'clothing', description: 'Мужская и женская одежда' },
       { name: 'Дом и сад', slug: 'home-garden', description: 'Товары для дома и дачи' },
     ];
 
+    const createdCategories = [];
     for (let i = 0; i < categories.length; i++) {
       const cat = categories[i];
-      await prisma.category.upsert({
+      const created = await prisma.category.upsert({
         where: { productId_slug: { productId: store.id, slug: cat.slug } as any },
         update: {},
         create: {
@@ -89,7 +90,63 @@ async function run() {
           productId: store.id,
         },
       });
+      createdCategories.push(created);
       console.log('📂 Category ready:', cat.name);
+    }
+
+    // Создаем подкатегории для Электроники (аналог подменю)
+    const electronicsCategory = createdCategories.find(c => c.slug === 'electronics');
+    if (electronicsCategory) {
+      const subCategories = [
+        { name: 'Смартфоны', slug: 'smartphones', description: 'Мобильные телефоны' },
+        { name: 'Ноутбуки', slug: 'laptops', description: 'Портативные компьютеры' },
+        { name: 'Аксессуары', slug: 'accessories', description: 'Чехлы, зарядки, наушники' },
+      ];
+
+      for (let i = 0; i < subCategories.length; i++) {
+        const subCat = subCategories[i];
+        await prisma.category.upsert({
+          where: { productId_slug: { productId: store.id, slug: subCat.slug } as any },
+          update: {},
+          create: {
+            name: subCat.name,
+            slug: subCat.slug,
+            description: subCat.description,
+            orderIndex: i,
+            isActive: true,
+            parentId: electronicsCategory.id, // Иерархия!
+            productId: store.id,
+          },
+        });
+        console.log('📱 SubCategory ready:', subCat.name);
+      }
+    }
+
+    // Создаем подкатегории для Одежды
+    const clothingCategory = createdCategories.find(c => c.slug === 'clothing');
+    if (clothingCategory) {
+      const clothingSubCategories = [
+        { name: 'Мужская одежда', slug: 'mens-clothing', description: 'Одежда для мужчин' },
+        { name: 'Женская одежда', slug: 'womens-clothing', description: 'Одежда для женщин' },
+      ];
+
+      for (let i = 0; i < clothingSubCategories.length; i++) {
+        const subCat = clothingSubCategories[i];
+        await prisma.category.upsert({
+          where: { productId_slug: { productId: store.id, slug: subCat.slug } as any },
+          update: {},
+          create: {
+            name: subCat.name,
+            slug: subCat.slug,
+            description: subCat.description,
+            orderIndex: i,
+            isActive: true,
+            parentId: clothingCategory.id, // Иерархия!
+            productId: store.id,
+          },
+        });
+        console.log('👕 SubCategory ready:', subCat.name);
+      }
     }
 
     // Pages
@@ -117,6 +174,133 @@ async function run() {
       });
       console.log('📝 Page ready:', created.slug);
     }
+
+    // Создаем демо-меню
+    console.log('🧭 Creating demo menus...');
+    
+    // Главное меню
+    const mainMenu = await prisma.menuType.upsert({
+      where: { projectId_name: { projectId: project.id, name: 'main' } as any },
+      update: {},
+      create: {
+        name: 'main',
+        title: 'Главное меню',
+        description: 'Основная навигация сайта',
+        projectId: project.id,
+      },
+    });
+    console.log('📁 MenuType main ready:', mainMenu.id);
+
+    // Пункты главного меню
+    const mainMenuItems = [
+      { title: 'Главная', alias: 'home', component: 'Website', view: 'page', targetId: seedPages.find(p => p.isHomePage)?.slug },
+      { title: 'Каталог', alias: 'catalog', component: 'Store', view: 'categories' },
+      { title: 'О компании', alias: 'about', component: 'Website', view: 'page', targetId: 'about' },
+      { title: 'Контакты', alias: 'contacts', component: 'Website', view: 'page', targetId: 'contacts' },
+    ];
+
+    let menuOrder = 0;
+    for (const item of mainMenuItems) {
+      const created = await prisma.menuItem.upsert({
+        where: { menuTypeId_alias: { menuTypeId: mainMenu.id, alias: item.alias } as any },
+        update: {},
+        create: {
+          title: item.title,
+          alias: item.alias,
+          type: 'COMPONENT',
+          level: 1,
+          orderIndex: menuOrder++,
+          component: item.component,
+          view: item.view,
+          targetId: item.targetId,
+          isPublished: true,
+          accessLevel: 'PUBLIC',
+          language: '*',
+          parameters: JSON.stringify({
+            menu_show: true,
+            css_class: 'nav-link'
+          }),
+          menuTypeId: mainMenu.id,
+        },
+      });
+      console.log('🧩 MenuItem ready:', created.alias);
+    }
+
+    // Подменю для каталога
+    const catalogMenuItem = await prisma.menuItem.findFirst({
+      where: { menuTypeId: mainMenu.id, alias: 'catalog' }
+    });
+
+    if (catalogMenuItem && createdCategories.length > 0) {
+      let subMenuOrder = 0;
+      for (const category of createdCategories) {
+        const subItem = await prisma.menuItem.upsert({
+          where: { menuTypeId_alias: { menuTypeId: mainMenu.id, alias: `category-${category.slug}` } as any },
+          update: {},
+          create: {
+            title: category.name,
+            alias: `category-${category.slug}`,
+            type: 'COMPONENT',
+            level: 2,
+            parentId: catalogMenuItem.id,
+            orderIndex: subMenuOrder++,
+            component: 'Store',
+            view: 'category',
+            targetId: category.id,
+            isPublished: true,
+            accessLevel: 'PUBLIC',
+            language: '*',
+            parameters: JSON.stringify({
+              menu_show: true,
+              itemsPerPage: 20,
+              showFilters: true
+            }),
+            menuTypeId: mainMenu.id,
+          },
+        });
+        console.log('🔗 SubMenuItem ready:', subItem.alias);
+      }
+    }
+
+    // Футер меню
+    const footerMenu = await prisma.menuType.upsert({
+      where: { projectId_name: { projectId: project.id, name: 'footer' } as any },
+      update: {},
+      create: {
+        name: 'footer',
+        title: 'Меню подвала',
+        description: 'Навигация в нижней части сайта',
+        projectId: project.id,
+      },
+    });
+
+    const footerItems = [
+      { title: 'Политика конфиденциальности', alias: 'privacy', externalUrl: '/privacy' },
+      { title: 'Условия использования', alias: 'terms', externalUrl: '/terms' },
+      { title: 'Поддержка', alias: 'support', externalUrl: '/support' },
+    ];
+
+    let footerOrder = 0;
+    for (const item of footerItems) {
+      await prisma.menuItem.upsert({
+        where: { menuTypeId_alias: { menuTypeId: footerMenu.id, alias: item.alias } as any },
+        update: {},
+        create: {
+          title: item.title,
+          alias: item.alias,
+          type: 'URL',
+          level: 1,
+          orderIndex: footerOrder++,
+          externalUrl: item.externalUrl,
+          isPublished: true,
+          accessLevel: 'PUBLIC',
+          language: '*',
+          menuTypeId: footerMenu.id,
+        },
+      });
+    }
+
+    console.log('🧭 Demo menus created successfully');
 
     console.log('✅ Startapus seeder: done');
   } catch (e) {
