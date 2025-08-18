@@ -63,7 +63,7 @@
 - [ ] E2E: домены (мок), роли (разные сценарии)
 - [ ] Починить селекторы списка проектов (ожидание карточек, рукопожатие SSE) и стабилизировать webServer
  - [x] Базовые сценарии проектов и SSE проходят (искл. incognito sync)
- - [ ] Incognito realtime sync: исправить `Failed to fetch` в `tests/e2e/chrome-incognito-sync.spec.ts` (проверить CORS/SSE контекст)
+ - [x] Incognito realtime sync: исправить `Failed to fetch` в `tests/e2e/chrome-incognito-sync.spec.ts` (проверить CORS/SSE контекст)
 
 ## Тестирование (Backend / Vitest)
 - [x] Импортированы backend e2e (auth/domains/SSE), обновлён `vitest.config.ts`, добавлен `scripts/test-backend.mjs`
