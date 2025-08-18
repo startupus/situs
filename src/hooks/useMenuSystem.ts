@@ -52,12 +52,15 @@ export const useMenuSystem = (projectId?: string) => {
   // Получение авторизованных пунктов меню (с учетом прав доступа)
   const getAuthorizedMenuItems = async (
     menuTypeId: string, 
-    accessLevels: string[] = ['PUBLIC']
+    accessLevels: string[] = ['PUBLIC'],
+    language: string = '*'
   ): Promise<MenuItemData[]> => {
     try {
       const levels = accessLevels.join(',');
+      const params = new URLSearchParams({ menuTypeId, accessLevels: levels });
+      if (language) params.set('language', language);
       const response = await fetch(
-        `http://localhost:3002/api/menu-items/authorized?menuTypeId=${menuTypeId}&accessLevels=${levels}`
+        `http://localhost:3002/api/menu-items/authorized?${params.toString()}`
       );
       const data = await response.json();
       
@@ -106,10 +109,10 @@ export const useMenuSystem = (projectId?: string) => {
   };
 
   // Получение активного пункта меню и хлебных крошек для текущего пути
-  const getActiveMenuItem = async (menuTypeId: string, currentPath: string) => {
+  const getActiveMenuItem = async (menuTypeId: string, currentPath: string, language: string = '*') => {
     try {
       const response = await fetch(
-        `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuTypeId}&path=${encodeURIComponent(currentPath)}`
+        `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuTypeId}&path=${encodeURIComponent(currentPath)}&language=${language}`
       );
       const data = await response.json();
       
@@ -239,7 +242,8 @@ export const useMenuSystem = (projectId?: string) => {
 export const useNavigationMenu = (
   projectId: string, 
   menuTypeName: string = 'main',
-  accessLevels: string[] = ['PUBLIC']
+  accessLevels: string[] = ['PUBLIC'],
+  language: string = '*'
 ) => {
   const [menuItems, setMenuItems] = useState<MenuItemData[]>([]);
   const [menuTree, setMenuTree] = useState<MenuItemData[]>([]);
@@ -264,7 +268,7 @@ export const useNavigationMenu = (
         }
 
         // Загружаем авторизованные пункты
-        const items = await getAuthorizedMenuItems(menuType.id, accessLevels);
+        const items = await getAuthorizedMenuItems(menuType.id, accessLevels, language);
         setMenuItems(items);
 
         // Строим дерево
@@ -280,7 +284,7 @@ export const useNavigationMenu = (
     if (menuTypes.length > 0) {
       loadMenu();
     }
-  }, [menuTypes, menuTypeName, accessLevels]);
+  }, [menuTypes, menuTypeName, accessLevels, language]);
 
   return {
     menuItems,
