@@ -72,6 +72,7 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     const go = () => {
       if (!projectId) return;
       if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/website`);
+      else if (item.type === 'ECOMMERCE') navigate(`/projects/${projectId}/store`);
       else navigate(`/projects/${projectId}`);
     };
     return (

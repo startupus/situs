@@ -101,4 +101,7 @@ export interface NavigationItem {
   path: string;
   section?: ProjectSection;
   children?: NavigationItem[];
-} 
+}
+
+// Экспорт типов системы меню
+export * from './menu'; 

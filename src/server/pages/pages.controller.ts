@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Query, Req, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Req, Put, Delete } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreatePageDto } from './dto/create-page.dto';
 import { UpdatePageDto } from './dto/update-page.dto';
@@ -77,5 +77,21 @@ export class PagesController {
       },
     });
     return { success: true, data: updated };
+  }
+
+  @Delete(':id')
+  @Scopes('PROJECT_ADMIN')
+  async delete(@Param('id') id: string) {
+    // Проверим, что страница существует и не является главной
+    const page = await this.prisma.page.findUnique({ where: { id } });
+    if (!page) {
+      return { success: false, error: 'Страница не найдена' };
+    }
+    if (page.isHomePage) {
+      return { success: false, error: 'Нельзя удалить главную страницу' };
+    }
+
+    await this.prisma.page.delete({ where: { id } });
+    return { success: true, message: 'Страница удалена' };
   }
 }

@@ -3,6 +3,8 @@ import { DatabaseModule } from '../database/database.module';
 import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
 import { ProjectProductsController } from './project-products.controller';
+import { CategoriesController } from './categories.controller';
+import { ItemsController } from './items.controller';
 
 /**
  * Модуль продуктов
@@ -10,7 +12,7 @@ import { ProjectProductsController } from './project-products.controller';
  */
 @Module({
   imports: [DatabaseModule],
-  controllers: [ProductsController, ProjectProductsController],
+  controllers: [ProductsController, ProjectProductsController, CategoriesController, ItemsController],
   providers: [ProductsService],
   exports: [ProductsService],
 })

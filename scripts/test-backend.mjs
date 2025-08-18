@@ -28,9 +28,20 @@ async function main() {
   process.env.PORT = String(TEST_PORT);
   process.env.AUTH_TEST_TOKEN = process.env.AUTH_TEST_TOKEN || 'test-token-12345';
 
+  // Сначала соберем backend
+  console.log('🔨 Собираем backend...');
+  const build = spawn('npm', ['run', 'nestjs:build'], { stdio: 'inherit' });
+  await new Promise((resolve, reject) => {
+    build.on('exit', (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`Build failed with code ${code}`));
+    });
+  });
+
+  console.log('🚀 Запускаем тестовый сервер...');
   const server = spawn(
-    process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['tsx', '--tsconfig', 'tsconfig.nestjs.json', 'src/server/main.ts'],
+    'node',
+    ['dist/server/main.js'],
     {
       stdio: 'inherit',
       env: { ...process.env, NODE_ENV: 'test', PORT: String(TEST_PORT) },
