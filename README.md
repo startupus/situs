@@ -66,12 +66,15 @@ Situs/
   - `projects/` — проекты: контроллеры/сервисы/DTO, статус, публикация, события SSE
   - `pages/` — Website Pages API: список, редактирование, `PATCH /projects/:projectId/pages/reorder`
   - `products/` — каркас продуктов (Website/Shop/Blog)
-  - `users/`, `auth/` — пользователи и аутентификация (подготовка к ролям/аккаунтам)
+  - `users/`, `auth/` — пользователи и аутентификация (JWT, Local strategy)
+  - `accounts/` — аккаунты, членства и связи «агентство ↔ клиент» (Accounts, AccountMemberships, AgencyClients)
+  - `domains/` — проверки и поведение доменов
+  - `seo/` — публичные SEO‑эндпоинты (robots.txt, sitemap.xml с ETag/Cache‑Control)
   - `realtime/` — события `GET /api/projects/events` (SSE) и heartbeat
   - `database/` — `PrismaService` и глобальный модуль БД
   - `common/` — глобальные фильтры/пайпы/интерсепторы
   - `health/` — `GET /health`
-  - `config/` — конфиги (например, базы/портов)
+  - `config/` — конфиги (`env.validation.ts`, `cors.config.ts`, `rate-limit.config.ts`, `access.config.ts`)
 
 - Frontend (React) — `src/`
   - `App.tsx` — корневой роутинг (в т.ч. `projects/:projectId/website`)
@@ -138,6 +141,21 @@ Situs/
 - **Prisma** (SQLite для dev, `prisma/dev.db`)
 - Модульная архитектура: projects, pages (Website), realtime, health, database, common
 - Реалтайм через SSE: эндпоинт `GET /api/projects/events` (text/event-stream)
+
+#### Security & Access
+- Глобальные Guard’ы: `JwtAuthGuard`, `RolesGuard`, `PoliciesGuard` (+ `ThrottlerGuard`)
+- Декораторы: `@Public()`, `@Roles()`, `@Scopes()`
+- Поведение окружений:
+  - development: упрощённый доступ (bypass в `JwtAuthGuard`)
+  - test: строгая проверка, поддержка `AUTH_TEST_TOKEN` для e2e
+  - production: строгая проверка ролей/скоупов
+- CORS из `cors.config.ts`, лимиты запросов из `rate-limit.config.ts`, валидация ENV через `env.validation.ts`
+
+#### SEO & Domains
+- Публичные эндпоинты: `GET /robots.txt`, `GET /sitemap.xml` (ETag/Cache‑Control, 304 при `If-None-Match`)
+- Middleware:
+  - `DomainRedirectMiddleware` — условный 301 с `project.domain` на `project.customDomain` (если опубликован и домен верифицирован)
+  - `TenantResolverMiddleware` — резолв арендатора по Host/домену (добавляет `tenant.projectId`/`tenant.productId` в `req`)
 
 ### Текущее состояние
 - Backend (NestJS, `src/server/**`) — стабильный запуск из `dist/`
@@ -212,6 +230,19 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
 Переключение статуса проекта (`PATCH /api/projects/:id/status`) должно породить событие `project_status` во всех вкладках/браузерах.
 Сохранение порядка перетаскиванием карточек публикует `project_reordered` и моментально обновляет порядок у всех клиентов.
 
+4) Тесты
+```bash
+# Backend e2e/unit (Vitest)
+npm run test            # быстрый прогон __tests__
+npm run test:backend    # старт API в NODE_ENV=test и запуск Vitest
+
+# Playwright e2e (webServer поднимается автоматически)
+npm run test:e2e
+```
+Примечания к тестам:
+- В test‑окружении `AUTH_TEST_TOKEN=test-token-12345` можно использовать как Bearer для приватных ручек.
+- Публичные эндпоинты: `/`, `/health`, `/robots.txt`, `/sitemap.xml`, `/api/projects/events`, `/api/projects/heartbeat`.
+
 ## 🧹 Депрекации/чистка
 - Удалены `.js`‑артефакты из `src/server/**` (оставлен только TypeScript‑код)
 - Временные Express/минимальные сервера удалены; запуск — только через NestJS (`src/server/main.ts`)
@@ -236,6 +267,9 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
 - [Стандарты разработки](./docs/DEVELOPMENT_STANDARDS.md)
 - [Техническое задание](./docs/TECHNICAL_SPECIFICATION.md)
 - [Обзор docs](./docs/README.md)
+- [Auth и домены (роли/скоупы, публичные маршруты, редиректы)](./docs/AUTH_AND_DOMAINS.md)
+- [Заметки по Swagger (планы интеграции)](./docs/SWAGGER_NOTES.md)
+- [Стандарты Playwright](./docs/testing/PLAYWRIGHT_STANDARDS.md)
 
 ### Архитектура
 - [Структура компонентов](./src/components/README.md)
@@ -253,6 +287,9 @@ curl -N http://localhost:3001/api/projects/events?sub=cli
   - Realtime: `src/server/realtime/README.md`
   - Health: `src/server/health/README.md`
   - Users: `src/server/users/README.md`
+  - Accounts: `src/server/accounts/README.md`
+  - Domains: `src/server/domains/README.md`
+  - SEO: `src/server/seo/README.md`
 - Frontend:
   - Redaktus: `src/components/redaktus/README.md`
   - Situs (экраны): `src/components/situs/README.md`
