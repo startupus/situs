@@ -20,6 +20,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
 import { DomainsModule } from './domains/domains.module';
+import { MenusModule } from './menus/menus.module';
 import { envValidationSchema } from './config/env.validation';
 import { corsConfig } from './config/cors.config';
 import { rateLimitConfig } from './config/rate-limit.config';
@@ -70,6 +71,9 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
     // Аккаунты и членства
     AccountsModule,
+
+    // Универсальная система меню
+    MenusModule,
 
     // Аутентификация
     AuthModule,

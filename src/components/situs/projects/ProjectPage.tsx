@@ -170,7 +170,18 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     <div className="p-6 space-y-8">
       {/* Верх: плитки компонентов проекта (перетаскиваемые) */}
       <section>
-        <h2 className="text-lg font-semibold text-dark dark:text-white mb-4">Компоненты проекта</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold text-dark dark:text-white">Компоненты проекта</h2>
+          <Link
+            to={`/projects/${projectId}/menus`}
+            className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700 transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
+              <path d="M2 4h12v1H2V4zm0 3h12v1H2V7zm0 3h12v1H2v-1z"/>
+            </svg>
+            Управление меню
+          </Link>
+        </div>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onTilesDragEnd}>
           <SortableContext items={productsOrder.map((p) => p.id)} strategy={rectSortingStrategy}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

@@ -8,7 +8,16 @@ export type ProjectEventType =
   | 'project_deleted'
   | 'project_status'
   | 'project_reordered'
-  | 'task_progress_check';
+  | 'task_progress_check'
+  // События системы меню
+  | 'menu_type_created'
+  | 'menu_type_updated'
+  | 'menu_type_deleted'
+  | 'menu_item_created'
+  | 'menu_item_updated'
+  | 'menu_item_deleted'
+  | 'menu_items_reordered'
+  | 'menu_structure_changed';
 
 export interface RealtimeEvent<T = any> {
   type: ProjectEventType;
@@ -47,6 +56,39 @@ export class RealtimeEventsService {
 
   publishProjectStatus(id: string, status: string): void {
     this.publish('project_status', { id, status });
+  }
+
+  // События системы меню
+  publishMenuTypeCreated(projectId: string, menuType: any): void {
+    this.publish('menu_type_created', { projectId, menuType });
+  }
+
+  publishMenuTypeUpdated(projectId: string, menuType: any): void {
+    this.publish('menu_type_updated', { projectId, menuType });
+  }
+
+  publishMenuTypeDeleted(projectId: string, menuTypeId: string): void {
+    this.publish('menu_type_deleted', { projectId, menuTypeId });
+  }
+
+  publishMenuItemCreated(projectId: string, menuItem: any): void {
+    this.publish('menu_item_created', { projectId, menuItem });
+  }
+
+  publishMenuItemUpdated(projectId: string, menuItem: any): void {
+    this.publish('menu_item_updated', { projectId, menuItem });
+  }
+
+  publishMenuItemDeleted(projectId: string, menuItemId: string, menuTypeId: string): void {
+    this.publish('menu_item_deleted', { projectId, menuItemId, menuTypeId });
+  }
+
+  publishMenuItemsReordered(projectId: string, menuTypeId: string, items: any[]): void {
+    this.publish('menu_items_reordered', { projectId, menuTypeId, items });
+  }
+
+  publishMenuStructureChanged(projectId: string, menuTypeId: string): void {
+    this.publish('menu_structure_changed', { projectId, menuTypeId });
   }
 
   /** Регистрирует SSE-клиента. Возвращает функцию отписки */

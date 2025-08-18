@@ -193,6 +193,14 @@ export interface CreateMenuItemRequest {
   menuTypeId: string;
 }
 
+export interface CreateMenuTypeRequest {
+  name: string;
+  title: string;
+  description?: string;
+  isActive: boolean;
+  projectId: string;
+}
+
 /**
  * Данные для обновления пункта меню
  */

@@ -14,6 +14,7 @@ interface Category {
   isActive: boolean;
   _count: { items: number };
   children?: Category[];
+  parent?: Category;
 }
 
 interface Item {
@@ -42,6 +43,61 @@ const SitusProjectStore: React.FC = () => {
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
   const [showCreateItemModal, setShowCreateItemModal] = useState(false);
   const navigate = useNavigate();
+
+  // Функция для иерархического отображения категорий (аналог системы меню)
+  const renderCategoriesHierarchy = (parentCategories: Category[], level = 1): React.ReactNode => {
+    return parentCategories.map((category) => (
+      <div key={category.id} className={`${level > 1 ? 'ml-6 border-l-2 border-gray-200 dark:border-gray-600 pl-4' : ''}`}>
+        <div className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:shadow-md transition-shadow mb-2">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">
+                  {level === 1 ? '📁' : level === 2 ? '📂' : '📄'}
+                </span>
+                <h4 className="font-medium text-dark dark:text-white">
+                  {category.name}
+                  <span className="text-xs text-body-color dark:text-dark-6 ml-2">
+                    (Уровень {level})
+                  </span>
+                </h4>
+              </div>
+              {category.description && (
+                <p className="text-sm text-body-color dark:text-dark-6 mt-1 line-clamp-2">
+                  {category.description}
+                </p>
+              )}
+              <div className="flex items-center gap-4 mt-2 text-sm">
+                <span className="text-body-color dark:text-dark-6">
+                  {category._count.items} товаров
+                </span>
+                {category.children && category.children.length > 0 && (
+                  <span className="text-body-color dark:text-dark-6">
+                    {category.children.length} подкатегорий
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <button className="text-primary hover:text-primary/80 text-sm px-2 py-1 rounded">
+                Редактировать
+              </button>
+              <button className="text-red-600 hover:text-red-700 dark:text-red-400 text-sm px-2 py-1 rounded">
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Рекурсивно отображаем дочерние категории */}
+        {category.children && category.children.length > 0 && (
+          <div className="mt-2">
+            {renderCategoriesHierarchy(category.children, level + 1)}
+          </div>
+        )}
+      </div>
+    ));
+  };
 
   useEffect(() => {
     const loadProject = async () => {
@@ -214,40 +270,9 @@ const SitusProjectStore: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {categories.map((category) => (
-                  <div
-                    key={category.id}
-                    className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:shadow-md transition-shadow"
-                  >
-                    {category.image && (
-                      <img
-                        src={category.image}
-                        alt={category.name}
-                        className="w-full h-32 object-cover rounded-md mb-3"
-                      />
-                    )}
-                    <h4 className="font-medium text-dark dark:text-white mb-2">{category.name}</h4>
-                    {category.description && (
-                      <p className="text-sm text-body-color dark:text-dark-6 mb-3 line-clamp-2">
-                        {category.description}
-                      </p>
-                    )}
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-body-color dark:text-dark-6">
-                        {category._count.items} товаров
-                      </span>
-                      <div className="flex gap-2">
-                        <button className="text-primary hover:text-primary/80">
-                          Редактировать
-                        </button>
-                        <button className="text-red-600 hover:text-red-700 dark:text-red-400">
-                          Удалить
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="space-y-4">
+                {/* Иерархическое отображение категорий (как в системе меню) */}
+                {renderCategoriesHierarchy(categories.filter(cat => !cat.parentId))}
               </div>
             )}
           </div>
