@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { ConfigService } from '@nestjs/config';
@@ -61,7 +62,23 @@ async function bootstrap() {
     console.warn('[BOOT] Failed to register early routes:', (e as any)?.message || e);
   }
 
-  // Swagger отключён
+  // Swagger (dev/test by default, can be disabled via ENABLE_SWAGGER=0)
+  try {
+    const enableSwagger = (process.env.ENABLE_SWAGGER || '1') !== '0' && process.env.NODE_ENV !== 'production';
+    if (enableSwagger) {
+      const config = new DocumentBuilder()
+        .setTitle('Situs API')
+        .setDescription('Документация API для Situs (NestJS)')
+        .setVersion('1.0')
+        .addBearerAuth()
+        .build();
+      const document = SwaggerModule.createDocument(app, config);
+      SwaggerModule.setup('api-docs', app, document);
+      console.log('[BOOT] Swagger enabled at /api-docs');
+    }
+  } catch (e) {
+    console.warn('[BOOT] Swagger init failed:', (e as any)?.message || e);
+  }
 
   // Удалены временные Express-ручки /api/projects — используем ProjectsController
 
