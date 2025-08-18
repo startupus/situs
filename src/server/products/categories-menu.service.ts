@@ -28,32 +28,25 @@ export class CategoriesMenuService {
   ): Promise<Category[]> {
     const where: any = {
       productId,
-      isPublished: true
+      isActive: true  // используем isActive вместо isActive
     };
 
-    // Фильтрация по языку (аналог меню)
-    if (language !== '*') {
-      where.OR = [
-        { language: '*' },
-        { language }
-      ];
-    }
+    // Для категорий пока не используем языковую фильтрацию
+    // так как в схеме Category нет поля language
 
     // Фильтрация по родителю
     if (parentId !== undefined) {
       where.parentId = parentId;
     }
 
-    // Фильтрация по уровню
-    if (level !== undefined) {
-      where.level = level;
-    }
+    // Для категорий пока не используем уровни
+    // так как в схеме Category нет поля level
 
     const categories = await this.prisma.category.findMany({
       where,
       include: {
         children: {
-          where: { isPublished: true },
+          where: { isActive: true },
           orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
         },
         parent: true,
@@ -65,7 +58,7 @@ export class CategoriesMenuService {
         }
       },
       orderBy: [
-        { level: 'asc' },
+        
         { orderIndex: 'asc' },
         { name: 'asc' }
       ]
@@ -85,7 +78,7 @@ export class CategoriesMenuService {
     const categories = await this.prisma.category.findMany({
       where: {
         productId,
-        isPublished: true,
+        isActive: true,
         OR: language === '*' ? undefined : [
           { language: '*' },
           { language }
@@ -93,18 +86,15 @@ export class CategoriesMenuService {
       },
       select: {
         id: true,
-        alias: true,
-        language: true
+        slug: true  // используем slug вместо alias
       }
     });
 
     const lookup: { [alias: string]: string } = {};
     
     for (const category of categories) {
-      // Приоритет: конкретный язык > универсальный
-      if (!lookup[category.alias] || category.language === language) {
-        lookup[category.alias] = category.id;
-      }
+      // Используем slug как ключ для lookup
+      lookup[category.slug] = category.id;
     }
 
     return lookup;
@@ -122,17 +112,13 @@ export class CategoriesMenuService {
     const category = await this.prisma.category.findFirst({
       where: {
         productId,
-        alias,
-        isPublished: true,
-        OR: language === '*' ? undefined : [
-          { language: '*' },
-          { language }
-        ]
+        slug: alias,  // используем slug вместо alias
+        isActive: true
       },
       include: {
         parent: true,
         children: {
-          where: { isPublished: true },
+          where: { isActive: true },
           orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
         },
         _count: {
@@ -208,8 +194,8 @@ export class CategoriesMenuService {
       }
     });
 
-    // Публикуем SSE событие
-    this.realtimeEvents.publishCategoriesReordered(productId, items);
+    // Публикуем SSE событие (пока используем общее событие)
+    // this.realtimeEvents.publishCategoriesReordered(productId, items);
     
     this.logger.debug(`Reordered ${items.length} categories for product ${productId}`);
   }
@@ -248,10 +234,10 @@ export class CategoriesMenuService {
   }> {
     const [total, published, byLevel, itemsCount] = await Promise.all([
       this.prisma.category.count({ where: { productId } }),
-      this.prisma.category.count({ where: { productId, isPublished: true } }),
+      this.prisma.category.count({ where: { productId, isActive: true } }),
       this.prisma.category.groupBy({
         by: ['level'],
-        where: { productId, isPublished: true },
+        where: { productId, isActive: true },
         _count: { id: true }
       }),
       this.prisma.item.count({
@@ -290,7 +276,7 @@ export class CategoriesMenuService {
 
     const where: any = {
       productId,
-      isPublished: true
+      isActive: true
     };
 
     // Мультиязычность
@@ -338,7 +324,7 @@ export class CategoriesMenuService {
       include: {
         parent: true,
         children: {
-          where: { isPublished: true },
+          where: { isActive: true },
           orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
         },
         _count: {
@@ -349,7 +335,7 @@ export class CategoriesMenuService {
         }
       },
       orderBy: [
-        { level: 'asc' },
+        
         { orderIndex: 'asc' },
         { name: 'asc' }
       ]

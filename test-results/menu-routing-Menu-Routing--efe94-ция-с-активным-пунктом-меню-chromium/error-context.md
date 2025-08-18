@@ -1,0 +1,134 @@
+# Page snapshot
+
+```yaml
+- link "S":
+  - /url: /
+- navigation:
+  - list:
+    - listitem:
+      - link:
+        - /url: /
+    - listitem:
+      - link:
+        - /url: /projects
+    - listitem:
+      - link:
+        - /url: /orders
+    - listitem:
+      - link:
+        - /url: /marketing
+    - listitem:
+      - link:
+        - /url: /users
+    - listitem:
+      - link:
+        - /url: /support
+    - listitem
+    - listitem:
+      - link:
+        - /url: /section-settings
+- button "АС"
+- banner:
+  - link "Назад":
+    - /url: /projects
+  - heading "Сайт экосистемы Стартапус" [level=1]
+  - button "Поиск"
+  - button "Добавить"
+- heading "Управление меню" [level=1]
+- paragraph: Универсальная система меню с иерархической структурой и привязкой к компонентам
+- text: Синхронизация 10:10:32 PM
+- heading "Тип меню:" [level=3]
+- combobox:
+  - option "Выберите тип меню"
+  - option "Главное меню (main)" [selected]
+  - option "Меню подвала (footer)"
+  - option "Боковое меню (bokovoe-menyu)"
+- button "Создать тип меню":
+  - img
+  - text: Создать тип меню
+- heading "Всего пунктов" [level=4]
+- paragraph: "9"
+- paragraph
+- heading "Опубликованных" [level=4]
+- paragraph: "9"
+- paragraph: 100%
+- heading "Уровней" [level=4]
+- paragraph: "2"
+- paragraph: Максимальная глубина
+- heading "Компоненты" [level=4]
+- paragraph: "3"
+- text: "Website: 4 Blog: 1 Store: 4"
+- heading "Детальная статистика" [level=4]
+- heading "По типам:" [level=5]
+- text: "🧩 Компонент: 9"
+- heading "По доступу:" [level=5]
+- text: "🌐 Публичный: 9"
+- heading "По языкам:" [level=5]
+- text: "🌍 Все языки: 9"
+- button "📋 Список"
+- button "🖱️ Перетаскивание"
+- button "👁️ Предпросмотр"
+- heading "Пункты меню" [level=3]
+- paragraph: 6 корневых пунктов, 3 подпунктов
+- button "Создать пункт меню":
+  - img
+  - text: Создать пункт меню
+- text: 🧩
+- heading "Главная" [level=4]
+- text: "Level 1 PUBLIC /home Website view: page → home 🌍"
+- group: Параметры (2)
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Новости" [level=4]
+- text: "Level 1 PUBLIC /novosti Blog view: list → news 🌍"
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Портфолио" [level=4]
+- text: "Level 1 PUBLIC /portfolio Website view: page → portfolio 🌍"
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Каталог" [level=4]
+- text: "Level 1 PUBLIC /catalog Store view: categories 🌍"
+- group: Параметры (2)
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Электроника" [level=4]
+- text: "Level 2 PUBLIC /category-electronics Store view: category → cmeh0duv900069kfmgephcj8b 🌍"
+- group: Параметры (3)
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Одежда" [level=4]
+- text: "Level 2 PUBLIC /category-clothing Store view: category → cmeh0duvb00089kfm9d6ef9h9 🌍"
+- group: Параметры (3)
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Дом и сад" [level=4]
+- text: "Level 2 PUBLIC /category-home-garden Store view: category → cmeh0duvc000a9kfmg6nr5jpi 🌍"
+- group: Параметры (3)
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "О компании" [level=4]
+- text: "Level 1 PUBLIC /about Website view: page → about 🌍"
+- group: Параметры (2)
+- button "✏️"
+- button "🗑️"
+- text: 🧩
+- heading "Контакты" [level=4]
+- text: "Level 1 PUBLIC /contacts Website view: page → contacts 🌍"
+- group: Параметры (2)
+- button "✏️"
+- button "🗑️"
+- heading "💡 Подсказки по управлению меню" [level=4]
+- list:
+  - listitem: "• Максимальная глубина иерархии: 3 уровня"
+  - listitem: • Используйте тип "Заголовок" для группировки пунктов
+  - listitem: • Alias автоматически генерируется из названия
+  - listitem: • Права доступа наследуются от родительских пунктов
+```

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { MenuItemData } from '../../types/menu';
 import { useNavigationMenu } from '../../hooks/useMenuSystem';
 import { useLanguage } from '../../hooks/useLanguage';
+import { useActiveMenuItem } from './ActiveMenuTracker';
 
 /**
  * Компонент навигационного меню
@@ -31,22 +32,27 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
   const { language } = useLanguage();
   const languageCode = language === 'ru' ? 'ru-RU' : 'en-GB';
   const { menuTree, loading, error } = useNavigationMenu(projectId, menuTypeName, accessLevels, languageCode);
+  const { activeItem } = useActiveMenuItem(projectId, menuTypeName);
 
   // Определение активного пункта меню
   const isActiveMenuItem = (item: MenuItemData): boolean => {
-    // Точное совпадение по alias
-    if (item.alias && location.pathname.includes(item.alias)) {
-      return true;
-    }
-
-    // Совпадение по targetId
-    if (item.targetId && location.pathname.includes(item.targetId)) {
+    // Используем данные из ActiveMenuTracker
+    if (activeItem && activeItem.id === item.id) {
       return true;
     }
 
     // Проверяем дочерние элементы
     if (item.children && item.children.length > 0) {
       return item.children.some(child => isActiveMenuItem(child));
+    }
+
+    // Fallback: проверяем по URL
+    if (item.alias && location.pathname.includes(item.alias)) {
+      return true;
+    }
+
+    if (item.targetId && location.pathname.includes(item.targetId)) {
+      return true;
     }
 
     return false;
