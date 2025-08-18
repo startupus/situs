@@ -168,11 +168,11 @@ const MenuManager: React.FC = () => {
         <EditMenuItemModal
           item={editingItem}
           onClose={() => setEditingItem(null)}
-          onUpdate={(updatedItem) => {
-            // Обновляем локальный стейт
-            setMenuItems(items => 
-              items.map(item => item.id === updatedItem.id ? updatedItem : item)
-            );
+          onUpdate={async (updatedItem) => {
+            // После обновления перезагружаем список пунктов выбранного типа
+            if (selectedMenuType) {
+              await loadMenuItems(selectedMenuType);
+            }
             setEditingItem(null);
           }}
         />
