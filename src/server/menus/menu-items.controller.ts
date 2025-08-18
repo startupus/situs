@@ -77,7 +77,8 @@ export class MenuItemsController {
   @Scopes('PROJECT_READ')
   async getActive(
     @Query('menuTypeId') menuTypeId: string,
-    @Query('path') path: string
+    @Query('path') path: string,
+    @Query('language') language: string = '*'
   ) {
     if (!menuTypeId || !path) {
       return { 
@@ -86,7 +87,7 @@ export class MenuItemsController {
       };
     }
 
-    const activeItem = await this.menusService.getActiveMenuItem(menuTypeId, path);
+    const activeItem = await this.menusService.getActiveMenuItem(menuTypeId, path, language);
     return { success: true, data: activeItem };
   }
 
@@ -94,7 +95,8 @@ export class MenuItemsController {
   @Scopes('PROJECT_READ')
   async getAuthorized(
     @Query('menuTypeId') menuTypeId: string,
-    @Query('accessLevels') accessLevels?: string
+    @Query('accessLevels') accessLevels?: string,
+    @Query('language') language: string = '*'
   ) {
     if (!menuTypeId) {
       return { success: false, error: 'Параметр menuTypeId обязателен' };
@@ -105,7 +107,7 @@ export class MenuItemsController {
       ? accessLevels.split(',') as AccessLevel[]
       : [AccessLevel.PUBLIC];
 
-    const authorizedItems = await this.menusService.getAuthorizedItems(menuTypeId, levels);
+    const authorizedItems = await this.menusService.getAuthorizedItems(menuTypeId, levels, language);
     return { success: true, data: authorizedItems };
   }
 
@@ -121,6 +123,22 @@ export class MenuItemsController {
 
     const lookup = await this.menusService.buildLookup(menuTypeId, language);
     return { success: true, data: lookup };
+  }
+
+  // Поиск эквивалентного пункта на другом языке (для переключателя языков)
+  @Get('language/equivalent')
+  @Scopes('PROJECT_READ')
+  async getEquivalent(
+    @Query('menuTypeId') menuTypeId: string,
+    @Query('sourceItemId') sourceItemId: string,
+    @Query('language') language: string
+  ) {
+    if (!menuTypeId || !sourceItemId || !language) {
+      return { success: false, error: 'menuTypeId, sourceItemId и language обязательны' };
+    }
+
+    const item = await this.menusService.findEquivalentMenuItem(menuTypeId, sourceItemId, language);
+    return { success: true, data: item };
   }
 
   // Получение Itemid для роутинга (SEF URLs)

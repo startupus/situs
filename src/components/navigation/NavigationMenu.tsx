@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MenuItemData } from '../../types/menu';
 import { useNavigationMenu } from '../../hooks/useMenuSystem';
+import { useLanguage } from '../../hooks/useLanguage';
 
 /**
  * Компонент навигационного меню
@@ -27,7 +28,9 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
   maxLevel = 3
 }) => {
   const location = useLocation();
-  const { menuTree, loading, error } = useNavigationMenu(projectId, menuTypeName, accessLevels);
+  const { language } = useLanguage();
+  const languageCode = language === 'ru' ? 'ru-RU' : 'en-GB';
+  const { menuTree, loading, error } = useNavigationMenu(projectId, menuTypeName, accessLevels, languageCode);
 
   // Определение активного пункта меню
   const isActiveMenuItem = (item: MenuItemData): boolean => {

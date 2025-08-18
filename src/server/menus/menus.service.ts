@@ -27,6 +27,42 @@ export class MenusService {
     private readonly realtimeEvents: RealtimeEventsService
   ) {}
 
+  /**
+   * Простой in-memory кэш lookup-таблиц на уровне процесса.
+   * Ключ: `${menuTypeId}:${language}`; Значение: { value, ts }
+   * Инвалидация выполняется при любых изменениях структуры/элементов меню.
+   */
+  private lookupCache = new Map<string, { value: MenuLookup; ts: number }>();
+  private readonly lookupTtlMs = 5 * 60 * 1000; // 5 минут
+
+  private makeLookupCacheKey(menuTypeId: string, language: string) {
+    const lang = language && language.length > 0 ? language : '*';
+    return `${menuTypeId}:${lang}`;
+  }
+
+  private getLookupFromCache(menuTypeId: string, language: string): MenuLookup | null {
+    const key = this.makeLookupCacheKey(menuTypeId, language);
+    const entry = this.lookupCache.get(key);
+    if (!entry) return null;
+    if (Date.now() - entry.ts > this.lookupTtlMs) {
+      this.lookupCache.delete(key);
+      return null;
+    }
+    return entry.value;
+  }
+
+  private setLookupToCache(menuTypeId: string, language: string, value: MenuLookup) {
+    const key = this.makeLookupCacheKey(menuTypeId, language);
+    this.lookupCache.set(key, { value, ts: Date.now() });
+  }
+
+  private invalidateLookupCache(menuTypeId: string) {
+    const prefix = `${menuTypeId}:`;
+    for (const key of this.lookupCache.keys()) {
+      if (key.startsWith(prefix)) this.lookupCache.delete(key);
+    }
+  }
+
   // ========== MenuType CRUD ==========
 
   async createMenuType(dto: CreateMenuTypeDto): Promise<MenuType> {
@@ -178,13 +214,15 @@ export class MenusService {
    */
   async getActiveMenuItem(
     menuTypeId: string,
-    currentPath: string
+    currentPath: string,
+    language?: string
   ): Promise<MenuItem | null> {
     // Попробуем найти точное совпадение по пути
     const exactMatch = await this.prisma.menuItem.findFirst({
       where: {
         menuTypeId,
         isPublished: true,
+        ...(language && language !== '*' ? { OR: [{ language: '*' }, { language }] } : {}),
         OR: [
           { externalUrl: currentPath },
           // Логика сопоставления с component + view + targetId
@@ -204,19 +242,22 @@ export class MenusService {
    */
   async getAuthorizedItems(
     menuTypeId: string,
-    userAccessLevels: AccessLevel[]
+    userAccessLevels: AccessLevel[],
+    language?: string
   ): Promise<MenuItem[]> {
     return this.prisma.menuItem.findMany({
       where: {
         menuTypeId,
         isPublished: true,
-        accessLevel: { in: userAccessLevels }
+        accessLevel: { in: userAccessLevels },
+        ...(language && language !== '*' ? { OR: [{ language: '*' }, { language }] } : {})
       },
       include: {
         children: {
           where: { 
             isPublished: true,
-            accessLevel: { in: userAccessLevels }
+            accessLevel: { in: userAccessLevels },
+            ...(language && language !== '*' ? { OR: [{ language: '*' }, { language }] } : {})
           }
         }
       },
@@ -231,25 +272,30 @@ export class MenusService {
    * Построение lookup таблицы для роутинга (аналог Joomla)
    */
   async buildLookup(menuTypeId: string, language: string): Promise<MenuLookup> {
+    // Пытаемся вернуть из кэша
+    const cached = this.getLookupFromCache(menuTypeId, language);
+    if (cached) return cached;
+
     const items = await this.getItems(menuTypeId, ['language'], [language]);
     const lookup: MenuLookup = {};
 
     items.forEach(item => {
       if (item.component && item.view) {
-        const key = item.layout ? `${item.view}:${item.layout}` : item.view;
-        // Более безопасный парсинг targetId
-        let targetId = 0;
+        // Индексация по component:view[:layout]
+        const baseKey = item.layout ? `${item.component}:${item.view}:${item.layout}` : `${item.component}:${item.view}`;
+        // Парсинг targetId в число, иначе детерминированный псевдохеш
+        let targetNumeric = 0;
         if (item.targetId) {
           const parsed = parseInt(item.targetId, 10);
-          // Если targetId не число, используем простой хеш
-          targetId = isNaN(parsed) ? item.targetId.length * 37 : parsed;
+          targetNumeric = isNaN(parsed) ? item.targetId.length * 37 : parsed;
         }
 
-        if (!lookup[key]) lookup[key] = {};
-        lookup[key][targetId] = item.id;
+        if (!lookup[baseKey]) lookup[baseKey] = {};
+        lookup[baseKey][targetNumeric] = item.id;
       }
     });
 
+    this.setLookupToCache(menuTypeId, language, lookup);
     return lookup;
   }
 
@@ -288,6 +334,8 @@ export class MenusService {
 
     // Публикуем SSE событие
     this.realtimeEvents.publishMenuItemCreated(menuItem.menuType.projectId, menuItem);
+    // Инвалидация lookup-кэша по типу меню
+    this.invalidateLookupCache(menuItem.menuTypeId);
 
     return menuItem;
   }
@@ -375,6 +423,8 @@ export class MenusService {
 
     // Публикуем SSE событие
     this.realtimeEvents.publishMenuItemUpdated(menuItem.menuType.projectId, menuItem);
+    // Инвалидация lookup-кэша по типу меню
+    this.invalidateLookupCache(menuItem.menuTypeId);
 
     return menuItem;
   }
@@ -410,6 +460,8 @@ export class MenusService {
     if (projectId) {
       this.realtimeEvents.publishMenuItemDeleted(projectId, id, menuTypeId);
     }
+    // Инвалидация lookup-кэша по типу меню
+    if (menuTypeId) this.invalidateLookupCache(menuTypeId);
   }
 
   /**
@@ -452,5 +504,38 @@ export class MenusService {
       firstItem.menuType.projectId, 
       firstItem.menuTypeId
     );
+    // Инвалидация lookup-кэша по типу меню
+    this.invalidateLookupCache(firstItem.menuTypeId);
+  }
+
+  /**
+   * Поиск эквивалентного пункта меню на другом языке
+   */
+  async findEquivalentMenuItem(
+    menuTypeId: string,
+    sourceItemId: string,
+    language: string
+  ): Promise<MenuItem | null> {
+    const src = await this.prisma.menuItem.findUnique({ where: { id: sourceItemId } });
+    if (!src) return null;
+
+    const target = await this.prisma.menuItem.findFirst({
+      where: {
+        menuTypeId,
+        isPublished: true,
+        component: src.component || undefined,
+        view: src.view || undefined,
+        layout: src.layout || undefined,
+        targetId: src.targetId || undefined,
+        OR: language && language !== '*' ? [{ language }, { language: '*' }] : undefined,
+      },
+      orderBy: [
+        { language: 'desc' }, // сначала конкретный язык, затем '*'
+        { level: 'asc' },
+        { orderIndex: 'asc' },
+      ],
+    });
+
+    return target || null;
   }
 }
