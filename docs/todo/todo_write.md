@@ -72,7 +72,7 @@
 
 ## Dev/операции
 - [ ] Починить ts/tsx dev‑рантайм (после стабилизации)
-- [ ] CI/CD: сборка NestJS, `prisma migrate deploy`, Playwright test, публикация артефактов
+- [x] CI/CD: сборка NestJS, Prisma generate/db push, backend tests (`test:backend`), Playwright e2e
 - [ ] Мониторинг: health, лог‑рутинг, трекинг ошибок
 
 ### Dev‑рантайм (tsx) — расследование и фиксы
