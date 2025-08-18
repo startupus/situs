@@ -6,7 +6,7 @@
 - [x] Добавить глобальные пайпы/фильтры/интерцептор и graceful shutdown
 - [x] Добавить pm2 конфиг и npm-скрипты деплоя
 - [x] Прогнать e2e Playwright: status toggle + SSE sync
-- [ ] Создать unit-тесты для `ProjectsService.update` (без Jest)
+- [x] Создать unit-тесты для `ProjectsService.update` (без Jest)
 - [ ] Документация: обновить корневой README архитектуры, добавить Swagger
 - [ ] Очистить корень от артефактов компиляции и дублирующих конфигов TS
  
