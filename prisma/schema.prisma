@@ -231,17 +231,22 @@ model Category {
   id          String   @id @default(cuid())
   name        String
   description String?
-  slug        String
+  slug        String   // SEO-friendly URL (как alias в MenuItem)
+  alias       String   @default("")  // Дублируем slug для совместимости с menu-подобным API
   image       String?
   
-  // Иерархия категорий
+  // Иерархия категорий (как в Joomla MenuItem)
+  level       Int      @default(1)  // Добавляем level как в MenuItem
   parentId    String?
   parent      Category? @relation("CategoryHierarchy", fields: [parentId], references: [id])
   children    Category[] @relation("CategoryHierarchy")
   
-  // Настройки отображения
+  // Настройки отображения (как в Joomla MenuItem)
   orderIndex  Int      @default(0)
   isActive    Boolean  @default(true)
+  isPublished Boolean  @default(true)  // Добавляем isPublished как в MenuItem
+  language    String   @default("*")   // Добавляем language как в MenuItem
+  accessLevel AccessLevel @default(PUBLIC)  // Добавляем accessLevel как в MenuItem
   
   // Product relation - категории привязаны к продукту ECOMMERCE
   productId   String
@@ -254,6 +259,7 @@ model Category {
   updatedAt   DateTime @updatedAt
   
   @@unique([productId, slug])
+  @@unique([productId, alias])  // Добавляем уникальность alias как в MenuItem
   @@map("categories")
 }
 

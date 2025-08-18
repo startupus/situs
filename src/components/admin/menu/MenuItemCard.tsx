@@ -44,7 +44,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   return (
     <div className={`${level > 1 ? 'ml-6 border-l-2 border-primary/20 pl-4' : ''}`}>
-      <div className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:shadow-md transition-shadow mb-2">
+      <div className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:shadow-md transition-shadow mb-2" data-testid="menu-item">
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3">

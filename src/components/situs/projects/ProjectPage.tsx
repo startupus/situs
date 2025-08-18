@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import BreadcrumbsBar from '../../navigation/BreadcrumbsBar';
 import { projectsApi } from '../../../api/services/projects.api';
 import { ProjectData } from '../../../types/project';
 import { useProject } from '../../../contexts/ProjectContext';
@@ -167,7 +168,16 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   // временно нет действий в хедере
 
   return (
-    <div className="p-6 space-y-8">
+    <>
+      {/* Хлебные крошки */}
+      <BreadcrumbsBar 
+        projectId={projectId!}
+        menuTypeName="main"
+        homeTitle="Проекты"
+        homeUrl="/projects"
+      />
+      
+      <div className="p-6 space-y-8">
       {/* Верх: плитки компонентов проекта (перетаскиваемые) */}
       <section>
         <div className="flex justify-between items-center mb-4">
@@ -208,7 +218,8 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
           <DragOverlay />
         </DndContext>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

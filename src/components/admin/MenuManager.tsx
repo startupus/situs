@@ -5,6 +5,8 @@ import { useMenuSystemRealtime } from '../../hooks/useMenuSystemRealtime';
 import MenuTypesSelector from './menu/MenuTypesSelector';
 import MenuStatistics from './menu/MenuStatistics';
 import MenuItemsList from './menu/MenuItemsList';
+import MenuItemDragDrop from './menu/MenuItemDragDrop';
+import MenuPreview from './menu/MenuPreview';
 import CreateMenuItemModal from './menu/CreateMenuItemModal';
 import EditMenuItemModal from './menu/EditMenuItemModal';
 
@@ -17,6 +19,7 @@ const MenuManager: React.FC = () => {
   const [selectedMenuType, setSelectedMenuType] = useState<string>('');
   const [showCreateItemModal, setShowCreateItemModal] = useState(false);
   const [editingItem, setEditingItem] = useState<MenuItemData | null>(null);
+  const [viewMode, setViewMode] = useState<'list' | 'dragdrop' | 'preview'>('list');
 
   // Используем real-time хук для автоматической синхронизации
   const { 
@@ -62,6 +65,32 @@ const MenuManager: React.FC = () => {
     }
   };
 
+  // Изменение порядка пунктов меню
+  const handleReorderItems = async (reorderedItems: Array<{
+    id: string;
+    orderIndex: number;
+    level: number;
+    parentId: string | null;
+  }>) => {
+    try {
+      const response = await fetch('http://localhost:3002/api/menu-items/reorder', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: reorderedItems })
+      });
+
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.error || 'Ошибка изменения порядка');
+      }
+
+      // Данные обновятся автоматически через SSE
+    } catch (error) {
+      console.error('Ошибка reorder:', error);
+      throw error;
+    }
+  };
+
   // Удаление пункта меню (SSE автоматически обновит список)
   const handleDeleteMenuItem = async (itemId: string) => {
     if (!confirm('Вы уверены, что хотите удалить этот пункт меню?')) return;
@@ -103,7 +132,7 @@ const MenuManager: React.FC = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6" data-testid="menu-manager">
       {/* Заголовок */}
       <div className="mb-6">
         <div className="flex justify-between items-start">
@@ -143,13 +172,68 @@ const MenuManager: React.FC = () => {
         <MenuStatistics menuItems={menuItems} className="mb-6" />
       )}
 
-      {/* Список пунктов меню */}
+      {/* Переключатель режимов */}
       {selectedMenuType && (
+        <div className="mb-6">
+          <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'list' 
+                  ? 'bg-primary text-white' 
+                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+              }`}
+            >
+              📋 Список
+            </button>
+            <button
+              onClick={() => setViewMode('dragdrop')}
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'dragdrop' 
+                  ? 'bg-primary text-white' 
+                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+              }`}
+            >
+              🖱️ Перетаскивание
+            </button>
+            <button
+              onClick={() => setViewMode('preview')}
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'preview' 
+                  ? 'bg-primary text-white' 
+                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+              }`}
+            >
+              👁️ Предпросмотр
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Список пунктов меню */}
+      {selectedMenuType && viewMode === 'list' && (
         <MenuItemsList
           menuItems={menuItems}
           onEditItem={setEditingItem}
           onDeleteItem={handleDeleteMenuItem}
           onCreateItem={() => setShowCreateItemModal(true)}
+        />
+      )}
+
+      {/* Drag & Drop режим */}
+      {selectedMenuType && viewMode === 'dragdrop' && (
+        <MenuItemDragDrop 
+          items={menuItems}
+          onReorder={handleReorderItems}
+        />
+      )}
+
+      {/* Предпросмотр меню */}
+      {selectedMenuType && viewMode === 'preview' && (
+        <MenuPreview 
+          projectId={projectId!}
+          selectedMenuType={selectedMenuType}
+          menuItems={menuItems}
         />
       )}
 

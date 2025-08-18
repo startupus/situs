@@ -1,7 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
-import { MenusService, MenuLookup } from './menus.service';
 import { Cron, CronExpression } from '@nestjs/schedule';
+
+// Типы для lookup таблицы
+export interface MenuLookup {
+  [key: string]: { [targetId: number]: string };
+}
 
 /**
  * Сервис для создания и кэширования lookup таблиц меню
@@ -14,8 +18,7 @@ export class MenuLookupService {
   private lastUpdate = new Map<string, Date>();
 
   constructor(
-    private readonly prisma: PrismaService,
-    private readonly menusService: MenusService
+    private readonly prisma: PrismaService
   ) {}
 
   /**
