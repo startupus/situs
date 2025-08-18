@@ -11,7 +11,7 @@
   - `POST /api/pages` — создание страницы (упрощённый DTO; добавить валидацию).
 - `project-pages.controller.ts` — маршруты проекта:
   - `GET /api/projects/:projectId/pages?page=&limit=` — страницы Website конкретного проекта.
-  - `PATCH /api/projects/:projectId/pages/reorder` — сохранение порядка (DnD), тело: `{ ids: string[] }`.
+  - `PATCH /api/projects/:projectId/pages/reorder` — сохранение порядка (DnD), тело: `{ ids: string[] }` (DTO `ReorderPagesDto`).
 
 ## Контракты API (кратко)
 - Список страниц:
@@ -44,7 +44,7 @@
 - Глобальные пайпы/фильтры/интерсепторы — `src/server/common/*`
 
 ## Ближайшие задачи
-- Валидация DTO (`class-validator`) для create/update/reorder
+- Валидация DTO (`class-validator`) для create/update страниц
 - Полный CRUD: создание/удаление/редактирование страниц Website
 - Поиск/фильтры/пагинация (согласовать с frontend)
 - Guards/Policies: роли (Global/Account/Project) и `@Scopes()` для ручек

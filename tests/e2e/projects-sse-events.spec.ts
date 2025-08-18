@@ -31,7 +31,8 @@ test.describe('Projects SSE', () => {
 
     // Фиксируем исходный статус через API
     const current = await page.evaluate(async ({ projectId }) => {
-      const res = await fetch(`http://localhost:3001/api/projects/${projectId}`);
+      const base = window.location.origin;
+      const res = await fetch(`${base}/api/projects/${projectId}`);
       const json = await res.json();
       return (json?.data?.status || '').toUpperCase();
     }, { projectId });
@@ -40,7 +41,8 @@ test.describe('Projects SSE', () => {
 
     // Меняем статус через API
     const ok = await page.evaluate(async ({ projectId, targetStatus }) => {
-      const res = await fetch(`http://localhost:3001/api/projects/${projectId}/status`, {
+      const base = window.location.origin;
+      const res = await fetch(`${base}/api/projects/${projectId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: targetStatus }),
@@ -52,7 +54,8 @@ test.describe('Projects SSE', () => {
     // Ждём подтверждение на сервере
     await expect.poll(async () => {
       const changed = await page.evaluate(async ({ projectId, targetStatus }) => {
-        const res = await fetch(`http://localhost:3001/api/projects/${projectId}`);
+        const base = window.location.origin;
+        const res = await fetch(`${base}/api/projects/${projectId}`);
         const json = await res.json();
         return (json?.data?.status || '').toUpperCase() === targetStatus;
       }, { projectId, targetStatus });

@@ -1,6 +1,9 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Query, Optional } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { PrismaService } from '../database/prisma.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductQueryDto } from './dto/product-query.dto';
 
 /**
  * Контроллер для вложенных маршрутов продуктов в рамках проекта
@@ -16,25 +19,17 @@ export class ProjectProductsController {
   @Get()
   async findAll(
     @Param('projectId') projectId: string,
-    @Query('page') page?: string,
-    @Query('limit') limit?: string,
-    @Query('type') type?: string,
-    @Query('status') status?: string,
+    @Query() query: Omit<ProductQueryDto, 'projectId'>,
   ) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
-    const result = await svc.findByProject(projectId, {
-      page: page ? parseInt(page, 10) : undefined,
-      limit: limit ? parseInt(limit, 10) : undefined,
-      type,
-      status,
-    });
+    const result = await svc.findByProject(projectId, query);
     return { success: true, data: result };
   }
 
   @Post()
   async create(
     @Param('projectId') projectId: string,
-    @Body() body: { name: string; description?: string; type: string; settings?: string },
+    @Body() body: Omit<CreateProductDto, 'projectId'>,
   ) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
     const product = await svc.createInProject(projectId, body);
@@ -45,7 +40,7 @@ export class ProjectProductsController {
   async update(
     @Param('projectId') projectId: string,
     @Param('productId') productId: string,
-    @Body() body: Partial<{ name: string; description?: string; type: string; status: string; settings?: string }>,
+    @Body() body: UpdateProductDto,
   ) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
     const product = await svc.updateInProject(projectId, productId, body);

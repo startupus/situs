@@ -11,7 +11,7 @@ export class RegisterDto {
   })
   @IsEmail({}, { message: 'Некорректный формат email' })
   @IsNotEmpty({ message: 'Email обязателен' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     description: 'Пароль пользователя',
@@ -23,7 +23,7 @@ export class RegisterDto {
   @MinLength(8, { message: 'Пароль должен содержать минимум 8 символов' })
   @MaxLength(50, { message: 'Пароль должен содержать максимум 50 символов' })
   @IsNotEmpty({ message: 'Пароль обязателен' })
-  password: string;
+  password!: string;
 
   @ApiProperty({
     description: 'Имя пользователя',
@@ -33,5 +33,5 @@ export class RegisterDto {
   @IsString({ message: 'Имя должно быть строкой' })
   @MaxLength(100, { message: 'Имя должно содержать максимум 100 символов' })
   @IsNotEmpty({ message: 'Имя обязательно' })
-  name: string;
+  name!: string;
 }
