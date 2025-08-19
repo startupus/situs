@@ -80,6 +80,16 @@ const MenuManager: React.FC = () => {
     }
   };
 
+  // Изменение статуса пункта меню
+  const handleToggleMenuItemStatus = async (itemId: string, isActive: boolean) => {
+    try {
+      await menuAPI.handleUpdateMenuItem(itemId, { isPublished: isActive });
+      // SSE событие автоматически обновит список пунктов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка изменения статуса пункта меню');
+    }
+  };
+
   // Изменение порядка пунктов меню
   const handleReorderItems = async (reorderedItems: MenuItemData[] | Array<{
     id: string;
@@ -169,6 +179,26 @@ const MenuManager: React.FC = () => {
     }
   };
 
+  // Пакетное изменение статуса пунктов меню
+  const handleBatchToggleMenuItemStatus = async (itemIds: string[], isActive: boolean) => {
+    try {
+      await menuAPI.handleBatchToggleMenuItemStatus(itemIds, isActive);
+      // SSE событие автоматически обновит список пунктов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка пакетного изменения статуса пунктов меню');
+    }
+  };
+
+  // Пакетное удаление пунктов меню
+  const handleBatchDeleteMenuItems = async (itemIds: string[]) => {
+    try {
+      await menuAPI.handleBatchDeleteMenuItems(itemIds);
+      // SSE событие автоматически обновит список пунктов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка пакетного удаления пунктов меню');
+    }
+  };
+
 
 
   if (loading) {
@@ -195,59 +225,77 @@ const MenuManager: React.FC = () => {
     <div className="p-6" data-testid="menu-manager">
 
 
-      {/* Переключатель вкладок и вида */}
-      {menuState.selectedMenuType && (
-        <div className="mb-6">
-          <div className="flex items-center justify-between">
-            {/* Вкладки */}
-            <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit">
-              <button
-                onClick={() => menuState.setActiveTab('items')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  menuState.activeTab === 'items' 
-                    ? 'bg-primary text-white' 
-                    : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
-                }`}
-              >
-                <FiList size={16} />
-                Пункты меню
-              </button>
+      {/* Переключатель вкладок с селектором типа меню */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between">
+          {/* Вкладки */}
+          <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit">
+            <button
+              onClick={() => menuState.setActiveTab('items')}
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                menuState.activeTab === 'items' 
+                  ? 'bg-primary text-white' 
+                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+              }`}
+            >
+              <FiList size={16} />
+              Пункты меню
+            </button>
 
-              <button
-                onClick={() => menuState.setActiveTab('types')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  menuState.activeTab === 'types' 
-                    ? 'bg-primary text-white' 
-                    : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
-                }`}
-              >
-                <FiGrid size={16} />
-                Типы меню
-              </button>
-            </div>
-
-            {/* Переключатель вида (только для вкладки "Пункты меню") */}
-            {menuState.activeTab === 'items' && (
-              <div className="inline-flex rounded-md border border-stroke dark:border-dark-3 overflow-hidden">
-                <button
-                  onClick={() => menuState.setDisplayStyle('tree')}
-                  className={`p-2 ${menuState.displayStyle === 'tree' ? 'bg-primary text-white' : 'text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-3'}`}
-                  title="Дерево"
-                >
-                  <FiGrid size={16} />
-                </button>
-                <button
-                  onClick={() => menuState.setDisplayStyle('list')}
-                  className={`p-2 ${menuState.displayStyle === 'list' ? 'bg-primary text-white' : 'text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-3'}`}
-                  title="Список"
-                >
-                  <FiList size={16} />
-                </button>
-              </div>
-            )}
+            <button
+              onClick={() => menuState.setActiveTab('types')}
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                menuState.activeTab === 'types' 
+                  ? 'bg-primary text-white' 
+                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+              }`}
+            >
+              <FiGrid size={16} />
+              Типы меню
+            </button>
           </div>
+
+          {/* Селектор типа меню (без заголовка, только на вкладке "Пункты меню") */}
+          {menuTypes.length > 0 && menuState.activeTab === 'items' && (
+            <div className="relative max-w-xs">
+              <select
+                value={menuState.selectedMenuType}
+                onChange={(e) => {
+                  if (e.target.value === '__create_new__') {
+                    menuState.openCreateTypeModal();
+                  } else {
+                    menuState.setSelectedMenuType(e.target.value);
+                  }
+                }}
+                className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-12 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+              >
+                <option value="">Выберите тип меню</option>
+                {menuTypes.map((menuType) => (
+                  <option key={menuType.id} value={menuType.id}>
+                    {menuType.title} ({menuType.name})
+                  </option>
+                ))}
+                <option value="__create_new__">+ Создать новый тип</option>
+              </select>
+              <span className="pointer-events-none absolute right-0 top-0 flex h-full w-12 items-center justify-center text-dark-5">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.29645 5.15354L2.29642 5.15357L2.30065 5.1577L7.65065 10.3827L8.00167 10.7255L8.35105 10.381L13.7011 5.10603L13.7011 5.10604L13.7036 5.10354C13.7221 5.08499 13.7386 5.08124 13.75 5.08124C13.7614 5.08124 13.7779 5.08499 13.7964 5.10354C13.815 5.12209 13.8188 5.13859 13.8188 5.14999C13.8188 5.1612 13.8151 5.17734 13.7974 5.19552L8.04956 10.8433L8.04955 10.8433L8.04645 10.8464C8.01604 10.8768 7.99596 10.8921 7.98519 10.8992C7.97756 10.8983 7.97267 10.8968 7.96862 10.8952C7.96236 10.8929 7.94954 10.887 7.92882 10.8721L2.20263 5.2455C2.18488 5.22733 2.18125 5.2112 2.18125 5.19999C2.18125 5.18859 2.18501 5.17209 2.20355 5.15354C2.2221 5.13499 2.2386 5.13124 2.25 5.13124C2.2614 5.13124 2.2779 5.13499 2.29645 5.15354Z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                  />
+                </svg>
+              </span>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Вкладка: Пункты меню */}
       {menuState.activeTab === 'items' && (
@@ -262,6 +310,9 @@ const MenuManager: React.FC = () => {
           onCreateItem={menuState.openCreateItemModal}
           onReorderItems={handleReorderItems}
           onUpdateMenuItem={handleUpdateMenuItem}
+          onToggleItemStatus={handleToggleMenuItemStatus}
+          onBatchToggleStatus={handleBatchToggleMenuItemStatus}
+          onBatchDelete={handleBatchDeleteMenuItems}
           onMenuTypeChange={menuState.setSelectedMenuType}
           onMenuTypesUpdate={loadMenuTypes}
           onDisplayStyleChange={menuState.setDisplayStyle}

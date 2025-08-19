@@ -274,6 +274,64 @@ export const useMenuAPI = (projectId: string) => {
   };
 
   /**
+   * Пакетное изменение статуса пунктов меню
+   */
+  const handleBatchToggleMenuItemStatus = async (itemIds: string[], isActive: boolean) => {
+    try {
+      // Выполняем запросы параллельно для всех выбранных пунктов
+      const promises = itemIds.map(itemId => 
+        fetch(`http://localhost:3002/api/menu-items/${itemId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isPublished: isActive })
+        })
+      );
+
+      const responses = await Promise.all(promises);
+      const results = await Promise.all(responses.map(r => r.json()));
+      
+      // Проверяем, что все запросы успешны
+      const failedResults = results.filter(r => !r.success);
+      if (failedResults.length > 0) {
+        throw new Error(`Ошибка изменения статуса ${failedResults.length} пунктов меню`);
+      }
+
+      return results.map(r => r.data);
+    } catch (error) {
+      console.error('Ошибка пакетного изменения статуса пунктов меню:', error);
+      throw error;
+    }
+  };
+
+  /**
+   * Пакетное удаление пунктов меню
+   */
+  const handleBatchDeleteMenuItems = async (itemIds: string[]) => {
+    try {
+      // Выполняем запросы параллельно для всех выбранных пунктов
+      const promises = itemIds.map(itemId => 
+        fetch(`http://localhost:3002/api/menu-items/${itemId}`, {
+          method: 'DELETE'
+        })
+      );
+
+      const responses = await Promise.all(promises);
+      const results = await Promise.all(responses.map(r => r.json()));
+      
+      // Проверяем, что все запросы успешны
+      const failedResults = results.filter(r => !r.success);
+      if (failedResults.length > 0) {
+        throw new Error(`Ошибка удаления ${failedResults.length} пунктов меню`);
+      }
+
+      return results.map(r => r.data);
+    } catch (error) {
+      console.error('Ошибка пакетного удаления пунктов меню:', error);
+      throw error;
+    }
+  };
+
+  /**
    * Загрузка всех пунктов меню для подсчета
    */
   const loadAllMenuItems = async () => {
@@ -305,9 +363,13 @@ export const useMenuAPI = (projectId: string) => {
     handleDeleteMenuType,
     handleToggleMenuTypeStatus,
     
-    // Пакетные операции
+    // Пакетные операции - типы меню
     handleBatchToggleMenuTypeStatus,
     handleBatchDeleteMenuTypes,
+    
+    // Пакетные операции - пункты меню
+    handleBatchToggleMenuItemStatus,
+    handleBatchDeleteMenuItems,
     
     // Утилиты
     loadAllMenuItems

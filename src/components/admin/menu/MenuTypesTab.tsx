@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiPlus, FiEdit, FiTrash2 } from 'react-icons/fi';
+import { FiPlus, FiEdit, FiTrash2, FiSettings } from 'react-icons/fi';
 import { MenuTypeData } from '../../../types/menu';
 import ToggleSwitch from '../../ui/ToggleSwitch';
 import BatchActions from '../../ui/BatchActions';
@@ -133,8 +133,8 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
                   }}
                   className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-primary hover:text-primary/80 border border-primary/20 rounded-md hover:bg-primary/5 transition-colors"
                 >
-                  <FiPlus size={14} />
-                  Добавить пункт
+                  <FiSettings size={14} />
+                  Настроить
                 </button>
                 
                 {/* Тумблер активности */}
