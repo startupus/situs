@@ -5,7 +5,7 @@
  * и результаты проверки
  */
 
-import type { Permission } from './index';
+import type { Permission } from './permissions.types';
 
 /** Уровни доступа в многосайтовой системе */
 export type AccessScope = 
