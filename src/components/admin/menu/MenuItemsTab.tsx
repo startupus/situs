@@ -14,6 +14,9 @@ interface MenuItemsTabProps {
   onCreateItem: () => void;
   onReorderItems: (items: any[]) => Promise<void>;
   onUpdateMenuItem: (id: string, updates: Partial<MenuItemData>) => Promise<void>;
+  onToggleItemStatus: (itemId: string, isActive: boolean) => Promise<void>;
+  onBatchToggleStatus?: (itemIds: string[], isActive: boolean) => Promise<void>;
+  onBatchDelete?: (itemIds: string[]) => Promise<void>;
   onMenuTypeChange: (typeId: string) => void;
   onMenuTypesUpdate: () => void;
   onDisplayStyleChange: (style: 'tree' | 'list') => void;
@@ -30,6 +33,9 @@ const MenuItemsTab: React.FC<MenuItemsTabProps> = ({
   onCreateItem,
   onReorderItems,
   onUpdateMenuItem,
+  onToggleItemStatus,
+  onBatchToggleStatus,
+  onBatchDelete,
   onMenuTypeChange,
   onMenuTypesUpdate,
   onDisplayStyleChange
@@ -43,6 +49,9 @@ const MenuItemsTab: React.FC<MenuItemsTabProps> = ({
         onCreateItem={onCreateItem}
         onReorderItems={onReorderItems}
         onUpdateMenuItem={onUpdateMenuItem}
+        onToggleItemStatus={onToggleItemStatus}
+        onBatchToggleStatus={onBatchToggleStatus}
+        onBatchDelete={onBatchDelete}
         displayStyle={displayStyle}
         selectedMenuType={selectedMenuType}
         onMenuTypeChange={onMenuTypeChange}

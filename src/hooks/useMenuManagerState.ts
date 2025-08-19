@@ -80,6 +80,7 @@ export const useMenuManagerState = () => {
   const closeDeleteTypeModal = useCallback(() => setDeletingMenuType(null), []);
 
   const openCreateItemModal = useCallback(() => setShowCreateItemModal(true), []);
+  const openCreateTypeModal = useCallback(() => setShowCreateTypeModal(true), []);
   const openEditItemModal = useCallback((item: MenuItemData) => setEditingItem(item), []);
   const openEditTypeModal = useCallback((type: MenuTypeData) => setEditingMenuType(type), []);
   const openDeleteTypeModal = useCallback((type: MenuTypeData) => setDeletingMenuType(type), []);
@@ -114,6 +115,7 @@ export const useMenuManagerState = () => {
     
     // Модальные окна - открытие
     openCreateItemModal,
+    openCreateTypeModal,
     openEditItemModal,
     openEditTypeModal,
     openDeleteTypeModal

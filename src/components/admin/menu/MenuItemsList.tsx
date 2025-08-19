@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiCompass, FiPlus, FiGrid, FiList, FiCheck, FiX, FiEyeOff, FiTrash2 } from 'react-icons/fi';
-import { MenuItemData } from '../../../types/menu';
-import MenuDragDrop from './MenuDragDrop';
+import { MenuItemData, MenuTypeData } from '../../../types/menu';
+import { MenuItemDragDrop } from './drag-drop';
 import MenuTypesSelector from './MenuTypesSelector';
 import BatchActions, { BatchAction } from '../../ui/BatchActions';
 
@@ -16,11 +16,14 @@ interface MenuItemsListProps {
   onCreateItem: () => void;
   onReorderItems?: (items: MenuItemData[]) => void;
   onUpdateMenuItem?: (id: string, updates: Partial<MenuItemData>) => void;
+  onToggleItemStatus?: (itemId: string, isActive: boolean) => Promise<void>;
+  onBatchToggleStatus?: (itemIds: string[], isActive: boolean) => Promise<void>;
+  onBatchDelete?: (itemIds: string[]) => Promise<void>;
   maxLevel?: number;
   displayStyle?: 'tree' | 'list';
   selectedMenuType?: string;
   onMenuTypeChange?: (menuTypeId: string) => void;
-  menuTypes?: Array<{id: string; name: string; title: string; isActive?: boolean; projectId?: string; createdAt?: string; updatedAt?: string}>;
+  menuTypes?: MenuTypeData[];
   onMenuTypesUpdate?: () => void;
   projectId: string;
   onDisplayStyleChange?: (style: 'tree' | 'list') => void;
@@ -35,6 +38,9 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
   onCreateItem,
   onReorderItems,
   onUpdateMenuItem,
+  onToggleItemStatus,
+  onBatchToggleStatus,
+  onBatchDelete,
   maxLevel = 3,
   displayStyle = 'tree',
   selectedMenuType = '',
@@ -88,22 +94,32 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
     }
   ];
 
-  const handleBatchAction = (actionId: string, itemIds: string[]) => {
-    switch (actionId) {
-      case 'activate':
-        console.log('Активировать пункты:', itemIds);
-        // TODO: Реализовать массовую активацию
-        break;
-      case 'deactivate':
-        console.log('Деактивировать пункты:', itemIds);
-        // TODO: Реализовать массовую деактивацию
-        break;
-      case 'delete':
-        if (confirm(`Вы уверены, что хотите удалить ${itemIds.length} пунктов меню?`)) {
-          console.log('Удалить пункты:', itemIds);
-          // TODO: Реализовать массовое удаление
-        }
-        break;
+  const handleBatchAction = async (actionId: string, itemIds: string[]) => {
+    try {
+      switch (actionId) {
+        case 'activate':
+          if (onBatchToggleStatus) {
+            await onBatchToggleStatus(itemIds, true);
+          }
+          break;
+        case 'deactivate':
+          if (onBatchToggleStatus) {
+            await onBatchToggleStatus(itemIds, false);
+          }
+          break;
+        case 'delete':
+          if (confirm(`Вы уверены, что хотите удалить ${itemIds.length} пунктов меню?`)) {
+            if (onBatchDelete) {
+              await onBatchDelete(itemIds);
+            }
+          }
+          break;
+      }
+      // Очищаем выбор после выполнения действия
+      setSelectedItems([]);
+    } catch (error) {
+      console.error('Ошибка пакетной обработки пунктов меню:', error);
+      alert('Произошла ошибка при выполнении операции');
     }
   };
   
@@ -128,7 +144,7 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
       const maxOrderIndex = Math.max(...rootItems.map(item => item.orderIndex || 0), -1);
       
       onUpdateMenuItem(itemId, {
-        parentId: null,
+        parentId: undefined,
         level: 1,
         orderIndex: maxOrderIndex + 1
       });
@@ -161,22 +177,7 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
 
   return (
     <div>
-      {/* Селектор типа меню с переключателями вида */}
-      <div className="flex items-center gap-4 mb-4">
-        <div className="flex-1">
-          {onMenuTypeChange && onMenuTypesUpdate && (
-            <MenuTypesSelector
-              projectId={projectId}
-              menuTypes={menuTypes}
-              selectedMenuType={selectedMenuType}
-              onMenuTypeChange={onMenuTypeChange}
-              onMenuTypesUpdate={onMenuTypesUpdate}
-            />
-          )}
-        </div>
 
-
-      </div>
 
       {/* Компонент пакетной обработки */}
       <BatchActions
@@ -207,15 +208,21 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
 
       {/* Drag & Drop с бесконечной вложенностью (как в Joomla) */}
       {onReorderItems ? (
-        <MenuDragDrop
-          menuItems={menuItems}
-          onReorderItems={onReorderItems}
+        <MenuItemDragDrop
+          items={menuItems}
+          onReorder={async (reorderedItems) => {
+            // Преобразуем данные для совместимости
+            const updatedItems = reorderedItems.map(item => ({
+              ...menuItems.find(mi => mi.id === item.id)!,
+              orderIndex: item.orderIndex,
+              level: item.level,
+              parentId: item.parentId || undefined
+            }));
+            onReorderItems(updatedItems);
+          }}
           onEditItem={onEditItem}
           onDeleteItem={onDeleteItem}
-          onMakeSubmenu={handleMakeSubmenu}
-          onMakeRoot={handleMakeRoot}
-          maxLevel={maxLevel}
-          displayStyle={displayStyle}
+          onToggleStatus={onToggleItemStatus}
           showSelection={true}
           selectedItems={selectedItems}
           onSelectItem={handleSelectItem}
