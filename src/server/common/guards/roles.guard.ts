@@ -7,8 +7,10 @@ export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    // Dev/Test режим: не блокируем доступ ролями, чтобы не мешать разработке и e2e
-    if (process.env.NODE_ENV !== 'production') {
+    // Test режим: проверяем тестовый токен для e2e тестов
+    const request = context.switchToHttp().getRequest();
+    if (process.env.NODE_ENV === 'test' && 
+        request.headers.authorization === `Bearer ${process.env.AUTH_TEST_TOKEN || 'test-token-12345'}`) {
       return true;
     }
     const requiredRoles = this.reflector.getAllAndOverride<GlobalRole[]>(ROLES_KEY, [
@@ -20,7 +22,6 @@ export class RolesGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    const request = context.switchToHttp().getRequest();
     const user = request.user as any;
 
     // If nothing required, allow

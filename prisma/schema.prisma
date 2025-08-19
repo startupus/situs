@@ -15,7 +15,6 @@ model User {
   username  String   @unique
   email     String   @unique
   password  String
-  role      UserRole @default(BUSINESS)
   globalRole GlobalRole @default(BUSINESS)
   status    UserStatus @default(ACTIVE)
   
@@ -386,12 +385,6 @@ model MenuItem {
 }
 
 // Enums
-enum UserRole {
-  BUSINESS    // Бизнес-пользователь: 1 проект, простой интерфейс
-  AGENCY      // Агентство: много проектов для клиентов
-  ADMIN       // Системный администратор
-}
-
 enum GlobalRole {
   SUPER_ADMIN
   STAFF
