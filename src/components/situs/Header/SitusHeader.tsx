@@ -51,6 +51,14 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
   const sectionTitle = useMemo(() => {
     // Спец-случай: страница продукта Website — показываем "Сайт"
     if (/^\/projects\/[^/]+\/website/.test(location.pathname)) return 'Сайт';
+    // Спец-случай: страница меню — показываем заголовок в зависимости от вкладки
+    if (/^\/projects\/[^/]+\/menus/.test(location.pathname)) {
+      // Пытаемся определить активную вкладку из URL или localStorage
+      const searchParams = new URLSearchParams(location.search);
+      const tab = searchParams.get('tab');
+      if (tab === 'types') return 'Управление типами меню';
+      return 'Управление пунктами меню';
+    }
     if (isProjectPage) return headerProjectName || currentProject?.name || 'Проект';
     const path = location.pathname;
     if (path === '/' || path === '') return 'Панель управления Situs';
@@ -61,9 +69,14 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
     if (path.startsWith('/support')) return 'Поддержка';
     if (path.startsWith('/section-settings')) return 'Настройки';
     return 'Раздел';
-  }, [isProjectPage, headerProjectName, currentProject?.name, location.pathname]);
+  }, [isProjectPage, headerProjectName, currentProject?.name, location.pathname, location.search]);
 
   const backHref = useMemo(() => {
+    // Спец-случай: страница меню — возвращаемся в проект
+    if (/^\/projects\/[^/]+\/menus/.test(location.pathname)) {
+      const match = location.pathname.match(/^\/projects\/([^/]+)/);
+      return match ? `/projects/${match[1]}` : '/projects';
+    }
     if (isProjectPage) return '/projects';
     if (location.pathname !== '/') return '/';
     return undefined;
@@ -185,7 +198,19 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                 {canCreateHere && (
                   <button
                     onClick={() => {
-                      if (location.pathname.startsWith('/projects')) {
+                      if (location.pathname.includes('/menus')) {
+                        // Определяем активную вкладку из URL
+                        const searchParams = new URLSearchParams(location.search);
+                        const tab = searchParams.get('tab');
+                        
+                        if (tab === 'types') {
+                          // На вкладке "Типы меню" создаем тип меню
+                          window.dispatchEvent(new CustomEvent('situs:create-menu-type'));
+                        } else {
+                          // На вкладке "Пункты меню" создаем пункт меню
+                          window.dispatchEvent(new CustomEvent('situs:create-menu-item'));
+                        }
+                      } else if (location.pathname.startsWith('/projects')) {
                         window.dispatchEvent(new CustomEvent('situs:create-project'));
                       }
                     }}

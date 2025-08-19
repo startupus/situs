@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FiEye, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiGrid, FiSmartphone, FiList, FiUser, FiUsers, FiStar, FiInfo, FiChevronDown } from 'react-icons/fi';
 import { MenuItemData } from '../../../types/menu';
 import { useMenuSystemRealtime } from '../../../hooks/useMenuSystemRealtime';
 
@@ -106,10 +107,10 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
           {/* Иконка */}
           {item.component && (
             <span className="text-xs">
-              {item.component === 'Website' ? '🌐' :
-               item.component === 'Store' ? '🛒' :
-               item.component === 'Blog' ? '📝' :
-               item.component === 'Landing' ? '🎯' : '🧩'}
+              {item.component === 'Website' ? <FiGlobe size={14} /> :
+               item.component === 'Store' ? <FiShoppingCart size={14} /> :
+               item.component === 'Blog' ? <FiEdit size={14} /> :
+               item.component === 'Landing' ? <FiTarget size={14} /> : <FiGrid size={14} />}
             </span>
           )}
           
@@ -120,7 +121,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
 
           {/* Индикатор дочерних элементов */}
           {hasChildren && (
-            <span className="text-xs text-gray-500">▼</span>
+            <FiChevronDown size={12} className="text-gray-500" />
           )}
         </div>
 
@@ -138,8 +139,9 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
     <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3">
       {/* Заголовок */}
       <div className="p-4 border-b border-stroke dark:border-dark-3">
-        <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
-          👁️ Предпросмотр меню
+        <h3 className="text-lg font-semibold text-dark dark:text-white mb-2 flex items-center gap-2">
+          <FiEye size={20} />
+          Предпросмотр меню
         </h3>
         <p className="text-sm text-body-color dark:text-dark-6">
           Как меню выглядит для пользователей с разными правами доступа
@@ -159,9 +161,9 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
               onChange={(e) => setPreviewStyle(e.target.value as any)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white"
             >
-              <option value="horizontal">📱 Горизонтальное</option>
-              <option value="vertical">📋 Вертикальное</option>
-              <option value="mobile">📱 Мобильное</option>
+              <option value="horizontal">Горизонтальное</option>
+              <option value="vertical">Вертикальное</option>
+              <option value="mobile">Мобильное</option>
             </select>
           </div>
 
@@ -175,9 +177,9 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
               onChange={(e) => setUserRole(e.target.value as any)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white"
             >
-              <option value="guest">👤 Гость (PUBLIC)</option>
-              <option value="user">👥 Пользователь (REGISTERED)</option>
-              <option value="admin">⭐ Администратор (ALL)</option>
+              <option value="guest">Гость (PUBLIC)</option>
+              <option value="user">Пользователь (REGISTERED)</option>
+              <option value="admin">Администратор (ALL)</option>
             </select>
           </div>
 
@@ -191,10 +193,10 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
               onChange={(e) => setLanguage(e.target.value)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white"
             >
-              <option value="*">🌍 Все языки</option>
-              <option value="ru-RU">🇷🇺 Русский</option>
-              <option value="en-GB">🇬🇧 English</option>
-              <option value="es-ES">🇪🇸 Español</option>
+              <option value="*">Все языки</option>
+              <option value="ru-RU">Русский</option>
+              <option value="en-GB">English</option>
+              <option value="es-ES">Español</option>
             </select>
           </div>
         </div>
@@ -214,7 +216,9 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
       <div className="p-4">
         {filteredItems.length === 0 ? (
           <div className="text-center py-8">
-            <div className="text-4xl mb-4">👁️</div>
+            <div className="text-4xl mb-4 flex justify-center">
+              <FiEye size={64} className="text-body-color dark:text-dark-6" />
+            </div>
             <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
               Меню скрыто
             </h3>
@@ -235,7 +239,9 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
       {/* Информация о предпросмотре */}
       <div className="p-4 bg-gray-50 dark:bg-gray-800 border-t border-stroke dark:border-dark-3">
         <div className="flex items-start gap-3">
-          <div className="text-blue-600 dark:text-blue-400 text-lg">💡</div>
+          <div className="text-blue-600 dark:text-blue-400 text-lg">
+            <FiInfo size={20} />
+          </div>
           <div className="text-sm text-body-color dark:text-dark-6">
             <p className="font-medium mb-1">Предпросмотр обновляется в реальном времени</p>
             <p>Изменения в меню мгновенно отражаются здесь. Проверьте, как меню выглядит для разных ролей пользователей.</p>

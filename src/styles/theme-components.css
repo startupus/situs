@@ -1,0 +1,256 @@
+/* ===== СТАНДАРТНЫЕ КОМПОНЕНТЫ ТЕМЫ ===== */
+/* Базовые компоненты из @react-pro-components-main для единообразия интерфейса */
+
+/* ===== КНОПКИ ===== */
+.btn-primary {
+  @apply rounded-md border border-primary bg-primary p-3 text-center text-base font-medium text-white transition hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply rounded-md border border-stroke dark:border-dark-3 p-3 text-center text-base font-medium text-dark dark:text-white transition hover:border-red-600 hover:bg-red-600 hover:text-white;
+}
+
+.btn-outline {
+  @apply rounded-md border border-primary p-3 text-center text-base font-medium text-primary transition hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-ghost {
+  @apply rounded-md p-3 text-center text-base font-medium text-dark dark:text-white transition hover:bg-gray-2 dark:hover:bg-dark-3;
+}
+
+/* ===== ПОЛЯ ВВОДА ===== */
+.input-field {
+  @apply w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2;
+}
+
+.input-field-with-icon {
+  @apply w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2;
+}
+
+.input-label {
+  @apply mb-[10px] block text-base font-medium text-dark dark:text-white;
+}
+
+.input-error {
+  @apply border-red text-red;
+}
+
+.input-success {
+  @apply border-green text-green;
+}
+
+/* ===== СЕЛЕКТОРЫ ===== */
+.select-wrapper {
+  @apply relative z-20;
+}
+
+.select-field {
+  @apply relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2;
+}
+
+.select-field-with-icon {
+  @apply relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2;
+}
+
+.select-arrow {
+  @apply absolute top-1/2 right-4 z-10 -translate-y-1/2;
+}
+
+.select-icon {
+  @apply absolute top-1/2 left-4 -translate-y-1/2;
+}
+
+/* ===== МОДАЛЬНЫЕ ОКНА ===== */
+.modal-overlay {
+  @apply fixed inset-0 bg-dark/90 flex items-center justify-center z-50 px-4 py-5;
+}
+
+.modal-content {
+  @apply bg-white dark:bg-dark-2 rounded-[20px] w-full max-w-4xl max-h-[90vh] overflow-y-auto;
+}
+
+.modal-header {
+  @apply flex justify-between items-center p-8 pb-6;
+}
+
+.modal-title {
+  @apply text-2xl font-semibold text-dark dark:text-white;
+}
+
+.modal-close-btn {
+  @apply flex items-center justify-center w-8 h-8 rounded-full text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white hover:bg-gray-2 dark:hover:bg-dark-3 transition-colors;
+}
+
+.modal-body {
+  @apply px-8 pb-8;
+}
+
+/* ===== КАРТОЧКИ И БЛОКИ ===== */
+.card {
+  @apply bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3 p-6;
+}
+
+.card-header {
+  @apply flex justify-between items-center mb-4;
+}
+
+.card-title {
+  @apply text-lg font-medium text-dark dark:text-white;
+}
+
+.card-subtitle {
+  @apply text-sm text-body-color dark:text-dark-6;
+}
+
+/* ===== СЕКЦИИ С ИКОНКАМИ ===== */
+.section-primary {
+  @apply border border-primary/20 dark:border-primary/30 rounded-lg p-6 bg-primary/5 dark:bg-primary/10 mb-6;
+}
+
+.section-header {
+  @apply flex items-center gap-2 mb-4;
+}
+
+.section-title {
+  @apply text-lg font-medium text-dark dark:text-white;
+}
+
+.section-icon {
+  @apply text-primary;
+}
+
+/* ===== СПИСКИ ===== */
+.list-item {
+  @apply flex items-center justify-between p-4 border border-stroke dark:border-dark-3 rounded-lg;
+}
+
+.list-item-content {
+  @apply flex-1;
+}
+
+.list-item-title {
+  @apply font-medium text-dark dark:text-white;
+}
+
+.list-item-subtitle {
+  @apply text-sm text-body-color dark:text-dark-6;
+}
+
+.list-item-actions {
+  @apply flex items-center gap-2;
+}
+
+/* ===== ВКЛАДКИ ===== */
+.tabs-container {
+  @apply flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit;
+}
+
+.tab-button {
+  @apply flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors;
+}
+
+.tab-button-active {
+  @apply bg-primary text-white;
+}
+
+.tab-button-inactive {
+  @apply text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white;
+}
+
+/* ===== ПЕРЕКЛЮЧАТЕЛИ ВИДА ===== */
+.view-switcher {
+  @apply inline-flex rounded-md border border-stroke dark:border-dark-3 overflow-hidden;
+}
+
+.view-button {
+  @apply p-2 transition-colors;
+}
+
+.view-button-active {
+  @apply bg-primary text-white;
+}
+
+.view-button-inactive {
+  @apply text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-3;
+}
+
+/* ===== СОСТОЯНИЯ ЗАГРУЗКИ ===== */
+.loading-state {
+  @apply text-center py-12 border border-stroke dark:border-dark-3 rounded-lg;
+}
+
+.loading-icon {
+  @apply text-6xl mb-4 flex justify-center text-body-color dark:text-dark-6;
+}
+
+.loading-title {
+  @apply text-lg font-medium text-dark dark:text-white mb-2;
+}
+
+.loading-subtitle {
+  @apply text-body-color dark:text-dark-6;
+}
+
+/* ===== ИНФОРМАЦИОННЫЕ БЛОКИ ===== */
+.info-block {
+  @apply p-4 bg-white dark:bg-dark-3 rounded-lg border border-stroke dark:border-dark-3;
+}
+
+.info-header {
+  @apply flex items-center gap-2 mb-2;
+}
+
+.info-title {
+  @apply text-dark dark:text-white font-medium;
+}
+
+.info-content {
+  @apply text-sm text-body-color dark:text-dark-6 space-y-1;
+}
+
+/* ===== СЕТКИ ===== */
+.grid-2 {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+}
+
+.grid-3 {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-6;
+}
+
+.grid-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+/* ===== УТИЛИТЫ ===== */
+.text-primary {
+  @apply text-primary;
+}
+
+.text-secondary {
+  @apply text-body-color dark:text-dark-6;
+}
+
+.text-muted {
+  @apply text-body-color dark:text-dark-6;
+}
+
+.bg-primary-light {
+  @apply bg-primary/5 dark:bg-primary/10;
+}
+
+.border-primary-light {
+  @apply border-primary/20 dark:border-primary/30;
+}
+
+/* ===== АНИМАЦИИ ===== */
+.fade-in {
+  @apply animate-in fade-in duration-200;
+}
+
+.slide-in {
+  @apply animate-in slide-in-from-bottom-2 duration-300;
+}
+
+.scale-in {
+  @apply animate-in zoom-in-95 duration-200;
+}

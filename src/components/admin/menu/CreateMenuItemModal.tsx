@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuItemData, CreateMenuItemRequest } from '../../../types/menu';
+import { FiX, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiChevronDown, FiInfo } from 'react-icons/fi';
 
 /**
  * Модальное окно создания пункта меню
@@ -11,6 +12,15 @@ interface CreateMenuItemModalProps {
   onClose: () => void;
   onCreate: (data: CreateMenuItemRequest) => void;
 }
+
+interface ViewOption {
+  value: string;
+  label: string;
+  description: string;
+  component: string;
+}
+
+
 
 const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
   menuTypeId,
@@ -25,6 +35,32 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
     level: 1,
     menuTypeId
   });
+
+  // Данные для селекторов View
+  const viewOptions: ViewOption[] = [
+    // Website
+    { value: 'page', label: 'Страница', description: 'Отдельная страница сайта', component: 'Website' },
+    { value: 'home', label: 'Главная страница', description: 'Домашняя страница', component: 'Website' },
+    { value: 'about', label: 'О нас', description: 'Страница о компании', component: 'Website' },
+    { value: 'contacts', label: 'Контакты', description: 'Страница контактов', component: 'Website' },
+    
+    // Store
+    { value: 'categories', label: 'Список категорий', description: 'Каталог товаров', component: 'Store' },
+    { value: 'category', label: 'Категория товаров', description: 'Конкретная категория', component: 'Store' },
+    { value: 'product', label: 'Товар', description: 'Страница товара', component: 'Store' },
+    { value: 'cart', label: 'Корзина', description: 'Корзина покупок', component: 'Store' },
+    
+    // Blog
+    { value: 'list', label: 'Список статей', description: 'Лента новостей/блога', component: 'Blog' },
+    { value: 'article', label: 'Статья', description: 'Отдельная статья', component: 'Blog' },
+    { value: 'category', label: 'Категория статей', description: 'Статьи по категории', component: 'Blog' },
+    
+    // Landing
+    { value: 'page', label: 'Лендинг', description: 'Посадочная страница', component: 'Landing' },
+    { value: 'form', label: 'Форма', description: 'Страница с формой', component: 'Landing' }
+  ];
+
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,29 +120,34 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
     }
   };
 
+  // Фильтрация опций View по выбранному компоненту
+  const getFilteredViewOptions = () => {
+    if (!formData.component) return [];
+    return viewOptions.filter(option => option.component === formData.component);
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium text-dark dark:text-white">
+    <div className="fixed inset-0 bg-dark/90 flex items-center justify-center z-50 px-4 py-5">
+      <div className="bg-white dark:bg-dark-2 rounded-[20px] w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        {/* Заголовок модала */}
+        <div className="flex justify-between items-center p-8 pb-6">
+          <h3 className="text-2xl font-semibold text-dark dark:text-white">
             Создать пункт меню
           </h3>
           <button
             onClick={onClose}
-            className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white"
+            className="flex items-center justify-center w-8 h-8 rounded-full text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white hover:bg-gray-2 dark:hover:bg-dark-3 transition-colors"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+            <FiX size={20} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="px-8 pb-8">
           {/* Основные поля */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Название */}
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+              <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                 Название пункта меню *
               </label>
               <input
@@ -120,156 +161,212 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
                     alias: generateAlias(title)
                   }));
                 }}
-                className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
+                className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 placeholder="Введите название"
               />
             </div>
 
             {/* Alias */}
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+              <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                 Alias (URL) *
               </label>
               <input
                 type="text"
                 value={formData.alias || ''}
                 onChange={(e) => setFormData(prev => ({ ...prev, alias: e.target.value }))}
-                className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
+                className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 placeholder="url-alias"
               />
             </div>
           </div>
 
           {/* Тип и иерархия */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Тип пункта меню */}
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+              <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                 Тип пункта
               </label>
-              <select
-                value={formData.type || 'COMPONENT'}
-                onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value as any }))}
-                className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-              >
-                <option value="COMPONENT">🧩 Компонент</option>
-                <option value="URL">🔗 Внешняя ссылка</option>
-                <option value="HEADING">📂 Заголовок группы</option>
-                <option value="SEPARATOR">➖ Разделитель</option>
-              </select>
+              <div className="relative z-20">
+                <select 
+                  value={formData.type || 'COMPONENT'}
+                  onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value as any }))}
+                  className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                >
+                  <option value="COMPONENT" className="dark:bg-dark-2">Компонент</option>
+                  <option value="URL" className="dark:bg-dark-2">Внешняя ссылка</option>
+                  <option value="HEADING" className="dark:bg-dark-2">Заголовок группы</option>
+                  <option value="SEPARATOR" className="dark:bg-dark-2">Разделитель</option>
+                </select>
+                <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                  <FiChevronDown size={20} className="text-body-color" />
+                </span>
+              </div>
             </div>
 
             {/* Родительский пункт */}
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+              <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                 Родительский пункт
               </label>
-              <select
-                value={formData.parentId || ''}
-                onChange={(e) => {
-                  const parentId = e.target.value || undefined;
-                  const parent = parentItems.find(item => item.id === parentId);
-                  setFormData(prev => ({ 
-                    ...prev, 
-                    parentId,
-                    level: parent ? parent.level + 1 : 1
-                  }));
-                }}
-                className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-              >
-                <option value="">Корневой уровень</option>
-                {parentItems.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {'  '.repeat(item.level - 1)}📁 {item.title} (Level {item.level})
-                  </option>
-                ))}
-              </select>
+              <div className="relative z-20">
+                <select
+                  value={formData.parentId || ''}
+                  onChange={(e) => {
+                    const parentId = e.target.value || undefined;
+                    const parent = parentItems.find(item => item.id === parentId);
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      parentId,
+                      level: parent ? parent.level + 1 : 1
+                    }));
+                  }}
+                  className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                >
+                  <option value="" className="dark:bg-dark-2">Корневой уровень</option>
+                  {parentItems.map((item) => (
+                    <option key={item.id} value={item.id} className="dark:bg-dark-2">
+                      {'  '.repeat(item.level - 1)}{item.title} (Level {item.level})
+                    </option>
+                  ))}
+                </select>
+                <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                  <FiChevronDown size={20} className="text-body-color" />
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Настройки компонента (если тип COMPONENT) */}
           {formData.type === 'COMPONENT' && (
-            <div className="border border-blue-200 dark:border-blue-800 rounded-lg p-4 bg-blue-50 dark:bg-blue-900/20">
-              <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-3">
-                🧩 Настройки компонента
-              </h4>
+            <div className="border border-primary/20 dark:border-primary/30 rounded-lg p-6 bg-primary/5 dark:bg-primary/10 mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <FiTarget className="text-primary" size={20} />
+                <h4 className="text-lg font-medium text-dark dark:text-white">
+                  Настройки компонента
+                </h4>
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Компонент */}
                 <div>
-                  <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+                  <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                     Компонент *
                   </label>
-                  <select
-                    value={formData.component || ''}
-                    onChange={(e) => {
-                      const component = e.target.value;
-                      const defaults = getComponentDefaults(component);
-                      setFormData(prev => ({ 
-                        ...prev, 
-                        component,
-                        ...defaults
-                      }));
-                    }}
-                    className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                  >
-                    <option value="">Выберите компонент</option>
-                    <option value="Website">🌐 Website</option>
-                    <option value="Store">🛒 Store</option>
-                    <option value="Blog">📝 Blog</option>
-                    <option value="Landing">🎯 Landing</option>
-                  </select>
+                  <div className="relative z-20">
+                    <span className="absolute top-1/2 left-4 -translate-y-1/2">
+                      {formData.component === 'Website' && <FiGlobe className="text-body-color" size={16} />}
+                      {formData.component === 'Store' && <FiShoppingCart className="text-body-color" size={16} />}
+                      {formData.component === 'Blog' && <FiEdit className="text-body-color" size={16} />}
+                      {formData.component === 'Landing' && <FiTarget className="text-body-color" size={16} />}
+                    </span>
+                    <select
+                      value={formData.component || ''}
+                      onChange={(e) => {
+                        const component = e.target.value;
+                        const defaults = getComponentDefaults(component);
+                        setFormData(prev => ({ 
+                          ...prev, 
+                          component,
+                          view: '',
+                          targetId: '',
+                          ...defaults
+                        }));
+                      }}
+                      className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                    >
+                      <option value="" className="dark:bg-dark-2">Выберите компонент</option>
+                      <option value="Website" className="dark:bg-dark-2">Website</option>
+                      <option value="Store" className="dark:bg-dark-2">Store</option>
+                      <option value="Blog" className="dark:bg-dark-2">Blog</option>
+                      <option value="Landing" className="dark:bg-dark-2">Landing</option>
+                    </select>
+                    <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                      <FiChevronDown size={20} className="text-body-color" />
+                    </span>
+                  </div>
                 </div>
 
                 {/* View */}
                 <div>
-                  <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+                  <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                     View *
                   </label>
-                  <input
-                    type="text"
-                    value={formData.view || ''}
-                    onChange={(e) => setFormData(prev => ({ ...prev, view: e.target.value }))}
-                    className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                    placeholder="page, category, list..."
-                  />
+                  <div className="relative z-20">
+                    <select
+                      value={formData.view || ''}
+                      onChange={(e) => setFormData(prev => ({ ...prev, view: e.target.value, targetId: '' }))}
+                      className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                      disabled={!formData.component}
+                    >
+                      <option value="" className="dark:bg-dark-2">
+                        {formData.component ? 'Выберите view' : 'Сначала выберите компонент'}
+                      </option>
+                      {getFilteredViewOptions().map((option) => (
+                        <option key={option.value} value={option.value} className="dark:bg-dark-2">
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                      <FiChevronDown size={20} className="text-body-color" />
+                    </span>
+                  </div>
+                  {formData.view && (
+                    <p className="mt-2 text-sm text-body-color dark:text-dark-6">
+                      {getFilteredViewOptions().find(opt => opt.value === formData.view)?.description}
+                    </p>
+                  )}
                 </div>
 
-                {/* Target ID */}
+                {/* Параметры */}
                 <div>
-                  <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                    Target ID
+                  <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
+                    Параметры
                   </label>
                   <input
                     type="text"
                     value={formData.targetId || ''}
                     onChange={(e) => setFormData(prev => ({ ...prev, targetId: e.target.value }))}
-                    className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                    placeholder="ID страницы, категории..."
+                    className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                    placeholder="Дополнительные параметры (опционально)"
                   />
+                  <p className="mt-2 text-sm text-body-color dark:text-dark-6">
+                    Дополнительные параметры для компонента (например: id=123, category=news)
+                  </p>
                 </div>
               </div>
 
               {/* Подсказки по компоненту */}
               {formData.component && (
-                <div className="mt-3 p-3 bg-white dark:bg-dark-3 rounded border text-xs text-body-color dark:text-dark-6">
-                  <strong>Подсказки для {formData.component}:</strong>
+                <div className="mt-4 p-4 bg-white dark:bg-dark-3 rounded-lg border border-stroke dark:border-dark-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FiInfo size={16} className="text-primary" />
+                    <strong className="text-dark dark:text-white">Подсказки для {formData.component}:</strong>
+                  </div>
                   {formData.component === 'Website' && (
-                    <ul className="mt-1 space-y-1">
-                      <li>• view: page (отдельная страница)</li>
-                      <li>• targetId: slug страницы (home, about, contacts)</li>
+                    <ul className="text-sm text-body-color dark:text-dark-6 space-y-1">
+                      <li>• <strong>View:</strong> page (отдельная страница), home (главная)</li>
+                      <li>• <strong>Параметры:</strong> slug=about, id=123</li>
                     </ul>
                   )}
                   {formData.component === 'Store' && (
-                    <ul className="mt-1 space-y-1">
-                      <li>• view: categories (список категорий), category (конкретная категория)</li>
-                      <li>• targetId: ID категории или пустое для списка</li>
+                    <ul className="text-sm text-body-color dark:text-dark-6 space-y-1">
+                      <li>• <strong>View:</strong> categories (список), category (конкретная категория)</li>
+                      <li>• <strong>Параметры:</strong> category_id=5, featured=true</li>
                     </ul>
                   )}
                   {formData.component === 'Blog' && (
-                    <ul className="mt-1 space-y-1">
-                      <li>• view: list (список статей), article (конкретная статья)</li>
-                      <li>• targetId: slug категории или ID статьи</li>
+                    <ul className="text-sm text-body-color dark:text-dark-6 space-y-1">
+                      <li>• <strong>View:</strong> list (список статей), article (статья)</li>
+                      <li>• <strong>Параметры:</strong> category=news, limit=10</li>
+                    </ul>
+                  )}
+                  {formData.component === 'Landing' && (
+                    <ul className="text-sm text-body-color dark:text-dark-6 space-y-1">
+                      <li>• <strong>View:</strong> page (лендинг), form (форма)</li>
+                      <li>• <strong>Параметры:</strong> template=modern, theme=dark</li>
                     </ul>
                   )}
                 </div>
@@ -279,19 +376,22 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
 
           {/* Внешняя ссылка (если тип URL) */}
           {formData.type === 'URL' && (
-            <div className="border border-green-200 dark:border-green-800 rounded-lg p-4 bg-green-50 dark:bg-green-900/20">
-              <h4 className="font-medium text-green-800 dark:text-green-200 mb-3">
-                🔗 Внешняя ссылка
-              </h4>
+            <div className="border border-primary/20 dark:border-primary/30 rounded-lg p-6 bg-primary/5 dark:bg-primary/10 mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <FiGlobe className="text-primary" size={20} />
+                <h4 className="text-lg font-medium text-dark dark:text-white">
+                  Внешняя ссылка
+                </h4>
+              </div>
               <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+                <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                   URL адрес *
                 </label>
                 <input
                   type="url"
                   value={formData.externalUrl || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, externalUrl: e.target.value }))}
-                  className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
+                  className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                   placeholder="https://example.com"
                 />
               </div>
@@ -299,89 +399,100 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
           )}
 
           {/* Права доступа и язык */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Права доступа */}
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+              <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                 Уровень доступа
               </label>
-              <select
-                value={formData.accessLevel || 'PUBLIC'}
-                onChange={(e) => setFormData(prev => ({ ...prev, accessLevel: e.target.value as any }))}
-                className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-              >
-                <option value="PUBLIC">🌐 Публичный (все пользователи)</option>
-                <option value="REGISTERED">👤 Зарегистрированные</option>
-                <option value="SPECIAL">⭐ Специальный (админы)</option>
-                <option value="CUSTOM">🔧 Пользовательский</option>
-              </select>
+              <div className="relative z-20">
+                <select
+                  value={formData.accessLevel || 'PUBLIC'}
+                  onChange={(e) => setFormData(prev => ({ ...prev, accessLevel: e.target.value as any }))}
+                  className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                >
+                  <option value="PUBLIC" className="dark:bg-dark-2">Публичный (все пользователи)</option>
+                  <option value="REGISTERED" className="dark:bg-dark-2">Зарегистрированные</option>
+                  <option value="SPECIAL" className="dark:bg-dark-2">Специальный (админы)</option>
+                  <option value="CUSTOM" className="dark:bg-dark-2">Пользовательский</option>
+                </select>
+                <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                  <FiChevronDown size={20} className="text-body-color" />
+                </span>
+              </div>
             </div>
 
             {/* Язык */}
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+              <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                 Язык
               </label>
-              <select
-                value={formData.language || '*'}
-                onChange={(e) => setFormData(prev => ({ ...prev, language: e.target.value }))}
-                className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-              >
-                <option value="*">🌍 Все языки</option>
-                <option value="ru-RU">🇷🇺 Русский</option>
-                <option value="en-GB">🇬🇧 English</option>
-                <option value="es-ES">🇪🇸 Español</option>
-              </select>
+              <div className="relative z-20">
+                <select
+                  value={formData.language || '*'}
+                  onChange={(e) => setFormData(prev => ({ ...prev, language: e.target.value }))}
+                  className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+                >
+                  <option value="*" className="dark:bg-dark-2">Все языки</option>
+                  <option value="ru-RU" className="dark:bg-dark-2">Русский</option>
+                  <option value="en-GB" className="dark:bg-dark-2">English</option>
+                  <option value="es-ES" className="dark:bg-dark-2">Español</option>
+                </select>
+                <span className="absolute top-1/2 right-4 z-10 -translate-y-1/2">
+                  <FiChevronDown size={20} className="text-body-color" />
+                </span>
+              </div>
             </div>
           </div>
 
           {/* SEO поля (дополнительно) */}
-          <details className="border border-gray-200 dark:border-gray-700 rounded-lg">
-            <summary className="p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-dark-3 font-medium text-dark dark:text-white">
-              🔍 SEO настройки (опционально)
+          <details className="border border-stroke dark:border-dark-3 rounded-lg mb-6">
+            <summary className="p-4 cursor-pointer hover:bg-gray-2 dark:hover:bg-dark-3 font-medium text-dark dark:text-white flex items-center gap-2">
+              <FiTarget size={16} className="text-primary" />
+              SEO настройки (опционально)
             </summary>
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-3">
+            <div className="p-4 border-t border-stroke dark:border-dark-3 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+                <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                   Meta Title
                 </label>
                 <input
                   type="text"
                   value={formData.metaTitle || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, metaTitle: e.target.value }))}
-                  className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
+                  className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                   placeholder="Заголовок для поисковых систем"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+                <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
                   Meta Description
                 </label>
                 <textarea
                   value={formData.metaDescription || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, metaDescription: e.target.value }))}
-                  className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
+                  className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                   placeholder="Описание для поисковых систем"
-                  rows={2}
+                  rows={3}
                 />
               </div>
             </div>
           </details>
 
           {/* Кнопки */}
-          <div className="flex gap-3 pt-4">
+          <div className="flex gap-4 pt-6">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-stroke dark:border-dark-3 rounded-lg text-dark dark:text-white hover:bg-gray-50 dark:hover:bg-dark-3 transition-colors"
+              className="flex-1 rounded-md border border-stroke dark:border-dark-3 p-3 text-center text-base font-medium text-dark dark:text-white transition hover:border-red-600 hover:bg-red-600 hover:text-white"
             >
               Отмена
             </button>
             <button
               type="submit"
               disabled={!formData.title || !formData.alias}
-              className="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 rounded-md border border-primary bg-primary p-3 text-center text-base font-medium text-white transition hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Создать пункт
             </button>

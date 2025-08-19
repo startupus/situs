@@ -24,40 +24,10 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   async onModuleInit() {
     console.log('[Prisma] onModuleInit start');
     try {
-      // Уменьшенные таймауты для dev-режима, чтобы избежать зависания
-      const connectTimeout = process.env.NODE_ENV === 'production' ? 10000 : 3000;
-      
-      await Promise.race([
-        this.$connect(),
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('DB connect timeout')), connectTimeout)
-        )
-      ]);
-      
+      await this.$connect();
       console.log('✅ Подключение к базе данных установлено');
-
-      // Dev-seed: не блокируем запуск приложения. Выполняем best-effort без await.
-      if (process.env.NODE_ENV !== 'production') {
-        setImmediate(async () => {
-          try {
-            const devEmail = 'dev@situs.local';
-            await this.user.upsert({
-              where: { email: devEmail },
-              update: {},
-              create: { username: 'dev', email: devEmail, password: 'dev' },
-            });
-            console.log('👤 dev-пользователь готов (best-effort)');
-          } catch (e: any) {
-            console.warn('⚠️ Не удалось создать dev-пользователя (не критично):', (e && (e.message || e)));
-          }
-        });
-      }
     } catch (error: any) {
-      console.error('❌ Ошибка подключения к базе данных:', (error && (error.message || error)));
-      // В dev-режиме не блокируем запуск: API/health должны быть доступны
-      if (process.env.NODE_ENV === 'production') {
-        throw error;
-      }
+      console.warn('⚠️ Ошибка подключения к базе данных (не критично):', (error && (error.message || error)));
     }
     console.log('[Prisma] onModuleInit end');
   }
