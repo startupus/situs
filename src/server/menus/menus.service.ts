@@ -49,7 +49,13 @@ export class MenusService {
     return menuType;
   }
 
-  async findMenuTypes(projectId: string): Promise<MenuType[]> {
+  async findMenuTypes(projectIdOrSlug: string): Promise<MenuType[]> {
+    let projectId = projectIdOrSlug;
+    // Если пришёл slug — резолвим в id
+    if (!projectIdOrSlug.startsWith('c')) {
+      const project = await this.prisma.project.findUnique({ where: { slug: projectIdOrSlug }, select: { id: true } });
+      if (project) projectId = project.id;
+    }
     return this.prisma.menuType.findMany({
       where: { projectId },
       include: {

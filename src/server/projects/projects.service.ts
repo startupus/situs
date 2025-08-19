@@ -98,9 +98,10 @@ export class ProjectsService {
   /**
    * Получение проекта по ID
    */
-  async findOne(id: string) {
-    const project = await this.prisma.project.findUnique({
-      where: { id },
+  async findOne(idOrSlug: string) {
+    // Сначала пробуем как ID
+    let project = await this.prisma.project.findUnique({
+      where: { id: idOrSlug },
       select: {
         id: true,
         name: true,
@@ -119,6 +120,30 @@ export class ProjectsService {
         _count: { select: { products: true } },
       },
     });
+
+    // Если по ID не нашли — пробуем как slug
+    if (!project) {
+      project = await this.prisma.project.findUnique({
+        where: { slug: idOrSlug },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          slug: true,
+          domain: true,
+          customDomain: true,
+          isPublished: true,
+          settings: true,
+          theme: true,
+          ownerId: true,
+          status: true,
+          createdAt: true,
+          updatedAt: true,
+          products: { select: { id: true, type: true, status: true } },
+          _count: { select: { products: true } },
+        },
+      });
+    }
 
     if (!project) {
       throw new NotFoundException('Проект не найден');

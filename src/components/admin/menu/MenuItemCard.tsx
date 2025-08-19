@@ -1,5 +1,7 @@
 import React from 'react';
 import { MenuItemData } from '../../../types/menu';
+import { FiBox, FiLink, FiFolder, FiMinus, FiHelpCircle, FiGlobe, FiEdit, FiTrash2 } from 'react-icons/fi';
+import ToggleSwitch from '../../ui/ToggleSwitch';
 
 /**
  * Компонент карточки пункта меню
@@ -11,6 +13,9 @@ interface MenuItemCardProps {
   onEdit: (item: MenuItemData) => void;
   onDelete: (itemId: string) => void;
   children?: React.ReactNode; // Для дочерних пунктов
+  isSelected?: boolean;
+  onSelect?: (itemId: string, selected: boolean) => void;
+  showSelection?: boolean;
 }
 
 const MenuItemCard: React.FC<MenuItemCardProps> = ({
@@ -18,16 +23,19 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
   level,
   onEdit,
   onDelete,
-  children
+  children,
+  isSelected = false,
+  onSelect,
+  showSelection = false
 }) => {
   // Получение иконки по типу пункта меню
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'COMPONENT': return '🧩';
-      case 'URL': return '🔗';
-      case 'HEADING': return '📂';
-      case 'SEPARATOR': return '➖';
-      default: return '❓';
+      case 'COMPONENT': return <FiBox size={16} className="text-primary" />;
+      case 'URL': return <FiLink size={16} className="text-primary" />;
+      case 'HEADING': return <FiFolder size={16} className="text-primary" />;
+      case 'SEPARATOR': return <FiMinus size={16} className="text-primary" />;
+      default: return <FiHelpCircle size={16} className="text-primary" />;
     }
   };
 
@@ -48,6 +56,16 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3">
+              {/* Чекбокс выбора */}
+              {showSelection && onSelect && (
+                <input
+                  type="checkbox"
+                  checked={isSelected}
+                  onChange={(e) => onSelect(item.id, e.target.checked)}
+                  className="w-4 h-4 text-primary bg-transparent border-2 border-stroke dark:border-dark-3 rounded focus:ring-primary focus:ring-2"
+                />
+              )}
+              
               {/* Иконка по типу пункта меню */}
               <span className="text-lg" title={`Тип: ${item.type}`}>
                 {getTypeIcon(item.type)}
@@ -106,8 +124,9 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                     </span>
                   )}
                   
-                  <span className="text-gray-500 dark:text-gray-400">
-                    {item.language === '*' ? '🌍' : item.language}
+                  <span className="text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                    <FiGlobe size={12} />
+                    {item.language === '*' ? 'Все языки' : item.language}
                   </span>
                 </div>
 
@@ -129,20 +148,31 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
           </div>
           
           {/* Действия */}
-          <div className="flex gap-2 ml-4">
+          <div className="flex items-center gap-2 ml-4">
+            {/* Тумблер активности */}
+            <ToggleSwitch
+              checked={item.isPublished ?? true}
+              onChange={(checked) => {
+                // TODO: Реализовать изменение статуса пункта меню
+                console.log('Toggle menu item status:', item.id, checked);
+              }}
+              size="sm"
+            />
+            
             <button
               onClick={() => onEdit(item)}
-              className="text-primary hover:text-primary/80 text-sm px-3 py-1 rounded border border-primary/20 hover:bg-primary/5 transition-colors"
+              className="text-primary hover:text-primary/80 text-sm px-3 py-1 rounded border border-primary/20 hover:bg-primary/5 transition-colors flex items-center gap-1"
               title="Редактировать пункт меню"
             >
-              ✏️
+              <FiEdit size={14} />
             </button>
+            
             <button
               onClick={() => onDelete(item.id)}
-              className="text-red-600 hover:text-red-700 dark:text-red-400 text-sm px-3 py-1 rounded border border-red-200 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+              className="text-red-600 hover:text-red-700 dark:text-red-400 text-sm px-3 py-1 rounded border border-red-200 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-1"
               title="Удалить пункт меню"
             >
-              🗑️
+              <FiTrash2 size={14} />
             </button>
           </div>
         </div>

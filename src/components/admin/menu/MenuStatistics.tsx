@@ -1,5 +1,6 @@
 import React from 'react';
 import { MenuItemData } from '../../../types/menu';
+import { FiBox, FiLink, FiFolder, FiMinus, FiGlobe, FiUsers, FiStar, FiSettings } from 'react-icons/fi';
 
 /**
  * Компонент статистики меню
@@ -93,10 +94,16 @@ const MenuStatistics: React.FC<MenuStatisticsProps> = ({
               {Object.entries(typeStats).map(([type, count]) => (
                 <div key={type} className="flex justify-between items-center">
                   <span className="text-gray-600 dark:text-gray-400">
-                    {type === 'COMPONENT' ? '🧩 Компонент' :
-                     type === 'URL' ? '🔗 Ссылка' :
-                     type === 'HEADING' ? '📂 Заголовок' :
-                     type === 'SEPARATOR' ? '➖ Разделитель' : type}:
+                    <span className="flex items-center gap-1">
+                      {type === 'COMPONENT' ? <FiBox size={14} /> :
+                       type === 'URL' ? <FiLink size={14} /> :
+                       type === 'HEADING' ? <FiFolder size={14} /> :
+                       type === 'SEPARATOR' ? <FiMinus size={14} /> : null}
+                      {type === 'COMPONENT' ? 'Компонент' :
+                       type === 'URL' ? 'Ссылка' :
+                       type === 'HEADING' ? 'Заголовок' :
+                       type === 'SEPARATOR' ? 'Разделитель' : type}:
+                    </span>
                   </span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">{count}</span>
                 </div>
@@ -109,10 +116,16 @@ const MenuStatistics: React.FC<MenuStatisticsProps> = ({
               {Object.entries(accessStats).map(([access, count]) => (
                 <div key={access} className="flex justify-between items-center">
                   <span className="text-gray-600 dark:text-gray-400">
-                    {access === 'PUBLIC' ? '🌐 Публичный' :
-                     access === 'REGISTERED' ? '👤 Зарегистрированные' :
-                     access === 'SPECIAL' ? '⭐ Специальный' :
-                     access === 'CUSTOM' ? '🔧 Пользовательский' : access}:
+                    <span className="flex items-center gap-1">
+                      {access === 'PUBLIC' ? <FiGlobe size={14} /> :
+                       access === 'REGISTERED' ? <FiUsers size={14} /> :
+                       access === 'SPECIAL' ? <FiStar size={14} /> :
+                       access === 'CUSTOM' ? <FiSettings size={14} /> : null}
+                      {access === 'PUBLIC' ? 'Публичный' :
+                       access === 'REGISTERED' ? 'Зарегистрированные' :
+                       access === 'SPECIAL' ? 'Специальный' :
+                       access === 'CUSTOM' ? 'Пользовательский' : access}:
+                    </span>
                   </span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">{count}</span>
                 </div>
@@ -130,9 +143,12 @@ const MenuStatistics: React.FC<MenuStatisticsProps> = ({
               ).map(([language, count]) => (
                 <div key={language} className="flex justify-between items-center">
                   <span className="text-gray-600 dark:text-gray-400">
-                    {language === '*' ? '🌍 Все языки' :
-                     language === 'ru-RU' ? '🇷🇺 Русский' :
-                     language === 'en-GB' ? '🇬🇧 English' : language}:
+                    <span className="flex items-center gap-1">
+                      <FiGlobe size={14} />
+                      {language === '*' ? 'Все языки' :
+                       language === 'ru-RU' ? 'Русский' :
+                       language === 'en-GB' ? 'English' : language}:
+                    </span>
                   </span>
                   <span className="font-medium text-gray-800 dark:text-gray-200">{count}</span>
                 </div>

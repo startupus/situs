@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { MenuTypeData, MenuItemData, CreateMenuItemRequest } from '../../types/menu';
+import { MenuItemData, CreateMenuItemRequest, CreateMenuTypeRequest } from '../../types/menu';
 import { useMenuSystemRealtime } from '../../hooks/useMenuSystemRealtime';
-import MenuTypesSelector from './menu/MenuTypesSelector';
-import MenuStatistics from './menu/MenuStatistics';
-import MenuItemsList from './menu/MenuItemsList';
-import MenuItemDragDrop from './menu/MenuItemDragDrop';
-import MenuPreview from './menu/MenuPreview';
-import CreateMenuItemModal from './menu/CreateMenuItemModal';
-import EditMenuItemModal from './menu/EditMenuItemModal';
+import { useMenuAPI } from '../../hooks/useMenuAPI';
+import { useMenuManagerState } from '../../hooks/useMenuManagerState';
+import { FiList, FiGrid } from 'react-icons/fi';
+import MenuTypesTab from './menu/MenuTypesTab';
+import MenuItemsTab from './menu/MenuItemsTab';
+import MenuManagerModals from './menu/MenuManagerModals';
 
 /**
  * Главный компонент управления меню проекта
@@ -16,11 +15,11 @@ import EditMenuItemModal from './menu/EditMenuItemModal';
  */
 const MenuManager: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  const [selectedMenuType, setSelectedMenuType] = useState<string>('');
-  const [showCreateItemModal, setShowCreateItemModal] = useState(false);
-  const [editingItem, setEditingItem] = useState<MenuItemData | null>(null);
-  const [viewMode, setViewMode] = useState<'list' | 'dragdrop' | 'preview'>('list');
-
+  
+  // Используем новые хуки для разделения логики
+  const menuState = useMenuManagerState();
+  const menuAPI = useMenuAPI(projectId!);
+  
   // Используем real-time хук для автоматической синхронизации
   const { 
     menuTypes, 
@@ -30,86 +29,147 @@ const MenuManager: React.FC = () => {
     lastUpdate,
     loadMenuTypes,
     loadMenuItems 
-  } = useMenuSystemRealtime(projectId!, selectedMenuType);
+  } = useMenuSystemRealtime(projectId!, menuState.selectedMenuType);
 
   // Автоматический выбор главного меню при загрузке
   useEffect(() => {
-    if (menuTypes.length > 0 && !selectedMenuType) {
-      const mainMenu = menuTypes.find((mt: MenuTypeData) => mt.name === 'main');
-      if (mainMenu) {
-        setSelectedMenuType(mainMenu.id);
-      }
+    menuState.autoSelectMainMenu(menuTypes);
+  }, [menuTypes, menuState]);
+
+  // Загрузка всех пунктов при загрузке типов меню
+  useEffect(() => {
+    if (menuTypes.length > 0) {
+      menuAPI.loadAllMenuItems()
+        .then(items => menuState.setAllMenuItems(items))
+        .catch(error => console.error('Ошибка загрузки всех пунктов меню:', error));
     }
-  }, [menuTypes, selectedMenuType]);
+  }, [menuTypes, menuAPI, menuState]);
 
+  // ==================== ОБРАБОТЧИКИ API С ИНТЕГРАЦИЕЙ SSE ====================
 
-
-  // Создание пункта меню (SSE автоматически обновит список)
+  // Создание пункта меню
   const handleCreateMenuItem = async (data: CreateMenuItemRequest) => {
     try {
-      const response = await fetch('http://localhost:3002/api/menu-items', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+      await menuAPI.handleCreateMenuItem(data);
+      menuState.closeCreateItemModal();
+      // SSE событие автоматически обновит список пунктов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка создания пункта меню');
+    }
+  };
 
-      const result = await response.json();
-      if (result.success) {
-        setShowCreateItemModal(false);
-        // SSE событие автоматически обновит список пунктов меню
-      } else {
-        alert(result.error || 'Ошибка создания пункта меню');
-      }
-    } catch (err) {
-      alert('Ошибка сети при создании пункта меню');
+  // Обновление пункта меню
+  const handleUpdateMenuItem = async (id: string, updates: Partial<MenuItemData>) => {
+    try {
+      await menuAPI.handleUpdateMenuItem(id, updates);
+      // SSE событие автоматически обновит список пунктов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка обновления пункта меню');
+    }
+  };
+
+  // Удаление пункта меню
+  const handleDeleteMenuItem = async (itemId: string) => {
+    if (!confirm('Вы уверены, что хотите удалить этот пункт меню?')) return;
+
+    try {
+      await menuAPI.handleDeleteMenuItem(itemId);
+      // SSE событие автоматически обновит список пунктов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка удаления пункта меню');
     }
   };
 
   // Изменение порядка пунктов меню
-  const handleReorderItems = async (reorderedItems: Array<{
+  const handleReorderItems = async (reorderedItems: MenuItemData[] | Array<{
     id: string;
     orderIndex: number;
     level: number;
     parentId: string | null;
   }>) => {
     try {
-      const response = await fetch('http://localhost:3002/api/menu-items/reorder', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: reorderedItems })
-      });
-
-      const result = await response.json();
-      if (!result.success) {
-        throw new Error(result.error || 'Ошибка изменения порядка');
-      }
-
-      // Данные обновятся автоматически через SSE
+      await menuAPI.handleReorderItems(reorderedItems);
+      // SSE событие автоматически обновит список пунктов меню
     } catch (error) {
       console.error('Ошибка reorder:', error);
       throw error;
     }
   };
 
-  // Удаление пункта меню (SSE автоматически обновит список)
-  const handleDeleteMenuItem = async (itemId: string) => {
-    if (!confirm('Вы уверены, что хотите удалить этот пункт меню?')) return;
-
+  // Создание типа меню
+  const handleCreateMenuType = async (data: CreateMenuTypeRequest) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items/${itemId}`, {
-        method: 'DELETE'
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        // SSE событие автоматически обновит список пунктов меню
-      } else {
-        alert(result.error || 'Ошибка удаления пункта меню');
-      }
-    } catch (err) {
-      alert('Ошибка сети при удалении пункта меню');
+      const newType = await menuAPI.handleCreateMenuType(data);
+      loadMenuTypes();
+      menuState.setSelectedMenuType(newType.id); // Переключаемся на новый тип
+      menuState.closeCreateTypeModal();
+      // SSE событие автоматически обновит список типов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка создания типа меню');
     }
   };
+
+  // Изменение статуса типа меню
+  const handleToggleMenuTypeStatus = async (typeId: string, isActive: boolean) => {
+    try {
+      await menuAPI.handleToggleMenuTypeStatus(typeId, isActive);
+      loadMenuTypes();
+      // SSE событие автоматически обновит список типов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка изменения статуса типа меню');
+    }
+  };
+
+  // Обновление типа меню
+  const handleUpdateMenuType = async (typeId: string, updates: { 
+    title?: string; 
+    name?: string; 
+    description?: string; 
+    isActive?: boolean 
+  }) => {
+    try {
+      await menuAPI.handleUpdateMenuType(typeId, updates);
+      loadMenuTypes();
+      // SSE событие автоматически обновит список типов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка обновления типа меню');
+    }
+  };
+
+  // Удаление типа меню
+  const handleDeleteMenuType = async (typeId: string) => {
+    try {
+      await menuAPI.handleDeleteMenuType(typeId);
+      loadMenuTypes();
+      // SSE событие автоматически обновит список типов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка удаления типа меню');
+    }
+  };
+
+  // Пакетное изменение статуса типов меню
+  const handleBatchToggleMenuTypeStatus = async (typeIds: string[], isActive: boolean) => {
+    try {
+      await menuAPI.handleBatchToggleMenuTypeStatus(typeIds, isActive);
+      loadMenuTypes();
+      // SSE событие автоматически обновит список типов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка пакетного изменения статуса типов меню');
+    }
+  };
+
+  // Пакетное удаление типов меню
+  const handleBatchDeleteMenuTypes = async (typeIds: string[]) => {
+    try {
+      await menuAPI.handleBatchDeleteMenuTypes(typeIds);
+      loadMenuTypes();
+      // SSE событие автоматически обновит список типов меню
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Ошибка пакетного удаления типов меню');
+    }
+  };
+
+
 
   if (loading) {
     return (
@@ -133,134 +193,118 @@ const MenuManager: React.FC = () => {
 
   return (
     <div className="p-6" data-testid="menu-manager">
-      {/* Заголовок */}
-      <div className="mb-6">
-        <div className="flex justify-between items-start">
-          <div>
-            <h1 className="text-2xl font-bold text-dark dark:text-white mb-2">
-              Управление меню
-            </h1>
-            <p className="text-body-color dark:text-dark-6">
-              Универсальная система меню с иерархической структурой и привязкой к компонентам
-            </p>
-          </div>
-          
-          {/* Индикатор real-time статуса */}
-          <div className="flex items-center gap-2 text-sm">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-body-color dark:text-dark-6">
-              Синхронизация
-            </span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">
-              {lastUpdate.toLocaleTimeString()}
-            </span>
-          </div>
-        </div>
-      </div>
 
-      {/* Переключатель типов меню */}
-      <MenuTypesSelector
-        projectId={projectId!}
-        menuTypes={menuTypes}
-        selectedMenuType={selectedMenuType}
-        onMenuTypeChange={setSelectedMenuType}
-        onMenuTypesUpdate={loadMenuTypes} // SSE обновит автоматически
-      />
 
-      {/* Статистика меню */}
-      {selectedMenuType && menuItems.length > 0 && (
-        <MenuStatistics menuItems={menuItems} className="mb-6" />
-      )}
-
-      {/* Переключатель режимов */}
-      {selectedMenuType && (
+      {/* Переключатель вкладок и вида */}
+      {menuState.selectedMenuType && (
         <div className="mb-6">
-          <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit">
-            <button
-              onClick={() => setViewMode('list')}
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'list' 
-                  ? 'bg-primary text-white' 
-                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
-              }`}
-            >
-              📋 Список
-            </button>
-            <button
-              onClick={() => setViewMode('dragdrop')}
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'dragdrop' 
-                  ? 'bg-primary text-white' 
-                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
-              }`}
-            >
-              🖱️ Перетаскивание
-            </button>
-            <button
-              onClick={() => setViewMode('preview')}
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'preview' 
-                  ? 'bg-primary text-white' 
-                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
-              }`}
-            >
-              👁️ Предпросмотр
-            </button>
+          <div className="flex items-center justify-between">
+            {/* Вкладки */}
+            <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit">
+              <button
+                onClick={() => menuState.setActiveTab('items')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  menuState.activeTab === 'items' 
+                    ? 'bg-primary text-white' 
+                    : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+                }`}
+              >
+                <FiList size={16} />
+                Пункты меню
+              </button>
+
+              <button
+                onClick={() => menuState.setActiveTab('types')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  menuState.activeTab === 'types' 
+                    ? 'bg-primary text-white' 
+                    : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
+                }`}
+              >
+                <FiGrid size={16} />
+                Типы меню
+              </button>
+            </div>
+
+            {/* Переключатель вида (только для вкладки "Пункты меню") */}
+            {menuState.activeTab === 'items' && (
+              <div className="inline-flex rounded-md border border-stroke dark:border-dark-3 overflow-hidden">
+                <button
+                  onClick={() => menuState.setDisplayStyle('tree')}
+                  className={`p-2 ${menuState.displayStyle === 'tree' ? 'bg-primary text-white' : 'text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-3'}`}
+                  title="Дерево"
+                >
+                  <FiGrid size={16} />
+                </button>
+                <button
+                  onClick={() => menuState.setDisplayStyle('list')}
+                  className={`p-2 ${menuState.displayStyle === 'list' ? 'bg-primary text-white' : 'text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-3'}`}
+                  title="Список"
+                >
+                  <FiList size={16} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {/* Список пунктов меню */}
-      {selectedMenuType && viewMode === 'list' && (
-        <MenuItemsList
+      {/* Вкладка: Пункты меню */}
+      {menuState.activeTab === 'items' && (
+        <MenuItemsTab
           menuItems={menuItems}
-          onEditItem={setEditingItem}
-          onDeleteItem={handleDeleteMenuItem}
-          onCreateItem={() => setShowCreateItemModal(true)}
-        />
-      )}
-
-      {/* Drag & Drop режим */}
-      {selectedMenuType && viewMode === 'dragdrop' && (
-        <MenuItemDragDrop 
-          items={menuItems}
-          onReorder={handleReorderItems}
-        />
-      )}
-
-      {/* Предпросмотр меню */}
-      {selectedMenuType && viewMode === 'preview' && (
-        <MenuPreview 
+          menuTypes={menuTypes}
+          selectedMenuType={menuState.selectedMenuType}
+          displayStyle={menuState.displayStyle}
           projectId={projectId!}
-          selectedMenuType={selectedMenuType}
-          menuItems={menuItems}
+          onEditItem={menuState.openEditItemModal}
+          onDeleteItem={handleDeleteMenuItem}
+          onCreateItem={menuState.openCreateItemModal}
+          onReorderItems={handleReorderItems}
+          onUpdateMenuItem={handleUpdateMenuItem}
+          onMenuTypeChange={menuState.setSelectedMenuType}
+          onMenuTypesUpdate={loadMenuTypes}
+          onDisplayStyleChange={menuState.setDisplayStyle}
         />
       )}
 
-      {/* Модальное окно создания пункта меню */}
-      {showCreateItemModal && (
-        <CreateMenuItemModal
-          menuTypeId={selectedMenuType}
-          parentItems={menuItems.filter(item => item.level < 3)} // Максимум 3 уровня
-          onClose={() => setShowCreateItemModal(false)}
-          onCreate={handleCreateMenuItem}
+      {/* Вкладка: Типы меню */}
+      {menuState.activeTab === 'types' && (
+        <MenuTypesTab
+          menuTypes={menuTypes}
+          allMenuItems={menuState.allMenuItems}
+          onToggleStatus={handleToggleMenuTypeStatus}
+          onEditType={menuState.openEditTypeModal}
+          onDeleteType={menuState.openDeleteTypeModal}
+          onSelectMenuType={menuState.setSelectedMenuType}
+          onSetActiveTab={menuState.setActiveTab}
+          onBatchToggleStatus={handleBatchToggleMenuTypeStatus}
+          onBatchDelete={handleBatchDeleteMenuTypes}
         />
       )}
 
-      {/* Модальное окно редактирования пункта меню */}
-      {editingItem && (
-        <EditMenuItemModal
-          item={editingItem}
-          onClose={() => setEditingItem(null)}
-          onUpdate={(updatedItem) => {
-            // Обновляем локальный стейт
-            setMenuItems(items => 
-              items.map(item => item.id === updatedItem.id ? updatedItem : item)
-            );
-            setEditingItem(null);
-          }}
-        />
-      )}
+      {/* Модальные окна */}
+      <MenuManagerModals
+        showCreateItemModal={menuState.showCreateItemModal}
+        showCreateTypeModal={menuState.showCreateTypeModal}
+        editingItem={menuState.editingItem}
+        editingMenuType={menuState.editingMenuType}
+        deletingMenuType={menuState.deletingMenuType}
+        selectedMenuType={menuState.selectedMenuType}
+        menuItems={menuItems}
+        allMenuItems={menuState.allMenuItems}
+        projectId={projectId!}
+        onCloseCreateItem={menuState.closeCreateItemModal}
+        onCloseCreateType={menuState.closeCreateTypeModal}
+        onCloseEditItem={menuState.closeEditItemModal}
+        onCloseEditType={menuState.closeEditTypeModal}
+        onCloseDeleteType={menuState.closeDeleteTypeModal}
+        onCreateMenuItem={handleCreateMenuItem}
+        onCreateMenuType={handleCreateMenuType}
+        onUpdateMenuItem={handleUpdateMenuItem}
+        onUpdateMenuType={handleUpdateMenuType}
+        onDeleteMenuType={handleDeleteMenuType}
+      />
     </div>
   );
 };

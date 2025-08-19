@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import { 
+  FiTarget, FiSearch, FiMail, FiSmartphone, FiBarChart, 
+  FiGlobe, FiShoppingCart, FiMessageSquare, FiFile,
+  FiUsers, FiSettings, FiDollarSign, FiTrendingUp,
+  FiZap
+} from 'react-icons/fi';
 
 interface MarketingProject {
   id: string;
@@ -72,7 +78,7 @@ const SitusMarketing: React.FC = () => {
       name: "Google Ads",
       category: "advertising",
       description: "Контекстная реклама в поисковых системах",
-      icon: "🎯",
+      icon: "target",
       status: "active",
       performance: 92
     },
@@ -81,7 +87,7 @@ const SitusMarketing: React.FC = () => {
       name: "SEO оптимизация",
       category: "seo", 
       description: "Продвижение в органической выдаче",
-      icon: "🔍",
+      icon: "search",
       status: "active",
       performance: 85
     },
@@ -90,7 +96,7 @@ const SitusMarketing: React.FC = () => {
       name: "Email рассылки",
       category: "email",
       description: "Автоматизированный email-маркетинг",
-      icon: "📧",
+      icon: "mail",
       status: "active",
       performance: 78
     },
@@ -99,7 +105,7 @@ const SitusMarketing: React.FC = () => {
       name: "Социальные сети",
       category: "social",
       description: "SMM продвижение в социальных сетях",
-      icon: "📱",
+      icon: "smartphone",
       status: "pending",
       performance: 65
     },
@@ -108,7 +114,7 @@ const SitusMarketing: React.FC = () => {
       name: "Яндекс.Метрика",
       category: "analytics",
       description: "Глубокая аналитика поведения пользователей",
-      icon: "📊",
+      icon: "bar-chart",
       status: "active",
       performance: 95
     }
@@ -147,22 +153,33 @@ const SitusMarketing: React.FC = () => {
 
   const getProjectTypeIcon = (type: string) => {
     switch (type) {
-      case "website": return "🌐";
-      case "store": return "🛒";
-      case "chatbot": return "🤖";
-      default: return "📄";
+      case "website": return <FiGlobe size={16} />;
+      case "store": return <FiShoppingCart size={16} />;
+      case "chatbot": return <FiMessageSquare size={16} />;
+      default: return <FiFile size={16} />;
     }
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case "seo": return "🔍";
-      case "advertising": return "🎯";
-      case "email": return "📧";
-      case "social": return "📱";
-      case "analytics": return "📊";
-      case "partnerships": return "🤝";
-      default: return "⚙️";
+      case "seo": return <FiSearch size={16} />;
+      case "advertising": return <FiTarget size={16} />;
+      case "email": return <FiMail size={16} />;
+      case "social": return <FiSmartphone size={16} />;
+      case "analytics": return <FiBarChart size={16} />;
+      case "partnerships": return <FiUsers size={16} />;
+      default: return <FiSettings size={16} />;
+    }
+  };
+
+  const getToolIcon = (iconName: string) => {
+    switch (iconName) {
+      case "target": return <FiTarget size={24} className="text-primary" />;
+      case "search": return <FiSearch size={24} className="text-primary" />;
+      case "mail": return <FiMail size={24} className="text-primary" />;
+      case "smartphone": return <FiSmartphone size={24} className="text-primary" />;
+      case "bar-chart": return <FiBarChart size={24} className="text-primary" />;
+      default: return <FiSettings size={24} className="text-primary" />;
     }
   };
 
@@ -212,7 +229,8 @@ const SitusMarketing: React.FC = () => {
                   : "hover:bg-gray-50 dark:hover:bg-dark-3"
               }`}
             >
-              📊 Все проекты
+              <FiBarChart size={16} className="mr-2" />
+              Все проекты
             </button>
             {marketingProjects.map((project) => (
               <button
@@ -277,7 +295,7 @@ const SitusMarketing: React.FC = () => {
           <div className="rounded-lg bg-white p-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
             <div className="flex items-center">
               <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-800">
-                <span className="text-xl">💰</span>
+                <FiDollarSign className="text-xl text-blue-600 dark:text-blue-400" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-dark dark:text-white">
@@ -291,7 +309,7 @@ const SitusMarketing: React.FC = () => {
           <div className="rounded-lg bg-white p-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
             <div className="flex items-center">
               <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-800">
-                <span className="text-xl">📈</span>
+                <FiTrendingUp className="text-xl text-green-600 dark:text-green-400" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-dark dark:text-white">
@@ -305,7 +323,7 @@ const SitusMarketing: React.FC = () => {
           <div className="rounded-lg bg-white p-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
             <div className="flex items-center">
               <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-800">
-                <span className="text-xl">👥</span>
+                <FiUsers className="text-xl text-purple-600 dark:text-purple-400" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-dark dark:text-white">
@@ -319,7 +337,7 @@ const SitusMarketing: React.FC = () => {
           <div className="rounded-lg bg-white p-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
             <div className="flex items-center">
               <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-800">
-                <span className="text-xl">🤝</span>
+                <FiUsers className="text-xl text-orange-600 dark:text-orange-400" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-dark dark:text-white">
@@ -347,7 +365,7 @@ const SitusMarketing: React.FC = () => {
               {filteredTools.map((tool) => (
                 <div key={tool.id} className="flex items-center justify-between rounded-lg border border-stroke p-4 dark:border-dark-3">
                   <div className="flex items-center">
-                    <span className="mr-3 text-2xl">{tool.icon}</span>
+                    <div className="mr-3">{getToolIcon(tool.icon)}</div>
                     <div>
                       <h6 className="font-medium text-dark dark:text-white">{tool.name}</h6>
                       <p className="text-sm text-body-color dark:text-dark-6">{tool.description}</p>
@@ -419,7 +437,7 @@ const SitusMarketing: React.FC = () => {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             <div className="rounded-lg border border-stroke p-4 dark:border-dark-3">
               <div className="mb-3 flex items-center">
-                <span className="mr-2 text-xl">🎯</span>
+                <FiTarget className="mr-2 text-xl text-primary" />
                 <h6 className="font-medium text-dark dark:text-white">Ретаргетинг</h6>
               </div>
               <p className="text-sm text-body-color dark:text-dark-6">
@@ -432,7 +450,7 @@ const SitusMarketing: React.FC = () => {
 
             <div className="rounded-lg border border-stroke p-4 dark:border-dark-3">
               <div className="mb-3 flex items-center">
-                <span className="mr-2 text-xl">📧</span>
+                <FiMail className="mr-2 text-xl text-primary" />
                 <h6 className="font-medium text-dark dark:text-white">Email-воронка</h6>
               </div>
               <p className="text-sm text-body-color dark:text-dark-6">
@@ -445,7 +463,7 @@ const SitusMarketing: React.FC = () => {
 
             <div className="rounded-lg border border-stroke p-4 dark:border-dark-3">
               <div className="mb-3 flex items-center">
-                <span className="mr-2 text-xl">💡</span>
+                <FiZap className="mr-2 text-xl text-primary" />
                 <h6 className="font-medium text-dark dark:text-white">A/B тестирование</h6>
               </div>
               <p className="text-sm text-body-color dark:text-dark-6">

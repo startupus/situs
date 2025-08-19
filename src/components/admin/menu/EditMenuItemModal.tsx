@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MenuItemData, CreateMenuItemRequest } from '../../../types/menu';
+import { FiBox, FiLink, FiFolder, FiGlobe, FiUsers, FiStar, FiSettings } from 'react-icons/fi';
 
 /**
  * Модальное окно редактирования пункта меню
@@ -139,9 +140,9 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                 className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none"
                 required
               >
-                <option value="COMPONENT">🧩 Компонент</option>
-                <option value="URL">🔗 Внешняя ссылка</option>
-                <option value="HEADING">📂 Заголовок (разделитель)</option>
+                <option value="COMPONENT">Компонент</option>
+                <option value="URL">Внешняя ссылка</option>
+                <option value="HEADING">Заголовок (разделитель)</option>
               </select>
             </div>
 
@@ -158,10 +159,10 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                     className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none"
                   >
                     <option value="">Выберите компонент</option>
-                    <option value="Website">🌐 Website</option>
-                    <option value="Shop">🛒 Shop</option>
-                    <option value="Blog">📝 Blog</option>
-                    <option value="Landing">🎯 Landing</option>
+                    <option value="Website">Website</option>
+                    <option value="Shop">Shop</option>
+                    <option value="Blog">Blog</option>
+                    <option value="Landing">Landing</option>
                   </select>
                 </div>
 
@@ -220,10 +221,10 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                   onChange={(e) => handleChange('accessLevel', e.target.value)}
                   className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none"
                 >
-                  <option value="PUBLIC">🌐 Публичный доступ</option>
-                  <option value="REGISTERED">👤 Только для зарегистрированных</option>
-                  <option value="SPECIAL">⭐ Специальные права</option>
-                  <option value="CUSTOM">🔧 Пользовательские права</option>
+                  <option value="PUBLIC">Публичный доступ</option>
+                  <option value="REGISTERED">Только для зарегистрированных</option>
+                  <option value="SPECIAL">Специальные права</option>
+                  <option value="CUSTOM">Пользовательские права</option>
                 </select>
               </div>
 
@@ -236,10 +237,10 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                   onChange={(e) => handleChange('language', e.target.value)}
                   className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none"
                 >
-                  <option value="*">🌍 Все языки</option>
-                  <option value="ru-RU">🇷🇺 Русский</option>
-                  <option value="en-GB">🇬🇧 English</option>
-                  <option value="es-ES">🇪🇸 Español</option>
+                  <option value="*">Все языки</option>
+                  <option value="ru-RU">Русский</option>
+                  <option value="en-GB">English</option>
+                  <option value="es-ES">Español</option>
                 </select>
               </div>
             </div>
