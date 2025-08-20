@@ -6,52 +6,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // Создание валют
-  const usdCurrency = await prisma.currency.upsert({
-    where: { code: 'USD' },
-    update: {},
-    create: {
-      code: 'USD',
-      name: 'US Dollar',
-      symbol: '$',
-      decimals: 2,
-      isActive: true,
-      isSystem: true,
-      description: 'United States Dollar',
-      color: '#22C55E'
-    }
-  });
-
-  const rubCurrency = await prisma.currency.upsert({
-    where: { code: 'RUB' },
-    update: {},
-    create: {
-      code: 'RUB',
-      name: 'Russian Ruble',
-      symbol: '₽',
-      decimals: 2,
-      isActive: true,
-      isSystem: true,
-      description: 'Russian Ruble',
-      color: '#3B82F6'
-    }
-  });
-
-  const monetusCurrency = await prisma.currency.upsert({
-    where: { code: 'MONETUS' },
-    update: {},
-    create: {
-      code: 'MONETUS',
-      name: 'Monetus',
-      symbol: '₿',
-      decimals: 0,
-      isActive: true,
-      isSystem: true,
-      description: 'Situs Platform Internal Currency',
-      color: '#8B5CF6'
-    }
-  });
-
   // Создание администратора
   const adminPassword = await hash('admin123', 12);
   const admin = await prisma.user.upsert({
@@ -75,43 +29,12 @@ async function main() {
       username: 'dmitriy',
       email: 'dmitriy@startapus.com',
       password: userPassword,
-      role: 'USER',
+      role: 'BUSINESS',
       status: 'ACTIVE'
     }
   });
 
-  // Создание балансов для пользователя
-  await prisma.balance.upsert({
-    where: {
-      userId_currencyId: {
-        userId: user.id,
-        currencyId: monetusCurrency.id
-      }
-    },
-    update: {},
-    create: {
-      userId: user.id,
-      currencyId: monetusCurrency.id,
-      amount: 1250,
-      reserved: 0
-    }
-  });
 
-  await prisma.balance.upsert({
-    where: {
-      userId_currencyId: {
-        userId: user.id,
-        currencyId: usdCurrency.id
-      }
-    },
-    update: {},
-    create: {
-      userId: user.id,
-      currencyId: usdCurrency.id,
-      amount: 500,
-      reserved: 0
-    }
-  });
 
   // Создание проекта "Сайт экосистемы Стартапус"
   const startapusProject = await prisma.project.upsert({
@@ -122,20 +45,27 @@ async function main() {
       name: 'Сайт экосистемы Стартапус',
       description: 'Официальный сайт экосистемы Стартапус - инновационная платформа для создания и управления веб-проектами',
       slug: 'startapus-ecosystem',
-      type: 'WEBSITE',
-      status: 'PUBLISHED',
       domain: 'startapus.com',
-      metaTitle: 'Стартапус - Экосистема для создания веб-проектов',
-      metaDescription: 'Создавайте современные веб-сайты с помощью экосистемы Стартапус. Situs, Redaktus, Hubus и другие инструменты для вашего успеха.',
-      metaKeywords: 'стартапус, situs, redaktus, веб-разработка, конструктор сайтов, CMS',
-      primaryColor: '#3B82F6',
-      secondaryColor: '#8B5CF6',
-      fontFamily: 'Inter',
-      hasEcommerce: false,
-      hasAnalytics: true,
-      hasBlog: true,
-      hasContactForm: true,
+      isPublished: true,
       ownerId: user.id
+    }
+  });
+
+  // Создание продукта Website для проекта Стартапус
+  const websiteProduct = await prisma.product.upsert({
+    where: {
+      projectId_name: {
+        projectId: startapusProject.id,
+        name: 'Website'
+      }
+    },
+    update: {},
+    create: {
+      name: 'Website',
+      description: 'Основной сайт проекта',
+      type: 'WEBSITE',
+      status: 'ACTIVE',
+      projectId: startapusProject.id
     }
   });
 
@@ -148,7 +78,7 @@ async function main() {
       isHomePage: true,
       metaTitle: 'Стартапус - Инновационная экосистема для веб-разработки',
       metaDescription: 'Создавайте профессиональные веб-сайты с экосистемой Стартапус. Визуальный редактор, AI-помощник и мощные инструменты.',
-      content: {
+      content: JSON.stringify({
         blocks: [
           {
             id: 'hero-1',
@@ -209,7 +139,7 @@ async function main() {
             }
           }
         ]
-      }
+      })
     },
     {
       id: 'about',
@@ -217,7 +147,7 @@ async function main() {
       slug: 'about',
       metaTitle: 'О компании Стартапус - Наша миссия и команда',
       metaDescription: 'Узнайте больше о команде Стартапус, нашей миссии и видении будущего веб-разработки.',
-      content: {
+      content: JSON.stringify({
         blocks: [
           {
             id: 'about-hero',
@@ -243,7 +173,7 @@ async function main() {
             }
           }
         ]
-      }
+      })
     },
     {
       id: 'products',
@@ -251,7 +181,7 @@ async function main() {
       slug: 'products',
       metaTitle: 'Продукты Стартапус - Полная экосистема для веб-разработки',
       metaDescription: 'Изучите все продукты экосистемы Стартапус: Situs, Redaktus, Hubus, Bilingus, Controlus и Loginus.',
-      content: {
+      content: JSON.stringify({
         blocks: [
           {
             id: 'products-detail',
@@ -262,7 +192,7 @@ async function main() {
             }
           }
         ]
-      }
+      })
     },
     {
       id: 'blog',
@@ -270,7 +200,7 @@ async function main() {
       slug: 'blog',
       metaTitle: 'Блог Стартапус - Новости и статьи о веб-разработке',
       metaDescription: 'Читайте последние новости, гайды и статьи о веб-разработке в блоге Стартапус.',
-      content: {
+      content: JSON.stringify({
         blocks: [
           {
             id: 'blog-list',
@@ -281,7 +211,7 @@ async function main() {
             }
           }
         ]
-      }
+      })
     },
     {
       id: 'contact',
@@ -289,7 +219,7 @@ async function main() {
       slug: 'contact',
       metaTitle: 'Контакты Стартапус - Свяжитесь с нами',
       metaDescription: 'Свяжитесь с командой Стартапус. Мы всегда готовы помочь и ответить на ваши вопросы.',
-      content: {
+      content: JSON.stringify({
         blocks: [
           {
             id: 'contact-form',
@@ -303,22 +233,22 @@ async function main() {
             }
           }
         ]
-      }
+      })
     }
   ];
 
   for (const pageData of pages) {
     await prisma.page.upsert({
       where: {
-        projectId_slug: {
-          projectId: startapusProject.id,
+        productId_slug: {
+          productId: websiteProduct.id,
           slug: pageData.slug
         }
       },
       update: {},
       create: {
         ...pageData,
-        projectId: startapusProject.id,
+        productId: websiteProduct.id,
         pageType: 'PAGE',
         status: 'PUBLISHED'
       }
@@ -331,11 +261,18 @@ async function main() {
       name: 'Тестовый интернет-магазин',
       description: 'Демонстрационный проект интернет-магазина',
       slug: 'test-ecommerce-store',
-      type: 'ECOMMERCE',
-      status: 'DRAFT',
-      hasEcommerce: true,
-      hasAnalytics: true,
       ownerId: user.id
+    }
+  });
+
+  // Создание продукта Store для тестового проекта
+  const storeProduct = await prisma.product.create({
+    data: {
+      name: 'Store',
+      description: 'Интернет-магазин',
+      type: 'ECOMMERCE',
+      status: 'ACTIVE',
+      projectId: testProject.id
     }
   });
 
@@ -344,10 +281,10 @@ async function main() {
       title: 'Главная страница магазина',
       slug: '',
       isHomePage: true,
-      projectId: testProject.id,
+      productId: storeProduct.id,
       pageType: 'PAGE',
-      status: 'DRAFT',
-      content: {
+      status: 'PUBLISHED',
+      content: JSON.stringify({
         blocks: [
           {
             id: 'shop-hero',
@@ -358,9 +295,358 @@ async function main() {
             }
           }
         ]
-      }
+      })
     }
   });
+
+  // Создание типов меню для проекта Стартапус
+  const mainMenuType = await prisma.menuType.upsert({
+    where: {
+      projectId_name: {
+        projectId: startapusProject.id,
+        name: 'main'
+      }
+    },
+    update: {},
+    create: {
+      name: 'main',
+      title: 'Главное меню',
+      description: 'Основное навигационное меню сайта',
+      isActive: true,
+      projectId: startapusProject.id
+    }
+  });
+
+  const footerMenuType = await prisma.menuType.upsert({
+    where: {
+      projectId_name: {
+        projectId: startapusProject.id,
+        name: 'footer'
+      }
+    },
+    update: {},
+    create: {
+      name: 'footer',
+      title: 'Меню подвала',
+      description: 'Навигационное меню в подвале сайта',
+      isActive: true,
+      projectId: startapusProject.id
+    }
+  });
+
+  const sidebarMenuType = await prisma.menuType.upsert({
+    where: {
+      projectId_name: {
+        projectId: startapusProject.id,
+        name: 'sidebar'
+      }
+    },
+    update: {},
+    create: {
+      name: 'sidebar',
+      title: 'Боковое меню',
+      description: 'Дополнительное меню в боковой панели',
+      isActive: true,
+      projectId: startapusProject.id
+    }
+  });
+
+  // Создание пунктов главного меню
+  const mainMenuItems = [
+    {
+      title: 'Главная',
+      alias: 'home',
+      type: 'COMPONENT',
+      component: 'Website',
+      view: 'page',
+      layout: 'default',
+      targetId: 'home',
+      orderIndex: 1,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        menu_image: '',
+        css_class: 'nav-home'
+      })
+    },
+    {
+      title: 'О компании',
+      alias: 'about',
+      type: 'COMPONENT',
+      component: 'Website',
+      view: 'page',
+      layout: 'default',
+      targetId: 'about',
+      orderIndex: 2,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        menu_image: '',
+        css_class: 'nav-about'
+      })
+    },
+    {
+      title: 'Продукты',
+      alias: 'products',
+      type: 'COMPONENT',
+      component: 'Website',
+      view: 'page',
+      layout: 'default',
+      targetId: 'products',
+      orderIndex: 3,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        menu_image: '',
+        css_class: 'nav-products'
+      })
+    },
+    {
+      title: 'Блог',
+      alias: 'blog',
+      type: 'COMPONENT',
+      component: 'Website',
+      view: 'page',
+      layout: 'default',
+      targetId: 'blog',
+      orderIndex: 4,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        menu_image: '',
+        css_class: 'nav-blog'
+      })
+    },
+    {
+      title: 'Контакты',
+      alias: 'contact',
+      type: 'COMPONENT',
+      component: 'Website',
+      view: 'page',
+      layout: 'default',
+      targetId: 'contact',
+      orderIndex: 5,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        menu_image: '',
+        css_class: 'nav-contact'
+      })
+    }
+  ];
+
+  // Создаем пункты главного меню
+  for (const itemData of mainMenuItems) {
+    await prisma.menuItem.upsert({
+      where: {
+        menuTypeId_alias: {
+          menuTypeId: mainMenuType.id,
+          alias: itemData.alias
+        }
+      },
+      update: {},
+      create: {
+        ...itemData,
+        menuTypeId: mainMenuType.id,
+        isPublished: true,
+        accessLevel: 'PUBLIC',
+        language: '*'
+      }
+    });
+  }
+
+  // Создание пунктов меню подвала
+  const footerMenuItems = [
+    {
+      title: 'Политика конфиденциальности',
+      alias: 'privacy',
+      type: 'URL',
+      externalUrl: '/privacy',
+      orderIndex: 1,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        target: '_self',
+        css_class: 'footer-link'
+      })
+    },
+    {
+      title: 'Условия использования',
+      alias: 'terms',
+      type: 'URL',
+      externalUrl: '/terms',
+      orderIndex: 2,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        target: '_self',
+        css_class: 'footer-link'
+      })
+    },
+    {
+      title: 'Поддержка',
+      alias: 'support',
+      type: 'URL',
+      externalUrl: 'mailto:support@startapus.com',
+      orderIndex: 3,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        target: '_blank',
+        css_class: 'footer-link'
+      })
+    }
+  ];
+
+  // Создаем пункты меню подвала
+  for (const itemData of footerMenuItems) {
+    await prisma.menuItem.upsert({
+      where: {
+        menuTypeId_alias: {
+          menuTypeId: footerMenuType.id,
+          alias: itemData.alias
+        }
+      },
+      update: {},
+      create: {
+        ...itemData,
+        menuTypeId: footerMenuType.id,
+        isPublished: true,
+        accessLevel: 'PUBLIC',
+        language: '*'
+      }
+    });
+  }
+
+  // Создание типов меню для тестового проекта (интернет-магазин)
+  const shopMainMenuType = await prisma.menuType.upsert({
+    where: {
+      projectId_name: {
+        projectId: testProject.id,
+        name: 'main'
+      }
+    },
+    update: {},
+    create: {
+      name: 'main',
+      title: 'Главное меню магазина',
+      description: 'Основное навигационное меню интернет-магазина',
+      isActive: true,
+      projectId: testProject.id
+    }
+  });
+
+  // Создание пунктов меню для интернет-магазина
+  const shopMenuItems = [
+    {
+      title: 'Главная',
+      alias: 'home',
+      type: 'COMPONENT',
+      component: 'Store',
+      view: 'home',
+      layout: 'default',
+      orderIndex: 1,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        show_featured: true,
+        css_class: 'shop-nav-home'
+      })
+    },
+    {
+      title: 'Каталог',
+      alias: 'catalog',
+      type: 'HEADING',
+      orderIndex: 2,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        css_class: 'shop-nav-heading'
+      })
+    },
+    {
+      title: 'Электроника',
+      alias: 'electronics',
+      type: 'COMPONENT',
+      component: 'Store',
+      view: 'category',
+      layout: 'grid',
+      parentId: null, // Будет установлен после создания родительского элемента
+      orderIndex: 1,
+      level: 2,
+      parameters: JSON.stringify({
+        menu_show: true,
+        items_per_page: 12,
+        css_class: 'shop-nav-category'
+      })
+    },
+    {
+      title: 'Одежда',
+      alias: 'clothing',
+      type: 'COMPONENT',
+      component: 'Store',
+      view: 'category',
+      layout: 'grid',
+      parentId: null, // Будет установлен после создания родительского элемента
+      orderIndex: 2,
+      level: 2,
+      parameters: JSON.stringify({
+        menu_show: true,
+        items_per_page: 12,
+        css_class: 'shop-nav-category'
+      })
+    },
+    {
+      title: 'О магазине',
+      alias: 'about-shop',
+      type: 'COMPONENT',
+      component: 'Website',
+      view: 'page',
+      layout: 'default',
+      orderIndex: 3,
+      level: 1,
+      parameters: JSON.stringify({
+        menu_show: true,
+        css_class: 'shop-nav-about'
+      })
+    }
+  ];
+
+  // Создаем пункты меню магазина и устанавливаем иерархию
+  const createdShopItems = [];
+  for (const itemData of shopMenuItems) {
+    const item = await prisma.menuItem.upsert({
+      where: {
+        menuTypeId_alias: {
+          menuTypeId: shopMainMenuType.id,
+          alias: itemData.alias
+        }
+      },
+      update: {},
+      create: {
+        ...itemData,
+        menuTypeId: shopMainMenuType.id,
+        isPublished: true,
+        accessLevel: 'PUBLIC',
+        language: '*'
+      }
+    });
+    createdShopItems.push(item);
+  }
+
+  // Устанавливаем родительские связи для подкатегорий
+  const catalogItem = createdShopItems.find(item => item.alias === 'catalog');
+  if (catalogItem) {
+    await prisma.menuItem.updateMany({
+      where: {
+        menuTypeId: shopMainMenuType.id,
+        alias: { in: ['electronics', 'clothing'] }
+      },
+      data: {
+        parentId: catalogItem.id
+      }
+    });
+  }
 
   console.log('✅ Database seeded successfully!');
   console.log('\n📊 Created:');
@@ -368,7 +654,8 @@ async function main() {
   console.log(`- User: dmitriy@startapus.com / user123`);
   console.log(`- Project: ${startapusProject.name}`);
   console.log(`- Pages: ${pages.length} pages`);
-  console.log(`- Currencies: USD, RUB, MONETUS`);
+  console.log(`- Menu Types: 4 types (main, footer, sidebar for Startapus + main for shop)`);
+  console.log(`- Menu Items: ${mainMenuItems.length + footerMenuItems.length + shopMenuItems.length} items`);
 }
 
 main()

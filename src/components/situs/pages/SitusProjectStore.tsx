@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProject, ProjectData } from '../../../services/projectApi';
 import { apiClient } from '../../../api/client';
+import { testIds } from '../../ui/testids';
 
 interface Category {
   id: string;
@@ -227,6 +228,7 @@ const SitusProjectStore: React.FC = () => {
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
               }`}
+              data-testid={testIds.products.tabs.categories}
             >
               Категории ({categories.length})
             </button>
@@ -237,6 +239,7 @@ const SitusProjectStore: React.FC = () => {
                   ? 'border-primary text-primary'
                   : 'border-transparent text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
               }`}
+              data-testid={testIds.products.tabs.items}
             >
               Товары ({items.length})
             </button>
@@ -245,12 +248,13 @@ const SitusProjectStore: React.FC = () => {
 
         {/* Контент вкладок */}
         {activeTab === 'categories' && (
-          <div>
+          <div data-testid={testIds.products.categoriesSection}>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium text-dark dark:text-white">Категории товаров</h3>
               <button
                 onClick={() => setShowCreateCategoryModal(true)}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+                data-testid={testIds.products.createCategoryButton}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
                   <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
@@ -279,12 +283,13 @@ const SitusProjectStore: React.FC = () => {
         )}
 
         {activeTab === 'items' && (
-          <div>
+          <div data-testid={testIds.products.itemsSection}>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium text-dark dark:text-white">Товары</h3>
               <button
                 onClick={() => setShowCreateItemModal(true)}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+                data-testid={testIds.products.createItemButton}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
                   <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
@@ -315,7 +320,7 @@ const SitusProjectStore: React.FC = () => {
                 </div>
                 <ul className="divide-y divide-stroke dark:divide-dark-3">
                   {items.map((item) => (
-                    <li key={item.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3">
+                    <li key={item.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3" data-testid={testIds.products.itemRow}>
                       <div className="col-span-4 flex items-center gap-3">
                         {item.images && JSON.parse(item.images)[0] ? (
                           <img
