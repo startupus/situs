@@ -2,6 +2,7 @@ import React from 'react';
 import { MenuItemData } from '../../../types/menu';
 import { FiBox, FiLink, FiFolder, FiMinus, FiHelpCircle, FiGlobe, FiEdit, FiTrash2 } from 'react-icons/fi';
 import ToggleSwitch from '../../ui/ToggleSwitch';
+import { testIds } from '../../ui/testids';
 
 /**
  * Компонент карточки пункта меню
@@ -52,7 +53,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   return (
     <div className={`${level > 1 ? 'ml-6 border-l-2 border-primary/20 pl-4' : ''}`}>
-      <div className="border border-stroke dark:border-dark-3 rounded-lg mb-2" data-testid="menu-item">
+      <div className="border border-stroke dark:border-dark-3 rounded-lg mb-2" data-testid={testIds.menu.item}>
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3 flex-1">
             {/* Чекбокс выбора */}

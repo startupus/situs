@@ -22,8 +22,8 @@ test.describe('Projects realtime sync (SSE)', () => {
     await expect(firstCardA).toBeVisible({ timeout: 20000 });
 
     // Находим ссылку "Подробнее" — из её href извлечём id
-    const detailLinkA = firstCardA.locator('a[href^="/projects/"]');
-    const href = await detailLinkA.getAttribute('href');
+    // Берём вторую ссылку внутри карточки, которая ведёт на детальную (первая может быть бейджем типа)
+    const href = await firstCardA.locator('a[href^="/projects/"]').nth(1).getAttribute('href');
     expect(href).toBeTruthy();
 
     // На странице B найдём ту же карточку по href
