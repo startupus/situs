@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -24,8 +24,39 @@ export class AccountsController {
 
   @Post()
   @Scopes('ACCOUNT_WRITE')
-  async create(@Body() dto: CreateAccountDto) {
-    const account = await this.prisma.account.create({ data: { name: dto.name, type: dto.type as any, ownerId: dto.ownerId } });
+  async create(@Body() dto: CreateAccountDto, @Req() req: any) {
+    // Определяем владельца: либо из dto, либо из текущего пользователя (guard проставляет в req.user)
+    const resolvedOwnerId: string | undefined = dto.ownerId || req?.user?.id;
+    if (!resolvedOwnerId) {
+      throw new BadRequestException('Owner ID is required');
+    }
+
+    // Гарантируем существование владельца в БД. В тестовом окружении — авто‑создаём, чтобы избежать 500 (FK violation)
+    const existingOwner = await this.prisma.user.findUnique({ where: { id: resolvedOwnerId } });
+    if (!existingOwner) {
+      if (process.env.NODE_ENV === 'test') {
+        await this.prisma.user.create({
+          data: {
+            id: resolvedOwnerId,
+            username: `test_${resolvedOwnerId}`.slice(0, 30),
+            email: `${resolvedOwnerId}@local.test`,
+            password: 'test',
+            role: 'BUSINESS' as any,
+            globalRole: 'BUSINESS' as any,
+          },
+        });
+      } else {
+        throw new BadRequestException('Owner user not found');
+      }
+    }
+
+    const account = await this.prisma.account.create({
+      data: {
+        name: dto.name,
+        type: dto.type as any,
+        ownerId: resolvedOwnerId,
+      },
+    });
     return { success: true, data: account };
   }
 

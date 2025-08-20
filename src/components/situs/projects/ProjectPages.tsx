@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProjectData } from '../../../services/projectApi';
 import { FiHome, FiFileText, FiBookOpen, FiPhone, FiInfo, FiPlus, FiSearch, FiEdit, FiEye, FiX, FiSettings } from 'react-icons/fi';
+import { testIds } from '../../ui/testids';
 
 interface ProjectPagesProps {
   project: ProjectData;
@@ -62,7 +63,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6" data-testid={testIds.pages.container}>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl font-semibold text-dark dark:text-white mb-2">
@@ -95,6 +96,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
           <div className="flex-1">
             <div className="relative">
               <input
+                data-testid={testIds.pages.searchInput}
                 type="text"
                 placeholder="Поиск страниц..."
                 value={searchTerm}
@@ -108,6 +110,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
           {/* Фильтр по статусу */}
           <div className="w-full md:w-48">
             <select
+              data-testid={testIds.pages.statusSelect}
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none transition-colors"
@@ -149,6 +152,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
             <div
               key={page.id}
               className="bg-white dark:bg-dark-3 rounded-lg p-4 border border-stroke dark:border-dark-3 hover:border-primary dark:hover:border-primary transition-all duration-200"
+              data-testid={testIds.pages.pageCard}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -191,6 +195,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
 
                 <div className="flex gap-2 ml-4">
                   <Link
+                    data-testid={testIds.pages.pageEditLink}
                     to={`/redaktus?projectId=${project.id}&pageId=${page.id}`}
                     className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-white hover:bg-primary/90 transition-colors"
                   >
