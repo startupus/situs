@@ -9,6 +9,7 @@ import { FiChevronLeft, FiChevronRight, FiPauseCircle } from 'react-icons/fi';
 import { useSite } from '../../../contexts/SiteContext';
 import { ProjectData } from '../../../types/project';
 import { projectsApi } from '../../../api/services/projects.api';
+import { testIds } from '../../ui/testids';
 
 interface ProjectsListProps {
   onCreateProject: () => void;
@@ -269,6 +270,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
         {...listeners}
         className={`rounded-xl border transition-all duration-200 shadow-sm cursor-grab active:cursor-grabbing flex flex-col h-full 
           ${isInactive ? 'bg-gray-100/70 border-gray-200 dark:bg-dark-3 dark:border-dark-4 opacity-80 pointer-events-auto' : 'bg-white dark:bg-dark-2 border-stroke dark:border-dark-3 hover:border-primary/50 dark:hover:border-primary/50'}`}
+        data-testid={testIds.projects.card}
       >
         <div
           className="p-4 flex-1"
@@ -286,7 +288,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
                 <FaFolderOpen className="w-6 h-6 text-primary" />
               )}
             </div>
-            <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+            <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()} data-testid={testIds.projects.statusToggle}>
               <ActiveSwitcher checked={project.status === 'active'} onChange={(v) => handleToggleActive(project.id, v)} />
             </div>
           </div>
@@ -305,7 +307,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
             <div className={`flex items-center justify-between text-sm ${isInactive ? 'text-gray-400 dark:text-dark-5' : 'text-body-color dark:text-dark-6'}`}>
               <div className="flex items-center gap-1">
                 {(activeProducts.length ? activeProducts : []).map((p: any) => (
-                  <a key={p.id} href={`/projects/${project.id}`} title={p.type} className={`inline-flex items-center justify-center w-7 h-7 rounded ${isInactive ? 'bg-gray-300/30 text-gray-500' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}>
+                  <a key={p.id} href={`/projects/${project.id}`} title={p.type} className={`inline-flex items-center justify-center w-7 h-7 rounded ${isInactive ? 'bg-gray-300/30 text-gray-500' : 'bg-primary/10 text-primary hover:bg-primary/20'}`} data-testid={testIds.projects.detailLink}>
                     {getProductTypeIcon((p.type || '').toString().toUpperCase())}
                   </a>
                 ))}
@@ -404,7 +406,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
 
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-testid={testIds.projects.list}>
       {/* Список проектов */}
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>

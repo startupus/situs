@@ -8,6 +8,7 @@ import { FiList, FiGrid } from 'react-icons/fi';
 import MenuTypesTab from './menu/MenuTypesTab';
 import MenuItemsTab from './menu/MenuItemsTab';
 import MenuManagerModals from './menu/MenuManagerModals';
+import { testIds } from '../ui/testids';
 
 /**
  * Главный компонент управления меню проекта
@@ -222,7 +223,7 @@ const MenuManager: React.FC = () => {
   }
 
   return (
-    <div className="p-6" data-testid="menu-manager">
+    <div className="p-6" data-testid={testIds.menu.manager}>
 
 
       {/* Переключатель вкладок с селектором типа меню */}
@@ -259,6 +260,7 @@ const MenuManager: React.FC = () => {
           {menuTypes.length > 0 && menuState.activeTab === 'items' && (
             <div className="relative max-w-xs">
               <select
+                data-testid={testIds.menu.typeSelect}
                 value={menuState.selectedMenuType}
                 onChange={(e) => {
                   if (e.target.value === '__create_new__') {

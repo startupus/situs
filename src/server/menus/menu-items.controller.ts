@@ -204,12 +204,7 @@ export class MenuItemsController {
     }
   }
 
-  @Get(':id')
-  @Scopes('PROJECT_READ')
-  async findOne(@Param('id') id: string) {
-    const menuItem = await this.menusService.findMenuItemById(id);
-    return { success: true, data: menuItem };
-  }
+  // ВАЖНО: динамический маршрут ':id' должен объявляться после всех статических путей
 
   @Post()
   @Scopes('PROJECT_WRITE')
@@ -339,5 +334,12 @@ export class MenuItemsController {
         error: error instanceof Error ? error.message : 'Ошибка построения URL' 
       };
     }
+  }
+
+  @Get(':id')
+  @Scopes('PROJECT_READ')
+  async findOne(@Param('id') id: string) {
+    const menuItem = await this.menusService.findMenuItemById(id);
+    return { success: true, data: menuItem };
   }
 }
