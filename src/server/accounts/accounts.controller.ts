@@ -41,7 +41,6 @@ export class AccountsController {
             username: `test_${resolvedOwnerId}`.slice(0, 30),
             email: `${resolvedOwnerId}@local.test`,
             password: 'test',
-            role: 'BUSINESS' as any,
             globalRole: 'BUSINESS' as any,
           },
         });

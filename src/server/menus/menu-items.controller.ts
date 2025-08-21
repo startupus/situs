@@ -205,6 +205,31 @@ export class MenuItemsController {
   }
 
   // ВАЖНО: динамический маршрут ':id' должен объявляться после всех статических путей
+  // Определение активного пункта меню для текущего пути
+  @Get('active-by-path')
+  @Scopes('PROJECT_READ')
+  async getActiveByPath(
+    @Query('menuTypeId') menuTypeId: string,
+    @Query('path') path: string
+  ) {
+    if (!menuTypeId || !path) {
+      return { success: false, error: 'Параметры menuTypeId и path обязательны' };
+    }
+
+    const activeItem = await this.menuResolverService.resolveActiveMenuItem(menuTypeId, path);
+    if (!activeItem) {
+      return { success: true, data: null };
+    }
+
+    const breadcrumbs = await this.menuResolverService.buildBreadcrumbs(activeItem, menuTypeId);
+    return {
+      success: true,
+      data: {
+        activeItem,
+        breadcrumbs
+      }
+    };
+  }
 
   @Post()
   @Scopes('PROJECT_WRITE')
@@ -247,31 +272,7 @@ export class MenuItemsController {
     return { success: true, data: resolved };
   }
 
-  // Определение активного пункта меню для текущего пути
-  @Get('active-by-path')
-  @Scopes('PROJECT_READ')
-  async getActiveByPath(
-    @Query('menuTypeId') menuTypeId: string,
-    @Query('path') path: string
-  ) {
-    if (!menuTypeId || !path) {
-      return { success: false, error: 'Параметры menuTypeId и path обязательны' };
-    }
-
-    const activeItem = await this.menuResolverService.resolveActiveMenuItem(menuTypeId, path);
-    if (!activeItem) {
-      return { success: true, data: null };
-    }
-
-    const breadcrumbs = await this.menuResolverService.buildBreadcrumbs(activeItem, menuTypeId);
-    return { 
-      success: true, 
-      data: { 
-        activeItem, 
-        breadcrumbs 
-      } 
-    };
-  }
+  
 
   // Проверка доступа к пункту меню
   @Get('security/check-access/:id')

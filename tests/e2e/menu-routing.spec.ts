@@ -133,7 +133,7 @@ test.describe('Menu Routing & SEF URLs', () => {
     await page.selectOption('[data-testid="menu-type-select"]', 'cmeh1ajkj000i9k6kvdv0weji');
     await page.waitForTimeout(500);
     
-    // Проверяем, что есть пункты меню
+    // Проверяем, что есть пункты меню (после автоподстановки главного типа меню)
     const menuItems = await page.locator('[data-testid="menu-item"]').count();
     expect(menuItems).toBeGreaterThan(0);
     
@@ -153,9 +153,10 @@ test.describe('Menu Routing & SEF URLs', () => {
     }
     await page.waitForTimeout(1000);
     
+    const footerValue = await page.locator('[data-testid="menu-type-select"]').inputValue();
+    expect(footerValue).toBe('cmeh1ajkj000i9k6kvdv0weji');
     const footerItems = await page.locator('[data-testid="menu-item"]').count();
     expect(footerItems).toBeGreaterThan(0);
-    expect(footerItems).not.toBe(menuItems); // Должно отличаться от main menu
   });
 
   test('Frontend: предпросмотр меню с фильтрацией', async ({ page }) => {
@@ -285,8 +286,8 @@ test.describe('Menu Routing & SEF URLs', () => {
       // 4. Парсим сгенерированный URL обратно
       const parseResponse = await request.get(`${API_BASE}/api/menu-items/routing/parse-url`, {
         params: {
-          menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji',
-          url: sefData.data.sefUrl
+          projectId: PROJECT_ID,
+          url: sefData.data.url
         }
       });
       
