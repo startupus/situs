@@ -5,6 +5,7 @@ export { default as StatsCard } from './StatsCard'
 export { StatsGrid } from './StatsCard'
 
 // Theme Components
+export { default as ThemeActionButtons } from './ThemeActionButtons'
 export { default as ThemeAlert } from './ThemeAlert'
 export { default as ThemeAvatar } from './ThemeAvatar'
 export { default as ThemeBadge } from './ThemeBadge'

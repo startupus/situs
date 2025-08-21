@@ -10,6 +10,7 @@ import ThemeProgress from '@/components/ui/ThemeProgress';
 import ThemeSpinner from '@/components/ui/ThemeSpinner';
 import ThemeSwitch from '@/components/ui/ThemeSwitch';
 import ThemeTooltip from '@/components/ui/ThemeTooltip';
+import ThemeActionButtons from '@/components/ui/ThemeActionButtons';
 
 // Core Components - Selects и Forms
 import { 
@@ -273,6 +274,46 @@ const AppearanceDemoSimple: React.FC = () => {
           </ComponentDemo>
         </DemoSection>
 
+        {/* Кнопки действий */}
+        <DemoSection title="🔧 Кнопки действий" id="action-buttons">
+          <ComponentDemo title="ThemeActionButtons" id="theme-action-buttons">
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Обе кнопки:</span>
+                <ThemeActionButtons
+                  onEdit={() => alert('Редактировать')}
+                  onDelete={() => alert('Удалить')}
+                />
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Только редактирование:</span>
+                <ThemeActionButtons
+                  onEdit={() => alert('Редактировать')}
+                />
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Только удаление:</span>
+                <ThemeActionButtons
+                  onDelete={() => alert('Удалить')}
+                />
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Кастомные подсказки:</span>
+                <ThemeActionButtons
+                  onEdit={() => alert('Изменить пользователя')}
+                  onDelete={() => alert('Удалить пользователя')}
+                  editTitle="Изменить пользователя"
+                  deleteTitle="Удалить пользователя"
+                />
+              </div>
+            </div>
+            <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-400">
+              <strong>Использование:</strong> В таблицах пользователей и разделе меню для единообразия интерфейса.
+              Использует корпоративные иконки FiEdit и FiTrash2.
+            </div>
+          </ComponentDemo>
+        </DemoSection>
+
         {/* Информация о полной библиотеке */}
         <DemoSection title="📚 Полная библиотека компонентов" id="full-library">
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
@@ -281,10 +322,10 @@ const AppearanceDemoSimple: React.FC = () => {
             </h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Theme Components (11)</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Theme Components (12)</h4>
                 <ul className="text-blue-700 dark:text-blue-300 space-y-1">
-                  <li>• Alerts, Avatars, Badges</li>
-                  <li>• Breadcrumb, Checkbox</li>
+                  <li>• Action Buttons, Alerts, Avatars</li>
+                  <li>• Badges, Breadcrumb, Checkbox</li>
                   <li>• Progress, Pagination</li>
                   <li>• Spinner, Switch, Tooltip</li>
                 </ul>

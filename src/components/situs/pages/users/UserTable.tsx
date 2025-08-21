@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeButton, ThemeSelect, ThemeCheckbox } from '../../../ui';
+import { ThemeButton, ThemeSelect, ThemeCheckbox, ThemeBadge, ThemeActionButtons } from '../../../ui';
 
 interface User {
   id: string;
@@ -31,7 +31,45 @@ const UserTable: React.FC<UserTableProps> = ({
   onUpdateUserRole,
   onUpdateUserStatus
 }) => {
+  const getRoleVariant = (role: string): 'primary' | 'success' | 'danger' | 'warning' | 'info' => {
+    switch (role) {
+      case 'SUPER_ADMIN': return 'danger';
+      case 'STAFF': return 'primary';
+      case 'AGENCY': return 'info';
+      case 'BUSINESS': return 'success';
+      default: return 'primary';
+    }
+  };
 
+  const getRoleLabel = (role: string): string => {
+    switch (role) {
+      case 'SUPER_ADMIN': return 'Супер Админ';
+      case 'STAFF': return 'Сотрудник';
+      case 'AGENCY': return 'Агентство';
+      case 'BUSINESS': return 'Бизнес';
+      default: return role;
+    }
+  };
+
+  const getStatusVariant = (status: User['status']): 'primary' | 'success' | 'danger' | 'warning' | 'info' => {
+    switch (status) {
+      case 'active': return 'success';
+      case 'pending': return 'warning';
+      case 'suspended': return 'danger';
+      case 'inactive': return 'info';
+      default: return 'info';
+    }
+  };
+
+  const getStatusLabel = (status: User['status']): string => {
+    switch (status) {
+      case 'active': return 'Активный';
+      case 'pending': return 'Ожидает';
+      case 'suspended': return 'Заблокирован';
+      case 'inactive': return 'Неактивный';
+      default: return status;
+    }
+  };
 
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -106,32 +144,20 @@ const UserTable: React.FC<UserTableProps> = ({
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  <ThemeSelect
-                    value={user.globalRole}
-                    onChange={(e) => onUpdateUserRole(user.id, e.target.value)}
-                    options={[
-                      { value: "SUPER_ADMIN", label: "Супер Админ" },
-                      { value: "STAFF", label: "Сотрудник" },
-                      { value: "AGENCY", label: "Агентство" },
-                      { value: "BUSINESS", label: "Бизнес" }
-                    ]}
+                  <ThemeBadge
+                    variant={getRoleVariant(user.globalRole)}
                     size="sm"
-                    variant="badge"
-                  />
+                  >
+                    {getRoleLabel(user.globalRole)}
+                  </ThemeBadge>
                 </td>
                 <td className="px-6 py-4">
-                  <ThemeSelect
-                    value={user.status}
-                    onChange={(e) => onUpdateUserStatus(user.id, e.target.value as User['status'])}
-                    options={[
-                      { value: "active", label: "Активный" },
-                      { value: "pending", label: "Ожидает" },
-                      { value: "suspended", label: "Заблокирован" },
-                      { value: "inactive", label: "Неактивный" }
-                    ]}
+                  <ThemeBadge
+                    variant={getStatusVariant(user.status)}
                     size="sm"
-                    variant="badge"
-                  />
+                  >
+                    {getStatusLabel(user.status)}
+                  </ThemeBadge>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
                   {user.projectsCount}
@@ -140,23 +166,12 @@ const UserTable: React.FC<UserTableProps> = ({
                   {user.lastLogin ? user.lastLogin.toLocaleDateString('ru-RU') : 'Никогда'}
                 </td>
                 <td className="px-6 py-4 text-sm font-medium">
-                  <div className="flex space-x-2">
-                    <ThemeButton
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => console.log('Edit user:', user.id)}
-                    >
-                      Редактировать
-                    </ThemeButton>
-                    <ThemeButton
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => console.log('Delete user:', user.id)}
-                      className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
-                    >
-                      Удалить
-                    </ThemeButton>
-                  </div>
+                  <ThemeActionButtons
+                    onEdit={() => console.log('Edit user:', user.id)}
+                    onDelete={() => console.log('Delete user:', user.id)}
+                    editTitle="Редактировать пользователя"
+                    deleteTitle="Удалить пользователя"
+                  />
                 </td>
               </tr>
             ))}
