@@ -68,6 +68,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
     if (path.startsWith('/users')) return 'Пользователи';
     if (path.startsWith('/support')) return 'Поддержка';
     if (path.startsWith('/section-settings')) return 'Настройки';
+    if (path.startsWith('/demo/components')) return 'Демонстрация компонентов';
     return 'Раздел';
   }, [isProjectPage, headerProjectName, currentProject?.name, location.pathname, location.search]);
 
@@ -78,6 +79,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
       return match ? `/projects/${match[1]}` : '/projects';
     }
     if (isProjectPage) return '/projects';
+    if (location.pathname.startsWith('/demo/components')) return '/section-settings/appearance';
     if (location.pathname !== '/') return '/';
     return undefined;
   }, [isProjectPage, location.pathname]);
@@ -87,9 +89,15 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
   // Правило отображения кнопки создания по разделам
   const canCreateHere = useMemo(() => {
     if (location.pathname.startsWith('/projects')) return true;
-    // можно расширить: orders, users etc.
+    if (location.pathname.startsWith('/users')) {
+      // На странице пользователей кнопка + доступна только на вкладках "Пользователи" и "Роли"
+      const searchParams = new URLSearchParams(location.search);
+      const tab = searchParams.get('tab');
+      return tab === 'users' || tab === 'roles' || !tab; // по умолчанию вкладка "users"
+    }
+    // можно расширить: orders etc.
     return false;
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
   const isWebsitePage = useMemo(() => /^\/projects\/[^/]+\/website/.test(location.pathname), [location.pathname]);
 
   // Состояние поиска в верхней панели
@@ -210,6 +218,19 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                           // На вкладке "Пункты меню" создаем пункт меню
                           window.dispatchEvent(new CustomEvent('situs:create-menu-item'));
                         }
+                      } else if (location.pathname.startsWith('/users')) {
+                        // Определяем активную вкладку из URL
+                        const searchParams = new URLSearchParams(location.search);
+                        const tab = searchParams.get('tab');
+                        
+                        if (tab === 'roles') {
+                          // На вкладке "Роли и права" создаем роль
+                          window.dispatchEvent(new CustomEvent('situs:create-role'));
+                        } else if (tab === 'users' || !tab) {
+                          // На вкладке "Пользователи" создаем пользователя напрямую
+                          window.dispatchEvent(new CustomEvent('situs:create-user'));
+                        }
+                        // На вкладках "Приглашения" и "Настройки" кнопка + не работает
                       } else if (location.pathname.startsWith('/projects')) {
                         window.dispatchEvent(new CustomEvent('situs:create-project'));
                       }

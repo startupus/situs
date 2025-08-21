@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ProjectRolePermissions from './ProjectRolePermissions';
 
 interface SectionSettings {
   id: string;
@@ -28,6 +29,7 @@ const SectionContent: React.FC<SectionContentProps> = ({
   handleSectionToggle,
   handleSectionSettingChange
 }) => {
+  const [activeTab, setActiveTab] = useState<'basic' | 'roles'>('basic');
   return (
     <div>
       {/* Заголовок */}
@@ -39,10 +41,48 @@ const SectionContent: React.FC<SectionContentProps> = ({
             <p className="text-body-color dark:text-dark-6">{section.description}</p>
           </div>
         </div>
+
+        {/* Табы для проектов */}
+        {section.id === 'projects' && (
+          <div className="border-b border-gray-200 dark:border-gray-700">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab('basic')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'basic'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                Основные настройки
+              </button>
+              <button
+                onClick={() => setActiveTab('roles')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'roles'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                Права ролей
+              </button>
+            </nav>
+          </div>
+        )}
       </div>
 
-      {/* Настройки раздела */}
-      <div className="grid gap-8 md:grid-cols-2">
+      {/* Контент в зависимости от активного таба */}
+      {section.id === 'projects' && activeTab === 'roles' ? (
+        <ProjectRolePermissions
+          onSave={(rolePermissions) => {
+            console.log('Сохранение настроек ролей:', rolePermissions);
+            // Здесь будет API вызов для сохранения
+          }}
+        />
+      ) : (
+        <>
+          {/* Настройки раздела */}
+          <div className="grid gap-8 md:grid-cols-2">
         {/* Основные настройки раздела */}
         <div className="bg-white rounded-lg p-6 shadow-lg dark:bg-dark-2">
           <h3 className="text-xl font-semibold text-dark dark:text-white mb-6">
@@ -162,6 +202,8 @@ const SectionContent: React.FC<SectionContentProps> = ({
           Сбросить
         </button>
       </div>
+        </>
+      )}
     </div>
   );
 };

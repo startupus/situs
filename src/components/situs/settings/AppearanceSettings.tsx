@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaPalette, FaGlobe } from 'react-icons/fa';
+import { FaPalette, FaGlobe, FaEye } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 interface GlobalSettings {
   theme: string;
@@ -26,6 +27,7 @@ const AppearanceSettings: React.FC<AppearanceSettingsProps> = ({
   setShowEditorModal,
   handleSave 
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg dark:bg-dark-2">
       <h3 className="text-xl font-semibold text-dark dark:text-white mb-6">
@@ -69,6 +71,36 @@ const AppearanceSettings: React.FC<AppearanceSettingsProps> = ({
                 Расширенные настройки темы
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Демонстрация компонентов */}
+        <div className="bg-gray-50 dark:bg-dark rounded-lg p-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <FaEye className="text-primary" />
+            <h4 className="text-lg font-semibold text-dark dark:text-white">
+              Демонстрация компонентов
+            </h4>
+          </div>
+          <p className="text-body-color dark:text-dark-6 mb-4">
+            Просмотр всех доступных компонентов глобальной темы проекта
+          </p>
+          
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-dark dark:text-white font-medium">
+                300+ компонентов UI библиотеки
+              </p>
+              <p className="text-xs text-body-color dark:text-dark-6">
+                Theme Components, Core Components, Dashboard Components
+              </p>
+            </div>
+                          <button 
+                onClick={() => navigate('/demo/components')}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Открыть демо
+              </button>
           </div>
         </div>
 
