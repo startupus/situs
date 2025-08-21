@@ -18,7 +18,7 @@ export const useMenuSystem = (projectId?: string) => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch(`http://localhost:3002/api/menu-types?projectId=${projectId}`);
+      const response = await fetch(`/api/menu-types?projectId=${projectId}`);
       const data = await response.json();
       
       if (data.success) {
@@ -36,7 +36,7 @@ export const useMenuSystem = (projectId?: string) => {
   // Загрузка пунктов меню по типу
   const loadMenuItems = async (menuTypeId: string): Promise<MenuItemData[]> => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items?menuTypeId=${menuTypeId}`);
+      const response = await fetch(`/api/menu-items?menuTypeId=${menuTypeId}`);
       const data = await response.json();
       
       if (data.success) {
@@ -60,7 +60,7 @@ export const useMenuSystem = (projectId?: string) => {
       const params = new URLSearchParams({ menuTypeId, accessLevels: levels });
       if (language) params.set('language', language);
       const response = await fetch(
-        `http://localhost:3002/api/menu-items/authorized?${params.toString()}`
+        `/api/menu-items/authorized?${params.toString()}`
       );
       const data = await response.json();
       
@@ -78,7 +78,7 @@ export const useMenuSystem = (projectId?: string) => {
   const getMenuLookup = async (menuTypeId: string, language = '*') => {
     try {
       const response = await fetch(
-        `http://localhost:3002/api/menu-items/lookup?menuTypeId=${menuTypeId}&language=${language}`
+        `/api/menu-items/lookup?menuTypeId=${menuTypeId}&language=${language}`
       );
       const data = await response.json();
       
@@ -95,7 +95,7 @@ export const useMenuSystem = (projectId?: string) => {
   // Разрешение пункта меню в данные компонента
   const resolveMenuItem = async (menuItemId: string) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items/${menuItemId}/resolve`);
+      const response = await fetch(`/api/menu-items/${menuItemId}/resolve`);
       const data = await response.json();
       
       if (data.success) {
@@ -112,7 +112,7 @@ export const useMenuSystem = (projectId?: string) => {
   const getActiveMenuItem = async (menuTypeId: string, currentPath: string, language: string = '*') => {
     try {
       const response = await fetch(
-        `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuTypeId}&path=${encodeURIComponent(currentPath)}&language=${language}`
+        `/api/menu-items/active-by-path?menuTypeId=${menuTypeId}&path=${encodeURIComponent(currentPath)}&language=${language}`
       );
       const data = await response.json();
       

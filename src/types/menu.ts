@@ -22,12 +22,34 @@ export interface MenuTypeData {
 }
 
 /**
- * Пункт меню (аналог menuitem в Joomla)
+ * Языковая версия пункта меню
+ */
+export interface MenuItemLanguageVersion {
+  language: string;       // "ru-RU", "en-GB", "es-ES"
+  title: string;          // "Каталог товаров" / "Product Catalog"
+  alias: string;          // "catalog" / "catalog-en"
+  externalUrl?: string;   // Может отличаться для разных языков
+  
+  // SEO метаданные для конкретного языка
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
+  
+  // CSS и стили для конкретного языка
+  cssClass?: string;
+  menuImage?: string;
+  
+  // Параметры для конкретного языка
+  parameters?: Partial<MenuParameters>;
+}
+
+/**
+ * Пункт меню (аналог menuitem в Joomla) с поддержкой мультиязычности
  */
 export interface MenuItemData {
   id: string;
-  title: string;          // "Каталог товаров"
-  alias: string;          // "catalog"
+  title: string;          // "Каталог товаров" (основной язык)
+  alias: string;          // "catalog" (основной язык)
   type: MenuItemType;
   
   // Иерархия (как в Joomla)
@@ -41,22 +63,25 @@ export interface MenuItemData {
   view?: string;          // "page", "category", "item", "list"
   layout?: string;        // "default", "blog", "grid", "form"
   targetId?: string;      // pageId, categoryId, itemId
-  externalUrl?: string;   // Для type = URL
+  externalUrl?: string;   // Для type = URL (основной язык)
   
   // Настройки отображения
   isPublished: boolean;
   accessLevel: AccessLevel;
-  language: string;       // "*", "ru-RU", "en-GB"
+  language: string;       // Основной язык: "*", "ru-RU", "en-GB"
+  
+  // Мультиязычность - языковые версии
+  languageVersions?: MenuItemLanguageVersion[];
   
   // Параметры (JSON как в Joomla)
   parameters: MenuParameters;
   
-  // SEO метаданные
+  // SEO метаданные (основной язык)
   metaTitle?: string;
   metaDescription?: string;
   metaKeywords?: string;
   
-  // CSS и стили
+  // CSS и стили (основной язык)
   cssClass?: string;
   menuImage?: string;
   
@@ -169,6 +194,20 @@ export interface MenuItemFilters {
 }
 
 /**
+ * Поддерживаемые языки системы
+ */
+export const SUPPORTED_LANGUAGES = [
+  { code: '*', name: 'Все языки', flag: '🌐' },
+  { code: 'ru-RU', name: 'Русский', flag: '🇷🇺' },
+  { code: 'en-GB', name: 'English', flag: '🇬🇧' },
+  { code: 'es-ES', name: 'Español', flag: '🇪🇸' },
+  { code: 'fr-FR', name: 'Français', flag: '🇫🇷' },
+  { code: 'de-DE', name: 'Deutsch', flag: '🇩🇪' },
+] as const;
+
+export type SupportedLanguageCode = typeof SUPPORTED_LANGUAGES[number]['code'];
+
+/**
  * Данные для создания пункта меню
  */
 export interface CreateMenuItemRequest {
@@ -184,6 +223,7 @@ export interface CreateMenuItemRequest {
   externalUrl?: string;
   accessLevel?: AccessLevel;
   language?: string;
+  languageVersions?: MenuItemLanguageVersion[];
   parameters?: Partial<MenuParameters>;
   metaTitle?: string;
   metaDescription?: string;
@@ -237,4 +277,106 @@ export interface MenuItemsResponse {
 export interface MenuTypesResponse {
   success: boolean;
   data: MenuTypeData[];
+}
+
+/**
+ * Утилиты для работы с мультиязычными пунктами меню
+ */
+export class MenuItemLanguageUtils {
+  /**
+   * Получить языковую версию пункта меню
+   */
+  static getLanguageVersion(
+    item: MenuItemData, 
+    languageCode: string
+  ): MenuItemLanguageVersion | null {
+    if (!item.languageVersions) return null;
+    return item.languageVersions.find(v => v.language === languageCode) || null;
+  }
+
+  /**
+   * Получить локализованные данные пункта меню для конкретного языка
+   */
+  static getLocalizedMenuItem(
+    item: MenuItemData, 
+    languageCode: string
+  ): MenuItemData {
+    const version = this.getLanguageVersion(item, languageCode);
+    
+    if (!version) {
+      return item; // Возвращаем основную версию
+    }
+
+    // Объединяем основные данные с языковой версией
+    return {
+      ...item,
+      title: version.title || item.title,
+      alias: version.alias || item.alias,
+      externalUrl: version.externalUrl || item.externalUrl,
+      metaTitle: version.metaTitle || item.metaTitle,
+      metaDescription: version.metaDescription || item.metaDescription,
+      metaKeywords: version.metaKeywords || item.metaKeywords,
+      cssClass: version.cssClass || item.cssClass,
+      menuImage: version.menuImage || item.menuImage,
+      parameters: version.parameters ? 
+        { ...item.parameters, ...version.parameters } : 
+        item.parameters
+    };
+  }
+
+  /**
+   * Добавить или обновить языковую версию
+   */
+  static setLanguageVersion(
+    item: MenuItemData, 
+    version: MenuItemLanguageVersion
+  ): MenuItemData {
+    const versions = item.languageVersions || [];
+    const existingIndex = versions.findIndex(v => v.language === version.language);
+    
+    if (existingIndex >= 0) {
+      versions[existingIndex] = version;
+    } else {
+      versions.push(version);
+    }
+
+    return {
+      ...item,
+      languageVersions: versions
+    };
+  }
+
+  /**
+   * Удалить языковую версию
+   */
+  static removeLanguageVersion(
+    item: MenuItemData, 
+    languageCode: string
+  ): MenuItemData {
+    if (!item.languageVersions) return item;
+    
+    return {
+      ...item,
+      languageVersions: item.languageVersions.filter(v => v.language !== languageCode)
+    };
+  }
+
+  /**
+   * Получить список доступных языков для пункта меню
+   */
+  static getAvailableLanguages(item: MenuItemData): string[] {
+    const languages = [item.language];
+    if (item.languageVersions) {
+      languages.push(...item.languageVersions.map(v => v.language));
+    }
+    return [...new Set(languages)].filter(lang => lang !== '*');
+  }
+
+  /**
+   * Проверить, есть ли языковая версия для конкретного языка
+   */
+  static hasLanguageVersion(item: MenuItemData, languageCode: string): boolean {
+    if (item.language === languageCode) return true;
+    return item.languageVersions?.some(v => v.language === languageCode) || false;
+  }
 }

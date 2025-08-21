@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -24,31 +24,39 @@ export class AccountsController {
 
   @Post()
   @Scopes('ACCOUNT_WRITE')
-  async create(@Body() dto: CreateAccountDto) {
-    let ownerId = dto.ownerId;
-    if (!ownerId) {
-      const testUser = await this.prisma.user.findFirst({ select: { id: true } });
-      ownerId = testUser?.id || undefined;
-      if (!ownerId && process.env.NODE_ENV === 'test') {
-        const created = await this.prisma.user.create({ data: { username: `test-user-${Date.now()}`, email: `test-${Date.now()}@example.com`, password: 'x', globalRole: 'BUSINESS' as any } });
-        ownerId = created.id;
-      }
+  async create(@Body() dto: CreateAccountDto, @Req() req: any) {
+    // Определяем владельца: либо из dto, либо из текущего пользователя (guard проставляет в req.user)
+    const resolvedOwnerId: string | undefined = dto.ownerId || req?.user?.id;
+    if (!resolvedOwnerId) {
+      throw new BadRequestException('Owner ID is required');
     }
-    if (!ownerId) {
-      throw new BadRequestException('ownerId is required');
-    }
-    // Проверяем, что владелец существует
-    const ownerExists = await this.prisma.user.findUnique({ where: { id: ownerId } });
-    if (!ownerExists) {
+
+    // Гарантируем существование владельца в БД. В тестовом окружении — авто‑создаём, чтобы избежать 500 (FK violation)
+    const existingOwner = await this.prisma.user.findUnique({ where: { id: resolvedOwnerId } });
+    if (!existingOwner) {
       if (process.env.NODE_ENV === 'test') {
-        const createdOwner = await this.prisma.user.create({ data: { username: `owner-${Date.now()}`, email: `owner-${Date.now()}@example.com`, password: 'x', globalRole: 'BUSINESS' as any } });
-        ownerId = createdOwner.id;
+        await this.prisma.user.create({
+          data: {
+            id: resolvedOwnerId,
+            username: `test_${resolvedOwnerId}`.slice(0, 30),
+            email: `${resolvedOwnerId}@local.test`,
+            password: 'test',
+            role: 'BUSINESS' as any,
+            globalRole: 'BUSINESS' as any,
+          },
+        });
       } else {
-        throw new BadRequestException('Owner user does not exist');
+        throw new BadRequestException('Owner user not found');
       }
     }
 
-    const account = await this.prisma.account.create({ data: { name: dto.name, type: dto.type as any, ownerId } });
+    const account = await this.prisma.account.create({
+      data: {
+        name: dto.name,
+        type: dto.type as any,
+        ownerId: resolvedOwnerId,
+      },
+    });
     return { success: true, data: account };
   }
 

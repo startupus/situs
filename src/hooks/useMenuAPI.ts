@@ -12,7 +12,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const handleCreateMenuItem = async (data: CreateMenuItemRequest) => {
     try {
-      const response = await fetch('http://localhost:3002/api/menu-items', {
+      const response = await fetch('/api/menu-items', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -35,7 +35,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const handleUpdateMenuItem = async (id: string, updates: Partial<MenuItemData>) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items/${id}`, {
+      const response = await fetch(`/api/menu-items/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates)
@@ -58,7 +58,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const handleDeleteMenuItem = async (itemId: string) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items/${itemId}`, {
+      const response = await fetch(`/api/menu-items/${itemId}`, {
         method: 'DELETE'
       });
 
@@ -92,7 +92,7 @@ export const useMenuAPI = (projectId: string) => {
         parentId: item.parentId || null
       }));
 
-      const response = await fetch('http://localhost:3002/api/menu-items/reorder', {
+      const response = await fetch('/api/menu-items/reorder', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: itemsToSend })
@@ -117,7 +117,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const handleCreateMenuType = async (data: CreateMenuTypeRequest) => {
     try {
-      const response = await fetch('http://localhost:3002/api/menu-types', {
+      const response = await fetch('/api/menu-types', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -151,7 +151,7 @@ export const useMenuAPI = (projectId: string) => {
         projectId
       };
 
-      const response = await fetch(`http://localhost:3002/api/menu-types/${typeId}`, {
+      const response = await fetch(`/api/menu-types/${typeId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updateData)
@@ -174,7 +174,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const handleDeleteMenuType = async (typeId: string) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-types/${typeId}`, {
+      const response = await fetch(`/api/menu-types/${typeId}`, {
         method: 'DELETE'
       });
 
@@ -195,7 +195,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const handleToggleMenuTypeStatus = async (typeId: string, isActive: boolean) => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-types/${typeId}`, {
+      const response = await fetch(`/api/menu-types/${typeId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isActive, projectId })
@@ -222,7 +222,7 @@ export const useMenuAPI = (projectId: string) => {
     try {
       // Выполняем запросы параллельно для всех выбранных типов
       const promises = typeIds.map(typeId => 
-        fetch(`http://localhost:3002/api/menu-types/${typeId}`, {
+        fetch(`/api/menu-types/${typeId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ isActive, projectId })
@@ -252,7 +252,7 @@ export const useMenuAPI = (projectId: string) => {
     try {
       // Выполняем запросы параллельно для всех выбранных типов
       const promises = typeIds.map(typeId => 
-        fetch(`http://localhost:3002/api/menu-types/${typeId}`, {
+        fetch(`/api/menu-types/${typeId}`, {
           method: 'DELETE'
         })
       );
@@ -280,7 +280,7 @@ export const useMenuAPI = (projectId: string) => {
     try {
       // Выполняем запросы параллельно для всех выбранных пунктов
       const promises = itemIds.map(itemId => 
-        fetch(`http://localhost:3002/api/menu-items/${itemId}`, {
+        fetch(`/api/menu-items/${itemId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ isPublished: isActive })
@@ -310,7 +310,7 @@ export const useMenuAPI = (projectId: string) => {
     try {
       // Выполняем запросы параллельно для всех выбранных пунктов
       const promises = itemIds.map(itemId => 
-        fetch(`http://localhost:3002/api/menu-items/${itemId}`, {
+        fetch(`/api/menu-items/${itemId}`, {
           method: 'DELETE'
         })
       );
@@ -336,7 +336,7 @@ export const useMenuAPI = (projectId: string) => {
    */
   const loadAllMenuItems = async () => {
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items?projectId=${projectId}`);
+      const response = await fetch(`/api/menu-items?projectId=${projectId}`);
       const data = await response.json();
       
       if (!data.success) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiEye, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiGrid, FiSmartphone, FiList, FiUser, FiUsers, FiStar, FiInfo, FiChevronDown } from 'react-icons/fi';
 import { MenuItemData } from '../../../types/menu';
 import { useMenuSystemRealtime } from '../../../hooks/useMenuSystemRealtime';
+import { testIds } from '../../ui/testids';
 
 /**
  * Компонент предпросмотра меню в реальном времени
@@ -136,7 +137,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3" data-testid="menu-preview">
+    <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3" data-testid={testIds.menu.preview}>
       {/* Заголовок */}
       <div className="p-4 border-b border-stroke dark:border-dark-3">
         <h3 className="text-lg font-semibold text-dark dark:text-white mb-2 flex items-center gap-2">
@@ -157,7 +158,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
               Стиль
             </label>
             <select
-              data-testid="menu-preview-style"
+              data-testid={testIds.menu.previewStyleSelect}
               value={previewStyle}
               onChange={(e) => setPreviewStyle(e.target.value as any)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white"
@@ -174,7 +175,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
               Роль пользователя
             </label>
             <select
-              data-testid="menu-preview-role"
+              data-testid={testIds.menu.previewRoleSelect}
               value={userRole}
               onChange={(e) => setUserRole(e.target.value as any)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white"
@@ -191,7 +192,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
               Язык
             </label>
             <select
-              data-testid="menu-preview-language"
+              data-testid={testIds.menu.previewLanguageSelect}
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white"
@@ -205,7 +206,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
         </div>
 
         {/* Статистика фильтрации */}
-        <div className="mt-3 text-sm text-body-color dark:text-dark-6" data-testid="menu-preview-stats">
+        <div className="mt-3 text-sm text-body-color dark:text-dark-6" data-testid={testIds.menu.previewStats}>
           Показано: <strong>{filteredItems.length}</strong> из {menuItems.length} пунктов
           {userRole !== 'admin' && menuItems.length > filteredItems.length && (
             <span className="text-orange-600 dark:text-orange-400 ml-2">

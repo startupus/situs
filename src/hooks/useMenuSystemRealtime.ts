@@ -20,7 +20,7 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
       setLoading(true);
       setError(null);
       
-      const response = await fetch(`http://localhost:3002/api/menu-types?projectId=${projectId}`);
+      const response = await fetch(`/api/menu-types?projectId=${projectId}`);
       const data = await response.json();
       
       if (data.success) {
@@ -41,7 +41,7 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
     if (!menuTypeId) return;
     
     try {
-      const response = await fetch(`http://localhost:3002/api/menu-items?menuTypeId=${menuTypeId}`);
+      const response = await fetch(`/api/menu-items?menuTypeId=${menuTypeId}`);
       const data = await response.json();
       
       if (data.success) {

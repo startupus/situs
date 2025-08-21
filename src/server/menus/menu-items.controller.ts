@@ -204,6 +204,7 @@ export class MenuItemsController {
     }
   }
 
+  // ВАЖНО: динамический маршрут ':id' должен объявляться после всех статических путей
   // Определение активного пункта меню для текущего пути
   @Get('active-by-path')
   @Scopes('PROJECT_READ')
@@ -228,13 +229,6 @@ export class MenuItemsController {
         breadcrumbs
       }
     };
-  }
-
-  @Get(':id')
-  @Scopes('PROJECT_READ')
-  async findOne(@Param('id') id: string) {
-    const menuItem = await this.menusService.findMenuItemById(id);
-    return { success: true, data: menuItem };
   }
 
   @Post()
@@ -341,5 +335,12 @@ export class MenuItemsController {
         error: error instanceof Error ? error.message : 'Ошибка построения URL' 
       };
     }
+  }
+
+  @Get(':id')
+  @Scopes('PROJECT_READ')
+  async findOne(@Param('id') id: string) {
+    const menuItem = await this.menusService.findMenuItemById(id);
+    return { success: true, data: menuItem };
   }
 }
