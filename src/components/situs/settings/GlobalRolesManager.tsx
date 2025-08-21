@@ -529,6 +529,7 @@ const GlobalRolesManager: React.FC = () => {
       )}
 
       {/* Модальное окно редактирования прав */}
+      {console.log('🎭 Rendering modal with:', { showPermissionsModal, selectedRole: selectedRoleForPermissions?.displayName, permissionsCount: permissions.length })}
       <RolePermissionsModal
         isOpen={showPermissionsModal}
         onClose={handleClosePermissionsModal}

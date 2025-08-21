@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FiCheck, FiShield, FiLock, FiUnlock } from 'react-icons/fi';
-import ProModal from '../../ui/ProModal';
-import ProButton from '../../ui/ProButton';
+import { FiCheck, FiShield, FiLock, FiUnlock, FiX } from 'react-icons/fi';
+import { ThemeModal, ThemeButton } from '../../ui';
 
 interface Permission {
   id: string;
@@ -107,12 +106,19 @@ const RolePermissionsModal: React.FC<RolePermissionsModalProps> = ({
   if (!isOpen || !role) return null;
 
   return (
-    <ProModal
-      isOpen={isOpen}
-      onClose={onClose}
-      size="xl"
-      className="max-h-[90vh] overflow-hidden"
-    >
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Настройка прав доступа
+          </h3>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+          >
+            <FiX className="w-6 h-6" />
+          </button>
+        </div>
       {/* Заголовок с иконкой */}
       <div className="flex items-center space-x-3 mb-6">
         <FiShield className="w-6 h-6 text-blue-600" />
@@ -263,24 +269,25 @@ const RolePermissionsModal: React.FC<RolePermissionsModalProps> = ({
         </div>
         
         <div className="flex space-x-4">
-          <ProButton
-            variant="outline"
+          <ThemeButton
+            variant="secondary"
             onClick={onClose}
           >
             Отмена
-          </ProButton>
+          </ThemeButton>
           {!hasFullAccess && (
-            <ProButton
+            <ThemeButton
               variant="primary"
               onClick={handleSave}
             >
               <FiCheck className="w-4 h-4 mr-2" />
               Сохранить
-            </ProButton>
+            </ThemeButton>
           )}
         </div>
       </div>
-    </ProModal>
+      </div>
+    </div>
   );
 };
 
