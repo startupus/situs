@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FiEdit, FiTrash2, FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { MenuItemProps } from './types';
 import ToggleSwitch from '../../../ui/ToggleSwitch';
+import { testIds } from '../../../ui/testids';
 
 /**
  * Компонент отдельного пункта меню с поддержкой Drag & Drop
@@ -52,18 +53,20 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
         onDragOver={(e) => onDragOver(e, item)}
         onDragLeave={onDragLeave}
         onDrop={(e) => onDrop(e, item)}
+        data-testid={testIds.menu.item}
         className={`
           flex items-center gap-3 p-3 rounded-lg cursor-move transition-all
           ${isDragging ? 'opacity-50 bg-gray-100 dark:bg-gray-800' : 'hover:bg-gray-50 dark:hover:bg-dark-3'}
           ${getDropIndicatorClass()}
         `}
         style={{ marginLeft: `${displayDepth * 20}px` }}
-        data-testid="menu-item"
       >
         {/* Иконка перетаскивания */}
-        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid="menu-drag-handle">
-          ⋮⋮
-        </div>
+<<<<<<< HEAD
+        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid={testIds.menu.dragHandle}>⋮⋮</div>
+=======
+        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid={testIds.menu.dragHandle}>⋮⋮</div>
+>>>>>>> origin/dev/phase2-website-ui-dto-validation-2025-08-18
 
         {/* Чекбокс для пакетной обработки */}
         {showSelection && onSelectItem && (

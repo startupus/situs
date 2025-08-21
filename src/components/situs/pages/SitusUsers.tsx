@@ -4,6 +4,7 @@ import { User } from '../../../types/users';
 import { ApiUtils } from '../../../api/client';
 import UserModal from '../components/UserModal';
 import RolePermissionsModal from '../components/RolePermissionsModal';
+import { testIds } from '../../ui/testids';
 
 const SitusUsers: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -207,7 +208,7 @@ const SitusUsers: React.FC = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6" data-testid={testIds.users.container}>
       {/* Заголовок */}
       <div className="flex justify-between items-center">
         <div>
@@ -261,6 +262,7 @@ const SitusUsers: React.FC = () => {
               Поиск
             </label>
             <input
+              data-testid={testIds.users.searchInput}
               type="text"
               value={filters.search || ''}
               onChange={(e) => handleFilterChange({ search: e.target.value })}
@@ -273,6 +275,7 @@ const SitusUsers: React.FC = () => {
               Роль
             </label>
             <select
+              data-testid={testIds.users.roleSelect}
               value={filters.role || ''}
               onChange={(e) => handleFilterChange({ role: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -291,6 +294,7 @@ const SitusUsers: React.FC = () => {
               Статус
             </label>
             <select
+              data-testid={testIds.users.statusSelect}
               value={filters.status || ''}
               onChange={(e) => handleFilterChange({ status: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -324,7 +328,7 @@ const SitusUsers: React.FC = () => {
       </div>
 
       {/* Таблица пользователей */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden" data-testid={testIds.users.table}>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-700">
@@ -351,7 +355,7 @@ const SitusUsers: React.FC = () => {
             </thead>
             <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
               {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700" data-testid={testIds.users.row}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center">
@@ -391,18 +395,21 @@ const SitusUsers: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex space-x-2">
                       <button
+                        data-testid={testIds.users.editButton}
                         onClick={() => handleEditUser(user)}
                         className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                       >
                         Редактировать
                       </button>
                       <button
+                        data-testid={testIds.users.permissionsButton}
                         onClick={() => handleEditPermissions(user.id)}
                         className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300"
                       >
                         Права
                       </button>
                       <button
+                        data-testid={testIds.users.deleteButton}
                         onClick={() => handleDeleteUser(user.id)}
                         className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                       >
