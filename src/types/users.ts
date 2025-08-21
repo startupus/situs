@@ -1,8 +1,14 @@
-// Типы ролей пользователей
-export type UserRole = 'super_admin' | 'company_admin' | 'admin' | 'moderator' | 'editor' | 'client';
+// Глобальные роли пользователей (синхронизировано с бэкендом)
+export type GlobalRole = 'SUPER_ADMIN' | 'STAFF' | 'AGENCY' | 'BUSINESS';
 
-// Статусы пользователей
-export type UserStatus = 'active' | 'inactive' | 'suspended' | 'pending';
+// Роли проекта
+export type ProjectRole = 'OWNER' | 'ADMIN' | 'EDITOR' | 'VIEWER';
+
+// Роли аккаунта  
+export type AccountRole = 'OWNER' | 'ADMIN' | 'MANAGER' | 'MEMBER';
+
+// Статусы пользователей (синхронизировано с бэкендом)
+export type UserStatus = 'ACTIVE' | 'INACTIVE' | 'SUSPENDED' | 'BANNED';
 
 // Права доступа
 export interface UserPermission {
@@ -15,7 +21,7 @@ export interface UserPermission {
 // Роль с правами доступа
 export interface Role {
   id: string;
-  name: UserRole;
+  name: GlobalRole;
   displayName: string;
   description: string;
   permissions: string[]; // IDs прав доступа
@@ -29,7 +35,7 @@ export interface User {
   firstName: string;
   lastName: string;
   avatar?: string;
-  role: UserRole;
+  globalRole: GlobalRole;
   status: UserStatus;
   createdAt: Date;
   updatedAt: Date;
@@ -55,7 +61,7 @@ export interface User {
 
 // Фильтры для поиска пользователей
 export interface UserFilters {
-  role?: UserRole | 'all';
+  role?: GlobalRole | 'all';
   status?: UserStatus | 'all';
   search?: string;
   company?: string;
@@ -69,8 +75,8 @@ export interface UserStats {
   active: number;
   inactive: number;
   suspended: number;
-  pending: number;
-  byRole: Record<UserRole, number>;
+  banned: number;
+  byRole: Record<GlobalRole, number>;
   newThisMonth: number;
   newThisWeek: number;
 }
@@ -80,7 +86,7 @@ export interface UserForm {
   email: string;
   firstName: string;
   lastName: string;
-  role: UserRole;
+  globalRole: GlobalRole;
   status: UserStatus;
   phone?: string;
   company?: string;
