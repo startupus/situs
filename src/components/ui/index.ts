@@ -25,5 +25,138 @@ export { default as ThemeSwitch } from './ThemeSwitch'
 export { default as ThemeTooltip } from './ThemeTooltip'
 export { ThemeForm, ThemeInput, ThemeSelect, ThemeTextarea } from './ThemeForm'
 
+// Theme Badge Components
+export { 
+  ThemeDangerBadge, 
+  ThemeDarkBadge, 
+  ThemeGrayBadge, 
+  ThemeInfoBadge, 
+  ThemeLightBadge, 
+  ThemePrimaryBadge, 
+  ThemeSecondaryBadge, 
+  ThemeSuccessBadge, 
+  ThemeWarningBadge,
+  ThemeBadges
+} from './ThemeBadges';
+
+// Theme Button Components
+export { 
+  // Primary variants
+  ThemePrimaryButton,
+  ThemePrimaryButtonWithIcon,
+  ThemePrimaryOutlineButton,
+  ThemePrimaryOutlineButtonWithIcon,
+  ThemePrimaryOutlineFullRoundedButtonWithIcon,
+  ThemePrimaryOutlineSemiRoundedButtonWithIcon,
+  ThemePrimaryRoundedButton,
+  ThemePrimaryRoundedButtonWithIcon,
+  ThemePrimarySemiRoundedButton,
+  ThemePrimarySemiRoundedButtonWithIcon,
+  // Secondary variants
+  ThemeSecondaryButton,
+  ThemeSecondaryButtonWithIcon,
+  ThemeSecondaryOutlineButton,
+  ThemeSecondaryRoundedButton,
+  ThemeSecondaryRoundedButtonWithIcon,
+  ThemeSecondarySemiRoundedButton,
+  ThemeSecondarySemiRoundedButtonWithIcon,
+  // Dark variants
+  ThemeDarkButton,
+  ThemeDarkButtonWithIcon,
+  ThemeDarkOutlineButton,
+  ThemeDarkRoundedButton,
+  ThemeDarkRoundedButtonWithIcon,
+  ThemeDarkSemiRoundedButton,
+  ThemeDarkSemiRoundedButtonWithIcon,
+  // White variants
+  ThemeWhiteButton,
+  ThemeWhiteButtonWithIcon,
+  ThemeWhiteOutlineButtonWithIcon,
+  ThemeWhiteOutlineRoundedButtonWithIcon,
+  ThemeWhiteOutlineSemiRoundedButtonWithIcon,
+  ThemeWhiteRoundedButton,
+  ThemeWhiteRoundedButtonWithIcon,
+  ThemeWhiteSemiRoundedButton,
+  ThemeWhiteSemiRoundedButtonWithIcon,
+  // Collection
+  ThemeButtons
+} from './ThemeButtons';
+
+// Theme Alert Components
+export { 
+  ThemeAttentionAlert1,
+  ThemeAttentionAlert2,
+  ThemeAttentionAlert3,
+  ThemeInfoAlert1,
+  ThemeInfoAlert2,
+  ThemeInfoAlert3,
+  ThemeSuccessAlert1,
+  ThemeSuccessAlert2,
+  ThemeSuccessAlert3,
+  ThemeSuccessAlert4,
+  ThemeWarningAlert1,
+  ThemeWarningAlert2,
+  ThemeWarningAlert3,
+  ThemeAlerts
+} from './ThemeAlerts';
+
+// Theme Avatar Components
+export { 
+  ThemeAvatar1,
+  ThemeAvatar2,
+  ThemeAvatar3,
+  ThemeAvatar4,
+  ThemeAvatar5,
+  ThemeAvatar6,
+  ThemeAvatar7,
+  ThemeAvatar8,
+  ThemeAvatar9,
+  ThemeAvatars
+} from './ThemeAvatars';
+
+// Theme Breadcrumb Components
+export { 
+  ThemeBreadcrumb1,
+  ThemeBreadcrumb2,
+  ThemeBreadcrumb3,
+  ThemeBreadcrumb4,
+  ThemeBreadcrumb5,
+  ThemeBreadcrumb6,
+  ThemeBreadcrumb7,
+  ThemeBreadcrumb8,
+  ThemeBreadcrumb9,
+  ThemeBreadcrumb10,
+  ThemeBreadcrumb11,
+  ThemeBreadcrumb12,
+  ThemeBreadcrumbs
+} from './ThemeBreadcrumbs';
+
+// Theme Checkbox Components
+export { 
+  ThemeCheckbox1,
+  ThemeCheckbox2,
+  ThemeCheckbox3,
+  ThemeCheckbox4,
+  ThemeCheckbox5,
+  ThemeCheckboxes
+} from './ThemeCheckboxes';
+
+// Theme ProgressBar Components
+export { 
+  ThemeProgressBar1,
+  ThemeProgressBar2,
+  ThemeProgressBar3,
+  ThemeProgressBars
+} from './ThemeProgressBars';
+
+// Theme Spinner Components
+export { 
+  ThemeSpinner1,
+  ThemeSpinner2,
+  ThemeSpinner3,
+  ThemeSpinner4,
+  ThemeSpinners
+} from './ThemeSpinners';
+
 // Core Components - экспортируем все из корректного индекса
 export * from './core'

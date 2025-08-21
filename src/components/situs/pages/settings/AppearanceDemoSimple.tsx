@@ -13,6 +13,79 @@ import ThemeTooltip from '@/components/ui/ThemeTooltip';
 import ThemeActionButtons from '@/components/ui/ThemeActionButtons';
 import ThemePermissionsModal from '@/components/ui/ThemePermissionsModal';
 
+// Core Badge Components - новые интегрированные компоненты
+import { 
+  ThemeDangerBadge, 
+  ThemePrimaryBadge, 
+  ThemeSuccessBadge, 
+  ThemeWarningBadge, 
+  ThemeInfoBadge,
+  ThemeDarkBadge,
+  ThemeGrayBadge,
+  ThemeLightBadge,
+  ThemeSecondaryBadge
+} from '@/components/ui';
+
+// Core Button Components - новые интегрированные компоненты
+import { 
+  ThemePrimaryButton,
+  ThemePrimaryButtonWithIcon,
+  ThemePrimaryOutlineButton,
+  ThemePrimaryRoundedButton,
+  ThemeSecondaryButton,
+  ThemeSecondaryButtonWithIcon,
+  ThemeDarkButton,
+  ThemeDarkButtonWithIcon,
+  ThemeWhiteButton,
+  ThemeWhiteButtonWithIcon
+} from '@/components/ui';
+
+// Core Alert Components - новые интегрированные компоненты
+import { 
+  ThemeSuccessAlert1,
+  ThemeInfoAlert1,
+  ThemeWarningAlert1,
+  ThemeAttentionAlert1
+} from '@/components/ui';
+
+// Core Avatar Components - новые интегрированные компоненты
+import { 
+  ThemeAvatar1,
+  ThemeAvatar2,
+  ThemeAvatar3,
+  ThemeAvatar4,
+  ThemeAvatar5
+} from '@/components/ui';
+
+// Core Breadcrumb Components - новые интегрированные компоненты
+import { 
+  ThemeBreadcrumb1,
+  ThemeBreadcrumb2,
+  ThemeBreadcrumb3,
+  ThemeBreadcrumb4,
+  ThemeBreadcrumb5
+} from '@/components/ui';
+
+// Core Checkbox Components - новые интегрированные компоненты
+import { 
+  ThemeCheckbox1,
+  ThemeCheckbox2,
+  ThemeCheckbox3,
+  ThemeCheckbox4,
+  ThemeCheckbox5
+} from '@/components/ui';
+
+// Core Progress & Spinner Components - новые интегрированные компоненты
+import { 
+  ThemeProgressBar1,
+  ThemeProgressBar2,
+  ThemeProgressBar3,
+  ThemeSpinner1,
+  ThemeSpinner2,
+  ThemeSpinner3,
+  ThemeSpinner4
+} from '@/components/ui';
+
 // Core Components - Selects и Forms (временно отключено для диагностики)
 // import { 
 //   Select1, Select2, Select3,
@@ -193,6 +266,262 @@ const AppearanceDemoSimple: React.FC = () => {
 
         {/* Core Components */}
         <DemoSection title="🔧 Core Components" id="core-components">
+          <ComponentDemo title="Core Badges" id="core-badges">
+            <div className="w-full space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Danger, Warning, Success</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <ThemeDangerBadge />
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <ThemeWarningBadge />
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <ThemeSuccessBadge />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Primary, Info, Secondary</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <ThemePrimaryBadge />
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <ThemeInfoBadge />
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <ThemeSecondaryBadge />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dark, Gray, Light</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <ThemeDarkBadge />
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <ThemeGrayBadge />
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <ThemeLightBadge />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Buttons" id="core-buttons">
+            <div className="w-full space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Primary Variants</h4>
+                  <div className="space-y-2">
+                    <div><ThemePrimaryButton /></div>
+                    <div><ThemePrimaryButtonWithIcon /></div>
+                    <div><ThemePrimaryOutlineButton /></div>
+                    <div><ThemePrimaryRoundedButton /></div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Secondary Variants</h4>
+                  <div className="space-y-2">
+                    <div><ThemeSecondaryButton /></div>
+                    <div><ThemeSecondaryButtonWithIcon /></div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dark Variants</h4>
+                  <div className="space-y-2">
+                    <div><ThemeDarkButton /></div>
+                    <div><ThemeDarkButtonWithIcon /></div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">White Variants</h4>
+                  <div className="space-y-2 p-2 bg-gray-800 rounded">
+                    <div><ThemeWhiteButton /></div>
+                    <div><ThemeWhiteButtonWithIcon /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Alerts" id="core-alerts">
+            <div className="w-full space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Success Alert</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeSuccessAlert1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Info Alert</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeInfoAlert1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Warning Alert</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeWarningAlert1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Attention Alert</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeAttentionAlert1 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Avatars" id="core-avatars">
+            <div className="w-full space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Avatar Variant 1</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeAvatar1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Avatar Variant 2</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeAvatar2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Avatar Variant 3</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeAvatar3 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Avatar Variant 4</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeAvatar4 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Avatar Variant 5</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeAvatar5 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Breadcrumbs" id="core-breadcrumbs">
+            <div className="w-full space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Breadcrumb Variant 1</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeBreadcrumb1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Breadcrumb Variant 2</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeBreadcrumb2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Breadcrumb Variant 3</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeBreadcrumb3 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Checkboxes" id="core-checkboxes">
+            <div className="w-full space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Checkbox Variant 1</h4>
+                  <ThemeCheckbox1 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Checkbox Variant 2</h4>
+                  <ThemeCheckbox2 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Checkbox Variant 3</h4>
+                  <ThemeCheckbox3 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Checkbox Variant 4</h4>
+                  <ThemeCheckbox4 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Checkbox Variant 5</h4>
+                  <ThemeCheckbox5 />
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Progress Bars" id="core-progress">
+            <div className="w-full space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Progress Bar Variant 1</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeProgressBar1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Progress Bar Variant 2</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeProgressBar2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Progress Bar Variant 3</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeProgressBar3 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Spinners" id="core-spinners">
+            <div className="w-full space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Spinner Variant 1</h4>
+                  <div className="flex justify-center p-4">
+                    <ThemeSpinner1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Spinner Variant 2</h4>
+                  <div className="flex justify-center p-4">
+                    <ThemeSpinner2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Spinner Variant 3</h4>
+                  <div className="flex justify-center p-4">
+                    <ThemeSpinner3 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Spinner Variant 4</h4>
+                  <div className="flex justify-center p-4">
+                    <ThemeSpinner4 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
           <ComponentDemo title="Selects" id="core-selects">
             <div className="w-full space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -290,11 +619,7 @@ const AppearanceDemoSimple: React.FC = () => {
             </div>
           </ComponentDemo>
 
-          <ComponentDemo title="Buttons" id="core-buttons">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Primary Button</button>
-            <button className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Secondary Button</button>
-            <button className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900">Dark Button</button>
-          </ComponentDemo>
+
         </DemoSection>
 
         {/* Dashboard Components */}
@@ -417,12 +742,17 @@ const AppearanceDemoSimple: React.FC = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (200+)</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (89 активно из 200+)</h4>
                 <ul className="text-blue-700 dark:text-blue-300 space-y-1">
-                  <li>• Buttons (33 варианта)</li>
+                  <li>✅ Badges (9 компонентов)</li>
+                  <li>✅ Buttons (33 компонента)</li>
+                  <li>✅ Alerts (13 компонентов)</li>
+                  <li>✅ Avatars (9 компонентов)</li>
+                  <li>✅ Breadcrumbs (12 компонентов)</li>
+                  <li>✅ Checkboxes (5 компонентов)</li>
+                  <li>✅ Progress (3 компонента)</li>
+                  <li>✅ Spinners (4 компонента)</li>
                   <li>• Forms, Inputs, Selects</li>
-                  <li>• Navigation, Tabs, Menus</li>
-                  <li>• Data Display, Lists</li>
                 </ul>
               </div>
               <div>
