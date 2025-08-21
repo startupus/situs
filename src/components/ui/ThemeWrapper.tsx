@@ -1,69 +1,39 @@
 // src/components/ui/ThemeWrapper.tsx
 import React, { ReactNode } from 'react';
-import { useTheme } from '../../contexts/ThemeContext';
 
 interface ThemeWrapperProps {
   children: ReactNode;
   className?: string;
-  adaptColors?: boolean;
-  adaptTypography?: boolean;
-  adaptLayout?: boolean;
-  customStyles?: Record<string, string>;
+  themeType?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info' | 'dark' | 'light';
 }
 
 /**
  * Универсальный компонент для адаптации Core компонентов к глобальной теме
- * Применяет CSS переменные темы и кастомные стили
+ * Применяет CSS классы для интеграции с системой тем проекта
  */
 export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({
   children,
   className = '',
-  adaptColors = true,
-  adaptTypography = true,
-  adaptLayout = true,
-  customStyles = {}
+  themeType = 'primary'
 }) => {
-  const { currentTheme, isDarkMode } = useTheme();
-  
   // Базовые классы для адаптации к теме
   const themeClasses = [
+    // Основной класс для применения тематических стилей
+    'theme-core-component',
     // Цветовая адаптация
-    adaptColors && 'theme-colors',
+    'theme-colors',
     // Типографика
-    adaptTypography && 'theme-typography',
-    // Макет и отступы
-    adaptLayout && 'theme-layout',
+    'theme-typography', 
     // Переходы и анимации
     'transition-all duration-200',
-    // Темный режим
-    isDarkMode && 'dark',
+    // Тип темы
+    `theme-${themeType}`,
     // Кастомные классы
     className
   ].filter(Boolean).join(' ');
 
-  // CSS переменные для инлайн стилей
-  const themeStyles = {
-    '--theme-primary': 'var(--color-primary)',
-    '--theme-secondary': 'var(--color-secondary)', 
-    '--theme-accent': 'var(--color-accent)',
-    '--theme-success': 'var(--color-success)',
-    '--theme-warning': 'var(--color-warning)',
-    '--theme-error': 'var(--color-error)',
-    '--theme-info': 'var(--color-info)',
-    '--theme-background': 'var(--color-background)',
-    '--theme-surface': 'var(--color-surface)',
-    '--theme-text': 'var(--color-text)',
-    '--theme-text-secondary': 'var(--color-text-secondary)',
-    '--theme-border': 'var(--color-border)',
-    '--theme-border-light': 'var(--color-border-light)',
-    ...customStyles
-  } as React.CSSProperties;
-
   return (
-    <div 
-      className={themeClasses}
-      style={themeStyles}
-    >
+    <div className={themeClasses}>
       {children}
     </div>
   );
@@ -74,11 +44,11 @@ export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({
  */
 export const withTheme = <P extends object>(
   Component: React.ComponentType<P>,
-  wrapperProps: Partial<ThemeWrapperProps> = {}
+  themeType: ThemeWrapperProps['themeType'] = 'primary'
 ) => {
-  const ThemedComponent: React.FC<P> = (props) => (
-    <ThemeWrapper {...wrapperProps}>
-      <Component {...props} />
+  const ThemedComponent: React.FC<P & { className?: string }> = ({ className, ...props }) => (
+    <ThemeWrapper className={className} themeType={themeType}>
+      <Component {...(props as P)} />
     </ThemeWrapper>
   );
   

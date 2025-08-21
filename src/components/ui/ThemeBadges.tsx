@@ -11,10 +11,10 @@ import {
   SuccessBadge, 
   WarningBadge 
 } from './core';
-import { ThemeWrapper } from './ThemeWrapper';
+import { withTheme } from './ThemeWrapper';
 
-// Интерфейс для пропсов Badge компонентов
-interface BadgeProps {
+// Интерфейс для пропсов Badge компонентов с поддержкой темы
+interface ThemeBadgeProps {
   children?: React.ReactNode;
   className?: string;
   variant?: 'solid' | 'outline' | 'opacity';
@@ -23,59 +23,15 @@ interface BadgeProps {
 }
 
 // Обертки с префиксом Theme для всех Badge компонентов с поддержкой глобальной темы
-export const ThemeDangerBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <DangerBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeDarkBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <DarkBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeGrayBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <GrayBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeInfoBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <InfoBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeLightBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <LightBadge />
-  </ThemeWrapper>
-);
-
-export const ThemePrimaryBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <PrimaryBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeSecondaryBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <SecondaryBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeSuccessBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <SuccessBadge />
-  </ThemeWrapper>
-);
-
-export const ThemeWarningBadge: React.FC<BadgeProps> = (props) => (
-  <ThemeWrapper className={props.className} adaptColors adaptTypography>
-    <WarningBadge />
-  </ThemeWrapper>
-);
+export const ThemeDangerBadge = withTheme(DangerBadge, 'danger');
+export const ThemeDarkBadge = withTheme(DarkBadge, 'dark');
+export const ThemeGrayBadge = withTheme(GrayBadge, 'secondary');
+export const ThemeInfoBadge = withTheme(InfoBadge, 'info');
+export const ThemeLightBadge = withTheme(LightBadge, 'light');
+export const ThemePrimaryBadge = withTheme(PrimaryBadge, 'primary');
+export const ThemeSecondaryBadge = withTheme(SecondaryBadge, 'secondary');
+export const ThemeSuccessBadge = withTheme(SuccessBadge, 'success');
+export const ThemeWarningBadge = withTheme(WarningBadge, 'warning');
 
 // Экспорт всех Badge компонентов как единый объект для удобства
 export const ThemeBadges = {

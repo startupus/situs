@@ -25,6 +25,9 @@ export { default as ThemeSwitch } from './ThemeSwitch'
 export { default as ThemeTooltip } from './ThemeTooltip'
 export { ThemeForm, ThemeInput, ThemeSelect, ThemeTextarea } from './ThemeForm'
 
+// Theme Wrapper for Core Components
+export { ThemeWrapper, withTheme } from './ThemeWrapper'
+
 // Theme Badge Components
 export { 
   ThemeDangerBadge, 

@@ -1,6 +1,12 @@
 /* src/styles/theme-core-components.css */
 /* Стили для адаптации Core компонентов к глобальной теме */
 
+.theme-core-component {
+  /* Базовые стили для всех Core компонентов */
+  position: relative;
+  z-index: 1;
+}
+
 .theme-colors {
   /* Адаптация цветов Core компонентов к глобальной теме */
   

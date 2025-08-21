@@ -11,63 +11,18 @@ import {
   Avatar8,
   Avatar9
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Интерфейс для пропсов Avatar компонентов
-interface AvatarProps {
-  children?: React.ReactNode;
-  className?: string;
-  src?: string;
-  alt?: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-  fallback?: string;
-  status?: 'online' | 'offline' | 'away' | 'busy';
-  showStatus?: boolean;
-  variant?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
-  rounded?: boolean;
-}
-
-// Утилита для адаптации стилей под глобальную тему
-const adaptAvatarProps = (props: AvatarProps) => ({
-  ...props,
-  className: `${props.className || ''} transition-all duration-200`
-});
-
-// Avatar Variants
-export const ThemeAvatar1: React.FC<AvatarProps> = (props) => (
-  <Avatar1 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar2: React.FC<AvatarProps> = (props) => (
-  <Avatar2 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar3: React.FC<AvatarProps> = (props) => (
-  <Avatar3 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar4: React.FC<AvatarProps> = (props) => (
-  <Avatar4 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar5: React.FC<AvatarProps> = (props) => (
-  <Avatar5 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar6: React.FC<AvatarProps> = (props) => (
-  <Avatar6 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar7: React.FC<AvatarProps> = (props) => (
-  <Avatar7 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar8: React.FC<AvatarProps> = (props) => (
-  <Avatar8 {...adaptAvatarProps(props)} />
-);
-
-export const ThemeAvatar9: React.FC<AvatarProps> = (props) => (
-  <Avatar9 {...adaptAvatarProps(props)} />
-);
+// Avatar Variants с поддержкой темы
+export const ThemeAvatar1 = withTheme(Avatar1, 'primary');
+export const ThemeAvatar2 = withTheme(Avatar2, 'primary');
+export const ThemeAvatar3 = withTheme(Avatar3, 'primary');
+export const ThemeAvatar4 = withTheme(Avatar4, 'primary');
+export const ThemeAvatar5 = withTheme(Avatar5, 'primary');
+export const ThemeAvatar6 = withTheme(Avatar6, 'primary');
+export const ThemeAvatar7 = withTheme(Avatar7, 'primary');
+export const ThemeAvatar8 = withTheme(Avatar8, 'primary');
+export const ThemeAvatar9 = withTheme(Avatar9, 'primary');
 
 // Экспорт всех Avatar компонентов как единый объект для удобства
 export const ThemeAvatars = {
@@ -82,5 +37,4 @@ export const ThemeAvatars = {
   Avatar9: ThemeAvatar9,
 };
 
-// Экспорт по умолчанию
 export default ThemeAvatars;

@@ -5,11 +5,12 @@ import {
   Skeleton2,
   Skeleton3
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Skeleton Variants - простые обертки
-export const ThemeSkeleton1: React.FC = () => <Skeleton1 />;
-export const ThemeSkeleton2: React.FC = () => <Skeleton2 />;
-export const ThemeSkeleton3: React.FC = () => <Skeleton3 />;
+// Skeleton Variants с поддержкой темы
+export const ThemeSkeleton1 = withTheme(Skeleton1, 'secondary');
+export const ThemeSkeleton2 = withTheme(Skeleton2, 'secondary');
+export const ThemeSkeleton3 = withTheme(Skeleton3, 'secondary');
 
 // Экспорт коллекции
 export const ThemeSkeletons = {

@@ -10,16 +10,17 @@ import {
   Toast7,
   Toast8
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Toast Variants - простые обертки
-export const ThemeToast1: React.FC = () => <Toast1 />;
-export const ThemeToast2: React.FC = () => <Toast2 />;
-export const ThemeToast3: React.FC = () => <Toast3 />;
-export const ThemeToast4: React.FC = () => <Toast4 />;
-export const ThemeToast5: React.FC = () => <Toast5 />;
-export const ThemeToast6: React.FC = () => <Toast6 />;
-export const ThemeToast7: React.FC = () => <Toast7 />;
-export const ThemeToast8: React.FC = () => <Toast8 />;
+// Toast Variants с поддержкой темы
+export const ThemeToast1 = withTheme(Toast1, 'info');
+export const ThemeToast2 = withTheme(Toast2, 'success');
+export const ThemeToast3 = withTheme(Toast3, 'warning');
+export const ThemeToast4 = withTheme(Toast4, 'danger');
+export const ThemeToast5 = withTheme(Toast5, 'info');
+export const ThemeToast6 = withTheme(Toast6, 'primary');
+export const ThemeToast7 = withTheme(Toast7, 'secondary');
+export const ThemeToast8 = withTheme(Toast8, 'dark');
 
 // Экспорт коллекции
 export const ThemeToasts = {

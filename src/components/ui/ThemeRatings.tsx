@@ -5,11 +5,12 @@ import {
   Rating2,
   Rating3
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Rating Variants - простые обертки
-export const ThemeRating1: React.FC = () => <Rating1 />;
-export const ThemeRating2: React.FC = () => <Rating2 />;
-export const ThemeRating3: React.FC = () => <Rating3 />;
+// Rating Variants с поддержкой темы
+export const ThemeRating1 = withTheme(Rating1, 'warning');
+export const ThemeRating2 = withTheme(Rating2, 'warning');
+export const ThemeRating3 = withTheme(Rating3, 'warning');
 
 // Экспорт коллекции
 export const ThemeRatings = {

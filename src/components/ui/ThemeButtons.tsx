@@ -35,161 +35,48 @@ import {
   WhiteSemiRoundedButton,
   WhiteSemiRoundedButtonWithIcon
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Интерфейс для пропсов Button компонентов
-interface ButtonProps {
-  children?: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-  variant?: 'primary' | 'secondary' | 'dark' | 'white';
-  style?: 'solid' | 'outline';
-  rounded?: 'none' | 'semi' | 'full';
-  withIcon?: boolean;
-}
+// Primary Button Variants с поддержкой темы
+export const ThemePrimaryButton = withTheme(PrimaryButton, 'primary');
+export const ThemePrimaryButtonWithIcon = withTheme(PrimaryButtonWithIcon, 'primary');
+export const ThemePrimaryOutlineButton = withTheme(PrimaryOutlineButton, 'primary');
+export const ThemePrimaryOutlineButtonWithIcon = withTheme(PrimaryOutlineButtonWithIcon, 'primary');
+export const ThemePrimaryOutlineFullRoundedButtonWithIcon = withTheme(PrimaryOutlineFullRoundedButtonWithIcon, 'primary');
+export const ThemePrimaryOutlineSemiRoundedButtonWithIcon = withTheme(PrimaryOutlineSemiRoundedButtonWithIcon, 'primary');
+export const ThemePrimaryRoundedButton = withTheme(PrimaryRoundedButton, 'primary');
+export const ThemePrimaryRoundedButtonWithIcon = withTheme(PrimaryRoundedButtonWithIcon, 'primary');
+export const ThemePrimarySemiRoundedButton = withTheme(PrimarySemiRoundedButton, 'primary');
+export const ThemePrimarySemiRoundedButtonWithIcon = withTheme(PrimarySemiRoundedButtonWithIcon, 'primary');
 
-// Утилита для адаптации стилей под глобальную тему
-const adaptButtonProps = (props: ButtonProps) => ({
-  ...props,
-  className: `${props.className || ''} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2`
-});
+// Secondary Button Variants с поддержкой темы
+export const ThemeSecondaryButton = withTheme(SecondaryButton, 'secondary');
+export const ThemeSecondaryButtonWithIcon = withTheme(SecondaryButtonWithIcon, 'secondary');
+export const ThemeSecondaryOutlineButton = withTheme(SecondaryOutlineButton, 'secondary');
+export const ThemeSecondaryRoundedButton = withTheme(SecondaryRoundedButton, 'secondary');
+export const ThemeSecondaryRoundedButtonWithIcon = withTheme(SecondaryRoundedButtonWithIcon, 'secondary');
+export const ThemeSecondarySemiRoundedButton = withTheme(SecondarySemiRoundedButton, 'secondary');
+export const ThemeSecondarySemiRoundedButtonWithIcon = withTheme(SecondarySemiRoundedButtonWithIcon, 'secondary');
 
-// Primary Button Variants
-export const ThemePrimaryButton: React.FC<ButtonProps> = (props) => (
-  <PrimaryButton {...adaptButtonProps(props)} />
-);
+// Dark Button Variants с поддержкой темы
+export const ThemeDarkButton = withTheme(DarkButton, 'dark');
+export const ThemeDarkButtonWithIcon = withTheme(DarkButtonWithIcon, 'dark');
+export const ThemeDarkOutlineButton = withTheme(DarkOutlineButton, 'dark');
+export const ThemeDarkRoundedButton = withTheme(DarkRoundedButton, 'dark');
+export const ThemeDarkRoundedButtonWithIcon = withTheme(DarkRoundedButtonWithIcon, 'dark');
+export const ThemeDarkSemiRoundedButton = withTheme(DarkSemiRoundedButton, 'dark');
+export const ThemeDarkSemiRoundedButtonWithIcon = withTheme(DarkSemiRoundedButtonWithIcon, 'dark');
 
-export const ThemePrimaryButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <PrimaryButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimaryOutlineButton: React.FC<ButtonProps> = (props) => (
-  <PrimaryOutlineButton {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimaryOutlineButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <PrimaryOutlineButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimaryOutlineFullRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <PrimaryOutlineFullRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimaryOutlineSemiRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <PrimaryOutlineSemiRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimaryRoundedButton: React.FC<ButtonProps> = (props) => (
-  <PrimaryRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimaryRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <PrimaryRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimarySemiRoundedButton: React.FC<ButtonProps> = (props) => (
-  <PrimarySemiRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemePrimarySemiRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <PrimarySemiRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-// Secondary Button Variants
-export const ThemeSecondaryButton: React.FC<ButtonProps> = (props) => (
-  <SecondaryButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeSecondaryButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <SecondaryButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeSecondaryOutlineButton: React.FC<ButtonProps> = (props) => (
-  <SecondaryOutlineButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeSecondaryRoundedButton: React.FC<ButtonProps> = (props) => (
-  <SecondaryRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeSecondaryRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <SecondaryRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeSecondarySemiRoundedButton: React.FC<ButtonProps> = (props) => (
-  <SecondarySemiRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeSecondarySemiRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <SecondarySemiRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-// Dark Button Variants
-export const ThemeDarkButton: React.FC<ButtonProps> = (props) => (
-  <DarkButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeDarkButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <DarkButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeDarkOutlineButton: React.FC<ButtonProps> = (props) => (
-  <DarkOutlineButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeDarkRoundedButton: React.FC<ButtonProps> = (props) => (
-  <DarkRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeDarkRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <DarkRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeDarkSemiRoundedButton: React.FC<ButtonProps> = (props) => (
-  <DarkSemiRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeDarkSemiRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <DarkSemiRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-// White Button Variants
-export const ThemeWhiteButton: React.FC<ButtonProps> = (props) => (
-  <WhiteButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <WhiteButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteOutlineButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <WhiteOutlineButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteOutlineRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <WhiteOutlineRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteOutlineSemiRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <WhiteOutlineSemiRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteRoundedButton: React.FC<ButtonProps> = (props) => (
-  <WhiteRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <WhiteRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteSemiRoundedButton: React.FC<ButtonProps> = (props) => (
-  <WhiteSemiRoundedButton {...adaptButtonProps(props)} />
-);
-
-export const ThemeWhiteSemiRoundedButtonWithIcon: React.FC<ButtonProps> = (props) => (
-  <WhiteSemiRoundedButtonWithIcon {...adaptButtonProps(props)} />
-);
+// White Button Variants с поддержкой темы
+export const ThemeWhiteButton = withTheme(WhiteButton, 'light');
+export const ThemeWhiteButtonWithIcon = withTheme(WhiteButtonWithIcon, 'light');
+export const ThemeWhiteOutlineButtonWithIcon = withTheme(WhiteOutlineButtonWithIcon, 'light');
+export const ThemeWhiteOutlineRoundedButtonWithIcon = withTheme(WhiteOutlineRoundedButtonWithIcon, 'light');
+export const ThemeWhiteOutlineSemiRoundedButtonWithIcon = withTheme(WhiteOutlineSemiRoundedButtonWithIcon, 'light');
+export const ThemeWhiteRoundedButton = withTheme(WhiteRoundedButton, 'light');
+export const ThemeWhiteRoundedButtonWithIcon = withTheme(WhiteRoundedButtonWithIcon, 'light');
+export const ThemeWhiteSemiRoundedButton = withTheme(WhiteSemiRoundedButton, 'light');
+export const ThemeWhiteSemiRoundedButtonWithIcon = withTheme(WhiteSemiRoundedButtonWithIcon, 'light');
 
 // Экспорт всех Button компонентов как единый объект для удобства
 export const ThemeButtons = {
@@ -235,5 +122,4 @@ export const ThemeButtons = {
   WhiteSemiRoundedWithIcon: ThemeWhiteSemiRoundedButtonWithIcon,
 };
 
-// Экспорт по умолчанию
 export default ThemeButtons;

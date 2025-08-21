@@ -11,17 +11,18 @@ import {
   UnOrderedList5,
   UnOrderedList6
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// List Variants - простые обертки
-export const ThemeOrderedList1: React.FC = () => <OrderedList1 />;
-export const ThemeOrderedList2: React.FC = () => <OrderedList2 />;
-export const ThemeOrderedList3: React.FC = () => <OrderedList3 />;
-export const ThemeUnOrderedList1: React.FC = () => <UnOrderedList1 />;
-export const ThemeUnOrderedList2: React.FC = () => <UnOrderedList2 />;
-export const ThemeUnOrderedList3: React.FC = () => <UnOrderedList3 />;
-export const ThemeUnOrderedList4: React.FC = () => <UnOrderedList4 />;
-export const ThemeUnOrderedList5: React.FC = () => <UnOrderedList5 />;
-export const ThemeUnOrderedList6: React.FC = () => <UnOrderedList6 />;
+// List Variants с поддержкой темы
+export const ThemeOrderedList1 = withTheme(OrderedList1, 'primary');
+export const ThemeOrderedList2 = withTheme(OrderedList2, 'primary');
+export const ThemeOrderedList3 = withTheme(OrderedList3, 'primary');
+export const ThemeUnOrderedList1 = withTheme(UnOrderedList1, 'primary');
+export const ThemeUnOrderedList2 = withTheme(UnOrderedList2, 'primary');
+export const ThemeUnOrderedList3 = withTheme(UnOrderedList3, 'primary');
+export const ThemeUnOrderedList4 = withTheme(UnOrderedList4, 'primary');
+export const ThemeUnOrderedList5 = withTheme(UnOrderedList5, 'primary');
+export const ThemeUnOrderedList6 = withTheme(UnOrderedList6, 'primary');
 
 // Экспорт коллекции
 export const ThemeLists = {

@@ -15,104 +15,41 @@ import {
   WarningAlert2,
   WarningAlert3
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Интерфейс для пропсов Alert компонентов
-interface AlertProps {
-  children?: React.ReactNode;
-  className?: string;
-  title?: string;
-  message?: string;
-  type?: 'success' | 'info' | 'warning' | 'attention';
-  variant?: '1' | '2' | '3' | '4';
-  onDismiss?: () => void;
-  showActions?: boolean;
-}
+// Alert Variants с поддержкой темы
+export const ThemeAttentionAlert1 = withTheme(AttentionAlert1, 'warning');
+export const ThemeAttentionAlert2 = withTheme(AttentionAlert2, 'warning');
+export const ThemeAttentionAlert3 = withTheme(AttentionAlert3, 'warning');
 
-// Утилита для адаптации стилей под глобальную тему
-const adaptAlertProps = (props: AlertProps) => ({
-  ...props,
-  className: `${props.className || ''} transition-all duration-200`
-});
+export const ThemeInfoAlert1 = withTheme(InfoAlert1, 'info');
+export const ThemeInfoAlert2 = withTheme(InfoAlert2, 'info');
+export const ThemeInfoAlert3 = withTheme(InfoAlert3, 'info');
 
-// Attention Alert Variants
-export const ThemeAttentionAlert1: React.FC<AlertProps> = (props) => (
-  <AttentionAlert1 {...adaptAlertProps(props)} />
-);
+export const ThemeSuccessAlert1 = withTheme(SuccessAlert1, 'success');
+export const ThemeSuccessAlert2 = withTheme(SuccessAlert2, 'success');
+export const ThemeSuccessAlert3 = withTheme(SuccessAlert3, 'success');
+export const ThemeSuccessAlert4 = withTheme(SuccessAlert4, 'success');
 
-export const ThemeAttentionAlert2: React.FC<AlertProps> = (props) => (
-  <AttentionAlert2 {...adaptAlertProps(props)} />
-);
-
-export const ThemeAttentionAlert3: React.FC<AlertProps> = (props) => (
-  <AttentionAlert3 {...adaptAlertProps(props)} />
-);
-
-// Info Alert Variants
-export const ThemeInfoAlert1: React.FC<AlertProps> = (props) => (
-  <InfoAlert1 {...adaptAlertProps(props)} />
-);
-
-export const ThemeInfoAlert2: React.FC<AlertProps> = (props) => (
-  <InfoAlert2 {...adaptAlertProps(props)} />
-);
-
-export const ThemeInfoAlert3: React.FC<AlertProps> = (props) => (
-  <InfoAlert3 {...adaptAlertProps(props)} />
-);
-
-// Success Alert Variants
-export const ThemeSuccessAlert1: React.FC<AlertProps> = (props) => (
-  <SuccessAlert1 {...adaptAlertProps(props)} />
-);
-
-export const ThemeSuccessAlert2: React.FC<AlertProps> = (props) => (
-  <SuccessAlert2 {...adaptAlertProps(props)} />
-);
-
-export const ThemeSuccessAlert3: React.FC<AlertProps> = (props) => (
-  <SuccessAlert3 {...adaptAlertProps(props)} />
-);
-
-export const ThemeSuccessAlert4: React.FC<AlertProps> = (props) => (
-  <SuccessAlert4 {...adaptAlertProps(props)} />
-);
-
-// Warning Alert Variants
-export const ThemeWarningAlert1: React.FC<AlertProps> = (props) => (
-  <WarningAlert1 {...adaptAlertProps(props)} />
-);
-
-export const ThemeWarningAlert2: React.FC<AlertProps> = (props) => (
-  <WarningAlert2 {...adaptAlertProps(props)} />
-);
-
-export const ThemeWarningAlert3: React.FC<AlertProps> = (props) => (
-  <WarningAlert3 {...adaptAlertProps(props)} />
-);
+export const ThemeWarningAlert1 = withTheme(WarningAlert1, 'warning');
+export const ThemeWarningAlert2 = withTheme(WarningAlert2, 'warning');
+export const ThemeWarningAlert3 = withTheme(WarningAlert3, 'warning');
 
 // Экспорт всех Alert компонентов как единый объект для удобства
 export const ThemeAlerts = {
-  // Attention variants
   Attention1: ThemeAttentionAlert1,
   Attention2: ThemeAttentionAlert2,
   Attention3: ThemeAttentionAlert3,
-  
-  // Info variants
   Info1: ThemeInfoAlert1,
   Info2: ThemeInfoAlert2,
   Info3: ThemeInfoAlert3,
-  
-  // Success variants
   Success1: ThemeSuccessAlert1,
   Success2: ThemeSuccessAlert2,
   Success3: ThemeSuccessAlert3,
   Success4: ThemeSuccessAlert4,
-  
-  // Warning variants
   Warning1: ThemeWarningAlert1,
   Warning2: ThemeWarningAlert2,
   Warning3: ThemeWarningAlert3,
 };
 
-// Экспорт по умолчанию
 export default ThemeAlerts;

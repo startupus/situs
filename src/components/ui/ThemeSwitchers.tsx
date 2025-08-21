@@ -15,21 +15,22 @@ import {
   Switcher12,
   Switcher13
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Switcher Variants - простые обертки
-export const ThemeSwitcher1: React.FC = () => <Switcher1 />;
-export const ThemeSwitcher2: React.FC = () => <Switcher2 />;
-export const ThemeSwitcher3: React.FC = () => <Switcher3 />;
-export const ThemeSwitcher4: React.FC = () => <Switcher4 />;
-export const ThemeSwitcher5: React.FC = () => <Switcher5 />;
-export const ThemeSwitcher6: React.FC = () => <Switcher6 />;
-export const ThemeSwitcher7: React.FC = () => <Switcher7 />;
-export const ThemeSwitcher8: React.FC = () => <Switcher8 />;
-export const ThemeSwitcher9: React.FC = () => <Switcher9 />;
-export const ThemeSwitcher10: React.FC = () => <Switcher10 />;
-export const ThemeSwitcher11: React.FC = () => <Switcher11 />;
-export const ThemeSwitcher12: React.FC = () => <Switcher12 />;
-export const ThemeSwitcher13: React.FC = () => <Switcher13 />;
+// Switcher Variants с поддержкой темы
+export const ThemeSwitcher1 = withTheme(Switcher1, 'primary');
+export const ThemeSwitcher2 = withTheme(Switcher2, 'primary');
+export const ThemeSwitcher3 = withTheme(Switcher3, 'primary');
+export const ThemeSwitcher4 = withTheme(Switcher4, 'primary');
+export const ThemeSwitcher5 = withTheme(Switcher5, 'primary');
+export const ThemeSwitcher6 = withTheme(Switcher6, 'primary');
+export const ThemeSwitcher7 = withTheme(Switcher7, 'primary');
+export const ThemeSwitcher8 = withTheme(Switcher8, 'primary');
+export const ThemeSwitcher9 = withTheme(Switcher9, 'primary');
+export const ThemeSwitcher10 = withTheme(Switcher10, 'primary');
+export const ThemeSwitcher11 = withTheme(Switcher11, 'primary');
+export const ThemeSwitcher12 = withTheme(Switcher12, 'primary');
+export const ThemeSwitcher13 = withTheme(Switcher13, 'primary');
 
 // Экспорт коллекции
 export const ThemeSwitchers = {
