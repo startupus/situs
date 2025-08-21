@@ -15,6 +15,7 @@ import SitusProfileSettings from "./pages/SitusProfileSettings";
 import SitusSectionSettings from "./pages/SitusSectionSettings";
 import AppearanceDemoPage from "./pages/settings/AppearanceDemoPage";
 import ProjectPage from "./projects/ProjectPage";
+
 import SitusProjectWebsite from "./pages/SitusProjectWebsite";
 import SitusProjectStore from "./pages/SitusProjectStore";
 import MenuManager from "../admin/MenuManager";
