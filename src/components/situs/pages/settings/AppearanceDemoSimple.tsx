@@ -12,13 +12,16 @@ import ThemeSwitch from '@/components/ui/ThemeSwitch';
 import ThemeTooltip from '@/components/ui/ThemeTooltip';
 import ThemeActionButtons from '@/components/ui/ThemeActionButtons';
 
-// Core Components - Selects и Forms
-import { 
-  Select1, Select2, Select3,
-  FormElementInput, FormElementSelect, FormElementTextarea, FormElementFileUpload,
-  InputRange1, InputRange2, InputRange3,
-  VerificationCodeInput1, VerificationCodeInput2, VerificationCodeInput3, VerificationCodeInput4
-} from '@/components/ui';
+// Core Components - Selects и Forms (временно отключено для диагностики)
+// import { 
+//   Select1, Select2, Select3,
+//   FormElementInput, FormElementSelect, FormElementTextarea, FormElementFileUpload,
+//   InputRange1, InputRange2, InputRange3,
+//   VerificationCodeInput1, VerificationCodeInput2, VerificationCodeInput3, VerificationCodeInput4
+// } from '@/components/ui';
+
+// Временный импорт только Select1 для тестирования
+import Select1 from '@/components/ui/core/Selects/Select1';
 
 interface DemoSectionProps {
   title: string;
@@ -147,11 +150,13 @@ const AppearanceDemoSimple: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Select 2</h4>
-                  <Select2 />
+                  {/* <Select2 /> */}
+                  <p className="text-gray-500">Select2 временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Select 3</h4>
-                  <Select3 />
+                  {/* <Select3 /> */}
+                  <p className="text-gray-500">Select3 временно отключен</p>
                 </div>
               </div>
             </div>
@@ -162,19 +167,23 @@ const AppearanceDemoSimple: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Input Field</h4>
-                  <FormElementInput />
+                  {/* <FormElementInput /> */}
+                  <p className="text-gray-500">FormElementInput временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Select Field</h4>
-                  <FormElementSelect />
+                  {/* <FormElementSelect /> */}
+                  <p className="text-gray-500">FormElementSelect временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Textarea Field</h4>
-                  <FormElementTextarea />
+                  {/* <FormElementTextarea /> */}
+                  <p className="text-gray-500">FormElementTextarea временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">File Upload</h4>
-                  <FormElementFileUpload />
+                  {/* <FormElementFileUpload /> */}
+                  <p className="text-gray-500">FormElementFileUpload временно отключен</p>
                 </div>
               </div>
             </div>
@@ -185,15 +194,18 @@ const AppearanceDemoSimple: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Range 1</h4>
-                  <InputRange1 />
+                  {/* <InputRange1 /> */}
+                  <p className="text-gray-500">InputRange1 временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Range 2</h4>
-                  <InputRange2 />
+                  {/* <InputRange2 /> */}
+                  <p className="text-gray-500">InputRange2 временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Range 3</h4>
-                  <InputRange3 />
+                  {/* <InputRange3 /> */}
+                  <p className="text-gray-500">InputRange3 временно отключен</p>
                 </div>
               </div>
             </div>
@@ -204,19 +216,23 @@ const AppearanceDemoSimple: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 1</h4>
-                  <VerificationCodeInput1 />
+                  {/* <VerificationCodeInput1 /> */}
+                  <p className="text-gray-500">VerificationCodeInput1 временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 2</h4>
-                  <VerificationCodeInput2 />
+                  {/* <VerificationCodeInput2 /> */}
+                  <p className="text-gray-500">VerificationCodeInput2 временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 3</h4>
-                  <VerificationCodeInput3 />
+                  {/* <VerificationCodeInput3 /> */}
+                  <p className="text-gray-500">VerificationCodeInput3 временно отключен</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 4</h4>
-                  <VerificationCodeInput4 />
+                  {/* <VerificationCodeInput4 /> */}
+                  <p className="text-gray-500">VerificationCodeInput4 временно отключен</p>
                 </div>
               </div>
             </div>

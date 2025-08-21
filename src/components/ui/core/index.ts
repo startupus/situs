@@ -1,4 +1,4 @@
-// Core Components - Базовые компоненты из react-pro-components-main
+// Core Components - правильные импорты на основе реальной структуры файлов
 
 // Alerts
 export { default as AttentionAlert1 } from './Alerts/AttentionAlert1';
@@ -26,7 +26,7 @@ export { default as Avatar7 } from './Avatar/Avatar7';
 export { default as Avatar8 } from './Avatar/Avatar8';
 export { default as Avatar9 } from './Avatar/Avatar9';
 
-// Badges
+// Badges - используем реальные имена файлов
 export { default as DangerBadge } from './Badges/DangerBadge';
 export { default as DarkBadge } from './Badges/DarkBadge';
 export { default as GrayBadge } from './Badges/GrayBadge';
@@ -43,53 +43,19 @@ export { default as Breadcrumb2 } from './Breadcrumb/Breadcrumb2';
 export { default as Breadcrumb3 } from './Breadcrumb/Breadcrumb3';
 export { default as Breadcrumb4 } from './Breadcrumb/Breadcrumb4';
 export { default as Breadcrumb5 } from './Breadcrumb/Breadcrumb5';
-export { default as Breadcrumb6 } from './Breadcrumb/Breadcrumb6';
-export { default as Breadcrumb7 } from './Breadcrumb/Breadcrumb7';
-export { default as Breadcrumb8 } from './Breadcrumb/Breadcrumb8';
-export { default as Breadcrumb9 } from './Breadcrumb/Breadcrumb9';
-export { default as Breadcrumb10 } from './Breadcrumb/Breadcrumb10';
-export { default as Breadcrumb11 } from './Breadcrumb/Breadcrumb11';
-export { default as Breadcrumb12 } from './Breadcrumb/Breadcrumb12';
 
-// Button Groups
-export { default as ButtonGroup1 } from './ButtonGroups/ButtonGroup1';
-export { default as ButtonGroup2 } from './ButtonGroups/ButtonGroup2';
-export { default as ButtonGroup3 } from './ButtonGroups/ButtonGroup3';
-
-// Buttons
-export { default as DarkButton } from './Buttons/DarkButton';
-export { default as DarkButtonWithIcon } from './Buttons/DarkButtonWithIcon';
-export { default as DarkOutlineButton } from './Buttons/DarkOutlineButton';
-export { default as DarkRoundedButton } from './Buttons/DarkRoundedButton';
-export { default as DarkRoundedButtonWithIcon } from './Buttons/DarkRoundedButtonWithIcon';
-export { default as DarkSemiRoundedButton } from './Buttons/DarkSemiRoundedButton';
-export { default as DarkSemiRoundedButtonWithIcon } from './Buttons/DarkSemiRoundedButtonWithIcon';
+// Buttons - используем реальные имена файлов
 export { default as PrimaryButton } from './Buttons/PrimaryButton';
 export { default as PrimaryButtonWithIcon } from './Buttons/PrimaryButtonWithIcon';
 export { default as PrimaryOutlineButton } from './Buttons/PrimaryOutlineButton';
-export { default as PrimaryOutlineButtonWithIcon } from './Buttons/PrimaryOutlineButtonWithIcon';
-export { default as PrimaryOutlineFullRoundedButtonWithIcon } from './Buttons/PrimaryOutlineFullRoundedButtonWithIcon';
-export { default as PrimaryOutlineSemiRoundedButtonWithIcon } from './Buttons/PrimaryOutlineSemiRoundedButtonWithIcon';
 export { default as PrimaryRoundedButton } from './Buttons/PrimaryRoundedButton';
-export { default as PrimaryRoundedButtonWithIcon } from './Buttons/PrimaryRoundedButtonWithIcon';
-export { default as PrimarySemiRoundedButton } from './Buttons/PrimarySemiRoundedButton';
-export { default as PrimarySemiRoundedButtonWithIcon } from './Buttons/PrimarySemiRoundedButtonWithIcon';
 export { default as SecondaryButton } from './Buttons/SecondaryButton';
 export { default as SecondaryButtonWithIcon } from './Buttons/SecondaryButtonWithIcon';
 export { default as SecondaryOutlineButton } from './Buttons/SecondaryOutlineButton';
-export { default as SecondaryRoundedButton } from './Buttons/SecondaryRoundedButton';
-export { default as SecondaryRoundedButtonWithIcon } from './Buttons/SecondaryRoundedButtonWithIcon';
-export { default as SecondarySemiRoundedButton } from './Buttons/SecondarySemiRoundedButton';
-export { default as SecondarySemiRoundedButtonWithIcon } from './Buttons/SecondarySemiRoundedButtonWithIcon';
+export { default as DarkButton } from './Buttons/DarkButton';
+export { default as DarkButtonWithIcon } from './Buttons/DarkButtonWithIcon';
 export { default as WhiteButton } from './Buttons/WhiteButton';
 export { default as WhiteButtonWithIcon } from './Buttons/WhiteButtonWithIcon';
-export { default as WhiteOutlineButtonWithIcon } from './Buttons/WhiteOutlineButtonWithIcon';
-export { default as WhiteOutlineRoundedButtonWithIcon } from './Buttons/WhiteOutlineRoundedButtonWithIcon';
-export { default as WhiteOutlineSemiRoundedButtonWithIcon } from './Buttons/WhiteOutlineSemiRoundedButtonWithIcon';
-export { default as WhiteRoundedButton } from './Buttons/WhiteRoundedButton';
-export { default as WhiteRoundedButtonWithIcon } from './Buttons/WhiteRoundedButtonWithIcon';
-export { default as WhiteSemiRoundedButton } from './Buttons/WhiteSemiRoundedButton';
-export { default as WhiteSemiRoundedButtonWithIcon } from './Buttons/WhiteSemiRoundedButtonWithIcon';
 
 // Checkboxes
 export { default as Checkbox1 } from './Checkboxes/Checkbox1';
@@ -98,92 +64,32 @@ export { default as Checkbox3 } from './Checkboxes/Checkbox3';
 export { default as Checkbox4 } from './Checkboxes/Checkbox4';
 export { default as Checkbox5 } from './Checkboxes/Checkbox5';
 
-// Clipboard
-export { default as Clipboard1 } from './Clipboard/Clipboard1';
-export { default as Clipboard2 } from './Clipboard/Clipboard2';
-export { default as Clipboard3 } from './Clipboard/Clipboard3';
-export { default as Clipboard4 } from './Clipboard/Clipboard4';
-
-// DatePicker
-export { default as DatePicker1 } from './DatePicker/DatePicker1';
-export { default as DatePicker2 } from './DatePicker/DatePicker2';
-
-// FileUploads
-export { default as FileUpload1 } from './FileUploads/FileUpload1';
-export { default as FileUpload2 } from './FileUploads/FileUpload2';
-export { default as FileUpload3 } from './FileUploads/FileUpload3';
-export { default as FileUpload4 } from './FileUploads/FileUpload4';
-export { default as FileUpload5 } from './FileUploads/FileUpload5';
-
 // Form Elements
-export { default as FormElementFileUpload } from './FormElement/FormElementFileUpload';
 export { default as FormElementInput } from './FormElement/FormElementInput';
 export { default as FormElementSelect } from './FormElement/FormElementSelect';
 export { default as FormElementTextarea } from './FormElement/FormElementTextarea';
-
-// Galleries
-export { default as Gallery1 } from './Galleries/Gallery1';
-export { default as Gallery2 } from './Galleries/Gallery2';
-export { default as Gallery3 } from './Galleries/Gallery3';
-export { default as Gallery4 } from './Galleries/Gallery4';
-export { default as Gallery5 } from './Galleries/Gallery5';
+export { default as FormElementFileUpload } from './FormElement/FormElementFileUpload';
 
 // Input Range
 export { default as InputRange1 } from './InputRange/InputRange1';
 export { default as InputRange2 } from './InputRange/InputRange2';
 export { default as InputRange3 } from './InputRange/InputRange3';
 
-// Lists
-export { default as List1 } from './List/List1';
-export { default as List2 } from './List/List2';
-export { default as List3 } from './List/List3';
-export { default as List4 } from './List/List4';
-export { default as List5 } from './List/List5';
-export { default as List6 } from './List/List6';
-export { default as List7 } from './List/List7';
-export { default as List8 } from './List/List8';
-export { default as List9 } from './List/List9';
-
-// Mega Menus
-export { default as MegaMenu1 } from './MegaMenus/MegaMenu1';
-export { default as MegaMenu2 } from './MegaMenus/MegaMenu2';
-export { default as MegaMenu3 } from './MegaMenus/MegaMenu3';
-
-// Page Titles
-export { default as PageTitle1 } from './PageTitles/PageTitle1';
-export { default as PageTitle2 } from './PageTitles/PageTitle2';
-export { default as PageTitle3 } from './PageTitles/PageTitle3';
-export { default as PageTitle4 } from './PageTitles/PageTitle4';
-export { default as PageTitle5 } from './PageTitles/PageTitle5';
-
-// Paginations
-export { default as Pagination1 } from './Paginations/Pagination1';
-export { default as Pagination2 } from './Paginations/Pagination2';
-export { default as Pagination3 } from './Paginations/Pagination3';
-export { default as Pagination4 } from './Paginations/Pagination4';
-export { default as Pagination5 } from './Paginations/Pagination5';
-export { default as Pagination6 } from './Paginations/Pagination6';
-
-// Progress
-export { default as ProgressBar1 } from './Progress/ProgressBar1';
-export { default as ProgressBar2 } from './Progress/ProgressBar2';
-export { default as ProgressBar3 } from './Progress/Progress';
-export { default as ProgressBar4 } from './Progress/progressBar4';
-
-// Ratings
-export { default as Rating1 } from './Ratings/Rating1';
-export { default as Rating2 } from './Ratings/Rating2';
-export { default as Rating3 } from './Ratings/Rating3';
-
 // Selects
 export { default as Select1 } from './Selects/Select1';
 export { default as Select2 } from './Selects/Select2';
 export { default as Select3 } from './Selects/Select3';
 
-// Skeletons
-export { default as Skeleton1 } from './Skeletons/Skeleton1';
-export { default as Skeleton2 } from './Skeletons/Skeleton2';
-export { default as Skeleton3 } from './Skeletons/Skeleton3';
+// Verification Code Inputs
+export { default as VerificationCodeInput1 } from './VerificationCodeInputs/VerificationCodeInput1';
+export { default as VerificationCodeInput2 } from './VerificationCodeInputs/VerificationCodeInput2';
+export { default as VerificationCodeInput3 } from './VerificationCodeInputs/VerificationCodeInput3';
+export { default as VerificationCodeInput4 } from './VerificationCodeInputs/VerificationCodeInput4';
+
+// Progress
+export { default as ProgressBar1 } from './Progress/ProgressBar1';
+export { default as ProgressBar2 } from './Progress/ProgressBar2';
+export { default as ProgressBar3 } from './Progress/ProgressBar3';
 
 // Spinners
 export { default as Spinner1 } from './Spinners/Spinner1';
@@ -191,63 +97,12 @@ export { default as Spinner2 } from './Spinners/Spinner2';
 export { default as Spinner3 } from './Spinners/Spinner3';
 export { default as Spinner4 } from './Spinners/Spinner4';
 
-// Sticky Bars
-export { default as StickyBar1 } from './StickyBars/StickyBar1';
-export { default as StickyBar2 } from './StickyBars/StickyBar2';
-export { default as StickyBar3 } from './StickyBars/StickyBar3';
-export { default as StickyBar4 } from './StickyBars/StickyBar4';
-
-// Switcher
-export { default as Switcher1 } from './Switcher/Switcher1';
-export { default as Switcher2 } from './Switcher/Switcher2';
-export { default as Switcher3 } from './Switcher/Switcher3';
-export { default as Switcher4 } from './Switcher/Switcher4';
-export { default as Switcher5 } from './Switcher/Switcher5';
-export { default as Switcher6 } from './Switcher/Switcher6';
-export { default as Switcher7 } from './Switcher/Switcher7';
-export { default as Switcher8 } from './Switcher/Switcher8';
-export { default as Switcher9 } from './Switcher/Switcher9';
-export { default as Switcher10 } from './Switcher/Switcher10';
-export { default as Switcher11 } from './Switcher/Switcher11';
-export { default as Switcher12 } from './Switcher/Switcher12';
-export { default as Switcher13 } from './Switcher/Switcher13';
-
-// Tab
-export { default as Tab1 } from './Tab/Tab1';
-export { default as Tab2 } from './Tab/Tab2';
-export { default as Tab3 } from './Tab/Tab3';
-export { default as Tab4 } from './Tab/Tab4';
-export { default as Tab5 } from './Tab/Tab5';
-export { default as Tab6 } from './Tab/Tab6';
-export { default as Tab7 } from './Tab/Tab7';
-export { default as Tab8 } from './Tab/Tab8';
-export { default as Tab9 } from './Tab/Tab9';
-export { default as Tab10 } from './Tab/Tab10';
-export { default as Tab11 } from './Tab/Tab11';
-
-// Tags
-export { default as Tag1 } from './Tags/Tag1';
-export { default as Tag2 } from './Tags/Tag2';
-export { default as Tag3 } from './Tags/Tag3';
-export { default as Tag4 } from './Tags/Tag4';
-
-// Toast
-export { default as Toast1 } from './Toast/Toast1';
-export { default as Toast2 } from './Toast/Toast2';
-export { default as Toast3 } from './Toast/Toast3';
-export { default as Toast4 } from './Toast/Toast4';
-export { default as Toast5 } from './Toast/Toast5';
-export { default as Toast6 } from './Toast/Toast6';
-export { default as Toast7 } from './Toast/Toast7';
-export { default as Toast8 } from './Toast/Toast8';
-
 // Tooltip
 export { default as Tooltip1 } from './Tooltip/Tooltip1';
 export { default as Tooltip2 } from './Tooltip/Tooltip2';
 export { default as Tooltip3 } from './Tooltip/Tooltip3';
 
-// Verification Code Inputs
-export { default as VerificationCodeInput1 } from './VerificationCodeInputs/VerificationCodeInput1';
-export { default as VerificationCodeInput2 } from './VerificationCodeInputs/VerificationCodeInput2';
-export { default as VerificationCodeInput3 } from './VerificationCodeInputs/VerificationCodeInput3';
-export { default as VerificationCodeInput4 } from './VerificationCodeInputs/VerificationCodeInput4';
+// Paginations
+export { default as Pagination1 } from './Paginations/Pagination1';
+export { default as Pagination2 } from './Paginations/Pagination2';
+export { default as Pagination3 } from './Paginations/Pagination3';
