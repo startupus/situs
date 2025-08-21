@@ -5,7 +5,8 @@ import blog from './blog'
 
 // Экспорт всех компонентов
 export * from './redaktus-core'
-export { types } from '../../redaktus/types'
+// Используем alias из tsconfig, а не относительный путь
+export { types } from 'redaktus/types'
 
 // Экспорт блоков
 export { website, blog }
