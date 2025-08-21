@@ -158,5 +158,47 @@ export {
   ThemeSpinners
 } from './ThemeSpinners';
 
+// Theme FormElement Components
+export { 
+  ThemeFormElementInput,
+  ThemeFormElementSelect,
+  ThemeFormElementTextarea,
+  ThemeFormElementFileUpload,
+  ThemeFormElements
+} from './ThemeFormElements';
+
+// Theme Tooltip Components
+export { 
+  ThemeTooltip1,
+  ThemeTooltip2,
+  ThemeTooltip3,
+  ThemeTooltips
+} from './ThemeTooltips';
+
+// Theme Pagination Components
+export { 
+  ThemePagination1,
+  ThemePagination2,
+  ThemePagination3,
+  ThemePaginations
+} from './ThemePaginations';
+
+// Theme VerificationCodeInput Components
+export { 
+  ThemeVerificationCodeInput1,
+  ThemeVerificationCodeInput2,
+  ThemeVerificationCodeInput3,
+  ThemeVerificationCodeInput4,
+  ThemeVerificationInputs
+} from './ThemeVerificationInputs';
+
+// Theme InputRange Components
+export { 
+  ThemeInputRange1,
+  ThemeInputRange2,
+  ThemeInputRange3,
+  ThemeInputRanges
+} from './ThemeInputRanges';
+
 // Core Components - экспортируем все из корректного индекса
 export * from './core'
