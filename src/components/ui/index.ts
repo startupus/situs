@@ -1,5 +1,8 @@
 export { default as Button } from './Button'
 export type { ButtonProps } from './Button'
+export { default as ProButton } from './ProButton'
+export { default as ProModal } from './ProModal'
+export { default as ProTable } from './ProTable'
 export { default as SitusDarkModeToggle } from './SitusDarkModeToggle'
 export { default as StatsCard } from './StatsCard'
 export { StatsGrid } from './StatsCard'
