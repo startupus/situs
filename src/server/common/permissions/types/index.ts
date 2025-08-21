@@ -8,35 +8,19 @@
  */
 
 // Базовые права доступа
-export type {
-  CorePermission,
-  ProjectPermission,
-  UserPermission,
-  BasePermission
-} from './permissions.types';
+import type { CorePermission, ProjectPermission, UserPermission, BasePermission } from './permissions.types';
+export type { CorePermission, ProjectPermission, UserPermission, BasePermission };
 
 // Компонентные права
-export type {
-  OrdersPermission,
-  AnalyticsPermission,
-  BillingPermission,
-  AgencyPermission,
-  ComponentPermission
-} from './component-permissions.types';
+import type { OrdersPermission, AnalyticsPermission, BillingPermission, AgencyPermission, ComponentPermission } from './component-permissions.types';
+export type { OrdersPermission, AnalyticsPermission, BillingPermission, AgencyPermission, ComponentPermission };
 
 // Системные права
-export type {
-  AccountPermission,
-  ProductPermission,
-  ContentPermission,
-  MenuPermission,
-  ReportsPermission,
-  SystemPermission,
-  SystemPermissions
-} from './system-permissions.types';
+import type { AccountPermission, ProductPermission, ContentPermission, MenuPermission, ReportsPermission, SystemPermission, SystemPermissions } from './system-permissions.types';
+export type { AccountPermission, ProductPermission, ContentPermission, MenuPermission, ReportsPermission, SystemPermission, SystemPermissions };
 
 // Роли и контекст (будут созданы далее)
-export type { GlobalRole, ProjectRole, AccountRole } from './roles.types';
+export type { GlobalRole, ProjectRole, AccountRole, RoleInfo } from './roles.types';
 export type { PermissionContext, AccessScope, PermissionCheckResult } from './context.types';
 
 // Объединенный тип всех прав

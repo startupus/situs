@@ -4,15 +4,15 @@
 
 // Основные декораторы прав
 export {
-  Permission,
+  Require,
   AnyPermission,
-  AllPermissions,
+  RequireAll,
   PERMISSION_KEY
 } from './permission.decorator';
 
 // Контекстные декораторы
 export {
-  PermissionContext,
+  SetPermissionContext as PermissionContext,
   OwnerOnly,
   AgencyAccess,
   RequirePermission,

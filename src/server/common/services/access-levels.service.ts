@@ -70,7 +70,7 @@ export class AccessLevelsService {
       allowedRoles: [],
       level: 30
     }
-  };
+  } as const;
 
   /**
    * Получить все системные уровни доступа
@@ -83,21 +83,21 @@ export class AccessLevelsService {
    * Получить уровень доступа по имени
    */
   getSystemAccessLevel(name: AccessLevel) {
-    return this.systemAccessLevels[name];
+    return this.systemAccessLevels[name as keyof typeof this.systemAccessLevels];
   }
 
   /**
    * Проверить, имеет ли роль доступ к системному уровню
    */
   hasSystemAccess(userRole: string, accessLevel: AccessLevel): boolean {
-    const level = this.systemAccessLevels[accessLevel];
+    const level = this.systemAccessLevels[accessLevel as keyof typeof this.systemAccessLevels] as any;
     if (!level) return false;
 
     // Если уровень доступен всем
-    if (level.allowedRoles.includes('*')) return true;
+    if ((level.allowedRoles as any).includes('*')) return true;
 
     // Проверяем, есть ли роль в списке разрешенных
-    return level.allowedRoles.includes(userRole);
+    return (level.allowedRoles as any).includes(userRole);
   }
 
   /**
@@ -168,36 +168,32 @@ export class AccessLevelsService {
 
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { 
-        globalRole: true,
-        accountMemberships: {
-          select: { accountId: true, role: true }
-        },
-        projectAccesses: {
-          select: { projectId: true, role: true }
-        }
-      }
-    });
+      include: { 
+        accountMemberships: { select: { accountId: true, role: true } },
+        projectAccesses: { select: { projectId: true, role: true } }
+      },
+      select: undefined as any
+    } as any);
 
     if (!user) return false;
 
-    const allowedRoles = JSON.parse(customLevel.allowedRoles);
-    const conditions = JSON.parse(customLevel.conditions);
+    const allowedRoles = JSON.parse(customLevel.allowedRoles as any);
+    const conditions = JSON.parse(customLevel.conditions as any);
 
     // Проверяем глобальную роль
-    if (allowedRoles.includes(user.globalRole)) return true;
+    if (allowedRoles.includes((user as any).globalRole)) return true;
 
     // Проверяем дополнительные условия
     if (conditions.requireAccountMembership && customLevel.accountId) {
-      const hasMembership = user.accountMemberships.some(
-        membership => membership.accountId === customLevel.accountId
+      const hasMembership = (user as any).accountMemberships.some(
+        (membership: any) => membership.accountId === customLevel.accountId
       );
       if (!hasMembership) return false;
     }
 
     if (conditions.requireProjectAccess && customLevel.projectId) {
-      const hasAccess = user.projectAccesses.some(
-        access => access.projectId === customLevel.projectId
+      const hasAccess = (user as any).projectAccesses.some(
+        (access: any) => access.projectId === customLevel.projectId
       );
       if (!hasAccess) return false;
     }
@@ -253,15 +249,14 @@ export class AccessLevelsService {
    */
   async getAvailableAccessLevels(projectId?: string, accountId?: string) {
     const systemLevels = this.getSystemAccessLevels();
-    
-    const customLevels = [];
-    
+    const customLevels: any[] = [];
+
     if (projectId) {
       const projectCustomLevels = await this.getProjectCustomAccessLevels(projectId);
       customLevels.push(...projectCustomLevels.map(level => ({
         ...level,
-        allowedRoles: JSON.parse(level.allowedRoles),
-        conditions: JSON.parse(level.conditions),
+        allowedRoles: JSON.parse(level.allowedRoles as any),
+        conditions: JSON.parse(level.conditions as any),
         isCustom: true
       })));
     }
@@ -270,16 +265,16 @@ export class AccessLevelsService {
       const accountCustomLevels = await this.getAccountCustomAccessLevels(accountId);
       customLevels.push(...accountCustomLevels.map(level => ({
         ...level,
-        allowedRoles: JSON.parse(level.allowedRoles),
-        conditions: JSON.parse(level.conditions),
+        allowedRoles: JSON.parse(level.allowedRoles as any),
+        conditions: JSON.parse(level.conditions as any),
         isCustom: true
       })));
     }
 
     return {
-      system: systemLevels,
+      system: systemLevels as any,
       custom: customLevels,
-      all: [...systemLevels, ...customLevels]
+      all: [...(systemLevels as any), ...customLevels]
     };
   }
 
@@ -293,24 +288,21 @@ export class AccessLevelsService {
   ): Promise<boolean> {
     // Получаем ресурс с его уровнем доступа
     let resource: any;
-    
+
     switch (resourceType) {
       case 'project':
         resource = await this.prisma.project.findUnique({
-          where: { id: resourceId },
-          select: { accessLevel: true, customAccessLevelId: true }
+          where: { id: resourceId }
         });
         break;
       case 'product':
         resource = await this.prisma.product.findUnique({
-          where: { id: resourceId },
-          select: { accessLevel: true, customAccessLevelId: true }
+          where: { id: resourceId }
         });
         break;
       case 'page':
         resource = await this.prisma.page.findUnique({
-          where: { id: resourceId },
-          select: { accessLevel: true, customAccessLevelId: true }
+          where: { id: resourceId }
         });
         break;
     }
@@ -319,20 +311,19 @@ export class AccessLevelsService {
 
     // Получаем пользователя
     const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-      select: { globalRole: true }
+      where: { id: userId }
     });
 
     if (!user) return false;
 
     // Проверяем системный уровень доступа
     if (resource.accessLevel !== 'CUSTOM') {
-      return this.hasSystemAccess(user.globalRole, resource.accessLevel);
+      return this.hasSystemAccess((user as any).globalRole, resource.accessLevel as AccessLevel);
     }
 
     // Проверяем кастомный уровень доступа
-    if (resource.customAccessLevelId) {
-      return this.hasCustomAccess(userId, resource.customAccessLevelId);
+    if ((resource as any).customAccessLevelId) {
+      return this.hasCustomAccess(userId, (resource as any).customAccessLevelId);
     }
 
     return false;

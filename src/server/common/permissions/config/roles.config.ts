@@ -134,11 +134,11 @@ export const ROLE_HIERARCHY = {
 };
 
 /** Экспортируемые права ролей */
-export const ROLE_PERMISSIONS = {
+export const ROLE_PERMISSIONS: Record<string, Permission[]> = {
   BUSINESS: BUSINESS_PERMISSIONS,
   AGENCY: [...BUSINESS_PERMISSIONS, ...AGENCY_ADDITIONAL_PERMISSIONS],
   STAFF: [...BUSINESS_PERMISSIONS, ...AGENCY_ADDITIONAL_PERMISSIONS, ...STAFF_ADDITIONAL_PERMISSIONS],
-  SUPER_ADMIN: ['*'] as Permission[]
+  SUPER_ADMIN: ['*' as unknown as Permission]
 };
 
 /**

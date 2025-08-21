@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
-import { PermissionGuard } from './common/guards/permission.guard';
+import { PermissionGuard } from './common/permissions/guards/permission.guard';
 import { DomainsModule } from './domains/domains.module';
 import { MenusModule } from './menus/menus.module';
 import { envValidationSchema } from './config/env.validation';

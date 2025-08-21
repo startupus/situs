@@ -4,10 +4,11 @@ import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { ValidationPipe } from './pipes/validation.pipe';
 import { RolesGuard } from './guards/roles.guard';
 import { PoliciesGuard } from './guards/policies.guard';
-import { PermissionGuard } from './guards/permission.guard';
-import { PermissionsService } from './services/permissions.service';
+import { PermissionGuard } from './permissions/guards/permission.guard';
+import { PermissionsService } from './permissions/services/permissions.service';
 import { AccessLevelsService } from './services/access-levels.service';
 import { DatabaseModule } from '../database/database.module';
+import { PermissionsModule } from './permissions/permissions.module';
 
 /**
  * Модуль общих утилит с обновленной системой прав доступа
@@ -19,7 +20,7 @@ import { DatabaseModule } from '../database/database.module';
  * - Конфигурацию ролей с иерархией
  */
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, PermissionsModule],
   providers: [
     // Существующие компоненты
     GlobalExceptionFilter,

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { Scopes } from '../common/decorators/roles.decorator';
 
@@ -16,6 +16,14 @@ export class AgencyClientController {
   @Post()
   @Scopes('ACCOUNT_WRITE')
   async create(@Body() body: { agencyAccountId: string; clientAccountId: string }) {
+    // Валидация существования аккаунтов
+    const [agency, client] = await Promise.all([
+      this.prisma.account.findUnique({ where: { id: body.agencyAccountId }, select: { id: true } }),
+      this.prisma.account.findUnique({ where: { id: body.clientAccountId }, select: { id: true } }),
+    ]);
+    if (!agency || !client) {
+      throw new BadRequestException('Agency or client account not found');
+    }
     const link = await this.prisma.agencyClient.create({ data: body });
     return { success: true, data: link };
   }

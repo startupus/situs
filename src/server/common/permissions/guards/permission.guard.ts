@@ -72,7 +72,7 @@ export class PermissionGuard implements CanActivate {
     request: any
   ): Promise<boolean> {
     if (typeof requiredPermission === 'string') {
-      return this.checkSinglePermission(user, requiredPermission, request);
+      return this.checkSinglePermission(user, requiredPermission as Permission, request);
     }
 
     switch (requiredPermission.type) {
