@@ -200,5 +200,101 @@ export {
   ThemeInputRanges
 } from './ThemeInputRanges';
 
+// Theme Tab Components
+export { 
+  ThemeTab1, ThemeTab2, ThemeTab3, ThemeTab4, ThemeTab5, ThemeTab6,
+  ThemeTab7, ThemeTab8, ThemeTab9, ThemeTab10, ThemeTab11,
+  ThemeTabs
+} from './ThemeTabs';
+
+// Theme Tag Components
+export { 
+  ThemeTag1, ThemeTag2, ThemeTag3, ThemeTag4,
+  ThemeTags
+} from './ThemeTags';
+
+// Theme List Components
+export { 
+  ThemeOrderedList1, ThemeOrderedList2, ThemeOrderedList3,
+  ThemeUnOrderedList1, ThemeUnOrderedList2, ThemeUnOrderedList3,
+  ThemeUnOrderedList4, ThemeUnOrderedList5, ThemeUnOrderedList6,
+  ThemeLists
+} from './ThemeLists';
+
+// Theme Switcher Components
+export { 
+  ThemeSwitcher1, ThemeSwitcher2, ThemeSwitcher3, ThemeSwitcher4, ThemeSwitcher5,
+  ThemeSwitcher6, ThemeSwitcher7, ThemeSwitcher8, ThemeSwitcher9, ThemeSwitcher10,
+  ThemeSwitcher11, ThemeSwitcher12, ThemeSwitcher13,
+  ThemeSwitchers
+} from './ThemeSwitchers';
+
+// Theme Clipboard Components
+export { 
+  ThemeClipboard1, ThemeClipboard2, ThemeClipboard3, ThemeClipboard4,
+  ThemeClipboards
+} from './ThemeClipboards';
+
+// Theme Rating Components
+export { 
+  ThemeRating1, ThemeRating2, ThemeRating3,
+  ThemeRatings
+} from './ThemeRatings';
+
+// Theme Skeleton Components
+export { 
+  ThemeSkeleton1, ThemeSkeleton2, ThemeSkeleton3,
+  ThemeSkeletons
+} from './ThemeSkeletons';
+
+// Theme Toast Components
+export { 
+  ThemeToast1, ThemeToast2, ThemeToast3, ThemeToast4,
+  ThemeToast5, ThemeToast6, ThemeToast7, ThemeToast8,
+  ThemeToasts
+} from './ThemeToasts';
+
+// Theme FileUpload Components
+export { 
+  ThemeFileUpload1, ThemeFileUpload2, ThemeFileUpload3, ThemeFileUpload4, ThemeFileUpload5,
+  ThemeFileUploads
+} from './ThemeFileUploads';
+
+// Theme DatePicker Components
+export { 
+  ThemeDatePicker1, ThemeDatePicker2,
+  ThemeDatePickers
+} from './ThemeDatePickers';
+
+// Theme ButtonGroup Components
+export { 
+  ThemeButtonGroup1, ThemeButtonGroup2, ThemeButtonGroup3,
+  ThemeButtonGroups
+} from './ThemeButtonGroups';
+
+// Theme Gallery Components
+export { 
+  ThemeGallery1, ThemeGallery2, ThemeGallery3, ThemeGallery4, ThemeGallery5,
+  ThemeGalleries
+} from './ThemeGalleries';
+
+// Theme PageTitle Components
+export { 
+  ThemePageTitle1, ThemePageTitle2, ThemePageTitle3, ThemePageTitle4, ThemePageTitle5,
+  ThemePageTitles
+} from './ThemePageTitles';
+
+// Theme StickyBar Components
+export { 
+  ThemeStickyBar1, ThemeStickyBar2, ThemeStickyBar3, ThemeStickyBar4,
+  ThemeStickyBars
+} from './ThemeStickyBars';
+
+// Theme MegaMenu Components
+export { 
+  ThemeMegaMenu1, ThemeMegaMenu2, ThemeMegaMenu3,
+  ThemeMegaMenus
+} from './ThemeMegaMenus';
+
 // Core Components - экспортируем все из корректного индекса
 export * from './core'
