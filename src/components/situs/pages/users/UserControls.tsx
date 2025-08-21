@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeButton } from '../../../ui';
-import { FiMail } from 'react-icons/fi';
+import { ThemeButton, ThemeInput, ThemeSelect } from '../../../ui';
+import { FiMail, FiSearch } from 'react-icons/fi';
 
 interface UserControlsProps {
   searchTerm: string;
@@ -30,42 +30,37 @@ const UserControls: React.FC<UserControlsProps> = ({
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
         {/* Поиск и фильтры */}
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Поиск пользователей..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-            />
-            <svg className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
+          <ThemeInput
+            type="text"
+            placeholder="Поиск пользователей..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            icon={<FiSearch className="w-5 h-5" />}
+          />
           
-          <select
+          <ThemeSelect
             value={filterRole}
             onChange={(e) => setFilterRole(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          >
-            <option value="">Все роли</option>
-            <option value="SUPER_ADMIN">Супер Админ</option>
-            <option value="STAFF">Сотрудник</option>
-            <option value="AGENCY">Агентство</option>
-            <option value="BUSINESS">Бизнес</option>
-          </select>
+            options={[
+              { value: "", label: "Все роли" },
+              { value: "SUPER_ADMIN", label: "Супер Админ" },
+              { value: "STAFF", label: "Сотрудник" },
+              { value: "AGENCY", label: "Агентство" },
+              { value: "BUSINESS", label: "Бизнес" }
+            ]}
+          />
           
-          <select
+          <ThemeSelect
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          >
-            <option value="">Все статусы</option>
-            <option value="active">Активные</option>
-            <option value="pending">Ожидающие</option>
-            <option value="suspended">Заблокированные</option>
-            <option value="inactive">Неактивные</option>
-          </select>
+            options={[
+              { value: "", label: "Все статусы" },
+              { value: "active", label: "Активные" },
+              { value: "pending", label: "Ожидающие" },
+              { value: "suspended", label: "Заблокированные" },
+              { value: "inactive", label: "Неактивные" }
+            ]}
+          />
         </div>
 
         {/* Действия */}
@@ -79,24 +74,27 @@ const UserControls: React.FC<UserControlsProps> = ({
           
           {selectedUsers.length > 0 && (
             <div className="flex space-x-2">
-              <button
+              <ThemeButton
                 onClick={() => onBulkAction('activate')}
-                className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+                variant="success"
+                size="sm"
               >
                 Активировать ({selectedUsers.length})
-              </button>
-              <button
+              </ThemeButton>
+              <ThemeButton
                 onClick={() => onBulkAction('suspend')}
-                className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
+                variant="warning"
+                size="sm"
               >
                 Заблокировать
-              </button>
-              <button
+              </ThemeButton>
+              <ThemeButton
                 onClick={() => onBulkAction('delete')}
-                className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
+                variant="danger"
+                size="sm"
               >
                 Удалить
-              </button>
+              </ThemeButton>
             </div>
           )}
         </div>
