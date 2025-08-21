@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, UserRole, UserStatus } from '../../../types/users';
+import { User, GlobalRole, UserStatus } from '../../../types/users';
 
 interface UserModalProps {
   isOpen: boolean;
@@ -13,8 +13,8 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
     email: '',
     firstName: '',
     lastName: '',
-    role: 'client' as UserRole,
-    status: 'active' as UserStatus,
+    globalRole: 'BUSINESS' as GlobalRole,
+    status: 'ACTIVE' as UserStatus,
     phone: '',
     company: '',
     position: '',
@@ -27,7 +27,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        role: user.role,
+        globalRole: user.globalRole,
         status: user.status,
         phone: user.phone || '',
         company: user.company || '',
@@ -39,8 +39,8 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
         email: '',
         firstName: '',
         lastName: '',
-        role: 'client',
-        status: 'active',
+        globalRole: 'BUSINESS',
+        status: 'ACTIVE',
         phone: '',
         company: '',
         position: '',
@@ -119,17 +119,15 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
                 Роль
               </label>
               <select
-                name="role"
-                value={formData.role}
+                name="globalRole"
+                value={formData.globalRole}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option value="client">Клиент</option>
-                <option value="editor">Редактор</option>
-                <option value="moderator">Модератор</option>
-                <option value="admin">Администратор</option>
-                <option value="company_admin">Администратор компании</option>
-                <option value="super_admin">Супер администратор</option>
+                <option value="BUSINESS">Бизнес-пользователь</option>
+                <option value="AGENCY">Агентство</option>
+                <option value="STAFF">Персонал</option>
+                <option value="SUPER_ADMIN">Супер администратор</option>
               </select>
             </div>
             <div>
@@ -142,10 +140,10 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option value="active">Активен</option>
-                <option value="inactive">Неактивен</option>
-                <option value="suspended">Заблокирован</option>
-                <option value="pending">Ожидает</option>
+                <option value="ACTIVE">Активен</option>
+                <option value="INACTIVE">Неактивен</option>
+                <option value="SUSPENDED">Заблокирован</option>
+                <option value="BANNED">Забанен</option>
               </select>
             </div>
           </div>

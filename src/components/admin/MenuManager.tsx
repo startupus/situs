@@ -230,7 +230,7 @@ const MenuManager: React.FC = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           {/* Вкладки */}
-          <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit">
+          <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit" data-testid="menu-mode-tabs">
             <button
               onClick={() => menuState.setActiveTab('items')}
               className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${

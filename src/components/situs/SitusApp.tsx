@@ -13,7 +13,9 @@ import SitusUsersNew from "./pages/SitusUsersNew";
 import SitusSupport from "./pages/SitusSupport";
 import SitusProfileSettings from "./pages/SitusProfileSettings";
 import SitusSectionSettings from "./pages/SitusSectionSettings";
+import AppearanceDemoPage from "./pages/settings/AppearanceDemoPage";
 import ProjectPage from "./projects/ProjectPage";
+
 import SitusProjectWebsite from "./pages/SitusProjectWebsite";
 import SitusProjectStore from "./pages/SitusProjectStore";
 import MenuManager from "../admin/MenuManager";
@@ -53,6 +55,9 @@ const SitusApp: React.FC = () => {
         {/* Настройки */}
         <Route path="profile-settings" element={<SitusProfileSettings />} />
         <Route path="section-settings/*" element={<SitusSectionSettings />} />
+        
+        {/* Демо-страница компонентов (без layout настроек) */}
+        <Route path="demo/components" element={<AppearanceDemoPage />} />
         
         {/* Fallback для несуществующих маршрутов */}
         <Route path="*" element={

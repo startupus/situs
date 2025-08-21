@@ -197,12 +197,12 @@ export interface MenuItemFilters {
  * Поддерживаемые языки системы
  */
 export const SUPPORTED_LANGUAGES = [
-  { code: '*', name: 'Все языки', flag: '🌐' },
-  { code: 'ru-RU', name: 'Русский', flag: '🇷🇺' },
-  { code: 'en-GB', name: 'English', flag: '🇬🇧' },
-  { code: 'es-ES', name: 'Español', flag: '🇪🇸' },
-  { code: 'fr-FR', name: 'Français', flag: '🇫🇷' },
-  { code: 'de-DE', name: 'Deutsch', flag: '🇩🇪' },
+  { code: '*', name: 'Все языки', flag: '' },
+  { code: 'ru-RU', name: 'Русский', flag: '' },
+  { code: 'en-GB', name: 'English', flag: '' },
+  { code: 'es-ES', name: 'Español', flag: '' },
+  { code: 'fr-FR', name: 'Français', flag: '' },
+  { code: 'de-DE', name: 'Deutsch', flag: '' },
 ] as const;
 
 export type SupportedLanguageCode = typeof SUPPORTED_LANGUAGES[number]['code'];
