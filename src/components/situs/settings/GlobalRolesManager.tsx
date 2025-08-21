@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSSEPermissions } from '../../../hooks/useSSEPermissions';
-import RolePermissionsModal from '../components/RolePermissionsModal';
+import { ThemePermissionsModal } from '../../ui';
 import ProButton from '../../ui/ProButton';
 import { 
   FiPlus, 
@@ -529,7 +529,7 @@ const GlobalRolesManager: React.FC = () => {
       )}
 
       {/* Модальное окно редактирования прав */}
-      <RolePermissionsModal
+      <ThemePermissionsModal
         isOpen={showPermissionsModal}
         onClose={handleClosePermissionsModal}
         role={selectedRoleForPermissions}

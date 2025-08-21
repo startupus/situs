@@ -131,6 +131,21 @@ const SitusUsers: React.FC = () => {
     setSelectedUsers([]);
   };
 
+  const handleEditUser = (userId: string) => {
+    console.log('Редактирование пользователя:', userId);
+    // TODO: Открыть форму редактирования пользователя
+    alert(`Редактирование пользователя ${userId} будет реализовано в следующей версии`);
+  };
+
+  const handleDeleteUser = (userId: string) => {
+    const user = users.find(u => u.id === userId);
+    if (user && window.confirm(`Вы уверены, что хотите удалить пользователя "${user.name}"?`)) {
+      console.log('Удаление пользователя:', userId);
+      // TODO: Реализовать удаление пользователя
+      alert(`Удаление пользователя ${user.name} будет реализовано в следующей версии`);
+    }
+  };
+
   // Обработчик создания роли
   const handleCreateRole = useCallback(async (roleData: any) => {
     try {
@@ -200,6 +215,8 @@ const SitusUsers: React.FC = () => {
             onSelectAll={handleSelectAll}
             onUpdateUserRole={updateUserRole}
             onUpdateUserStatus={updateUserStatus}
+            onEditUser={handleEditUser}
+            onDeleteUser={handleDeleteUser}
           />
         </div>
       )}

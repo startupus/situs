@@ -11,6 +11,7 @@ import ThemeSpinner from '@/components/ui/ThemeSpinner';
 import ThemeSwitch from '@/components/ui/ThemeSwitch';
 import ThemeTooltip from '@/components/ui/ThemeTooltip';
 import ThemeActionButtons from '@/components/ui/ThemeActionButtons';
+import ThemePermissionsModal from '@/components/ui/ThemePermissionsModal';
 
 // Core Components - Selects и Forms (временно отключено для диагностики)
 // import { 
@@ -53,11 +54,62 @@ const AppearanceDemoSimple: React.FC = () => {
   const [checkboxState, setCheckboxState] = useState(false);
   const [switchState, setSwitchState] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showPermissionsModal, setShowPermissionsModal] = useState(false);
 
   const breadcrumbItems = [
     { label: 'Главная', href: '/' },
     { label: 'Настройки', href: '/settings' },
     { label: 'Внешний вид', current: true }
+  ];
+
+  // Демо данные для модального окна прав
+  const demoRole = {
+    id: 'demo-role',
+    name: 'DEMO',
+    displayName: 'Демо роль',
+    level: 50,
+    description: 'Демонстрационная роль для показа модального окна',
+    permissions: ['users.view', 'projects.create'],
+    isSystem: false
+  };
+
+  const demoPermissions = [
+    {
+      id: 'users.view',
+      name: 'users.view',
+      displayName: 'Просмотр пользователей',
+      description: 'Доступ к списку пользователей',
+      category: 'users',
+      subcategory: 'view',
+      isSystem: false
+    },
+    {
+      id: 'users.manage',
+      name: 'users.manage',
+      displayName: 'Управление пользователями',
+      description: 'Создание, редактирование и удаление пользователей',
+      category: 'users',
+      subcategory: 'manage',
+      isSystem: false
+    },
+    {
+      id: 'projects.create',
+      name: 'projects.create',
+      displayName: 'Создание проектов',
+      description: 'Создание новых проектов',
+      category: 'projects',
+      subcategory: 'create',
+      isSystem: false
+    },
+    {
+      id: 'projects.manage',
+      name: 'projects.manage',
+      displayName: 'Управление проектами',
+      description: 'Редактирование и удаление проектов',
+      category: 'projects',
+      subcategory: 'manage',
+      isSystem: false
+    }
   ];
 
   return (
@@ -328,6 +380,24 @@ const AppearanceDemoSimple: React.FC = () => {
               Использует корпоративные иконки FiEdit и FiTrash2.
             </div>
           </ComponentDemo>
+
+          <ComponentDemo title="ThemePermissionsModal" id="theme-permissions-modal">
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-400">Модальное окно настройки прав доступа:</span>
+                <button
+                  onClick={() => setShowPermissionsModal(true)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                >
+                  Открыть модальное окно
+                </button>
+              </div>
+            </div>
+            <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-400">
+              <strong>Использование:</strong> В разделе управления ролями и правами пользователей.
+              Поддерживает поиск, фильтрацию по категориям и массовые операции.
+            </div>
+          </ComponentDemo>
         </DemoSection>
 
         {/* Информация о полной библиотеке */}
@@ -338,11 +408,11 @@ const AppearanceDemoSimple: React.FC = () => {
             </h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Theme Components (12)</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Theme Components (13)</h4>
                 <ul className="text-blue-700 dark:text-blue-300 space-y-1">
                   <li>• Action Buttons, Alerts, Avatars</li>
                   <li>• Badges, Breadcrumb, Checkbox</li>
-                  <li>• Progress, Pagination</li>
+                  <li>• Progress, Pagination, Permissions</li>
                   <li>• Spinner, Switch, Tooltip</li>
                 </ul>
               </div>
@@ -374,6 +444,19 @@ const AppearanceDemoSimple: React.FC = () => {
           </div>
         </DemoSection>
       </div>
+
+      {/* Модальное окно настройки прав */}
+      <ThemePermissionsModal
+        isOpen={showPermissionsModal}
+        onClose={() => setShowPermissionsModal(false)}
+        role={demoRole}
+        permissions={demoPermissions}
+        onSave={(roleId, permissions) => {
+          console.log('Сохранение прав для роли:', roleId, permissions);
+          setShowPermissionsModal(false);
+          alert(`Права сохранены для роли ${roleId}. Выбрано прав: ${permissions.length}`);
+        }}
+      />
     </div>
   );
 };
