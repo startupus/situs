@@ -21,6 +21,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "redaktus/frontend": ["src/components/redaktus/frontend.ts"],
       "redaktus/core": ["src/components/redaktus/core.ts"],
       "redaktus/types": ["src/components/redaktus/types-only.ts"],
@@ -40,7 +41,11 @@
     "node_modules",
     "dist",
     "src/server/**",
-    "src/server/dist"
+    "src/server/dist",
+    "src/mcp/**",
+    "**/__tests__/**",
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ],
   "references": [
     { "path": "./src/server" }
