@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import type { PermissionContext } from '../types';
+import type { PermissionContext as PermissionContextType, Permission } from '../types';
 
 /**
  * Декораторы для установки контекста проверки прав
@@ -11,8 +11,9 @@ import type { PermissionContext } from '../types';
  * @example
  * @PermissionContext({ resource: 'project', scope: 'own' })
  */
-export const PermissionContext = (context: Partial<PermissionContext>) => 
-  SetMetadata('permission_context', context);
+export const PERMISSION_CONTEXT_KEY = 'permission_context';
+export const SetPermissionContext = (context: Partial<PermissionContextType>) => 
+  SetMetadata(PERMISSION_CONTEXT_KEY, context);
 
 /**
  * Декоратор для владельцев ресурса
@@ -40,12 +41,12 @@ export const AgencyAccess = (scope: 'clients' | 'own' | 'all') =>
  */
 export const RequirePermission = (
   permission: Permission, 
-  context?: Partial<PermissionContext>
+  context?: Partial<PermissionContextType>
 ) => {
-  return (target: any, propertyKey?: string, descriptor?: PropertyDescriptor) => {
-    SetMetadata('permission', permission)(target, propertyKey, descriptor);
+  return (target: any, propertyKey?: string | symbol, descriptor?: PropertyDescriptor) => {
+    (SetMetadata('permission', permission) as any)(target as any, propertyKey as any, descriptor as any);
     if (context) {
-      SetMetadata('permission_context', context)(target, propertyKey, descriptor);
+      (SetMetadata('permission_context', context) as any)(target as any, propertyKey as any, descriptor as any);
     }
   };
 };

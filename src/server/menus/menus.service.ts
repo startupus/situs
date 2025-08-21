@@ -237,22 +237,24 @@ export class MenusService {
    * Построение lookup таблицы для роутинга (аналог Joomla)
    */
   async buildLookup(menuTypeId: string, language: string): Promise<MenuLookup> {
+    // Берем только опубликованные пункты
     const items = await this.getItems(menuTypeId, ['language'], [language]);
     const lookup: MenuLookup = {};
 
     items.forEach(item => {
       if (item.component && item.view) {
-        const key = item.layout ? `${item.view}:${item.layout}` : item.view;
-        // Более безопасный парсинг targetId
-        let targetId = 0;
+        // Ключ в формате Component:View[:Layout], как ожидает e2e
+        const keyBase = `${item.component}:${item.view}`;
+        const key = item.layout ? `${keyBase}:${item.layout}` : keyBase;
+        // Безопасный индекс по targetId
+        let targetIndex = 0;
         if (item.targetId) {
           const parsed = parseInt(item.targetId, 10);
-          // Если targetId не число, используем простой хеш
-          targetId = isNaN(parsed) ? item.targetId.length * 37 : parsed;
+          targetIndex = Number.isNaN(parsed) ? item.targetId.length * 37 : parsed;
         }
 
         if (!lookup[key]) lookup[key] = {};
-        lookup[key][targetId] = item.id;
+        lookup[key][targetIndex] = item.id;
       }
     });
 

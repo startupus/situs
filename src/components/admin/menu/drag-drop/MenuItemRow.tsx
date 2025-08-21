@@ -58,9 +58,10 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
           ${getDropIndicatorClass()}
         `}
         style={{ marginLeft: `${displayDepth * 20}px` }}
+        data-testid="menu-item"
       >
         {/* Иконка перетаскивания */}
-        <div className="text-body-color dark:text-dark-6 cursor-move">
+        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid="menu-drag-handle">
           ⋮⋮
         </div>
 

@@ -21,26 +21,9 @@ export class RoleHierarchyService {
    * Получает все права роли с учетом наследования
    */
   getRolePermissions(roleId: GlobalRole): Permission[] {
-    const { ROLE_HIERARCHY } = require('../config/roles.config');
-    const role = ROLE_HIERARCHY[roleId];
-    
-    if (!role) return [];
-    
-    // Если есть специальное право "*", возвращаем все права
-    if (role.permissions.includes('*')) {
-      return ['*'] as Permission[];
-    }
-    
-    let permissions = [...role.permissions];
-    
-    // Добавляем права от родительской роли
-    if (role.inheritsFrom && ROLE_HIERARCHY[role.inheritsFrom]) {
-      const parentPermissions = this.getRolePermissions(role.inheritsFrom);
-      permissions = [...permissions, ...parentPermissions];
-    }
-    
-    // Убираем дубликаты
-    return [...new Set(permissions)];
+    const { ROLE_PERMISSIONS } = require('../config/roles.config');
+    const permissions: Permission[] = ROLE_PERMISSIONS[roleId] || [];
+    return Array.from(new Set(permissions));
   }
 
   /**
@@ -63,17 +46,7 @@ export class RoleHierarchyService {
   getRoleInfo(roleId: GlobalRole): RoleInfo | null {
     const { ROLE_HIERARCHY } = require('../config/roles.config');
     const role = ROLE_HIERARCHY[roleId];
-    
-    if (!role) return null;
-    
-    return {
-      id: role.id,
-      name: role.name,
-      description: role.description,
-      level: role.level,
-      inheritsFrom: role.inheritsFrom,
-      limitations: role.limitations
-    };
+    return role || null;
   }
 
   /**
@@ -81,15 +54,7 @@ export class RoleHierarchyService {
    */
   getAllRoles(): RoleInfo[] {
     const { ROLE_HIERARCHY } = require('../config/roles.config');
-    
-    return Object.values(ROLE_HIERARCHY).map(role => ({
-      id: role.id,
-      name: role.name,
-      description: role.description,
-      level: role.level,
-      inheritsFrom: role.inheritsFrom,
-      limitations: role.limitations
-    }));
+    return Object.values(ROLE_HIERARCHY);
   }
 
   /**

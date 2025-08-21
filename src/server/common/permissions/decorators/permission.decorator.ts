@@ -9,9 +9,9 @@ export const PERMISSION_CONTEXT_KEY = 'permission_context';
  * Декоратор для проверки конкретного права доступа
  * 
  * @example
- * @Permission('project.edit.own')
+ * @Require('project.edit.own')
  */
-export const Permission = (permission: Permission) => 
+export const Require = (permission: Permission) => 
   SetMetadata(PERMISSION_KEY, permission);
 
 /**
@@ -27,7 +27,7 @@ export const AnyPermission = (permissions: Permission[]) =>
  * Декоратор для проверки всех прав одновременно (AND)
  * 
  * @example
- * @AllPermissions(['project.view.own', 'project.edit.own'])
+ * @RequireAll(['project.view.own', 'project.edit.own'])
  */
-export const AllPermissions = (permissions: Permission[]) => 
+export const RequireAll = (permissions: Permission[]) => 
   SetMetadata(PERMISSION_KEY, { type: 'all', permissions });

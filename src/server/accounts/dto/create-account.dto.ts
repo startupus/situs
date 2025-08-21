@@ -9,6 +9,7 @@ export class CreateAccountDto {
   @IsEnum(AccountType, { message: 'Тип аккаунта должен быть AGENCY или BUSINESS' })
   type!: AccountType | string;
 
+  @IsOptional()
   @IsString({ message: 'ID владельца должен быть строкой' })
-  ownerId!: string;
+  ownerId?: string;
 }

@@ -87,14 +87,14 @@ export function getPermissionCategory(permission: Permission): string {
 export function isSystemPermission(permission: Permission): boolean {
   return permission.includes('system.') || 
          permission.includes('core.admin') ||
-         permission === '*';
+         (permission as unknown as string) === '*';
 }
 
 /**
  * Получает уровень важности права (для сортировки)
  */
 export function getPermissionLevel(permission: Permission): number {
-  if (permission === '*') return 1000;
+  if ((permission as unknown as string) === '*') return 1000;
   if (permission.includes('system.')) return 900;
   if (permission.includes('.all')) return 800;
   if (permission.includes('.clients')) return 600;
