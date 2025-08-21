@@ -19,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
+import { PermissionGuard } from './common/permissions/guards/permission.guard';
 import { DomainsModule } from './domains/domains.module';
 import { MenusModule } from './menus/menus.module';
 import { envValidationSchema } from './config/env.validation';
@@ -96,8 +97,11 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
   controllers: [HealthController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
-    { provide: APP_GUARD, useClass: RolesGuard },
-    { provide: APP_GUARD, useClass: PoliciesGuard },
+    // Новый guard с детальной проверкой прав (заменяет RolesGuard и PoliciesGuard)
+    { provide: APP_GUARD, useClass: PermissionGuard },
+    // Старые guards временно оставлены для совместимости
+    // { provide: APP_GUARD, useClass: RolesGuard },
+    // { provide: APP_GUARD, useClass: PoliciesGuard },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
   ],
 })

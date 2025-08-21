@@ -228,7 +228,7 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
           onSelectItem={handleSelectItem}
         />
       ) : (
-        <div className="text-center py-8 text-body-color dark:text-dark-6">
+        <div className="text-center py-8 text-body-color dark:text-dark-6" data-testid="menu-dragdrop">
           Функция перестановки недоступна
         </div>
       )}
