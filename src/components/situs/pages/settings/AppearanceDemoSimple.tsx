@@ -86,6 +86,27 @@ import {
   ThemeSpinner4
 } from '@/components/ui';
 
+// Core Form & Input Components - новые интегрированные компоненты
+import { 
+  ThemeFormElementInput,
+  ThemeFormElementSelect,
+  ThemeFormElementTextarea,
+  ThemeFormElementFileUpload,
+  ThemeTooltip1,
+  ThemeTooltip2,
+  ThemeTooltip3,
+  ThemePagination1,
+  ThemePagination2,
+  ThemePagination3,
+  ThemeVerificationCodeInput1,
+  ThemeVerificationCodeInput2,
+  ThemeVerificationCodeInput3,
+  ThemeVerificationCodeInput4,
+  ThemeInputRange1,
+  ThemeInputRange2,
+  ThemeInputRange3
+} from '@/components/ui';
+
 // Core Components - Selects и Forms (временно отключено для диагностики)
 // import { 
 //   Select1, Select2, Select3,
@@ -522,6 +543,135 @@ const AppearanceDemoSimple: React.FC = () => {
             </div>
           </ComponentDemo>
 
+          <ComponentDemo title="Core Form Elements" id="core-form-elements">
+            <div className="w-full space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Form Input Elements</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeFormElementInput />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Form Select Elements</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeFormElementSelect />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Form Textarea Elements</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeFormElementTextarea />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Form File Upload</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeFormElementFileUpload />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Tooltips" id="core-tooltips">
+            <div className="w-full space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Tooltip Variant 1</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeTooltip1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Tooltip Variant 2</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeTooltip2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Tooltip Variant 3</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeTooltip3 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Paginations" id="core-paginations">
+            <div className="w-full space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Pagination Variant 1</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemePagination1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Pagination Variant 2</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemePagination2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Pagination Variant 3</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemePagination3 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Verification Inputs" id="core-verification">
+            <div className="w-full space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Verification Input 1</h4>
+                  <ThemeVerificationCodeInput1 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Verification Input 2</h4>
+                  <ThemeVerificationCodeInput2 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Verification Input 3</h4>
+                  <ThemeVerificationCodeInput3 />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Verification Input 4</h4>
+                  <ThemeVerificationCodeInput4 />
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Core Input Ranges" id="core-input-ranges">
+            <div className="w-full space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Input Range Variant 1</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeInputRange1 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Input Range Variant 2</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeInputRange2 />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Input Range Variant 3</h4>
+                  <div className="scale-75 origin-left">
+                    <ThemeInputRange3 />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ComponentDemo>
+
           <ComponentDemo title="Selects" id="core-selects">
             <div className="w-full space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -742,7 +892,7 @@ const AppearanceDemoSimple: React.FC = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (89 активно из 200+)</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (106 активно из 200+)</h4>
                 <ul className="text-blue-700 dark:text-blue-300 space-y-1">
                   <li>✅ Badges (9 компонентов)</li>
                   <li>✅ Buttons (33 компонента)</li>
@@ -752,7 +902,12 @@ const AppearanceDemoSimple: React.FC = () => {
                   <li>✅ Checkboxes (5 компонентов)</li>
                   <li>✅ Progress (3 компонента)</li>
                   <li>✅ Spinners (4 компонента)</li>
-                  <li>• Forms, Inputs, Selects</li>
+                  <li>✅ Forms (4 компонента)</li>
+                  <li>✅ Tooltips (3 компонента)</li>
+                  <li>✅ Paginations (3 компонента)</li>
+                  <li>✅ VerificationInputs (4 компонента)</li>
+                  <li>✅ InputRanges (3 компонента)</li>
+                  <li>✅ Selects (1 компонент)</li>
                 </ul>
               </div>
               <div>
