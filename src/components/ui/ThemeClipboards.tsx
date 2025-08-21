@@ -6,12 +6,13 @@ import {
   Clipboard3,
   Clipboard4
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Clipboard Variants - простые обертки
-export const ThemeClipboard1: React.FC = () => <Clipboard1 />;
-export const ThemeClipboard2: React.FC = () => <Clipboard2 />;
-export const ThemeClipboard3: React.FC = () => <Clipboard3 />;
-export const ThemeClipboard4: React.FC = () => <Clipboard4 />;
+// Clipboard Variants с поддержкой темы
+export const ThemeClipboard1 = withTheme(Clipboard1, 'primary');
+export const ThemeClipboard2 = withTheme(Clipboard2, 'primary');
+export const ThemeClipboard3 = withTheme(Clipboard3, 'primary');
+export const ThemeClipboard4 = withTheme(Clipboard4, 'primary');
 
 // Экспорт коллекции
 export const ThemeClipboards = {

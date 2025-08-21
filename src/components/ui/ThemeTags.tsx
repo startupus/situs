@@ -6,12 +6,13 @@ import {
   Tag3,
   Tag4
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Tag Variants - простые обертки
-export const ThemeTag1: React.FC = () => <Tag1 />;
-export const ThemeTag2: React.FC = () => <Tag2 />;
-export const ThemeTag3: React.FC = () => <Tag3 />;
-export const ThemeTag4: React.FC = () => <Tag4 />;
+// Tag Variants с поддержкой темы
+export const ThemeTag1 = withTheme(Tag1, 'primary');
+export const ThemeTag2 = withTheme(Tag2, 'secondary');
+export const ThemeTag3 = withTheme(Tag3, 'success');
+export const ThemeTag4 = withTheme(Tag4, 'info');
 
 // Экспорт коллекции
 export const ThemeTags = {

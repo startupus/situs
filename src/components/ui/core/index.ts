@@ -106,3 +106,115 @@ export { default as Tooltip3 } from './Tooltip/Tooltip3';
 export { default as Pagination1 } from './Paginations/Pagination1';
 export { default as Pagination2 } from './Paginations/Pagination2';
 export { default as Pagination3 } from './Paginations/Pagination3';
+
+// Tabs
+export { default as Tab1 } from './Tab/Tab1';
+export { default as Tab2 } from './Tab/Tab2';
+export { default as Tab3 } from './Tab/Tab3';
+export { default as Tab4 } from './Tab/Tab4';
+export { default as Tab5 } from './Tab/Tab5';
+export { default as Tab6 } from './Tab/Tab6';
+export { default as Tab7 } from './Tab/Tab7';
+export { default as Tab8 } from './Tab/Tab8';
+export { default as Tab9 } from './Tab/Tab9';
+export { default as Tab10 } from './Tab/Tab10';
+export { default as Tab11 } from './Tab/Tab11';
+
+// Tags
+export { default as Tag1 } from './Tags/Tag1';
+export { default as Tag2 } from './Tags/Tag2';
+export { default as Tag3 } from './Tags/Tag3';
+export { default as Tag4 } from './Tags/Tag4';
+
+// Lists
+export { default as OrderedList1 } from './List/OrderedList1';
+export { default as OrderedList2 } from './List/OrderedList2';
+export { default as OrderedList3 } from './List/OrderedList3';
+export { default as UnOrderedList1 } from './List/UnOrderedList1';
+export { default as UnOrderedList2 } from './List/UnOrderedList2';
+export { default as UnOrderedList3 } from './List/UnOrderedList3';
+export { default as UnOrderedList4 } from './List/UnOrderedList4';
+export { default as UnOrderedList5 } from './List/UnOrderedList5';
+export { default as UnOrderedList6 } from './List/UnOrderedList6';
+
+// Switchers
+export { default as Switcher1 } from './Switcher/Switcher1';
+export { default as Switcher2 } from './Switcher/Switcher2';
+export { default as Switcher3 } from './Switcher/Switcher3';
+export { default as Switcher4 } from './Switcher/Switcher4';
+export { default as Switcher5 } from './Switcher/Switcher5';
+export { default as Switcher6 } from './Switcher/Switcher6';
+export { default as Switcher7 } from './Switcher/Switcher7';
+export { default as Switcher8 } from './Switcher/Switcher8';
+export { default as Switcher9 } from './Switcher/Switcher9';
+export { default as Switcher10 } from './Switcher/Switcher10';
+export { default as Switcher11 } from './Switcher/Switcher11';
+export { default as Switcher12 } from './Switcher/Switcher12';
+export { default as Switcher13 } from './Switcher/Switcher13';
+
+// Clipboards
+export { default as Clipboard1 } from './Clipboard/Clipboard1';
+export { default as Clipboard2 } from './Clipboard/Clipboard2';
+export { default as Clipboard3 } from './Clipboard/Clipboard3';
+export { default as Clipboard4 } from './Clipboard/Clipboard4';
+
+// Ratings
+export { default as Rating1 } from './Ratings/Rating1';
+export { default as Rating2 } from './Ratings/Rating2';
+export { default as Rating3 } from './Ratings/Rating3';
+
+// Skeletons
+export { default as Skeleton1 } from './Skeletons/Skeleton1';
+export { default as Skeleton2 } from './Skeletons/Skeleton2';
+export { default as Skeleton3 } from './Skeletons/Skeleton3';
+
+// Toast
+export { default as Toast1 } from './Toast/Toast1';
+export { default as Toast2 } from './Toast/Toast2';
+export { default as Toast3 } from './Toast/Toast3';
+export { default as Toast4 } from './Toast/Toast4';
+export { default as Toast5 } from './Toast/Toast5';
+export { default as Toast6 } from './Toast/Toast6';
+export { default as Toast7 } from './Toast/Toast7';
+export { default as Toast8 } from './Toast/Toast8';
+
+// FileUploads
+export { default as FileUpload1 } from './FileUploads/FileUpload1';
+export { default as FileUpload2 } from './FileUploads/FileUpload2';
+export { default as FileUpload3 } from './FileUploads/FileUpload3';
+export { default as FileUpload4 } from './FileUploads/FileUpload4';
+export { default as FileUpload5 } from './FileUploads/FileUpload5';
+
+// DatePickers
+export { default as DatePicker1 } from './DatePicker/DatePicker1';
+export { default as DatePicker2 } from './DatePicker/DatePicker2';
+
+// ButtonGroups
+export { default as ButtonGroup1 } from './ButtonGroups/ButtonGroup1';
+export { default as ButtonGroup2 } from './ButtonGroups/ButtonGroup2';
+export { default as ButtonGroup3 } from './ButtonGroups/ButtonGroup3';
+
+// Galleries
+export { default as Gallery1 } from './Galleries/Gallery1';
+export { default as Gallery2 } from './Galleries/Gallery2';
+export { default as Gallery3 } from './Galleries/Gallery3';
+export { default as Gallery4 } from './Galleries/Gallery4';
+export { default as Gallery5 } from './Galleries/Gallery5';
+
+// PageTitles
+export { default as PageTitle1 } from './PageTitles/PageTitle1';
+export { default as PageTitle2 } from './PageTitles/PageTitle2';
+export { default as PageTitle3 } from './PageTitles/PageTitle3';
+export { default as PageTitle4 } from './PageTitles/PageTitle4';
+export { default as PageTitle5 } from './PageTitles/PageTitle5';
+
+// StickyBars
+export { default as StickyBar1 } from './StickyBars/StickyBar1';
+export { default as StickyBar2 } from './StickyBars/StickyBar2';
+export { default as StickyBar3 } from './StickyBars/StickyBar3';
+export { default as StickyBar4 } from './StickyBars/StickyBar4';
+
+// MegaMenus
+export { default as MegaMenu1 } from './MegaMenus/MegaMenu1';
+export { default as MegaMenu2 } from './MegaMenus/MegaMenu2';
+export { default as MegaMenu3 } from './MegaMenus/MegaMenu3';

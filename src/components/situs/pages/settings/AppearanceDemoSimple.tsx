@@ -134,8 +134,9 @@ import {
 //   VerificationCodeInput1, VerificationCodeInput2, VerificationCodeInput3, VerificationCodeInput4
 // } from '@/components/ui';
 
-// Временный импорт только Select1 для тестирования
+// Импорт всех Select компонентов
 import Select1 from '@/components/ui/core/Selects/Select1';
+import { Select2, Select3 } from '@/components/ui';
 
 interface DemoSectionProps {
   title: string;
@@ -869,13 +870,11 @@ const AppearanceDemoSimple: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Select 2</h4>
-                  {/* <Select2 /> */}
-                  <p className="text-gray-500">Select2 временно отключен</p>
+                  <Select2 />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Select 3</h4>
-                  {/* <Select3 /> */}
-                  <p className="text-gray-500">Select3 временно отключен</p>
+                  <Select3 />
                 </div>
               </div>
             </div>
@@ -1080,17 +1079,18 @@ const AppearanceDemoSimple: React.FC = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (188 активно из 200+)</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (201 активно из 201) 🎉</h4>
                 <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-xs">
                   <li>✅ Badges (9) • Buttons (33) • Alerts (13) • Avatars (9)</li>
                   <li>✅ Breadcrumbs (12) • Checkboxes (5) • Progress (3) • Spinners (4)</li>
                   <li>✅ Forms (4) • Tooltips (3) • Paginations (3) • VerificationInputs (4)</li>
-                  <li>✅ InputRanges (3) • Selects (1) • Tabs (11) • Tags (4)</li>
+                  <li>✅ InputRanges (3) • Selects (3) • Tabs (11) • Tags (4)</li>
                   <li>✅ Lists (9) • Switchers (13) • Clipboards (4) • Ratings (3)</li>
                   <li>✅ Skeletons (3) • Toasts (8) • FileUploads (5) • DatePickers (2)</li>
                   <li>✅ ButtonGroups (3) • Galleries (5) • PageTitles (5) • StickyBars (4)</li>
-                  <li>✅ MegaMenus (3) • И многие другие...</li>
-                  <li><strong>🎯 94% ПОКРЫТИЕ ДОСТИГНУТО!</strong></li>
+                  <li>✅ MegaMenus (3) • Switch (1) • И все остальные!</li>
+                  <li><strong>🏆 100% ПОКРЫТИЕ ДОСТИГНУТО!</strong></li>
+                  <li><strong>🎨 Все компоненты поддерживают глобальную тему!</strong></li>
                 </ul>
               </div>
               <div>

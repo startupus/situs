@@ -13,19 +13,20 @@ import {
   Tab10,
   Tab11
 } from './core';
+import { withTheme } from './ThemeWrapper';
 
-// Tab Variants - простые обертки
-export const ThemeTab1: React.FC = () => <Tab1 />;
-export const ThemeTab2: React.FC = () => <Tab2 />;
-export const ThemeTab3: React.FC = () => <Tab3 />;
-export const ThemeTab4: React.FC = () => <Tab4 />;
-export const ThemeTab5: React.FC = () => <Tab5 />;
-export const ThemeTab6: React.FC = () => <Tab6 />;
-export const ThemeTab7: React.FC = () => <Tab7 />;
-export const ThemeTab8: React.FC = () => <Tab8 />;
-export const ThemeTab9: React.FC = () => <Tab9 />;
-export const ThemeTab10: React.FC = () => <Tab10 />;
-export const ThemeTab11: React.FC = () => <Tab11 />;
+// Tab Variants с поддержкой темы
+export const ThemeTab1 = withTheme(Tab1, 'primary');
+export const ThemeTab2 = withTheme(Tab2, 'primary');
+export const ThemeTab3 = withTheme(Tab3, 'primary');
+export const ThemeTab4 = withTheme(Tab4, 'primary');
+export const ThemeTab5 = withTheme(Tab5, 'primary');
+export const ThemeTab6 = withTheme(Tab6, 'primary');
+export const ThemeTab7 = withTheme(Tab7, 'primary');
+export const ThemeTab8 = withTheme(Tab8, 'primary');
+export const ThemeTab9 = withTheme(Tab9, 'primary');
+export const ThemeTab10 = withTheme(Tab10, 'primary');
+export const ThemeTab11 = withTheme(Tab11, 'primary');
 
 // Экспорт коллекции
 export const ThemeTabs = {
