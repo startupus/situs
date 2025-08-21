@@ -1,5 +1,15 @@
 # TODO Write
 
+## ACL: подготовка к merge
+- [x] Добавить ресёрч по схеме и миграциям: `docs/research/RESEARCH_2025-08-20-acl-schema.md`
+- [x] Зафиксировать миграции в create-only: `acl_baseline`
+- [x] Добавить и выполнить демонстрационный seed ACL: `prisma/seed-acl.ts`
+- [x] Прогнать CI (backend + e2e) — зелёный статус
+- [ ] Запушить ветку `acl-evaluation` на origin
+- [ ] Создать PR в `dev/phase2-website-ui-dto-validation-2025-08-18`
+- [ ] Провести ревью, согласовать план миграции/отката
+- [ ] Слить в `dev`, выполнить smoke‑проверки; при необходимости — последующий merge в `main`
+
 - [x] Исправить PATCH /api/projects/:id/status (status + isPublished, публикация событий в сервисе)
 - [x] Удалить минимальный сервер и артефакты .js из `src/server/projects`
 - [x] Добавить heartbeat `/api/projects/heartbeat` и README для realtime/projects

@@ -9,8 +9,10 @@ export class PoliciesGuard implements CanActivate {
   constructor(private reflector: Reflector, private prisma: PrismaService, private config: ConfigService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    // Dev/Test режим: не блокируем доступ политиками, чтобы не мешать разработке и e2e
-    if (process.env.NODE_ENV !== 'production') {
+    // Test режим: проверяем тестовый токен для e2e тестов
+    const request = context.switchToHttp().getRequest();
+    if (process.env.NODE_ENV === 'test' && 
+        request.headers.authorization === `Bearer ${process.env.AUTH_TEST_TOKEN || 'test-token-12345'}`) {
       return true;
     }
     const requiredScopes = this.reflector.getAllAndOverride<Array<ProjectScope | AccountScope>>(SCOPES_KEY, [
@@ -19,7 +21,6 @@ export class PoliciesGuard implements CanActivate {
     ]);
     if (!requiredScopes || requiredScopes.length === 0) return true;
 
-    const request = context.switchToHttp().getRequest();
     const user = (request as any).user as { id: string; globalRole?: string } | undefined;
     if (!user?.id) return false;
 
