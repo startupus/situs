@@ -62,11 +62,7 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
         style={{ marginLeft: `${displayDepth * 20}px` }}
       >
         {/* Иконка перетаскивания */}
-<<<<<<< HEAD
         <div className="text-body-color dark:text-dark-6 cursor-move" data-testid={testIds.menu.dragHandle}>⋮⋮</div>
-=======
-        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid={testIds.menu.dragHandle}>⋮⋮</div>
->>>>>>> origin/dev/phase2-website-ui-dto-validation-2025-08-18
 
         {/* Чекбокс для пакетной обработки */}
         {showSelection && onSelectItem && (
