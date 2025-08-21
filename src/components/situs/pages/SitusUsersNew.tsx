@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usersApi, User, UserFilters, UsersListResponse } from '../../../api/services/users.api';
 import UserModal from '../components/UserModal';
-import RolePermissionsModal from '../components/RolePermissionsModal';
+import { ThemePermissionsModal } from '../../ui';
 
 /**
  * Компонент управления пользователями с интеграцией API
@@ -365,7 +365,7 @@ const SitusUsersNew: React.FC = () => {
       )}
 
       {showPermissionsModal && (
-        <RolePermissionsModal
+        <ThemePermissionsModal
           isOpen={showPermissionsModal}
           onClose={() => setShowPermissionsModal(false)}
           userId=""

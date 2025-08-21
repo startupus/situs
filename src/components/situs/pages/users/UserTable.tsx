@@ -21,6 +21,8 @@ interface UserTableProps {
   onSelectAll: (selected: boolean) => void;
   onUpdateUserRole: (userId: string, newRole: string) => void;
   onUpdateUserStatus: (userId: string, newStatus: User['status']) => void;
+  onEditUser: (userId: string) => void;
+  onDeleteUser: (userId: string) => void;
 }
 
 const UserTable: React.FC<UserTableProps> = ({
@@ -29,7 +31,9 @@ const UserTable: React.FC<UserTableProps> = ({
   onSelectUser,
   onSelectAll,
   onUpdateUserRole,
-  onUpdateUserStatus
+  onUpdateUserStatus,
+  onEditUser,
+  onDeleteUser
 }) => {
   const getRoleVariant = (role: string): 'primary' | 'success' | 'danger' | 'warning' | 'info' => {
     switch (role) {
@@ -167,8 +171,8 @@ const UserTable: React.FC<UserTableProps> = ({
                 </td>
                 <td className="px-6 py-4 text-sm font-medium">
                   <ThemeActionButtons
-                    onEdit={() => console.log('Edit user:', user.id)}
-                    onDelete={() => console.log('Delete user:', user.id)}
+                    onEdit={() => onEditUser(user.id)}
+                    onDelete={() => onDeleteUser(user.id)}
                     editTitle="Редактировать пользователя"
                     deleteTitle="Удалить пользователя"
                   />
