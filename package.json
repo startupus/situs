@@ -72,7 +72,8 @@
     "test:jest:watch": "jest --watch",
     "test:jest:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "_tmpEcho": "1"
+    "_tmpEcho": "1",
+    "db:seed:acl": "tsx prisma/seed-acl.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
