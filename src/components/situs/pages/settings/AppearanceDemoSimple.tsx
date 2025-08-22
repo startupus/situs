@@ -72,6 +72,24 @@ import {
   ThemeVerificationCodeInput4
 } from '@/components/ui';
 
+// Dashboard Components - существующие компоненты панели управления
+import { 
+  Calendar1,
+  Calendar2,
+  Chart1,
+  Chart2,
+  DataStats1,
+  DataStats2,
+  Profile1,
+  Profile2,
+  ChatBox1,
+  ChatList1,
+  Dropdown1,
+  Dropdown2,
+  HorizontalMenu1,
+  VerticalNavbar1
+} from '@/components/ui/dashboard';
+
 // Core Avatar Components - новые интегрированные компоненты
 import { 
   ThemeAvatar1,
@@ -975,44 +993,93 @@ const AppearanceDemoSimple: React.FC = () => {
         {/* Dashboard Components */}
         <DemoSection title={<><FiBarChart2 className="inline mr-2" />Dashboard Components</>} id="dashboard-components">
           <ComponentDemo title="Calendar" id="dashboard-calendar">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Calendar компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Calendar Variant 1</h4>
+                <Calendar1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Calendar Variant 2</h4>
+                <Calendar2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Charts" id="dashboard-charts">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Chart компоненты требуют дополнительных библиотек (Chart.js, D3.js)
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chart Variant 1</h4>
+                <Chart1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chart Variant 2</h4>
+                <Chart2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Data Stats" id="dashboard-stats">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Data Stats компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Data Stats Variant 1</h4>
+                <DataStats1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Data Stats Variant 2</h4>
+                <DataStats2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Profile" id="dashboard-profile">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Profile компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Profile Variant 1</h4>
+                <Profile1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Profile Variant 2</h4>
+                <Profile2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Chat" id="dashboard-chat">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Chat компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chat Box</h4>
+                <ChatBox1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chat List</h4>
+                <ChatList1 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Dropdown" id="dashboard-dropdown">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Dropdown компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dropdown Variant 1</h4>
+                <Dropdown1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dropdown Variant 2</h4>
+                <Dropdown2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Navigation" id="dashboard-navigation">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Navigation компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Horizontal Menu</h4>
+                <HorizontalMenu1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Vertical Navbar</h4>
+                <VerticalNavbar1 />
+              </div>
             </div>
           </ComponentDemo>
         </DemoSection>
