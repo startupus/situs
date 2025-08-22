@@ -45,7 +45,7 @@ const DefaultTextarea = () => {
       <textarea
         rows='5'
         placeholder='Default textarea'
-        className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+        className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
       />
     </>
   )
@@ -60,7 +60,7 @@ const ActiveTextarea = () => {
       <textarea
         rows='5'
         placeholder='Active textarea'
-        className='w-full bg-transparent rounded-md border border-primary p-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+        className='w-full bg-transparent rounded-md border border-primary p-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
       />
     </>
   )
@@ -76,7 +76,7 @@ const DisabledTextarea = () => {
         rows='5'
         placeholder='Disabled textarea'
         disabled
-        className='w-full rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:disabled:bg-dark-4 dark:disabled:border-dark-4'
+        className='w-full rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:disabled:bg-dark-4 dark:disabled:border-dark-4'
       />
     </>
   )
@@ -93,7 +93,7 @@ const MessageTextarea = () => {
           type='email'
           rows='6'
           placeholder='Type your message'
-          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-3 pl-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-3 pl-12 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
         />
         <span className='absolute top-[18px] left-4'>
           <svg

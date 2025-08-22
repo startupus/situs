@@ -31,7 +31,7 @@ function InputRange3() {
             max={max}
             onInput={minTrigger}
             value={minValue}
-            className="pointer-events-none absolute z-20 h-2 w-full cursor-pointer appearance-none opacity-0"
+            className="pointer-events-auto absolute z-20 h-2 w-full cursor-pointer appearance-none opacity-0"
           />
 
           <input
@@ -41,7 +41,7 @@ function InputRange3() {
             max={max}
             onInput={maxTrigger}
             value={maxValue}
-            className="pointer-events-none absolute z-20 h-2 w-full cursor-pointer appearance-none opacity-0"
+            className="pointer-events-auto absolute z-20 h-2 w-full cursor-pointer appearance-none opacity-0"
           />
 
           <div className="relative z-10 h-2">

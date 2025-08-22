@@ -39,7 +39,7 @@ const DefaultSelect = () => {
         Default Select
       </label>
       <div className='relative z-20'>
-        <select className='relative z-20 w-full appearance-none rounded-lg border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'>
+        <select className='relative z-20 w-full appearance-none rounded-lg border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'>
           <option value='' className='dark:bg-dark-2'>Option</option>
           <option value='' className='dark:bg-dark-2'>Option</option>
           <option value='' className='dark:bg-dark-2'>Option</option>
@@ -87,7 +87,7 @@ const SelectCountry = () => {
             </g>
           </svg>
         </span>
-        <select className='relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'>
+        <select className='relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-12 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'>
           <option value='' className='dark:bg-dark-2'>USA</option>
           <option value='' className='dark:bg-dark-2'>UK</option>
           <option value='' className='dark:bg-dark-2'>Canada</option>
@@ -121,7 +121,7 @@ const MultiselectDropdown = () => {
       <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
         Multiselect Dropdown
       </label>
-      <div className='relative z-20 w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-[5px] pr-8 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'>
+      <div className='relative z-20 w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-[5px] pr-8 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'>
         <div className='flex flex-wrap items-center'>
           <span className='m-[5px] flex items-center justify-center rounded-sm border-[.5px] border-stroke dark:border-dark-3 bg-gray-2 dark:bg-dark-2 py-[6px] px-[10px] text-sm font-medium text-body-color dark:text-dark-6'>
             Design
