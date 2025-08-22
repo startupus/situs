@@ -49,6 +49,47 @@ import {
   ThemeAttentionAlert1
 } from '@/components/ui';
 
+// Core Form Elements - новые интегрированные компоненты
+import { 
+  ThemeFormElementInput,
+  ThemeFormElementSelect,
+  ThemeFormElementTextarea,
+  ThemeFormElementFileUpload
+} from '@/components/ui';
+
+// Core Input Range Components - новые интегрированные компоненты
+import { 
+  ThemeInputRange1,
+  ThemeInputRange2,
+  ThemeInputRange3
+} from '@/components/ui';
+
+// Core Verification Code Input Components - новые интегрированные компоненты
+import { 
+  ThemeVerificationCodeInput1,
+  ThemeVerificationCodeInput2,
+  ThemeVerificationCodeInput3,
+  ThemeVerificationCodeInput4
+} from '@/components/ui';
+
+// Dashboard Components - существующие компоненты панели управления
+import { 
+  Calendar1,
+  Calendar2,
+  Chart1,
+  Chart2,
+  DataStats1,
+  DataStats2,
+  Profile1,
+  Profile2,
+  ChatBox1,
+  ChatList1,
+  Dropdown1,
+  Dropdown2,
+  HorizontalMenu1,
+  VerticalNavbar1
+} from '@/components/ui/dashboard';
+
 // Core Avatar Components - новые интегрированные компоненты
 import { 
   ThemeAvatar1,
@@ -886,23 +927,19 @@ const AppearanceDemoSimple: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Input Field</h4>
-                  {/* <FormElementInput /> */}
-                  <p className="text-gray-500">FormElementInput временно отключен</p>
+                  <ThemeFormElementInput />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Select Field</h4>
-                  {/* <FormElementSelect /> */}
-                  <p className="text-gray-500">FormElementSelect временно отключен</p>
+                  <ThemeFormElementSelect />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Textarea Field</h4>
-                  {/* <FormElementTextarea /> */}
-                  <p className="text-gray-500">FormElementTextarea временно отключен</p>
+                  <ThemeFormElementTextarea />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">File Upload</h4>
-                  {/* <FormElementFileUpload /> */}
-                  <p className="text-gray-500">FormElementFileUpload временно отключен</p>
+                  <ThemeFormElementFileUpload />
                 </div>
               </div>
             </div>
@@ -913,18 +950,15 @@ const AppearanceDemoSimple: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Range 1</h4>
-                  {/* <InputRange1 /> */}
-                  <p className="text-gray-500">InputRange1 временно отключен</p>
+                  <ThemeInputRange1 />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Range 2</h4>
-                  {/* <InputRange2 /> */}
-                  <p className="text-gray-500">InputRange2 временно отключен</p>
+                  <ThemeInputRange2 />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Range 3</h4>
-                  {/* <InputRange3 /> */}
-                  <p className="text-gray-500">InputRange3 временно отключен</p>
+                  <ThemeInputRange3 />
                 </div>
               </div>
             </div>
@@ -935,23 +969,19 @@ const AppearanceDemoSimple: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 1</h4>
-                  {/* <VerificationCodeInput1 /> */}
-                  <p className="text-gray-500">VerificationCodeInput1 временно отключен</p>
+                  <ThemeVerificationCodeInput1 />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 2</h4>
-                  {/* <VerificationCodeInput2 /> */}
-                  <p className="text-gray-500">VerificationCodeInput2 временно отключен</p>
+                  <ThemeVerificationCodeInput2 />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 3</h4>
-                  {/* <VerificationCodeInput3 /> */}
-                  <p className="text-gray-500">VerificationCodeInput3 временно отключен</p>
+                  <ThemeVerificationCodeInput3 />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 4</h4>
-                  {/* <VerificationCodeInput4 /> */}
-                  <p className="text-gray-500">VerificationCodeInput4 временно отключен</p>
+                  <ThemeVerificationCodeInput4 />
                 </div>
               </div>
             </div>
@@ -963,44 +993,93 @@ const AppearanceDemoSimple: React.FC = () => {
         {/* Dashboard Components */}
         <DemoSection title={<><FiBarChart2 className="inline mr-2" />Dashboard Components</>} id="dashboard-components">
           <ComponentDemo title="Calendar" id="dashboard-calendar">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Calendar компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Calendar Variant 1</h4>
+                <Calendar1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Calendar Variant 2</h4>
+                <Calendar2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Charts" id="dashboard-charts">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Chart компоненты требуют дополнительных библиотек (Chart.js, D3.js)
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chart Variant 1</h4>
+                <Chart1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chart Variant 2</h4>
+                <Chart2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Data Stats" id="dashboard-stats">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Data Stats компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Data Stats Variant 1</h4>
+                <DataStats1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Data Stats Variant 2</h4>
+                <DataStats2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Profile" id="dashboard-profile">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Profile компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Profile Variant 1</h4>
+                <Profile1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Profile Variant 2</h4>
+                <Profile2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Chat" id="dashboard-chat">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Chat компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chat Box</h4>
+                <ChatBox1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Chat List</h4>
+                <ChatList1 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Dropdown" id="dashboard-dropdown">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Dropdown компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dropdown Variant 1</h4>
+                <Dropdown1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dropdown Variant 2</h4>
+                <Dropdown2 />
+              </div>
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Navigation" id="dashboard-navigation">
-            <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              Navigation компоненты доступны в полной библиотеке
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Horizontal Menu</h4>
+                <HorizontalMenu1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Vertical Navbar</h4>
+                <VerticalNavbar1 />
+              </div>
             </div>
           </ComponentDemo>
         </DemoSection>
