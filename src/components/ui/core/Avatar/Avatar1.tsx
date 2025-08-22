@@ -33,9 +33,9 @@ const Avatar1 = () => {
 
 export default Avatar1;
 
-const AvatarItem = ({ img, size }) => {
+const AvatarItem = ({ img, size }: { img: string; size: string }) => {
   // Преобразовать размер в фиксированные классы с защитой от сжатия
-  const getSizeClasses = (size) => {
+  const getSizeClasses = (size: string) => {
     const sizeMap = {
       '6': 'h-6 w-6 min-h-[24px] min-w-[24px]',
       '[38px]': 'h-[38px] w-[38px] min-h-[38px] min-w-[38px]',

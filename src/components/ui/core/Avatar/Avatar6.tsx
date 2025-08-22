@@ -54,9 +54,9 @@ const Avatar6 = () => {
 
 export default Avatar6
 
-const AvatarItem = ({ img, size, bulletSize, bulletPosition, active, border }) => {
+const AvatarItem = ({ img, size, bulletSize, bulletPosition, active, border }: { img: string; size: string; bulletSize: string; bulletPosition: string; active?: boolean; border: string }) => {
   // Преобразовать размер в фиксированные классы с защитой от сжатия
-  const getSizeClasses = (size) => {
+  const getSizeClasses = (size: string) => {
     const sizeMap = {
       '6': 'h-6 w-6 min-h-[24px] min-w-[24px]',
       '[38px]': 'h-[38px] w-[38px] min-h-[38px] min-w-[38px]',
@@ -68,7 +68,7 @@ const AvatarItem = ({ img, size, bulletSize, bulletPosition, active, border }) =
   };
 
   // Преобразовать размер bullet в фиксированные классы
-  const getBulletSizeClasses = (bulletSize) => {
+  const getBulletSizeClasses = (bulletSize: string) => {
     const bulletMap = {
       '[7px]': 'h-[7px] w-[7px]',
       '3': 'h-3 w-3',
@@ -80,7 +80,7 @@ const AvatarItem = ({ img, size, bulletSize, bulletPosition, active, border }) =
   };
 
   // Преобразовать позицию bullet в фиксированные классы
-  const getBulletPositionClasses = (bulletPosition) => {
+  const getBulletPositionClasses = (bulletPosition: string) => {
     const positionMap = {
       '0.5': '-top-0.5 -right-0.5',
       '1': '-top-1 -right-1',
