@@ -47,13 +47,36 @@ const Avatar5 = () => {
   )
 }
 
-
 export default Avatar5
 
 const AvatarItem = ({ img, size, bulletSize, active, border }) => {
+  // Преобразовать размер в фиксированные классы с защитой от сжатия
+  const getSizeClasses = (size) => {
+    const sizeMap = {
+      '6': 'h-6 w-6 min-h-[24px] min-w-[24px]',
+      '[38px]': 'h-[38px] w-[38px] min-h-[38px] min-w-[38px]',
+      '[42px]': 'h-[42px] w-[42px] min-h-[42px] min-w-[42px]',
+      '[52px]': 'h-[52px] w-[52px] min-h-[52px] min-w-[52px]',
+      '20': 'h-20 w-20 min-h-[80px] min-w-[80px]'
+    };
+    return sizeMap[size] || 'h-10 w-10 min-h-[40px] min-w-[40px]';
+  };
+
+  // Преобразовать размер bullet в фиксированные классы
+  const getBulletSizeClasses = (bulletSize) => {
+    const bulletMap = {
+      '[7px]': 'h-[7px] w-[7px]',
+      '3': 'h-3 w-3',
+      '[13px]': 'h-[13px] w-[13px]',
+      '[15px]': 'h-[15px] w-[15px]',
+      '[18px]': 'h-[18px] w-[18px]'
+    };
+    return bulletMap[bulletSize] || 'h-2 w-2';
+  };
+
   return (
     <div
-      className={`h-${size} w-${size} relative rounded-full`}
+      className={`${getSizeClasses(size)} relative rounded-full flex-shrink-0`}
     >
       <img
         src={img}
@@ -61,9 +84,7 @@ const AvatarItem = ({ img, size, bulletSize, active, border }) => {
         className='h-full w-full rounded-full object-cover object-center'
       />
       <span
-        className={`bg-${
-          active ? '[#219653]' : '[#DC3545]'
-        } absolute top-0 right-0 block h-${bulletSize} w-${bulletSize} rounded-full ${border} border-white dark:border-dark`}
+        className={`${active ? 'bg-[#219653]' : 'bg-[#DC3545]'} absolute top-0 right-0 block ${getBulletSizeClasses(bulletSize)} rounded-full ${border} border-white dark:border-dark`}
       ></span>
     </div>
   )
