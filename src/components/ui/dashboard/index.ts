@@ -70,11 +70,11 @@ export { default as HorizontalMenu4 } from './HorizontalMenu/HorizontalMenu4';
 export { default as HorizontalMenu5 } from './HorizontalMenu/HorizontalMenu5';
 export { default as HorizontalMenu6 } from './HorizontalMenu/HorizontalMenu6';
 
-// Map
-export { default as Map1 } from './Map/Map1';
-export { default as Map2 } from './Map/Map2';
-export { default as Map3 } from './Map/Map3';
-export { default as Map4 } from './Map/Map4';
+// Map - временно отключены из-за зависимости от jsvectormap
+// export { default as Map1 } from './Map/Map1';
+// export { default as Map2 } from './Map/Map2';
+// export { default as Map3 } from './Map/Map3';
+// export { default as Map4 } from './Map/Map4';
 
 // Popover
 export { default as Popover1 } from './Popover/Popover1';
