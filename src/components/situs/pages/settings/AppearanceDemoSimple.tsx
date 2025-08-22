@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiSettings, FiBarChart2, FiTool, FiTrendingUp, FiPieChart, FiAward, FiStar, FiLayers } from 'react-icons/fi';
 // Временно импортируем компоненты напрямую, пока не настроим экспорты
 import ThemeAlert from '@/components/ui/ThemeAlert';
 import ThemeAvatar from '@/components/ui/ThemeAvatar';
@@ -242,7 +243,7 @@ const AppearanceDemoSimple: React.FC = () => {
 
       <div className="max-w-7xl mx-auto p-6">
         {/* Theme Components - Наши кастомные компоненты */}
-        <DemoSection title="🎨 Theme Components (Кастомные)" id="theme-components">
+        <DemoSection title={<><FiLayers className="inline mr-2" />Theme Components (Кастомные)</>} id="theme-components">
           <ComponentDemo title="Alerts" id="theme-alerts">
             <ThemeAlert type="success" title="Успех">Операция выполнена успешно</ThemeAlert>
             <ThemeAlert type="error" title="Ошибка">Произошла ошибка</ThemeAlert>
@@ -306,7 +307,7 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Core Components */}
-        <DemoSection title="🔧 Core Components" id="core-components">
+        <DemoSection title={<><FiSettings className="inline mr-2" />Core Components</>} id="core-components">
           <ComponentDemo title="Core Badges" id="core-badges">
             <div className="w-full space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -960,22 +961,22 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Dashboard Components */}
-        <DemoSection title="📊 Dashboard Components" id="dashboard-components">
+        <DemoSection title={<><FiBarChart2 className="inline mr-2" />Dashboard Components</>} id="dashboard-components">
           <ComponentDemo title="Calendar" id="dashboard-calendar">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              📅 Calendar компоненты доступны в полной библиотеке
+              Calendar компоненты доступны в полной библиотеке
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Charts" id="dashboard-charts">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              📈 Chart компоненты требуют дополнительных библиотек (Chart.js, D3.js)
+              Chart компоненты требуют дополнительных библиотек (Chart.js, D3.js)
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Data Stats" id="dashboard-stats">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              📊 Data Stats компоненты доступны в полной библиотеке
+              Data Stats компоненты доступны в полной библиотеке
             </div>
           </ComponentDemo>
 
@@ -993,7 +994,7 @@ const AppearanceDemoSimple: React.FC = () => {
 
           <ComponentDemo title="Dropdown" id="dashboard-dropdown">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              ⬇️ Dropdown компоненты доступны в полной библиотеке
+              Dropdown компоненты доступны в полной библиотеке
             </div>
           </ComponentDemo>
 
@@ -1005,7 +1006,7 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Кнопки действий */}
-        <DemoSection title="🔧 Кнопки действий" id="action-buttons">
+        <DemoSection title={<><FiTool className="inline mr-2" />Кнопки действий</>} id="action-buttons">
           <ComponentDemo title="ThemeActionButtons" id="theme-action-buttons">
             <div className="space-y-4">
               <div className="flex items-center gap-4">
@@ -1079,7 +1080,10 @@ const AppearanceDemoSimple: React.FC = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Core Components (201 активно из 201) 🎉</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2 flex items-center">
+                  <FiAward className="mr-2" />
+                  Core Components (201 активно из 201)
+                </h4>
                 <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-xs">
                   <li>✅ Badges (9) • Buttons (33) • Alerts (13) • Avatars (9)</li>
                   <li>✅ Breadcrumbs (12) • Checkboxes (5) • Progress (3) • Spinners (4)</li>
@@ -1089,8 +1093,8 @@ const AppearanceDemoSimple: React.FC = () => {
                   <li>✅ Skeletons (3) • Toasts (8) • FileUploads (5) • DatePickers (2)</li>
                   <li>✅ ButtonGroups (3) • Galleries (5) • PageTitles (5) • StickyBars (4)</li>
                   <li>✅ MegaMenus (3) • Switch (1) • И все остальные!</li>
-                  <li><strong>🏆 100% ПОКРЫТИЕ ДОСТИГНУТО!</strong></li>
-                  <li><strong>🎨 Все компоненты поддерживают глобальную тему!</strong></li>
+                  <li className="flex items-center"><FiAward className="mr-2" /><strong>100% ПОКРЫТИЕ ДОСТИГНУТО!</strong></li>
+                  <li className="flex items-center"><FiLayers className="mr-2" /><strong>Все компоненты поддерживают глобальную тему!</strong></li>
                 </ul>
               </div>
               <div>
