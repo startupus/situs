@@ -128,25 +128,14 @@ import {
   ThemeSpinner4
 } from '@/components/ui';
 
-// Core Form & Input Components - новые интегрированные компоненты
+// Additional Theme Components - дополнительные компоненты
 import { 
-  ThemeFormElementInput,
-  ThemeFormElementSelect,
-  ThemeFormElementTextarea,
-  ThemeFormElementFileUpload,
   ThemeTooltip1,
   ThemeTooltip2,
   ThemeTooltip3,
   ThemePagination1,
   ThemePagination2,
-  ThemePagination3,
-  ThemeVerificationCodeInput1,
-  ThemeVerificationCodeInput2,
-  ThemeVerificationCodeInput3,
-  ThemeVerificationCodeInput4,
-  ThemeInputRange1,
-  ThemeInputRange2,
-  ThemeInputRange3
+  ThemePagination3
 } from '@/components/ui';
 
 // Additional Core Components - все новые категории
