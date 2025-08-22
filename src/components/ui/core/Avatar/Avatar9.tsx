@@ -42,7 +42,7 @@ const Avatar9 = () => {
 
 export default Avatar9
 
-const AvatarItem = ({ img, name, arrow, active, children }) => {
+const AvatarItem = ({ img, name, arrow, active, children }: { img: string; name?: string; arrow?: boolean; active?: boolean; children?: React.ReactNode }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const trigger = useRef(null)
@@ -127,7 +127,7 @@ const AvatarItem = ({ img, name, arrow, active, children }) => {
   )
 }
 
-const DropdownItem = ({ link, children }) => {
+const DropdownItem = ({ link, children }: { link: string; children: React.ReactNode }) => {
   return (
     <a
       href={link}

@@ -20,7 +20,7 @@ const Avatar7 = () => {
 
 export default Avatar7
 
-const AvatarItem = ({ img }) => {
+const AvatarItem = ({ img }: { img: string }) => {
   return (
     <div className='group group-first:ml-0 -ml-5 h-[60px] w-[60px] min-h-[60px] min-w-[60px] rounded-full border-4 border-white dark:border-dark-3 flex-shrink-0'>
       <img
