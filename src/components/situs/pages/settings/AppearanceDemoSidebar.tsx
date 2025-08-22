@@ -1,10 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { FiChevronRight, FiChevronDown } from 'react-icons/fi';
+import { 
+  FiChevronRight, 
+  FiChevronDown, 
+  FiLayers, 
+  FiAlertTriangle, 
+  FiUser, 
+  FiTag, 
+  FiNavigation, 
+  FiEdit3, 
+  FiBarChart2, 
+  FiFileText, 
+  FiSettings, 
+  FiList, 
+  FiSliders, 
+  FiLock, 
+  FiCircle, 
+  FiCalendar, 
+  FiTrendingUp, 
+  FiUserCheck, 
+  FiMessageCircle, 
+  FiChevronDown as FiDropdown, 
+  FiCompass 
+} from 'react-icons/fi';
 
 interface MenuItem {
   id: string;
   title: string;
-  icon: string;
+  icon: React.ReactNode;
   children?: MenuItem[];
 }
 
@@ -12,41 +34,41 @@ const menuItems: MenuItem[] = [
   {
     id: 'theme-components',
     title: 'Theme Components',
-    icon: '🎨',
+    icon: <FiLayers size={16} />,
     children: [
-      { id: 'theme-alerts', title: 'Alerts', icon: '🚨' },
-      { id: 'theme-avatars', title: 'Avatars', icon: '👤' },
-      { id: 'theme-badges', title: 'Badges', icon: '🏷️' },
-      { id: 'theme-breadcrumb', title: 'Breadcrumb', icon: '🍞' },
-      { id: 'theme-forms', title: 'Forms', icon: '📝' },
-      { id: 'theme-progress', title: 'Progress', icon: '📊' },
-      { id: 'theme-pagination', title: 'Pagination', icon: '📄' },
+      { id: 'theme-alerts', title: 'Alerts', icon: <FiAlertTriangle size={16} /> },
+      { id: 'theme-avatars', title: 'Avatars', icon: <FiUser size={16} /> },
+      { id: 'theme-badges', title: 'Badges', icon: <FiTag size={16} /> },
+      { id: 'theme-breadcrumb', title: 'Breadcrumb', icon: <FiNavigation size={16} /> },
+      { id: 'theme-forms', title: 'Forms', icon: <FiEdit3 size={16} /> },
+      { id: 'theme-progress', title: 'Progress', icon: <FiBarChart2 size={16} /> },
+      { id: 'theme-pagination', title: 'Pagination', icon: <FiFileText size={16} /> },
     ]
   },
   {
     id: 'core-components',
     title: 'Core Components',
-    icon: '🔧',
+    icon: <FiSettings size={16} />,
     children: [
-      { id: 'core-selects', title: 'Selects', icon: '📋' },
-      { id: 'core-form-elements', title: 'Form Elements', icon: '📝' },
-      { id: 'core-input-range', title: 'Input Range', icon: '🎚️' },
-      { id: 'core-verification', title: 'Verification Inputs', icon: '🔐' },
-      { id: 'core-buttons', title: 'Buttons', icon: '🔘' },
+      { id: 'core-selects', title: 'Selects', icon: <FiList size={16} /> },
+      { id: 'core-form-elements', title: 'Form Elements', icon: <FiEdit3 size={16} /> },
+      { id: 'core-input-range', title: 'Input Range', icon: <FiSliders size={16} /> },
+      { id: 'core-verification', title: 'Verification Inputs', icon: <FiLock size={16} /> },
+      { id: 'core-buttons', title: 'Buttons', icon: <FiCircle size={16} /> },
     ]
   },
   {
     id: 'dashboard-components',
     title: 'Dashboard Components',
-    icon: '📊',
+    icon: <FiBarChart2 size={16} />,
     children: [
-      { id: 'dashboard-calendar', title: 'Calendar', icon: '📅' },
-      { id: 'dashboard-charts', title: 'Charts', icon: '📈' },
-      { id: 'dashboard-stats', title: 'Data Stats', icon: '📊' },
-      { id: 'dashboard-profile', title: 'Profile', icon: '👤' },
-      { id: 'dashboard-chat', title: 'Chat', icon: '💬' },
-      { id: 'dashboard-dropdown', title: 'Dropdown', icon: '⬇️' },
-      { id: 'dashboard-navigation', title: 'Navigation', icon: '🧭' },
+      { id: 'dashboard-calendar', title: 'Calendar', icon: <FiCalendar size={16} /> },
+      { id: 'dashboard-charts', title: 'Charts', icon: <FiTrendingUp size={16} /> },
+      { id: 'dashboard-stats', title: 'Data Stats', icon: <FiBarChart2 size={16} /> },
+      { id: 'dashboard-profile', title: 'Profile', icon: <FiUserCheck size={16} /> },
+      { id: 'dashboard-chat', title: 'Chat', icon: <FiMessageCircle size={16} /> },
+      { id: 'dashboard-dropdown', title: 'Dropdown', icon: <FiDropdown size={16} /> },
+      { id: 'dashboard-navigation', title: 'Navigation', icon: <FiCompass size={16} /> },
     ]
   }
 ];
