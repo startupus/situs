@@ -30,10 +30,6 @@ const TooltipItem = ({
   children,
   tooltipsText,
   position
-}: {
-  children: React.ReactNode;
-  tooltipsText: string;
-  position: 'top' | 'bottom' | 'left' | 'right';
 }) => {
   return (
     <div className='w-full px-4 sm:w-1/2 lg:w-1/4'>
