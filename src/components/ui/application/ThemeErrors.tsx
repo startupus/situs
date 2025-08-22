@@ -2,6 +2,7 @@
 import React from 'react';
 import Error1 from '../core/application/Error/Error1';
 import Error2 from '../core/application/Error/Error2';
+import Error3 from '../core/application/Error/Error3';
 import Error5 from '../core/application/Error/Error5';
 
 // Интерфейс для пропсов Error компонентов
@@ -26,9 +27,7 @@ export const ThemeError2: React.FC<ErrorProps> = (props) => (
 );
 
 export const ThemeError3: React.FC<ErrorProps> = (props) => (
-  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-    <p className="text-gray-600 dark:text-gray-400">Error3 - будет добавлен позже</p>
-  </div>
+  <Error3 {...adaptErrorProps(props)} />
 );
 
 export const ThemeError4: React.FC<ErrorProps> = (props) => (

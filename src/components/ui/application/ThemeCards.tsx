@@ -1,6 +1,7 @@
 // src/components/ui/application/ThemeCards.tsx
 import React from 'react';
 import Card1 from '../core/application/Card/Card1';
+import Card8 from '../core/application/Card/Card8';
 
 // Интерфейс для пропсов Card компонентов
 interface CardProps {
@@ -57,9 +58,7 @@ export const ThemeCard7: React.FC<CardProps> = (props) => (
 );
 
 export const ThemeCard8: React.FC<CardProps> = (props) => (
-  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-    <p className="text-gray-600 dark:text-gray-400">Card8 - будет добавлен позже</p>
-  </div>
+  <Card8 {...adaptCardProps(props)} />
 );
 
 export const ThemeCard9: React.FC<CardProps> = (props) => (

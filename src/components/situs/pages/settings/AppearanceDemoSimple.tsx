@@ -99,7 +99,8 @@ import {
   ThemeError5,
   ThemeCard1,
   ThemeCard2,
-  ThemeCard3
+  ThemeCard3,
+  ThemeCard8
 } from '@/components/ui/application';
 
 // Core Avatar Components - новые интегрированные компоненты
@@ -1079,6 +1080,10 @@ const AppearanceDemoSimple: React.FC = () => {
               <div>
                 <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Card Variant 3</h4>
                 <ThemeCard3 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Card Variant 8</h4>
+                <ThemeCard8 />
               </div>
             </div>
           </ComponentDemo>

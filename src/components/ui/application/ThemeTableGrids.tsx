@@ -1,6 +1,7 @@
 // src/components/ui/application/ThemeTableGrids.tsx
 import React from 'react';
 import TableGrid1 from '../core/application/TableGrid/TableGrid1';
+import TableGrid2 from '../core/application/TableGrid/TableGrid2';
 
 // Интерфейс для пропсов TableGrid компонентов
 interface TableGridProps {
@@ -19,11 +20,8 @@ export const ThemeTableGrid1: React.FC<TableGridProps> = (props) => (
   <TableGrid1 {...adaptTableGridProps(props)} />
 );
 
-// Заглушки для остальных TableGrid компонентов (будут добавлены позже)
 export const ThemeTableGrid2: React.FC<TableGridProps> = (props) => (
-  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-    <p className="text-gray-600 dark:text-gray-400">TableGrid2 - будет добавлен позже</p>
-  </div>
+  <TableGrid2 {...adaptTableGridProps(props)} />
 );
 
 export const ThemeTableGrid3: React.FC<TableGridProps> = (props) => (
