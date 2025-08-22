@@ -982,13 +982,13 @@ const AppearanceDemoSimple: React.FC = () => {
 
           <ComponentDemo title="Profile" id="dashboard-profile">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              👤 Profile компоненты доступны в полной библиотеке
+              Profile компоненты доступны в полной библиотеке
             </div>
           </ComponentDemo>
 
           <ComponentDemo title="Chat" id="dashboard-chat">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              💬 Chat компоненты доступны в полной библиотеке
+              Chat компоненты доступны в полной библиотеке
             </div>
           </ComponentDemo>
 
@@ -1000,7 +1000,7 @@ const AppearanceDemoSimple: React.FC = () => {
 
           <ComponentDemo title="Navigation" id="dashboard-navigation">
             <div className="text-gray-600 dark:text-gray-400 p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
-              🧭 Navigation компоненты доступны в полной библиотеке
+              Navigation компоненты доступны в полной библиотеке
             </div>
           </ComponentDemo>
         </DemoSection>
