@@ -82,14 +82,14 @@ const AvatarItem = ({ img, name, arrow, active, children }) => {
           ref={trigger}
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <div className='relative mr-4 h-[42px] w-[42px] rounded-full'>
+          <div className='relative mr-4 h-[42px] w-[42px] min-h-[42px] min-w-[42px] rounded-full flex-shrink-0'>
             <img
               src={img}
               alt='avatar'
               className='h-full w-full rounded-full object-cover object-center'
             />
             <span
-              className={`absolute -top-0.5 -right-0.5 block h-[14px] w-[14px] rounded-full border-[2.3px] border-white dark:border-dark ${
+              className={`absolute -top-0.5 -right-0.5 block h-[14px] w-[14px] min-h-[14px] min-w-[14px] rounded-full border-[2.3px] border-white dark:border-dark ${
                 active ? 'bg-[#219653]' : 'bg-red'
               } `}
             ></span>

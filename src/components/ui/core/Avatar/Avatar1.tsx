@@ -34,8 +34,20 @@ const Avatar1 = () => {
 export default Avatar1;
 
 const AvatarItem = ({ img, size }) => {
+  // Преобразовать размер в фиксированные классы с защитой от сжатия
+  const getSizeClasses = (size) => {
+    const sizeMap = {
+      '6': 'h-6 w-6 min-h-[24px] min-w-[24px]',
+      '[38px]': 'h-[38px] w-[38px] min-h-[38px] min-w-[38px]',
+      '[42px]': 'h-[42px] w-[42px] min-h-[42px] min-w-[42px]',
+      '[52px]': 'h-[52px] w-[52px] min-h-[52px] min-w-[52px]',
+      '20': 'h-20 w-20 min-h-[80px] min-w-[80px]'
+    };
+    return sizeMap[size] || 'h-10 w-10 min-h-[40px] min-w-[40px]';
+  };
+
   return (
-    <div className={`h-${size} w-${size} rounded-full`}>
+    <div className={`${getSizeClasses(size)} rounded-full flex-shrink-0`}>
       <img
         src={img}
         alt="avatar"
