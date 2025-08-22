@@ -90,6 +90,12 @@ import {
   VerticalNavbar1
 } from '@/components/ui/dashboard';
 
+// Application Components - новые интегрированные компоненты
+import { 
+  ThemeBlog1,
+  ThemeBlog2
+} from '@/components/ui/application';
+
 // Core Avatar Components - новые интегрированные компоненты
 import { 
   ThemeAvatar1,
@@ -1068,6 +1074,22 @@ const AppearanceDemoSimple: React.FC = () => {
               <div>
                 <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Vertical Navbar</h4>
                 <VerticalNavbar1 />
+              </div>
+            </div>
+          </ComponentDemo>
+        </DemoSection>
+
+        {/* Application Components */}
+        <DemoSection title={<><FiLayers className="inline mr-2" />Application Components</>} id="application-components">
+          <ComponentDemo title="Blog Components" id="application-blog">
+            <div className="space-y-8">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Blog Variant 1</h4>
+                <ThemeBlog1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Blog Variant 2</h4>
+                <ThemeBlog2 />
               </div>
             </div>
           </ComponentDemo>
