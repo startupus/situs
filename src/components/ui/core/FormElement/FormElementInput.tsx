@@ -65,7 +65,7 @@ const DefaultInput = () => {
       <input
         type='text'
         placeholder='Default Input'
-        className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2'
+        className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2'
       />
     </>
   )
@@ -96,7 +96,7 @@ const DisabledInput = () => {
         type='text'
         placeholder='Active Input'
         disabled
-        className='w-full rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2 dark:disabled:bg-dark-4 dark:disabled:border-dark-4'
+        className='w-full rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2 dark:disabled:bg-dark-4 dark:disabled:border-dark-4'
       />
     </>
   )
@@ -112,7 +112,7 @@ const NameInput = () => {
         <input
           type='text'
           placeholder='Devid Jhon'
-          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
         />
         <span className='absolute top-1/2 left-4 -translate-y-1/2'>
           <svg
@@ -146,7 +146,7 @@ const EmailInput = () => {
         <input
           type='email'
           placeholder='info@yourmai.com'
-          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
         />
         <span className='absolute top-1/2 left-4 -translate-y-1/2'>
           <svg
@@ -177,7 +177,7 @@ const CompanyNameInput = () => {
         <input
           type='text'
           placeholder='Pimjo Labs'
-          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
         />
         <span className='absolute top-1/2 left-4 -translate-y-1/2'>
           <svg
@@ -221,7 +221,7 @@ const CurrencyInput = () => {
         <input
           type='text'
           placeholder='Pimjo Labs'
-          className='w-full bg-transparent rounded-br-md rounded-tr-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-5 text-dark-6 dark:text-white outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+          className='w-full bg-transparent rounded-br-md rounded-tr-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
         />
       </div>
     </>
@@ -238,7 +238,7 @@ const InvalidInput = () => {
         <input
           type='email'
           placeholder='Devid Jhon'
-          className='w-full bg-transparent rounded-md border border-red py-[10px] pl-5 pr-12 text-dark-6 dark:text-white outline-hidden transition'
+          className='w-full bg-transparent rounded-md border border-red py-[10px] pl-5 pr-12 text-dark-6 outline-hidden transition'
         />
         <span className='absolute top-1/2 right-4 -translate-y-1/2'>
           <svg
@@ -284,7 +284,7 @@ const StrongInput = () => {
         <input
           type='email'
           placeholder='Devid Jhon'
-          className='w-full bg-transparent rounded-md border border-green py-[10px] px-12 text-dark-6 dark:text-white outline-hidden transition'
+          className='w-full bg-transparent rounded-md border border-green py-[10px] px-12 text-dark-6 outline-hidden transition'
         />
         <span className='absolute top-1/2 left-4 -translate-y-1/2'>
           <svg

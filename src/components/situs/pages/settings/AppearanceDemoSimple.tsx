@@ -965,28 +965,7 @@ const AppearanceDemoSimple: React.FC = () => {
             </div>
           </ComponentDemo>
 
-          <ComponentDemo title="Verification Code Inputs" id="core-verification">
-            <div className="w-full space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 1</h4>
-                  <ThemeVerificationCodeInput1 />
-                </div>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 2</h4>
-                  <ThemeVerificationCodeInput2 />
-                </div>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 3</h4>
-                  <ThemeVerificationCodeInput3 />
-                </div>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Code Input 4</h4>
-                  <ThemeVerificationCodeInput4 />
-                </div>
-              </div>
-            </div>
-          </ComponentDemo>
+
 
 
         </DemoSection>

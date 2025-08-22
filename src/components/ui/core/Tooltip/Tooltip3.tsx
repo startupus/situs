@@ -26,7 +26,7 @@ const ToolTip3 = () => {
 
 export default ToolTip3
 
-const TooltipItem = ({ children, tooltipsText, position }) => {
+const TooltipItem = ({ children, tooltipsText, position }: { children: React.ReactNode; tooltipsText: string; position: 'top' | 'bottom' | 'left' | 'right' }) => {
   return (
     <div className='w-full px-4 sm:w-1/2 lg:w-1/4'>
       <div className='mb-14'>
