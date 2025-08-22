@@ -93,7 +93,13 @@ import {
 // Application Components - новые интегрированные компоненты
 import { 
   ThemeBlog1,
-  ThemeBlog2
+  ThemeBlog2,
+  ThemeError1,
+  ThemeError2,
+  ThemeError5,
+  ThemeCard1,
+  ThemeCard2,
+  ThemeCard3
 } from '@/components/ui/application';
 
 // Core Avatar Components - новые интегрированные компоненты
@@ -1081,15 +1087,36 @@ const AppearanceDemoSimple: React.FC = () => {
 
         {/* Application Components */}
         <DemoSection title={<><FiLayers className="inline mr-2" />Application Components</>} id="application-components">
-          <ComponentDemo title="Blog Components" id="application-blog">
+          <ComponentDemo title="Card Components" id="application-card">
             <div className="space-y-8">
               <div>
-                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Blog Variant 1</h4>
-                <ThemeBlog1 />
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Card Variant 1</h4>
+                <ThemeCard1 />
               </div>
               <div>
-                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Blog Variant 2</h4>
-                <ThemeBlog2 />
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Card Variant 2</h4>
+                <ThemeCard2 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Card Variant 3</h4>
+                <ThemeCard3 />
+              </div>
+            </div>
+          </ComponentDemo>
+
+          <ComponentDemo title="Error Components" id="application-error">
+            <div className="space-y-8">
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Error Page Variant 1</h4>
+                <ThemeError1 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Error Page Variant 2</h4>
+                <ThemeError2 />
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">Error Page Variant 5</h4>
+                <ThemeError5 />
               </div>
             </div>
           </ComponentDemo>
