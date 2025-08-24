@@ -7,7 +7,7 @@ import { Scopes } from '../common/decorators/roles.decorator';
 /**
  * Контроллер категорий товаров
  */
-@Controller('api/categories')
+@Controller('categories')
 export class CategoriesController {
   constructor(private readonly prisma: PrismaService) {}
 

@@ -175,7 +175,7 @@ export const useMenuSystem = (projectId?: string) => {
   useEffect(() => {
     if (!projectId) return;
 
-    const eventSource = new EventSource('/api/projects/events');
+    const eventSource = new EventSource('/api/realtime/projects');
     
     eventSource.onmessage = (event) => {
       try {

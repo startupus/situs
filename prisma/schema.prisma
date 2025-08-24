@@ -13,8 +13,8 @@ datasource db {
 model User {
   id        String   @id @default(cuid())
   username  String   @unique
-  email     String   @unique
-  password  String
+  email     String?  @unique
+  password  String?
   globalRole GlobalRole @default(BUSINESS)
   status    UserStatus @default(ACTIVE)
   
@@ -36,7 +36,103 @@ model User {
   accountMemberships AccountMembership[]
   media            Media[]
 
+  // Groups mapping (Joomla-like)
+  groups   UserGroupMap[]
+
+  // External auth providers (SSO)
+  authProviders UserAuthProvider[]
+
+  // Invitations accepted by this user
+  invitationsAccepted UserInvitation[] @relation("InvitationAccepted")
+
+  // Invitations created by this user
+  invitationsSent UserInvitation[] @relation("InvitationInviter")
+
   @@map("users")
+}
+
+/// Joomla-like hierarchical user groups
+model UserGroup {
+  id          String     @id @default(cuid())
+  title       String     @unique
+  description String?
+  isCore      Boolean    @default(false)
+  parentId    String?
+  parent      UserGroup? @relation("UserGroupHierarchy", fields: [parentId], references: [id])
+  children    UserGroup[] @relation("UserGroupHierarchy")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Mappings
+  users       UserGroupMap[]
+
+  @@map("user_groups")
+}
+
+/// M:N mapping users to groups
+model UserGroupMap {
+  id       String   @id @default(cuid())
+  userId   String
+  groupId  String
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group    UserGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, groupId])
+  @@map("user_group_map")
+}
+
+/// View levels (maps to sets of groups) — optional, reserved for future
+model ViewLevel {
+  id          String   @id @default(cuid())
+  title       String   @unique
+  description String?
+  ordering    Int      @default(0)
+  // Stores group ids as JSON array for simplicity; can be normalized later
+  groupIds    String   @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("view_levels")
+}
+
+/// External authentication providers (SSO)
+model UserAuthProvider {
+  id            String   @id @default(cuid())
+  userId        String
+  provider      String   // e.g. google, github, apple
+  providerUserId String  // id at the provider
+  accessToken   String?
+  refreshToken  String?
+  expiresAt     DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+  @@map("user_auth_providers")
+}
+
+/// Invitations to join the platform/accounts/projects
+model UserInvitation {
+  id          String   @id @default(cuid())
+  email       String?
+  token       String   @unique
+  invitedById String
+  role        GlobalRole? // suggested role on accept
+  accountId   String?
+  projectId   String?
+  status      String   @default("PENDING") // PENDING | ACCEPTED | EXPIRED | REVOKED
+  expiresAt   DateTime?
+  acceptedById String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  invitedBy   User     @relation("InvitationInviter", fields: [invitedById], references: [id])
+  acceptedBy  User?    @relation("InvitationAccepted", fields: [acceptedById], references: [id])
+
+  @@map("user_invitations")
 }
 
 model Project {
@@ -441,6 +537,7 @@ enum GlobalRole {
 enum UserStatus {
   ACTIVE
   INACTIVE
+  PENDING
   SUSPENDED
   BANNED
 }

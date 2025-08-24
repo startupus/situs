@@ -17,7 +17,12 @@ export type ProjectEventType =
   | 'menu_item_updated'
   | 'menu_item_deleted'
   | 'menu_items_reordered'
-  | 'menu_structure_changed';
+  | 'menu_structure_changed'
+  // События пользователей
+  | 'user_created'
+  | 'user_updated'
+  | 'user_deleted'
+  | 'user_status_changed';
 
 export interface RealtimeEvent<T = any> {
   type: ProjectEventType;

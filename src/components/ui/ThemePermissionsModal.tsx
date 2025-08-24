@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiCheck, FiShield, FiLock, FiX } from 'react-icons/fi';
 import ThemeButton from './ThemeButton';
+import { ThemeInput, ThemeSelect } from './ThemeForm';
 
 interface Permission {
   id: string;
@@ -124,26 +125,25 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-end mb-6">
+        {/* Заголовок с кнопкой закрытия */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-3">
+            <FiShield className="w-6 h-6 text-blue-600" />
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Настройка прав доступа
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {role.displayName} (уровень {role.level})
+              </p>
+            </div>
+          </div>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
           >
             <FiX className="w-6 h-6" />
           </button>
-        </div>
-
-        {/* Заголовок с иконкой */}
-        <div className="flex items-center space-x-3 mb-6">
-          <FiShield className="w-6 h-6 text-blue-600" />
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Настройка прав доступа
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              {role.displayName} (уровень {role.level})
-            </p>
-          </div>
         </div>
 
         {/* Предупреждение для системных ролей */}
@@ -163,28 +163,27 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Поиск */}
             <div className="flex-1">
-              <input
+              <ThemeInput
                 type="text"
                 placeholder="Поиск прав доступа..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={hasFullAccess}
+                className="mb-0"
               />
             </div>
             {/* Фильтр по категории */}
             <div className="flex-1">
-              <select
+              <ThemeSelect
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                options={[
+                  { value: 'all', label: 'Все категории' },
+                  ...categories.map(category => ({ value: category, label: category }))
+                ]}
                 disabled={hasFullAccess}
-              >
-                <option value="all">Все категории</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-                ))}
-              </select>
+                className="mb-0"
+              />
             </div>
           </div>
         </div>

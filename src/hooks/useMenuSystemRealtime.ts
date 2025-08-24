@@ -60,7 +60,7 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
     if (!projectId) return;
 
     console.log('[MENU_RT] Подключение к SSE для проекта:', projectId);
-    const eventSource = new EventSource('/api/projects/events');
+    const eventSource = new EventSource('/api/realtime/projects');
     
     eventSource.onmessage = (event) => {
       try {

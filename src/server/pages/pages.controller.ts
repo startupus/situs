@@ -8,7 +8,7 @@ import { Public } from '../common/decorators/public.decorator';
 /**
  * Простой контроллер страниц
  */
-@Controller('api/pages')
+@Controller('pages')
 export class PagesController {
   constructor(private readonly prisma: PrismaService) {}
 

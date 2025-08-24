@@ -37,7 +37,7 @@ import { Roles, Scopes } from '../common/decorators/roles.decorator';
  */
 // @ApiTags('projects')
 console.log('[BOOT] Loading ProjectsController file');
-@Controller('api/projects')
+@Controller('projects')
 // @UseGuards(SimpleJwtGuard) // Временно отключено
 // @ApiBearerAuth()
 export class ProjectsController {

@@ -37,7 +37,9 @@ export class ProjectsService {
     const skip = (page - 1) * limit;
 
     // Строим условия поиска
-    const where: Prisma.ProjectWhereInput = {};
+    const where: Prisma.ProjectWhereInput = {
+      // Показываем все проекты, включая удаленные (с особым UI)
+    };
     if (status) where.status = this.mapProjectStatus(status);
     if (ownerId) where.ownerId = ownerId;
     if (typeof isPublished === 'string') {

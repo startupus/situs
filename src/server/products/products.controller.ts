@@ -9,7 +9,7 @@ import { Scopes } from '../common/decorators/roles.decorator';
 /**
  * Контроллер продуктов (глобальные маршруты)
  */
-@Controller('api/products')
+@Controller('products')
 export class ProductsController {
   private readonly productsService?: ProductsService;
   constructor(@Optional() productsService?: ProductsService) {

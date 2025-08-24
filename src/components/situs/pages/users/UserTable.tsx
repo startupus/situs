@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeButton, ThemeSelect, ThemeCheckbox, ThemeBadge, ThemeActionButtons } from '../../../ui';
+import ToggleSwitch from '../../../ui/ToggleSwitch';
 
 interface User {
   id: string;
@@ -7,7 +8,7 @@ interface User {
   name: string;
   avatar?: string;
   globalRole: string;
-  status: 'active' | 'inactive' | 'pending' | 'suspended';
+  status: 'ACTIVE' | 'INACTIVE' | 'PENDING' | 'SUSPENDED' | 'BANNED';
   lastLogin?: Date;
   projectsCount: number;
   isEmailVerified: boolean;
@@ -57,20 +58,22 @@ const UserTable: React.FC<UserTableProps> = ({
 
   const getStatusVariant = (status: User['status']): 'primary' | 'success' | 'danger' | 'warning' | 'info' => {
     switch (status) {
-      case 'active': return 'success';
-      case 'pending': return 'warning';
-      case 'suspended': return 'danger';
-      case 'inactive': return 'info';
+      case 'ACTIVE': return 'success';
+      case 'PENDING': return 'warning';
+      case 'SUSPENDED': return 'danger';
+      case 'BANNED': return 'danger';
+      case 'INACTIVE': return 'info';
       default: return 'info';
     }
   };
 
   const getStatusLabel = (status: User['status']): string => {
     switch (status) {
-      case 'active': return 'Активный';
-      case 'pending': return 'Ожидает';
-      case 'suspended': return 'Заблокирован';
-      case 'inactive': return 'Неактивный';
+      case 'ACTIVE': return 'Активный';
+      case 'PENDING': return 'Ожидает';
+      case 'SUSPENDED': return 'Заблокирован';
+      case 'BANNED': return 'Забанен';
+      case 'INACTIVE': return 'Неактивный';
       default: return status;
     }
   };
@@ -84,7 +87,7 @@ const UserTable: React.FC<UserTableProps> = ({
               <th className="px-6 py-3 text-left">
                 <ThemeCheckbox
                   checked={selectedUsers.length === users.length && users.length > 0}
-                  onChange={(e) => onSelectAll(e.target.checked)}
+                  onChange={(checked) => onSelectAll(checked)}
                 />
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -113,23 +116,42 @@ const UserTable: React.FC<UserTableProps> = ({
                 <td className="px-6 py-4">
                   <ThemeCheckbox
                     checked={selectedUsers.includes(user.id)}
-                    onChange={(e) => onSelectUser(user.id, e.target.checked)}
+                    onChange={(checked) => onSelectUser(user.id, checked)}
                   />
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center">
-                    {user.avatar ? (
-                      <img className="h-10 w-10 rounded-full" src={user.avatar} alt={user.name} />
-                    ) : (
-                      <div className="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          {user.name.split(' ').map(n => n[0]).join('')}
-                        </span>
+                    <div className="relative">
+                      {user.avatar ? (
+                        <img className="h-10 w-10 rounded-full" src={user.avatar} alt={user.name} />
+                      ) : (
+                        <div className="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {user.name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                      )}
+                      {/* Статус-иконка на аватарке */}
+                      <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
+                        {user.status === 'ACTIVE' && (
+                          <div className="w-3 h-3 bg-green-500 rounded-full" title="Активен"></div>
+                        )}
+                        {user.status === 'INACTIVE' && (
+                          <div className="w-3 h-3 bg-gray-400 rounded-full" title="Неактивен"></div>
+                        )}
+                        {user.status === 'PENDING' && (
+                          <div className="w-3 h-3 bg-yellow-500 rounded-full" title="Ожидает активации"></div>
+                        )}
+                        {(user.status === 'SUSPENDED' || user.status === 'BANNED') && (
+                          <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20" title="Заблокирован">
+                            <path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" />
+                          </svg>
+                        )}
                       </div>
-                    )}
+                    </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900 dark:text-white">
-                        {user.name}
+                        <span>{user.name}</span>
                       </div>
                       <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center space-x-2">
                         <span>{user.email}</span>
@@ -156,12 +178,21 @@ const UserTable: React.FC<UserTableProps> = ({
                   </ThemeBadge>
                 </td>
                 <td className="px-6 py-4">
-                  <ThemeBadge
-                    variant={getStatusVariant(user.status)}
-                    size="sm"
-                  >
-                    {getStatusLabel(user.status)}
-                  </ThemeBadge>
+                  {user.status === 'SUSPENDED' || user.status === 'BANNED' || user.status === 'PENDING' ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {(user.status === 'SUSPENDED' || user.status === 'BANNED') && 'Заблокирован'}
+                      {user.status === 'PENDING' && 'Ожидает'}
+                    </span>
+                  ) : (
+                    <ToggleSwitch
+                      checked={user.status === 'ACTIVE'}
+                      onChange={(checked) => {
+                        const newStatus = checked ? 'ACTIVE' : 'INACTIVE';
+                        onUpdateUserStatus(user.id, newStatus);
+                      }}
+                      size="sm"
+                    />
+                  )}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900 dark:text-white">
                   {user.projectsCount}

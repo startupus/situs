@@ -16,6 +16,10 @@ import { SeoModule } from './seo/seo.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { DomainRedirectMiddleware } from './common/middleware/domain-redirect.middleware';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { UserGroupsModule } from './user-groups/user-groups.module';
+import { ViewLevelsModule } from './view-levels/view-levels.module';
+import { InvitationsModule } from './invitations/invitations.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
@@ -78,6 +82,18 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
     // Аутентификация
     AuthModule,
+
+    // Пользователи
+    UsersModule,
+
+    // Группы пользователей
+    UserGroupsModule,
+
+    // Уровни доступа
+    ViewLevelsModule,
+
+    // Приглашения
+    InvitationsModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,

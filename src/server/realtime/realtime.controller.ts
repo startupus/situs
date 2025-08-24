@@ -4,8 +4,8 @@ import { map } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
 import { Public } from '../common/decorators/public.decorator';
 
-// Базовый префикс 'api' чтобы упростить маршруты и поддержать /api/projects/events
-@Controller('api')
+// Используем префикс 'realtime' чтобы избежать конфликтов
+@Controller('realtime')
 export class RealtimeController {
   constructor(@Inject(RealtimeEventsService) private readonly realtime: RealtimeEventsService) {}
 
@@ -13,25 +13,40 @@ export class RealtimeController {
    * Тест публикации события в глобальную шину
    * GET /api/realtime/test?type=foo => publish({ type: 'foo', payload: { ts } })
    */
-  @Get('realtime/test')
+  @Get('test')
   test(@Query('type') type: any = 'project_updated') {
     const payload = { ts: new Date().toISOString() };
     this.realtime.publish(type as any, payload);
     return { success: true, type, payload };
   }
 
-  @Get('realtime/stats')
+  @Get('stats')
   stats() {
     return { success: true, data: this.realtime.getStats() };
   }
 
   /**
    * SSE поток для проектов
-   * Фактический путь: GET /api/projects/events (совместим с фронтом)
+   * Фактический путь: GET /api/realtime/projects (изменен путь чтобы избежать конфликта с projects/:id)
    */
   @Public()
-  @Sse('projects/events')
+  @Sse('projects')
   events(): any {
+    const source$ = this.realtime.asObservable();
+    // Handshake: сразу после подключения клиент получает техническое событие, чтобы UI зафиксировал соединение
+    const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
+    return merge(handshake$, source$).pipe(
+      map((evt) => ({ data: evt }) as MessageEvent),
+    );
+  }
+
+  /**
+   * SSE поток для пользователей
+   * Фактический путь: GET /api/realtime/users
+   */
+  @Public()
+  @Sse('users')
+  usersEvents(): any {
     const source$ = this.realtime.asObservable();
     // Handshake: сразу после подключения клиент получает техническое событие, чтобы UI зафиксировал соединение
     const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
@@ -45,7 +60,7 @@ export class RealtimeController {
    * Позволяет клиенту периодически дергать endpoint, если сеть/проксирующие балансировщики рвут SSE
    */
   @Public()
-  @Get('projects/heartbeat')
+  @Get('api/realtime/heartbeat')
   heartbeat() {
     return { success: true, ts: new Date().toISOString() };
   }
@@ -54,7 +69,7 @@ export class RealtimeController {
    * Общий прогресс/статус долгих операций через событийную шину
    * Клиент может инициировать проверку на фронте и слушать через SSE
    */
-  @Get('realtime/progress')
+  @Get('api/realtime/progress')
   progress(@Query('taskId') taskId?: string) {
     if (taskId) {
       this.realtime.publish('task_progress_check', { taskId, ts: new Date().toISOString() });

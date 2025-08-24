@@ -60,9 +60,10 @@ export class RoleAssignmentService {
     }
 
     // Проверяем, имеет ли право назначать роли
+    // Используем системное право, существующее в типах
     const hasPermission = this.roleHierarchyService.hasPermission(
       assigner.globalRole,
-      'user.manage.roles'
+      'system.admin'
     );
 
     if (!hasPermission) {
@@ -362,12 +363,12 @@ export class RoleAssignmentService {
   }
 
   private getAccountRoleLevel(role: AccountRole): number {
-    const levels = {
-      'MEMBER': 30,
-      'ADMIN': 70,
-      'OWNER': 100
+    const levels: Record<'MEMBER'|'ADMIN'|'OWNER', number> = {
+      MEMBER: 30,
+      ADMIN: 70,
+      OWNER: 100
     };
-    return levels[role] || 0;
+    return (levels as any)[role] || 0;
   }
 
   private async logRoleChange(

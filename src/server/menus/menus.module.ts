@@ -42,8 +42,8 @@ export class MenusModule {
     consumer
       .apply(MenuAccessMiddleware)
       .forRoutes(
-        { path: 'api/menu-items/*', method: RequestMethod.GET },
-        { path: 'api/menu-types/*', method: RequestMethod.GET }
+        { path: 'menu-items/*', method: RequestMethod.GET },
+        { path: 'menu-types/*', method: RequestMethod.GET }
       );
   }
 }

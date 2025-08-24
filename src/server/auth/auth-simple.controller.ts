@@ -6,7 +6,7 @@ import { AuthSimpleService } from './auth-simple.service';
  * Упрощенный контроллер аутентификации
  */
 // @ApiTags('auth')
-@Controller('api/auth')
+@Controller('auth')
 export class AuthSimpleController {
   constructor(private readonly authService: AuthSimpleService) {}
 
