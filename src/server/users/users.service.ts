@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, GlobalRole, UserStatus } from './entities/user.entity';
 import { RealtimeEventsService } from '../realtime/realtime-events.service';
+import * as bcrypt from 'bcryptjs';
 
 /**
  * Сервис для работы с пользователями
@@ -21,7 +22,9 @@ export class UsersService {
    * Создание нового пользователя
    */
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const username = (createUserDto.email?.split('@')[0]) || createUserDto.name?.replace(/\s+/g, '.').toLowerCase() || 'user';
+    // Генерируем уникальный username с timestamp для уникальности
+    const baseUsername = (createUserDto.email?.split('@')[0]) || createUserDto.name?.replace(/\s+/g, '.').toLowerCase() || 'user';
+    const username = `${baseUsername}_${Date.now()}`;
     const profile = JSON.stringify({
       name: createUserDto.name || '',
       avatar: createUserDto.avatar || '',
@@ -34,10 +37,15 @@ export class UsersService {
       ? (createUserDto.isActive ? 'ACTIVE' : 'INACTIVE')
       : ((createUserDto.status as any) || 'PENDING');
 
+    // Хешируем пароль если он предоставлен
+    const hashedPassword = createUserDto.password 
+      ? await this.hashPassword(createUserDto.password)
+      : null;
+
     const user = await this.prisma.user.create({
       data: { 
         email: createUserDto.email || null, 
-        password: createUserDto.password || null, 
+        password: hashedPassword, 
         username, 
         profile,
         globalRole,
@@ -500,6 +508,14 @@ export class UsersService {
       message: 'Настройки обновлены',
       settings,
     };
+  }
+
+  /**
+   * Хеширование пароля
+   */
+  private async hashPassword(password: string): Promise<string> {
+    const saltRounds = 12;
+    return bcrypt.hash(password, saltRounds);
   }
 
   /**
