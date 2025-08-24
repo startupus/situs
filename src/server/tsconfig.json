@@ -22,5 +22,5 @@
     "sourceMap": false
   },
   "include": ["./**/*.ts"],
-  "exclude": ["./dist", "./build.ts", "**/*.spec.ts", "**/*.test.ts", "./auth/**/*", "./users/**/*"]
+  "exclude": ["./dist", "./build.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
