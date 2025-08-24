@@ -6,6 +6,8 @@ import SiteMenuSettings from '../projects/SiteMenuSettings';
 import ProjectTrafficChart from './ProjectTrafficChart';
 import ProjectConversionWidget from './ProjectConversionWidget';
 import { apiClient } from '../../../api/client';
+import { WebsiteCategoriesManager } from '../../admin/website/WebsiteCategoriesManager';
+import { PageCategorySelector } from '../../admin/website/PageCategorySelector';
 
 const SitusProjectWebsite: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -13,7 +15,7 @@ const SitusProjectWebsite: React.FC = () => {
   const [pages, setPages] = useState<PageData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'pages' | 'menu' | 'design' | 'seo'>('pages');
+  const [activeTab, setActiveTab] = useState<'pages' | 'categories' | 'menu' | 'design' | 'seo'>('pages');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [creating, setCreating] = useState(false);
   const navigate = useNavigate();
@@ -152,6 +154,7 @@ const SitusProjectWebsite: React.FC = () => {
 
   const tabs = [
     { id: 'pages', name: 'Страницы', icon: <FiFileText aria-hidden /> },
+    { id: 'categories', name: 'Категории', icon: <FiCompass aria-hidden /> },
     { id: 'menu', name: 'Меню', icon: <FiCompass aria-hidden /> },
     { id: 'design', name: 'Дизайн', icon: <FiPenTool aria-hidden /> },
     { id: 'seo', name: 'SEO', icon: <FiSearch aria-hidden /> },
@@ -224,15 +227,16 @@ const SitusProjectWebsite: React.FC = () => {
             {/* Список страниц (плотный список) */}
             <div className="rounded-lg border border-stroke dark:border-dark-3 overflow-hidden">
               <div className="bg-gray-50 dark:bg-dark-3 px-4 py-2 text-xs font-medium text-body-color dark:text-dark-6 grid grid-cols-12 gap-2">
-                <div className="col-span-5">Страница</div>
+                <div className="col-span-4">Страница</div>
+                <div className="col-span-2">Категории</div>
                 <div className="col-span-2">Статус</div>
-                <div className="col-span-2">Путь</div>
+                <div className="col-span-1">Путь</div>
                 <div className="col-span-3 text-right">Действия</div>
               </div>
               <ul className="divide-y divide-stroke dark:divide-dark-3">
                 {pages.map((page) => (
                   <li key={page.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3">
-                    <div className="col-span-5 flex items-center gap-2">
+                    <div className="col-span-4 flex items-center gap-2">
                       <span className="text-lg">{page.isHomePage ? <FiHome aria-hidden /> : <FiFileText aria-hidden />}</span>
                       <button
                         onClick={() => navigate(`/redaktus?projectId=${project.id}&pageId=${page.id}`)}
@@ -242,11 +246,36 @@ const SitusProjectWebsite: React.FC = () => {
                       </button>
                     </div>
                     <div className="col-span-2">
+                      {page.webCategories && page.webCategories.length > 0 ? (
+                        <div className="flex flex-wrap gap-1">
+                          {page.webCategories.slice(0, 2).map(({ category }) => (
+                            <span
+                              key={category.id}
+                              className={`text-xs px-2 py-1 rounded-full ${
+                                category.id === page.primaryCategoryId
+                                  ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                                  : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
+                              }`}
+                            >
+                              {category.name}
+                            </span>
+                          ))}
+                          {page.webCategories.length > 2 && (
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              +{page.webCategories.length - 2}
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-gray-400 dark:text-gray-500">Без категорий</span>
+                      )}
+                    </div>
+                    <div className="col-span-2">
                       <span className={`text-xs px-2 py-1 rounded-full ${page.status === 'PUBLISHED' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'}`}>
                         {page.status === 'PUBLISHED' ? 'Опубликована' : 'Черновик'}
                       </span>
                     </div>
-                    <div className="col-span-2 text-sm text-body-color dark:text-dark-6 truncate">/{page.slug}</div>
+                    <div className="col-span-1 text-sm text-body-color dark:text-dark-6 truncate">/{page.slug}</div>
                     <div className="col-span-3 text-right flex gap-2 justify-end">
                       <button
                         onClick={() => navigate(`/redaktus?projectId=${project.id}&pageId=${page.id}`)}
@@ -267,6 +296,12 @@ const SitusProjectWebsite: React.FC = () => {
                 ))}
               </ul>
             </div>
+          </div>
+        )}
+
+        {activeTab === 'categories' && (
+          <div className="p-6">
+            <WebsiteCategoriesManager projectId={projectId!} />
           </div>
         )}
 
@@ -424,13 +459,16 @@ const SitusProjectWebsite: React.FC = () => {
 // Компонент модального окна создания страницы
 interface CreatePageModalProps {
   onClose: () => void;
-  onCreate: (data: { title: string; slug: string }) => void;
+  onCreate: (data: { title: string; slug: string; categories?: string[]; primaryCategoryId?: string }) => void;
   isCreating: boolean;
 }
 
 const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, isCreating }) => {
+  const { projectId } = useParams<{ projectId: string }>();
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [primaryCategoryId, setPrimaryCategoryId] = useState<string>();
 
   const generateSlug = (title: string) => {
     return title
@@ -450,12 +488,22 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !slug.trim()) return;
-    onCreate({ title: title.trim(), slug: slug.trim() });
+    onCreate({ 
+      title: title.trim(), 
+      slug: slug.trim(),
+      categories: selectedCategories,
+      primaryCategoryId 
+    });
+  };
+
+  const handleCategoriesChange = (categories: string[], primaryId?: string) => {
+    setSelectedCategories(categories);
+    setPrimaryCategoryId(primaryId);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-md mx-4">
+      <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium text-dark dark:text-white">Создать страницу</h3>
           <button
@@ -484,7 +532,7 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
             />
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-sm font-medium text-dark dark:text-white mb-2">
               URL (slug)
             </label>
@@ -500,6 +548,16 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
             <p className="text-xs text-body-color dark:text-dark-6 mt-1">
               Используется в адресе страницы: /url-stranitsy
             </p>
+          </div>
+
+          <div className="mb-6">
+            <PageCategorySelector
+              projectId={projectId!}
+              selectedCategories={selectedCategories}
+              primaryCategoryId={primaryCategoryId}
+              onChange={handleCategoriesChange}
+              disabled={isCreating}
+            />
           </div>
 
           <div className="flex gap-3 justify-end">
