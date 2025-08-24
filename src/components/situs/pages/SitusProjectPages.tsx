@@ -52,8 +52,8 @@ const SitusProjectPages: React.FC = () => {
       const tab = e?.detail?.tab as 'menu' | 'design' | 'seo' | undefined;
       setActiveTab(tab || 'menu');
     };
-    window.addEventListener('situs:open-website-settings', handler);
-    return () => window.removeEventListener('situs:open-website-settings', handler);
+    window.addEventListener('situs:open-pages-settings', handler);
+    return () => window.removeEventListener('situs:open-pages-settings', handler);
   }, []);
 
   // Функция создания страницы
@@ -63,17 +63,17 @@ const SitusProjectPages: React.FC = () => {
     try {
       setCreating(true);
       
-      // Найдем Website продукт
-      const websiteProduct = (project as any).products?.find((p: any) => p.type === 'WEBSITE');
-      if (!websiteProduct) {
-        throw new Error('Website продукт не найден');
+      // Найдем Pages продукт
+      const pagesProduct = (project as any).products?.find((p: any) => p.type === 'WEBSITE');
+      if (!pagesProduct) {
+        throw new Error('Pages продукт не найден');
       }
 
       const response = await apiClient.createPage({
         title: pageData.title,
         slug: pageData.slug,
         content: JSON.stringify([]), // Пустой контент
-        productId: websiteProduct.id,
+        productId: pagesProduct.id,
         status: 'DRAFT',
         pageType: 'PAGE'
       });

@@ -23,8 +23,8 @@ import { CreateWebCategoryDto, UpdateWebCategoryDto, ReorderWebCategoriesDto } f
 export class WebCategoriesController {
   constructor(private readonly webCategoriesService: WebCategoriesService) {}
 
-  // GET /api/projects/:projectId/website/categories
-  @Get('projects/:projectId/website/categories')
+  // GET /api/projects/:projectId/pages/categories
+  @Get('projects/:projectId/pages/categories')
   async getProjectWebCategories(
     @Param('projectId') projectId: string,
     @Request() req: ExpressRequest,
@@ -45,8 +45,8 @@ export class WebCategoriesController {
     }
   }
 
-  // POST /api/projects/:projectId/website/categories
-  @Post('projects/:projectId/website/categories')
+  // POST /api/projects/:projectId/pages/categories
+  @Post('projects/:projectId/pages/categories')
   async createWebCategory(
     @Param('projectId') projectId: string,
     @Body() createDto: CreateWebCategoryDto,
@@ -67,8 +67,8 @@ export class WebCategoriesController {
     }
   }
 
-  // PUT /api/website/categories/:id
-  @Put('website/categories/:id')
+  // PUT /api/pages/categories/:id
+  @Put('pages/categories/:id')
   async updateWebCategory(
     @Param('id') categoryId: string,
     @Body() updateDto: UpdateWebCategoryDto,
@@ -89,8 +89,8 @@ export class WebCategoriesController {
     }
   }
 
-  // DELETE /api/website/categories/:id
-  @Delete('website/categories/:id')
+  // DELETE /api/pages/categories/:id
+  @Delete('pages/categories/:id')
   async deleteWebCategory(
     @Param('id') categoryId: string,
     @Request() req: ExpressRequest,
@@ -106,8 +106,8 @@ export class WebCategoriesController {
     }
   }
 
-  // PATCH /api/website/categories/reorder
-  @Patch('website/categories/reorder')
+  // PATCH /api/pages/categories/reorder
+  @Patch('pages/categories/reorder')
   async reorderWebCategories(
     @Body() reorderDto: ReorderWebCategoriesDto,
     @Request() req: ExpressRequest,

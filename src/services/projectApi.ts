@@ -146,15 +146,19 @@ export interface AssignCategoriesRequest {
 
 export async function getPagesCategories(projectId: string, includeInactive = false): Promise<WebCategoryData[]> {
   const params = includeInactive ? '?includeInactive=true' : '';
-  const data = await http<{ categories: WebCategoryData[] }>(`/api/projects/${projectId}/website/categories${params}`);
+  const data = await http<{ categories: WebCategoryData[] }>(`/api/projects/${projectId}/pages/categories${params}`);
   return data?.categories || [];
 }
 
-// Alias for backward compatibility
+// Aliases for backward compatibility
 export const getWebsiteCategories = getPagesCategories;
+export const createWebsiteCategory = createPagesCategory;
+export const updateWebsiteCategory = updatePagesCategory;
+export const deleteWebsiteCategory = deletePagesCategory;
+export const reorderWebsiteCategories = reorderPagesCategories;
 
-export async function createWebsiteCategory(projectId: string, categoryData: CreateWebCategoryRequest): Promise<WebCategoryData> {
-  const data = await http<{ category: WebCategoryData }>(`/api/projects/${projectId}/website/categories`, {
+export async function createPagesCategory(projectId: string, categoryData: CreateWebCategoryRequest): Promise<WebCategoryData> {
+  const data = await http<{ category: WebCategoryData }>(`/api/projects/${projectId}/pages/categories`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(categoryData),
@@ -162,8 +166,8 @@ export async function createWebsiteCategory(projectId: string, categoryData: Cre
   return data.category;
 }
 
-export async function updateWebsiteCategory(categoryId: string, updateData: UpdateWebCategoryRequest): Promise<WebCategoryData> {
-  const data = await http<{ category: WebCategoryData }>(`/api/website/categories/${categoryId}`, {
+export async function updatePagesCategory(categoryId: string, updateData: UpdateWebCategoryRequest): Promise<WebCategoryData> {
+  const data = await http<{ category: WebCategoryData }>(`/api/pages/categories/${categoryId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updateData),
@@ -171,14 +175,14 @@ export async function updateWebsiteCategory(categoryId: string, updateData: Upda
   return data.category;
 }
 
-export async function deleteWebsiteCategory(categoryId: string): Promise<void> {
-  await http<{ success: boolean }>(`/api/website/categories/${categoryId}`, {
+export async function deletePagesCategory(categoryId: string): Promise<void> {
+  await http<{ success: boolean }>(`/api/pages/categories/${categoryId}`, {
     method: 'DELETE',
   });
 }
 
-export async function reorderWebsiteCategories(reorderData: ReorderWebCategoriesRequest): Promise<void> {
-  await http<{ success: boolean }>(`/api/website/categories/reorder`, {
+export async function reorderPagesCategories(reorderData: ReorderWebCategoriesRequest): Promise<void> {
+  await http<{ success: boolean }>(`/api/pages/categories/reorder`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(reorderData),

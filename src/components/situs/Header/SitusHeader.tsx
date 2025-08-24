@@ -49,8 +49,8 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   // Вспомогательные вычисления для заголовка/навигации
   const sectionTitle = useMemo(() => {
-    // Спец-случай: страница продукта Website — показываем "Сайт"
-    if (/^\/projects\/[^/]+\/website/.test(location.pathname)) return 'Сайт';
+    // Спец-случай: страница продукта Pages — показываем "Страницы"
+    if (/^\/projects\/[^/]+\/pages/.test(location.pathname)) return 'Страницы';
     // Спец-случай: страница меню — показываем заголовок в зависимости от вкладки
     if (/^\/projects\/[^/]+\/menus/.test(location.pathname)) {
       // Пытаемся определить активную вкладку из URL или localStorage
@@ -98,7 +98,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
     // можно расширить: orders etc.
     return false;
   }, [location.pathname, location.search]);
-  const isWebsitePage = useMemo(() => /^\/projects\/[^/]+\/website/.test(location.pathname), [location.pathname]);
+  const isPagesPage = useMemo(() => /^\/projects\/[^/]+\/pages/.test(location.pathname), [location.pathname]);
 
   // Состояние поиска в верхней панели
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -192,10 +192,10 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                   <FiSearch aria-hidden />
                 </button>
                 {/* Кнопка Добавить в акценте — крайняя справа */}
-                {isWebsitePage && (
+                {isPagesPage && (
                   <button
                     onClick={() => {
-                      window.dispatchEvent(new CustomEvent('situs:open-website-settings', { detail: { tab: 'menu' } }));
+                      window.dispatchEvent(new CustomEvent('situs:open-pages-settings', { detail: { tab: 'menu' } }));
                     }}
                     className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-stroke text-body-color hover:text-primary hover:border-primary dark:border-dark-3 dark:text-dark-6 transition-colors"
                     title="Настройки сайта"
