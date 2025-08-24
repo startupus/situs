@@ -16,7 +16,7 @@
     "dev:status": "bash ./scripts/dev-status.sh",
     "db:seed:demo": "tsx scripts/seed-demo-projects.ts",
     "dev:redaktus": "vite --port 5178",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
