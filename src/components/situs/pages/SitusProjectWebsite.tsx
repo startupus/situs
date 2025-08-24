@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FiAlertTriangle, FiFileText, FiCompass, FiPenTool, FiSearch, FiHome } from 'react-icons/fi';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProject, ProjectData, getProjectPages, PageData } from '../../../services/projectApi';
 import SiteMenuSettings from '../projects/SiteMenuSettings';
@@ -132,7 +133,7 @@ const SitusProjectWebsite: React.FC = () => {
     return (
       <div className="p-6">
         <div className="text-center py-12">
-          <div className="text-red-500 mb-4 text-4xl">⚠️</div>
+          <div className="text-red-500 mb-4 text-4xl flex justify-center"><FiAlertTriangle aria-hidden /></div>
           <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
             Ошибка загрузки проекта
           </h3>
@@ -150,10 +151,10 @@ const SitusProjectWebsite: React.FC = () => {
 
 
   const tabs = [
-    { id: 'pages', name: 'Страницы', icon: '📄' },
-    { id: 'menu', name: 'Меню', icon: '🧭' },
-    { id: 'design', name: 'Дизайн', icon: '🎨' },
-    { id: 'seo', name: 'SEO', icon: '🔍' },
+    { id: 'pages', name: 'Страницы', icon: <FiFileText aria-hidden /> },
+    { id: 'menu', name: 'Меню', icon: <FiCompass aria-hidden /> },
+    { id: 'design', name: 'Дизайн', icon: <FiPenTool aria-hidden /> },
+    { id: 'seo', name: 'SEO', icon: <FiSearch aria-hidden /> },
   ];
 
   return (
@@ -232,7 +233,7 @@ const SitusProjectWebsite: React.FC = () => {
                 {pages.map((page) => (
                   <li key={page.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3">
                     <div className="col-span-5 flex items-center gap-2">
-                      <span className="text-lg">{page.isHomePage ? '🏠' : '📄'}</span>
+                      <span className="text-lg">{page.isHomePage ? <FiHome aria-hidden /> : <FiFileText aria-hidden />}</span>
                       <button
                         onClick={() => navigate(`/redaktus?projectId=${project.id}&pageId=${page.id}`)}
                         className="text-left font-medium text-dark dark:text-white hover:text-primary truncate"

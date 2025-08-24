@@ -46,6 +46,27 @@ const MenuManager: React.FC = () => {
     }
   }, [menuTypes, menuAPI, menuState]);
 
+  // Глобальное событие открытия модала создания пункта: гарантируем наличие типа меню
+  useEffect(() => {
+    if (!menuState.showCreateItemModal) return;
+
+    // Если нет типов — автосоздаём и переоткрываем модал через общий обработчик
+    if (menuTypes.length === 0) {
+      menuState.closeCreateItemModal();
+      void openCreateItemWithEnsureType();
+      return;
+    }
+
+    // Если типы есть, но не выбран — выбираем основной или первый
+    if (!menuState.selectedMenuType) {
+      const mainType = menuTypes.find((t) => t.name === 'main');
+      const typeToUse = mainType || menuTypes[0];
+      if (typeToUse) {
+        menuState.setSelectedMenuType(typeToUse.id);
+      }
+    }
+  }, [menuState.showCreateItemModal, menuTypes, menuState]);
+
   // ==================== ОБРАБОТЧИКИ API С ИНТЕГРАЦИЕЙ SSE ====================
 
   // Создание пункта меню
@@ -56,6 +77,40 @@ const MenuManager: React.FC = () => {
       // SSE событие автоматически обновит список пунктов меню
     } catch (error) {
       alert(error instanceof Error ? error.message : 'Ошибка создания пункта меню');
+    }
+  };
+
+  // Открыть модал создания пункта меню с автосозданием типа меню при необходимости
+  const openCreateItemWithEnsureType = async () => {
+    try {
+      // Если нет ни одного типа меню — создаём основной тип автоматически
+      if (menuTypes.length === 0) {
+        const newType = await menuAPI.handleCreateMenuType({
+          name: 'main',
+          title: 'Главное меню',
+          description: 'Автоматически создано при добавлении первого пункта',
+          isActive: true,
+          projectId: projectId!
+        });
+        await loadMenuTypes();
+        menuState.setSelectedMenuType(newType.id);
+        menuState.openCreateItemModal();
+        return;
+      }
+
+      // Если типы есть, но не выбран текущий — выбираем основной или первый
+      if (!menuState.selectedMenuType) {
+        const mainType = menuTypes.find((t) => t.name === 'main');
+        const typeToUse = mainType || menuTypes[0];
+        if (typeToUse) {
+          menuState.setSelectedMenuType(typeToUse.id);
+        }
+      }
+
+      menuState.openCreateItemModal();
+    } catch (error) {
+      console.error('Ошибка подготовки создания пункта меню:', error);
+      alert(error instanceof Error ? error.message : 'Не удалось подготовить создание пункта меню');
     }
   };
 
@@ -309,7 +364,7 @@ const MenuManager: React.FC = () => {
           projectId={projectId!}
           onEditItem={menuState.openEditItemModal}
           onDeleteItem={handleDeleteMenuItem}
-          onCreateItem={menuState.openCreateItemModal}
+          onCreateItem={openCreateItemWithEnsureType}
           onReorderItems={handleReorderItems}
           onUpdateMenuItem={handleUpdateMenuItem}
           onToggleItemStatus={handleToggleMenuItemStatus}

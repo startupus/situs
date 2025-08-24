@@ -48,8 +48,14 @@ export async function getProject(projectId: string): Promise<ProjectData> {
 }
 
 export async function getProjectPages(projectId: string): Promise<PageData[]> {
-  const data = await http<{ pages: PageData[] }>(`/api/projects/${projectId}/pages`);
-  return data?.pages || [];
+  try {
+    const data = await http<{ pages: PageData[] }>(`/api/projects/${projectId}/pages`);
+    return data?.pages || [];
+  } catch (err) {
+    // Fallback для совместимости: старый список страниц по query-параметру
+    const alt = await http<{ pages: PageData[] }>(`/api/pages?projectId=${projectId}`);
+    return alt?.pages || [];
+  }
 }
 
 export async function getPage(pageId: string): Promise<PageData> {
