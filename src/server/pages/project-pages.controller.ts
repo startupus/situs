@@ -3,7 +3,7 @@ import { PrismaService } from '../database/prisma.service';
 import { ReorderPagesDto } from './dto/reorder-pages.dto';
 import { Scopes } from '../common/decorators/roles.decorator';
 
-@Controller('api')
+@Controller()
 export class ProjectPagesController {
   constructor(private readonly prisma: PrismaService) {}
 
