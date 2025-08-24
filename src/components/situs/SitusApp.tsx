@@ -16,7 +16,7 @@ import SitusSectionSettings from "./pages/SitusSectionSettings";
 import AppearanceDemoPage from "./pages/settings/AppearanceDemoPage";
 import ProjectPage from "./projects/ProjectPage";
 
-import SitusProjectWebsite from "./pages/SitusProjectWebsite";
+import SitusProjectPages from "./pages/SitusProjectPages";
 import SitusProjectStore from "./pages/SitusProjectStore";
 import MenuManager from "../admin/MenuManager";
 import AcceptInvitation from "./pages/AcceptInvitation";
@@ -42,7 +42,7 @@ const SitusApp: React.FC = () => {
         {/* Проекты */}
         <Route path="projects" element={<SitusProjects />} />
         <Route path="projects/:projectId" element={<ProjectPage />} />
-        <Route path="projects/:projectId/website" element={<SitusProjectWebsite />} />
+        <Route path="projects/:projectId/website" element={<SitusProjectPages />} />
         <Route path="projects/:projectId/store" element={<SitusProjectStore />} />
         <Route path="projects/:projectId/menus" element={<MenuManager />} />
         <Route path="projects/websites" element={<SitusWebsites />} />

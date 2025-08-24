@@ -18,7 +18,7 @@ export class WebCategoriesService {
     // TODO: checkProjectAccess method not found
     // await this.projectsService.checkProjectAccess(projectId, userId, 'PROJECT_READ');
 
-    // Получаем Website продукт проекта
+    // Получаем Pages продукт проекта
     const websiteProduct = await this.prisma.product.findFirst({
       where: {
         projectId,
@@ -27,7 +27,7 @@ export class WebCategoriesService {
     });
 
     if (!websiteProduct) {
-      throw new HttpException('Website product not found for this project', HttpStatus.NOT_FOUND);
+      throw new HttpException('Pages product not found for this project', HttpStatus.NOT_FOUND);
     }
 
     // Получаем категории с иерархией
@@ -62,7 +62,7 @@ export class WebCategoriesService {
     // TODO: checkProjectAccess method not found
     // await this.projectsService.checkProjectAccess(projectId, userId, 'PROJECT_WRITE');
 
-    // Получаем Website продукт проекта
+    // Получаем Pages продукт проекта
     const websiteProduct = await this.prisma.product.findFirst({
       where: {
         projectId,
@@ -71,7 +71,7 @@ export class WebCategoriesService {
     });
 
     if (!websiteProduct) {
-      throw new HttpException('Website product not found for this project', HttpStatus.NOT_FOUND);
+      throw new HttpException('Pages product not found for this project', HttpStatus.NOT_FOUND);
     }
 
     // Проверяем уникальность slug в продукте
