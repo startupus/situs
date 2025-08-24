@@ -11,7 +11,7 @@ import {
   reorderWebsiteCategories
 } from '../../../services/projectApi';
 
-interface WebsiteCategoriesManagerProps {
+interface PagesCategoriesManagerProps {
   projectId: string;
 }
 
@@ -20,7 +20,7 @@ interface CategoryTreeNode extends WebCategoryData {
   isExpanded?: boolean;
 }
 
-export const WebsiteCategoriesManager: React.FC<WebsiteCategoriesManagerProps> = ({ projectId }) => {
+export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ projectId }) => {
   const [categories, setCategories] = useState<WebCategoryData[]>([]);
   const [categoryTree, setCategoryTree] = useState<CategoryTreeNode[]>([]);
   const [loading, setLoading] = useState(true);
@@ -242,7 +242,7 @@ export const WebsiteCategoriesManager: React.FC<WebsiteCategoriesManagerProps> =
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Категории Website
+            Категории Pages
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
             Управление рубриками для страниц сайта

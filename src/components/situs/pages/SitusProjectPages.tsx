@@ -6,10 +6,10 @@ import SiteMenuSettings from '../projects/SiteMenuSettings';
 import ProjectTrafficChart from './ProjectTrafficChart';
 import ProjectConversionWidget from './ProjectConversionWidget';
 import { apiClient } from '../../../api/client';
-import { WebsiteCategoriesManager } from '../../admin/website/WebsiteCategoriesManager';
-import { PageCategorySelector } from '../../admin/website/PageCategorySelector';
+import { PagesCategoriesManager } from '../../admin/pages/PagesCategoriesManager';
+import { PageCategorySelector } from '../../admin/pages/PageCategorySelector';
 
-const SitusProjectWebsite: React.FC = () => {
+const SitusProjectPages: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const [project, setProject] = useState<ProjectData | null>(null);
   const [pages, setPages] = useState<PageData[]>([]);
@@ -301,7 +301,7 @@ const SitusProjectWebsite: React.FC = () => {
 
         {activeTab === 'categories' && (
           <div className="p-6">
-            <WebsiteCategoriesManager projectId={projectId!} />
+            <PagesCategoriesManager projectId={projectId!} />
           </div>
         )}
 
@@ -583,4 +583,4 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
   );
 };
 
-export default SitusProjectWebsite;
+export default SitusProjectPages;

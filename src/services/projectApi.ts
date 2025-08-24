@@ -102,7 +102,7 @@ export async function updatePage(pageId: string, updateData: Partial<PageData>):
   });
 }
 
-// ==================== WEBSITE CATEGORIES ====================
+// ==================== PAGES CATEGORIES ====================
 
 export interface CreateWebCategoryRequest {
   name: string;
@@ -144,11 +144,14 @@ export interface AssignCategoriesRequest {
   remove?: string[];
 }
 
-export async function getWebsiteCategories(projectId: string, includeInactive = false): Promise<WebCategoryData[]> {
+export async function getPagesCategories(projectId: string, includeInactive = false): Promise<WebCategoryData[]> {
   const params = includeInactive ? '?includeInactive=true' : '';
   const data = await http<{ categories: WebCategoryData[] }>(`/api/projects/${projectId}/website/categories${params}`);
   return data?.categories || [];
 }
+
+// Alias for backward compatibility
+export const getWebsiteCategories = getPagesCategories;
 
 export async function createWebsiteCategory(projectId: string, categoryData: CreateWebCategoryRequest): Promise<WebCategoryData> {
   const data = await http<{ category: WebCategoryData }>(`/api/projects/${projectId}/website/categories`, {
