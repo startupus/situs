@@ -258,14 +258,31 @@ const AcceptInvitation: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
           {/* Заголовок */}
           <div className="text-center mb-6">
-            <img 
-              src="/images/logo.png" 
-              alt="Logo" 
-              className="w-12 h-12 mx-auto mb-4"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
+            <div className="flex items-center justify-between mb-4">
+              {currentStep !== 'info' ? (
+                <button
+                  onClick={handleBack}
+                  className="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  <FiArrowLeft className="mr-2" size={16} />
+                  Назад
+                </button>
+              ) : (
+                <div></div>
+              )}
+              
+              <img 
+                src="/images/logo.png" 
+                alt="Logo" 
+                className="w-12 h-12"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+              
+              <div></div>
+            </div>
+            
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
               Принятие приглашения
             </h1>
@@ -277,43 +294,29 @@ const AcceptInvitation: React.FC = () => {
             </p>
           </div>
 
-          {/* Информация о приглашении - только на первом шаге */}
-          {currentStep === 'info' && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 mb-6 text-sm">
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-gray-600 dark:text-gray-400">Роль:</span>
-                <span className="font-medium text-gray-900 dark:text-white">
-                  {getRoleText(invitation.role)}
-                </span>
-              </div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-gray-600 dark:text-gray-400">Истекает:</span>
-                <span className="font-medium text-gray-900 dark:text-white">
-                  {formatDate(invitation.expiresAt)}
-                </span>
-              </div>
-              {invitation.message && (
-                <p className="text-gray-700 dark:text-gray-300 text-xs italic">
-                  {invitation.message}
-                </p>
-              )}
-            </div>
-          )}
+
 
           {/* Прогресс-бар */}
           <div className="mb-6">
-            <div className="flex justify-between items-center mb-2">
-              {(['info', 'verification', 'password', 'complete'] as Step[]).map((step, index) => {
+            <div className="flex justify-center items-center mb-2">
+              {(['info', 'verification', 'password'] as Step[]).map((step, index) => {
                 const stepNumber = index + 1;
                 const isActive = step === currentStep;
                 const isCompleted = ['info', 'verification', 'password', 'complete'].indexOf(currentStep) > index;
                 const isVisible = 
                   step === 'info' || 
                   (step === 'verification' && settings.requireEmailVerification) ||
-                  (step === 'password' && settings.allowPasswordCreation) ||
-                  step === 'complete';
+                  (step === 'password' && settings.allowPasswordCreation);
 
                 if (!isVisible) return null;
+
+                const visibleSteps = [
+                  'info',
+                  ...(settings.requireEmailVerification ? ['verification'] : []),
+                  ...(settings.allowPasswordCreation ? ['password'] : [])
+                ];
+                const currentIndex = visibleSteps.indexOf(step);
+                const isLastStep = currentIndex === visibleSteps.length - 1;
 
                 return (
                   <div key={step} className="flex items-center">
@@ -326,7 +329,7 @@ const AcceptInvitation: React.FC = () => {
                     `}>
                       {isCompleted ? <FiCheck size={16} /> : stepNumber}
                     </div>
-                    {index < 3 && isVisible && (
+                    {!isLastStep && (
                       <div className={`
                         w-8 h-0.5 mx-2
                         ${isCompleted ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'}
@@ -335,6 +338,16 @@ const AcceptInvitation: React.FC = () => {
                   </div>
                 );
               })}
+              
+              {/* Финальная галочка */}
+              {currentStep === 'complete' && (
+                <>
+                  <div className="w-8 h-0.5 mx-2 bg-blue-600" />
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-600 text-white">
+                    <FiCheck size={16} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -540,28 +553,14 @@ const AcceptInvitation: React.FC = () => {
             </div>
           )}
 
-          {/* Кнопки навигации */}
+          {/* Основная кнопка */}
           {currentStep !== 'complete' && (
-            <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-              {currentStep !== 'info' ? (
-                <ThemeButton
-                  onClick={handleBack}
-                  variant="secondary"
-                  disabled={submitting}
-                  className="flex items-center"
-                >
-                  <FiArrowLeft className="mr-2" size={16} />
-                  Назад
-                </ThemeButton>
-              ) : (
-                <div></div>
-              )}
-
+            <div className="flex justify-center mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
               <ThemeButton
                 onClick={handleNext}
                 variant="primary"
                 disabled={submitting}
-                className="flex items-center"
+                className="flex items-center min-w-[120px] justify-center"
               >
                 {submitting ? (
                   <ThemeSpinner size="sm" className="mr-2" />
