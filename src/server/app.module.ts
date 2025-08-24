@@ -20,6 +20,7 @@ import { UsersModule } from './users/users.module';
 import { UserGroupsModule } from './user-groups/user-groups.module';
 import { ViewLevelsModule } from './view-levels/view-levels.module';
 import { InvitationsModule } from './invitations/invitations.module';
+import { CommunicationModule } from './communication/communication.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { PoliciesGuard } from './common/guards/policies.guard';
@@ -94,6 +95,9 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
     // Приглашения
     InvitationsModule,
+
+    // Каналы связи
+    CommunicationModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,

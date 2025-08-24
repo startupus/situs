@@ -14,6 +14,7 @@ export enum UserStatus {
   ACTIVE = 'active',
   INACTIVE = 'inactive', 
   PENDING = 'pending',
+  INVITED = 'invited',
   SUSPENDED = 'suspended',
   BANNED = 'banned'
 }

@@ -162,6 +162,10 @@ const SitusUsers: React.FC = () => {
     try {
       const emails = inviteData.emails.split('\n').filter(email => email.trim());
       console.log('Отправка приглашений:', { emails, role: inviteData.role, message: inviteData.message });
+      
+      // Компонент UserInvites сам обрабатывает отправку через API
+      // Здесь можно добавить дополнительную логику если нужно
+      console.log('Приглашения отправлены успешно');
     } catch (error) {
       console.error('Ошибка отправки приглашений:', error);
     }
@@ -204,7 +208,7 @@ const SitusUsers: React.FC = () => {
             filterStatus={filterStatus}
             setFilterStatus={setFilterStatus}
             selectedUsers={selectedUsers}
-            onInviteClick={() => setShowCreateUserForm(true)}
+            onInviteClick={() => setActiveTab('invites')}
             onBulkAction={handleBulkAction}
           />
           
