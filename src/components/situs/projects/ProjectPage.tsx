@@ -72,7 +72,7 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
     const go = () => {
       if (!projectId) return;
-      if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/website`);
+      if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/pages`);
       else if (item.type === 'ECOMMERCE') navigate(`/projects/${projectId}/store`);
       else navigate(`/projects/${projectId}`);
     };

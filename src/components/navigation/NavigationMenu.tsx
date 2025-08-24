@@ -67,7 +67,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
     if (item.component && item.view && item.targetId) {
       switch (item.component) {
         case 'Website':
-          return `/projects/${projectId}/website#${item.targetId}`;
+          return `/projects/${projectId}/pages#${item.targetId}`;
         case 'Store':
           if (item.view === 'categories') {
             return `/projects/${projectId}/store`;
