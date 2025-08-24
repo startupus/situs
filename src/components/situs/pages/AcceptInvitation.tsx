@@ -34,6 +34,7 @@ const AcceptInvitation: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<Step>('info');
   const [showPassword, setShowPassword] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
+  const [redirectCountdown, setRedirectCountdown] = useState(5);
 
   // Глобальные настройки (пока захардкожены, потом будут из API)
   const [settings] = useState<GlobalSettings>({
@@ -63,6 +64,24 @@ const AcceptInvitation: React.FC = () => {
 
     loadInvitation();
   }, [token]);
+
+  // Таймер обратного отсчета для перенаправления
+  useEffect(() => {
+    if (currentStep === 'complete' && success) {
+      const timer = setInterval(() => {
+        setRedirectCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            navigate('/');
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [currentStep, success, navigate]);
 
   const loadInvitation = async () => {
     try {
@@ -203,11 +222,6 @@ const AcceptInvitation: React.FC = () => {
       setSuccess(true);
       setCurrentStep('complete');
       
-      // Перенаправление через 2 секунды
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
-      
     } catch (err: any) {
       console.error('Ошибка регистрации:', err);
       setError(err.message || 'Ошибка при создании аккаунта');
@@ -228,6 +242,10 @@ const AcceptInvitation: React.FC = () => {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('ru-RU');
+  };
+
+  const handleManualRedirect = () => {
+    navigate('/');
   };
 
   if (loading) {
@@ -339,15 +357,7 @@ const AcceptInvitation: React.FC = () => {
                 );
               })}
               
-              {/* Финальная галочка */}
-              {currentStep === 'complete' && (
-                <>
-                  <div className="w-8 h-0.5 mx-2 bg-blue-600" />
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-600 text-white">
-                    <FiCheck size={16} />
-                  </div>
-                </>
-              )}
+
             </div>
           </div>
 
@@ -540,16 +550,40 @@ const AcceptInvitation: React.FC = () => {
 
           {/* Шаг 4: Завершение */}
           {currentStep === 'complete' && (
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center space-y-6">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto">
                 <FiCheck className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                Добро пожаловать!
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Ваш аккаунт успешно создан. Перенаправляем вас в систему...
-              </p>
+              
+              <div>
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
+                  Добро пожаловать!
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Ваш аккаунт успешно создан.
+                </p>
+                
+                {redirectCountdown > 0 ? (
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Автоматическое перенаправление через {redirectCountdown} сек...
+                  </p>
+                ) : (
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Перенаправление...
+                  </p>
+                )}
+              </div>
+
+              <div className="flex justify-center">
+                <ThemeButton
+                  onClick={handleManualRedirect}
+                  variant="primary"
+                  className="flex items-center"
+                >
+                  Войти в систему
+                  <FiArrowRight className="ml-2" size={16} />
+                </ThemeButton>
+              </div>
             </div>
           )}
 
