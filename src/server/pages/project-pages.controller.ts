@@ -20,7 +20,20 @@ export class ProjectPagesController {
 
     const where = { product: { projectId, type: 'WEBSITE' } } as const;
     const [pages, total] = await Promise.all([
-      this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
+      this.prisma.page.findMany({ 
+        where, 
+        skip, 
+        take: l, 
+        orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }],
+        include: {
+          primaryCategory: true,
+          webCategories: {
+            include: {
+              category: true,
+            },
+          },
+        },
+      }),
       this.prisma.page.count({ where }),
     ]);
     return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
@@ -40,7 +53,20 @@ export class ProjectPagesController {
 
     const where = { productId, product: { projectId } } as const;
     const [pages, total] = await Promise.all([
-      this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
+      this.prisma.page.findMany({ 
+        where, 
+        skip, 
+        take: l, 
+        orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }],
+        include: {
+          primaryCategory: true,
+          webCategories: {
+            include: {
+              category: true,
+            },
+          },
+        },
+      }),
       this.prisma.page.count({ where }),
     ]);
     return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };

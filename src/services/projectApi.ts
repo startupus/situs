@@ -13,6 +13,30 @@ export interface ProjectData {
   updatedAt: string;
 }
 
+export interface WebCategoryData {
+  id: string;
+  name: string;
+  description?: string;
+  slug: string;
+  alias: string;
+  level: number;
+  parentId?: string;
+  orderIndex: number;
+  isActive: boolean;
+  isPublished: boolean;
+  language: string;
+  accessLevel: string;
+  productId: string;
+  createdAt: string;
+  updatedAt: string;
+  parent?: WebCategoryData;
+  children?: WebCategoryData[];
+  _count?: {
+    pageLinks: number;
+    primaryPages: number;
+  };
+}
+
 export interface PageData {
   id: string;
   title: string;
@@ -27,8 +51,16 @@ export interface PageData {
   template?: string;
   layout?: string;
   projectId: string;
+  primaryCategoryId?: string;
   createdAt: string;
   updatedAt: string;
+  primaryCategory?: WebCategoryData;
+  webCategories?: Array<{
+    pageId: string;
+    categoryId: string;
+    assignedAt: string;
+    category: WebCategoryData;
+  }>;
 }
 
 const base = typeof window !== 'undefined' ? '' : (process.env.API_BASE_URL || 'http://localhost:3001');
@@ -68,4 +100,120 @@ export async function updatePage(pageId: string, updateData: Partial<PageData>):
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updateData),
   });
+}
+
+// ==================== WEBSITE CATEGORIES ====================
+
+export interface CreateWebCategoryRequest {
+  name: string;
+  description?: string;
+  slug: string;
+  alias?: string;
+  parentId?: string;
+  orderIndex?: number;
+  isActive?: boolean;
+  isPublished?: boolean;
+  language?: string;
+  accessLevel?: string;
+}
+
+export interface UpdateWebCategoryRequest {
+  name?: string;
+  description?: string;
+  slug?: string;
+  alias?: string;
+  parentId?: string;
+  orderIndex?: number;
+  isActive?: boolean;
+  isPublished?: boolean;
+  language?: string;
+  accessLevel?: string;
+}
+
+export interface ReorderWebCategoriesRequest {
+  projectId: string;
+  items: Array<{
+    id: string;
+    orderIndex: number;
+    parentId?: string;
+  }>;
+}
+
+export interface AssignCategoriesRequest {
+  add?: string[];
+  remove?: string[];
+}
+
+export async function getWebsiteCategories(projectId: string, includeInactive = false): Promise<WebCategoryData[]> {
+  const params = includeInactive ? '?includeInactive=true' : '';
+  const data = await http<{ categories: WebCategoryData[] }>(`/api/projects/${projectId}/website/categories${params}`);
+  return data?.categories || [];
+}
+
+export async function createWebsiteCategory(projectId: string, categoryData: CreateWebCategoryRequest): Promise<WebCategoryData> {
+  const data = await http<{ category: WebCategoryData }>(`/api/projects/${projectId}/website/categories`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(categoryData),
+  });
+  return data.category;
+}
+
+export async function updateWebsiteCategory(categoryId: string, updateData: UpdateWebCategoryRequest): Promise<WebCategoryData> {
+  const data = await http<{ category: WebCategoryData }>(`/api/website/categories/${categoryId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updateData),
+  });
+  return data.category;
+}
+
+export async function deleteWebsiteCategory(categoryId: string): Promise<void> {
+  await http<{ success: boolean }>(`/api/website/categories/${categoryId}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function reorderWebsiteCategories(reorderData: ReorderWebCategoriesRequest): Promise<void> {
+  await http<{ success: boolean }>(`/api/website/categories/reorder`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(reorderData),
+  });
+}
+
+// ==================== PAGE CATEGORIES ====================
+
+export async function assignPageCategories(pageId: string, assignData: AssignCategoriesRequest): Promise<{ added: string[]; removed: string[] }> {
+  const data = await http<{ added: string[]; removed: string[] }>(`/api/pages/${pageId}/categories`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(assignData),
+  });
+  return data;
+}
+
+export async function setPagePrimaryCategory(pageId: string, categoryId: string): Promise<PageData> {
+  const data = await http<{ page: PageData }>(`/api/pages/${pageId}/categories/primary`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ categoryId }),
+  });
+  return data.page;
+}
+
+// ==================== URL HELPERS ====================
+
+export function buildCanonicalUrl(page: PageData, menuUrl?: string): string {
+  // Приоритет: URL из меню, затем основная рубрика
+  if (menuUrl) {
+    return menuUrl;
+  }
+  
+  if (page.primaryCategory) {
+    return `/${page.primaryCategory.slug}/${page.slug}`;
+  }
+  
+  // Fallback: только slug страницы
+  return `/${page.slug}`;
 }
