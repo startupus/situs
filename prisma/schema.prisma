@@ -268,6 +268,7 @@ model Product {
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   pages   Page[]
   categories Category[] // Для ECOMMERCE продуктов
+  webCategories WebCategory[] // Для WEBSITE: рубрики (категории) страниц
   items   Item[]      // Для ECOMMERCE продуктов
   
   @@unique([projectId, name])
@@ -299,11 +300,15 @@ model Page {
   
   // Product relation
   productId String
+  // Primary category for URL building (Website categories)
+  primaryCategoryId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
   // Relations
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  primaryCategory WebCategory? @relation("PagePrimaryCategory", fields: [primaryCategoryId], references: [id])
+  webCategories PageWebCategory[]
   
   @@unique([productId, slug])
   @@map("pages")
@@ -419,6 +424,56 @@ model Category {
   @@unique([productId, slug])
   @@unique([productId, alias])  // Добавляем уникальность alias как в MenuItem
   @@map("categories")
+}
+
+/// Website Category (Рубрика для страниц Website)
+model WebCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  slug        String
+  alias       String   @default("")
+
+  // Иерархия (как в Joomla)
+  level       Int      @default(1)
+  parentId    String?
+  parent      WebCategory? @relation("WebCategoryHierarchy", fields: [parentId], references: [id])
+  children    WebCategory[] @relation("WebCategoryHierarchy")
+
+  // Публикация/доступ/язык
+  orderIndex  Int      @default(0)
+  isActive    Boolean  @default(true)
+  isPublished Boolean  @default(true)
+  language    String   @default("*")
+  accessLevel AccessLevel @default(PUBLIC)
+
+  // Привязка к продукту WEBSITE
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  // Связи с Page через стык-таблицу
+  pageLinks   PageWebCategory[]
+  // Обратная связь для primaryCategory
+  primaryPages Page[] @relation("PagePrimaryCategory")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([productId, slug])
+  @@map("web_categories")
+}
+
+/// Стык-таблица: многие-ко-многим Page ↔ WebCategory
+model PageWebCategory {
+  pageId      String
+  categoryId  String
+  assignedAt  DateTime @default(now())
+
+  page        Page        @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  category    WebCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([pageId, categoryId])
+  @@map("page_web_categories")
 }
 
 model Item {
