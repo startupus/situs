@@ -185,6 +185,39 @@ export class UsersService {
   }
 
   /**
+   * Поиск пользователя по email или телефону
+   */
+  async findByEmailOrPhone(email?: string, phone?: string): Promise<any> {
+    if (!email && !phone) {
+      return null;
+    }
+
+    const whereConditions: any[] = [];
+    if (email) {
+      whereConditions.push({ email });
+    }
+    if (phone) {
+      whereConditions.push({ phone });
+    }
+
+    return this.prisma.user.findFirst({
+      where: {
+        OR: whereConditions,
+      },
+    });
+  }
+
+  /**
+   * Обновление пароля пользователя
+   */
+  async updatePassword(userId: string, hashedPassword: string): Promise<void> {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { password: hashedPassword },
+    });
+  }
+
+  /**
    * Обновление пользователя
    */
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {

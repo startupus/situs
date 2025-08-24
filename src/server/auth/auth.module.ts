@@ -9,6 +9,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UsersModule } from '../users/users.module';
+import { CommunicationModule } from '../communication/communication.module';
 
 /**
  * Модуль аутентификации
@@ -22,6 +23,7 @@ import { UsersModule } from '../users/users.module';
 @Module({
   imports: [
     UsersModule,
+    CommunicationModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

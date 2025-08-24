@@ -6,7 +6,8 @@ import { AcceptInvitationDto } from './dto/accept-invitation.dto';
 import { Invitation, InvitationStatus } from './entities/invitation.entity';
 import { UsersService } from '../users/users.service';
 import { GlobalRole, UserStatus } from '../users/entities/user.entity';
-import { CommunicationService, CommunicationChannel } from '../communication/communication.service';
+import { CommunicationService } from '../communication/communication.service';
+import { CommunicationChannel } from '@prisma/client';
 import * as crypto from 'crypto';
 
 @Injectable()
