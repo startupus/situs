@@ -47,6 +47,10 @@ model User {
 
   // Invitations created by this user
   invitationsSent UserInvitation[] @relation("InvitationInviter")
+  
+  // Новые приглашения
+  sentInvitations     Invitation[] @relation("InvitedBy")
+  acceptedInvitations Invitation[] @relation("AcceptedBy")
 
   @@map("users")
 }
@@ -112,6 +116,51 @@ model UserAuthProvider {
 
   @@unique([provider, providerUserId])
   @@map("user_auth_providers")
+}
+
+/// Приглашения пользователей
+model Invitation {
+  id                String            @id @default(cuid())
+  email             String
+  role              GlobalRole        @default(BUSINESS)
+  status            InvitationStatus  @default(PENDING)
+  token             String            @unique
+  message           String?
+  channel           CommunicationChannel @default(EMAIL)
+  
+  // Метаданные
+  invitedBy         String
+  invitedByUser     User              @relation("InvitedBy", fields: [invitedBy], references: [id])
+  acceptedBy        String?
+  acceptedByUser    User?             @relation("AcceptedBy", fields: [acceptedBy], references: [id])
+  
+  // Временные метки
+  expiresAt         DateTime
+  sentAt            DateTime?
+  acceptedAt        DateTime?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@map("invitations")
+}
+
+/// Настройки каналов связи
+model CommunicationSettings {
+  id                String                @id @default(cuid())
+  channel           CommunicationChannel  @unique
+  enabled           Boolean               @default(false)
+  
+  // Конфигурация для каждого канала
+  config            Json                  // Настройки API ключей, токенов и т.д.
+  
+  // Шаблоны сообщений
+  inviteTemplate    String?               // Шаблон приглашения
+  reminderTemplate  String?               // Шаблон напоминания
+  
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@map("communication_settings")
 }
 
 /// Invitations to join the platform/accounts/projects
@@ -538,8 +587,24 @@ enum UserStatus {
   ACTIVE
   INACTIVE
   PENDING
+  INVITED
   SUSPENDED
   BANNED
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+enum CommunicationChannel {
+  EMAIL
+  SMS
+  TELEGRAM
+  WHATSAPP
+  SLACK
 }
 
 enum ProjectStatus {

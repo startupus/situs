@@ -1,62 +1,56 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, IsOptional, IsArray, IsEnum, IsNumber, Min, Max } from 'class-validator';
+import { IsEmail, IsEnum, IsOptional, IsString, IsArray, IsDateString } from 'class-validator';
 import { GlobalRole } from '../../users/entities/user.entity';
 
-/**
- * DTO для создания приглашений
- */
+export enum CommunicationChannel {
+  EMAIL = 'EMAIL',
+  SMS = 'SMS',
+  TELEGRAM = 'TELEGRAM',
+  WHATSAPP = 'WHATSAPP',
+  SLACK = 'SLACK'
+}
+
 export class CreateInvitationDto {
   @ApiProperty({
-    description: 'Список email адресов для приглашения',
+    description: 'Email адреса для приглашения',
     example: ['user1@example.com', 'user2@example.com'],
+    type: [String]
   })
   @IsArray()
-  @IsEmail({}, { each: true, message: 'Некорректный формат email' })
+  @IsEmail({}, { each: true })
   emails!: string[];
 
   @ApiProperty({
-    description: 'Роль для приглашенных пользователей',
+    description: 'Роль по умолчанию для приглашенных пользователей',
     enum: GlobalRole,
-    example: GlobalRole.BUSINESS,
+    example: GlobalRole.BUSINESS
   })
-  @IsEnum(GlobalRole, { message: 'Некорректная роль' })
+  @IsEnum(GlobalRole)
   role!: GlobalRole;
 
   @ApiProperty({
-    description: 'Сообщение для приглашенных пользователей',
-    example: 'Добро пожаловать в нашу команду!',
-    required: false,
+    description: 'Персональное сообщение (необязательно)',
+    example: 'Добро пожаловать в нашу платформу!',
+    required: false
   })
   @IsOptional()
   @IsString()
   message?: string;
 
   @ApiProperty({
-    description: 'Время действия приглашения в часах',
-    example: 72,
-    required: false,
+    description: 'Канал связи для отправки приглашения',
+    enum: CommunicationChannel,
+    example: CommunicationChannel.EMAIL
   })
-  @IsOptional()
-  @IsNumber()
-  @Min(1, { message: 'Минимальное время действия - 1 час' })
-  @Max(8760, { message: 'Максимальное время действия - 1 год (8760 часов)' })
-  expiresInHours?: number;
+  @IsEnum(CommunicationChannel)
+  channel!: CommunicationChannel;
 
   @ApiProperty({
-    description: 'ID аккаунта (если приглашение в аккаунт)',
-    example: 'clm1234567890',
-    required: false,
+    description: 'Дата истечения приглашения (ISO string)',
+    example: '2024-12-31T23:59:59.000Z',
+    required: false
   })
   @IsOptional()
-  @IsString()
-  accountId?: string;
-
-  @ApiProperty({
-    description: 'ID проекта (если приглашение в проект)',
-    example: 'clm1234567890',
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  projectId?: string;
+  @IsDateString()
+  expiresAt?: string;
 }

@@ -131,23 +131,18 @@ const UserTable: React.FC<UserTableProps> = ({
                           </span>
                         </div>
                       )}
-                      {/* Статус-иконка на аватарке */}
-                      <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
-                        {user.status === 'ACTIVE' && (
-                          <div className="w-3 h-3 bg-green-500 rounded-full" title="Активен"></div>
-                        )}
-                        {user.status === 'INACTIVE' && (
-                          <div className="w-3 h-3 bg-gray-400 rounded-full" title="Неактивен"></div>
-                        )}
-                        {user.status === 'PENDING' && (
-                          <div className="w-3 h-3 bg-yellow-500 rounded-full" title="Ожидает активации"></div>
-                        )}
-                        {(user.status === 'SUSPENDED' || user.status === 'BANNED') && (
-                          <svg className="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20" title="Заблокирован">
-                            <path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" />
-                          </svg>
-                        )}
-                      </div>
+                      {/* Статус-индикатор на аватарке */}
+                      <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-gray-800 ${
+                        user.status === 'ACTIVE' ? 'bg-green-500' :
+                        user.status === 'INACTIVE' ? 'bg-gray-400' :
+                        user.status === 'PENDING' ? 'bg-yellow-500' :
+                        (user.status === 'SUSPENDED' || user.status === 'BANNED') ? 'bg-red-500' : 'bg-gray-400'
+                      }`} title={
+                        user.status === 'ACTIVE' ? 'Активен' :
+                        user.status === 'INACTIVE' ? 'Неактивен' :
+                        user.status === 'PENDING' ? 'Ожидает активации' :
+                        (user.status === 'SUSPENDED' || user.status === 'BANNED') ? 'Заблокирован' : 'Неизвестный статус'
+                      }></div>
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900 dark:text-white">
