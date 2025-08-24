@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaEnvelope, FaPhone } from 'react-icons/fa'
+import CodeLogin from '../components/auth/CodeLogin'
 
 interface LoginPageProps {
   onLogin?: (user: any) => void
@@ -8,11 +9,18 @@ interface LoginPageProps {
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [contactMethod, setContactMethod] = useState<'email' | 'phone'>('email')
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  
+  // Проверяем, нужно ли показать вход по коду
+  const loginMethod = searchParams.get('method')
+  const showCodeLogin = loginMethod === 'code'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -20,13 +28,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     setError('')
 
     try {
-      // TODO: Интеграция с Loginus Service
+      const loginData = contactMethod === 'email' 
+        ? { email, password }
+        : { phone, password } // TODO: Добавить поддержку входа по телефону в API
+
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(loginData),
       })
 
       if (!response.ok) {
@@ -50,6 +61,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     }
   }
 
+  // Если выбран вход по коду, показываем CodeLogin
+  if (showCodeLogin) {
+    return (
+      <CodeLogin 
+        onLogin={onLogin} 
+        onBack={() => navigate('/login')}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
@@ -67,51 +88,91 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </div>
 
         {/* Форма входа */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+          {/* Заголовок */}
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Вход по паролю
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">
+              Введите {contactMethod === 'email' ? 'email' : 'телефон'} и пароль
+            </p>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Поле email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email
-              </label>
+            {/* Табы для выбора канала связи */}
+            <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+              <button
+                type="button"
+                onClick={() => setContactMethod('email')}
+                className={`flex-1 flex items-center justify-center py-3 px-4 rounded-md text-sm font-medium transition-colors ${
+                  contactMethod === 'email'
+                    ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                }`}
+              >
+                <FaEnvelope className="w-4 h-4 mr-2" />
+                Почта
+              </button>
+              <button
+                type="button"
+                onClick={() => setContactMethod('phone')}
+                className={`flex-1 flex items-center justify-center py-3 px-4 rounded-md text-sm font-medium transition-colors ${
+                  contactMethod === 'phone'
+                    ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                }`}
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                Телефон
+              </button>
+            </div>
+
+            {/* Поле ввода контакта */}
+            {contactMethod === 'email' ? (
               <div className="relative">
-                <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                 <input
-                  id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
-                  placeholder="your@email.com"
+                  placeholder="Введите ваш email"
                   required
                 />
               </div>
-            </div>
-
-            {/* Поле пароль */}
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Пароль
-              </label>
+            ) : (
               <div className="relative">
-                <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                <FaPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                 <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
-                  placeholder="••••••••"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
+                  placeholder="+7 (900) 123-45-67"
                   required
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-                </button>
               </div>
+            )}
+
+            {/* Поле пароля */}
+            <div className="relative">
+              <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
+                placeholder="Введите пароль"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
             </div>
 
             {/* Ошибка */}
@@ -129,25 +190,44 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             >
               {isLoading ? 'Вход...' : 'Войти'}
             </button>
+
+            {/* Дополнительные ссылки */}
+            <div className="text-center space-y-3">
+              <div>
+                <button
+                  type="button"
+                  onClick={() => navigate('/forgot-password')}
+                  className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                >
+                  Забыли пароль?
+                </button>
+              </div>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => window.location.href = '/login?method=code'}
+                  className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                >
+                  Войти по коду
+                </button>
+              </div>
+              <div className="pt-2 border-t border-gray-200 dark:border-gray-600">
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                  Нет аккаунта?
+                </p>
+                <button
+                  type="button"
+                  onClick={() => navigate('/register')}
+                  className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                >
+                  Создать аккаунт
+                </button>
+              </div>
+            </div>
           </form>
-
-          {/* Дополнительные ссылки */}
-          <div className="mt-6 text-center">
-            <a href="/forgot-password" className="text-blue-600 hover:text-blue-500 text-sm">
-              Забыли пароль?
-            </a>
-          </div>
         </div>
 
-        {/* Футер */}
-        <div className="mt-8 text-center">
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            Нет аккаунта?{' '}
-            <a href="/register" className="text-blue-600 hover:text-blue-500">
-              Создать аккаунт
-            </a>
-          </p>
-        </div>
+
       </div>
     </div>
   )

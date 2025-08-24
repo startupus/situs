@@ -1,13 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
-
-export enum CommunicationChannel {
-  EMAIL = 'EMAIL',
-  SMS = 'SMS',
-  TELEGRAM = 'TELEGRAM',
-  WHATSAPP = 'WHATSAPP',
-  SLACK = 'SLACK'
-}
+import { CommunicationChannel } from '@prisma/client';
 
 export interface CommunicationMessage {
   to: string;

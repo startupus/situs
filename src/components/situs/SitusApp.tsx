@@ -20,14 +20,20 @@ import SitusProjectWebsite from "./pages/SitusProjectWebsite";
 import SitusProjectStore from "./pages/SitusProjectStore";
 import MenuManager from "../admin/MenuManager";
 import AcceptInvitation from "./pages/AcceptInvitation";
+import { LoginPage } from "../../auth/LoginPage";
+import ForgotPassword from "../auth/ForgotPassword";
+import Register from "../auth/Register";
 
 const SitusApp: React.FC = () => {
   console.log("SitusApp component rendered");
 
   return (
     <Routes>
-      {/* Публичная страница принятия приглашения (без layout) */}
+      {/* Публичные страницы (без layout) */}
       <Route path="/accept-invitation" element={<AcceptInvitation />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/register" element={<Register />} />
       
       <Route path="/" element={<SitusMainLayout />}>
         {/* Главная страница - дашборд */}
