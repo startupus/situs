@@ -9,6 +9,7 @@ import { RealtimeModule } from './realtime/realtime.module';
 import { jwtConfig } from './config/jwt.config';
 import { databaseConfig } from './config/database.config';
 import { PagesModule } from './pages/pages.module';
+import { WebCategoriesModule } from './website/web-categories.module';
 import { ProductsModule } from './products/products.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { TenantResolverMiddleware } from './common/middleware/tenant-resolver.middleware';
@@ -59,6 +60,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     CommonModule,
     RealtimeModule, // Нужен для SSE
     PagesModule,
+    WebCategoriesModule,
 
     // Бизнес-модули
     ProjectsModule,
