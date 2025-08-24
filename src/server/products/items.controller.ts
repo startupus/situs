@@ -7,7 +7,7 @@ import { Scopes } from '../common/decorators/roles.decorator';
 /**
  * Контроллер товаров
  */
-@Controller('api/items')
+@Controller('items')
 export class ItemsController {
   constructor(private readonly prisma: PrismaService) {}
 

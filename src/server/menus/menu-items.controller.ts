@@ -22,7 +22,7 @@ import { AccessLevel } from '@prisma/client';
 /**
  * Контроллер пунктов меню
  */
-@Controller('api/menu-items')
+@Controller('menu-items')
 export class MenuItemsController {
   constructor(
     private readonly menusService: MenusService,

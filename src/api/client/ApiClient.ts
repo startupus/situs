@@ -38,7 +38,7 @@ class ApiClient {
   private baseURL: string;
   private defaultHeaders: Record<string, string>;
 
-  constructor(baseURL: string = '/api') {
+  constructor(baseURL: string = 'http://localhost:3002/api') {
     this.baseURL = baseURL;
     this.defaultHeaders = {
       'Content-Type': 'application/json',
@@ -295,8 +295,42 @@ class ApiClient {
   /**
    * Получение статистики пользователей
    */
-  async getUsersStatistics(): Promise<ApiResponse<any>> {
+  async getUsersStatistics(): Promise<ApiResponse<{
+    total: number;
+    active: number;
+    pending: number;
+    suspended: number;
+    inactive: number;
+  }>> {
     return this.get('/users/statistics');
+  }
+
+  /**
+   * Блокировка пользователя
+   */
+  async suspendUser(id: string): Promise<ApiResponse<any>> {
+    return this.put(`/users/${id}/suspend`);
+  }
+
+  /**
+   * Изменение роли пользователя
+   */
+  async changeUserRole(id: string, globalRole: string): Promise<ApiResponse<any>> {
+    return this.put(`/users/${id}/role`, { globalRole });
+  }
+
+  /**
+   * Массовое обновление пользователей
+   */
+  async bulkUpdateUsers(userIds: string[], data: { globalRole?: string; status?: string }): Promise<ApiResponse<{ count: number }>> {
+    return this.put('/users/bulk/update', { userIds, data });
+  }
+
+  /**
+   * Массовое удаление пользователей
+   */
+  async bulkDeleteUsers(userIds: string[]): Promise<ApiResponse<{ count: number }>> {
+    return this.request('/users/bulk/delete', { method: 'DELETE', body: { userIds } });
   }
 
   // === PROJECTS API ===

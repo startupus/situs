@@ -1,4 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { apiClient } from '../../../../api/client';
+import { useUsersSSE } from '../../../../hooks/useUsersSSE';
 
 export interface User {
   id: string;
@@ -6,7 +8,7 @@ export interface User {
   name: string;
   avatar?: string;
   globalRole: string;
-  status: 'active' | 'inactive' | 'pending' | 'suspended';
+  status: 'ACTIVE' | 'INACTIVE' | 'PENDING' | 'SUSPENDED' | 'BANNED';
   lastLogin?: Date;
   createdAt: Date;
   projectsCount: number;
@@ -46,79 +48,61 @@ export const useUsers = () => {
   const [settings, setSettings] = useState<UserSettings | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // SSE для реального времени обновления пользователей
+  useUsersSSE({
+    onUserUpdated: (userId, updatedUser, changes) => {
+      console.log('📡 SSE: Пользователь обновлен', { userId, updatedUser, changes });
+      setUsers(prev => prev.map(user => 
+        user.id === userId ? { ...user, ...updatedUser } : user
+      ));
+    },
+    onConnected: () => {
+      console.log('🔗 SSE соединение пользователей установлено');
+    },
+    onError: (error) => {
+      console.error('❌ Ошибка SSE пользователей:', error);
+    }
+  });
+
   const loadUsersAndSettings = useCallback(async () => {
     setLoading(true);
     try {
-      // Здесь будут API вызовы
-      const mockUsers: User[] = [
-        {
-          id: '1',
-          email: 'admin@example.com',
-          name: 'Администратор Системы',
-          avatar: 'https://ui-avatars.com/api/?name=AS&background=3b82f6&color=fff',
-          globalRole: 'SUPER_ADMIN',
-          status: 'active',
-          lastLogin: new Date(Date.now() - 1000 * 60 * 30), // 30 минут назад
-          createdAt: new Date('2024-01-01'),
-          projectsCount: 15,
-          permissions: ['*'],
-          isEmailVerified: true,
-          twoFactorEnabled: true
-        },
-        {
-          id: '2',
-          email: 'manager@agency.com',
-          name: 'Менеджер Агентства',
-          avatar: 'https://ui-avatars.com/api/?name=MA&background=10b981&color=fff',
-          globalRole: 'AGENCY',
-          status: 'active',
-          lastLogin: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 часа назад
-          createdAt: new Date('2024-02-15'),
-          projectsCount: 8,
-          permissions: ['projects.create', 'projects.manage.own', 'users.invite'],
-          isEmailVerified: true,
-          twoFactorEnabled: false
-        },
-        {
-          id: '3',
-          email: 'client@business.com',
-          name: 'Клиент Бизнес',
-          globalRole: 'BUSINESS',
-          status: 'pending',
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), // вчера
-          projectsCount: 0,
-          permissions: ['projects.create.limited'],
-          isEmailVerified: false,
-          twoFactorEnabled: false
-        },
-        {
-          id: '4',
-          email: 'staff@company.com',
-          name: 'Сотрудник Компании',
-          avatar: 'https://ui-avatars.com/api/?name=SK&background=f59e0b&color=fff',
-          globalRole: 'STAFF',
-          status: 'active',
-          lastLogin: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), // 3 дня назад
-          createdAt: new Date('2024-01-20'),
-          projectsCount: 25,
-          permissions: ['system.admin', 'users.manage', 'projects.manage'],
-          isEmailVerified: true,
-          twoFactorEnabled: true
-        },
-        {
-          id: '5',
-          email: 'blocked@example.com',
-          name: 'Заблокированный Пользователь',
-          globalRole: 'BUSINESS',
-          status: 'suspended',
-          lastLogin: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // месяц назад
-          createdAt: new Date('2024-03-01'),
-          projectsCount: 2,
-          permissions: [],
-          isEmailVerified: true,
-          twoFactorEnabled: false
-        }
-      ];
+      // Загружаем пользователей с сервера
+      const usersResponse = await apiClient.getUsers();
+      if ((usersResponse as any)?.error) {
+        console.error('Ошибка загрузки пользователей:', usersResponse.error);
+        setUsers([]);
+      } else {
+        // Преобразуем данные с сервера в формат фронтенда
+        const serverUsers = Array.isArray(usersResponse)
+          ? usersResponse
+          : ((usersResponse as any).data || []);
+        const toFrontendStatus = (s: string | undefined): User['status'] => {
+          const v = (s || '').toUpperCase();
+          if (v === 'ACTIVE') return 'ACTIVE';
+          if (v === 'INACTIVE') return 'INACTIVE';
+          if (v === 'PENDING') return 'PENDING';
+          if (v === 'SUSPENDED') return 'SUSPENDED';
+          if (v === 'BANNED') return 'BANNED';
+          return 'ACTIVE';
+        };
+
+        const transformedUsers: User[] = serverUsers.map((user: any) => ({
+          id: user.id,
+          email: user.email,
+          name: user.name || user.username || 'Пользователь',
+          avatar: user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || user.username || 'U')}&background=3b82f6&color=fff`,
+          globalRole: user.globalRole || 'BUSINESS',
+          status: toFrontendStatus(user.status),
+          lastLogin: user.lastLogin ? new Date(user.lastLogin) : undefined,
+          createdAt: new Date(user.createdAt),
+          projectsCount: user.projectsCount || 0,
+          permissions: user.permissions || [],
+          isEmailVerified: user.isEmailVerified || false,
+          twoFactorEnabled: user.twoFactorEnabled || false
+        }));
+        setUsers(transformedUsers);
+      }
 
       const mockSettings: UserSettings = {
         registration: {
@@ -146,36 +130,48 @@ export const useUsers = () => {
         }
       };
 
-      setUsers(mockUsers);
+      // Настройки пока оставляем как мок данные
       setSettings(mockSettings);
     } catch (error) {
       console.error('Ошибка загрузки пользователей и настроек:', error);
+      setUsers([]);
     } finally {
       setLoading(false);
     }
   }, []);
 
   const updateUserRole = useCallback(async (userId: string, newRole: string) => {
-    setUsers(prev => prev.map(user => 
-      user.id === userId ? { ...user, globalRole: newRole } : user
-    ));
-
     try {
-      // API вызов для обновления роли
-      console.log('Обновление роли пользователя:', { userId, newRole });
+      const response = await apiClient.changeUserRole(userId, newRole);
+      if (response.error) {
+        console.error('Ошибка обновления роли пользователя:', response.error);
+        return;
+      }
+
+      // Обновляем локальное состояние
+      setUsers(prev => prev.map(user => 
+        user.id === userId ? { ...user, globalRole: newRole } : user
+      ));
     } catch (error) {
       console.error('Ошибка обновления роли пользователя:', error);
     }
   }, []);
 
   const updateUserStatus = useCallback(async (userId: string, newStatus: User['status']) => {
-    setUsers(prev => prev.map(user => 
-      user.id === userId ? { ...user, status: newStatus } : user
-    ));
-
     try {
-      // API вызов для обновления статуса
-      console.log('Обновление статуса пользователя:', { userId, newStatus });
+      // Преобразуем статус фронтенда в формат бэкенда (верхний регистр)
+      const backendStatus = newStatus.toUpperCase();
+      const response = await apiClient.updateUser(userId, { status: backendStatus });
+
+      if (response.error) {
+        console.error('Ошибка обновления статуса пользователя:', response.error);
+        return;
+      }
+
+      // Обновляем локальное состояние
+      setUsers(prev => prev.map(user => 
+        user.id === userId ? { ...user, status: newStatus } : user
+      ));
     } catch (error) {
       console.error('Ошибка обновления статуса пользователя:', error);
     }
@@ -185,29 +181,50 @@ export const useUsers = () => {
     if (userIds.length === 0) return;
 
     try {
+      let response;
+      
       switch (action) {
         case 'activate':
-          setUsers(prev => prev.map(user => 
-            userIds.includes(user.id) ? { ...user, status: 'active' } : user
-          ));
-          break;
-        case 'suspend':
-          setUsers(prev => prev.map(user => 
-            userIds.includes(user.id) ? { ...user, status: 'suspended' } : user
-          ));
-          break;
-        case 'delete':
-          if (confirm(`Удалить ${userIds.length} пользователей?`)) {
-            setUsers(prev => prev.filter(user => !userIds.includes(user.id)));
-          }
-          break;
-        case 'changeRole':
-          if (data?.role) {
+          response = await apiClient.bulkUpdateUsers(userIds, { status: 'ACTIVE' });
+          if (!response.error) {
             setUsers(prev => prev.map(user => 
-              userIds.includes(user.id) ? { ...user, globalRole: data.role } : user
+              userIds.includes(user.id) ? { ...user, status: 'ACTIVE' } : user
             ));
           }
           break;
+          
+        case 'suspend':
+          response = await apiClient.bulkUpdateUsers(userIds, { status: 'SUSPENDED' });
+          if (!response.error) {
+            setUsers(prev => prev.map(user => 
+              userIds.includes(user.id) ? { ...user, status: 'SUSPENDED' } : user
+            ));
+          }
+          break;
+          
+        case 'delete':
+          if (confirm(`Удалить ${userIds.length} пользователей?`)) {
+            response = await apiClient.bulkDeleteUsers(userIds);
+            if (!response.error) {
+              setUsers(prev => prev.filter(user => !userIds.includes(user.id)));
+            }
+          }
+          break;
+          
+        case 'changeRole':
+          if (data?.role) {
+            response = await apiClient.bulkUpdateUsers(userIds, { globalRole: data.role });
+            if (!response.error) {
+              setUsers(prev => prev.map(user => 
+                userIds.includes(user.id) ? { ...user, globalRole: data.role } : user
+              ));
+            }
+          }
+          break;
+      }
+
+      if (response?.error) {
+        console.error('Ошибка массовой операции:', response.error);
       }
     } catch (error) {
       console.error('Ошибка массовой операции:', error);
@@ -216,28 +233,48 @@ export const useUsers = () => {
 
   const createUser = useCallback(async (userData: any) => {
     try {
-      console.log('Создание пользователя:', userData);
-      
-      const newUser: User = {
-        id: Date.now().toString(),
+      const response = await apiClient.createUser({
         email: userData.email,
+        password: userData.password || 'TempPassword123!',
         name: userData.name,
-        globalRole: userData.role as 'BUSINESS' | 'AGENCY' | 'STAFF' | 'SUPER_ADMIN',
-        status: userData.isActive ? 'active' : 'inactive',
-        createdAt: new Date(),
-        projectsCount: 0,
-        permissions: [],
-        isEmailVerified: false,
-        twoFactorEnabled: false,
-        lastLogin: undefined
-      };
+        globalRole: userData.role,
+        isActive: userData.isActive
+      });
 
-      setUsers(prev => [...prev, newUser]);
+      if (response.error) {
+        console.error('Ошибка создания пользователя:', response.error);
+        throw new Error(response.error.message);
+      }
+
+      // Добавляем нового пользователя в локальное состояние
+      if (response.data) {
+        const newUser: User = {
+          id: response.data.id,
+          email: response.data.email,
+          name: response.data.name || response.data.username || 'Пользователь',
+          avatar: response.data.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(response.data.name || 'U')}&background=3b82f6&color=fff`,
+          globalRole: response.data.globalRole || 'BUSINESS',
+          status: response.data.status || 'active',
+          lastLogin: response.data.lastLogin ? new Date(response.data.lastLogin) : undefined,
+          createdAt: new Date(response.data.createdAt),
+          projectsCount: response.data.projectsCount || 0,
+          permissions: response.data.permissions || [],
+          isEmailVerified: response.data.isEmailVerified || false,
+          twoFactorEnabled: response.data.twoFactorEnabled || false
+        };
+        
+        setUsers(prev => [newUser, ...prev]);
+      }
     } catch (error) {
       console.error('Ошибка создания пользователя:', error);
       throw error;
     }
   }, []);
+
+  // Автоматическая загрузка данных при монтировании
+  useEffect(() => {
+    loadUsersAndSettings();
+  }, [loadUsersAndSettings]);
 
   return {
     users,

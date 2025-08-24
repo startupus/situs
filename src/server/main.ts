@@ -25,16 +25,24 @@ process.on('unhandledRejection', (reason) => {
  * - Глобальные фильтры и интерцепторы
  */
 async function bootstrap() {
-  console.log('[BOOT] Creating Nest application...');
-  const app = await NestFactory.create(AppModule);
-  console.log('[BOOT] Nest application created');
+  try {
+    console.log('[BOOT] Creating Nest application...');
+    const app = await NestFactory.create(AppModule);
+    console.log('[BOOT] Nest application created');
+    
+    console.log('[BOOT] Application created successfully, starting configuration...');
 
   // Минимальная конфигурация для стабильного запуска
 
   // CORS настройки
   const configService = app.get(ConfigService);
   const origins = (configService.get<string[]>('cors.origins') || []);
-  app.enableCors({ origin: origins.length ? origins : true, credentials: true });
+  app.enableCors({ 
+    origin: origins.length ? origins : true, 
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  });
   console.log('[BOOT] CORS enabled with', origins.length ? origins : 'any');
 
   // Trust proxy для корректного Host/X-Forwarded-Host
@@ -43,6 +51,10 @@ async function bootstrap() {
     const instance: any = httpAdapter.getInstance?.();
     instance?.set?.('trust proxy', true);
   } catch {}
+
+  // Глобальный префикс для API
+  app.setGlobalPrefix('api');
+  console.log('[BOOT] Global prefix set to /api');
 
   // Глобальные пайпы/фильтры/интерцепторы
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
@@ -82,9 +94,17 @@ async function bootstrap() {
 
   // Удалены временные Express-ручки /api/projects — используем ProjectsController
 
+  console.log('[BOOT] Starting server setup...');
   const port = Number(process.env.PORT || 3002);
-  try { console.log(`[BOOT] About to listen on port ${port}`); } catch {}
-  await app.listen(port);
+  console.log(`[BOOT] About to listen on port ${port}`);
+  
+  try {
+    await app.listen(port);
+    console.log(`[BOOT] Server started successfully on port ${port}`);
+  } catch (error) {
+    console.error('[BOOT] Failed to start server:', error);
+    throw error;
+  }
   console.log(`[BOOT] Listening OK on http://localhost:${port}`);
   console.log('🚀 Situs NestJS Server запущен и слушает порт', port);
   console.log(`🔗 API базовый URL: http://localhost:${port}/api`);
@@ -98,6 +118,11 @@ async function bootstrap() {
   // SSE реализован в RealtimeController (@Sse('projects/events'))
 
   // Дублирующие endpoints удалены - перенесены в начало main.ts перед app.listen()
+  
+  } catch (error) {
+    console.error('[BOOT] Bootstrap failed:', error);
+    process.exit(1);
+  }
 }
 
 // Обработка сигналов для корректного завершения

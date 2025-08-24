@@ -34,12 +34,13 @@ class ProjectsApiService {
    */
   async getProjects(filters?: ProjectFilters): Promise<ProjectsListResponse> {
     try {
-      const response = await apiClient.get<ApiResponse<ProjectsListResponse>>(
+      const response = await apiClient.get<any>(
         this.baseEndpoint,
         filters
       );
 
-      if (ApiUtils.isSuccess(response)) {
+      // API возвращает { success: true, data: { projects: [...], total: 4, ... } }
+      if (response.success && response.data) {
         return response.data;
       }
 
@@ -333,7 +334,7 @@ class ProjectsApiService {
       const subId = getSubId();
       // Всегда используем тот же origin, чтобы сработал Vite proxy для /api
       const origin = (typeof window !== 'undefined') ? window.location.origin : base;
-      const url = `${origin}/api/projects/events?sub=${encodeURIComponent(subId)}`;
+      const url = `${origin}/api/realtime/projects?sub=${encodeURIComponent(subId)}`;
       // Локальный журнал событий для отладки
       const pushLog = (entry: any) => {
         try {

@@ -57,8 +57,9 @@ const UserControls: React.FC<UserControlsProps> = ({
               { value: "", label: "Все статусы" },
               { value: "active", label: "Активные" },
               { value: "pending", label: "Ожидающие" },
+              { value: "inactive", label: "Неактивные" },
               { value: "suspended", label: "Заблокированные" },
-              { value: "inactive", label: "Неактивные" }
+              { value: "banned", label: "Забаненные" }
             ]}
           />
         </div>

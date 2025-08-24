@@ -39,7 +39,7 @@ class ApiClient {
     // В браузере по умолчанию работаем через тот же origin, чтобы избежать CORS и использовать Vite proxy
     if (typeof window !== 'undefined') {
       const envBase = (import.meta as any)?.env?.VITE_API_BASE_URL as string | undefined;
-      return envBase && envBase.trim().length > 0 ? envBase : window.location.origin;
+      return envBase && envBase.trim().length > 0 ? envBase : '';
     }
     // На сервере читаем из переменных окружения, иначе localhost (используется редко)
     return process.env.API_BASE_URL || 'http://localhost:3001';
@@ -235,6 +235,81 @@ class ApiClient {
   async deletePage(id: string): Promise<ApiResponse<any>> {
     return this.delete(`/api/pages/${id}`);
   }
+
+  // === USERS API ===
+
+  /**
+   * Получение списка пользователей
+   */
+  async getUsers(): Promise<ApiResponse<any[]>> {
+    return this.get('/api/users');
+  }
+
+  /**
+   * Создание пользователя
+   */
+  async createUser(userData: any): Promise<ApiResponse<any>> {
+    return this.post('/api/users', userData);
+  }
+
+  /**
+   * Обновление пользователя
+   */
+  async updateUser(id: string, userData: any): Promise<ApiResponse<any>> {
+    return this.patch(`/api/users/${id}`, userData);
+  }
+
+  /**
+   * Получение статистики пользователей
+   */
+  async getUsersStatistics(): Promise<ApiResponse<{
+    total: number;
+    active: number;
+    pending: number;
+    suspended: number;
+    inactive: number;
+    banned: number;
+  }>> {
+    return this.get('/api/users/statistics');
+  }
+
+  /**
+   * Активация пользователя
+   */
+  async activateUser(id: string): Promise<ApiResponse<any>> {
+    return this.put(`/api/users/${id}/activate`);
+  }
+
+  /**
+   * Блокировка пользователя
+   */
+  async suspendUser(id: string): Promise<ApiResponse<any>> {
+    return this.put(`/api/users/${id}/suspend`);
+  }
+
+  /**
+   * Изменение роли пользователя
+   */
+  async changeUserRole(id: string, globalRole: string): Promise<ApiResponse<any>> {
+    return this.put(`/api/users/${id}/role`, { globalRole });
+  }
+
+  /**
+   * Массовое обновление пользователей
+   */
+  async bulkUpdateUsers(userIds: string[], updates: any): Promise<ApiResponse<any>> {
+    return this.put('/api/users/bulk/update', { userIds, data: updates });
+  }
+
+  /**
+   * Массовое удаление пользователей
+   */
+  async bulkDeleteUsers(userIds: string[]): Promise<ApiResponse<any>> {
+    return this.request('/api/users/bulk/delete', {
+      method: 'DELETE',
+      body: JSON.stringify({ userIds }),
+    });
+  }
 }
 
 /**
@@ -292,6 +367,6 @@ export const ApiUtils = {
     }
     return 'Произошла неизвестная ошибка';
   }
-};
+}
 
 export default apiClient;

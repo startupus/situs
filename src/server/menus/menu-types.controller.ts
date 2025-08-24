@@ -16,7 +16,7 @@ import { Scopes } from '../common/decorators/roles.decorator';
 /**
  * Контроллер типов меню
  */
-@Controller('api/menu-types')
+@Controller('menu-types')
 export class MenuTypesController {
   constructor(private readonly menusService: MenusService) {}
 
