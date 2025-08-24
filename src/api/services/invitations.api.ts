@@ -84,7 +84,7 @@ export class InvitationsAPI {
    */
   static async getInvitationByToken(token: string): Promise<Invitation> {
     const response = await apiClient.get(`/api/invitations/by-token/${token}`);
-    return response.data;
+    return response;
   }
 
   /**
@@ -95,7 +95,7 @@ export class InvitationsAPI {
     invitation: Invitation;
   }> {
     const response = await apiClient.post('/api/invitations/accept', data);
-    return response.data;
+    return response;
   }
 
   /**

@@ -257,9 +257,12 @@ export class InvitationsService {
    */
   async acceptInvitation(acceptInvitationDto: AcceptInvitationDto): Promise<{ user: any; invitation: Invitation }> {
     const { token, email, password, name } = acceptInvitationDto;
+    
+    console.log('🔍 Accepting invitation:', { token, email, name });
 
     // Находим и валидируем приглашение
     const invitation = await this.findByToken(token);
+    console.log('📧 Found invitation:', invitation);
     
     if (invitation.email !== email) {
       throw new BadRequestException('Email не совпадает с приглашением');
@@ -271,45 +274,53 @@ export class InvitationsService {
       throw new ConflictException('Пользователь с таким email уже существует');
     }
 
-    // Создаем нового пользователя
-    const newUser = await this.usersService.create({
-      email,
-      password,
-      globalRole: invitation.role,
-      name: name || email.split('@')[0],
-      status: UserStatus.ACTIVE // Сразу активируем пользователя
-    });
-
-    // Обновляем приглашение
-    const updatedInvitation = await this.prisma.invitation.update({
-      where: { id: invitation.id },
-      data: {
-        status: InvitationStatus.ACCEPTED,
-        acceptedBy: newUser.id,
-        acceptedAt: new Date()
-      },
-      include: {
-        invitedByUser: {
-          select: {
-            id: true,
-            email: true,
-            profile: true,
-          }
+    // Создаем нового пользователя с минимальными данными
+    try {
+      const userData = {
+        email,
+        password,
+        name: name || email.split('@')[0],
+        isActive: true
+      };
+      console.log('👤 Creating user with data:', userData);
+      
+      const newUser = await this.usersService.create(userData);
+      console.log('✅ User created:', newUser.id);
+      
+      // Обновляем приглашение
+      const updatedInvitation = await this.prisma.invitation.update({
+        where: { id: invitation.id },
+        data: {
+          status: InvitationStatus.ACCEPTED,
+          acceptedBy: newUser.id,
+          acceptedAt: new Date()
         },
-        acceptedByUser: {
-          select: {
-            id: true,
-            email: true,
-            profile: true,
+        include: {
+          invitedByUser: {
+            select: {
+              id: true,
+              email: true,
+              profile: true,
+            }
+          },
+          acceptedByUser: {
+            select: {
+              id: true,
+              email: true,
+              profile: true,
+            }
           }
         }
-      }
-    });
+      });
 
-    return {
-      user: newUser,
-      invitation: this.mapToEntity(updatedInvitation)
-    };
+      return {
+        user: newUser,
+        invitation: this.mapToEntity(updatedInvitation)
+      };
+    } catch (error) {
+      console.error('❌ Error creating user:', error);
+      throw error;
+    }
   }
 
   /**

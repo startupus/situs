@@ -19,12 +19,16 @@ import ProjectPage from "./projects/ProjectPage";
 import SitusProjectWebsite from "./pages/SitusProjectWebsite";
 import SitusProjectStore from "./pages/SitusProjectStore";
 import MenuManager from "../admin/MenuManager";
+import AcceptInvitation from "./pages/AcceptInvitation";
 
 const SitusApp: React.FC = () => {
   console.log("SitusApp component rendered");
 
   return (
     <Routes>
+      {/* Публичная страница принятия приглашения (без layout) */}
+      <Route path="/accept-invitation" element={<AcceptInvitation />} />
+      
       <Route path="/" element={<SitusMainLayout />}>
         {/* Главная страница - дашборд */}
         <Route index element={<SitusDashboard />} />
