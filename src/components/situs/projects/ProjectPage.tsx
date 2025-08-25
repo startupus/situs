@@ -46,7 +46,11 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
       try {
         const response = await projectsApi.getProject(projectId);
         setProject(response as any);
-        const prods = ((response as any)?.products || []).map((p: any) => ({ id: p.id, name: p.type, type: p.type }));
+        const prods = ((response as any)?.products || []).map((p: any) => ({ 
+          id: p.id, 
+          name: p.type === 'WEBSITE' ? 'PAGES' : p.type, 
+          type: p.type 
+        }));
         setProductsOrder(prods);
       } catch (error) {
         console.error('Ошибка загрузки проекта:', error);

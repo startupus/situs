@@ -172,7 +172,7 @@ const SitusProjectPages: React.FC = () => {
           {project.name}
         </Link>
         <span>/</span>
-        <span className="text-dark dark:text-white">Продукт: Сайт</span>
+        <span className="text-dark dark:text-white">Продукт: Страницы</span>
       </nav>
 
       {/* Вкладки настроек сайта */}
