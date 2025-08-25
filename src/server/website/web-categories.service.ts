@@ -19,21 +19,21 @@ export class WebCategoriesService {
     // await this.projectsService.checkProjectAccess(projectId, userId, 'PROJECT_READ');
 
     // Получаем Pages продукт проекта
-    const websiteProduct = await this.prisma.product.findFirst({
+    const pagesProduct = await this.prisma.product.findFirst({
       where: {
         projectId,
         type: ProductType.WEBSITE,
       },
     });
 
-    if (!websiteProduct) {
+    if (!pagesProduct) {
       throw new HttpException('Pages product not found for this project', HttpStatus.NOT_FOUND);
     }
 
     // Получаем категории с иерархией
     const categories = await this.prisma.webCategory.findMany({
       where: {
-        productId: websiteProduct.id,
+        productId: pagesProduct.id,
         ...(includeInactive ? {} : { isActive: true }),
       },
       include: {
@@ -63,14 +63,14 @@ export class WebCategoriesService {
     // await this.projectsService.checkProjectAccess(projectId, userId, 'PROJECT_WRITE');
 
     // Получаем Pages продукт проекта
-    const websiteProduct = await this.prisma.product.findFirst({
+    const pagesProduct = await this.prisma.product.findFirst({
       where: {
         projectId,
         type: ProductType.WEBSITE,
       },
     });
 
-    if (!websiteProduct) {
+    if (!pagesProduct) {
       throw new HttpException('Pages product not found for this project', HttpStatus.NOT_FOUND);
     }
 
@@ -78,7 +78,7 @@ export class WebCategoriesService {
     const existingCategory = await this.prisma.webCategory.findUnique({
       where: {
         productId_slug: {
-          productId: websiteProduct.id,
+          productId: pagesProduct.id,
           slug: createDto.slug,
         },
       },
@@ -96,7 +96,7 @@ export class WebCategoriesService {
       parentCategory = await this.prisma.webCategory.findFirst({
         where: {
           id: createDto.parentId,
-          productId: websiteProduct.id,
+          productId: pagesProduct.id,
         },
       });
 
@@ -113,7 +113,7 @@ export class WebCategoriesService {
     }
 
     // Определяем orderIndex если не задан
-    const orderIndex = createDto.orderIndex ?? await this.getNextOrderIndex(websiteProduct.id, createDto.parentId);
+    const orderIndex = createDto.orderIndex ?? await this.getNextOrderIndex(pagesProduct.id, createDto.parentId);
 
     // Создаём категорию
     const category = await this.prisma.webCategory.create({
@@ -129,7 +129,7 @@ export class WebCategoriesService {
         isPublished: createDto.isPublished ?? true,
         language: createDto.language || '*',
         accessLevel: createDto.accessLevel || AccessLevel.PUBLIC,
-        productId: websiteProduct.id,
+        productId: pagesProduct.id,
       },
       include: {
         parent: true,
@@ -144,7 +144,7 @@ export class WebCategoriesService {
     });
 
     // SSE событие
-    this.realtimeService.publish('menu_type_created', { category }); // TODO: add website category events
+    this.realtimeService.publish('menu_type_created', { category }); // TODO: add pages category events
 
     return category;
   }
@@ -232,7 +232,7 @@ export class WebCategoriesService {
     }
 
     // SSE событие
-    this.realtimeService.publish('menu_type_updated', { category: updatedCategory }); // TODO: add website category events
+    this.realtimeService.publish('menu_type_updated', { category: updatedCategory }); // TODO: add pages category events
 
     return updatedCategory;
   }
@@ -273,7 +273,7 @@ export class WebCategoriesService {
     });
 
     // SSE событие
-    this.realtimeService.publish('menu_type_deleted', { categoryId }); // TODO: add website category events
+    this.realtimeService.publish('menu_type_deleted', { categoryId }); // TODO: add pages category events
   }
 
   async reorderCategories(reorderDto: ReorderWebCategoriesDto, userId: string) {
@@ -295,7 +295,7 @@ export class WebCategoriesService {
     });
 
     // SSE событие
-    this.realtimeService.publish('menu_items_reordered', { items: reorderDto.items }); // TODO: add website category events
+    this.realtimeService.publish('menu_items_reordered', { items: reorderDto.items }); // TODO: add pages category events
   }
 
   private async getNextOrderIndex(productId: string, parentId?: string): Promise<number> {
