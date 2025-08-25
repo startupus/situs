@@ -39,7 +39,7 @@ export class WebCategoriesController {
       return { success: true, categories };
     } catch (error: any) {
       throw new HttpException(
-        error.message || 'Failed to fetch website categories',
+        error.message || 'Failed to fetch pages categories',
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -61,7 +61,7 @@ export class WebCategoriesController {
       return { success: true, category };
     } catch (error: any) {
       throw new HttpException(
-        error.message || 'Failed to create website category',
+        error.message || 'Failed to create pages category',
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -83,7 +83,7 @@ export class WebCategoriesController {
       return { success: true, category };
     } catch (error: any) {
       throw new HttpException(
-        error.message || 'Failed to update website category',
+        error.message || 'Failed to update pages category',
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -97,10 +97,10 @@ export class WebCategoriesController {
   ) {
     try {
       await this.webCategoriesService.deleteCategory(categoryId, (req as any).user.id);
-      return { success: true, message: 'Website category deleted successfully' };
+      return { success: true, message: 'Pages category deleted successfully' };
     } catch (error: any) {
       throw new HttpException(
-        error.message || 'Failed to delete website category',
+        error.message || 'Failed to delete pages category',
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -114,10 +114,10 @@ export class WebCategoriesController {
   ) {
     try {
       await this.webCategoriesService.reorderCategories(reorderDto, (req as any).user.id);
-      return { success: true, message: 'Website categories reordered successfully' };
+      return { success: true, message: 'Pages categories reordered successfully' };
     } catch (error: any) {
       throw new HttpException(
-        error.message || 'Failed to reorder website categories',
+        error.message || 'Failed to reorder pages categories',
         error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

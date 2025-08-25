@@ -36,7 +36,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
       setCategories(data);
       setCategoryTree(buildCategoryTree(data));
     } catch (error) {
-      console.error('Failed to load website categories:', error);
+      console.error('Failed to load pages categories:', error);
     } finally {
       setLoading(false);
     }

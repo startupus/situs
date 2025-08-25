@@ -187,7 +187,7 @@ export class ProjectsService {
       });
       // Автоматическая инициализация предустановленных продуктов проекта
       // 1) Страницы (WEBSITE)
-      const website = await this.prisma.product.create({
+      const pages = await this.prisma.product.create({
         data: {
           name: 'Сайт',
           description: 'Управление страницами проекта',
@@ -215,7 +215,7 @@ export class ProjectsService {
               status: commonPageData.status as any,
               pageType: commonPageData.pageType as any,
               isHomePage: !!p.isHomePage,
-              product: { connect: { id: website.id } },
+              product: { connect: { id: pages.id } },
             },
           })
         )
