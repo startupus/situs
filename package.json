@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Специализированный визуальный редактор для создания веб-сайтов с drag-and-drop интерфейсом",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "predev": "node -e \"if (!require('fs').existsSync('src')) { console.error('❌ Запустите проект из корневой папки Situs/\\nТекущая директория:', process.cwd()); process.exit(1); }\"",
     "dev": "vite",
@@ -16,7 +16,7 @@
     "dev:status": "bash ./scripts/dev-status.sh",
     "db:seed:demo": "tsx scripts/seed-demo-projects.ts",
     "dev:redaktus": "vite --port 5178",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -32,12 +32,12 @@ const SectionContent: React.FC<SectionContentProps> = ({
   const [activeTab, setActiveTab] = useState<'basic' | 'roles'>('basic');
   return (
     <div>
-      {/* Заголовок */}
+      {/* Заголовок внутри контента не дублирует заголовок верхней панели */}
       <div className="mb-8">
-        <div className="flex items-center space-x-4 mb-6">
+        <div className="flex items-center space-x-4 mb-3">
           <div className="text-2xl">{section.icon}</div>
           <div>
-            <h1 className="text-3xl font-bold text-dark dark:text-white">{section.name}</h1>
+            {/* Убрали h1: заголовок раздела отрисовывается в верхнем хедере */}
             <p className="text-body-color dark:text-dark-6">{section.description}</p>
           </div>
         </div>
