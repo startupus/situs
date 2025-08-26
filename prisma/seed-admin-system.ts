@@ -111,7 +111,34 @@ async function main() {
     });
 
     // 5) admin-top (пока без элементов — опционально)
-    console.log('✅ System admin project seeded with menu types:', adminSidebar.name, adminTop.name);
+    // 6) Продукт ADMIN и базовые экраны
+    const adminProduct = await prisma.product.upsert({
+      where: { projectId_name: { projectId: project.id, name: 'Admin' } },
+      update: { type: 'ADMIN' as any },
+      create: {
+        projectId: project.id,
+        name: 'Admin',
+        description: 'Системный компонент админки',
+        type: 'ADMIN' as any,
+        settings: '{}',
+      },
+    });
+
+    const screens = [
+      { title: 'Проекты', alias: 'projects', path: '/projects', orderIndex: 0, icon: 'Folder' },
+      { title: 'Пользователи', alias: 'users', path: '/users', orderIndex: 1, icon: 'Users' },
+      { title: 'Маркетинг', alias: 'marketing', path: '/marketing', orderIndex: 2, icon: 'Megaphone' },
+      { title: 'Поддержка', alias: 'support', path: '/support', orderIndex: 3, icon: 'LifeBuoy' },
+    ];
+    for (const s of screens) {
+      await prisma.adminScreen.upsert({
+        where: { projectId_alias: { projectId: project.id, alias: s.alias } as any },
+        update: { title: s.title, path: s.path, orderIndex: s.orderIndex, icon: s.icon, isActive: true },
+        create: { ...s, projectId: project.id, productId: adminProduct.id, isActive: true },
+      });
+    }
+
+    console.log('✅ System admin project seeded with menu types and admin screens:', adminSidebar.name, adminTop.name);
   } catch (e) {
     console.error('❌ Error seeding system admin project:', e);
     process.exit(1);

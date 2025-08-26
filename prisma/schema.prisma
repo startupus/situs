@@ -189,6 +189,8 @@ model Project {
   name        String
   description String?
   slug        String      @unique  // Генерируется из названия
+  // Системный проект админки
+  isSystemAdmin Boolean   @default(false)
   
   // Domain settings - ключевое отличие от старой схемы
   domain       String?     // situs subdomain (example.situs.com)
@@ -219,6 +221,7 @@ model Project {
   media     Media[]
   menuTypes MenuType[] // Универсальная система меню
   customAccessLevels CustomAccessLevel[] // Кастомные уровни доступа
+  adminScreens AdminScreen[]
   
   @@map("projects")
 }
@@ -270,9 +273,34 @@ model Product {
   categories Category[] // Для ECOMMERCE продуктов
   webCategories WebCategory[] // Для WEBSITE: рубрики (категории) страниц
   items   Item[]      // Для ECOMMERCE продуктов
+  adminScreens AdminScreen[] // Для ADMIN: экраны админки
   
   @@unique([projectId, name])
   @@map("products")
+}
+/// Admin Screen — экран/страница админки, управляемая системным проектом
+model AdminScreen {
+  id          String   @id @default(cuid())
+  title       String
+  alias       String   // уникальный ключ экрана
+  path        String   // абсолютный путь, например "/projects" (динамические сегменты поддержим позже)
+  orderIndex  Int      @default(0)
+  isActive    Boolean  @default(true)
+  icon        String?  // имя иконки для UI
+  category    String?  // группа экранов (например, "management")
+
+  // Привязки
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([projectId, alias])
+  @@unique([projectId, path])
+  @@map("admin_screens")
 }
 
 model Page {
@@ -694,6 +722,7 @@ enum ProductType {
   BLOG        // Блог
   LANDING     // Лендинг
   API         // API сервис
+  ADMIN       // Системный компонент админки
 }
 
 enum ProductStatus {

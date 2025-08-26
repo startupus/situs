@@ -48,6 +48,23 @@ export class UiService {
     }
   }
 
+  /**
+   * Резолв из AdminScreen (системный продукт ADMIN в системном проекте)
+   */
+  private async resolveFromAdminScreens(path: string): Promise<{ title?: string; breadcrumbs?: Array<{ label: string; to?: string }> }> {
+    try {
+      const adminProject = await this.prisma.project.findUnique({ where: { slug: 'situs-admin' }, select: { id: true } });
+      if (!adminProject) return {};
+      const screen = await this.prisma.adminScreen.findFirst({ where: { projectId: adminProject.id, path } });
+      if (!screen) return {};
+      // Крошки: пока одноуровневые (можно расширить по category)
+      const breadcrumbs: Array<{ label: string; to?: string }> = [];
+      return { title: screen.title, breadcrumbs };
+    } catch {
+      return {};
+    }
+  }
+
   buildBreadcrumbs(projectId: string) {
     // Заглушка для будущей логики: вернём базовые элементы.
     return {
@@ -67,10 +84,10 @@ export class UiService {
 
     // 0) Сначала пробуем найти соответствие в системном меню админки
     if (!segs[0] || segs[0] !== 'projects') {
+      const fromScreens = await this.resolveFromAdminScreens(safePath);
+      if (fromScreens.title) return { title: fromScreens.title, breadcrumbs: fromScreens.breadcrumbs || [] };
       const fromAdmin = await this.resolveFromAdminMenu(safePath);
-      if (fromAdmin.title) {
-        return { title: fromAdmin.title, breadcrumbs: fromAdmin.breadcrumbs || [] };
-      }
+      if (fromAdmin.title) return { title: fromAdmin.title, breadcrumbs: fromAdmin.breadcrumbs || [] };
     }
 
     if (segs[0] === 'projects' && segs[1]) {
