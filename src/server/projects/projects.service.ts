@@ -298,6 +298,17 @@ export class ProjectsService {
       throw new NotFoundException('Проект не найден или у вас нет прав доступа');
     }
 
+    // Системные ограничения для системного проекта
+    if (this.isSystemProject(existingProject)) {
+      // Запрещаем изменение slug и ownerId системного проекта
+      if ((updateProjectDto as any).slug !== undefined) {
+        throw new ForbiddenException('Slug системного проекта нельзя изменять');
+      }
+      if ((updateProjectDto as any).ownerId !== undefined) {
+        throw new ForbiddenException('Владельца системного проекта нельзя изменять');
+      }
+    }
+
     // Проверяем уникальность имени если оно изменяется
     if (updateProjectDto.name && updateProjectDto.name !== existingProject.name) {
       const duplicateProject = await this.prisma.project.findFirst({ where: { name: updateProjectDto.name, ownerId: effectiveOwnerId, id: { not: id } } });
