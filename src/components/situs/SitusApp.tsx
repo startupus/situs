@@ -17,12 +17,14 @@ import AppearanceDemoPage from "./pages/settings/AppearanceDemoPage";
 import ProjectPage from "./projects/ProjectPage";
 
 import SitusProjectPages from "./pages/SitusProjectPages";
+import SitusProjectPagesSettings from "./pages/SitusProjectPagesSettings";
 import SitusProjectStore from "./pages/SitusProjectStore";
 import MenuManager from "../admin/MenuManager";
 import AcceptInvitation from "./pages/AcceptInvitation";
 import { LoginPage } from "../../auth/LoginPage";
 import ForgotPassword from "../auth/ForgotPassword";
 import Register from "../auth/Register";
+import ProjectSettingsPlaceholder from "./projects/settings/ProjectSettingsPlaceholder";
 
 const SitusApp: React.FC = () => {
   console.log("SitusApp component rendered");
@@ -43,8 +45,17 @@ const SitusApp: React.FC = () => {
         <Route path="projects" element={<SitusProjects />} />
         <Route path="projects/:projectId" element={<ProjectPage />} />
         <Route path="projects/:projectId/pages" element={<SitusProjectPages />} />
+        <Route path="projects/:projectId/pages/settings" element={<SitusProjectPagesSettings />} />
         <Route path="projects/:projectId/store" element={<SitusProjectStore />} />
         <Route path="projects/:projectId/menus" element={<MenuManager />} />
+        <Route path="projects/:projectId/settings" element={<ProjectSettingsPlaceholder title="Настройки проекта" />} />
+        <Route path="projects/:projectId/settings/menu" element={<MenuManager />} />
+        <Route path="projects/:projectId/settings/seo" element={<ProjectSettingsPlaceholder title="SEO настройки" />} />
+        <Route path="projects/:projectId/settings/domain" element={<ProjectSettingsPlaceholder title="Домен и публикация" />} />
+        <Route path="projects/:projectId/settings/theme" element={<ProjectSettingsPlaceholder title="Глобальная тема проекта" />} />
+        <Route path="projects/:projectId/settings/integrations" element={<ProjectSettingsPlaceholder title="Интеграции проекта" />} />
+        <Route path="projects/:projectId/settings/team" element={<ProjectSettingsPlaceholder title="Команда проекта" />} />
+        <Route path="projects/:projectId/settings/access" element={<ProjectSettingsPlaceholder title="Доступ и роли" />} />
         <Route path="projects/websites" element={<SitusWebsites />} />
         <Route path="projects/stores" element={<SitusStores />} />
         <Route path="projects/chatbots" element={<SitusChatbots />} />

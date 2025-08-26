@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FiAlertTriangle, FiFileText, FiCompass, FiPenTool, FiSearch, FiHome } from 'react-icons/fi';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProject, ProjectData, getProjectPages, PageData } from '../../../services/projectApi';
-import SiteMenuSettings from '../projects/SiteMenuSettings';
 import ProjectTrafficChart from './ProjectTrafficChart';
 import ProjectConversionWidget from './ProjectConversionWidget';
 import { apiClient } from '../../../api/client';
@@ -15,7 +14,7 @@ const SitusProjectPages: React.FC = () => {
   const [pages, setPages] = useState<PageData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'pages' | 'categories' | 'menu' | 'design' | 'seo'>('pages');
+  const [activeTab, setActiveTab] = useState<'pages' | 'categories'>('pages');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [creating, setCreating] = useState(false);
   const navigate = useNavigate();
@@ -46,11 +45,23 @@ const SitusProjectPages: React.FC = () => {
     loadProject();
   }, [projectId]);
 
-  // Слушатель на иконку настроек сайта из верхней панели — хук должен быть до любых ранних return
+  // Слушатель события открытия настроек
   useEffect(() => {
     const handler = (e: any) => {
-      const tab = e?.detail?.tab as 'menu' | 'design' | 'seo' | undefined;
-      setActiveTab(tab || 'menu');
+      const tab = e?.detail?.tab as 'design' | 'seo' | 'menu' | undefined;
+      if (!projectId) return;
+      if (tab === 'menu') {
+        navigate(`/projects/${projectId}/settings/menu`);
+        return;
+      }
+      if (tab === 'design') {
+        navigate(`/projects/${projectId}/settings/theme`);
+        return;
+      }
+      if (tab === 'seo') {
+        navigate(`/projects/${projectId}/settings/seo`);
+        return;
+      }
     };
     window.addEventListener('situs:open-pages-settings', handler);
     return () => window.removeEventListener('situs:open-pages-settings', handler);
@@ -155,25 +166,11 @@ const SitusProjectPages: React.FC = () => {
   const tabs = [
     { id: 'pages', name: 'Страницы', icon: <FiFileText aria-hidden /> },
     { id: 'categories', name: 'Категории', icon: <FiCompass aria-hidden /> },
-    { id: 'menu', name: 'Меню', icon: <FiCompass aria-hidden /> },
-    { id: 'design', name: 'Дизайн', icon: <FiPenTool aria-hidden /> },
-    { id: 'seo', name: 'SEO', icon: <FiSearch aria-hidden /> },
   ];
 
   return (
     <div className="p-6">
-      {/* Хлебные крошки */}
-      <nav className="flex items-center space-x-2 text-sm text-body-color dark:text-dark-6 mb-4">
-        <Link to="/projects" className="hover:text-primary transition-colors">
-          Проекты
-        </Link>
-        <span>/</span>
-        <Link to={`/projects/${projectId}`} className="hover:text-primary transition-colors">
-          {project.name}
-        </Link>
-        <span>/</span>
-        <span className="text-dark dark:text-white">Продукт: Страницы</span>
-      </nav>
+      {/* Крошки перенесены в верхнюю панель (SitusHeader). Дубликат в контенте удалён. */}
 
       {/* Вкладки настроек сайта */}
       <div className="border-b border-stroke dark:border-dark-3 mb-6">
@@ -305,143 +302,7 @@ const SitusProjectPages: React.FC = () => {
           </div>
         )}
 
-        {activeTab === 'menu' && (
-          <div className="p-6">
-            <h3 className="text-lg font-medium text-dark dark:text-white mb-4">Настройки меню</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Тип меню
-                </label>
-                <select className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white">
-                  <option>Горизонтальное</option>
-                  <option>Вертикальное</option>
-                  <option>Мега-меню</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Позиция
-                </label>
-                <select className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white">
-                  <option>Верх страницы</option>
-                  <option>Боковая панель</option>
-                  <option>Подвал</option>
-                </select>
-              </div>
-              <div className="pt-4">
-                <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-                  Сохранить настройки меню
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'design' && (
-          <div className="p-6">
-            <h3 className="text-lg font-medium text-dark dark:text-white mb-4">Настройки дизайна</h3>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Основной цвет
-                </label>
-                <input 
-                  type="color" 
-                  defaultValue="#3B82F6"
-                  className="w-16 h-10 border border-stroke dark:border-dark-3 rounded-lg"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Шрифт
-                </label>
-                <select className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white">
-                  <option>Inter</option>
-                  <option>Roboto</option>
-                  <option>Open Sans</option>
-                  <option>Lato</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Шаблон
-                </label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {['Минимализм', 'Корпоративный', 'Креативный'].map((template) => (
-                    <div key={template} className="border border-stroke dark:border-dark-3 rounded-lg p-3 cursor-pointer hover:border-primary transition-colors">
-                      <div className="aspect-video bg-gray-100 dark:bg-gray-600 rounded mb-2"></div>
-                      <p className="text-sm text-center text-dark dark:text-white">{template}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="pt-4">
-                <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-                  Применить дизайн
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'seo' && (
-          <div className="p-6">
-            <h3 className="text-lg font-medium text-dark dark:text-white mb-4">SEO настройки</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Заголовок сайта (Title)
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="Название вашего сайта"
-                  className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Описание сайта (Meta Description)
-                </label>
-                <textarea 
-                  rows={3}
-                  placeholder="Краткое описание вашего сайта"
-                  className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Ключевые слова
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="ключевые, слова, через, запятую"
-                  className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                  Домен
-                </label>
-                <div className="flex gap-2">
-                  <input 
-                    type="text" 
-                    placeholder="example.com"
-                    className="flex-1 px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
-                  />
-                  <button className="px-4 py-2 border border-stroke dark:border-dark-3 rounded-lg text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white transition-colors">
-                    Проверить
-                  </button>
-                </div>
-              </div>
-              <div className="pt-4">
-                <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-                  Сохранить SEO настройки
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Вкладки Дизайн/SEO и меню удалены. Настройки теперь доступны через кнопки и маршруты настроек проекта. */}
       </div>
 
       {/* Модальное окно создания страницы */}

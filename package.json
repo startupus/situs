@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Специализированный визуальный редактор для создания веб-сайтов с drag-and-drop интерфейсом",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "predev": "node -e \"if (!require('fs').existsSync('src')) { console.error('❌ Запустите проект из корневой папки Situs/\\nТекущая директория:', process.cwd()); process.exit(1); }\"",
     "dev": "vite",
