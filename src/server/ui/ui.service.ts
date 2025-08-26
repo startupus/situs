@@ -5,6 +5,49 @@ import { PrismaService } from '../database/prisma.service';
 export class UiService {
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * Резолв заголовка и крошек из системного меню админки (situs-admin → admin-sidebar)
+   */
+  private async resolveFromAdminMenu(path: string): Promise<{ title?: string; breadcrumbs?: Array<{ label: string; to?: string }> }> {
+    try {
+      const adminProject = await this.prisma.project.findUnique({ where: { slug: 'situs-admin' }, select: { id: true } });
+      if (!adminProject) return {};
+
+      const adminSidebar = await this.prisma.menuType.findUnique({
+        where: { projectId_name: { projectId: adminProject.id, name: 'admin-sidebar' } },
+        select: { id: true },
+      });
+      if (!adminSidebar) return {};
+
+      // Ищем пункт меню по точному совпадению externalUrl
+      const item = await this.prisma.menuItem.findFirst({
+        where: { menuTypeId: adminSidebar.id, isPublished: true, externalUrl: path },
+        include: { parent: true },
+      });
+      if (!item) return {};
+
+      const breadcrumbs: Array<{ label: string; to?: string }> = [];
+      // Построим крошки из родителей, лист (item) не включаем
+      let current = item.parentId
+        ? await this.prisma.menuItem.findUnique({ where: { id: item.parentId }, include: { parent: true } })
+        : null;
+      const stack: Array<{ label: string; to?: string }> = [];
+      while (current) {
+        const to = current.externalUrl || undefined;
+        stack.push({ label: current.title, to });
+        current = current.parentId
+          ? await this.prisma.menuItem.findUnique({ where: { id: current.parentId }, include: { parent: true } })
+          : null;
+      }
+      // Родители от корня к листу
+      stack.reverse().forEach((c) => breadcrumbs.push(c));
+
+      return { title: item.title, breadcrumbs };
+    } catch {
+      return {};
+    }
+  }
+
   buildBreadcrumbs(projectId: string) {
     // Заглушка для будущей логики: вернём базовые элементы.
     return {
@@ -21,6 +64,14 @@ export class UiService {
     const segs = safePath.split('/').filter(Boolean);
     let title = 'Раздел';
     const breadcrumbs: Array<{ label: string; to?: string }> = [];
+
+    // 0) Сначала пробуем найти соответствие в системном меню админки
+    if (!segs[0] || segs[0] !== 'projects') {
+      const fromAdmin = await this.resolveFromAdminMenu(safePath);
+      if (fromAdmin.title) {
+        return { title: fromAdmin.title, breadcrumbs: fromAdmin.breadcrumbs || [] };
+      }
+    }
 
     if (segs[0] === 'projects' && segs[1]) {
       const projectSlug = segs[1];
