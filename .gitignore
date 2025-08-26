@@ -9,3 +9,16 @@ coverage/
 temp*/
 .vscode/
 .idea/
+
+# Local runtime artifacts
+.api.pid
+.playwright-mcp/**
+server*.log
+*.log
+prisma/dev.db
+tsconfig.server.tsbuildinfo
+vite.log
+server.dist.log
+server-dist.log
+server.dev.log
+.dist/
