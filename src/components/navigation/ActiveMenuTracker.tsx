@@ -113,9 +113,9 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
       }
 
       // 4. Совпадение по компоненту и view
-      if (pathSegments.includes('website') || pathSegments.includes('pages')) {
-        const websiteMatch = allItems.find(item => item.component === 'Website');
-        if (websiteMatch) return websiteMatch;
+      if (pathSegments.includes('pages')) {
+        const pagesMatch = allItems.find(item => item.component === 'Website');
+        if (pagesMatch) return pagesMatch;
       }
 
       if (pathSegments.includes('store') || pathSegments.includes('shop')) {

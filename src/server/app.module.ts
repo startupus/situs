@@ -9,6 +9,7 @@ import { RealtimeModule } from './realtime/realtime.module';
 import { jwtConfig } from './config/jwt.config';
 import { databaseConfig } from './config/database.config';
 import { PagesModule } from './pages/pages.module';
+import { WebCategoriesModule } from './website/web-categories.module';
 import { ProductsModule } from './products/products.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { TenantResolverMiddleware } from './common/middleware/tenant-resolver.middleware';
@@ -33,6 +34,7 @@ import { rateLimitConfig } from './config/rate-limit.config';
 import { accessConfig } from './config/access.config';
 import { RolesGuard } from './common/guards/roles.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { UiModule } from './ui/ui.module';
 
 /**
  * Основной модуль приложения
@@ -59,6 +61,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     CommonModule,
     RealtimeModule, // Нужен для SSE
     PagesModule,
+    WebCategoriesModule,
 
     // Бизнес-модули
     ProjectsModule,
@@ -98,6 +101,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
     // Каналы связи
     CommunicationModule,
+    UiModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,

@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect as useReactEffect } from 'react';
 import { useProject } from "../../../contexts/ProjectContext";
-import { FiMenu, FiArrowLeft, FiSearch, FiBell, FiX, FiPlus, FiSettings } from "react-icons/fi";
+import { FiMenu, FiSearch, FiBell, FiX, FiPlus, FiSettings } from "react-icons/fi";
 import { projectsApi } from "../../../api/services/projects.api";
 
 interface SitusHeaderProps {
@@ -23,7 +24,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   // Извлекаем projectId из URL
   const projectId = useMemo(() => {
-    const match = location.pathname.match(/^\/projects\/([^\/]+)/);
+    const match = location.pathname.match(/^\/projects\/([^\/]*)/);
     return match?.[1] || null;
   }, [location.pathname]);
 
@@ -49,15 +50,30 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   // Вспомогательные вычисления для заголовка/навигации
   const sectionTitle = useMemo(() => {
-    // Спец-случай: страница продукта Website — показываем "Сайт"
-    if (/^\/projects\/[^/]+\/website/.test(location.pathname)) return 'Сайт';
+    // Спец-случай: страница продукта Pages — показываем "Страницы"
+    if (/^\/projects\/[^/]+\/pages\/settings/.test(location.pathname)) return 'Настройки страниц';
+    if (/^\/projects\/[^/]+\/pages(?!\/settings)/.test(location.pathname)) return 'Страницы';
     // Спец-случай: страница меню — показываем заголовок в зависимости от вкладки
     if (/^\/projects\/[^/]+\/menus/.test(location.pathname)) {
-      // Пытаемся определить активную вкладку из URL или localStorage
       const searchParams = new URLSearchParams(location.search);
       const tab = searchParams.get('tab');
       if (tab === 'types') return 'Управление типами меню';
       return 'Управление пунктами меню';
+    }
+    // Спец-случай: настройки проекта
+    if (/^\/projects\/[^/]+\/settings/.test(location.pathname)) {
+      const m = location.pathname.match(/^\/projects\/[^/]+\/settings\/([^/?#]+)/);
+      const subsection = m?.[1] || null;
+      const map: Record<string, string> = {
+        domain: 'Домен и публикация',
+        seo: 'SEO',
+        theme: 'Тема',
+        team: 'Команда',
+        integrations: 'Интеграции',
+        access: 'Доступ и роли',
+        menu: 'Меню',
+      };
+      return subsection ? (map[subsection] || 'Настройки проекта') : 'Настройки проекта';
     }
     if (isProjectPage) return headerProjectName || currentProject?.name || 'Проект';
     const path = location.pathname;
@@ -72,39 +88,30 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
     return 'Раздел';
   }, [isProjectPage, headerProjectName, currentProject?.name, location.pathname, location.search]);
 
-  const backHref = useMemo(() => {
-    // Спец-случай: страница меню — возвращаемся в проект
-    if (/^\/projects\/[^/]+\/menus/.test(location.pathname)) {
-      const match = location.pathname.match(/^\/projects\/([^/]+)/);
-      return match ? `/projects/${match[1]}` : '/projects';
-    }
-    if (isProjectPage) return '/projects';
-    if (location.pathname.startsWith('/demo/components')) return '/section-settings/appearance';
-    if (location.pathname !== '/') return '/';
-    return undefined;
-  }, [isProjectPage, location.pathname]);
-
-  // Настройки доступны в левом сайдбаре — отдельной иконки в хедере не нужно
-
   // Правило отображения кнопки создания по разделам
   const canCreateHere = useMemo(() => {
     if (location.pathname.startsWith('/projects')) return true;
     if (location.pathname.startsWith('/users')) {
-      // На странице пользователей кнопка + доступна только на вкладках "Пользователи" и "Роли"
       const searchParams = new URLSearchParams(location.search);
       const tab = searchParams.get('tab');
-      return tab === 'users' || tab === 'roles' || !tab; // по умолчанию вкладка "users"
+      return tab === 'users' || tab === 'roles' || !tab;
     }
-    // можно расширить: orders etc.
     return false;
   }, [location.pathname, location.search]);
-  const isWebsitePage = useMemo(() => /^\/projects\/[^/]+\/website/.test(location.pathname), [location.pathname]);
+  const isPagesPage = useMemo(() => /^\/projects\/[^/]+\/pages/.test(location.pathname), [location.pathname]);
+  const isProjectSettings = useMemo(() => /^\/projects\/[^/]+\/settings/.test(location.pathname), [location.pathname]);
+  const settingsSubsection = useMemo(() => {
+    const m = location.pathname.match(/^\/projects\/[^/]+\/settings\/([^/?#]+)/);
+    return m?.[1] || null;
+  }, [location.pathname]);
 
   // Состояние поиска в верхней панели
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchWrapperRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const [breadcrumbs, setBreadcrumbs] = useState<Array<{ label: string; to?: string }>>([]);
+  const [metaTitle, setMetaTitle] = useState<string | null>(null);
 
   const closeSearch = () => {
     setIsSearchOpen(false);
@@ -113,7 +120,6 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   useEffect(() => {
     if (isSearchOpen) {
-      // Фокус и обработка ESC
       const t = setTimeout(() => searchInputRef.current?.focus(), 50);
       const onKey = (e: KeyboardEvent) => {
         if (e.key === 'Escape') closeSearch();
@@ -138,6 +144,44 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
     return () => document.removeEventListener('mousedown', onClick);
   }, [isSearchOpen]);
 
+  // Загружаем крошки/метаданные из бэка для консистентности (полный переход на API /api/ui/meta)
+  useReactEffect(() => {
+    const load = async () => {
+      const path = location.pathname;
+      try {
+        const res = await fetch(`/api/ui/meta?path=${encodeURIComponent(path)}`);
+        if (!res.ok) throw new Error(String(res.status));
+        const data = await res.json();
+        const apiCrumbs = Array.isArray(data?.breadcrumbs) ? data.breadcrumbs : [];
+        const apiTitle = typeof data?.title === 'string' && data.title.trim() ? data.title.trim() : null;
+        if (apiCrumbs.length === 0 && path.startsWith('/projects') && projectId) {
+          setBreadcrumbs([
+            { label: 'Проекты', to: '/projects' },
+            { label: headerProjectName || currentProject?.name || 'Проект', to: `/projects/${projectId}` },
+          ]);
+        } else {
+          setBreadcrumbs(apiCrumbs);
+        }
+        setMetaTitle(apiTitle);
+      } catch {
+        // fallback на локальную базовую логику (без текущего leaf)
+        const parts: Array<{ label: string; to?: string }> = [];
+        if (path.startsWith('/projects') && projectId) {
+          parts.push({ label: 'Проекты', to: '/projects' });
+          parts.push({ label: headerProjectName || currentProject?.name || 'Проект', to: `/projects/${projectId}` });
+          if (/^\/projects\/[^/]+\/settings\//.test(path)) {
+            parts.push({ label: 'Настройки', to: `/projects/${projectId}/settings` });
+          } else if (/^\/projects\/[^/]+\/pages\//.test(path)) {
+            parts.push({ label: 'Страницы', to: `/projects/${projectId}/pages` });
+          }
+        }
+        setBreadcrumbs(parts);
+        setMetaTitle(null);
+      }
+    };
+    load();
+  }, [location.pathname, projectId, headerProjectName, currentProject?.name]);
+
   const onSubmitSearch: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const q = searchQuery.trim();
@@ -145,17 +189,19 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
       closeSearch();
       return;
     }
-    // Навигация к странице с результатами поиска текущего раздела
     const base = isProjectPage ? `/projects/${projectId}` : `/${(location.pathname.split('/')[1] || '').replace(/\/$/, '')}`;
     const target = base && base !== '/' ? `${base}?search=${encodeURIComponent(q)}` : `/projects?search=${encodeURIComponent(q)}`;
     navigate(target);
-    // Оставляем строку поиска открытой, но убираем фокус для визуального отклика
     searchInputRef.current?.blur();
   };
+  // Небольшая корректировка отступов хедера, чтобы добавить строку крошек и не увеличивать высоту заметно
+  const showProjectBreadcrumbs = useMemo(() => /^\/projects\/[^/]+/.test(location.pathname), [location.pathname]);
+  const headerPaddingY = showProjectBreadcrumbs ? 'py-3' : 'py-4';
+
   return (
     <>
       <header className="w-full bg-white dark:bg-dark border-b border-stroke dark:border-dark-3">
-        <div className="relative flex items-center justify-between bg-white dark:bg-dark min-h-[64px] py-4 pl-[70px] pr-4 md:pl-20 md:pr-8 xl:pl-8">
+        <div className={`relative flex items-center justify-between bg-white dark:bg-dark min-h-[64px] ${headerPaddingY} pl-[70px] pr-4 md:pl-20 md:pr-8 xl:pl-8`}>
           <button
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
@@ -169,16 +215,27 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
           <div className="hidden sm:block w-full">
             <div className={`flex items-center justify-between w-full transition-opacity duration-150 ${isSearchOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
             >
-              {/* Левая зона: стрелка назад (если не главная) + заголовок раздела */}
-              <div className="flex items-center gap-3 min-w-0">
-                {backHref && (
-                  <Link to={backHref} className="text-body-color hover:text-primary dark:text-dark-6" title="Назад">
-                    <FiArrowLeft aria-hidden />
-                  </Link>
-                )}
+              {/* Левая зона: заголовок и компактные крошки для страниц проекта */}
+              <div className="flex flex-col gap-0.5 min-w-0">
                 <h1 className="text-xl md:text-2xl font-semibold text-dark dark:text-white truncate">
-                  {sectionTitle}
+                  {metaTitle || sectionTitle}
                 </h1>
+                {showProjectBreadcrumbs && (
+                  <nav className="hidden md:flex items-center gap-1 text-xs text-body-color dark:text-dark-6 leading-none truncate" aria-label="Хлебные крошки">
+                    {breadcrumbs.map((b, idx) => (
+                      <React.Fragment key={idx}>
+                        {idx > 0 && <span className="shrink-0">/</span>}
+                        {b.to ? (
+                          <Link to={b.to} className="hover:text-primary transition-colors truncate max-w-[240px]">
+                            {b.label}
+                          </Link>
+                        ) : (
+                          <span className="truncate shrink-0">{b.label}</span>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </nav>
+                )}
               </div>
 
               {/* Правая зона: поиск, уведомления, добавить, аккаунт */}
@@ -192,13 +249,15 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                   <FiSearch aria-hidden />
                 </button>
                 {/* Кнопка Добавить в акценте — крайняя справа */}
-                {isWebsitePage && (
+                {isPagesPage && (
                   <button
                     onClick={() => {
-                      window.dispatchEvent(new CustomEvent('situs:open-website-settings', { detail: { tab: 'menu' } }));
+                      if (projectId) {
+                        navigate(`/projects/${projectId}/pages/settings`);
+                      }
                     }}
                     className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-stroke text-body-color hover:text-primary hover:border-primary dark:border-dark-3 dark:text-dark-6 transition-colors"
-                    title="Настройки сайта"
+                    title="Настройки компонента Страницы"
                   >
                     <FiSettings aria-hidden />
                   </button>
@@ -207,30 +266,21 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                   <button
                     onClick={() => {
                       if (location.pathname.includes('/menus')) {
-                        // Определяем активную вкладку из URL
                         const searchParams = new URLSearchParams(location.search);
                         const tab = searchParams.get('tab');
-                        
                         if (tab === 'types') {
-                          // На вкладке "Типы меню" создаем тип меню
                           window.dispatchEvent(new CustomEvent('situs:create-menu-type'));
                         } else {
-                          // На вкладке "Пункты меню" создаем пункт меню
                           window.dispatchEvent(new CustomEvent('situs:create-menu-item'));
                         }
                       } else if (location.pathname.startsWith('/users')) {
-                        // Определяем активную вкладку из URL
                         const searchParams = new URLSearchParams(location.search);
                         const tab = searchParams.get('tab');
-                        
                         if (tab === 'roles') {
-                          // На вкладке "Роли и права" создаем роль
                           window.dispatchEvent(new CustomEvent('situs:create-role'));
                         } else if (tab === 'users' || !tab) {
-                          // На вкладке "Пользователи" создаем пользователя напрямую
                           window.dispatchEvent(new CustomEvent('situs:create-user'));
                         }
-                        // На вкладках "Приглашения" и "Настройки" кнопка + не работает
                       } else if (location.pathname.startsWith('/projects')) {
                         window.dispatchEvent(new CustomEvent('situs:create-project'));
                       }

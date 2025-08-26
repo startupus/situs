@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
-import BreadcrumbsBar from '../../navigation/BreadcrumbsBar';
+import { FiArrowLeft, FiMoreVertical, FiGlobe, FiSettings, FiMenu as FiMenuIcon, FiSearch, FiEye } from 'react-icons/fi';
+import ProjectAnalytics from './ProjectAnalytics';
+import ProjectKpiStrip from './ProjectKpiStrip';
 import { projectsApi } from '../../../api/services/projects.api';
 import { ProjectData } from '../../../types/project';
 import { useProject } from '../../../contexts/ProjectContext';
@@ -31,12 +32,7 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
 
   // Локальные списки: верхние плитки (продукты) и виджеты (ниже)
   const [productsOrder, setProductsOrder] = useState<Array<{ id: string; name: string; type: string }>>([]);
-  const [widgetsOrder, setWidgetsOrder] = useState<Array<{ id: string; title: string }>>([
-    { id: 'w-currency', title: 'Курсы валют' },
-    { id: 'w-weather', title: 'Погода' },
-    { id: 'w-clock-moscow', title: 'Часы: Москва' },
-    { id: 'w-clock-hk', title: 'Часы: Гонконг' },
-  ]);
+  // Widgets section removed per product vision
 
   useEffect(() => {
     const loadProject = async () => {
@@ -46,7 +42,11 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
       try {
         const response = await projectsApi.getProject(projectId);
         setProject(response as any);
-        const prods = ((response as any)?.products || []).map((p: any) => ({ id: p.id, name: p.type, type: p.type }));
+        const prods = ((response as any)?.products || []).map((p: any) => ({ 
+          id: p.id, 
+          name: p.type === 'WEBSITE' ? 'PAGES' : p.type, 
+          type: p.type 
+        }));
         setProductsOrder(prods);
       } catch (error) {
         console.error('Ошибка загрузки проекта:', error);
@@ -72,7 +72,7 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
     const go = () => {
       if (!projectId) return;
-      if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/website`);
+      if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/pages`);
       else if (item.type === 'ECOMMERCE') navigate(`/projects/${projectId}/store`);
       else navigate(`/projects/${projectId}`);
     };
@@ -97,23 +97,14 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
             {...attributes}
             {...listeners}
           >
-            ⋮⋮
+            <FiMoreVertical aria-hidden />
           </button>
         </div>
       </div>
     );
   };
 
-  const SortableWidget: React.FC<{ item: { id: string; title: string } }> = ({ item }) => {
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
-    const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
-    return (
-      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 shadow-sm cursor-grab active:cursor-grabbing h-32">
-        <div className="text-sm text-body-color dark:text-dark-6">Виджет</div>
-        <div className="text-lg font-semibold text-dark dark:text-white">{item.title}</div>
-      </div>
-    );
-  };
+  // Widgets UI removed
 
   const onTilesDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -124,13 +115,7 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     // TODO: при необходимости сохранение порядка на бэке аналогично списку проектов (settings.orderIndex на уровне продукта)
   };
 
-  const onWidgetsDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIndex = widgetsOrder.findIndex((w) => w.id === active.id);
-    const newIndex = widgetsOrder.findIndex((w) => w.id === over.id);
-    setWidgetsOrder(arrayMove(widgetsOrder, oldIndex, newIndex));
-  };
+  // Widgets logic removed
 
   if (loading) {
     return (
@@ -169,28 +154,14 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
 
   return (
     <>
-      {/* Хлебные крошки */}
-      <BreadcrumbsBar 
-        projectId={projectId!}
-        menuTypeName="main"
-        homeTitle="Проекты"
-        homeUrl="/projects"
-      />
+      {/* KPI без заголовка вместо хлебных крошек */}
+      <ProjectKpiStrip project={project} />
       
       <div className="p-6 space-y-8">
       {/* Верх: плитки компонентов проекта (перетаскиваемые) */}
       <section>
-        <div className="flex justify-between items-center mb-4">
+        <div className="mb-4">
           <h2 className="text-lg font-semibold text-dark dark:text-white">Компоненты проекта</h2>
-          <Link
-            to={`/projects/${projectId}/menus`}
-            className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700 transition-colors"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
-              <path d="M2 4h12v1H2V4zm0 3h12v1H2V7zm0 3h12v1H2v-1z"/>
-            </svg>
-            Управление меню
-          </Link>
         </div>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onTilesDragEnd}>
           <SortableContext items={productsOrder.map((p) => p.id)} strategy={rectSortingStrategy}>
@@ -204,20 +175,69 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
         </DndContext>
       </section>
 
-      {/* Низ: дашборд‑виджеты с перетаскиванием (референс главной) */}
+      {/* Quick Start (для новых/неполностью настроенных проектов) */}
       <section>
-        <h2 className="text-lg font-semibold text-dark dark:text-white mb-4">Виджеты</h2>
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onWidgetsDragEnd}>
-          <SortableContext items={widgetsOrder.map((w) => w.id)} strategy={rectSortingStrategy}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {widgetsOrder.map((w) => (
-                <SortableWidget key={w.id} item={w} />
-              ))}
-            </div>
-          </SortableContext>
-          <DragOverlay />
-        </DndContext>
+        <h2 className="text-lg font-semibold text-dark dark:text-white mb-3">Быстрый старт</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <Link to={`/projects/${projectId}/settings/domain`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiGlobe aria-hidden /> Домен и публикация</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Подключите домен и включите публикацию</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/theme`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiSettings aria-hidden /> Глобальная тема</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Выберите цвета, шрифты и стиль</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/menu`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiMenuIcon aria-hidden /> Меню проекта</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Создайте главное навигационное меню</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/seo`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiSearch aria-hidden /> SEO настройки</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Title, Description, индексация</p>
+          </Link>
+        </div>
       </section>
+
+      {/* KPI строка и аналитика проекта */}
+      <section>
+        <ProjectAnalytics project={project} showOverview={false} />
+      </section>
+
+      {/* Блок настроек проекта (системные функции) */}
+      <section>
+        <h2 className="text-lg font-semibold text-dark dark:text-white mb-3">Настройки проекта</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <Link to={`/projects/${projectId}/settings/domain`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiGlobe aria-hidden /> Домен и доступ</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Поддомены, кастомный домен, публикация</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/menu`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiMenuIcon aria-hidden /> Меню проекта</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Типы меню, пункты, иерархия</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/seo`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSearch aria-hidden /> SEO</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Мета‑данные, robots, sitemap</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/theme`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSettings aria-hidden /> Тема</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Цвета, типографика, компоненты</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/integrations`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiEye aria-hidden /> Интеграции</div>
+            <p className="text-xs text-body-color dark:text-dark-6">CRM, аналитика, платежи</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/team`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSettings aria-hidden /> Команда</div>
+            <p className="text-xs text-body-color dark:text-dark-6">Участники и приглашения</p>
+          </Link>
+          <Link to={`/projects/${projectId}/settings/access`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
+            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSettings aria-hidden /> Доступ и роли</div>
+            <p className="text-xs text-body-color dark:text-dark-6">ACL, уровни видимости</p>
+          </Link>
+        </div>
+      </section>
+      
       </div>
     </>
   );
