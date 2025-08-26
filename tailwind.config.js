@@ -134,5 +134,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("./Upload/react-pro-components-main/plugin.js"),
+  ],
 } 

@@ -33,7 +33,7 @@ export class WebCategoriesController {
     try {
       const categories = await this.webCategoriesService.getProjectCategories(
         projectId,
-        (req as any).user.id,
+        (req as any)?.user?.id ?? 'owner-dev',
         includeInactive === 'true',
       );
       return { success: true, categories };

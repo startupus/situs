@@ -34,6 +34,7 @@ import { rateLimitConfig } from './config/rate-limit.config';
 import { accessConfig } from './config/access.config';
 import { RolesGuard } from './common/guards/roles.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { UiModule } from './ui/ui.module';
 
 /**
  * Основной модуль приложения
@@ -100,6 +101,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
     // Каналы связи
     CommunicationModule,
+    UiModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,

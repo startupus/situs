@@ -270,11 +270,6 @@ import {
 
 ## 📋 ДЕТАЛЬНЫЙ ПЛАН ПО КАТЕГОРИЯМ
 
-### 1. Blog Components (10 компонентов)
-- **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Blog/`
-- **Цель:** `src/components/ui/core/application/Blog/`
-- **Theme файл:** `src/components/ui/application/ThemeBlogs.tsx`
-- **Компоненты:** Blog1-8, BlogDetails1-2
 
 ### 2. Card Components (16 компонентов) 
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Card/`
@@ -294,11 +289,7 @@ import {
 - **Theme файл:** `src/components/ui/application/ThemeErrors.tsx`
 - **Компоненты:** Error1-8
 
-### 5. Footer Components (7 компонентов)
-- **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Footer/`
-- **Цель:** `src/components/ui/core/application/Footer/`
-- **Theme файл:** `src/components/ui/application/ThemeFooters.tsx`
-- **Компоненты:** Footer1-7
+
 
 ### 6. Modal Components (11 компонентов)
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Modal/`

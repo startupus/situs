@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FiGrid,
@@ -8,7 +8,12 @@ import {
   FiUsers,
   FiLifeBuoy,
   FiSettings,
+  FiGlobe,
+  FiMenu as FiMenuIcon,
+  FiSearch,
+  FiArrowLeft,
 } from "react-icons/fi";
+import ProjectSidebarOverlay from "./ProjectSidebarOverlay";
 
 interface SitusNavItem {
   divider: boolean;
@@ -28,6 +33,24 @@ interface SitusSidebarProps {
 
 const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen, isOpen, onClose }) => {
   const location = useLocation();
+  const projectId = useMemo(() => {
+    const m = location.pathname.match(/^\/projects\/([^\/]+)/);
+    return m?.[1] || null;
+  }, [location.pathname]);
+  const [overlayPanel, setOverlayPanel] = useState<"overview" | "settings" | null>(null);
+
+  // Системное вычисление ссылки "назад" (поднятие на уровень выше по URL)
+  const backTarget = useMemo(() => {
+    const pathOnly = location.pathname.split('?')[0].split('#')[0];
+    const segments = pathOnly.split('/').filter(Boolean);
+    if (segments.length === 0) return "/";
+    // если на корне списка проектов → назад на дашборд
+    if (segments.length === 1) return "/";
+    // отсекаем последний сегмент пути
+    const parentSegments = segments.slice(0, -1);
+    const parentPath = '/' + parentSegments.join('/');
+    return parentPath || "/";
+  }, [location.pathname]);
 
   const navList: SitusNavItem[] = [
     {
@@ -98,50 +121,122 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
       >
         <div>
           <div className="px-6 pt-6 pb-6">
-            <Link to="/">
-              <div className="h-8 w-8 bg-primary rounded flex items-center justify-center text-white font-bold text-lg">
-                S
-              </div>
-            </Link>
+            {projectId ? (
+              <Link to={backTarget} title="Назад" className="h-8 w-8 rounded flex items-center justify-center border border-stroke dark:border-dark-3 text-dark dark:text-white hover:bg-gray-100 dark:hover:bg-dark-3">
+                <FiArrowLeft aria-hidden />
+              </Link>
+            ) : (
+              <Link to="/">
+                <div className="h-8 w-8 bg-primary rounded flex items-center justify-center text-white font-bold text-lg">
+                  S
+                </div>
+              </Link>
+            )}
           </div>
           <nav>
             <ul>
-              {navList.map((item, index) =>
-                item?.divider === false ? (
-                  <li key={index} className="group relative">
-                    <Link
-                      to={item.link || "#"}
-                      className={`text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
-                        location.pathname === item.link ? "border-primary bg-primary/5 text-primary" : ""
-                      }`}
-                    >
-                      <span>{item.icon}</span>
-                    </Link>
-
-                    <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">
-                      <span className="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white">
-                        <svg
-                          width="9"
-                          height="12"
-                          viewBox="0 0 9 12"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="fill-current"
+              {!projectId && navList.map((item, index) => {
+                if (item?.divider === false) {
+                  const isProjects = item.link === "/projects";
+                  const isActive = isProjects ? location.pathname.startsWith("/projects") : location.pathname === item.link;
+                  return (
+                    <React.Fragment key={index}>
+                      <li className="group relative">
+                        <Link
+                          to={item.link || "#"}
+                          className={`text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
+                            isActive ? "border-primary bg-primary/5 text-primary" : ""
+                          }`}
                         >
-                          <path d="M1.23134 6.8294C0.642883 6.43303 0.642882 5.56697 1.23133 5.1706L7.44134 0.987699C8.10557 0.540292 9 1.01624 9 1.81709L9 10.1829C9 10.9838 8.10557 11.4597 7.44134 11.0123L1.23134 6.8294Z" />
-                        </svg>
-                      </span>
-                      {item.text}
-                    </span>
-                  </li>
-                ) : (
+                          <span>{item.icon}</span>
+                        </Link>
+                        <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">
+                          <span className="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white">
+                            <svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="fill-current">
+                              <path d="M1.23134 6.8294C0.642883 6.43303 0.642882 5.56697 1.23133 5.1706L7.44134 0.987699C8.10557 0.540292 9 1.01624 9 1.81709L9 10.1829C9 10.9838 8.10557 11.4597 7.44134 11.0123L1.23134 6.8294Z" />
+                            </svg>
+                          </span>
+                          {item.text}
+                        </span>
+                      </li>
+                      {projectId && isProjects && (
+                        <>
+                          <li className="group relative">
+                            <Link
+                              to={`/projects/${projectId}`}
+                              className={`text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
+                                location.pathname === `/projects/${projectId}` ? "border-primary bg-primary/5 text-primary" : ""
+                              }`}
+                            >
+                              <span><FiGrid size={18} aria-hidden /></span>
+                            </Link>
+                            <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">Обзор проекта</span>
+                          </li>
+                          <li className="group relative">
+                            <Link
+                              to={`/projects/${projectId}/settings/menu`}
+                              className={`text-body-color hover;border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
+                                location.pathname.startsWith(`/projects/${projectId}/settings`) ? "border-primary bg-primary/5 text-primary" : ""
+                              }`}
+                            >
+                              <span><FiSettings size={18} aria-hidden /></span>
+                            </Link>
+                            <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">Настройки проекта</span>
+                          </li>
+                        </>
+                      )}
+                    </React.Fragment>
+                  );
+                }
+                return (
                   <li key={index}>
                     <div className="bg-stroke dark:bg-dark-3 mx-6 my-3 h-[1px]"></div>
                   </li>
-                ),
+                );
+              })}
+              {projectId && (
+                <>
+                  {/* Проектный режим: только меню проекта */}
+                  <li className="group relative" onMouseEnter={() => setOverlayPanel("overview")}>
+                    <Link
+                      to={`/projects/${projectId}`}
+                      className={`text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
+                        location.pathname === `/projects/${projectId}` ? "border-primary bg-primary/5 text-primary" : ""
+                      }`}
+                    >
+                      <span><FiGrid size={18} aria-hidden /></span>
+                    </Link>
+                    <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">Компоненты</span>
+                  </li>
+                  <li className="group relative">
+                    <Link
+                      to={`/projects/${projectId}/menus`}
+                      className={`text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
+                        location.pathname.startsWith(`/projects/${projectId}/menus`) ? "border-primary bg-primary/5 text-primary" : ""
+                      }`}
+                    >
+                      <span><FiMenuIcon size={18} aria-hidden /></span>
+                    </Link>
+                    <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">Меню</span>
+                  </li>
+                  <li className="group relative" onMouseEnter={() => setOverlayPanel("settings")}>
+                    <Link
+                      to={`/projects/${projectId}/settings/domain`}
+                      className={`text-body-color hover;border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200 ${
+                        location.pathname.startsWith(`/projects/${projectId}/settings`) ? "border-primary bg-primary/5 text-primary" : ""
+                      }`}
+                    >
+                      <span><FiSettings size={18} aria-hidden /></span>
+                    </Link>
+                    <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">Настройки</span>
+                  </li>
+                </>
               )}
             </ul>
           </nav>
+          {projectId && overlayPanel && (
+            <ProjectSidebarOverlay projectId={projectId} panel={overlayPanel} onClose={() => setOverlayPanel(null)} />)
+          }
         </div>
 
         {/* Аватар фиксированно прижат к низу сайдбара и всегда на виду */}
