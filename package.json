@@ -52,6 +52,7 @@
     "db:reset": "prisma migrate reset --force",
     "db:seed:startapus": "tsx scripts/seed-startapus.ts",
     "db:seed": "tsx prisma/seed.ts",
+    "db:seed:admin": "tsx prisma/seed-admin-system.ts",
     "db:studio": "prisma studio",
     "db:deploy": "prisma migrate deploy",
     "dev:api": "tsx --tsconfig tsconfig.server.json src/server/main.ts",
