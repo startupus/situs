@@ -25,6 +25,7 @@ import { LoginPage } from "../../auth/LoginPage";
 import ForgotPassword from "../auth/ForgotPassword";
 import Register from "../auth/Register";
 import ProjectSettingsPlaceholder from "./projects/settings/ProjectSettingsPlaceholder";
+import ProjectIntegrationsPage from "./projects/settings/ProjectIntegrationsPage";
 
 const SitusApp: React.FC = () => {
   console.log("SitusApp component rendered");
@@ -53,7 +54,7 @@ const SitusApp: React.FC = () => {
         <Route path="projects/:projectId/settings/seo" element={<ProjectSettingsPlaceholder title="SEO настройки" />} />
         <Route path="projects/:projectId/settings/domain" element={<ProjectSettingsPlaceholder title="Домен и публикация" />} />
         <Route path="projects/:projectId/settings/theme" element={<ProjectSettingsPlaceholder title="Глобальная тема проекта" />} />
-        <Route path="projects/:projectId/settings/integrations" element={<ProjectSettingsPlaceholder title="Интеграции проекта" />} />
+        <Route path="projects/:projectId/settings/integrations" element={<ProjectIntegrationsPage />} />
         <Route path="projects/:projectId/settings/team" element={<ProjectSettingsPlaceholder title="Команда проекта" />} />
         <Route path="projects/:projectId/settings/access" element={<ProjectSettingsPlaceholder title="Доступ и роли" />} />
         <Route path="projects/websites" element={<SitusWebsites />} />

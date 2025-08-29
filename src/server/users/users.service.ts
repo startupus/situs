@@ -92,7 +92,8 @@ export class UsersService {
     sortOrder?: string;
     page?: number;
     limit?: number;
-  }) {
+    projectId?: string;
+  }, principal?: { id?: string; globalRole?: GlobalRole }) {
     const { search, role, status, sortBy = 'createdAt', sortOrder = 'desc', page = 1, limit = 20 } = filters;
 
     // Построение условий фильтрации
@@ -128,8 +129,30 @@ export class UsersService {
       orderBy.createdAt = sortOrder;
     }
 
+    // Ограничение доступа: BUSINESS/AGENCY/STAFF видят только пользователей проектов, где есть доступ
+    if (principal && principal.globalRole !== GlobalRole.SUPER_ADMIN) {
+      // Пользователи, у которых есть ProjectAccess в проектах текущего пользователя/аккаунта
+      const accessibleProjectIds = await this.prisma.projectAccess.findMany({
+        where: { userId: principal.id },
+        select: { projectId: true },
+      }).then(rows => rows.map(r => r.projectId));
+      if (accessibleProjectIds.length > 0) {
+        where.OR = (where.OR || []).concat([
+          { projectAccesses: { some: { projectId: { in: accessibleProjectIds } } } } as any,
+        ]);
+      } else {
+        // если нет доступных проектов — показываем пусто
+        where.id = '__none__';
+      }
+    }
+
+    // Фильтр по projectId: только пользователи, имеющие доступ к этому проекту
+    if (filters.projectId) {
+      where.projectAccesses = { some: { projectId: filters.projectId } } as any;
+    }
+
     // Подсчет общего количества
-    const total = await this.prisma.user.count({ where });
+    const total = await this.prisma.user.count({ where } as any);
 
     // Получение пользователей с пагинацией
     const users = await this.prisma.user.findMany({
@@ -139,6 +162,7 @@ export class UsersService {
       take: limit,
       include: {
         ownedProjects: true,
+        projectAccesses: true,
         authProviders: true,
         groups: {
           include: {
@@ -173,6 +197,26 @@ export class UsersService {
     });
 
     return user ? this.enrichUserData(this.excludePassword(user)) : null;
+  }
+
+  /**
+   * DEV fallback: вернуть дефолтного пользователя, если нет аутентификации
+   * Предпочтительно SUPER_ADMIN, иначе самый ранний пользователь
+   */
+  async getDefaultUser(): Promise<User | null> {
+    // Сначала пробуем SUPER_ADMIN
+    const admin = await this.prisma.user.findFirst({
+      where: { globalRole: 'SUPER_ADMIN' as any },
+      orderBy: { createdAt: 'asc' },
+      include: { ownedProjects: true },
+    });
+    if (admin) return this.enrichUserData(this.excludePassword(admin));
+    // Иначе любого первого по createdAt
+    const anyUser = await this.prisma.user.findFirst({
+      orderBy: { createdAt: 'asc' },
+      include: { ownedProjects: true },
+    });
+    return anyUser ? this.enrichUserData(this.excludePassword(anyUser)) : null;
   }
 
   /**

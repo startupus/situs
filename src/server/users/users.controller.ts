@@ -69,7 +69,7 @@ export class UsersController {
       }
     }
   })
-  findAll(
+  async findAll(
     @Query('search') search?: string,
     @Query('role') role?: string,
     @Query('status') status?: string,
@@ -77,6 +77,8 @@ export class UsersController {
     @Query('sortOrder') sortOrder?: 'asc' | 'desc',
     @Query('page') page?: string,
     @Query('limit') limit?: string,
+    @Query('projectId') projectId?: string,
+    @Request() req?: ExpressRequest,
   ) {
     const filters = {
       search,
@@ -86,8 +88,10 @@ export class UsersController {
       sortOrder: sortOrder || 'desc',
       page: parseInt(page || '1', 10),
       limit: parseInt(limit || '20', 10),
+      projectId,
     };
-    return this.usersService.findAllWithFilters(filters);
+    const principal = (req as any)?.user || null;
+    return this.usersService.findAllWithFilters(filters as any, principal as any);
   }
 
   /**
@@ -117,65 +121,28 @@ export class UsersController {
   /**
    * Получение настроек пользователей
    */
-  @Get('settings')
-  @ApiOperation({ summary: 'Получение настроек пользователей' })
-  @ApiResponse({ 
-    status: 200, 
-    description: 'Настройки пользователей',
-    schema: {
-      type: 'object',
-      properties: {
-        registration: {
-          type: 'object',
-          properties: {
-            allowSelfRegistration: { type: 'boolean' },
-            requireEmailVerification: { type: 'boolean' },
-            defaultRole: { type: 'string' },
-          }
-        },
-        authentication: {
-          type: 'object',
-          properties: {
-            enableTwoFactor: { type: 'boolean' },
-            sessionTimeout: { type: 'number' },
-            allowedProviders: { type: 'array', items: { type: 'string' } },
-          }
-        },
-        notifications: {
-          type: 'object',
-          properties: {
-            emailNotifications: { type: 'boolean' },
-            invitationNotifications: { type: 'boolean' },
-          }
-        },
-        privacy: {
-          type: 'object',
-          properties: {
-            showOnlineStatus: { type: 'boolean' },
-            allowProfileViewing: { type: 'boolean' },
-          }
-        }
-      }
-    }
-  })
-  getUserSettings() {
-    return this.usersService.getUserSettings();
-  }
+  // Удалён дублирующийся GET /users/settings — ниже есть защищённая версия
 
   /**
    * Получение текущего пользователя
    */
   @Get('me')
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Получение профиля текущего пользователя' })
   @ApiResponse({ 
     status: 200, 
-    description: 'Профиль пользователя',
-    type: User,
+    description: 'Профиль пользователя (обернутый в стандартный ответ)',
   })
-  getProfile(@Request() req: ExpressRequest): Promise<User | null> {
-    return this.usersService.findById((req as any).user.id);
+  async getProfile(@Request() req: ExpressRequest): Promise<{ success: true; data: User | null }> {
+    // Если есть авторизованный пользователь — отдаем его
+    const maybeUserId = (req as any)?.user?.id;
+    let user: User | null = null;
+    if (maybeUserId) {
+      user = await this.usersService.findById(maybeUserId);
+    } else if (process.env.NODE_ENV !== 'production') {
+      // DEV: fallback для неавторизованных
+      user = await this.usersService.getDefaultUser();
+    }
+    return { success: true, data: user };
   }
 
   /**

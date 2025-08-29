@@ -235,48 +235,21 @@ const SitusSectionSettings: React.FC = () => {
             {/* Маршруты для системных настроек */}
             <Route 
               path="/general" 
-              element={
-                <GeneralSettings 
-                  globalSettings={globalSettings}
-                  handleGlobalSettingChange={handleGlobalSettingChange}
-                  handleSave={handleSave}
-                />
-              } 
+              element={<Navigate to="/profile-settings?tab=general" replace />} 
             />
             
-            <Route 
-              path="/appearance" 
-              element={
-                <AppearanceSettings 
-                  globalSettings={globalSettings}
-                  handleGlobalSettingChange={handleGlobalSettingChange}
-                  setShowThemeModal={setShowThemeModal}
-                  setShowEditorModal={setShowEditorModal}
-                  handleSave={handleSave}
-                />
-              } 
-            />
-
+            {/* Внешний вид перенесён в тему проекта (системный проект админки) */}
+            <Route path="/appearance" element={<Navigate to="/projects/situs-admin/settings/theme" replace />} />
 
             
             <Route 
               path="/notifications" 
-              element={
-                <NotificationsSettings 
-                  globalSettings={globalSettings}
-                  handleGlobalSettingChange={handleGlobalSettingChange}
-                  handleSave={handleSave}
-                />
-              } 
+              element={<Navigate to="/profile-settings?tab=notifications" replace />} 
             />
             
             <Route 
               path="/security" 
-              element={
-                <SecuritySettings 
-                  handleSave={handleSave}
-                />
-              } 
+              element={<Navigate to="/profile-settings?tab=security" replace />} 
             />
           </Routes>
         </div>
