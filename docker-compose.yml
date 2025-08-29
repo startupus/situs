@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Основная база данных для Situs Service
   postgres:
-    image: postgres:14
+    image: postgres:15
     container_name: situs-postgres
     restart: always
     environment:
@@ -13,7 +13,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "55432:5432"
     networks:
       - situs-network
     healthcheck:
@@ -24,7 +24,7 @@ services:
 
   # Тестовая база данных
   postgres-test:
-    image: postgres:14
+    image: postgres:15
     container_name: situs-postgres-test
     restart: always
     environment:
@@ -60,26 +60,26 @@ services:
       retries: 3
 
   # Situs Service - основной сервис
-  situs-service:
+  situs-api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: situs-service
+    container_name: situs-api
     ports:
-      - "${SITUS_PORT:-3000}:3000"
+      - "3002:3002"
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - DATABASE_URL=postgresql://${POSTGRES_USER:-situs}:${POSTGRES_PASSWORD:-situs_password}@postgres:5432/${POSTGRES_DB:-situs}?schema=public
-      - REDIS_URL=redis://redis:6379
-    env_file:
-      - .env
-    depends_on:
-      - postgres
-      - redis
+      - PORT=3002
+      - JWT_SECRET=${JWT_SECRET:-change_me_at_least_32_chars_long}
+      - JWT_ACCESS_EXPIRES_IN=30m
+      - JWT_REFRESH_EXPIRES_IN=7d
+    volumes:
+      - ./prisma:/app/prisma
     networks:
       - situs-network
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3002/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -101,6 +101,31 @@ services:
     networks:
       - situs-network
     command: ["npx", "prisma", "studio", "--hostname", "0.0.0.0", "--port", "5555"]
+
+  situs-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: situs-web
+    ports:
+      - "5177:5177"
+    depends_on:
+      - situs-api
+    networks:
+      - situs-network
+
+  pgloader:
+    image: dimitri/pgloader:latest
+    container_name: situs-pgloader
+    command: ["pgloader", "/work/pgloader.load"]
+    volumes:
+      - ./scripts/pgloader.load:/work/pgloader.load
+      - ./prisma/dev.db:/data/dev.db:ro
+    depends_on:
+      - postgres
+    networks:
+      - situs-network
+      - default
 
 volumes:
   postgres_data:

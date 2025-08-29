@@ -60,9 +60,6 @@ const Chart4 = () => {
       curve: "straight",
     },
 
-    markers: {
-      size: 0,
-    },
     labels: {
       show: false,
       position: "top",

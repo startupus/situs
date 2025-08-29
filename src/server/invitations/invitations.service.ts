@@ -21,13 +21,22 @@ export class InvitationsService {
   /**
    * Создание множественных приглашений
    */
-  async create(createInvitationDto: CreateInvitationDto, invitedBy: string): Promise<Invitation[]> {
+  async create(createInvitationDto: CreateInvitationDto, invitedBy?: string): Promise<Invitation[]> {
     const { emails, role, message, channel, expiresAt } = createInvitationDto;
     
-    // Проверяем, что пользователь существует
-    const inviter = await this.usersService.findById(invitedBy);
+    // Определяем отправителя (fallback: первый пользователь или системный админ)
+    let inviter = invitedBy ? await this.usersService.findById(invitedBy) : null;
     if (!inviter) {
-      throw new NotFoundException('Пользователь, отправляющий приглашение, не найден');
+      const first = await this.prisma.user.findFirst({ orderBy: { createdAt: 'asc' } });
+      if (first) {
+        inviter = await this.usersService.findById(first.id);
+      } else {
+        // создаём системного администратора (dev)
+        const admin = await this.prisma.user.create({
+          data: { username: 'admin', email: 'admin@situs.local', password: null, globalRole: 'SUPER_ADMIN' as any, status: 'ACTIVE' as any }
+        });
+        inviter = await this.usersService.findById(admin.id);
+      }
     }
 
     // Проверяем, что email'ы еще не зарегистрированы
@@ -64,6 +73,7 @@ export class InvitationsService {
     const invitations: Invitation[] = [];
     const defaultExpiresAt = expiresAt ? new Date(expiresAt) : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 дней
 
+    const inviterId = (inviter as any)?.id as string;
     for (const email of emails) {
       const token = this.generateInvitationToken();
       
@@ -74,7 +84,7 @@ export class InvitationsService {
           message,
           channel,
           token,
-          invitedBy,
+          invitedBy: inviterId,
           expiresAt: defaultExpiresAt,
           status: InvitationStatus.PENDING,
         },
@@ -90,7 +100,15 @@ export class InvitationsService {
       });
 
       // Отправляем приглашение через выбранный канал
-      const sendResult = await this.sendInvitation(invitation, channel as CommunicationChannel);
+      // Если канал EMAIL отключен — не падаем, просто помечаем как неотправленное
+      let sendResult: { success: boolean; error?: string } = { success: false };
+      try {
+        sendResult = await this.sendInvitation(invitation, channel as CommunicationChannel);
+      } catch (e: any) {
+        // логируем, но не прерываем создание записи
+        // eslint-disable-next-line no-console
+        console.warn('Invitation send failed:', e?.message || e);
+      }
       
       // Обновляем дату отправки только если отправка прошла успешно
       if (sendResult.success) {

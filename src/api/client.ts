@@ -38,11 +38,11 @@ class ApiClient {
   private getBaseURL(): string {
     // В браузере по умолчанию работаем через тот же origin, чтобы избежать CORS и использовать Vite proxy
     if (typeof window !== 'undefined') {
-      const envBase = (import.meta as any)?.env?.VITE_API_BASE_URL as string | undefined;
-      return envBase && envBase.trim().length > 0 ? envBase : '';
+      // Принудительно используем относительный путь
+      return '';
     }
     // На сервере читаем из переменных окружения, иначе localhost (используется редко)
-    return process.env.API_BASE_URL || 'http://localhost:3001';
+    return process.env.API_BASE_URL || 'http://localhost:3002';
   }
 
   /**
@@ -79,7 +79,8 @@ class ApiClient {
     // Для health endpoint используем прямой путь
     const isHealthCheck = endpoint.startsWith('/health');
     const baseUrl = this.baseURL; // базовый URL без /api — endpoint включает нужный префикс
-    const url = `${baseUrl}${endpoint}`;
+    const isAbsolute = /^(https?:)?\/\//i.test(endpoint);
+    const url = isAbsolute ? endpoint : `${baseUrl}${endpoint}`;
     
     // Автоматически добавляем токен если он есть
     const token = this.getStoredToken();
@@ -115,7 +116,12 @@ class ApiClient {
         throw new ApiClientError(friendly, errorData.statusCode ?? status, errorData);
       }
 
-      const data = await response.json();
+      // Может прийти пустой ответ (204/пустой body). Пытаемся распарсить JSON, иначе вернем { success: true, data: null }
+      const text = await response.text();
+      if (!text || text.trim().length === 0) {
+        return { success: true, data: null } as any;
+      }
+      const data = JSON.parse(text);
       return data;
     } catch (error) {
       if (error instanceof ApiClientError) {
@@ -123,11 +129,18 @@ class ApiClient {
       }
       
       // Обработка сетевых ошибок
-      throw new ApiClientError(
-        'Ошибка сети. Проверьте подключение к интернету.',
-        0,
-        { error: 'NetworkError', message: String(error) }
-      );
+      // Попробуем fallback в dev: прямое обращение к бэку, минуя Vite proxy
+      if (typeof window !== 'undefined' && !isAbsolute && endpoint.startsWith('/api/')) {
+        try {
+          const directUrl = `http://localhost:3002${endpoint}`;
+          const retryResp = await fetch(directUrl, config);
+          if (retryResp.ok) {
+            const txt = await retryResp.text();
+            return txt && txt.trim() ? JSON.parse(txt) : ({ success: true, data: null } as any);
+          }
+        } catch {}
+      }
+      throw new ApiClientError('Ошибка сети. Проверьте подключение к интернету.', 0, { error: 'NetworkError', message: String(error) });
     }
   }
 
@@ -241,8 +254,8 @@ class ApiClient {
   /**
    * Получение списка пользователей
    */
-  async getUsers(): Promise<ApiResponse<any[]>> {
-    return this.get('/api/users');
+  async getUsers(params?: Record<string, any>): Promise<ApiResponse<any[]>> {
+    return this.get('/api/users', params);
   }
 
   /**

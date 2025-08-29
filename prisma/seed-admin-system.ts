@@ -65,7 +65,36 @@ async function main() {
       create: { projectId: project.id, name: 'admin-top', title: 'Admin Top' },
     });
 
+    // Меню пользователя (дропдаун в интерфейсе админки)
+    const adminUser = await prisma.menuType.upsert({
+      where: { projectId_name: { projectId: project.id, name: 'admin-user' } },
+      update: { title: 'Admin User Menu' },
+      create: { projectId: project.id, name: 'admin-user', title: 'Admin User Menu' },
+    });
+
     // 4) Пункты меню admin-sidebar
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'dashboard' } },
+      update: {
+        title: 'Дашборд',
+        type: MenuItemType.URL,
+        externalUrl: '/',
+        orderIndex: 0,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminSidebar.id,
+        title: 'Дашборд',
+        alias: 'dashboard',
+        type: MenuItemType.URL,
+        externalUrl: '/',
+        orderIndex: 0,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'projects' } },
       update: {
@@ -83,6 +112,50 @@ async function main() {
         type: MenuItemType.URL,
         externalUrl: '/projects',
         orderIndex: 0,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'orders' } },
+      update: {
+        title: 'Заказы',
+        type: MenuItemType.URL,
+        externalUrl: '/orders',
+        orderIndex: 2,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminSidebar.id,
+        title: 'Заказы',
+        alias: 'orders',
+        type: MenuItemType.URL,
+        externalUrl: '/orders',
+        orderIndex: 2,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'marketing' } },
+      update: {
+        title: 'Маркетинг',
+        type: MenuItemType.URL,
+        externalUrl: '/marketing',
+        orderIndex: 3,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminSidebar.id,
+        title: 'Маркетинг',
+        alias: 'marketing',
+        type: MenuItemType.URL,
+        externalUrl: '/marketing',
+        orderIndex: 3,
         level: 1,
         isPublished: true,
       },
@@ -110,7 +183,142 @@ async function main() {
       },
     });
 
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'support' } },
+      update: {
+        title: 'Поддержка',
+        type: MenuItemType.URL,
+        externalUrl: '/support',
+        orderIndex: 4,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminSidebar.id,
+        title: 'Поддержка',
+        alias: 'support',
+        type: MenuItemType.URL,
+        externalUrl: '/support',
+        orderIndex: 4,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'settings' } },
+      update: {
+        title: 'Настройки',
+        type: MenuItemType.URL,
+        externalUrl: '/profile-settings',
+        orderIndex: 5,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminSidebar.id,
+        title: 'Настройки',
+        alias: 'settings',
+        type: MenuItemType.URL,
+        externalUrl: '/profile-settings',
+        orderIndex: 5,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
     // 5) admin-top (пока без элементов — опционально)
+
+    // 5.1) admin-user — элементы дропдауна пользователя
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'notifications' } },
+      update: {
+        title: 'Уведомления',
+        type: MenuItemType.URL,
+        externalUrl: '/profile-settings?tab=notifications',
+        orderIndex: 0,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminUser.id,
+        title: 'Уведомления',
+        alias: 'notifications',
+        type: MenuItemType.URL,
+        externalUrl: '/profile-settings?tab=notifications',
+        orderIndex: 0,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'profile-settings' } },
+      update: {
+        title: 'Настройки профиля',
+        type: MenuItemType.URL,
+        externalUrl: '/profile-settings',
+        orderIndex: 1,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminUser.id,
+        title: 'Настройки профиля',
+        alias: 'profile-settings',
+        type: MenuItemType.URL,
+        externalUrl: '/profile-settings',
+        orderIndex: 1,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'dashboard' } },
+      update: {
+        title: 'Дашборд',
+        type: MenuItemType.URL,
+        externalUrl: '/',
+        orderIndex: 2,
+        level: 1,
+        isPublished: true,
+      },
+      create: {
+        menuTypeId: adminUser.id,
+        title: 'Дашборд',
+        alias: 'dashboard',
+        type: MenuItemType.URL,
+        externalUrl: '/',
+        orderIndex: 2,
+        level: 1,
+        isPublished: true,
+      },
+    });
+
+    await prisma.menuItem.upsert({
+      where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'logout' } },
+      update: {
+        title: 'Выйти',
+        type: MenuItemType.URL,
+        externalUrl: '/auth/logout',
+        orderIndex: 3,
+        level: 1,
+        isPublished: true,
+        parameters: JSON.stringify({ action: 'logout' }),
+      },
+      create: {
+        menuTypeId: adminUser.id,
+        title: 'Выйти',
+        alias: 'logout',
+        type: MenuItemType.URL,
+        externalUrl: '/auth/logout',
+        orderIndex: 3,
+        level: 1,
+        isPublished: true,
+        parameters: JSON.stringify({ action: 'logout' }),
+      },
+    });
     // 6) Продукт ADMIN и базовые экраны
     const adminProduct = await prisma.product.upsert({
       where: { projectId_name: { projectId: project.id, name: 'Admin' } },
@@ -125,10 +333,13 @@ async function main() {
     });
 
     const screens = [
-      { title: 'Проекты', alias: 'projects', path: '/projects', orderIndex: 0, icon: 'Folder' },
-      { title: 'Пользователи', alias: 'users', path: '/users', orderIndex: 1, icon: 'Users' },
-      { title: 'Маркетинг', alias: 'marketing', path: '/marketing', orderIndex: 2, icon: 'Megaphone' },
-      { title: 'Поддержка', alias: 'support', path: '/support', orderIndex: 3, icon: 'LifeBuoy' },
+      { title: 'Дашборд', alias: 'dashboard', path: '/', orderIndex: 0, icon: 'Grid' },
+      { title: 'Проекты', alias: 'projects', path: '/projects', orderIndex: 1, icon: 'Folder' },
+      { title: 'Заказы', alias: 'orders', path: '/orders', orderIndex: 2, icon: 'ShoppingCart' },
+      { title: 'Маркетинг', alias: 'marketing', path: '/marketing', orderIndex: 3, icon: 'Megaphone' },
+      { title: 'Пользователи', alias: 'users', path: '/users', orderIndex: 4, icon: 'Users' },
+      { title: 'Поддержка', alias: 'support', path: '/support', orderIndex: 5, icon: 'LifeBuoy' },
+      { title: 'Настройки', alias: 'settings', path: '/profile-settings', orderIndex: 6, icon: 'Settings' },
     ];
     for (const s of screens) {
       await prisma.adminScreen.upsert({
@@ -139,6 +350,81 @@ async function main() {
     }
 
     console.log('✅ System admin project seeded with menu types and admin screens:', adminSidebar.name, adminTop.name);
+
+    // 7) Communication settings: enable EMAIL with a dev SMTP stub
+    try {
+      await prisma.communicationSettings.upsert({
+        where: { channel: 'EMAIL' as any },
+        update: {
+          enabled: true,
+          config: {
+            host: process.env.SMTP_HOST || 'localhost',
+            port: Number(process.env.SMTP_PORT || 1025),
+            secure: false,
+            auth: {
+              user: process.env.SMTP_USER || '',
+              pass: process.env.SMTP_PASS || ''
+            },
+            from: process.env.SMTP_FROM || 'Situs <no-reply@situs.local>'
+          },
+          inviteTemplate: undefined,
+          reminderTemplate: undefined,
+        },
+        create: {
+          channel: 'EMAIL' as any,
+          enabled: true,
+          config: {
+            host: process.env.SMTP_HOST || 'localhost',
+            port: Number(process.env.SMTP_PORT || 1025),
+            secure: false,
+            auth: {
+              user: process.env.SMTP_USER || '',
+              pass: process.env.SMTP_PASS || ''
+            },
+            from: process.env.SMTP_FROM || 'Situs <no-reply@situs.local>'
+          },
+        },
+      });
+      console.log('📮 Communication EMAIL settings ensured');
+    } catch (e) {
+      console.warn('⚠️ Failed to seed communication settings:', (e as any)?.message || e);
+    }
+
+    // 8) Integrations: ensure EMAIL_SMTP and N8N placeholders for situs-admin
+    try {
+      // EMAIL_SMTP (placeholder, not active)
+      await prisma.integration.upsert({
+        where: { projectId_provider_instanceKey: { projectId: project.id, provider: 'EMAIL_SMTP' as any, instanceKey: 'default' } as any },
+        update: {},
+        create: {
+          projectId: project.id,
+          provider: 'EMAIL_SMTP' as any,
+          instanceKey: 'default',
+          title: 'Email (SMTP)',
+          isActive: false,
+          status: 'DISABLED' as any,
+          config: {},
+        },
+      });
+
+      // N8N (placeholder, not active)
+      await prisma.integration.upsert({
+        where: { projectId_provider_instanceKey: { projectId: project.id, provider: 'N8N' as any, instanceKey: 'default' } as any },
+        update: {},
+        create: {
+          projectId: project.id,
+          provider: 'N8N' as any,
+          instanceKey: 'default',
+          title: 'n8n (external)',
+          isActive: false,
+          status: 'DISABLED' as any,
+          config: { baseUrl: process.env.N8N_BASE_URL || '' },
+        },
+      });
+      console.log('🔌 Integrations placeholders ensured (EMAIL_SMTP, N8N)');
+    } catch (e) {
+      console.warn('⚠️ Failed to seed integrations:', (e as any)?.message || e);
+    }
   } catch (e) {
     console.error('❌ Error seeding system admin project:', e);
     process.exit(1);

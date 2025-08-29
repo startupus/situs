@@ -182,17 +182,12 @@ class UsersApiService {
    */
   async login(credentials: AuthCredentials): Promise<AuthResponse> {
     try {
-      // Mock аутентификация
-      const user = mockUsers.find(u => u.email === credentials.email);
-      if (!user) {
-        throw new Error('Неверный email или пароль');
+      const res = await apiClient.post<AuthResponse>(`${this.authEndpoint}/login`, credentials);
+      const data = res.data || res as any;
+      if (typeof window !== 'undefined' && data?.token) {
+        localStorage.setItem('auth_token', data.token);
       }
-
-      return {
-        user,
-        token: 'mock-jwt-token-' + Date.now(),
-        expiresIn: 3600
-      };
+      return data;
     } catch (error) {
       console.error('Login API Error:', error);
       throw new Error(ApiUtils.handleError(error));
@@ -204,29 +199,12 @@ class UsersApiService {
    */
   async register(userData: CreateUserData): Promise<AuthResponse> {
     try {
-      // Mock регистрация
-      const newUser: User = {
-        id: `user_${Date.now()}`,
-        email: userData.email,
-        firstName: '',
-        lastName: '',
-        role: userData.role || 'client',
-        status: 'active',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        isEmailVerified: false,
-        projectsCount: 0,
-        ordersCount: 0,
-        permissions: ['projects.view']
-      };
-
-      mockUsers.push(newUser);
-
-      return {
-        user: newUser,
-        token: 'mock-jwt-token-' + Date.now(),
-        expiresIn: 3600
-      };
+      const res = await apiClient.post<AuthResponse>(`${this.authEndpoint}/register`, userData as any);
+      const data = res.data || res as any;
+      if (typeof window !== 'undefined' && data?.token) {
+        localStorage.setItem('auth_token', data.token);
+      }
+      return data;
     } catch (error) {
       console.error('Register API Error:', error);
       throw new Error(ApiUtils.handleError(error));
@@ -248,8 +226,9 @@ class UsersApiService {
    */
   async getCurrentUser(): Promise<User> {
     try {
-      // Mock текущий пользователь
-      return mockUsers[0];
+      const res = await apiClient.get<User>(`/api/users/me`);
+      const data = res.data || res as any;
+      return data;
     } catch (error) {
       console.error('Get Current User API Error:', error);
       throw new Error(ApiUtils.handleError(error));

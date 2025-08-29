@@ -22,7 +22,12 @@ export type ProjectEventType =
   | 'user_created'
   | 'user_updated'
   | 'user_deleted'
-  | 'user_status_changed';
+  | 'user_status_changed'
+  // События интеграций
+  | 'integration_created'
+  | 'integration_updated'
+  | 'integration_deleted'
+  | 'integration_status_changed';
 
 export interface RealtimeEvent<T = any> {
   type: ProjectEventType;
