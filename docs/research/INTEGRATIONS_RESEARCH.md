@@ -103,14 +103,14 @@
 
 ## Чек‑лист реализации
 
-- [ ] Prisma: `Integration`, `IntegrationEvent`.
-- [ ] NestJS: `IntegrationsModule`, `IntegrationRegistry`, `IntegrationPlugin`.
-- [ ] Плагин `EMAIL_SMTP` (мост к CommunicationService), `healthCheck`.
-- [ ] API: providers/list/create/update/test/delete.
-- [ ] SSE: `integration_created|updated|deleted|status_changed`.
-- [ ] UI: каталог + «Установленные», страница настроек интеграции.
-- [ ] Роутинг/меню: пункт «Интеграции» на уровне проекта; редирект из «Настройки → Интеграции».
-- [ ] Связка инвайтов с интеграциями (событие → EMAIL).
+- [x] Prisma: `Integration`, `IntegrationEvent`.
+- [x] NestJS: `IntegrationsModule`, `IntegrationRegistry`, `IntegrationPlugin`.
+- [x] Плагин `EMAIL_SMTP` (мост к CommunicationService), `healthCheck`.
+- [x] API: providers/list/create/update/test/delete.
+- [x] SSE: `integration_created|updated|deleted|status_changed`.
+- [x] UI: каталог + «Установленные», страница настроек интеграции.
+- [x] Роутинг/меню: пункт «Интеграции» на уровне проекта; редирект из «Настройки → Интеграции`.
+- [x] Связка инвайтов с интеграциями (событие → EMAIL, лог в IntegrationEvent + SSE).
 - [ ] README в папке интеграций и обновление корневого README со ссылками.
 
 

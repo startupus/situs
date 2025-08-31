@@ -14,7 +14,7 @@
 - **Типы меню**:
   - `admin-sidebar` — левые иконки верхнего уровня админки
   - `admin-top` — быстрые действия/иконки верхней панели (опционально)
-  - `project-sidebar` — (опционально) навигация внутри проекта
+  - `project-sidebar` — (опционально) навигация публичной части сайтов проекта (не используется админкой)
 
 ### Архитектура и объём работ
 #### 1) Данные и БД
@@ -35,7 +35,7 @@
 #### 3) Frontend
 - `SitusSidebar`:
   - Рендерить список иконок из `admin-sidebar` системного проекта.
-  - В проектном контексте: сохранить текущую 2/3‑уровневую модель; опционально источником сделать `project-sidebar`.
+  - В проектном контексте: маппить `admin-sidebar` в маршруты текущего проекта (без использования `project-sidebar`).
   - Поддержать `permissionKeys` — скрывать недоступные элементы.
 - `SitusHeader`:
   - Полностью перейти на `/api/ui/meta` для заголовка/крошек.
@@ -100,19 +100,19 @@
 - Проверить, что изменения меню/экранов отражаются в UI без перезагрузки (SSE/рефетч).
 
 ### Чек‑лист
-- [ ] Создать системный проект `situs-admin` (флаг `isSystemAdmin=true`), сидом
-- [ ] Посеять типы меню `admin-sidebar` и `admin-top` в `situs-admin`
-- [ ] Добавить тип продукта `ADMIN` и модель `AdminScreen` (Prisma)
-- [ ] Создать модуль `admin-screens` (NestJS) с CRUD: list/get/upsert/remove
-- [ ] Сидировать базовые `AdminScreen`: `/projects`, `/users`, `/marketing`, `/support`
-- [ ] `/api/ui/meta`: сначала `AdminScreen` по `path`, затем меню `admin-sidebar`; затем проектная логика
-- [ ] Подключить `SitusSidebar` к `admin-sidebar`; `SitusHeader` к `/api/ui/meta`
-- [ ] Показать системный проект в `/projects` с бейджем “system”; скрыть удаление и тумблер статуса
-- [ ] Запретить на бэкенде: удаление системного проекта, статус `DELETED`, изменение `slug` и `ownerId`
-- [ ] Перенести текущие админ‑страницы: для каждого маршрута создать `AdminScreen` с `path/title`; убрать локальные title/breadcrumbs
-- [ ] Сопоставить пункты меню `admin-sidebar` с `AdminScreen.path` (router targets)
-- [ ] Документировать стандарты экранов админки (title, breadcrumbs, permissions)
-- [ ] E2E (Playwright): проверить заголовки/крошки для всех перенесённых экранов, обновления через SSE
+- [x] Создать системный проект `situs-admin` (флаг `isSystemAdmin=true`), сидом
+- [x] Посеять типы меню `admin-sidebar` и `admin-top` в `situs-admin`
+- [x] Добавить тип продукта `ADMIN` и модель `AdminScreen` (Prisma)
+- [x] Создать модуль `admin-screens` (NestJS) с CRUD: list/get/upsert/remove
+- [x] Сидировать базовые `AdminScreen`: `/projects`, `/users`, `/marketing`, `/support`
+- [x] `/api/ui/meta`: сначала `AdminScreen` по `path`, затем меню `admin-sidebar`; затем проектная логика
+- [x] Подключить `SitusSidebar` к `admin-sidebar`; `SitusHeader` к `/api/ui/meta`
+- [x] Показать системный проект в `/projects` с бейджем “system”; скрыть удаление и тумблер статуса
+- [x] Запретить на бэкенде: удаление системного проекта, статус `DELETED`, изменение `slug` и `ownerId`
+- [x] Перенести текущие админ‑страницы: для каждого маршрута создать `AdminScreen` с `path/title`; убрать локальные title/breadcrumbs
+- [x] Сопоставить пункты меню `admin-sidebar` с `AdminScreen.path` (router targets)
+- [x] Документировать стандарты экранов админки (title, breadcrumbs, permissions)
+- [x] E2E (Playwright): проверить заголовки/крошки (без кликабельного leaf), глобальную навигацию и обновления через SSE
 
 ### Риски
 - Различия прав у ролей → исчезновение элементов; логирование и мониторинг.

@@ -56,6 +56,20 @@ export class RealtimeController {
   }
 
   /**
+   * SSE поток для интеграций
+   * Фактический путь: GET /api/realtime/integrations
+   */
+  @Public()
+  @Sse('integrations')
+  integrationsEvents(): any {
+    const source$ = this.realtime.asObservable();
+    const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
+    return merge(handshake$, source$).pipe(
+      map((evt) => ({ data: evt }) as MessageEvent),
+    );
+  }
+
+  /**
    * Heartbeat для удержания соединения живым через обычный HTTP long-poll совместимый путь
    * Позволяет клиенту периодически дергать endpoint, если сеть/проксирующие балансировщики рвут SSE
    */

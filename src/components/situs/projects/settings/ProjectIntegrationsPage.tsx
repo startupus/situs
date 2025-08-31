@@ -24,6 +24,8 @@ const ProjectIntegrationsPage: React.FC = () => {
   const [workflows, setWorkflows] = useState<any[] | null>(null);
   const [selectedWorkflowId, setSelectedWorkflowId] = useState<string>('');
   const [actionKeyInput, setActionKeyInput] = useState<string>('');
+  const [es, setEs] = useState<EventSource | null>(null);
+  const [query, setQuery] = useState<string>('');
 
   useEffect(() => {
     let aborted = false;
@@ -44,6 +46,25 @@ const ProjectIntegrationsPage: React.FC = () => {
     return () => { aborted = true; };
   }, [projectId]);
 
+  // Подписка на SSE integration_* события для автообновления списков/статусов
+  useEffect(() => {
+    try { es?.close(); } catch {}
+    const source = new EventSource('/api/realtime/integrations');
+    setEs(source);
+    source.onmessage = async (ev) => {
+      try {
+        const data = JSON.parse(ev.data || '{}');
+        const t = (data?.type || '').toString();
+        if (!t.startsWith('integration_')) return;
+        // На любое обновление интеграций — перезагружаем список для текущего проекта
+        const list = await integrationsApi.listByProject(projectId);
+        setInstances(list);
+      } catch {}
+    };
+    source.onerror = () => { try { source.close(); } catch {}; };
+    return () => { try { source.close(); } catch {}; setEs(null); };
+  }, [projectId]);
+
   const byProvider = useMemo(() => {
     const map: Record<string, IntegrationInstance[]> = {};
     for (const inst of instances) {
@@ -51,6 +72,27 @@ const ProjectIntegrationsPage: React.FC = () => {
     }
     return map;
   }, [instances]);
+
+  const filteredProviders = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return providers;
+    return providers.filter((p) => (
+      p.name.toLowerCase().includes(q) ||
+      p.key.toLowerCase().includes(q) ||
+      (p.category||'').toLowerCase().includes(q)
+    ));
+  }, [providers, query]);
+
+  const filteredInstances = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return instances;
+    return instances.filter((i) => (
+      (i.title||'').toLowerCase().includes(q) ||
+      (i.provider||'').toLowerCase().includes(q) ||
+      (i.instanceKey||'').toLowerCase().includes(q) ||
+      (i.status||'').toLowerCase().includes(q)
+    ));
+  }, [instances, query]);
 
   async function createInstance(provider: IntegrationProviderMeta) {
     setBusy(true); setError(null);
@@ -158,14 +200,19 @@ const ProjectIntegrationsPage: React.FC = () => {
 
   return (
     <div className="p-6">
-      <div className="mb-4">
-        <h1 className="text-2xl font-semibold text-dark dark:text-white">Интеграции проекта</h1>
-        <p className="text-sm text-body-color dark:text-dark-6">Подключайте провайдеры интеграций и управляйте инстансами</p>
-      </div>
-
-      <div className="flex items-center gap-3 border-b border-gray-200 dark:border-gray-700 mb-6">
-        <button className={`py-2 px-3 ${tab==='catalog'?'border-b-2 border-primary text-primary':'text-gray-600 dark:text-gray-300'}`} onClick={() => setTab('catalog')}>Каталог</button>
-        <button className={`py-2 px-3 ${tab==='installed'?'border-b-2 border-primary text-primary':'text-gray-600 dark:text-gray-300'}`} onClick={() => setTab('installed')}>Установленные</button>
+      <div className="flex items-center justify-between gap-3 border-b border-gray-200 dark:border-gray-700 mb-6">
+        <div className="flex items-center gap-3">
+          <button className={`py-2 px-3 ${tab==='catalog'?'border-b-2 border-primary text-primary':'text-gray-600 dark:text-gray-300'}`} onClick={() => setTab('catalog')}>Каталог</button>
+          <button className={`py-2 px-3 ${tab==='installed'?'border-b-2 border-primary text-primary':'text-gray-600 dark:text-gray-300'}`} onClick={() => setTab('installed')}>Установленные</button>
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            value={query}
+            onChange={(e)=>setQuery(e.target.value)}
+            placeholder="Поиск (название, ключ, статус)"
+            className="h-9 rounded-md border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 dark:text-white px-3 text-sm"
+          />
+        </div>
       </div>
 
       {error && (
@@ -174,7 +221,7 @@ const ProjectIntegrationsPage: React.FC = () => {
 
       {tab === 'catalog' && (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {providers.map((p) => (
+          {filteredProviders.map((p) => (
             <div key={p.key} className="rounded border border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-900">
               <div className="flex items-start justify-between">
                 <div>
@@ -193,17 +240,26 @@ const ProjectIntegrationsPage: React.FC = () => {
 
       {tab === 'installed' && (
         <div className="space-y-3">
-          {instances.length === 0 && <div className="text-sm text-gray-500">Нет установленных интеграций</div>}
-          {instances.map((inst) => (
+          {filteredInstances.length === 0 && <div className="text-sm text-gray-500">Нет установленных интеграций</div>}
+          {filteredInstances.map((inst) => (
             <div key={inst.id} className="rounded border border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-900 flex items-center justify-between">
               <div className="min-w-0">
-                <div className="font-medium truncate">
-                  {inst.title || inst.provider}
-                  <span className="text-xs text-gray-500 ml-2 break-all inline-block align-baseline">
-                    [{inst.provider}/{maskInstanceKey(inst)}]
+                <div className="font-medium truncate flex items-center gap-2">
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold ${inst.status==='READY'?'bg-green-100 text-green-800':'bg-gray-100 text-gray-700'} ${inst.status==='ERROR'?'bg-red-100 text-red-800':''}`} title={`Статус: ${inst.status}`}>
+                    {inst.status}
+                  </span>
+                  {inst.isActive ? (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-100 text-blue-800" title="Интеграция активна">active</span>
+                  ) : (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-gray-100 text-gray-700" title="Интеграция выключена">inactive</span>
+                  )}
+                  <span className="truncate">
+                    {inst.title || inst.provider}
+                    <span className="text-xs text-gray-500 ml-2 break-all inline-block align-baseline">
+                      [{inst.provider}/{maskInstanceKey(inst)}]
+                    </span>
                   </span>
                 </div>
-                <div className="text-xs text-gray-500">Статус: {inst.status} · Активна: {inst.isActive ? 'да' : 'нет'}</div>
               </div>
               <div className="flex items-center gap-2">
                 <button disabled={busy} onClick={() => openEdit(inst)} className="px-3 py-2 text-sm rounded border border-gray-300 dark:border-gray-600">Настроить</button>

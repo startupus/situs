@@ -164,9 +164,39 @@ export class UiService {
     const items = await this.prisma.menuItem.findMany({
       where: { menuTypeId: adminSidebar.id, isPublished: true, parentId: null },
       orderBy: { orderIndex: 'asc' },
-      select: { title: true, externalUrl: true },
+      select: { title: true, externalUrl: true, parameters: true },
     });
-    return items.map(i => ({ title: i.title, to: i.externalUrl || '#' }));
+    if (!items || items.length === 0) {
+      // Диагностический лог: пустой admin-sidebar — проверьте сиды системного проекта
+      // eslint-disable-next-line no-console
+      console.warn('[UI] admin-sidebar is empty. Ensure situs-admin seeds are applied');
+    }
+    return items.map(i => ({
+      title: i.title,
+      to: i.externalUrl || '#',
+      params: i.parameters ? JSON.parse(i.parameters) : undefined,
+    }));
+  }
+
+  // Project navigation шаблон из системного проекта (единый для всех проектов)
+  async getSystemProjectSidebar(): Promise<Array<{ title: string; to: string }>> {
+    const adminProject = await this.prisma.project.findUnique({ where: { slug: 'situs-admin' }, select: { id: true } });
+    if (!adminProject) return [];
+    const projectSidebar = await this.prisma.menuType.findUnique({
+      where: { projectId_name: { projectId: adminProject.id, name: 'project-sidebar' } },
+      select: { id: true },
+    });
+    if (!projectSidebar) return [];
+    const items = await this.prisma.menuItem.findMany({
+      where: { menuTypeId: projectSidebar.id, isPublished: true, parentId: null },
+      orderBy: { orderIndex: 'asc' },
+      select: { title: true, externalUrl: true, parameters: true },
+    });
+    return items.map(i => ({
+      title: i.title,
+      to: i.externalUrl || '#',
+      params: i.parameters ? JSON.parse(i.parameters) : undefined,
+    }));
   }
 
   // Admin user dropdown (меню пользователя в верхней панели)
@@ -251,14 +281,18 @@ export class UiService {
     }
 
     if (segs[0] === 'projects' && segs[1]) {
-      const projectSlug = segs[1];
-      const project = await this.prisma.project.findUnique({ where: { slug: projectSlug }, select: { name: true, slug: true } }).catch(() => null);
+      const idOrSlug = segs[1];
+      // Надёжно резолвим проект по id или slug
+      let project = await this.prisma.project.findUnique({ where: { id: idOrSlug }, select: { name: true, slug: true, id: true } }).catch(() => null);
+      if (!project) {
+        project = await this.prisma.project.findUnique({ where: { slug: idOrSlug }, select: { name: true, slug: true, id: true } }).catch(() => null);
+      }
       const projectName = project?.name || 'Проект';
+      const projectSlug = project?.slug || idOrSlug;
       const projectPath = `/projects/${projectSlug}`;
 
-      // базовые крошки всегда
+      // базовые крошки всегда: показываем только "Проекты"; текущий раздел (leaf) не добавляем
       breadcrumbs.push({ label: 'Проекты', to: '/projects' });
-      breadcrumbs.push({ label: projectName, to: projectPath });
 
       // projects/:id only
       if (segs.length === 2) {

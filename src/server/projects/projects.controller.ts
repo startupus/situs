@@ -121,6 +121,14 @@ export class ProjectsController {
   @Patch(':id')
   @Scopes('PROJECT_WRITE')
   async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
+    // Жёсткая защита системного проекта на уровне контроллера (ранний возврат)
+    if (id === 'situs-admin') {
+      const body = (req && req.body) ? req.body : updateProjectDto as any;
+      const hasForbidden = body && (('slug' in body) || ('ownerId' in body));
+      if (hasForbidden) {
+        throw new ForbiddenException('Slug/ownerId системного проекта нельзя изменять');
+      }
+    }
     return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
   }
 

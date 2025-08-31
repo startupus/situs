@@ -33,9 +33,19 @@ export class UiController {
   }
 
   // Новый эндпоинт: project sidebar (меню проекта по типу)
+  // ВНИМАНИЕ: этот эндпоинт НЕ используется административной частью.
+  // Он предназначен для публичных меню сайтов проектов (main/footer/sidebar),
+  // и не должен применяться для построения левого сайдбара админки.
   @Get('project-sidebar')
   async getProjectSidebar(@Query('projectId') projectId: string, @Query('type') type?: string) {
     const items = await this.ui.getProjectSidebar(projectId, type || 'project-sidebar');
+    return { success: true, data: items };
+  }
+
+  // Новый эндпоинт: system project sidebar (шаблон проектной навигации из системного проекта)
+  @Get('system-project-sidebar')
+  async getSystemProjectSidebar() {
+    const items = await this.ui.getSystemProjectSidebar();
     return { success: true, data: items };
   }
 }

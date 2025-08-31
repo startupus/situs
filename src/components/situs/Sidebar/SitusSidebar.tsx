@@ -1,16 +1,11 @@
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FiGrid,
   FiFolder,
-  FiShoppingCart,
-  FiBarChart2,
   FiUsers,
-  FiLifeBuoy,
   FiSettings,
-  FiGlobe,
   FiMenu as FiMenuIcon,
-  FiSearch,
   FiArrowLeft,
 } from "react-icons/fi";
 import ProjectSidebarOverlay from "./ProjectSidebarOverlay";
@@ -45,11 +40,37 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
   }, [location.pathname]);
   const [overlayPanel, setOverlayPanel] = useState<"overview" | "settings" | null>(null);
   const [adminItems, setAdminItems] = useState<AdminItem[] | null>(null);
+  const [systemProjectItems, setSystemProjectItems] = useState<AdminItem[] | null>(null);
   const [projectItems, setProjectItems] = useState<AdminItem[] | null>(null);
   const sseRef = useRef<EventSource | null>(null);
 
+  // Преобразование глобальных пунктов admin-sidebar в проектные маршруты текущего проекта
+  const mapAdminToProject = useCallback((items: AdminItem[], pid: string): AdminItem[] => {
+    const remap = (to: string): string => {
+      if (!to || to === '/') return `/projects/${pid}`;
+      if (to === '/projects') return `/projects/${pid}/pages`;
+      if (to === '/orders') return `/projects/${pid}/store`;
+      if (to === '/marketing') return `/projects/${pid}/settings/seo`;
+      if (to === '/users') return `/projects/${pid}/settings/access`;
+      if (to === '/support') return `/projects/${pid}/settings/integrations`;
+      if (to === '/section-settings') return `/projects/${pid}/settings`;
+      return to.startsWith('/projects/') ? to : `/projects/${pid}`;
+    };
+    return items.map((i) => ({ title: i.title, to: remap(i.to || '#') }));
+  }, []);
+
+  // Преобразование шаблона проектной навигации системного проекта ("/project/...") в маршруты текущего проекта
+  const mapSystemProjectToProject = useCallback((items: AdminItem[], pid: string): AdminItem[] => {
+    const remap = (to: string): string => {
+      if (!to || to === '/project') return `/projects/${pid}`;
+      // Заменяем префикс /project на /projects/:id
+      return to.replace(/^\/project(\/|$)/, `/projects/${pid}$1`);
+    };
+    return items.map((i) => ({ title: i.title, to: remap(i.to || '#') }));
+  }, []);
+
+  // Всегда поддерживаем в состоянии adminItems как единый источник для админ-навигации
   useEffect(() => {
-    if (projectId) return;
     let aborted = false;
     (async () => {
       try {
@@ -57,13 +78,14 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
         const json = await res.json();
         if (!aborted && json?.success && Array.isArray(json.data)) {
           setAdminItems(json.data as AdminItem[]);
+          if (!json.data.length) { try { console.warn('[SIDEBAR] admin-sidebar is empty at init'); } catch {} }
+        } else {
+          try { console.warn('[SIDEBAR] failed to load admin-sidebar at init'); } catch {}
         }
-      } catch {
-        // fallback остаётся на локальном меню
-      }
+      } catch {}
     })();
     return () => { aborted = true; };
-  }, [projectId]);
+  }, []);
 
   // SSE автообновление меню (admin/project)
   useEffect(() => {
@@ -76,28 +98,28 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
         const data = JSON.parse(ev.data || '{}');
         const t = data?.type as string;
         if (!t) return;
+        try { console.debug('[SIDEBAR_SSE] event:', t); } catch {}
         if (t.startsWith('menu_')) {
-          if (projectId) {
-            // обновляем меню проекта
-            try {
-              const r1 = await fetch(`/api/ui/project-sidebar?projectId=${projectId}&type=project-sidebar`);
-              const j1 = await r1.json().catch(() => null);
-              if (j1?.success && Array.isArray(j1.data) && j1.data.length) {
-                setProjectItems(j1.data as AdminItem[]);
-              } else {
-                const r2 = await fetch(`/api/ui/project-sidebar?projectId=${projectId}&type=admin-sidebar`);
-                const j2 = await r2.json().catch(() => null);
-                if (j2?.success && Array.isArray(j2.data)) setProjectItems(j2.data as AdminItem[]);
-              }
-            } catch {}
-          } else {
-            // обновляем глобальное меню админки
-            try {
-              const r = await fetch('/api/ui/admin-sidebar');
-              const j = await r.json().catch(() => null);
-              if (j?.success && Array.isArray(j.data)) setAdminItems(j.data as AdminItem[]);
-            } catch {}
-          }
+          try {
+            const r = await fetch('/api/ui/admin-sidebar');
+            const j = await r.json().catch(() => null);
+            if (j?.success && Array.isArray(j.data)) {
+              setAdminItems(j.data as AdminItem[]);
+              if (!j.data.length) { try { console.warn('[SIDEBAR] admin-sidebar is empty'); } catch {} }
+            } else {
+              try { console.warn('[SIDEBAR] failed to load admin-sidebar'); } catch {}
+            }
+          } catch {}
+          try {
+            const rp = await fetch('/api/ui/system-project-sidebar');
+            const jp = await rp.json().catch(() => null);
+            if (jp?.success && Array.isArray(jp.data)) {
+              setSystemProjectItems(jp.data as AdminItem[]);
+              if (!jp.data.length) { try { console.warn('[SIDEBAR] system-project-sidebar is empty'); } catch {} }
+            } else {
+              try { console.warn('[SIDEBAR] failed to load system-project-sidebar'); } catch {}
+            }
+          } catch {}
         }
       } catch {}
     };
@@ -112,30 +134,50 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
       setProjectItems(null);
       return;
     }
-    let aborted = false;
+    let canceled = false;
     (async () => {
       try {
-        // Пытаемся загрузить project-sidebar
-        const r1 = await fetch(`/api/ui/project-sidebar?projectId=${projectId}&type=project-sidebar`);
-        const j1 = await r1.json().catch(() => null);
-        if (!aborted && j1?.success && Array.isArray(j1.data) && j1.data.length) {
-          setProjectItems(j1.data as AdminItem[]);
-          return;
+        const rp = await fetch('/api/ui/system-project-sidebar');
+        const jp = await rp.json().catch(() => null);
+        if (!canceled && jp?.success && Array.isArray(jp.data)) {
+          setSystemProjectItems(jp.data as AdminItem[]);
         }
-        // Fallback: admin-sidebar для проекта
-        const r2 = await fetch(`/api/ui/project-sidebar?projectId=${projectId}&type=admin-sidebar`);
-        const j2 = await r2.json().catch(() => null);
-        if (!aborted && j2?.success && Array.isArray(j2.data)) {
-          setProjectItems(j2.data as AdminItem[]);
-          return;
-        }
-        setProjectItems([]);
-      } catch {
-        setProjectItems([]);
+      } catch {}
+      // Подстраховка: если по какой-то причине шаблон пуст — подхватим admin-sidebar (fallback)
+      if (!systemProjectItems || systemProjectItems.length === 0) {
+        try {
+          const ra = await fetch('/api/ui/admin-sidebar');
+          const ja = await ra.json().catch(() => null);
+          if (!canceled && ja?.success && Array.isArray(ja.data)) setAdminItems(ja.data as AdminItem[]);
+        } catch {}
       }
     })();
-    return () => { aborted = true; };
+    return () => { canceled = true; };
   }, [projectId]);
+
+  // Синхронизируем состояние проектных пунктов при обновлении adminItems
+  useEffect(() => {
+    if (!projectId) return;
+    if (!adminItems || adminItems.length === 0) return;
+    try {
+      const mapped = mapAdminToProject(adminItems, projectId);
+      setProjectItems(mapped);
+    } catch {}
+  }, [projectId, adminItems, mapAdminToProject]);
+
+  // Вычисляем проектные пункты из adminItems (единый источник)
+  const projectMappedItems: AdminItem[] = useMemo(() => {
+    if (!projectId) return [];
+    // Приоритет: шаблон проектной навигации из системного проекта
+    if (systemProjectItems && systemProjectItems.length) {
+      try { return mapSystemProjectToProject(systemProjectItems, projectId); } catch {}
+    }
+    // Fallback: маппинг admin-sidebar
+    if (adminItems && adminItems.length) {
+      try { return mapAdminToProject(adminItems, projectId); } catch {}
+    }
+    return projectItems || [];
+  }, [projectId, systemProjectItems, adminItems, mapSystemProjectToProject, mapAdminToProject, projectItems]);
 
   // Системное вычисление ссылки "назад" (поднятие на уровень выше по URL)
   const backTarget = useMemo(() => {
@@ -150,53 +192,8 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
     return parentPath || "/";
   }, [location.pathname]);
 
-  const navList: SitusNavItem[] = [
-    {
-      divider: false,
-      link: "/",
-      text: "Дашборд",
-      icon: <FiGrid size={18} aria-hidden />,
-    },
-    {
-      divider: false,
-      link: "/projects",
-      text: "Проекты",
-      icon: <FiFolder size={18} aria-hidden />,
-    },
-    {
-      divider: false,
-      link: "/orders",
-      text: "Заказы",
-      icon: <FiShoppingCart size={18} aria-hidden />,
-    },
-    {
-      divider: false,
-      link: "/marketing",
-      text: "Маркетинг",
-      icon: <FiBarChart2 size={18} aria-hidden />,
-    },
-    {
-      divider: false,
-      link: "/users",
-      text: "Пользователи",
-      icon: <FiUsers size={18} aria-hidden />,
-    },
-    {
-      divider: false,
-      link: "/support",
-      text: "Поддержка",
-      icon: <FiLifeBuoy size={18} aria-hidden />,
-    },
-    {
-      divider: true,
-    },
-    {
-      divider: false,
-      link: "/section-settings",
-      text: "Настройки",
-      icon: <FiSettings size={18} aria-hidden />,
-    },
-  ];
+  // Источник меню админки берём исключительно с бэкенда (`/api/ui/admin-sidebar`).
+  // Локальный fallback навигации удалён по требованию: при отсутствии данных отображаем пустое меню.
 
   const topItems: SitusNavItem[] = useMemo(() => {
     if (projectId) return [];
@@ -209,8 +206,8 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
       });
       return mapped;
     }
-    // fallback: локальная конфигурация
-    return navList.filter((i) => i.divider === false);
+    // Без локального фолбэка возвращаем пустой список, чтобы навигация полагалась только на API
+    return [];
   }, [projectId, adminItems]);
 
   const computedOpen = typeof sidebarOpen === "boolean" ? sidebarOpen : !!isOpen;
@@ -316,8 +313,8 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
               })}
               {projectId && (
                 <>
-                  {/* Проектный режим: пункты из меню проекта */}
-                  {(projectItems || []).map((mi, idx) => {
+                  {/* Проектный режим: пункты из меню проекта (из admin-sidebar, смэппленные в контекст проекта) */}
+                  {(projectMappedItems || []).map((mi, idx) => {
                     const isActive = mi.to === location.pathname || location.pathname.startsWith(mi.to + "/");
                     let icon: React.ReactNode = <FiGrid size={18} aria-hidden />;
                     if (/settings/.test(mi.to)) icon = <FiSettings size={18} aria-hidden />;
