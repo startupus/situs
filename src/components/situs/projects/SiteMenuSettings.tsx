@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ProjectData, PageData } from '../../../services/projectApi';
+import IconPreview from '../../admin/menu/IconPreview';
+import IconSelector from '../../admin/menu/IconSelector';
 
 interface SiteMenuSettingsProps {
   project: ProjectData;
@@ -15,6 +17,8 @@ interface MenuItem {
   children?: MenuItem[];
   order: number;
   visible: boolean;
+  icon?: string;        // Название React иконки
+  iconLibrary?: string; // Библиотека иконок
 }
 
 interface MenuConfig {
@@ -41,10 +45,12 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
 
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showIconSelector, setShowIconSelector] = useState(false);
   const [newMenuItem, setNewMenuItem] = useState<Partial<MenuItem>>({
     title: '',
     type: 'page',
-    visible: true
+    visible: true,
+    iconLibrary: 'fi'
   });
 
   const handleDragStart = (e: React.DragEvent, itemId: string) => {
@@ -108,6 +114,8 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
       type: newMenuItem.type || 'link',
       url: newMenuItem.url,
       pageId: newMenuItem.pageId,
+      icon: newMenuItem.icon,
+      iconLibrary: newMenuItem.iconLibrary || 'fi',
       order: menuConfig.items.length,
       visible: true
     };
@@ -117,7 +125,7 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
       items: [...prev.items, newItem]
     }));
 
-    setNewMenuItem({ title: '', type: 'page', visible: true });
+    setNewMenuItem({ title: '', type: 'page', visible: true, iconLibrary: 'fi' });
     setShowAddModal(false);
   };
 
@@ -139,8 +147,21 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
     }
   };
 
-  const getItemIcon = (type: string) => {
-    switch (type) {
+  const getItemIcon = (item: MenuItem) => {
+    // Если есть пользовательская иконка, используем её
+    if (item.icon) {
+      return (
+        <IconPreview 
+          iconName={item.icon}
+          iconLibrary={item.iconLibrary}
+          size={20}
+          className="text-primary"
+        />
+      );
+    }
+
+    // Fallback на эмодзи по типу
+    switch (item.type) {
       case 'page':
         return '📄';
       case 'link':
@@ -271,7 +292,7 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
                     } ${!item.visible ? 'opacity-50' : ''}`}
                   >
                     <div className="flex items-center gap-2 flex-1">
-                      <span className="text-lg">{getItemIcon(item.type)}</span>
+                      <span className="text-lg">{getItemIcon(item)}</span>
                       <div className="flex-1">
                         <div className="font-medium text-dark dark:text-white">
                           {item.title}
@@ -396,6 +417,47 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
                 </div>
               )}
 
+              {/* Выбор иконки */}
+              <div>
+                <label className="block text-sm font-medium text-dark dark:text-white mb-2">
+                  Иконка пункта меню
+                </label>
+                <div className="flex items-center gap-3">
+                  {/* Предварительный просмотр */}
+                  <div className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-dark-3 rounded border border-stroke dark:border-dark-3">
+                    <IconPreview 
+                      iconName={newMenuItem.icon}
+                      iconLibrary={newMenuItem.iconLibrary}
+                      size={20}
+                      className="text-primary"
+                    />
+                    <span className="text-sm text-dark dark:text-white">
+                      {newMenuItem.icon || 'По умолчанию'}
+                    </span>
+                  </div>
+                  
+                  {/* Кнопки управления */}
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowIconSelector(true)}
+                      className="px-3 py-1.5 bg-primary text-white rounded text-sm hover:bg-primary/90 transition-colors"
+                    >
+                      Выбрать
+                    </button>
+                    {newMenuItem.icon && (
+                      <button
+                        type="button"
+                        onClick={() => setNewMenuItem(prev => ({ ...prev, icon: undefined }))}
+                        className="px-3 py-1.5 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded text-sm hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                      >
+                        Убрать
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={() => setShowAddModal(false)}
@@ -414,6 +476,18 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
             </div>
           </div>
         </div>
+      )}
+
+      {/* Селектор иконок */}
+      {showIconSelector && (
+        <IconSelector
+          selectedIcon={newMenuItem.icon}
+          selectedLibrary={newMenuItem.iconLibrary}
+          onSelect={(icon, library) => {
+            setNewMenuItem(prev => ({ ...prev, icon, iconLibrary: library }));
+          }}
+          onClose={() => setShowIconSelector(false)}
+        />
       )}
     </div>
   );

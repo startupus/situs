@@ -4,6 +4,7 @@ import { MenuItemData } from '../../types/menu';
 import { useNavigationMenu } from '../../hooks/useMenuSystem';
 import { useLanguage } from '../../hooks/useLanguage';
 import { useActiveMenuItem } from './ActiveMenuTracker';
+import IconPreview from '../admin/menu/IconPreview';
 
 /**
  * Компонент навигационного меню
@@ -107,9 +108,19 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
       }`}>
         {showIcons && (
           <span className="text-sm">
-            {item.type === 'COMPONENT' ? '🧩' : 
-             item.type === 'URL' ? '🔗' : 
-             item.type === 'HEADING' ? '📂' : '❓'}
+            {item.icon ? (
+              <IconPreview 
+                iconName={item.icon}
+                iconLibrary={item.iconLibrary}
+                size={16}
+                className={isActive ? 'text-white' : 'text-primary'}
+              />
+            ) : (
+              // Fallback на эмодзи
+              item.type === 'COMPONENT' ? '🧩' : 
+              item.type === 'URL' ? '🔗' : 
+              item.type === 'HEADING' ? '📂' : '❓'
+            )}
           </span>
         )}
         <span className={level > 1 ? 'text-sm' : ''}>{item.title}</span>

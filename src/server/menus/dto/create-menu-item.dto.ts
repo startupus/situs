@@ -113,6 +113,17 @@ export class CreateMenuItemDto {
   @MaxLength(500)
   menuImage?: string;
 
+  // Иконка для пункта меню
+  @IsOptional()
+  @IsString({ message: 'Название иконки должно быть строкой' })
+  @MaxLength(50)
+  icon?: string;
+
+  @IsOptional()
+  @IsString({ message: 'Библиотека иконок должна быть строкой' })
+  @MaxLength(10)
+  iconLibrary?: string = 'fi';
+
   // Связи
   @IsString({ message: 'ID типа меню должен быть строкой' })
   menuTypeId!: string;

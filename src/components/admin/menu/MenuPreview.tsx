@@ -3,6 +3,7 @@ import { FiEye, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiGrid, FiSmartphone,
 import { MenuItemData } from '../../../types/menu';
 import { useMenuSystemRealtime } from '../../../hooks/useMenuSystemRealtime';
 import { testIds } from '../../ui/testids';
+import IconPreview from './IconPreview';
 
 /**
  * Компонент предпросмотра меню в реальном времени
@@ -106,14 +107,22 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
           style={indentStyle}
         >
           {/* Иконка */}
-          {item.component && (
-            <span className="text-xs">
-              {item.component === 'Website' ? <FiGlobe size={14} /> :
-               item.component === 'Store' ? <FiShoppingCart size={14} /> :
-               item.component === 'Blog' ? <FiEdit size={14} /> :
-               item.component === 'Landing' ? <FiTarget size={14} /> : <FiGrid size={14} />}
-            </span>
-          )}
+          <span className="text-xs">
+            {item.icon ? (
+              <IconPreview 
+                iconName={item.icon}
+                iconLibrary={item.iconLibrary}
+                size={14}
+                className="text-primary"
+              />
+            ) : (
+              // Fallback на иконки по компоненту
+              item.component === 'Website' ? <FiGlobe size={14} /> :
+              item.component === 'Store' ? <FiShoppingCart size={14} /> :
+              item.component === 'Blog' ? <FiEdit size={14} /> :
+              item.component === 'Landing' ? <FiTarget size={14} /> : <FiGrid size={14} />
+            )}
+          </span>
           
           {/* Название */}
           <span className="text-dark dark:text-white">

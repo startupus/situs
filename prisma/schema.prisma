@@ -599,6 +599,10 @@ model MenuItem {
   targetId    String?      // pageId, categoryId, itemId
   externalUrl String?      // Для type = URL
   
+  // Иконка для пункта меню
+  icon        String?      // Название React иконки (например: "FiHome", "FiUsers")
+  iconLibrary String?      @default("fi") // Библиотека иконок (fi, fa, md, etc.)
+  
   // Настройки отображения
   isPublished Boolean      @default(true)
   accessLevel AccessLevel  @default(PUBLIC)
