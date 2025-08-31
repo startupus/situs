@@ -27,8 +27,7 @@ export type ProjectEventType =
   | 'integration_created'
   | 'integration_updated'
   | 'integration_deleted'
-  | 'integration_status_changed'
-  | 'integration_health_changed';
+  | 'integration_status_changed';
 
 export interface RealtimeEvent<T = any> {
   type: ProjectEventType;
@@ -45,8 +44,6 @@ export class RealtimeEventsService {
   private readonly subject = new Subject<RealtimeEvent>();
   private readonly clients = new Set<(data: RealtimeEvent) => void>();
   private publishedCounter = 0;
-  private debounceTimers = new Map<string, NodeJS.Timeout>();
-  private debouncedEvents = new Map<string, RealtimeEvent[]>();
 
   asObservable(): Observable<RealtimeEvent> {
     return this.subject.asObservable();
@@ -62,48 +59,6 @@ export class RealtimeEventsService {
         try { send(evt as RealtimeEvent); } catch {}
       }
       this.publishedCounter += 1;
-    } catch {
-      // глушим ошибки публикации, чтобы не влиять на бизнес-логику
-    }
-  }
-
-  /**
-   * Debounced publish for bulk operations
-   * Groups events by key and publishes them in batches after delay
-   */
-  publishDebounced<T = any>(key: string, type: ProjectEventType, payload?: T, delayMs = 1000): void {
-    try {
-      const evt: RealtimeEvent<T> = { type, payload };
-      
-      // Add to debounced events
-      const existing = this.debouncedEvents.get(key) || [];
-      existing.push(evt);
-      this.debouncedEvents.set(key, existing);
-      
-      // Clear existing timer
-      const existingTimer = this.debounceTimers.get(key);
-      if (existingTimer) {
-        clearTimeout(existingTimer);
-      }
-      
-      // Set new timer
-      const timer = setTimeout(() => {
-        const events = this.debouncedEvents.get(key) || [];
-        if (events.length > 0) {
-          // Publish batch event
-          this.publish('integration_updated', {
-            key,
-            events: events.map(e => ({ type: e.type, payload: e.payload })),
-            count: events.length
-          });
-          
-          // Clean up
-          this.debouncedEvents.delete(key);
-          this.debounceTimers.delete(key);
-        }
-      }, delayMs);
-      
-      this.debounceTimers.set(key, timer);
     } catch {
       // глушим ошибки публикации, чтобы не влиять на бизнес-логику
     }

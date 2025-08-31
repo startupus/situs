@@ -77,10 +77,6 @@ class IntegrationsApiService {
   async remove(id: string): Promise<{ success: boolean }> {
     return apiClient.delete(`${this.base}/${id}`);
   }
-
-  async previewEmail(id: string, template?: string, variables?: Record<string, any>): Promise<{ success: boolean; preview?: string; error?: string }> {
-    return apiClient.post(`${this.base}/${id}/email/preview`, { template, variables });
-  }
 }
 
 export const integrationsApi = new IntegrationsApiService();

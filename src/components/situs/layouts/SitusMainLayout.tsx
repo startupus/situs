@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SitusSidebar from "../Sidebar/SitusSidebar";
 import SitusHeader from "../Header/SitusHeader";
 import { Outlet } from "react-router-dom";
-import { ToastProvider } from "../../ui/ThemeToast";
 
 interface SitusMainLayoutProps {}
 
@@ -10,7 +9,7 @@ const SitusMainLayout: React.FC<SitusMainLayoutProps> = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
 
   return (
-    <ToastProvider position="top-right">
+    <>
       <div className="relative flex min-h-screen w-full items-start">
         <SitusSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -23,7 +22,7 @@ const SitusMainLayout: React.FC<SitusMainLayoutProps> = () => {
           </div>
         </div>
       </div>
-    </ToastProvider>
+    </>
   );
 };
 

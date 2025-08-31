@@ -44,15 +44,6 @@ export class IntegrationsController {
   ) {
     return this.service.listN8nWorkflows(id, { baseUrl, apiKey });
   }
-
-  // Предпросмотр email шаблона для EMAIL_SMTP интеграций
-  @Post(':id/email/preview')
-  previewEmail(
-    @Param('id') id: string,
-    @Body() body: { template?: string; variables?: Record<string, any> }
-  ) {
-    return this.service.previewEmail(id, body.template, body.variables);
-  }
 }
 
 

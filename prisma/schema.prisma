@@ -673,10 +673,6 @@ model Integration {
   status     IntegrationStatus  @default(DISABLED)
   config     Json?
   secrets    Json?
-  
-  // Health check results
-  lastHealthCheck DateTime?
-  healthStatus    String?           // JSON: { success: boolean, status: string, detail?: string }
 
   createdAt  DateTime           @default(now())
   updatedAt  DateTime           @updatedAt

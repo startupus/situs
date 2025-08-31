@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Inject, Sse, MessageEvent } from '@nestjs/common';
 import { RealtimeEventsService } from './realtime-events.service';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
 import { Public } from '../common/decorators/public.decorator';
 
@@ -57,28 +57,14 @@ export class RealtimeController {
 
   /**
    * SSE поток для интеграций
-   * Фактический путь: GET /api/realtime/integrations?projectId=xxx
+   * Фактический путь: GET /api/realtime/integrations
    */
   @Public()
   @Sse('integrations')
-  integrationsEvents(@Query('projectId') projectId?: string): any {
+  integrationsEvents(): any {
     const source$ = this.realtime.asObservable();
     const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
-    
-    // Filter events by projectId if specified
-    const filteredSource$ = projectId ? 
-      source$.pipe(
-        filter((evt: any) => {
-          // Pass through non-integration events
-          if (!evt?.type?.startsWith('integration_')) {
-            return true;
-          }
-          // Only pass integration events for this project
-          return evt?.payload?.projectId === projectId;
-        })
-      ) : source$;
-    
-    return merge(handshake$, filteredSource$).pipe(
+    return merge(handshake$, source$).pipe(
       map((evt) => ({ data: evt }) as MessageEvent),
     );
   }

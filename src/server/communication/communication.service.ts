@@ -132,21 +132,6 @@ export class CommunicationService {
   }
 
   /**
-   * Предпросмотр email по шаблону
-   */
-  async previewEmail(
-    template: string,
-    variables: Record<string, any> = {}
-  ): Promise<{ success: boolean; preview?: string; error?: string }> {
-    try {
-      const processed = this.processTemplate(template, variables);
-      return { success: true, preview: processed };
-    } catch (error: any) {
-      return { success: false, error: error?.message || 'Template processing error' };
-    }
-  }
-
-  /**
    * Отправка email (MVP - только логирование)
    */
   private async sendEmail(
