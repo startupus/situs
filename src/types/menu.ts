@@ -65,6 +65,10 @@ export interface MenuItemData {
   targetId?: string;      // pageId, categoryId, itemId
   externalUrl?: string;   // Для type = URL (основной язык)
   
+  // Иконка для пункта меню
+  icon?: string;          // Название React иконки (например: "FiHome", "FiUsers")
+  iconLibrary?: string;   // Библиотека иконок (fi, fa, md, etc.)
+  
   // Настройки отображения
   isPublished: boolean;
   accessLevel: AccessLevel;
@@ -221,6 +225,8 @@ export interface CreateMenuItemRequest {
   layout?: string;
   targetId?: string;
   externalUrl?: string;
+  icon?: string;          // Название React иконки
+  iconLibrary?: string;   // Библиотека иконок
   accessLevel?: AccessLevel;
   language?: string;
   languageVersions?: MenuItemLanguageVersion[];

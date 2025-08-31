@@ -3,6 +3,7 @@ import { MenuItemData } from '../../../types/menu';
 import { FiBox, FiLink, FiFolder, FiMinus, FiHelpCircle, FiGlobe, FiEdit, FiTrash2 } from 'react-icons/fi';
 import ToggleSwitch from '../../ui/ToggleSwitch';
 import { testIds } from '../../ui/testids';
+import IconPreview from './IconPreview';
 
 /**
  * Компонент карточки пункта меню
@@ -29,9 +30,22 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
   onSelect,
   showSelection = false
 }) => {
-  // Получение иконки по типу пункта меню
-  const getTypeIcon = (type: string) => {
-    switch (type) {
+  // Получение иконки пункта меню (приоритет: пользовательская -> по типу)
+  const getMenuIcon = () => {
+    // Если есть пользовательская иконка, используем её
+    if (item.icon) {
+      return (
+        <IconPreview 
+          iconName={item.icon}
+          iconLibrary={item.iconLibrary}
+          size={16}
+          className="text-primary"
+        />
+      );
+    }
+
+    // Fallback на иконки по типу пункта меню
+    switch (item.type) {
       case 'COMPONENT': return <FiBox size={16} className="text-primary" />;
       case 'URL': return <FiLink size={16} className="text-primary" />;
       case 'HEADING': return <FiFolder size={16} className="text-primary" />;
@@ -68,7 +82,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
             
             {/* Иконка по типу пункта меню */}
             <span className="text-lg" title={`Тип: ${item.type}`}>
-              {getTypeIcon(item.type)}
+              {getMenuIcon()}
             </span>
             
             <div className="flex-1">

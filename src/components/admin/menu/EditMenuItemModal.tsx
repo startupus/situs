@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { MenuItemData, CreateMenuItemRequest } from '../../../types/menu';
-import { FiBox, FiLink, FiFolder, FiGlobe, FiUsers, FiStar, FiSettings, FiX } from 'react-icons/fi';
+import { FiBox, FiLink, FiFolder, FiGlobe, FiUsers, FiStar, FiSettings, FiX, FiImage } from 'react-icons/fi';
 import CorporateSelect from '../../ui/CorporateSelect';
 import CorporateInput from '../../ui/CorporateInput';
 import CorporateTextarea from '../../ui/CorporateTextarea';
+import IconSelector from './IconSelector';
+import IconPreview from './IconPreview';
 
 /**
  * Модальное окно редактирования пункта меню
@@ -28,6 +30,8 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
     view: item.view || '',
     layout: item.layout || '',
     targetId: item.targetId || '',
+    icon: item.icon || '',
+    iconLibrary: item.iconLibrary || 'fi',
     accessLevel: item.accessLevel,
     language: item.language,
     isPublished: item.isPublished,
@@ -36,6 +40,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showIconSelector, setShowIconSelector] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,6 +207,51 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
               />
             </div>
 
+            {/* Выбор иконки */}
+            <div className="border border-primary/20 dark:border-primary/30 rounded-lg p-4 bg-primary/5 dark:bg-primary/10">
+              <div className="flex items-center gap-2 mb-3">
+                <FiImage className="text-primary" size={16} />
+                <label className="text-sm font-medium text-dark dark:text-white">
+                  Иконка пункта меню
+                </label>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                {/* Предварительный просмотр */}
+                <div className="flex items-center gap-2 p-2 bg-white dark:bg-dark-3 rounded border border-stroke dark:border-dark-3">
+                  <IconPreview 
+                    iconName={formData.icon}
+                    iconLibrary={formData.iconLibrary}
+                    size={20}
+                    className="text-primary"
+                  />
+                  <span className="text-sm text-dark dark:text-white">
+                    {formData.icon || 'По умолчанию'}
+                  </span>
+                </div>
+                
+                {/* Кнопки управления */}
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowIconSelector(true)}
+                    className="px-3 py-1.5 bg-primary text-white rounded text-sm hover:bg-primary/90 transition-colors"
+                  >
+                    Изменить
+                  </button>
+                  {formData.icon && (
+                    <button
+                      type="button"
+                      onClick={() => handleChange('icon', '')}
+                      className="px-3 py-1.5 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded text-sm hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    >
+                      Убрать
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* Параметры JSON */}
             <CorporateTextarea
               label="Параметры (JSON)"
@@ -247,6 +297,19 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
           </form>
         </div>
       </div>
+
+      {/* Селектор иконок */}
+      {showIconSelector && (
+        <IconSelector
+          selectedIcon={formData.icon}
+          selectedLibrary={formData.iconLibrary}
+          onSelect={(icon, library) => {
+            handleChange('icon', icon);
+            handleChange('iconLibrary', library);
+          }}
+          onClose={() => setShowIconSelector(false)}
+        />
+      )}
     </div>
   );
 };

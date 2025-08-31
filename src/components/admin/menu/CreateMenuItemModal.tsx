@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MenuItemData, CreateMenuItemRequest } from '../../../types/menu';
-import { FiX, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiChevronDown, FiInfo } from 'react-icons/fi';
+import { FiX, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiChevronDown, FiInfo, FiImage } from 'react-icons/fi';
+import IconSelector from './IconSelector';
+import IconPreview, { getDefaultIconForMenuType } from './IconPreview';
 
 /**
  * Модальное окно создания пункта меню
@@ -33,8 +35,11 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
     accessLevel: 'PUBLIC',
     language: '*',
     level: 1,
-    menuTypeId
+    menuTypeId,
+    iconLibrary: 'fi'
   });
+
+  const [showIconSelector, setShowIconSelector] = useState(false);
 
   // Данные для селекторов View
   const viewOptions: ViewOption[] = [
@@ -266,11 +271,13 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
                       onChange={(e) => {
                         const component = e.target.value;
                         const defaults = getComponentDefaults(component);
+                        const defaultIcon = getDefaultIconForMenuType(formData.type, component);
                         setFormData(prev => ({ 
                           ...prev, 
                           component,
                           view: '',
                           targetId: '',
+                          icon: prev.icon || defaultIcon,
                           ...defaults
                         }));
                       }}
@@ -398,6 +405,56 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
             </div>
           )}
 
+          {/* Выбор иконки */}
+          <div className="border border-primary/20 dark:border-primary/30 rounded-lg p-6 bg-primary/5 dark:bg-primary/10 mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <FiImage className="text-primary" size={20} />
+              <h4 className="text-lg font-medium text-dark dark:text-white">
+                Иконка пункта меню
+              </h4>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              {/* Предварительный просмотр */}
+              <div className="flex items-center gap-3 p-3 bg-white dark:bg-dark-3 rounded-lg border border-stroke dark:border-dark-3">
+                <IconPreview 
+                  iconName={formData.icon}
+                  iconLibrary={formData.iconLibrary}
+                  size={24}
+                  className="text-primary"
+                />
+                <div>
+                  <div className="text-sm font-medium text-dark dark:text-white">
+                    {formData.icon || 'Иконка не выбрана'}
+                  </div>
+                  <div className="text-xs text-body-color dark:text-dark-6">
+                    {formData.icon ? `Библиотека: ${formData.iconLibrary}` : 'Будет использована иконка по умолчанию'}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Кнопки управления */}
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowIconSelector(true)}
+                  className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+                >
+                  Выбрать иконку
+                </button>
+                {formData.icon && (
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, icon: undefined }))}
+                    className="px-4 py-2 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-sm font-medium"
+                  >
+                    Убрать
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
           {/* Права доступа и язык */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Права доступа */}
@@ -499,6 +556,18 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({
           </div>
         </form>
       </div>
+
+      {/* Селектор иконок */}
+      {showIconSelector && (
+        <IconSelector
+          selectedIcon={formData.icon}
+          selectedLibrary={formData.iconLibrary}
+          onSelect={(icon, library) => {
+            setFormData(prev => ({ ...prev, icon, iconLibrary: library }));
+          }}
+          onClose={() => setShowIconSelector(false)}
+        />
+      )}
     </div>
   );
 };
