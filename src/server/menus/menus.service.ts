@@ -293,6 +293,52 @@ export class MenusService {
       dto.level = parent.level + 1;
     }
 
+    // Автоподбор дефолтной иконки, если не задана вручную
+    if (!dto.icon) {
+      const alias = (dto.alias || '').toLowerCase();
+      const title = (dto.title || '').toLowerCase();
+      const type = dto.type || MenuItemType.COMPONENT;
+      const component = (dto.component || '').toLowerCase();
+
+      const pick = (name: string) => ({ icon: name, iconLibrary: 'fi' as any });
+
+      // По компоненту/просмотру
+      if (component.includes('store')) {
+        Object.assign(dto, pick('FiShoppingCart'));
+      } else if (component.includes('website') || alias === 'overview' || title.includes('обзор')) {
+        Object.assign(dto, pick('FiHome'));
+      } else if (component.includes('menu') || alias === 'menu' || title.includes('меню')) {
+        Object.assign(dto, pick('FiMenu'));
+      } else if (component.includes('users') || alias === 'users' || title.includes('польз')) {
+        Object.assign(dto, pick('FiUsers'));
+      } else if (component.includes('settings') || alias === 'settings' || title.includes('настрой')) {
+        Object.assign(dto, pick('FiSettings'));
+      } else if (component.includes('seo') || alias === 'seo') {
+        Object.assign(dto, pick('FiTarget'));
+      } else if (component.includes('pages') || alias === 'pages' || title.includes('страниц')) {
+        Object.assign(dto, pick('FiFileText'));
+      } else if (component.includes('access') || alias === 'access' || title.includes('доступ')) {
+        Object.assign(dto, pick('FiLock'));
+      } else if (component.includes('team') || alias === 'team' || title.includes('команд')) {
+        Object.assign(dto, pick('FiUsers'));
+      } else {
+        // По типу
+        switch (type) {
+          case MenuItemType.URL:
+            Object.assign(dto, pick('FiArrowRight'));
+            break;
+          case MenuItemType.HEADING:
+            Object.assign(dto, pick('FiFolder'));
+            break;
+          case MenuItemType.SEPARATOR:
+            Object.assign(dto, pick('FiMinus'));
+            break;
+          default:
+            Object.assign(dto, pick('FiHome'));
+        }
+      }
+    }
+
     const menuItem = await this.prisma.menuItem.create({
       data: dto,
       include: {

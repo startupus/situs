@@ -101,17 +101,17 @@ const AVAILABLE_ICONS: IconData[] = [
   { name: 'FiDownload', component: FiDownload, category: 'actions', keywords: ['скачать', 'загрузить', 'download', 'load'] },
 ];
 
-const CATEGORIES = [
-  { key: 'all', label: 'Все', emoji: '🎯' },
-  { key: 'general', label: 'Общие', emoji: '🏠' },
-  { key: 'navigation', label: 'Навигация', emoji: '🧭' },
-  { key: 'ecommerce', label: 'E-commerce', emoji: '🛒' },
-  { key: 'content', label: 'Контент', emoji: '📄' },
-  { key: 'social', label: 'Социальные', emoji: '💬' },
-  { key: 'interface', label: 'Интерфейс', emoji: '🎛️' },
-  { key: 'time', label: 'Время', emoji: '⏰' },
-  { key: 'technical', label: 'Технические', emoji: '⚙️' },
-  { key: 'actions', label: 'Действия', emoji: '🎬' },
+const CATEGORIES: Array<{ key: string; label: string; icon: React.ComponentType<{ size?: number }> }> = [
+  { key: 'all', label: 'Все', icon: FiGrid },
+  { key: 'general', label: 'Общие', icon: FiHome },
+  { key: 'navigation', label: 'Навигация', icon: FiNavigation },
+  { key: 'ecommerce', label: 'E-commerce', icon: FiShoppingCart },
+  { key: 'content', label: 'Контент', icon: FiFileText },
+  { key: 'social', label: 'Социальные', icon: FiMessageCircle },
+  { key: 'interface', label: 'Интерфейс', icon: FiList },
+  { key: 'time', label: 'Время', icon: FiClock },
+  { key: 'technical', label: 'Технические', icon: FiTool },
+  { key: 'actions', label: 'Действия', icon: FiCheck },
 ];
 
 const IconSelector: React.FC<IconSelectorProps> = ({
@@ -187,20 +187,23 @@ const IconSelector: React.FC<IconSelectorProps> = ({
 
           {/* Категории */}
           <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((category) => (
-              <button
-                key={category.key}
-                onClick={() => setSelectedCategory(category.key)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  selectedCategory === category.key
-                    ? 'bg-primary text-white'
-                    : 'bg-gray-100 dark:bg-dark-3 text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-4'
-                }`}
-              >
-                <span>{category.emoji}</span>
-                {category.label}
-              </button>
-            ))}
+            {CATEGORIES.map((category) => {
+              const Icon = category.icon;
+              return (
+                <button
+                  key={category.key}
+                  onClick={() => setSelectedCategory(category.key)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    selectedCategory === category.key
+                      ? 'bg-primary text-white'
+                      : 'bg-gray-100 dark:bg-dark-3 text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark-4'
+                  }`}
+                >
+                  <Icon size={16} />
+                  {category.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
