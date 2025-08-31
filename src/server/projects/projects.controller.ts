@@ -108,6 +108,15 @@ export class ProjectsController {
   }
 
   /**
+   * Получение активной темы проекта (MVP)
+   */
+  @Get(':id/theme')
+  async getProjectTheme(@Param('id') id: string) {
+    const theme = await this.projectsService.getProjectThemeConfig(id);
+    return { success: true, data: theme } as const;
+  }
+
+  /**
    * Создание нового проекта
    */
   @Post()
@@ -135,6 +144,15 @@ export class ProjectsController {
   @Put(':id')
   async updatePut(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
     return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
+  }
+
+  /**
+   * Обновление активной темы проекта (MVP)
+   */
+  @Put(':id/theme')
+  async updateProjectTheme(@Param('id') id: string, @Body() body: any) {
+    const result = await this.projectsService.updateProjectThemeConfig(id, body);
+    return { success: result.success } as const;
   }
 
   /**

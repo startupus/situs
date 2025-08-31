@@ -187,6 +187,42 @@ class ProjectsApiService {
   }
 
   /**
+   * Получить активную тему проекта (MVP)
+   */
+  async getProjectTheme(projectId: string): Promise<any> {
+    try {
+      const response = await apiClient.get<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/theme`
+      );
+      if (ApiUtils.isSuccess(response)) {
+        return response.data;
+      }
+      throw new Error(response.error || 'Ошибка при загрузке темы проекта');
+    } catch (error) {
+      console.error('Get Project Theme API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
+   * Сохранить активную тему проекта (MVP)
+   */
+  async updateProjectTheme(projectId: string, themeConfig: any): Promise<void> {
+    try {
+      const response = await apiClient.put<ApiResponse<{ success: boolean }>>(
+        `${this.baseEndpoint}/${projectId}/theme`,
+        themeConfig
+      );
+      if (!ApiUtils.isSuccess(response)) {
+        throw new Error(response.error || 'Ошибка при сохранении темы проекта');
+      }
+    } catch (error) {
+      console.error('Update Project Theme API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
    * Обновить домены проекта (base domain / customDomain)
    */
   async updateProjectDomains(projectId: string, data: { domain?: string; customDomain?: string }): Promise<void> {
