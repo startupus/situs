@@ -1,12 +1,9 @@
+@import './styles/theme-components.css';
+@import './styles/theme-core-components.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Импорт стандартных компонентов темы */
-@import './styles/theme-components.css';
-
-/* Импорт стилей для Core компонентов */
-@import './styles/theme-core-components.css';
 
 /* ===== CSS ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ ===== */
 :root {

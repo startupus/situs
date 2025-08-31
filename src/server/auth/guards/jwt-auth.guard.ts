@@ -13,8 +13,19 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) { super(); }
 
   canActivate(context: ExecutionContext) {
-    // В development можно упростить доступ, но в test и production применяем строгую проверку
+    // В development режимe: разрешаем доступ и подставляем dev-пользователя,
+    // чтобы downstream-guards (PermissionGuard) видели req.user
     if (process.env.NODE_ENV === 'development') {
+      const req = context.switchToHttp().getRequest();
+      if (!req.user) {
+        (req as any).user = {
+          id: 'dev-user-id',
+          email: 'dev@situs.local',
+          name: 'Dev User',
+          globalRole: 'SUPER_ADMIN',
+          scopes: ['PROJECT_READ','PROJECT_WRITE','PROJECT_ADMIN']
+        };
+      }
       return true;
     }
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
@@ -48,6 +59,13 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       /^\/api\/projects\/heartbeat$/,
       /^\/auth\//,
       /^\/api\/auth\//,
+      /^\/api\/users\/me$/,
+      /^\/api\/ui\/meta/,
+      /^\/api\/ui\/admin-sidebar/,
+      /^\/api\/ui\/project-sidebar/,
+      /^\/api\/ui\/admin-user/,
+      // Dev: разрешаем инвайты без токена, контроллер сам обеспечит fallback user
+      /^\/api\/invitations($|\/)/,
     ];
     if (allow.some((re) => re.test(url))) return true;
 

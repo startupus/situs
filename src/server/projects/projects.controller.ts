@@ -18,7 +18,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 // import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProjectsService } from './projects.service';
-import { Optional, Inject } from '@nestjs/common';
+import { Optional, Inject, ForbiddenException } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { UpdateProjectDomainDto } from './dto/update-project-domain.dto';
@@ -121,6 +121,14 @@ export class ProjectsController {
   @Patch(':id')
   @Scopes('PROJECT_WRITE')
   async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
+    // Жёсткая защита системного проекта на уровне контроллера (ранний возврат)
+    if (id === 'situs-admin') {
+      const body = (req && req.body) ? req.body : updateProjectDto as any;
+      const hasForbidden = body && (('slug' in body) || ('ownerId' in body));
+      if (hasForbidden) {
+        throw new ForbiddenException('Slug/ownerId системного проекта нельзя изменять');
+      }
+    }
     return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
   }
 

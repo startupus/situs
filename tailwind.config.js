@@ -136,5 +136,6 @@ export default {
   },
   plugins: [
     require("./Upload/react-pro-components-main/plugin.js"),
+    require("tailwindcss-animate"),
   ],
 } 

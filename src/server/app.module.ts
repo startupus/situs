@@ -35,6 +35,8 @@ import { accessConfig } from './config/access.config';
 import { RolesGuard } from './common/guards/roles.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UiModule } from './ui/ui.module';
+import { AdminScreensModule } from './admin-screens/admin-screens.module';
+import { IntegrationsModule } from './integrations/integrations.module';
 
 /**
  * Основной модуль приложения
@@ -102,6 +104,8 @@ import { UiModule } from './ui/ui.module';
     // Каналы связи
     CommunicationModule,
     UiModule,
+    AdminScreensModule,
+    IntegrationsModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
