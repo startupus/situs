@@ -64,11 +64,12 @@ const BasicThemeForm: React.FC<BasicThemeFormProps> = ({ value, onChange }) => {
 
 const ProjectThemeManager: React.FC = () => {
   const { projectId } = useParams();
-  const { currentTheme, isDarkMode, updateTheme, toggleDarkMode, saveThemeSettings } = useTheme();
+  const { currentTheme, isDarkMode, updateTheme, toggleDarkMode, saveThemeSettings, settings, updateThemeVariant } = useTheme();
   const [serverTheme, setServerTheme] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [previewMode, setPreviewMode] = useState<boolean>(false);
 
   const effectiveProjectId = useMemo(() => projectId as string, [projectId]);
 
@@ -91,6 +92,34 @@ const ProjectThemeManager: React.FC = () => {
     load();
     return () => { mounted = false; };
   }, [effectiveProjectId]);
+
+  const handleSelectPreset = (themeId: string) => {
+    try {
+      const preset = settings.availableThemes.find((t) => t.id === themeId);
+      if (!preset) return;
+      // Обновляем контекст на выбранную предустановку
+      updateTheme(themeId);
+      // И синхронизируем редактируемую конфигурацию с пресетом
+      setServerTheme(preset);
+      if (previewMode) {
+        try {
+          updateThemeVariant('light', preset.colors.light as any);
+          updateThemeVariant('dark', preset.colors.dark as any);
+        } catch {}
+      }
+    } catch {}
+  };
+
+  const togglePreview = () => {
+    const next = !previewMode;
+    setPreviewMode(next);
+    try {
+      if (serverTheme && serverTheme.colors) {
+        updateThemeVariant('light', serverTheme.colors.light as any);
+        updateThemeVariant('dark', serverTheme.colors.dark as any);
+      }
+    } catch {}
+  };
 
   const handleSave = async () => {
     if (!effectiveProjectId || !serverTheme) return;
@@ -125,6 +154,12 @@ const ProjectThemeManager: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={togglePreview}
+            className={`px-3 py-2 border rounded-lg text-sm ${previewMode ? 'border-primary text-primary' : 'border-stroke hover:bg-gray-50 dark:hover:bg-dark-3'}`}
+          >
+            {previewMode ? 'Предпросмотр включен' : 'Предпросмотр'}
+          </button>
+          <button
             onClick={toggleDarkMode}
             className="px-3 py-2 border border-stroke rounded-lg text-sm hover:bg-gray-50 dark:hover:bg-dark-3"
           >
@@ -140,19 +175,19 @@ const ProjectThemeManager: React.FC = () => {
         </div>
       </div>
 
-      {/* Выбор предустановленных тем (на основе текущих настроек ThemeContext) */}
+      {/* Выбор предустановленных тем */}
       <div className="space-y-3">
         <label className="block text-sm font-medium text-dark dark:text-white">Предустановленная тема</label>
         <select
           value={currentTheme.id}
-          onChange={(e) => updateTheme(e.target.value)}
+          onChange={(e) => handleSelectPreset(e.target.value)}
           className="w-full max-w-sm rounded-lg border border-stroke px-3 py-2 dark:border-dark-3 dark:bg-dark dark:text-white"
         >
-          {/* Список доступных тем хранится в ThemeContext.settings.availableThemes */}
-          {/* Чтобы не тянуть весь контекст сюда, оставим выбор по текущей теме (updateTheme сам переключит) */}
-          <option value={currentTheme.id}>{currentTheme.name}</option>
+          {settings.availableThemes.map((t) => (
+            <option key={t.id} value={t.id}>{t.name}</option>
+          ))}
         </select>
-        <p className="text-xs text-body-color dark:text-dark-6">Список тем может быть расширен позже (Фаза 2).</p>
+        <p className="text-xs text-body-color dark:text-dark-6">Можно настроить палитру ниже и сохранить как активную для проекта.</p>
       </div>
 
       {/* Редактор палитры (MVP) */}
