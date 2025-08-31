@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { DemoAPI } from "../../../api/services/demo.api";
 
 // Компонент левой панели с подменю (копируем из SitusProjects)
 const ProjectsSidebar: React.FC = () => {
@@ -118,50 +119,41 @@ const ProjectsSidebar: React.FC = () => {
   );
 };
 
-// Моковые данные магазинов
-const mockStores = [
-  {
-    id: 2,
-    name: "Интернет-магазин 'МодаСтиль'",
-    status: "active",
-    url: "https://modastyle.ru",
-    createdAt: "2024-02-20",
-    visitors: 3200,
-    orders: 180,
-    revenue: 450000,
-    products: 1250,
-    categories: 15
-  },
-  {
-    id: 5,
-    name: "Магазин электроники 'ТехноМир'",
-    status: "active",
-    url: "https://technomir.ru",
-    createdAt: "2024-02-05",
-    visitors: 4500,
-    orders: 320,
-    revenue: 890000,
-    products: 850,
-    categories: 8
-  },
-  {
-    id: 8,
-    name: "Магазин книг 'ЧитайГород'",
-    status: "development",
-    url: "https://chitaygorod.ru",
-    createdAt: "2024-03-20",
-    visitors: 0,
-    orders: 0,
-    revenue: 0,
-    products: 0,
-    categories: 0
-  }
-];
+type StoreCard = {
+  id: number | string;
+  name: string;
+  status: string;
+  url: string;
+  createdAt: string;
+  visitors: number;
+  orders: number;
+  revenue: number;
+  products: number;
+  categories: number;
+};
 
 const SitusStores: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [stores, setStores] = useState<StoreCard[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const filteredStores = mockStores.filter(store =>
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const resp = await DemoAPI.stores();
+        const list = (resp as any)?.data || [];
+        if (mounted) setStores(list);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const filteredStores = stores.filter(store =>
     store.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 

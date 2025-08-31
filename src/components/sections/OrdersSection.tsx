@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { DemoAPI } from '../../api/services/demo.api';
 import { 
   FiShoppingBag, FiMail, FiPhone, FiUser, FiCalendar, 
   FiClock, FiDollarSign, FiPackage, FiFilter, FiSearch,
@@ -32,71 +33,22 @@ const OrdersSection: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
-  // Моковые данные заказов и заявок
-  const [orders] = useState<Order[]>([
-    {
-      id: 'ORD-001',
-      type: 'ecommerce',
-      status: 'new',
-      customerName: 'Анна Петрова',
-      customerEmail: 'anna@example.com',
-      customerPhone: '+7 (912) 345-67-89',
-      amount: 3500,
-      currency: 'RUB',
-      items: [
-        { id: '1', name: 'Футболка базовая', quantity: 2, price: 1200 },
-        { id: '2', name: 'Джинсы классические', quantity: 1, price: 3500 }
-      ],
-      createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-      priority: 'high'
-    },
-    {
-      id: 'ORD-002',
-      type: 'contact',
-      status: 'new',
-      customerName: 'Михаил Иванов',
-      customerEmail: 'mikhail@company.ru',
-      customerPhone: '+7 (495) 123-45-67',
-      message: 'Интересует разработка корпоративного сайта для нашей компании. Нужна консультация по функционалу и стоимости.',
-      createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
-      priority: 'high'
-    },
-    {
-      id: 'ORD-003',
-      type: 'callback',
-      status: 'processing',
-      customerName: 'Елена Смирнова',
-      customerEmail: 'elena@example.com',
-      customerPhone: '+7 (921) 876-54-32',
-      message: 'Заказать обратный звонок для консультации по интернет-магазину',
-      createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-      priority: 'medium'
-    },
-    {
-      id: 'ORD-004',
-      type: 'ecommerce',
-      status: 'completed',
-      customerName: 'Дмитрий Козлов',
-      customerEmail: 'dmitriy@example.com',
-      amount: 5000,
-      currency: 'RUB',
-      items: [
-        { id: '3', name: 'Кроссовки спортивные', quantity: 1, price: 5000 }
-      ],
-      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-      priority: 'low'
-    },
-    {
-      id: 'ORD-005',
-      type: 'contact',
-      status: 'new',
-      customerName: 'Ольга Федорова',
-      customerEmail: 'olga@startup.io',
-      message: 'Хотим создать лендинг для нашего стартапа. Когда можем обсудить детали?',
-      createdAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-      priority: 'high'
-    }
-  ]);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const resp = await DemoAPI.orders();
+        const list = (resp as any)?.data || [];
+        if (mounted) setOrders(list);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
 
   const getFilteredOrders = () => {
     let filtered = orders;
