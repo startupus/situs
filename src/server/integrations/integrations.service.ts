@@ -6,6 +6,8 @@ import { IntegrationRegistry } from './plugins/registry';
 import { EmailIntegrationPlugin } from './plugins/email/email.integration';
 import { N8nIntegrationPlugin } from './plugins/n8n/n8n.integration';
 import { CommunicationService } from '../communication/communication.service';
+import { IntegrationWebhooksService } from './webhooks.service';
+import { IntegrationEncryptionService } from './encryption.service';
 
 export interface CreateIntegrationDto {
   projectId: string;
@@ -26,11 +28,19 @@ export interface UpdateIntegrationDto {
 
 @Injectable()
 export class IntegrationsService {
+  private healthCache = new Map<string, { result: any; timestamp: number }>();
+  private testRateLimit = new Map<string, number[]>(); // integrationId -> timestamps array
+  private readonly CACHE_TTL = 60000; // 60 seconds
+  private readonly RATE_LIMIT_WINDOW = 60000; // 60 seconds
+  private readonly RATE_LIMIT_MAX = 10; // max 10 tests per minute per integration
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly realtime: RealtimeEventsService,
     private readonly registry: IntegrationRegistry,
     private readonly comms: CommunicationService,
+    private readonly webhooks: IntegrationWebhooksService,
+    private readonly encryption: IntegrationEncryptionService,
   ) {}
 
   private ensureRegistry() {
@@ -50,7 +60,12 @@ export class IntegrationsService {
   }
 
   async listByProject(projectId: string) {
-    return this.prisma.integration.findMany({ where: { projectId } });
+    const integrations = await this.prisma.integration.findMany({ where: { projectId } });
+    // Return integrations with decrypted secrets for internal use
+    return integrations.map(integration => ({
+      ...integration,
+      secrets: this.encryption.retrieveSecrets(integration.secrets as string)
+    }));
   }
 
   async create(dto: CreateIntegrationDto) {
@@ -70,10 +85,11 @@ export class IntegrationsService {
         isActive: false,
         status: IntegrationStatus.DISABLED,
         config: dto.config ?? undefined,
-        secrets: dto.secrets ?? undefined,
+        secrets: this.encryption.processSecrets(dto.secrets) ?? undefined,
       },
     });
     this.realtime.publish('integration_created', { id: created.id, projectId: dto.projectId });
+    await this.webhooks.notifyWebhooks('integration_created', created);
     return created;
   }
 
@@ -99,7 +115,7 @@ export class IntegrationsService {
       data: {
         title: dto.title ?? undefined,
         config: dto.config ?? undefined,
-        secrets: dto.secrets ?? undefined,
+        secrets: dto.secrets ? this.encryption.processSecrets(dto.secrets) : undefined,
         isActive: dto.isActive ?? undefined,
         instanceKey: dto.instanceKey ?? undefined,
         status: dto.isActive === undefined ? undefined : (dto.isActive ? IntegrationStatus.READY : IntegrationStatus.DISABLED),
@@ -109,23 +125,91 @@ export class IntegrationsService {
     if (dto.isActive !== undefined) {
       this.realtime.publish('integration_status_changed', { id, projectId: updated.projectId, status: updated.status });
     }
+    await this.webhooks.notifyWebhooks('integration_updated', updated, dto);
     return updated;
+  }
+
+  private checkRateLimit(integrationId: string): boolean {
+    const now = Date.now();
+    const timestamps = this.testRateLimit.get(integrationId) || [];
+    
+    // Remove old timestamps outside the window
+    const validTimestamps = timestamps.filter(ts => now - ts < this.RATE_LIMIT_WINDOW);
+    
+    if (validTimestamps.length >= this.RATE_LIMIT_MAX) {
+      return false; // Rate limit exceeded
+    }
+    
+    // Add current timestamp and update
+    validTimestamps.push(now);
+    this.testRateLimit.set(integrationId, validTimestamps);
+    return true;
   }
 
   async test(id: string) {
     const integration = await this.prisma.integration.findUnique({ where: { id } });
     if (!integration) throw new NotFoundException('Integration not found');
+    
+    // Check rate limit
+    if (!this.checkRateLimit(id)) {
+      throw new BadRequestException('Rate limit exceeded. Please wait before testing again.');
+    }
+    
+    // Check cache
+    const cached = this.healthCache.get(id);
+    if (cached && (Date.now() - cached.timestamp) < this.CACHE_TTL) {
+      return cached.result;
+    }
+    
     this.ensureRegistry();
     const plugin = this.registry.getPlugin(integration.provider);
-    if (!plugin) return { success: false, status: 'ERROR' };
-    return plugin.healthCheck(integration);
+    if (!plugin) {
+      const result = { success: false, status: 'ERROR', detail: 'Plugin not found' };
+      this.healthCache.set(id, { result, timestamp: Date.now() });
+      return result;
+    }
+    
+    let result: any;
+    try {
+      result = await plugin.healthCheck(integration);
+    } catch (error: any) {
+      result = { success: false, status: 'ERROR', detail: error?.message || 'Health check failed' };
+    }
+    
+    // Cache the result
+    this.healthCache.set(id, { result, timestamp: Date.now() });
+    
+    // Store health status in database
+    await this.prisma.integration.update({
+      where: { id },
+      data: {
+        lastHealthCheck: new Date(),
+        healthStatus: JSON.stringify(result)
+      }
+    });
+    
+    // Publish health change event
+    this.realtime.publish('integration_health_changed', { 
+      id, 
+      projectId: integration.projectId, 
+      health: result,
+      timestamp: new Date().toISOString()
+    });
+    
+    return result;
   }
 
   async remove(id: string) {
     const integration = await this.prisma.integration.findUnique({ where: { id } });
     if (!integration) throw new NotFoundException('Integration not found');
+    
+    // Clean up caches
+    this.healthCache.delete(id);
+    this.testRateLimit.delete(id);
+    
     await this.prisma.integration.delete({ where: { id } });
     this.realtime.publish('integration_deleted', { id, projectId: integration.projectId });
+    await this.webhooks.notifyWebhooks('integration_deleted', integration);
     return { success: true };
   }
 
@@ -157,6 +241,39 @@ export class IntegrationsService {
     const items = Array.isArray(raw) ? raw : (Array.isArray((raw as any)?.data) ? (raw as any).data : []);
     return { success: true, data: items };
   }
+
+  /**
+   * Предпросмотр email по шаблону для EMAIL_SMTP интеграций
+   */
+  async previewEmail(id: string, template?: string, variables?: Record<string, any>) {
+    const integration = await this.prisma.integration.findUnique({ where: { id } });
+    if (!integration) throw new NotFoundException('Integration not found');
+    if (integration.provider !== 'EMAIL_SMTP') {
+      throw new BadRequestException('Only EMAIL_SMTP provider supports email preview');
+    }
+
+    // Получаем шаблон из настроек канала или используем переданный
+    const settings = await this.comms.getChannelSettings('EMAIL' as any);
+    const templateToUse = template || settings?.inviteTemplate || 'Нет шаблона';
+    
+    // Используем тестовые переменные если не переданы
+    const testVariables = variables || {
+      userName: 'Иван Иванов',
+      inviteLink: 'https://example.com/invite/abc123',
+      projectName: 'Тестовый проект',
+      inviterName: 'Администратор',
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString('ru-RU')
+    };
+
+    return this.comms.previewEmail(templateToUse, testVariables);
+  }
+
+  /**
+   * Admin method to clear health cache
+   */
+  clearHealthCache() {
+    this.healthCache.clear();
+    this.testRateLimit.clear();
+    return { success: true, message: 'Health cache cleared' };
+  }
 }
-
-
