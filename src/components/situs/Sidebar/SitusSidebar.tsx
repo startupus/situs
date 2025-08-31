@@ -8,6 +8,10 @@ import {
   FiMenu as FiMenuIcon,
   FiArrowLeft,
 } from "react-icons/fi";
+// Динамические наборы иконок для поддержки конфигурации из БД
+import * as FiIcons from "react-icons/fi";
+import * as FaIcons from "react-icons/fa";
+import * as MdIcons from "react-icons/md";
 import ProjectSidebarOverlay from "./ProjectSidebarOverlay";
 import UserMenuList from "../Header/UserMenuList";
 import { useUser } from "../../../contexts/UserContext";
@@ -29,7 +33,7 @@ interface SitusSidebarProps {
   onClose?: () => void;
 }
 
-type AdminItem = { title: string; to: string };
+type AdminItem = { title: string; to: string; params?: any; icon?: string; iconLibrary?: string };
 
 const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen, isOpen, onClose }) => {
   const location = useLocation();
@@ -43,6 +47,25 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
   const [systemProjectItems, setSystemProjectItems] = useState<AdminItem[] | null>(null);
   const [projectItems, setProjectItems] = useState<AdminItem[] | null>(null);
   const sseRef = useRef<EventSource | null>(null);
+
+  // Резолв иконки из настроек пункта меню (icon + iconLibrary)
+  const resolveIconNode = useCallback((item?: { icon?: string; iconLibrary?: string }, fallback?: React.ReactNode) => {
+    const size = 18;
+    const name = item?.icon || "";
+    if (name) {
+      const lib = (item?.iconLibrary || (name.startsWith("Fi") ? "fi" : name.startsWith("Fa") ? "fa" : name.startsWith("Md") ? "md" : "fi")).toLowerCase();
+      const packs: Record<string, any> = { fi: FiIcons, fa: FaIcons, md: MdIcons };
+      const pack = packs[lib];
+      const Cmp = pack ? pack[name as keyof typeof pack] : undefined;
+      if (Cmp) {
+        try {
+          const IconComp = Cmp as React.ComponentType<{ size?: number; "aria-hidden"?: boolean }>;
+          return <IconComp size={size} aria-hidden />;
+        } catch {}
+      }
+    }
+    return fallback ?? <FiGrid size={size} aria-hidden />;
+  }, []);
 
   // Преобразование глобальных пунктов admin-sidebar в проектные маршруты текущего проекта
   const mapAdminToProject = useCallback((items: AdminItem[], pid: string): AdminItem[] => {
@@ -199,16 +222,15 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
     if (projectId) return [];
     if (adminItems?.length) {
       const mapped = adminItems.map((mi) => {
-        let icon: React.ReactNode = <FiGrid size={18} aria-hidden />;
-        if (mi.title === "Проекты") icon = <FiFolder size={18} aria-hidden />;
-        if (mi.title === "Пользователи") icon = <FiUsers size={18} aria-hidden />;
-        return { divider: false, link: mi.to, text: mi.title, icon } as SitusNavItem;
+        const fallback = mi.title === "Проекты" ? <FiFolder size={18} aria-hidden /> : mi.title === "Пользователи" ? <FiUsers size={18} aria-hidden /> : <FiGrid size={18} aria-hidden />;
+        const iconNode = resolveIconNode(mi, fallback);
+        return { divider: false, link: mi.to, text: mi.title, icon: iconNode } as SitusNavItem;
       });
       return mapped;
     }
     // Без локального фолбэка возвращаем пустой список, чтобы навигация полагалась только на API
     return [];
-  }, [projectId, adminItems]);
+  }, [projectId, adminItems, resolveIconNode]);
 
   const computedOpen = typeof sidebarOpen === "boolean" ? sidebarOpen : !!isOpen;
 
@@ -316,10 +338,12 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
                   {/* Проектный режим: пункты из меню проекта (из admin-sidebar, смэппленные в контекст проекта) */}
                   {(projectMappedItems || []).map((mi, idx) => {
                     const isActive = mi.to === location.pathname || location.pathname.startsWith(mi.to + "/");
-                    let icon: React.ReactNode = <FiGrid size={18} aria-hidden />;
-                    if (/settings/.test(mi.to)) icon = <FiSettings size={18} aria-hidden />;
-                    if (/menus/.test(mi.to)) icon = <FiMenuIcon size={18} aria-hidden />;
-                    if (/projects\//.test(mi.to)) icon = <FiGrid size={18} aria-hidden />;
+                    const fallback = /menus/.test(mi.to)
+                      ? <FiMenuIcon size={18} aria-hidden />
+                      : /settings/.test(mi.to)
+                        ? <FiSettings size={18} aria-hidden />
+                        : <FiGrid size={18} aria-hidden />;
+                    const icon = resolveIconNode(mi, fallback);
                     return (
                       <li className="group relative" key={idx}>
                         <Link

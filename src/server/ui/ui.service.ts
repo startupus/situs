@@ -164,7 +164,7 @@ export class UiService {
     const items = await this.prisma.menuItem.findMany({
       where: { menuTypeId: adminSidebar.id, isPublished: true, parentId: null },
       orderBy: { orderIndex: 'asc' },
-      select: { title: true, externalUrl: true, parameters: true },
+      select: { title: true, externalUrl: true, parameters: true, icon: true, iconLibrary: true },
     });
     if (!items || items.length === 0) {
       // Диагностический лог: пустой admin-sidebar — проверьте сиды системного проекта
@@ -175,6 +175,8 @@ export class UiService {
       title: i.title,
       to: i.externalUrl || '#',
       params: i.parameters ? JSON.parse(i.parameters) : undefined,
+      icon: i.icon || undefined,
+      iconLibrary: i.iconLibrary || undefined,
     }));
   }
 
@@ -190,12 +192,14 @@ export class UiService {
     const items = await this.prisma.menuItem.findMany({
       where: { menuTypeId: projectSidebar.id, isPublished: true, parentId: null },
       orderBy: { orderIndex: 'asc' },
-      select: { title: true, externalUrl: true, parameters: true },
+      select: { title: true, externalUrl: true, parameters: true, icon: true, iconLibrary: true },
     });
     return items.map(i => ({
       title: i.title,
       to: i.externalUrl || '#',
       params: i.parameters ? JSON.parse(i.parameters) : undefined,
+      icon: i.icon || undefined,
+      iconLibrary: i.iconLibrary || undefined,
     }));
   }
 
@@ -234,9 +238,15 @@ export class UiService {
     const items = await this.prisma.menuItem.findMany({
       where: { menuTypeId: menuType.id, isPublished: true, parentId: null },
       orderBy: { orderIndex: 'asc' },
-      select: { title: true, externalUrl: true },
+      select: { title: true, externalUrl: true, parameters: true, icon: true, iconLibrary: true },
     });
-    return items.map(i => ({ title: i.title, to: i.externalUrl || '#' }));
+    return items.map(i => ({
+      title: i.title,
+      to: i.externalUrl || '#',
+      params: i.parameters ? JSON.parse(i.parameters) : undefined,
+      icon: i.icon || undefined,
+      iconLibrary: i.iconLibrary || undefined,
+    }));
   }
 
   buildBreadcrumbs(projectId: string) {
