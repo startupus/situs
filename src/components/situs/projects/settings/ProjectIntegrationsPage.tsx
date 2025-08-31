@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { integrationsApi, IntegrationInstance, IntegrationProviderMeta, CreateIntegrationRequest, UpdateIntegrationRequest } from '../../../../api/services/integrations.api';
 import { useToast } from '../../../ui/ThemeToast';
-import { FiHelpCircle, FiChevronDown, FiChevronUp, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiHelpCircle, FiChevronUp, FiEye, FiEyeOff } from 'react-icons/fi';
 
 /**
  * Страница настроек интеграций проекта
@@ -89,13 +89,7 @@ const ProjectIntegrationsPage: React.FC = () => {
     return () => { try { source.close(); } catch {}; setEs(null); };
   }, [projectId]);
 
-  const byProvider = useMemo(() => {
-    const map: Record<string, IntegrationInstance[]> = {};
-    for (const inst of instances) {
-      (map[inst.provider] ||= []).push(inst);
-    }
-    return map;
-  }, [instances]);
+
 
   const filteredProviders = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -323,27 +317,24 @@ const ProjectIntegrationsPage: React.FC = () => {
     }
 
     setBusy(true);
-    const testPromises = activeInstances.map(async (inst) => {
-      setTestingInstances(prev => new Set([...prev, inst.id]));
-      try {
-        const res = await integrationsApi.test(inst.id);
-        setHealthStatuses(prev => ({
-          ...prev,
-          [inst.id]: { ...res, lastChecked: Date.now() }
-        }));
-        return { instance: inst, result: res, error: null };
-      } catch (e: any) {
-        return { instance: inst, result: null, error: e?.message || 'Ошибка' };
-      } finally {
-        setTestingInstances(prev => {
-          const next = new Set(prev);
-          next.delete(inst.id);
-          return next;
-        });
-      }
-    });
-
+    
+    // Set all instances as testing
+    setTestingInstances(new Set(activeInstances.map(inst => inst.id)));
+    
     try {
+      const testPromises = activeInstances.map(async (inst) => {
+        try {
+          const res = await integrationsApi.test(inst.id);
+          setHealthStatuses(prev => ({
+            ...prev,
+            [inst.id]: { ...res, lastChecked: Date.now() }
+          }));
+          return { instance: inst, result: res, error: null };
+        } catch (e: any) {
+          return { instance: inst, result: null, error: e?.message || 'Ошибка' };
+        }
+      });
+
       const results = await Promise.all(testPromises);
       const successful = results.filter(r => r.result?.success).length;
       const failed = results.length - successful;
@@ -363,6 +354,7 @@ const ProjectIntegrationsPage: React.FC = () => {
       });
     } finally {
       setBusy(false);
+      setTestingInstances(new Set()); // Clear all testing states
     }
   }
 
@@ -559,7 +551,14 @@ const ProjectIntegrationsPage: React.FC = () => {
             <div key={inst.id} className="rounded border border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-900 flex items-center justify-between">
               <div className="min-w-0">
                 <div className="font-medium truncate flex items-center gap-2">
-                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold ${inst.status==='READY'?'bg-green-100 text-green-800':'bg-gray-100 text-gray-700'} ${inst.status==='ERROR'?'bg-red-100 text-red-800':''}`} title={`Статус: ${inst.status}`}>
+                  <span 
+                    className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold ${
+                      inst.status === 'READY' ? 'bg-green-100 text-green-800' :
+                      inst.status === 'ERROR' ? 'bg-red-100 text-red-800' :
+                      'bg-gray-100 text-gray-700'
+                    }`} 
+                    title={`Статус: ${inst.status}`}
+                  >
                     {inst.status}
                   </span>
                   {getHealthIndicator(inst)}
@@ -836,16 +835,22 @@ const ProjectIntegrationsPage: React.FC = () => {
                           });
                           return;
                         }
-                        setForm(f=>{
-                          const prev = (f.config?.routes)||{} as Record<string,string>;
-                          const nextRoutes = { ...prev, [actionKeyInput]: selectedWorkflowId };
-                          return { ...f, config: { ...(f.config||{}), routes: nextRoutes } };
-                        });
+                        setForm(f => ({
+                          ...f,
+                          config: {
+                            ...(f.config || {}),
+                            routes: {
+                              ...(f.config?.routes || {}),
+                              [actionKeyInput]: selectedWorkflowId
+                            }
+                          }
+                        }));
                         setActionKeyInput('');
+                        const selectedWorkflow = workflows?.find(w => w.id === selectedWorkflowId);
                         addToast({
                           type: 'success',
                           title: 'Маршрут добавлен',
-                          message: `Ключ "${actionKeyInput}" привязан к workflow`,
+                          message: `Ключ "${actionKeyInput}" → ${selectedWorkflow?.name || selectedWorkflowId}`,
                           duration: 3000
                         });
                       }}
@@ -868,11 +873,16 @@ const ProjectIntegrationsPage: React.FC = () => {
                           <button
                             type="button"
                             className="text-xs underline shrink-0 text-red-600 hover:text-red-500"
-                            onClick={()=>{
-                              setForm(f=>{
-                                const prev = { ...((f.config?.routes)||{}) } as Record<string,string>;
-                                delete prev[key as string];
-                                return { ...f, config: { ...(f.config||{}), routes: prev } };
+                            onClick={() => {
+                              setForm(f => {
+                                const { [key]: removed, ...remainingRoutes } = f.config?.routes || {};
+                                return {
+                                  ...f,
+                                  config: {
+                                    ...(f.config || {}),
+                                    routes: remainingRoutes
+                                  }
+                                };
                               });
                             }}
                           >Удалить</button>
@@ -895,5 +905,3 @@ const ProjectIntegrationsPage: React.FC = () => {
 };
 
 export default ProjectIntegrationsPage;
-
-

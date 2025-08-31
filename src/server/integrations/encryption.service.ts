@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class IntegrationEncryptionService {
@@ -19,7 +20,6 @@ export class IntegrationEncryptionService {
                      'default_key_change_in_production_32_chars';
     
     // Create a 32-byte key from the string
-    const crypto = require('crypto');
     return crypto.scryptSync(keyString, 'salt', this.keyLength);
   }
 
@@ -30,10 +30,10 @@ export class IntegrationEncryptionService {
     if (!data) return null;
     
     try {
-      const crypto = require('crypto');
+
       const key = this.getEncryptionKey();
-      const iv = crypto.randomBytes(16);
-      const cipher = crypto.createCipher(this.algorithm, key);
+      const iv = crypto.randomBytes(12); // 12 bytes for GCM
+      const cipher = crypto.createCipherGCM(this.algorithm, key, iv);
       
       cipher.setAAD(Buffer.from('situs-integration-secrets'));
       
@@ -59,7 +59,7 @@ export class IntegrationEncryptionService {
     if (!encryptedData) return null;
     
     try {
-      const crypto = require('crypto');
+
       const key = this.getEncryptionKey();
       
       const parts = encryptedData.split(':');
@@ -71,7 +71,7 @@ export class IntegrationEncryptionService {
       const authTag = Buffer.from(parts[1], 'hex');
       const encrypted = parts[2];
       
-      const decipher = crypto.createDecipher(this.algorithm, key);
+      const decipher = crypto.createDecipherGCM(this.algorithm, key, iv);
       decipher.setAAD(Buffer.from('situs-integration-secrets'));
       decipher.setAuthTag(authTag);
       

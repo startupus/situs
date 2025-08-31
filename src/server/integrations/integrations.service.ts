@@ -169,57 +169,44 @@ export class IntegrationsService {
       return result;
     }
     
+    let result: any;
     try {
-      const result = await plugin.healthCheck(integration);
-      
-      // Cache the result
-      this.healthCache.set(id, { result, timestamp: Date.now() });
-      
-      // Store health status in database
-      await this.prisma.integration.update({
-        where: { id },
-        data: {
-          lastHealthCheck: new Date(),
-          healthStatus: JSON.stringify(result)
-        }
-      });
-      
-      // Publish health change event
-      this.realtime.publish('integration_health_changed', { 
-        id, 
-        projectId: integration.projectId, 
-        health: result,
-        timestamp: new Date().toISOString()
-      });
-      
-      return result;
+      result = await plugin.healthCheck(integration);
     } catch (error: any) {
-      const result = { success: false, status: 'ERROR', detail: error?.message || 'Health check failed' };
-      this.healthCache.set(id, { result, timestamp: Date.now() });
-      
-      // Store error health status in database
-      await this.prisma.integration.update({
-        where: { id },
-        data: {
-          lastHealthCheck: new Date(),
-          healthStatus: JSON.stringify(result)
-        }
-      });
-      
-      this.realtime.publish('integration_health_changed', { 
-        id, 
-        projectId: integration.projectId, 
-        health: result,
-        timestamp: new Date().toISOString()
-      });
-      
-      return result;
+      result = { success: false, status: 'ERROR', detail: error?.message || 'Health check failed' };
     }
+    
+    // Cache the result
+    this.healthCache.set(id, { result, timestamp: Date.now() });
+    
+    // Store health status in database
+    await this.prisma.integration.update({
+      where: { id },
+      data: {
+        lastHealthCheck: new Date(),
+        healthStatus: JSON.stringify(result)
+      }
+    });
+    
+    // Publish health change event
+    this.realtime.publish('integration_health_changed', { 
+      id, 
+      projectId: integration.projectId, 
+      health: result,
+      timestamp: new Date().toISOString()
+    });
+    
+    return result;
   }
 
   async remove(id: string) {
     const integration = await this.prisma.integration.findUnique({ where: { id } });
     if (!integration) throw new NotFoundException('Integration not found');
+    
+    // Clean up caches
+    this.healthCache.delete(id);
+    this.testRateLimit.delete(id);
+    
     await this.prisma.integration.delete({ where: { id } });
     this.realtime.publish('integration_deleted', { id, projectId: integration.projectId });
     await this.webhooks.notifyWebhooks('integration_deleted', integration);
@@ -280,6 +267,13 @@ export class IntegrationsService {
 
     return this.comms.previewEmail(templateToUse, testVariables);
   }
+
+  /**
+   * Admin method to clear health cache
+   */
+  clearHealthCache() {
+    this.healthCache.clear();
+    this.testRateLimit.clear();
+    return { success: true, message: 'Health cache cleared' };
+  }
 }
-
-

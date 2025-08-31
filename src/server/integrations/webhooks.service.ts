@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Integration } from '@prisma/client';
+import * as crypto from 'crypto';
 
 export interface WebhookPayload {
   event: string;
@@ -82,7 +83,6 @@ export class IntegrationWebhooksService {
 
       // Add HMAC signature if secret is configured
       if (config.secret) {
-        const crypto = require('crypto');
         const signature = crypto
           .createHmac('sha256', config.secret)
           .update(JSON.stringify(payload))

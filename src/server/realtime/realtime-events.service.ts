@@ -91,7 +91,7 @@ export class RealtimeEventsService {
         const events = this.debouncedEvents.get(key) || [];
         if (events.length > 0) {
           // Publish batch event
-          this.publish('integration_batch_update' as any, {
+          this.publish('integration_updated', {
             key,
             events: events.map(e => ({ type: e.type, payload: e.payload })),
             count: events.length
