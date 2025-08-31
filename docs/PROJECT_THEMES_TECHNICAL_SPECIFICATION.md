@@ -26,6 +26,20 @@
 - ❌ Нет возможности создания и сохранения пользовательских тем
 - ❌ Отсутствует предпросмотр тем
 
+## 🔎 Актуальность к текущему коду
+
+### Соответствие и расхождения
+- ✅ В коде уже есть контексты тем: `src/contexts/ThemeContext.tsx`, `src/contexts/AdminThemeContext.tsx`, `src/contexts/EditorThemeContext.tsx`, `src/contexts/ProjectThemeContext.tsx`.
+- ✅ Типы тем централизованы в `src/types/theme.ts` и используют DualThemeVariant: `colors: { light: ThemeColors; dark: ThemeColors }`.
+- ✅ Маршрут `/projects/:projectId/settings/theme` существует, но сейчас рендерит `ProjectSettingsPlaceholder`.
+- ✅ В БД (Prisma) уже есть поля `projects.settings` и `projects.theme` (JSON-строки) для хранения настроек и темы на уровне проекта.
+- ❌ Нет таблиц `project_themes` и `theme_templates` в текущей Prisma-схеме.
+- ❌ Нет API-эндпоинтов для CRUD тем; текущее хранение — локально (localStorage) через контексты.
+- ⚠️ Спецификация описывает полную систему (мульти-темы, шаблоны, overrides). Для соответствия коду требуется этапность внедрения и MVP.
+
+### Вывод
+- На первом этапе целесообразно реализовать MVP на существующей схеме данных (`projects.theme`) и существующих контекстах темы, а затем развивать систему к много-темности и шаблонам.
+
 ---
 
 ## 🎨 Концепция системы тем (по аналогии с Joomla)
@@ -48,6 +62,13 @@
 
 ### 1. Расширение схемы базы данных
 
+#### MVP (без новых таблиц)
+- Используем существующие поля проекта:
+  - `projects.theme` (JSON как строка) — активная конфигурация в формате `ThemeConfig`.
+  - `projects.settings` — флаги (например, тёмный режим).
+- Новые таблицы — со следующей фазы.
+
+#### Фаза 2 (мульти-темность и шаблоны)
 ```sql
 -- Новая таблица для хранения тем проектов
 CREATE TABLE project_themes (
@@ -88,15 +109,37 @@ ALTER TABLE projects ADD COLUMN theme_settings JSON DEFAULT '{}';
 
 ### 2. Новые TypeScript типы
 
+#### Актуальные типы в коде (сегодня)
 ```typescript
-// Расширение существующих типов
+// src/types/theme.ts (фрагменты)
+export interface ThemeColors { /* ... */ }
+
+export interface DualThemeVariant {
+  light: ThemeColors;
+  dark: ThemeColors;
+}
+
+export interface ThemeConfig {
+  id: string;
+  name: string;
+  colors: DualThemeVariant; // поддержка светлой/тёмной палитр
+  typography?: ThemeTypography;
+  layout?: ThemeLayout;
+  animations?: ThemeAnimations;
+  gradients?: ThemeGradients;
+  customCss?: string;
+}
+```
+
+#### Расширение для проекта (Фаза 2)
+```typescript
 export interface ProjectThemeConfig extends ThemeConfig {
   projectId: string;
   type: 'admin' | 'public' | 'mobile' | 'print';
   isActive: boolean;
   isDefault: boolean;
   templateFiles?: ThemeTemplateFiles;
-  parentThemeId?: string; // Для наследования
+  parentThemeId?: string;
 }
 
 export interface ThemeTemplateFiles {
@@ -104,43 +147,28 @@ export interface ThemeTemplateFiles {
   js?: string[];
   images?: string[];
   fonts?: string[];
-  components?: {
-    [componentName: string]: string; // Путь к переопределенному компоненту
-  };
+  components?: Record<string, string>;
 }
 
-export interface ProjectThemeTemplate {
-  id: string;
-  name: string;
-  description?: string;
-  category: string;
-  previewImage?: string;
-  config: ProjectThemeConfig;
-  templateFiles: ThemeTemplateFiles;
-  isBuiltIn: boolean;
-  isPublic: boolean;
-  downloadsCount: number;
-  createdAt: Date;
-  createdBy?: string;
-}
+export interface ProjectThemeTemplate { /* как в исходной спецификации */ }
 
-export interface ProjectThemeManager {
-  themes: ProjectThemeConfig[];
-  activeTheme?: ProjectThemeConfig;
-  templates: ProjectThemeTemplate[];
-  createTheme: (config: Partial<ProjectThemeConfig>) => Promise<ProjectThemeConfig>;
-  updateTheme: (id: string, config: Partial<ProjectThemeConfig>) => Promise<void>;
-  deleteTheme: (id: string) => Promise<void>;
-  activateTheme: (id: string) => Promise<void>;
-  duplicateTheme: (id: string, newName: string) => Promise<ProjectThemeConfig>;
-  importTheme: (themeData: ProjectThemeTemplate) => Promise<ProjectThemeConfig>;
-  exportTheme: (id: string) => Promise<string>;
-  installTemplate: (templateId: string) => Promise<ProjectThemeConfig>;
-}
+export interface ProjectThemeManager { /* как в исходной спецификации */ }
 ```
 
 ### 3. Компонентная архитектура
 
+#### MVP структура (этап 0–1)
+```
+src/components/situs/projects/settings/theme/
+├── ProjectThemeManager.tsx          # заменяет placeholder, интеграция с ThemeContext/ProjectThemeContext
+└── components/
+    └── BasicThemeForm.tsx           # выбор предустановленных тем, dark/light toggle, сохранение
+```
+
+– Допустимо переиспользовать части `src/components/admin/EnhancedThemeSettings.tsx`.
+– Предпросмотр через динамическое применение CSS-переменных `ThemeContext`.
+
+#### Полная структура (Фаза 2)
 ```
 src/components/situs/projects/settings/theme/
 ├── ProjectThemeManager.tsx          # Главный компонент управления темами
@@ -277,17 +305,19 @@ interface ThemeOverrides {
 
 ## 🛠 Этапы реализации
 
-### Этап 1: Базовая инфраструктура (1-2 недели)
-1. **Расширение схемы БД**
-   - Создание таблиц `project_themes` и `theme_templates`
-   - Миграции для существующих проектов
-   - Обновление Prisma схемы
+### Этап 0: Разблокировка UI (1–2 дня)
+1. Заменить `ProjectSettingsPlaceholder` на `ProjectThemeManager` в маршруте `/projects/:id/settings/theme`.
+2. Показать список предустановленных тем (`DEFAULT_THEMES`) с переключением.
+3. Включить предпросмотр через `ThemeContext` (DualThemeVariant, dark/light).
 
-2. **API эндпоинты**
-   - CRUD операции для тем проектов
-   - Управление шаблонами тем
-   - Импорт/экспорт тем
-   - Активация/деактивация тем
+### Этап 1: Базовая инфраструктура (1-2 недели)
+1. **Хранение в БД (без новых таблиц)**
+   - Сохранение активной темы проекта в поле `projects.theme` (JSON строка)
+   - Миграция настроек из localStorage при первом сохранении
+
+2. **API эндпоинты (MVP)**
+   - `GET /api/projects/:projectId/theme` и `PUT /api/projects/:projectId/theme`
+   - Формат данных: `ThemeConfig`
 
 3. **Обновление типов**
    - Расширение существующих типов тем
@@ -528,8 +558,18 @@ Response: {
 
 ## 📊 API Спецификация
 
-### Основные эндпоинты:
+### MVP (без новых таблиц)
+```typescript
+// Получение/сохранение активной темы проекта (projects.theme)
+GET /api/projects/:projectId/theme
+Response: ThemeConfig
 
+PUT /api/projects/:projectId/theme
+Body: ThemeConfig
+Response: { success: boolean }
+```
+
+### Этап 2+: Полные эндпоинты
 ```typescript
 // Получение тем проекта
 GET /api/projects/:projectId/themes
@@ -608,6 +648,8 @@ Response: ProjectThemeConfig
 - Обратная совместимость с текущими темами
 - Миграция настроек из поля `settings.theme`
 - Поддержка существующих CSS классов
+- Совместимость с `DualThemeVariant` (светлая/тёмная палитры) из `ThemeContext`
+- Переиспользование `AdminThemeContext`/`EditorThemeContext` подходов для единообразия
 
 ---
 
@@ -725,6 +767,8 @@ src/
 - ✅ 3-5 предустановленных шаблонов
 - ✅ Базовый импорт/экспорт
 - ✅ Адаптивный интерфейс
+- ✅ Сохранение активной темы в `projects.theme` (JSON)
+- ✅ Замена placeholder на рабочий UI на маршруте `/projects/:id/settings/theme`
 
 ### Полная версия:
 - ✅ Все функции MVP
