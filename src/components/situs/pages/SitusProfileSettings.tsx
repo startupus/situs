@@ -57,11 +57,12 @@ const SitusProfileSettings: React.FC = () => {
       try {
         const res = await fetch('/api/users/me');
         if (!res.ok) throw new Error(String(res.status));
-        const data = await res.json();
+        const payload = await res.json();
+        const data = payload && typeof payload === 'object' && 'data' in payload ? (payload as any).data : payload;
 
         // "profile" может быть JSON строкой с name/avatar/bio/phone/position/company/location/website
         let profileJson: any = {};
-        try { profileJson = data?.profile ? JSON.parse(data.profile) : {}; } catch { profileJson = {}; }
+        try { profileJson = data?.profile ? (typeof data.profile === 'string' ? JSON.parse(data.profile) : data.profile) : {}; } catch { profileJson = {}; }
 
         const fullName: string = profileJson.name || data?.name || '';
         const nameParts = fullName.trim().split(/\s+/);

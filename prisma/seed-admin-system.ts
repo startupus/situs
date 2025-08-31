@@ -38,6 +38,7 @@ async function main() {
         name: 'Situs Admin',
         description: 'Системный проект админки',
         status: ProjectStatus.ACTIVE,
+        isSystemAdmin: true,
         settings: JSON.stringify({ isSystemAdmin: true, language: 'ru' }),
       },
       create: {
@@ -47,6 +48,7 @@ async function main() {
         ownerId: owner.id,
         status: ProjectStatus.ACTIVE,
         isPublished: false,
+        isSystemAdmin: true,
         settings: JSON.stringify({ isSystemAdmin: true, language: 'ru' }),
       },
     });
@@ -70,6 +72,13 @@ async function main() {
       where: { projectId_name: { projectId: project.id, name: 'admin-user' } },
       update: { title: 'Admin User Menu' },
       create: { projectId: project.id, name: 'admin-user', title: 'Admin User Menu' },
+    });
+
+    // Шаблон проектной навигации для всех проектов системы (используется в сайдбаре проекта)
+    const projectSidebar = await prisma.menuType.upsert({
+      where: { projectId_name: { projectId: project.id, name: 'project-sidebar' } },
+      update: { title: 'Project Sidebar' },
+      create: { projectId: project.id, name: 'project-sidebar', title: 'Project Sidebar' },
     });
 
     // 4) Пункты меню admin-sidebar
@@ -226,6 +235,40 @@ async function main() {
         isPublished: true,
       },
     });
+
+    // Пункты меню project-sidebar (шаблон): пути начинаются с /project и маппятся на /projects/:id/**
+    const projectSidebarItems: Array<{ alias: string; title: string; path: string; orderIndex: number }>= [
+      { alias: 'overview', title: 'Обзор', path: '/project', orderIndex: 0 },
+      { alias: 'pages', title: 'Страницы', path: '/project/pages', orderIndex: 1 },
+      { alias: 'store', title: 'Магазин', path: '/project/store', orderIndex: 2 },
+      { alias: 'seo', title: 'SEO', path: '/project/settings/seo', orderIndex: 3 },
+      { alias: 'integrations', title: 'Интеграции', path: '/project/settings/integrations', orderIndex: 4 },
+      { alias: 'team', title: 'Команда', path: '/project/settings/team', orderIndex: 5 },
+      { alias: 'access', title: 'Доступ', path: '/project/settings/access', orderIndex: 6 },
+    ];
+    for (const it of projectSidebarItems) {
+      await prisma.menuItem.upsert({
+        where: { menuTypeId_alias: { menuTypeId: projectSidebar.id, alias: it.alias } },
+        update: {
+          title: it.title,
+          type: MenuItemType.URL,
+          externalUrl: it.path,
+          orderIndex: it.orderIndex,
+          level: 1,
+          isPublished: true,
+        },
+        create: {
+          menuTypeId: projectSidebar.id,
+          title: it.title,
+          alias: it.alias,
+          type: MenuItemType.URL,
+          externalUrl: it.path,
+          orderIndex: it.orderIndex,
+          level: 1,
+          isPublished: true,
+        },
+      });
+    }
 
     // 5) admin-top (пока без элементов — опционально)
 
