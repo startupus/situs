@@ -45,6 +45,88 @@ export class ProjectsService {
   private readonly _constructed: boolean = (console.log('[BOOT] ProjectsService constructed'), true);
 
   /**
+   * Получение активной конфигурации темы проекта (MVP)
+   * Хранится в поле projects.theme как JSON-строка
+   */
+  async getProjectThemeConfig(projectId: string): Promise<any> {
+    const project = await this.prisma.project.findUnique({
+      where: { id: projectId },
+      select: { id: true, theme: true }
+    });
+    if (!project) {
+      throw new NotFoundException('Проект не найден');
+    }
+    try {
+      if (project.theme && typeof project.theme === 'string' && project.theme.trim().length > 0) {
+        return JSON.parse(project.theme);
+      }
+    } catch {}
+    // Возвращаем дефолтную конфигурацию если нет сохранённой
+    return this.getDefaultThemeConfig();
+  }
+
+  /**
+   * Сохранение активной конфигурации темы проекта (MVP)
+   */
+  async updateProjectThemeConfig(projectId: string, themeConfig: any): Promise<{ success: boolean }> {
+    // Минимальная валидация: наличие цветов
+    if (!themeConfig || !themeConfig.colors || !themeConfig.colors.light || !themeConfig.colors.dark) {
+      throw new BadRequestException('Некорректные данные темы');
+    }
+    await this.prisma.project.update({
+      where: { id: projectId },
+      data: { theme: JSON.stringify(themeConfig) }
+    });
+    return { success: true };
+  }
+
+  /**
+   * Серверный дефолт темы (синхрон с стандартной темой на фронте)
+   */
+  private getDefaultThemeConfig(): any {
+    return {
+      id: 'standard-theme',
+      name: 'Стандартная тема',
+      colors: {
+        light: {
+          primary: '#4C1D95',
+          primaryHover: '#7C3AED',
+          primaryActive: '#5B21B6',
+          secondary: '#13C296',
+          accent: '#9055FD',
+          success: '#22AD5C',
+          warning: '#FBBF24',
+          error: '#F23030',
+          info: '#2D68F8',
+          background: '#FFFFFF',
+          surface: '#F9FAFB',
+          text: '#1F2937',
+          textSecondary: '#6B7280',
+          border: '#E5E7EB',
+          borderLight: '#F3F4F6'
+        },
+        dark: {
+          primary: '#8B5CF6',
+          primaryHover: '#A78BFA',
+          primaryActive: '#7C3AED',
+          secondary: '#10B981',
+          accent: '#34D399',
+          success: '#34D399',
+          warning: '#F59E0B',
+          error: '#F87171',
+          info: '#60A5FA',
+          background: '#0F0F23',
+          surface: '#1E1E3F',
+          text: '#F1F5F9',
+          textSecondary: '#CBD5E1',
+          border: '#4C1D95',
+          borderLight: '#6D28D9'
+        }
+      }
+    };
+  }
+
+  /**
    * Получение всех проектов с пагинацией и фильтрами
    */
   async findAll(query: ProjectQueryDto) {
