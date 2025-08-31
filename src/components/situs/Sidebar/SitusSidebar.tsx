@@ -79,7 +79,7 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
       if (to === '/section-settings') return `/projects/${pid}/settings`;
       return to.startsWith('/projects/') ? to : `/projects/${pid}`;
     };
-    return items.map((i) => ({ title: i.title, to: remap(i.to || '#') }));
+    return items.map((i) => ({ title: i.title, to: remap(i.to || '#'), icon: i.icon, iconLibrary: i.iconLibrary, params: (i as any).params }));
   }, []);
 
   // Преобразование шаблона проектной навигации системного проекта ("/project/...") в маршруты текущего проекта
@@ -89,7 +89,7 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
       // Заменяем префикс /project на /projects/:id
       return to.replace(/^\/project(\/|$)/, `/projects/${pid}$1`);
     };
-    return items.map((i) => ({ title: i.title, to: remap(i.to || '#') }));
+    return items.map((i) => ({ title: i.title, to: remap(i.to || '#'), icon: i.icon, iconLibrary: i.iconLibrary, params: (i as any).params }));
   }, []);
 
   // Всегда поддерживаем в состоянии adminItems как единый источник для админ-навигации
