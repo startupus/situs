@@ -57,14 +57,34 @@ export class RealtimeController {
 
   /**
    * SSE поток для интеграций
-   * Фактический путь: GET /api/realtime/integrations
+   * Фактический путь: GET /api/realtime/integrations?projectId=xxx
    */
   @Public()
   @Sse('integrations')
-  integrationsEvents(): any {
+  integrationsEvents(@Query('projectId') projectId?: string): any {
     const source$ = this.realtime.asObservable();
     const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
-    return merge(handshake$, source$).pipe(
+    
+    // Filter events by projectId if specified
+    const filteredSource$ = projectId ? 
+      source$.pipe(
+        map((evt: any) => {
+          // Only pass through integration events for this project
+          if (evt?.type?.startsWith('integration_') && evt?.payload?.projectId === projectId) {
+            return evt;
+          }
+          // Pass through non-integration events as-is
+          if (!evt?.type?.startsWith('integration_')) {
+            return evt;
+          }
+          // Filter out integration events for other projects
+          return null;
+        }),
+        // Remove null events
+        map((evt: any) => evt).filter((evt: any) => evt !== null)
+      ) : source$;
+    
+    return merge(handshake$, filteredSource$).pipe(
       map((evt) => ({ data: evt }) as MessageEvent),
     );
   }
