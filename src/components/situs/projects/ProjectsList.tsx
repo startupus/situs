@@ -59,6 +59,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
       })();
       return {
         id: project.id,
+        slug: project.slug,
         name: project.name,
         description: project.description,
         status: project.status || 'ACTIVE', // Сохраняем оригинальный статус
@@ -68,6 +69,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
         settings: project.settings,
         orderIndex: typeof settingsObj.orderIndex === 'number' ? settingsObj.orderIndex : null,
         domain: project.domain || null,
+        isSystemAdmin: Boolean(settingsObj?.isSystemAdmin) || project.slug === 'situs-admin',
       } as any;
     });
     // Сортировка по orderIndex, если он есть; остальные в конце, сохраняем относительный порядок
@@ -259,7 +261,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
 
     const activeProducts = (project.products || []).filter((p: any) => (p.status || '').toString().toUpperCase() === 'ACTIVE');
 
-    const ActiveSwitcher: React.FC<{ checked: boolean; onChange: (v: boolean) => void }> = ({ checked, onChange }) => {
+    const ActiveSwitcher: React.FC<{ checked: boolean; onChange: (v: boolean) => void; disabled?: boolean }> = ({ checked, onChange, disabled }) => {
       return (
         <label className="flex cursor-pointer select-none items-center">
           <div className="relative">
@@ -268,15 +270,17 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
               checked={checked}
               onChange={(e) => onChange(e.target.checked)}
               className="sr-only peer"
+              disabled={disabled}
             />
-            <div className="block h-6 w-10 rounded-full border border-[#BFCEFF] bg-[#EAEEFB] peer-checked:bg-green-500/90 transition-colors"></div>
-            <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4 pointer-events-none" />
+            <div className={`block h-6 w-10 rounded-full border ${disabled ? 'border-gray-300 bg-gray-200' : 'border-[#BFCEFF] bg-[#EAEEFB]'} peer-checked:bg-green-500/90 transition-colors`}></div>
+            <div className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4 pointer-events-none ${disabled ? 'opacity-60' : ''}`} />
           </div>
         </label>
       );
     };
 
     const isInactive = project.status !== 'ACTIVE';
+    const isSystem = Boolean((project as any).isSystemAdmin);
     return (
       <div
         ref={setNodeRef}
@@ -311,14 +315,19 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
                   {getStatusText(project.status)}
                 </span>
               ) : (
-                <ActiveSwitcher checked={project.status === 'ACTIVE'} onChange={(v) => handleToggleActive(project.id, v)} />
+                <ActiveSwitcher checked={project.status === 'ACTIVE'} onChange={(v) => handleToggleActive(project.id, v)} disabled={isSystem} />
               )}
             </div>
           </div>
 
           {/* Сведения */}
           <div className="mb-0">
-            <h3 className={`text-lg font-semibold mb-1 ${isInactive ? 'text-gray-500 dark:text-dark-6' : 'text-dark dark:text-white'}`}>{project.name}</h3>
+            <h3 className={`text-lg font-semibold mb-1 ${isInactive ? 'text-gray-500 dark:text-dark-6' : 'text-dark dark:text-white'}`}>
+              {project.name}
+              {isSystem && (
+                <span className="ml-2 inline-flex items-center rounded-md bg-purple-100 px-2 py-0.5 text-[10px] font-semibold text-purple-700 align-middle uppercase">system</span>
+              )}
+            </h3>
             <div className={`${isInactive ? 'text-gray-400 dark:text-dark-5' : 'text-body-color dark:text-dark-6'} text-sm mb-3`}>
               <div className="flex items-center justify-between">
                 {project.domain ? (
@@ -353,9 +362,13 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
               Подробнее
             </Link>
           )}
-          <button onClick={(e)=>{ e.stopPropagation(); handleDelete(project.id, project.name); }} className={`inline-flex items-center justify-center w-9 h-9 rounded-md ${isInactive || project.status === 'DELETED' ? 'text-body-color hover:text-red-600 hover:bg-red-50/40 dark:hover:bg-red-900/10' : 'text-body-color hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'} transition-colors`} title="Удалить проект">
-            <FiTrash2 />
-          </button>
+          {isSystem ? (
+            <span className="inline-flex items-center justify-center px-2 py-1 rounded-md text-[11px] font-medium text-purple-700 bg-purple-50">system</span>
+          ) : (
+            <button onClick={(e)=>{ e.stopPropagation(); handleDelete(project.id, project.name); }} className={`inline-flex items-center justify-center w-9 h-9 rounded-md ${isInactive || project.status === 'DELETED' ? 'text-body-color hover:text-red-600 hover:bg-red-50/40 dark:hover:bg-red-900/10' : 'text-body-color hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'} transition-colors`} title="Удалить проект">
+              <FiTrash2 />
+            </button>
+          )}
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 /// <reference lib="decorators.legacy" />
-import { Injectable, NotFoundException, BadRequestException, Optional, Inject } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Optional, Inject, ForbiddenException } from '@nestjs/common';
 import { RealtimeEventsService } from '../realtime/realtime-events.service';
 import { Prisma, ProjectStatus, ProductType, PageStatus, PageType } from '@prisma/client';
 import { PrismaService } from '../database/prisma.service';
@@ -24,6 +24,21 @@ export class ProjectsService {
     this.prisma = prisma;
     this.realtime = realtime;
     console.log('[BOOT] ProjectsService manual injection, prisma:', !!this.prisma, 'realtime:', !!this.realtime);
+  }
+
+  private isSystemProject(project: { slug?: string | null; settings?: any; isSystemAdmin?: boolean | null }): boolean {
+    try {
+      if (!project) return false;
+      // 1) Жёсткий флаг БД
+      if (project.isSystemAdmin === true) return true;
+      // 2) Слаг резервно
+      if ((project.slug || '').toString() === 'situs-admin') return true;
+      // 3) Настройки как запасной вариант
+      const settings = project && typeof project.settings === 'string' ? JSON.parse(project.settings) : (project.settings || {});
+      return Boolean(settings?.isSystemAdmin);
+    } catch {
+      return false;
+    }
   }
   // Диагностика создания сервиса
   // eslint-disable-next-line no-console
@@ -273,18 +288,29 @@ export class ProjectsService {
    */
   async update(id: string, updateProjectDto: UpdateProjectDto, ownerId: string) {
     const effectiveOwnerId = await this.resolveOwnerId(ownerId);
-    // Проверяем существование и права доступа
-    // Основной путь: ищем по id и ownerId
-    let existingProject = await this.prisma.project.findFirst({ where: { id, ownerId: effectiveOwnerId } });
-
-    // Dev-режим (guard-ы отключены): если пользователь не аутентифицирован и пришёл fallback owner,
-    // разрешаем обновление по одному лишь id, чтобы не блокировать UI.
-    if (!existingProject) {
-      existingProject = await this.prisma.project.findUnique({ where: { id } });
+    // Разрешаем параметр как id или slug
+    let target = await this.prisma.project.findUnique({ where: { id } });
+    if (!target) {
+      target = await this.prisma.project.findUnique({ where: { slug: id } });
     }
-
+    if (!target) throw new NotFoundException('Проект не найден или у вас нет прав доступа');
+    const actualId = target.id;
+    // Проверяем существование и права (в dev допускаем ослабление)
+    let existingProject = await this.prisma.project.findFirst({ where: { id: actualId, ownerId: effectiveOwnerId } });
     if (!existingProject) {
-      throw new NotFoundException('Проект не найден или у вас нет прав доступа');
+      existingProject = await this.prisma.project.findUnique({ where: { id: actualId } });
+    }
+    if (!existingProject) throw new NotFoundException('Проект не найден или у вас нет прав доступа');
+
+    // Системные ограничения для системного проекта
+    if (this.isSystemProject(existingProject)) {
+      // Запрещаем изменение slug и ownerId системного проекта
+      if ((updateProjectDto as any).slug !== undefined) {
+        throw new ForbiddenException('Slug системного проекта нельзя изменять');
+      }
+      if ((updateProjectDto as any).ownerId !== undefined) {
+        throw new ForbiddenException('Владельца системного проекта нельзя изменять');
+      }
     }
 
     // Проверяем уникальность имени если оно изменяется
@@ -300,7 +326,14 @@ export class ProjectsService {
     if (updateProjectDto.name !== undefined) updateData.name = updateProjectDto.name;
     if (updateProjectDto.description !== undefined) updateData.description = updateProjectDto.description;
     if (updateProjectDto.settings !== undefined) updateData.settings = JSON.stringify(updateProjectDto.settings);
-    if (updateProjectDto.status !== undefined) updateData.status = this.mapProjectStatus(updateProjectDto.status);
+    if (updateProjectDto.status !== undefined) {
+      // Блокируем перевод системного проекта в статус DELETED
+      const nextStatus = (updateProjectDto.status as any)?.toString?.().toUpperCase?.();
+      if (this.isSystemProject(existingProject) && nextStatus === 'DELETED') {
+        throw new ForbiddenException('Системный проект нельзя пометить как удалённый');
+      }
+      updateData.status = this.mapProjectStatus(updateProjectDto.status);
+    }
     if ((updateProjectDto as any).isPublished !== undefined) updateData.isPublished = Boolean((updateProjectDto as any).isPublished);
     // Доменные поля (могут приходить из специализированного DTO)
     const domain = (updateProjectDto as any).domain as string | undefined;
@@ -316,7 +349,7 @@ export class ProjectsService {
       }
       updateData.customDomain = customDomain || null;
     }
-    const updatedProject = await this.prisma.project.update({ where: { id }, data: updateData });
+    const updatedProject = await this.prisma.project.update({ where: { id: actualId }, data: updateData });
 
     // Если изменили статус — публикуем событие реального времени
     try {
@@ -356,14 +389,17 @@ export class ProjectsService {
    * Удаление проекта
    */
   async remove(id: string, ownerId: string) {
-    // В условиях отсутствующей авторизации (гварды отключены) разрешаем удаление по ID.
-    // Если авторизация будет включена — можно вернуть проверку ownerId.
-    const existingProject = await this.prisma.project.findUnique({ where: { id } });
-    if (!existingProject) {
-      throw new NotFoundException('Проект не найден');
+    // Разрешаем параметр как id или slug
+    let existingProject = await this.prisma.project.findUnique({ where: { id } });
+    if (!existingProject) existingProject = await this.prisma.project.findUnique({ where: { slug: id } });
+    if (!existingProject) throw new NotFoundException('Проект не найден');
+
+    // Блокируем удаление системного проекта админки
+    if (this.isSystemProject(existingProject as any)) {
+      throw new ForbiddenException('Системный проект нельзя удалить');
     }
 
-    await this.prisma.project.delete({ where: { id } });
+    await this.prisma.project.delete({ where: { id: existingProject.id } });
     try { this.realtime?.publish('project_deleted', { id }); } catch {}
     return { message: 'Проект успешно удален' };
   }

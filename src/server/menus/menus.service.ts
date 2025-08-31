@@ -50,12 +50,20 @@ export class MenusService {
   }
 
   async findMenuTypes(projectIdOrSlug: string): Promise<MenuType[]> {
-    let projectId = projectIdOrSlug;
-    // Если пришёл slug — резолвим в id
-    if (!projectIdOrSlug.startsWith('c')) {
-      const project = await this.prisma.project.findUnique({ where: { slug: projectIdOrSlug }, select: { id: true } });
-      if (project) projectId = project.id;
+    // Надёжное разрешение идентификатора проекта: сначала пробуем как id, затем как slug
+    let resolvedProjectId: string | null = null;
+    try {
+      const byId = await this.prisma.project.findUnique({ where: { id: projectIdOrSlug }, select: { id: true } });
+      if (byId?.id) {
+        resolvedProjectId = byId.id;
+      } else {
+        const bySlug = await this.prisma.project.findUnique({ where: { slug: projectIdOrSlug }, select: { id: true } });
+        if (bySlug?.id) resolvedProjectId = bySlug.id;
+      }
+    } catch {
+      // ignore and fallback to null
     }
+    const projectId = resolvedProjectId || projectIdOrSlug;
     return this.prisma.menuType.findMany({
       where: { projectId },
       include: {

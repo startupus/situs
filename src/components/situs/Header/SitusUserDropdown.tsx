@@ -1,28 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { usersApi } from "../../../api/services/users.api";
 
-const navList = [
-  {
-    link: "#",
-    text: "Уведомления",
-  },
-  {
-    link: "/profile-settings",
-    text: "Настройки профиля",
-  },
-  {
-    link: "/",
-    text: "Дашборд",
-  },
-  {
-    link: "#",
-    text: "Выйти",
-  },
-];
+type UserMenuItem = { title: string; to: string; params?: any };
 
 const SitusUserDropdown: React.FC = () => {
+  const [items, setItems] = useState<UserMenuItem[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let aborted = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/ui/admin-user');
+        const json = await res.json();
+        if (!aborted && json?.success && Array.isArray(json.data)) {
+          setItems(json.data as UserMenuItem[]);
+        }
+      } catch {
+        // fallback — дефолтный набор
+        if (!aborted) setItems([
+          { title: 'Уведомления', to: '/profile-settings?tab=notifications' },
+          { title: 'Настройки профиля', to: '/profile-settings' },
+          { title: 'Дашборд', to: '/' },
+          { title: 'Выйти', to: '/auth/logout', params: { action: 'logout' } },
+        ]);
+      }
+    })();
+    return () => { aborted = true; };
+  }, []);
+
   const userName = "Администратор Системы";
   const userRole = "Системный администратор";
+  const onClickItem = (item: UserMenuItem) => (e: React.MouseEvent) => {
+    if (item?.params?.action === 'logout') {
+      e.preventDefault();
+      usersApi.logout();
+      navigate('/');
+      return;
+    }
+  };
   return (
     <div className="group relative">
       <Link to="#" className="flex items-center">
@@ -54,15 +71,16 @@ const SitusUserDropdown: React.FC = () => {
           <div className="text-xs text-body-color dark:text-dark-6">{userRole}</div>
         </div>
         <div className="space-y-2">
-        {navList.map((item, index) => (
-          <Link
-            key={index}
-            to={item.link}
-            className="block rounded-sm px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
-          >
-            {item.text}
-          </Link>
-        ))}
+          {items.map((item, index) => (
+            <Link
+              key={index}
+              to={item.to || '#'}
+              onClick={onClickItem(item)}
+              className="block rounded-sm px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
+            >
+              {item.title}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

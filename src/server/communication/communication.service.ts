@@ -140,16 +140,29 @@ export class CommunicationService {
     content: string,
     config: any
   ): Promise<CommunicationResult> {
-    this.logger.log(`📧 EMAIL отправлен на ${to}`);
-    this.logger.log(`Тема: ${subject}`);
-    this.logger.log(`Содержание: ${content}`);
-    this.logger.log(`Конфигурация: ${JSON.stringify(config, null, 2)}`);
-    
-    // В MVP просто возвращаем успех
-    return {
-      success: true,
-      messageId: `email_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    };
+    try {
+      // Если nodemailer не установлен — журналируем и имитируем отправку (dev)
+      let nodemailer: any = null;
+      try { nodemailer = require('nodemailer'); } catch {}
+      if (!nodemailer) {
+        this.logger.log(`📧 [DEV] EMAIL → ${to} | ${subject}`);
+        this.logger.log(content);
+        return { success: true, messageId: `dev_${Date.now()}` };
+      }
+
+      const transporter = nodemailer.createTransport({
+        host: config?.host,
+        port: config?.port,
+        secure: !!config?.secure,
+        auth: config?.auth,
+      });
+      const from = config?.from || 'Situs <no-reply@situs.local>';
+      const info = await transporter.sendMail({ from, to, subject, html: content, text: content });
+      return { success: true, messageId: info?.messageId || `smtp_${Date.now()}` };
+    } catch (e: any) {
+      this.logger.error('Email send error', e?.message || e);
+      return { success: false, error: e?.message || 'Email send error' };
+    }
   }
 
   /**

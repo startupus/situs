@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usersApi, User, UserFilters, UsersListResponse } from '../../../api/services/users.api';
+import { projectsApi } from '../../../api/services/projects.api';
+import { Project } from '../../../types/project';
 import UserModal from '../components/UserModal';
 import { ThemePermissionsModal } from '../../ui';
 
@@ -25,6 +27,8 @@ const SitusUsersNew: React.FC = () => {
     total: 0,
     totalPages: 0
   });
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [projectId, setProjectId] = useState<string>('');
 
   // Загрузка пользователей
   const loadUsers = async () => {
@@ -33,6 +37,7 @@ const SitusUsersNew: React.FC = () => {
       const searchFilters = {
         ...filters,
         search: searchTerm || undefined,
+        projectId: projectId || undefined,
         page: currentPage,
         limit: pageSize
       };
@@ -55,6 +60,15 @@ const SitusUsersNew: React.FC = () => {
       // setStats(stats);
     } catch (error) {
       console.error('Ошибка загрузки статистики:', error);
+    }
+  };
+
+  const loadProjects = async () => {
+    try {
+      const res = await projectsApi.getProjects({ page: 1, limit: 100 });
+      setProjects(res.projects || []);
+    } catch (e) {
+      setProjects([]);
     }
   };
 
@@ -177,9 +191,10 @@ const SitusUsersNew: React.FC = () => {
 
   // Загрузка данных при монтировании и изменении фильтров
   useEffect(() => {
+    loadProjects();
     loadUsers();
     loadStats();
-  }, [currentPage, filters]);
+  }, [currentPage, filters, projectId]);
 
   useEffect(() => {
     const timeoutId = setTimeout(handleSearch, 500);
@@ -210,6 +225,18 @@ const SitusUsersNew: React.FC = () => {
       {/* Фильтры и поиск */}
       <div className="mb-6 space-y-4">
         <div className="flex gap-4">
+          <div>
+            <select
+              value={projectId}
+              onChange={(e) => { setProjectId(e.target.value); setCurrentPage(1); }}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">Все проекты</option>
+              {projects.map(p => (
+                <option key={p.id} value={p.id}>{p.name}</option>
+              ))}
+            </select>
+          </div>
           <div className="flex-1">
             <input
               type="text"
