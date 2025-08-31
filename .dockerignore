@@ -1,0 +1,39 @@
+# VCS
+.git
+.git/**
+
+# Node
+node_modules
+node_modules/**
+
+# Build outputs
+/dist
+/dist/**
+*.tsbuildinfo
+
+# Large local assets not needed for build
+/Upload
+/Upload/**
+
+# Tests artifacts
+/playwright-report
+/playwright-report/**
+/test-results
+/test-results/**
+
+# IDE and OS
+.vscode
+.idea
+.DS_Store
+
+# Logs and temp
+*.log
+server*.log
+*.out
+*.tmp
+
+# Misc
+situs:open-pages-settings
+/test-final-services.html
+/test-prisma.js
+

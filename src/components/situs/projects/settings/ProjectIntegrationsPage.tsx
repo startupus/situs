@@ -23,6 +23,8 @@ const ProjectIntegrationsPage: React.FC = () => {
   const [form, setForm] = useState<{ title?: string; instanceKey?: string; config?: any; secrets?: any }>({});
   const [workflows, setWorkflows] = useState<any[] | null>(null);
   const [selectedWorkflowId, setSelectedWorkflowId] = useState<string>('');
+  // Позволяет вводить ID воркфлоу вручную, если список пуст или нет доступа к n8n
+  const [manualWorkflowId, setManualWorkflowId] = useState<string>('');
   const [actionKeyInput, setActionKeyInput] = useState<string>('');
   const [es, setEs] = useState<EventSource | null>(null);
   const [query, setQuery] = useState<string>('');
@@ -354,6 +356,17 @@ const ProjectIntegrationsPage: React.FC = () => {
                       ))}
                     </div>
                   )}
+                  {/* Ввод ID воркфлоу вручную — для случаев, когда список недоступен */}
+                  <div className="mt-2">
+                    <label className="block text-sm mb-1">Workflow ID вручную</label>
+                    <input
+                      placeholder="например, 123 или uuid"
+                      value={manualWorkflowId}
+                      onChange={(e)=>setManualWorkflowId(e.target.value)}
+                      className="w-full rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 px-3 py-2"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Можно указать ID вручную, если список воркфлоу недоступен.</p>
+                  </div>
                 </div>
 
                 {/* Маршрутизация действий -> воркфлоу */}
@@ -372,15 +385,17 @@ const ProjectIntegrationsPage: React.FC = () => {
                     <button
                       type="button"
                       className="px-3 py-2 text-sm rounded bg-primary text-white disabled:opacity-60"
-                      disabled={!actionKeyInput || !selectedWorkflowId}
+                      disabled={!actionKeyInput || !(selectedWorkflowId || manualWorkflowId)}
                       onClick={()=>{
-                        if (!actionKeyInput || !selectedWorkflowId) return;
+                        const targetWorkflowId = selectedWorkflowId || manualWorkflowId;
+                        if (!actionKeyInput || !targetWorkflowId) return;
                         setForm(f=>{
                           const prev = (f.config?.routes)||{} as Record<string,string>;
-                          const nextRoutes = { ...prev, [actionKeyInput]: selectedWorkflowId };
+                          const nextRoutes = { ...prev, [actionKeyInput]: targetWorkflowId };
                           return { ...f, config: { ...(f.config||{}), routes: nextRoutes } };
                         });
                         setActionKeyInput('');
+                        setManualWorkflowId('');
                       }}
                     >Добавить маршрут</button>
                   </div>
