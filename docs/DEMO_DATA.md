@@ -12,6 +12,26 @@
     - Меню: `GET /api/menu-types`, `GET /api/menu-items` (и прочие)
     - Страницы: `GET /api/pages`, `GET /api/pages/:id`
 
+## DemoModule (временный API для мок‑данных)
+
+- Назначение: централизованно отдавать временные демо‑данные через бэкенд, исключая хардкод во фронтенде.
+- Путь: `src/server/demo/*`
+  - `demo.data.ts` — демо‑массивы (websites, stores, orders, products, supportTickets)
+  - `demo.controller.ts` — публичные эндпоинты
+  - `demo.module.ts` — модуль NestJS
+- Эндпоинты:
+  - `GET /api/demo/websites`
+  - `GET /api/demo/stores`
+  - `GET /api/demo/orders`
+  - `GET /api/demo/products`
+  - `GET /api/demo/support-tickets`
+- Клиент фронтенда: `src/api/services/demo.api.ts` (`DemoAPI.websites()`, `stores()`, ...)
+- Статус: временное решение до полноценной реализации бизнес‑модулей. Источник правды остаётся за реальными API.
+
+Пример миграции фронтенда:
+- Было: локальные массивы `const mock... = [...]` в компонентах.
+- Стало: `useEffect` + `DemoAPI.*()` → состояние компонента.
+
 - Скрипты:
   - Системный проект админки: `npm run db:seed:admin`
   - Демо‑проект Startapus (pages/menu/categories): `tsx scripts/seed-startapus.ts`

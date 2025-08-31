@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { DemoAPI } from "../../../api/services/demo.api";
 
 // Компонент левой панели с подменю (копируем из SitusProjects)
 const ProjectsSidebar: React.FC = () => {
@@ -118,51 +119,42 @@ const ProjectsSidebar: React.FC = () => {
   );
 };
 
-// Моковые данные сайтов
-const mockWebsites = [
-  {
-    id: 1,
-    name: "Корпоративный сайт ООО 'ТехноСтрой'",
-    status: "active",
-    url: "https://technostroy.ru",
-    createdAt: "2024-01-15",
-    visitors: 1250,
-    orders: 45,
-    revenue: 125000,
-    template: "Корпоративный",
-    pages: 12
-  },
-  {
-    id: 4,
-    name: "Лендинг 'Курсы программирования'",
-    status: "active",
-    url: "https://coding-courses.ru",
-    createdAt: "2024-01-30",
-    visitors: 2100,
-    orders: 89,
-    revenue: 267000,
-    template: "Лендинг",
-    pages: 1
-  },
-  {
-    id: 7,
-    name: "Блог 'Технологии будущего'",
-    status: "development",
-    url: "https://tech-future.ru",
-    createdAt: "2024-03-15",
-    visitors: 0,
-    orders: 0,
-    revenue: 0,
-    template: "Блог",
-    pages: 5
-  }
-];
+type WebsiteCard = {
+  id: number | string;
+  name: string;
+  status: string;
+  url: string;
+  createdAt: string;
+  visitors: number;
+  orders?: number;
+  revenue?: number;
+  template?: string;
+  pages: number;
+};
 
 const SitusWebsites: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [websites, setWebsites] = useState<WebsiteCard[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const filteredWebsites = mockWebsites.filter(website =>
-    website.name.toLowerCase().includes(searchTerm.toLowerCase())
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const resp = await DemoAPI.websites();
+        const list = (resp as any)?.data || [];
+        if (mounted) setWebsites(list);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const filteredWebsites = websites.filter((w) =>
+    w.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const getStatusBadge = (status: string) => {
@@ -187,6 +179,17 @@ const SitusWebsites: React.FC = () => {
         );
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex">
+        <ProjectsSidebar />
+        <div className="flex-1 p-6">
+          <div className="text-body-color dark:text-dark-6">Загрузка...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex">

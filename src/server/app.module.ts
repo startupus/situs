@@ -37,6 +37,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UiModule } from './ui/ui.module';
 import { AdminScreensModule } from './admin-screens/admin-screens.module';
 import { IntegrationsModule } from './integrations/integrations.module';
+import { DemoModule } from './demo/demo.module';
 
 /**
  * Основной модуль приложения
@@ -106,6 +107,7 @@ import { IntegrationsModule } from './integrations/integrations.module';
     UiModule,
     AdminScreensModule,
     IntegrationsModule,
+    DemoModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
