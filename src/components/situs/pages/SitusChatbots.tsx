@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { DemoAPI } from "../../../api/services/demo.api";
 
 // Компонент левой панели с подменю (копируем из SitusProjects)
 const ProjectsSidebar: React.FC = () => {
@@ -118,50 +119,26 @@ const ProjectsSidebar: React.FC = () => {
   );
 };
 
-// Моковые данные чат-ботов
-const mockChatbots = [
-  {
-    id: 3,
-    name: "Чат-бот поддержки 'Помощник24'",
-    status: "development",
-    url: "https://t.me/helper24_bot",
-    createdAt: "2024-03-10",
-    visitors: 850,
-    orders: 120,
-    revenue: 85000,
-    platform: "Telegram",
-    messages: 1250
-  },
-  {
-    id: 6,
-    name: "Чат-бот заказа пиццы 'ПиццаБот'",
-    status: "active",
-    url: "https://t.me/pizzabot",
-    createdAt: "2024-02-15",
-    visitors: 1800,
-    orders: 450,
-    revenue: 225000,
-    platform: "Telegram",
-    messages: 3200
-  },
-  {
-    id: 9,
-    name: "Чат-бот консультаций 'ЮристБот'",
-    status: "active",
-    url: "https://t.me/lawyer_bot",
-    createdAt: "2024-01-25",
-    visitors: 950,
-    orders: 75,
-    revenue: 150000,
-    platform: "Telegram",
-    messages: 2100
-  }
-];
-
 const SitusChatbots: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [chatbots, setChatbots] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const filteredChatbots = mockChatbots.filter(chatbot =>
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const resp = await DemoAPI.chatbots();
+        const list = (resp as any)?.data || [];
+        if (mounted) setChatbots(list);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
+
+  const filteredChatbots = chatbots.filter(chatbot =>
     chatbot.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -238,8 +215,16 @@ const SitusChatbots: React.FC = () => {
       </div>
 
       {/* Список чат-ботов */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredChatbots.map((chatbot) => (
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+            <p className="mt-2 text-body-color dark:text-dark-6">Загрузка чат-ботов...</p>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredChatbots.map((chatbot) => (
           <div
             key={chatbot.id}
             className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3 p-6 hover:shadow-lg transition-shadow"
@@ -324,10 +309,9 @@ const SitusChatbots: React.FC = () => {
             </div>
           </div>
         ))}
-      </div>
 
-      {/* Пустое состояние */}
-      {filteredChatbots.length === 0 && (
+        {/* Пустое состояние */}
+        {filteredChatbots.length === 0 && (
         <div className="text-center py-12">
           <svg
             width="64"
@@ -359,6 +343,8 @@ const SitusChatbots: React.FC = () => {
             </Link>
           )}
         </div>
+        )}
+      </div>
       )}
       </div>
     </div>

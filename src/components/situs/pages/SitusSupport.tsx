@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { DemoAPI } from "../../../api/services/demo.api";
 
 interface SupportTicket {
   id: string;
@@ -12,69 +13,32 @@ interface SupportTicket {
   responses: number;
 }
 
-const mockTickets: SupportTicket[] = [
-  {
-    id: "TICK-001",
-    title: "Проблема с подключением API",
-    description: "Не могу подключиться к API компонентов. Получаю ошибку 401",
-    status: "open",
-    priority: "high",
-    category: "technical",
-    createdAt: new Date("2024-01-15T10:30:00"),
-    updatedAt: new Date("2024-01-15T10:30:00"),
-    responses: 0
-  },
-  {
-    id: "TICK-002", 
-    title: "Вопрос по тарифам",
-    description: "Хотел бы узнать подробности о корпоративном тарифе",
-    status: "in_progress",
-    priority: "medium",
-    category: "billing",
-    createdAt: new Date("2024-01-14T14:20:00"),
-    updatedAt: new Date("2024-01-15T09:15:00"),
-    responses: 2
-  },
-  {
-    id: "TICK-003",
-    title: "Предложение новой функции",
-    description: "Было бы здорово добавить поддержку dark mode для всех компонентов",
-    status: "closed",
-    priority: "low",
-    category: "feature",
-    createdAt: new Date("2024-01-12T16:45:00"),
-    updatedAt: new Date("2024-01-14T11:30:00"),
-    responses: 4
-  },
-  {
-    id: "TICK-004",
-    title: "Ошибка в компоненте Modal",
-    description: "Модальное окно не закрывается при нажатии на overlay",
-    status: "open",
-    priority: "urgent",
-    category: "bug",
-    createdAt: new Date("2024-01-15T12:00:00"),
-    updatedAt: new Date("2024-01-15T12:00:00"),
-    responses: 0
-  },
-  {
-    id: "TICK-005",
-    title: "Помощь с интеграцией",
-    description: "Нужна консультация по интеграции TailGrids в существующий проект",
-    status: "in_progress",
-    priority: "medium",
-    category: "other",
-    createdAt: new Date("2024-01-13T09:30:00"),
-    updatedAt: new Date("2024-01-15T08:45:00"),
-    responses: 3
-  }
-];
-
 const SitusSupport: React.FC = () => {
-  const [tickets, setTickets] = useState<SupportTicket[]>(mockTickets);
+  const [tickets, setTickets] = useState<SupportTicket[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const resp = await DemoAPI.supportTickets();
+        const list = (resp as any)?.data || [];
+        // Преобразуем строки дат в объекты Date
+        const processedTickets = list.map((ticket: any) => ({
+          ...ticket,
+          createdAt: new Date(ticket.createdAt),
+          updatedAt: new Date(ticket.updatedAt)
+        }));
+        if (mounted) setTickets(processedTickets);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -164,6 +128,19 @@ const SitusSupport: React.FC = () => {
   };
 
   const stats = getStatistics();
+
+  if (loading) {
+    return (
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+            <p className="mt-2 text-body-color dark:text-dark-6">Загрузка обращений...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

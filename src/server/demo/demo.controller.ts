@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { Public } from '../common/decorators/public.decorator';
-import { demoOrders, demoProducts, demoStores, demoSupportTickets, demoWebsites } from './demo.data';
+import { demoOrders, demoProducts, demoStores, demoSupportTickets, demoWebsites, demoChatbots } from './demo.data';
 
 @Controller('demo')
 export class DemoController {
@@ -32,6 +32,12 @@ export class DemoController {
   @Public()
   getSupportTickets() {
     return { success: true, data: demoSupportTickets };
+  }
+
+  @Get('chatbots')
+  @Public()
+  getChatbots() {
+    return { success: true, data: demoChatbots };
   }
 }
 
