@@ -44,21 +44,25 @@ test.describe('Menu Routing & SEF URLs', () => {
   });
 
   test('API: генерация SEF URL для пункта меню', async ({ request }) => {
-    // Сначала получаем ID любого пункта меню
+    // Ищем основной тип меню динамически
+    const menuTypesResp = await request.get(`${API_BASE}/api/menu-types`, { params: { projectId: PROJECT_ID } });
+    expect(menuTypesResp.ok()).toBeTruthy();
+    const menuTypesData = await menuTypesResp.json();
+    expect(menuTypesData.success).toBe(true);
+    const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
+    expect(!!mainType).toBe(true);
+
+    // Получаем пункты для найденного типа
     const menuItemsResponse = await request.get(`${API_BASE}/api/menu-items`, {
-      params: { menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji' }
+      params: { menuTypeId: mainType.id }
     });
-    
     const menuItems = await menuItemsResponse.json();
     expect(menuItems.success).toBe(true);
     expect(menuItems.data.length).toBeGreaterThan(0);
-    
+
     const firstItem = menuItems.data[0];
-    
-    // Генерируем SEF URL
     const sefResponse = await request.get(`${API_BASE}/api/menu-items/${firstItem.id}/sef-url`);
     expect(sefResponse.ok()).toBeTruthy();
-    
     const sefData = await sefResponse.json();
     expect(sefData.success).toBe(true);
     expect(sefData.data).toHaveProperty('url');
@@ -88,9 +92,15 @@ test.describe('Menu Routing & SEF URLs', () => {
   });
 
   test('API: lookup таблица для быстрого поиска', async ({ request }) => {
+    const menuTypesResp = await request.get(`${API_BASE}/api/menu-types`, { params: { projectId: PROJECT_ID } });
+    expect(menuTypesResp.ok()).toBeTruthy();
+    const menuTypesData = await menuTypesResp.json();
+    expect(menuTypesData.success).toBe(true);
+    const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
+
     const response = await request.get(`${API_BASE}/api/menu-items/lookup`, {
       params: {
-        menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji',
+        menuTypeId: mainType.id,
         language: '*'
       }
     });
@@ -124,13 +134,16 @@ test.describe('Menu Routing & SEF URLs', () => {
     }
   });
 
-  test('Frontend: навигация с активным пунктом меню', async ({ page }) => {
+  test('Frontend: навигация с активным пунктом меню', async ({ page, request }) => {
     await page.goto(`${FRONTEND_BASE}/projects/${PROJECT_ID}/menus`);
     
     // Ждем загрузки меню
     await page.waitForSelector('[data-testid="menu-manager"]', { timeout: 10000 });
-    // Явно выбираем главную группу меню
-    await page.selectOption('[data-testid="menu-type-select"]', 'cmeh1ajkj000i9k6kvdv0weji');
+    // Явно выбираем главную группу меню (получаем id динамически)
+    const menuTypesResp = await request.get(`${API_BASE}/api/menu-types`, { params: { projectId: PROJECT_ID } });
+    const menuTypesData = await menuTypesResp.json();
+    const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
+    await page.selectOption('[data-testid="menu-type-select"]', mainType.id);
     await page.waitForTimeout(500);
     
     // Проверяем, что есть пункты меню (после автоподстановки главного типа меню)
@@ -154,7 +167,7 @@ test.describe('Menu Routing & SEF URLs', () => {
     await page.waitForTimeout(1000);
     
     const footerValue = await page.locator('[data-testid="menu-type-select"]').inputValue();
-    expect(footerValue).toBe('cmeh1ajkj000i9k6kvdv0weji');
+    expect(footerValue).toBe(mainType.id);
     const footerItems = await page.locator('[data-testid="menu-item"]').count();
     expect(footerItems).toBeGreaterThan(0);
   });
@@ -176,11 +189,14 @@ test.describe('Menu Routing & SEF URLs', () => {
     expect(statsText).toContain('из');
   });
 
-  test('Frontend: Drag & Drop перестановка пунктов', async ({ page }) => {
+  test('Frontend: Drag & Drop перестановка пунктов', async ({ page, request }) => {
     await page.goto(`${FRONTEND_BASE}/projects/${PROJECT_ID}/menus`);
     
     // Гарантируем выбор типа меню, чтобы загрузились элементы
-    await page.selectOption('[data-testid="menu-type-select"]', 'cmeh1ajkj000i9k6kvdv0weji');
+    const menuTypesResp = await request.get(`${API_BASE}/api/menu-types`, { params: { projectId: PROJECT_ID } });
+    const menuTypesData = await menuTypesResp.json();
+    const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
+    await page.selectOption('[data-testid="menu-type-select"]', mainType.id);
     await page.waitForSelector('[data-testid="menu-drag-handle"]', { timeout: 15000 });
     
     // Проверяем наличие элементов для перетаскивания
@@ -192,9 +208,10 @@ test.describe('Menu Routing & SEF URLs', () => {
 
   test('API: проверка прав доступа к пунктам меню', async ({ request }) => {
     // Получаем первый пункт меню
-    const menuItemsResponse = await request.get(`${API_BASE}/api/menu-items`, {
-      params: { menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji' }
-    });
+    const menuTypesResp = await request.get(`${API_BASE}/api/menu-types`, { params: { projectId: PROJECT_ID } });
+    const menuTypesData = await menuTypesResp.json();
+    const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
+    const menuItemsResponse = await request.get(`${API_BASE}/api/menu-items`, { params: { menuTypeId: mainType.id } });
     
     const menuItems = await menuItemsResponse.json();
     expect(menuItems.success).toBe(true);

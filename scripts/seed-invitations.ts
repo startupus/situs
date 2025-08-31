@@ -1,3 +1,69 @@
+#!/usr/bin/env tsx
+import { PrismaClient, InvitationStatus, CommunicationChannel, GlobalRole } from '@prisma/client';
+
+/**
+ * Сид демо-приглашения для e2e:
+ * - токен: token3456789012cdefgh
+ * - email: staff-member@example.com
+ */
+async function run() {
+  const prisma = new PrismaClient();
+  try {
+    console.log('🌱 Seeding demo invitation for e2e...');
+
+    // Гарантируем наличие отправителя (admin@situs.local или создаём)
+    let inviter = await prisma.user.findFirst({ where: { email: 'admin@situs.local' } });
+    if (!inviter) {
+      inviter = await prisma.user.upsert({
+        where: { email: 'admin@situs.local' },
+        update: { globalRole: 'SUPER_ADMIN' as GlobalRole },
+        create: {
+          username: 'admin',
+          email: 'admin@situs.local',
+          password: 'admin',
+          globalRole: 'SUPER_ADMIN' as GlobalRole,
+          status: 'ACTIVE' as any,
+        },
+      });
+    }
+
+    const token = 'token3456789012cdefgh';
+    const email = 'staff-member@example.com';
+    const expiresAt = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+
+    await prisma.invitation.upsert({
+      where: { token },
+      update: {
+        email,
+        role: 'STAFF' as GlobalRole,
+        status: InvitationStatus.PENDING,
+        expiresAt,
+        invitedBy: inviter.id,
+        channel: CommunicationChannel.EMAIL,
+      },
+      create: {
+        email,
+        role: 'STAFF' as GlobalRole,
+        status: InvitationStatus.PENDING,
+        token,
+        message: 'E2E demo invite',
+        channel: CommunicationChannel.EMAIL,
+        invitedBy: inviter.id,
+        expiresAt,
+      },
+    });
+
+    console.log('✅ Demo invitation ensured');
+  } catch (e) {
+    console.error('❌ Seed invitations error:', e);
+    process.exitCode = 1;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+run();
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
