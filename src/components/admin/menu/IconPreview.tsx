@@ -8,7 +8,8 @@ import {
   FiSearch, FiFilter, FiGrid, FiList, FiEye, FiEyeOff,
   FiCalendar, FiClock, FiBookmark, FiFlag, FiAward, FiTarget,
   FiTool, FiCpu, FiDatabase, FiServer, FiWifi, FiMonitor,
-  FiX, FiCheck, FiPlus, FiMinus, FiRefreshCw, FiDownload
+  FiX, FiCheck, FiPlus, FiMinus, FiRefreshCw, FiDownload,
+  FiLock, FiBell, FiLogOut
 } from 'react-icons/fi';
 
 interface IconPreviewProps {
@@ -47,6 +48,8 @@ const ICON_COMPONENTS: Record<string, React.ComponentType<{ size?: number; class
   
   // Действия
   FiX, FiCheck, FiPlus, FiMinus, FiRefreshCw, FiDownload,
+  // Дополнительные (доступ/уведомления/выход)
+  FiLock, FiBell, FiLogOut,
 };
 
 /**

@@ -91,6 +91,8 @@ async function main() {
         orderIndex: 0,
         level: 1,
         isPublished: true,
+        icon: 'FiGrid',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -101,6 +103,8 @@ async function main() {
         orderIndex: 0,
         level: 1,
         isPublished: true,
+        icon: 'FiGrid',
+        iconLibrary: 'fi',
       },
     });
 
@@ -113,6 +117,8 @@ async function main() {
         orderIndex: 0,
         level: 1,
         isPublished: true,
+        icon: 'FiFolder',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -123,6 +129,8 @@ async function main() {
         orderIndex: 0,
         level: 1,
         isPublished: true,
+        icon: 'FiFolder',
+        iconLibrary: 'fi',
       },
     });
 
@@ -135,6 +143,8 @@ async function main() {
         orderIndex: 2,
         level: 1,
         isPublished: true,
+        icon: 'FiShoppingCart',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -145,6 +155,8 @@ async function main() {
         orderIndex: 2,
         level: 1,
         isPublished: true,
+        icon: 'FiShoppingCart',
+        iconLibrary: 'fi',
       },
     });
 
@@ -157,6 +169,8 @@ async function main() {
         orderIndex: 3,
         level: 1,
         isPublished: true,
+        icon: 'FiTrendingUp',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -167,6 +181,8 @@ async function main() {
         orderIndex: 3,
         level: 1,
         isPublished: true,
+        icon: 'FiTrendingUp',
+        iconLibrary: 'fi',
       },
     });
 
@@ -179,6 +195,8 @@ async function main() {
         orderIndex: 1,
         level: 1,
         isPublished: true,
+        icon: 'FiUsers',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -189,6 +207,8 @@ async function main() {
         orderIndex: 1,
         level: 1,
         isPublished: true,
+        icon: 'FiUsers',
+        iconLibrary: 'fi',
       },
     });
 
@@ -201,6 +221,8 @@ async function main() {
         orderIndex: 4,
         level: 1,
         isPublished: true,
+        icon: 'FiLifeBuoy',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -211,6 +233,8 @@ async function main() {
         orderIndex: 4,
         level: 1,
         isPublished: true,
+        icon: 'FiLifeBuoy',
+        iconLibrary: 'fi',
       },
     });
 
@@ -223,6 +247,8 @@ async function main() {
         orderIndex: 5,
         level: 1,
         isPublished: true,
+        icon: 'FiSettings',
+        iconLibrary: 'fi',
       },
       create: {
         menuTypeId: adminSidebar.id,
@@ -233,6 +259,8 @@ async function main() {
         orderIndex: 5,
         level: 1,
         isPublished: true,
+        icon: 'FiSettings',
+        iconLibrary: 'fi',
       },
     });
 
