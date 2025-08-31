@@ -406,6 +406,7 @@ npm run test:e2e
 - [Стандарты разработки](./docs/DEVELOPMENT_STANDARDS.md)
 - [Техническое задание](./docs/TECHNICAL_SPECIFICATION.md)
 - [Обзор docs](./docs/README.md)
+- [Демо‑данные и подход к мокам (JSON → API)](./docs/DEMO_DATA.md)
 - [Auth и домены (роли/скоупы, публичные маршруты, редиректы)](./docs/AUTH_AND_DOMAINS.md)
 - [Заметки по Swagger (планы интеграции)](./docs/SWAGGER_NOTES.md)
 - [Стандарты Playwright](./docs/testing/PLAYWRIGHT_STANDARDS.md)

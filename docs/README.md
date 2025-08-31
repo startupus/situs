@@ -10,6 +10,7 @@
 - `MCP_INTEGRATION.md` — интеграция MCP
 - `DEVELOPMENT_STANDARDS.md` — стандарты разработки (актуально)
 - `TECHNICAL_SPECIFICATION.md` — техническое задание
+- `DEMO_DATA.md` — демо‑данные в JSON и подход к мокам (JSON → API)
 - `specs/admin-navigation-from-menu-tz.md` — навигация админки от компонента Меню
 - `specs/admin-routing-tz.md` — разделение админки и публичного лендинга (отдельный проект)
 

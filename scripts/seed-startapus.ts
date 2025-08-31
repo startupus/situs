@@ -75,22 +75,26 @@ async function run() {
       { name: 'Дом и сад', slug: 'home-garden', description: 'Товары для дома и дачи' },
     ];
 
-    const createdCategories = [];
+    type CreatedCategory = { id: string; slug: string; name: string };
+    const createdCategories: CreatedCategory[] = [];
     for (let i = 0; i < categories.length; i++) {
       const cat = categories[i];
       const created = await prisma.category.upsert({
         where: { productId_slug: { productId: store.id, slug: cat.slug } as any },
-        update: {},
+        update: {
+          alias: cat.slug,
+        },
         create: {
           name: cat.name,
           slug: cat.slug,
+          alias: cat.slug,
           description: cat.description,
           orderIndex: i,
           isActive: true,
           productId: store.id,
         },
       });
-      createdCategories.push(created);
+      createdCategories.push({ id: created.id, slug: created.slug, name: created.name });
       console.log('📂 Category ready:', cat.name);
     }
 
@@ -107,10 +111,13 @@ async function run() {
         const subCat = subCategories[i];
         await prisma.category.upsert({
           where: { productId_slug: { productId: store.id, slug: subCat.slug } as any },
-          update: {},
+          update: {
+            alias: subCat.slug,
+          },
           create: {
             name: subCat.name,
             slug: subCat.slug,
+            alias: subCat.slug,
             description: subCat.description,
             orderIndex: i,
             isActive: true,
@@ -134,10 +141,11 @@ async function run() {
         const subCat = clothingSubCategories[i];
         await prisma.category.upsert({
           where: { productId_slug: { productId: store.id, slug: subCat.slug } as any },
-          update: {},
+          update: { alias: subCat.slug },
           create: {
             name: subCat.name,
             slug: subCat.slug,
+            alias: subCat.slug,
             description: subCat.description,
             orderIndex: i,
             isActive: true,
@@ -149,12 +157,9 @@ async function run() {
       }
     }
 
-    // Pages
-    const seedPages = [
-      { title: 'Главная', slug: 'home', isHomePage: true },
-      { title: 'О компании', slug: 'about' },
-      { title: 'Контакты', slug: 'contacts' },
-    ];
+    // Pages (из JSON)
+    const pagesJson = await import('../src/server/demo-data/startapus/pages.json');
+    const seedPages: Array<{ title: string; slug: string; isHomePage?: boolean }> = pagesJson.pages;
 
     let order = 0;
     for (const p of seedPages) {
@@ -175,61 +180,56 @@ async function run() {
       console.log('📝 Page ready:', created.slug);
     }
 
-    // Создаем демо-меню
-    console.log('🧭 Creating demo menus...');
-    
-    // Главное меню
-    const mainMenu = await prisma.menuType.upsert({
-      where: { projectId_name: { projectId: project.id, name: 'main' } as any },
-      update: {},
-      create: {
-        name: 'main',
-        title: 'Главное меню',
-        description: 'Основная навигация сайта',
-        projectId: project.id,
-      },
-    });
-    console.log('📁 MenuType main ready:', mainMenu.id);
-
-    // Пункты главного меню
-    const mainMenuItems = [
-      { title: 'Главная', alias: 'home', component: 'Website', view: 'page', targetId: seedPages.find(p => p.isHomePage)?.slug },
-      { title: 'Каталог', alias: 'catalog', component: 'Store', view: 'categories' },
-      { title: 'О компании', alias: 'about', component: 'Website', view: 'page', targetId: 'about' },
-      { title: 'Контакты', alias: 'contacts', component: 'Website', view: 'page', targetId: 'contacts' },
-    ];
-
-    let menuOrder = 0;
-    for (const item of mainMenuItems) {
-      const created = await prisma.menuItem.upsert({
-        where: { menuTypeId_alias: { menuTypeId: mainMenu.id, alias: item.alias } as any },
-        update: {},
-        create: {
-          title: item.title,
-          alias: item.alias,
-          type: 'COMPONENT',
-          level: 1,
-          orderIndex: menuOrder++,
-          component: item.component,
-          view: item.view,
-          targetId: item.targetId,
-          isPublished: true,
-          accessLevel: 'PUBLIC',
-          language: '*',
-          parameters: JSON.stringify({
-            menu_show: true,
-            css_class: 'nav-link'
-          }),
-          menuTypeId: mainMenu.id,
-        },
+    // Меню (из JSON)
+    console.log('🧭 Creating demo menus (JSON)...');
+    const menuJson = await import('../src/server/demo-data/startapus/menu.json');
+    for (const mt of menuJson.menuTypes) {
+      const menuType = await prisma.menuType.upsert({
+        where: { projectId_name: { projectId: project.id, name: mt.name } as any },
+        update: { title: mt.title, description: mt.description ?? undefined },
+        create: { name: mt.name, title: mt.title, description: mt.description ?? undefined, projectId: project.id },
       });
-      console.log('🧩 MenuItem ready:', created.alias);
-    }
+      console.log('📁 MenuType ready:', menuType.name);
 
-    // Подменю для каталога
-    const catalogMenuItem = await prisma.menuItem.findFirst({
-      where: { menuTypeId: mainMenu.id, alias: 'catalog' }
-    });
+      if (Array.isArray(mt.items)) {
+        let orderIndex = 0;
+        for (const item of mt.items) {
+          const type = (item.type as any) || 'COMPONENT';
+          await prisma.menuItem.upsert({
+            where: { menuTypeId_alias: { menuTypeId: menuType.id, alias: item.alias } as any },
+            update: {
+              title: item.title,
+              component: item.component,
+              view: item.view,
+              targetId: item.targetId,
+              externalUrl: item.externalUrl,
+              isPublished: true,
+              orderIndex: item.orderIndex ?? orderIndex,
+            },
+            create: {
+              title: item.title,
+              alias: item.alias,
+              type: type as any,
+              level: 1,
+              orderIndex: item.orderIndex ?? orderIndex,
+              component: item.component,
+              view: item.view,
+              targetId: item.targetId,
+              externalUrl: item.externalUrl,
+              isPublished: true,
+              accessLevel: 'PUBLIC' as any,
+              language: '*',
+              parameters: JSON.stringify({ menu_show: true }),
+              menuTypeId: menuType.id,
+            },
+          });
+          orderIndex++;
+        }
+      }
+    }
+    // Подменю для каталога (если есть тип main и пункт catalog)
+    const mainMenu = await prisma.menuType.findFirst({ where: { projectId: project.id, name: 'main' } });
+    const catalogMenuItem = mainMenu ? await prisma.menuItem.findFirst({ where: { menuTypeId: mainMenu.id, alias: 'catalog' } }) : null;
 
     if (catalogMenuItem && createdCategories.length > 0) {
       let subMenuOrder = 0;

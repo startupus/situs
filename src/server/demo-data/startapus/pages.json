@@ -1,0 +1,9 @@
+{
+  "pages": [
+    { "title": "Главная", "slug": "home", "isHomePage": true },
+    { "title": "О компании", "slug": "about" },
+    { "title": "Контакты", "slug": "contacts" }
+  ]
+}
+
+
