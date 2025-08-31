@@ -33,7 +33,7 @@ export class IntegrationEncryptionService {
 
       const key = this.getEncryptionKey();
       const iv = crypto.randomBytes(12); // 12 bytes for GCM
-      const cipher = crypto.createCipherGCM(this.algorithm, key, iv);
+      const cipher = crypto.createCipheriv(this.algorithm, key, iv) as crypto.CipherGCM;
       
       cipher.setAAD(Buffer.from('situs-integration-secrets'));
       
@@ -71,7 +71,7 @@ export class IntegrationEncryptionService {
       const authTag = Buffer.from(parts[1], 'hex');
       const encrypted = parts[2];
       
-      const decipher = crypto.createDecipherGCM(this.algorithm, key, iv);
+      const decipher = crypto.createDecipheriv(this.algorithm, key, iv) as crypto.DecipherGCM;
       decipher.setAAD(Buffer.from('situs-integration-secrets'));
       decipher.setAuthTag(authTag);
       

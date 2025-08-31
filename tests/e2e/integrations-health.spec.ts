@@ -7,7 +7,8 @@ test.describe('Integrations Health Check API', () => {
   test.beforeAll(async ({ request }) => {
     // Get first project
     const projectsResponse = await request.get('http://localhost:3002/api/projects');
-    const projects = await projectsResponse.json();
+    const body = await projectsResponse.json();
+    const projects = Array.isArray(body?.data?.projects) ? body.data.projects : Array.isArray(body) ? body : [];
     expect(projects.length).toBeGreaterThan(0);
     projectId = projects[0].id;
 
