@@ -22,3 +22,7 @@ server.dist.log
 server-dist.log
 server.dev.log
 .dist/
+ 
+# Playwright / E2E artifacts
+test-results/
+playwright-report/
