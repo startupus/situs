@@ -30,11 +30,32 @@ if ! npm run schema:sync; then
     exit 1
 fi
 
+"$PWD"/node_modules/.bin/prettier --check . >/dev/null 2>&1 || {
+    log_error "Prettier formatting check failed. Run: npm run format"
+    exit 1
+}
+
 # 2. Проверка безопасности разработки
 log_info "Running development safety checks..."
 if ! npm run dev:safe -- --check-only; then
     log_error "Development safety checks failed"
     exit 1
+fi
+
+# 3. Линтинг и типы (быстрые проверки)
+log_info "Running ESLint..."
+if ! npm run lint; then
+    log_error "ESLint failed"
+    exit 1
+fi
+
+log_info "Checking commit message with commitlint (if present)..."
+if [ -x "$PWD/node_modules/.bin/commitlint" ]; then
+  LAST_MSG=$(git log -1 --pretty=%B)
+  echo "$LAST_MSG" | "$PWD"/node_modules/.bin/commitlint || {
+    log_error "Commit message does not follow Conventional Commits"
+    exit 1
+  }
 fi
 
 log_success "All pre-commit checks passed! ✅"

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Проверка сообщения коммита по Conventional Commits
+if [ -x "$PWD/node_modules/.bin/commitlint" ]; then
+  "$PWD"/node_modules/.bin/commitlint --edit "$1"
+else
+  # commitlint ещё не установлен — пропускаем, чтобы не блокировать разработку
+  exit 0
+fi
