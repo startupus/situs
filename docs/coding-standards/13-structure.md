@@ -18,9 +18,37 @@
 - Хуки — `src/hooks/*`; типы — `src/types/*`; утилиты — `src/lib/*`/`src/utils/*`.
 - API‑слой — `src/api/services/*`. Переиспользуемые UI — `src/components/ui/*`.
 
+## Пример дерева
+```text
+src/
+  components/
+    admin/
+      menu/
+        drag-drop/
+        MenuManager.tsx
+        MenuItemsList.tsx
+        README.md
+  hooks/
+    useMenuSystemRealtime.ts
+  types/
+    menu.ts
+  server/
+    menus/
+      menus.module.ts
+      menus.service.ts
+      menu-resolver.service.ts
+      dto/
+      entities/
+```
+
 ## Публичные точки входа
 - Использовать `index.ts` для реэкспорта модулей/типов; избегать глубоких относительных импортов.
-- В `tsconfig` использовать `paths` для алиасов.
+
+```ts
+// src/components/admin/menu/index.ts
+export * from './MenuManager'
+export * from './MenuItemsList'
+```
 
 ## Зависимости
 - Перед выносом кода — выделять явные контракты/интерфейсы в `src/types/*`.

@@ -20,17 +20,49 @@
 - Применение изменений: `npx prisma db push` для dev, `prisma migrate dev/deploy` для миграций.
 - Правило: не изменять `backend/prisma/schema.prisma` вручную — только через корневую схему.
 
-## Транзакции
-- Использовать транзакции ORM для целостности связанных операций (создание/перемещение меню и т.п.).
-- Важные инварианты проверять внутри транзакции (уникальные алиасы, корректность родителя).
+### Пример модели (Prisma)
+```prisma
+model MenuItem {
+  id         String   @id @default(cuid())
+  projectId  String
+  parentId   String?  @db.VarChar(191)
+  title      String
+  alias      String
+  isActive   Boolean  @default(true)
+  order      Int      @default(0)
+
+  @@index([projectId])
+  @@index([parentId])
+  @@unique([projectId, alias])
+}
+```
+
+### Транзакция (Prisma)
+```ts
+await prisma.$transaction(async (tx) => {
+  const item = await tx.menuItem.update({ where: { id }, data: { parentId, order } })
+  await tx.menuItem.updateMany({ where: { parentId }, data: { order: { increment: 1 } } })
+  return item
+})
+```
+
+### Seed (TypeScript)
+```ts
+import { prisma } from '@/src/server/database/prisma'
+
+await prisma.menuItem.createMany({ data: [
+  { projectId, title: 'Главная', alias: 'home', order: 0 },
+  { projectId, title: 'О нас', alias: 'about', order: 1 },
+]})
+```
 
 ## Индексы и ограничения
 - Индексы на поля поиска/соединений (например, `projectId`, `parentId`, `slug/alias`).
 - Уникальные ограничения на бизнес‑ключи (например, alias в пределах типа меню/проекта).
 
-## Сиды и демо
-- Сиды хранить в `prisma/seed*.ts` и `scripts/seed-*.ts`. Запуск: `npm run db:seed`/`db:seed:demo`.
-- Отдельные сиды для ACL/групп/меню: см. `prisma/seed-acl.ts`, `scripts/seed-startapus-menus.ts`.
+## Транзакции
+- Использовать транзакции ORM для целостности связанных операций (создание/перемещение меню и т.п.).
+- Важные инварианты проверять внутри транзакции (уникальные алиасы, корректность родителя).
 
 ## Версионирование и синхронизация
 - При изменении схемы — запускать `npm run schema:sync` и `npx prisma generate`.

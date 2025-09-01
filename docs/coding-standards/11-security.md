@@ -14,17 +14,43 @@
 - Роли и уровни доступа (view levels) реализованы централизованно; проверка в гард/декораторах.
 - Не доверять фронту. Все права — на сервере.
 
+### Пример guard
+```ts
+import { CanActivate, ExecutionContext, Injectable, ForbiddenException } from '@nestjs/common'
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+  constructor(private readonly requiredRole: string) {}
+  canActivate(ctx: ExecutionContext): boolean {
+    const req = ctx.switchToHttp().getRequest()
+    const user = req.user
+    if (!user || !user.roles?.includes(this.requiredRole)) {
+      throw new ForbiddenException('Insufficient role')
+    }
+    return true
+  }
+}
+```
+
 ## Валидация и санитизация
 - Входные DTO — `class-validator` + `ValidationPipe` с `whitelist`, `forbidNonWhitelisted`.
 - Санитизация строк/HTML там, где это необходимо. В React избегать `dangerouslySetInnerHTML`.
 
-## Защита
-- XSS: экранирование, Content Security Policy (по возможности).
-- CSRF: для stateful сценариев — токены/заголовки. Для SPA+JWT — правильно настроенный CORS и методы.
-- SQL/ORM injection: только параметризованные запросы/ORM.
-
 ## Заголовки и CORS
 - `helmet` на бэкенде; CORS с явным allowlist (см. конфиги).
+
+```ts
+import helmet from 'helmet'
+import { NestFactory } from '@nestjs/core'
+
+const app = await NestFactory.create(AppModule)
+app.use(helmet())
+app.enableCors({
+  origin: ['http://localhost:5177'],
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+})
+```
 
 ## Секреты
 - Не коммитить .env; хранить секреты в окружении/менеджерах секретов. Разделять dev/stage/prod.

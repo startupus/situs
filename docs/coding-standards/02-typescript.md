@@ -21,6 +21,58 @@
 - Дженерики — именовать понятно (`TEntity`, `TResponse`).
 - Для readonly структур применять `as const` и `readonly` поля/массивы.
 
+### unknown vs any
+```ts
+function parseJson(input: string): unknown {
+  return JSON.parse(input)
+}
+
+const data = parseJson('{"x":1}')
+// Don't: (любой доступ без сужения)
+// console.log(data.foo)
+
+// Do: сузить тип перед использованием
+if (typeof data === 'object' && data !== null && 'x' in data) {
+  const { x } = data as { x: number }
+  console.log(x)
+}
+```
+
+### Исчерпывающие проверки (never)
+```ts
+type Status = 'idle' | 'loading' | 'success' | 'error'
+
+function getLabel(status: Status): string {
+  switch (status) {
+    case 'idle':
+      return 'Готово'
+    case 'loading':
+      return 'Загрузка'
+    case 'success':
+      return 'Успех'
+    case 'error':
+      return 'Ошибка'
+    default: {
+      const _exhaustive: never = status
+      return _exhaustive
+    }
+  }
+}
+```
+
+### Дженерики и возвраты
+```ts
+export interface ApiResponse<TData> {
+  data: TData
+  error?: string
+}
+
+export async function fetchEntity<TEntity>(id: string): Promise<ApiResponse<TEntity>> {
+  const res = await api.get(`/entities/${id}`)
+  return { data: res.data as TEntity }
+}
+```
+
 ## Interface vs type
 - `interface` — для объектных контрактов, расширяемых и публичных API.
 - `type` — для алиасов сложных типов (union/intersection), mapped/conditional типов.
