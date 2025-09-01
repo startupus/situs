@@ -223,6 +223,24 @@ class ProjectsApiService {
   }
 
   /**
+   * Получить статистику использования темы проекта
+   */
+  async getProjectThemeUsage(projectId: string): Promise<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number }>{
+    try {
+      const response = await apiClient.get<ApiResponse<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number }>>(
+        `${this.baseEndpoint}/${projectId}/theme/usage`
+      );
+      if (ApiUtils.isSuccess(response)) {
+        return response.data;
+      }
+      throw new Error(response.error || 'Ошибка при загрузке статистики темы');
+    } catch (error) {
+      console.error('Get Project Theme Usage API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  /**
    * Обновить домены проекта (base domain / customDomain)
    */
   async updateProjectDomains(projectId: string, data: { domain?: string; customDomain?: string }): Promise<void> {

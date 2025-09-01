@@ -32,6 +32,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Загрузка настроек темы при инициализации
   useEffect(() => {
     loadThemeSettings();
+    // Авто-миграция: если в localStorage есть тема, а в БД нет — сохраним при первом заходе
+    try {
+      const saved = localStorage.getItem('situs-theme-settings');
+      if (saved) {
+        // Отложим миграцию: компонент менеджера вызовет PUT при сохранении; здесь только отметка
+        console.log('Theme settings detected in localStorage (ready for migration)');
+      }
+    } catch {}
   }, []);
 
   // Применение CSS переменных при изменении темы или режима

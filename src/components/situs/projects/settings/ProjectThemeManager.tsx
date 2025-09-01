@@ -71,6 +71,7 @@ const ProjectThemeManager: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [previewMode, setPreviewMode] = useState<boolean>(false);
   const [notice, setNotice] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [usage, setUsage] = useState<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number } | null>(null);
 
   const effectiveProjectId = useMemo(() => projectId as string, [projectId]);
 
@@ -84,6 +85,11 @@ const ProjectThemeManager: React.FC = () => {
         const theme = await projectsApi.getProjectTheme(effectiveProjectId);
         if (!mounted) return;
         setServerTheme(theme);
+        // Статистика использования
+        try {
+          const u = await projectsApi.getProjectThemeUsage(effectiveProjectId);
+          if (mounted) setUsage(u);
+        } catch {}
       } catch (e: any) {
         setError(e?.message || 'Ошибка загрузки темы');
       } finally {
@@ -188,6 +194,24 @@ const ProjectThemeManager: React.FC = () => {
           }`}
         >
           {notice.text}
+        </div>
+      )}
+
+      {/* Статистика использования */}
+      {!!usage && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
+            <div className="text-xs text-body-color dark:text-dark-6">Последнее обновление</div>
+            <div className="text-sm text-dark dark:text-white font-medium">{usage.lastUpdatedAt ? new Date(usage.lastUpdatedAt).toLocaleString() : '—'}</div>
+          </div>
+          <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
+            <div className="text-xs text-body-color dark:text-dark-6">Последняя тема</div>
+            <div className="text-sm text-dark dark:text-white font-medium">{usage.lastThemeId || '—'}</div>
+          </div>
+          <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
+            <div className="text-xs text-body-color dark:text-dark-6">Сохранений</div>
+            <div className="text-sm text-dark dark:text-white font-medium">{usage.timesSaved ?? 0}</div>
+          </div>
         </div>
       )}
 

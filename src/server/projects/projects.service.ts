@@ -73,9 +73,29 @@ export class ProjectsService {
     if (!themeConfig || !themeConfig.colors || !themeConfig.colors.light || !themeConfig.colors.dark) {
       throw new BadRequestException('Некорректные данные темы');
     }
+    // Обновляем конфиг темы
+    const project = await this.prisma.project.findUnique({ where: { id: projectId }, select: { settings: true } });
+    let settingsObj: any = {};
+    try {
+      settingsObj = project?.settings ? (typeof project.settings === 'string' ? JSON.parse(project.settings) : project.settings) : {};
+    } catch {
+      settingsObj = {};
+    }
+    const now = new Date().toISOString();
+    const prevUsage = settingsObj.themeUsage || {};
+    const nextUsage = {
+      lastUpdatedAt: now,
+      lastThemeId: themeConfig?.id || prevUsage.lastThemeId || 'unknown',
+      timesSaved: (prevUsage.timesSaved || 0) + 1
+    };
+    settingsObj.themeUsage = nextUsage;
+
     await this.prisma.project.update({
       where: { id: projectId },
-      data: { theme: JSON.stringify(themeConfig) }
+      data: {
+        theme: JSON.stringify(themeConfig),
+        settings: JSON.stringify(settingsObj)
+      }
     });
     return { success: true };
   }
@@ -124,6 +144,27 @@ export class ProjectsService {
         }
       }
     };
+  }
+
+  /**
+   * Получение статистики использования темы (из projects.settings.themeUsage)
+   */
+  async getProjectThemeUsage(projectId: string): Promise<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number }> {
+    const project = await this.prisma.project.findUnique({ where: { id: projectId }, select: { settings: true } });
+    if (!project) {
+      throw new NotFoundException('Проект не найден');
+    }
+    try {
+      const settingsObj = project.settings ? (typeof project.settings === 'string' ? JSON.parse(project.settings) : project.settings) : {};
+      const usage = settingsObj.themeUsage || {};
+      return {
+        lastUpdatedAt: usage.lastUpdatedAt,
+        lastThemeId: usage.lastThemeId,
+        timesSaved: usage.timesSaved || 0
+      };
+    } catch {
+      return { timesSaved: 0 };
+    }
   }
 
   /**

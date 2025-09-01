@@ -117,6 +117,15 @@ export class ProjectsController {
   }
 
   /**
+   * Публичный алиас активной темы проекта (для фронтенда)
+   */
+  @Get(':id/theme/active')
+  async getProjectThemeActive(@Param('id') id: string) {
+    const theme = await this.projectsService.getProjectThemeConfig(id);
+    return { success: true, data: theme } as const;
+  }
+
+  /**
    * Создание нового проекта
    */
   @Post()
@@ -153,6 +162,15 @@ export class ProjectsController {
   async updateProjectTheme(@Param('id') id: string, @Body() body: any) {
     const result = await this.projectsService.updateProjectThemeConfig(id, body);
     return { success: result.success } as const;
+  }
+
+  /**
+   * Статистика использования темы
+   */
+  @Get(':id/theme/usage')
+  async getProjectThemeUsage(@Param('id') id: string) {
+    const usage = await this.projectsService.getProjectThemeUsage(id);
+    return { success: true, data: usage } as const;
   }
 
   /**
