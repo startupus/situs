@@ -155,6 +155,89 @@ export const demoSupportTickets = [
     updatedAt: new Date('2024-01-15T10:30:00').toISOString(),
     responses: 0,
   },
+  {
+    id: 'TICK-002', 
+    title: 'Вопрос по тарифам',
+    description: 'Хотел бы узнать подробности о корпоративном тарифе',
+    status: 'in_progress',
+    priority: 'medium',
+    category: 'billing',
+    createdAt: new Date('2024-01-14T14:20:00').toISOString(),
+    updatedAt: new Date('2024-01-15T09:15:00').toISOString(),
+    responses: 2,
+  },
+  {
+    id: 'TICK-003',
+    title: 'Предложение новой функции',
+    description: 'Было бы здорово добавить поддержку dark mode для всех компонентов',
+    status: 'closed',
+    priority: 'low',
+    category: 'feature',
+    createdAt: new Date('2024-01-12T16:45:00').toISOString(),
+    updatedAt: new Date('2024-01-14T11:30:00').toISOString(),
+    responses: 4,
+  },
+  {
+    id: 'TICK-004',
+    title: 'Ошибка в компоненте Modal',
+    description: 'Модальное окно не закрывается при нажатии на overlay',
+    status: 'open',
+    priority: 'urgent',
+    category: 'bug',
+    createdAt: new Date('2024-01-15T12:00:00').toISOString(),
+    updatedAt: new Date('2024-01-15T12:00:00').toISOString(),
+    responses: 0,
+  },
+  {
+    id: 'TICK-005',
+    title: 'Помощь с интеграцией',
+    description: 'Нужна консультация по интеграции TailGrids в существующий проект',
+    status: 'in_progress',
+    priority: 'medium',
+    category: 'other',
+    createdAt: new Date('2024-01-13T09:30:00').toISOString(),
+    updatedAt: new Date('2024-01-15T08:45:00').toISOString(),
+    responses: 3,
+  },
+];
+
+export const demoChatbots = [
+  {
+    id: 3,
+    name: "Чат-бот поддержки 'Помощник24'",
+    status: "development",
+    url: "https://t.me/helper24_bot",
+    createdAt: "2024-03-10",
+    visitors: 850,
+    orders: 120,
+    revenue: 85000,
+    platform: "Telegram",
+    messages: 1250
+  },
+  {
+    id: 6,
+    name: "Чат-бот заказа пиццы 'ПиццаБот'",
+    status: "active",
+    url: "https://t.me/pizzabot",
+    createdAt: "2024-02-15",
+    visitors: 1800,
+    orders: 450,
+    revenue: 225000,
+    platform: "Telegram",
+    messages: 3200
+  },
+  {
+    id: 9,
+    name: "Чат-бот консультаций 'ЮристБот'",
+    status: "active",
+    url: "https://t.me/lawyer_bot",
+    createdAt: "2024-01-25",
+    visitors: 950,
+    orders: 75,
+    revenue: 150000,
+    platform: "Telegram",
+    messages: 2100
+  }
 ];
 
 

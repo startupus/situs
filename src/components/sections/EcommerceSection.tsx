@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { DemoAPI } from '../../api/services/demo.api';
 import { 
   FiShoppingCart, FiPackage, FiDollarSign, FiTrendingUp, 
   FiPlus, FiEdit, FiTrash2, FiEye, FiSearch, FiFilter
@@ -17,53 +18,52 @@ interface Product {
 const EcommerceSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'products' | 'orders' | 'analytics' | 'settings'>('products');
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Моковые данные товаров
-  const [products] = useState<Product[]>([
-    {
-      id: '1',
-      name: 'Футболка базовая',
-      price: 1200,
-      category: 'Одежда',
-      stock: 50,
-      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
-      status: 'active'
-    },
-    {
-      id: '2',
-      name: 'Джинсы классические',
-      price: 3500,
-      category: 'Одежда',
-      stock: 25,
-      image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop',
-      status: 'active'
-    },
-    {
-      id: '3',
-      name: 'Кроссовки спортивные',
-      price: 5000,
-      category: 'Обувь',
-      stock: 12,
-      image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=300&h=300&fit=crop',
-      status: 'draft'
-    }
-  ]);
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const resp = await DemoAPI.products();
+        const list = (resp as any)?.data || [];
+        if (mounted) setProducts(list);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
 
-  const renderProducts = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Товары</h3>
-          <p className="text-gray-600 dark:text-gray-400">Управляйте каталогом товаров</p>
+  const renderProducts = () => {
+    if (loading) {
+      return (
+        <div className="space-y-6">
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">Загрузка товаров...</p>
+            </div>
+          </div>
         </div>
-        <button 
-          onClick={() => setShowAddProductModal(true)}
-          className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <FiPlus className="w-4 h-4" />
-          <span>Добавить товар</span>
-        </button>
-      </div>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Товары</h3>
+            <p className="text-gray-600 dark:text-gray-400">Управляйте каталогом товаров</p>
+          </div>
+          <button 
+            onClick={() => setShowAddProductModal(true)}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <FiPlus className="w-4 h-4" />
+            <span>Добавить товар</span>
+          </button>
+        </div>
 
       {/* Фильтры и поиск */}
       <div className="flex items-center space-x-4">
@@ -140,7 +140,8 @@ const EcommerceSection: React.FC = () => {
         ))}
       </div>
     </div>
-  );
+    );
+  };
 
   const renderOrders = () => (
     <div className="space-y-6">

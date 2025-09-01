@@ -20,6 +20,10 @@ export class DemoAPI {
   static async supportTickets() {
     return apiClient.get('/api/demo/support-tickets');
   }
+
+  static async chatbots() {
+    return apiClient.get('/api/demo/chatbots');
+  }
 }
 
 
