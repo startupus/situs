@@ -265,7 +265,8 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                 {canCreateHere && (
                   <button
                     onClick={() => {
-                      if (location.pathname.includes('/menus')) {
+                      // Менеджер меню доступен по двум путям: /projects/:id/menus и /projects/:id/settings/menu
+                      if (location.pathname.includes('/menus') || /\/projects\/[^/]+\/settings\/menu/.test(location.pathname)) {
                         const searchParams = new URLSearchParams(location.search);
                         const tab = searchParams.get('tab');
                         if (tab === 'types') {

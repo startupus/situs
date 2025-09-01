@@ -265,14 +265,14 @@ async function main() {
     });
 
     // Пункты меню project-sidebar (шаблон): пути начинаются с /project и маппятся на /projects/:id/**
-    const projectSidebarItems: Array<{ alias: string; title: string; path: string; orderIndex: number }>= [
-      { alias: 'overview', title: 'Обзор', path: '/project', orderIndex: 0 },
-      { alias: 'pages', title: 'Страницы', path: '/project/pages', orderIndex: 1 },
-      { alias: 'store', title: 'Магазин', path: '/project/store', orderIndex: 2 },
-      { alias: 'seo', title: 'SEO', path: '/project/settings/seo', orderIndex: 3 },
-      { alias: 'integrations', title: 'Интеграции', path: '/project/settings/integrations', orderIndex: 4 },
-      { alias: 'team', title: 'Команда', path: '/project/settings/team', orderIndex: 5 },
-      { alias: 'access', title: 'Доступ', path: '/project/settings/access', orderIndex: 6 },
+    const projectSidebarItems: Array<{ alias: string; title: string; path: string; orderIndex: number; icon?: string; iconLibrary?: string }>= [
+      { alias: 'overview', title: 'Обзор', path: '/project', orderIndex: 0, icon: 'FiGrid', iconLibrary: 'fi' },
+      { alias: 'pages', title: 'Страницы', path: '/project/pages', orderIndex: 1, icon: 'FiFileText', iconLibrary: 'fi' },
+      { alias: 'store', title: 'Магазин', path: '/project/store', orderIndex: 2, icon: 'FiShoppingCart', iconLibrary: 'fi' },
+      { alias: 'seo', title: 'SEO', path: '/project/settings/seo', orderIndex: 3, icon: 'FiTarget', iconLibrary: 'fi' },
+      { alias: 'integrations', title: 'Интеграции', path: '/project/settings/integrations', orderIndex: 4, icon: 'FiTool', iconLibrary: 'fi' },
+      { alias: 'team', title: 'Команда', path: '/project/settings/team', orderIndex: 5, icon: 'FiUsers', iconLibrary: 'fi' },
+      { alias: 'access', title: 'Доступ', path: '/project/settings/access', orderIndex: 6, icon: 'FiLock', iconLibrary: 'fi' },
     ];
     for (const it of projectSidebarItems) {
       await prisma.menuItem.upsert({
@@ -284,6 +284,8 @@ async function main() {
           orderIndex: it.orderIndex,
           level: 1,
           isPublished: true,
+          icon: it.icon,
+          iconLibrary: it.iconLibrary as any,
         },
         create: {
           menuTypeId: projectSidebar.id,
@@ -294,6 +296,8 @@ async function main() {
           orderIndex: it.orderIndex,
           level: 1,
           isPublished: true,
+          icon: it.icon,
+          iconLibrary: it.iconLibrary as any,
         },
       });
     }

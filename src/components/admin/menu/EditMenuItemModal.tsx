@@ -35,7 +35,16 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
     accessLevel: item.accessLevel,
     language: item.language,
     isPublished: item.isPublished,
-    parameters: item.parameters || '{}'
+    parameters: (() => {
+      try {
+        // Если параметры приходят строкой JSON, распарсим её, иначе используем объект
+        const raw = (item as any).parameters;
+        const obj = typeof raw === 'string' ? JSON.parse(raw) : (raw || {});
+        return JSON.stringify(obj, null, 2);
+      } catch {
+        return '{}';
+      }
+    })()
   });
   
   const [loading, setLoading] = useState(false);
@@ -48,28 +57,50 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
     setError(null);
 
     try {
-      // Валидация параметров JSON
-      let parsedParameters = {};
+      // Валидация и нормализация параметров JSON (устраняем двойное экранирование)
+      let parsedParameters: any = {};
       if (formData.parameters.trim()) {
         try {
-          parsedParameters = JSON.parse(formData.parameters);
+          const firstParse = JSON.parse(formData.parameters);
+          parsedParameters = typeof firstParse === 'string' ? JSON.parse(firstParse) : firstParse;
         } catch (err) {
           throw new Error('Некорректный формат JSON в параметрах');
         }
       }
 
-      const response = await fetch(`http://localhost:3002/api/menu-items/${item.id}`, {
+      const payload = {
+        // Обязательные и основные поля из формы
+        title: formData.title,
+        alias: formData.alias,
+        type: formData.type,
+        component: formData.component || undefined,
+        view: formData.view || undefined,
+        layout: formData.layout ?? '',
+        targetId: formData.targetId || undefined,
+        icon: formData.icon || undefined,
+        iconLibrary: formData.iconLibrary || 'fi',
+        accessLevel: formData.accessLevel,
+        language: formData.language,
+        isPublished: formData.isPublished,
+        parameters: JSON.stringify(parsedParameters),
+        // Поля из исходного элемента, чтобы пройти валидацию и избежать edge-кейсов
+        level: item.level,
+        parentId: item.parentId || undefined,
+        orderIndex: item.orderIndex,
+        externalUrl: item.externalUrl || undefined,
+        menuTypeId: item.menuTypeId,
+      } as any;
+
+      const response = await fetch(`/api/menu-items/${item.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          parameters: JSON.stringify(parsedParameters)
-        })
+        body: JSON.stringify(payload)
       });
 
       const result = await response.json();
       if (result.success) {
-        onUpdate({ ...item, ...formData });
+        // Передаём наверх обновлённый объект с нормализованными параметрами
+        onUpdate({ ...item, ...formData, parameters: parsedParameters as any });
         onClose();
       } else {
         setError(result.error || 'Ошибка обновления пункта меню');

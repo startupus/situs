@@ -13,15 +13,32 @@ export class WebCategoriesService {
     private readonly realtimeService: RealtimeEventsService,
   ) {}
 
+  /**
+   * Надёжно резолвит ID проекта по переданному значению (id или slug)
+   */
+  private async resolveProjectId(idOrSlug: string): Promise<string> {
+    if (!idOrSlug) {
+      throw new HttpException('Project id or slug is required', HttpStatus.BAD_REQUEST);
+    }
+    // Сначала пробуем как ID
+    const byId = await this.prisma.project.findUnique({ where: { id: idOrSlug }, select: { id: true } }).catch(() => null);
+    if (byId?.id) return byId.id;
+    // Затем как slug
+    const bySlug = await this.prisma.project.findUnique({ where: { slug: idOrSlug }, select: { id: true } }).catch(() => null);
+    if (bySlug?.id) return bySlug.id;
+    throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+  }
+
   async getProjectCategories(projectId: string, userId: string, includeInactive = false) {
     // Проверяем права на проект
     // TODO: checkProjectAccess method not found
     // await this.projectsService.checkProjectAccess(projectId, userId, 'PROJECT_READ');
 
     // Получаем Pages продукт проекта
+    const resolvedProjectId = await this.resolveProjectId(projectId);
     const pagesProduct = await this.prisma.product.findFirst({
       where: {
-        projectId,
+        projectId: resolvedProjectId,
         type: ProductType.WEBSITE,
       },
     });
@@ -63,9 +80,10 @@ export class WebCategoriesService {
     // await this.projectsService.checkProjectAccess(projectId, userId, 'PROJECT_WRITE');
 
     // Получаем Pages продукт проекта
+    const resolvedProjectId = await this.resolveProjectId(projectId);
     const pagesProduct = await this.prisma.product.findFirst({
       where: {
-        projectId,
+        projectId: resolvedProjectId,
         type: ProductType.WEBSITE,
       },
     });
