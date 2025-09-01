@@ -1,0 +1,13 @@
+node_modules
+dist
+coverage
+playwright-report
+test-results
+*.log
+*.tsbuildinfo
+prisma/dev.db
+**/build/**
+**/.next/**
+**/.cache/**
+**/*.min.js
+**/*.min.css

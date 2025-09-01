@@ -26,23 +26,7 @@ npm run lint && npm run test --silent
 ```
 
 ## CI (пример GitHub Actions)
-```yaml
-name: CI
-on: [push, pull_request]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test --if-present
-      - run: npm run test:e2e --if-present
-      - run: npm run build --if-present
-```
+См. файл workflow: `.github/workflows/ci.yml` (линт, TS‑проверки, форматтер, prisma, Playwright, сборка).
 
 ## Документация
 - Ссылки на стандарты в `docs/README.md` и `docs/CODING_STANDARDS.md`.
