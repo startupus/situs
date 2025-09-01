@@ -11,7 +11,7 @@ function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function waitForHealth(url, timeoutMs = 30000) {
+async function waitForHealth(url, timeoutMs = 45000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     try {
@@ -27,6 +27,9 @@ async function main() {
   process.env.NODE_ENV = 'test';
   process.env.PORT = String(TEST_PORT);
   process.env.AUTH_TEST_TOKEN = process.env.AUTH_TEST_TOKEN || 'test-token-12345';
+  // Минимальный набор переменных окружения для прохождения валидации
+  process.env.DATABASE_URL = process.env.DATABASE_URL || 'postgresql://user:pass@localhost:5432/db';
+  process.env.JWT_SECRET = process.env.JWT_SECRET || 'test-secret-1234567890abcd';
 
   // Сначала соберем backend
   console.log('🔨 Собираем backend...');
@@ -39,16 +42,17 @@ async function main() {
   });
 
   console.log('🚀 Запускаем тестовый сервер...');
+  // Для тестов запускаем через tsx, чтобы не зависеть от dist
   const server = spawn(
-    'node',
-    ['dist/server/main.js'],
+    process.platform === 'win32' ? 'npx.cmd' : 'npx',
+    ['tsx', '--tsconfig', 'tsconfig.server.json', 'src/server/main.ts'],
     {
       stdio: 'inherit',
       env: { ...process.env, NODE_ENV: 'test', PORT: String(TEST_PORT) },
     },
   );
 
-  const ok = await waitForHealth(`${TEST_BASE}/health`, 30000);
+  const ok = await waitForHealth(`${TEST_BASE}/api/health`, 45000);
   if (!ok) {
     try { server.kill('SIGTERM'); } catch {}
     console.error('❌ Не удалось дождаться /health от тестового сервера');
