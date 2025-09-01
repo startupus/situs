@@ -25,6 +25,7 @@
     "test:storybook": "test-storybook",
     "test:visual": "playwright test --config=playwright-visual.config.ts",
     "test:backend": "node scripts/test-backend.mjs",
+    "test:backend:unit": "vitest run __tests__/backend/**/*.unit.test.ts",
     "test:ci": "npm run test:backend && npm run test:e2e",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --fix src --ext ts,tsx",
