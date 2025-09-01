@@ -2,12 +2,9 @@
 
 Назначение: стандарты для unit, integration и e2e тестов.
 
-## Чеклист реализации
-- [x] Инструменты: Vitest для unit, Playwright для e2e (Jest — нельзя)
-- [x] Структура тестов: рядом с кодом или __tests__
-- [x] Покрытие: бизнес-логика сервисов, критические утилиты, роутинг меню
-- [x] Моки и фикстуры, изоляция
-- [x] CI-прогон и отчёты покрытия
+## Ссылки в проекте
+- `vitest.config.ts`, `playwright.config.ts`
+- `tests/e2e/` — e2e тесты
 
 ## Инструменты
 - Unit/Integration — Vitest (`vitest.config.ts`, `npm run test`, `npm run test:coverage`).

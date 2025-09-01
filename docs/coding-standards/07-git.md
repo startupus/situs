@@ -2,12 +2,9 @@
 
 Назначение: правила версионирования, сообщений коммитов и оформления PR.
 
-## Чеклист реализации
-- [x] Conventional Commits (feat/fix/docs/refactor/test/chore)
-- [x] Небольшие PR, понятный diff и описание
-- [x] Ссылки на задачи/документы
-- [x] Pre-commit проверки и линт
-- [x] Code review чеклист
+## Ссылки в проекте
+- `.githooks/pre-commit` — проверки перед коммитом
+- `.commitlintrc.json` — commitlint
 
 ## Коммиты
 - Формат: `type(scope?): subject` — `feat(menu): add batch actions`.

@@ -2,12 +2,10 @@
 
 Назначение: единые правила контроля качества кода и дев‑утилиты.
 
-## Чеклист реализации
-- [x] ESLint конфиг и запуск (`eslint.config.js`, npm scripts)
-- [x] TypeScript компиляция (фронт/бэк: `tsconfig*.json`)
-- [x] Pre-commit hooks (линт, tsc, schema:sync)
-- [x] CI проверки: линт, тесты, сборка
-- [x] Документация и авто‑линки в README
+## Ссылки в проекте
+- `.githooks/pre-commit` — проверки и форматирование
+- `.prettierrc.json` — Prettier
+- `.commitlintrc.json` — commitlint
 
 ## ESLint
 - Конфиг — `eslint.config.js` с `@typescript-eslint`. Запуск: `npm run lint`, `npm run lint:fix`.
@@ -48,6 +46,11 @@ jobs:
 
 ## Документация
 - Ссылки на стандарты в `docs/README.md` и `docs/CODING_STANDARDS.md`.
+
+## Установка хуков
+```bash
+npm run hooks:install
+```
 
 ## Навигация
 Назад: `./README.md`

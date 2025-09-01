@@ -2,13 +2,9 @@
 
 Назначение: правила типизации и конфигурации TS для фронтенда и бэкенда.
 
-## Чеклист реализации
-- [x] Строгий режим и компилятор (tsconfig, include/exclude)
-- [x] Типизация: избегать any, использовать unknown/never, дженерики
-- [x] Интерфейсы и типы: когда interface vs type, Props
-- [x] Enums и константы
-- [x] Паттерны утилитных типов
-- [x] ESLint правила и автофиксы
+## Ссылки в проекте
+- `tsconfig.json`, `tsconfig.server.json` — конфигурации TS
+- `eslint.config.js` — TS правила
 
 ## Конфигурация
 - Строгий режим включён (`strict: true`) в `tsconfig.json` и `tsconfig.server.json`.
