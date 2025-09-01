@@ -147,6 +147,28 @@ export class ProjectsService {
   }
 
   /**
+   * Санитайзер для ThemeConfig: обрезает customCss и удаляет потенциально опасные конструкции.
+   * В MVP — минимальная очистка, без сторонних зависимостей.
+   */
+  sanitizeThemeConfig(themeConfig: any): any {
+    const clone = JSON.parse(JSON.stringify(themeConfig || {}));
+    if (clone && typeof clone.customCss === 'string') {
+      let css = clone.customCss;
+      // Запрещаем @import и url(javascript:)
+      css = css.replace(/@import[^;]+;?/gi, '');
+      css = css.replace(/url\(([^)]+)\)/gi, (m, p1) => {
+        const val = String(p1 || '').replace(/["']/g, '').trim();
+        if (/^javascript:/i.test(val)) return 'url(about:blank)';
+        return `url(${p1})`;
+      });
+      // Ограничим длину
+      if (css.length > 8000) css = css.slice(0, 8000);
+      clone.customCss = css;
+    }
+    return clone;
+  }
+
+  /**
    * Получение статистики использования темы (из projects.settings.themeUsage)
    */
   async getProjectThemeUsage(projectId: string): Promise<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number }> {

@@ -18,7 +18,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 // import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProjectsService } from './projects.service';
-import { Optional, Inject, ForbiddenException } from '@nestjs/common';
+import { Optional, Inject, ForbiddenException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { UpdateProjectDomainDto } from './dto/update-project-domain.dto';
@@ -29,6 +29,7 @@ import { GrantProjectAccessDto } from './dto/grant-project-access.dto';
 import { UpdateProjectAccessDto } from './dto/update-project-access.dto';
 // import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard'; // Временно отключено
 import { Roles, Scopes } from '../common/decorators/roles.decorator';
+import { ThemeConfigDto } from './dto/theme-config.dto';
 
 /**
  * Контроллер проектов
@@ -111,6 +112,8 @@ export class ProjectsController {
    * Получение активной темы проекта (MVP)
    */
   @Get(':id/theme')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_READ')
   async getProjectTheme(@Param('id') id: string) {
     const theme = await this.projectsService.getProjectThemeConfig(id);
     return { success: true, data: theme } as const;
@@ -120,6 +123,7 @@ export class ProjectsController {
    * Публичный алиас активной темы проекта (для фронтенда)
    */
   @Get(':id/theme/active')
+  @Scopes('PROJECT_READ')
   async getProjectThemeActive(@Param('id') id: string) {
     const theme = await this.projectsService.getProjectThemeConfig(id);
     return { success: true, data: theme } as const;
@@ -159,8 +163,12 @@ export class ProjectsController {
    * Обновление активной темы проекта (MVP)
    */
   @Put(':id/theme')
-  async updateProjectTheme(@Param('id') id: string, @Body() body: any) {
-    const result = await this.projectsService.updateProjectThemeConfig(id, body);
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_WRITE')
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+  async updateProjectTheme(@Param('id') id: string, @Body() body: ThemeConfigDto) {
+    const safe = this.projectsService.sanitizeThemeConfig(body);
+    const result = await this.projectsService.updateProjectThemeConfig(id, safe);
     return { success: result.success } as const;
   }
 
@@ -168,6 +176,8 @@ export class ProjectsController {
    * Статистика использования темы
    */
   @Get(':id/theme/usage')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_READ')
   async getProjectThemeUsage(@Param('id') id: string) {
     const usage = await this.projectsService.getProjectThemeUsage(id);
     return { success: true, data: usage } as const;

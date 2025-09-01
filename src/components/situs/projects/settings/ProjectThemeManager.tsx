@@ -90,6 +90,27 @@ const ProjectThemeManager: React.FC = () => {
           const u = await projectsApi.getProjectThemeUsage(effectiveProjectId);
           if (mounted) setUsage(u);
         } catch {}
+
+        // Авто-миграция: если локально есть пользовательская тема, а на сервере дефолтная (timesSaved отсутствует)
+        try {
+          const migratedFlag = localStorage.getItem(`theme-migrated:${effectiveProjectId}`);
+          if (!migratedFlag) {
+            const ls = localStorage.getItem('situs-theme-settings');
+            if (ls && (!u || !u.timesSaved)) {
+              const parsed = JSON.parse(ls);
+              const toSave = parsed?.customTheme || parsed?.availableThemes?.find((t: any) => t?.id === parsed?.currentTheme);
+              if (toSave && toSave.colors?.light && toSave.colors?.dark) {
+                await projectsApi.updateProjectTheme(effectiveProjectId, toSave);
+                localStorage.setItem(`theme-migrated:${effectiveProjectId}`, '1');
+                setNotice({ type: 'success', text: 'Тема автоматически мигрирована в проект' });
+                setServerTheme(toSave);
+                try { const u2 = await projectsApi.getProjectThemeUsage(effectiveProjectId); setUsage(u2); } catch {}
+              }
+            } else {
+              localStorage.setItem(`theme-migrated:${effectiveProjectId}`, '1');
+            }
+          }
+        } catch {}
       } catch (e: any) {
         setError(e?.message || 'Ошибка загрузки темы');
       } finally {
@@ -232,6 +253,19 @@ const ProjectThemeManager: React.FC = () => {
 
       {/* Редактор палитры (MVP) */}
       <BasicThemeForm value={serverTheme} onChange={setServerTheme} />
+
+      {/* Кнопки управления */}
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => {
+            setServerTheme(serverTheme);
+            setNotice({ type: 'success', text: 'Сброшено к последнему сохранению' });
+          }}
+          className="px-3 py-2 rounded-lg border border-stroke hover:bg-gray-50 dark:hover:bg-dark-3"
+        >
+          Сбросить к сохранённому
+        </button>
+      </div>
 
       {/* Блок предпросмотра UI элементов */}
       <div className="space-y-4">
