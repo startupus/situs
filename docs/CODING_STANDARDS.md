@@ -1,5 +1,7 @@
 # Стандарты кодирования (адаптировано из Joomla для нашего стека)
 
+[Полная структура стандартов и чеклисты находятся в `docs/coding-standards/`](./coding-standards/).
+
 Документ описывает единые правила кодирования для проекта, вдохновлённые стандартами Joomla (`https://github.com/genr8r/coding-standards`) и адаптированные под наш стек: TypeScript/React (Vite) на фронтенде и NestJS (TypeScript) + Prisma/TypeORM на бэкенде. Этот документ дополняет `docs/DEVELOPMENT_STANDARDS.md` (процессы) и не дублирует их.
 
 ## Цели
