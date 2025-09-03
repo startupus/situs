@@ -16,7 +16,7 @@ function CodeGeneratorTwo() {
                 id=""
                 rows="7"
                 placeholder="Type here a detailed description of what you want to generate."
-                className="w-full rounded-lg border border-stroke bg-transparent p-5 text-base text-dark placeholder-dark-6 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-base text-dark placeholder-dark-6 focus:border-primary dark:border-dark-3 dark:text-white"
               ></textarea>
             </div>
 
@@ -33,7 +33,7 @@ function CodeGeneratorTwo() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">Professional</option>
                       <option value="">Mid Label</option>
@@ -67,7 +67,7 @@ function CodeGeneratorTwo() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">English</option>
                       <option value="">Francais</option>
@@ -282,7 +282,7 @@ console.log(message);`}
               </div>
 
               <div className="flex items-center gap-2.5 md:justify-end">
-                <button className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-stroke bg-transparent px-4 py-2.5 text-base font-medium text-dark shadow-xs duration-200 dark:border-dark-3 dark:text-white dark:hover:bg-white/5">
+                <button className="shadow-xs inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-stroke bg-transparent px-4 py-2.5 text-base font-medium text-dark duration-200 dark:border-dark-3 dark:text-white dark:hover:bg-white/5">
                   <span>
                     <svg
                       width="20"

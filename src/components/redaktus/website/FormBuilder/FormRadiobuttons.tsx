@@ -1,16 +1,16 @@
-import clsx from 'clsx'
-import * as React from 'react'
-import { Repeater } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import { UseFormRegister } from 'react-hook-form'
-import blockNames from '../blockNames'
+import clsx from 'clsx';
+import * as React from 'react';
+import { Repeater } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import { UseFormRegister } from 'react-hook-form';
+import blockNames from '../blockNames';
 
 export interface FormRadiobuttonsProps {
-  register?: UseFormRegister<any>
-  fieldName?: string
-  fieldLabel?: string
-  isRequired: boolean
-  columns: 'one' | 'two'
+  register?: UseFormRegister<any>;
+  fieldName?: string;
+  fieldLabel?: string;
+  isRequired: boolean;
+  columns: 'one' | 'two';
 }
 
 const FormRadiobuttons: types.Brick<FormRadiobuttonsProps> = ({
@@ -21,9 +21,7 @@ const FormRadiobuttons: types.Brick<FormRadiobuttonsProps> = ({
   columns,
 }) => {
   return (
-    <div
-      className={clsx('w-full px-2 py-1', columns === 'two' && 'col-span-2')}
-    >
+    <div className={clsx('w-full px-2 py-1', columns === 'two' && 'col-span-2')}>
       <span className="block text-gray-400 group-hover:text-indigo-600 font-medium uppercase tracking-widest text-sm peer-focus:text-indigo-700 mb-2">
         {fieldLabel}
       </span>
@@ -36,8 +34,8 @@ const FormRadiobuttons: types.Brick<FormRadiobuttonsProps> = ({
         }}
       />
     </div>
-  )
-}
+  );
+};
 
 FormRadiobuttons.schema = {
   name: blockNames.FormRadiobuttons,
@@ -103,6 +101,6 @@ FormRadiobuttons.schema = {
       label: 'Error required',
     },
   ],
-}
+};
 
-export default FormRadiobuttons
+export default FormRadiobuttons;

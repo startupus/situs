@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function About9() {
   return (
@@ -17,13 +17,7 @@ export default function About9() {
           <div className="w-full px-4 lg:w-4/12">
             <div>
               <div className="mb-7 text-dark dark:text-white">
-                <svg
-                  width="120"
-                  height="120"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_2143_23490)">
                     <rect
                       x="30.7236"
@@ -112,12 +106,7 @@ export default function About9() {
                       fill="currentColor"
                     />
                     <circle cx="21" cy="21" r="2" fill="currentColor" />
-                    <circle
-                      cx="95.4609"
-                      cy="95.7056"
-                      r="2"
-                      fill="currentColor"
-                    />
+                    <circle cx="95.4609" cy="95.7056" r="2" fill="currentColor" />
                   </g>
                   <defs>
                     <clipPath id="clip0_2143_23490">
@@ -139,9 +128,7 @@ export default function About9() {
 
         <div>
           <div className="mb-11 w-full max-w-[970px]">
-            <span className="mb-2 block text-lg font-semibold uppercase text-primary">
-              OUR MISSION
-            </span>
+            <span className="mb-2 block text-lg font-semibold uppercase text-primary">OUR MISSION</span>
             <h2 className="mb-3 text-4xl leading-[1.2]! tracking-[-1.2px] text-dark sm:text-5xl md:text-[60px] dark:text-white">
               Empowering your ideas
               <span className="font-bold"> into real business </span>
@@ -155,19 +142,17 @@ export default function About9() {
           <div className="grid gap-8 md:grid-cols-2 lg:gap-[70px]">
             <div>
               <p className="text-base text-body-color dark:text-dark-6">
-                Proin gravida nibh velit auctor aliquet. aks Aenean
-                sollicitudin, lorem quis bibendum auctor, nisi elit consequat
-                ipsum, nec sagittis sem, tidiomic consequat ipsum bibendum
-                auctor, nisi elit consequat ipsum, nec sagittis sem, tidiomic .
+                Proin gravida nibh velit auctor aliquet. aks Aenean sollicitudin, lorem quis bibendum auctor, nisi elit
+                consequat ipsum, nec sagittis sem, tidiomic consequat ipsum bibendum auctor, nisi elit consequat ipsum,
+                nec sagittis sem, tidiomic .
               </p>
             </div>
 
             <div>
               <p className="text-base text-body-color dark:text-dark-6">
-                Proin gravida nibh velit auctor aliquet. aks Aenean
-                sollicitudin, lorem quis bibendum auctor, nisi elit consequat
-                ipsum, nec sagittis sem, tidiomic consequat ipsum bibendum
-                auctor, nisi elit consequat ipsum, nec sagittis sem, tidiomic .
+                Proin gravida nibh velit auctor aliquet. aks Aenean sollicitudin, lorem quis bibendum auctor, nisi elit
+                consequat ipsum, nec sagittis sem, tidiomic consequat ipsum bibendum auctor, nisi elit consequat ipsum,
+                nec sagittis sem, tidiomic .
               </p>
             </div>
           </div>

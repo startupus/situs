@@ -39,33 +39,29 @@ async function main() {
   });
 
   console.log('🚀 Запускаем тестовый сервер...');
-  const server = spawn(
-    'node',
-    ['dist/server/main.js'],
-    {
-      stdio: 'inherit',
-      env: { ...process.env, NODE_ENV: 'test', PORT: String(TEST_PORT) },
-    },
-  );
+  const server = spawn('node', ['dist/server/main.js'], {
+    stdio: 'inherit',
+    env: { ...process.env, NODE_ENV: 'test', PORT: String(TEST_PORT) },
+  });
 
   const ok = await waitForHealth(`${TEST_BASE}/health`, 30000);
   if (!ok) {
-    try { server.kill('SIGTERM'); } catch {}
+    try {
+      server.kill('SIGTERM');
+    } catch {}
     console.error('❌ Не удалось дождаться /health от тестового сервера');
     process.exit(1);
   }
 
-  const vitest = spawn(
-    process.platform === 'win32' ? 'npx.cmd' : 'npx',
-    ['vitest', 'run'],
-    {
-      stdio: 'inherit',
-      env: { ...process.env, TEST_BASE: TEST_BASE, NODE_ENV: 'test' },
-    },
-  );
+  const vitest = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['vitest', 'run'], {
+    stdio: 'inherit',
+    env: { ...process.env, TEST_BASE: TEST_BASE, NODE_ENV: 'test' },
+  });
 
   vitest.on('exit', (code) => {
-    try { server.kill('SIGTERM'); } catch {}
+    try {
+      server.kill('SIGTERM');
+    } catch {}
     process.exit(code || 0);
   });
 }
@@ -74,5 +70,3 @@ main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
-
-

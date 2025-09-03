@@ -6,7 +6,7 @@ import { RealtimeModule } from '../realtime/realtime.module';
 
 /**
  * Модуль пользователей
- * 
+ *
  * Управляет:
  * - CRUD операциями с пользователями
  * - Профилями пользователей

@@ -7,7 +7,7 @@ const Newsletter6 = () => {
         <div className="rounded-lg bg-primary p-8 sm:p-12">
           <div className="flex flex-wrap items-center space-y-8 lg:flex-nowrap lg:justify-between lg:space-x-6 lg:space-y-0">
             <div className="w-full lg:max-w-[370px]">
-              <h2 className="text-[22px] font-semibold leading-tight! text-white sm:text-[28px]">
+              <h2 className="leading-tight! text-[22px] font-semibold text-white sm:text-[28px]">
                 Subscribe to Receive All of Our Future Updates
               </h2>
             </div>
@@ -16,7 +16,7 @@ const Newsletter6 = () => {
                 <input
                   type="email"
                   placeholder="Enter your email to join"
-                  className="h-[52px] w-full rounded-md bg-white px-6 text-base text-body-color outline-hidden"
+                  className="outline-hidden h-[52px] w-full rounded-md bg-white px-6 text-base text-body-color"
                 />
                 <button className="h-[52px] w-full rounded-md border border-white px-7 text-base text-white duration-150 hover:bg-white hover:text-primary sm:w-auto">
                   Subscribe

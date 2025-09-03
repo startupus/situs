@@ -1,43 +1,42 @@
-import * as React from 'react'
-import clsx from 'clsx'
-import * as types from 'redaktus/types'
-import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
-import blockNames from '../blockNames'
-
+import * as React from 'react';
+import clsx from 'clsx';
+import * as types from 'redaktus/types';
+import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import blockNames from '../blockNames';
 
 export interface FormInputProps {
-  register: UseFormRegister<any>
+  register: UseFormRegister<any>;
   errors: FieldErrorsImpl<{
-    [x: string]: any
-  }>
-  fieldName?: string
-  label?: string
-  isRequired: boolean
-  inputType: 'text' | 'number' | 'date'
-  key: string
-  pattern?: string
-  patternError?: string
-  requiredError?: string
-  columns: 'one' | 'two'
+    [x: string]: any;
+  }>;
+  fieldName?: string;
+  label?: string;
+  isRequired: boolean;
+  inputType: 'text' | 'number' | 'date';
+  key: string;
+  pattern?: string;
+  patternError?: string;
+  requiredError?: string;
+  columns: 'one' | 'two';
 }
 
 const isRegex = (strRegex: string): boolean => {
   try {
-    const testRegex = new RegExp(strRegex)
-    return true
+    const testRegex = new RegExp(strRegex);
+    return true;
   } catch {
-    return false
+    return false;
   }
-}
+};
 
 const strToRegex = (strRegex: string | undefined): RegExp | undefined => {
   try {
-    const testRegex = strRegex ? new RegExp(strRegex) : undefined
-    return testRegex
+    const testRegex = strRegex ? new RegExp(strRegex) : undefined;
+    return testRegex;
   } catch {
-    return undefined
+    return undefined;
   }
-}
+};
 
 const FormInput: types.Brick<FormInputProps> = ({
   register,
@@ -53,12 +52,7 @@ const FormInput: types.Brick<FormInputProps> = ({
   columns,
 }) => {
   return (
-    <label
-      className={clsx(
-        'px-2 py-1 group block',
-        columns === 'two' && 'col-span-2'
-      )}
-    >
+    <label className={clsx('px-2 py-1 group block', columns === 'two' && 'col-span-2')}>
       <span className="block font-medium uppercase tracking-widest text-sm peer-focus:text-sky-700 transition-colors duration-200 text-gray-400 group-hover:text-sky-600 dark:text-gray-300 dark:group-hover:text-sky-300">
         {label}
         {isRequired && <span className="text-red-600 ml-2">*</span>}
@@ -68,7 +62,7 @@ const FormInput: types.Brick<FormInputProps> = ({
         className={clsx(
           'w-full px-4 py-2 border rounded-lg outline-none focus:ring-1 focus:shadow-sky-200 focus:shadow-lg peer transition-colors duration-200',
           errors[fieldName] ? 'ring-1 ring-red-400' : 'ring-sky-500',
-          'border-gray-300 text-gray-900 focus:shadow-sky-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:shadow-sky-900'
+          'border-gray-300 text-gray-900 focus:shadow-sky-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:shadow-sky-900',
         )}
         {...register(fieldName?.replace(/\s/g, '').toLowerCase() || key, {
           required: isRequired,
@@ -83,8 +77,8 @@ const FormInput: types.Brick<FormInputProps> = ({
         </span>
       )}
     </label>
-  )
-}
+  );
+};
 
 FormInput.schema = {
   name: blockNames.FormInput,
@@ -155,7 +149,6 @@ FormInput.schema = {
       name: 'pattern',
       type: types.SideEditPropType.Text,
       label: 'Pattern',
-
     },
     {
       name: 'patternError',
@@ -163,6 +156,6 @@ FormInput.schema = {
       label: 'Error pattern',
     },
   ],
-}
+};
 
-export default FormInput
+export default FormInput;

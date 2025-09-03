@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { DemoAPI } from '../../api/services/demo.api';
-import { 
-  FiShoppingBag, FiMail, FiPhone, FiUser, FiCalendar, 
-  FiClock, FiDollarSign, FiPackage, FiFilter, FiSearch,
-  FiEye, FiCheck, FiX, FiMoreHorizontal, FiBell
+import {
+  FiShoppingBag,
+  FiMail,
+  FiPhone,
+  FiUser,
+  FiCalendar,
+  FiClock,
+  FiDollarSign,
+  FiPackage,
+  FiFilter,
+  FiSearch,
+  FiEye,
+  FiCheck,
+  FiX,
+  FiMoreHorizontal,
+  FiBell,
 } from 'react-icons/fi';
 
 interface Order {
@@ -47,71 +59,95 @@ const OrdersSection: React.FC = () => {
         if (mounted) setLoading(false);
       }
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const getFilteredOrders = () => {
     let filtered = orders;
-    
+
     if (activeTab !== 'all') {
       if (activeTab === 'new') {
-        filtered = filtered.filter(order => order.status === 'new');
+        filtered = filtered.filter((order) => order.status === 'new');
       } else {
-        filtered = filtered.filter(order => order.type === activeTab);
+        filtered = filtered.filter((order) => order.type === activeTab);
       }
     }
-    
+
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(order => order.status === statusFilter);
+      filtered = filtered.filter((order) => order.status === statusFilter);
     }
-    
+
     return filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   };
 
   const getOrderTypeIcon = (type: string) => {
     switch (type) {
-      case 'ecommerce': return FiShoppingBag;
-      case 'contact': return FiMail;
-      case 'callback': return FiPhone;
-      default: return FiPackage;
+      case 'ecommerce':
+        return FiShoppingBag;
+      case 'contact':
+        return FiMail;
+      case 'callback':
+        return FiPhone;
+      default:
+        return FiPackage;
     }
   };
 
   const getOrderTypeName = (type: string) => {
     switch (type) {
-      case 'ecommerce': return 'Заказ';
-      case 'contact': return 'Заявка';
-      case 'callback': return 'Обратный звонок';
-      default: return 'Заявка';
+      case 'ecommerce':
+        return 'Заказ';
+      case 'contact':
+        return 'Заявка';
+      case 'callback':
+        return 'Обратный звонок';
+      default:
+        return 'Заявка';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'new': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-      case 'processing': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'completed': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'cancelled': return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+      case 'new':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+      case 'processing':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
+      case 'completed':
+        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+      case 'cancelled':
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+      default:
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
     }
   };
 
   const getStatusName = (status: string) => {
     switch (status) {
-      case 'new': return 'Новый';
-      case 'processing': return 'В работе';
-      case 'completed': return 'Выполнен';
-      case 'cancelled': return 'Отменен';
-      default: return status;
+      case 'new':
+        return 'Новый';
+      case 'processing':
+        return 'В работе';
+      case 'completed':
+        return 'Выполнен';
+      case 'cancelled':
+        return 'Отменен';
+      default:
+        return status;
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'border-l-red-500';
-      case 'medium': return 'border-l-yellow-500';
-      case 'low': return 'border-l-green-500';
-      default: return 'border-l-gray-300';
+      case 'high':
+        return 'border-l-red-500';
+      case 'medium':
+        return 'border-l-yellow-500';
+      case 'low':
+        return 'border-l-green-500';
+      default:
+        return 'border-l-gray-300';
     }
   };
 
@@ -137,7 +173,7 @@ const OrdersSection: React.FC = () => {
     console.log(`Изменение статуса заказа ${orderId} на ${newStatus}`);
   };
 
-  const newOrdersCount = orders.filter(order => order.status === 'new').length;
+  const newOrdersCount = orders.filter((order) => order.status === 'new').length;
 
   return (
     <div className="space-y-6">
@@ -148,16 +184,14 @@ const OrdersSection: React.FC = () => {
           {newOrdersCount > 0 && (
             <div className="flex items-center space-x-2 px-3 py-1 bg-red-100 dark:bg-red-900 rounded-full">
               <FiBell className="w-4 h-4 text-red-600 dark:text-red-400" />
-              <span className="text-sm font-medium text-red-600 dark:text-red-400">
-                {newOrdersCount} новых
-              </span>
+              <span className="text-sm font-medium text-red-600 dark:text-red-400">{newOrdersCount} новых</span>
             </div>
           )}
         </div>
-        
+
         <div className="flex items-center space-x-4">
           {/* Фильтр по статусу */}
-          <select 
+          <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
@@ -181,7 +215,7 @@ const OrdersSection: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Новые</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {orders.filter(o => o.status === 'new').length}
+                {orders.filter((o) => o.status === 'new').length}
               </p>
             </div>
           </div>
@@ -195,7 +229,7 @@ const OrdersSection: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">В работе</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {orders.filter(o => o.status === 'processing').length}
+                {orders.filter((o) => o.status === 'processing').length}
               </p>
             </div>
           </div>
@@ -209,7 +243,7 @@ const OrdersSection: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Заказы</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {orders.filter(o => o.type === 'ecommerce').length}
+                {orders.filter((o) => o.type === 'ecommerce').length}
               </p>
             </div>
           </div>
@@ -223,8 +257,11 @@ const OrdersSection: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Выручка</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {orders.filter(o => o.type === 'ecommerce' && o.status === 'completed')
-                  .reduce((sum, o) => sum + (o.amount || 0), 0).toLocaleString()} ₽
+                {orders
+                  .filter((o) => o.type === 'ecommerce' && o.status === 'completed')
+                  .reduce((sum, o) => sum + (o.amount || 0), 0)
+                  .toLocaleString()}{' '}
+                ₽
               </p>
             </div>
           </div>
@@ -236,9 +273,9 @@ const OrdersSection: React.FC = () => {
         <nav className="flex space-x-8">
           {[
             { id: 'all', label: 'Все', count: orders.length },
-            { id: 'new', label: 'Новые', count: orders.filter(o => o.status === 'new').length },
-            { id: 'ecommerce', label: 'Заказы', count: orders.filter(o => o.type === 'ecommerce').length },
-            { id: 'contact', label: 'Заявки', count: orders.filter(o => o.type !== 'ecommerce').length }
+            { id: 'new', label: 'Новые', count: orders.filter((o) => o.status === 'new').length },
+            { id: 'ecommerce', label: 'Заказы', count: orders.filter((o) => o.type === 'ecommerce').length },
+            { id: 'contact', label: 'Заявки', count: orders.filter((o) => o.type !== 'ecommerce').length },
           ].map(({ id, label, count }) => (
             <button
               key={id}
@@ -275,20 +312,16 @@ const OrdersSection: React.FC = () => {
                     <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
                       <TypeIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                     </div>
-                    
+
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                          {order.id}
-                        </h3>
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{order.id}</h3>
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(order.status)}`}>
                           {getStatusName(order.status)}
                         </span>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">
-                          {getOrderTypeName(order.type)}
-                        </span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{getOrderTypeName(order.type)}</span>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <div className="flex items-center space-x-4">
                           <div className="flex items-center space-x-2">
@@ -299,20 +332,16 @@ const OrdersSection: React.FC = () => {
                           </div>
                           <div className="flex items-center space-x-2">
                             <FiMail className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              {order.customerEmail}
-                            </span>
+                            <span className="text-sm text-gray-600 dark:text-gray-400">{order.customerEmail}</span>
                           </div>
                           {order.customerPhone && (
                             <div className="flex items-center space-x-2">
                               <FiPhone className="w-4 h-4 text-gray-400" />
-                              <span className="text-sm text-gray-600 dark:text-gray-400">
-                                {order.customerPhone}
-                              </span>
+                              <span className="text-sm text-gray-600 dark:text-gray-400">{order.customerPhone}</span>
                             </div>
                           )}
                         </div>
-                        
+
                         {order.amount && (
                           <div className="flex items-center space-x-2">
                             <FiDollarSign className="w-4 h-4 text-green-500" />
@@ -326,16 +355,14 @@ const OrdersSection: React.FC = () => {
                             )}
                           </div>
                         )}
-                        
+
                         {order.message && (
-                          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                            {order.message}
-                          </p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{order.message}</p>
                         )}
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-4">
                     <div className="text-right">
                       <div className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-400">
@@ -343,7 +370,7 @@ const OrdersSection: React.FC = () => {
                         <span>{formatTime(order.createdAt)}</span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => setSelectedOrder(order)}
@@ -351,7 +378,7 @@ const OrdersSection: React.FC = () => {
                       >
                         <FiEye className="w-4 h-4" />
                       </button>
-                      
+
                       {order.status === 'new' && (
                         <button
                           onClick={() => handleStatusChange(order.id, 'processing')}
@@ -360,7 +387,7 @@ const OrdersSection: React.FC = () => {
                           <FiCheck className="w-4 h-4" />
                         </button>
                       )}
-                      
+
                       <button className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
                         <FiMoreHorizontal className="w-4 h-4" />
                       </button>
@@ -376,12 +403,8 @@ const OrdersSection: React.FC = () => {
       {getFilteredOrders().length === 0 && (
         <div className="text-center py-12">
           <FiPackage className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-            Заказов не найдено
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400">
-            Заказы и заявки будут отображаться здесь
-          </p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Заказов не найдено</h3>
+          <p className="text-gray-600 dark:text-gray-400">Заказы и заявки будут отображаться здесь</p>
         </div>
       )}
 
@@ -401,13 +424,11 @@ const OrdersSection: React.FC = () => {
                   <FiX className="w-5 h-5" />
                 </button>
               </div>
-              
+
               <div className="space-y-6">
                 {/* Информация о клиенте */}
                 <div>
-                  <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">
-                    Информация о клиенте
-                  </h4>
+                  <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">Информация о клиенте</h4>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-3">
                       <FiUser className="w-4 h-4 text-gray-400" />
@@ -415,30 +436,37 @@ const OrdersSection: React.FC = () => {
                     </div>
                     <div className="flex items-center space-x-3">
                       <FiMail className="w-4 h-4 text-gray-400" />
-                      <a href={`mailto:${selectedOrder.customerEmail}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+                      <a
+                        href={`mailto:${selectedOrder.customerEmail}`}
+                        className="text-blue-600 dark:text-blue-400 hover:underline"
+                      >
                         {selectedOrder.customerEmail}
                       </a>
                     </div>
                     {selectedOrder.customerPhone && (
                       <div className="flex items-center space-x-3">
                         <FiPhone className="w-4 h-4 text-gray-400" />
-                        <a href={`tel:${selectedOrder.customerPhone}`} className="text-blue-600 dark:text-blue-400 hover:underline">
+                        <a
+                          href={`tel:${selectedOrder.customerPhone}`}
+                          className="text-blue-600 dark:text-blue-400 hover:underline"
+                        >
                           {selectedOrder.customerPhone}
                         </a>
                       </div>
                     )}
                   </div>
                 </div>
-                
+
                 {/* Товары (для e-commerce заказов) */}
                 {selectedOrder.items && (
                   <div>
-                    <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">
-                      Товары
-                    </h4>
+                    <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">Товары</h4>
                     <div className="space-y-3">
                       {selectedOrder.items.map((item) => (
-                        <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                        >
                           <div>
                             <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
                             <span className="text-gray-500 dark:text-gray-400 ml-2">x{item.quantity}</span>
@@ -457,19 +485,17 @@ const OrdersSection: React.FC = () => {
                     </div>
                   </div>
                 )}
-                
+
                 {/* Сообщение */}
                 {selectedOrder.message && (
                   <div>
-                    <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">
-                      Сообщение
-                    </h4>
+                    <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">Сообщение</h4>
                     <p className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                       {selectedOrder.message}
                     </p>
                   </div>
                 )}
-                
+
                 {/* Действия */}
                 <div className="flex items-center justify-end space-x-3 pt-6 border-t border-gray-200 dark:border-gray-600">
                   <button
@@ -499,4 +525,4 @@ const OrdersSection: React.FC = () => {
   );
 };
 
-export default OrdersSection; 
+export default OrdersSection;

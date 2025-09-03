@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const HorizontalMenu6 = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,16 +10,11 @@ const HorizontalMenu6 = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -28,8 +23,8 @@ const HorizontalMenu6 = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -38,10 +33,7 @@ const HorizontalMenu6 = () => {
         <div className="flex items-center justify-between bg-primary px-4 xl:px-[30px]">
           <div className="mr-4 max-w-[100px] lg:mr-12">
             <a href="/#" className="block py-4">
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                alt="logo"
-              />
+              <img src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg" alt="logo" />
             </a>
           </div>
           <div className="flex w-full items-center justify-between">
@@ -67,12 +59,7 @@ const HorizontalMenu6 = () => {
                     </g>
                     <defs>
                       <clipPath id="clip0_1052_7440">
-                        <rect
-                          width="20"
-                          height="20"
-                          fill="white"
-                          transform="translate(0.635376)"
-                        />
+                        <rect width="20" height="20" fill="white" transform="translate(0.635376)" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -82,9 +69,7 @@ const HorizontalMenu6 = () => {
                   onFocus={() => setDropdownOpen(true)}
                   onBlur={() => setDropdownOpen(false)}
                   className={`${
-                    dropdownOpen === true
-                      ? "visible top-full opacity-100"
-                      : "invisible top-[120%] opacity-0"
+                    dropdownOpen === true ? 'visible top-full opacity-100' : 'invisible top-[120%] opacity-0'
                   } absolute left-0 mt-2 w-[250px] rounded bg-primary shadow-card-2 duration-200`}
                 >
                   <ul className="space-y-5 px-5 py-6">
@@ -139,13 +124,7 @@ const HorizontalMenu6 = () => {
               </div>
               <div className="relative mr-3 hidden sm:block">
                 <button>
-                  <svg
-                    width="19"
-                    height="18"
-                    viewBox="0 0 19 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_1050_7423)">
                       <path
                         d="M6.06351 0.506256H2.85726C1.90101 0.506256 1.14163 1.26563 1.14163 2.22188V5.42813C1.14163 5.76563 1.42288 6.07501 1.78851 6.07501C2.15413 6.07501 2.43538 5.79376 2.43538 5.42813V2.22188C2.40726 1.96876 2.60413 1.77188 2.85726 1.77188H6.06351C6.40101 1.77188 6.71038 1.49063 6.71038 1.12501C6.71038 0.759381 6.40101 0.506256 6.06351 0.506256Z"
@@ -166,12 +145,7 @@ const HorizontalMenu6 = () => {
                     </g>
                     <defs>
                       <clipPath id="clip0_1050_7423">
-                        <rect
-                          width="18"
-                          height="18"
-                          fill="white"
-                          transform="translate(0.635376)"
-                        />
+                        <rect width="18" height="18" fill="white" transform="translate(0.635376)" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -182,13 +156,7 @@ const HorizontalMenu6 = () => {
                   <span className="absolute -right-[6px] -top-2 block rounded-full bg-[#FF6756] px-[6px] text-xs font-medium text-white">
                     3
                   </span>
-                  <svg
-                    width="21"
-                    height="20"
-                    viewBox="0 0 21 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M18.6354 16.5937L18.0104 15.625C17.8854 15.4375 17.8229 15.25 17.8229 15.0312V8.53125C17.8229 6.6875 17.0416 4.96875 15.6041 3.6875C14.4479 2.65625 12.9479 2 11.3541 1.875V1.25C11.3541 0.875 11.0416 0.53125 10.6354 0.53125C10.2604 0.53125 9.91663 0.84375 9.91663 1.25V1.84375C9.85413 1.84375 9.79163 1.84375 9.72913 1.875C6.10413 2.28125 3.38538 5.1875 3.38538 8.65625V15.0312C3.35413 15.3437 3.29163 15.5 3.22913 15.5937L2.63538 16.5937C2.44788 16.9062 2.44788 17.2812 2.63538 17.5937C2.82288 17.875 3.13538 18.0625 3.47913 18.0625H9.94788V18.75C9.94788 19.125 10.2604 19.4687 10.6666 19.4687C11.0416 19.4687 11.3854 19.1562 11.3854 18.75V18.0625H17.8229C18.1666 18.0625 18.4791 17.875 18.6666 17.5937C18.8541 17.2812 18.8541 16.9062 18.6354 16.5937ZM4.22913 16.6562L4.44788 16.2812C4.63538 15.9687 4.72913 15.5937 4.79163 15.1562V8.65625C4.79163 5.90625 6.97913 3.59375 9.88538 3.28125C11.6666 3.09375 13.4166 3.625 14.6979 4.75C15.8229 5.75 16.4479 7.09375 16.4479 8.53125V15.0312C16.4479 15.5 16.5729 15.9375 16.8541 16.375L17.0416 16.6562H4.22913Z"
                       fill="white"
@@ -203,17 +171,9 @@ const HorizontalMenu6 = () => {
                     alt="avatar"
                     className="h-8 w-8 rounded-full border-2 border-white/20 object-cover object-center"
                   />
-                  <span className="pl-[10px] pr-[5px] text-sm font-medium text-white">
-                    Patrick
-                  </span>
+                  <span className="pl-[10px] pr-[5px] text-sm font-medium text-white">Patrick</span>
                   <span>
-                    <svg
-                      width="15"
-                      height="14"
-                      viewBox="0 0 15 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M7.63535 9.97501C7.5041 9.97501 7.39473 9.93126 7.28535 9.84376L2.2541 4.90001C2.05723 4.70314 2.05723 4.39689 2.2541 4.20001C2.45098 4.00314 2.75723 4.00314 2.9541 4.20001L7.63535 8.77189L12.3166 4.15626C12.5135 3.95939 12.8197 3.95939 13.0166 4.15626C13.2135 4.35314 13.2135 4.65939 13.0166 4.85626L7.98535 9.80001C7.87598 9.90939 7.7666 9.97501 7.63535 9.97501Z"
                         fill="white"

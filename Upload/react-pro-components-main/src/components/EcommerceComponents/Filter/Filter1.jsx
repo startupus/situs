@@ -12,7 +12,7 @@ const Filter = () => {
               <div className="w-full px-4 sm:w-1/2">
                 <div className="mb-4 inline-block sm:mb-0">
                   <div className="relative">
-                    <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[9px] pl-[18px] pr-10 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
+                    <select className="outline-hidden w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[9px] pl-[18px] pr-10 font-medium text-dark transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
                       <option value="" className="dark:bg-dark-2">
                         Best Selling
                       </option>

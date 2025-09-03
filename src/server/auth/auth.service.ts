@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  ConflictException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException, BadRequestException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcryptjs';
@@ -20,7 +15,7 @@ import { User } from '../users/entities/user.entity';
 
 /**
  * Сервис аутентификации
- * 
+ *
  * Обеспечивает:
  * - Хеширование паролей
  * - Генерацию JWT токенов
@@ -71,13 +66,13 @@ export class AuthService {
    */
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.usersService.findByEmail(email);
-    
-    if (user && await this.comparePasswords(password, user.password)) {
+
+    if (user && (await this.comparePasswords(password, user.password))) {
       // Удаляем пароль из результата
       const { password: _, ...result } = user;
       return result as User;
     }
-    
+
     return null;
   }
 
@@ -157,7 +152,7 @@ export class AuthService {
    */
   async sendLoginCode(sendCodeDto: SendCodeDto) {
     const { email, phone, channel } = sendCodeDto;
-    
+
     // Определяем пользователя по email или телефону
     let user;
     if (email) {
@@ -184,14 +179,11 @@ export class AuthService {
 
     // Отправляем код через выбранный канал
     try {
-      await this.communicationService.sendMessage(
-        channel as any,
-        {
-          to: email || phone || '',
-          subject: 'Код для входа в Situs Platform',
-          content: `Ваш код для входа: ${code}. Код действителен 10 минут.`,
-        }
-      );
+      await this.communicationService.sendMessage(channel as any, {
+        to: email || phone || '',
+        subject: 'Код для входа в Situs Platform',
+        content: `Ваш код для входа: ${code}. Код действителен 10 минут.`,
+      });
 
       return {
         success: true,
@@ -209,7 +201,7 @@ export class AuthService {
    */
   async verifyLoginCode(verifyCodeDto: VerifyCodeDto): Promise<AuthResponseDto> {
     const { email, phone, code } = verifyCodeDto;
-    
+
     const key = email || phone || '';
     const storedCodeData = this.loginCodes.get(key);
 
@@ -245,11 +237,11 @@ export class AuthService {
    */
   async registerPublic(registerPublicDto: RegisterPublicDto): Promise<AuthResponseDto> {
     const { email, phone, name, password, verificationCode } = registerPublicDto;
-    
+
     // Проверяем код подтверждения
     const key = email || phone || '';
     const storedData = this.loginCodes.get(key);
-    
+
     if (!storedData) {
       throw new BadRequestException('Неверный или истекший код');
     }
@@ -277,7 +269,7 @@ export class AuthService {
     };
 
     const user = await this.usersService.create(userData);
-    
+
     // Удаляем использованный код
     this.loginCodes.delete(key);
 
@@ -289,7 +281,7 @@ export class AuthService {
    */
   async forgotPassword(forgotPasswordDto: ForgotPasswordDto): Promise<{ message: string }> {
     const { email, phone, channel } = forgotPasswordDto;
-    
+
     // Находим пользователя
     const user = await this.usersService.findByEmailOrPhone(email, phone);
     if (!user) {
@@ -330,10 +322,10 @@ export class AuthService {
    */
   async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{ message: string }> {
     const { email, phone, code, newPassword } = resetPasswordDto;
-    
+
     const key = email || phone || '';
     const storedData = this.resetCodes.get(key);
-    
+
     if (!storedData) {
       throw new BadRequestException('Неверный или истекший код');
     }

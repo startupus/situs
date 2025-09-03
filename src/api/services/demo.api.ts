@@ -25,5 +25,3 @@ export class DemoAPI {
     return apiClient.get('/api/demo/chatbots');
   }
 }
-
-

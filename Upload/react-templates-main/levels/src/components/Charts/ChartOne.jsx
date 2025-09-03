@@ -112,7 +112,7 @@ const ChartOne = () => {
           </div>
           <div>
             <div className="relative z-20 inline-block rounded-md bg-transparent">
-              <select className="relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[7px] pl-3 pr-10 text-base text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6">
+              <select className="outline-hidden relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[7px] pl-3 pr-10 text-base text-body-color dark:border-dark-3 dark:text-dark-6">
                 <option value="" className="dark:bg-dark-2">
                   Monthly
                 </option>

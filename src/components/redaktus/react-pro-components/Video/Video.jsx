@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 // Handler hook for when Outside click dropdown close
 let useClickOutside = (handler) => {
@@ -10,10 +10,10 @@ let useClickOutside = (handler) => {
         handler();
       }
     };
-    document.addEventListener("mousedown", maybeHandler);
+    document.addEventListener('mousedown', maybeHandler);
 
     return () => {
-      document.removeEventListener("mousedown", maybeHandler);
+      document.removeEventListener('mousedown', maybeHandler);
     };
   });
   return domNode;
@@ -49,12 +49,7 @@ const Video = () => {
                   className="absolute z-20 flex h-20 w-20 items-center justify-center rounded-full bg-white text-primary dark:bg-dark-2 dark:text-white md:h-[100px] md:w-[100px]"
                 >
                   <span className="absolute right-0 top-0 z-[-1] h-full w-full animate-ping rounded-full bg-white/20 delay-300 duration-1000"></span>
-                  <svg
-                    width="23"
-                    height="27"
-                    viewBox="0 0 23 27"
-                    className="fill-current"
-                  >
+                  <svg width="23" height="27" viewBox="0 0 23 27" className="fill-current">
                     <path d="M22.5 12.634C23.1667 13.0189 23.1667 13.9811 22.5 14.366L2.25 26.0574C1.58333 26.4423 0.750001 25.9611 0.750001 25.1913L0.750002 1.80866C0.750002 1.03886 1.58334 0.557731 2.25 0.942631L22.5 12.634Z" />
                   </svg>
                 </a>
@@ -62,13 +57,7 @@ const Video = () => {
 
               <div>
                 <span className="absolute left-4 top-4 z-40">
-                  <svg
-                    width="50"
-                    height="79"
-                    viewBox="0 0 50 79"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="50" height="79" viewBox="0 0 50 79" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle
                       cx="47.7119"
                       cy="76.9617"
@@ -139,13 +128,7 @@ const Video = () => {
                       transform="rotate(180 32.3916 16.7161)"
                       fill="white"
                     />
-                    <circle
-                      cx="32.3877"
-                      cy="31.342"
-                      r="1.74121"
-                      transform="rotate(180 32.3877 31.342)"
-                      fill="white"
-                    />
+                    <circle cx="32.3877" cy="31.342" r="1.74121" transform="rotate(180 32.3877 31.342)" fill="white" />
                     <circle
                       cx="32.3916"
                       cy="1.74145"
@@ -181,13 +164,7 @@ const Video = () => {
                       transform="rotate(180 17.0674 16.7161)"
                       fill="white"
                     />
-                    <circle
-                      cx="17.0674"
-                      cy="31.342"
-                      r="1.74121"
-                      transform="rotate(180 17.0674 31.342)"
-                      fill="white"
-                    />
+                    <circle cx="17.0674" cy="31.342" r="1.74121" transform="rotate(180 17.0674 31.342)" fill="white" />
                     <circle
                       cx="17.0674"
                       cy="1.74145"
@@ -223,13 +200,7 @@ const Video = () => {
                       transform="rotate(180 1.74316 16.7161)"
                       fill="white"
                     />
-                    <circle
-                      cx="1.74316"
-                      cy="31.342"
-                      r="1.74121"
-                      transform="rotate(180 1.74316 31.342)"
-                      fill="white"
-                    />
+                    <circle cx="1.74316" cy="31.342" r="1.74121" transform="rotate(180 1.74316 31.342)" fill="white" />
                     <circle
                       cx="1.74316"
                       cy="1.74145"
@@ -240,13 +211,7 @@ const Video = () => {
                   </svg>
                 </span>
                 <span className="absolute bottom-4 right-4 z-40">
-                  <svg
-                    width="50"
-                    height="79"
-                    viewBox="0 0 50 79"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="50" height="79" viewBox="0 0 50 79" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle
                       cx="47.7119"
                       cy="76.9617"
@@ -317,13 +282,7 @@ const Video = () => {
                       transform="rotate(180 32.3916 16.7161)"
                       fill="white"
                     />
-                    <circle
-                      cx="32.3877"
-                      cy="31.342"
-                      r="1.74121"
-                      transform="rotate(180 32.3877 31.342)"
-                      fill="white"
-                    />
+                    <circle cx="32.3877" cy="31.342" r="1.74121" transform="rotate(180 32.3877 31.342)" fill="white" />
                     <circle
                       cx="32.3916"
                       cy="1.74145"
@@ -359,13 +318,7 @@ const Video = () => {
                       transform="rotate(180 17.0674 16.7161)"
                       fill="white"
                     />
-                    <circle
-                      cx="17.0674"
-                      cy="31.342"
-                      r="1.74121"
-                      transform="rotate(180 17.0674 31.342)"
-                      fill="white"
-                    />
+                    <circle cx="17.0674" cy="31.342" r="1.74121" transform="rotate(180 17.0674 31.342)" fill="white" />
                     <circle
                       cx="17.0674"
                       cy="1.74145"
@@ -401,13 +354,7 @@ const Video = () => {
                       transform="rotate(180 1.74316 16.7161)"
                       fill="white"
                     />
-                    <circle
-                      cx="1.74316"
-                      cy="31.342"
-                      r="1.74121"
-                      transform="rotate(180 1.74316 31.342)"
-                      fill="white"
-                    />
+                    <circle cx="1.74316" cy="31.342" r="1.74121" transform="rotate(180 1.74316 31.342)" fill="white" />
                     <circle
                       cx="1.74316"
                       cy="1.74145"
@@ -427,10 +374,7 @@ const Video = () => {
         <div className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/70">
           <div className="mx-auto w-full max-w-[550px] bg-white">
             <>
-              <iframe
-                className="h-[320px] w-full"
-                src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1"
-              />
+              <iframe className="h-[320px] w-full" src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1" />
             </>
           </div>
 

@@ -11,13 +11,13 @@ describe('API Basic Tests', () => {
       body: {},
       params: {},
       query: {},
-      user: { id: '1', email: 'test@example.com' }
+      user: { id: '1', email: 'test@example.com' },
     };
 
     mockResponse = {
       status: vi.fn().mockReturnThis(),
       json: vi.fn().mockReturnThis(),
-      send: vi.fn().mockReturnThis()
+      send: vi.fn().mockReturnThis(),
     };
   });
 
@@ -25,28 +25,28 @@ describe('API Basic Tests', () => {
     it('должен возвращать правильный формат успешного ответа', () => {
       const successResponse = {
         success: true,
-        data: { message: 'Test data' }
+        data: { message: 'Test data' },
       };
 
       mockResponse.json!(successResponse);
 
       expect(mockResponse.json).toHaveBeenCalledWith({
         success: true,
-        data: { message: 'Test data' }
+        data: { message: 'Test data' },
       });
     });
 
     it('должен возвращать правильный формат ошибки', () => {
       const errorResponse = {
         success: false,
-        error: 'Test error message'
+        error: 'Test error message',
       };
 
       mockResponse.json!(errorResponse);
 
       expect(mockResponse.json).toHaveBeenCalledWith({
         success: false,
-        error: 'Test error message'
+        error: 'Test error message',
       });
     });
   });
@@ -56,33 +56,24 @@ describe('API Basic Tests', () => {
       const requiredFields = ['email', 'password'];
       const requestBody = { email: 'test@example.com' };
 
-      const missingFields = requiredFields.filter(field => !requestBody[field as keyof typeof requestBody]);
+      const missingFields = requiredFields.filter((field) => !requestBody[field as keyof typeof requestBody]);
 
       expect(missingFields).toContain('password');
       expect(missingFields).toHaveLength(1);
     });
 
     it('должен валидировать email формат', () => {
-      const validEmails = [
-        'test@example.com',
-        'user.name@domain.co.uk',
-        'user+tag@example.org'
-      ];
+      const validEmails = ['test@example.com', 'user.name@domain.co.uk', 'user+tag@example.org'];
 
-      const invalidEmails = [
-        'invalid-email',
-        '@example.com',
-        'user@',
-        'user@.com'
-      ];
+      const invalidEmails = ['invalid-email', '@example.com', 'user@', 'user@.com'];
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      validEmails.forEach(email => {
+      validEmails.forEach((email) => {
         expect(emailRegex.test(email)).toBe(true);
       });
 
-      invalidEmails.forEach(email => {
+      invalidEmails.forEach((email) => {
         expect(emailRegex.test(email)).toBe(false);
       });
     });
@@ -90,14 +81,15 @@ describe('API Basic Tests', () => {
 
   describe('Authentication', () => {
     it('должен проверять структуру JWT токена', () => {
-      const mockToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-      
+      const mockToken =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
       // Проверяем, что токен имеет правильный формат (3 части, разделенные точками)
       const tokenParts = mockToken.split('.');
       expect(tokenParts).toHaveLength(3);
-      
+
       // Проверяем, что каждая часть не пустая
-      tokenParts.forEach(part => {
+      tokenParts.forEach((part) => {
         expect(part).toBeTruthy();
       });
     });
@@ -108,7 +100,7 @@ describe('API Basic Tests', () => {
         email: 'test@example.com',
         firstName: 'Test',
         lastName: 'User',
-        role: 'USER'
+        role: 'USER',
       };
 
       expect(mockUser).toHaveProperty('id');
@@ -129,7 +121,7 @@ describe('API Basic Tests', () => {
         status: 'DRAFT',
         userId: '1',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       expect(mockProject).toHaveProperty('id');
@@ -155,7 +147,7 @@ describe('API Basic Tests', () => {
         { input: 'Test Project', expected: 'test-project' },
         { input: 'Test Project Name', expected: 'test-project-name' },
         { input: 'Test Project with Special Chars!@#$%', expected: 'test-project-with-special-chars' },
-        { input: 'Multiple   Spaces', expected: 'multiple-spaces' }
+        { input: 'Multiple   Spaces', expected: 'multiple-spaces' },
       ];
 
       testCases.forEach(({ input, expected }) => {
@@ -173,7 +165,7 @@ describe('API Basic Tests', () => {
         UNAUTHORIZED: 401,
         NOT_FOUND: 404,
         CONFLICT: 409,
-        INTERNAL_SERVER_ERROR: 500
+        INTERNAL_SERVER_ERROR: 500,
       };
 
       expect(statusCodes.OK).toBe(200);
@@ -192,8 +184,8 @@ describe('API Basic Tests', () => {
           error: {
             message,
             status,
-            timestamp: new Date().toISOString()
-          }
+            timestamp: new Date().toISOString(),
+          },
         };
       };
 
@@ -219,7 +211,7 @@ describe('API Basic Tests', () => {
       const testCases = [
         { query: {}, expected: { page: 1, limit: 10, offset: 0 } },
         { query: { page: '2', limit: '5' }, expected: { page: 2, limit: 5, offset: 5 } },
-        { query: { page: '3', limit: '20' }, expected: { page: 3, limit: 20, offset: 40 } }
+        { query: { page: '3', limit: '20' }, expected: { page: 3, limit: 20, offset: 40 } },
       ];
 
       testCases.forEach(({ query, expected }) => {
@@ -227,4 +219,4 @@ describe('API Basic Tests', () => {
       });
     });
   });
-}); 
+});

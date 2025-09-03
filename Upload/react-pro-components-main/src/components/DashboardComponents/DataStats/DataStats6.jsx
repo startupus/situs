@@ -112,7 +112,7 @@ export default DataStats6;
 
 const DataStatsCard = ({ children, name, number, icon }) => {
   return (
-    <div className="flex items-center border-dashed border-stroke dark:border-dark-3 not-last:border-b not-last:pb-6">
+    <div className="not-last:border-b not-last:pb-6 flex items-center border-dashed border-stroke dark:border-dark-3">
       <div className="flex w-full items-center">
         <div className="mr-3 flex h-[44px] w-full max-w-[44px] items-center justify-center rounded-[5px] bg-primary/5 text-primary xs:mr-5 xs:h-[54px] xs:max-w-[54px]">
           {icon}

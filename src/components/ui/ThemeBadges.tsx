@@ -1,15 +1,15 @@
 // src/components/ui/ThemeBadges.tsx
 import React from 'react';
-import { 
-  DangerBadge, 
-  DarkBadge, 
-  GrayBadge, 
-  InfoBadge, 
-  LightBadge, 
-  PrimaryBadge, 
-  SecondaryBadge, 
-  SuccessBadge, 
-  WarningBadge 
+import {
+  DangerBadge,
+  DarkBadge,
+  GrayBadge,
+  InfoBadge,
+  LightBadge,
+  PrimaryBadge,
+  SecondaryBadge,
+  SuccessBadge,
+  WarningBadge,
 } from './core';
 import { withTheme } from './ThemeWrapper';
 

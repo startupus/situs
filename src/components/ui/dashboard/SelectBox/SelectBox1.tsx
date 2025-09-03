@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const SelectBox = () => {
   return (
@@ -53,20 +53,14 @@ const SelectBoxItem = ({ img, name, position }) => {
       <label htmlFor={name} className="flex w-full items-center">
         <div
           className={`user-box flex w-full items-center rounded-[5px] py-[10px] px-4 hover:bg-gray-2 dark:hover:bg-dark  ${
-            isChecked
-              ? "bg-gray-2 dark:bg-dark"
-              : ""
+            isChecked ? 'bg-gray-2 dark:bg-dark' : ''
           }`}
         >
-          <div className={`box mr-5 flex h-5 w-full max-w-[20px] cursor-pointer items-center justify-center rounded-sm border  ${isChecked ? "border-primary bg-primary" : "border-stroke dark:border-dark-3"}`}>
-            <span className={`icon ${isChecked ? "" : "opacity-0"}`}>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+          <div
+            className={`box mr-5 flex h-5 w-full max-w-[20px] cursor-pointer items-center justify-center rounded-sm border  ${isChecked ? 'border-primary bg-primary' : 'border-stroke dark:border-dark-3'}`}
+          >
+            <span className={`icon ${isChecked ? '' : 'opacity-0'}`}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -77,11 +71,7 @@ const SelectBoxItem = ({ img, name, position }) => {
             </span>
           </div>
           <div className="mr-5 h-11 w-full max-w-[44px] rounded-full">
-            <img
-              src={img}
-              alt="author"
-              className="h-full w-full object-cover object-center"
-            />
+            <img src={img} alt="author" className="h-full w-full object-cover object-center" />
           </div>
           <div>
             <h4 className="text-sm font-medium text-dark dark:text-white">{name}</h4>

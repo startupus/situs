@@ -1,12 +1,28 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FiArrowLeft, FiMoreVertical, FiGlobe, FiSettings, FiMenu as FiMenuIcon, FiSearch, FiEye } from 'react-icons/fi';
+import {
+  FiArrowLeft,
+  FiMoreVertical,
+  FiGlobe,
+  FiSettings,
+  FiMenu as FiMenuIcon,
+  FiSearch,
+  FiEye,
+} from 'react-icons/fi';
 import ProjectAnalytics from './ProjectAnalytics';
 import ProjectKpiStrip from './ProjectKpiStrip';
 import { projectsApi } from '../../../api/services/projects.api';
 import { ProjectData } from '../../../types/project';
 import { useProject } from '../../../contexts/ProjectContext';
-import { DndContext, PointerSensor, useSensor, useSensors, DragEndEvent, closestCenter, DragOverlay } from '@dnd-kit/core';
+import {
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+  closestCenter,
+  DragOverlay,
+} from '@dnd-kit/core';
 import { SortableContext, rectSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -24,9 +40,7 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     }
   })();
   // DnD sensors
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { delay: 150, tolerance: 5 } })
-  );
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { delay: 150, tolerance: 5 } }));
 
   const navigate = useNavigate();
 
@@ -37,15 +51,15 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   useEffect(() => {
     const loadProject = async () => {
       if (!projectId) return;
-      
+
       setLoading(true);
       try {
         const response = await projectsApi.getProject(projectId);
         setProject(response as any);
-        const prods = ((response as any)?.products || []).map((p: any) => ({ 
-          id: p.id, 
-          name: p.type === 'WEBSITE' ? 'PAGES' : p.type, 
-          type: p.type 
+        const prods = ((response as any)?.products || []).map((p: any) => ({
+          id: p.id,
+          name: p.type === 'WEBSITE' ? 'PAGES' : p.type,
+          type: p.type,
         }));
         setProductsOrder(prods);
       } catch (error) {
@@ -69,7 +83,11 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   // DnD компоненты
   const SortableTile: React.FC<{ item: { id: string; name: string; type?: string } }> = ({ item }) => {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
-    const style: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.85 : 1 };
+    const style: React.CSSProperties = {
+      transform: CSS.Transform.toString(transform),
+      transition,
+      opacity: isDragging ? 0.85 : 1,
+    };
     const go = () => {
       if (!projectId) return;
       if (item.type === 'WEBSITE') navigate(`/projects/${projectId}/pages`);
@@ -133,12 +151,8 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
   if (!project) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-semibold text-dark dark:text-white mb-2">
-          Проект не найден
-        </h2>
-        <p className="text-body-color dark:text-dark-6 mb-4">
-          Проект с указанным ID не существует
-        </p>
+        <h2 className="text-xl font-semibold text-dark dark:text-white mb-2">Проект не найден</h2>
+        <p className="text-body-color dark:text-dark-6 mb-4">Проект с указанным ID не существует</p>
         <Link
           to="/projects"
           className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors"
@@ -156,88 +170,142 @@ const ProjectPage: React.FC<ProjectPageProps> = () => {
     <>
       {/* KPI без заголовка вместо хлебных крошек */}
       <ProjectKpiStrip project={project} />
-      
+
       <div className="p-6 space-y-8">
-      {/* Верх: плитки компонентов проекта (перетаскиваемые) */}
-      <section>
-        <div className="mb-4">
-          <h2 className="text-lg font-semibold text-dark dark:text-white">Компоненты проекта</h2>
-        </div>
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onTilesDragEnd}>
-          <SortableContext items={productsOrder.map((p) => p.id)} strategy={rectSortingStrategy}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {productsOrder.map((item) => (
-                <SortableTile key={item.id} item={item} />
-              ))}
-            </div>
-          </SortableContext>
-          <DragOverlay />
-        </DndContext>
-      </section>
+        {/* Верх: плитки компонентов проекта (перетаскиваемые) */}
+        <section>
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold text-dark dark:text-white">Компоненты проекта</h2>
+          </div>
+          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onTilesDragEnd}>
+            <SortableContext items={productsOrder.map((p) => p.id)} strategy={rectSortingStrategy}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {productsOrder.map((item) => (
+                  <SortableTile key={item.id} item={item} />
+                ))}
+              </div>
+            </SortableContext>
+            <DragOverlay />
+          </DndContext>
+        </section>
 
-      {/* Quick Start (для новых/неполностью настроенных проектов) */}
-      <section>
-        <h2 className="text-lg font-semibold text-dark dark:text-white mb-3">Быстрый старт</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          <Link to={`/projects/${projectId}/settings/domain`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiGlobe aria-hidden /> Домен и публикация</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Подключите домен и включите публикацию</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/theme`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiSettings aria-hidden /> Глобальная тема</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Выберите цвета, шрифты и стиль</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/menu`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiMenuIcon aria-hidden /> Меню проекта</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Создайте главное навигационное меню</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/seo`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-1 text-dark dark:text-white"><FiSearch aria-hidden /> SEO настройки</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Title, Description, индексация</p>
-          </Link>
-        </div>
-      </section>
+        {/* Quick Start (для новых/неполностью настроенных проектов) */}
+        <section>
+          <h2 className="text-lg font-semibold text-dark dark:text-white mb-3">Быстрый старт</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <Link
+              to={`/projects/${projectId}/settings/domain`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-1 text-dark dark:text-white">
+                <FiGlobe aria-hidden /> Домен и публикация
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Подключите домен и включите публикацию</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/theme`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-1 text-dark dark:text-white">
+                <FiSettings aria-hidden /> Глобальная тема
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Выберите цвета, шрифты и стиль</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/menu`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-1 text-dark dark:text-white">
+                <FiMenuIcon aria-hidden /> Меню проекта
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Создайте главное навигационное меню</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/seo`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-1 text-dark dark:text-white">
+                <FiSearch aria-hidden /> SEO настройки
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Title, Description, индексация</p>
+            </Link>
+          </div>
+        </section>
 
-      {/* KPI строка и аналитика проекта */}
-      <section>
-        <ProjectAnalytics project={project} showOverview={false} />
-      </section>
+        {/* KPI строка и аналитика проекта */}
+        <section>
+          <ProjectAnalytics project={project} showOverview={false} />
+        </section>
 
-      {/* Блок настроек проекта (системные функции) */}
-      <section>
-        <h2 className="text-lg font-semibold text-dark dark:text-white mb-3">Настройки проекта</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <Link to={`/projects/${projectId}/settings/domain`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiGlobe aria-hidden /> Домен и доступ</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Поддомены, кастомный домен, публикация</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/menu`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiMenuIcon aria-hidden /> Меню проекта</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Типы меню, пункты, иерархия</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/seo`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSearch aria-hidden /> SEO</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Мета‑данные, robots, sitemap</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/theme`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSettings aria-hidden /> Тема</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Цвета, типографика, компоненты</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/integrations`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiEye aria-hidden /> Интеграции</div>
-            <p className="text-xs text-body-color dark:text-dark-6">CRM, аналитика, платежи</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/team`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSettings aria-hidden /> Команда</div>
-            <p className="text-xs text-body-color dark:text-dark-6">Участники и приглашения</p>
-          </Link>
-          <Link to={`/projects/${projectId}/settings/access`} className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all">
-            <div className="flex items-center gap-3 mb-2 text-dark dark:text-white"><FiSettings aria-hidden /> Доступ и роли</div>
-            <p className="text-xs text-body-color dark:text-dark-6">ACL, уровни видимости</p>
-          </Link>
-        </div>
-      </section>
-      
+        {/* Блок настроек проекта (системные функции) */}
+        <section>
+          <h2 className="text-lg font-semibold text-dark dark:text-white mb-3">Настройки проекта</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <Link
+              to={`/projects/${projectId}/settings/domain`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiGlobe aria-hidden /> Домен и доступ
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Поддомены, кастомный домен, публикация</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/menu`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiMenuIcon aria-hidden /> Меню проекта
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Типы меню, пункты, иерархия</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/seo`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiSearch aria-hidden /> SEO
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Мета‑данные, robots, sitemap</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/theme`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiSettings aria-hidden /> Тема
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Цвета, типографика, компоненты</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/integrations`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiEye aria-hidden /> Интеграции
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">CRM, аналитика, платежи</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/team`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiSettings aria-hidden /> Команда
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">Участники и приглашения</p>
+            </Link>
+            <Link
+              to={`/projects/${projectId}/settings/access`}
+              className="group rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4 hover:shadow-md hover:border-primary/60 transition-all"
+            >
+              <div className="flex items-center gap-3 mb-2 text-dark dark:text-white">
+                <FiSettings aria-hidden /> Доступ и роли
+              </div>
+              <p className="text-xs text-body-color dark:text-dark-6">ACL, уровни видимости</p>
+            </Link>
+          </div>
+        </section>
       </div>
     </>
   );

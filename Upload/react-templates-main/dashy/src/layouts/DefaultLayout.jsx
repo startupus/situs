@@ -9,7 +9,7 @@ const DefaultLayout = () => {
 
   return (
     <>
-      <div className="relative flex items-start w-full min-h-screen">
+      <div className="relative flex min-h-screen w-full items-start">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         <div className="w-full xl:pl-[300px]">

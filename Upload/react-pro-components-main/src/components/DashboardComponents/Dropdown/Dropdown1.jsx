@@ -32,16 +32,16 @@ const Dropdown = () => {
   return (
     <>
       {/* <!-- ====== Dropdowns Section Start --> */}
-      <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20 dark:bg-dark">
+      <section class="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
         <div className="container">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             {/* one */}
             <div ref={domNode} className="w-full px-4 sm:w-1/2 lg:w-1/4">
               <div className="py-8 text-center">
-                <div className="relative inline-block mb-8 text-left">
+                <div className="relative mb-8 inline-block text-left">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className={`bg-primary flex items-center rounded-[5px] px-5 py-[13px] text-base font-medium text-white`}
+                    className={`flex items-center rounded-[5px] bg-primary px-5 py-[13px] text-base font-medium text-white`}
                   >
                     Dropdown Button
                     <span className="pl-4">
@@ -58,10 +58,10 @@ const Dropdown = () => {
                     </span>
                   </button>
                   <div
-                    className={`shadow-1 dark:shadow-box-dark absolute left-0 z-40 mt-2 w-full rounded-md bg-white dark:bg-dark-2 py-[10px] transition-all ${
+                    className={`absolute left-0 z-40 mt-2 w-full rounded-md bg-white py-[10px] shadow-1 transition-all dark:bg-dark-2 dark:shadow-box-dark ${
                       dropdownOpen
-                        ? "top-full opacity-100 visible"
-                        : "top-[110%] invisible opacity-0"
+                        ? "visible top-full opacity-100"
+                        : "invisible top-[110%] opacity-0"
                     }`}
                   >
                     <DropdownItem label="Dashboard" href="/#" />
@@ -87,7 +87,7 @@ const DropdownItem = ({ label, href }) => {
   return (
     <a
       href={href}
-      className="text-body-color dark:text-dark-6 hover:bg-[#F5F7FD] dark:hover:bg-primary/5 hover:text-primary block px-5 py-2 text-base"
+      className="block px-5 py-2 text-base text-body-color hover:bg-[#F5F7FD] hover:text-primary dark:text-dark-6 dark:hover:bg-primary/5"
     >
       {label}
     </a>

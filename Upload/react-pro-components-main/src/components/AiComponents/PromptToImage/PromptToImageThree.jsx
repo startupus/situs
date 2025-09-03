@@ -19,7 +19,7 @@ function PromptToImageThree() {
                 id=""
                 rows="5"
                 placeholder="Generated content will appear here..."
-                className="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 focus:border-primary dark:border-dark-3 dark:text-white"
               ></textarea>
             </div>
             <div className="mb-7">
@@ -340,7 +340,7 @@ function PromptToImageThree() {
               </button>
             </div>
           </div>
-          <div className="flex aspect-472/542 w-full max-w-[472px] items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3 dark:bg-white/5 dark:text-dark-6">
+          <div className="aspect-472/542 flex w-full max-w-[472px] items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3 dark:bg-white/5 dark:text-dark-6">
             <svg
               width="60"
               height="60"
@@ -389,7 +389,7 @@ function PromptToImageThree() {
                 id=""
                 rows="5"
                 placeholder="Generated content will appear here..."
-                className="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 focus:border-primary dark:border-dark-3 dark:text-white"
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                 ultrices augue sit amet odio posuere, sit amet porttitor ex
@@ -723,14 +723,14 @@ function PromptToImageThree() {
               </button>
             </div>
           </div>
-          <div className="relative flex aspect-472/542 w-full max-w-[472px] items-center justify-center overflow-hidden rounded-xl border border-gray-5 dark:border-dark-3">
+          <div className="aspect-472/542 relative flex w-full max-w-[472px] items-center justify-center overflow-hidden rounded-xl border border-gray-5 dark:border-dark-3">
             <img
               src="https://i.ibb.co/X5F06YQ/image-1.jpg"
               alt="result image"
               className="h-full w-full object-cover object-center"
             />
 
-            <button className="absolute bottom-5 right-5 flex h-[46px] w-[46px] items-center justify-center rounded-lg bg-white text-dark shadow-xs hover:bg-primary hover:text-white dark:bg-dark dark:text-white">
+            <button className="shadow-xs absolute bottom-5 right-5 flex h-[46px] w-[46px] items-center justify-center rounded-lg bg-white text-dark hover:bg-primary hover:text-white dark:bg-dark dark:text-white">
               <svg
                 width="22"
                 height="22"

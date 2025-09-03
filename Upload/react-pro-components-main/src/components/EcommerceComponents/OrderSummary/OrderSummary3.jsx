@@ -3,7 +3,7 @@ import React from "react";
 const OrderSummary3 = () => {
   return (
     <>
-      <section className="bg-white dark:bg-dark py-20 lg:py-[120px]">
+      <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-1/2">
@@ -23,7 +23,7 @@ const OrderSummary3 = () => {
           </div>
         </div>
 
-        <div className="bg-gray-2 dark:bg-dark-2 mb-[50px] py-[50px]">
+        <div className="mb-[50px] bg-gray-2 py-[50px] dark:bg-dark-2">
           <div className="container mx-auto">
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 md:w-1/2 lg:w-4/12">
@@ -31,7 +31,7 @@ const OrderSummary3 = () => {
                   <h4 className="mb-[10px] text-base font-medium text-dark dark:text-white">
                     Note:
                   </h4>
-                  <p className="text-body-color dark:text-dark-6 text-base">
+                  <p className="text-base text-body-color dark:text-dark-6">
                     Your order has been confirmed and will be shipping soon.
                   </p>
                 </div>
@@ -47,7 +47,7 @@ const OrderSummary3 = () => {
                   <p className="mb-1 text-base font-medium text-body-color dark:text-dark-6">
                     Email: contact@yourmail.com
                   </p>
-                  <p className="text-body-color dark:text-dark-6 text-base">
+                  <p className="text-base text-body-color dark:text-dark-6">
                     Address: New York, USA 2707 Davis Anenue
                   </p>
                 </div>
@@ -73,7 +73,7 @@ const OrderSummary3 = () => {
                 <h3 className="mb-[18px] text-xl font-semibold text-dark dark:text-white md:text-2xl">
                   Shipping Method
                 </h3>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   FedEx - Take up to 3 <br />
                   working days.
                 </p>
@@ -84,7 +84,7 @@ const OrderSummary3 = () => {
                 <h3 className="mb-[18px] text-xl font-semibold text-dark dark:text-white md:text-2xl">
                   Payment Method
                 </h3>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   Apply Pay Mastercard <br />
                   **** **** **** 5874
                 </p>
@@ -100,11 +100,11 @@ const OrderSummary3 = () => {
                   <span> Shipping Cost (+) </span>
                   <span className="font-semibold"> $10.00 </span>
                 </p>
-                <p className="mb-[18px] flex justify-between border-t border-stroke dark:border-dark-3 pt-6 text-base text-dark dark:text-white">
+                <p className="mb-[18px] flex justify-between border-t border-stroke pt-6 text-base text-dark dark:border-dark-3 dark:text-white">
                   <span> Total Payable </span>
                   <span className="font-semibold"> $99.99 </span>
                 </p>
-                <button className="flex w-full items-center justify-center rounded-md bg-dark dark:bg-dark-2 py-[10px] px-10 text-center text-base font-semibold text-white hover:bg-dark/90">
+                <button className="flex w-full items-center justify-center rounded-md bg-dark px-10 py-[10px] text-center text-base font-semibold text-white hover:bg-dark/90 dark:bg-dark-2">
                   Continue Shopping
                 </button>
               </div>
@@ -120,9 +120,9 @@ export default OrderSummary3;
 
 const ProductItem = ({ img, link, title, color, size, number, price }) => {
   return (
-    <div className="rounded-md border-[.5px] border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 pl-5 pr-8">
+    <div className="rounded-md border-[.5px] border-stroke bg-white py-5 pl-5 pr-8 dark:border-dark-3 dark:bg-dark-2">
       <div className="items-center sm:flex">
-        <div className="mb-3 mr-6 h-20 w-full max-w-[80px] sm:mb-0 rounded-sm overflow-hidden">
+        <div className="mb-3 mr-6 h-20 w-full max-w-[80px] overflow-hidden rounded-sm sm:mb-0">
           <img
             src={img}
             alt="product"
@@ -133,11 +133,11 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
           <div className="mb-3 md:mb-0">
             <a
               href={link}
-              className="hover:text-primary inline-block text-base font-medium text-dark dark:text-white mb-1"
+              className="mb-1 inline-block text-base font-medium text-dark hover:text-primary dark:text-white"
             >
               {title}
             </a>
-            <p className="text-body-color dark:text-dark-6 flex text-sm">
+            <p className="flex text-sm text-body-color dark:text-dark-6">
               <span className="mr-5"> Color: {color} </span>
               <span className="mr-5"> Size: {size} </span>
             </p>
@@ -146,7 +146,9 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
             <p className="mr-20 text-base font-medium text-dark dark:text-white">
               Qty: {number}
             </p>
-            <p className="mr-5 text-base font-medium text-dark dark:text-white">{price}</p>
+            <p className="mr-5 text-base font-medium text-dark dark:text-white">
+              {price}
+            </p>
           </div>
         </div>
       </div>

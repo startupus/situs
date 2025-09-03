@@ -4,7 +4,7 @@ const SearchForm = () => {
       <div className="hidden w-full lg:flex">
         <form className="relative flex w-full items-center rounded-md border border-stroke bg-gray-2 dark:border-dark-3 dark:bg-dark-2">
           <div className="relative border-r border-stroke dark:border-dark-3">
-            <select className="appearance-none bg-transparent py-[14px] pl-[22px] pr-10 text-base font-medium text-dark outline-hidden dark:text-white">
+            <select className="outline-hidden appearance-none bg-transparent py-[14px] pl-[22px] pr-10 text-base font-medium text-dark dark:text-white">
               <option className="dark:bg-dark-2">All categories</option>
               <option className="dark:bg-dark-2">Best matches</option>
               <option className="dark:bg-dark-2">Newest</option>
@@ -25,7 +25,7 @@ const SearchForm = () => {
           <input
             type="text"
             placeholder="I'm shopping for..."
-            className="w-full bg-transparent py-3 pl-6 pr-[58px] text-base text-body-color outline-hidden dark:text-dark-6"
+            className="outline-hidden w-full bg-transparent py-3 pl-6 pr-[58px] text-base text-body-color dark:text-dark-6"
           />
           <button className="absolute right-0 top-0 flex h-full w-[52px] items-center justify-center rounded-br-md rounded-tr-md border border-primary bg-primary text-white">
             <svg

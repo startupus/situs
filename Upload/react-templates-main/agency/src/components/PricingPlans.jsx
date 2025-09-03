@@ -82,7 +82,7 @@ const PricingPlans = () => {
                 <div
                   className={`relative z-10 mb-10 overflow-hidden rounded-xl px-8 py-10 text-center sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] ${
                     item.popular
-                      ? "bg-primary bg-linear-to-b from-primary to-[#179BEE] shadow-pricing xl:pb-10 xl:pt-[55px]"
+                      ? "bg-linear-to-b bg-primary from-primary to-[#179BEE] shadow-pricing xl:pb-10 xl:pt-[55px]"
                       : "border-2 border-[#D4DEFF] bg-white drop-shadow-pricing dark:border-dark-3 dark:bg-dark-2 xl:pb-[50px] xl:pt-[45px]"
                   } ${index === 0 && "lg:rounded-r-none lg:border-r-0"} ${index === plans.length - 1 && "lg:rounded-l-none lg:border-l-0"}`}
                 >

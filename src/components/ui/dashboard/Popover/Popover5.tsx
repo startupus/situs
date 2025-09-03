@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const Popover5 = () => {
   return (
     <section className="flex min-h-screen items-center bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
       <div className="mx-auto w-full px-4 lg:container">
         <div className="group relative block pt-2 lg:inline-block">
-          <a
-            href="/#"
-            className="mb-3 inline-block text-base font-medium text-primary underline"
-          >
+          <a href="/#" className="mb-3 inline-block text-base font-medium text-primary underline">
             Popover Text
           </a>
           <div className="invisible absolute top-full left-0 w-full opacity-0 group-hover:visible group-hover:opacity-100 sm:w-[530px] lg:top-1/2 lg:left-full lg:-translate-y-1/2">
@@ -35,12 +32,8 @@ const Popover5 = () => {
                     />
                   </div>
                   <div>
-                    <h5 className="text-base font-medium text-dark dark:text-white">
-                      Naimur Rahman
-                    </h5>
-                    <p className="text-sm text-body-color dark:text-dark-6">
-                      Product Designer
-                    </p>
+                    <h5 className="text-base font-medium text-dark dark:text-white">Naimur Rahman</h5>
+                    <p className="text-sm text-body-color dark:text-dark-6">Product Designer</p>
                   </div>
                 </div>
                 <div>
@@ -50,13 +43,10 @@ const Popover5 = () => {
                 </div>
               </div>
               <div className="pt-6 pb-[30px] px-[30px]">
-                <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">
-                  From Pimjo Labs Team
-                </h3>
+                <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">From Pimjo Labs Team</h3>
                 <p className="mb-5 text-base text-body-color dark:text-dark-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Mauris facilisis congue justo nec facilisis. Quisque quis
-                  augue ipsum. Aliquam suscipit dui ac dui commodo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis congue justo nec facilisis.
+                  Quisque quis augue ipsum. Aliquam suscipit dui ac dui commodo.
                 </p>
                 <p className="flex items-center text-base text-body-color dark:text-dark-6">
                   <span className="mr-[10px] inline">

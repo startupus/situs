@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const DataStats10 = () => {
   return (
@@ -68,9 +68,7 @@ const DataStatsCard = ({ icon, color, name, size, progress }) => {
       </div>
       <div className="w-full">
         <div className="mb-3 flex items-center justify-between">
-          <p className="text-sm font-medium text-dark dark:text-white">
-            {name}
-          </p>
+          <p className="text-sm font-medium text-dark dark:text-white">{name}</p>
           <p className="text-sm text-dark dark:text-white">{size}</p>
         </div>
         <div className="relative block h-[5px] w-full rounded-full bg-[#E6E9ED] dark:bg-dark-3">

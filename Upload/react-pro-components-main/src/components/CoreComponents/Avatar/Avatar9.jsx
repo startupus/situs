@@ -1,104 +1,106 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from "react";
 
 const Avatar9 = () => {
   return (
     <>
-      <section className='bg-white dark:bg-dark py-[75px]'>
-        <div className='mx-auto px-4 sm:container'>
-          <div className='-mx-4 flex flex-wrap justify-center'>
+      <section className="bg-white py-[75px] dark:bg-dark">
+        <div className="mx-auto px-4 sm:container">
+          <div className="-mx-4 flex flex-wrap justify-center">
             <AvatarItem
               active
-              name='Devid Milinear'
-              img='https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-05.jpg'
+              name="Devid Milinear"
+              img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-05.jpg"
             >
-              <DropdownItem link='/#'>Profile</DropdownItem>
-              <DropdownItem link='/#'>Settings</DropdownItem>
-              <DropdownItem link='/#'>Sign Out</DropdownItem>
+              <DropdownItem link="/#">Profile</DropdownItem>
+              <DropdownItem link="/#">Settings</DropdownItem>
+              <DropdownItem link="/#">Sign Out</DropdownItem>
             </AvatarItem>
             <AvatarItem
               active
               arrow
-              name='Devid Milinear'
-              img='https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-05.jpg'
+              name="Devid Milinear"
+              img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-05.jpg"
             >
-              <DropdownItem link='/#'>Profile</DropdownItem>
-              <DropdownItem link='/#'>Settings</DropdownItem>
-              <DropdownItem link='/#'>Sign Out</DropdownItem>
+              <DropdownItem link="/#">Profile</DropdownItem>
+              <DropdownItem link="/#">Settings</DropdownItem>
+              <DropdownItem link="/#">Sign Out</DropdownItem>
             </AvatarItem>
             <AvatarItem
               arrow
-              img='https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-05.jpg'
+              img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-05.jpg"
             >
-              <DropdownItem link='/#'>Profile</DropdownItem>
-              <DropdownItem link='/#'>Settings</DropdownItem>
-              <DropdownItem link='/#'>Sign Out</DropdownItem>
+              <DropdownItem link="/#">Profile</DropdownItem>
+              <DropdownItem link="/#">Settings</DropdownItem>
+              <DropdownItem link="/#">Sign Out</DropdownItem>
             </AvatarItem>
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Avatar9
+export default Avatar9;
 
 const AvatarItem = ({ img, name, arrow, active, children }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const trigger = useRef(null)
-  const dropdown = useRef(null)
+  const trigger = useRef(null);
+  const dropdown = useRef(null);
 
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
-      if (!dropdown.current) return
+      if (!dropdown.current) return;
       if (
         !dropdownOpen ||
         dropdown.current.contains(target) ||
         trigger.current.contains(target)
       )
-        return
-      setDropdownOpen(false)
-    }
-    document.addEventListener('click', clickHandler)
-    return () => document.removeEventListener('click', clickHandler)
-  })
+        return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener("click", clickHandler);
+    return () => document.removeEventListener("click", clickHandler);
+  });
 
   // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
-      if (!dropdownOpen || keyCode !== 27) return
-      setDropdownOpen(false)
-    }
-    document.addEventListener('keydown', keyHandler)
-    return () => document.removeEventListener('keydown', keyHandler)
-  })
+      if (!dropdownOpen || keyCode !== 27) return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
+  });
 
   return (
-    <div className='mb-8 w-full px-4 md:w-1/2 lg:w-1/3'>
-      <div className='relative inline-block'>
+    <div className="mb-8 w-full px-4 md:w-1/2 lg:w-1/3">
+      <div className="relative inline-block">
         <button
-          className='flex items-center text-left'
+          className="flex items-center text-left"
           ref={trigger}
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <div className='relative mr-4 h-[42px] w-[42px] rounded-full'>
+          <div className="relative mr-4 h-[42px] w-[42px] rounded-full">
             <img
               src={img}
-              alt='avatar'
-              className='h-full w-full rounded-full object-cover object-center'
+              alt="avatar"
+              className="h-full w-full rounded-full object-cover object-center"
             />
             <span
-              className={`absolute -top-0.5 -right-0.5 block h-[14px] w-[14px] rounded-full border-[2.3px] border-white dark:border-dark ${
-                active ? 'bg-[#219653]' : 'bg-red'
+              className={`absolute -right-0.5 -top-0.5 block h-[14px] w-[14px] rounded-full border-[2.3px] border-white dark:border-dark ${
+                active ? "bg-[#219653]" : "bg-red"
               } `}
             ></span>
           </div>
           {name && (
-            <span className='text-base font-medium text-dark dark:text-white'>{name}</span>
+            <span className="text-base font-medium text-dark dark:text-white">
+              {name}
+            </span>
           )}
           {arrow && (
-            <span className='pl-[10px] text-dark dark:text-white'>
+            <span className="pl-[10px] text-dark dark:text-white">
               <svg
                 width={20}
                 height={20}
@@ -116,24 +118,24 @@ const AvatarItem = ({ img, name, arrow, active, children }) => {
           ref={dropdown}
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
-          className={`shadow-card dark:shadow-box-dark absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white dark:bg-dark-2 p-2 ${
-            dropdownOpen === true ? 'block' : 'hidden'
+          className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark-2 dark:shadow-box-dark ${
+            dropdownOpen === true ? "block" : "hidden"
           }`}
         >
           {children}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const DropdownItem = ({ link, children }) => {
   return (
     <a
       href={link}
-      className='text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-3 block w-full rounded-sm py-2 px-3 text-left text-sm'
+      className="block w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3"
     >
       {children}
     </a>
-  )
-}
+  );
+};

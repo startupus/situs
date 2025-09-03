@@ -21,7 +21,7 @@ async function testBrowserTools() {
   console.log('🚀 Запуск BrowserTools сервера...');
   const child = spawn('npx', ['@agentdeskai/browser-tools-server@latest'], {
     stdio: 'inherit',
-    env: { ...process.env, PORT: '3025' }
+    env: { ...process.env, PORT: '3025' },
   });
 
   // Ждем запуска
@@ -33,7 +33,7 @@ async function testBrowserTools() {
     const response = await fetch('http://localhost:3025/capture-screenshot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({})
+      body: JSON.stringify({}),
     });
 
     if (response.ok) {
@@ -61,8 +61,8 @@ function execCommand(command: string): Promise<void> {
 }
 
 function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // Запуск теста
-testBrowserTools().catch(console.error); 
+testBrowserTools().catch(console.error);

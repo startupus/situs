@@ -3,4 +3,4 @@
   "discoveryEnabled": false,
   "discoveryHosts": ["browser-tools-server"],
   "discoveryPorts": [3025]
-} 
+}

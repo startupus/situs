@@ -100,7 +100,7 @@ input#toggleFive:checked ~ .dot > span {
 } */
 
 input#toggleEight:checked ~ .dot span {
-  @apply bg-primary border-white;
+  @apply border-white bg-primary;
 }
 
 input#toggleNine:checked ~ .dot span {
@@ -168,7 +168,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .payment:checked ~ label {
-  @apply border-primary bg-primary/8;
+  @apply bg-primary/8 border-primary;
 }
 
 .shipping:checked ~ label {
@@ -220,11 +220,11 @@ input[type="radio"]:checked ~ .box span {
 /* ============
 =============== */
 .noUi-base {
-  @apply dark:bg-dark-2 bg-white;
+  @apply bg-white dark:bg-dark-2;
 }
 
 .priceSlideOne .noUi-target {
-  @apply bg-gray mt-8 border-none shadow-none;
+  @apply mt-8 border-none bg-gray shadow-none;
 }
 
 .priceSlideOne .noUi-connects {
@@ -232,11 +232,11 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .priceSlideOne .noUi-connect {
-  @apply bg-primary h-[6px] rounded-full;
+  @apply h-[6px] rounded-full bg-primary;
 }
 
 .priceSlideOne .noUi-horizontal .noUi-handle {
-  @apply border-primary dark:bg-dark-2 -top-2 h-[22px] w-[22px] rounded-full border-[6px] bg-white shadow-none;
+  @apply -top-2 h-[22px] w-[22px] rounded-full border-[6px] border-primary bg-white shadow-none dark:bg-dark-2;
 }
 
 .priceSlideTwo .noUi-target {
@@ -248,11 +248,11 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .priceSlideTwo .noUi-connect {
-  @apply bg-primary h-1 rounded-full;
+  @apply h-1 rounded-full bg-primary;
 }
 
 .priceSlideTwo .noUi-horizontal .noUi-handle {
-  @apply border-primary -top-3 h-[30px] w-[30px] rounded-full border bg-white shadow-none;
+  @apply -top-3 h-[30px] w-[30px] rounded-full border border-primary bg-white shadow-none;
 }
 
 .noUi-horizontal .noUi-handle:after,
@@ -279,7 +279,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .themeSwitcherTwo input:checked ~ .light {
-  @apply text-body-color bg-transparent;
+  @apply bg-transparent text-body-color;
 }
 .themeSwitcherTwo input:checked ~ .dark {
   @apply bg-gray text-primary;
@@ -293,7 +293,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .themeSwitcherThree input:checked ~ div .light {
-  @apply text-body-color dark:bg-dark-2 bg-white;
+  @apply bg-white text-body-color dark:bg-dark-2;
 }
 .themeSwitcherThree input:checked ~ div .dark {
   @apply bg-primary text-white;
@@ -343,11 +343,11 @@ input[type="radio"]:checked ~ .box span {
 
 /* Maps */
 .jvm-zoom-btn {
-  @apply border-stroke bg-gray text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 top-auto bottom-0 left-auto flex h-[30px] w-[30px] items-center justify-center rounded border-[.5px] leading-[1.1] font-medium hover:text-white;
+  @apply bottom-0 left-auto top-auto flex h-[30px] w-[30px] items-center justify-center rounded border-[.5px] border-stroke bg-gray font-medium leading-[1.1] text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-dark-6;
 }
 
 .mapOne .jvm-zoom-btn {
-  @apply top-auto -bottom-[33px] left-auto;
+  @apply -bottom-[33px] left-auto top-auto;
 }
 .mapOne.mapThree .jvm-zoom-btn {
   @apply bottom-0;
@@ -360,7 +360,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .mapTwo .jvm-zoom-btn {
-  @apply top-auto bottom-0;
+  @apply bottom-0 top-auto;
 }
 
 .mapTwo .jvm-zoom-btn.jvm-zoomin {

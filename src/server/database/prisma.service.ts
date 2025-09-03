@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 /**
  * Сервис для работы с Prisma ORM
- * 
+ *
  * Управляет подключением к базе данных
  * и предоставляет клиент для всех модулей
  */
@@ -27,7 +27,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       await this.$connect();
       console.log('✅ Подключение к базе данных установлено');
     } catch (error: any) {
-      console.warn('⚠️ Ошибка подключения к базе данных (не критично):', (error && (error.message || error)));
+      console.warn('⚠️ Ошибка подключения к базе данных (не критично):', error && (error.message || error));
     }
     console.log('[Prisma] onModuleInit end');
   }
@@ -57,7 +57,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
         try {
           await this.$executeRawUnsafe(`TRUNCATE TABLE "public"."${tablename}" CASCADE;`);
         } catch (error: any) {
-          console.log({ error: (error && (error.message || error)) });
+          console.log({ error: error && (error.message || error) });
         }
       }
     }

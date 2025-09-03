@@ -6,36 +6,41 @@
 /* Глобальные переменные для тем - совместимость с TailGrids */
 :root {
   /* Классическая синяя тема (по умолчанию) */
-  --color-primary: #2881C6;
+  --color-primary: #2881c6;
   --color-secondary: #059669;
-  --color-accent: #7C3AED;
-  --color-success: #22AD5C;
-  --color-warning: #FBBF24;
-  --color-error: #F23030;
-  --color-info: #2D68F8;
-  
+  --color-accent: #7c3aed;
+  --color-success: #22ad5c;
+  --color-warning: #fbbf24;
+  --color-error: #f23030;
+  --color-info: #2d68f8;
+
   /* Дублирование без префикса для максимальной совместимости */
-  --primary: #2881C6;
+  --primary: #2881c6;
   --secondary: #059669;
-  --accent: #7C3AED;
-  --success: #22AD5C;
-  --warning: #FBBF24;
-  --error: #F23030;
-  --info: #2D68F8;
+  --accent: #7c3aed;
+  --success: #22ad5c;
+  --warning: #fbbf24;
+  --error: #f23030;
+  --info: #2d68f8;
 }
 
 /* Контейнер интерфейса */
 .redaktus-interface {
   /* Базовые стили интерфейса - используем Inter как в @admino/ */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
-  
+
   /* Используем CSS переменные для темы с приоритетом */
   background-color: var(--interface-bg, #ffffff) !important;
   color: var(--interface-text, #1f2937) !important;
   border-color: var(--interface-border, #e5e7eb) !important;
-  
+
   /* Изоляция от глобальных стилей */
   isolation: isolate;
   position: relative;
@@ -45,11 +50,11 @@
 /* Светлая тема интерфейса - контрастная и яркая */
 .redaktus-interface.interface-light {
   --interface-bg: #ffffff !important;
-  --interface-text: #1F2937 !important; /* более темный для контраста */
-  --interface-border: #D1D5DB !important; /* более заметная граница */
-  --interface-surface: #F9FAFB !important; /* легкий серый фон */
-  --interface-surface-disabled: #F3F4F6 !important; /* фон для disabled */
-  --interface-text-disabled: #9CA3AF !important; /* текст для disabled */
+  --interface-text: #1f2937 !important; /* более темный для контраста */
+  --interface-border: #d1d5db !important; /* более заметная граница */
+  --interface-surface: #f9fafb !important; /* легкий серый фон */
+  --interface-surface-disabled: #f3f4f6 !important; /* фон для disabled */
+  --interface-text-disabled: #9ca3af !important; /* текст для disabled */
   --interface-primary: #4c1d95 !important;
   --interface-secondary: #13c296 !important;
   --interface-accent: #9055fd !important;
@@ -57,7 +62,7 @@
   --interface-warning: #fbbf24 !important;
   --interface-error: #f23030 !important;
   --interface-info: #2d68f8 !important;
-  
+
   /* Переменные совместимости с TailGrids */
   --color-primary: var(--interface-primary) !important;
   --color-secondary: var(--interface-secondary) !important;
@@ -70,19 +75,19 @@
 /* Темная тема интерфейса - контрастная и выразительная */
 .redaktus-interface.interface-dark {
   --interface-bg: #111827 !important; /* более темный для контраста */
-  --interface-text: #F3F4F6 !important; /* яркий белый текст */
+  --interface-text: #f3f4f6 !important; /* яркий белый текст */
   --interface-border: #374151 !important; /* четкие границы */
-  --interface-surface: #1F2937 !important; /* контрастный серый */
+  --interface-surface: #1f2937 !important; /* контрастный серый */
   --interface-surface-disabled: #374151 !important; /* фон для disabled */
-  --interface-text-disabled: #6B7280 !important; /* текст для disabled */
-  --interface-primary: #4C1D95 !important; /* сохраняем админский primary */
+  --interface-text-disabled: #6b7280 !important; /* текст для disabled */
+  --interface-primary: #4c1d95 !important; /* сохраняем админский primary */
   --interface-secondary: #10b981 !important;
   --interface-accent: #34d399 !important;
   --interface-success: #34d399 !important;
   --interface-warning: #f59e0b !important;
   --interface-error: #f87171 !important;
   --interface-info: #60a5fa !important;
-  
+
   /* Переменные совместимости с TailGrids */
   --color-primary: var(--interface-primary) !important;
   --color-secondary: var(--interface-secondary) !important;
@@ -97,7 +102,7 @@
   /* Базовые стили админки */
   background-color: var(--interface-bg, #ffffff);
   color: var(--interface-text, #1f2937);
-  
+
   /* Изоляция от глобальных стилей */
   isolation: isolate;
   position: relative;
@@ -187,7 +192,7 @@
   background-color: var(--interface-bg, #ffffff) !important;
   color: var(--interface-text, #1f2937) !important;
   border-color: var(--interface-border, #e5e7eb) !important;
-  
+
   /* Изоляция от канваса */
   isolation: isolate;
   z-index: 20;
@@ -202,14 +207,14 @@
 }
 
 /* Панели в темной теме - на основе Admino */
-.redaktus-interface-panel[data-interface-theme="dark"] {
-  --interface-bg: #1C2434 !important; /* dark-2 из Admino */
-  --interface-text: #8A99AF !important; /* dark-6 из Admino */
-  --interface-border: #2E3A47 !important; /* dark-3 из Admino */
-  --interface-surface: #24303F !important; /* между dark-2 и dark-3 */
-  --interface-surface-disabled: #2E3A47 !important; /* фон для disabled */
-  --interface-text-disabled: #6B7280 !important; /* текст для disabled */
-  --interface-primary: #4C1D95 !important; /* сохраняем админский primary */
+.redaktus-interface-panel[data-interface-theme='dark'] {
+  --interface-bg: #1c2434 !important; /* dark-2 из Admino */
+  --interface-text: #8a99af !important; /* dark-6 из Admino */
+  --interface-border: #2e3a47 !important; /* dark-3 из Admino */
+  --interface-surface: #24303f !important; /* между dark-2 и dark-3 */
+  --interface-surface-disabled: #2e3a47 !important; /* фон для disabled */
+  --interface-text-disabled: #6b7280 !important; /* текст для disabled */
+  --interface-primary: #4c1d95 !important; /* сохраняем админский primary */
   --interface-secondary: #10b981 !important;
   --interface-accent: #34d399 !important;
   --interface-success: #34d399 !important;
@@ -219,13 +224,13 @@
 }
 
 /* Панели в светлой теме - контрастные */
-.redaktus-interface-panel[data-interface-theme="light"] {
+.redaktus-interface-panel[data-interface-theme='light'] {
   --interface-bg: #f8f9fa !important; /* светло-серый фон для отделения от белого канваса */
-  --interface-text: #1F2937 !important; /* более темный для контраста */
-  --interface-border: #D1D5DB !important; /* более заметная граница */
+  --interface-text: #1f2937 !important; /* более темный для контраста */
+  --interface-border: #d1d5db !important; /* более заметная граница */
   --interface-surface: #ffffff !important; /* белый фон для инпутов - контраст на сером */
-  --interface-surface-disabled: #F3F4F6 !important; /* фон для disabled */
-  --interface-text-disabled: #9CA3AF !important; /* текст для disabled */
+  --interface-surface-disabled: #f3f4f6 !important; /* фон для disabled */
+  --interface-text-disabled: #9ca3af !important; /* текст для disabled */
   --interface-primary: #4c1d95 !important;
   --interface-secondary: #13c296 !important;
   --interface-accent: #9055fd !important;
@@ -283,7 +288,7 @@
 }
 
 /* Темная тема - без теней, минималистично */
-.redaktus-interface-panel[data-interface-theme="dark"] {
+.redaktus-interface-panel[data-interface-theme='dark'] {
   background-color: var(--interface-bg) !important;
   color: var(--interface-text) !important;
 }
@@ -321,7 +326,7 @@
 
 /* Активные кнопки */
 .redaktus-interface-panel button:not(.redaktus-canvas *):active,
-.redaktus-interface-panel button[aria-expanded="true"]:not(.redaktus-canvas *) {
+.redaktus-interface-panel button[aria-expanded='true']:not(.redaktus-canvas *) {
   background-color: var(--interface-primary) !important;
   color: #ffffff !important;
 }
@@ -340,7 +345,9 @@
   border: 1px solid transparent !important; /* прозрачная граница по умолчанию */
   border-radius: 6px !important;
   padding: 8px 12px !important;
-  transition: border-color 0.2s ease, background-color 0.2s ease !important;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease !important;
 }
 
 /* Focus для инпутов */
@@ -377,17 +384,17 @@
   --interface-border-width: 1px !important;
   --interface-border-radius: 8px !important;
   --interface-border-style: solid !important;
-  
+
   /* Настройки типографики */
   --interface-font-size: 14px !important;
   --interface-line-height: 1.5 !important;
   --interface-font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
-  
+
   /* Настройки макета */
   --interface-sidebar-width: 280px !important;
   --interface-panel-spacing: 16px !important;
   --interface-content-padding: 24px !important;
-  
+
   /* Настройки анимаций */
   --interface-animation-duration: 0.2s !important;
   --interface-animation-easing: ease !important;
@@ -435,7 +442,7 @@
 }
 
 /* Принудительное уменьшенное движение */
-.redaktus-interface[data-reduced-motion="true"] * {
+.redaktus-interface[data-reduced-motion='true'] * {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;

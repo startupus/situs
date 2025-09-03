@@ -1,14 +1,60 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  FiHome, FiUser, FiUsers, FiSettings, FiInfo, FiMail, FiPhone, FiMapPin,
-  FiMenu, FiArrowRight, FiChevronDown, FiCompass, FiNavigation,
-  FiShoppingCart, FiShoppingBag, FiCreditCard, FiTruck, FiTag, FiDollarSign,
-  FiFileText, FiImage, FiVideo, FiMusic, FiFile, FiFolder, FiEdit,
-  FiShare, FiMessageCircle, FiHeart, FiStar, FiThumbsUp,
-  FiSearch, FiFilter, FiGrid, FiList, FiEye, FiEyeOff,
-  FiCalendar, FiClock, FiBookmark, FiFlag, FiAward, FiTarget,
-  FiTool, FiCpu, FiDatabase, FiServer, FiWifi, FiMonitor,
-  FiX, FiCheck, FiPlus, FiMinus, FiRefreshCw, FiDownload
+import {
+  FiHome,
+  FiUser,
+  FiUsers,
+  FiSettings,
+  FiInfo,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiMenu,
+  FiArrowRight,
+  FiChevronDown,
+  FiCompass,
+  FiNavigation,
+  FiShoppingCart,
+  FiShoppingBag,
+  FiCreditCard,
+  FiTruck,
+  FiTag,
+  FiDollarSign,
+  FiFileText,
+  FiImage,
+  FiVideo,
+  FiMusic,
+  FiFile,
+  FiFolder,
+  FiEdit,
+  FiShare,
+  FiMessageCircle,
+  FiHeart,
+  FiStar,
+  FiThumbsUp,
+  FiSearch,
+  FiFilter,
+  FiGrid,
+  FiList,
+  FiEye,
+  FiEyeOff,
+  FiCalendar,
+  FiClock,
+  FiBookmark,
+  FiFlag,
+  FiAward,
+  FiTarget,
+  FiTool,
+  FiCpu,
+  FiDatabase,
+  FiServer,
+  FiWifi,
+  FiMonitor,
+  FiX,
+  FiCheck,
+  FiPlus,
+  FiMinus,
+  FiRefreshCw,
+  FiDownload,
 } from 'react-icons/fi';
 
 interface IconSelectorProps {
@@ -31,7 +77,12 @@ const AVAILABLE_ICONS: IconData[] = [
   { name: 'FiHome', component: FiHome, category: 'general', keywords: ['дом', 'главная', 'home', 'house'] },
   { name: 'FiUser', component: FiUser, category: 'general', keywords: ['пользователь', 'профиль', 'user', 'profile'] },
   { name: 'FiUsers', component: FiUsers, category: 'general', keywords: ['пользователи', 'команда', 'users', 'team'] },
-  { name: 'FiSettings', component: FiSettings, category: 'general', keywords: ['настройки', 'конфигурация', 'settings', 'config'] },
+  {
+    name: 'FiSettings',
+    component: FiSettings,
+    category: 'general',
+    keywords: ['настройки', 'конфигурация', 'settings', 'config'],
+  },
   { name: 'FiInfo', component: FiInfo, category: 'general', keywords: ['информация', 'справка', 'info', 'help'] },
   { name: 'FiMail', component: FiMail, category: 'general', keywords: ['почта', 'email', 'письмо', 'mail'] },
   { name: 'FiPhone', component: FiPhone, category: 'general', keywords: ['телефон', 'звонок', 'phone', 'call'] },
@@ -39,21 +90,71 @@ const AVAILABLE_ICONS: IconData[] = [
 
   // Навигация
   { name: 'FiMenu', component: FiMenu, category: 'navigation', keywords: ['меню', 'навигация', 'menu', 'navigation'] },
-  { name: 'FiArrowRight', component: FiArrowRight, category: 'navigation', keywords: ['стрелка', 'далее', 'arrow', 'next'] },
-  { name: 'FiChevronDown', component: FiChevronDown, category: 'navigation', keywords: ['вниз', 'раскрыть', 'down', 'expand'] },
-  { name: 'FiCompass', component: FiCompass, category: 'navigation', keywords: ['компас', 'направление', 'compass', 'direction'] },
-  { name: 'FiNavigation', component: FiNavigation, category: 'navigation', keywords: ['навигация', 'маршрут', 'navigation', 'route'] },
+  {
+    name: 'FiArrowRight',
+    component: FiArrowRight,
+    category: 'navigation',
+    keywords: ['стрелка', 'далее', 'arrow', 'next'],
+  },
+  {
+    name: 'FiChevronDown',
+    component: FiChevronDown,
+    category: 'navigation',
+    keywords: ['вниз', 'раскрыть', 'down', 'expand'],
+  },
+  {
+    name: 'FiCompass',
+    component: FiCompass,
+    category: 'navigation',
+    keywords: ['компас', 'направление', 'compass', 'direction'],
+  },
+  {
+    name: 'FiNavigation',
+    component: FiNavigation,
+    category: 'navigation',
+    keywords: ['навигация', 'маршрут', 'navigation', 'route'],
+  },
 
   // E-commerce
-  { name: 'FiShoppingCart', component: FiShoppingCart, category: 'ecommerce', keywords: ['корзина', 'покупки', 'cart', 'shopping'] },
-  { name: 'FiShoppingBag', component: FiShoppingBag, category: 'ecommerce', keywords: ['сумка', 'покупки', 'bag', 'shopping'] },
-  { name: 'FiCreditCard', component: FiCreditCard, category: 'ecommerce', keywords: ['карта', 'оплата', 'payment', 'card'] },
-  { name: 'FiTruck', component: FiTruck, category: 'ecommerce', keywords: ['доставка', 'грузовик', 'delivery', 'truck'] },
+  {
+    name: 'FiShoppingCart',
+    component: FiShoppingCart,
+    category: 'ecommerce',
+    keywords: ['корзина', 'покупки', 'cart', 'shopping'],
+  },
+  {
+    name: 'FiShoppingBag',
+    component: FiShoppingBag,
+    category: 'ecommerce',
+    keywords: ['сумка', 'покупки', 'bag', 'shopping'],
+  },
+  {
+    name: 'FiCreditCard',
+    component: FiCreditCard,
+    category: 'ecommerce',
+    keywords: ['карта', 'оплата', 'payment', 'card'],
+  },
+  {
+    name: 'FiTruck',
+    component: FiTruck,
+    category: 'ecommerce',
+    keywords: ['доставка', 'грузовик', 'delivery', 'truck'],
+  },
   { name: 'FiTag', component: FiTag, category: 'ecommerce', keywords: ['тег', 'ярлык', 'tag', 'label'] },
-  { name: 'FiDollarSign', component: FiDollarSign, category: 'ecommerce', keywords: ['деньги', 'цена', 'money', 'price'] },
+  {
+    name: 'FiDollarSign',
+    component: FiDollarSign,
+    category: 'ecommerce',
+    keywords: ['деньги', 'цена', 'money', 'price'],
+  },
 
   // Контент
-  { name: 'FiFileText', component: FiFileText, category: 'content', keywords: ['документ', 'текст', 'document', 'text'] },
+  {
+    name: 'FiFileText',
+    component: FiFileText,
+    category: 'content',
+    keywords: ['документ', 'текст', 'document', 'text'],
+  },
   { name: 'FiImage', component: FiImage, category: 'content', keywords: ['изображение', 'фото', 'image', 'photo'] },
   { name: 'FiVideo', component: FiVideo, category: 'content', keywords: ['видео', 'фильм', 'video', 'movie'] },
   { name: 'FiMusic', component: FiMusic, category: 'content', keywords: ['музыка', 'аудио', 'music', 'audio'] },
@@ -63,14 +164,24 @@ const AVAILABLE_ICONS: IconData[] = [
 
   // Социальные
   { name: 'FiShare', component: FiShare, category: 'social', keywords: ['поделиться', 'share', 'социальные'] },
-  { name: 'FiMessageCircle', component: FiMessageCircle, category: 'social', keywords: ['сообщение', 'чат', 'message', 'chat'] },
+  {
+    name: 'FiMessageCircle',
+    component: FiMessageCircle,
+    category: 'social',
+    keywords: ['сообщение', 'чат', 'message', 'chat'],
+  },
   { name: 'FiHeart', component: FiHeart, category: 'social', keywords: ['сердце', 'нравится', 'heart', 'like'] },
   { name: 'FiStar', component: FiStar, category: 'social', keywords: ['звезда', 'рейтинг', 'star', 'rating'] },
   { name: 'FiThumbsUp', component: FiThumbsUp, category: 'social', keywords: ['лайк', 'одобрение', 'like', 'approve'] },
 
   // Интерфейс
   { name: 'FiSearch', component: FiSearch, category: 'interface', keywords: ['поиск', 'найти', 'search', 'find'] },
-  { name: 'FiFilter', component: FiFilter, category: 'interface', keywords: ['фильтр', 'сортировка', 'filter', 'sort'] },
+  {
+    name: 'FiFilter',
+    component: FiFilter,
+    category: 'interface',
+    keywords: ['фильтр', 'сортировка', 'filter', 'sort'],
+  },
   { name: 'FiGrid', component: FiGrid, category: 'interface', keywords: ['сетка', 'таблица', 'grid', 'table'] },
   { name: 'FiList', component: FiList, category: 'interface', keywords: ['список', 'перечень', 'list', 'items'] },
   { name: 'FiEye', component: FiEye, category: 'interface', keywords: ['просмотр', 'видеть', 'view', 'see'] },
@@ -79,26 +190,66 @@ const AVAILABLE_ICONS: IconData[] = [
   // Время и события
   { name: 'FiCalendar', component: FiCalendar, category: 'time', keywords: ['календарь', 'дата', 'calendar', 'date'] },
   { name: 'FiClock', component: FiClock, category: 'time', keywords: ['время', 'часы', 'time', 'clock'] },
-  { name: 'FiBookmark', component: FiBookmark, category: 'time', keywords: ['закладка', 'сохранить', 'bookmark', 'save'] },
+  {
+    name: 'FiBookmark',
+    component: FiBookmark,
+    category: 'time',
+    keywords: ['закладка', 'сохранить', 'bookmark', 'save'],
+  },
   { name: 'FiFlag', component: FiFlag, category: 'time', keywords: ['флаг', 'отметка', 'flag', 'mark'] },
-  { name: 'FiAward', component: FiAward, category: 'time', keywords: ['награда', 'достижение', 'award', 'achievement'] },
+  {
+    name: 'FiAward',
+    component: FiAward,
+    category: 'time',
+    keywords: ['награда', 'достижение', 'award', 'achievement'],
+  },
   { name: 'FiTarget', component: FiTarget, category: 'time', keywords: ['цель', 'мишень', 'target', 'goal'] },
 
   // Технические
   { name: 'FiTool', component: FiTool, category: 'technical', keywords: ['инструмент', 'настройка', 'tool', 'config'] },
-  { name: 'FiCpu', component: FiCpu, category: 'technical', keywords: ['процессор', 'производительность', 'cpu', 'performance'] },
-  { name: 'FiDatabase', component: FiDatabase, category: 'technical', keywords: ['база данных', 'данные', 'database', 'data'] },
-  { name: 'FiServer', component: FiServer, category: 'technical', keywords: ['сервер', 'хостинг', 'server', 'hosting'] },
+  {
+    name: 'FiCpu',
+    component: FiCpu,
+    category: 'technical',
+    keywords: ['процессор', 'производительность', 'cpu', 'performance'],
+  },
+  {
+    name: 'FiDatabase',
+    component: FiDatabase,
+    category: 'technical',
+    keywords: ['база данных', 'данные', 'database', 'data'],
+  },
+  {
+    name: 'FiServer',
+    component: FiServer,
+    category: 'technical',
+    keywords: ['сервер', 'хостинг', 'server', 'hosting'],
+  },
   { name: 'FiWifi', component: FiWifi, category: 'technical', keywords: ['интернет', 'сеть', 'wifi', 'network'] },
-  { name: 'FiMonitor', component: FiMonitor, category: 'technical', keywords: ['монитор', 'экран', 'monitor', 'screen'] },
+  {
+    name: 'FiMonitor',
+    component: FiMonitor,
+    category: 'technical',
+    keywords: ['монитор', 'экран', 'monitor', 'screen'],
+  },
 
   // Действия
   { name: 'FiX', component: FiX, category: 'actions', keywords: ['закрыть', 'удалить', 'close', 'delete'] },
   { name: 'FiCheck', component: FiCheck, category: 'actions', keywords: ['готово', 'подтвердить', 'done', 'confirm'] },
   { name: 'FiPlus', component: FiPlus, category: 'actions', keywords: ['добавить', 'создать', 'add', 'create'] },
   { name: 'FiMinus', component: FiMinus, category: 'actions', keywords: ['убрать', 'минус', 'remove', 'minus'] },
-  { name: 'FiRefreshCw', component: FiRefreshCw, category: 'actions', keywords: ['обновить', 'перезагрузить', 'refresh', 'reload'] },
-  { name: 'FiDownload', component: FiDownload, category: 'actions', keywords: ['скачать', 'загрузить', 'download', 'load'] },
+  {
+    name: 'FiRefreshCw',
+    component: FiRefreshCw,
+    category: 'actions',
+    keywords: ['обновить', 'перезагрузить', 'refresh', 'reload'],
+  },
+  {
+    name: 'FiDownload',
+    component: FiDownload,
+    category: 'actions',
+    keywords: ['скачать', 'загрузить', 'download', 'load'],
+  },
 ];
 
 const CATEGORIES: Array<{ key: string; label: string; icon: React.ComponentType<{ size?: number }> }> = [
@@ -114,12 +265,7 @@ const CATEGORIES: Array<{ key: string; label: string; icon: React.ComponentType<
   { key: 'actions', label: 'Действия', icon: FiCheck },
 ];
 
-const IconSelector: React.FC<IconSelectorProps> = ({
-  selectedIcon,
-  selectedLibrary = 'fi',
-  onSelect,
-  onClose
-}) => {
+const IconSelector: React.FC<IconSelectorProps> = ({ selectedIcon, selectedLibrary = 'fi', onSelect, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
@@ -130,15 +276,16 @@ const IconSelector: React.FC<IconSelectorProps> = ({
 
     // Фильтр по категории
     if (selectedCategory !== 'all') {
-      icons = icons.filter(icon => icon.category === selectedCategory);
+      icons = icons.filter((icon) => icon.category === selectedCategory);
     }
 
     // Фильтр по поисковому запросу
     if (searchTerm.trim()) {
       const search = searchTerm.toLowerCase();
-      icons = icons.filter(icon => 
-        icon.name.toLowerCase().includes(search) ||
-        icon.keywords.some(keyword => keyword.toLowerCase().includes(search))
+      icons = icons.filter(
+        (icon) =>
+          icon.name.toLowerCase().includes(search) ||
+          icon.keywords.some((keyword) => keyword.toLowerCase().includes(search)),
       );
     }
 
@@ -159,9 +306,7 @@ const IconSelector: React.FC<IconSelectorProps> = ({
       <div className="bg-white dark:bg-dark-2 rounded-lg w-full max-w-4xl max-h-[90vh] flex flex-col">
         {/* Заголовок */}
         <div className="flex justify-between items-center p-6 border-b border-stroke dark:border-dark-3">
-          <h3 className="text-xl font-semibold text-dark dark:text-white">
-            Выбор иконки для пункта меню
-          </h3>
+          <h3 className="text-xl font-semibold text-dark dark:text-white">Выбор иконки для пункта меню</h3>
           <button
             onClick={onClose}
             className="flex items-center justify-center w-8 h-8 rounded-full text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white hover:bg-gray-2 dark:hover:bg-dark-3 transition-colors"
@@ -174,7 +319,10 @@ const IconSelector: React.FC<IconSelectorProps> = ({
         <div className="p-6 border-b border-stroke dark:border-dark-3">
           {/* Поиск */}
           <div className="relative mb-4">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-color dark:text-dark-6" size={16} />
+            <FiSearch
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-color dark:text-dark-6"
+              size={16}
+            />
             <input
               type="text"
               value={searchTerm}
@@ -211,9 +359,7 @@ const IconSelector: React.FC<IconSelectorProps> = ({
           {filteredIcons.length === 0 ? (
             <div className="text-center py-12">
               <FiSearch size={48} className="mx-auto text-gray-300 dark:text-dark-6 mb-4" />
-              <p className="text-body-color dark:text-dark-6 mb-2">
-                Иконки не найдены
-              </p>
+              <p className="text-body-color dark:text-dark-6 mb-2">Иконки не найдены</p>
               <p className="text-sm text-body-color dark:text-dark-6">
                 Попробуйте изменить поисковый запрос или выбрать другую категорию
               </p>
@@ -234,7 +380,7 @@ const IconSelector: React.FC<IconSelectorProps> = ({
                   title={iconData.name}
                 >
                   {renderIcon(iconData, 20)}
-                  
+
                   {/* Подсказка при наведении */}
                   {hoveredIcon === iconData.name && (
                     <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-dark dark:bg-white text-white dark:text-dark px-2 py-1 rounded text-xs whitespace-nowrap z-10">
@@ -253,25 +399,19 @@ const IconSelector: React.FC<IconSelectorProps> = ({
           <div className="flex items-center justify-between">
             {/* Предварительный просмотр */}
             <div className="flex items-center gap-4">
-              <div className="text-sm text-body-color dark:text-dark-6">
-                Предварительный просмотр:
-              </div>
+              <div className="text-sm text-body-color dark:text-dark-6">Предварительный просмотр:</div>
               {selectedIcon ? (
                 <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-dark-3 rounded-lg">
                   {(() => {
-                    const iconData = AVAILABLE_ICONS.find(icon => icon.name === selectedIcon);
+                    const iconData = AVAILABLE_ICONS.find((icon) => icon.name === selectedIcon);
                     return iconData ? renderIcon(iconData, 20) : <FiHome size={20} />;
                   })()}
-                  <span className="text-sm font-medium text-dark dark:text-white">
-                    {selectedIcon}
-                  </span>
+                  <span className="text-sm font-medium text-dark dark:text-white">{selectedIcon}</span>
                 </div>
               ) : (
                 <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-dark-3 rounded-lg">
                   <FiHome size={20} className="text-gray-400" />
-                  <span className="text-sm text-gray-400">
-                    Иконка не выбрана
-                  </span>
+                  <span className="text-sm text-gray-400">Иконка не выбрана</span>
                 </div>
               )}
             </div>

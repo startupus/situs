@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const OrderSummary4 = () => {
   return (
@@ -8,22 +8,14 @@ const OrderSummary4 = () => {
           <div className="flex flex-wrap justify-between p-5 sm:p-8 lg:p-11">
             <div className="w-full md:w-1/2">
               <div className="mb-6 md:mb-0">
-                <h3 className="mb-[5px] text-2xl font-semibold text-dark dark:text-white">
-                  Order Details
-                </h3>
-                <p className="text-body-color dark:text-dark-6 text-base">
-                  Your order will be with soon
-                </p>
+                <h3 className="mb-[5px] text-2xl font-semibold text-dark dark:text-white">Order Details</h3>
+                <p className="text-body-color dark:text-dark-6 text-base">Your order will be with soon</p>
               </div>
             </div>
             <div className="w-full md:w-1/2">
               <div className="md:text-right">
-                <p className="text-dark dark:text-white text-base font-medium lg:text-lg mb-1">
-                  Order Number: #HD8845
-                </p>
-                <p className="text-body-color dark:text-dark-6 text-base">
-                  Order Placement: 15th March, 2025
-                </p>
+                <p className="text-dark dark:text-white text-base font-medium lg:text-lg mb-1">Order Number: #HD8845</p>
+                <p className="text-body-color dark:text-dark-6 text-base">Order Placement: 15th March, 2025</p>
               </div>
             </div>
           </div>
@@ -35,12 +27,8 @@ const OrderSummary4 = () => {
                   <th className="min-w-[370px] py-3 pl-5 text-base font-medium text-dark dark:text-white sm:pl-8 lg:pl-11">
                     Item
                   </th>
-                  <th className="min-w-[120px] py-3 px-4 text-base font-medium text-dark dark:text-white">
-                    Quantity
-                  </th>
-                  <th className="min-w-[120px] py-3 px-4 text-base font-medium text-dark dark:text-white">
-                    Price
-                  </th>
+                  <th className="min-w-[120px] py-3 px-4 text-base font-medium text-dark dark:text-white">Quantity</th>
+                  <th className="min-w-[120px] py-3 px-4 text-base font-medium text-dark dark:text-white">Price</th>
                   <th className="min-w-[200px] py-3 pr-5 text-right text-base font-medium text-dark dark:text-white sm:pr-8 lg:pr-11">
                     Delivery Expected
                   </th>
@@ -84,9 +72,7 @@ const OrderSummary4 = () => {
             </div>
             <div className="w-full md:w-1/3 lg:w-1/2">
               <div className="mb-6 text-right">
-                <p className="text-base font-semibold text-dark dark:text-white">
-                  Total: $210.00
-                </p>
+                <p className="text-base font-semibold text-dark dark:text-white">Total: $210.00</p>
               </div>
             </div>
           </div>
@@ -98,25 +84,12 @@ const OrderSummary4 = () => {
 
 export default OrderSummary4;
 
-const ProductItem = ({
-  img,
-  link,
-  title,
-  color,
-  size,
-  number,
-  price,
-  deliveryDate,
-}) => {
+const ProductItem = ({ img, link, title, color, size, number, price, deliveryDate }) => {
   return (
     <tr>
       <td className="border-stroke dark:border-dark-3 border-t py-6 pr-4 pl-5 sm:pl-8 lg:pl-11">
         <div className="flex items-center">
-          <img
-            src={img}
-            alt="product"
-            className="mr-6 h-16 w-16 rounded-sm lg:h-20 lg:w-20"
-          />
+          <img src={img} alt="product" className="mr-6 h-16 w-16 rounded-sm lg:h-20 lg:w-20" />
           <div>
             <a
               href={link}
@@ -138,9 +111,7 @@ const ProductItem = ({
         <p className="text-base text-dark dark:text-white">{price}</p>
       </td>
       <td className="border-stroke dark:border-dark-3 border-t py-6 pl-4 pr-5 sm:pr-8 lg:pr-11">
-        <p className="text-body-color dark:text-dark-6 text-right text-base">
-          {deliveryDate}
-        </p>
+        <p className="text-body-color dark:text-dark-6 text-right text-base">{deliveryDate}</p>
       </td>
     </tr>
   );

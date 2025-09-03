@@ -3,7 +3,7 @@ import { mcpClient, SitusMcpClient } from '../mcp/client/mcp-client';
 
 /**
  * React хук для работы с MCP клиентом
- * 
+ *
  * Предоставляет удобный интерфейс для взаимодействия с MCP сервером
  * из React компонентов.
  */
@@ -39,74 +39,98 @@ export function useMcpClient() {
   }, []);
 
   // Выполнение инструмента
-  const callTool = useCallback(async (toolName: string, arguments_: Record<string, any>) => {
-    if (!isConnected) {
-      throw new Error('Клиент не подключен к MCP серверу');
-    }
+  const callTool = useCallback(
+    async (toolName: string, arguments_: Record<string, any>) => {
+      if (!isConnected) {
+        throw new Error('Клиент не подключен к MCP серверу');
+      }
 
-    try {
-      setIsLoading(true);
-      setError(null);
-      const result = await mcpClient.callTool(toolName, arguments_);
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : `Ошибка выполнения инструмента ${toolName}`;
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [isConnected]);
+      try {
+        setIsLoading(true);
+        setError(null);
+        const result = await mcpClient.callTool(toolName, arguments_);
+        return result;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : `Ошибка выполнения инструмента ${toolName}`;
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [isConnected],
+  );
 
   // Получение ресурса
-  const readResource = useCallback(async (uri: string) => {
-    if (!isConnected) {
-      throw new Error('Клиент не подключен к MCP серверу');
-    }
+  const readResource = useCallback(
+    async (uri: string) => {
+      if (!isConnected) {
+        throw new Error('Клиент не подключен к MCP серверу');
+      }
 
-    try {
-      setIsLoading(true);
-      setError(null);
-      const result = await mcpClient.readResource(uri);
-      return result;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : `Ошибка получения ресурса ${uri}`;
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [isConnected]);
+      try {
+        setIsLoading(true);
+        setError(null);
+        const result = await mcpClient.readResource(uri);
+        return result;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : `Ошибка получения ресурса ${uri}`;
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [isConnected],
+  );
 
   // Создание проекта
-  const createProject = useCallback(async (name: string, description?: string, template?: string) => {
-    return callTool('create-project', { name, description, template });
-  }, [callTool]);
+  const createProject = useCallback(
+    async (name: string, description?: string, template?: string) => {
+      return callTool('create-project', { name, description, template });
+    },
+    [callTool],
+  );
 
   // Получение списка проектов
-  const listProjects = useCallback(async (limit = 10, offset = 0) => {
-    return callTool('list-projects', { limit, offset });
-  }, [callTool]);
+  const listProjects = useCallback(
+    async (limit = 10, offset = 0) => {
+      return callTool('list-projects', { limit, offset });
+    },
+    [callTool],
+  );
 
   // Обновление проекта
-  const updateProject = useCallback(async (projectId: string, name?: string, description?: string) => {
-    return callTool('update-project', { projectId, name, description });
-  }, [callTool]);
+  const updateProject = useCallback(
+    async (projectId: string, name?: string, description?: string) => {
+      return callTool('update-project', { projectId, name, description });
+    },
+    [callTool],
+  );
 
   // Получение документации проекта
-  const getProjectDocs = useCallback(async (projectId: string) => {
-    return readResource(`situs://docs/project/${projectId}`);
-  }, [readResource]);
+  const getProjectDocs = useCallback(
+    async (projectId: string) => {
+      return readResource(`situs://docs/project/${projectId}`);
+    },
+    [readResource],
+  );
 
   // Получение шаблонов компонентов
-  const getComponentTemplates = useCallback(async (category: string) => {
-    return readResource(`situs://templates/components/${category}`);
-  }, [readResource]);
+  const getComponentTemplates = useCallback(
+    async (category: string) => {
+      return readResource(`situs://templates/components/${category}`);
+    },
+    [readResource],
+  );
 
   // Получение конфигурации темы
-  const getThemeConfig = useCallback(async (themeName: string) => {
-    return readResource(`situs://config/theme/${themeName}`);
-  }, [readResource]);
+  const getThemeConfig = useCallback(
+    async (themeName: string) => {
+      return readResource(`situs://config/theme/${themeName}`);
+    },
+    [readResource],
+  );
 
   // Получение списка инструментов
   const listTools = useCallback(async () => {
@@ -176,7 +200,7 @@ export function useMcpClient() {
   // Автоматическое подключение при монтировании компонента
   useEffect(() => {
     connect();
-    
+
     // Отключение при размонтировании
     return () => {
       disconnect();
@@ -188,26 +212,26 @@ export function useMcpClient() {
     isConnected,
     isLoading,
     error,
-    
+
     // Методы подключения
     connect,
     disconnect,
     clearError,
-    
+
     // Основные методы
     callTool,
     readResource,
-    
+
     // Методы для проектов
     createProject,
     listProjects,
     updateProject,
-    
+
     // Методы для ресурсов
     getProjectDocs,
     getComponentTemplates,
     getThemeConfig,
-    
+
     // Методы для получения списков
     listTools,
     listResources,

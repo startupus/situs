@@ -335,7 +335,7 @@ const VerticalNavbar7 = () => {
           <form className="relative mb-6">
             <input
               type="text"
-              className="placeholder-body-color h-10 w-full rounded-sm border-[.5px] border-[#E7E7E730] bg-white/10 pl-10 pr-3 text-sm font-medium text-white outline-hidden focus:border-white focus:bg-transparent"
+              className="outline-hidden h-10 w-full rounded-sm border-[.5px] border-[#E7E7E730] bg-white/10 pl-10 pr-3 text-sm font-medium text-white placeholder-body-color focus:border-white focus:bg-transparent"
               placeholder="Search"
             />
             <button className="absolute left-3 top-1/2 -translate-y-1/2">
@@ -370,12 +370,8 @@ const VerticalNavbar7 = () => {
               />
             </div>
             <div>
-              <h6 className="text-base font-medium text-white/80">
-                Musharof
-              </h6>
-              <p className="text-sm text-white/50">
-                hello@tailgrids.com
-              </p>
+              <h6 className="text-base font-medium text-white/80">Musharof</h6>
+              <p className="text-sm text-white/50">hello@tailgrids.com</p>
             </div>
           </div>
         </div>
@@ -434,7 +430,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`${
           dropdownOpen ? "bg-white/10 text-white" : ""
-        } relative flex w-full items-center rounded py-[10px] px-[15px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white`}
+        } relative flex w-full items-center rounded px-[15px] py-[10px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white`}
       >
         <span className="mr-[10px]">{icon}</span>
         {menu}
@@ -447,7 +443,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
           <span
             className={`${
               dropdownOpen === true ? "rotate-0" : "rotate-180"
-            } absolute top-1/2 right-10 -translate-y-1/2`}
+            } absolute right-10 top-1/2 -translate-y-1/2`}
           >
             <svg
               width="20"
@@ -470,7 +466,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         onBlur={() => setDropdownOpen(false)}
         className={`${dropdownOpen === true ? "block" : "hidden"} `}
       >
-        <ul className="py-1 px-5">{children}</ul>
+        <ul className="px-5 py-1">{children}</ul>
       </div>
     </li>
   );
@@ -481,7 +477,7 @@ const DropdownItem = ({ link, menu }) => {
     <li>
       <a
         href={link}
-        className="flex w-full items-center rounded-sm py-[10px] px-[15px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white"
+        className="flex w-full items-center rounded-sm px-[15px] py-[10px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white"
       >
         {menu}
       </a>

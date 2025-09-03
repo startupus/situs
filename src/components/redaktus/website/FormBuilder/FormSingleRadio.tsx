@@ -1,25 +1,18 @@
-import * as React from 'react'
-import * as types from 'redaktus/types'
-import { UseFormRegister } from 'react-hook-form'
-import blockNames from '../blockNames'
+import * as React from 'react';
+import * as types from 'redaktus/types';
+import { UseFormRegister } from 'react-hook-form';
+import blockNames from '../blockNames';
 
 export interface FormSingleRadioProps {
-  register: UseFormRegister<any>
-  fieldName?: string
-  label: string
-  value: string
-  isRequired: boolean
-  key: string
+  register: UseFormRegister<any>;
+  fieldName?: string;
+  label: string;
+  value: string;
+  isRequired: boolean;
+  key: string;
 }
 
-const FormSingleRadio: types.Brick<FormSingleRadioProps> = ({
-  register,
-  fieldName,
-  label,
-  value,
-  isRequired,
-  key,
-}) => {
+const FormSingleRadio: types.Brick<FormSingleRadioProps> = ({ register, fieldName, label, value, isRequired, key }) => {
   return (
     <label className="block">
       <input
@@ -30,8 +23,8 @@ const FormSingleRadio: types.Brick<FormSingleRadioProps> = ({
       />
       <span className="ml-2 text-gray-800 dark:text-gray-50">{label}</span>
     </label>
-  )
-}
+  );
+};
 
 FormSingleRadio.schema = {
   name: blockNames.FormSingleRadio,
@@ -51,6 +44,6 @@ FormSingleRadio.schema = {
     { name: 'label', type: types.SideEditPropType.Text, label: 'Label' },
     { name: 'value', type: types.SideEditPropType.Text, label: 'Value' },
   ],
-}
+};
 
-export default FormSingleRadio
+export default FormSingleRadio;

@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const Popover3 = () => {
   return (
     <section className="min-h-screen bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
       <div className="mx-auto px-4 lg:container">
         <div className="group relative block pt-2 lg:inline-block">
-          <a
-            href="/#"
-            className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline"
-          >
+          <a href="/#" className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline">
             Popover Text
           </a>
           <div className="invisible absolute top-full left-0 w-full opacity-0 group-hover:visible group-hover:opacity-100 sm:w-[530px] lg:top-0 lg:left-full">
@@ -29,9 +26,8 @@ const Popover3 = () => {
                 Do you want to add this?
               </h3>
               <p className="mb-[14px] text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-                facilisis congue justo nec facilisis. Quisque quis augue ipsum.
-                Aliquam suscipit dui ac dui commodo.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis congue justo nec facilisis.
+                Quisque quis augue ipsum. Aliquam suscipit dui ac dui commodo.
               </p>
               <p className="mb-7 text-base text-body-color dark:text-dark-6">
                 Quisque quis augue ipsum. Aliquam suscipit dui ac dui.

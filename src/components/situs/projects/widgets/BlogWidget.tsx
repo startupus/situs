@@ -37,5 +37,3 @@ const BlogWidget: React.FC<BlogWidgetProps> = () => {
 };
 
 export default BlogWidget;
-
-

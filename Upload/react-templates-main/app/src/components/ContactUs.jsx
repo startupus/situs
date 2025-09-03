@@ -29,15 +29,15 @@ const formItems = [
 const ContactUs = () => {
   return (
     <>
-      <section className="dark:bg-dark relative z-40 bg-white py-20 lg:py-[120px]">
+      <section className="relative z-40 bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
-          <div className="shadow-contact-3 dark:bg-dark-2 relative bg-white">
+          <div className="relative bg-white shadow-contact-3 dark:bg-dark-2">
             <div className="-mx-4 flex flex-row-reverse flex-wrap items-stretch lg:flex-row">
               <div className="w-full px-4 lg:w-4/12">
-                <div className="bg-primary relative z-40 flex h-full w-full items-end overflow-hidden 2xl:max-w-[370px]">
+                <div className="relative z-40 flex h-full w-full items-end overflow-hidden bg-primary 2xl:max-w-[370px]">
                   <div>
-                    <div className="top-[120px] -left-8 p-10 lg:absolute lg:-rotate-90 lg:p-0">
-                      <h2 className="inline-flex items-center text-xl font-medium text-white uppercase">
+                    <div className="-left-8 top-[120px] p-10 lg:absolute lg:-rotate-90 lg:p-0">
+                      <h2 className="inline-flex items-center text-xl font-medium uppercase text-white">
                         <span className="mr-2 inline-block h-[2px] w-6 bg-white"></span>
                         CONTACT US
                       </h2>
@@ -105,7 +105,7 @@ const ContactUs = () => {
                     </div>
                   </div>
                   <div>
-                    <span className="absolute top-2 right-2 z-[-1]">
+                    <span className="absolute right-2 top-2 z-[-1]">
                       <ShapeEleven />
                     </span>
                     <span className="absolute bottom-0 left-0 z-[-1]">
@@ -120,10 +120,10 @@ const ContactUs = () => {
 
               <div className="w-full px-4 lg:w-8/12">
                 <div className="p-10 md:p-[70px] lg:p-14 xl:p-[70px]">
-                  <h2 className="text-dark mb-5 text-[28px] font-bold dark:text-white">
+                  <h2 className="mb-5 text-[28px] font-bold text-dark dark:text-white">
                     Get In Touch With Us
                   </h2>
-                  <p className="text-body-color dark:text-dark-6 mb-[60px] max-w-[490px] text-base">
+                  <p className="mb-[60px] max-w-[490px] text-base text-body-color dark:text-dark-6">
                     There are many variations of passages of Lorem Ipsum
                     available but the majority have suffered alteration in some
                     form.
@@ -138,7 +138,7 @@ const ContactUs = () => {
                               <textarea
                                 rows="4"
                                 placeholder={item.placeholder}
-                                className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary placeholder:text-body-color/50 dark:placeholder:text-body-color w-full resize-none border-b bg-transparent py-4 text-sm outline-hidden focus-visible:shadow-none"
+                                className="outline-hidden w-full resize-none border-b border-stroke bg-transparent py-4 text-sm text-body-color placeholder:text-body-color/50 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 dark:placeholder:text-body-color dark:focus:border-primary"
                               ></textarea>
                             </div>
                           </div>
@@ -148,7 +148,7 @@ const ContactUs = () => {
                               <input
                                 type={item.type}
                                 placeholder={item.placeholder}
-                                className="border-stroke text-body-color placeholder:text-body-color/50 focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary dark:placeholder:text-body-color w-full border-b bg-transparent py-4 text-sm outline-hidden focus-visible:shadow-none"
+                                className="outline-hidden w-full border-b border-stroke bg-transparent py-4 text-sm text-body-color placeholder:text-body-color/50 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 dark:placeholder:text-body-color dark:focus:border-primary"
                               />
                             </div>
                           </div>
@@ -158,7 +158,7 @@ const ContactUs = () => {
                       <div className="w-full px-4">
                         <button
                           type="submit"
-                          className="bg-primary hover:bg-primary/90 rounded-sm px-9 py-3 text-base font-medium text-white transition"
+                          className="rounded-sm bg-primary px-9 py-3 text-base font-medium text-white transition hover:bg-primary/90"
                         >
                           Send Message
                         </button>

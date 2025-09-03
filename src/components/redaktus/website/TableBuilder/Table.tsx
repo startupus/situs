@@ -1,13 +1,13 @@
-import React from 'react'
-import { Repeater } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-import Container from '../layout/Container'
-import Section from '../layout/Section'
-import { BackgroundColorsSideEditProps } from '../LayoutSideProps'
+import React from 'react';
+import { Repeater } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
+import Container from '../layout/Container';
+import Section from '../layout/Section';
+import { BackgroundColorsSideEditProps } from '../LayoutSideProps';
 
 export interface TableProps {
-  bg?: { color: string; className: string }
+  bg?: { color: string; className: string };
 }
 
 const Table: types.Brick<TableProps> = ({ bg }) => {
@@ -19,8 +19,8 @@ const Table: types.Brick<TableProps> = ({ bg }) => {
         </table>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 Table.schema = {
   name: blockNames.Table,
@@ -39,7 +39,8 @@ Table.schema = {
           {
             cellText: 'Cell text default',
             text: 'Cell',
-          }],
+          },
+        ],
       },
       {
         cells: [
@@ -50,7 +51,8 @@ Table.schema = {
           {
             cellText: 'Cell text default',
             text: 'Cell',
-          }],
+          },
+        ],
       },
       {
         cells: [
@@ -61,8 +63,10 @@ Table.schema = {
           {
             cellText: 'Cell text default',
             text: 'Cell',
-          }],
-      }],
+          },
+        ],
+      },
+    ],
   }),
 
   repeaterItems: [
@@ -71,11 +75,11 @@ Table.schema = {
       label: 'Rows',
       itemType: blockNames.TableRow,
       min: 1,
-    }],
+    },
+  ],
 
   // Sidebar Edit controls for props
-  sideEditProps: [
-    BackgroundColorsSideEditProps],
-}
+  sideEditProps: [BackgroundColorsSideEditProps],
+};
 
-export default Table
+export default Table;

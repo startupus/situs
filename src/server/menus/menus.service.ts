@@ -24,7 +24,7 @@ export interface MenuLookup {
 export class MenusService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly realtimeEvents: RealtimeEventsService
+    private readonly realtimeEvents: RealtimeEventsService,
   ) {}
 
   // ========== MenuType CRUD ==========
@@ -32,7 +32,7 @@ export class MenusService {
   async createMenuType(dto: CreateMenuTypeDto): Promise<MenuType> {
     // Проверяем уникальность name в рамках проекта
     const existing = await this.prisma.menuType.findFirst({
-      where: { projectId: dto.projectId, name: dto.name }
+      where: { projectId: dto.projectId, name: dto.name },
     });
 
     if (existing) {
@@ -40,7 +40,7 @@ export class MenusService {
     }
 
     const menuType = await this.prisma.menuType.create({
-      data: dto
+      data: dto,
     });
 
     // Публикуем SSE событие
@@ -67,9 +67,9 @@ export class MenusService {
     return this.prisma.menuType.findMany({
       where: { projectId },
       include: {
-        _count: { select: { items: true } }
+        _count: { select: { items: true } },
       },
-      orderBy: { createdAt: 'asc' }
+      orderBy: { createdAt: 'asc' },
     });
   }
 
@@ -78,13 +78,9 @@ export class MenusService {
       where: { id },
       include: {
         items: {
-          orderBy: [
-            { level: 'asc' },
-            { orderIndex: 'asc' },
-            { title: 'asc' }
-          ]
-        }
-      }
+          orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }, { title: 'asc' }],
+        },
+      },
     });
 
     if (!menuType) {
@@ -101,11 +97,11 @@ export class MenusService {
     // Проверяем уникальность name если он изменяется
     if (dto.name) {
       const existing = await this.prisma.menuType.findFirst({
-        where: { 
+        where: {
           name: dto.name,
           projectId: dto.projectId || undefined,
-          NOT: { id }
-        }
+          NOT: { id },
+        },
       });
 
       if (existing) {
@@ -115,7 +111,7 @@ export class MenusService {
 
     const menuType = await this.prisma.menuType.update({
       where: { id },
-      data: dto
+      data: dto,
     });
 
     // Публикуем SSE событие
@@ -130,7 +126,7 @@ export class MenusService {
 
     // Удаляем (каскадно удалятся все пункты меню)
     await this.prisma.menuType.delete({
-      where: { id }
+      where: { id },
     });
 
     // Публикуем SSE событие
@@ -146,16 +142,13 @@ export class MenusService {
     menuTypeId: string,
     properties: string[] = [],
     values: any[] = [],
-    language?: string
+    language?: string,
   ): Promise<MenuItem[]> {
     const where: any = { menuTypeId, isPublished: true };
 
     // Фильтрация по language (как в Joomla)
     if (language && language !== '*') {
-      where.OR = [
-        { language: '*' },
-        { language }
-      ];
+      where.OR = [{ language: '*' }, { language }];
     }
 
     // Мультипараметровая фильтрация (как в Joomla)
@@ -175,25 +168,18 @@ export class MenusService {
       include: {
         children: {
           where: { isPublished: true },
-          orderBy: [{ orderIndex: 'asc' }, { title: 'asc' }]
+          orderBy: [{ orderIndex: 'asc' }, { title: 'asc' }],
         },
-        parent: true
+        parent: true,
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' },
-        { title: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }, { title: 'asc' }],
     });
   }
 
   /**
    * Получение активного пункта меню (аналог Joomla $menu->getActive())
    */
-  async getActiveMenuItem(
-    menuTypeId: string,
-    currentPath: string
-  ): Promise<MenuItem | null> {
+  async getActiveMenuItem(menuTypeId: string, currentPath: string): Promise<MenuItem | null> {
     // Попробуем найти точное совпадение по пути
     const exactMatch = await this.prisma.menuItem.findFirst({
       where: {
@@ -202,8 +188,8 @@ export class MenusService {
         OR: [
           { externalUrl: currentPath },
           // Логика сопоставления с component + view + targetId
-        ]
-      }
+        ],
+      },
     });
 
     if (exactMatch) return exactMatch;
@@ -216,28 +202,22 @@ export class MenusService {
   /**
    * Получение пунктов меню с проверкой прав доступа
    */
-  async getAuthorizedItems(
-    menuTypeId: string,
-    userAccessLevels: AccessLevel[]
-  ): Promise<MenuItem[]> {
+  async getAuthorizedItems(menuTypeId: string, userAccessLevels: AccessLevel[]): Promise<MenuItem[]> {
     return this.prisma.menuItem.findMany({
       where: {
         menuTypeId,
         isPublished: true,
-        accessLevel: { in: userAccessLevels }
+        accessLevel: { in: userAccessLevels },
       },
       include: {
         children: {
-          where: { 
+          where: {
             isPublished: true,
-            accessLevel: { in: userAccessLevels }
-          }
-        }
+            accessLevel: { in: userAccessLevels },
+          },
+        },
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
   }
 
@@ -249,7 +229,7 @@ export class MenusService {
     const items = await this.getItems(menuTypeId, ['language'], [language]);
     const lookup: MenuLookup = {};
 
-    items.forEach(item => {
+    items.forEach((item) => {
       if (item.component && item.view) {
         // Ключ в формате Component:View[:Layout], как ожидает e2e
         const keyBase = `${item.component}:${item.view}`;
@@ -272,7 +252,7 @@ export class MenusService {
   async createMenuItem(dto: CreateMenuItemDto): Promise<MenuItem> {
     // Проверяем уникальность alias в рамках типа меню
     const existing = await this.prisma.menuItem.findFirst({
-      where: { menuTypeId: dto.menuTypeId, alias: dto.alias }
+      where: { menuTypeId: dto.menuTypeId, alias: dto.alias },
     });
 
     if (existing) {
@@ -282,7 +262,7 @@ export class MenusService {
     // Проверяем существование родительского пункта
     if (dto.parentId) {
       const parent = await this.prisma.menuItem.findUnique({
-        where: { id: dto.parentId }
+        where: { id: dto.parentId },
       });
 
       if (!parent) {
@@ -344,8 +324,8 @@ export class MenusService {
       include: {
         children: true,
         parent: true,
-        menuType: true
-      }
+        menuType: true,
+      },
     });
 
     // Публикуем SSE событие
@@ -354,12 +334,7 @@ export class MenusService {
     return menuItem;
   }
 
-  async findMenuItems(
-    menuTypeId?: string,
-    language?: string,
-    level?: number,
-    parentId?: string
-  ): Promise<MenuItem[]> {
+  async findMenuItems(menuTypeId?: string, language?: string, level?: number, parentId?: string): Promise<MenuItem[]> {
     const where: any = {};
 
     if (menuTypeId) where.menuTypeId = menuTypeId;
@@ -368,10 +343,7 @@ export class MenusService {
 
     // Фильтрация по языку
     if (language && language !== '*') {
-      where.OR = [
-        { language: '*' },
-        { language }
-      ];
+      where.OR = [{ language: '*' }, { language }];
     }
 
     return this.prisma.menuItem.findMany({
@@ -379,13 +351,9 @@ export class MenusService {
       include: {
         children: true,
         parent: true,
-        menuType: true
+        menuType: true,
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' },
-        { title: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }, { title: 'asc' }],
     });
   }
 
@@ -395,8 +363,8 @@ export class MenusService {
       include: {
         children: true,
         parent: true,
-        menuType: true
-      }
+        menuType: true,
+      },
     });
 
     if (!menuItem) {
@@ -413,11 +381,11 @@ export class MenusService {
     // Проверяем уникальность alias если он изменяется
     if (dto.alias && dto.menuTypeId) {
       const existing = await this.prisma.menuItem.findFirst({
-        where: { 
+        where: {
           menuTypeId: dto.menuTypeId,
           alias: dto.alias,
-          NOT: { id }
-        }
+          NOT: { id },
+        },
       });
 
       if (existing) {
@@ -431,8 +399,8 @@ export class MenusService {
       include: {
         children: true,
         parent: true,
-        menuType: true
-      }
+        menuType: true,
+      },
     });
 
     // Публикуем SSE событие
@@ -445,10 +413,10 @@ export class MenusService {
     // Проверяем существование и получаем с дочерними элементами
     const menuItem = await this.prisma.menuItem.findUnique({
       where: { id },
-      include: { 
+      include: {
         children: true,
-        menuType: true // Добавляем для SSE события
-      }
+        menuType: true, // Добавляем для SSE события
+      },
     });
 
     if (!menuItem) {
@@ -465,7 +433,7 @@ export class MenusService {
     const menuTypeId = menuItem.menuTypeId;
 
     await this.prisma.menuItem.delete({
-      where: { id }
+      where: { id },
     });
 
     // Публикуем SSE событие
@@ -481,7 +449,7 @@ export class MenusService {
     // Получаем первый пункт для определения projectId и menuTypeId
     const firstItem = await this.prisma.menuItem.findUnique({
       where: { id: dto.items[0]?.id },
-      include: { menuType: true }
+      include: { menuType: true },
     });
 
     if (!firstItem) {
@@ -490,29 +458,22 @@ export class MenusService {
 
     // Обновляем все пункты в рамках одной транзакции
     await this.prisma.$transaction(
-      dto.items.map(item => 
+      dto.items.map((item) =>
         this.prisma.menuItem.update({
           where: { id: item.id },
           data: {
             orderIndex: item.orderIndex,
             level: item.level,
-            parentId: item.parentId
-          }
-        })
-      )
+            parentId: item.parentId,
+          },
+        }),
+      ),
     );
 
     // Публикуем SSE событие о изменении порядка
-    this.realtimeEvents.publishMenuItemsReordered(
-      firstItem.menuType.projectId, 
-      firstItem.menuTypeId, 
-      dto.items
-    );
+    this.realtimeEvents.publishMenuItemsReordered(firstItem.menuType.projectId, firstItem.menuTypeId, dto.items);
 
     // Также публикуем событие об изменении структуры
-    this.realtimeEvents.publishMenuStructureChanged(
-      firstItem.menuType.projectId, 
-      firstItem.menuTypeId
-    );
+    this.realtimeEvents.publishMenuStructureChanged(firstItem.menuType.projectId, firstItem.menuTypeId);
   }
 }

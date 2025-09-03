@@ -1,11 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
   },
   define: {
     // Исправляем ошибку process is not defined
@@ -17,9 +17,9 @@ export default defineConfig({
       'redaktus/frontend': '/src/components/redaktus/frontend.ts',
       'redaktus/core': '/src/components/redaktus/core.ts',
       'redaktus/types': '/src/components/redaktus/types-only.ts',
-      'redaktus': '/src/components/redaktus/index.ts',
-      'website': '/src/components/redaktus/website',
-      'blog': '/src/components/redaktus/blog',
+      redaktus: '/src/components/redaktus/index.ts',
+      website: '/src/components/redaktus/website',
+      blog: '/src/components/redaktus/blog',
       // Next.js заглушки для совместимости (поскольку мы не в Next.js)
       'next/head': '/src/components/redaktus/next-shims/head.tsx',
       'next/link': '/src/components/redaktus/next-shims/link.tsx',
@@ -42,7 +42,7 @@ export default defineConfig({
         target: 'http://localhost:3002',
         changeOrigin: true,
         secure: false,
-      }
+      },
     },
     watch: {
       usePolling: true,
@@ -53,8 +53,8 @@ export default defineConfig({
         '**/docs/archives/**',
         '**/docs/templates-archive/**',
         '**/logs/**',
-        '**/backend/**'
-      ]
+        '**/backend/**',
+      ],
     },
   },
   build: {
@@ -62,10 +62,6 @@ export default defineConfig({
     sourcemap: true,
   },
   optimizeDeps: {
-    exclude: [
-      'react-app-polyfill',
-      '@reach/router',
-      'react-bricks-ui'
-    ]
-  }
-}) 
+    exclude: ['react-app-polyfill', '@reach/router', 'react-bricks-ui'],
+  },
+});

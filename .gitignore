@@ -26,3 +26,6 @@ server.dev.log
 # Playwright / E2E artifacts
 test-results/
 playwright-report/
+.env
+prisma/dev.db
+prisma/prisma/dev.db

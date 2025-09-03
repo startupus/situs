@@ -58,8 +58,8 @@ const Navbar = () => {
 
   return (
     <header
-      className={`dark:bg-dark sticky top-0 left-0 z-50 w-full bg-white lg:overflow-hidden ${
-        sticky && "dark:bg-dark/80 bg-white/80 shadow-xs backdrop-blur-xs"
+      className={`sticky left-0 top-0 z-50 w-full bg-white dark:bg-dark lg:overflow-hidden ${
+        sticky && "shadow-xs backdrop-blur-xs bg-white/80 dark:bg-dark/80"
       }`}
     >
       <div className="container mx-auto">
@@ -68,31 +68,31 @@ const Navbar = () => {
             <Link to="/" className="block w-full">
               <img src={logoWhite} alt="logo" className="w-full" />
             </Link>
-            <span className="bg-primary absolute top-1/2 right-0 z-[-1] h-full w-[1000%] -translate-y-1/2 lg:h-[150%]"></span>
+            <span className="absolute right-0 top-1/2 z-[-1] h-full w-[1000%] -translate-y-1/2 bg-primary lg:h-[150%]"></span>
           </div>
 
           <div className="flex w-full items-center justify-between px-4">
             <div ref={navRef}>
               <button
                 onClick={handleNavbarToggle}
-                className={`ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden ${
+                className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
                   navbarOpen ? "navbarTogglerActive" : ""
                 }`}
               >
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
               </button>
 
               <nav
-                className={`dark:bg-dark-2 absolute top-full right-4 z-20 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none lg:dark:bg-transparent ${navbarOpen ? "" : "hidden"}`}
+                className={`absolute right-4 top-full z-20 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none lg:dark:bg-transparent ${navbarOpen ? "" : "hidden"}`}
               >
                 <ul className="block lg:flex">
                   {navList.map((item, index) => (
                     <li key={index}>
                       <Link
                         to={item.link}
-                        className="text-dark hover:border-primary hover:text-primary flex border-transparent py-2 text-base font-medium lg:ml-10 lg:inline-flex lg:border-t-2 lg:py-7 dark:text-white"
+                        className="flex border-transparent py-2 text-base font-medium text-dark hover:border-primary hover:text-primary dark:text-white lg:ml-10 lg:inline-flex lg:border-t-2 lg:py-7"
                       >
                         {item.text}
                       </Link>
@@ -104,7 +104,7 @@ const Navbar = () => {
 
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <div className="flex items-center">
-                <div className="bg-primary flex h-11 min-w-[44px] items-center justify-center rounded-full text-white">
+                <div className="flex h-11 min-w-[44px] items-center justify-center rounded-full bg-primary text-white">
                   <svg
                     width="20"
                     height="20"
@@ -118,7 +118,7 @@ const Navbar = () => {
                   <span className="block text-sm font-medium dark:text-white">
                     Call Us
                   </span>
-                  <h6 className="text-dark text-base font-semibold dark:text-white">
+                  <h6 className="text-base font-semibold text-dark dark:text-white">
                     360-779-2228
                   </h6>
                 </div>

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Tab10 = () => {
-  const [open, setOpen] = useState("profile");
+  const [open, setOpen] = useState('profile');
 
   const handleTabOpen = (tabCategory) => {
     setOpen(tabCategory);
@@ -17,11 +17,9 @@ const Tab10 = () => {
                 <div className="-mx-5 flex flex-col md:flex-row">
                   <div className="px-5">
                     <button
-                      onClick={() => handleTabOpen("profile")}
+                      onClick={() => handleTabOpen('profile')}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
-                        open === "profile"
-                          ? "text-primary border-primary"
-                          : "border-stroke md:border-transparent"
+                        open === 'profile' ? 'text-primary border-primary' : 'border-stroke md:border-transparent'
                       }`}
                     >
                       Profile
@@ -29,11 +27,9 @@ const Tab10 = () => {
                   </div>
                   <div className="px-5">
                     <button
-                      onClick={() => handleTabOpen("password")}
+                      onClick={() => handleTabOpen('password')}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
-                        open === "password"
-                          ? "text-primary border-primary"
-                          : "border-stroke md:border-transparent"
+                        open === 'password' ? 'text-primary border-primary' : 'border-stroke md:border-transparent'
                       }`}
                     >
                       Password
@@ -41,11 +37,9 @@ const Tab10 = () => {
                   </div>
                   <div className="px-5">
                     <button
-                      onClick={() => handleTabOpen("team")}
+                      onClick={() => handleTabOpen('team')}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
-                        open === "team"
-                          ? "text-primary border-primary"
-                          : "border-stroke md:border-transparent"
+                        open === 'team' ? 'text-primary border-primary' : 'border-stroke md:border-transparent'
                       }`}
                     >
                       Team
@@ -53,11 +47,9 @@ const Tab10 = () => {
                   </div>
                   <div className="px-5">
                     <button
-                      onClick={() => handleTabOpen("notification")}
+                      onClick={() => handleTabOpen('notification')}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
-                        open === "notification"
-                          ? "text-primary border-primary"
-                          : "border-stroke md:border-transparent"
+                        open === 'notification' ? 'text-primary border-primary' : 'border-stroke md:border-transparent'
                       }`}
                     >
                       Notification
@@ -65,11 +57,9 @@ const Tab10 = () => {
                   </div>
                   <div className="px-5">
                     <button
-                      onClick={() => handleTabOpen("integration")}
+                      onClick={() => handleTabOpen('integration')}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
-                        open === "integration"
-                          ? "text-primary border-primary"
-                          : "border-stroke md:border-transparent"
+                        open === 'integration' ? 'text-primary border-primary' : 'border-stroke md:border-transparent'
                       }`}
                     >
                       Integration
@@ -77,11 +67,9 @@ const Tab10 = () => {
                   </div>
                   <div className="px-5">
                     <button
-                      onClick={() => handleTabOpen("license")}
+                      onClick={() => handleTabOpen('license')}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
-                        open === "license"
-                          ? "text-primary border-primary"
-                          : "border-stroke md:border-transparent"
+                        open === 'license' ? 'text-primary border-primary' : 'border-stroke md:border-transparent'
                       }`}
                     >
                       License
@@ -134,13 +122,7 @@ export default Tab10;
 const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
-      <div
-        className={`mt-8 text-base text-body-color ${
-          open === tabCategory ? "block" : "hidden"
-        } `}
-      >
-        {details}
-      </div>
+      <div className={`mt-8 text-base text-body-color ${open === tabCategory ? 'block' : 'hidden'} `}>{details}</div>
     </div>
   );
 };

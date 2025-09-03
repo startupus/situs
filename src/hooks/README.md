@@ -17,40 +17,38 @@
 ### Использование:
 
 ```tsx
-import { useTheme } from '../hooks/useTheme'
+import { useTheme } from '../hooks/useTheme';
 
 function MyComponent() {
-  const { 
-    theme,           // 'light' | 'dark' | 'system'
-    resolvedTheme,   // 'light' | 'dark' (реальная тема)
-    isDark,          // boolean
-    isLight,         // boolean
-    isSystem,        // boolean
-    setTheme,        // функция для установки темы
-    toggleTheme      // функция для переключения темы
-  } = useTheme()
+  const {
+    theme, // 'light' | 'dark' | 'system'
+    resolvedTheme, // 'light' | 'dark' (реальная тема)
+    isDark, // boolean
+    isLight, // boolean
+    isSystem, // boolean
+    setTheme, // функция для установки темы
+    toggleTheme, // функция для переключения темы
+  } = useTheme();
 
   return (
     <div className={isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}>
-      <button onClick={toggleTheme}>
-        Переключить тему
-      </button>
+      <button onClick={toggleTheme}>Переключить тему</button>
     </div>
-  )
+  );
 }
 ```
 
 ### API:
 
-| Свойство | Тип | Описание |
-|----------|-----|----------|
-| `theme` | `'light' \| 'dark' \| 'system'` | Текущая выбранная тема |
-| `resolvedTheme` | `'light' \| 'dark'` | Реальная применяемая тема |
-| `isDark` | `boolean` | `true` если темная тема |
-| `isLight` | `boolean` | `true` если светлая тема |
-| `isSystem` | `boolean` | `true` если используется системная тема |
-| `setTheme` | `(theme: Theme) => void` | Установить конкретную тему |
-| `toggleTheme` | `() => void` | Переключить на следующую тему |
+| Свойство        | Тип                             | Описание                                |
+| --------------- | ------------------------------- | --------------------------------------- |
+| `theme`         | `'light' \| 'dark' \| 'system'` | Текущая выбранная тема                  |
+| `resolvedTheme` | `'light' \| 'dark'`             | Реальная применяемая тема               |
+| `isDark`        | `boolean`                       | `true` если темная тема                 |
+| `isLight`       | `boolean`                       | `true` если светлая тема                |
+| `isSystem`      | `boolean`                       | `true` если используется системная тема |
+| `setTheme`      | `(theme: Theme) => void`        | Установить конкретную тему              |
+| `toggleTheme`   | `() => void`                    | Переключить на следующую тему           |
 
 ### Особенности:
 
@@ -58,4 +56,4 @@ function MyComponent() {
 2. **Сохранение**: Выбранная тема сохраняется в `localStorage` под ключом `theme`
 3. **CSS классы**: Хук автоматически добавляет классы `light` или `dark` к `document.documentElement`
 4. **Meta теги**: Обновляет `theme-color` meta тег для корректного отображения в браузере
-5. **Слушатели**: Автоматически слушает изменения системной темы при выборе "системная" тема 
+5. **Слушатели**: Автоматически слушает изменения системной темы при выборе "системная" тема

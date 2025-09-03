@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Pricing9 = () => {
   return (
@@ -7,15 +7,13 @@ const Pricing9 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Our Pricing Plans
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Our Pricing Plans</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Pricing & plans
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -79,16 +77,7 @@ const Pricing9 = () => {
 
 export default Pricing9;
 
-const PricingCard = ({
-  children,
-  subTitle,
-  price,
-  type,
-  subscription,
-  trial,
-  button,
-  active,
-}) => {
+const PricingCard = ({ children, subTitle, price, type, subscription, trial, button, active }) => {
   return (
     <>
       <div className="w-full px-4 md:w-1/2 lg:w-1/3">
@@ -102,27 +91,21 @@ const PricingCard = ({
             <span className="mb-[14px] block text-[22px] font-semibold leading-[28px] text-dark dark:text-white">
               {type}
             </span>
-            <p className="mx-auto max-w-[200px] text-sm text-body-color dark:text-dark-6">
-              {subTitle}
-            </p>
+            <p className="mx-auto max-w-[200px] text-sm text-body-color dark:text-dark-6">{subTitle}</p>
           </div>
           <div className="mb-11 space-y-[14px]">{children}</div>
           <h2 className="mb-6 text-4xl font-bold text-dark dark:text-white xl:text-[42px] xl:leading-[1.21]">
-            <sup className="-top-5 text-xl font-medium text-body-color dark:text-dark-6">
-              $
-            </sup>
+            <sup className="-top-5 text-xl font-medium text-body-color dark:text-dark-6">$</sup>
             <span> {price} </span>
-            <span className="text-base font-medium text-body-color dark:text-dark-6">
-              /{subscription}
-            </span>
+            <span className="text-base font-medium text-body-color dark:text-dark-6">/{subscription}</span>
           </h2>
 
           <a
             href="/#"
             className={`mb-3 inline-block rounded-md border border-primary px-9 py-[11px] text-center text-base font-medium transition xl:px-[66px] ${
               active
-                ? "bg-primary text-white hover:bg-blue-dark"
-                : "bg-transparent text-primary hover:bg-primary hover:text-white"
+                ? 'bg-primary text-white hover:bg-blue-dark'
+                : 'bg-transparent text-primary hover:bg-primary hover:text-white'
             } `}
           >
             {button}

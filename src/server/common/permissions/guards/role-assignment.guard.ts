@@ -11,7 +11,7 @@ import { GlobalRole, ProjectRole, AccountRole } from '../types/roles.types';
 export class RoleAssignmentGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
-    private readonly roleAssignmentService: RoleAssignmentService
+    private readonly roleAssignmentService: RoleAssignmentService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -33,7 +33,7 @@ export class RoleAssignmentGuard implements CanActivate {
         assignerId,
         targetUserId,
         projectId,
-        newRole as ProjectRole
+        newRole as ProjectRole,
       );
 
       if (!check.allowed) {
@@ -45,7 +45,7 @@ export class RoleAssignmentGuard implements CanActivate {
         assignerId,
         targetUserId,
         accountId,
-        newRole as AccountRole
+        newRole as AccountRole,
       );
 
       if (!check.allowed) {
@@ -56,7 +56,7 @@ export class RoleAssignmentGuard implements CanActivate {
       const check = await this.roleAssignmentService.canAssignGlobalRole(
         assignerId,
         targetUserId,
-        newRole as GlobalRole
+        newRole as GlobalRole,
       );
 
       if (!check.allowed) {

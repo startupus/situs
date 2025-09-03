@@ -16,21 +16,16 @@ import { testIds } from '../ui/testids';
  */
 const MenuManager: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  
+
   // Используем новые хуки для разделения логики
   const menuState = useMenuManagerState();
   const menuAPI = useMenuAPI(projectId!);
-  
+
   // Используем real-time хук для автоматической синхронизации
-  const { 
-    menuTypes, 
-    menuItems, 
-    loading, 
-    error, 
-    lastUpdate,
-    loadMenuTypes,
-    loadMenuItems 
-  } = useMenuSystemRealtime(projectId!, menuState.selectedMenuType);
+  const { menuTypes, menuItems, loading, error, lastUpdate, loadMenuTypes, loadMenuItems } = useMenuSystemRealtime(
+    projectId!,
+    menuState.selectedMenuType,
+  );
 
   // Автоматический выбор главного меню при загрузке
   useEffect(() => {
@@ -40,9 +35,10 @@ const MenuManager: React.FC = () => {
   // Загрузка всех пунктов при загрузке типов меню
   useEffect(() => {
     if (menuTypes.length > 0) {
-      menuAPI.loadAllMenuItems()
-        .then(items => menuState.setAllMenuItems(items))
-        .catch(error => console.error('Ошибка загрузки всех пунктов меню:', error));
+      menuAPI
+        .loadAllMenuItems()
+        .then((items) => menuState.setAllMenuItems(items))
+        .catch((error) => console.error('Ошибка загрузки всех пунктов меню:', error));
     }
   }, [menuTypes, menuAPI, menuState]);
 
@@ -90,7 +86,7 @@ const MenuManager: React.FC = () => {
           title: 'Главное меню',
           description: 'Автоматически создано при добавлении первого пункта',
           isActive: true,
-          projectId: projectId!
+          projectId: projectId!,
         });
         await loadMenuTypes();
         menuState.setSelectedMenuType(newType.id);
@@ -147,12 +143,16 @@ const MenuManager: React.FC = () => {
   };
 
   // Изменение порядка пунктов меню
-  const handleReorderItems = async (reorderedItems: MenuItemData[] | Array<{
-    id: string;
-    orderIndex: number;
-    level: number;
-    parentId: string | null;
-  }>) => {
+  const handleReorderItems = async (
+    reorderedItems:
+      | MenuItemData[]
+      | Array<{
+          id: string;
+          orderIndex: number;
+          level: number;
+          parentId: string | null;
+        }>,
+  ) => {
     try {
       await menuAPI.handleReorderItems(reorderedItems);
       // SSE событие автоматически обновит список пунктов меню
@@ -187,12 +187,15 @@ const MenuManager: React.FC = () => {
   };
 
   // Обновление типа меню
-  const handleUpdateMenuType = async (typeId: string, updates: { 
-    title?: string; 
-    name?: string; 
-    description?: string; 
-    isActive?: boolean 
-  }) => {
+  const handleUpdateMenuType = async (
+    typeId: string,
+    updates: {
+      title?: string;
+      name?: string;
+      description?: string;
+      isActive?: boolean;
+    },
+  ) => {
     try {
       await menuAPI.handleUpdateMenuType(typeId, updates);
       loadMenuTypes();
@@ -255,8 +258,6 @@ const MenuManager: React.FC = () => {
     }
   };
 
-
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -279,18 +280,19 @@ const MenuManager: React.FC = () => {
 
   return (
     <div className="p-6" data-testid={testIds.menu.manager}>
-
-
       {/* Переключатель вкладок с селектором типа меню */}
       <div className="mb-6">
         <div className="flex items-center justify-between">
           {/* Вкладки */}
-          <div className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit" data-testid="menu-mode-tabs">
+          <div
+            className="flex items-center gap-2 bg-white dark:bg-dark-2 rounded-lg p-1 border border-stroke dark:border-dark-3 w-fit"
+            data-testid="menu-mode-tabs"
+          >
             <button
               onClick={() => menuState.setActiveTab('items')}
               className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                menuState.activeTab === 'items' 
-                  ? 'bg-primary text-white' 
+                menuState.activeTab === 'items'
+                  ? 'bg-primary text-white'
                   : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
               }`}
             >
@@ -301,8 +303,8 @@ const MenuManager: React.FC = () => {
             <button
               onClick={() => menuState.setActiveTab('types')}
               className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                menuState.activeTab === 'types' 
-                  ? 'bg-primary text-white' 
+                menuState.activeTab === 'types'
+                  ? 'bg-primary text-white'
                   : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
               }`}
             >
@@ -335,13 +337,7 @@ const MenuManager: React.FC = () => {
                 <option value="__create_new__">+ Создать новый тип</option>
               </select>
               <span className="pointer-events-none absolute right-0 top-0 flex h-full w-12 items-center justify-center text-dark-5">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M2.29645 5.15354L2.29642 5.15357L2.30065 5.1577L7.65065 10.3827L8.00167 10.7255L8.35105 10.381L13.7011 5.10603L13.7011 5.10604L13.7036 5.10354C13.7221 5.08499 13.7386 5.08124 13.75 5.08124C13.7614 5.08124 13.7779 5.08499 13.7964 5.10354C13.815 5.12209 13.8188 5.13859 13.8188 5.14999C13.8188 5.1612 13.8151 5.17734 13.7974 5.19552L8.04956 10.8433L8.04955 10.8433L8.04645 10.8464C8.01604 10.8768 7.99596 10.8921 7.98519 10.8992C7.97756 10.8983 7.97267 10.8968 7.96862 10.8952C7.96236 10.8929 7.94954 10.887 7.92882 10.8721L2.20263 5.2455C2.18488 5.22733 2.18125 5.2112 2.18125 5.19999C2.18125 5.18859 2.18501 5.17209 2.20355 5.15354C2.2221 5.13499 2.2386 5.13124 2.25 5.13124C2.2614 5.13124 2.2779 5.13499 2.29645 5.15354Z"
                     fill="currentColor"
@@ -416,7 +412,5 @@ const MenuManager: React.FC = () => {
     </div>
   );
 };
-
-
 
 export default MenuManager;

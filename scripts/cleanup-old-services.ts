@@ -10,7 +10,7 @@ console.log('🧹 Очистка упоминаний старых сервис�
 const serviceMapping: Record<string, string> = {
   'provider-service': 'hubus-service',
   'proxy-service': 'hubus-service',
-  'accounting-service': 'bilingus-service'
+  'accounting-service': 'bilingus-service',
 };
 
 // Исключения - файлы которые не нужно обновлять
@@ -20,13 +20,13 @@ const excludeFiles: string[] = [
   'ARCHITECTURE_MODERNIZATION_REPORT.md',
   'HUBUS_SERVICE_ARCHITECTURE.md',
   'FINAL_ARCHITECTURE_DECISION.md',
-  'cleanup-old-services.ts'
+  'cleanup-old-services.ts',
 ];
 
 // Функция для проверки исключений
 function shouldSkipFile(filePath: string): boolean {
   const fileName = path.basename(filePath);
-  return excludeFiles.some(exclude => fileName.includes(exclude));
+  return excludeFiles.some((exclude) => fileName.includes(exclude));
 }
 
 // Функция для обновления файла
@@ -106,13 +106,13 @@ function fixMarkdownLint(): void {
   const filePath = 'services/client-service/INTEGRATION_COMPLETION_SUMMARY.md';
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Исправляем проблему с пустой строкой перед заголовком
     content = content.replace(
       /- ✅ \*\*Производительность\*\*.*\nСистема готова к использованию/,
-      '- ✅ **Производительность** - Оптимизированная для высокой нагрузки\n\nСистема готова к использованию'
+      '- ✅ **Производительность** - Оптимизированная для высокой нагрузки\n\nСистема готова к использованию',
     );
-    
+
     fs.writeFileSync(filePath, content, 'utf8');
     console.log(`✅ Исправлен markdownlint: ${filePath}`);
   } catch (error) {
@@ -123,16 +123,16 @@ function fixMarkdownLint(): void {
 // Основная функция
 function main(): void {
   console.log('📁 Обработка файлов проекта...');
-  
+
   // Исправляем markdownlint
   fixMarkdownLint();
-  
+
   // Обрабатываем все файлы
   const totalUpdated = processDirectory('.');
-  
+
   console.log(`\n📊 Результат:`);
   console.log(`✅ Обновлено файлов: ${totalUpdated}`);
-  
+
   if (totalUpdated > 0) {
     console.log('\n🔧 Запуск линтера для проверки...');
     try {
@@ -142,9 +142,9 @@ function main(): void {
       console.log('⚠️  Линтер выявил проблемы, но это нормально');
     }
   }
-  
+
   console.log('\n🎉 Очистка завершена!');
 }
 
 // Запускаем скрипт
-main(); 
+main();

@@ -17,7 +17,7 @@ const HeroArea = () => {
                 <span className="mb-4 block text-lg font-medium text-primary">
                   App Landing Page Example
                 </span>
-                <h1 className="mb-4 text-4xl font-bold leading-[1.208]! text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-4 text-4xl font-bold text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
                   Crafted with TaiGrids UI Components
                 </h1>
                 <p className="mb-16 max-w-[440px] text-base text-body-color dark:text-dark-6">

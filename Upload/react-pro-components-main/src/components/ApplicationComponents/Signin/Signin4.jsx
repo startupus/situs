@@ -121,7 +121,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="w-full rounded-md border border-stroke bg-transparent px-5 py-4 text-base text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
+          className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-4 text-base text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
         />
         <span className="absolute right-5 top-1/2 -translate-y-1/2">
           {type === "email" && (

@@ -119,7 +119,7 @@ function PromptToTextOne() {
               <input
                 type="text"
                 placeholder="Start with a detailed description"
-                className="h-12 w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden h-12 w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:text-white"
               />
               <button className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-white hover:bg-primary/90">
                 Generate

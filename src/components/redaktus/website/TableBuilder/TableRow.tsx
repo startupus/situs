@@ -1,10 +1,10 @@
-import React from 'react'
-import { Repeater } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
+import React from 'react';
+import { Repeater } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 export interface TableRowProps {
-  index: number
+  index: number;
 }
 
 const TableRow: types.Brick<TableRowProps> = ({ index }) => {
@@ -26,9 +26,9 @@ const TableRow: types.Brick<TableRowProps> = ({ index }) => {
           <Repeater propName="cells" />
         </tr>
       </tbody>
-    )
+    );
   }
-}
+};
 
 TableRow.schema = {
   name: blockNames.TableRow,
@@ -59,6 +59,6 @@ TableRow.schema = {
 
   // Sidebar Edit controls for props
   sideEditProps: [],
-}
+};
 
-export default TableRow
+export default TableRow;

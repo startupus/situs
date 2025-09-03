@@ -45,9 +45,9 @@ const Navbar = () => {
 
   return (
     <header
-      className={`absolute top-0 left-0 z-50 w-full ${
+      className={`absolute left-0 top-0 z-50 w-full ${
         sticky &&
-        "dark:bg-dark/80 sticky bg-white/80 shadow-sm backdrop-blur-sm"
+        "sticky bg-white/80 shadow-sm backdrop-blur-sm dark:bg-dark/80"
       }`}
     >
       <div className="container mx-auto">
@@ -70,22 +70,22 @@ const Navbar = () => {
             <div ref={navRef}>
               <button
                 onClick={handleNavbarToggle}
-                className={`ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden ${navbarOpen ? "navbarTogglerActive" : ""}`}
+                className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${navbarOpen ? "navbarTogglerActive" : ""}`}
               >
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
               </button>
 
               <nav
-                className={`dark:bg-dark absolute top-full right-4 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none xl:ml-11 lg:dark:bg-transparent ${navbarOpen ? "" : "hidden"}`}
+                className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent xl:ml-11 ${navbarOpen ? "" : "hidden"}`}
               >
                 <ul className="block lg:flex">
                   {navList.map((item, index) => (
                     <li key={index}>
                       <Link
                         to={item.link}
-                        className="text-dark hover:text-primary dark:hover:text-primary flex py-2 text-base font-medium lg:ml-10 lg:inline-flex dark:text-white"
+                        className="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary lg:ml-10 lg:inline-flex"
                       >
                         {item.text}
                       </Link>
@@ -98,13 +98,13 @@ const Navbar = () => {
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <Link
                 to="#"
-                className="text-dark hover:text-primary dark:hover:text-primary px-5 py-2 text-base font-medium dark:text-white"
+                className="px-5 py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
               >
                 Login
               </Link>
               <Link
                 to="#"
-                className="bg-dark hover:bg-body-color dark:bg-dark-2 rounded-md px-6 py-2 text-base font-medium text-white"
+                className="rounded-md bg-dark px-6 py-2 text-base font-medium text-white hover:bg-body-color dark:bg-dark-2"
               >
                 Download
               </Link>

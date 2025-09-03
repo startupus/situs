@@ -42,12 +42,15 @@ const SitusProjectPagesSettings: React.FC = () => {
 
       <div className="mt-6 flex gap-3">
         <button className="rounded-lg bg-primary px-4 py-2 text-white hover:bg-primary/90">Сохранить</button>
-        <Link to={`/projects/${projectId}/pages`} className="rounded-lg border border-stroke dark:border-dark-3 px-4 py-2 text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white">Отмена</Link>
+        <Link
+          to={`/projects/${projectId}/pages`}
+          className="rounded-lg border border-stroke dark:border-dark-3 px-4 py-2 text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white"
+        >
+          Отмена
+        </Link>
       </div>
     </div>
   );
 };
 
 export default SitusProjectPagesSettings;
-
-

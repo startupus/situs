@@ -10,46 +10,46 @@ const Tab2 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="w-full mb-14">
+            <div className="mb-14 w-full">
               <div className="flex flex-wrap bg-[#FAFAFA]">
                 <button
                   onClick={() => handleTabOpen("home")}
-                  className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
+                  className={`border-b-2 px-6 py-4 text-sm font-medium md:text-base lg:px-12 lg:py-5 ${
                     open === "home"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   Home
                 </button>
                 <button
                   onClick={() => handleTabOpen("about")}
-                  className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
+                  className={`border-b-2 px-6 py-4 text-sm font-medium md:text-base lg:px-12 lg:py-5 ${
                     open === "about"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   About Us
                 </button>
                 <button
                   onClick={() => handleTabOpen("team")}
-                  className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
+                  className={`border-b-2 px-6 py-4 text-sm font-medium md:text-base lg:px-12 lg:py-5 ${
                     open === "team"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   Our Team
                 </button>
                 <button
                   onClick={() => handleTabOpen("company")}
-                  className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
+                  className={`border-b-2 px-6 py-4 text-sm font-medium md:text-base lg:px-12 lg:py-5 ${
                     open === "company"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   Company Details
@@ -91,7 +91,7 @@ const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
       <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
+        className={`p-6 text-base leading-relaxed text-body-color ${
           open === tabCategory ? "block" : "hidden"
         } `}
       >

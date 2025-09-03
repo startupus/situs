@@ -16,8 +16,8 @@ const mockPrisma = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
-    count: vi.fn()
-  }
+    count: vi.fn(),
+  },
 };
 
 (PrismaClient as vi.MockedClass<typeof PrismaClient>).mockImplementation(() => mockPrisma as any);
@@ -38,7 +38,7 @@ describe('UserService', () => {
           role: 'USER',
           isActive: true,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         {
           id: '2',
@@ -48,8 +48,8 @@ describe('UserService', () => {
           role: 'ADMIN',
           isActive: true,
           createdAt: new Date(),
-          updatedAt: new Date()
-        }
+          updatedAt: new Date(),
+        },
       ];
 
       mockPrisma.user.findMany.mockResolvedValue(mockUsers);
@@ -59,24 +59,24 @@ describe('UserService', () => {
         role: 'USER',
         isActive: true,
         page: 1,
-        limit: 10
+        limit: 10,
       });
 
       expect(mockPrisma.user.findMany).toHaveBeenCalledWith({
         where: {
           role: 'USER',
-          isActive: true
+          isActive: true,
         },
         skip: 0,
         take: 10,
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
       });
       expect(result).toEqual({
         users: mockUsers,
         total: 2,
         page: 1,
         limit: 10,
-        totalPages: 1
+        totalPages: 1,
       });
     });
 
@@ -91,7 +91,7 @@ describe('UserService', () => {
         total: 0,
         page: 1,
         limit: 10,
-        totalPages: 0
+        totalPages: 0,
       });
     });
   });
@@ -106,7 +106,7 @@ describe('UserService', () => {
         role: 'USER',
         isActive: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       mockPrisma.user.findUnique.mockResolvedValue(mockUser);
@@ -114,7 +114,7 @@ describe('UserService', () => {
       const result = await UserService.findOne('1');
 
       expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
-        where: { id: '1' }
+        where: { id: '1' },
       });
       expect(result).toEqual(mockUser);
     });
@@ -138,7 +138,7 @@ describe('UserService', () => {
         role: 'USER',
         isActive: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       mockPrisma.user.findUnique.mockResolvedValue(mockUser);
@@ -146,7 +146,7 @@ describe('UserService', () => {
       const result = await UserService.findByEmail('test@example.com');
 
       expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
-        where: { email: 'test@example.com' }
+        where: { email: 'test@example.com' },
       });
       expect(result).toEqual(mockUser);
     });
@@ -162,7 +162,7 @@ describe('UserService', () => {
         role: 'USER',
         isActive: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       const hashedPassword = 'hashedPassword123';
@@ -174,7 +174,7 @@ describe('UserService', () => {
         password: 'password123',
         firstName: 'New',
         lastName: 'User',
-        role: 'USER'
+        role: 'USER',
       });
 
       expect(bcrypt.hash).toHaveBeenCalledWith('password123', 12);
@@ -184,8 +184,8 @@ describe('UserService', () => {
           password: hashedPassword,
           firstName: 'New',
           lastName: 'User',
-          role: 'USER'
-        }
+          role: 'USER',
+        },
       });
       expect(result).toEqual(mockUser);
     });
@@ -201,7 +201,7 @@ describe('UserService', () => {
         role: 'USER',
         isActive: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       const hashedPassword = 'hashedPassword123';
@@ -216,7 +216,7 @@ describe('UserService', () => {
         email: 'new@example.com',
         password: 'password123',
         firstName: 'New',
-        lastName: 'User'
+        lastName: 'User',
       });
 
       expect(result).toEqual({
@@ -226,25 +226,27 @@ describe('UserService', () => {
           firstName: 'New',
           lastName: 'User',
           role: 'USER',
-          fullName: 'New User'
+          fullName: 'New User',
         },
         token: mockToken,
-        refreshToken: mockRefreshToken
+        refreshToken: mockRefreshToken,
       });
     });
 
     it('должен выбросить ошибку если пользователь с таким email уже существует', async () => {
       mockPrisma.user.findUnique.mockResolvedValue({
         id: '1',
-        email: 'existing@example.com'
+        email: 'existing@example.com',
       });
 
-      await expect(UserService.register({
-        email: 'existing@example.com',
-        password: 'password123',
-        firstName: 'Test',
-        lastName: 'User'
-      })).rejects.toThrow('Пользователь с таким email уже существует');
+      await expect(
+        UserService.register({
+          email: 'existing@example.com',
+          password: 'password123',
+          firstName: 'Test',
+          lastName: 'User',
+        }),
+      ).rejects.toThrow('Пользователь с таким email уже существует');
     });
   });
 
@@ -259,7 +261,7 @@ describe('UserService', () => {
         password: 'hashedPassword123',
         isActive: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       const mockToken = 'mock-jwt-token';
@@ -271,7 +273,7 @@ describe('UserService', () => {
 
       const result = await UserService.login({
         email: 'test@example.com',
-        password: 'password123'
+        password: 'password123',
       });
 
       expect(result).toEqual({
@@ -281,36 +283,40 @@ describe('UserService', () => {
           firstName: 'Test',
           lastName: 'User',
           role: 'USER',
-          fullName: 'Test User'
+          fullName: 'Test User',
         },
         token: mockToken,
-        refreshToken: mockRefreshToken
+        refreshToken: mockRefreshToken,
       });
     });
 
     it('должен выбросить ошибку если пользователь не найден', async () => {
       mockPrisma.user.findUnique.mockResolvedValue(null);
 
-      await expect(UserService.login({
-        email: 'nonexistent@example.com',
-        password: 'password123'
-      })).rejects.toThrow('Неверные учетные данные');
+      await expect(
+        UserService.login({
+          email: 'nonexistent@example.com',
+          password: 'password123',
+        }),
+      ).rejects.toThrow('Неверные учетные данные');
     });
 
     it('должен выбросить ошибку если пароль неверный', async () => {
       const mockUser = {
         id: '1',
         email: 'test@example.com',
-        password: 'hashedPassword123'
+        password: 'hashedPassword123',
       };
 
       mockPrisma.user.findUnique.mockResolvedValue(mockUser);
       (bcrypt.compare as vi.Mock).mockResolvedValue(false);
 
-      await expect(UserService.login({
-        email: 'test@example.com',
-        password: 'wrongpassword'
-      })).rejects.toThrow('Неверные учетные данные');
+      await expect(
+        UserService.login({
+          email: 'test@example.com',
+          password: 'wrongpassword',
+        }),
+      ).rejects.toThrow('Неверные учетные данные');
     });
 
     it('должен выбросить ошибку если пользователь неактивен', async () => {
@@ -318,16 +324,18 @@ describe('UserService', () => {
         id: '1',
         email: 'test@example.com',
         password: 'hashedPassword123',
-        isActive: false
+        isActive: false,
       };
 
       mockPrisma.user.findUnique.mockResolvedValue(mockUser);
       (bcrypt.compare as vi.Mock).mockResolvedValue(true);
 
-      await expect(UserService.login({
-        email: 'test@example.com',
-        password: 'password123'
-      })).rejects.toThrow('Аккаунт деактивирован');
+      await expect(
+        UserService.login({
+          email: 'test@example.com',
+          password: 'password123',
+        }),
+      ).rejects.toThrow('Аккаунт деактивирован');
     });
   });
 
@@ -341,22 +349,22 @@ describe('UserService', () => {
         role: 'USER',
         isActive: true,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       mockPrisma.user.update.mockResolvedValue(mockUser);
 
       const result = await UserService.update('1', {
         firstName: 'Updated',
-        lastName: 'User'
+        lastName: 'User',
       });
 
       expect(mockPrisma.user.update).toHaveBeenCalledWith({
         where: { id: '1' },
         data: {
           firstName: 'Updated',
-          lastName: 'User'
-        }
+          lastName: 'User',
+        },
       });
       expect(result).toEqual(mockUser);
     });
@@ -366,7 +374,7 @@ describe('UserService', () => {
     it('должен успешно изменить пароль', async () => {
       const mockUser = {
         id: '1',
-        password: 'oldHashedPassword'
+        password: 'oldHashedPassword',
       };
 
       const newHashedPassword = 'newHashedPassword';
@@ -382,7 +390,7 @@ describe('UserService', () => {
       expect(bcrypt.hash).toHaveBeenCalledWith('newPassword', 12);
       expect(mockPrisma.user.update).toHaveBeenCalledWith({
         where: { id: '1' },
-        data: { password: newHashedPassword }
+        data: { password: newHashedPassword },
       });
       expect(result).toBe(true);
     });
@@ -390,14 +398,15 @@ describe('UserService', () => {
     it('должен выбросить ошибку если текущий пароль неверный', async () => {
       const mockUser = {
         id: '1',
-        password: 'oldHashedPassword'
+        password: 'oldHashedPassword',
       };
 
       mockPrisma.user.findUnique.mockResolvedValue(mockUser);
       (bcrypt.compare as vi.Mock).mockResolvedValue(false);
 
-      await expect(UserService.changePassword('1', 'wrongPassword', 'newPassword'))
-        .rejects.toThrow('Неверный текущий пароль');
+      await expect(UserService.changePassword('1', 'wrongPassword', 'newPassword')).rejects.toThrow(
+        'Неверный текущий пароль',
+      );
     });
   });
 
@@ -405,7 +414,7 @@ describe('UserService', () => {
     it('должен деактивировать пользователя', async () => {
       const mockUser = {
         id: '1',
-        isActive: false
+        isActive: false,
       };
 
       mockPrisma.user.update.mockResolvedValue(mockUser);
@@ -414,7 +423,7 @@ describe('UserService', () => {
 
       expect(mockPrisma.user.update).toHaveBeenCalledWith({
         where: { id: '1' },
-        data: { isActive: false }
+        data: { isActive: false },
       });
       expect(result).toEqual(mockUser);
     });
@@ -424,7 +433,7 @@ describe('UserService', () => {
     it('должен активировать пользователя', async () => {
       const mockUser = {
         id: '1',
-        isActive: true
+        isActive: true,
       };
 
       mockPrisma.user.update.mockResolvedValue(mockUser);
@@ -433,7 +442,7 @@ describe('UserService', () => {
 
       expect(mockPrisma.user.update).toHaveBeenCalledWith({
         where: { id: '1' },
-        data: { isActive: true }
+        data: { isActive: true },
       });
       expect(result).toEqual(mockUser);
     });
@@ -443,7 +452,7 @@ describe('UserService', () => {
     it('должен удалить пользователя', async () => {
       const mockUser = {
         id: '1',
-        email: 'test@example.com'
+        email: 'test@example.com',
       };
 
       mockPrisma.user.delete.mockResolvedValue(mockUser);
@@ -451,7 +460,7 @@ describe('UserService', () => {
       const result = await UserService.delete('1');
 
       expect(mockPrisma.user.delete).toHaveBeenCalledWith({
-        where: { id: '1' }
+        where: { id: '1' },
       });
       expect(result).toEqual(mockUser);
     });
@@ -464,14 +473,14 @@ describe('UserService', () => {
         {
           id: '1',
           email: 'recent@example.com',
-          createdAt: new Date()
-        }
+          createdAt: new Date(),
+        },
       ]);
 
       const result = await UserService.getStatistics();
 
       expect(mockPrisma.user.count).toHaveBeenCalledWith({
-        where: { isActive: true }
+        where: { isActive: true },
       });
       expect(mockPrisma.user.findMany).toHaveBeenCalledWith({
         where: { isActive: true },
@@ -483,8 +492,8 @@ describe('UserService', () => {
           firstName: true,
           lastName: true,
           role: true,
-          createdAt: true
-        }
+          createdAt: true,
+        },
       });
       expect(result).toEqual({
         total: 100,
@@ -495,9 +504,9 @@ describe('UserService', () => {
             firstName: null,
             lastName: null,
             role: 'USER',
-            createdAt: expect.any(Date)
-          }
-        ]
+            createdAt: expect.any(Date),
+          },
+        ],
       });
     });
   });
@@ -510,7 +519,7 @@ describe('UserService', () => {
         firstName: 'Test',
         lastName: 'User',
         role: 'USER',
-        isActive: true
+        isActive: true,
       };
 
       const mockDecoded = { userId: '1' };
@@ -522,7 +531,7 @@ describe('UserService', () => {
 
       expect(jwt.verify).toHaveBeenCalledWith('valid-token', process.env.JWT_SECRET);
       expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
-        where: { id: '1' }
+        where: { id: '1' },
       });
       expect(result).toEqual({
         id: '1',
@@ -530,7 +539,7 @@ describe('UserService', () => {
         firstName: 'Test',
         lastName: 'User',
         role: 'USER',
-        fullName: 'Test User'
+        fullName: 'Test User',
       });
     });
 
@@ -539,8 +548,7 @@ describe('UserService', () => {
         throw new Error('Invalid token');
       });
 
-      await expect(UserService.verifyToken('invalid-token'))
-        .rejects.toThrow('Invalid token');
+      await expect(UserService.verifyToken('invalid-token')).rejects.toThrow('Invalid token');
     });
   });
-}); 
+});

@@ -74,7 +74,7 @@ async function main() {
   // Получаем существующих пользователей для создания приглашений от их имени
   const users = await prisma.user.findMany({
     take: 2,
-    select: { id: true, email: true }
+    select: { id: true, email: true },
   });
 
   if (users.length === 0) {
@@ -140,18 +140,18 @@ async function main() {
       invitedBy: inviter.id,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       sentAt: new Date(),
-    }
+    },
   ];
 
   // Создаем приглашения, если они еще не существуют
   for (const invitationData of invitations) {
     const existing = await prisma.invitation.findFirst({
-      where: { email: invitationData.email }
+      where: { email: invitationData.email },
     });
 
     if (!existing) {
       await prisma.invitation.create({
-        data: invitationData
+        data: invitationData,
       });
       console.log(`✅ Создано приглашение для ${invitationData.email} (${invitationData.status})`);
     } else {
@@ -173,9 +173,9 @@ async function main() {
           secure: false,
           auth: {
             user: 'noreply@example.com',
-            pass: 'your-email-password'
-          }
-        }
+            pass: 'your-email-password',
+          },
+        },
       },
       inviteTemplate: `
         Здравствуйте!
@@ -195,7 +195,7 @@ async function main() {
         
         Ссылка: {{inviteLink}}
         Истекает: {{expiresAt}}
-      `
+      `,
     },
     {
       channel: 'SMS',
@@ -204,17 +204,17 @@ async function main() {
         provider: 'twilio',
         accountSid: 'your-twilio-sid',
         authToken: 'your-twilio-token',
-        fromNumber: '+1234567890'
+        fromNumber: '+1234567890',
       },
       inviteTemplate: 'Приглашение: {{inviteLink}} (до {{expiresAt}})',
-      reminderTemplate: 'Напоминание о приглашении: {{inviteLink}}'
+      reminderTemplate: 'Напоминание о приглашении: {{inviteLink}}',
     },
     {
       channel: 'TELEGRAM',
       enabled: false,
       config: {
         botToken: 'your-telegram-bot-token',
-        chatId: 'your-chat-id'
+        chatId: 'your-chat-id',
       },
       inviteTemplate: `
         🎉 Приглашение на платформу!
@@ -222,7 +222,7 @@ async function main() {
         Ссылка: {{inviteLink}}
         Действительно до: {{expiresAt}}
       `,
-      reminderTemplate: '⏰ Напоминание о приглашении: {{inviteLink}}'
+      reminderTemplate: '⏰ Напоминание о приглашении: {{inviteLink}}',
     },
     {
       channel: 'WHATSAPP',
@@ -231,37 +231,39 @@ async function main() {
         provider: 'twilio',
         accountSid: 'your-twilio-sid',
         authToken: 'your-twilio-token',
-        fromNumber: 'whatsapp:+1234567890'
+        fromNumber: 'whatsapp:+1234567890',
       },
       inviteTemplate: 'Приглашение: {{inviteLink}}',
-      reminderTemplate: 'Напоминание: {{inviteLink}}'
+      reminderTemplate: 'Напоминание: {{inviteLink}}',
     },
     {
       channel: 'SLACK',
       enabled: false,
       config: {
         webhookUrl: 'https://hooks.slack.com/services/...',
-        channel: '#invitations'
+        channel: '#invitations',
       },
       inviteTemplate: `
         Новое приглашение отправлено!
         Email: {{email}}
         Ссылка: {{inviteLink}}
       `,
-      reminderTemplate: 'Напоминание о приглашении для {{email}}'
-    }
+      reminderTemplate: 'Напоминание о приглашении для {{email}}',
+    },
   ];
 
   for (const channelData of channels) {
     const existing = await prisma.communicationSettings.findUnique({
-      where: { channel: channelData.channel as any }
+      where: { channel: channelData.channel as any },
     });
 
     if (!existing) {
       await prisma.communicationSettings.create({
-        data: channelData as any
+        data: channelData as any,
       });
-      console.log(`✅ Создана настройка канала ${channelData.channel} (${channelData.enabled ? 'включен' : 'выключен'})`);
+      console.log(
+        `✅ Создана настройка канала ${channelData.channel} (${channelData.enabled ? 'включен' : 'выключен'})`,
+      );
     } else {
       console.log(`⏭️  Настройка канала ${channelData.channel} уже существует`);
     }

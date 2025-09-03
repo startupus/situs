@@ -12,19 +12,19 @@ import { PrismaService } from '../../../../database/prisma.service';
 const mockUser = {
   id: 'user-123',
   globalRole: 'BUSINESS',
-  status: 'ACTIVE'
+  status: 'ACTIVE',
 };
 
 const mockAgencyUser = {
   id: 'user-456',
   globalRole: 'AGENCY',
-  status: 'ACTIVE'
+  status: 'ACTIVE',
 };
 
 const mockSuperAdmin = {
   id: 'user-789',
   globalRole: 'SUPER_ADMIN',
-  status: 'ACTIVE'
+  status: 'ACTIVE',
 };
 
 describe('PermissionsService', () => {
@@ -36,19 +36,19 @@ describe('PermissionsService', () => {
   beforeEach(async () => {
     const mockPrismaService = {
       user: {
-        findUnique: jest.fn()
-      }
+        findUnique: jest.fn(),
+      },
     };
 
     const mockRoleHierarchyService = {
       hasPermission: jest.fn(),
-      getRolePermissions: jest.fn()
+      getRolePermissions: jest.fn(),
     };
 
     const mockContextResolverService = {
       checkProjectOwnership: jest.fn(),
       checkProjectAccess: jest.fn(),
-      isAgencyClient: jest.fn()
+      isAgencyClient: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -73,7 +73,7 @@ describe('PermissionsService', () => {
       const result = await service.checkPermission('user-789', {
         resource: 'project',
         scope: 'own',
-        action: 'project.edit.own'
+        action: 'project.edit.own',
       });
 
       expect(result.allowed).toBe(true);
@@ -85,7 +85,7 @@ describe('PermissionsService', () => {
       const result = await service.checkPermission('nonexistent', {
         resource: 'project',
         scope: 'own',
-        action: 'project.edit.own'
+        action: 'project.edit.own',
       });
 
       expect(result.allowed).toBe(false);
@@ -99,7 +99,7 @@ describe('PermissionsService', () => {
       const result = await service.checkPermission('user-123', {
         resource: 'project',
         scope: 'own',
-        action: 'system.admin'
+        action: 'system.admin',
       });
 
       expect(result.allowed).toBe(false);
@@ -116,7 +116,7 @@ describe('PermissionsService', () => {
         resource: 'project',
         scope: 'own',
         action: 'project.edit.own',
-        projectId: 'project-123'
+        projectId: 'project-123',
       });
 
       expect(result.allowed).toBe(true);
@@ -133,7 +133,7 @@ describe('PermissionsService', () => {
         resource: 'project',
         scope: 'own',
         action: 'project.edit.own',
-        projectId: 'project-456'
+        projectId: 'project-456',
       });
 
       expect(result.allowed).toBe(false);
@@ -149,7 +149,7 @@ describe('PermissionsService', () => {
         resource: 'agency',
         scope: 'agency',
         action: 'agency.clients.manage',
-        clientId: 'client-123'
+        clientId: 'client-123',
       });
 
       expect(result.allowed).toBe(true);
@@ -163,7 +163,7 @@ describe('PermissionsService', () => {
       const result = await service.checkPermission('user-123', {
         resource: 'agency',
         scope: 'agency',
-        action: 'agency.clients.manage'
+        action: 'agency.clients.manage',
       });
 
       expect(result.allowed).toBe(false);

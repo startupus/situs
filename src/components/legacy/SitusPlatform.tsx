@@ -21,13 +21,17 @@ export function SitusPlatform() {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${
-      resolvedTheme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
-    }`}>
+    <div
+      className={`min-h-screen transition-colors duration-200 ${
+        resolvedTheme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+      }`}
+    >
       {/* Верхняя панель */}
-      <header className={`border-b transition-colors duration-200 ${
-        resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-      }`}>
+      <header
+        className={`border-b transition-colors duration-200 ${
+          resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}
+      >
         <div className="px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <h1 className="text-xl font-bold">🏢 Situs Platform</h1>
@@ -74,7 +78,7 @@ export function SitusPlatform() {
               </button>
             </nav>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {/* Переключатель языка */}
             <button
@@ -111,39 +115,36 @@ export function SitusPlatform() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Проекты сайтов</h2>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                + Создать проект
-              </button>
+              <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">+ Создать проект</button>
             </div>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {state.sites.map((site) => (
                 <div
                   key={site.id}
                   className={`p-6 rounded-lg border transition-colors ${
-                    resolvedTheme === 'dark' 
-                      ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
+                    resolvedTheme === 'dark'
+                      ? 'bg-gray-800 border-gray-700 hover:border-gray-600'
                       : 'bg-white border-gray-200 hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold">{site.name}</h3>
-                    <span className={`px-2 py-1 text-xs rounded ${
-                      site.status === 'published' 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                        : site.status === 'draft'
-                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
-                        : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
-                    }`}>
-                      {site.status === 'published' ? 'Опубликован' : 
-                       site.status === 'draft' ? 'Черновик' : 'Архив'}
+                    <span
+                      className={`px-2 py-1 text-xs rounded ${
+                        site.status === 'published'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : site.status === 'draft'
+                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                            : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      {site.status === 'published' ? 'Опубликован' : site.status === 'draft' ? 'Черновик' : 'Архив'}
                     </span>
                   </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    {site.description}
-                  </p>
-                  
+
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{site.description}</p>
+
                   <div className="space-y-2 mb-4">
                     <div className="text-sm">
                       <span className="text-gray-500 dark:text-gray-400">Домен:</span>
@@ -158,7 +159,7 @@ export function SitusPlatform() {
                       <span className="ml-2">{new Date(site.createdAt).toLocaleDateString()}</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex space-x-2">
                     <a
                       href={`/studio?site=${site.id}`}
@@ -202,13 +203,11 @@ export function SitusPlatform() {
           <div>
             <h2 className="text-2xl font-bold mb-6">Аналитика</h2>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6">
-              <p className="text-gray-600 dark:text-gray-400">
-                Аналитика будет доступна в следующих версиях.
-              </p>
+              <p className="text-gray-600 dark:text-gray-400">Аналитика будет доступна в следующих версиях.</p>
             </div>
           </div>
         )}
       </main>
     </div>
   );
-} 
+}

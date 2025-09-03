@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { FiEye, FiGlobe, FiShoppingCart, FiEdit, FiTarget, FiGrid, FiSmartphone, FiList, FiUser, FiUsers, FiStar, FiInfo, FiChevronDown } from 'react-icons/fi';
+import {
+  FiEye,
+  FiGlobe,
+  FiShoppingCart,
+  FiEdit,
+  FiTarget,
+  FiGrid,
+  FiSmartphone,
+  FiList,
+  FiUser,
+  FiUsers,
+  FiStar,
+  FiInfo,
+  FiChevronDown,
+} from 'react-icons/fi';
 import { MenuItemData } from '../../../types/menu';
 import { useMenuSystemRealtime } from '../../../hooks/useMenuSystemRealtime';
 import { testIds } from '../../ui/testids';
@@ -12,14 +26,10 @@ import IconPreview from './IconPreview';
 interface MenuPreviewProps {
   projectId: string;
   selectedMenuType: string;
-  menuItems: MenuItemData[];  // Получаем пункты меню от родителя
+  menuItems: MenuItemData[]; // Получаем пункты меню от родителя
 }
 
-const MenuPreview: React.FC<MenuPreviewProps> = ({
-  projectId,
-  selectedMenuType,
-  menuItems
-}) => {
+const MenuPreview: React.FC<MenuPreviewProps> = ({ projectId, selectedMenuType, menuItems }) => {
   const [previewStyle, setPreviewStyle] = useState<'horizontal' | 'vertical' | 'mobile'>('horizontal');
   const [userRole, setUserRole] = useState<'guest' | 'user' | 'admin'>('guest');
   const [language, setLanguage] = useState<string>('*');
@@ -29,10 +39,10 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
     const accessLevels = {
       guest: ['PUBLIC'],
       user: ['PUBLIC', 'REGISTERED'],
-      admin: ['PUBLIC', 'REGISTERED', 'SPECIAL', 'CUSTOM']
+      admin: ['PUBLIC', 'REGISTERED', 'SPECIAL', 'CUSTOM'],
     };
 
-    return menuItems.filter(item => {
+    return menuItems.filter((item) => {
       // Фильтр по правам доступа
       if (!accessLevels[userRole].includes(item.accessLevel)) {
         return false;
@@ -55,14 +65,14 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
     const rootItems: MenuItemData[] = [];
 
     // Создаем карту всех пунктов
-    items.forEach(item => {
+    items.forEach((item) => {
       itemsMap.set(item.id, { ...item, children: [] });
     });
 
     // Строим дерево
-    items.forEach(item => {
+    items.forEach((item) => {
       const itemWithChildren = itemsMap.get(item.id)!;
-      
+
       if (item.parentId) {
         const parent = itemsMap.get(item.parentId);
         if (parent) {
@@ -87,7 +97,10 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
 
     if (item.type === 'HEADING') {
       return (
-        <div key={item.id} className="font-semibold text-gray-600 dark:text-gray-400 text-sm uppercase tracking-wider py-2">
+        <div
+          key={item.id}
+          className="font-semibold text-gray-600 dark:text-gray-400 text-sm uppercase tracking-wider py-2"
+        >
           {item.title}
         </div>
       );
@@ -98,7 +111,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
 
     return (
       <div key={item.id}>
-        <div 
+        <div
           className={`
             flex items-center gap-2 px-3 py-2 rounded-lg transition-colors cursor-pointer
             ${previewStyle === 'horizontal' ? 'hover:bg-primary/10' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}
@@ -109,44 +122,41 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
           {/* Иконка */}
           <span className="text-xs">
             {item.icon ? (
-              <IconPreview 
-                iconName={item.icon}
-                iconLibrary={item.iconLibrary}
-                size={14}
-                className="text-primary"
-              />
+              <IconPreview iconName={item.icon} iconLibrary={item.iconLibrary} size={14} className="text-primary" />
+            ) : // Fallback на иконки по компоненту
+            item.component === 'Website' ? (
+              <FiGlobe size={14} />
+            ) : item.component === 'Store' ? (
+              <FiShoppingCart size={14} />
+            ) : item.component === 'Blog' ? (
+              <FiEdit size={14} />
+            ) : item.component === 'Landing' ? (
+              <FiTarget size={14} />
             ) : (
-              // Fallback на иконки по компоненту
-              item.component === 'Website' ? <FiGlobe size={14} /> :
-              item.component === 'Store' ? <FiShoppingCart size={14} /> :
-              item.component === 'Blog' ? <FiEdit size={14} /> :
-              item.component === 'Landing' ? <FiTarget size={14} /> : <FiGrid size={14} />
+              <FiGrid size={14} />
             )}
           </span>
-          
+
           {/* Название */}
-          <span className="text-dark dark:text-white">
-            {item.title}
-          </span>
+          <span className="text-dark dark:text-white">{item.title}</span>
 
           {/* Индикатор дочерних элементов */}
-          {hasChildren && (
-            <FiChevronDown size={12} className="text-gray-500" />
-          )}
+          {hasChildren && <FiChevronDown size={12} className="text-gray-500" />}
         </div>
 
         {/* Дочерние элементы */}
         {hasChildren && previewStyle === 'vertical' && (
-          <div className="ml-4">
-            {item.children!.map(child => renderPreviewItem(child, depth + 1))}
-          </div>
+          <div className="ml-4">{item.children!.map((child) => renderPreviewItem(child, depth + 1))}</div>
         )}
       </div>
     );
   };
 
   return (
-    <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3" data-testid={testIds.menu.preview}>
+    <div
+      className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3"
+      data-testid={testIds.menu.preview}
+    >
       {/* Заголовок */}
       <div className="p-4 border-b border-stroke dark:border-dark-3">
         <h3 className="text-lg font-semibold text-dark dark:text-white mb-2 flex items-center gap-2">
@@ -163,9 +173,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Стиль отображения */}
           <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Стиль
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Стиль</label>
             <select
               data-testid={testIds.menu.previewStyleSelect}
               value={previewStyle}
@@ -180,9 +188,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
 
           {/* Роль пользователя */}
           <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Роль пользователя
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Роль пользователя</label>
             <select
               data-testid={testIds.menu.previewRoleSelect}
               value={userRole}
@@ -197,9 +203,7 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
 
           {/* Язык */}
           <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Язык
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Язык</label>
             <select
               data-testid={testIds.menu.previewLanguageSelect}
               value={language}
@@ -232,19 +236,19 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
             <div className="text-4xl mb-4 flex justify-center">
               <FiEye size={64} className="text-body-color dark:text-dark-6" />
             </div>
-            <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
-              Меню скрыто
-            </h3>
+            <h3 className="text-lg font-medium text-dark dark:text-white mb-2">Меню скрыто</h3>
             <p className="text-body-color dark:text-dark-6">
               Для роли "{userRole}" и языка "{language}" нет доступных пунктов меню
             </p>
           </div>
         ) : (
-          <div className={`
+          <div
+            className={`
             ${previewStyle === 'horizontal' ? 'flex flex-wrap gap-4' : 'space-y-1'}
             ${previewStyle === 'mobile' ? 'space-y-2' : ''}
-          `}>
-            {menuTree.map(item => renderPreviewItem(item))}
+          `}
+          >
+            {menuTree.map((item) => renderPreviewItem(item))}
           </div>
         )}
       </div>
@@ -257,7 +261,9 @@ const MenuPreview: React.FC<MenuPreviewProps> = ({
           </div>
           <div className="text-sm text-body-color dark:text-dark-6">
             <p className="font-medium mb-1">Предпросмотр обновляется в реальном времени</p>
-            <p>Изменения в меню мгновенно отражаются здесь. Проверьте, как меню выглядит для разных ролей пользователей.</p>
+            <p>
+              Изменения в меню мгновенно отражаются здесь. Проверьте, как меню выглядит для разных ролей пользователей.
+            </p>
           </div>
         </div>
       </div>

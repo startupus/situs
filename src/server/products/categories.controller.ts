@@ -16,13 +16,13 @@ export class CategoriesController {
   async findAll(
     @Query('productId') productId?: string,
     @Query('parentId') parentId?: string,
-    @Query('level') level?: string
+    @Query('level') level?: string,
   ) {
     const where: any = {};
-    
+
     if (productId) where.productId = productId;
     if (parentId) where.parentId = parentId;
-    
+
     // Фильтрация по уровню иерархии (аналог системы меню)
     if (level) {
       const levelNum = parseInt(level, 10);
@@ -41,13 +41,13 @@ export class CategoriesController {
       include: {
         children: {
           include: {
-            _count: { select: { items: true } }
-          }
+            _count: { select: { items: true } },
+          },
         },
         parent: true,
-        _count: { select: { items: true } }
+        _count: { select: { items: true } },
       },
-      orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+      orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
     });
 
     return { success: true, data: categories };
@@ -59,7 +59,7 @@ export class CategoriesController {
   async getItemsByFilters(
     @Query('productId') productId: string,
     @Query('properties') properties?: string,
-    @Query('values') values?: string
+    @Query('values') values?: string,
   ) {
     if (!productId) {
       return { success: false, error: 'Параметр productId обязателен' };
@@ -92,9 +92,9 @@ export class CategoriesController {
       include: {
         children: true,
         parent: true,
-        _count: { select: { items: true } }
+        _count: { select: { items: true } },
       },
-      orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+      orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
     });
 
     return { success: true, data: categories };
@@ -110,10 +110,10 @@ export class CategoriesController {
         children: true,
         items: {
           take: 10,
-          orderBy: { orderIndex: 'asc' }
+          orderBy: { orderIndex: 'asc' },
         },
-        _count: { select: { items: true } }
-      }
+        _count: { select: { items: true } },
+      },
     });
 
     if (!category) {
@@ -135,12 +135,12 @@ export class CategoriesController {
         parentId: dto.parentId,
         orderIndex: dto.orderIndex ?? 0,
         isActive: dto.isActive ?? true,
-        productId: dto.productId
+        productId: dto.productId,
       },
       include: {
         parent: true,
-        _count: { select: { items: true } }
-      }
+        _count: { select: { items: true } },
+      },
     });
 
     return { success: true, data: category };
@@ -158,12 +158,12 @@ export class CategoriesController {
         image: dto.image,
         parentId: dto.parentId,
         orderIndex: dto.orderIndex,
-        isActive: dto.isActive
+        isActive: dto.isActive,
       },
       include: {
         parent: true,
-        _count: { select: { items: true } }
-      }
+        _count: { select: { items: true } },
+      },
     });
 
     return { success: true, data: category };
@@ -175,18 +175,18 @@ export class CategoriesController {
     // Проверим, что в категории нет товаров
     const itemsCount = await this.prisma.item.count({ where: { categoryId: id } });
     if (itemsCount > 0) {
-      return { 
-        success: false, 
-        error: `Нельзя удалить категорию с товарами (${itemsCount} товаров)` 
+      return {
+        success: false,
+        error: `Нельзя удалить категорию с товарами (${itemsCount} товаров)`,
       };
     }
 
     // Проверим, что нет дочерних категорий
     const childrenCount = await this.prisma.category.count({ where: { parentId: id } });
     if (childrenCount > 0) {
-      return { 
-        success: false, 
-        error: `Нельзя удалить категорию с подкатегориями (${childrenCount} подкатегорий)` 
+      return {
+        success: false,
+        error: `Нельзя удалить категорию с подкатегориями (${childrenCount} подкатегорий)`,
       };
     }
 
@@ -204,15 +204,15 @@ export class CategoriesController {
 
     // Обновляем все категории в рамках одной транзакции
     await this.prisma.$transaction(
-      dto.items.map(item => 
+      dto.items.map((item) =>
         this.prisma.category.update({
           where: { id: item.id },
           data: {
             orderIndex: item.orderIndex,
-            parentId: item.parentId
-          }
-        })
-      )
+            parentId: item.parentId,
+          },
+        }),
+      ),
     );
 
     return { success: true, message: 'Порядок категорий обновлен' };

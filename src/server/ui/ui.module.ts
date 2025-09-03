@@ -10,5 +10,3 @@ import { DatabaseModule } from '../database/database.module';
   exports: [UiService],
 })
 export class UiModule {}
-
-

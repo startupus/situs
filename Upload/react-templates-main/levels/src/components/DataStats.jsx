@@ -87,26 +87,26 @@ const DataStats = () => {
 
   return (
     <>
-      <div className="flex flex-wrap mb-8 bg-white rounded-lg shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="mb-8 flex flex-wrap rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
         {dataStatsList.map((item, index) => (
           <div
             key={index}
             className="w-full sm:w-1/2 lg:w-1/4 xl:w-1/2 2xl:w-1/4"
           >
             <div
-              className={`border-stroke dark:border-dark-3 flex py-6 pr-9 pl-6 sm:border-r`}
+              className={`flex border-stroke py-6 pl-6 pr-9 dark:border-dark-3 sm:border-r`}
             >
               <div
                 style={{
                   backgroundColor: `rgba(${hexToRgb(item.color)}, 0.08)`,
                   color: item.color,
                 }}
-                className="text-purple xs:mr-[18px] xs:h-[50px] xs:max-w-[50px] mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px]"
+                className="mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px] text-purple xs:mr-[18px] xs:h-[50px] xs:max-w-[50px]"
               >
                 {item.icon}
               </div>
 
-              <div className="flex justify-between w-full">
+              <div className="flex w-full justify-between">
                 <div>
                   <p
                     className="text-base font-medium"

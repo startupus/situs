@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function About10() {
   return (
@@ -17,16 +17,13 @@ export default function About10() {
 
           <div className="w-full">
             <div>
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Sub Heading
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Sub Heading</span>
               <h2 className="mb-3 text-3xl font-bold leading-tight! text-dark sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl dark:text-white">
                 Making Credit history with nightcard
               </h2>
               <p className="mb-12 text-base text-body-color dark:text-dark-6">
-                Proin gravida nibh vel velit auctor aliquet. aks Aenean
-                sollicitudin, lorem quis bibendum auctor, nisi elit consequat
-                ipsum, nec sagittis sem
+                Proin gravida nibh vel velit auctor aliquet. aks Aenean sollicitudin, lorem quis bibendum auctor, nisi
+                elit consequat ipsum, nec sagittis sem
               </p>
 
               <a

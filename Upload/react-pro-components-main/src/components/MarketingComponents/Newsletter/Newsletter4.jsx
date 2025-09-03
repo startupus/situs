@@ -21,7 +21,7 @@ const Newsletter4 = () => {
                 <input
                   type="email"
                   placeholder="Enter your email to join"
-                  className="w-full rounded-md border border-stroke bg-transparent px-6 py-3 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6"
+                  className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-6 py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
                 />
                 <button className="w-full whitespace-nowrap rounded-md border border-transparent bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90 sm:w-auto">
                   Subscribe

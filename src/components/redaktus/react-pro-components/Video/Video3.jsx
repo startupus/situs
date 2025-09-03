@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 // Handler hook for when Outside click dropdown close
 let useClickOutside = (handler) => {
@@ -10,10 +10,10 @@ let useClickOutside = (handler) => {
         handler();
       }
     };
-    document.addEventListener("mousedown", maybeHandler);
+    document.addEventListener('mousedown', maybeHandler);
 
     return () => {
-      document.removeEventListener("mousedown", maybeHandler);
+      document.removeEventListener('mousedown', maybeHandler);
     };
   });
   return domNode;
@@ -45,32 +45,21 @@ const Video3 = () => {
                   </h2>
                   <span className="mx-auto mb-4 block h-1 w-[60px] rounded-sm bg-white"></span>
                   <p className="mb-[50px] text-base text-white md:text-lg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Proin at quam fringilla, scelerisque nisl diam.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at quam fringilla, scelerisque nisl
+                    diam.
                   </p>
                   <button
                     onClick={() => setVideoOpen(true)}
                     className="z-20 mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white text-primary dark:bg-dark-3 dark:text-white md:h-[100px] md:w-[100px]"
                   >
-                    <svg
-                      width="23"
-                      height="27"
-                      viewBox="0 0 23 27"
-                      className="fill-current"
-                    >
+                    <svg width="23" height="27" viewBox="0 0 23 27" className="fill-current">
                       <path d="M22.5 12.634C23.1667 13.0189 23.1667 13.9811 22.5 14.366L2.25 26.0574C1.58333 26.4423 0.750001 25.9611 0.750001 25.1913L0.750002 1.80866C0.750002 1.03886 1.58334 0.557731 2.25 0.942631L22.5 12.634Z" />
                     </svg>
                   </button>
                 </div>
                 <div>
                   <span className="absolute bottom-0 left-0 z-[-1]">
-                    <svg
-                      width="957"
-                      height="550"
-                      viewBox="0 0 957 550"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="957" height="550" viewBox="0 0 957 550" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect
                         x="-70.8242"
                         y="490.75"
@@ -89,23 +78,13 @@ const Video3 = () => {
                           gradientUnits="userSpaceOnUse"
                         >
                           <stop stopColor="#3056D3" stopOpacity="0.26" />
-                          <stop
-                            offset="1"
-                            stopColor="#3056D3"
-                            stopOpacity="0"
-                          />
+                          <stop offset="1" stopColor="#3056D3" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                     </svg>
                   </span>
                   <span className="absolute bottom-0 right-0 z-[-1]">
-                    <svg
-                      width="431"
-                      height="320"
-                      viewBox="0 0 431 320"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="431" height="320" viewBox="0 0 431 320" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect
                         x="385.004"
                         y="501.935"
@@ -124,11 +103,7 @@ const Video3 = () => {
                           gradientUnits="userSpaceOnUse"
                         >
                           <stop stopColor="#3056D3" stopOpacity="0.36" />
-                          <stop
-                            offset="1"
-                            stopColor="#3056D3"
-                            stopOpacity="0"
-                          />
+                          <stop offset="1" stopColor="#3056D3" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -144,10 +119,7 @@ const Video3 = () => {
         <div className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/70">
           <div className="mx-auto w-full max-w-[550px] bg-white">
             <>
-              <iframe
-                className="h-[320px] w-full"
-                src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1"
-              />
+              <iframe className="h-[320px] w-full" src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1" />
             </>
           </div>
 

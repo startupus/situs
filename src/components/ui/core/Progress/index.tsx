@@ -1,16 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const Progress = ({
-  ShowValue,
-  ShowValueInside,
-  primary,
-  secondary,
-  warning,
-  danger,
-  success,
-  info,
-  value = "50",
-}) => {
+const Progress = ({ ShowValue, ShowValueInside, primary, secondary, warning, danger, success, info, value = '50' }) => {
   return (
     <>
       {/* ====== Progress-bars Section Start */}

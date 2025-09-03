@@ -106,7 +106,7 @@ const Wishlist = () => {
                       </td>
                       <td className="border-t border-stroke py-[30px] dark:border-dark-3">
                         <p
-                          className={`text-lg font-medium  ${item.stock ? "text-green" : "text-red"}`}
+                          className={`text-lg font-medium ${item.stock ? "text-green" : "text-red"}`}
                         >
                           {item.stock ? "In Stock" : "Stock Out"}
                         </p>

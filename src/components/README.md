@@ -17,7 +17,7 @@
 ### Использование:
 
 ```tsx
-import ThemeToggle from './components/ThemeToggle'
+import ThemeToggle from './components/ThemeToggle';
 
 function Header() {
   return (
@@ -25,15 +25,15 @@ function Header() {
       <h1>Redaktus</h1>
       <ThemeToggle />
     </header>
-  )
+  );
 }
 ```
 
 ### Особенности:
 
-1. **Иконки**: 
+1. **Иконки**:
    - 🌞 Солнце для светлой темы
-   - 🌙 Луна для темной темы  
+   - 🌙 Луна для темной темы
    - 🖥️ Монитор для системной темы
 
 2. **Метки**:
@@ -55,9 +55,9 @@ function Header() {
 
 ```tsx
 <button className="flex items-center space-x-2 px-3 py-2 rounded-lg...">
-  {getThemeIcon()}  {/* SVG иконка */}
+  {getThemeIcon()} {/* SVG иконка */}
   <span className="text-sm font-medium...">
-    {getThemeLabel()}  {/* Текст метки */}
+    {getThemeLabel()} {/* Текст метки */}
   </span>
 </button>
 ```
@@ -66,4 +66,4 @@ function Header() {
 
 - `useTheme` хук из `../hooks/useTheme`
 - Tailwind CSS для стилизации
-- React для рендеринга 
+- React для рендеринга

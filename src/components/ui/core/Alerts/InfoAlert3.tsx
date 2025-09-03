@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const InfoAlert3 = () => {
   return (
@@ -6,13 +6,7 @@ const InfoAlert3 = () => {
       <div className="container">
         <div className="border-l-cyan-dark dark:bg-dark-2 flex max-w-[655px] items-center rounded-md border-l-[6px] bg-white p-5 pl-6">
           <div className="bg-cyan-dark mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full text-white">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_961_15681)">
                 <path
                   d="M8.99998 0.506256C4.3031 0.506256 0.506226 4.30313 0.506226 9.00001C0.506226 13.6969 4.3031 17.5219 8.99998 17.5219C13.6969 17.5219 17.5219 13.6969 17.5219 9.00001C17.5219 4.30313 13.6969 0.506256 8.99998 0.506256ZM8.99998 16.2563C5.00623 16.2563 1.77185 12.9938 1.77185 9.00001C1.77185 5.00626 5.00623 1.77188 8.99998 1.77188C12.9937 1.77188 16.2562 5.03438 16.2562 9.02813C16.2562 12.9938 12.9937 16.2563 8.99998 16.2563Z"
@@ -36,23 +30,14 @@ const InfoAlert3 = () => {
           </div>
           <div className="flex items-center justify-between w-full">
             <div>
-              <h3 className="mb-1 text-lg font-medium text-dark dark:text-white">
-                Did you know?
-              </h3>
+              <h3 className="mb-1 text-lg font-medium text-dark dark:text-white">Did you know?</h3>
               <p className="text-sm text-body-color dark:text-dark-6">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               </p>
             </div>
             <div>
               <button className="duration-300 text-dark-3 hover:text-dark dark:text-dark-4 dark:hover:text-dark-6">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M11 10L18.625 2.375C18.9062 2.09375 18.9062 1.65625 18.625 1.375C18.3438 1.09375 17.9062 1.09375 17.625 1.375L10 9L2.375 1.375C2.09375 1.09375 1.65625 1.09375 1.375 1.375C1.09375 1.65625 1.09375 2.09375 1.375 2.375L9 10L1.375 17.625C1.09375 17.9062 1.09375 18.3438 1.375 18.625C1.5 18.75 1.6875 18.8438 1.875 18.8438C2.0625 18.8438 2.25 18.7812 2.375 18.625L10 11L17.625 18.625C17.75 18.75 17.9375 18.8438 18.125 18.8438C18.3125 18.8438 18.5 18.7812 18.625 18.625C18.9062 18.3438 18.9062 17.9062 18.625 17.625L11 10Z"
                     fill="currentColor"

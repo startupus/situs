@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Switcher11 = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,23 +10,13 @@ const Switcher11 = () => {
   return (
     <>
       <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white p-1 shadow-card">
-        <input
-          type="checkbox"
-          className="sr-only"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
+        <input type="checkbox" className="sr-only" checked={isChecked} onChange={handleCheckboxChange} />
         <span
           className={`flex items-center space-x-[6px] rounded px-[18px] py-2 text-sm font-medium ${
-            !isChecked ? "bg-gray text-primary" : "text-body-color"
+            !isChecked ? 'bg-gray text-primary' : 'text-body-color'
           }`}
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            className="mr-[6px] fill-current"
-          >
+          <svg width="16" height="16" viewBox="0 0 16 16" className="mr-[6px] fill-current">
             <g clipPath="url(#clip0_3122_652)">
               <path
                 fillRule="evenodd"
@@ -44,15 +34,10 @@ const Switcher11 = () => {
         </span>
         <span
           className={`flex items-center space-x-[6px] rounded px-[18px] py-2 text-sm font-medium ${
-            isChecked ? "bg-gray text-primary" : "text-body-color"
+            isChecked ? 'bg-gray text-primary' : 'text-body-color'
           }`}
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            className="mr-[6px] fill-current"
-          >
+          <svg width="16" height="16" viewBox="0 0 16 16" className="mr-[6px] fill-current">
             <path
               fillRule="evenodd"
               clipRule="evenodd"

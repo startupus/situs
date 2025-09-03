@@ -31,7 +31,7 @@ export const EditorThemeProvider: React.FC<EditorThemeProviderProps> = ({ childr
   // Применение темы к DOM
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (isDarkMode) {
       root.classList.add('editor-dark');
       root.classList.remove('editor-light');
@@ -43,7 +43,7 @@ export const EditorThemeProvider: React.FC<EditorThemeProviderProps> = ({ childr
 
   const setTheme = (newTheme: EditorTheme) => {
     setThemeState(newTheme);
-    
+
     let newIsDarkMode = false;
     if (newTheme === 'dark') {
       newIsDarkMode = true;
@@ -52,13 +52,13 @@ export const EditorThemeProvider: React.FC<EditorThemeProviderProps> = ({ childr
     } else if (newTheme === 'system') {
       newIsDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-    
+
     setIsDarkMode(newIsDarkMode);
-    
+
     // Сохранение настроек
     const settings: EditorThemeSettings = {
       theme: newTheme,
-      isDarkMode: newIsDarkMode
+      isDarkMode: newIsDarkMode,
     };
     localStorage.setItem('editor-theme-settings', JSON.stringify(settings));
   };
@@ -74,14 +74,10 @@ export const EditorThemeProvider: React.FC<EditorThemeProviderProps> = ({ childr
     theme,
     isDarkMode,
     toggleTheme,
-    setTheme
+    setTheme,
   };
 
-  return (
-    <EditorThemeContext.Provider value={contextValue}>
-      {children}
-    </EditorThemeContext.Provider>
-  );
+  return <EditorThemeContext.Provider value={contextValue}>{children}</EditorThemeContext.Provider>;
 };
 
 export const useEditorTheme = (): EditorThemeContextType => {

@@ -1,10 +1,6 @@
 // src/components/ui/ThemeTooltips.tsx
 import React from 'react';
-import { 
-  Tooltip1,
-  Tooltip2,
-  Tooltip3
-} from './core';
+import { Tooltip1, Tooltip2, Tooltip3 } from './core';
 
 // Интерфейс для пропсов Tooltip компонентов
 interface TooltipProps {
@@ -22,21 +18,15 @@ interface TooltipProps {
 // Утилита для адаптации стилей под глобальную тему
 const adaptTooltipProps = (props: TooltipProps) => ({
   ...props,
-  className: `${props.className || ''} transition-all duration-200`
+  className: `${props.className || ''} transition-all duration-200`,
 });
 
 // Tooltip Variants
-export const ThemeTooltip1: React.FC<TooltipProps> = (props) => (
-  <Tooltip1 {...adaptTooltipProps(props)} />
-);
+export const ThemeTooltip1: React.FC<TooltipProps> = (props) => <Tooltip1 {...adaptTooltipProps(props)} />;
 
-export const ThemeTooltip2: React.FC<TooltipProps> = (props) => (
-  <Tooltip2 {...adaptTooltipProps(props)} />
-);
+export const ThemeTooltip2: React.FC<TooltipProps> = (props) => <Tooltip2 {...adaptTooltipProps(props)} />;
 
-export const ThemeTooltip3: React.FC<TooltipProps> = (props) => (
-  <Tooltip3 {...adaptTooltipProps(props)} />
-);
+export const ThemeTooltip3: React.FC<TooltipProps> = (props) => <Tooltip3 {...adaptTooltipProps(props)} />;
 
 // Экспорт всех Tooltip компонентов как единый объект для удобства
 export const ThemeTooltips = {

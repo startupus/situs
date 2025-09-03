@@ -10,15 +10,14 @@ const FRONTEND_BASE = process.env.FRONTEND_BASE || 'http://localhost:5177';
 const PROJECT_ID = 'startapus-ecosystem';
 
 test.describe('Menu Routing & SEF URLs', () => {
-  
   test('API: получение Itemid для роутинга', async ({ request }) => {
     const response = await request.get(`${API_BASE}/api/menu-items/routing/get-itemid`, {
       params: {
         projectId: PROJECT_ID,
         component: 'Website',
         view: 'page',
-        targetId: 'home'
-      }
+        targetId: 'home',
+      },
     });
 
     expect(response.ok()).toBeTruthy();
@@ -32,8 +31,8 @@ test.describe('Menu Routing & SEF URLs', () => {
     const response = await request.get(`${API_BASE}/api/menu-items/routing/parse-url`, {
       params: {
         projectId: PROJECT_ID,
-        url: '/home?Itemid=cmeh1ajkk000k9k6kbbwh1vm6'
-      }
+        url: '/home?Itemid=cmeh1ajkk000k9k6kbbwh1vm6',
+      },
     });
 
     expect(response.ok()).toBeTruthy();
@@ -54,7 +53,7 @@ test.describe('Menu Routing & SEF URLs', () => {
 
     // Получаем пункты для найденного типа
     const menuItemsResponse = await request.get(`${API_BASE}/api/menu-items`, {
-      params: { menuTypeId: mainType.id }
+      params: { menuTypeId: mainType.id },
     });
     const menuItems = await menuItemsResponse.json();
     expect(menuItems.success).toBe(true);
@@ -73,8 +72,8 @@ test.describe('Menu Routing & SEF URLs', () => {
     const response = await request.get(`${API_BASE}/api/menu-items/routing/sitemap`, {
       params: {
         projectId: PROJECT_ID,
-        baseUrl: 'https://example.com'
-      }
+        baseUrl: 'https://example.com',
+      },
     });
 
     expect(response.ok()).toBeTruthy();
@@ -82,7 +81,7 @@ test.describe('Menu Routing & SEF URLs', () => {
     expect(data.success).toBe(true);
     expect(Array.isArray(data.data)).toBe(true);
     expect(data.data.length).toBeGreaterThan(0);
-    
+
     // Проверяем структуру sitemap
     const firstEntry = data.data[0];
     expect(firstEntry).toHaveProperty('url');
@@ -101,33 +100,33 @@ test.describe('Menu Routing & SEF URLs', () => {
     const response = await request.get(`${API_BASE}/api/menu-items/lookup`, {
       params: {
         menuTypeId: mainType.id,
-        language: '*'
-      }
+        language: '*',
+      },
     });
 
     expect(response.ok()).toBeTruthy();
     const data = await response.json();
     expect(data.success).toBe(true);
     expect(typeof data.data).toBe('object');
-    
+
     // Lookup должен содержать ключи вида "Website:page"
     const lookupKeys = Object.keys(data.data);
     expect(lookupKeys.length).toBeGreaterThan(0);
-    expect(lookupKeys.some(key => key.includes(':'))).toBe(true);
+    expect(lookupKeys.some((key) => key.includes(':'))).toBe(true);
   });
 
   test('API: поиск активного пункта меню по пути', async ({ request }) => {
     const response = await request.get(`${API_BASE}/api/menu-items/active-by-path`, {
       params: {
         menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji',
-        path: '/home'
-      }
+        path: '/home',
+      },
     });
 
     expect(response.ok()).toBeTruthy();
     const data = await response.json();
     expect(data.success).toBe(true);
-    
+
     if (data.data) {
       expect(data.data).toHaveProperty('activeItem');
       expect(data.data).toHaveProperty('breadcrumbs');
@@ -136,7 +135,7 @@ test.describe('Menu Routing & SEF URLs', () => {
 
   test('Frontend: навигация с активным пунктом меню', async ({ page, request }) => {
     await page.goto(`${FRONTEND_BASE}/projects/${PROJECT_ID}/menus`);
-    
+
     // Ждем загрузки меню
     await page.waitForSelector('[data-testid="menu-manager"]', { timeout: 10000 });
     // Явно выбираем главную группу меню (получаем id динамически)
@@ -145,11 +144,11 @@ test.describe('Menu Routing & SEF URLs', () => {
     const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
     await page.selectOption('[data-testid="menu-type-select"]', mainType.id);
     await page.waitForTimeout(500);
-    
+
     // Проверяем, что есть пункты меню (после автоподстановки главного типа меню)
     const menuItems = await page.locator('[data-testid="menu-item"]').count();
     expect(menuItems).toBeGreaterThan(0);
-    
+
     // Проверяем работу переключения типов меню: выбираем другой тип по селектору test-id
     const typeSelect = page.locator('[data-testid="menu-type-select"]');
     const options = await typeSelect.locator('option').all();
@@ -158,14 +157,17 @@ test.describe('Menu Routing & SEF URLs', () => {
     let nextValue = currentValue;
     for (const opt of options) {
       const val = await opt.getAttribute('value');
-      if (val && val !== currentValue && val !== '__create_new__') { nextValue = val; break; }
+      if (val && val !== currentValue && val !== '__create_new__') {
+        nextValue = val;
+        break;
+      }
     }
     if (nextValue !== currentValue) {
       await typeSelect.selectOption(nextValue);
       await page.waitForTimeout(1000);
     }
     await page.waitForTimeout(1000);
-    
+
     const footerValue = await page.locator('[data-testid="menu-type-select"]').inputValue();
     expect(footerValue).toBe(mainType.id);
     const footerItems = await page.locator('[data-testid="menu-item"]').count();
@@ -174,16 +176,16 @@ test.describe('Menu Routing & SEF URLs', () => {
 
   test('Frontend: предпросмотр меню с фильтрацией', async ({ page }) => {
     await page.goto(`${FRONTEND_BASE}/projects/${PROJECT_ID}/menus`);
-    
+
     // Переходим в блок предпросмотра (компонент постоянно виден ниже списка)
     await page.waitForSelector('[data-testid="menu-preview"]', { timeout: 10000 });
-    
+
     // Проверяем настройки предпросмотра
     await page.waitForSelector('[data-testid="menu-preview-role"]');
-    
+
     // Меняем роль на администратора
     await page.selectOption('[data-testid="menu-preview-role"]', 'admin');
-    
+
     // Проверяем, что количество показанных пунктов изменилось
     const statsText = await page.textContent('[data-testid="menu-preview-stats"]');
     expect(statsText).toContain('из');
@@ -191,18 +193,18 @@ test.describe('Menu Routing & SEF URLs', () => {
 
   test('Frontend: Drag & Drop перестановка пунктов', async ({ page, request }) => {
     await page.goto(`${FRONTEND_BASE}/projects/${PROJECT_ID}/menus`);
-    
+
     // Гарантируем выбор типа меню, чтобы загрузились элементы
     const menuTypesResp = await request.get(`${API_BASE}/api/menu-types`, { params: { projectId: PROJECT_ID } });
     const menuTypesData = await menuTypesResp.json();
     const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
     await page.selectOption('[data-testid="menu-type-select"]', mainType.id);
     await page.waitForSelector('[data-testid="menu-drag-handle"]', { timeout: 15000 });
-    
+
     // Проверяем наличие элементов для перетаскивания
     const dragHandles = await page.locator('[data-testid="menu-drag-handle"]').count();
     expect(dragHandles).toBeGreaterThan(0);
-    
+
     // Инструкции могут отличаться по тексту — достаточно наличия drag handle
   });
 
@@ -212,16 +214,16 @@ test.describe('Menu Routing & SEF URLs', () => {
     const menuTypesData = await menuTypesResp.json();
     const mainType = (menuTypesData.data || []).find((t: any) => t.name === 'main') || menuTypesData.data?.[0];
     const menuItemsResponse = await request.get(`${API_BASE}/api/menu-items`, { params: { menuTypeId: mainType.id } });
-    
+
     const menuItems = await menuItemsResponse.json();
     expect(menuItems.success).toBe(true);
     const firstItem = menuItems.data[0];
-    
+
     // Проверяем доступ
     const accessResponse = await request.get(`${API_BASE}/api/menu-items/security/check-access/${firstItem.id}`, {
       params: {
-        userAccessLevels: 'PUBLIC,REGISTERED'
-      }
+        userAccessLevels: 'PUBLIC,REGISTERED',
+      },
     });
 
     expect(accessResponse.ok()).toBeTruthy();
@@ -233,8 +235,8 @@ test.describe('Menu Routing & SEF URLs', () => {
   test('API: статистика прав доступа', async ({ request }) => {
     const response = await request.get(`${API_BASE}/api/menu-items/security/access-stats`, {
       params: {
-        projectId: PROJECT_ID
-      }
+        projectId: PROJECT_ID,
+      },
     });
 
     expect(response.ok()).toBeTruthy();
@@ -251,26 +253,26 @@ test.describe('Menu Routing & SEF URLs', () => {
       params: {
         menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji',
         accessLevels: 'PUBLIC',
-        language: 'ru-RU'
-      }
+        language: 'ru-RU',
+      },
     });
 
     expect(ruResponse.ok()).toBeTruthy();
     const ruData = await ruResponse.json();
     expect(ruData.success).toBe(true);
-    
+
     // Получаем пункты для всех языков
     const allResponse = await request.get(`${API_BASE}/api/menu-items/authorized`, {
       params: {
         menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji',
         accessLevels: 'PUBLIC',
-        language: '*'
-      }
+        language: '*',
+      },
     });
 
     const allData = await allResponse.json();
     expect(allData.success).toBe(true);
-    
+
     // Для универсальных пунктов (language='*') результаты должны быть одинаковыми
     expect(ruData.data.length).toBe(allData.data.length);
   });
@@ -280,39 +282,36 @@ test.describe('Menu Routing & SEF URLs', () => {
     const lookupResponse = await request.get(`${API_BASE}/api/menu-items/lookup`, {
       params: {
         menuTypeId: 'cmeh1ajkj000i9k6kvdv0weji',
-        language: '*'
-      }
+        language: '*',
+      },
     });
-    
+
     const lookupData = await lookupResponse.json();
     expect(lookupData.success).toBe(true);
-    
+
     // 2. Ищем Itemid для Website:page
-    const websitePageKey = Object.keys(lookupData.data).find(key => 
-      key.startsWith('Website:page')
-    );
-    
+    const websitePageKey = Object.keys(lookupData.data).find((key) => key.startsWith('Website:page'));
+
     if (websitePageKey) {
       const itemId = Object.values(lookupData.data[websitePageKey])[0] as string;
-      
+
       // 3. Генерируем SEF URL
       const sefResponse = await request.get(`${API_BASE}/api/menu-items/${itemId}/sef-url`);
       const sefData = await sefResponse.json();
       expect(sefData.success).toBe(true);
-      
+
       // 4. Парсим сгенерированный URL обратно
       const parseResponse = await request.get(`${API_BASE}/api/menu-items/routing/parse-url`, {
         params: {
           projectId: PROJECT_ID,
-          url: sefData.data.url
-        }
+          url: sefData.data.url,
+        },
       });
-      
+
       const parseData = await parseResponse.json();
       expect(parseData.success).toBe(true);
       expect(parseData.data.component).toBe('Website');
       expect(parseData.data.view).toBe('page');
     }
   });
-
 });

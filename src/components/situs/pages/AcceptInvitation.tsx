@@ -41,7 +41,7 @@ const AcceptInvitation: React.FC = () => {
     requireEmailVerification: true,
     allowPasswordCreation: true,
     requirePassword: false,
-    enableTwoFactorAuth: false
+    enableTwoFactorAuth: false,
   });
 
   const [form, setForm] = useState<AcceptInvitationForm>({
@@ -49,7 +49,7 @@ const AcceptInvitation: React.FC = () => {
     password: '',
     confirmPassword: '',
     name: '',
-    verificationCode: ''
+    verificationCode: '',
   });
 
   const [formErrors, setFormErrors] = useState<Partial<AcceptInvitationForm>>({});
@@ -87,10 +87,10 @@ const AcceptInvitation: React.FC = () => {
     try {
       setLoading(true);
       const response = await InvitationsAPI.getInvitationByToken(token!);
-      
+
       if (response && response.email) {
         setInvitation(response);
-        setForm(prev => ({ ...prev, email: response.email }));
+        setForm((prev) => ({ ...prev, email: response.email }));
       } else {
         setError('Приглашение не найдено или недействительно');
       }
@@ -103,9 +103,9 @@ const AcceptInvitation: React.FC = () => {
   };
 
   const handleInputChange = (field: keyof AcceptInvitationForm, value: string) => {
-    setForm(prev => ({ ...prev, [field]: value }));
+    setForm((prev) => ({ ...prev, [field]: value }));
     if (formErrors[field]) {
-      setFormErrors(prev => ({ ...prev, [field]: undefined }));
+      setFormErrors((prev) => ({ ...prev, [field]: undefined }));
     }
     setError(null);
   };
@@ -146,8 +146,11 @@ const AcceptInvitation: React.FC = () => {
   const getNextStep = (current: Step): Step | null => {
     switch (current) {
       case 'info':
-        return settings.requireEmailVerification ? 'verification' : 
-               settings.allowPasswordCreation ? 'password' : 'complete';
+        return settings.requireEmailVerification
+          ? 'verification'
+          : settings.allowPasswordCreation
+            ? 'password'
+            : 'complete';
       case 'verification':
         return settings.allowPasswordCreation ? 'password' : 'complete';
       case 'password':
@@ -206,22 +209,21 @@ const AcceptInvitation: React.FC = () => {
   const completeRegistration = async () => {
     try {
       setSubmitting(true);
-      
+
       const registrationData = {
         token: token!,
         name: form.name,
         ...(form.password && { password: form.password }),
-        ...(settings.requireEmailVerification && { verificationCode: form.verificationCode })
+        ...(settings.requireEmailVerification && { verificationCode: form.verificationCode }),
       };
 
       console.log('Завершение регистрации:', registrationData);
-      
+
       // TODO: Реальный API вызов
       // const response = await InvitationsAPI.acceptInvitation(registrationData);
-      
+
       setSuccess(true);
       setCurrentStep('complete');
-      
     } catch (err: any) {
       console.error('Ошибка регистрации:', err);
       setError(err.message || 'Ошибка при создании аккаунта');
@@ -232,10 +234,10 @@ const AcceptInvitation: React.FC = () => {
 
   const getRoleText = (role: string) => {
     const roleMap: Record<string, string> = {
-      'SUPER_ADMIN': 'Супер Админ',
-      'STAFF': 'Сотрудник',
-      'AGENCY': 'Агентство',
-      'BUSINESS': 'Бизнес'
+      SUPER_ADMIN: 'Супер Админ',
+      STAFF: 'Сотрудник',
+      AGENCY: 'Агентство',
+      BUSINESS: 'Бизнес',
     };
     return roleMap[role] || role;
   };
@@ -288,22 +290,20 @@ const AcceptInvitation: React.FC = () => {
               ) : (
                 <div></div>
               )}
-              
-              <img 
-                src="/images/logo.png" 
-                alt="Logo" 
+
+              <img
+                src="/images/logo.png"
+                alt="Logo"
                 className="w-12 h-12"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
-              
+
               <div></div>
             </div>
-            
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Принятие приглашения
-            </h1>
+
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Принятие приглашения</h1>
             <p className="text-gray-600 dark:text-gray-400">
               {currentStep === 'info' && 'Создайте аккаунт для присоединения к платформе'}
               {currentStep === 'verification' && 'Подтвердите ваш email адрес'}
@@ -312,8 +312,6 @@ const AcceptInvitation: React.FC = () => {
             </p>
           </div>
 
-
-
           {/* Прогресс-бар */}
           <div className="mb-6">
             <div className="flex justify-center items-center mb-2">
@@ -321,8 +319,8 @@ const AcceptInvitation: React.FC = () => {
                 const stepNumber = index + 1;
                 const isActive = step === currentStep;
                 const isCompleted = ['info', 'verification', 'password', 'complete'].indexOf(currentStep) > index;
-                const isVisible = 
-                  step === 'info' || 
+                const isVisible =
+                  step === 'info' ||
                   (step === 'verification' && settings.requireEmailVerification) ||
                   (step === 'password' && settings.allowPasswordCreation);
 
@@ -331,33 +329,36 @@ const AcceptInvitation: React.FC = () => {
                 const visibleSteps = [
                   'info',
                   ...(settings.requireEmailVerification ? ['verification'] : []),
-                  ...(settings.allowPasswordCreation ? ['password'] : [])
+                  ...(settings.allowPasswordCreation ? ['password'] : []),
                 ];
                 const currentIndex = visibleSteps.indexOf(step);
                 const isLastStep = currentIndex === visibleSteps.length - 1;
 
                 return (
                   <div key={step} className="flex items-center">
-                    <div className={`
+                    <div
+                      className={`
                       w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
-                      ${isCompleted || isActive 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
+                      ${
+                        isCompleted || isActive
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
                       }
-                    `}>
+                    `}
+                    >
                       {isCompleted ? <FiCheck size={16} /> : stepNumber}
                     </div>
                     {!isLastStep && (
-                      <div className={`
+                      <div
+                        className={`
                         w-8 h-0.5 mx-2
                         ${isCompleted ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'}
-                      `} />
+                      `}
+                      />
                     )}
                   </div>
                 );
               })}
-              
-
             </div>
           </div>
 
@@ -369,11 +370,7 @@ const AcceptInvitation: React.FC = () => {
 
           {success && (
             <div className="mb-4">
-              <ThemeAlert 
-                type="success" 
-                title="Аккаунт создан!"
-                message="Перенаправляем вас в систему..."
-              />
+              <ThemeAlert type="success" title="Аккаунт создан!" message="Перенаправляем вас в систему..." />
             </div>
           )}
 
@@ -381,9 +378,7 @@ const AcceptInvitation: React.FC = () => {
           {currentStep === 'info' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
                 <div className="relative">
                   <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                   <input
@@ -398,9 +393,7 @@ const AcceptInvitation: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Полное имя *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Полное имя *</label>
                 <div className="relative">
                   <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                   <input
@@ -411,15 +404,14 @@ const AcceptInvitation: React.FC = () => {
                     className={`w-full pl-10 pr-4 py-3 border rounded-lg 
                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white
                               focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                              ${formErrors.name 
-                                ? 'border-red-300 dark:border-red-600' 
-                                : 'border-gray-300 dark:border-gray-600'
+                              ${
+                                formErrors.name
+                                  ? 'border-red-300 dark:border-red-600'
+                                  : 'border-gray-300 dark:border-gray-600'
                               }`}
                   />
                 </div>
-                {formErrors.name && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{formErrors.name}</p>
-                )}
+                {formErrors.name && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{formErrors.name}</p>}
               </div>
             </div>
           )}
@@ -428,9 +420,7 @@ const AcceptInvitation: React.FC = () => {
           {currentStep === 'verification' && (
             <div className="space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                  Введите код подтверждения
-                </h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Введите код подтверждения</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
                   Мы отправили 6-значный код на {form.email}
                 </p>
@@ -458,9 +448,7 @@ const AcceptInvitation: React.FC = () => {
               </div>
 
               {formErrors.verificationCode && (
-                <p className="text-center text-sm text-red-600 dark:text-red-400">
-                  {formErrors.verificationCode}
-                </p>
+                <p className="text-center text-sm text-red-600 dark:text-red-400">{formErrors.verificationCode}</p>
               )}
 
               <div className="text-center">
@@ -479,9 +467,7 @@ const AcceptInvitation: React.FC = () => {
           {currentStep === 'password' && (
             <div className="space-y-4">
               <div className="text-center mb-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                  Настройка пароля
-                </h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Настройка пароля</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Вы можете создать пароль или пропустить этот шаг
                 </p>
@@ -501,9 +487,10 @@ const AcceptInvitation: React.FC = () => {
                     className={`w-full pl-10 pr-12 py-3 border rounded-lg 
                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white
                               focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                              ${formErrors.password 
-                                ? 'border-red-300 dark:border-red-600' 
-                                : 'border-gray-300 dark:border-gray-600'
+                              ${
+                                formErrors.password
+                                  ? 'border-red-300 dark:border-red-600'
+                                  : 'border-gray-300 dark:border-gray-600'
                               }`}
                   />
                   <button
@@ -534,9 +521,10 @@ const AcceptInvitation: React.FC = () => {
                       className={`w-full pl-10 pr-4 py-3 border rounded-lg 
                                 bg-white dark:bg-gray-700 text-gray-900 dark:text-white
                                 focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                                ${formErrors.confirmPassword 
-                                  ? 'border-red-300 dark:border-red-600' 
-                                  : 'border-gray-300 dark:border-gray-600'
+                                ${
+                                  formErrors.confirmPassword
+                                    ? 'border-red-300 dark:border-red-600'
+                                    : 'border-gray-300 dark:border-gray-600'
                                 }`}
                     />
                   </div>
@@ -554,32 +542,22 @@ const AcceptInvitation: React.FC = () => {
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto">
                 <FiCheck className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
-              
+
               <div>
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
-                  Добро пожаловать!
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Ваш аккаунт успешно создан.
-                </p>
-                
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">Добро пожаловать!</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">Ваш аккаунт успешно создан.</p>
+
                 {redirectCountdown > 0 ? (
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     Автоматическое перенаправление через {redirectCountdown} сек...
                   </p>
                 ) : (
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Перенаправление...
-                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Перенаправление...</p>
                 )}
               </div>
 
               <div className="flex justify-center">
-                <ThemeButton
-                  onClick={handleManualRedirect}
-                  variant="primary"
-                  className="flex items-center"
-                >
+                <ThemeButton onClick={handleManualRedirect} variant="primary" className="flex items-center">
                   Войти в систему
                   <FiArrowRight className="ml-2" size={16} />
                 </ThemeButton>

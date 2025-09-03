@@ -258,7 +258,7 @@ const BlogCard = ({ image, CardSubTitle, CardTitle, CardDescription }) => {
 
 const BlogSideCardItem = ({ subtitle, title, description }) => {
   return (
-    <div className="first:border-b first:border-white/30 first:pb-6 not-first:pt-6">
+    <div className="not-first:pt-6 first:border-b first:border-white/30 first:pb-6">
       <span className="mb-2 inline-block text-sm font-medium text-white">
         {subtitle}
       </span>

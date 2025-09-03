@@ -51,7 +51,13 @@ describe('ProjectsService.update', () => {
       .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }) // existingProject
       .mockResolvedValueOnce(null); // duplicate check for customDomain
     prisma.project.findUnique.mockResolvedValue(null);
-    prisma.project.update.mockResolvedValue({ id: 'p1', name: 'A', status: 'ACTIVE', updatedAt: new Date(), isPublished: false });
+    prisma.project.update.mockResolvedValue({
+      id: 'p1',
+      name: 'A',
+      status: 'ACTIVE',
+      updatedAt: new Date(),
+      isPublished: false,
+    });
     const res = await service.update('p1', { customDomain: 'example.com' } as any, 'owner-1');
     expect(res.id).toBe('p1');
     expect(prisma.project.update).toHaveBeenCalled();
@@ -60,11 +66,15 @@ describe('ProjectsService.update', () => {
   it('maps status and publishes SSE events', async () => {
     prisma.user.findUnique.mockResolvedValue({ id: 'owner-1' });
     prisma.project.findFirst.mockResolvedValue({ id: 'p1', name: 'A', ownerId: 'owner-1', status: 'ACTIVE' });
-    prisma.project.update.mockResolvedValue({ id: 'p1', name: 'A', status: 'ACTIVE', updatedAt: new Date(), isPublished: true });
+    prisma.project.update.mockResolvedValue({
+      id: 'p1',
+      name: 'A',
+      status: 'ACTIVE',
+      updatedAt: new Date(),
+      isPublished: true,
+    });
     await service.update('p1', { status: 'ACTIVE', isPublished: true } as any, 'owner-1');
     expect(realtime.publishProjectStatus).toHaveBeenCalledWith('p1', 'ACTIVE');
     expect(realtime.publish).toHaveBeenCalledWith('project_updated', expect.objectContaining({ id: 'p1' }));
   });
 });
-
-

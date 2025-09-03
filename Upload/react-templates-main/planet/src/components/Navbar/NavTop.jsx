@@ -43,7 +43,7 @@ const NavTop = () => {
               <div className="hidden items-center justify-end md:flex">
                 <div>
                   <div className="relative">
-                    <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-hidden transition dark:text-dark-6">
+                    <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                       <option value="English" className="dark:bg-dark-2">
                         English
                       </option>
@@ -70,7 +70,7 @@ const NavTop = () => {
                 </div>
                 <div>
                   <div className="relative">
-                    <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-hidden transition dark:text-dark-6">
+                    <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                       <option value="USD" className="dark:bg-dark-2">
                         USD
                       </option>

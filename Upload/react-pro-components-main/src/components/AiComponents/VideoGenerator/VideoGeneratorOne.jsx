@@ -45,7 +45,7 @@ function VideoGeneratorOne() {
               </div>
             </div>
 
-            <div className="relative my-8 aspect-860/400 overflow-hidden rounded-2xl">
+            <div className="aspect-860/400 relative my-8 overflow-hidden rounded-2xl">
               <img
                 src="https://i.ibb.co/VM8gmsr/image-1.jpg"
                 alt="video cover"
@@ -101,7 +101,7 @@ function VideoGeneratorOne() {
               <input
                 type="text"
                 placeholder="Craft a captivating video effortlessly with our state-of-the-art Talking..."
-                className="flex h-[60px] w-full items-center rounded-lg border border-stroke bg-transparent px-5 py-3 pr-20 text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
+                className="outline-hidden flex h-[60px] w-full items-center rounded-lg border border-stroke bg-transparent px-5 py-3 pr-20 text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
               />
               <button className="absolute right-2 top-1/2 inline-flex h-11 -translate-y-1/2 items-center justify-center gap-2 rounded-lg bg-primary py-2.5 pl-4 pr-5 font-medium text-white hover:bg-primary/90">
                 <span>

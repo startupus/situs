@@ -15,7 +15,7 @@ export default function Select2() {
             <div className="relative">
               <select
                 name="choose-country"
-                className="w-full appearance-none rounded-lg border border-stroke bg-transparent px-12 py-3 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent px-12 py-3 text-dark focus:border-primary dark:border-dark-3 dark:text-white"
               >
                 <option value="USA">USA</option>
                 <option value="UK">UK</option>

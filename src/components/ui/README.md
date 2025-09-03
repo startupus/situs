@@ -7,8 +7,9 @@
 ### ✅ Скопированы ВСЕ компоненты из react-pro-components-main:
 
 **📁 CoreComponents (25+ категорий, 200+ компонентов):**
+
 - Alerts (13 вариантов)
-- Avatar (9 вариантов) 
+- Avatar (9 вариантов)
 - Badges (9 вариантов)
 - Breadcrumb (12 вариантов)
 - ButtonGroups (3 варианта)
@@ -39,6 +40,7 @@
 - VerificationCodeInputs (4 варианта)
 
 **📁 DashboardComponents (20+ категорий, 100+ компонентов):**
+
 - Calendar (4 варианта)
 - Chart (10 вариантов)
 - ChatBox (4 варианта)
@@ -62,6 +64,7 @@
 ## Структура компонентов
 
 ### Базовые компоненты (Legacy)
+
 - `Button` - Базовая кнопка
 - `SitusDarkModeToggle` - Переключатель темной темы
 - `StatsCard` - Карточка статистики
@@ -70,11 +73,13 @@
 - `CorporateInput/Select/Textarea` - Корпоративные формы
 
 ### Pro компоненты
+
 - `ProButton` - Профессиональная кнопка
 - `ProModal` - Профессиональное модальное окно
 - `ProTable` - Профессиональная таблица
 
 ### Theme компоненты (из react-pro-components-main)
+
 - `ThemeButton` - Тематическая кнопка
 - `ThemeModal` - Тематическое модальное окно
 - `ThemeStatsCard` - Тематическая карточка статистики
@@ -84,6 +89,7 @@
 ## Core Components - Базовые компоненты глобальной темы
 
 ### ThemeAlert
+
 Система уведомлений с поддержкой различных типов.
 
 ```tsx
@@ -91,37 +97,35 @@ import { ThemeAlert } from '@/components/ui';
 
 <ThemeAlert type="success" title="Успех" onClose={() => {}}>
   Операция выполнена успешно
-</ThemeAlert>
+</ThemeAlert>;
 ```
 
 **Пропсы:**
+
 - `type`: 'success' | 'error' | 'warning' | 'info'
 - `title`: string (опционально)
 - `onClose`: функция закрытия (опционально)
 - `showIcon`: boolean (по умолчанию true)
 
 ### ThemeAvatar
+
 Компонент аватара с поддержкой статусов и fallback.
 
 ```tsx
 import { ThemeAvatar } from '@/components/ui';
 
-<ThemeAvatar 
-  src="/path/to/image.jpg"
-  size="md"
-  status="online"
-  showStatus={true}
-  fallback="AB"
-/>
+<ThemeAvatar src="/path/to/image.jpg" size="md" status="online" showStatus={true} fallback="AB" />;
 ```
 
 **Пропсы:**
+
 - `size`: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 - `status`: 'online' | 'offline' | 'away' | 'busy'
 - `showStatus`: boolean
 - `fallback`: string (инициалы)
 
 ### ThemeBadge
+
 Система значков с различными вариантами оформления.
 
 ```tsx
@@ -129,10 +133,11 @@ import { ThemeBadge } from '@/components/ui';
 
 <ThemeBadge variant="success" size="md" rounded="full">
   Активен
-</ThemeBadge>
+</ThemeBadge>;
 ```
 
 **Пропсы:**
+
 - `variant`: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'gray'
 - `size`: 'sm' | 'md' | 'lg'
 - `rounded`: 'none' | 'sm' | 'md' | 'lg' | 'full'
@@ -140,6 +145,7 @@ import { ThemeBadge } from '@/components/ui';
 - `opacity`: boolean
 
 ### ThemeBreadcrumb
+
 Навигационные хлебные крошки.
 
 ```tsx
@@ -148,13 +154,14 @@ import { ThemeBreadcrumb } from '@/components/ui';
 const items = [
   { label: 'Главная', href: '/' },
   { label: 'Пользователи', href: '/users' },
-  { label: 'Профиль', current: true }
+  { label: 'Профиль', current: true },
 ];
 
-<ThemeBreadcrumb items={items} showHomeIcon={true} />
+<ThemeBreadcrumb items={items} showHomeIcon={true} />;
 ```
 
 ### ThemeCheckbox
+
 Чекбоксы с поддержкой различных состояний.
 
 ```tsx
@@ -166,16 +173,18 @@ import { ThemeCheckbox } from '@/components/ui';
   label="Согласен с условиями"
   variant="primary"
   shape="rounded"
-/>
+/>;
 ```
 
 **Пропсы:**
+
 - `variant`: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info'
 - `shape`: 'square' | 'rounded' | 'circle'
 - `indeterminate`: boolean
 - `error`: string
 
 ### ThemePagination
+
 Компонент пагинации с умной логикой отображения страниц.
 
 ```tsx
@@ -187,25 +196,21 @@ import { ThemePagination } from '@/components/ui';
   onPageChange={setCurrentPage}
   maxVisiblePages={5}
   showFirstLast={true}
-/>
+/>;
 ```
 
 ### ThemeProgress
+
 Индикаторы прогресса с анимацией.
 
 ```tsx
 import { ThemeProgress } from '@/components/ui';
 
-<ThemeProgress
-  value={75}
-  max={100}
-  variant="success"
-  showPercentage={true}
-  animated={true}
-/>
+<ThemeProgress value={75} max={100} variant="success" showPercentage={true} animated={true} />;
 ```
 
 ### ThemeSpinner
+
 Различные типы загрузочных индикаторов.
 
 ```tsx
@@ -216,27 +221,24 @@ import { ThemeSpinner } from '@/components/ui';
 ```
 
 **Типы:**
+
 - `border`: классический спиннер с вращающейся границей
 - `grow`: пульсирующий спиннер
 - `dots`: три прыгающие точки
 - `pulse`: пульсирующий блок
 
 ### ThemeSwitch
+
 Переключатели с различными размерами и цветами.
 
 ```tsx
 import { ThemeSwitch } from '@/components/ui';
 
-<ThemeSwitch
-  checked={isEnabled}
-  onChange={setIsEnabled}
-  size="md"
-  variant="primary"
-  label="Включить уведомления"
-/>
+<ThemeSwitch checked={isEnabled} onChange={setIsEnabled} size="md" variant="primary" label="Включить уведомления" />;
 ```
 
 ### ThemeToast
+
 Система toast-уведомлений с контекстом.
 
 ```tsx
@@ -245,7 +247,7 @@ import { ThemeToast, ToastProvider, useToast } from '@/components/ui';
 // В корне приложения
 <ToastProvider position="top-right">
   <App />
-</ToastProvider>
+</ToastProvider>;
 
 // В компоненте
 const { addToast } = useToast();
@@ -255,12 +257,13 @@ const showSuccess = () => {
     type: 'success',
     title: 'Успех',
     message: 'Данные сохранены',
-    duration: 5000
+    duration: 5000,
   });
 };
 ```
 
 ### ThemeTooltip
+
 Всплывающие подсказки с умным позиционированием.
 
 ```tsx
@@ -268,12 +271,13 @@ import { ThemeTooltip } from '@/components/ui';
 
 <ThemeTooltip content="Это подсказка" position="top" variant="dark">
   <button>Наведи на меня</button>
-</ThemeTooltip>
+</ThemeTooltip>;
 ```
 
 ## Использование в проекте
 
 Все компоненты поддерживают:
+
 - ✅ Темную и светлую темы
 - ✅ Адаптивный дизайн
 - ✅ Accessibility (ARIA)
@@ -306,12 +310,7 @@ import * as UI from '@/components/ui';
 import { ThemeButton } from '@/components/ui';
 
 const SaveButton = ({ onSave, loading, ...props }) => (
-  <ThemeButton
-    variant="primary"
-    disabled={loading}
-    onClick={onSave}
-    {...props}
-  >
+  <ThemeButton variant="primary" disabled={loading} onClick={onSave} {...props}>
     {loading ? 'Сохранение...' : 'Сохранить'}
   </ThemeButton>
 );
@@ -334,10 +333,10 @@ const SaveButton = ({ onSave, loading, ...props }) => (
 
 ```tsx
 // Импорт любого Core компонента
-import { 
-  PrimaryButton, 
-  SuccessAlert1, 
-  Avatar1, 
+import {
+  PrimaryButton,
+  SuccessAlert1,
+  Avatar1,
   DangerBadge,
   Breadcrumb1,
   ButtonGroup1,
@@ -361,7 +360,7 @@ import {
   Tag1,
   Toast1,
   Tooltip1,
-  VerificationCodeInput1
+  VerificationCodeInput1,
 } from '@/components/ui';
 
 // Использование в компоненте
@@ -370,7 +369,7 @@ import {
   <SuccessAlert1 />
   <Avatar1 />
   <DangerBadge />
-</div>
+</div>;
 ```
 
 ### Dashboard Components
@@ -396,7 +395,7 @@ import {
   ShoppingCart1,
   Step1,
   TableStack1,
-  VerticalNavbar1
+  VerticalNavbar1,
 } from '@/components/ui';
 
 // Использование в компоненте
@@ -405,7 +404,7 @@ import {
   <Chart1 />
   <DataStats1 />
   <Profile1 />
-</div>
+</div>;
 ```
 
 ## 📋 Следующие шаги

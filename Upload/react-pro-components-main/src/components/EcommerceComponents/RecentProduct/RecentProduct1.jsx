@@ -2,16 +2,16 @@ import React from "react";
 
 const RecentProduct = () => {
   return (
-    <section className="pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+    <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-          <span className="text-primary mb-2 block text-lg font-semibold">
+          <span className="mb-2 block text-lg font-semibold text-primary">
             Recent Products
           </span>
-          <h2 className="text-dark dark:text-white mb-3 text-3xl font-bold sm:text-4xl md:leading-[1.2] md:text-[40px]">
+          <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
             Top Collections
           </h2>
-          <p className="text-body-color dark:text-dark-6 text-base">
+          <p className="text-base text-body-color dark:text-dark-6">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form.
           </p>
@@ -61,20 +61,22 @@ const ProductCard = ({ link, img, title, subtitle, price }) => {
         <div className="mb-5 overflow-hidden rounded-[5px]">
           <img src={img} alt="category" className="w-full" />
         </div>
-        <div className="xs:flex flex-wrap justify-between">
-          <div className="xs:mb-0 mb-3">
+        <div className="flex-wrap justify-between xs:flex">
+          <div className="mb-3 xs:mb-0">
             <h3>
               <a
                 href={link}
-                className="hover:text-primary inline-block mb-1 text-lg font-semibold text-dark dark:text-white transition 2xl:text-xl"
+                className="mb-1 inline-block text-lg font-semibold text-dark transition hover:text-primary dark:text-white 2xl:text-xl"
               >
                 {title}
               </a>
             </h3>
-            <p className="text-body-color dark:text-dark-6 text-base">{subtitle}</p>
+            <p className="text-base text-body-color dark:text-dark-6">
+              {subtitle}
+            </p>
           </div>
           <div>
-            <p className="text-primary text-base font-semibold">{price}</p>
+            <p className="text-base font-semibold text-primary">{price}</p>
           </div>
         </div>
       </div>

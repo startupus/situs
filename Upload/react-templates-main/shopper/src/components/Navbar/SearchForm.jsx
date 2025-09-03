@@ -26,7 +26,7 @@ const SearchForm = () => {
         <div className="flex max-w-[200px] justify-end">
           <button
             onClick={toggleDropdown}
-            className="text-dark flex items-center justify-center dark:text-white"
+            className="flex items-center justify-center text-dark dark:text-white"
           >
             <svg
               width="26"
@@ -42,15 +42,15 @@ const SearchForm = () => {
         </div>
 
         <div
-          className={`absolute top-full right-0 mt-[23px] w-[330px] ${isOpen ? "block" : "hidden"}`}
+          className={`absolute right-0 top-full mt-[23px] w-[330px] ${isOpen ? "block" : "hidden"}`}
         >
           <form className="flex items-center justify-between">
             <input
               type="text"
               placeholder="Search Components or UI"
-              className="text-body-color shadow-1 focus:border-primary dark:bg-dark-2 dark:text-dark-6 w-full rounded-md border border-transparent bg-white py-4 pr-8 pl-5 outline-hidden focus-visible:shadow-none dark:shadow-none"
+              className="outline-hidden w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color shadow-1 focus:border-primary focus-visible:shadow-none dark:bg-dark-2 dark:text-dark-6 dark:shadow-none"
             />
-            <button className="text-body-color absolute top-1/2 right-5 -translate-y-1/2">
+            <button className="absolute right-5 top-1/2 -translate-y-1/2 text-body-color">
               <svg
                 width="26"
                 height="26"

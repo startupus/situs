@@ -1,5 +1,5 @@
-import { types } from 'redaktus/frontend'
-import React from 'react'
+import { types } from 'redaktus/frontend';
+import React from 'react';
 
 const config: types.RedaktusConfig = {
   appId: 'redaktus-local',
@@ -11,13 +11,7 @@ const config: types.RedaktusConfig = {
       defaultLocked: false,
       defaultStatus: types.PageStatus.Published,
       getDefaultContent: () => [],
-      allowedBlockTypes: [
-        'hero',
-        'features',
-        'testimonials',
-        'cta',
-        'content',
-      ],
+      allowedBlockTypes: ['hero', 'features', 'testimonials', 'cta', 'content'],
     },
   ],
   renderLocalLink: () => React.createElement('div'),
@@ -29,6 +23,6 @@ const config: types.RedaktusConfig = {
   // Отключаем внешние API
   enableAPI: false,
   enableCloud: false,
-}
+};
 
-export default config 
+export default config;

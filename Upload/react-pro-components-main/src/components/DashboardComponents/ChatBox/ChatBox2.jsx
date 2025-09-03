@@ -86,7 +86,7 @@ const ChatBox2 = () => {
                 <input
                   type="text"
                   placeholder="Type something here..."
-                  className="h-11 w-full rounded-[5px] border border-stroke bg-transparent pl-[18px] pr-12 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6"
+                  className="outline-hidden h-11 w-full rounded-[5px] border border-stroke bg-transparent pl-[18px] pr-12 text-base text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
                 />
 
                 <button className="absolute right-[18px] top-1/2 -translate-y-1/2">

@@ -20,7 +20,7 @@ const HorizontalMenu2 = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                  className="outline-hidden w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                   <svg
@@ -77,7 +77,7 @@ const HorizontalMenu2 = () => {
               <select
                 name=""
                 id=""
-                className="appearance-none bg-transparent pl-6 pr-5 text-sm font-medium text-body-color outline-hidden dark:text-dark-6"
+                className="outline-hidden appearance-none bg-transparent pl-6 pr-5 text-sm font-medium text-body-color dark:text-dark-6"
               >
                 <option value="">English</option>
                 <option value="">Hindi</option>
@@ -85,7 +85,7 @@ const HorizontalMenu2 = () => {
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/countries/usa.svg"
                 alt="usa"
-                className="absolute left-0 top-1/2 h-3 w-5 -translate-y-1/2 rounded-xs"
+                className="rounded-xs absolute left-0 top-1/2 h-3 w-5 -translate-y-1/2"
               />
               <span className="absolute right-0 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                 <svg

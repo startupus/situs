@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid = () => {
   return (
@@ -75,26 +75,13 @@ const SingleProduct = ({ img, link, title, price, reviews, prevPrice }) => {
             </h3>
             <p className="flex items-center text-base font-medium text-dark dark:text-white md:text-lg">
               {price}
-              {prevPrice && (
-                <span className="pl-1 text-body-color line-through dark:text-dark-6">
-                  {" "}
-                  {prevPrice}
-                </span>
-              )}
+              {prevPrice && <span className="pl-1 text-body-color line-through dark:text-dark-6"> {prevPrice}</span>}
             </p>
           </div>
           <div className="flex items-center whitespace-nowrap pt-1">
-            <span className="text-base font-medium text-body-color dark:text-dark-6">
-              {reviews}
-            </span>
+            <span className="text-base font-medium text-body-color dark:text-dark-6">{reviews}</span>
             <span className="pl-1">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16.7903 6.72187L11.6997 5.93437L9.39346 1.09687C9.22471 0.759375 8.77471 0.759375 8.60596 1.09687L6.29971 5.9625L1.23721 6.72187C0.871586 6.77812 0.730961 7.25625 1.01221 7.50937L4.69659 11.3062L3.82471 16.6219C3.76846 16.9875 4.13409 17.2969 4.47159 17.0719L9.05596 14.5687L13.6122 17.0719C13.9216 17.2406 14.3153 16.9594 14.231 16.6219L13.3591 11.3062L17.0435 7.50937C17.2685 7.25625 17.156 6.77812 16.7903 6.72187Z"
                   fill="#FFA645"

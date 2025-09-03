@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About9() {
   return (
-    <section className="overflow-hidden bg-white pb-12 pt-20 lg:pb-[90px] lg:pt-[120px] dark:bg-dark">
+    <section className="overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 mb-16 flex flex-wrap">
           <div className="w-full px-4 lg:w-8/12">
@@ -142,7 +142,7 @@ export default function About9() {
             <span className="mb-2 block text-lg font-semibold uppercase text-primary">
               OUR MISSION
             </span>
-            <h2 className="mb-3 text-4xl leading-[1.2]! tracking-[-1.2px] text-dark sm:text-5xl md:text-[60px] dark:text-white">
+            <h2 className="leading-[1.2]! mb-3 text-4xl tracking-[-1.2px] text-dark dark:text-white sm:text-5xl md:text-[60px]">
               Empowering your ideas
               <span className="font-bold"> into real business </span>
             </h2>

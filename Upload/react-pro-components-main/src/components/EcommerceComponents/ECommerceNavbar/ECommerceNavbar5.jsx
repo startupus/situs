@@ -52,7 +52,7 @@ const ECommerceNavbar5 = () => {
                 <div className="-mx-3 hidden items-center justify-end md:flex">
                   <div className="px-3">
                     <div className="relative">
-                      <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-hidden transition dark:text-dark-6">
+                      <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                         <option value="">English</option>
                         <option value="">Urdu</option>
                         <option value="">Hindi</option>
@@ -73,7 +73,7 @@ const ECommerceNavbar5 = () => {
                   </div>
                   <div className="px-3">
                     <div className="relative">
-                      <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-hidden transition dark:text-dark-6">
+                      <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                         <option value="">USD</option>
                         <option value="">INR</option>
                         <option value="">ERU</option>
@@ -448,7 +448,7 @@ const ListItem = ({ children, NavLink, menuName, submenu }) => {
               !open ? "hidden lg:block" : "block"
             } `}
           >
-            <span className="absolute -top-[6px] left-8 -z-10 hidden h-3 w-3 rotate-45 rounded-xs border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block xl:left-10"></span>
+            <span className="rounded-xs absolute -top-[6px] left-8 -z-10 hidden h-3 w-3 rotate-45 border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block xl:left-10"></span>
             {children}
           </div>
         </>

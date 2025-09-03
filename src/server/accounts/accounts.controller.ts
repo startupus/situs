@@ -62,7 +62,10 @@ export class AccountsController {
   @Patch(':id')
   @Scopes('ACCOUNT_WRITE')
   async update(@Param('id') id: string, @Body() dto: UpdateAccountDto) {
-    const account = await this.prisma.account.update({ where: { id }, data: { name: dto.name, type: (dto.type as any) || undefined } });
+    const account = await this.prisma.account.update({
+      where: { id },
+      data: { name: dto.name, type: (dto.type as any) || undefined },
+    });
     return { success: true, data: account };
   }
 

@@ -53,7 +53,7 @@ const SingleFeaturedProduct = ({ img, link, rating, title, price, big }) => {
         alt="product"
         className="absolute h-full w-full object-cover object-center"
       />
-      <div className="absolute bottom-0 left-0 flex h-3/4 w-full items-end bg-linear-to-b from-[#212B3600] to-[#212B36DA] p-6">
+      <div className="bg-linear-to-b absolute bottom-0 left-0 flex h-3/4 w-full items-end from-[#212B3600] to-[#212B36DA] p-6">
         <div>
           <h3>
             <a

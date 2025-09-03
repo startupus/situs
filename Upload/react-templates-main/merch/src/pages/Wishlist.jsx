@@ -42,12 +42,12 @@ const Wishlist = () => {
     <>
       <Breadcrumb pageName="Wishlist" />
 
-      <section className="dark:bg-dark bg-white pt-24 pb-[120px]">
+      <section className="bg-white pb-[120px] pt-24 dark:bg-dark">
         <div className="container mx-auto">
-          <div className="flex -mx-4">
+          <div className="-mx-4 flex">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[575px] text-center lg:mb-[70px]">
-                <h2 className="text-dark mb-[6px] text-3xl font-semibold sm:text-4xl dark:text-white">
+                <h2 className="mb-[6px] text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
                   Your Favorite Items
                 </h2>
                 <p className="text-base text-body-color dark:text-dark-6">
@@ -57,29 +57,29 @@ const Wishlist = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             {wishlistItems.map((item, index) => (
               <div
                 key={index}
                 className="w-full px-4 sm:w-1/2 lg:w-1/3 xl:w-1/4"
               >
                 <div className="mb-10">
-                  <Link to={item.link} className="block mb-4">
+                  <Link to={item.link} className="mb-4 block">
                     <img src={item.image} alt="product" className="w-full" />
                   </Link>
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="text-body-color dark:text-dark-5 mb-[10px] block text-base font-medium">
+                      <span className="mb-[10px] block text-base font-medium text-body-color dark:text-dark-5">
                         {item.color}
                       </span>
-                      <span className="text-dark mb-[10px] block text-base font-semibold dark:text-white">
+                      <span className="mb-[10px] block text-base font-semibold text-dark dark:text-white">
                         {item.price}
                       </span>
                     </div>
                     <h3>
                       <Link
                         to={item.link}
-                        className="block mb-5 text-lg font-semibold text-dark hover:text-primary md:text-xl dark:text-white"
+                        className="mb-5 block text-lg font-semibold text-dark hover:text-primary dark:text-white md:text-xl"
                       >
                         {item.name}
                       </Link>
@@ -88,13 +88,13 @@ const Wishlist = () => {
                     <div className="space-y-3">
                       <Link
                         to="#"
-                        className="bg-primary hover:bg-blue-dark flex w-full items-center justify-center border border-transparent px-10 py-[9px] text-center text-base font-medium text-white"
+                        className="flex w-full items-center justify-center border border-transparent bg-primary px-10 py-[9px] text-center text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Checkout
                       </Link>
                       <Link
                         to="#"
-                        className="border-primary text-primary hover:bg-primary flex w-full items-center justify-center border px-10 py-[9px] text-center text-base font-medium transition-all hover:text-white"
+                        className="flex w-full items-center justify-center border border-primary px-10 py-[9px] text-center text-base font-medium text-primary transition-all hover:bg-primary hover:text-white"
                       >
                         Remove Item
                       </Link>

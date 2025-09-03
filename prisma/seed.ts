@@ -16,8 +16,8 @@ async function main() {
       email: 'admin@startapus.com',
       password: adminPassword,
       role: 'ADMIN',
-      status: 'ACTIVE'
-    }
+      status: 'ACTIVE',
+    },
   });
 
   // Создание основного пользователя
@@ -30,11 +30,9 @@ async function main() {
       email: 'dmitriy@startapus.com',
       password: userPassword,
       role: 'BUSINESS',
-      status: 'ACTIVE'
-    }
+      status: 'ACTIVE',
+    },
   });
-
-
 
   // Создание проекта "Сайт экосистемы Стартапус"
   const startapusProject = await prisma.project.upsert({
@@ -43,12 +41,13 @@ async function main() {
     create: {
       id: 'startapus-ecosystem',
       name: 'Сайт экосистемы Стартапус',
-      description: 'Официальный сайт экосистемы Стартапус - инновационная платформа для создания и управления веб-проектами',
+      description:
+        'Официальный сайт экосистемы Стартапус - инновационная платформа для создания и управления веб-проектами',
       slug: 'startapus-ecosystem',
       domain: 'startapus.com',
       isPublished: true,
-      ownerId: user.id
-    }
+      ownerId: user.id,
+    },
   });
 
   // Создание продукта Website для проекта Стартапус
@@ -56,8 +55,8 @@ async function main() {
     where: {
       projectId_name: {
         projectId: startapusProject.id,
-        name: 'Website'
-      }
+        name: 'Website',
+      },
     },
     update: {},
     create: {
@@ -65,8 +64,8 @@ async function main() {
       description: 'Основной сайт проекта',
       type: 'WEBSITE',
       status: 'ACTIVE',
-      projectId: startapusProject.id
-    }
+      projectId: startapusProject.id,
+    },
   });
 
   // Создание страниц для проекта Стартапус
@@ -77,7 +76,8 @@ async function main() {
       slug: '',
       isHomePage: true,
       metaTitle: 'Стартапус - Инновационная экосистема для веб-разработки',
-      metaDescription: 'Создавайте профессиональные веб-сайты с экосистемой Стартапус. Визуальный редактор, AI-помощник и мощные инструменты.',
+      metaDescription:
+        'Создавайте профессиональные веб-сайты с экосистемой Стартапус. Визуальный редактор, AI-помощник и мощные инструменты.',
       content: JSON.stringify({
         blocks: [
           {
@@ -89,8 +89,8 @@ async function main() {
               buttonText: 'Начать бесплатно',
               buttonLink: '/situs',
               backgroundImage: '/images/hero-bg.jpg',
-              overlayOpacity: 0.4
-            }
+              overlayOpacity: 0.4,
+            },
           },
           {
             id: 'products-1',
@@ -103,43 +103,43 @@ async function main() {
                   name: 'Situs',
                   description: 'Визуальный конструктор сайтов',
                   icon: '🏗️',
-                  features: ['Drag & Drop редактор', 'Готовые блоки', 'Адаптивный дизайн']
+                  features: ['Drag & Drop редактор', 'Готовые блоки', 'Адаптивный дизайн'],
                 },
                 {
                   name: 'Redaktus',
                   description: 'Продвинутый контент-редактор',
                   icon: '✏️',
-                  features: ['Блочный редактор', 'Совместная работа', 'История изменений']
+                  features: ['Блочный редактор', 'Совместная работа', 'История изменений'],
                 },
                 {
                   name: 'Hubus',
                   description: 'AI-помощник для контента',
                   icon: '🤖',
-                  features: ['Генерация текстов', 'Оптимизация SEO', 'Перевод контента']
+                  features: ['Генерация текстов', 'Оптимизация SEO', 'Перевод контента'],
                 },
                 {
                   name: 'Bilingus',
                   description: 'Система биллинга и платежей',
                   icon: '💳',
-                  features: ['Подписки', 'Платежи', 'Аналитика доходов']
+                  features: ['Подписки', 'Платежи', 'Аналитика доходов'],
                 },
                 {
                   name: 'Controlus',
                   description: 'Мониторинг и аналитика',
                   icon: '📊',
-                  features: ['Метрики производительности', 'Пользовательская аналитика', 'Отчеты']
+                  features: ['Метрики производительности', 'Пользовательская аналитика', 'Отчеты'],
                 },
                 {
                   name: 'Loginus',
                   description: 'Единая система авторизации',
                   icon: '🔐',
-                  features: ['Single Sign-On', 'OAuth2', 'Безопасность']
-                }
-              ]
-            }
-          }
-        ]
-      })
+                  features: ['Single Sign-On', 'OAuth2', 'Безопасность'],
+                },
+              ],
+            },
+          },
+        ],
+      }),
     },
     {
       id: 'about',
@@ -154,33 +154,36 @@ async function main() {
             type: 'text-section',
             props: {
               title: 'О компании Стартапус',
-              content: 'Мы создаем инновационные инструменты для веб-разработки, которые делают создание сайтов простым и доступным для всех.',
-              layout: 'centered'
-            }
+              content:
+                'Мы создаем инновационные инструменты для веб-разработки, которые делают создание сайтов простым и доступным для всех.',
+              layout: 'centered',
+            },
           },
           {
             id: 'mission',
             type: 'mission-section',
             props: {
               title: 'Наша миссия',
-              mission: 'Демократизировать веб-разработку, предоставив каждому возможность создавать профессиональные сайты без глубоких технических знаний.',
+              mission:
+                'Демократизировать веб-разработку, предоставив каждому возможность создавать профессиональные сайты без глубоких технических знаний.',
               values: [
                 'Инновации в каждом продукте',
                 'Простота использования',
                 'Открытость и прозрачность',
-                'Поддержка сообщества'
-              ]
-            }
-          }
-        ]
-      })
+                'Поддержка сообщества',
+              ],
+            },
+          },
+        ],
+      }),
     },
     {
       id: 'products',
       title: 'Продукты',
       slug: 'products',
       metaTitle: 'Продукты Стартапус - Полная экосистема для веб-разработки',
-      metaDescription: 'Изучите все продукты экосистемы Стартапус: Situs, Redaktus, Hubus, Bilingus, Controlus и Loginus.',
+      metaDescription:
+        'Изучите все продукты экосистемы Стартапус: Situs, Redaktus, Hubus, Bilingus, Controlus и Loginus.',
       content: JSON.stringify({
         blocks: [
           {
@@ -188,11 +191,11 @@ async function main() {
             type: 'products-detail-section',
             props: {
               title: 'Продукты экосистемы',
-              description: 'Каждый продукт решает конкретные задачи и работает в единой экосистеме'
-            }
-          }
-        ]
-      })
+              description: 'Каждый продукт решает конкретные задачи и работает в единой экосистеме',
+            },
+          },
+        ],
+      }),
     },
     {
       id: 'blog',
@@ -207,11 +210,11 @@ async function main() {
             type: 'blog-section',
             props: {
               title: 'Блог',
-              subtitle: 'Новости, обновления и полезные статьи'
-            }
-          }
-        ]
-      })
+              subtitle: 'Новости, обновления и полезные статьи',
+            },
+          },
+        ],
+      }),
     },
     {
       id: 'contact',
@@ -229,12 +232,12 @@ async function main() {
               subtitle: 'Мы всегда готовы помочь и ответить на ваши вопросы',
               email: 'hello@startapus.com',
               phone: '+7 (495) 123-45-67',
-              address: 'Москва, Россия'
-            }
-          }
-        ]
-      })
-    }
+              address: 'Москва, Россия',
+            },
+          },
+        ],
+      }),
+    },
   ];
 
   for (const pageData of pages) {
@@ -242,16 +245,16 @@ async function main() {
       where: {
         productId_slug: {
           productId: websiteProduct.id,
-          slug: pageData.slug
-        }
+          slug: pageData.slug,
+        },
       },
       update: {},
       create: {
         ...pageData,
         productId: websiteProduct.id,
         pageType: 'PAGE',
-        status: 'PUBLISHED'
-      }
+        status: 'PUBLISHED',
+      },
     });
   }
 
@@ -261,8 +264,8 @@ async function main() {
       name: 'Тестовый интернет-магазин',
       description: 'Демонстрационный проект интернет-магазина',
       slug: 'test-ecommerce-store',
-      ownerId: user.id
-    }
+      ownerId: user.id,
+    },
   });
 
   // Создание продукта Store для тестового проекта
@@ -272,8 +275,8 @@ async function main() {
       description: 'Интернет-магазин',
       type: 'ECOMMERCE',
       status: 'ACTIVE',
-      projectId: testProject.id
-    }
+      projectId: testProject.id,
+    },
   });
 
   await prisma.page.create({
@@ -291,12 +294,12 @@ async function main() {
             type: 'ecommerce-hero',
             props: {
               title: 'Добро пожаловать в наш магазин',
-              subtitle: 'Лучшие товары по выгодным ценам'
-            }
-          }
-        ]
-      })
-    }
+              subtitle: 'Лучшие товары по выгодным ценам',
+            },
+          },
+        ],
+      }),
+    },
   });
 
   // Создание типов меню для проекта Стартапус
@@ -304,8 +307,8 @@ async function main() {
     where: {
       projectId_name: {
         projectId: startapusProject.id,
-        name: 'main'
-      }
+        name: 'main',
+      },
     },
     update: {},
     create: {
@@ -313,16 +316,16 @@ async function main() {
       title: 'Главное меню',
       description: 'Основное навигационное меню сайта',
       isActive: true,
-      projectId: startapusProject.id
-    }
+      projectId: startapusProject.id,
+    },
   });
 
   const footerMenuType = await prisma.menuType.upsert({
     where: {
       projectId_name: {
         projectId: startapusProject.id,
-        name: 'footer'
-      }
+        name: 'footer',
+      },
     },
     update: {},
     create: {
@@ -330,16 +333,16 @@ async function main() {
       title: 'Меню подвала',
       description: 'Навигационное меню в подвале сайта',
       isActive: true,
-      projectId: startapusProject.id
-    }
+      projectId: startapusProject.id,
+    },
   });
 
   const sidebarMenuType = await prisma.menuType.upsert({
     where: {
       projectId_name: {
         projectId: startapusProject.id,
-        name: 'sidebar'
-      }
+        name: 'sidebar',
+      },
     },
     update: {},
     create: {
@@ -347,8 +350,8 @@ async function main() {
       title: 'Боковое меню',
       description: 'Дополнительное меню в боковой панели',
       isActive: true,
-      projectId: startapusProject.id
-    }
+      projectId: startapusProject.id,
+    },
   });
 
   // Создание пунктов главного меню
@@ -366,8 +369,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         menu_image: '',
-        css_class: 'nav-home'
-      })
+        css_class: 'nav-home',
+      }),
     },
     {
       title: 'О компании',
@@ -382,8 +385,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         menu_image: '',
-        css_class: 'nav-about'
-      })
+        css_class: 'nav-about',
+      }),
     },
     {
       title: 'Продукты',
@@ -398,8 +401,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         menu_image: '',
-        css_class: 'nav-products'
-      })
+        css_class: 'nav-products',
+      }),
     },
     {
       title: 'Блог',
@@ -414,8 +417,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         menu_image: '',
-        css_class: 'nav-blog'
-      })
+        css_class: 'nav-blog',
+      }),
     },
     {
       title: 'Контакты',
@@ -430,9 +433,9 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         menu_image: '',
-        css_class: 'nav-contact'
-      })
-    }
+        css_class: 'nav-contact',
+      }),
+    },
   ];
 
   // Создаем пункты главного меню
@@ -441,8 +444,8 @@ async function main() {
       where: {
         menuTypeId_alias: {
           menuTypeId: mainMenuType.id,
-          alias: itemData.alias
-        }
+          alias: itemData.alias,
+        },
       },
       update: {},
       create: {
@@ -450,8 +453,8 @@ async function main() {
         menuTypeId: mainMenuType.id,
         isPublished: true,
         accessLevel: 'PUBLIC',
-        language: '*'
-      }
+        language: '*',
+      },
     });
   }
 
@@ -467,8 +470,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         target: '_self',
-        css_class: 'footer-link'
-      })
+        css_class: 'footer-link',
+      }),
     },
     {
       title: 'Условия использования',
@@ -480,8 +483,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         target: '_self',
-        css_class: 'footer-link'
-      })
+        css_class: 'footer-link',
+      }),
     },
     {
       title: 'Поддержка',
@@ -493,9 +496,9 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         target: '_blank',
-        css_class: 'footer-link'
-      })
-    }
+        css_class: 'footer-link',
+      }),
+    },
   ];
 
   // Создаем пункты меню подвала
@@ -504,8 +507,8 @@ async function main() {
       where: {
         menuTypeId_alias: {
           menuTypeId: footerMenuType.id,
-          alias: itemData.alias
-        }
+          alias: itemData.alias,
+        },
       },
       update: {},
       create: {
@@ -513,8 +516,8 @@ async function main() {
         menuTypeId: footerMenuType.id,
         isPublished: true,
         accessLevel: 'PUBLIC',
-        language: '*'
-      }
+        language: '*',
+      },
     });
   }
 
@@ -523,8 +526,8 @@ async function main() {
     where: {
       projectId_name: {
         projectId: testProject.id,
-        name: 'main'
-      }
+        name: 'main',
+      },
     },
     update: {},
     create: {
@@ -532,8 +535,8 @@ async function main() {
       title: 'Главное меню магазина',
       description: 'Основное навигационное меню интернет-магазина',
       isActive: true,
-      projectId: testProject.id
-    }
+      projectId: testProject.id,
+    },
   });
 
   // Создание пунктов меню для интернет-магазина
@@ -550,8 +553,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         show_featured: true,
-        css_class: 'shop-nav-home'
-      })
+        css_class: 'shop-nav-home',
+      }),
     },
     {
       title: 'Каталог',
@@ -561,8 +564,8 @@ async function main() {
       level: 1,
       parameters: JSON.stringify({
         menu_show: true,
-        css_class: 'shop-nav-heading'
-      })
+        css_class: 'shop-nav-heading',
+      }),
     },
     {
       title: 'Электроника',
@@ -577,8 +580,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         items_per_page: 12,
-        css_class: 'shop-nav-category'
-      })
+        css_class: 'shop-nav-category',
+      }),
     },
     {
       title: 'Одежда',
@@ -593,8 +596,8 @@ async function main() {
       parameters: JSON.stringify({
         menu_show: true,
         items_per_page: 12,
-        css_class: 'shop-nav-category'
-      })
+        css_class: 'shop-nav-category',
+      }),
     },
     {
       title: 'О магазине',
@@ -607,9 +610,9 @@ async function main() {
       level: 1,
       parameters: JSON.stringify({
         menu_show: true,
-        css_class: 'shop-nav-about'
-      })
-    }
+        css_class: 'shop-nav-about',
+      }),
+    },
   ];
 
   // Создаем пункты меню магазина и устанавливаем иерархию
@@ -619,8 +622,8 @@ async function main() {
       where: {
         menuTypeId_alias: {
           menuTypeId: shopMainMenuType.id,
-          alias: itemData.alias
-        }
+          alias: itemData.alias,
+        },
       },
       update: {},
       create: {
@@ -628,23 +631,23 @@ async function main() {
         menuTypeId: shopMainMenuType.id,
         isPublished: true,
         accessLevel: 'PUBLIC',
-        language: '*'
-      }
+        language: '*',
+      },
     });
     createdShopItems.push(item);
   }
 
   // Устанавливаем родительские связи для подкатегорий
-  const catalogItem = createdShopItems.find(item => item.alias === 'catalog');
+  const catalogItem = createdShopItems.find((item) => item.alias === 'catalog');
   if (catalogItem) {
     await prisma.menuItem.updateMany({
       where: {
         menuTypeId: shopMainMenuType.id,
-        alias: { in: ['electronics', 'clothing'] }
+        alias: { in: ['electronics', 'clothing'] },
       },
       data: {
-        parentId: catalogItem.id
-      }
+        parentId: catalogItem.id,
+      },
     });
   }
 

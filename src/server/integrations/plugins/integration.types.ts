@@ -25,5 +25,3 @@ export interface IntegrationPlugin {
   getMeta(): IntegrationMeta;
   healthCheck(instance: Integration): Promise<HealthStatus>;
 }
-
-

@@ -77,7 +77,7 @@ const Newsletter7 = () => {
               </svg>
             </div>
             <div className="text-center">
-              <h3 className="mb-3 text-xl font-semibold leading-tight! text-primary sm:text-[28px]">
+              <h3 className="leading-tight! mb-3 text-xl font-semibold text-primary sm:text-[28px]">
                 Get 50% Flat Discount
               </h3>
               <p className="mx-auto mb-9 max-w-[295px] text-base text-body-color dark:text-dark-6">
@@ -89,7 +89,7 @@ const Newsletter7 = () => {
                 <input
                   type="email"
                   placeholder="Enter your email address"
-                  className="h-[52px] w-full rounded-md border border-stroke bg-transparent px-6 text-center text-base text-body-color outline-hidden placeholder:opacity-60 focus:border-primary dark:border-dark-3 dark:text-dark-6"
+                  className="outline-hidden h-[52px] w-full rounded-md border border-stroke bg-transparent px-6 text-center text-base text-body-color placeholder:opacity-60 focus:border-primary dark:border-dark-3 dark:text-dark-6"
                 />
                 <button className="h-[52px] w-full rounded-md bg-primary px-6 text-base font-medium text-white hover:bg-primary/90">
                   Subscribe Now

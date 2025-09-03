@@ -17,7 +17,7 @@ const HeroArea = () => {
                 <span className="mb-5 block text-base font-semibold text-white sm:text-lg md:text-xl">
                   Digital Marketing
                 </span>
-                <h1 className="mb-4 text-3xl font-bold leading-[1.208]! text-white sm:text-4xl lg:text-[42px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-[42px] xl:text-5xl">
                   Grow your website traffic with TailGrids.
                 </h1>
                 <p className="mb-9 text-base text-white">

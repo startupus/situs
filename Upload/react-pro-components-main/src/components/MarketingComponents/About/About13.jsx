@@ -2,12 +2,12 @@ import React from "react";
 
 export default function About13() {
   return (
-    <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div className="container">
         <div className="grid items-center gap-12 lg:grid-cols-2 xl:gap-24">
           <div className="w-full">
             <div className="relative z-10 pl-10 pt-10">
-              <div className="absolute left-0 top-0 -z-10 aspect-430/508 w-full max-w-[430px] bg-purple-light-3"></div>
+              <div className="aspect-430/508 absolute left-0 top-0 -z-10 w-full max-w-[430px] bg-purple-light-3"></div>
               <div className="shadow-lg">
                 <img
                   src="https://i.ibb.co/9yxC7vs/image-1.png"
@@ -21,7 +21,7 @@ export default function About13() {
               <span className="mb-5 block text-xl font-semibold text-dark dark:text-white">
                 GAIN MORE LOYAL CUSTOMERS
               </span>
-              <h2 className="mb-5 text-3xl font-bold leading-tight! text-dark sm:text-4xl md:text-5xl dark:text-white">
+              <h2 className="leading-tight! mb-5 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-5xl">
                 Powerful AI Features Built for Conversations
               </h2>
               <p className="mb-9 text-lg text-body-color dark:text-dark-6">

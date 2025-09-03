@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const ChatList2 = () => {
   return (
@@ -6,9 +6,7 @@ const ChatList2 = () => {
       <div className="mx-auto px-4 md:container">
         <div className="mx-auto max-w-[400px] rounded-lg bg-white px-6 py-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
           <div className="mb-8 flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-dark dark:text-white">
-              Messages
-            </h3>
+            <h3 className="text-xl font-semibold text-dark dark:text-white">Messages</h3>
             <Dropdown />
           </div>
 
@@ -88,16 +86,11 @@ const Dropdown = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -106,17 +99,13 @@ const Dropdown = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
     <div className="relative">
-      <button
-        ref={trigger}
-        onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="text-dark dark:text-white"
-      >
+      <button ref={trigger} onClick={() => setDropdownOpen(!dropdownOpen)} className="text-dark dark:text-white">
         <svg
           width="24"
           height="24"
@@ -135,7 +124,7 @@ const Dropdown = () => {
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
-          dropdownOpen === true ? "block" : "hidden"
+          dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
         <button className="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
@@ -153,26 +142,17 @@ const ChatItem = ({ img, name, text, time, active, number }) => {
   return (
     <div className="flex cursor-pointer items-center rounded-[5px] px-4 py-[10px] hover:bg-gray-1 dark:hover:bg-dark-3">
       <div className="relative mr-[14px] h-11 w-full max-w-[44px] rounded-full">
-        <img
-          src={img}
-          alt="profile"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="profile" className="h-full w-full object-cover object-center" />
         <span
           className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full border-2 border-gray-2 dark:border-dark-2 ${
-            active ? "bg-green" : "bg-red"
+            active ? 'bg-green' : 'bg-red'
           }`}
         ></span>
       </div>
       <div className="w-full">
         <div className="mb-1 flex justify-between">
-          <h5 className="text-sm font-medium text-dark dark:text-white">
-            {name}
-          </h5>
-          <span className="text-xs text-body-color dark:text-dark-6">
-            {" "}
-            {time}{" "}
-          </span>
+          <h5 className="text-sm font-medium text-dark dark:text-white">{name}</h5>
+          <span className="text-xs text-body-color dark:text-dark-6"> {time} </span>
         </div>
         <div className="flex justify-between">
           <p className="text-sm text-dark dark:text-white">{text}</p>

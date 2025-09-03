@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const RecentProduct2 = () => {
   return (
@@ -41,26 +41,16 @@ const ProductCard = ({ link, img, title, subtitle, button, white }) => {
         style={{ backgroundImage: `url(${img})` }}
         className="mb-10 overflow-hidden rounded-sm bg-cover bg-center bg-no-repeat py-8 px-8 sm:px-10 sm:py-[55px] lg:px-8 xl:px-10"
       >
-        <h3
-          className={`${
-            white ? "text-white" : "text-dark"
-          } mb-4 text-xl font-bold  sm:text-2xl`}
-        >
-          {title}
-        </h3>
-        <p
-          className={`${
-            white ? "text-white" : "text-body-color"
-          } mb-8 max-w-[250px] text-base sm:mb-10`}
-        >
+        <h3 className={`${white ? 'text-white' : 'text-dark'} mb-4 text-xl font-bold  sm:text-2xl`}>{title}</h3>
+        <p className={`${white ? 'text-white' : 'text-body-color'} mb-8 max-w-[250px] text-base sm:mb-10`}>
           {subtitle}
         </p>
         <a
           href={link}
           className={`${
             white
-              ? "border-white hover:border-primary hover:bg-primary"
-              : "border-primary bg-primary hover:bg-blue-dark"
+              ? 'border-white hover:border-primary hover:bg-primary'
+              : 'border-primary bg-primary hover:bg-blue-dark'
           } inline-flex rounded border py-[7px] px-5 text-base font-medium text-white transition-all`}
         >
           {button}

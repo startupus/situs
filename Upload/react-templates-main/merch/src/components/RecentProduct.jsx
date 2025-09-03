@@ -39,15 +39,15 @@ const collections = [
 const RecentProduct = () => {
   return (
     <>
-      <section className="dark:bg-dark pt-[120px]">
+      <section className="pt-[120px] dark:bg-dark">
         <div className="container mx-auto">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-                <span className="block mb-2 text-lg font-semibold text-primary">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Recent Products
                 </span>
-                <h2 className="text-dark mb-3 text-3xl font-bold sm:text-4xl md:text-[40px] md:leading-[1.2] dark:text-white">
+                <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
                   Top Collections
                 </h2>
                 <p className="text-base text-body-color dark:text-dark-6">
@@ -58,7 +58,7 @@ const RecentProduct = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             {collections.map((collection, index) => (
               <div
                 key={index}
@@ -77,7 +77,7 @@ const RecentProduct = () => {
                       <h3>
                         <Link
                           to={collection.link}
-                          className="inline-block mb-1 text-lg font-semibold transition text-dark hover:text-primary 2xl:text-xl dark:text-white"
+                          className="mb-1 inline-block text-lg font-semibold text-dark transition hover:text-primary dark:text-white 2xl:text-xl"
                         >
                           {collection.productName}
                         </Link>

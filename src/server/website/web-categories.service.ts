@@ -21,10 +21,14 @@ export class WebCategoriesService {
       throw new HttpException('Project id or slug is required', HttpStatus.BAD_REQUEST);
     }
     // Сначала пробуем как ID
-    const byId = await this.prisma.project.findUnique({ where: { id: idOrSlug }, select: { id: true } }).catch(() => null);
+    const byId = await this.prisma.project
+      .findUnique({ where: { id: idOrSlug }, select: { id: true } })
+      .catch(() => null);
     if (byId?.id) return byId.id;
     // Затем как slug
-    const bySlug = await this.prisma.project.findUnique({ where: { slug: idOrSlug }, select: { id: true } }).catch(() => null);
+    const bySlug = await this.prisma.project
+      .findUnique({ where: { slug: idOrSlug }, select: { id: true } })
+      .catch(() => null);
     if (bySlug?.id) return bySlug.id;
     throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
   }
@@ -65,10 +69,7 @@ export class WebCategoriesService {
           },
         },
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' },
-      ],
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
 
     return categories;
@@ -131,7 +132,7 @@ export class WebCategoriesService {
     }
 
     // Определяем orderIndex если не задан
-    const orderIndex = createDto.orderIndex ?? await this.getNextOrderIndex(pagesProduct.id, createDto.parentId);
+    const orderIndex = createDto.orderIndex ?? (await this.getNextOrderIndex(pagesProduct.id, createDto.parentId));
 
     // Создаём категорию
     const category = await this.prisma.webCategory.create({
@@ -259,7 +260,7 @@ export class WebCategoriesService {
     // Получаем категорию с продуктом
     const category = await this.prisma.webCategory.findUnique({
       where: { id: categoryId },
-      include: { 
+      include: {
         product: { include: { project: true } },
         children: true,
         pageLinks: true,

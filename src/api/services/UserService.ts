@@ -8,11 +8,11 @@ const prisma = new PrismaClient();
 const security = {
   jwt: {
     secret: process.env.JWT_SECRET || 'your-secret-key',
-    expiresIn: '7d'
+    expiresIn: '7d',
   },
   bcrypt: {
-    saltRounds: 12
-  }
+    saltRounds: 12,
+  },
 };
 
 /**
@@ -65,26 +65,26 @@ class UserService {
   async findMany(filters?: UserFilters) {
     try {
       const whereClause: any = {};
-      
+
       // Поиск по email, имени или фамилии
       if (filters?.search) {
         whereClause.OR = [
           { email: { contains: filters.search, mode: 'insensitive' } },
           { firstName: { contains: filters.search, mode: 'insensitive' } },
-          { lastName: { contains: filters.search, mode: 'insensitive' } }
+          { lastName: { contains: filters.search, mode: 'insensitive' } },
         ];
       }
-      
+
       // Фильтр по роли
       if (filters?.role) {
         whereClause.role = filters.role.toUpperCase();
       }
-      
+
       // Фильтр по активности
       if (filters?.isActive !== undefined) {
         whereClause.isActive = filters.isActive;
       }
-      
+
       // Определяем сортировку
       let orderBy: any = { createdAt: 'desc' };
       if (filters?.sortBy) {
@@ -118,13 +118,13 @@ class UserService {
           createdAt: true,
           updatedAt: true,
           _count: {
-            select: { projects: true }
-          }
+            select: { projects: true },
+          },
         },
-        orderBy
+        orderBy,
       });
 
-      return users.map(user => ({
+      return users.map((user) => ({
         id: user.id,
         email: user.email,
         firstName: user.firstName,
@@ -135,7 +135,7 @@ class UserService {
         lastLoginAt: user.lastLoginAt?.toISOString() || null,
         createdAt: user.createdAt.toISOString(),
         updatedAt: user.updatedAt.toISOString(),
-        projectCount: user._count.projects
+        projectCount: user._count.projects,
       }));
     } catch (error) {
       console.error('Ошибка при получении пользователей:', error);
@@ -167,11 +167,11 @@ class UserService {
               slug: true,
               status: true,
               isPublished: true,
-              createdAt: true
+              createdAt: true,
             },
-            orderBy: { updatedAt: 'desc' }
-          }
-        }
+            orderBy: { updatedAt: 'desc' },
+          },
+        },
       });
 
       if (!user) {
@@ -189,14 +189,14 @@ class UserService {
         lastLoginAt: user.lastLoginAt?.toISOString() || null,
         createdAt: user.createdAt.toISOString(),
         updatedAt: user.updatedAt.toISOString(),
-        projects: user.projects.map(project => ({
+        projects: user.projects.map((project) => ({
           id: project.id,
           name: project.name,
           slug: project.slug,
           status: project.status,
           isPublished: project.isPublished,
-          createdAt: project.createdAt.toISOString()
-        }))
+          createdAt: project.createdAt.toISOString(),
+        })),
       };
     } catch (error) {
       console.error('Ошибка при получении пользователя:', error);
@@ -220,8 +220,8 @@ class UserService {
           isActive: true,
           lastLoginAt: true,
           createdAt: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       if (!user) {
@@ -238,7 +238,7 @@ class UserService {
         isActive: user.isActive,
         lastLoginAt: user.lastLoginAt?.toISOString() || null,
         createdAt: user.createdAt.toISOString(),
-        updatedAt: user.updatedAt.toISOString()
+        updatedAt: user.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при получении пользователя по email:', error);
@@ -253,7 +253,7 @@ class UserService {
     try {
       // Проверяем уникальность email
       const existingUser = await prisma.user.findUnique({
-        where: { email: data.email }
+        where: { email: data.email },
       });
 
       if (existingUser) {
@@ -270,7 +270,7 @@ class UserService {
           firstName: data.firstName,
           lastName: data.lastName,
           role: data.role || 'USER',
-          isActive: data.isActive !== undefined ? data.isActive : true
+          isActive: data.isActive !== undefined ? data.isActive : true,
         },
         select: {
           id: true,
@@ -280,8 +280,8 @@ class UserService {
           role: true,
           isActive: true,
           createdAt: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       return {
@@ -293,7 +293,7 @@ class UserService {
         role: user.role.toLowerCase(),
         isActive: user.isActive,
         createdAt: user.createdAt.toISOString(),
-        updatedAt: user.updatedAt.toISOString()
+        updatedAt: user.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при создании пользователя:', error);
@@ -308,7 +308,7 @@ class UserService {
     try {
       // Проверяем уникальность email
       const existingUser = await prisma.user.findUnique({
-        where: { email: data.email }
+        where: { email: data.email },
       });
 
       if (existingUser) {
@@ -325,7 +325,7 @@ class UserService {
           firstName: data.firstName,
           lastName: data.lastName,
           role: 'USER',
-          isActive: true
+          isActive: true,
         },
         select: {
           id: true,
@@ -334,8 +334,8 @@ class UserService {
           lastName: true,
           role: true,
           isActive: true,
-          createdAt: true
-        }
+          createdAt: true,
+        },
       });
 
       // Генерируем JWT токен
@@ -350,9 +350,9 @@ class UserService {
           fullName: this.getFullName(user.firstName, user.lastName),
           role: user.role.toLowerCase(),
           isActive: user.isActive,
-          createdAt: user.createdAt.toISOString()
+          createdAt: user.createdAt.toISOString(),
         },
-        token
+        token,
       };
     } catch (error) {
       console.error('Ошибка при регистрации пользователя:', error);
@@ -377,8 +377,8 @@ class UserService {
           role: true,
           isActive: true,
           lastLoginAt: true,
-          createdAt: true
-        }
+          createdAt: true,
+        },
       });
 
       if (!user) {
@@ -398,7 +398,7 @@ class UserService {
       // Обновляем время последнего входа
       await prisma.user.update({
         where: { id: user.id },
-        data: { lastLoginAt: new Date() }
+        data: { lastLoginAt: new Date() },
       });
 
       // Генерируем JWT токен
@@ -414,9 +414,9 @@ class UserService {
           role: user.role.toLowerCase(),
           isActive: user.isActive,
           lastLoginAt: new Date().toISOString(),
-          createdAt: user.createdAt.toISOString()
+          createdAt: user.createdAt.toISOString(),
         },
-        token
+        token,
       };
     } catch (error) {
       console.error('Ошибка при авторизации:', error);
@@ -432,10 +432,10 @@ class UserService {
       // Проверяем уникальность email если он изменяется
       if (data.email) {
         const existingUser = await prisma.user.findFirst({
-          where: { 
+          where: {
             email: data.email,
-            id: { not: userId }
-          }
+            id: { not: userId },
+          },
         });
 
         if (existingUser) {
@@ -447,7 +447,7 @@ class UserService {
         where: { id: userId },
         data: {
           ...data,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         select: {
           id: true,
@@ -458,8 +458,8 @@ class UserService {
           isActive: true,
           lastLoginAt: true,
           createdAt: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       return {
@@ -472,7 +472,7 @@ class UserService {
         isActive: updatedUser.isActive,
         lastLoginAt: updatedUser.lastLoginAt?.toISOString() || null,
         createdAt: updatedUser.createdAt.toISOString(),
-        updatedAt: updatedUser.updatedAt.toISOString()
+        updatedAt: updatedUser.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при обновлении пользователя:', error);
@@ -487,7 +487,7 @@ class UserService {
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: { password: true }
+        select: { password: true },
       });
 
       if (!user) {
@@ -505,10 +505,10 @@ class UserService {
 
       await prisma.user.update({
         where: { id: userId },
-        data: { 
+        data: {
           password: hashedNewPassword,
-          updatedAt: new Date()
-        }
+          updatedAt: new Date(),
+        },
       });
 
       return { success: true };
@@ -525,21 +525,21 @@ class UserService {
     try {
       const user = await prisma.user.update({
         where: { id: userId },
-        data: { 
+        data: {
           isActive: false,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         select: {
           id: true,
           email: true,
-          isActive: true
-        }
+          isActive: true,
+        },
       });
 
       return {
         id: user.id,
         email: user.email,
-        isActive: user.isActive
+        isActive: user.isActive,
       };
     } catch (error) {
       console.error('Ошибка при деактивации пользователя:', error);
@@ -554,21 +554,21 @@ class UserService {
     try {
       const user = await prisma.user.update({
         where: { id: userId },
-        data: { 
+        data: {
           isActive: true,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         select: {
           id: true,
           email: true,
-          isActive: true
-        }
+          isActive: true,
+        },
       });
 
       return {
         id: user.id,
         email: user.email,
-        isActive: user.isActive
+        isActive: user.isActive,
       };
     } catch (error) {
       console.error('Ошибка при активации пользователя:', error);
@@ -584,17 +584,17 @@ class UserService {
       // Сначала удаляем все проекты пользователя
       await prisma.page.deleteMany({
         where: {
-          project: { ownerId: userId }
-        }
+          project: { ownerId: userId },
+        },
       });
 
       await prisma.project.deleteMany({
-        where: { ownerId: userId }
+        where: { ownerId: userId },
       });
 
       // Затем удаляем пользователя
       await prisma.user.delete({
-        where: { id: userId }
+        where: { id: userId },
       });
 
       return { success: true };
@@ -613,7 +613,7 @@ class UserService {
         prisma.user.count(),
         prisma.user.count({ where: { isActive: true } }),
         prisma.user.count({ where: { role: 'ADMIN' } }),
-        prisma.user.count({ where: { role: 'USER' } })
+        prisma.user.count({ where: { role: 'USER' } }),
       ]);
 
       return {
@@ -621,7 +621,7 @@ class UserService {
         activeUsers,
         inactiveUsers: totalUsers - activeUsers,
         adminUsers,
-        userUsers
+        userUsers,
       };
     } catch (error) {
       console.error('Ошибка при получении статистики пользователей:', error);
@@ -635,7 +635,7 @@ class UserService {
   async verifyToken(token: string) {
     try {
       const decoded = jwt.verify(token, security.jwt.secret) as { userId: string };
-      
+
       const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
         select: {
@@ -644,8 +644,8 @@ class UserService {
           firstName: true,
           lastName: true,
           role: true,
-          isActive: true
-        }
+          isActive: true,
+        },
       });
 
       if (!user || !user.isActive) {
@@ -659,7 +659,7 @@ class UserService {
         lastName: user.lastName,
         fullName: this.getFullName(user.firstName, user.lastName),
         role: user.role.toLowerCase(),
-        isActive: user.isActive
+        isActive: user.isActive,
       };
     } catch (error) {
       console.error('Ошибка при верификации токена:', error);
@@ -685,11 +685,7 @@ class UserService {
    * Генерация JWT токена
    */
   private generateToken(userId: string): string {
-    return jwt.sign(
-      { userId },
-      security.jwt.secret,
-      { expiresIn: security.jwt.expiresIn }
-    );
+    return jwt.sign({ userId }, security.jwt.secret, { expiresIn: security.jwt.expiresIn });
   }
 
   /**
@@ -701,4 +697,4 @@ class UserService {
   }
 }
 
-export default new UserService(); 
+export default new UserService();

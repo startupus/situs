@@ -28,7 +28,7 @@ const footerMenu = [
 const Footer = () => {
   return (
     <>
-      <footer className="dark:bg-dark relative z-10 bg-white pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+      <footer className="relative z-10 bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
@@ -46,7 +46,7 @@ const Footer = () => {
                   />
                 </Link>
 
-                <p className="text-body-color dark:text-dark-6 mb-7 text-base">
+                <p className="mb-7 text-base text-body-color dark:text-dark-6">
                   Lorem ipsum dolor amet consectetur adipiscing elit do eiusmod
                   tempor incididunt ut labore et dolore.
                 </p>
@@ -54,7 +54,7 @@ const Footer = () => {
                 <div className="-mx-3 flex items-center">
                   <Link
                     to="#"
-                    className="text-dark-7 hover:text-primary dark:hover:text-primary px-3 dark:text-white/40"
+                    className="px-3 text-dark-7 hover:text-primary dark:text-white/40 dark:hover:text-primary"
                   >
                     <svg
                       width="10"
@@ -68,7 +68,7 @@ const Footer = () => {
 
                   <Link
                     to="#"
-                    className="text-dark-7 dark:hover:text-primary hover:text-primary px-3 dark:text-white/40"
+                    className="px-3 text-dark-7 hover:text-primary dark:text-white/40 dark:hover:text-primary"
                   >
                     <svg
                       width="19"
@@ -82,7 +82,7 @@ const Footer = () => {
 
                   <Link
                     to="#"
-                    className="text-dark-7 dark:hover:text-primary hover:text-primary px-3 dark:text-white/40"
+                    className="px-3 text-dark-7 hover:text-primary dark:text-white/40 dark:hover:text-primary"
                   >
                     <svg
                       width="18"
@@ -98,7 +98,7 @@ const Footer = () => {
 
                   <Link
                     to="#"
-                    className="text-dark-7 dark:hover:text-primary hover:text-primary px-3 dark:text-white/40"
+                    className="px-3 text-dark-7 hover:text-primary dark:text-white/40 dark:hover:text-primary"
                   >
                     <svg
                       width="18"
@@ -119,7 +119,7 @@ const Footer = () => {
                 className={`w-full px-4 sm:w-1/2 lg:w-3/12`}
               >
                 <div className="mb-10 w-full">
-                  <h4 className="text-dark mb-9 text-lg font-semibold dark:text-white">
+                  <h4 className="mb-9 text-lg font-semibold text-dark dark:text-white">
                     {group.title}
                   </h4>
 
@@ -128,7 +128,7 @@ const Footer = () => {
                       <li key={index}>
                         <Link
                           to={item.link}
-                          className="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary inline-block text-base leading-loose"
+                          className="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                         >
                           {item.text}
                         </Link>
@@ -141,21 +141,21 @@ const Footer = () => {
 
             <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
               <div className="mb-10 w-full">
-                <h4 className="text-dark mb-9 text-lg font-semibold dark:text-white">
+                <h4 className="mb-9 text-lg font-semibold text-dark dark:text-white">
                   Subscribe To Newsletter
                 </h4>
-                <p className="text-body-color dark:text-dark-6 mb-5 text-base">
+                <p className="mb-5 text-base text-body-color dark:text-dark-6">
                   Enter your email address for receiving valuable newsletters.
                 </p>
                 <form className="relative mb-5 w-full overflow-hidden rounded-sm">
                   <input
                     type="email"
                     placeholder="Your Email"
-                    className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 h-12 w-full rounded-sm border bg-transparent px-5 text-sm outline-hidden focus-visible:shadow-none"
+                    className="outline-hidden h-12 w-full rounded-sm border border-stroke bg-transparent px-5 text-sm text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
                   />
                   <button
                     type="submit"
-                    className="bg-primary hover:bg-primary/90 absolute top-0 right-0 flex h-full w-12 items-center justify-center text-white"
+                    className="absolute right-0 top-0 flex h-full w-12 items-center justify-center bg-primary text-white hover:bg-primary/90"
                   >
                     <svg
                       width="20"
@@ -171,7 +171,7 @@ const Footer = () => {
                     </svg>
                   </button>
                 </form>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   &copy; 2025 TailGrids
                 </p>
               </div>

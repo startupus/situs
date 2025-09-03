@@ -19,7 +19,7 @@ export class MenuResolverService {
       return {
         component: null,
         data: null,
-        error: 'Пункт меню не содержит информации о компоненте'
+        error: 'Пункт меню не содержит информации о компоненте',
       };
     }
 
@@ -27,28 +27,28 @@ export class MenuResolverService {
       switch (menuItem.component) {
         case 'Website':
           return await this.resolveWebsiteComponent(menuItem);
-        
+
         case 'Store':
           return await this.resolveStoreComponent(menuItem);
-        
+
         case 'Blog':
           return await this.resolveBlogComponent(menuItem);
-        
+
         case 'Landing':
           return await this.resolveLandingComponent(menuItem);
-        
+
         default:
           return {
             component: menuItem.component,
             data: null,
-            error: `Неизвестный компонент: ${menuItem.component}`
+            error: `Неизвестный компонент: ${menuItem.component}`,
           };
       }
     } catch (error) {
       return {
         component: menuItem.component,
         data: null,
-        error: `Ошибка разрешения компонента: ${error instanceof Error ? error.message : String(error)}`
+        error: `Ошибка разрешения компонента: ${error instanceof Error ? error.message : String(error)}`,
       };
     }
   }
@@ -65,7 +65,7 @@ export class MenuResolverService {
           return {
             component: 'Website',
             data: null,
-            error: 'Для view=page требуется targetId (slug страницы)'
+            error: 'Для view=page требуется targetId (slug страницы)',
           };
         }
 
@@ -74,23 +74,23 @@ export class MenuResolverService {
           where: {
             slug: targetId,
             product: {
-              type: 'WEBSITE'
-            }
+              type: 'WEBSITE',
+            },
           },
           include: {
             product: {
               include: {
-                project: true
-              }
-            }
-          }
+                project: true,
+              },
+            },
+          },
         });
 
         if (!page) {
           return {
             component: 'Website',
             data: null,
-            error: `Страница с slug "${targetId}" не найдена`
+            error: `Страница с slug "${targetId}" не найдена`,
           };
         }
 
@@ -100,15 +100,15 @@ export class MenuResolverService {
           data: {
             page,
             project: page.product.project,
-            url: `/projects/${page.product.project.slug}/website/${page.slug}`
-          }
+            url: `/projects/${page.product.project.slug}/website/${page.slug}`,
+          },
         };
 
       default:
         return {
           component: 'Website',
           data: null,
-          error: `Неизвестный view для Website: ${view}`
+          error: `Неизвестный view для Website: ${view}`,
         };
     }
   }
@@ -125,19 +125,19 @@ export class MenuResolverService {
         const categories = await this.prisma.category.findMany({
           where: {
             product: {
-              type: 'ECOMMERCE'
-            }
+              type: 'ECOMMERCE',
+            },
           },
           include: {
             children: true,
             _count: { select: { items: true } },
             product: {
               include: {
-                project: true
-              }
-            }
+                project: true,
+              },
+            },
           },
-          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
         });
 
         return {
@@ -146,8 +146,8 @@ export class MenuResolverService {
           data: {
             categories,
             project: categories[0]?.product?.project,
-            url: `/projects/${categories[0]?.product?.project?.slug}/store`
-          }
+            url: `/projects/${categories[0]?.product?.project?.slug}/store`,
+          },
         };
 
       case 'category':
@@ -155,7 +155,7 @@ export class MenuResolverService {
           return {
             component: 'Store',
             data: null,
-            error: 'Для view=category требуется targetId (ID категории)'
+            error: 'Для view=category требуется targetId (ID категории)',
           };
         }
 
@@ -167,22 +167,22 @@ export class MenuResolverService {
             parent: true,
             items: {
               take: 20,
-              orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+              orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
             },
             _count: { select: { items: true } },
             product: {
               include: {
-                project: true
-              }
-            }
-          }
+                project: true,
+              },
+            },
+          },
         });
 
         if (!category) {
           return {
             component: 'Store',
             data: null,
-            error: `Категория с ID "${targetId}" не найдена`
+            error: `Категория с ID "${targetId}" не найдена`,
           };
         }
 
@@ -193,15 +193,15 @@ export class MenuResolverService {
             category,
             items: category.items,
             project: category.product.project,
-            url: `/projects/${category.product.project.slug}/store/category/${category.slug}`
-          }
+            url: `/projects/${category.product.project.slug}/store/category/${category.slug}`,
+          },
         };
 
       default:
         return {
           component: 'Store',
           data: null,
-          error: `Неизвестный view для Store: ${view}`
+          error: `Неизвестный view для Store: ${view}`,
         };
     }
   }
@@ -221,8 +221,8 @@ export class MenuResolverService {
           data: {
             articles: [], // TODO: реализовать модель Article
             project: null, // TODO: получить проект
-            url: `/blog/${targetId || 'list'}`
-          }
+            url: `/blog/${targetId || 'list'}`,
+          },
         };
 
       case 'article':
@@ -233,15 +233,15 @@ export class MenuResolverService {
           data: {
             article: null, // TODO: найти статью по targetId
             project: null,
-            url: `/blog/article/${targetId}`
-          }
+            url: `/blog/article/${targetId}`,
+          },
         };
 
       default:
         return {
           component: 'Blog',
           data: null,
-          error: `Неизвестный view для Blog: ${view}`
+          error: `Неизвестный view для Blog: ${view}`,
         };
     }
   }
@@ -261,15 +261,15 @@ export class MenuResolverService {
           data: {
             landing: null, // TODO: найти лендинг по targetId
             project: null,
-            url: `/landing/${targetId}`
-          }
+            url: `/landing/${targetId}`,
+          },
         };
 
       default:
         return {
           component: 'Landing',
           data: null,
-          error: `Неизвестный view для Landing: ${view}`
+          error: `Неизвестный view для Landing: ${view}`,
         };
     }
   }
@@ -284,9 +284,9 @@ export class MenuResolverService {
     const menuItems = await this.prisma.menuItem.findMany({
       where: {
         menuTypeId,
-        isPublished: true
+        isPublished: true,
       },
-      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
 
     // Ищем точное совпадение по targetId или alias
@@ -294,7 +294,7 @@ export class MenuResolverService {
       if (item.alias && currentPath.includes(item.alias)) {
         return item;
       }
-      
+
       if (item.targetId && currentPath.includes(item.targetId)) {
         return item;
       }
@@ -321,12 +321,12 @@ export class MenuResolverService {
         id: currentItem.id,
         title: currentItem.title,
         alias: currentItem.alias,
-        url: this.buildMenuItemUrl(currentItem)
+        url: this.buildMenuItemUrl(currentItem),
       });
 
       if (currentItem.parentId) {
         currentItem = await this.prisma.menuItem.findUnique({
-          where: { id: currentItem.parentId }
+          where: { id: currentItem.parentId },
         });
       } else {
         currentItem = null;

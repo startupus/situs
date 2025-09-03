@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const PageTitle4 = () => {
   return (
@@ -13,9 +13,7 @@ const PageTitle4 = () => {
             />
           </div>
           <div>
-            <h4 className="mb-1 text-sm font-semibold text-dark dark:text-white">
-              Hey Devid Wisedom 👋
-            </h4>
+            <h4 className="mb-1 text-sm font-semibold text-dark dark:text-white">Hey Devid Wisedom 👋</h4>
             <p className="text-sm font-medium text-body-color dark:text-dark-6">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit ante.
             </p>

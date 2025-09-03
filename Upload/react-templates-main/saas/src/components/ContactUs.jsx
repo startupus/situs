@@ -67,16 +67,16 @@ const inputList = [
 const ContactUs = () => {
   return (
     <>
-      <section className="dark:bg-dark relative z-40 py-20 lg:py-[120px]">
-        <div className="dark:bg-dark-3 absolute top-0 left-0 z-[-1] h-1/2 w-full bg-[#E9F9FF]"></div>
+      <section className="relative z-40 py-20 dark:bg-dark lg:py-[120px]">
+        <div className="absolute left-0 top-0 z-[-1] h-1/2 w-full bg-[#E9F9FF] dark:bg-dark-3"></div>
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-6/12 xl:w-7/12">
               <div className="mb-[60px] lg:mb-[100px] xl:mb-[150px]">
-                <span className="text-dark mb-6 block text-base font-medium dark:text-white">
+                <span className="mb-6 block text-base font-medium text-dark dark:text-white">
                   CONTACT US
                 </span>
-                <h2 className="text-dark text-[35px] leading-tight font-semibold dark:text-white">
+                <h2 className="text-[35px] font-semibold leading-tight text-dark dark:text-white">
                   Let’s talk about <br />
                   your problem.
                 </h2>
@@ -87,17 +87,17 @@ const ContactUs = () => {
                   <div key={index} className="w-full max-w-[330px] px-4">
                     <div className="mb-12 w-full">
                       <div className="flex">
-                        <div className="text-primary mr-6 h-9 w-9">
+                        <div className="mr-6 h-9 w-9 text-primary">
                           {item.icon}
                         </div>
                         <div>
-                          <h5 className="text-dark mb-4 text-lg font-medium dark:text-white">
+                          <h5 className="mb-4 text-lg font-medium text-dark dark:text-white">
                             {item.title}
                           </h5>
                           {item.child.map((child, childIndex) => (
                             <p
                               key={childIndex}
-                              className={`text-body-color dark:text-dark-6 text-base ${childIndex !== 0 && "mt-2"}`}
+                              className={`text-base text-body-color dark:text-dark-6 ${childIndex !== 0 && "mt-2"}`}
                             >
                               {child}
                             </p>
@@ -111,15 +111,15 @@ const ContactUs = () => {
             </div>
 
             <div className="w-full px-4 lg:w-6/12 xl:w-5/12">
-              <div className="shadow-3 dark:bg-dark-2 rounded-lg bg-white px-8 py-12 sm:p-[60px] lg:px-12 xl:p-[60px]">
-                <h3 className="text-dark mb-8 text-2xl font-semibold sm:text-[28px] dark:text-white">
+              <div className="rounded-lg bg-white px-8 py-12 shadow-3 dark:bg-dark-2 sm:p-[60px] lg:px-12 xl:p-[60px]">
+                <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white sm:text-[28px]">
                   Send us a Message
                 </h3>
 
                 <form>
                   {inputList.map((item, index) => (
                     <div key={index} className="mb-6">
-                      <label className="text-body-color dark:text-dark-6 block text-xs">
+                      <label className="block text-xs text-body-color dark:text-dark-6">
                         {item.label}
                       </label>
 
@@ -127,13 +127,13 @@ const ContactUs = () => {
                         <textarea
                           rows="1"
                           placeholder={item.placeholder}
-                          className="text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary placeholder:dark:text-dark-6/30 placeholder:text-dark-6 w-full resize-none border-b border-[#f1f1f1] bg-transparent py-4 text-base outline-hidden focus-visible:shadow-none"
+                          className="outline-hidden w-full resize-none border-b border-[#f1f1f1] bg-transparent py-4 text-base text-body-color placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 placeholder:dark:text-dark-6/30 dark:focus:border-primary"
                         ></textarea>
                       ) : (
                         <input
                           type={item.type}
                           placeholder={item.placeholder}
-                          className="text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary placeholder:dark:text-dark-6/30 placeholder:text-dark-6 w-full border-b border-[#f1f1f1] bg-transparent py-4 text-base outline-hidden focus-visible:shadow-none"
+                          className="outline-hidden w-full border-b border-[#f1f1f1] bg-transparent py-4 text-base text-body-color placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 placeholder:dark:text-dark-6/30 dark:focus:border-primary"
                         />
                       )}
                     </div>
@@ -142,7 +142,7 @@ const ContactUs = () => {
                   <div>
                     <button
                       type="submit"
-                      className="bg-primary hover:bg-primary/90 rounded-sm px-10 py-3 text-base font-medium text-white transition"
+                      className="rounded-sm bg-primary px-10 py-3 text-base font-medium text-white transition hover:bg-primary/90"
                     >
                       Send Message
                     </button>

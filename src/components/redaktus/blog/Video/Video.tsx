@@ -1,17 +1,17 @@
-import React from 'react'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-import Container from '../layout/Container'
-import Section from '../layout/Section'
+import React from 'react';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
+import Container from '../layout/Container';
+import Section from '../layout/Section';
 
 const videoUrlPrefix: { [key: string]: string } = Object.freeze({
   youtube: 'https://www.youtube.com/embed/',
   vimeo: 'https://player.vimeo.com/video/',
-})
+});
 
 export interface VideoProps {
-  url: string
-  platform: string
+  url: string;
+  platform: string;
 }
 
 const Video: types.Brick<VideoProps> = ({ platform, url }) => {
@@ -19,24 +19,18 @@ const Video: types.Brick<VideoProps> = ({ platform, url }) => {
     <Section>
       <Container>
         <div className="aspect-video">
-          <iframe
-            key="video iframe"
-            width="100%"
-            height="100%"
-            src={`${videoUrlPrefix[platform]}${url}?rel=0`}
-          />
+          <iframe key="video iframe" width="100%" height="100%" src={`${videoUrlPrefix[platform]}${url}?rel=0`} />
         </div>
       </Container>
     </Section>
-  )
-}
+  );
+};
 Video.schema = {
   name: blockNames.Video,
   label: 'Video',
   category: 'rb-ui blog',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Video/Video.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Video/Video.tsx',
   getDefaultProps: () => ({
     url: 'A60xWr-nqv0',
     platform: 'youtube',
@@ -60,5 +54,5 @@ Video.schema = {
       type: types.SideEditPropType.Text,
     },
   ],
-}
-export default Video
+};
+export default Video;

@@ -1,5 +1,12 @@
 /// <reference lib="decorators.legacy" />
-import { Injectable, NotFoundException, BadRequestException, Optional, Inject, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+  Optional,
+  Inject,
+  ForbiddenException,
+} from '@nestjs/common';
 import { RealtimeEventsService } from '../realtime/realtime-events.service';
 import { Prisma, ProjectStatus, ProductType, PageStatus, PageType } from '@prisma/client';
 import { PrismaService } from '../database/prisma.service';
@@ -9,7 +16,7 @@ import { ProjectQueryDto } from './dto/project-query.dto';
 
 /**
  * Сервис проектов
- * 
+ *
  * Мигрированная логика из Express /api/projects
  */
 @Injectable()
@@ -17,10 +24,7 @@ export class ProjectsService {
   private readonly prisma: PrismaService;
   private readonly realtime?: RealtimeEventsService;
 
-  constructor(
-    prisma: PrismaService,
-    @Optional() @Inject(RealtimeEventsService) realtime?: RealtimeEventsService,
-  ) {
+  constructor(prisma: PrismaService, @Optional() @Inject(RealtimeEventsService) realtime?: RealtimeEventsService) {
     this.prisma = prisma;
     this.realtime = realtime;
     console.log('[BOOT] ProjectsService manual injection, prisma:', !!this.prisma, 'realtime:', !!this.realtime);
@@ -34,7 +38,8 @@ export class ProjectsService {
       // 2) Слаг резервно
       if ((project.slug || '').toString() === 'situs-admin') return true;
       // 3) Настройки как запасной вариант
-      const settings = project && typeof project.settings === 'string' ? JSON.parse(project.settings) : (project.settings || {});
+      const settings =
+        project && typeof project.settings === 'string' ? JSON.parse(project.settings) : project.settings || {};
       return Boolean(settings?.isSystemAdmin);
     } catch {
       return false;
@@ -51,7 +56,7 @@ export class ProjectsService {
   async getProjectThemeConfig(projectId: string): Promise<any> {
     const project = await this.prisma.project.findUnique({
       where: { id: projectId },
-      select: { id: true, theme: true }
+      select: { id: true, theme: true },
     });
     if (!project) {
       throw new NotFoundException('Проект не найден');
@@ -75,7 +80,7 @@ export class ProjectsService {
     }
     await this.prisma.project.update({
       where: { id: projectId },
-      data: { theme: JSON.stringify(themeConfig) }
+      data: { theme: JSON.stringify(themeConfig) },
     });
     return { success: true };
   }
@@ -103,7 +108,7 @@ export class ProjectsService {
           text: '#1F2937',
           textSecondary: '#6B7280',
           border: '#E5E7EB',
-          borderLight: '#F3F4F6'
+          borderLight: '#F3F4F6',
         },
         dark: {
           primary: '#2881C6',
@@ -120,9 +125,9 @@ export class ProjectsService {
           text: '#F1F5F9',
           textSecondary: '#CBD5E1',
           border: '#1F6AA3',
-          borderLight: '#3B92D4'
-        }
-      }
+          borderLight: '#3B92D4',
+        },
+      },
     };
   }
 
@@ -294,7 +299,11 @@ export class ProjectsService {
         },
       });
       // Автосоздание типовых страниц для WEBSITE
-      const commonPageData = { status: PageStatus.DRAFT as any, pageType: PageType.PAGE as any, content: '{}' } as const;
+      const commonPageData = {
+        status: PageStatus.DRAFT as any,
+        pageType: PageType.PAGE as any,
+        content: '{}',
+      } as const;
       const pagesToCreate: Array<{ title: string; slug: string; isHomePage?: boolean }> = [
         { title: 'Главная', slug: 'home', isHomePage: true },
         { title: 'О компании', slug: 'about' },
@@ -314,8 +323,8 @@ export class ProjectsService {
               isHomePage: !!p.isHomePage,
               product: { connect: { id: pages.id } },
             },
-          })
-        )
+          }),
+        ),
       );
 
       // 2) Блог (BLOG)
@@ -397,7 +406,9 @@ export class ProjectsService {
 
     // Проверяем уникальность имени если оно изменяется
     if (updateProjectDto.name && updateProjectDto.name !== existingProject.name) {
-      const duplicateProject = await this.prisma.project.findFirst({ where: { name: updateProjectDto.name, ownerId: effectiveOwnerId, id: { not: id } } });
+      const duplicateProject = await this.prisma.project.findFirst({
+        where: { name: updateProjectDto.name, ownerId: effectiveOwnerId, id: { not: id } },
+      });
 
       if (duplicateProject) {
         throw new BadRequestException('Проект с таким названием уже существует');
@@ -416,7 +427,8 @@ export class ProjectsService {
       }
       updateData.status = this.mapProjectStatus(updateProjectDto.status);
     }
-    if ((updateProjectDto as any).isPublished !== undefined) updateData.isPublished = Boolean((updateProjectDto as any).isPublished);
+    if ((updateProjectDto as any).isPublished !== undefined)
+      updateData.isPublished = Boolean((updateProjectDto as any).isPublished);
     // Доменные поля (могут приходить из специализированного DTO)
     const domain = (updateProjectDto as any).domain as string | undefined;
     const customDomain = (updateProjectDto as any).customDomain as string | undefined;
@@ -424,7 +436,9 @@ export class ProjectsService {
     if (typeof customDomain === 'string') {
       // Проверяем, что customDomain уникален среди проектов
       if (customDomain) {
-        const duplicate = await this.prisma.project.findFirst({ where: { id: { not: id }, customDomain: customDomain } });
+        const duplicate = await this.prisma.project.findFirst({
+          where: { id: { not: id }, customDomain: customDomain },
+        });
         if (duplicate) {
           throw new BadRequestException('Этот пользовательский домен уже привязан к другому проекту');
         }
@@ -482,7 +496,9 @@ export class ProjectsService {
     }
 
     await this.prisma.project.delete({ where: { id: existingProject.id } });
-    try { this.realtime?.publish('project_deleted', { id }); } catch {}
+    try {
+      this.realtime?.publish('project_deleted', { id });
+    } catch {}
     return { message: 'Проект успешно удален' };
   }
 
@@ -537,7 +553,13 @@ export class ProjectsService {
   async listAccesses(projectId: string) {
     return this.prisma.projectAccess.findMany({
       where: { projectId },
-      select: { id: true, userId: true, role: true, grantedAt: true, user: { select: { email: true, username: true } } },
+      select: {
+        id: true,
+        userId: true,
+        role: true,
+        grantedAt: true,
+        user: { select: { email: true, username: true } },
+      },
       orderBy: { grantedAt: 'desc' },
     });
   }
@@ -630,9 +652,39 @@ export class ProjectsService {
 
   private generateSlug(name: string): string {
     const map: Record<string, string> = {
-      а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z', и: 'i', й: 'i', к: 'k', л: 'l', м: 'm',
-      н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'c', ч: 'ch', ш: 'sh', щ: 'sch', ъ: '',
-      ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya',
+      а: 'a',
+      б: 'b',
+      в: 'v',
+      г: 'g',
+      д: 'd',
+      е: 'e',
+      ё: 'e',
+      ж: 'zh',
+      з: 'z',
+      и: 'i',
+      й: 'i',
+      к: 'k',
+      л: 'l',
+      м: 'm',
+      н: 'n',
+      о: 'o',
+      п: 'p',
+      р: 'r',
+      с: 's',
+      т: 't',
+      у: 'u',
+      ф: 'f',
+      х: 'h',
+      ц: 'c',
+      ч: 'ch',
+      ш: 'sh',
+      щ: 'sch',
+      ъ: '',
+      ы: 'y',
+      ь: '',
+      э: 'e',
+      ю: 'yu',
+      я: 'ya',
     };
     const transliterated = name
       .toLowerCase()

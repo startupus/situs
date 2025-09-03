@@ -17,11 +17,7 @@ interface EditMenuItemModalProps {
   onUpdate: (item: MenuItemData) => void;
 }
 
-const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({ 
-  item, 
-  onClose, 
-  onUpdate 
-}) => {
+const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({ item, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
     title: item.title,
     alias: item.alias,
@@ -39,14 +35,14 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
       try {
         // Если параметры приходят строкой JSON, распарсим её, иначе используем объект
         const raw = (item as any).parameters;
-        const obj = typeof raw === 'string' ? JSON.parse(raw) : (raw || {});
+        const obj = typeof raw === 'string' ? JSON.parse(raw) : raw || {};
         return JSON.stringify(obj, null, 2);
       } catch {
         return '{}';
       }
-    })()
+    })(),
   });
-  
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showIconSelector, setShowIconSelector] = useState(false);
@@ -94,7 +90,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
       const response = await fetch(`/api/menu-items/${item.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
@@ -113,7 +109,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
   };
 
   const handleChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -121,9 +117,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
       <div className="bg-white dark:bg-dark-2 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold text-dark dark:text-white">
-              Редактирование пункта меню
-            </h3>
+            <h3 className="text-xl font-bold text-dark dark:text-white">Редактирование пункта меню</h3>
             <button
               onClick={onClose}
               className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white p-1"
@@ -164,7 +158,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
               options={[
                 { value: 'COMPONENT', label: 'Компонент' },
                 { value: 'URL', label: 'Внешняя ссылка' },
-                { value: 'HEADING', label: 'Заголовок (разделитель)' }
+                { value: 'HEADING', label: 'Заголовок (разделитель)' },
               ]}
               required
             />
@@ -181,7 +175,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                     { value: 'Website', label: 'Website' },
                     { value: 'Shop', label: 'Shop' },
                     { value: 'Blog', label: 'Blog' },
-                    { value: 'Landing', label: 'Landing' }
+                    { value: 'Landing', label: 'Landing' },
                   ]}
                 />
 
@@ -221,7 +215,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                   { value: 'PUBLIC', label: 'Публичный доступ' },
                   { value: 'REGISTERED', label: 'Только для зарегистрированных' },
                   { value: 'SPECIAL', label: 'Специальные права' },
-                  { value: 'CUSTOM', label: 'Пользовательские права' }
+                  { value: 'CUSTOM', label: 'Пользовательские права' },
                 ]}
               />
 
@@ -233,7 +227,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                   { value: '*', label: 'Все языки' },
                   { value: 'ru-RU', label: 'Русский' },
                   { value: 'en-GB', label: 'English' },
-                  { value: 'es-ES', label: 'Español' }
+                  { value: 'es-ES', label: 'Español' },
                 ]}
               />
             </div>
@@ -242,25 +236,21 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
             <div className="border border-primary/20 dark:border-primary/30 rounded-lg p-4 bg-primary/5 dark:bg-primary/10">
               <div className="flex items-center gap-2 mb-3">
                 <FiImage className="text-primary" size={16} />
-                <label className="text-sm font-medium text-dark dark:text-white">
-                  Иконка пункта меню
-                </label>
+                <label className="text-sm font-medium text-dark dark:text-white">Иконка пункта меню</label>
               </div>
-              
+
               <div className="flex items-center gap-3">
                 {/* Предварительный просмотр */}
                 <div className="flex items-center gap-2 p-2 bg-white dark:bg-dark-3 rounded border border-stroke dark:border-dark-3">
-                  <IconPreview 
+                  <IconPreview
                     iconName={formData.icon}
                     iconLibrary={formData.iconLibrary}
                     size={20}
                     className="text-primary"
                   />
-                  <span className="text-sm text-dark dark:text-white">
-                    {formData.icon || 'По умолчанию'}
-                  </span>
+                  <span className="text-sm text-dark dark:text-white">{formData.icon || 'По умолчанию'}</span>
                 </div>
-                
+
                 {/* Кнопки управления */}
                 <div className="flex gap-2">
                   <button
@@ -302,7 +292,10 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({
                 onChange={(e) => handleChange('isPublished', e.target.checked)}
                 className="w-4 h-4 text-primary border-stroke dark:border-dark-3 rounded focus:ring-primary"
               />
-              <label htmlFor="isPublished" className="text-sm font-medium text-dark dark:text-white flex items-center gap-2">
+              <label
+                htmlFor="isPublished"
+                className="text-sm font-medium text-dark dark:text-white flex items-center gap-2"
+              >
                 <FiGlobe size={16} />
                 Опубликовано (видно пользователям)
               </label>

@@ -27,7 +27,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onBack }) => {
   });
 
   const handleInputChange = (field: string, value: string) => {
-    setForm(prev => ({ ...prev, [field]: value }));
+    setForm((prev) => ({ ...prev, [field]: value }));
     if (error) setError('');
   };
 
@@ -224,12 +224,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onBack }) => {
         </div>
       )}
 
-      <ThemeButton
-        onClick={handleNext}
-        disabled={!validateForm() || loading}
-        className="w-full"
-        loading={loading}
-      >
+      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full" loading={loading}>
         Отправить код
       </ThemeButton>
     </div>
@@ -280,12 +275,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onBack }) => {
         />
       </div>
 
-      <ThemeButton
-        onClick={handleNext}
-        disabled={!validateForm() || loading}
-        className="w-full"
-        loading={loading}
-      >
+      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full" loading={loading}>
         Изменить пароль
       </ThemeButton>
     </div>
@@ -294,17 +284,19 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onBack }) => {
   const renderCompleteStep = () => (
     <div className="text-center space-y-6">
       <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto">
-        <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="w-8 h-8 text-green-600 dark:text-green-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
       <p className="text-gray-600 dark:text-gray-400">
         Пароль успешно изменен. Теперь вы можете войти в систему с новым паролем.
       </p>
-      <ThemeButton
-        onClick={() => navigate('/login')}
-        className="w-full"
-      >
+      <ThemeButton onClick={() => navigate('/login')} className="w-full">
         Войти в систему
       </ThemeButton>
     </div>
@@ -318,12 +310,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onBack }) => {
           <div className="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
             <span className="text-white text-2xl font-bold">S</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Situs Platform
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Восстановление доступа
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Situs Platform</h1>
+          <p className="text-gray-600 dark:text-gray-400">Восстановление доступа</p>
         </div>
 
         {/* Форма */}
@@ -343,20 +331,14 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onBack }) => {
 
           {/* Заголовок */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {getStepTitle()}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {getStepDescription()}
-            </p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{getStepTitle()}</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">{getStepDescription()}</p>
           </div>
 
           {/* Ошибка */}
           {error && (
             <div className="mb-6">
-              <ThemeAlert variant="error">
-                {error}
-              </ThemeAlert>
+              <ThemeAlert variant="error">{error}</ThemeAlert>
             </div>
           )}
 

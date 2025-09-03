@@ -1,15 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-  Request,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { InvitationsService } from './invitations.service';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
@@ -31,8 +20,8 @@ export class InvitationsController {
   @Post()
   // В dev режиме guard пропускает, в prod потребуется JWT
   @ApiOperation({ summary: 'Создание приглашений пользователей' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Приглашения созданы и отправлены',
     type: [Invitation],
   })
@@ -40,9 +29,17 @@ export class InvitationsController {
   @ApiResponse({ status: 409, description: 'Пользователи уже существуют или имеют активные приглашения' })
   async create(
     @Body() createInvitationDto: CreateInvitationDto,
-    @Request() req: ExpressRequest
+    @Request() req: ExpressRequest,
   ): Promise<Invitation[]> {
-    const userId = ((req as any).user?.id) || (await (this.invitationsService as any).prisma.user.findFirst({ orderBy: { createdAt: 'asc' }, select: { id: true } }))?.id || '';
+    const userId =
+      (req as any).user?.id ||
+      (
+        await (this.invitationsService as any).prisma.user.findFirst({
+          orderBy: { createdAt: 'asc' },
+          select: { id: true },
+        })
+      )?.id ||
+      '';
     return this.invitationsService.create(createInvitationDto, userId);
   }
 
@@ -57,8 +54,8 @@ export class InvitationsController {
   @ApiQuery({ name: 'limit', required: false, description: 'Количество элементов на странице' })
   @ApiQuery({ name: 'status', required: false, enum: InvitationStatus, description: 'Фильтр по статусу' })
   @ApiQuery({ name: 'email', required: false, description: 'Поиск по email' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Список приглашений',
     schema: {
       type: 'object',
@@ -67,8 +64,8 @@ export class InvitationsController {
         total: { type: 'number' },
         page: { type: 'number' },
         limit: { type: 'number' },
-      }
-    }
+      },
+    },
   })
   findAll(
     @Query('page') page?: string,
@@ -76,12 +73,7 @@ export class InvitationsController {
     @Query('status') status?: InvitationStatus,
     @Query('email') email?: string,
   ) {
-    return this.invitationsService.findAll(
-      parseInt(page || '1', 10),
-      parseInt(limit || '20', 10),
-      status,
-      email
-    );
+    return this.invitationsService.findAll(parseInt(page || '1', 10), parseInt(limit || '20', 10), status, email);
   }
 
   /**
@@ -90,8 +82,8 @@ export class InvitationsController {
   @Get('by-token/:token')
   @Public()
   @ApiOperation({ summary: 'Получение приглашения по токену' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Данные приглашения',
     type: Invitation,
   })
@@ -107,16 +99,16 @@ export class InvitationsController {
   @Post('accept')
   @Public()
   @ApiOperation({ summary: 'Принятие приглашения и создание пользователя' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Пользователь создан, приглашение принято',
     schema: {
       type: 'object',
       properties: {
         user: { $ref: '#/components/schemas/User' },
         invitation: { $ref: '#/components/schemas/Invitation' },
-      }
-    }
+      },
+    },
   })
   @ApiResponse({ status: 400, description: 'Некорректные данные или приглашение недействительно' })
   @ApiResponse({ status: 409, description: 'Пользователь уже существует' })
@@ -131,8 +123,8 @@ export class InvitationsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Получение приглашения по ID' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Данные приглашения',
     type: Invitation,
   })
@@ -148,16 +140,13 @@ export class InvitationsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Обновление приглашения' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Приглашение обновлено',
     type: Invitation,
   })
   @ApiResponse({ status: 404, description: 'Приглашение не найдено' })
-  update(
-    @Param('id') id: string,
-    @Body() updateInvitationDto: UpdateInvitationDto
-  ): Promise<Invitation> {
+  update(@Param('id') id: string, @Body() updateInvitationDto: UpdateInvitationDto): Promise<Invitation> {
     return this.invitationsService.update(id, updateInvitationDto);
   }
 
@@ -168,8 +157,8 @@ export class InvitationsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Отмена приглашения' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Приглашение отменено',
     type: Invitation,
   })
@@ -185,8 +174,8 @@ export class InvitationsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Повторная отправка приглашения' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Приглашение отправлено повторно',
     type: Invitation,
   })

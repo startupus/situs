@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Skeleton2() {
   return (
@@ -6,13 +6,7 @@ export default function Skeleton2() {
       <div className="container">
         <div className="mx-auto w-full max-w-[370px]">
           <div className="mb-7 flex h-[200px] w-full items-center justify-center rounded-xl bg-linear-to-r from-gray-1 to-gray-4 text-secondary-color dark:from-dark-4 dark:to-dark-5">
-            <svg
-              width="28"
-              height="31"
-              viewBox="0 0 28 31"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="28" height="31" viewBox="0 0 28 31" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M17.8 15.4209C20.15 15.4209 22.1 13.5209 22.1 11.1209C22.1 8.72086 20.2 6.82086 17.8 6.82086C15.4 6.82086 13.5 8.82086 13.5 11.1709C13.5 13.5209 15.45 15.4209 17.8 15.4209ZM17.8 9.12086C18.9 9.12086 19.85 10.0209 19.85 11.1709C19.85 12.3209 18.95 13.2209 17.8 13.2209C16.65 13.2209 15.75 12.3209 15.75 11.1709C15.75 10.0209 16.65 9.12086 17.8 9.12086Z"
                 fill="currentColor"

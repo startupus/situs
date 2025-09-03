@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,7 +15,9 @@
   </head>
   <body>
     <!-- ====== Steps Section Start -->
-    <section class="min-h-screen overflow-hidden bg-white dark:bg-dark py-20 lg:py-[120px]">
+    <section
+      class="min-h-screen overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]"
+    >
       <div class="mx-auto px-4 md:container">
         <div class="flex items-center justify-center">
           <div>
@@ -77,7 +79,7 @@
 
       const chartOne = new ApexCharts(
         document.querySelector("#chartOne"),
-        chartOneOptions
+        chartOneOptions,
       );
       chartOne.render();
     </script>

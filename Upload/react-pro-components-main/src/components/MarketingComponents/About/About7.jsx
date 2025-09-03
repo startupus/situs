@@ -3,26 +3,26 @@ import React from "react";
 const About7 = () => {
   return (
     <>
-      <section className="overflow-hidden py-20 bg-white dark:bg-dark lg:py-[120px]">
+      <section className="overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap items-end justify-between -mx-4">
+          <div className="-mx-4 flex flex-wrap items-end justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
               <div className="mb-10 lg:mb-0">
-                <span className="block mb-2 text-lg font-semibold uppercase text-primary sm:text-xl">
+                <span className="mb-2 block text-lg font-semibold uppercase text-primary sm:text-xl">
                   ABOUT ME
                 </span>
                 <h2 className="mb-5 max-w-[400px] text-3xl font-bold leading-tight text-dark dark:text-white sm:text-4xl sm:leading-tight md:text-[40px]/[48px]">
                   Better design, better experience
                 </h2>
-                <p className="text-base text-body-color dark:text-dark-6 mb-9">
+                <p className="mb-9 text-base text-body-color dark:text-dark-6">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Quisque dui ligula, malesuada vel convallis in, tincidunt ut
                   mi Vestibulum sit amet.
                 </p>
-                <div className="flex flex-wrap -mx-4">
+                <div className="-mx-4 flex flex-wrap">
                   <div className="w-full px-4 md:w-1/2 lg:w-full xl:w-7/12">
-                    <div className="inline-flex items-center p-5 mb-8 bg-white rounded-lg dark:bg-dark-2 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] xl:mb-0">
-                      <div className="bg-primary/5 dark:bg-white/5 text-primary mr-4 flex h-11 w-full max-w-[44px] items-center justify-center rounded-lg">
+                    <div className="mb-8 inline-flex items-center rounded-lg bg-white p-5 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] dark:bg-dark-2 xl:mb-0">
+                      <div className="mr-4 flex h-11 w-full max-w-[44px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5">
                         <svg
                           width="22"
                           height="22"
@@ -58,7 +58,7 @@ const About7 = () => {
                       <div className="flex items-center space-x-3">
                         <a
                           href="/#"
-                          className="flex items-center justify-center border rounded-md border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary h-9 w-9 hover:text-white"
+                          className="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                         >
                           <svg
                             width="7"
@@ -71,7 +71,7 @@ const About7 = () => {
                         </a>
                         <a
                           href="/#"
-                          className="flex items-center justify-center border rounded-md border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary h-9 w-9 hover:text-white"
+                          className="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                         >
                           <svg
                             width="19"
@@ -84,7 +84,7 @@ const About7 = () => {
                         </a>
                         <a
                           href="/#"
-                          className="flex items-center justify-center border rounded-md border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary h-9 w-9 hover:text-white"
+                          className="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                         >
                           <svg
                             width="19"
@@ -97,7 +97,7 @@ const About7 = () => {
                         </a>
                         <a
                           href="/#"
-                          className="flex items-center justify-center border rounded-md border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary h-9 w-9 hover:text-white"
+                          className="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                         >
                           <svg
                             width="14"
@@ -121,24 +121,24 @@ const About7 = () => {
                   <h5 className="mb-5 text-lg font-semibold text-dark dark:text-white">
                     Design
                   </h5>
-                  <div className="relative w-full h-2 rounded-2xl bg-stroke dark:bg-dark-3">
-                    <div className="bg-primary absolute top-0 left-0 h-full w-[80%] rounded-2xl"></div>
+                  <div className="relative h-2 w-full rounded-2xl bg-stroke dark:bg-dark-3">
+                    <div className="absolute left-0 top-0 h-full w-[80%] rounded-2xl bg-primary"></div>
                   </div>
                 </div>
                 <div>
                   <h5 className="mb-5 text-lg font-semibold text-dark dark:text-white">
                     Branding
                   </h5>
-                  <div className="relative w-full h-2 rounded-2xl bg-stroke dark:bg-dark-3">
-                    <div className="bg-primary absolute top-0 left-0 h-full w-[70%] rounded-2xl"></div>
+                  <div className="relative h-2 w-full rounded-2xl bg-stroke dark:bg-dark-3">
+                    <div className="absolute left-0 top-0 h-full w-[70%] rounded-2xl bg-primary"></div>
                   </div>
                 </div>
                 <div>
                   <h5 className="mb-5 text-lg font-semibold text-dark dark:text-white">
                     Web Design
                   </h5>
-                  <div className="relative w-full h-2 rounded-2xl bg-stroke dark:bg-dark-3">
-                    <div className="bg-primary absolute top-0 left-0 h-full w-[92%] rounded-2xl"></div>
+                  <div className="relative h-2 w-full rounded-2xl bg-stroke dark:bg-dark-3">
+                    <div className="absolute left-0 top-0 h-full w-[92%] rounded-2xl bg-primary"></div>
                   </div>
                 </div>
               </div>

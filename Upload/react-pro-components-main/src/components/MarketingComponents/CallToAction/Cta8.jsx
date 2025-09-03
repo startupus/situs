@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Cta8() {
   return (
-    <section className="relative z-10 overflow-hidden bg-white py-20 lg:py-[120px] dark:bg-dark">
+    <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div className="container">
         <div className="mx-auto w-full max-w-[790px] text-center">
           <div className="mb-8 flex flex-wrap items-center justify-center gap-6">
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -44,7 +44,7 @@ export default function Cta8() {
                 />
               </svg>
             </div>
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -84,7 +84,7 @@ export default function Cta8() {
                 />
               </svg>
             </div>
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -110,7 +110,7 @@ export default function Cta8() {
                 />
               </svg>
             </div>
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -148,7 +148,7 @@ export default function Cta8() {
                 />
               </svg>
             </div>
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -162,7 +162,7 @@ export default function Cta8() {
                 />
               </svg>
             </div>
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -195,7 +195,7 @@ export default function Cta8() {
                 </defs>
               </svg>
             </div>
-            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px] dark:bg-dark-2">
+            <div className="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]">
               <svg
                 width="32"
                 height="32"
@@ -229,10 +229,10 @@ export default function Cta8() {
               </svg>
             </div>
           </div>
-          <h2 className="mx-auto mb-6 w-full max-w-[550px] text-3xl font-bold leading-tight! -tracking-[.72px] text-dark sm:text-4xl dark:text-white">
+          <h2 className="leading-tight! mx-auto mb-6 w-full max-w-[550px] text-3xl font-bold -tracking-[.72px] text-dark dark:text-white sm:text-4xl">
             Easily Bring AI in Your Workflow to Create Content
           </h2>
-          <p className="mb-8 text-base text-body-color sm:text-lg dark:text-dark-6">
+          <p className="mb-8 text-base text-body-color dark:text-dark-6 sm:text-lg">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form, by more and more
             injected humour.

@@ -20,12 +20,12 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
   // Получаем список доступных языков для пункта меню
   const availableLanguages = [item.language];
   if (item.languageVersions) {
-    availableLanguages.push(...item.languageVersions.map(v => v.language));
+    availableLanguages.push(...item.languageVersions.map((v) => v.language));
   }
 
   // Получаем список языков, которые можно добавить
   const addableLanguages = SUPPORTED_LANGUAGES.filter(
-    lang => lang.code !== '*' && !availableLanguages.includes(lang.code)
+    (lang) => lang.code !== '*' && !availableLanguages.includes(lang.code),
   );
 
   // Получаем данные для текущего активного языка
@@ -40,22 +40,24 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
         metaDescription: item.metaDescription || '',
         metaKeywords: item.metaKeywords || '',
         cssClass: item.cssClass || '',
-        menuImage: item.menuImage || ''
+        menuImage: item.menuImage || '',
       };
     }
 
-    const version = item.languageVersions?.find(v => v.language === activeLanguage);
-    return version || {
-      language: activeLanguage,
-      title: '',
-      alias: '',
-      externalUrl: '',
-      metaTitle: '',
-      metaDescription: '',
-      metaKeywords: '',
-      cssClass: '',
-      menuImage: ''
-    };
+    const version = item.languageVersions?.find((v) => v.language === activeLanguage);
+    return (
+      version || {
+        language: activeLanguage,
+        title: '',
+        alias: '',
+        externalUrl: '',
+        metaTitle: '',
+        metaDescription: '',
+        metaKeywords: '',
+        cssClass: '',
+        menuImage: '',
+      }
+    );
   };
 
   // Обновляем данные для текущего языка
@@ -64,33 +66,33 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
       // Обновляем основные данные пункта меню
       onUpdate({
         ...item,
-        [field]: value
+        [field]: value,
       });
     } else {
       // Обновляем языковую версию
       const versions = item.languageVersions || [];
-      const existingIndex = versions.findIndex(v => v.language === activeLanguage);
-      
+      const existingIndex = versions.findIndex((v) => v.language === activeLanguage);
+
       let updatedVersions;
       if (existingIndex >= 0) {
         updatedVersions = [...versions];
         updatedVersions[existingIndex] = {
           ...updatedVersions[existingIndex],
-          [field]: value
+          [field]: value,
         };
       } else {
         const newVersion: MenuItemLanguageVersion = {
           language: activeLanguage,
           title: '',
           alias: '',
-          [field]: value
+          [field]: value,
         };
         updatedVersions = [...versions, newVersion];
       }
 
       onUpdate({
         ...item,
-        languageVersions: updatedVersions
+        languageVersions: updatedVersions,
       });
     }
   };
@@ -100,13 +102,13 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
     const newVersion: MenuItemLanguageVersion = {
       language: languageCode,
       title: item.title, // Копируем заголовок из основного языка
-      alias: item.alias + '-' + languageCode.toLowerCase().split('-')[0] // catalog-en
+      alias: item.alias + '-' + languageCode.toLowerCase().split('-')[0], // catalog-en
     };
 
     const updatedVersions = [...(item.languageVersions || []), newVersion];
     onUpdate({
       ...item,
-      languageVersions: updatedVersions
+      languageVersions: updatedVersions,
     });
 
     setActiveLanguage(languageCode);
@@ -124,10 +126,10 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
       return;
     }
 
-    const updatedVersions = (item.languageVersions || []).filter(v => v.language !== languageCode);
+    const updatedVersions = (item.languageVersions || []).filter((v) => v.language !== languageCode);
     onUpdate({
       ...item,
-      languageVersions: updatedVersions
+      languageVersions: updatedVersions,
     });
 
     // Переключаемся на основной язык
@@ -135,43 +137,39 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
   };
 
   const currentData = getCurrentLanguageData();
-  const currentLanguageInfo = SUPPORTED_LANGUAGES.find(lang => lang.code === activeLanguage);
+  const currentLanguageInfo = SUPPORTED_LANGUAGES.find((lang) => lang.code === activeLanguage);
 
   return (
     <div className="space-y-4">
       {/* Заголовок секции */}
       <div className="flex items-center gap-2 mb-4">
         <FiGlobe className="text-primary" size={20} />
-        <h3 className="text-lg font-semibold text-dark dark:text-white">
-          Языковые версии
-        </h3>
+        <h3 className="text-lg font-semibold text-dark dark:text-white">Языковые версии</h3>
       </div>
 
       {/* Вкладки языков */}
       <div className="flex items-center gap-2 mb-6">
         <div className="flex items-center gap-1 bg-gray-100 dark:bg-dark-3 rounded-lg p-1">
-          {availableLanguages.map(langCode => {
-            const langInfo = SUPPORTED_LANGUAGES.find(lang => lang.code === langCode);
+          {availableLanguages.map((langCode) => {
+            const langInfo = SUPPORTED_LANGUAGES.find((lang) => lang.code === langCode);
             const isActive = activeLanguage === langCode;
             const isMainLanguage = langCode === item.language;
-            
+
             return (
               <div key={langCode} className="relative">
                 <button
                   onClick={() => setActiveLanguage(langCode)}
                   className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive 
-                      ? 'bg-primary text-white' 
+                    isActive
+                      ? 'bg-primary text-white'
                       : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white'
                   }`}
                 >
                   <span className="text-base">{langInfo?.flag || '🌐'}</span>
                   <span>{langInfo?.name || langCode}</span>
-                  {isMainLanguage && (
-                    <span className="text-xs opacity-75">(основной)</span>
-                  )}
+                  {isMainLanguage && <span className="text-xs opacity-75">(основной)</span>}
                 </button>
-                
+
                 {/* Кнопка удаления языка */}
                 {!isMainLanguage && (
                   <button
@@ -204,7 +202,7 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
             {/* Выпадающий список языков */}
             {showAddLanguage && (
               <div className="absolute top-full left-0 mt-1 bg-white dark:bg-dark-2 border border-stroke dark:border-dark-3 rounded-lg shadow-lg z-10 min-w-[200px]">
-                {addableLanguages.map(lang => (
+                {addableLanguages.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => addLanguage(lang.code)}
@@ -311,7 +309,8 @@ const MenuItemLanguageTabs: React.FC<MenuItemLanguageTabsProps> = ({ item, onUpd
         {/* Информационное сообщение */}
         <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
           <p className="text-sm text-blue-800 dark:text-blue-200">
-            <strong>Совет:</strong> Поля, оставленные пустыми, будут использовать значения из основного языка ({SUPPORTED_LANGUAGES.find(l => l.code === item.language)?.name || item.language}).
+            <strong>Совет:</strong> Поля, оставленные пустыми, будут использовать значения из основного языка (
+            {SUPPORTED_LANGUAGES.find((l) => l.code === item.language)?.name || item.language}).
           </p>
         </div>
       </div>

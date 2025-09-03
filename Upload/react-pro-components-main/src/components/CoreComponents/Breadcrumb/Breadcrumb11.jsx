@@ -2,15 +2,15 @@ import React from "react";
 
 const Breadcrumb11 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="w-full mb-8">
-          <div className="py-4 border-b border-stroke dark:border-dark-3 md:py-5">
+        <div className="mb-8 w-full">
+          <div className="border-b border-stroke py-4 dark:border-dark-3 md:py-5">
             <ul className="flex items-center">
               <li className="flex items-center">
                 <a
                   href="/#"
-                  className="flex items-center text-base font-medium hover:text-primary dark:text-dark-6 dark:hover:text-primary text-body-color"
+                  className="flex items-center text-base font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                 >
                   <span className="pr-2">
                     <svg
@@ -47,7 +47,7 @@ const Breadcrumb11 = () => {
               <li className="flex items-center">
                 <a
                   href="/#"
-                  className="text-base font-medium text-body-color dark:text-dark-6 dark:hover:text-primary hover:text-primary"
+                  className="text-base font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                 >
                   Product
                 </a>
@@ -70,7 +70,7 @@ const Breadcrumb11 = () => {
               <li className="flex items-center">
                 <a
                   href="/#"
-                  className="text-base font-medium text-body-color dark:text-dark-6 dark:hover:text-primary hover:text-primary"
+                  className="text-base font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                 >
                   Sales
                 </a>

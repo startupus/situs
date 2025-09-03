@@ -46,7 +46,7 @@ const CategoryManager: React.FC = () => {
       setLoading(true);
       const response = await fetch(`http://localhost:3002/api/categories?productId=${productId}`);
       const result = await response.json();
-      
+
       if (result.success) {
         setCategories(result.data);
         setLastUpdate(new Date());
@@ -72,7 +72,7 @@ const CategoryManager: React.FC = () => {
       const response = await fetch('http://localhost:3002/api/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
@@ -93,7 +93,7 @@ const CategoryManager: React.FC = () => {
 
     try {
       const response = await fetch(`http://localhost:3002/api/categories/${categoryId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       });
 
       const result = await response.json();
@@ -110,18 +110,21 @@ const CategoryManager: React.FC = () => {
   // Подсчет статистики
   const getStats = () => {
     const totalCategories = categories.length;
-    const publishedCategories = categories.filter(c => c.isPublished).length;
+    const publishedCategories = categories.filter((c) => c.isPublished).length;
     const totalItems = categories.reduce((sum, c) => sum + c.itemsCount, 0);
-    const categoriesByLevel = categories.reduce((acc, c) => {
-      acc[c.level] = (acc[c.level] || 0) + 1;
-      return acc;
-    }, {} as { [key: number]: number });
+    const categoriesByLevel = categories.reduce(
+      (acc, c) => {
+        acc[c.level] = (acc[c.level] || 0) + 1;
+        return acc;
+      },
+      {} as { [key: number]: number },
+    );
 
     return {
       totalCategories,
       publishedCategories,
       totalItems,
-      categoriesByLevel
+      categoriesByLevel,
     };
   };
 
@@ -153,21 +156,15 @@ const CategoryManager: React.FC = () => {
       <div className="mb-6">
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-2xl font-bold text-dark dark:text-white mb-2">
-              🛒 Категории товаров
-            </h1>
+            <h1 className="text-2xl font-bold text-dark dark:text-white mb-2">🛒 Категории товаров</h1>
             <p className="text-body-color dark:text-dark-6">
               Иерархическая система категоризации товаров по аналогии с меню
             </p>
           </div>
-          
+
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-body-color dark:text-dark-6">
-              Обновлено
-            </span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">
-              {lastUpdate.toLocaleTimeString()}
-            </span>
+            <span className="text-body-color dark:text-dark-6">Обновлено</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">{lastUpdate.toLocaleTimeString()}</span>
           </div>
         </div>
       </div>
@@ -231,20 +228,14 @@ const CategoryManager: React.FC = () => {
       {/* Список категорий */}
       <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3">
         <div className="p-4 border-b border-stroke dark:border-dark-3">
-          <h3 className="text-lg font-semibold text-dark dark:text-white">
-            Иерархический список категорий
-          </h3>
+          <h3 className="text-lg font-semibold text-dark dark:text-white">Иерархический список категорий</h3>
         </div>
-        
+
         {categories.length === 0 ? (
           <div className="p-8 text-center">
             <div className="text-4xl mb-4">📂</div>
-            <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
-              Категории не найдены
-            </h3>
-            <p className="text-body-color dark:text-dark-6 mb-4">
-              Создайте первую категорию для организации товаров
-            </p>
+            <h3 className="text-lg font-medium text-dark dark:text-white mb-2">Категории не найдены</h3>
+            <p className="text-body-color dark:text-dark-6 mb-4">Создайте первую категорию для организации товаров</p>
             <button
               onClick={() => setShowCreateModal(true)}
               className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
@@ -260,18 +251,12 @@ const CategoryManager: React.FC = () => {
                   <div className="flex items-center gap-3">
                     {/* Отступ по уровню */}
                     <div style={{ marginLeft: `${(category.level - 1) * 20}px` }} className="flex items-center gap-2">
-                      <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                        L{category.level}
-                      </span>
-                      <h4 className="font-medium text-dark dark:text-white">
-                        {category.name}
-                      </h4>
-                      <span className="text-sm text-body-color dark:text-dark-6">
-                        ({category.alias})
-                      </span>
+                      <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">L{category.level}</span>
+                      <h4 className="font-medium text-dark dark:text-white">{category.name}</h4>
+                      <span className="text-sm text-body-color dark:text-dark-6">({category.alias})</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-4">
                     {/* Статистика */}
                     <div className="flex items-center gap-3 text-sm text-body-color dark:text-dark-6">
@@ -282,7 +267,7 @@ const CategoryManager: React.FC = () => {
                       </span>
                       <span>🌍 {category.language}</span>
                     </div>
-                    
+
                     {/* Кнопки действий */}
                     <div className="flex items-center gap-2">
                       <button
@@ -302,10 +287,12 @@ const CategoryManager: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 {category.description && (
-                  <p className="text-sm text-body-color dark:text-dark-6 mt-2" 
-                     style={{ marginLeft: `${(category.level - 1) * 20 + 40}px` }}>
+                  <p
+                    className="text-sm text-body-color dark:text-dark-6 mt-2"
+                    style={{ marginLeft: `${(category.level - 1) * 20 + 40}px` }}
+                  >
                     {category.description}
                   </p>
                 )}
@@ -319,7 +306,7 @@ const CategoryManager: React.FC = () => {
       {showCreateModal && (
         <CreateCategoryModal
           productId={productId!}
-          parentCategories={categories.filter(c => c.level < 3)} // Максимум 3 уровня
+          parentCategories={categories.filter((c) => c.level < 3)} // Максимум 3 уровня
           onClose={() => setShowCreateModal(false)}
           onCreate={handleCreateCategory}
         />
@@ -331,9 +318,7 @@ const CategoryManager: React.FC = () => {
           category={editingCategory}
           onClose={() => setEditingCategory(null)}
           onUpdate={(updatedCategory) => {
-            setCategories(cats => 
-              cats.map(cat => cat.id === updatedCategory.id ? updatedCategory : cat)
-            );
+            setCategories((cats) => cats.map((cat) => (cat.id === updatedCategory.id ? updatedCategory : cat)));
             setEditingCategory(null);
           }}
         />
@@ -354,7 +339,7 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({
   productId,
   parentCategories,
   onClose,
-  onCreate
+  onCreate,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -362,7 +347,7 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({
     description: '',
     parentId: '',
     language: '*',
-    isPublished: true
+    isPublished: true,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -370,7 +355,7 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({
     onCreate({
       ...formData,
       productId,
-      parentId: formData.parentId || undefined
+      parentId: formData.parentId || undefined,
     });
   };
 
@@ -378,22 +363,18 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-dark-2 rounded-lg w-full max-w-md">
         <div className="p-6">
-          <h3 className="text-xl font-bold text-dark dark:text-white mb-4">
-            Создание категории
-          </h3>
-          
+          <h3 className="text-xl font-bold text-dark dark:text-white mb-4">Создание категории</h3>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                Название категории *
-              </label>
+              <label className="block text-sm font-medium text-dark dark:text-white mb-2">Название категории *</label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => {
                   const name = e.target.value;
                   const alias = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-                  setFormData(prev => ({ ...prev, name, alias }));
+                  setFormData((prev) => ({ ...prev, name, alias }));
                 }}
                 className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-transparent text-dark dark:text-white focus:border-primary focus:outline-none"
                 required
@@ -401,42 +382,37 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                Alias (для URL)
-              </label>
+              <label className="block text-sm font-medium text-dark dark:text-white mb-2">Alias (для URL)</label>
               <input
                 type="text"
                 value={formData.alias}
-                onChange={(e) => setFormData(prev => ({ ...prev, alias: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, alias: e.target.value }))}
                 className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-transparent text-dark dark:text-white focus:border-primary focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                Описание
-              </label>
+              <label className="block text-sm font-medium text-dark dark:text-white mb-2">Описание</label>
               <textarea
                 value={formData.description}
-                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
                 className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-transparent text-dark dark:text-white focus:border-primary focus:outline-none"
                 rows={3}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-                Родительская категория
-              </label>
+              <label className="block text-sm font-medium text-dark dark:text-white mb-2">Родительская категория</label>
               <select
                 value={formData.parentId}
-                onChange={(e) => setFormData(prev => ({ ...prev, parentId: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, parentId: e.target.value }))}
                 className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none"
               >
                 <option value="">Корневая категория (1 уровень)</option>
-                {parentCategories.map(cat => (
+                {parentCategories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
-                    {'  '.repeat(cat.level - 1)}{cat.name} (L{cat.level})
+                    {'  '.repeat(cat.level - 1)}
+                    {cat.name} (L{cat.level})
                   </option>
                 ))}
               </select>
@@ -447,7 +423,7 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({
                 type="checkbox"
                 id="isPublished"
                 checked={formData.isPublished}
-                onChange={(e) => setFormData(prev => ({ ...prev, isPublished: e.target.checked }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, isPublished: e.target.checked }))}
                 className="w-4 h-4 text-primary border-stroke dark:border-dark-3 rounded focus:ring-primary"
               />
               <label htmlFor="isPublished" className="text-sm font-medium text-dark dark:text-white">
@@ -484,23 +460,17 @@ interface EditCategoryModalProps {
   onUpdate: (category: CategoryData) => void;
 }
 
-const EditCategoryModal: React.FC<EditCategoryModalProps> = ({
-  category,
-  onClose,
-  onUpdate
-}) => {
+const EditCategoryModal: React.FC<EditCategoryModalProps> = ({ category, onClose, onUpdate }) => {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-md">
         <div className="text-center">
           <div className="text-4xl mb-4">🚧</div>
-          <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
-            Редактирование: {category.name}
-          </h3>
+          <h3 className="text-lg font-medium text-dark dark:text-white mb-2">Редактирование: {category.name}</h3>
           <p className="text-body-color dark:text-dark-6 mb-4">
             Функция редактирования будет реализована аналогично EditMenuItemModal.
           </p>
-          
+
           <button
             onClick={onClose}
             className="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"

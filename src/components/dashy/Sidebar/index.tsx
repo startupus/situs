@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom";
-import logoWhite from "../../assets/images/logo/logo-white.svg";
-import user from "../../assets/images/avatar/image-05.jpg";
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { Link } from 'react-router-dom';
+import logoWhite from '../../assets/images/logo/logo-white.svg';
+import user from '../../assets/images/avatar/image-05.jpg';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 const navList = [
   {
-    group: "Menu",
+    group: 'Menu',
   },
   {
-    link: "/",
-    text: "Home",
+    link: '/',
+    text: 'Home',
     icon: (
       <svg
         width="20"
@@ -25,8 +25,8 @@ const navList = [
     ),
   },
   {
-    link: "#",
-    text: "Dashboard",
+    link: '#',
+    text: 'Dashboard',
     icon: (
       <svg
         width="20"
@@ -44,22 +44,22 @@ const navList = [
     ),
     children: [
       {
-        link: "#",
-        text: "Dropdown One",
+        link: '#',
+        text: 'Dropdown One',
       },
       {
-        link: "#",
-        text: "Dropdown Two",
+        link: '#',
+        text: 'Dropdown Two',
       },
       {
-        link: "#",
-        text: "Dropdown Three",
+        link: '#',
+        text: 'Dropdown Three',
       },
     ],
   },
   {
-    link: "/",
-    text: "Calendar",
+    link: '/',
+    text: 'Calendar',
     icon: (
       <svg
         width="20"
@@ -75,8 +75,8 @@ const navList = [
     ),
   },
   {
-    link: "/",
-    text: "Order",
+    link: '/',
+    text: 'Order',
     icon: (
       <svg
         width="20"
@@ -98,11 +98,11 @@ const navList = [
     ),
   },
   {
-    group: "Support",
+    group: 'Support',
   },
   {
-    link: "/",
-    text: "Messages",
+    link: '/',
+    text: 'Messages',
     icon: (
       <svg
         width="20"
@@ -117,8 +117,8 @@ const navList = [
     ),
   },
   {
-    link: "/",
-    text: "Chat",
+    link: '/',
+    text: 'Chat',
     icon: (
       <svg
         width="20"
@@ -143,8 +143,8 @@ const navList = [
     ),
   },
   {
-    link: "/",
-    text: "Static",
+    link: '/',
+    text: 'Static',
     icon: (
       <svg
         width="20"
@@ -166,8 +166,8 @@ const navList = [
     ),
   },
   {
-    link: "/",
-    text: "Documents",
+    link: '/',
+    text: 'Documents',
     icon: (
       <svg
         width="20"
@@ -184,11 +184,11 @@ const navList = [
     ),
   },
   {
-    group: "Others",
+    group: 'Others',
   },
   {
-    link: "/",
-    text: "Settings",
+    link: '/',
+    text: 'Settings',
     icon: (
       <svg
         width="20"
@@ -211,8 +211,8 @@ const navList = [
     ),
   },
   {
-    link: "/",
-    text: "Settings",
+    link: '/',
+    text: 'Settings',
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
         <path
@@ -229,8 +229,8 @@ const navList = [
     ),
   },
   {
-    link: "/",
-    text: "Log out",
+    link: '/',
+    text: 'Log out',
     icon: (
       <svg
         width="20"
@@ -261,7 +261,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-auto bg-[#212B36] duration-200 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed top-0 left-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-auto bg-[#212B36] duration-200 xl:translate-x-0 ${sidebarOpen ? '-translate-x-full' : 'translate-x-0'}`}
       >
         <div>
           <div className="p-10 pb-2!">
@@ -276,22 +276,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {navList.map((item, index) =>
                   item?.group ? (
                     <li key={index}>
-                      <p className="mt-7 mb-[22px] text-sm font-medium text-white uppercase">
-                        {item.group}
-                      </p>
+                      <p className="mt-7 mb-[22px] text-sm font-medium text-white uppercase">{item.group}</p>
                     </li>
                   ) : item?.children ? (
                     <li key={index} className="relative">
                       <Link
                         to={item.link}
                         onClick={handleDropDownToggle}
-                        className={`relative flex w-full items-center rounded px-[18px] py-[10px] text-base font-medium hover:bg-white/10 hover:text-white ${openDropDown === true ? "bg-white/10 text-white" : "text-dark-6"} `}
+                        className={`relative flex w-full items-center rounded px-[18px] py-[10px] text-base font-medium hover:bg-white/10 hover:text-white ${openDropDown === true ? 'bg-white/10 text-white' : 'text-dark-6'} `}
                       >
                         <span className="mr-[10px]">{item.icon}</span>
                         {item.text}
                         <span
                           className={`absolute top-1/2 right-4 -translate-y-1/2 ${
-                            openDropDown ? "rotate-180" : "rotate-0"
+                            openDropDown ? 'rotate-180' : 'rotate-0'
                           }`}
                         >
                           <svg
@@ -349,13 +347,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               placeholder="Search"
             />
             <button className="absolute -translate-y-1/2 top-1/2 left-3">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M15.35 13.925L11.225 10.575C12.925 8.25 12.75 4.925 10.625 2.825C9.5 1.7 7.99999 1.075 6.39999 1.075C4.79999 1.075 3.29999 1.7 2.17499 2.825C-0.150006 5.15 -0.150006 8.95 2.17499 11.275C3.29999 12.4 4.79999 13.025 6.39999 13.025C7.92499 13.025 9.35 12.45 10.475 11.425L14.65 14.8C14.75 14.875 14.875 14.925 15 14.925C15.175 14.925 15.325 14.85 15.425 14.725C15.625 14.475 15.6 14.125 15.35 13.925ZM6.39999 11.9C5.09999 11.9 3.89999 11.4 2.97499 10.475C1.07499 8.575 1.07499 5.5 2.97499 3.625C3.89999 2.7 5.09999 2.2 6.39999 2.2C7.69999 2.2 8.9 2.7 9.825 3.625C11.725 5.525 11.725 8.6 9.825 10.475C8.925 11.4 7.69999 11.9 6.39999 11.9Z"
                   fill="#6B7280"
@@ -366,11 +358,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
           <div className="flex items-center">
             <div className="mr-4 h-12 w-full max-w-[48px] overflow-hidden rounded-full">
-              <img
-                src={user}
-                alt="profile"
-                className="object-cover object-center w-full h-full rounded-full"
-              />
+              <img src={user} alt="profile" className="object-cover object-center w-full h-full rounded-full" />
             </div>
             <div>
               <p className="text-base font-medium text-white">Musharof</p>
@@ -382,7 +370,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div
         onClick={handleSidebarToggle}
-        className={`bg-dark/80 fixed top-0 left-0 z-30 h-screen w-full xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`bg-dark/80 fixed top-0 left-0 z-30 h-screen w-full xl:hidden ${sidebarOpen ? '-translate-x-full' : 'translate-x-0'}`}
       ></div>
     </>
   );

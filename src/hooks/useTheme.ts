@@ -14,44 +14,47 @@ export const useTheme = () => {
   }, []);
 
   // Применяем тему ГЛОБАЛЬНО к HTML элементу для полного контроля
-  const applyTheme = useCallback((newTheme: 'light' | 'dark') => {
-    const htmlElement = document.documentElement;
-    
-    // ПРИНУДИТЕЛЬНОЕ ПРИМЕНЕНИЕ ТЕМЫ К КОРНЕВОМУ ЭЛЕМЕНТУ
-    if (newTheme === 'dark') {
-      htmlElement.classList.add('dark');
-      console.log('🎨 GLOBAL: Dark theme applied to HTML root');
-    } else {
-      htmlElement.classList.remove('dark');
-      console.log('🎨 GLOBAL: Light theme applied to HTML root');
-    }
-    
-    // Также применяем к интерфейсу для совместимости
-    const interfaceContainer = document.querySelector('.redaktus-interface');
-    if (interfaceContainer) {
-      interfaceContainer.classList.remove('interface-light', 'interface-dark');
-      interfaceContainer.classList.add(`interface-${newTheme}`);
-      
+  const applyTheme = useCallback(
+    (newTheme: 'light' | 'dark') => {
+      const htmlElement = document.documentElement;
+
+      // ПРИНУДИТЕЛЬНОЕ ПРИМЕНЕНИЕ ТЕМЫ К КОРНЕВОМУ ЭЛЕМЕНТУ
       if (newTheme === 'dark') {
-        interfaceContainer.classList.add('dark');
+        htmlElement.classList.add('dark');
+        console.log('🎨 GLOBAL: Dark theme applied to HTML root');
       } else {
-        interfaceContainer.classList.remove('dark');
+        htmlElement.classList.remove('dark');
+        console.log('🎨 GLOBAL: Light theme applied to HTML root');
       }
-    }
-    
-    console.log('🎨 Theme system:', theme, '-> resolved:', newTheme);
-  }, [theme]);
+
+      // Также применяем к интерфейсу для совместимости
+      const interfaceContainer = document.querySelector('.redaktus-interface');
+      if (interfaceContainer) {
+        interfaceContainer.classList.remove('interface-light', 'interface-dark');
+        interfaceContainer.classList.add(`interface-${newTheme}`);
+
+        if (newTheme === 'dark') {
+          interfaceContainer.classList.add('dark');
+        } else {
+          interfaceContainer.classList.remove('dark');
+        }
+      }
+
+      console.log('🎨 Theme system:', theme, '-> resolved:', newTheme);
+    },
+    [theme],
+  );
 
   // Обновляем разрешенную тему
   const updateResolvedTheme = useCallback(() => {
     let newResolvedTheme: 'light' | 'dark';
-    
+
     if (theme === 'system') {
       newResolvedTheme = getSystemTheme();
     } else {
       newResolvedTheme = theme;
     }
-    
+
     if (newResolvedTheme !== resolvedTheme) {
       setResolvedTheme(newResolvedTheme);
       applyTheme(newResolvedTheme);
@@ -65,10 +68,10 @@ export const useTheme = () => {
     if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
       setTheme(savedTheme);
     }
-    
+
     // Применяем тему
     updateResolvedTheme();
-    
+
     // Слушаем изменения системной темы
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
@@ -76,9 +79,9 @@ export const useTheme = () => {
         updateResolvedTheme();
       }
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
-    
+
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
@@ -105,6 +108,6 @@ export const useTheme = () => {
     theme,
     resolvedTheme,
     toggleTheme,
-    setTheme
+    setTheme,
   };
-}; 
+};

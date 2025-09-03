@@ -153,7 +153,7 @@ input#checkboxLabelFour:checked ~ .box span {
 
 /* v-2.0 start from here */
 .container {
-  @apply px-4 mx-auto;
+  @apply mx-auto px-4;
 }
 input[type="checkbox"]:checked ~ .box span {
   @apply opacity-100;
@@ -168,7 +168,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .payment:checked ~ label {
-  @apply border-primary bg-primary/8;
+  @apply bg-primary/8 border-primary;
 }
 
 .shipping:checked ~ label {
@@ -184,19 +184,19 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .color:checked ~ label span {
-  @apply w-2 h-2;
+  @apply h-2 w-2;
 }
 
 .productColor:checked ~ label span {
-  @apply w-5 h-5;
+  @apply h-5 w-5;
 }
 
 .productColor2:checked ~ label span {
-  @apply w-3 h-3;
+  @apply h-3 w-3;
 }
 
 .filter-size:checked ~ label {
-  @apply text-white border-primary bg-primary;
+  @apply border-primary bg-primary text-white;
 }
 
 .filter-size-2:checked ~ label {
@@ -224,7 +224,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .priceSlideOne .noUi-target {
-  @apply mt-8 border-none shadow-none bg-gray;
+  @apply mt-8 border-none bg-gray shadow-none;
 }
 
 .priceSlideOne .noUi-connects {
@@ -232,15 +232,15 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .priceSlideOne .noUi-connect {
-  @apply bg-primary h-[6px] rounded-full;
+  @apply h-[6px] rounded-full bg-primary;
 }
 
 .priceSlideOne .noUi-horizontal .noUi-handle {
-  @apply border-primary dark:bg-dark-2 -top-2 h-[22px] w-[22px] rounded-full border-[6px] bg-white shadow-none;
+  @apply -top-2 h-[22px] w-[22px] rounded-full border-[6px] border-primary bg-white shadow-none dark:bg-dark-2;
 }
 
 .priceSlideTwo .noUi-target {
-  @apply mt-8 bg-white border-none shadow-none;
+  @apply mt-8 border-none bg-white shadow-none;
 }
 
 .priceSlideTwo .noUi-connects {
@@ -252,7 +252,7 @@ input[type="radio"]:checked ~ .box span {
 }
 
 .priceSlideTwo .noUi-horizontal .noUi-handle {
-  @apply border-primary -top-3 h-[30px] w-[30px] rounded-full border bg-white shadow-none;
+  @apply -top-3 h-[30px] w-[30px] rounded-full border border-primary bg-white shadow-none;
 }
 
 .noUi-horizontal .noUi-handle:after,
@@ -296,7 +296,7 @@ input[type="radio"]:checked ~ .box span {
   @apply bg-white text-body-color dark:bg-dark-2;
 }
 .themeSwitcherThree input:checked ~ div .dark {
-  @apply text-white bg-primary;
+  @apply bg-primary text-white;
 }
 
 /* box-select-1 */
@@ -343,11 +343,11 @@ input[type="radio"]:checked ~ .box span {
 
 /* Maps */
 .jvm-zoom-btn {
-  @apply border-stroke bg-gray text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 top-auto bottom-0 left-auto flex h-[30px] w-[30px] items-center justify-center rounded border-[.5px] leading-[1.1] font-medium hover:text-white;
+  @apply bottom-0 left-auto top-auto flex h-[30px] w-[30px] items-center justify-center rounded border-[.5px] border-stroke bg-gray font-medium leading-[1.1] text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-dark-6;
 }
 
 .mapOne .jvm-zoom-btn {
-  @apply top-auto -bottom-[33px] left-auto;
+  @apply -bottom-[33px] left-auto top-auto;
 }
 .mapOne.mapThree .jvm-zoom-btn {
   @apply bottom-0;

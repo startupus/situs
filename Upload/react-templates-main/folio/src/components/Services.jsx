@@ -127,19 +127,15 @@ const servicesItems = [
 const Services = () => {
   return (
     <>
-      <section className="py-20 lg:py-[120px] dark:bg-dark">
+      <section className="py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
-              <div
-                className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[90px]"
-              >
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Core Features
-              </span>
-                <h2
-                  className="mb-3 text-3xl font-bold leading-[1.2] text-dark sm:text-4xl md:text-[40px] dark:text-white"
-                >
+              <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[90px]">
+                <span className="mb-2 block text-lg font-semibold text-primary">
+                  Core Features
+                </span>
+                <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Our Awesome Features
                 </h2>
                 <p className="text-base text-body-color dark:text-dark-6">
@@ -154,13 +150,10 @@ const Services = () => {
             {servicesItems.map((item, index) => (
               <div key={index} className="group w-full px-4 md:w-1/2 xl:w-1/4">
                 <div className="relative mx-auto mb-10 max-w-[370px] text-center">
-                  <div
-                    className="absolute -left-4 top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary group-first:hidden xl:block 2xl:w-[75px]"></div>
-                  <div
-                    className="absolute right-[-14px] top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary group-last:hidden xl:block 2xl:w-[75px]"></div>
+                  <div className="absolute -left-4 top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary group-first:hidden xl:block 2xl:w-[75px]"></div>
+                  <div className="absolute right-[-14px] top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary group-last:hidden xl:block 2xl:w-[75px]"></div>
 
-                  <div
-                    className="relative mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] bg-primary text-white">
+                  <div className="relative mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] bg-primary text-white">
                     {item.icon}
                   </div>
                   <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
@@ -174,8 +167,6 @@ const Services = () => {
             ))}
           </div>
         </div>
-
-
       </section>
     </>
   );

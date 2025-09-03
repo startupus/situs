@@ -10,7 +10,7 @@ import { MenusService } from './menus.service';
 export class MenuRulesService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly menusService: MenusService
+    private readonly menusService: MenusService,
   ) {}
 
   /**
@@ -22,19 +22,18 @@ export class MenuRulesService {
     component: string,
     view: string,
     targetId?: string,
-    requestedItemid?: string
+    requestedItemid?: string,
   ): Promise<string | null> {
-    
     // 1. Если Itemid указан в URL, проверяем его валидность
     if (requestedItemid) {
       const requestedItem = await this.prisma.menuItem.findFirst({
         where: {
           id: requestedItemid,
           menuType: {
-            projectId
+            projectId,
           },
-          isPublished: true
-        }
+          isPublished: true,
+        },
       });
 
       if (requestedItem && this.isMenuItemMatches(requestedItem, component, view, targetId)) {
@@ -50,13 +49,13 @@ export class MenuRulesService {
         targetId,
         isPublished: true,
         menuType: {
-          projectId
-        }
+          projectId,
+        },
       },
       orderBy: [
         { level: 'asc' }, // Предпочитаем пункты верхнего уровня
-        { orderIndex: 'asc' }
-      ]
+        { orderIndex: 'asc' },
+      ],
     });
 
     if (exactMatch) {
@@ -70,13 +69,10 @@ export class MenuRulesService {
         view,
         isPublished: true,
         menuType: {
-          projectId
-        }
+          projectId,
+        },
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
 
     if (componentMatch) {
@@ -89,13 +85,10 @@ export class MenuRulesService {
         component,
         isPublished: true,
         menuType: {
-          projectId
-        }
+          projectId,
+        },
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
 
     return generalMatch?.id || null;
@@ -111,11 +104,11 @@ export class MenuRulesService {
       include: {
         menuType: {
           include: {
-            project: true
-          }
+            project: true,
+          },
         },
-        parent: true
-      }
+        parent: true,
+      },
     });
 
     if (!menuItem) {
@@ -127,13 +120,13 @@ export class MenuRulesService {
 
     // Строим путь по иерархии меню
     const pathSegments: string[] = [];
-    
+
     // Добавляем родительские алиасы
     if (menuItem.parent) {
       const parentPath = await this.getMenuItemPath(menuItem.parent.id);
       pathSegments.push(...parentPath);
     }
-    
+
     // Добавляем текущий алиас
     pathSegments.push(menuItem.alias);
 
@@ -160,7 +153,10 @@ export class MenuRulesService {
   /**
    * Парсинг URL и определение активного пункта меню
    */
-  async parseUrl(url: string, projectId: string): Promise<{
+  async parseUrl(
+    url: string,
+    projectId: string,
+  ): Promise<{
     menuItem: any | null;
     component: string | null;
     view: string | null;
@@ -182,12 +178,12 @@ export class MenuRulesService {
         where: {
           id: itemid,
           menuType: {
-            projectId
-          }
+            projectId,
+          },
         },
         include: {
-          menuType: true
-        }
+          menuType: true,
+        },
       });
     }
 
@@ -199,7 +195,7 @@ export class MenuRulesService {
         view: menuItem.view,
         targetId: menuItem.targetId,
         itemid,
-        params
+        params,
       };
     }
 
@@ -210,7 +206,7 @@ export class MenuRulesService {
       view: null,
       targetId: null,
       itemid,
-      params
+      params,
     };
   }
 
@@ -220,38 +216,37 @@ export class MenuRulesService {
   async generateCanonicalUrl(menuItemId: string, domain?: string): Promise<string> {
     const sefUrl = await this.buildSefUrl(menuItemId);
     const baseUrl = domain || 'http://localhost:5177';
-    
+
     return `${baseUrl}${sefUrl}`;
   }
 
   /**
    * Построение sitemap.xml на основе пунктов меню
    */
-  async generateSitemap(projectId: string): Promise<Array<{
-    url: string;
-    lastmod: string;
-    priority: number;
-    changefreq: string;
-  }>> {
+  async generateSitemap(projectId: string): Promise<
+    Array<{
+      url: string;
+      lastmod: string;
+      priority: number;
+      changefreq: string;
+    }>
+  > {
     const menuItems = await this.prisma.menuItem.findMany({
       where: {
         isPublished: true,
         type: 'COMPONENT', // Только компоненты, не внешние ссылки
         menuType: {
-          projectId
-        }
+          projectId,
+        },
       },
       include: {
         menuType: {
           include: {
-            project: true
-          }
-        }
+            project: true,
+          },
+        },
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
 
     const sitemap = [];
@@ -259,10 +254,10 @@ export class MenuRulesService {
     for (const item of menuItems) {
       try {
         const url = await this.buildSefUrl(item.id);
-        
+
         // Определяем приоритет по уровню меню
         const priority = item.level === 1 ? 1.0 : item.level === 2 ? 0.8 : 0.6;
-        
+
         // Определяем частоту изменений по типу компонента
         let changefreq = 'monthly';
         if (item.component === 'Blog') changefreq = 'weekly';
@@ -273,7 +268,7 @@ export class MenuRulesService {
           url,
           lastmod: item.updatedAt.toISOString(),
           priority,
-          changefreq
+          changefreq,
         });
       } catch (error) {
         console.warn(`Ошибка генерации URL для пункта меню ${item.id}:`, error);
@@ -288,16 +283,11 @@ export class MenuRulesService {
   /**
    * Проверяет, соответствует ли пункт меню указанным параметрам
    */
-  private isMenuItemMatches(
-    menuItem: any, 
-    component: string, 
-    view: string, 
-    targetId?: string
-  ): boolean {
+  private isMenuItemMatches(menuItem: any, component: string, view: string, targetId?: string): boolean {
     if (menuItem.component !== component) return false;
     if (menuItem.view !== view) return false;
     if (targetId && menuItem.targetId !== targetId) return false;
-    
+
     return true;
   }
 
@@ -311,11 +301,11 @@ export class MenuRulesService {
     while (currentId) {
       const item = await this.prisma.menuItem.findUnique({
         where: { id: currentId },
-        select: { alias: true, parentId: true }
+        select: { alias: true, parentId: true },
       });
 
       if (!item) break;
-      
+
       path.unshift(item.alias);
       currentId = item.parentId || '';
     }

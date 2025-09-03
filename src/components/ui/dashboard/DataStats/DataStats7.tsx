@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const DataStats7 = () => {
   return (
@@ -10,13 +10,7 @@ const DataStats7 = () => {
             name="New Sales"
             number="1,253"
             icon={
-              <svg
-                width="26"
-                height="27"
-                viewBox="0 0 26 27"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M23.6437 5.00936C23.1562 4.39999 22.4656 4.07499 21.6937 4.07499H7.55623L7.47498 2.53124C7.43435 1.79999 6.82498 1.19061 6.09373 1.19061H2.72185C2.23435 1.19061 1.78748 1.59686 1.78748 2.12499C1.78748 2.65311 2.19373 3.05936 2.72185 3.05936H5.68748L6.5406 17.2781C6.58123 18.2937 7.43435 19.0656 8.40935 19.0656H21.7344C22.2218 19.0656 22.6687 18.6594 22.6687 18.1312C22.6687 17.6031 22.2625 17.1969 21.7344 17.1969H8.40935C8.36873 17.1969 8.3281 17.1562 8.3281 17.1156L8.1656 14.6375H20.4343C21.6125 14.6375 22.6281 13.825 22.8718 12.6875L24.0906 7.08124C24.2937 6.39061 24.0906 5.61874 23.6437 5.00936ZM22.3437 6.71561L21.125 12.3219C21.0437 12.6062 20.8 12.85 20.475 12.85H8.08435L7.6781 5.90311H21.6937C21.9781 5.90311 22.1406 6.06561 22.2218 6.14686C22.2625 6.26874 22.3843 6.47186 22.3437 6.71561Z"
                   fill="#3758F9"
@@ -38,13 +32,7 @@ const DataStats7 = () => {
             name="Active Users"
             number="9,358"
             icon={
-              <svg
-                width="26"
-                height="27"
-                viewBox="0 0 26 27"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M8.49062 12.3625C11.0094 12.3625 13.0812 10.3719 13.0812 7.89374C13.0812 5.41561 11.0094 3.42499 8.49062 3.42499C5.97187 3.42499 3.89999 5.41561 3.89999 7.89374C3.89999 10.3719 5.97187 12.3625 8.49062 12.3625ZM8.49062 5.29374C9.99374 5.29374 11.2531 6.47186 11.2531 7.93436C11.2531 9.39686 10.0344 10.575 8.49062 10.575C6.94687 10.575 5.72812 9.39686 5.72812 7.93436C5.72812 6.47186 6.98749 5.29374 8.49062 5.29374Z"
                   fill="#3758F9"
@@ -66,13 +54,7 @@ const DataStats7 = () => {
             name="Total Revenue"
             number="12,872"
             icon={
-              <svg
-                width="26"
-                height="27"
-                viewBox="0 0 26 27"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16.0469 12.6063H9.95312C7.96249 12.6063 6.29687 11.0625 6.29687 9.15314C6.29687 7.24376 7.92187 5.70001 9.95312 5.70001H18.9312C19.4187 5.70001 19.825 5.29376 19.825 4.80626C19.825 4.31876 19.4187 3.91251 18.9312 3.91251H14.7062V2.12501C14.7062 1.63751 14.3 1.23126 13.8125 1.23126C13.325 1.23126 12.9187 1.63751 12.9187 2.12501V3.83126H9.99374C6.98749 3.83126 4.50937 6.18751 4.50937 9.11251C4.50937 12.0375 6.94687 14.3938 9.99374 14.3938H16.0875C18.0781 14.3938 19.7437 15.9375 19.7437 17.8469C19.7437 19.7563 18.1187 21.3 16.0875 21.3H5.76874C5.28124 21.3 4.87499 21.7063 4.87499 22.1938C4.87499 22.6813 5.28124 23.0875 5.76874 23.0875H12.8781V24.875C12.8781 25.3625 13.2844 25.7688 13.7719 25.7688C14.2594 25.7688 14.6656 25.3625 14.6656 24.875V23.1688H15.9656C18.9719 23.1688 21.45 20.8125 21.45 17.8875C21.45 14.9625 19.0531 12.6063 16.0469 12.6063Z"
                   fill="#3758F9"
@@ -99,17 +81,11 @@ const DataStatsCard = ({ children, name, number, icon }) => {
             {icon}
           </div>
           <div>
-            <h5 className="text-lg font-bold text-dark dark:text-white xs:text-2xl lg:text-xl xl:text-2xl">
-              {number}
-            </h5>
-            <p className="text-sm text-body-color dark:text-dark-5 xs:text-base lg:text-sm xl:text-base">
-              {name}
-            </p>
+            <h5 className="text-lg font-bold text-dark dark:text-white xs:text-2xl lg:text-xl xl:text-2xl">{number}</h5>
+            <p className="text-sm text-body-color dark:text-dark-5 xs:text-base lg:text-sm xl:text-base">{name}</p>
           </div>
         </div>
-        <div className="-mx-[11px] w-full max-w-[200px] md:max-w-[120px] xl:max-w-[180px]">
-          {children}
-        </div>
+        <div className="-mx-[11px] w-full max-w-[200px] md:max-w-[120px] xl:max-w-[180px]">{children}</div>
       </div>
     </div>
   );
@@ -137,7 +113,7 @@ const Chart = (props) => {
     },
     chart: {
       height: 70,
-      type: "area",
+      type: 'area',
       parentHeightOffset: 0,
 
       toolbar: {
@@ -148,19 +124,19 @@ const Chart = (props) => {
       enabled: false,
     },
     stroke: {
-      curve: "straight",
+      curve: 'straight',
       width: 1,
     },
     xaxis: {
-      type: "datetime",
+      type: 'datetime',
       categories: [
-        "2018-09-19T00:00:00.000Z",
-        "2018-09-19T01:30:00.000Z",
-        "2018-09-19T02:30:00.000Z",
-        "2018-09-19T03:30:00.000Z",
-        "2018-09-19T04:30:00.000Z",
-        "2018-09-19T05:30:00.000Z",
-        "2018-09-19T06:30:00.000Z",
+        '2018-09-19T00:00:00.000Z',
+        '2018-09-19T01:30:00.000Z',
+        '2018-09-19T02:30:00.000Z',
+        '2018-09-19T03:30:00.000Z',
+        '2018-09-19T04:30:00.000Z',
+        '2018-09-19T05:30:00.000Z',
+        '2018-09-19T06:30:00.000Z',
       ],
       labels: {
         show: false,
@@ -182,12 +158,7 @@ const Chart = (props) => {
 
   return (
     <div id="chartOne" className="-mx-[11px]">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="area"
-        height={70}
-      />
+      <ReactApexChart options={options} series={series} type="area" height={70} />
     </div>
   );
 };

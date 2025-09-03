@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function VerificationCodeInput4() {
   return (
@@ -31,9 +31,7 @@ export default function VerificationCodeInput4() {
               0
             </div>
           </div>
-          <p className="mt-1.5 text-sm text-body-color">
-            This is a hint text to help user.
-          </p>
+          <p className="mt-1.5 text-sm text-body-color">This is a hint text to help user.</p>
         </div>
       </div>
     </section>

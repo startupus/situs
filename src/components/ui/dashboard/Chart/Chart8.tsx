@@ -1,26 +1,26 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart8 = () => {
   const series = [85];
   const options = {
     chart: {
-      fontFamily: "Inter, sans-serif",
+      fontFamily: 'Inter, sans-serif',
       height: 150,
-      type: "radialBar",
+      type: 'radialBar',
     },
 
     plotOptions: {
       radialBar: {
         hollow: {
-          size: "50%",
+          size: '50%',
         },
         dataLabels: {
           name: {
             show: false,
           },
           value: {
-            fontSize: "16px",
+            fontSize: '16px',
             offsetY: 8,
           },
           total: {
@@ -32,7 +32,7 @@ const Chart8 = () => {
     dataLabels: {
       enabled: true,
     },
-    colors: ["#3758F9"],
+    colors: ['#3758F9'],
     legend: {
       show: false,
     },
@@ -48,29 +48,15 @@ const Chart8 = () => {
           <div className="flex items-center">
             <div className="w-full">
               <div id="chartOne" className="-ml-5">
-                <ReactApexChart
-                  options={options}
-                  series={series}
-                  type="radialBar"
-                  height={150}
-                />
+                <ReactApexChart options={options} series={series} type="radialBar" height={150} />
               </div>
             </div>
             <div className="w-full">
-              <p className="mb-2 text-xl font-semibold leading-none text-dark dark:text-white">
-                Available Storage
-              </p>
+              <p className="mb-2 text-xl font-semibold leading-none text-dark dark:text-white">Available Storage</p>
               <p className="text-sm font-medium text-dark dark:text-white">
-                <span>150</span>{" "}
-                <span className="text-xs text-body-color dark:text-dark-6">
-                  {" "}
-                  GB{" "}
-                </span>
+                <span>150</span> <span className="text-xs text-body-color dark:text-dark-6"> GB </span>
                 <span>/ 512</span>
-                <span className="text-xs text-body-color dark:text-dark-6">
-                  {" "}
-                  GB{" "}
-                </span>
+                <span className="text-xs text-body-color dark:text-dark-6"> GB </span>
               </p>
             </div>
           </div>

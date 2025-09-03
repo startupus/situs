@@ -10,19 +10,19 @@ const Tab3 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="w-full mb-14">
+            <div className="mb-14 w-full">
               <div className="flex flex-wrap bg-[#FAFAFA]">
                 <button
                   onClick={() => handleTabOpen("home")}
-                  className={`flex items-center border-b-2 py-3 px-6 text-sm font-medium md:text-base lg:py-4 lg:px-10 ${
+                  className={`flex items-center border-b-2 px-6 py-3 text-sm font-medium md:text-base lg:px-10 lg:py-4 ${
                     open === "home"
                       ? "border-primary text-primary"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary"
                   }`}
                 >
-                  <span className="text-primary mr-2">
+                  <span className="mr-2 text-primary">
                     <svg
                       width="16"
                       height="16"
@@ -36,13 +36,13 @@ const Tab3 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("about")}
-                  className={`flex items-center border-b-2 py-3 px-6 text-sm font-medium md:text-base lg:py-4 lg:px-10 ${
+                  className={`flex items-center border-b-2 px-6 py-3 text-sm font-medium md:text-base lg:px-10 lg:py-4 ${
                     open === "about"
                       ? "border-primary text-primary"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary"
                   }`}
                 >
-                  <span className="text-primary mr-2">
+                  <span className="mr-2 text-primary">
                     <svg
                       width="18"
                       height="14"
@@ -56,13 +56,13 @@ const Tab3 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("team")}
-                  className={`flex items-center border-b-2 py-3 px-6 text-sm font-medium md:text-base lg:py-4 lg:px-10 ${
+                  className={`flex items-center border-b-2 px-6 py-3 text-sm font-medium md:text-base lg:px-10 lg:py-4 ${
                     open === "team"
                       ? "border-primary text-primary"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary"
                   }`}
                 >
-                  <span className="text-primary mr-2">
+                  <span className="mr-2 text-primary">
                     <svg
                       width="18"
                       height="12"
@@ -79,13 +79,13 @@ const Tab3 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("company")}
-                  className={`flex items-center border-b-2 py-3 px-6 text-sm font-medium md:text-base lg:py-4 lg:px-10 ${
+                  className={`flex items-center border-b-2 px-6 py-3 text-sm font-medium md:text-base lg:px-10 lg:py-4 ${
                     open === "company"
                       ? "border-primary text-primary"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary"
                   }`}
                 >
-                  <span className="text-primary mr-2">
+                  <span className="mr-2 text-primary">
                     <svg
                       width="18"
                       height="18"
@@ -144,7 +144,7 @@ const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
       <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
+        className={`p-6 text-base leading-relaxed text-body-color ${
           open === tabCategory ? "block" : "hidden"
         } `}
       >

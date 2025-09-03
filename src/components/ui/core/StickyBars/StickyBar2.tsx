@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function StickyBar2() {
   return (
@@ -31,13 +31,7 @@ export default function StickyBar2() {
               Sign up
             </a>
             <button className="flex h-10 w-[40px] items-center justify-center rounded-lg bg-gray-2 text-dark-6 duration-200 hover:bg-gray-3 hover:text-dark dark:bg-white/5 dark:hover:bg-white/10 dark:hover:text-white">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_2386_77)">
                   <path
                     d="M1.14288 1.14285L8.00003 8M8.00003 8L14.8572 14.8571M8.00003 8L14.8572 1.14285M8.00003 8L1.14288 14.8571"

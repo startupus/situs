@@ -36,7 +36,7 @@
         }
       "
       :class="scrolledFromTop ? 'fixed bg-white/80 backdrop-blur dark:bg-dark/80 py-2 border-b border-stroke dark:border-dark-3' : 'absolute' "
-      class="top-0 left-0 z-50 w-full"
+      class="left-0 top-0 z-50 w-full"
     >
       <div class="container mx-auto">
         <div class="relative z-40 -mx-4 flex items-center justify-between">
@@ -64,28 +64,28 @@
                 @click="navbarOpen = !navbarOpen"
                 :class="navbarOpen && 'navbarTogglerActive'"
                 id="navbarToggler"
-                class="ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden"
+                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
               >
                 <span
-                  class="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
                 ></span>
                 <span
-                  class="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
                 ></span>
                 <span
-                  class="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
                 ></span>
               </button>
               <nav
                 :class="!navbarOpen && 'hidden' "
                 id="navbarCollapse"
-                class="dark:bg-dark-2 absolute top-full right-4 z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none xl:ml-11 dark:lg:bg-transparent"
+                class="absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none dark:lg:bg-transparent xl:ml-11"
               >
                 <ul class="block lg:flex">
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-dark dark:text-dark-6 flex py-2 text-base font-medium lg:ml-10 lg:inline-flex dark:hover:text-white"
+                      class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-10 lg:inline-flex"
                     >
                       About Us
                     </a>
@@ -93,7 +93,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-dark dark:text-dark-6 flex py-2 text-base font-medium lg:ml-10 lg:inline-flex dark:hover:text-white"
+                      class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-10 lg:inline-flex"
                     >
                       Features
                     </a>
@@ -101,7 +101,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-dark dark:text-dark-6 flex py-2 text-base font-medium lg:ml-10 lg:inline-flex dark:hover:text-white"
+                      class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-10 lg:inline-flex"
                     >
                       Pricing
                     </a>
@@ -109,7 +109,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-dark dark:text-dark-6 flex py-2 text-base font-medium lg:ml-10 lg:inline-flex dark:hover:text-white"
+                      class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-10 lg:inline-flex"
                     >
                       Support
                     </a>
@@ -119,7 +119,7 @@
             </div>
             <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
               <button
-                class="border-primary text-primary hover:bg-primary inline-flex h-12 items-center justify-center gap-2 rounded-lg border px-6 py-3 text-base font-medium duration-200 hover:text-white"
+                class="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-primary px-6 py-3 text-base font-medium text-primary duration-200 hover:bg-primary hover:text-white"
               >
                 <span>
                   <svg
@@ -145,33 +145,33 @@
     <!-- ====== Navbar Section End -->
 
     <!-- ====== Hero Section Start -->
-    <div class="dark:bg-dark relative bg-white px-4 pt-[105px] pb-10 md:px-10">
+    <div class="relative bg-white px-4 pb-10 pt-[105px] dark:bg-dark md:px-10">
       <div
-        class="dark:bg-dark-2 rounded-[20px] bg-[#F6F8FC] px-2 py-14 sm:px-6"
+        class="rounded-[20px] bg-[#F6F8FC] px-2 py-14 dark:bg-dark-2 sm:px-6"
       >
         <div class="container">
           <div class="-mx-4 flex flex-wrap items-center">
             <div class="w-full px-4 lg:w-1/2">
               <div class="w-full max-w-[480px] max-lg:mb-12">
                 <span
-                  class="text-dark mb-6 block text-lg font-semibold dark:text-white"
+                  class="mb-6 block text-lg font-semibold text-dark dark:text-white"
                 >
                   Hello Welcome
                 </span>
                 <h2
-                  class="text-dark mb-5 text-3xl font-bold sm:text-4xl md:text-5xl dark:text-white"
+                  class="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-5xl"
                 >
                   I'm Edward <br />
                   Product Designer
                 </h2>
-                <p class="text-body-color dark:text-dark-6 mb-9 text-base">
+                <p class="mb-9 text-base text-body-color dark:text-dark-6">
                   I Create bold and modern interface design with UX knowledge
                   for companies all around the world.
                 </p>
 
                 <div class="mb-[70px] flex flex-wrap items-center gap-6">
                   <button
-                    class="bg-primary hover:bg-primary/90 inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white duration-200"
+                    class="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90"
                   >
                     <span>
                       <svg
@@ -191,19 +191,19 @@
                   </button>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark hover:text-primary text-base font-medium underline dark:text-white"
+                    class="text-base font-medium text-dark underline hover:text-primary dark:text-white"
                   >
                     See Portfolio
                   </a>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-4">
-                  <p class="text-dark-3 dark:text-dark-6 text-base font-medium">
+                  <p class="text-base font-medium text-dark-3 dark:text-dark-6">
                     Follow Me:
                   </p>
                   <div class="flex flex-wrap items-center gap-3">
                     <button
-                      class="text-dark hover:bg-dark dark:hover:text-dark flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-xs duration-200 hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white"
+                      class="shadow-xs flex h-12 w-12 items-center justify-center rounded-full bg-white text-dark duration-200 hover:bg-dark hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-dark"
                     >
                       <svg
                         width="20"
@@ -219,7 +219,7 @@
                       </svg>
                     </button>
                     <button
-                      class="text-dark hover:bg-dark dark:hover:text-dark flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-xs duration-200 hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white"
+                      class="shadow-xs flex h-12 w-12 items-center justify-center rounded-full bg-white text-dark duration-200 hover:bg-dark hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-dark"
                     >
                       <svg
                         width="20"
@@ -255,7 +255,7 @@
                       </svg>
                     </button>
                     <button
-                      class="text-dark hover:bg-dark dark:hover:text-dark flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-xs duration-200 hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white"
+                      class="shadow-xs flex h-12 w-12 items-center justify-center rounded-full bg-white text-dark duration-200 hover:bg-dark hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-dark"
                     >
                       <svg
                         width="20"
@@ -273,7 +273,7 @@
                       </svg>
                     </button>
                     <button
-                      class="text-dark hover:bg-dark dark:hover:text-dark flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-xs duration-200 hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white"
+                      class="shadow-xs flex h-12 w-12 items-center justify-center rounded-full bg-white text-dark duration-200 hover:bg-dark hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-dark"
                     >
                       <svg
                         width="20"
@@ -310,10 +310,10 @@
                 class="relative z-10 mx-auto aspect-[432/578] max-w-[432px] rounded-full lg:mr-0"
               >
                 <div
-                  class="bg-primary absolute top-0 left-0 -z-20 h-full w-full rounded-full"
+                  class="absolute left-0 top-0 -z-20 h-full w-full rounded-full bg-primary"
                 ></div>
                 <div
-                  class="border-primary absolute top-0 left-0 z-10 aspect-[432/595] h-full w-full -rotate-[8deg] rounded-full border bg-transparent"
+                  class="absolute left-0 top-0 z-10 aspect-[432/595] h-full w-full -rotate-[8deg] rounded-full border border-primary bg-transparent"
                 ></div>
                 <div
                   class="absolute inset-0 -z-10 flex h-full w-full items-end overflow-hidden rounded-full"
@@ -324,7 +324,7 @@
                   />
                 </div>
                 <div
-                  class="absolute top-0 left-0 -z-20 h-full w-full overflow-hidden rounded-full"
+                  class="absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-full"
                 >
                   <img
                     src="./assets/images/hero/hero-14/dots-shape.svg"
@@ -340,22 +340,22 @@
     <!-- ====== Hero Section End -->
 
     <!-- ====== About Section Start -->
-    <section class="dark:bg-dark overflow-hidden bg-white pt-20 lg:pt-[120px]">
+    <section class="overflow-hidden bg-white pt-20 dark:bg-dark lg:pt-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap items-end justify-between">
           <div class="w-full px-4 lg:w-1/2 xl:w-6/12">
             <div class="mb-10 lg:mb-0">
               <span
-                class="text-primary mb-2 block text-lg font-semibold uppercase sm:text-xl"
+                class="mb-2 block text-lg font-semibold uppercase text-primary sm:text-xl"
               >
                 ABOUT ME
               </span>
               <h2
-                class="text-dark mb-5 max-w-[400px] text-3xl leading-tight font-bold sm:text-4xl sm:leading-tight md:text-[40px]/[48px] dark:text-white"
+                class="mb-5 max-w-[400px] text-3xl font-bold leading-tight text-dark dark:text-white sm:text-4xl sm:leading-tight md:text-[40px]/[48px]"
               >
                 Better design, better experience
               </h2>
-              <p class="text-body-color dark:text-dark-6 mb-9 text-base">
+              <p class="mb-9 text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
                 dui ligula, malesuada vel convallis in, tincidunt ut mi
                 Vestibulum sit amet.
@@ -363,10 +363,10 @@
               <div class="-mx-4 flex flex-wrap">
                 <div class="w-full px-4 md:w-1/2 lg:w-full xl:w-7/12">
                   <div
-                    class="dark:bg-dark-2 mb-8 inline-flex items-center rounded-lg bg-white p-5 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] xl:mb-0"
+                    class="mb-8 inline-flex items-center rounded-lg bg-white p-5 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] dark:bg-dark-2 xl:mb-0"
                   >
                     <div
-                      class="bg-primary/5 text-primary mr-4 flex h-11 w-full max-w-[44px] items-center justify-center rounded-lg dark:bg-white/5"
+                      class="mr-4 flex h-11 w-full max-w-[44px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                     >
                       <svg
                         width="22"
@@ -383,13 +383,13 @@
                     </div>
                     <div class="w-full">
                       <span
-                        class="text-body-color dark:text-dark-6 text-sm font-medium"
+                        class="text-sm font-medium text-body-color dark:text-dark-6"
                       >
                         Email address
                       </span>
                       <a
                         href="javascript:void(0)"
-                        class="text-primary text-base font-semibold"
+                        class="text-base font-semibold text-primary"
                       >
                         contact@tailgrids.com
                       </a>
@@ -400,14 +400,14 @@
                 <div class="w-full px-4 md:w-1/2 lg:w-full xl:w-5/12">
                   <div class="mb-8 xl:mb-0">
                     <h5
-                      class="text-body-color dark:text-dark-6 mb-3 text-base font-medium"
+                      class="mb-3 text-base font-medium text-body-color dark:text-dark-6"
                     >
                       Follow Me On:
                     </h5>
                     <div class="flex items-center space-x-3">
                       <a
                         href="javascript:void(0)"
-                        class="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 flex h-9 w-9 items-center justify-center rounded-md border hover:text-white"
+                        class="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                       >
                         <svg
                           width="7"
@@ -422,7 +422,7 @@
                       </a>
                       <a
                         href="javascript:void(0)"
-                        class="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 flex h-9 w-9 items-center justify-center rounded-md border hover:text-white"
+                        class="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                       >
                         <svg
                           width="19"
@@ -437,7 +437,7 @@
                       </a>
                       <a
                         href="javascript:void(0)"
-                        class="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 flex h-9 w-9 items-center justify-center rounded-md border hover:text-white"
+                        class="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                       >
                         <svg
                           width="19"
@@ -452,7 +452,7 @@
                       </a>
                       <a
                         href="javascript:void(0)"
-                        class="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 flex h-9 w-9 items-center justify-center rounded-md border hover:text-white"
+                        class="flex h-9 w-9 items-center justify-center rounded-md border border-stroke text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                       >
                         <svg
                           width="14"
@@ -476,43 +476,43 @@
             <div class="space-y-8">
               <div>
                 <h5
-                  class="text-dark mb-5 text-lg font-semibold dark:text-white"
+                  class="mb-5 text-lg font-semibold text-dark dark:text-white"
                 >
                   Design
                 </h5>
                 <div
-                  class="bg-stroke dark:bg-dark-3 relative h-2 w-full rounded-2xl"
+                  class="relative h-2 w-full rounded-2xl bg-stroke dark:bg-dark-3"
                 >
                   <div
-                    class="bg-primary absolute top-0 left-0 h-full w-[80%] rounded-2xl"
+                    class="absolute left-0 top-0 h-full w-[80%] rounded-2xl bg-primary"
                   ></div>
                 </div>
               </div>
               <div>
                 <h5
-                  class="text-dark mb-5 text-lg font-semibold dark:text-white"
+                  class="mb-5 text-lg font-semibold text-dark dark:text-white"
                 >
                   Branding
                 </h5>
                 <div
-                  class="bg-stroke dark:bg-dark-3 relative h-2 w-full rounded-2xl"
+                  class="relative h-2 w-full rounded-2xl bg-stroke dark:bg-dark-3"
                 >
                   <div
-                    class="bg-primary absolute top-0 left-0 h-full w-[70%] rounded-2xl"
+                    class="absolute left-0 top-0 h-full w-[70%] rounded-2xl bg-primary"
                   ></div>
                 </div>
               </div>
               <div>
                 <h5
-                  class="text-dark mb-5 text-lg font-semibold dark:text-white"
+                  class="mb-5 text-lg font-semibold text-dark dark:text-white"
                 >
                   Web Design
                 </h5>
                 <div
-                  class="bg-stroke dark:bg-dark-3 relative h-2 w-full rounded-2xl"
+                  class="relative h-2 w-full rounded-2xl bg-stroke dark:bg-dark-3"
                 >
                   <div
-                    class="bg-primary absolute top-0 left-0 h-full w-[92%] rounded-2xl"
+                    class="absolute left-0 top-0 h-full w-[92%] rounded-2xl bg-primary"
                   ></div>
                 </div>
               </div>
@@ -524,22 +524,22 @@
     <!-- ====== About Section End -->
 
     <!-- ====== Services Section Start -->
-    <section class="dark:bg-dark py-20 lg:py-[120px]">
+    <section class="py-20 dark:bg-dark lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div
               class="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[90px]"
             >
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Core Features
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Our Awesome Features
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -550,10 +550,10 @@
           <div class="w-full px-4 md:w-1/2 xl:w-1/4">
             <div class="relative mx-auto mb-10 max-w-[370px] text-center">
               <div
-                class="border-primary absolute top-12 -right-4 hidden h-1 w-16 border-t-2 border-dashed xl:block 2xl:w-[75px]"
+                class="absolute -right-4 top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary xl:block 2xl:w-[75px]"
               ></div>
               <div
-                class="bg-primary relative mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] text-white"
+                class="relative mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] bg-primary text-white"
               >
                 <svg
                   width="44"
@@ -588,10 +588,10 @@
                   </defs>
                 </svg>
               </div>
-              <h3 class="text-dark mb-5 text-2xl font-semibold dark:text-white">
+              <h3 class="mb-5 text-2xl font-semibold text-dark dark:text-white">
                 Easy To Use
               </h3>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                 tincidunt rutrum.
               </p>
@@ -600,13 +600,13 @@
           <div class="w-full px-4 md:w-1/2 xl:w-1/4">
             <div class="relative mx-auto mb-10 max-w-[370px] text-center">
               <div
-                class="border-primary absolute top-12 -left-4 hidden h-1 w-16 border-t-2 border-dashed xl:block 2xl:w-[75px]"
+                class="absolute -left-4 top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary xl:block 2xl:w-[75px]"
               ></div>
               <div
-                class="border-primary absolute top-12 right-[-14px] hidden h-1 w-16 border-t-2 border-dashed xl:block 2xl:w-[75px]"
+                class="absolute right-[-14px] top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary xl:block 2xl:w-[75px]"
               ></div>
               <div
-                class="bg-primary mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] text-white"
+                class="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] bg-primary text-white"
               >
                 <svg
                   width="44"
@@ -622,10 +622,10 @@
                   />
                 </svg>
               </div>
-              <h3 class="text-dark mb-5 text-2xl font-semibold dark:text-white">
+              <h3 class="mb-5 text-2xl font-semibold text-dark dark:text-white">
                 Awesome Design
               </h3>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                 tincidunt rutrum.
               </p>
@@ -634,13 +634,13 @@
           <div class="w-full px-4 md:w-1/2 xl:w-1/4">
             <div class="relative mx-auto mb-10 max-w-[370px] text-center">
               <div
-                class="border-primary absolute top-12 -left-4 hidden h-1 w-16 border-t-2 border-dashed xl:block 2xl:w-[75px]"
+                class="absolute -left-4 top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary xl:block 2xl:w-[75px]"
               ></div>
               <div
-                class="border-primary absolute top-12 right-[-14px] hidden h-1 w-16 border-t-2 border-dashed xl:block 2xl:w-[75px]"
+                class="absolute right-[-14px] top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary xl:block 2xl:w-[75px]"
               ></div>
               <div
-                class="bg-primary mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] text-white"
+                class="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] bg-primary text-white"
               >
                 <svg
                   width="44"
@@ -668,10 +668,10 @@
                   />
                 </svg>
               </div>
-              <h3 class="text-dark mb-5 text-2xl font-semibold dark:text-white">
+              <h3 class="mb-5 text-2xl font-semibold text-dark dark:text-white">
                 Easy To Customize
               </h3>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                 tincidunt rutrum.
               </p>
@@ -680,10 +680,10 @@
           <div class="w-full px-4 md:w-1/2 xl:w-1/4">
             <div class="relative mx-auto mb-10 max-w-[370px] text-center">
               <div
-                class="border-primary absolute top-12 left-[-14px] hidden h-1 w-16 border-t-2 border-dashed xl:block 2xl:w-[75px]"
+                class="absolute left-[-14px] top-12 hidden h-1 w-16 border-t-2 border-dashed border-primary xl:block 2xl:w-[75px]"
               ></div>
               <div
-                class="bg-primary mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] text-white"
+                class="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-[20px] bg-primary text-white"
               >
                 <svg
                   width="44"
@@ -711,10 +711,10 @@
                   />
                 </svg>
               </div>
-              <h3 class="text-dark mb-5 text-2xl font-semibold dark:text-white">
+              <h3 class="mb-5 text-2xl font-semibold text-dark dark:text-white">
                 Any Time Support
               </h3>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                 tincidunt rutrum.
               </p>
@@ -734,7 +734,7 @@
           button: 'w-[10px] bg-stroke dark:bg-dark-3'
         }
       "
-      class="dark:bg-dark-2 bg-gray-1 py-20 lg:py-[120px]"
+      class="bg-gray-1 py-20 dark:bg-dark-2 lg:py-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap justify-center">
@@ -748,31 +748,31 @@
               >
                 <div class="w-full">
                   <div
-                    class="dark:bg-dark-2 relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] sm:px-10"
+                    class="relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] dark:bg-dark-2 sm:px-10"
                   >
                     <span
-                      class="bg-primary absolute top-0 right-0 rounded-bl-2xl p-4 text-2xl font-semibold text-white"
+                      class="absolute right-0 top-0 rounded-bl-2xl bg-primary p-4 text-2xl font-semibold text-white"
                     >
                       01
                     </span>
                     <span
-                      class="text-dark mb-2 inline-block text-2xl font-bold sm:text-[26px] sm:leading-7 dark:text-white"
+                      class="mb-2 inline-block text-2xl font-bold text-dark dark:text-white sm:text-[26px] sm:leading-7"
                     >
                       Digital
                     </span>
                     <h3
-                      class="text-body-color dark:text-dark-6 mb-5 text-base font-medium"
+                      class="mb-5 text-base font-medium text-body-color dark:text-dark-6"
                     >
                       Marketing Solutions
                     </h3>
-                    <p class="text-body-color dark:text-dark-6 mb-9 text-sm">
+                    <p class="mb-9 text-sm text-body-color dark:text-dark-6">
                       Lorem ipsum dolor consectetur adipiscing mod tempor
                       incididunt labore dolore magna ut veniam.
                     </p>
 
                     <a
                       href="javascript:void(0)"
-                      class="text-dark hover:text-primary inline-flex items-center text-sm font-medium dark:text-white"
+                      class="inline-flex items-center text-sm font-medium text-dark hover:text-primary dark:text-white"
                     >
                       View Details
                       <span class="ml-2">
@@ -804,31 +804,31 @@
               >
                 <div class="w-full">
                   <div
-                    class="dark:bg-dark-2 relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] sm:px-10"
+                    class="relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] dark:bg-dark-2 sm:px-10"
                   >
                     <span
-                      class="bg-primary absolute top-0 right-0 rounded-bl-2xl p-4 text-2xl font-semibold text-white"
+                      class="absolute right-0 top-0 rounded-bl-2xl bg-primary p-4 text-2xl font-semibold text-white"
                     >
                       02
                     </span>
                     <span
-                      class="text-dark mb-2 inline-block text-2xl font-bold sm:text-[26px] sm:leading-7 dark:text-white"
+                      class="mb-2 inline-block text-2xl font-bold text-dark dark:text-white sm:text-[26px] sm:leading-7"
                     >
                       Design
                     </span>
                     <h3
-                      class="text-body-color dark:text-dark-6 mb-5 text-base font-medium"
+                      class="mb-5 text-base font-medium text-body-color dark:text-dark-6"
                     >
                       Marketing Solutions
                     </h3>
-                    <p class="text-body-color dark:text-dark-6 mb-9 text-sm">
+                    <p class="mb-9 text-sm text-body-color dark:text-dark-6">
                       Lorem ipsum dolor consectetur adipiscing mod tempor
                       incididunt labore dolore magna ut veniam.
                     </p>
 
                     <a
                       href="javascript:void(0)"
-                      class="text-dark hover:text-primary inline-flex items-center text-sm font-medium dark:text-white"
+                      class="inline-flex items-center text-sm font-medium text-dark hover:text-primary dark:text-white"
                     >
                       View Details
                       <span class="ml-2">
@@ -860,31 +860,31 @@
               >
                 <div class="w-full">
                   <div
-                    class="dark:bg-dark-2 relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] sm:px-10"
+                    class="relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] dark:bg-dark-2 sm:px-10"
                   >
                     <span
-                      class="bg-primary absolute top-0 right-0 rounded-bl-2xl p-4 text-2xl font-semibold text-white"
+                      class="absolute right-0 top-0 rounded-bl-2xl bg-primary p-4 text-2xl font-semibold text-white"
                     >
                       03
                     </span>
                     <span
-                      class="text-dark mb-2 inline-block text-2xl font-bold sm:text-[26px] sm:leading-7 dark:text-white"
+                      class="mb-2 inline-block text-2xl font-bold text-dark dark:text-white sm:text-[26px] sm:leading-7"
                     >
                       Development
                     </span>
                     <h3
-                      class="text-body-color dark:text-dark-6 mb-5 text-base font-medium"
+                      class="mb-5 text-base font-medium text-body-color dark:text-dark-6"
                     >
                       Marketing Solutions
                     </h3>
-                    <p class="text-body-color dark:text-dark-6 mb-9 text-sm">
+                    <p class="mb-9 text-sm text-body-color dark:text-dark-6">
                       Lorem ipsum dolor consectetur adipiscing mod tempor
                       incididunt labore dolore magna ut veniam.
                     </p>
 
                     <a
                       href="javascript:void(0)"
-                      class="text-dark hover:text-primary inline-flex items-center text-sm font-medium dark:text-white"
+                      class="inline-flex items-center text-sm font-medium text-dark hover:text-primary dark:text-white"
                     >
                       View Details
                       <span class="ml-2">
@@ -934,21 +934,21 @@
 
     <!-- ====== Pricing Section Start -->
     <section
-      class="dark:bg-dark relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Pricing Table
               </span>
               <h2
-                class="text-dark mb-3 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Awesome Pricing Plan
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -959,47 +959,47 @@
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="shadow-pricing-2 dark:bg-dark-2 relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 sm:p-12 lg:px-6 lg:py-10 xl:p-14"
+              class="relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 shadow-pricing-2 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-14"
             >
               <span
-                class="text-dark mb-5 block text-xl font-medium dark:text-white"
+                class="mb-5 block text-xl font-medium text-dark dark:text-white"
               >
                 Starter
               </span>
 
               <h2
-                class="text-dark mb-11 text-4xl font-semibold xl:text-[42px] dark:text-white"
+                class="mb-11 text-4xl font-semibold text-dark dark:text-white xl:text-[42px]"
               >
                 <span class="text-xl font-medium">$</span>
                 <span class="px-0.5">25.00</span>
-                <span class="text-body-color dark:text-dark-6 text-base">
+                <span class="text-base text-body-color dark:text-dark-6">
                   Per Month
                 </span>
               </h2>
 
               <div class="mb-[50px]">
-                <h5 class="text-dark mb-5 text-lg font-medium dark:text-white">
+                <h5 class="mb-5 text-lg font-medium text-dark dark:text-white">
                   Features
                 </h5>
 
                 <div class="flex flex-col gap-[14px]">
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Up to 1 User
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     All UI components
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Lifetime access
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Free updates
                   </p>
                 </div>
               </div>
               <a
                 href="javascript:void(0)"
-                class="bg-primary hover:bg-blue-dark inline-block rounded-md px-7 py-3 text-center text-base font-medium text-white transition"
+                class="inline-block rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white transition hover:bg-blue-dark"
               >
                 Purchase Now
               </a>
@@ -1007,52 +1007,52 @@
           </div>
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="shadow-pricing-2 dark:bg-dark-2 relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 sm:p-12 lg:px-6 lg:py-10 xl:p-14"
+              class="relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 shadow-pricing-2 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-14"
             >
               <p
-                class="bg-primary absolute top-[60px] right-[-50px] inline-block -rotate-90 rounded-tl-md rounded-bl-md px-5 py-2 text-base font-medium text-white"
+                class="absolute right-[-50px] top-[60px] inline-block -rotate-90 rounded-bl-md rounded-tl-md bg-primary px-5 py-2 text-base font-medium text-white"
               >
                 Recommended
               </p>
               <span
-                class="text-dark mb-5 block text-xl font-medium dark:text-white"
+                class="mb-5 block text-xl font-medium text-dark dark:text-white"
               >
                 Basic
               </span>
 
               <h2
-                class="text-dark mb-11 text-4xl font-semibold xl:text-[42px] dark:text-white"
+                class="mb-11 text-4xl font-semibold text-dark dark:text-white xl:text-[42px]"
               >
                 <span class="text-xl font-medium">$</span>
                 <span class="px-0.5">59.00</span>
-                <span class="text-body-color dark:text-dark-6 text-base">
+                <span class="text-base text-body-color dark:text-dark-6">
                   Per Month
                 </span>
               </h2>
 
               <div class="mb-[50px]">
-                <h5 class="text-dark mb-5 text-lg font-medium dark:text-white">
+                <h5 class="mb-5 text-lg font-medium text-dark dark:text-white">
                   Features
                 </h5>
 
                 <div class="flex flex-col gap-[14px]">
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Up to 1 User
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     All UI components
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Lifetime access
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Free updates
                   </p>
                 </div>
               </div>
               <a
                 href="javascript:void(0)"
-                class="bg-primary hover:bg-blue-dark inline-block rounded-md px-7 py-3 text-center text-base font-medium text-white transition"
+                class="inline-block rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white transition hover:bg-blue-dark"
               >
                 Purchase Now
               </a>
@@ -1060,47 +1060,47 @@
           </div>
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="shadow-pricing-2 dark:bg-dark-2 relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 sm:p-12 lg:px-6 lg:py-10 xl:p-14"
+              class="relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 shadow-pricing-2 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-14"
             >
               <span
-                class="text-dark mb-5 block text-xl font-medium dark:text-white"
+                class="mb-5 block text-xl font-medium text-dark dark:text-white"
               >
                 Premium
               </span>
 
               <h2
-                class="text-dark mb-11 text-4xl font-semibold xl:text-[42px] dark:text-white"
+                class="mb-11 text-4xl font-semibold text-dark dark:text-white xl:text-[42px]"
               >
                 <span class="text-xl font-medium">$</span>
                 <span class="px-0.5">99.00</span>
-                <span class="text-body-color dark:text-dark-6 text-base">
+                <span class="text-base text-body-color dark:text-dark-6">
                   Per Month
                 </span>
               </h2>
 
               <div class="mb-[50px]">
-                <h5 class="text-dark mb-5 text-lg font-medium dark:text-white">
+                <h5 class="mb-5 text-lg font-medium text-dark dark:text-white">
                   Features
                 </h5>
 
                 <div class="flex flex-col gap-[14px]">
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Up to 1 User
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     All UI components
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Lifetime access
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     Free updates
                   </p>
                 </div>
               </div>
               <a
                 href="javascript:void(0)"
-                class="bg-primary hover:bg-blue-dark inline-block rounded-md px-7 py-3 text-center text-base font-medium text-white transition"
+                class="inline-block rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white transition hover:bg-blue-dark"
               >
                 Purchase Now
               </a>
@@ -1112,18 +1112,18 @@
     <!-- ====== Pricing Section End -->
 
     <!-- ====== Testimonials Section Start -->
-    <section class="bg-gray-1 dark:bg-dark-3 py-20 lg:py-[120px]">
+    <section class="bg-gray-1 py-20 dark:bg-dark-3 lg:py-[120px]">
       <div class="container">
         <div class="mx-auto mb-[60px] w-full max-w-[510px] text-center">
-          <span class="text-primary mb-2 block text-lg font-semibold">
+          <span class="mb-2 block text-lg font-semibold text-primary">
             Testimonials
           </span>
           <h2
-            class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+            class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
           >
             What our Clients Says
           </h2>
-          <p class="text-body-color dark:text-dark-6 text-base">
+          <p class="text-base text-body-color dark:text-dark-6">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form.
           </p>
@@ -1131,7 +1131,7 @@
 
         <div>
           <div class="gap-8 md:columns-2 lg:columns-3">
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1146,20 +1146,20 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Melissa Hart
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.”
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1174,13 +1174,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Maria Baptista
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.” lot it to all my friends and familys and
@@ -1188,7 +1188,7 @@
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1203,20 +1203,20 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Giana Franci
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.”
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1231,13 +1231,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Maren Press
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more lot it to all my friends and familys and
@@ -1245,7 +1245,7 @@
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1260,13 +1260,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Ryan Donin
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more lot it to all my friends ve learned a lot it
@@ -1274,7 +1274,7 @@
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1289,13 +1289,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Jakob Press
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.”
@@ -1310,17 +1310,17 @@
 
     <!-- ====== FAQ Section Start -->
     <section
-      class="dark:bg-dark relative z-20 overflow-hidden bg-white pt-20 pb-8 lg:pt-[120px] lg:pb-[50px]"
+      class="relative z-20 overflow-hidden bg-white pb-8 pt-20 dark:bg-dark lg:pb-[50px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 FAQ
               </span>
               <h2
-                class="text-dark text-3xl font-bold sm:text-[40px]/[48px] dark:text-white"
+                class="text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]"
               >
                 Frequently ask questions
               </h2>
@@ -1332,7 +1332,7 @@
           <div class="w-full px-4 lg:w-1/2">
             <div class="mb-12 flex lg:mb-[70px]">
               <div
-                class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
+                class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
               >
                 <svg
                   width="32"
@@ -1353,12 +1353,12 @@
               </div>
               <div class="w-full">
                 <h3
-                  class="text-dark mb-6 text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                  class="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
                   Is TailGrids Well-documented?
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 text-base leading-relaxed"
+                  class="text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1369,7 +1369,7 @@
             </div>
             <div class="mb-12 flex lg:mb-[70px]">
               <div
-                class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
+                class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
               >
                 <svg
                   width="32"
@@ -1390,12 +1390,12 @@
               </div>
               <div class="w-full">
                 <h3
-                  class="text-dark mb-6 text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                  class="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
                   Is TailGrids Well-documented?
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 text-base leading-relaxed"
+                  class="text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1408,7 +1408,7 @@
           <div class="w-full px-4 lg:w-1/2">
             <div class="mb-12 flex lg:mb-[70px]">
               <div
-                class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
+                class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
               >
                 <svg
                   width="32"
@@ -1429,12 +1429,12 @@
               </div>
               <div class="w-full">
                 <h3
-                  class="text-dark mb-6 text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                  class="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
                   Is TailGrids Well-documented?
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 text-base leading-relaxed"
+                  class="text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1445,7 +1445,7 @@
             </div>
             <div class="mb-12 flex lg:mb-[70px]">
               <div
-                class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
+                class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-xl bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px]"
               >
                 <svg
                   width="32"
@@ -1466,12 +1466,12 @@
               </div>
               <div class="w-full">
                 <h3
-                  class="text-dark mb-6 text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                  class="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
                   Is TailGrids Well-documented?
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 text-base leading-relaxed"
+                  class="text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1485,7 +1485,7 @@
       </div>
 
       <div>
-        <span class="absolute top-4 left-4 z-[-1]">
+        <span class="absolute left-4 top-4 z-[-1]">
           <svg
             width="48"
             height="134"
@@ -1775,7 +1775,7 @@
             />
           </svg>
         </span>
-        <span class="absolute right-4 bottom-4 z-[-1]">
+        <span class="absolute bottom-4 right-4 z-[-1]">
           <svg
             width="48"
             height="134"
@@ -2071,29 +2071,29 @@
 
     <!-- ====== Call To Action Section Start -->
     <section
-      class="dark:bg-dark relative z-10 overflow-hidden bg-white py-20 lg:py-[120px]"
+      class="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]"
     >
       <div class="container">
         <div class="mx-auto w-full max-w-[790px] text-center">
           <h2
-            class="text-dark mx-auto mb-6 w-full max-w-[550px] text-3xl !leading-tight font-bold -tracking-[.72px] sm:text-4xl dark:text-white"
+            class="mx-auto mb-6 w-full max-w-[550px] text-3xl font-bold !leading-tight -tracking-[.72px] text-dark dark:text-white sm:text-4xl"
           >
             Have a Project Idea In Mind? Let’s Work Together.
           </h2>
-          <p class="text-body-color dark:text-dark-6 mb-8 text-base sm:text-lg">
+          <p class="mb-8 text-base text-body-color dark:text-dark-6 sm:text-lg">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form, by more and more
             injected humour.
           </p>
           <button
-            class="bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium text-white duration-200"
+            class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90"
           >
             Get Started for Free
           </button>
         </div>
       </div>
 
-      <div class="absolute top-0 left-20 -z-10">
+      <div class="absolute left-20 top-0 -z-10">
         <svg
           width="605"
           height="237"
@@ -2136,7 +2136,7 @@
           </defs>
         </svg>
       </div>
-      <div class="absolute right-6 bottom-0 -z-10">
+      <div class="absolute bottom-0 right-6 -z-10">
         <svg
           width="531"
           height="197"
@@ -2184,21 +2184,21 @@
 
     <!-- ====== Contact Section Start -->
     <section
-      class="bg-gray-2 dark:bg-dark relative z-10 overflow-hidden py-20 lg:py-[120px]"
+      class="relative z-10 overflow-hidden bg-gray-2 py-20 dark:bg-dark lg:py-[120px]"
     >
       <div class="container">
         <div class="flex flex-wrap gap-10 lg:flex-nowrap">
           <div class="w-full">
             <div
-              class="dark:bg-dark-2 rounded-[20px] bg-white p-8 shadow-xs sm:p-[52px] lg:p-8 xl:p-[52px]"
+              class="shadow-xs rounded-[20px] bg-white p-8 dark:bg-dark-2 sm:p-[52px] lg:p-8 xl:p-[52px]"
             >
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Get in Touch
               </span>
-              <h3 class="text-dark mb-3 text-3xl font-bold dark:text-white">
+              <h3 class="mb-3 text-3xl font-bold text-dark dark:text-white">
                 Let’s Chat, Contact with Us
               </h3>
-              <p class="text-body-color dark:text-dark-6 mb-10 text-lg">
+              <p class="mb-10 text-lg text-body-color dark:text-dark-6">
                 Have any questions or feedback? We’re here to help. Send us a
                 message, We’ll get back to you within 24 hours.
               </p>
@@ -2208,14 +2208,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       First name
                     </label>
                     <input
                       type="text"
                       placeholder="First name"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2223,14 +2223,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Last name
                     </label>
                     <input
                       type="text"
                       placeholder="Last name"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary h-[50px] w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2238,14 +2238,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Email
                     </label>
                     <input
                       type="email"
                       placeholder="yourname@company.com"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary h-[50px] w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2253,14 +2253,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Phone number
                     </label>
                     <input
                       type="text"
                       placeholder="+1 (555) 444-0000"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary h-[50px] w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2268,7 +2268,7 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Message
                     </label>
@@ -2276,13 +2276,13 @@
                       type="text"
                       rows="5"
                       placeholder="Type your message"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary w-full rounded-lg border bg-transparent p-5 duration-200 outline-none dark:text-white"
+                      class="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     ></textarea>
                   </div>
                 </div>
                 <div class="w-full px-4">
                   <button
-                    class="bg-primary hover:bg-primary/90 flex h-[52px] w-full items-center justify-center rounded-lg px-5 py-3 text-base font-medium text-white duration-200"
+                    class="flex h-[52px] w-full items-center justify-center rounded-lg bg-primary px-5 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90"
                   >
                     Send Message
                   </button>
@@ -2301,16 +2301,16 @@
                 class="w-full"
               />
               <div
-                class="border-primary/20 absolute -bottom-[140px] -left-[140px] -z-10 aspect-square w-[290px] rounded-full border-2 bg-transparent"
+                class="absolute -bottom-[140px] -left-[140px] -z-10 aspect-square w-[290px] rounded-full border-2 border-primary/20 bg-transparent"
               ></div>
               <div
-                class="border-primary/20 absolute -top-[164px] -right-[40px] -z-10 aspect-square w-[390px] rounded-full border-2 bg-transparent"
+                class="absolute -right-[40px] -top-[164px] -z-10 aspect-square w-[390px] rounded-full border-2 border-primary/20 bg-transparent"
               ></div>
             </div>
 
-            <div class="bg-dark-4 space-y-5 rounded-[20px] p-6 shadow-xs">
+            <div class="shadow-xs space-y-5 rounded-[20px] bg-dark-4 p-6">
               <div
-                class="bg-dark-2 flex w-full items-center gap-5 rounded-[20px] p-5"
+                class="flex w-full items-center gap-5 rounded-[20px] bg-dark-2 p-5"
               >
                 <div
                   class="flex aspect-square w-full max-w-[60px] items-center justify-center rounded-full bg-white/10 text-white"
@@ -2330,12 +2330,12 @@
                 </div>
                 <div>
                   <h6 class="mb-1 text-lg font-semibold text-white">Email</h6>
-                  <p class="text-gray-7 text-base">techsupport@yourmail.com</p>
+                  <p class="text-base text-gray-7">techsupport@yourmail.com</p>
                 </div>
               </div>
 
               <div
-                class="bg-dark-2 flex w-full items-center gap-5 rounded-[20px] p-5"
+                class="flex w-full items-center gap-5 rounded-[20px] bg-dark-2 p-5"
               >
                 <div
                   class="flex aspect-square w-full max-w-[60px] items-center justify-center rounded-full bg-white/10 text-white"
@@ -2363,12 +2363,12 @@
                 </div>
                 <div>
                   <h6 class="mb-1 text-lg font-semibold text-white">Phone</h6>
-                  <p class="text-gray-7 text-base">(+005) 432 986 450</p>
+                  <p class="text-base text-gray-7">(+005) 432 986 450</p>
                 </div>
               </div>
 
               <div
-                class="bg-dark-2 flex w-full items-center gap-5 rounded-[20px] p-5"
+                class="flex w-full items-center gap-5 rounded-[20px] bg-dark-2 p-5"
               >
                 <div
                   class="flex aspect-square w-full max-w-[60px] items-center justify-center rounded-full bg-white/10 text-white"
@@ -2392,7 +2392,7 @@
                 </div>
                 <div>
                   <h6 class="mb-1 text-lg font-semibold text-white">Address</h6>
-                  <p class="text-gray-7 text-base">
+                  <p class="text-base text-gray-7">
                     230 Norman Street New York, H8R 1A1
                   </p>
                 </div>
@@ -2405,7 +2405,7 @@
     <!-- ====== Contact Section End -->
 
     <!-- ====== Blog Section Start -->
-    <section class="dark:bg-dark bg-white py-20 lg:py-[120px]">
+    <section class="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div class="container">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
@@ -2418,23 +2418,23 @@
                 />
               </div>
               <div class="flex gap-6">
-                <div class="bg-dark mt-3 h-0.5 w-8 dark:bg-white"></div>
+                <div class="mt-3 h-0.5 w-8 bg-dark dark:bg-white"></div>
                 <div>
                   <div class="mb-5 flex items-center gap-3">
-                    <span class="text-dark text-base uppercase dark:text-white">
+                    <span class="text-base uppercase text-dark dark:text-white">
                       tech
                     </span>
                     <span
-                      class="bg-stroke dark:bg-dark-3 block h-1.5 w-1.5 rounded-full"
+                      class="block h-1.5 w-1.5 rounded-full bg-stroke dark:bg-dark-3"
                     ></span>
 
-                    <span class="text-body-color dark:text-dark-6 text-base">
+                    <span class="text-base text-body-color dark:text-dark-6">
                       March 20, 2028
                     </span>
                   </div>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark hover:text-primary dark:hover:text-primary line-clamp-2 cursor-pointer text-xl font-bold dark:text-white"
+                    class="line-clamp-2 cursor-pointer text-xl font-bold text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
                     How to use Facebook ads to sell online courses
                   </a>
@@ -2453,23 +2453,23 @@
                 />
               </div>
               <div class="flex gap-6">
-                <div class="bg-dark mt-3 h-0.5 w-8 dark:bg-white"></div>
+                <div class="mt-3 h-0.5 w-8 bg-dark dark:bg-white"></div>
                 <div>
                   <div class="mb-5 flex items-center gap-3">
-                    <span class="text-dark text-base uppercase dark:text-white">
+                    <span class="text-base uppercase text-dark dark:text-white">
                       MODERN
                     </span>
                     <span
-                      class="bg-stroke dark:bg-dark-3 block h-1.5 w-1.5 rounded-full"
+                      class="block h-1.5 w-1.5 rounded-full bg-stroke dark:bg-dark-3"
                     ></span>
 
-                    <span class="text-body-color dark:text-dark-6 text-base">
+                    <span class="text-base text-body-color dark:text-dark-6">
                       March 20, 2028
                     </span>
                   </div>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark hover:text-primary dark:hover:text-primary line-clamp-2 cursor-pointer text-xl font-bold dark:text-white"
+                    class="line-clamp-2 cursor-pointer text-xl font-bold text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
                     What to do if template do not work properly
                   </a>
@@ -2487,23 +2487,23 @@
                 />
               </div>
               <div class="flex gap-6">
-                <div class="bg-dark mt-3 h-0.5 w-8 dark:bg-white"></div>
+                <div class="mt-3 h-0.5 w-8 bg-dark dark:bg-white"></div>
                 <div>
                   <div class="mb-5 flex items-center gap-3">
-                    <span class="text-dark text-base uppercase dark:text-white">
+                    <span class="text-base uppercase text-dark dark:text-white">
                       tools
                     </span>
                     <span
-                      class="bg-stroke dark:bg-dark-3 block h-1.5 w-1.5 rounded-full"
+                      class="block h-1.5 w-1.5 rounded-full bg-stroke dark:bg-dark-3"
                     ></span>
 
-                    <span class="text-body-color dark:text-dark-6 text-base">
+                    <span class="text-base text-body-color dark:text-dark-6">
                       March 20, 2028
                     </span>
                   </div>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark hover:text-primary dark:hover:text-primary line-clamp-2 cursor-pointer text-xl font-bold dark:text-white"
+                    class="line-clamp-2 cursor-pointer text-xl font-bold text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                   >
                     Meet AutoManage, the best AI management tools
                   </a>
@@ -2517,7 +2517,7 @@
     <!-- ====== Blog Section End -->
 
     <!-- ====== Brands Section Start -->
-    <section class="bg-gray-1 dark:bg-dark-2 py-10 lg:py-20">
+    <section class="bg-gray-1 py-10 dark:bg-dark-2 lg:py-20">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
@@ -2590,13 +2590,13 @@
     <!-- ====== Brands Section End -->
 
     <!-- ====== Footer Section Start -->
-    <footer class="dark:bg-dark relative z-10 bg-white pt-20 lg:pt-[120px]">
+    <footer class="relative z-10 bg-white pt-20 dark:bg-dark lg:pt-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap lg:mb-14">
           <div class="w-full px-4 md:w-2/3 lg:w-1/3">
             <div class="mb-12 w-full">
               <h4
-                class="text-dark text-3xl font-medium xl:text-[32px] dark:text-white"
+                class="text-3xl font-medium text-dark dark:text-white xl:text-[32px]"
               >
                 Please feel free to get in touch with us
               </h4>
@@ -2605,7 +2605,7 @@
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div class="mb-12 w-full">
               <div class="flex">
-                <div class="text-primary mr-6 h-9 w-9">
+                <div class="mr-6 h-9 w-9 text-primary">
                   <svg
                     width="35"
                     height="35"
@@ -2625,11 +2625,11 @@
                 </div>
                 <div>
                   <h5
-                    class="text-dark mb-4 text-lg font-semibold dark:text-white"
+                    class="mb-4 text-lg font-semibold text-dark dark:text-white"
                   >
                     Our Location
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     401 Broadway, 24th Floor, Orchard Cloud View, London
                   </p>
                 </div>
@@ -2639,7 +2639,7 @@
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div class="mb-12 w-full">
               <div class="flex">
-                <div class="text-primary mr-6 h-9 w-9">
+                <div class="mr-6 h-9 w-9 text-primary">
                   <svg
                     width="35"
                     height="35"
@@ -2655,14 +2655,14 @@
                 </div>
                 <div>
                   <h5
-                    class="text-dark mb-4 text-lg font-semibold dark:text-white"
+                    class="mb-4 text-lg font-semibold text-dark dark:text-white"
                   >
                     How Can We Help?
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 mb-2 text-base">
+                  <p class="mb-2 text-base text-body-color dark:text-dark-6">
                     info@yourdomain.com
                   </p>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     contact@yourdomain.com
                   </p>
                 </div>
@@ -2671,7 +2671,7 @@
           </div>
         </div>
       </div>
-      <div class="border-stroke dark:border-dark-3 border-t py-8">
+      <div class="border-t border-stroke py-8 dark:border-dark-3">
         <div class="container mx-auto">
           <div class="-mx-4 flex flex-wrap items-center">
             <div class="w-full px-4 lg:w-3/12 xl:w-1/3">
@@ -2692,7 +2692,7 @@
             </div>
             <div class="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-1/3">
               <div class="py-3 text-center">
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   &copy; 2025 TailGrids | All Rights Reserved
                 </p>
               </div>
@@ -2704,7 +2704,7 @@
                 >
                   <a
                     href="javascript:void(0)"
-                    class="text-dark-7 hover:text-primary px-3 dark:text-white/40"
+                    class="px-3 text-dark-7 hover:text-primary dark:text-white/40"
                   >
                     <svg
                       width="10"
@@ -2719,7 +2719,7 @@
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark-7 hover:text-primary px-3 dark:text-white/40"
+                    class="px-3 text-dark-7 hover:text-primary dark:text-white/40"
                   >
                     <svg
                       width="19"
@@ -2734,7 +2734,7 @@
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark-7 hover:text-primary px-3 dark:text-white/40"
+                    class="px-3 text-dark-7 hover:text-primary dark:text-white/40"
                   >
                     <svg
                       width="18"
@@ -2755,7 +2755,7 @@
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark-7 hover:text-primary px-3 dark:text-white/40"
+                    class="px-3 text-dark-7 hover:text-primary dark:text-white/40"
                   >
                     <svg
                       width="18"
@@ -2780,9 +2780,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

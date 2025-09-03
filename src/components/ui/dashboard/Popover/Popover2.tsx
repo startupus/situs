@@ -1,19 +1,14 @@
-import React from "react";
+import React from 'react';
 
 const Popover2 = () => {
   return (
     <section className="min-h-screen bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
       <div className="mx-auto px-4 lg:container">
         <div className="group relative text-center">
-          <a
-            href="/#"
-            className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline"
-          >
+          <a href="/#" className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline">
             Popover Text
           </a>
-          <div
-            className="invisible absolute top-full left-0 right-0 mx-auto w-[312px] rounded-sm bg-white dark:bg-dark-2 text-center opacity-0 shadow-2 dark:shadow-box-dark group-hover:visible group-hover:opacity-100"
-          >
+          <div className="invisible absolute top-full left-0 right-0 mx-auto w-[312px] rounded-sm bg-white dark:bg-dark-2 text-center opacity-0 shadow-2 dark:shadow-box-dark group-hover:visible group-hover:opacity-100">
             <span className="absolute -top-[9px] left-1/2 -translate-x-1/2 text-white dark:text-dark-2">
               <svg
                 width={18}
@@ -31,8 +26,8 @@ const Popover2 = () => {
             </h3>
             <div className="p-5">
               <p className="text-sm text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet, consect adipiscing elit. Mauris
-                facilisis congue exclamate justo nec facilisis.
+                Lorem ipsum dolor sit amet, consect adipiscing elit. Mauris facilisis congue exclamate justo nec
+                facilisis.
               </p>
             </div>
           </div>

@@ -1,9 +1,9 @@
 // Redaktus Config - скопировано с ReactBricks
 // import { types } from 'redaktus/core'
 
-import NextLink from './NextLink'
-import bricks from './bricks'
-import pageTypes from './pageTypes'
+import NextLink from './NextLink';
+import bricks from './bricks';
+import pageTypes from './pageTypes';
 
 // Простая типизация для конфигурации
 interface RedaktusConfig {
@@ -52,7 +52,7 @@ const config: RedaktusConfig = {
   renderLocalLink: NextLink,
   navigate: (path: string) => {
     if (typeof window !== 'undefined') {
-      window.location.href = path
+      window.location.href = path;
     }
   },
   loginPath: '/admin',
@@ -76,6 +76,6 @@ const config: RedaktusConfig = {
   enablePreviewImage: true,
   enableDefaultEmbedBrick: true,
   //permissions,  Fine-grained permissions for enterprise plans
-}
+};
 
-export default config
+export default config;

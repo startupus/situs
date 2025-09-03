@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Hero11 = () => {
   return (
@@ -17,9 +17,8 @@ const Hero11 = () => {
                   Ready for Any Websites Crafted by TailGrids
                 </h1>
                 <p className="mb-9 text-base font-medium text-body-color dark:text-dark-6 md:text-lg">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam at egestas tortor. Morbi sed odio id purus
-                  pellentesque iaculis.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at egestas tortor. Morbi sed odio id
+                  purus pellentesque iaculis.
                 </p>
                 <ul className="flex flex-wrap items-center justify-center gap-4">
                   <li>
@@ -45,13 +44,7 @@ const Hero11 = () => {
         </div>
         <div>
           <span className="absolute left-0 top-0 -z-10">
-            <svg
-              width="784"
-              height="619"
-              viewBox="0 0 784 619"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="784" height="619" viewBox="0 0 784 619" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect
                 opacity="0.05"
                 x="343.762"
@@ -78,13 +71,7 @@ const Hero11 = () => {
             </svg>
           </span>
           <span className="absolute right-0 top-0 -z-10">
-            <svg
-              width="577"
-              height="606"
-              viewBox="0 0 577 606"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="577" height="606" viewBox="0 0 577 606" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect
                 opacity="0.05"
                 x="880.642"
@@ -111,13 +98,7 @@ const Hero11 = () => {
             </svg>
           </span>
           <span className="absolute bottom-0 left-1/2 -z-10">
-            <svg
-              width="695"
-              height="363"
-              viewBox="0 0 695 363"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="695" height="363" viewBox="0 0 695 363" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect
                 opacity="0.05"
                 x="719.109"
@@ -144,13 +125,7 @@ const Hero11 = () => {
             </svg>
           </span>
           <span className="absolute bottom-0 left-1/4 -z-10">
-            <svg
-              width="469"
-              height="139"
-              viewBox="0 0 469 139"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="469" height="139" viewBox="0 0 469 139" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect
                 opacity="0.05"
                 width="353.669"
@@ -208,7 +183,7 @@ const Navbar = () => {
               <button
                 onClick={() => setOpen(!open)}
                 className={` ${
-                  open && "navbarTogglerActive"
+                  open && 'navbarTogglerActive'
                 } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
               >
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
@@ -217,7 +192,7 @@ const Navbar = () => {
               </button>
               <nav
                 className={`absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                  !open && "hidden"
+                  !open && 'hidden'
                 } `}
               >
                 <ul className="block lg:flex">

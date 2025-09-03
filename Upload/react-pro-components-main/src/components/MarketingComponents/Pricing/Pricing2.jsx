@@ -89,7 +89,7 @@ const PricingCard = ({
       <div
         className={` ${
           active
-            ? "relative z-10 mb-10 overflow-hidden rounded-xl bg-primary bg-linear-to-b from-primary to-[#179BEE] px-8 py-10 text-center shadow-pricing sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-10 xl:pt-[55px]"
+            ? "bg-linear-to-b relative z-10 mb-10 overflow-hidden rounded-xl bg-primary from-primary to-[#179BEE] px-8 py-10 text-center shadow-pricing sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-10 xl:pt-[55px]"
             : `relative z-10 mb-10 overflow-hidden rounded-xl border-2 border-[#D4DEFF] bg-white px-8 py-10 text-center drop-shadow-pricing dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-[50px] xl:pt-[45px]`
         } ${first && "lg:rounded-r-none lg:border-r-0"} ${
           last && "lg:rounded-l-none lg:border-l-0"

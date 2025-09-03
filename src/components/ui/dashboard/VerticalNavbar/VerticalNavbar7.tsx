@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const VerticalNavbar7 = () => {
   return (
@@ -7,10 +7,7 @@ const VerticalNavbar7 = () => {
         <div>
           <div className="p-10 pb-9">
             <a href="/#" className="block">
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                alt="logo"
-              />
+              <img src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg" alt="logo" />
             </a>
           </div>
 
@@ -21,12 +18,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -44,12 +36,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -82,12 +69,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -115,12 +97,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -145,12 +122,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -169,12 +141,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -187,12 +154,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -210,12 +172,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -250,12 +207,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -278,12 +230,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -301,12 +248,7 @@ const VerticalNavbar7 = () => {
                 <NavItem
                   link="/#"
                   icon={
-                    <svg
-                      width={18}
-                      height={18}
-                      viewBox="0 0 18 18"
-                      className="fill-current"
-                    >
+                    <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -339,13 +281,7 @@ const VerticalNavbar7 = () => {
               placeholder="Search"
             />
             <button className="absolute left-3 top-1/2 -translate-y-1/2">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -370,12 +306,8 @@ const VerticalNavbar7 = () => {
               />
             </div>
             <div>
-              <h6 className="text-base font-medium text-white/80">
-                Musharof
-              </h6>
-              <p className="text-sm text-white/50">
-                hello@tailgrids.com
-              </p>
+              <h6 className="text-base font-medium text-white/80">Musharof</h6>
+              <p className="text-sm text-white/50">hello@tailgrids.com</p>
             </div>
           </div>
         </div>
@@ -387,11 +319,7 @@ const VerticalNavbar7 = () => {
 export default VerticalNavbar7;
 
 const MenuTitle = ({ title }) => {
-  return (
-    <p className="mb-3 mt-5 px-[15px] text-sm font-semibold uppercase text-white">
-      {title}
-    </p>
-  );
+  return <p className="mb-3 mt-5 px-[15px] text-sm font-semibold uppercase text-white">{title}</p>;
 };
 
 const NavItem = ({ menu, link, submenu, message, icon, children }) => {
@@ -404,16 +332,11 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -422,8 +345,8 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -433,7 +356,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`${
-          dropdownOpen ? "bg-white/10 text-white" : ""
+          dropdownOpen ? 'bg-white/10 text-white' : ''
         } relative flex w-full items-center rounded py-[10px] px-[15px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white`}
       >
         <span className="mr-[10px]">{icon}</span>
@@ -446,15 +369,10 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         {submenu && (
           <span
             className={`${
-              dropdownOpen === true ? "rotate-0" : "rotate-180"
+              dropdownOpen === true ? 'rotate-0' : 'rotate-180'
             } absolute top-1/2 right-10 -translate-y-1/2`}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              className="fill-current"
-            >
+            <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -468,7 +386,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`${dropdownOpen === true ? "block" : "hidden"} `}
+        className={`${dropdownOpen === true ? 'block' : 'hidden'} `}
       >
         <ul className="py-1 px-5">{children}</ul>
       </div>

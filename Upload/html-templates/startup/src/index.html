@@ -33,10 +33,10 @@
     <div
       x-show="loaded"
       x-init="window.addEventListener('DOMContentLoaded', () => {setTimeout(() => loaded = false, 500)})"
-      class="dark:bg-dark fixed top-0 left-0 z-[999999] flex h-screen w-screen items-center justify-center bg-white"
+      class="fixed left-0 top-0 z-[999999] flex h-screen w-screen items-center justify-center bg-white dark:bg-dark"
     >
       <div
-        class="border-primary h-16 w-16 animate-spin rounded-full border-4 border-solid border-t-transparent"
+        class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"
       ></div>
     </div>
     <!-- ====== Preloader Section End -->
@@ -49,7 +49,7 @@
         }
       "
       :class="scrolledFromTop ? 'fixed z-50 bg-white/80 dark:bg-dark  shadow-sm backdrop-blur-sm' : 'absolute' "
-      class="top-0 left-0 z-50 w-full"
+      class="left-0 top-0 z-50 w-full"
     >
       <div class="container mx-auto">
         <div class="relative -mx-4 flex items-center justify-between">
@@ -73,29 +73,29 @@
                 @click="navbarOpen = !navbarOpen"
                 :class="navbarOpen && 'navbarTogglerActive'"
                 id="navbarToggler"
-                class="ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden"
+                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
               >
                 <span
-                  class="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
                 ></span>
                 <span
-                  class="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
                 ></span>
                 <span
-                  class="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"
                 ></span>
               </button>
               <nav
                 x-transition
                 :class="!navbarOpen && 'hidden'"
                 id="navbarCollapse"
-                class="dark:bg-dark-2 absolute top-full right-4 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow transition-all lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent"
+                class="absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow transition-all dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent"
               >
                 <ul class="block lg:flex">
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-12 lg:inline-flex dark:text-white"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:ml-12 lg:inline-flex"
                     >
                       Home
                     </a>
@@ -103,7 +103,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-12 lg:inline-flex dark:text-white"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:ml-12 lg:inline-flex"
                     >
                       Payment
                     </a>
@@ -111,7 +111,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-12 lg:inline-flex dark:text-white"
+                      class="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:ml-12 lg:inline-flex"
                     >
                       Features
                     </a>
@@ -122,13 +122,13 @@
             <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
               <a
                 href="javascript:void(0)"
-                class="text-dark hover:text-primary px-7 py-3 text-base font-medium dark:text-white"
+                class="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white"
               >
                 Login
               </a>
               <a
                 href="javascript:void(0)"
-                class="bg-primary hover:bg-primary/90 rounded-lg px-7 py-3 text-base font-medium text-white"
+                class="rounded-lg bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
               >
                 Sign Up
               </a>
@@ -141,19 +141,19 @@
 
     <!-- ====== Hero Section Start -->
     <div
-      class="dark:bg-dark relative bg-white pt-[120px] pb-[110px] lg:pt-[150px]"
+      class="relative bg-white pb-[110px] pt-[120px] dark:bg-dark lg:pt-[150px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 lg:w-5/12">
             <div class="hero-content">
               <h1
-                class="text-dark mb-3 text-4xl leading-snug font-bold sm:text-[42px] lg:text-[40px] xl:text-[42px] dark:text-white"
+                class="mb-3 text-4xl font-bold leading-snug text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-[42px]"
               >
                 Startup Site Template Built-with TailGrids Components
               </h1>
               <p
-                class="text-body-color dark:text-dark-6 mb-8 max-w-[480px] text-base"
+                class="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6"
               >
                 With TailGrids, business and students thrive together. Business
                 can perfectly match their staffing to changing demand throughout
@@ -163,7 +163,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="bg-primary hover:bg-blue-dark inline-flex items-center justify-center rounded-md px-6 py-3 text-center text-base font-medium text-white lg:px-7"
+                    class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-center text-base font-medium text-white hover:bg-blue-dark lg:px-7"
                   >
                     Get Started
                   </a>
@@ -171,7 +171,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="hover:text-primary inline-flex items-center justify-center px-5 py-3 text-center text-base font-medium text-[#464646] dark:text-white"
+                    class="inline-flex items-center justify-center px-5 py-3 text-center text-base font-medium text-[#464646] hover:text-primary dark:text-white"
                   >
                     <span class="mr-2">
                       <svg
@@ -208,11 +208,11 @@
               </ul>
               <div class="clients pt-16">
                 <h6
-                  class="text-body-color mb-2 flex items-center text-xs font-normal"
+                  class="mb-2 flex items-center text-xs font-normal text-body-color"
                 >
                   Used by Thriving Brands
                   <span
-                    class="bg-body-color ml-2 inline-block h-[1px] w-8"
+                    class="ml-2 inline-block h-[1px] w-8 bg-body-color"
                   ></span>
                 </h6>
                 <div class="flex max-w-[550px] items-center">
@@ -309,20 +309,20 @@
     <!-- ====== Hero Section End -->
 
     <!-- ====== Services Section Start -->
-    <section class="dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section class="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 What we Serve
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Our Best Services
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -332,13 +332,13 @@
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4 sm:w-4/5 md:w-1/2 lg:w-1/3">
             <div
-              class="group border-stroke dark:border-dark-3 dark:bg-dark-2 relative mb-8 rounded-xl border bg-white p-10 text-center md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
+              class="group relative mb-8 rounded-xl border border-stroke bg-white p-10 text-center dark:border-dark-3 dark:bg-dark-2 md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
             >
               <div
                 class="relative z-10 mx-auto mb-10 inline-flex h-11 items-center"
               >
                 <span
-                  class="bg-primary absolute top-0 -right-3 z-[-1] h-[34px] w-[34px] rounded-full opacity-10"
+                  class="absolute -right-3 top-0 z-[-1] h-[34px] w-[34px] rounded-full bg-primary opacity-10"
                 ></span>
                 <svg
                   width="51"
@@ -354,7 +354,7 @@
                 </svg>
               </div>
               <h4
-                class="text-dark mb-[14px] text-2xl font-bold dark:text-white"
+                class="mb-[14px] text-2xl font-bold text-dark dark:text-white"
               >
                 Marketing Solutions
               </h4>
@@ -363,19 +363,19 @@
               </p>
 
               <span
-                class="bg-primary absolute right-0 -bottom-2 left-0 z-[-1] mx-auto h-12 w-3/4 opacity-0 blur-[12px] transition group-hover:opacity-[14%]"
+                class="absolute -bottom-2 left-0 right-0 z-[-1] mx-auto h-12 w-3/4 bg-primary opacity-0 blur-[12px] transition group-hover:opacity-[14%]"
               ></span>
             </div>
           </div>
           <div class="w-full px-4 sm:w-4/5 md:w-1/2 lg:w-1/3">
             <div
-              class="group border-stroke dark:border-dark-3 dark:bg-dark-2 relative mb-8 rounded-xl border bg-white p-10 text-center md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
+              class="group relative mb-8 rounded-xl border border-stroke bg-white p-10 text-center dark:border-dark-3 dark:bg-dark-2 md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
             >
               <div
                 class="relative z-10 mx-auto mb-10 inline-flex h-11 items-center"
               >
                 <span
-                  class="bg-primary absolute top-0 -right-3 z-[-1] h-[34px] w-[34px] rounded-full opacity-10"
+                  class="absolute -right-3 top-0 z-[-1] h-[34px] w-[34px] rounded-full bg-primary opacity-10"
                 ></span>
                 <svg
                   width="51"
@@ -395,7 +395,7 @@
                 </svg>
               </div>
               <h4
-                class="text-dark mb-[14px] text-2xl font-bold dark:text-white"
+                class="mb-[14px] text-2xl font-bold text-dark dark:text-white"
               >
                 Business Analytics
               </h4>
@@ -403,19 +403,19 @@
                 Lorem Ipsum is simply dummy text of the printing and industry.
               </p>
               <span
-                class="bg-primary absolute right-0 -bottom-2 left-0 z-[-1] mx-auto h-12 w-3/4 opacity-0 blur-[12px] transition group-hover:opacity-[14%]"
+                class="absolute -bottom-2 left-0 right-0 z-[-1] mx-auto h-12 w-3/4 bg-primary opacity-0 blur-[12px] transition group-hover:opacity-[14%]"
               ></span>
             </div>
           </div>
           <div class="w-full px-4 sm:w-4/5 md:w-1/2 lg:w-1/3">
             <div
-              class="group border-stroke dark:border-dark-3 dark:bg-dark-2 relative mb-8 rounded-xl border bg-white p-10 text-center md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
+              class="group relative mb-8 rounded-xl border border-stroke bg-white p-10 text-center dark:border-dark-3 dark:bg-dark-2 md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
             >
               <div
                 class="relative z-10 mx-auto mb-10 inline-flex h-11 items-center"
               >
                 <span
-                  class="bg-primary absolute top-0 -right-3 z-[-1] h-[34px] w-[34px] rounded-full opacity-10"
+                  class="absolute -right-3 top-0 z-[-1] h-[34px] w-[34px] rounded-full bg-primary opacity-10"
                 ></span>
                 <svg
                   width="51"
@@ -439,7 +439,7 @@
                 </svg>
               </div>
               <h4
-                class="text-dark mb-[14px] text-2xl font-bold dark:text-white"
+                class="mb-[14px] text-2xl font-bold text-dark dark:text-white"
               >
                 UX & UI Design
               </h4>
@@ -448,7 +448,7 @@
               </p>
 
               <span
-                class="bg-primary absolute right-0 -bottom-2 left-0 z-[-1] mx-auto h-12 w-3/4 opacity-0 blur-[12px] transition group-hover:opacity-[14%]"
+                class="absolute -bottom-2 left-0 right-0 z-[-1] mx-auto h-12 w-3/4 bg-primary opacity-0 blur-[12px] transition group-hover:opacity-[14%]"
               ></span>
             </div>
           </div>
@@ -460,7 +460,7 @@
     <!-- ====== Video Section Start -->
     <section x-data="{ videoOpen: false }">
       <div
-        class="bg-primary relative overflow-hidden"
+        class="relative overflow-hidden bg-primary"
         :class="{videoOpen: 'z-50' }"
       >
         <div class="container mx-auto">
@@ -471,7 +471,7 @@
                   Watch Our Intro Video
                 </span>
                 <h2
-                  class="mb-6 text-3xl leading-snug font-bold text-white sm:text-4xl sm:leading-snug md:text-[40px] md:leading-snug"
+                  class="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug md:text-[40px] md:leading-snug"
                 >
                   Making world a better place for you and us
                 </h2>
@@ -482,7 +482,7 @@
                 </p>
                 <a
                   href="javascript:void(0)"
-                  class="hover:text-primary inline-block rounded-full border border-white px-9 py-3 text-base font-medium text-white hover:bg-white"
+                  class="inline-block rounded-full border border-white px-9 py-3 text-base font-medium text-white hover:bg-white hover:text-primary"
                 >
                   Know More
                 </a>
@@ -492,20 +492,20 @@
         </div>
 
         <div>
-          <div class="top-0 right-0 z-10 h-full w-full lg:absolute lg:w-1/2">
+          <div class="right-0 top-0 z-10 h-full w-full lg:absolute lg:w-1/2">
             <div class="flex h-full w-full items-center justify-center">
               <img
                 src="assets/images/videos/image-01.jpg"
                 alt="image"
-                class="top-0 left-0 z-[-1] h-full w-full object-cover object-center lg:absolute"
+                class="left-0 top-0 z-[-1] h-full w-full object-cover object-center lg:absolute"
               />
               <a
                 href="javascript:void(0)"
                 @click="videoOpen = true"
-                class="bg-primary absolute z-40 flex h-20 w-20 items-center justify-center rounded-full md:h-[100px] md:w-[100px]"
+                class="absolute z-40 flex h-20 w-20 items-center justify-center rounded-full bg-primary md:h-[100px] md:w-[100px]"
               >
                 <span
-                  class="bg-primary bg-primary/20 absolute top-0 right-0 z-[-1] h-full w-full animate-ping rounded-full delay-300 duration-1000"
+                  class="absolute right-0 top-0 z-[-1] h-full w-full animate-ping rounded-full bg-primary bg-primary/20 delay-300 duration-1000"
                 ></span>
                 <svg
                   width="23"
@@ -523,7 +523,7 @@
             </div>
           </div>
 
-          <span class="absolute top-0 left-0 z-[-1]">
+          <span class="absolute left-0 top-0 z-[-1]">
             <svg
               width="644"
               height="489"
@@ -540,7 +540,7 @@
               />
             </svg>
           </span>
-          <span class="absolute top-0 left-0 z-[-1]">
+          <span class="absolute left-0 top-0 z-[-1]">
             <svg
               width="659"
               height="562"
@@ -557,7 +557,7 @@
               />
             </svg>
           </span>
-          <span class="absolute top-3 right-3 z-[-1] lg:right-1/2 lg:mr-3">
+          <span class="absolute right-3 top-3 z-[-1] lg:right-1/2 lg:mr-3">
             <svg
               width="50"
               height="79"
@@ -740,7 +740,7 @@
         <div
           x-show="videoOpen"
           x-transition
-          class="fixed top-0 left-0 z-50 flex h-screen w-full items-center justify-center bg-black/70"
+          class="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/70"
         >
           <div
             @click.outside="videoOpen = false"
@@ -755,7 +755,7 @@
 
           <button
             @click="videoOpen = false"
-            class="text-body-color absolute top-0 right-0 flex h-20 w-20 cursor-pointer items-center justify-center hover:bg-black"
+            class="absolute right-0 top-0 flex h-20 w-20 cursor-pointer items-center justify-center text-body-color hover:bg-black"
           >
             <svg viewBox="0 0 16 15" class="h-8 w-8 fill-current">
               <path
@@ -770,21 +770,21 @@
 
     <!-- ====== Pricing Section Start -->
     <section
-      class="dark:bg-dark relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Pricing Table
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Our Pricing Plan
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -795,51 +795,51 @@
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="border-stroke shadow-pricing dark:border-dark-3 dark:bg-dark-2 relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 bg-white px-8 py-10 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]"
+              class="relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 border-stroke bg-white px-8 py-10 shadow-pricing dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]"
             >
-              <span class="text-primary mb-3 block text-lg font-semibold">
+              <span class="mb-3 block text-lg font-semibold text-primary">
                 Personal
               </span>
-              <h2 class="text-dark mb-5 text-[42px] font-bold dark:text-white">
+              <h2 class="mb-5 text-[42px] font-bold text-dark dark:text-white">
                 <span>$59</span>
                 <span
-                  class="text-body-color dark:text-dark-6 text-base font-medium"
+                  class="text-base font-medium text-body-color dark:text-dark-6"
                 >
                   / year
                 </span>
               </h2>
               <p
-                class="border-stroke text-body-color dark:border-dark-3 dark:text-dark-6 mb-8 border-b pb-8 text-base"
+                class="mb-8 border-b border-stroke pb-8 text-base text-body-color dark:border-dark-3 dark:text-dark-6"
               >
                 Perfect for using in a personal website or a client project.
               </p>
               <div class="mb-9 flex flex-col gap-[14px]">
-                <p class="text-body-color dark:text-dark-6 text-base">1 User</p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">1 User</p>
+                <p class="text-base text-body-color dark:text-dark-6">
                   All UI components
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Lifetime access
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Free updates
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Use on 1 (one) project
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   3 Months support
                 </p>
               </div>
               <a
                 href="javascript:void(0)"
-                class="border-stroke text-primary hover:border-primary hover:bg-primary dark:border-dark-3 block w-full rounded-md border bg-transparent p-3 text-center text-base font-medium transition hover:text-white"
+                class="block w-full rounded-md border border-stroke bg-transparent p-3 text-center text-base font-medium text-primary transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3"
               >
                 Choose Personal
               </a>
 
               <div>
-                <span class="absolute top-7 right-0 z-[-1]">
+                <span class="absolute right-0 top-7 z-[-1]">
                   <svg
                     width="77"
                     height="172"
@@ -867,7 +867,7 @@
                     </defs>
                   </svg>
                 </span>
-                <span class="absolute top-4 right-4 z-[-1]">
+                <span class="absolute right-4 top-4 z-[-1]">
                   <svg
                     width="41"
                     height="89"
@@ -1106,53 +1106,53 @@
           </div>
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="border-stroke shadow-pricing dark:border-dark-3 dark:bg-dark-2 relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 bg-white px-8 py-10 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]"
+              class="relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 border-stroke bg-white px-8 py-10 shadow-pricing dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]"
             >
-              <span class="text-primary mb-3 block text-lg font-semibold">
+              <span class="mb-3 block text-lg font-semibold text-primary">
                 Business
               </span>
-              <h2 class="text-dark mb-5 text-[42px] font-bold dark:text-white">
+              <h2 class="mb-5 text-[42px] font-bold text-dark dark:text-white">
                 <span>$199</span>
                 <span
-                  class="text-body-color dark:text-dark-6 text-base font-medium"
+                  class="text-base font-medium text-body-color dark:text-dark-6"
                 >
                   / year
                 </span>
               </h2>
               <p
-                class="border-stroke text-body-color dark:border-dark-3 dark:text-dark-6 mb-8 border-b pb-8 text-base"
+                class="mb-8 border-b border-stroke pb-8 text-base text-body-color dark:border-dark-3 dark:text-dark-6"
               >
                 Perfect for using in a Business website or a client project.
               </p>
               <div class="mb-9 flex flex-col gap-[14px]">
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   5 Users
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   All UI components
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Lifetime access
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Free updates
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Use on 3 (Three) project
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   4 Months support
                 </p>
               </div>
               <a
                 href="javascript:void(0)"
-                class="border-primary bg-primary hover:bg-primary/90 block w-full rounded-md border p-3 text-center text-base font-medium text-white transition"
+                class="block w-full rounded-md border border-primary bg-primary p-3 text-center text-base font-medium text-white transition hover:bg-primary/90"
               >
                 Choose Business
               </a>
 
               <div>
-                <span class="absolute top-7 right-0 z-[-1]">
+                <span class="absolute right-0 top-7 z-[-1]">
                   <svg
                     width="77"
                     height="172"
@@ -1180,7 +1180,7 @@
                     </defs>
                   </svg>
                 </span>
-                <span class="absolute top-4 right-4 z-[-1]">
+                <span class="absolute right-4 top-4 z-[-1]">
                   <svg
                     width="41"
                     height="89"
@@ -1419,53 +1419,53 @@
           </div>
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="border-stroke shadow-pricing dark:border-dark-3 dark:bg-dark-2 relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 bg-white px-8 py-10 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]"
+              class="relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 border-stroke bg-white px-8 py-10 shadow-pricing dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]"
             >
-              <span class="text-primary mb-3 block text-lg font-semibold">
+              <span class="mb-3 block text-lg font-semibold text-primary">
                 Professional
               </span>
-              <h2 class="text-dark mb-5 text-[42px] font-bold dark:text-white">
+              <h2 class="mb-5 text-[42px] font-bold text-dark dark:text-white">
                 <span>$256</span>
                 <span
-                  class="text-body-color dark:text-dark-6 text-base font-medium"
+                  class="text-base font-medium text-body-color dark:text-dark-6"
                 >
                   / year
                 </span>
               </h2>
               <p
-                class="border-stroke text-body-color dark:border-dark-3 dark:text-dark-6 mb-8 border-b pb-8 text-base"
+                class="mb-8 border-b border-stroke pb-8 text-base text-body-color dark:border-dark-3 dark:text-dark-6"
               >
                 Perfect for using in a Professional website or a client project.
               </p>
               <div class="mb-9 flex flex-col gap-[14px]">
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Unlimited Users
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   All UI components
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Lifetime access
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Free updates
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   Use on Unlimited project
                 </p>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   12 Months support
                 </p>
               </div>
               <a
                 href="javascript:void(0)"
-                class="border-stroke text-primary hover:border-primary hover:bg-primary dark:border-dark-3 block w-full rounded-md border bg-transparent p-3 text-center text-base font-medium transition hover:text-white"
+                class="block w-full rounded-md border border-stroke bg-transparent p-3 text-center text-base font-medium text-primary transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3"
               >
                 Choose Professional
               </a>
 
               <div>
-                <span class="absolute top-7 right-0 z-[-1]">
+                <span class="absolute right-0 top-7 z-[-1]">
                   <svg
                     width="77"
                     height="172"
@@ -1493,7 +1493,7 @@
                     </defs>
                   </svg>
                 </span>
-                <span class="absolute top-4 right-4 z-[-1]">
+                <span class="absolute right-4 top-4 z-[-1]">
                   <svg
                     width="41"
                     height="89"
@@ -1737,21 +1737,21 @@
 
     <!-- ====== Team Section Start -->
     <section
-      class="bg-tg-bg dark:bg-dark-2 overflow-hidden pt-20 pb-20 lg:pt-[120px] lg:pb-[120px]"
+      class="overflow-hidden bg-tg-bg pb-20 pt-20 dark:bg-dark-2 lg:pb-[120px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Our Team
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Our Team Members
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -1762,7 +1762,7 @@
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4 xl:w-10/12 2xl:w-9/12">
             <div
-              class="shadow-team dark:bg-dark relative flex flex-wrap rounded-[10px] bg-white px-6 pt-10"
+              class="relative flex flex-wrap rounded-[10px] bg-white px-6 pt-10 shadow-team dark:bg-dark"
             >
               <div class="w-full px-4 sm:w-1/2 lg:w-1/4">
                 <div class="mx-auto mb-10 max-w-[200px]">
@@ -1775,12 +1775,12 @@
                   </div>
                   <div class="text-center">
                     <h4
-                      class="text-dark mb-1 text-base font-semibold dark:text-white"
+                      class="mb-1 text-base font-semibold text-dark dark:text-white"
                     >
                       Melissa Tatcher
                     </h4>
                     <p
-                      class="text-body-color dark:text-dark-6 mb-5 text-[10px] leading-[16px] uppercase"
+                      class="mb-5 text-[10px] uppercase leading-[16px] text-body-color dark:text-dark-6"
                     >
                       MARKETING OPERATIONS
                     </p>
@@ -1862,12 +1862,12 @@
                   </div>
                   <div class="text-center">
                     <h4
-                      class="text-dark mb-1 text-base font-semibold dark:text-white"
+                      class="mb-1 text-base font-semibold text-dark dark:text-white"
                     >
                       Stuard Ferrel
                     </h4>
                     <p
-                      class="text-body-color dark:text-dark-6 mb-5 text-[10px] leading-[16px] uppercase"
+                      class="mb-5 text-[10px] uppercase leading-[16px] text-body-color dark:text-dark-6"
                     >
                       DIGITAL MARKETER
                     </p>
@@ -1949,12 +1949,12 @@
                   </div>
                   <div class="text-center">
                     <h4
-                      class="text-dark mb-1 text-base font-semibold dark:text-white"
+                      class="mb-1 text-base font-semibold text-dark dark:text-white"
                     >
                       Eva Hudson
                     </h4>
                     <p
-                      class="text-body-color dark:text-dark-6 mb-5 text-[10px] leading-[16px] uppercase"
+                      class="mb-5 text-[10px] uppercase leading-[16px] text-body-color dark:text-dark-6"
                     >
                       UI/UX DESIGNER
                     </p>
@@ -2036,12 +2036,12 @@
                   </div>
                   <div class="text-center">
                     <h4
-                      class="text-dark mb-1 text-base font-semibold dark:text-white"
+                      class="mb-1 text-base font-semibold text-dark dark:text-white"
                     >
                       Martin Ethariam
                     </h4>
                     <p
-                      class="text-body-color dark:text-dark-6 mb-5 text-[10px] leading-[16px] uppercase"
+                      class="mb-5 text-[10px] uppercase leading-[16px] text-body-color dark:text-dark-6"
                     >
                       GRAPHIC DESIGNER
                     </p>
@@ -2113,7 +2113,7 @@
                 </div>
               </div>
 
-              <span class="absolute -top-12 -left-12 z-[-1]">
+              <span class="absolute -left-12 -top-12 z-[-1]">
                 <svg
                   width="143"
                   height="143"
@@ -2216,7 +2216,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="absolute -right-8 -bottom-8 z-[-1]">
+              <span class="absolute -bottom-8 -right-8 z-[-1]">
                 <svg
                   width="76"
                   height="75"
@@ -2490,21 +2490,21 @@
           openFaq6: false
         }
       "
-      class="dark:bg-dark relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 FAQ
               </span>
               <h2
-                class="text-dark mb-4 text-3xl font-bold sm:text-[40px]/[48px] dark:text-white"
+                class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]"
               >
                 Any Questions? Look Here
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -2515,14 +2515,14 @@
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 lg:w-1/2">
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq1 = !openFaq1"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq1 && 'rotate-180'"
@@ -2540,7 +2540,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2548,7 +2548,7 @@
               </button>
               <div x-show="openFaq1" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2558,14 +2558,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq2 = !openFaq2"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq2 && 'rotate-180'"
@@ -2583,7 +2583,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2591,7 +2591,7 @@
               </button>
               <div x-show="openFaq2" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2601,14 +2601,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq3 = !openFaq3"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq3 && 'rotate-180'"
@@ -2626,7 +2626,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2634,7 +2634,7 @@
               </button>
               <div x-show="openFaq3" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2646,14 +2646,14 @@
           </div>
           <div class="w-full px-4 lg:w-1/2">
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq4 = !openFaq4"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq4 && 'rotate-180'"
@@ -2671,7 +2671,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2679,7 +2679,7 @@
               </button>
               <div x-show="openFaq4" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2689,14 +2689,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq5 = !openFaq5"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq5 && 'rotate-180'"
@@ -2714,7 +2714,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2722,7 +2722,7 @@
               </button>
               <div x-show="openFaq5" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2732,14 +2732,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq6 = !openFaq6"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq6 && 'rotate-180'"
@@ -2757,7 +2757,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2765,7 +2765,7 @@
               </button>
               <div x-show="openFaq6" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2778,7 +2778,7 @@
         </div>
       </div>
 
-      <div class="absolute right-0 bottom-0 z-[-1]">
+      <div class="absolute bottom-0 right-0 z-[-1]">
         <svg
           width="1440"
           height="886"
@@ -2811,10 +2811,10 @@
     <!-- ====== FAQ Section End -->
 
     <!-- ====== Call To Action Section Start -->
-    <section class="dark:bg-dark pt-20 lg:pt-[120px]">
+    <section class="pt-20 dark:bg-dark lg:pt-[120px]">
       <div class="container mx-auto">
         <div
-          class="bg-primary relative z-10 overflow-hidden rounded px-8 py-12 md:p-[70px]"
+          class="relative z-10 overflow-hidden rounded bg-primary px-8 py-12 md:p-[70px]"
         >
           <div class="-mx-4 flex flex-wrap items-center">
             <div class="w-full px-4 lg:w-1/2">
@@ -2822,7 +2822,7 @@
                 Find Your Next Dream App
               </span>
               <h2
-                class="mb-6 text-3xl leading-tight font-bold text-white sm:mb-8 sm:text-[40px]/[48px] lg:mb-0"
+                class="mb-6 text-3xl font-bold leading-tight text-white sm:mb-8 sm:text-[40px]/[48px] lg:mb-0"
               >
                 <span class="xs:block"> Get started with </span>
                 <span>our free trial</span>
@@ -2832,13 +2832,13 @@
               <div class="flex flex-wrap lg:justify-end">
                 <a
                   href="javascript:void(0)"
-                  class="hover:bg-shadow-1 text-primary my-1 mr-4 inline-flex rounded-md bg-white px-7 py-3 text-base font-medium transition"
+                  class="hover:bg-shadow-1 my-1 mr-4 inline-flex rounded-md bg-white px-7 py-3 text-base font-medium text-primary transition"
                 >
                   Get Pro Version
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="bg-secondary hover:bg-secondary/90 my-1 inline-flex rounded-md px-7 py-3 text-base font-medium text-white transition"
+                  class="my-1 inline-flex rounded-md bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-secondary/90"
                 >
                   Start Free Trial
                 </a>
@@ -2847,7 +2847,7 @@
           </div>
 
           <div>
-            <span class="absolute top-0 left-0 z-[-1]">
+            <span class="absolute left-0 top-0 z-[-1]">
               <svg
                 width="189"
                 height="162"
@@ -2878,7 +2878,7 @@
                 </defs>
               </svg>
             </span>
-            <span class="absolute right-0 bottom-0 z-[-1]">
+            <span class="absolute bottom-0 right-0 z-[-1]">
               <svg
                 width="191"
                 height="208"
@@ -2915,20 +2915,20 @@
     <!-- ====== Call To Action Section End -->
 
     <!-- ====== Testimonials Section Start -->
-    <section class="dark:bg-dark pt-20 pb-7 lg:pt-[120px] lg:pb-14">
+    <section class="pb-7 pt-20 dark:bg-dark lg:pb-14 lg:pt-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4">
             <div class="mb-[60px] max-w-[510px] lg:mb-[70px]">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Testimonials
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 What our Clients Says
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -2939,7 +2939,7 @@
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4 md:w-1/2">
             <div
-              class="shadow-testimonial-6 dark:bg-dark-2 relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 sm:p-10 md:px-6 md:py-10 lg:p-10 dark:shadow-none"
+              class="relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 shadow-testimonial-6 dark:bg-dark-2 dark:shadow-none sm:p-10 md:px-6 md:py-10 lg:p-10"
             >
               <div class="mb-10 flex items-center">
                 <div
@@ -2953,24 +2953,24 @@
                 </div>
                 <div class="w-full">
                   <h5
-                    class="text-dark mb-1 text-lg font-semibold dark:text-white"
+                    class="mb-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     Jason Keys
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-xs">
+                  <p class="text-xs text-body-color dark:text-dark-6">
                     Founder @ Dreampeet.
                   </p>
                 </div>
               </div>
 
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 “I believe in lifelong learning and Learn. is a great place to
                 learn from experts. I've learned a lot and recommend it to all
                 my friends and familys.”
               </p>
 
               <div>
-                <span class="absolute top-0 right-0">
+                <span class="absolute right-0 top-0">
                   <svg
                     width="104"
                     height="102"
@@ -3000,7 +3000,7 @@
           </div>
           <div class="w-full px-4 md:w-1/2">
             <div
-              class="shadow-testimonial-6 dark:bg-dark-2 relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 sm:p-10 md:px-6 md:py-10 lg:p-10 dark:shadow-none"
+              class="relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 shadow-testimonial-6 dark:bg-dark-2 dark:shadow-none sm:p-10 md:px-6 md:py-10 lg:p-10"
             >
               <div class="mb-10 flex items-center">
                 <div
@@ -3014,24 +3014,24 @@
                 </div>
                 <div class="w-full">
                   <h5
-                    class="text-dark mb-1 text-lg font-semibold dark:text-white"
+                    class="mb-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     Anee Doe
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-xs">
+                  <p class="text-xs text-body-color dark:text-dark-6">
                     CEO @ Trorex.
                   </p>
                 </div>
               </div>
 
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 “I believe in lifelong learning and Learn. is a great place to
                 learn from experts. I've learned a lot and recommend it to all
                 my friends and familys.”
               </p>
 
               <div>
-                <span class="absolute top-0 right-0">
+                <span class="absolute right-0 top-0">
                   <svg
                     width="104"
                     height="102"
@@ -3061,7 +3061,7 @@
           </div>
           <div class="w-full px-4 md:w-1/2">
             <div
-              class="shadow-testimonial-6 dark:bg-dark-2 relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 sm:p-10 md:px-6 md:py-10 lg:p-10 dark:shadow-none"
+              class="relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 shadow-testimonial-6 dark:bg-dark-2 dark:shadow-none sm:p-10 md:px-6 md:py-10 lg:p-10"
             >
               <div class="mb-10 flex items-center">
                 <div
@@ -3075,24 +3075,24 @@
                 </div>
                 <div class="w-full">
                   <h5
-                    class="text-dark mb-1 text-lg font-semibold dark:text-white"
+                    class="mb-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     Dipali Dow
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-xs">
+                  <p class="text-xs text-body-color dark:text-dark-6">
                     Founder @ Cradow.
                   </p>
                 </div>
               </div>
 
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 “I believe in lifelong learning and Learn. is a great place to
                 learn from experts. I've learned a lot and recommend it to all
                 my friends and familys.”
               </p>
 
               <div>
-                <span class="absolute top-0 right-0">
+                <span class="absolute right-0 top-0">
                   <svg
                     width="104"
                     height="102"
@@ -3122,7 +3122,7 @@
           </div>
           <div class="w-full px-4 md:w-1/2">
             <div
-              class="shadow-testimonial-6 dark:bg-dark-2 relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 sm:p-10 md:px-6 md:py-10 lg:p-10 dark:shadow-none"
+              class="relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 shadow-testimonial-6 dark:bg-dark-2 dark:shadow-none sm:p-10 md:px-6 md:py-10 lg:p-10"
             >
               <div class="mb-10 flex items-center">
                 <div
@@ -3136,24 +3136,24 @@
                 </div>
                 <div class="w-full">
                   <h5
-                    class="text-dark mb-1 text-lg font-semibold dark:text-white"
+                    class="mb-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     John Doe
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-xs">
+                  <p class="text-xs text-body-color dark:text-dark-6">
                     Founder @ Poettry.
                   </p>
                 </div>
               </div>
 
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 “I believe in lifelong learning and Learn. is a great place to
                 learn from experts. I've learned a lot and recommend it to all
                 my friends and familys.”
               </p>
 
               <div>
-                <span class="absolute top-0 right-0">
+                <span class="absolute right-0 top-0">
                   <svg
                     width="104"
                     height="102"
@@ -3188,22 +3188,22 @@
 
     <!-- ====== Contact Section Start -->
     <section
-      class="dark:bg-dark relative z-10 overflow-hidden bg-white py-20 lg:py-[120px]"
+      class="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap lg:justify-between">
           <div class="w-full px-4 lg:w-1/2 xl:w-6/12">
             <div class="mb-12 max-w-[570px] lg:mb-0">
-              <span class="text-primary mb-4 block text-base font-semibold">
+              <span class="mb-4 block text-base font-semibold text-primary">
                 Contact Us
               </span>
               <h2
-                class="text-dark mb-6 text-[32px] font-bold uppercase sm:text-[40px] lg:text-[36px] xl:text-[40px] dark:text-white"
+                class="mb-6 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px]"
               >
                 GET IN TOUCH WITH US
               </h2>
               <p
-                class="text-body-color dark:text-dark-6 mb-9 text-base leading-relaxed"
+                class="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6"
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eius tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -3212,7 +3212,7 @@
 
               <div class="mb-8 flex w-full max-w-[370px]">
                 <div
-                  class="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded sm:h-[70px] sm:max-w-[70px]"
+                  class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded bg-primary/5 text-primary sm:h-[70px] sm:max-w-[70px]"
                 >
                   <svg
                     width="32"
@@ -3228,10 +3228,10 @@
                   </svg>
                 </div>
                 <div class="w-full">
-                  <h4 class="text-dark mb-1 text-xl font-bold dark:text-white">
+                  <h4 class="mb-1 text-xl font-bold text-dark dark:text-white">
                     Our Location
                   </h4>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     99 S.t Jomblo Park Pekanbaru 28292. Indonesia
                   </p>
                 </div>
@@ -3239,7 +3239,7 @@
 
               <div class="mb-8 flex w-full max-w-[370px]">
                 <div
-                  class="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded sm:h-[70px] sm:max-w-[70px]"
+                  class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded bg-primary/5 text-primary sm:h-[70px] sm:max-w-[70px]"
                 >
                   <svg
                     width="32"
@@ -3270,10 +3270,10 @@
                   </svg>
                 </div>
                 <div class="w-full">
-                  <h4 class="text-dark mb-1 text-xl font-bold dark:text-white">
+                  <h4 class="mb-1 text-xl font-bold text-dark dark:text-white">
                     Phone Number
                   </h4>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     (+62)81 414 257 9980
                   </p>
                 </div>
@@ -3281,7 +3281,7 @@
 
               <div class="mb-8 flex w-full max-w-[370px]">
                 <div
-                  class="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded sm:h-[70px] sm:max-w-[70px]"
+                  class="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded bg-primary/5 text-primary sm:h-[70px] sm:max-w-[70px]"
                 >
                   <svg
                     width="32"
@@ -3297,10 +3297,10 @@
                   </svg>
                 </div>
                 <div class="w-full">
-                  <h4 class="text-dark mb-1 text-xl font-bold dark:text-white">
+                  <h4 class="mb-1 text-xl font-bold text-dark dark:text-white">
                     Email Address
                   </h4>
-                  <p class="text-body-color dark:text-dark-6 text-base">
+                  <p class="text-base text-body-color dark:text-dark-6">
                     info@yourdomain.com
                   </p>
                 </div>
@@ -3309,48 +3309,48 @@
           </div>
           <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
             <div
-              class="dark:bg-dark-2 relative rounded-lg bg-white p-8 shadow-lg sm:p-12"
+              class="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12"
             >
               <form>
                 <div class="mb-6">
                   <input
                     type="text"
                     placeholder="Your Name"
-                    class="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 w-full rounded border px-[14px] py-3 text-base outline-none"
+                    class="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-6">
                   <input
                     type="email"
                     placeholder="Your Email"
-                    class="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 w-full rounded border px-[14px] py-3 text-base outline-none"
+                    class="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-6">
                   <input
                     type="text"
                     placeholder="Your Phone"
-                    class="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 w-full rounded border px-[14px] py-3 text-base outline-none"
+                    class="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-6">
                   <textarea
                     rows="6"
                     placeholder="Your Message"
-                    class="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 w-full resize-none rounded border px-[14px] py-3 text-base outline-none"
+                    class="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                   ></textarea>
                 </div>
                 <div>
                   <button
                     type="submit"
-                    class="border-primary bg-primary hover:bg-primary/90 w-full rounded border p-3 text-white transition"
+                    class="w-full rounded border border-primary bg-primary p-3 text-white transition hover:bg-primary/90"
                   >
                     Send Message
                   </button>
                 </div>
               </form>
               <div>
-                <span class="absolute -top-10 -right-9 z-[-1]">
+                <span class="absolute -right-9 -top-10 z-[-1]">
                   <svg
                     width="100"
                     height="100"
@@ -3366,7 +3366,7 @@
                     />
                   </svg>
                 </span>
-                <span class="absolute top-[90px] -right-10 z-[-1]">
+                <span class="absolute -right-10 top-[90px] z-[-1]">
                   <svg
                     width="34"
                     height="134"
@@ -4165,9 +4165,9 @@
     <!-- ====== Contact Section End -->
 
     <!-- ====== Footer Section Start -->
-    <footer class="bg-primary relative z-10">
+    <footer class="relative z-10 bg-primary">
       <div class="container mx-auto">
-        <div class="border-gray-7/20 border-b pt-[70px] pb-10">
+        <div class="border-b border-gray-7/20 pb-10 pt-[70px]">
           <div class="-mx-4 flex flex-wrap items-center">
             <div class="w-full px-4 lg:w-1/2">
               <div class="mb-5 w-full max-w-[470px]">
@@ -4181,13 +4181,13 @@
             <div class="w-full px-4 lg:w-1/2">
               <div class="mb-5 w-full">
                 <form class="flex flex-wrap">
-                  <div class="relative mr-5 mb-3 w-full max-w-[370px]">
+                  <div class="relative mb-3 mr-5 w-full max-w-[370px]">
                     <input
                       type="email"
                       placeholder="Enter your email address"
-                      class="placeholder-dark-8 h-[52px] w-full rounded-md border border-white/[.08] bg-white/5 pr-5 pl-14 text-white outline-none focus:border-white/40 focus-visible:shadow-none"
+                      class="h-[52px] w-full rounded-md border border-white/[.08] bg-white/5 pl-14 pr-5 text-white placeholder-dark-8 outline-none focus:border-white/40 focus-visible:shadow-none"
                     />
-                    <label class="absolute top-1/2 left-5 -translate-y-1/2">
+                    <label class="absolute left-5 top-1/2 -translate-y-1/2">
                       <svg
                         width="18"
                         height="13"
@@ -4204,7 +4204,7 @@
                   </div>
                   <button
                     type="submit"
-                    class="text-dark mb-3 h-[52px] rounded-md border border-transparent bg-white px-7 font-medium transition hover:bg-white/90"
+                    class="mb-3 h-[52px] rounded-md border border-transparent bg-white px-7 font-medium text-dark transition hover:bg-white/90"
                   >
                     Subscribe
                   </button>
@@ -4236,7 +4236,7 @@
               <div class="-mx-3 flex items-center">
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="10"
@@ -4251,7 +4251,7 @@
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="19"
@@ -4266,7 +4266,7 @@
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="18"
@@ -4287,7 +4287,7 @@
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="18"
@@ -4308,7 +4308,7 @@
               <h4 class="mb-9 text-lg font-semibold text-white">Latest blog</h4>
               <a
                 href="javascript:void(0)"
-                class="text-gray-7 mb-8 flex items-center hover:text-white"
+                class="mb-8 flex items-center text-gray-7 hover:text-white"
               >
                 <div class="mr-5 w-full max-w-[70px] overflow-hidden rounded">
                   <img
@@ -4321,7 +4321,7 @@
               </a>
               <a
                 href="javascript:void(0)"
-                class="text-gray-7 mb-8 flex items-center hover:text-white"
+                class="mb-8 flex items-center text-gray-7 hover:text-white"
               >
                 <div class="mr-5 w-full max-w-[70px] overflow-hidden rounded">
                   <img
@@ -4422,7 +4422,7 @@
                   <p
                     class="mb-3 inline-flex items-start text-base leading-loose text-white/70"
                   >
-                    <span class="mt-[10px] mr-3">
+                    <span class="mr-3 mt-[10px]">
                       <svg
                         width="20"
                         height="20"
@@ -4444,7 +4444,7 @@
                   <p
                     class="mb-3 inline-flex items-start text-base leading-loose text-white/70"
                   >
-                    <span class="mt-[10px] mr-3">
+                    <span class="mr-3 mt-[10px]">
                       <svg
                         width="20"
                         height="20"
@@ -4481,7 +4481,7 @@
                   <p
                     class="mb-3 inline-flex items-start text-base leading-loose text-white/70"
                   >
-                    <span class="mt-[10px] mr-3">
+                    <span class="mr-3 mt-[10px]">
                       <svg
                         width="20"
                         height="20"
@@ -4513,7 +4513,7 @@
           <div class="-mx-4 flex flex-wrap">
             <div class="w-full px-4 md:w-1/3 lg:w-1/2">
               <div class="my-1 flex justify-center md:justify-start">
-                <p class="text-gray-7 text-base">&copy; 2025 TailGrids</p>
+                <p class="text-base text-gray-7">&copy; 2025 TailGrids</p>
               </div>
             </div>
             <div class="w-full px-4 md:w-2/3 lg:w-1/2">
@@ -4523,19 +4523,19 @@
                 >
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 px-3 text-base hover:text-white"
+                    class="px-3 text-base text-gray-7 hover:text-white"
                   >
                     Privacy policy
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 px-3 text-base hover:text-white"
+                    class="px-3 text-base text-gray-7 hover:text-white"
                   >
                     Legal notice
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 px-3 text-base hover:text-white"
+                    class="px-3 text-base text-gray-7 hover:text-white"
                   >
                     Terms of service
                   </a>
@@ -4551,9 +4551,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

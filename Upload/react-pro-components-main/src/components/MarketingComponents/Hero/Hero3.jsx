@@ -208,7 +208,7 @@ const Navbar = () => {
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                 alt="logo"
-                className="w-full hidden dark:block"
+                className="hidden w-full dark:block"
               />
             </a>
           </div>

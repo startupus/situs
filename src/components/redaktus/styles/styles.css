@@ -11,8 +11,7 @@
   --breakpoint-lg: 900px;
   --breakpoint-xl: 1200px;
 
-  --shadow-news-letter: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-    0 5px 15px 0 rgba(0, 0, 0, 0.05);
+  --shadow-news-letter: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 5px 15px 0 rgba(0, 0, 0, 0.05);
 }
 
 /*

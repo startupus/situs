@@ -70,10 +70,10 @@ const SitusProjectPages: React.FC = () => {
   // Функция создания страницы
   const handleCreatePage = async (pageData: { title: string; slug: string }) => {
     if (!project) return;
-    
+
     try {
       setCreating(true);
-      
+
       // Найдем Pages продукт
       const pagesProduct = (project as any).products?.find((p: any) => p.type === 'WEBSITE');
       if (!pagesProduct) {
@@ -86,11 +86,11 @@ const SitusProjectPages: React.FC = () => {
         content: JSON.stringify([]), // Пустой контент
         productId: pagesProduct.id,
         status: 'DRAFT',
-        pageType: 'PAGE'
+        pageType: 'PAGE',
       });
 
       if (response.success && response.data) {
-        setPages(prev => [...prev, response.data]);
+        setPages((prev) => [...prev, response.data]);
         setShowCreateModal(false);
       }
     } catch (err) {
@@ -115,7 +115,7 @@ const SitusProjectPages: React.FC = () => {
     try {
       const response = await apiClient.deletePage(pageId);
       if (response.success) {
-        setPages(prev => prev.filter(p => p.id !== pageId));
+        setPages((prev) => prev.filter((p) => p.id !== pageId));
       } else {
         alert(response.error || 'Ошибка удаления страницы');
       }
@@ -146,10 +146,10 @@ const SitusProjectPages: React.FC = () => {
     return (
       <div className="p-6">
         <div className="text-center py-12">
-          <div className="text-red-500 mb-4 text-4xl flex justify-center"><FiAlertTriangle aria-hidden /></div>
-          <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
-            Ошибка загрузки проекта
-          </h3>
+          <div className="text-red-500 mb-4 text-4xl flex justify-center">
+            <FiAlertTriangle aria-hidden />
+          </div>
+          <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">Ошибка загрузки проекта</h3>
           <p className="text-body-color dark:text-dark-6 mb-4">{error}</p>
           <Link
             to={`/projects/${projectId}`}
@@ -161,7 +161,6 @@ const SitusProjectPages: React.FC = () => {
       </div>
     );
   }
-
 
   const tabs = [
     { id: 'pages', name: 'Страницы', icon: <FiFileText aria-hidden /> },
@@ -203,7 +202,18 @@ const SitusProjectPages: React.FC = () => {
                 timeLabels={pages.map((_, i) => `День ${i + 1}`)}
               />
               <ProjectConversionWidget
-                projects={[{ id: 1, name: project.name, conversionRate: 2.5, visitors: 1240, orders: 36, revenue: 122000, trend: 'up', trendValue: 3.2 }]}
+                projects={[
+                  {
+                    id: 1,
+                    name: project.name,
+                    conversionRate: 2.5,
+                    visitors: 1240,
+                    orders: 36,
+                    revenue: 122000,
+                    trend: 'up',
+                    trendValue: 3.2,
+                  },
+                ]}
               />
             </div>
 
@@ -215,7 +225,7 @@ const SitusProjectPages: React.FC = () => {
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
-                  <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+                  <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z" />
                 </svg>
                 Создать страницу
               </button>
@@ -232,9 +242,14 @@ const SitusProjectPages: React.FC = () => {
               </div>
               <ul className="divide-y divide-stroke dark:divide-dark-3">
                 {pages.map((page) => (
-                  <li key={page.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3">
+                  <li
+                    key={page.id}
+                    className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3"
+                  >
                     <div className="col-span-4 flex items-center gap-2">
-                      <span className="text-lg">{page.isHomePage ? <FiHome aria-hidden /> : <FiFileText aria-hidden />}</span>
+                      <span className="text-lg">
+                        {page.isHomePage ? <FiHome aria-hidden /> : <FiFileText aria-hidden />}
+                      </span>
                       <button
                         onClick={() => navigate(`/redaktus?projectId=${project.id}&pageId=${page.id}`)}
                         className="text-left font-medium text-dark dark:text-white hover:text-primary truncate"
@@ -268,7 +283,9 @@ const SitusProjectPages: React.FC = () => {
                       )}
                     </div>
                     <div className="col-span-2">
-                      <span className={`text-xs px-2 py-1 rounded-full ${page.status === 'PUBLISHED' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'}`}>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full ${page.status === 'PUBLISHED' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'}`}
+                      >
                         {page.status === 'PUBLISHED' ? 'Опубликована' : 'Черновик'}
                       </span>
                     </div>
@@ -307,11 +324,7 @@ const SitusProjectPages: React.FC = () => {
 
       {/* Модальное окно создания страницы */}
       {showCreateModal && (
-        <CreatePageModal
-          onClose={() => setShowCreateModal(false)}
-          onCreate={handleCreatePage}
-          isCreating={creating}
-        />
+        <CreatePageModal onClose={() => setShowCreateModal(false)} onCreate={handleCreatePage} isCreating={creating} />
       )}
     </div>
   );
@@ -349,11 +362,11 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !slug.trim()) return;
-    onCreate({ 
-      title: title.trim(), 
+    onCreate({
+      title: title.trim(),
       slug: slug.trim(),
       categories: selectedCategories,
-      primaryCategoryId 
+      primaryCategoryId,
     });
   };
 
@@ -367,21 +380,16 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
       <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium text-dark dark:text-white">Создать страницу</h3>
-          <button
-            onClick={onClose}
-            className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white"
-          >
+          <button onClick={onClose} className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white">
             <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
-              <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Название страницы
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Название страницы</label>
             <input
               type="text"
               value={title}
@@ -394,9 +402,7 @@ const CreatePageModal: React.FC<CreatePageModalProps> = ({ onClose, onCreate, is
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              URL (slug)
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">URL (slug)</label>
             <input
               type="text"
               value={slug}

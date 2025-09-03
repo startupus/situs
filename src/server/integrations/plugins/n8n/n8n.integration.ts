@@ -49,5 +49,3 @@ export class N8nIntegrationPlugin implements IntegrationPlugin {
     }
   }
 }
-
-

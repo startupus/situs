@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Newsletter4 = () => {
   return (
@@ -7,15 +7,13 @@ const Newsletter4 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-1/2 xl:w-7/12">
             <div className="mb-14 lg:mb-0 lg:max-w-[520px]">
-              <span className="mb-3 block text-lg font-semibold text-primary">
-                Subscribe Our Newsletter
-              </span>
+              <span className="mb-3 block text-lg font-semibold text-primary">Subscribe Our Newsletter</span>
               <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
                 Get our new products updates on your inbox!
               </h2>
               <p className="mb-9 text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
               <form className="flex flex-wrap space-y-4 sm:flex-nowrap sm:space-x-4 sm:space-y-0">
                 <input
@@ -31,11 +29,7 @@ const Newsletter4 = () => {
           </div>
           <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
             <div className="text-center">
-              <img
-                src="https://i.ibb.co/Ykv5hN7/form-4.png"
-                alt="forms image"
-                className="mx-auto max-w-full"
-              />
+              <img src="https://i.ibb.co/Ykv5hN7/form-4.png" alt="forms image" className="mx-auto max-w-full" />
             </div>
           </div>
         </div>

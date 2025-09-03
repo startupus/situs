@@ -20,7 +20,7 @@ const ECommerceNavbar4 = () => {
                 <div className="-mx-3 hidden items-center justify-end md:flex">
                   <div className="px-3">
                     <div className="relative">
-                      <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-hidden transition dark:text-dark-6">
+                      <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                         <option value="">English</option>
                         <option value="">Urdu</option>
                         <option value="">Hindi</option>
@@ -41,7 +41,7 @@ const ECommerceNavbar4 = () => {
                   </div>
                   <div className="px-3">
                     <div className="relative">
-                      <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-hidden transition dark:text-dark-6">
+                      <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                         <option value="">USD</option>
                         <option value="">INR</option>
                         <option value="">ERU</option>
@@ -143,7 +143,7 @@ const MiddleNavbar = () => {
             <div className="hidden w-full lg:flex">
               <form className="relative flex w-full items-center rounded-md border border-stroke bg-gray-2 dark:border-dark-3 dark:bg-dark-2">
                 <div className="relative border-r border-stroke dark:border-dark-3">
-                  <select className="appearance-none bg-transparent py-[14px] pl-[22px] pr-10 text-base font-medium text-dark outline-hidden dark:text-white">
+                  <select className="outline-hidden appearance-none bg-transparent py-[14px] pl-[22px] pr-10 text-base font-medium text-dark dark:text-white">
                     <option className="dark:bg-dark-2">All categories</option>
                     <option className="dark:bg-dark-2">Best matches</option>
                     <option className="dark:bg-dark-2">Newest</option>
@@ -164,7 +164,7 @@ const MiddleNavbar = () => {
                 <input
                   type="text"
                   placeholder="I'm shopping for..."
-                  className="w-full bg-transparent py-3 pl-6 pr-[58px] text-base text-body-color outline-hidden dark:text-dark-6"
+                  className="outline-hidden w-full bg-transparent py-3 pl-6 pr-[58px] text-base text-body-color dark:text-dark-6"
                 />
                 <button className="absolute right-0 top-0 flex h-full w-[52px] items-center justify-center rounded-br-md rounded-tr-md border border-primary bg-primary text-white">
                   <svg
@@ -540,7 +540,7 @@ const AllCategories = ({ link, children }) => {
             !open && "hidden"
           } `}
         >
-          <span className="absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 rounded-xs border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"></span>
+          <span className="rounded-xs absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"></span>
           {children}
         </div>
       </div>

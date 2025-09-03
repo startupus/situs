@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function InputRange3() {
   const [minValue, setMinValue] = useState(1000);
@@ -49,24 +49,24 @@ function InputRange3() {
 
             <div
               className="absolute bottom-0 top-0 z-20 rounded-md bg-primary"
-              style={{ right: maxThumb + "%", left: minThumb + "%" }}
+              style={{ right: maxThumb + '%', left: minThumb + '%' }}
             ></div>
 
             <div
               className="absolute left-0 top-0 z-30 -ml-1 -mt-2 h-6 w-6 rounded-full border-2 border-primary bg-white"
-              style={{ left: minThumb + "%" }}
+              style={{ left: minThumb + '%' }}
             ></div>
 
             <div
               className="absolute right-0 top-0 z-30 -mr-3 -mt-2 h-6 w-6 rounded-full border-2 border-primary bg-white"
-              style={{ right: maxThumb + "%" }}
+              style={{ right: maxThumb + '%' }}
             ></div>
           </div>
 
           <div className="flex items-center justify-between py-5">
             <div>
               <span
-                style={{ left: minThumb + "%" }}
+                style={{ left: minThumb + '%' }}
                 className="absolute -top-16 ml-1 -translate-x-1/2 rounded-sm bg-white px-3 py-2 text-center text-dark shadow-lg after:absolute after:-bottom-1.5 after:left-1/2 after:h-3 after:w-3 after:-translate-x-1/2 after:rotate-45 after:rounded-br-sm after:bg-inherit dark:bg-dark-3 dark:text-white"
               >
                 {minValue}
@@ -74,7 +74,7 @@ function InputRange3() {
             </div>
             <div>
               <span
-                style={{ right: maxThumb + "%" }}
+                style={{ right: maxThumb + '%' }}
                 className="absolute -top-16 mr-1 translate-x-1/2 rounded-sm bg-white px-3 py-2 text-center text-dark shadow-lg after:absolute after:-bottom-1.5 after:left-1/2 after:h-3 after:w-3 after:-translate-x-1/2 after:rotate-45 after:rounded-br-sm after:bg-inherit dark:bg-dark-3 dark:text-white"
               >
                 {maxValue}

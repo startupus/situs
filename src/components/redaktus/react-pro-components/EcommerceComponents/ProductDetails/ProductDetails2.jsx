@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const ProductDetails2 = () => {
   const [open, setOpen] = useState(false);
@@ -25,17 +25,12 @@ const ProductDetails2 = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -76,22 +71,22 @@ const ProductDetails2 = () => {
                   <img
                     src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-01.jpg"
                     alt="products-details"
-                    className={`${productOne ? "block" : "hidden"} w-full rounded-md`}
+                    className={`${productOne ? 'block' : 'hidden'} w-full rounded-md`}
                   />
                   <img
                     src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-02.jpg"
                     alt="products-details"
-                    className={`${productTwo ? "block" : "hidden"} w-full rounded-md`}
+                    className={`${productTwo ? 'block' : 'hidden'} w-full rounded-md`}
                   />
                   <img
                     src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-03.jpg"
                     alt="products-details"
-                    className={`${productThree ? "block" : "hidden"} w-full rounded-md`}
+                    className={`${productThree ? 'block' : 'hidden'} w-full rounded-md`}
                   />
                   <img
                     src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-04.jpg"
                     alt="products-details"
-                    className={`${productFour ? "block" : "hidden"} w-full rounded-md`}
+                    className={`${productFour ? 'block' : 'hidden'} w-full rounded-md`}
                   />
                 </div>
                 <div className="-mx-2 flex items-center justify-between">
@@ -104,7 +99,7 @@ const ProductDetails2 = () => {
                         setProductFour(false);
                       }}
                       className={`${
-                        productOne ? "border-primary" : "border-transparent"
+                        productOne ? 'border-primary' : 'border-transparent'
                       } w-full overflow-hidden rounded-md border-2`}
                     >
                       <img
@@ -123,7 +118,7 @@ const ProductDetails2 = () => {
                         setProductFour(false);
                       }}
                       className={`${
-                        productTwo ? "border-primary" : "border-transparent"
+                        productTwo ? 'border-primary' : 'border-transparent'
                       } w-full overflow-hidden rounded-md border-2`}
                     >
                       <img
@@ -142,7 +137,7 @@ const ProductDetails2 = () => {
                         setProductFour(false);
                       }}
                       className={`${
-                        productThree ? "border-primary" : "border-transparent"
+                        productThree ? 'border-primary' : 'border-transparent'
                       } w-full overflow-hidden rounded-md border-2`}
                     >
                       <img
@@ -161,7 +156,7 @@ const ProductDetails2 = () => {
                         setProductFour(true);
                       }}
                       className={`${
-                        productFour ? "border-primary" : "border-transparent"
+                        productFour ? 'border-primary' : 'border-transparent'
                       } w-full overflow-hidden rounded-md border-2`}
                     >
                       <img
@@ -180,28 +175,18 @@ const ProductDetails2 = () => {
                 Macbook Pro M1 8/256GB
               </h3>
               <p className="text-body-color mb-5 text-base dark:text-dark-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                non erat quam. Vestibulum aliquam nibh.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non erat quam. Vestibulum aliquam nibh.
               </p>
               <div className="flex flex-wrap items-center">
                 <div className="flex items-center pr-6">
                   <h3 className="text-lg font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl xl:leading-[1.2] xl:text-[28px]">
                     <span className="pr-3"> $1200.99 </span>
-                    <span className="text-body-color dark:text-dark-6 line-through">
-                      {" "}
-                      $1500.99{" "}
-                    </span>
+                    <span className="text-body-color dark:text-dark-6 line-through"> $1500.99 </span>
                   </h3>
                 </div>
                 <div className="flex items-center">
                   <span className="pr-2">
-                    <svg
-                      width={20}
-                      height={21}
-                      viewBox="0 0 20 21"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width={20} height={21} viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10 1.0625C4.78125 1.0625 0.5625 5.28125 0.5625 10.5C0.5625 15.7188 4.78125 19.9688 10 19.9688C15.2188 19.9688 19.4688 15.7188 19.4688 10.5C19.4688 5.28125 15.2188 1.0625 10 1.0625ZM10 18.5625C5.5625 18.5625 1.96875 14.9375 1.96875 10.5C1.96875 6.0625 5.5625 2.46875 10 2.46875C14.4375 2.46875 18.0625 6.09375 18.0625 10.5312C18.0625 14.9375 14.4375 18.5625 10 18.5625Z"
                         fill="#22AD5C"
@@ -212,10 +197,7 @@ const ProductDetails2 = () => {
                       />
                     </svg>
                   </span>
-                  <span className="text-base font-medium text-dark dark:text-white">
-                    {" "}
-                    In Stock{" "}
-                  </span>
+                  <span className="text-base font-medium text-dark dark:text-white"> In Stock </span>
                 </div>
               </div>
 
@@ -223,12 +205,7 @@ const ProductDetails2 = () => {
                 <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">Color</h4>
                 <div className="flex items-center space-x-3">
                   <div className="relative">
-                    <input
-                      type="radio"
-                      name="productColor"
-                      id="black"
-                      className="productColor sr-only"
-                    />
+                    <input type="radio" name="productColor" id="black" className="productColor sr-only" />
                     <label
                       htmlFor="black"
                       className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-4 border-dark"
@@ -237,12 +214,7 @@ const ProductDetails2 = () => {
                     </label>
                   </div>
                   <div className="relative">
-                    <input
-                      type="radio"
-                      name="productColor"
-                      id="black2"
-                      className="productColor sr-only"
-                    />
+                    <input type="radio" name="productColor" id="black2" className="productColor sr-only" />
                     <label
                       htmlFor="black2"
                       className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-4 border-[#8B949B]"
@@ -251,12 +223,7 @@ const ProductDetails2 = () => {
                     </label>
                   </div>
                   <div className="relative">
-                    <input
-                      type="radio"
-                      name="productColor"
-                      id="black3"
-                      className="productColor sr-only"
-                    />
+                    <input type="radio" name="productColor" id="black3" className="productColor sr-only" />
                     <label
                       htmlFor="black3"
                       className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-4 border-[#DFE4EA]"
@@ -268,40 +235,33 @@ const ProductDetails2 = () => {
               </div>
 
               <div className="mt-[22px]">
-                  <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                    Specification
-                  </h4>
-                  <div className="space-y-3">
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Memory : </span>
-                      <span> 8GB unified memory </span>
-                    </p>
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Storage : </span>
-                      <span> 256GB/512GB SSD storage </span>
-                    </p>
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Display : </span>
-                      <span> 13-inch Retina display with True Tone </span>
-                    </p>
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Processor : </span>
-                      <span> Apple M1 chip with 8-core CPU &amp; GPU </span>
-                    </p>
-                  </div>
+                <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">Specification</h4>
+                <div className="space-y-3">
+                  <p className="text-dark dark:text-white text-base sm:flex">
+                    <span className="block w-28 font-medium"> Memory : </span>
+                    <span> 8GB unified memory </span>
+                  </p>
+                  <p className="text-dark dark:text-white text-base sm:flex">
+                    <span className="block w-28 font-medium"> Storage : </span>
+                    <span> 256GB/512GB SSD storage </span>
+                  </p>
+                  <p className="text-dark dark:text-white text-base sm:flex">
+                    <span className="block w-28 font-medium"> Display : </span>
+                    <span> 13-inch Retina display with True Tone </span>
+                  </p>
+                  <p className="text-dark dark:text-white text-base sm:flex">
+                    <span className="block w-28 font-medium"> Processor : </span>
+                    <span> Apple M1 chip with 8-core CPU &amp; GPU </span>
+                  </p>
                 </div>
+              </div>
 
               <div className="mt-[22px] flex flex-wrap">
                 <div className="mb-[22px] mr-[60px]">
                   <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">RAM</h4>
                   <div className="flex items-center space-x-3">
                     <div>
-                      <input
-                        type="radio"
-                        name="ram"
-                        id="8gb"
-                        className="ram-size sr-only"
-                      />
+                      <input type="radio" name="ram" id="8gb" className="ram-size sr-only" />
                       <label
                         htmlFor="8gb"
                         className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
@@ -310,12 +270,7 @@ const ProductDetails2 = () => {
                       </label>
                     </div>
                     <div>
-                      <input
-                        type="radio"
-                        name="ram"
-                        id="16gb"
-                        className="ram-size sr-only"
-                      />
+                      <input type="radio" name="ram" id="16gb" className="ram-size sr-only" />
                       <label
                         htmlFor="16gb"
                         className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
@@ -326,17 +281,10 @@ const ProductDetails2 = () => {
                   </div>
                 </div>
                 <div className="mb-5">
-                  <h4 className="mb-4 text-lg font-semibold text-black">
-                    Storage
-                  </h4>
+                  <h4 className="mb-4 text-lg font-semibold text-black">Storage</h4>
                   <div className="flex items-center space-x-3">
                     <div>
-                      <input
-                        type="radio"
-                        name="storage"
-                        id="256gb"
-                        className="ram-size sr-only"
-                      />
+                      <input type="radio" name="storage" id="256gb" className="ram-size sr-only" />
                       <label
                         htmlFor="256gb"
                         className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
@@ -345,12 +293,7 @@ const ProductDetails2 = () => {
                       </label>
                     </div>
                     <div>
-                      <input
-                        type="radio"
-                        name="storage"
-                        id="512gb"
-                        className="ram-size sr-only"
-                      />
+                      <input type="radio" name="storage" id="512gb" className="ram-size sr-only" />
                       <label
                         htmlFor="512gb"
                         className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
@@ -359,12 +302,7 @@ const ProductDetails2 = () => {
                       </label>
                     </div>
                     <div>
-                      <input
-                        type="radio"
-                        name="storage"
-                        id="1tb"
-                        className="ram-size sr-only"
-                      />
+                      <input type="radio" name="storage" id="1tb" className="ram-size sr-only" />
                       <label
                         htmlFor="1tb"
                         className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
@@ -378,8 +316,8 @@ const ProductDetails2 = () => {
 
               <div className="flex flex-wrap">
                 <div className="mr-5 mb-4 inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                  <span 
-                    className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white" 
+                  <span
+                    className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
                     onClick={decrement}
                   >
                     <svg
@@ -394,7 +332,7 @@ const ProductDetails2 = () => {
                     </svg>
                   </span>
                   <span className="py-3 px-5 border-x border-stroke dark:border-dark-3">{quantity}</span>
-                  <span 
+                  <span
                     className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
                     onClick={increment}
                   >
@@ -433,7 +371,7 @@ const ProductDetails2 = () => {
 
           <div
             className={`fixed left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-black/50 py-10 ${
-              !open && "hidden"
+              !open && 'hidden'
             } `}
           >
             <div
@@ -445,22 +383,22 @@ const ProductDetails2 = () => {
               <img
                 src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-01.jpg"
                 alt="products-details"
-                className={`w-full ${productOne ? "block" : "hidden"}`}
+                className={`w-full ${productOne ? 'block' : 'hidden'}`}
               />
               <img
                 src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-02.jpg"
                 alt="products-details"
-                className={`w-full ${productTwo ? "block" : "hidden"}`}
+                className={`w-full ${productTwo ? 'block' : 'hidden'}`}
               />
               <img
                 src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-03.jpg"
                 alt="products-details"
-                className={`w-full ${productThree ? "block" : "hidden"}`}
+                className={`w-full ${productThree ? 'block' : 'hidden'}`}
               />
               <img
                 src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-02/big-image-04.jpg"
                 alt="products-details"
-                className={`w-full ${productFour ? "block" : "hidden"}`}
+                className={`w-full ${productFour ? 'block' : 'hidden'}`}
               />
             </div>
           </div>

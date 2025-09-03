@@ -5,7 +5,7 @@ export default function Skeleton2() {
     <section className="bg-white py-20 dark:bg-dark">
       <div className="container">
         <div className="mx-auto w-full max-w-[370px]">
-          <div className="mb-7 flex h-[200px] w-full items-center justify-center rounded-xl bg-linear-to-r from-gray-1 to-gray-4 text-secondary-color dark:from-dark-4 dark:to-dark-5">
+          <div className="bg-linear-to-r mb-7 flex h-[200px] w-full items-center justify-center rounded-xl from-gray-1 to-gray-4 text-secondary-color dark:from-dark-4 dark:to-dark-5">
             <svg
               width="28"
               height="31"
@@ -24,9 +24,9 @@ export default function Skeleton2() {
             </svg>
           </div>
           <div className="space-y-4">
-            <div className="h-3 w-full rounded-full bg-linear-to-r from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5"></div>
-            <div className="h-3 w-4/6 rounded-full bg-linear-to-r from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5"></div>
-            <div className="h-3 w-5/6 rounded-full bg-linear-to-r from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5"></div>
+            <div className="bg-linear-to-r h-3 w-full rounded-full from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5"></div>
+            <div className="bg-linear-to-r h-3 w-4/6 rounded-full from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5"></div>
+            <div className="bg-linear-to-r h-3 w-5/6 rounded-full from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5"></div>
           </div>
         </div>
       </div>

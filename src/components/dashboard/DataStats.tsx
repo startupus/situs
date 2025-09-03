@@ -1,23 +1,23 @@
-import React from 'react'
-import { cn } from '../../lib/utils'
+import React from 'react';
+import { cn } from '../../lib/utils';
 
 export interface DataStatsCardProps {
-  title: string
-  subtitle?: string
-  value: string | number
+  title: string;
+  subtitle?: string;
+  value: string | number;
   change?: {
-    value: string
-    type: 'increase' | 'decrease'
-  }
-  percent?: number
-  icon?: React.ReactNode
-  color?: string
-  className?: string
+    value: string;
+    type: 'increase' | 'decrease';
+  };
+  percent?: number;
+  icon?: React.ReactNode;
+  color?: string;
+  className?: string;
 }
 
 export interface DataStatsProps {
-  cards: DataStatsCardProps[]
-  className?: string
+  cards: DataStatsCardProps[];
+  className?: string;
 }
 
 const DataStatsCard: React.FC<DataStatsCardProps> = ({
@@ -41,9 +41,7 @@ const DataStatsCard: React.FC<DataStatsCardProps> = ({
             {icon}
           </div>
           <div className="w-full">
-            <h4 className="mb-1 text-2xl font-bold text-dark dark:text-white">
-              {value}
-            </h4>
+            <h4 className="mb-1 text-2xl font-bold text-dark dark:text-white">{value}</h4>
             <p className="text-base text-body-color dark:text-dark-6">{title}</p>
           </div>
         </div>
@@ -53,23 +51,17 @@ const DataStatsCard: React.FC<DataStatsCardProps> = ({
               <span
                 className={cn(
                   'mr-2 flex items-center text-sm font-medium',
-                  change.type === 'increase' ? 'text-success' : 'text-danger'
+                  change.type === 'increase' ? 'text-success' : 'text-danger',
                 )}
               >
                 {change.type === 'increase' ? '↗' : '↘'} {change.value}
               </span>
             )}
-            {subtitle && (
-              <span className="text-sm text-body-color dark:text-dark-6">
-                {subtitle}
-              </span>
-            )}
+            {subtitle && <span className="text-sm text-body-color dark:text-dark-6">{subtitle}</span>}
           </div>
           {percent && (
             <div className="flex items-center">
-              <span className="mr-2 text-sm font-medium text-dark dark:text-white">
-                {percent}%
-              </span>
+              <span className="mr-2 text-sm font-medium text-dark dark:text-white">{percent}%</span>
               <div className="h-2 w-16 rounded-full bg-gray-200 dark:bg-dark-3">
                 <div
                   className="h-2 rounded-full"
@@ -84,8 +76,8 @@ const DataStatsCard: React.FC<DataStatsCardProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const DataStats: React.FC<DataStatsProps> = ({ cards, className }) => {
   return (
@@ -98,7 +90,7 @@ const DataStats: React.FC<DataStatsProps> = ({ cards, className }) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default DataStats 
+export default DataStats;

@@ -1,6 +1,6 @@
-import * as noUiSlider from "nouislider";
-import "nouislider/dist/nouislider.css";
-import React, { useEffect } from "react";
+import * as noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
+import React, { useEffect } from 'react';
 
 const Filter3 = () => {
   return (
@@ -14,13 +14,7 @@ const Filter3 = () => {
                   link="/#"
                   title="Dslr Camera"
                   icon={
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M17.1562 5.3125H14.8125L14.25 4.1875C13.8437 3.40625 13.0625 2.90625 12.1875 2.90625H7.8125C6.9375 2.90625 6.15625 3.40625 5.75 4.1875L5.1875 5.3125H2.84375C1.59375 5.3125 0.5625 6.34375 0.5625 7.59375V14.75C0.5625 16 1.59375 17.0312 2.84375 17.0312H17.1562C18.4062 17.0312 19.4375 16 19.4375 14.75V7.625C19.4687 6.34375 18.4375 5.3125 17.1562 5.3125ZM18.0625 14.7812C18.0625 15.2812 17.6562 15.6562 17.1875 15.6562H2.84375C2.34375 15.6562 1.96875 15.25 1.96875 14.7812V7.625C1.96875 7.125 2.375 6.75 2.84375 6.75H5.625C5.90625 6.75 6.125 6.59375 6.25 6.375L7 4.875C7.15625 4.5625 7.46875 4.375 7.78125 4.375H12.1875C12.5312 4.375 12.8437 4.5625 12.9687 4.875L13.7187 6.375C13.8437 6.625 14.0937 6.75 14.3437 6.75H17.125C17.625 6.75 18 7.15625 18 7.625V14.7812H18.0625Z"
                         fill="currentColor"
@@ -40,13 +34,7 @@ const Filter3 = () => {
                   link="/#"
                   title="Laptop"
                   icon={
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M19.4375 16.1563C19.4375 16.0625 19.4375 15.9688 19.4063 15.875L17.9375 11.9063C17.9375 11.875 17.9063 11.875 17.9063 11.8438V3.375C17.9063 2.40625 17.125 1.59375 16.1563 1.59375H3.84375C2.87501 1.59375 2.09375 2.375 2.09375 3.375V11.8438C2.09375 11.875 2.0625 11.875 2.0625 11.9063L0.593755 15.875C0.562505 15.9688 0.531255 16.0625 0.562505 16.1563C0.562505 16.1563 0.562505 16.1563 0.562505 16.1875V17.125C0.562505 17.8438 1.15625 18.4375 1.875 18.4375H18.1563C18.875 18.4375 19.4688 17.8438 19.4688 17.125L19.4375 16.1563C19.4688 16.1563 19.4375 16.1563 19.4375 16.1563ZM3.5 3.375C3.5 3.1875 3.65625 3 3.84375 3H16.1563C16.3438 3 16.5 3.15625 16.5 3.375V11.5H3.5V3.375ZM1.96875 17V16.25L3.21875 12.9063H16.8125L18.0625 16.25V17.0313H1.96875V17Z"
                         fill="currentColor"
@@ -62,13 +50,7 @@ const Filter3 = () => {
                   link="/#"
                   title="Gaming Console"
                   icon={
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M7.28125 8.09375H6.59375V7.4375C6.59375 7.0625 6.28125 6.71875 5.875 6.71875C5.46875 6.71875 5.15625 7.03125 5.15625 7.4375V8.09375H4.46875C4.09375 8.09375 3.75 8.40625 3.75 8.8125C3.75 9.21875 4.0625 9.53125 4.46875 9.53125H5.15625V10.1875C5.15625 10.5625 5.46875 10.9062 5.875 10.9062C6.28125 10.9062 6.59375 10.5937 6.59375 10.1875V9.53125H7.28125C7.65625 9.53125 8 9.21875 8 8.8125C8 8.40625 7.65625 8.09375 7.28125 8.09375Z"
                         fill="currentColor"
@@ -100,13 +82,7 @@ const Filter3 = () => {
                   link="/#"
                   title="Microphone"
                   icon={
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clipPath="url(#clip0_1022_21777)">
                         <path
                           d="M13.8125 0.5625C10.6875 0.5625 8.15625 3.09375 8.15625 6.21875C8.15625 6.75 8.25 7.28125 8.375 7.78125L1.34375 14.7813C0.28125 15.8438 0.28125 17.5938 1.34375 18.6563C1.875 19.1875 2.5625 19.4375 3.28125 19.4375C4 19.4375 4.6875 19.1875 5.21875 18.6563L12.25 11.625C12.75 11.7813 13.25 11.8438 13.8125 11.8438C16.9375 11.8438 19.4688 9.3125 19.4688 6.1875C19.4688 3.0625 16.9062 0.5625 13.8125 0.5625ZM2.34375 17.6563C1.84375 17.1563 1.84375 16.2813 2.34375 15.7813L2.4375 15.6875L4.3125 17.5625L4.25 17.625C3.71875 18.1875 2.84375 18.1875 2.34375 17.6563ZM5.28125 16.5938L3.40625 14.7188L9 9.15625C9.46875 9.9375 10.125 10.5625 10.875 11.0313L5.28125 16.5938ZM9.5625 6.1875C9.5625 5.8125 9.625 5.46875 9.6875 5.125L14.8438 10.3125C14.5 10.4063 14.1562 10.4375 13.8125 10.4375C11.4688 10.4375 9.5625 8.53125 9.5625 6.1875ZM16.2188 9.6875L10.3125 3.78125C11.0938 2.6875 12.3438 1.96875 13.7812 1.96875C16.125 1.96875 18.0312 3.875 18.0312 6.21875C18.0625 7.65625 17.3125 8.9375 16.2188 9.6875Z"
@@ -195,13 +171,7 @@ const CheckboxGroup = ({ title, id, name }) => {
           <input type="radio" name={name} id={id} className="sr-only"></input>
           <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-sm border">
             <span className="opacity-0">
-              <svg
-                width="11"
-                height="8"
-                viewBox="0 0 11 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                   fill="#3056D3"
@@ -220,9 +190,9 @@ const CheckboxGroup = ({ title, id, name }) => {
 
 const PriceRange = () => {
   useEffect(() => {
-    const stepsSlider = document.getElementById("slider-range");
-    const input0 = document.getElementById("minAmount");
-    const input1 = document.getElementById("maxAmount");
+    const stepsSlider = document.getElementById('slider-range');
+    const input0 = document.getElementById('minAmount');
+    const input1 = document.getElementById('maxAmount');
     const inputs = [input0, input1];
     noUiSlider.create(stepsSlider, {
       start: [200, 1200],
@@ -234,7 +204,7 @@ const PriceRange = () => {
       },
     });
 
-    stepsSlider.noUiSlider.on("update", function (values, handle) {
+    stepsSlider.noUiSlider.on('update', function (values, handle) {
       inputs[handle].innerHTML = values[handle];
     });
   });
@@ -245,9 +215,7 @@ const PriceRange = () => {
         <div className="price-range">
           <div className="price-amount flex items-center justify-between">
             <div className="amount-input w-1/2">
-              <label className="mb-1 block text-xs text-body-color dark:text-dark-6">
-                Minimum Price
-              </label>
+              <label className="mb-1 block text-xs text-body-color dark:text-dark-6">Minimum Price</label>
               <span
                 type="text"
                 id="minAmount"
@@ -257,9 +225,7 @@ const PriceRange = () => {
               </span>
             </div>
             <div className="amount-input w-1/2 text-right">
-              <label className="mb-1 block text-xs text-body-color dark:text-dark-6">
-                Maximum Price
-              </label>
+              <label className="mb-1 block text-xs text-body-color dark:text-dark-6">Maximum Price</label>
               <span
                 type="text"
                 id="maxAmount"

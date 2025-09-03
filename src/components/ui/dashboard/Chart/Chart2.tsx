@@ -1,26 +1,26 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart2 = () => {
   const series = [
     {
-      name: "Media",
+      name: 'Media',
       data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
     },
     {
-      name: "Photos",
+      name: 'Photos',
       data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
     },
     {
-      name: "Docs",
+      name: 'Docs',
       data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
     },
   ];
   const options = {
-    colors: ["#3758F9", "#13C296", "#F2994A"],
+    colors: ['#3758F9', '#13C296', '#F2994A'],
     chart: {
-      fontFamily: "Inter, sans-serif",
-      type: "bar",
+      fontFamily: 'Inter, sans-serif',
+      type: 'bar',
       height: 350,
       toolbar: {
         show: false,
@@ -29,8 +29,8 @@ const Chart2 = () => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "55%",
-        endingShape: "rounded-sm",
+        columnWidth: '55%',
+        endingShape: 'rounded-sm',
         borderRadius: 2,
       },
     },
@@ -40,20 +40,10 @@ const Chart2 = () => {
     stroke: {
       show: true,
       width: 4,
-      colors: ["transparent"],
+      colors: ['transparent'],
     },
     xaxis: {
-      categories: [
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-      ],
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
       axisBorder: {
         show: false,
       },
@@ -63,9 +53,9 @@ const Chart2 = () => {
     },
     legend: {
       show: true,
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "inter",
+      position: 'top',
+      horizontalAlign: 'left',
+      fontFamily: 'inter',
 
       markers: {
         radius: 12,
@@ -101,9 +91,7 @@ const Chart2 = () => {
         <div className="mx-auto w-full max-w-[760px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="flex justify-between">
             <div>
-              <h5 className="mb-6 text-xl font-semibold text-dark dark:text-white">
-                Activity Chart
-              </h5>
+              <h5 className="mb-6 text-xl font-semibold text-dark dark:text-white">Activity Chart</h5>
             </div>
             <div>
               <div className="relative z-20 inline-block rounded-md bg-transparent">
@@ -135,12 +123,7 @@ const Chart2 = () => {
             </div>
           </div>
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart
-              options={options}
-              series={series}
-              type="bar"
-              height={350}
-            />
+            <ReactApexChart options={options} series={series} type="bar" height={350} />
           </div>
         </div>
       </div>

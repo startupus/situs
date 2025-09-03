@@ -53,11 +53,7 @@ export class WebCategoriesController {
     @Request() req: ExpressRequest,
   ) {
     try {
-      const category = await this.webCategoriesService.createCategory(
-        projectId,
-        createDto,
-        (req as any).user.id,
-      );
+      const category = await this.webCategoriesService.createCategory(projectId, createDto, (req as any).user.id);
       return { success: true, category };
     } catch (error: any) {
       throw new HttpException(
@@ -75,11 +71,7 @@ export class WebCategoriesController {
     @Request() req: ExpressRequest,
   ) {
     try {
-      const category = await this.webCategoriesService.updateCategory(
-        categoryId,
-        updateDto,
-        (req as any).user.id,
-      );
+      const category = await this.webCategoriesService.updateCategory(categoryId, updateDto, (req as any).user.id);
       return { success: true, category };
     } catch (error: any) {
       throw new HttpException(
@@ -91,10 +83,7 @@ export class WebCategoriesController {
 
   // DELETE /api/pages/categories/:id
   @Delete('pages/categories/:id')
-  async deleteWebCategory(
-    @Param('id') categoryId: string,
-    @Request() req: ExpressRequest,
-  ) {
+  async deleteWebCategory(@Param('id') categoryId: string, @Request() req: ExpressRequest) {
     try {
       await this.webCategoriesService.deleteCategory(categoryId, (req as any).user.id);
       return { success: true, message: 'Pages category deleted successfully' };
@@ -108,10 +97,7 @@ export class WebCategoriesController {
 
   // PATCH /api/pages/categories/reorder
   @Patch('pages/categories/reorder')
-  async reorderWebCategories(
-    @Body() reorderDto: ReorderWebCategoriesDto,
-    @Request() req: ExpressRequest,
-  ) {
+  async reorderWebCategories(@Body() reorderDto: ReorderWebCategoriesDto, @Request() req: ExpressRequest) {
     try {
       await this.webCategoriesService.reorderCategories(reorderDto, (req as any).user.id);
       return { success: true, message: 'Pages categories reordered successfully' };

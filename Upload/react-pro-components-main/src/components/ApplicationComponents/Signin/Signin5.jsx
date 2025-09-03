@@ -22,7 +22,7 @@ const Signin5 = () => {
                 </p>
               </div>
               <div className="text-left">
-                <h2 className="mb-2 text-xl font-bold leading-[1.6]! text-dark dark:text-white sm:text-[28px]">
+                <h2 className="leading-[1.6]! mb-2 text-xl font-bold text-dark dark:text-white sm:text-[28px]">
                   Sign up to TailGrids
                 </h2>
                 <p className="mb-8 text-base text-body-color dark:text-dark-6">
@@ -180,7 +180,7 @@ const InputBox = ({ type, placeholder, name }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full border-b border-stroke bg-transparent py-[10px] text-base font-medium text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
+        className="outline-hidden w-full border-b border-stroke bg-transparent py-[10px] text-base font-medium text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
       />
     </div>
   );

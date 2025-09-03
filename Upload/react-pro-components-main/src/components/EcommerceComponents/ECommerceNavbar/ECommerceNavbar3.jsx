@@ -15,7 +15,7 @@ const ECommerceNavbar3 = () => {
                       <label className="hidden text-base font-medium text-white lg:inline-flex">
                         Language:
                       </label>
-                      <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white outline-hidden transition">
+                      <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white transition">
                         <option>English</option>
                         <option>Urdu</option>
                         <option>Hindi</option>
@@ -28,7 +28,7 @@ const ECommerceNavbar3 = () => {
                       <label className="hidden text-base font-medium text-white lg:inline-flex">
                         Currency:
                       </label>
-                      <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white outline-hidden transition">
+                      <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white transition">
                         <option value="">USD</option>
                         <option value="">INR</option>
                         <option value="">ERU</option>
@@ -125,7 +125,7 @@ const MiddleNavbar = () => {
             <div className="hidden w-full lg:flex">
               <form className="relative flex w-full items-center rounded-md bg-white dark:bg-dark-2">
                 <div className="relative border-r border-stroke dark:border-dark-3">
-                  <select className="appearance-none bg-transparent py-[14px] pl-[22px] pr-10 text-base font-medium text-dark outline-hidden dark:text-white">
+                  <select className="outline-hidden appearance-none bg-transparent py-[14px] pl-[22px] pr-10 text-base font-medium text-dark dark:text-white">
                     <option className="dark:bg-dark-2">All categories</option>
                     <option className="dark:bg-dark-2">Best matches</option>
                     <option className="dark:bg-dark-2">Newest</option>
@@ -146,7 +146,7 @@ const MiddleNavbar = () => {
                 <input
                   type="text"
                   placeholder="I'm shopping for..."
-                  className="w-full bg-transparent py-[14px] pl-6 pr-[58px] text-base text-body-color outline-hidden dark:text-dark-6"
+                  className="outline-hidden w-full bg-transparent py-[14px] pl-6 pr-[58px] text-base text-body-color dark:text-dark-6"
                 />
                 <button className="absolute right-0 top-0 flex h-full w-[52px] items-center justify-center rounded-br-md rounded-tr-md border-l border-stroke bg-white text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white">
                   <svg

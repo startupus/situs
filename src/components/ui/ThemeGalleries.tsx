@@ -1,12 +1,6 @@
 // src/components/ui/ThemeGalleries.tsx
 import React from 'react';
-import { 
-  Gallery1,
-  Gallery2,
-  Gallery3,
-  Gallery4,
-  Gallery5
-} from './core';
+import { Gallery1, Gallery2, Gallery3, Gallery4, Gallery5 } from './core';
 
 // Gallery Variants - простые обертки
 export const ThemeGallery1: React.FC = () => <Gallery1 />;

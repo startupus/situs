@@ -8,16 +8,11 @@ interface PreviewModeProps {
   className?: string;
 }
 
-const PreviewMode: React.FC<PreviewModeProps> = ({
-  page,
-  isPreview,
-  onTogglePreview,
-  className = ''
-}) => {
+const PreviewMode: React.FC<PreviewModeProps> = ({ page, isPreview, onTogglePreview, className = '' }) => {
   // Функция для рендеринга блоков в режиме предварительного просмотра
   const renderPreviewBlock = (block: any) => {
     const { type, props } = block;
-    
+
     // Простой рендеринг без элементов редактирования
     switch (type) {
       case 'hero-unit':
@@ -26,15 +21,11 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
             <h1 className="text-4xl font-bold mb-4">{props.title || 'Welcome'}</h1>
             <p className="text-xl mb-6">{props.text || 'Create beautiful content'}</p>
             {props.imageUrl && (
-              <img 
-                src={props.imageUrl} 
-                alt="Hero" 
-                className="mx-auto max-w-md rounded-lg shadow-lg"
-              />
+              <img src={props.imageUrl} alt="Hero" className="mx-auto max-w-md rounded-lg shadow-lg" />
             )}
           </div>
         );
-        
+
       case 'text-block':
         return (
           <div className={`py-6 px-4 ${getAlignmentClass(props.alignment)}`}>
@@ -43,7 +34,7 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
             </div>
           </div>
         );
-        
+
       case 'heading-block':
         const HeadingTag = props.level || 'h2';
         return (
@@ -53,22 +44,20 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
             </HeadingTag>
           </div>
         );
-        
+
       case 'image-block':
         return (
           <div className={`py-6 ${getAlignmentClass(props.alignment)}`}>
             <div className="max-w-4xl mx-auto">
               {props.imageUrl ? (
                 <div className="relative">
-                  <img 
-                    src={props.imageUrl} 
-                    alt={props.alt || 'Image'} 
+                  <img
+                    src={props.imageUrl}
+                    alt={props.alt || 'Image'}
                     className={`mx-auto ${getImageSizeClass(props.size)} rounded-lg shadow-md`}
                   />
                   {props.caption && (
-                    <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
-                      {props.caption}
-                    </p>
+                    <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">{props.caption}</p>
                   )}
                 </div>
               ) : (
@@ -79,7 +68,7 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
             </div>
           </div>
         );
-        
+
       case 'quote-block':
         return (
           <div className="py-6 px-4">
@@ -101,13 +90,11 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
             </div>
           </div>
         );
-        
+
       default:
         return (
           <div className="py-4 px-4 bg-gray-100 dark:bg-gray-800 rounded">
-            <p className="text-gray-500 dark:text-gray-400">
-              Block type "{type}" not supported in preview
-            </p>
+            <p className="text-gray-500 dark:text-gray-400">Block type "{type}" not supported in preview</p>
           </div>
         );
     }
@@ -116,26 +103,36 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
   // Вспомогательные функции для стилизации
   const getAlignmentClass = (alignment: string = 'left') => {
     switch (alignment) {
-      case 'center': return 'text-center';
-      case 'right': return 'text-right';
-      default: return 'text-left';
+      case 'center':
+        return 'text-center';
+      case 'right':
+        return 'text-right';
+      default:
+        return 'text-left';
     }
   };
 
   const getFontSizeClass = (size: string = 'medium') => {
     switch (size) {
-      case 'small': return 'text-sm';
-      case 'large': return 'text-lg';
-      default: return 'text-base';
+      case 'small':
+        return 'text-sm';
+      case 'large':
+        return 'text-lg';
+      default:
+        return 'text-base';
     }
   };
 
   const getImageSizeClass = (size: string = 'medium') => {
     switch (size) {
-      case 'small': return 'max-w-sm';
-      case 'large': return 'max-w-2xl';
-      case 'full': return 'w-full';
-      default: return 'max-w-lg';
+      case 'small':
+        return 'max-w-sm';
+      case 'large':
+        return 'max-w-2xl';
+      case 'full':
+        return 'w-full';
+      default:
+        return 'max-w-lg';
     }
   };
 
@@ -146,9 +143,7 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
         <button
           onClick={onTogglePreview}
           className={`flex items-center space-x-2 px-4 py-2 rounded-md shadow-lg transition-colors ${
-            isPreview
-              ? 'bg-blue-600 text-white hover:bg-blue-700'
-              : 'bg-gray-800 text-white hover:bg-gray-900'
+            isPreview ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-800 text-white hover:bg-gray-900'
           }`}
         >
           {isPreview ? (
@@ -172,9 +167,7 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
           <div className="preview-content">
             {page.content && page.content.length > 0 ? (
               page.content.map((block: any, index: number) => (
-                <div key={block.id || index}>
-                  {renderPreviewBlock(block)}
-                </div>
+                <div key={block.id || index}>{renderPreviewBlock(block)}</div>
               ))
             ) : (
               <div className="flex items-center justify-center min-h-screen text-gray-500 dark:text-gray-400">
@@ -200,4 +193,4 @@ const PreviewMode: React.FC<PreviewModeProps> = ({
   );
 };
 
-export default PreviewMode; 
+export default PreviewMode;

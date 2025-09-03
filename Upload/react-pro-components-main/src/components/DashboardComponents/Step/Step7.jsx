@@ -29,7 +29,7 @@ const SingleStep = ({ number, name, done }) => {
         </span>
         <p className="text-base text-black">{name}</p>
       </div>
-      <div className="mb-5 group-last:hidden hidden px-8 lg:block">
+      <div className="mb-5 hidden px-8 group-last:hidden lg:block">
         <svg
           width={32}
           height={16}

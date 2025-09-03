@@ -5,22 +5,47 @@
       "title": "Главное меню",
       "description": "Основная навигация сайта",
       "items": [
-        { "title": "Главная", "alias": "home", "component": "Website", "view": "page", "targetId": "home", "orderIndex": 0 },
+        {
+          "title": "Главная",
+          "alias": "home",
+          "component": "Website",
+          "view": "page",
+          "targetId": "home",
+          "orderIndex": 0
+        },
         { "title": "Каталог", "alias": "catalog", "component": "Store", "view": "categories", "orderIndex": 1 },
-        { "title": "О компании", "alias": "about", "component": "Website", "view": "page", "targetId": "about", "orderIndex": 2 },
-        { "title": "Контакты", "alias": "contacts", "component": "Website", "view": "page", "targetId": "contacts", "orderIndex": 3 }
+        {
+          "title": "О компании",
+          "alias": "about",
+          "component": "Website",
+          "view": "page",
+          "targetId": "about",
+          "orderIndex": 2
+        },
+        {
+          "title": "Контакты",
+          "alias": "contacts",
+          "component": "Website",
+          "view": "page",
+          "targetId": "contacts",
+          "orderIndex": 3
+        }
       ]
     },
     {
       "name": "footer",
       "title": "Меню подвала",
       "items": [
-        { "title": "Политика конфиденциальности", "alias": "privacy", "type": "URL", "externalUrl": "/privacy", "orderIndex": 0 },
+        {
+          "title": "Политика конфиденциальности",
+          "alias": "privacy",
+          "type": "URL",
+          "externalUrl": "/privacy",
+          "orderIndex": 0
+        },
         { "title": "Условия использования", "alias": "terms", "type": "URL", "externalUrl": "/terms", "orderIndex": 1 },
         { "title": "Поддержка", "alias": "support", "type": "URL", "externalUrl": "/support", "orderIndex": 2 }
       ]
     }
   ]
 }
-
-

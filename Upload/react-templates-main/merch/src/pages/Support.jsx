@@ -28,13 +28,13 @@ const Support = () => {
     <>
       <Breadcrumb pageName="Support" />
 
-      <section className="dark:bg-dark overflow-hidden py-[120px]">
+      <section className="overflow-hidden py-[120px] dark:bg-dark">
         <div className="container mx-auto">
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 xl:w-10/12">
-              <div className="flex flex-wrap px-5 mb-16 -mx-4 bg-primary py-14 sm:p-14">
+              <div className="-mx-4 mb-16 flex flex-wrap bg-primary px-5 py-14 sm:p-14">
                 <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-                  <div className="flex mb-5 lg:mb-0">
+                  <div className="mb-5 flex lg:mb-0">
                     <div className="mr-4">
                       <svg
                         width="32"
@@ -63,7 +63,7 @@ const Support = () => {
                   </div>
                 </div>
                 <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-                  <div className="flex mb-5 lg:mb-0">
+                  <div className="mb-5 flex lg:mb-0">
                     <div className="mr-4">
                       <svg
                         width="32"
@@ -107,7 +107,7 @@ const Support = () => {
                   </div>
                 </div>
                 <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-                  <div className="flex mb-5 lg:mb-0">
+                  <div className="mb-5 flex lg:mb-0">
                     <div className="mr-4">
                       <svg
                         width="32"
@@ -140,11 +140,11 @@ const Support = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center -mx-4">
+          <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4 lg:w-7/12 xl:w-6/12">
-              <div className="mb-12 lg:mr-4 lg:mb-0">
+              <div className="mb-12 lg:mb-0 lg:mr-4">
                 <form>
-                  <div className="flex flex-wrap -mx-4">
+                  <div className="-mx-4 flex flex-wrap">
                     {formItems.map((item, index) =>
                       item.type === "textarea" ? (
                         <div key={index} className="w-full px-4">
@@ -152,7 +152,7 @@ const Support = () => {
                             <textarea
                               placeholder={item.placeholder}
                               rows="6"
-                              className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary w-full resize-none border bg-transparent px-5 py-[17px] outline-hidden dark:placeholder:text-gray-500"
+                              className="outline-hidden w-full resize-none border border-stroke bg-transparent px-5 py-[17px] text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:placeholder:text-gray-500 dark:focus:border-primary"
                             ></textarea>
                           </div>
                         </div>
@@ -162,7 +162,7 @@ const Support = () => {
                             <input
                               type={item.type}
                               placeholder={item.placeholder}
-                              className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary w-full border bg-transparent px-5 py-[17px] outline-hidden dark:placeholder:text-gray-500"
+                              className="outline-hidden w-full border border-stroke bg-transparent px-5 py-[17px] text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:placeholder:text-gray-500 dark:focus:border-primary"
                             />
                           </div>
                         </div>
@@ -173,7 +173,7 @@ const Support = () => {
                       <div>
                         <button
                           type="submit"
-                          className="inline-flex items-center justify-center py-3 text-base font-medium text-white border border-transparent bg-primary hover:bg-primary/90 px-7"
+                          className="inline-flex items-center justify-center border border-transparent bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
                         >
                           Submit Message
                         </button>

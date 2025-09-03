@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Checkout3 = () => {
   return (
@@ -55,12 +55,8 @@ const Checkout3 = () => {
                   <div className="mb-10 w-full px-4 md:mb-0 md:w-1/2">
                     <div className="lg:max-w-[300px]">
                       <div className="mb-8 border-b border-stroke pb-4 dark:border-dark-3">
-                        <h4 className="mb-[6px] text-lg font-semibold text-dark dark:text-white">
-                          Coupon Code
-                        </h4>
-                        <p className="text-sm text-body-color dark:text-dark-6">
-                          Enter code to get discount instantly
-                        </p>
+                        <h4 className="mb-[6px] text-lg font-semibold text-dark dark:text-white">Coupon Code</h4>
+                        <p className="text-sm text-body-color dark:text-dark-6">Enter code to get discount instantly</p>
                       </div>
                       <form className="relative">
                         <input
@@ -116,32 +112,19 @@ const Checkout3 = () => {
               </h3>
 
               <div className="overflow-hidden rounded-lg border border-stroke bg-white p-9 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
-                <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white">
-                  Payment Method
-                </h3>
+                <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white">Payment Method</h3>
 
                 <PaymentGroup id="paymentCheckbox" labelTitle="Credit Card" />
                 <PaymentGroup id="paymentCheckbox2" labelTitle="Paypal" />
-                <PaymentGroup
-                  id="paymentCheckbox3"
-                  labelTitle="Cash on delivery"
-                />
+                <PaymentGroup id="paymentCheckbox3" labelTitle="Cash on delivery" />
                 <div className="mt-8 border-t border-stroke pt-8 dark:border-dark-3">
                   <form>
                     <div className="-mx-2 flex flex-wrap">
                       <div className="w-full px-2">
-                        <InputGroup
-                          type="text"
-                          placeholder="Jhon deo"
-                          labelTitle="Name on Card:"
-                        />
+                        <InputGroup type="text" placeholder="Jhon deo" labelTitle="Name on Card:" />
                       </div>
                       <div className="w-full px-2">
-                        <InputGroup
-                          type="text"
-                          placeholder="0000 0000 0000 1248"
-                          labelTitle="Card Number:"
-                        />
+                        <InputGroup type="text" placeholder="0000 0000 0000 1248" labelTitle="Card Number:" />
                       </div>
                       <div className="w-full px-2 sm:w-9/12">
                         <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
@@ -157,11 +140,7 @@ const Checkout3 = () => {
                         </div>
                       </div>
                       <div className="w-full px-2 sm:w-3/12">
-                        <InputGroup
-                          type="text"
-                          placeholder="248"
-                          labelTitle="CVV"
-                        />
+                        <InputGroup type="text" placeholder="248" labelTitle="CVV" />
                       </div>
                       <div className="w-full px-2">
                         <button className="flex w-full items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark">
@@ -204,9 +183,7 @@ const CartItem = ({ link, img, title, color, price }) => {
                 {title}
               </a>
             </h5>
-            <p className="text-sm text-body-color dark:text-dark-6">
-              Color: {color}
-            </p>
+            <p className="text-sm text-body-color dark:text-dark-6">Color: {color}</p>
           </div>
         </div>
       </td>
@@ -228,9 +205,7 @@ const CartItem = ({ link, img, title, color, price }) => {
         </div>
       </td>
       <td className="border-t border-stroke p-4 dark:border-dark-3">
-        <p className="text-base font-medium text-dark dark:text-white">
-          {price}
-        </p>
+        <p className="text-base font-medium text-dark dark:text-white">{price}</p>
       </td>
       <td className="border-t border-stroke p-4 pr-11 text-center dark:border-dark-3">
         <button className="text-dark hover:text-red dark:text-white">
@@ -263,10 +238,7 @@ const CartItem = ({ link, img, title, color, price }) => {
 const PaymentGroup = ({ id, labelTitle }) => {
   return (
     <div className="mb-4">
-      <label
-        htmlFor={id}
-        className="flex cursor-pointer select-none items-center"
-      >
+      <label htmlFor={id} className="flex cursor-pointer select-none items-center">
         <div className="relative">
           <input type="radio" id={id} name="payment" className="sr-only" />
           <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-full border border-primary bg-primary/5">
@@ -283,9 +255,7 @@ const InputGroup = ({ labelTitle, type, placeholder }) => {
   return (
     <div className="mb-5">
       {labelTitle && (
-        <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
-          {labelTitle}
-        </label>
+        <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">{labelTitle}</label>
       )}
       <input
         type={type}

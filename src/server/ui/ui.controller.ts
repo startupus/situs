@@ -49,5 +49,3 @@ export class UiController {
     return { success: true, data: items };
   }
 }
-
-

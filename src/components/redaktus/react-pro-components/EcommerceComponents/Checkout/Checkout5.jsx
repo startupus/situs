@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Checkout5 = () => {
   return (
@@ -15,18 +15,8 @@ const Checkout5 = () => {
                   <div>
                     <div className="mb-5">
                       <div className="-mx-3 flex flex-wrap">
-                        <InputGroup
-                          half
-                          type="text"
-                          placeholder="Mark Litho"
-                          labelTitle="Full Name"
-                        />
-                        <InputGroup
-                          half
-                          type="email"
-                          placeholder="yourmail@gmail.com"
-                          labelTitle="Email"
-                        />
+                        <InputGroup half type="text" placeholder="Mark Litho" labelTitle="Full Name" />
+                        <InputGroup half type="email" placeholder="yourmail@gmail.com" labelTitle="Email" />
                       </div>
                     </div>
 
@@ -65,43 +55,17 @@ const Checkout5 = () => {
                     </div>
 
                     <div className="-mx-3 flex flex-wrap">
-                      <InputGroup
-                        type="text"
-                        placeholder="Cardholder Name"
-                        labelTitle="Cardholder Name"
-                      />
-                      <InputGroup
-                        type="text"
-                        placeholder="Card Number"
-                        labelTitle="Card Number"
-                        carNumber
-                      />
-                      <InputGroup
-                        type="text"
-                        placeholder="MM"
-                        labelTitle="Expiration"
-                        threeHalf
-                      />
+                      <InputGroup type="text" placeholder="Cardholder Name" labelTitle="Cardholder Name" />
+                      <InputGroup type="text" placeholder="Card Number" labelTitle="Card Number" carNumber />
+                      <InputGroup type="text" placeholder="MM" labelTitle="Expiration" threeHalf />
                       <InputGroup type="text" placeholder="YYYY" threeHalf />
-                      <InputGroup
-                        type="text"
-                        placeholder="CVC/CVV"
-                        labelTitle="CVC/CVV"
-                        threeHalf
-                      />
+                      <InputGroup type="text" placeholder="CVC/CVV" labelTitle="CVC/CVV" threeHalf />
 
                       <div className="w-full px-3">
                         <div className="mb-8">
-                          <label
-                            for="checkboxLabelTwo"
-                            className="flex cursor-pointer select-none items-center"
-                          >
+                          <label for="checkboxLabelTwo" className="flex cursor-pointer select-none items-center">
                             <div className="relative">
-                              <input
-                                type="checkbox"
-                                id="checkboxLabelTwo"
-                                className="peer sr-only"
-                              />
+                              <input type="checkbox" id="checkboxLabelTwo" className="peer sr-only" />
                               <div className="mr-[10px] flex h-5 w-5 items-center justify-center rounded-sm border border-stroke bg-transparent peer-checked:border-primary peer-checked:bg-primary dark:border-dark-3">
                                 <span className="ml-0.5">
                                   <svg
@@ -121,9 +85,7 @@ const Checkout5 = () => {
                                 </span>
                               </div>
                             </div>
-                            <span className="text-dark dark:text-white">
-                              I agree to the company’s Terms of Service
-                            </span>
+                            <span className="text-dark dark:text-white">I agree to the company’s Terms of Service</span>
                           </label>
                         </div>
                       </div>
@@ -172,12 +134,8 @@ const Checkout5 = () => {
 
               <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 lg:px-8 2xl:px-10">
                 <div className="mb-8 border-b border-stroke pb-3 dark:border-dark-3">
-                  <h3 className="mb-1 text-lg font-semibold text-dark dark:text-white">
-                    Coupon Code
-                  </h3>
-                  <p className="text-sm text-body-color dark:text-dark-6">
-                    Enter code to get discount instantly
-                  </p>
+                  <h3 className="mb-1 text-lg font-semibold text-dark dark:text-white">Coupon Code</h3>
+                  <p className="text-sm text-body-color dark:text-dark-6">Enter code to get discount instantly</p>
                 </div>
 
                 <form className="relative">
@@ -205,11 +163,7 @@ const CartItem = ({ img, title, price }) => {
   return (
     <div className="mb-8 flex items-center border-b border-dashed border-white/30 pb-8">
       <div className="mr-4 h-[70px] w-full max-w-[70px] overflow-hidden rounded-lg sm:mr-6 sm:max-w-[100px] lg:mr-4 lg:max-w-[80px] xl:mr-6 xl:max-w-[100px]">
-        <img
-          src={img}
-          alt="product image"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="product image" className="h-full w-full object-cover object-center" />
       </div>
       <div className="w-full">
         <div className="w-full">
@@ -221,25 +175,12 @@ const CartItem = ({ img, title, price }) => {
   );
 };
 
-const InputGroup = ({
-  type,
-  placeholder,
-  labelTitle,
-  threeHalf,
-  half,
-  carNumber,
-}) => {
+const InputGroup = ({ type, placeholder, labelTitle, threeHalf, half, carNumber }) => {
   return (
-    <div
-      className={`w-full px-3 ${
-        (threeHalf && "self-end md:w-1/3") || (half && "md:w-1/2")
-      }`}
-    >
+    <div className={`w-full px-3 ${(threeHalf && 'self-end md:w-1/3') || (half && 'md:w-1/2')}`}>
       <div className="mb-6">
         {labelTitle && (
-          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
-            {labelTitle}
-          </label>
+          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">{labelTitle}</label>
         )}
         <div className="relative">
           <input
@@ -249,17 +190,8 @@ const InputGroup = ({
           />
           {carNumber && (
             <span className="absolute right-5 top-1/2 -translate-y-1/2">
-              <svg
-                width="60"
-                height="10"
-                viewBox="0 0 60 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M53.617 1.03516H49.1125V8.96614H53.617V1.03516Z"
-                  fill="#F26122"
-                ></path>
+              <svg width="60" height="10" viewBox="0 0 60 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M53.617 1.03516H49.1125V8.96614H53.617V1.03516Z" fill="#F26122"></path>
                 <path
                   d="M49.6008 4.99991C49.5922 3.4701 50.3068 2.02137 51.5378 1.06982C49.4309 -0.542193 46.4047 -0.308103 44.5861 1.60748C42.7675 3.52315 42.7675 6.47691 44.5861 8.39258C46.4047 10.308 49.4309 10.5423 51.5378 8.93006C50.3068 7.97869 49.5922 6.52997 49.6008 4.99991Z"
                   fill="#EA1D25"
@@ -285,13 +217,7 @@ const InputGroup = ({
 
 const Paypal = () => {
   return (
-    <svg
-      width={67}
-      height={16}
-      viewBox="0 0 67 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={67} height={16} viewBox="0 0 67 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_1759_423)">
         <path
           fillRule="evenodd"

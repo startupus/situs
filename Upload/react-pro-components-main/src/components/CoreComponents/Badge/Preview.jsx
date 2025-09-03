@@ -5,7 +5,7 @@ const Preview = () => {
   return (
     <>
       <div className="container">
-        <div className="flex flex-wrap items-center justify-between gap-20 mt-36">
+        <div className="mt-36 flex flex-wrap items-center justify-between gap-20">
           {/* With background */}
           <Badge label="  Primary" primary roundedMd />
           <Badge secondary label="Secondary" roundedFull />

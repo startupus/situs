@@ -17,7 +17,11 @@ async function main() {
       data: {
         name,
         description: 'created via script',
-        slug: name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'),
+        slug: name
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-'),
         settings: '{}',
         ownerId: dev.id,
         status: 'ACTIVE',
@@ -33,5 +37,3 @@ async function main() {
 }
 
 main();
-
-

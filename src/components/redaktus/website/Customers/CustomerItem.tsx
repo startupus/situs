@@ -1,11 +1,10 @@
-import * as React from 'react'
-import { Image } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-
+import * as React from 'react';
+import { Image } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 export interface CustomerProps {
-  grayscale?: boolean
+  grayscale?: boolean;
 }
 
 const Customer: types.Brick<CustomerProps> = ({ grayscale = true }) => {
@@ -22,8 +21,8 @@ const Customer: types.Brick<CustomerProps> = ({ grayscale = true }) => {
         }
       />
     </div>
-  )
-}
+  );
+};
 
 Customer.schema = {
   name: blockNames.Customer,
@@ -31,19 +30,17 @@ Customer.schema = {
   category: 'rb-ui website',
   hideFromAddMenu: true,
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Customers/CustomerItem.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Customers/CustomerItem.tsx',
 
   getDefaultProps: () => ({
     image: {
       src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-        'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+      placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
       srcSet: '',
       alt: 'Redaktus Icon',
       seoName: 'redaktus-icon',
     },
   }),
-}
+};
 
-export default Customer
+export default Customer;

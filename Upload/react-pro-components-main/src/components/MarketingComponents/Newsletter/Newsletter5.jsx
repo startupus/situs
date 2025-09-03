@@ -74,7 +74,7 @@ const Newsletter5 = () => {
               </div>
               <div className="w-full">
                 <div className="px-8 py-9 sm:px-14 sm:py-12 md:px-8 lg:px-12 lg:py-14 xl:px-[60px]">
-                  <h2 className="mb-5 text-xl font-bold leading-tight! text-dark dark:text-white sm:text-[28px] md:text-xl lg:text-[28px]">
+                  <h2 className="leading-tight! mb-5 text-xl font-bold text-dark dark:text-white sm:text-[28px] md:text-xl lg:text-[28px]">
                     Subscribe Now to Get Our Latest Offers!
                   </h2>
                   <p className="mb-10 text-base text-body-color dark:text-dark-6">
@@ -85,7 +85,7 @@ const Newsletter5 = () => {
                     <input
                       type="email"
                       placeholder="Enter your email address"
-                      className="h-[52px] w-full border border-stroke bg-transparent px-6 text-center text-base text-body-color outline-hidden placeholder:opacity-50 focus:border-primary dark:border-dark-3 dark:text-dark-6"
+                      className="outline-hidden h-[52px] w-full border border-stroke bg-transparent px-6 text-center text-base text-body-color placeholder:opacity-50 focus:border-primary dark:border-dark-3 dark:text-dark-6"
                     />
                     <button className="h-[52px] w-full border border-transparent bg-primary px-6 text-base font-medium text-white hover:bg-primary/90">
                       Subscribe Now

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Clipboard3() {
   return (
@@ -13,13 +13,7 @@ export default function Clipboard3() {
             />
             <button className="absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center gap-1 rounded-md bg-dark px-2.5 py-1.5 text-sm font-medium text-white duration-200 hover:bg-dark/90">
               <span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M14.15 3.29999L11.525 0.699988C11.35 0.524988 11.1 0.424988 10.85 0.424988H6.30004C5.57504 0.424988 4.97504 1.02499 4.97504 1.74999V10.875C4.97504 11.6 5.57504 12.2 6.30004 12.2H13.1C13.825 12.2 14.425 11.6 14.425 10.875V3.97499C14.425 3.72499 14.325 3.47499 14.15 3.29999ZM11.575 2.34999L12.525 3.29999H11.575V2.34999ZM13.1 11.075H6.30004C6.20004 11.075 6.10004 10.975 6.10004 10.875V1.74999C6.10004 1.64999 6.20004 1.54999 6.30004 1.54999H10.45V3.84999C10.45 4.14999 10.7 4.42499 11.025 4.42499H13.3V10.9C13.3 11 13.2 11.075 13.1 11.075Z"
                     fill="currentColor"

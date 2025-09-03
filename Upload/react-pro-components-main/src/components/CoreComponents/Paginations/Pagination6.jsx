@@ -30,7 +30,7 @@ export default function Pagination6() {
           </button>
         </li>
         <li>
-          <button className="flex h-10 min-w-10 items-center justify-center rounded-lg px-2 text-dark shadow-xs hover:bg-gray-2 dark:bg-white/5 dark:text-white dark:hover:bg-white/5">
+          <button className="shadow-xs flex h-10 min-w-10 items-center justify-center rounded-lg px-2 text-dark hover:bg-gray-2 dark:bg-white/5 dark:text-white dark:hover:bg-white/5">
             2
           </button>
         </li>

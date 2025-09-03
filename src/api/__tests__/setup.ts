@@ -99,4 +99,4 @@ afterEach(() => {
 // Очистка всех моков после всех тестов
 afterAll(() => {
   vi.restoreAllMocks();
-}); 
+});

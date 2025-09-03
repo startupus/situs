@@ -1,28 +1,25 @@
-import classNames from 'classnames'
-import * as React from 'react'
-import { Image, Link, Repeater, RichText } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-import { bgColors, textColors } from '../colors'
-import Container, { Size } from '../layout/Container'
-import Section, { Border } from '../layout/Section'
-import {
-  BackgroundColorsSideEditProps,
-  ContainerSizeSideEditProps,
-} from '../LayoutSideProps'
+import classNames from 'classnames';
+import * as React from 'react';
+import { Image, Link, Repeater, RichText } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
+import { bgColors, textColors } from '../colors';
+import Container, { Size } from '../layout/Container';
+import Section, { Border } from '../layout/Section';
+import { BackgroundColorsSideEditProps, ContainerSizeSideEditProps } from '../LayoutSideProps';
 
 export interface TextImageProps {
-  bg?: { color: string; className: string }
-  width?: Size
-  heroTitle?: boolean
-  mobileTextCenter?: boolean
-  multiple?: boolean
-  imageSide?: 'left' | 'right'
-  mobileImageTop?: boolean
-  mobileIcon?: boolean
-  hasShadow?: boolean
-  isRounded?: boolean
-  bulletsVariant?: { color: string; className: string }
+  bg?: { color: string; className: string };
+  width?: Size;
+  heroTitle?: boolean;
+  mobileTextCenter?: boolean;
+  multiple?: boolean;
+  imageSide?: 'left' | 'right';
+  mobileImageTop?: boolean;
+  mobileIcon?: boolean;
+  hasShadow?: boolean;
+  isRounded?: boolean;
+  bulletsVariant?: { color: string; className: string };
 }
 
 const TextImage: types.Brick<TextImageProps> = ({
@@ -38,9 +35,9 @@ const TextImage: types.Brick<TextImageProps> = ({
   isRounded = false,
   // bulletsVariant = bulletColors.pinkLight.value,
 }) => {
-  const titleColor = textColors.gray900
-  const highlightColor = textColors.purple500
-  const textColor = textColors.gray700
+  const titleColor = textColors.gray900;
+  const highlightColor = textColors.purple500;
+  const textColor = textColors.gray700;
 
   return (
     <Section bg={bg}>
@@ -50,16 +47,11 @@ const TextImage: types.Brick<TextImageProps> = ({
           'py-12 lg:py-20 flex flex-no-wrap md:items-start md:space-x-8',
           mobileTextCenter ? 'items-center' : 'items-start',
           mobileImageTop ? 'flex-col-reverse' : 'flex-col',
-          imageSide === 'right'
-            ? 'md:flex-row'
-            : 'md:flex-row-reverse md:space-x-reverse'
+          imageSide === 'right' ? 'md:flex-row' : 'md:flex-row-reverse md:space-x-reverse',
         )}
       >
         <div
-          className={classNames(
-            'w-full md:flex-1 flex flex-col',
-            imageSide === 'right' ? 'md:pr-1/10' : 'md:pl-1/10'
-          )}
+          className={classNames('w-full md:flex-1 flex flex-col', imageSide === 'right' ? 'md:pr-1/10' : 'md:pl-1/10')}
         >
           <Repeater
             propName="badge"
@@ -84,9 +76,7 @@ const TextImage: types.Brick<TextImageProps> = ({
                   {
                     'text-center md:text-left': mobileTextCenter,
                   },
-                  heroTitle
-                    ? 'text-3xl sm:text-4xl font-black'
-                    : 'text-2xl sm:text-3xl font-extrabold'
+                  heroTitle ? 'text-3xl sm:text-4xl font-black' : 'text-2xl sm:text-3xl font-extrabold',
                 )}
                 style={{ lineHeight: 1.125 }}
                 {...props.attributes}
@@ -117,9 +107,7 @@ const TextImage: types.Brick<TextImageProps> = ({
               </p>
             )}
             placeholder="Type a text..."
-            allowedFeatures={[
-              types.RichTextFeatures.bold,
-              types.RichTextFeatures.link]}
+            allowedFeatures={[types.RichTextFeatures.bold, types.RichTextFeatures.link]}
             renderLink={(props: any) => (
               <Link {...props} className="text-lg">
                 {props.children}
@@ -133,18 +121,12 @@ const TextImage: types.Brick<TextImageProps> = ({
               className: 'lg:w-2/5 text-lg',
             }}
             renderWrapper={(items: any) => (
-              <div className="mt-4 w-full flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
-                {items}
-              </div>
+              <div className="mt-4 w-full flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">{items}</div>
             )}
           />
           <Repeater
             propName="buttons"
-            renderWrapper={(items: any) => (
-              <div className="flex items-center flex-col sm:flex-row mt-4">
-                {items}
-              </div>
-            )}
+            renderWrapper={(items: any) => <div className="flex items-center flex-col sm:flex-row mt-4">{items}</div>}
           />
         </div>
         {multiple ? (
@@ -156,31 +138,27 @@ const TextImage: types.Brick<TextImageProps> = ({
             className={classNames(
               mobileIcon ? 'w-24' : 'w-full',
               mobileImageTop ? 'mt-0 mb-10' : 'mt-10 mb-0',
-              'md:w-2/5 md:mt-0 md:mb-0'
+              'md:w-2/5 md:mt-0 md:mb-0',
             )}
           >
             <Image
               propName="imageSource"
               alt="Image"
-              imageClassName={classNames(
-                { 'rounded-lg': isRounded },
-                { 'shadow-2xl': hasShadow }
-              )}
+              imageClassName={classNames({ 'rounded-lg': isRounded }, { 'shadow-2xl': hasShadow })}
             />
           </div>
         )}
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 TextImage.schema = {
   name: blockNames.TextImage,
   label: 'Text Image',
   category: 'rb-ui website',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/TextImage/TextImage.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/TextImage/TextImage.tsx',
 
   getDefaultProps: () => ({
     bg: {
@@ -196,10 +174,8 @@ TextImage.schema = {
     text: 'We create and host websites since 1997. We saw the Internet grow up as the standards evolved. We have built hundreds of successful web applications and we still have a lot of fun.',
     imageSource: {
       src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-        'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet:
-        'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+      placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+      srcSet: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
       alt: 'Dashboard',
       seoName: 'dashboard',
     },
@@ -298,7 +274,8 @@ TextImage.schema = {
       itemLabel: 'Logo',
       min: 0,
       max: 6,
-    }],
-}
+    },
+  ],
+};
 
-export default TextImage
+export default TextImage;

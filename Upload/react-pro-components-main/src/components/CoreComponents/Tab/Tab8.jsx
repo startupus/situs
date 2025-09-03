@@ -10,7 +10,7 @@ const Tab8 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="rounded-[10px] bg-white p-6 shadow-card">
               <div className="border-b border-stroke pb-2">
@@ -18,9 +18,9 @@ const Tab8 = () => {
                   <div className="px-[6px] pb-3">
                     <button
                       onClick={() => handleTabOpen("home")}
-                      className={`w-full rounded border py-2 px-5 text-base font-medium text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white ${
                         open === "home"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >
@@ -30,9 +30,9 @@ const Tab8 = () => {
                   <div className="px-[6px] pb-3">
                     <button
                       onClick={() => handleTabOpen("about")}
-                      className={`w-full rounded border py-2 px-5 text-base font-medium text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white ${
                         open === "about"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >
@@ -42,9 +42,9 @@ const Tab8 = () => {
                   <div className="px-[6px] pb-3">
                     <button
                       onClick={() => handleTabOpen("team")}
-                      className={`w-full rounded border py-2 px-5 text-base font-medium text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white ${
                         open === "team"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >
@@ -54,9 +54,9 @@ const Tab8 = () => {
                   <div className="px-[6px] pb-3">
                     <button
                       onClick={() => handleTabOpen("company")}
-                      className={`w-full rounded border py-2 px-5 text-base font-medium text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white ${
                         open === "company"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >

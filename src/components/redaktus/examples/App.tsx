@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from 'react';
 // import { Router } from '@reach/router'
-import { Redaktus } from 'redaktus/frontend'
-import * as types from 'redaktus/types'
+import { Redaktus } from 'redaktus/frontend';
+import * as types from 'redaktus/types';
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <h1>Redaktus Example</h1>
       <Redaktus />
     </div>
-  )
-}
+  );
+};
 
-export default App 
+export default App;

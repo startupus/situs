@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const About6 = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -10,16 +10,11 @@ const About6 = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!popup.current) return;
-      if (
-        !popupOpen ||
-        popup.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!popupOpen || popup.current.contains(target) || trigger.current.contains(target)) return;
       setPopupOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -28,8 +23,8 @@ const About6 = () => {
       if (!popupOpen || keyCode !== 27) return;
       setPopupOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -39,51 +34,29 @@ const About6 = () => {
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4 lg:w-1/2">
               <div className="bg-primary relative z-10 mb-12 py-12 px-5 sm:px-12 lg:mb-0 2xl:p-[70px]">
-                <h2 className="mb-6 text-xl font-bold text-white">
-                  OUR VISION
-                </h2>
+                <h2 className="mb-6 text-xl font-bold text-white">OUR VISION</h2>
                 <p className="mb-6 text-base leading-relaxed text-white/70">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                  eget feugiat nisi. Nam eu odio iaculis neque vestibu pharetra
-                  eu eget enim. Vestibulum eu risus porttitor, commodo magna ut,
-                  eleifend ex.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget feugiat nisi. Nam eu odio iaculis
+                  neque vestibu pharetra eu eget enim. Vestibulum eu risus porttitor, commodo magna ut, eleifend ex.
                 </p>
                 <p className="mb-8 text-base leading-relaxed text-white/70">
-                  Curabitur ut rutrum tellus. Nullam ornare nunc non felis
-                  viverra tempus.
+                  Curabitur ut rutrum tellus. Nullam ornare nunc non felis viverra tempus.
                 </p>
                 <div className="items-end justify-between md:flex lg:block xl:flex">
                   <div className="">
                     <div className="flex items-center">
-                      <span className="text-5xl font-extrabold text-white">
-                        {" "}
-                        05{" "}
-                      </span>
+                      <span className="text-5xl font-extrabold text-white"> 05 </span>
                       <p className="pl-3 text-base">
-                        <span className="block font-semibold text-white">
-                          {" "}
-                          We have{" "}
-                        </span>
-                        <span className="font-medium text-white/70">
-                          Years of experience
-                        </span>
+                        <span className="block font-semibold text-white"> We have </span>
+                        <span className="font-medium text-white/70">Years of experience</span>
                       </p>
                     </div>
                   </div>
                   <div className="pt-4 md:text-right lg:text-left xl:text-right">
-                    <a
-                      href="#"
-                      className="flex items-center text-base font-semibold text-white"
-                    >
+                    <a href="#" className="flex items-center text-base font-semibold text-white">
                       Meet the Team
                       <span className="pl-2">
-                        <svg
-                          width="19"
-                          height="20"
-                          viewBox="0 0 19 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M10.45 6.58601C10.1828 6.31882 9.76719 6.31882 9.5 6.58601C9.23281 6.8532 9.23281 7.26882 9.5 7.53601L11.2812 9.34695H6.14531C5.78906 9.34695 5.49219 9.64382 5.49219 10.0001C5.49219 10.3563 5.78906 10.6532 6.14531 10.6532H11.2812L9.5 12.4641C9.23281 12.7313 9.23281 13.1469 9.5 13.4141C9.61875 13.5329 9.79687 13.5923 9.975 13.5923C10.1531 13.5923 10.3312 13.5329 10.45 13.3844L13.3594 10.4454C13.6266 10.1782 13.6266 9.76257 13.3594 9.49539L10.45 6.58601Z"
                             fill="white"
@@ -98,13 +71,7 @@ const About6 = () => {
                   </div>
                 </div>
                 <span className="absolute top-4 right-4 -z-10">
-                  <svg
-                    width="33"
-                    height="47"
-                    viewBox="0 0 33 47"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="33" height="47" viewBox="0 0 33 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle
                       cx="16.6667"
                       cy="30.9998"
@@ -206,12 +173,7 @@ const About6 = () => {
                   className="absolute z-40 flex h-20 w-20 items-center justify-center rounded-full bg-white md:h-[100px] md:w-[100px]"
                 >
                   <span className="absolute top-0 right-0 z-[-1] h-full w-full animate-ping rounded-full bg-white/25 delay-300 duration-1000"></span>
-                  <svg
-                    width="23"
-                    height="27"
-                    viewBox="0 0 23 27"
-                    className="fill-current text-primary"
-                  >
+                  <svg width="23" height="27" viewBox="0 0 23 27" className="fill-current text-primary">
                     <path d="M22.5 12.634C23.1667 13.0189 23.1667 13.9811 22.5 14.366L2.25 26.0574C1.58333 26.4423 0.750001 25.9611 0.750001 25.1913L0.750002 1.80866C0.750002 1.03886 1.58334 0.557731 2.25 0.942631L22.5 12.634Z" />
                   </svg>
                 </button>
@@ -221,7 +183,7 @@ const About6 = () => {
         </div>
         <div
           className={`fixed top-0 left-0 z-50 flex h-screen w-full items-center justify-center bg-black/80 ${
-            popupOpen === true ? "block" : "hidden"
+            popupOpen === true ? 'block' : 'hidden'
           }`}
         >
           <div
@@ -232,11 +194,7 @@ const About6 = () => {
           >
             <iframe
               className="h-[320px] w-full"
-              src={
-                popupOpen === true
-                  ? `https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1`
-                  : ""
-              }
+              src={popupOpen === true ? `https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1` : ''}
             ></iframe>
           </div>
           <button

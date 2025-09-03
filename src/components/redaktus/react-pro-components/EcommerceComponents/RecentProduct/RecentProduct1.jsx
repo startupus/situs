@@ -1,19 +1,17 @@
-import React from "react";
+import React from 'react';
 
 const RecentProduct = () => {
   return (
     <section className="pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
       <div className="container mx-auto">
         <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-          <span className="text-primary mb-2 block text-lg font-semibold">
-            Recent Products
-          </span>
+          <span className="text-primary mb-2 block text-lg font-semibold">Recent Products</span>
           <h2 className="text-dark dark:text-white mb-3 text-3xl font-bold sm:text-4xl md:leading-[1.2] md:text-[40px]">
             Top Collections
           </h2>
           <p className="text-body-color dark:text-dark-6 text-base">
-            There are many variations of passages of Lorem Ipsum available but
-            the majority have suffered alteration in some form.
+            There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in
+            some form.
           </p>
         </div>
 

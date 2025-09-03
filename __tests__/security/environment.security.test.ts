@@ -1,9 +1,9 @@
 /**
  * 🔒 SECURITY TESTS - Environment Configuration
- * 
+ *
  * Comprehensive security testing for environment validation infrastructure
  * Based on project standards from TESTING.md and git history etalons
- * 
+ *
  * Test Categories:
  * - Unit tests for environment validation schemas
  * - Integration tests for cross-service security
@@ -101,7 +101,7 @@ describe('Security: Environment Configuration', () => {
       process.env.SESSION_SECRET = 'super-secret-session-key-min-32-characters';
 
       const config = new (require('../../services/gateway-service/src/config/environment.js').default.constructor)();
-      
+
       expect(config.getSessionSecret()).toBe('super-secret-session-key-min-32-characters');
       expect(config.isCookieSecure()).toBe(false); // По умолчанию false для development
     });
@@ -133,7 +133,7 @@ describe('Security: Environment Configuration', () => {
       process.env.ENCRYPTION_KEY = 'super-secret-encryption-key-min-32-chars';
 
       const config = new (require('../../services/bilingus-service/src/config/environment.js').default.constructor)();
-      
+
       expect(config.isPciComplianceEnabled()).toBe(true);
       expect(config.getEncryptionKey()).toBe('super-secret-encryption-key-min-32-chars');
     });
@@ -146,9 +146,9 @@ describe('Security: Environment Configuration', () => {
 
       const config = new (require('../../services/bilingus-service/src/config/environment.js').default.constructor)();
       const limits = config.getTransactionLimits();
-      
+
       expect(limits.max).toBe(5000);
-      expect(limits.min).toBe(0.10);
+      expect(limits.min).toBe(0.1);
     });
 
     test('должен правильно конфигурировать мультивалютность', () => {
@@ -158,7 +158,7 @@ describe('Security: Environment Configuration', () => {
       process.env.DEFAULT_CURRENCY = 'EUR';
 
       const config = new (require('../../services/bilingus-service/src/config/environment.js').default.constructor)();
-      
+
       expect(config.getSupportedCurrencies()).toEqual(['USD', 'EUR', 'RUB', 'CNY']);
       expect(config.getDefaultCurrency()).toBe('EUR');
     });
@@ -209,8 +209,10 @@ describe('Security: Environment Configuration', () => {
       process.env.CHAT_URL = 'http://localhost:3004';
 
       const hubusConfig = new (require('../../services/hubus-service/src/config/environment.js').default.constructor)();
-      const gatewayConfig = new (require('../../services/gateway-service/src/config/environment.js').default.constructor)();
-      const bilingusConfig = new (require('../../services/bilingus-service/src/config/environment.js').default.constructor)();
+      const gatewayConfig =
+        new (require('../../services/gateway-service/src/config/environment.js').default.constructor)();
+      const bilingusConfig =
+        new (require('../../services/bilingus-service/src/config/environment.js').default.constructor)();
 
       expect(hubusConfig.isProduction()).toBe(true);
       expect(gatewayConfig.isProduction()).toBe(true);

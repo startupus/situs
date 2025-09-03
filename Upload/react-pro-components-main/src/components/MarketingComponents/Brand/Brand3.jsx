@@ -3,9 +3,9 @@ import React from "react";
 const Brand3 = () => {
   return (
     <>
-      <section className="bg-white dark:bg-dark py-20 lg:py-[120px]">
+      <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="flex flex-wrap items-center justify-center">
                 <SingleImage
@@ -44,9 +44,9 @@ const SingleImage = ({ href, imgSrc, Alt }) => {
     <>
       <a
         href={href}
-        className="hover:border-primary/20 flex h-20 min-w-[150px] max-w-[225px] items-center justify-center rounded-full border border-transparent px-7 hover:bg-primary/5"
+        className="flex h-20 min-w-[150px] max-w-[225px] items-center justify-center rounded-full border border-transparent px-7 hover:border-primary/20 hover:bg-primary/5"
       >
-        <img src={imgSrc} alt={Alt} className="w-full h-10" />
+        <img src={imgSrc} alt={Alt} className="h-10 w-full" />
       </a>
     </>
   );

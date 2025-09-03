@@ -46,7 +46,7 @@ layer(base);
     cursor: pointer;
   }
   body {
-    @apply font-inter bg-gray dark:bg-dark;
+    @apply bg-gray font-inter dark:bg-dark;
   }
 }
 

@@ -44,27 +44,27 @@ const HeroArea = () => {
 
   return (
     <>
-      <section className="dark:bg-dark relative bg-white">
+      <section className="relative bg-white dark:bg-dark">
         <Swiper slidesPerView={1} loop={true} spaceBetween={30} ref={sliderRef}>
           {heroItems.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-gray dark:bg-dark-2 relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden">
+              <div className="relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden bg-gray dark:bg-dark-2">
                 <div className="container mx-auto">
                   <div className="-mx-4 flex flex-wrap items-center">
                     <div className="w-full px-4 lg:w-1/2">
                       <div className="mt-20 max-w-[570px] lg:mt-0">
-                        <span className="text-primary mb-[14px] block text-lg font-semibold">
+                        <span className="mb-[14px] block text-lg font-semibold text-primary">
                           {item.subtitle}
                         </span>
-                        <h2 className="text-dark mb-[18px] text-2xl leading-[1.25]! font-bold xl:text-4xl dark:text-white">
+                        <h2 className="leading-[1.25]! mb-[18px] text-2xl font-bold text-dark dark:text-white xl:text-4xl">
                           {item.title}
                         </h2>
-                        <p className="text-body-color dark:text-dark-6 mb-9 text-base">
+                        <p className="mb-9 text-base text-body-color dark:text-dark-6">
                           {item.details}
                         </p>
                         <a
                           href={item.button.link}
-                          className="bg-primary hover:bg-blue-dark inline-flex items-center justify-center rounded-full px-7 py-[13px] text-center text-base font-medium text-white"
+                          className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
                         >
                           {item.button.text}
                         </a>
@@ -82,7 +82,7 @@ const HeroArea = () => {
                   </div>
                 </div>
 
-                <div className="absolute top-0 right-0 -z-10">
+                <div className="absolute right-0 top-0 -z-10">
                   <svg
                     width={620}
                     height={560}
@@ -109,7 +109,7 @@ const HeroArea = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="absolute top-0 right-0 -z-10">
+                <div className="absolute right-0 top-0 -z-10">
                   <svg
                     width={536}
                     height={560}
@@ -141,7 +141,7 @@ const HeroArea = () => {
           ))}
 
           <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-            <button className="border-body-color text-body-color hover:border-primary hover:bg-primary dark:border-dark-6 dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary absolute top-1/2 left-4 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-transparent transition-all hover:text-white dark:hover:text-white">
+            <button className="absolute left-4 top-1/2 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-body-color bg-transparent text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-6 dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white">
               <svg
                 width="22"
                 height="22"
@@ -155,7 +155,7 @@ const HeroArea = () => {
             </button>
           </div>
           <div className="next-arrow cursor-pointer" onClick={handleNext}>
-            <button className="border-body-color text-body-color hover:border-primary hover:bg-primary dark:border-dark-6 dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary absolute top-1/2 right-4 left-auto z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-transparent transition-all hover:text-white dark:hover:text-white">
+            <button className="absolute left-auto right-4 top-1/2 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-body-color bg-transparent text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-6 dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white">
               <svg
                 width="22"
                 height="22"

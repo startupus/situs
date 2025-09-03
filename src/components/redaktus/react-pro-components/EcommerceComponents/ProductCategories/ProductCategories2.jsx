@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductCategories2 = () => {
   return (
@@ -47,9 +47,7 @@ const CategoriesItem = ({ link, img, title, subtitle, button }) => {
             >
               {title}
             </a>
-            <p className="mx-auto mb-5 max-w-[280px] text-base text-white">
-              {subtitle}
-            </p>
+            <p className="mx-auto mb-5 max-w-[280px] text-base text-white">{subtitle}</p>
             <button className="inline-flex items-center justify-center rounded-md bg-white py-[10px] px-7 text-center text-base font-medium text-dark hover:bg-gray-4">
               {button}
             </button>

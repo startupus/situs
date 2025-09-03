@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function FileUpload5() {
   return (
@@ -9,13 +9,7 @@ export default function FileUpload5() {
             <label htmlFor="">
               <input type="file" className="sr-only" />
               <div className="mx-auto mb-5 flex aspect-square w-[68px] items-center justify-center rounded-full bg-gray-3 text-dark">
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 28 28"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M24.5438 4.85623H14.4376L13.5188 3.10623C13.0376 2.23123 12.1626 1.66248 11.1563 1.66248H3.45635C1.96885 1.66248 0.787598 2.84373 0.787598 4.33123V23.6687C0.787598 25.1562 1.96885 26.3375 3.45635 26.3375H24.5876C26.0751 26.3375 27.2563 25.1562 27.2563 23.6687V7.52498C27.2563 6.03748 26.0313 4.85623 24.5438 4.85623ZM25.2876 23.6687C25.2876 24.0625 24.9813 24.3687 24.5876 24.3687H3.45635C3.0626 24.3687 2.75635 24.0625 2.75635 23.6687V4.33123C2.75635 3.93748 3.0626 3.63123 3.45635 3.63123H11.1563C11.4188 3.63123 11.6376 3.76248 11.7688 4.02498L12.9938 6.29998C13.1688 6.60623 13.5188 6.82498 13.8688 6.82498H24.5876C24.9813 6.82498 25.2876 7.13123 25.2876 7.52498V23.6687Z"
                     fill="currentColor"
@@ -27,9 +21,7 @@ export default function FileUpload5() {
                 </svg>
               </div>
               <div className="mx-auto w-full max-w-[290px] text-center">
-                <h3 className="mb-3 text-xl font-bold text-white">
-                  Drop File Here
-                </h3>
+                <h3 className="mb-3 text-xl font-bold text-white">Drop File Here</h3>
                 <p className="mb-5 text-base text-dark-6">
                   Drag and drop your PNG, JPG, WebP, SVG images here or browse
                 </p>
@@ -44,10 +36,7 @@ export default function FileUpload5() {
               </div>
             </label>
             <div className="absolute -top-7 left-1/2 -z-10 -translate-x-1/2 dark:opacity-20">
-              <img
-                src="./images/file-upload/grid-shape-1.svg"
-                alt="grid-shape-1"
-              />
+              <img src="./images/file-upload/grid-shape-1.svg" alt="grid-shape-1" />
             </div>
           </div>
         </div>

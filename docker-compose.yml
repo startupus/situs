@@ -13,11 +13,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "55432:5432"
+      - '55432:5432'
     networks:
       - situs-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-situs} -d ${POSTGRES_DB:-situs}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-situs} -d ${POSTGRES_DB:-situs}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -36,11 +36,11 @@ services:
     volumes:
       - postgres_test_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - '5433:5432'
     networks:
       - situs-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-situs} -d ${POSTGRES_DB:-situs_test}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-situs} -d ${POSTGRES_DB:-situs_test}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -50,13 +50,13 @@ services:
     image: redis:7
     container_name: situs-redis
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - '${REDIS_PORT:-6379}:6379'
     volumes:
       - redis_data:/data
     networks:
       - situs-network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       interval: 10s
       timeout: 5s
       retries: 3
@@ -68,7 +68,7 @@ services:
       dockerfile: Dockerfile
     container_name: situs-api
     ports:
-      - "3002:3002"
+      - '3002:3002'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - DATABASE_URL=postgresql://${POSTGRES_USER:-situs}:${POSTGRES_PASSWORD:-situs_password}@postgres:5432/${POSTGRES_DB:-situs}?schema=public
@@ -81,11 +81,14 @@ services:
     networks:
       - situs-network
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3002/health || exit 1"]
+      test: ['CMD-SHELL', 'curl -f http://localhost:3002/health || exit 1']
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
+    restart: always
+    depends_on:
+      - postgres
 
   # Prisma Studio для управления базой данных
   prisma-studio:
@@ -95,14 +98,14 @@ services:
     volumes:
       - .:/app
     ports:
-      - "5555:5555"
+      - '5555:5555'
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER:-situs}:${POSTGRES_PASSWORD:-situs_password}@postgres:5432/${POSTGRES_DB:-situs}?schema=public
     depends_on:
       - postgres
     networks:
       - situs-network
-    command: ["npx", "prisma", "studio", "--hostname", "0.0.0.0", "--port", "5555"]
+    command: ['npx', 'prisma', 'studio', '--hostname', '0.0.0.0', '--port', '5555']
 
   situs-web:
     build:
@@ -110,26 +113,11 @@ services:
       dockerfile: Dockerfile.web
     container_name: situs-web
     ports:
-      - "5177:5177"
+      - '5177:5177'
     depends_on:
       - situs-api
     networks:
       - situs-network
-
-  pgloader:
-    image: dimitri/pgloader:latest
-    container_name: situs-pgloader
-    command: ["pgloader", "/work/pgloader.load"]
-    volumes:
-      - ./scripts/pgloader.load:/work/pgloader.load
-      - ./prisma/dev.db:/data/dev.db:ro
-    depends_on:
-      - postgres
-    networks:
-      - situs-network
-      - default
-    profiles:
-      - migrate
 
 volumes:
   postgres_data:
@@ -138,4 +126,4 @@ volumes:
 
 networks:
   situs-network:
-    driver: bridge 
+    driver: bridge

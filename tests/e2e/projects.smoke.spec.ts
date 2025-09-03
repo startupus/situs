@@ -48,5 +48,3 @@ test.describe('Situs Projects Page', () => {
     await expect(page.getByRole('heading', { name: 'Проекты', exact: true })).toHaveCount(0);
   });
 });
-
-

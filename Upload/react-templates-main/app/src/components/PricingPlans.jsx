@@ -47,18 +47,18 @@ const featureRows = [
 const PricingPlans = () => {
   return (
     <>
-      <section className="dark:bg-dark bg-white pt-20 lg:pt-[120px]">
+      <section className="bg-white pt-20 dark:bg-dark lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Pricing Table
                 </span>
-                <h2 className="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white">
+                <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Awesome Pricing Plan
                 </h2>
-                <p className="text-body-color text-base">
+                <p className="text-base text-body-color">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
@@ -66,7 +66,7 @@ const PricingPlans = () => {
             </div>
           </div>
 
-          <div className="shadow-pricing-3 dark:bg-dark-2 relative z-10 overflow-hidden rounded-xl bg-white p-11">
+          <div className="relative z-10 overflow-hidden rounded-xl bg-white p-11 shadow-pricing-3 dark:bg-dark-2">
             <div className="w-full overflow-x-auto">
               <table className="table-auto">
                 <thead>
@@ -79,16 +79,16 @@ const PricingPlans = () => {
                         className="w-1/4 min-w-[200px] px-5 xl:pt-6"
                       >
                         <div className="mb-10 text-left">
-                          <span className="text-dark mb-[18px] text-lg font-medium dark:text-white">
+                          <span className="mb-[18px] text-lg font-medium text-dark dark:text-white">
                             {item.title}
                           </span>
-                          <h4 className="text-dark mb-3 text-[28px] font-bold lg:text-[32px] dark:text-white">
+                          <h4 className="mb-3 text-[28px] font-bold text-dark dark:text-white lg:text-[32px]">
                             <span className="pr-0.5">{item.price}</span>
-                            <span className="text-body-color dark:text-dark-6 text-base font-medium">
+                            <span className="text-base font-medium text-body-color dark:text-dark-6">
                               Per Month
                             </span>
                           </h4>
-                          <p className="text-body-color dark:text-dark-6 mb-6 text-sm font-normal">
+                          <p className="mb-6 text-sm font-normal text-body-color dark:text-dark-6">
                             {item.description}
                           </p>
                           <Link
@@ -105,23 +105,23 @@ const PricingPlans = () => {
 
                 <tbody>
                   <tr>
-                    <td className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5">
-                      <h5 className="text-dark text-base font-medium dark:text-white">
+                    <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
+                      <h5 className="text-base font-medium text-dark dark:text-white">
                         Key Features
                       </h5>
                     </td>
-                    <td className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5">
-                      <h5 className="text-dark text-center text-base font-medium dark:text-white">
+                    <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
+                      <h5 className="text-center text-base font-medium text-dark dark:text-white">
                         Features Limits
                       </h5>
                     </td>
-                    <td className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5">
-                      <h5 className="text-dark text-center text-base font-medium dark:text-white">
+                    <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
+                      <h5 className="text-center text-base font-medium text-dark dark:text-white">
                         Features Limits
                       </h5>
                     </td>
-                    <td className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5">
-                      <h5 className="text-dark text-center text-base font-medium dark:text-white">
+                    <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
+                      <h5 className="text-center text-base font-medium text-dark dark:text-white">
                         Features Limits
                       </h5>
                     </td>
@@ -129,8 +129,8 @@ const PricingPlans = () => {
 
                   {featureRows.map((feature, featureIndex) => (
                     <tr key={featureIndex}>
-                      <td className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5">
-                        <p className="text-body-color dark:text-dark-6 text-base">
+                      <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
+                        <p className="text-base text-body-color dark:text-dark-6">
                           {feature.title}
                         </p>
                       </td>
@@ -138,9 +138,9 @@ const PricingPlans = () => {
                       {feature.limits?.map((limit, limitIndex) => (
                         <td
                           key={limitIndex}
-                          className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5"
+                          className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3"
                         >
-                          <p className="text-body-color dark:text-dark-6 text-center text-base">
+                          <p className="text-center text-base text-body-color dark:text-dark-6">
                             {limit}
                           </p>
                         </td>
@@ -149,10 +149,10 @@ const PricingPlans = () => {
                       {feature.icons?.map((icon, iconIndex) => (
                         <td
                           key={iconIndex}
-                          className="dark:border-dark-3 border-t border-[#EEEEEE] px-5 py-5"
+                          className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3"
                         >
                           {icon === "check" && (
-                            <p className="text-body-color flex justify-center text-center text-base">
+                            <p className="flex justify-center text-center text-base text-body-color">
                               <svg
                                 width="25"
                                 height="25"
@@ -173,7 +173,7 @@ const PricingPlans = () => {
                           )}
 
                           {icon === "close" && (
-                            <p className="text-body-color flex justify-center text-center text-base">
+                            <p className="flex justify-center text-center text-base text-body-color">
                               <svg
                                 width="25"
                                 height="25"
@@ -200,7 +200,7 @@ const PricingPlans = () => {
               </table>
             </div>
             <div>
-              <span class="absolute top-0 left-0 z-[-1]">
+              <span class="absolute left-0 top-0 z-[-1]">
                 <svg
                   width="213"
                   height="188"
@@ -233,7 +233,7 @@ const PricingPlans = () => {
                   </defs>
                 </svg>
               </span>
-              <span class="absolute top-[120px] left-11 z-[-1]">
+              <span class="absolute left-11 top-[120px] z-[-1]">
                 <svg
                   width="50"
                   height="109"

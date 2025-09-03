@@ -2,10 +2,10 @@ import React from "react";
 
 const RecentProduct2 = () => {
   return (
-    <section className="pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+    <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-dark dark:text-white sm:leading-[35px] sm:text-[28px]">
+          <h2 className="text-2xl font-semibold text-dark dark:text-white sm:text-[28px] sm:leading-[35px]">
             Best Selling Items
           </h2>
         </div>
@@ -39,12 +39,12 @@ const ProductCard = ({ link, img, title, subtitle, button, white }) => {
     <div className="w-full px-4 lg:w-1/2">
       <div
         style={{ backgroundImage: `url(${img})` }}
-        className="mb-10 overflow-hidden rounded-sm bg-cover bg-center bg-no-repeat py-8 px-8 sm:px-10 sm:py-[55px] lg:px-8 xl:px-10"
+        className="mb-10 overflow-hidden rounded-sm bg-cover bg-center bg-no-repeat px-8 py-8 sm:px-10 sm:py-[55px] lg:px-8 xl:px-10"
       >
         <h3
           className={`${
             white ? "text-white" : "text-dark"
-          } mb-4 text-xl font-bold  sm:text-2xl`}
+          } mb-4 text-xl font-bold sm:text-2xl`}
         >
           {title}
         </h3>
@@ -61,7 +61,7 @@ const ProductCard = ({ link, img, title, subtitle, button, white }) => {
             white
               ? "border-white hover:border-primary hover:bg-primary"
               : "border-primary bg-primary hover:bg-blue-dark"
-          } inline-flex rounded border py-[7px] px-5 text-base font-medium text-white transition-all`}
+          } inline-flex rounded border px-5 py-[7px] text-base font-medium text-white transition-all`}
         >
           {button}
         </a>

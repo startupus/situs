@@ -31,7 +31,7 @@ const Portfolio6 = () => {
         `}
       </style>
       <section className="dark:bg-dark">
-        <div className="container mx-auto py-20 lg:py-[120px] overflow-hidden">
+        <div className="container mx-auto overflow-hidden py-20 lg:py-[120px]">
           <Swiper
             pagination={{ clickable: true }}
             modules={[Pagination]}
@@ -93,25 +93,27 @@ const PortfolioCard = ({
     <div className="-mx-4 flex flex-wrap justify-center">
       <div className="w-full px-4 lg:w-10/12 xl:w-8/12">
         <div
-          className="relative w-full bg-cover bg-center bg-no-repeat py-12 px-10 sm:p-[60px]"
+          className="relative w-full bg-cover bg-center bg-no-repeat px-10 py-12 sm:p-[60px]"
           style={{ backgroundImage: `url(${bgImg})` }}
         >
           <div className="w-full">
-            <div className="relative ml-auto w-full max-w-[330px] bg-white dark:bg-dark-2 py-[56px] px-8 sm:px-10">
-              <span className="bg-primary absolute right-0 top-0 rounded-bl-2xl p-4 text-2xl font-semibold text-white">
+            <div className="relative ml-auto w-full max-w-[330px] bg-white px-8 py-[56px] dark:bg-dark-2 sm:px-10">
+              <span className="absolute right-0 top-0 rounded-bl-2xl bg-primary p-4 text-2xl font-semibold text-white">
                 {number}
               </span>
-              <span className="inline-block mb-2 text-2xl font-bold sm:text-[26px] sm:leading-7 text-dark dark:text-white">
+              <span className="mb-2 inline-block text-2xl font-bold text-dark dark:text-white sm:text-[26px] sm:leading-7">
                 {" "}
                 {subtitle}{" "}
               </span>
-              <h3 className="text-body-color dark:text-dark-6 mb-5 text-base font-medium">
+              <h3 className="mb-5 text-base font-medium text-body-color dark:text-dark-6">
                 {title}
               </h3>
-              <p className="text-body-color dark:text-dark-6 mb-9 text-sm">{details}</p>
+              <p className="mb-9 text-sm text-body-color dark:text-dark-6">
+                {details}
+              </p>
               <a
                 href={link}
-                className="text-dark dark:text-white hover:text-primary inline-flex items-center text-sm font-medium"
+                className="inline-flex items-center text-sm font-medium text-dark hover:text-primary dark:text-white"
               >
                 {button}
                 <span className="ml-2">

@@ -10,10 +10,10 @@ import { Category } from '@prisma/client';
 @Injectable()
 export class CategoriesMenuService {
   private readonly logger = new Logger(CategoriesMenuService.name);
-  
+
   constructor(
     private readonly prisma: PrismaService,
-    private readonly realtimeEvents: RealtimeEventsService
+    private readonly realtimeEvents: RealtimeEventsService,
   ) {}
 
   /**
@@ -24,11 +24,11 @@ export class CategoriesMenuService {
     productId: string,
     language: string = '*',
     parentId?: string,
-    level?: number
+    level?: number,
   ): Promise<Category[]> {
     const where: any = {
       productId,
-      isActive: true  // используем isActive вместо isActive
+      isActive: true, // используем isActive вместо isActive
     };
 
     // Для категорий пока не используем языковую фильтрацию
@@ -47,21 +47,17 @@ export class CategoriesMenuService {
       include: {
         children: {
           where: { isActive: true },
-          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
         },
         parent: true,
         _count: {
           select: {
             items: true,
-            children: true
-          }
-        }
+            children: true,
+          },
+        },
       },
-      orderBy: [
-        
-        { orderIndex: 'asc' },
-        { name: 'asc' }
-      ]
+      orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
     });
 
     return categories;
@@ -71,27 +67,21 @@ export class CategoriesMenuService {
    * Построение lookup таблицы для категорий
    * Аналог buildLookup для меню
    */
-  async buildCategoriesLookup(
-    productId: string,
-    language: string = '*'
-  ): Promise<{ [alias: string]: string }> {
+  async buildCategoriesLookup(productId: string, language: string = '*'): Promise<{ [alias: string]: string }> {
     const categories = await this.prisma.category.findMany({
       where: {
         productId,
         isActive: true,
-        OR: language === '*' ? undefined : [
-          { language: '*' },
-          { language }
-        ]
+        OR: language === '*' ? undefined : [{ language: '*' }, { language }],
       },
       select: {
         id: true,
-        slug: true  // используем slug вместо alias
-      }
+        slug: true, // используем slug вместо alias
+      },
     });
 
     const lookup: { [alias: string]: string } = {};
-    
+
     for (const category of categories) {
       // Используем slug как ключ для lookup
       lookup[category.slug] = category.id;
@@ -104,30 +94,26 @@ export class CategoriesMenuService {
    * Поиск категории по alias
    * Аналог findMenuItemByAlias
    */
-  async findCategoryByAlias(
-    productId: string,
-    alias: string,
-    language: string = '*'
-  ): Promise<Category | null> {
+  async findCategoryByAlias(productId: string, alias: string, language: string = '*'): Promise<Category | null> {
     const category = await this.prisma.category.findFirst({
       where: {
         productId,
-        slug: alias,  // используем slug вместо alias
-        isActive: true
+        slug: alias, // используем slug вместо alias
+        isActive: true,
       },
       include: {
         parent: true,
         children: {
           where: { isActive: true },
-          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
         },
         _count: {
           select: {
             items: true,
-            children: true
-          }
-        }
-      }
+            children: true,
+          },
+        },
+      },
     });
 
     return category;
@@ -137,27 +123,24 @@ export class CategoriesMenuService {
    * Получение хлебных крошек для категории
    * Аналог getBreadcrumbs для меню
    */
-  async getCategoryBreadcrumbs(
-    categoryId: string,
-    language: string = '*'
-  ): Promise<Category[]> {
+  async getCategoryBreadcrumbs(categoryId: string, language: string = '*'): Promise<Category[]> {
     const breadcrumbs: Category[] = [];
     let currentCategory = await this.prisma.category.findUnique({
       where: { id: categoryId },
       include: {
-        parent: true
-      }
+        parent: true,
+      },
     });
 
     while (currentCategory) {
       breadcrumbs.unshift(currentCategory);
-      
+
       if (currentCategory.parentId) {
         currentCategory = await this.prisma.category.findUnique({
           where: { id: currentCategory.parentId },
           include: {
-            parent: true
-          }
+            parent: true,
+          },
         });
       } else {
         break;
@@ -178,7 +161,7 @@ export class CategoriesMenuService {
       orderIndex: number;
       level: number;
       parentId: string | null;
-    }>
+    }>,
   ): Promise<void> {
     // Обновляем порядок в транзакции
     await this.prisma.$transaction(async (tx) => {
@@ -188,15 +171,15 @@ export class CategoriesMenuService {
           data: {
             orderIndex: item.orderIndex,
             level: item.level,
-            parentId: item.parentId
-          }
+            parentId: item.parentId,
+          },
         });
       }
     });
 
     // Публикуем SSE событие (пока используем общее событие)
     // this.realtimeEvents.publishCategoriesReordered(productId, items);
-    
+
     this.logger.debug(`Reordered ${items.length} categories for product ${productId}`);
   }
 
@@ -204,14 +187,10 @@ export class CategoriesMenuService {
    * Получение активной категории
    * Аналог getActiveMenuItem
    */
-  async getActiveCategory(
-    productId: string,
-    currentPath: string,
-    language: string = '*'
-  ): Promise<Category | null> {
+  async getActiveCategory(productId: string, currentPath: string, language: string = '*'): Promise<Category | null> {
     // Простая логика: ищем по alias в пути
-    const pathSegments = currentPath.split('/').filter(s => s.length > 0);
-    
+    const pathSegments = currentPath.split('/').filter((s) => s.length > 0);
+
     for (const segment of pathSegments.reverse()) {
       const category = await this.findCategoryByAlias(productId, segment, language);
       if (category) {
@@ -238,17 +217,17 @@ export class CategoriesMenuService {
       this.prisma.category.groupBy({
         by: ['level'],
         where: { productId, isActive: true },
-        _count: { id: true }
+        _count: { id: true },
       }),
       this.prisma.item.count({
         where: {
-          category: { productId }
-        }
-      })
+          category: { productId },
+        },
+      }),
     ]);
 
     const categoriesByLevel: { [level: number]: number } = {};
-    byLevel.forEach(group => {
+    byLevel.forEach((group) => {
       categoriesByLevel[group.level] = group._count.id;
     });
 
@@ -256,7 +235,7 @@ export class CategoriesMenuService {
       totalCategories: total,
       publishedCategories: published,
       categoriesByLevel,
-      totalItems: itemsCount
+      totalItems: itemsCount,
     };
   }
 
@@ -268,7 +247,7 @@ export class CategoriesMenuService {
     productId: string,
     properties: string[],
     values: any[],
-    language: string = '*'
+    language: string = '*',
   ): Promise<Category[]> {
     if (properties.length !== values.length) {
       throw new Error('Количество свойств должно соответствовать количеству значений');
@@ -276,15 +255,12 @@ export class CategoriesMenuService {
 
     const where: any = {
       productId,
-      isActive: true
+      isActive: true,
     };
 
     // Мультиязычность
     if (language !== '*') {
-      where.OR = [
-        { language: '*' },
-        { language }
-      ];
+      where.OR = [{ language: '*' }, { language }];
     }
 
     // Применяем фильтры
@@ -300,11 +276,11 @@ export class CategoriesMenuService {
             where.level = value;
           }
           break;
-        
+
         case 'parentId':
           where.parentId = value;
           break;
-        
+
         case 'alias':
           if (Array.isArray(value)) {
             where.alias = { in: value };
@@ -312,7 +288,7 @@ export class CategoriesMenuService {
             where.alias = value;
           }
           break;
-        
+
         case 'name':
           where.name = { contains: value, mode: 'insensitive' };
           break;
@@ -325,20 +301,16 @@ export class CategoriesMenuService {
         parent: true,
         children: {
           where: { isActive: true },
-          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+          orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
         },
         _count: {
           select: {
             items: true,
-            children: true
-          }
-        }
+            children: true,
+          },
+        },
       },
-      orderBy: [
-        
-        { orderIndex: 'asc' },
-        { name: 'asc' }
-      ]
+      orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
     });
   }
 }

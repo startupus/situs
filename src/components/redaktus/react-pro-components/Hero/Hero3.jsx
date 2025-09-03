@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Hero3 = () => {
   return (
@@ -17,19 +17,12 @@ const Hero3 = () => {
                   Alex Julius
                 </h1>
                 <p className="mb-5 flex items-center text-base font-medium">
-                  <span className="text-dark dark:text-white">
-                    {" "}
-                    Professional:{" "}
-                  </span>
-                  <span className="pl-3 text-body-color dark:text-dark-6">
-                    {" "}
-                    Graphics Designer{" "}
-                  </span>
+                  <span className="text-dark dark:text-white"> Professional: </span>
+                  <span className="pl-3 text-body-color dark:text-dark-6"> Graphics Designer </span>
                 </p>
                 <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                  With TailGrids, business and students thrive together.
-                  Business can perfectly match their staffing to changing demand
-                  throughout the dayed.
+                  With TailGrids, business and students thrive together. Business can perfectly match their staffing to
+                  changing demand throughout the dayed.
                 </p>
                 <ul className="flex flex-wrap items-center">
                   <li>
@@ -46,32 +39,11 @@ const Hero3 = () => {
                       className="inline-flex items-center justify-center px-5 py-3 text-center text-base font-medium text-[#464646] hover:text-primary dark:text-white"
                     >
                       <span className="mr-2">
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="11" cy="11" r="11" fill="#3056D3" />
-                          <rect
-                            x="6.90906"
-                            y="13.3636"
-                            width="8.18182"
-                            height="1.63636"
-                            fill="white"
-                          />
-                          <rect
-                            x="10.1818"
-                            y="6"
-                            width="1.63636"
-                            height="4.09091"
-                            fill="white"
-                          />
-                          <path
-                            d="M11 12.5454L13.8343 9.47726H8.16576L11 12.5454Z"
-                            fill="white"
-                          />
+                          <rect x="6.90906" y="13.3636" width="8.18182" height="1.63636" fill="white" />
+                          <rect x="10.1818" y="6" width="1.63636" height="4.09091" fill="white" />
+                          <path d="M11 12.5454L13.8343 9.47726H8.16576L11 12.5454Z" fill="white" />
                         </svg>
                       </span>
                       Download CV
@@ -85,10 +57,7 @@ const Hero3 = () => {
                   </h6>
                   <ul className="flex flex-wrap items-center gap-7">
                     <li>
-                      <a
-                        href="/#"
-                        className="text-body-color hover:text-primary"
-                      >
+                      <a href="/#" className="text-body-color hover:text-primary">
                         <svg
                           width="10"
                           height="18"
@@ -101,10 +70,7 @@ const Hero3 = () => {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="/#"
-                        className="text-body-color hover:text-primary"
-                      >
+                      <a href="/#" className="text-body-color hover:text-primary">
                         <svg
                           width="18"
                           height="14"
@@ -117,10 +83,7 @@ const Hero3 = () => {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="/#"
-                        className="text-body-color hover:text-primary"
-                      >
+                      <a href="/#" className="text-body-color hover:text-primary">
                         <svg
                           width="18"
                           height="18"
@@ -135,10 +98,7 @@ const Hero3 = () => {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="/#"
-                        className="text-body-color hover:text-primary"
-                      >
+                      <a href="/#" className="text-body-color hover:text-primary">
                         <svg
                           width="18"
                           height="17"
@@ -151,10 +111,7 @@ const Hero3 = () => {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="/#"
-                        className="text-body-color hover:text-primary"
-                      >
+                      <a href="/#" className="text-body-color hover:text-primary">
                         <svg
                           width="25"
                           height="18"
@@ -218,7 +175,7 @@ const Navbar = () => {
                 onClick={() => setOpen(!open)}
                 id="navbarToggler"
                 className={` ${
-                  open && "navbarTogglerActive"
+                  open && 'navbarTogglerActive'
                 } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
               >
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
@@ -228,7 +185,7 @@ const Navbar = () => {
               <nav
                 id="navbarCollapse"
                 className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                  !open && "hidden"
+                  !open && 'hidden'
                 } `}
               >
                 <ul className="block lg:flex">

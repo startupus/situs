@@ -26,14 +26,11 @@ const ProjectsMain: React.FC = () => {
   return (
     <div>
       <ProjectsFilters />
-      
+
       <ProjectsList onCreateProject={handleCreateProject} refreshKey={refreshTick} />
 
       {showCreateModal && (
-        <CreateProjectModal
-          onClose={() => setShowCreateModal(false)}
-          onSuccess={handleProjectCreated}
-        />
+        <CreateProjectModal onClose={() => setShowCreateModal(false)} onSuccess={handleProjectCreated} />
       )}
     </div>
   );

@@ -546,7 +546,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="w-full border border-white bg-transparent p-3 text-base font-medium text-gray-4 placeholder-gray-4/60 outline-hidden"
+          className="outline-hidden w-full border border-white bg-transparent p-3 text-base font-medium text-gray-4 placeholder-gray-4/60"
         />
       </div>
     </div>

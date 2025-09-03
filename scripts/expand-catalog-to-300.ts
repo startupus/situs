@@ -2,7 +2,7 @@
 
 /**
  * 🚀 СКРИПТ РАСШИРЕНИЯ КАТАЛОГА ДО 300+ МОДЕЛЕЙ
- * 
+ *
  * Автоматически генерирует и добавляет модели для достижения цели в 300+ моделей
  * Включает все основные провайдеры и специализированные модели
  */
@@ -13,11 +13,11 @@ import { join } from 'path';
 // Генерируем дополнительные модели
 const generateAdditionalModels = () => {
   const models = [];
-  
+
   // Qwen семейство (Alibaba)
   const qwenModels = [
     'qwen2.5-72b-instruct',
-    'qwen2.5-32b-instruct', 
+    'qwen2.5-32b-instruct',
     'qwen2.5-14b-instruct',
     'qwen2.5-7b-instruct',
     'qwen2.5-3b-instruct',
@@ -96,36 +96,36 @@ const generateAdditionalModels = () => {
     'metamath-70b',
     'metamath-13b',
     'metamath-7b',
-    
-    // Medical модели  
+
+    // Medical модели
     'medalpaca-13b',
     'biomistral-7b',
     'meditron-70b',
     'meditron-7b',
-    
+
     // Legal модели
     'saul-7b-instruct',
     'legal-bert-base',
     'legal-pegasus-base',
-    
+
     // Finance модели
     'finbert-tone',
     'finbert-esg',
     'bloomberg-gpt-50b',
-    
+
     // Science модели
     'galactica-120b',
     'galactica-30b',
     'galactica-6.7b',
     'scibert-scivocab-uncased',
-    
+
     // Translation модели
     'nllb-200-3.3b',
     'nllb-200-1.3b',
     'nllb-200-distilled-600m',
     'm2m100-1.2b',
     'm2m100-418m',
-    
+
     // Embedding модели
     'gte-large-en-v1.5',
     'gte-base-en-v1.5',
@@ -137,13 +137,13 @@ const generateAdditionalModels = () => {
     'sentence-t5-large',
     'all-mpnet-base-v2',
     'all-minilm-l6-v2',
-    
+
     // Reranking модели
     'bge-reranker-large',
     'bge-reranker-base',
     'ms-marco-minilm-l-12-v2',
     'ms-marco-distilbert-base',
-    
+
     // Audio модели
     'whisper-large-v3',
     'whisper-large-v2',
@@ -157,7 +157,7 @@ const generateAdditionalModels = () => {
     'musicgen-large',
     'musicgen-medium',
     'musicgen-small',
-    
+
     // Image модели
     'stable-diffusion-3-medium',
     'stable-diffusion-2-1',
@@ -168,14 +168,14 @@ const generateAdditionalModels = () => {
     'deepfloyd-if-xl',
     'playground-v2-1024px',
     'playground-v2-512px',
-    
+
     // Video модели
     'stable-video-diffusion-img2vid',
     'stable-video-diffusion-img2vid-xt',
     'zeroscope-v2-xl',
     'zeroscope-v2-576w',
     'modelscope-t2v',
-    
+
     // Code модели расширенные
     'starcoder2-3b',
     'starcoder2-7b',
@@ -195,7 +195,7 @@ const generateAdditionalModels = () => {
     'codet5p-2b',
     'codet5p-770m',
     'codet5p-220m',
-    
+
     // Chat модели дополнительные
     'vicuna-33b-v1.3',
     'vicuna-13b-v1.5',
@@ -228,13 +228,13 @@ const generateAdditionalModels = () => {
 
   // Генерируем модели для каждого семейства
   const allModelNames = [
-    ...qwenModels.map(m => ({ name: m, brand: 'Alibaba', family: 'qwen' })),
-    ...yiModels.map(m => ({ name: m, brand: '01.AI', family: 'yi' })),
-    ...gemmaModels.map(m => ({ name: m, brand: 'Google', family: 'gemma' })),
-    ...phiModels.map(m => ({ name: m, brand: 'Microsoft', family: 'phi' })),
-    ...falconModels.map(m => ({ name: m, brand: 'TII', family: 'falcon' })),
-    ...nousModels.map(m => ({ name: m, brand: 'NousResearch', family: 'nous-hermes' })),
-    ...specializedModels.map(m => ({ name: m, brand: 'Various', family: 'specialized' })),
+    ...qwenModels.map((m) => ({ name: m, brand: 'Alibaba', family: 'qwen' })),
+    ...yiModels.map((m) => ({ name: m, brand: '01.AI', family: 'yi' })),
+    ...gemmaModels.map((m) => ({ name: m, brand: 'Google', family: 'gemma' })),
+    ...phiModels.map((m) => ({ name: m, brand: 'Microsoft', family: 'phi' })),
+    ...falconModels.map((m) => ({ name: m, brand: 'TII', family: 'falcon' })),
+    ...nousModels.map((m) => ({ name: m, brand: 'NousResearch', family: 'nous-hermes' })),
+    ...specializedModels.map((m) => ({ name: m, brand: 'Various', family: 'specialized' })),
   ];
 
   return allModelNames;
@@ -243,7 +243,7 @@ const generateAdditionalModels = () => {
 // Генерируем TypeScript код для моделей
 const generateModelCode = (modelData: any) => {
   const { name, brand, family } = modelData;
-  
+
   // Определяем категории на основе названия
   const categories = [];
   if (name.includes('chat') || name.includes('instruct')) categories.push('chat', 'instruct');
@@ -278,7 +278,7 @@ const generateModelCode = (modelData: any) => {
     brand: '${brand}',
     family: '${family}',
     model: '${name}',
-    categories: [${categories.map(c => `'${c}'`).join(', ')}],
+    categories: [${categories.map((c) => `'${c}'`).join(', ')}],
     capabilities: {
       textGeneration: true,
       imageGeneration: ${name.includes('diffusion') || name.includes('dall-e')},
@@ -312,13 +312,13 @@ const generateModelCode = (modelData: any) => {
 // Основная функция
 const main = () => {
   console.log('🚀 Генерируем расширенный каталог до 300+ моделей...');
-  
+
   const additionalModels = generateAdditionalModels();
   console.log(`📊 Сгенерировано ${additionalModels.length} дополнительных моделей`);
-  
+
   // Генерируем код
   const modelCodes = additionalModels.map(generateModelCode);
-  
+
   const fileContent = `/**
  * 🚀 АВТОМАТИЧЕСКИ СГЕНЕРИРОВАННЫЙ РАСШИРЕННЫЙ КАТАЛОГ
  * 
@@ -341,11 +341,11 @@ export const MASSIVE_MODELS_COUNT = massiveModelCatalog.length;
   // Сохраняем файл
   const outputPath = join(process.cwd(), 'src/services/MassiveModelCatalog.ts');
   writeFileSync(outputPath, fileContent);
-  
+
   console.log(`✅ Сохранен файл: ${outputPath}`);
   console.log(`📈 Общее количество моделей: ${additionalModels.length}`);
   console.log('🎯 Каталог готов для интеграции в ProviderRegistryService!');
 };
 
 // Запускаем
-main(); 
+main();

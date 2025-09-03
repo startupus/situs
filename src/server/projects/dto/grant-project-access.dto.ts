@@ -13,5 +13,3 @@ export class GrantProjectAccessDto {
   @IsIn(['OWNER', 'ADMIN', 'EDITOR', 'VIEWER'], { message: 'Недопустимая роль' })
   role!: string;
 }
-
-

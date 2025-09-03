@@ -75,7 +75,7 @@ const AllCategories = () => {
         <Link
           to="#"
           onClick={handleDropDownToggle}
-          className="bg-primary hover:bg-primary/90 dropdown-toggle inline-flex items-center justify-between rounded-[5px] py-[9px] pr-[18px] pl-4 text-base font-medium whitespace-nowrap text-white"
+          className="dropdown-toggle inline-flex items-center justify-between whitespace-nowrap rounded-[5px] bg-primary py-[9px] pl-4 pr-[18px] text-base font-medium text-white hover:bg-primary/90"
         >
           <span className="pr-[10px] text-white">
             <svg
@@ -108,17 +108,17 @@ const AllCategories = () => {
 
         <div ref={dropdownRef}>
           <div
-            className={`border-stroke dark:border-dark-3 dark:bg-dark-2 absolute top-[115%] left-0 z-10 w-[180px] rounded-lg border-[.5px] bg-white py-4 transition-all ${openDropDown ? "block" : "hidden"}`}
+            className={`absolute left-0 top-[115%] z-10 w-[180px] rounded-lg border-[.5px] border-stroke bg-white py-4 transition-all dark:border-dark-3 dark:bg-dark-2 ${openDropDown ? "block" : "hidden"}`}
           >
-            <span className="border-stroke dark:border-dark-3 dark:bg-dark-2 absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 rounded-xs border-[.5px] border-r-0 border-b-0 bg-white lg:block"></span>
+            <span className="rounded-xs absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"></span>
 
             {allCategories.map((item, index) =>
               item.submenuGroup ? (
-                <div key={index} className="group relative pr-[18px] pl-6">
+                <div key={index} className="group relative pl-6 pr-[18px]">
                   <Link
                     to={item.link}
                     onClick={handleCategoryToggle}
-                    className="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex items-center justify-between py-[6px] text-sm"
+                    className="flex items-center justify-between py-[6px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                   >
                     {item.text}
 
@@ -137,9 +137,9 @@ const AllCategories = () => {
                   </Link>
 
                   <div
-                    className={`border-stroke dark:border-dark-3 dark:bg-dark-2 top-0 left-full bg-white py-2 group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:w-[600px] lg:rounded-sm lg:border-[.5px] lg:px-8 lg:py-8 lg:opacity-0 xl:w-[650px] ${categoryOpen ? "block" : "hidden lg:block"}`}
+                    className={`left-full top-0 border-stroke bg-white py-2 group-hover:visible group-hover:opacity-100 dark:border-dark-3 dark:bg-dark-2 lg:invisible lg:absolute lg:w-[600px] lg:rounded-sm lg:border-[.5px] lg:px-8 lg:py-8 lg:opacity-0 xl:w-[650px] ${categoryOpen ? "block" : "hidden lg:block"}`}
                   >
-                    <div className="flex flex-wrap -mx-2">
+                    <div className="-mx-2 flex flex-wrap">
                       {item.submenuGroup.map((group, groupIndex) =>
                         group.image ? (
                           <div
@@ -160,7 +160,7 @@ const AllCategories = () => {
                             className="w-full px-2 lg:w-1/3"
                           >
                             <div>
-                              <h3 className="text-dark mb-[14px] text-base font-semibold dark:text-white">
+                              <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
                                 {group.title}
                               </h3>
 
@@ -169,7 +169,7 @@ const AllCategories = () => {
                                   <Link
                                     key={groupItemIndex}
                                     to={groupItem.link}
-                                    className="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary block py-[6px] text-base"
+                                    className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                                   >
                                     {groupItem.text}
                                   </Link>
@@ -183,11 +183,11 @@ const AllCategories = () => {
                   </div>
                 </div>
               ) : (
-                <div key={index} className="pr-[18px] pl-6">
+                <div key={index} className="pl-6 pr-[18px]">
                   <Link
                     to={item.link}
                     onClick={handleCategoryToggle}
-                    className="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex items-center justify-between py-[6px] text-sm"
+                    className="flex items-center justify-between py-[6px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                   >
                     {item.text}
                   </Link>

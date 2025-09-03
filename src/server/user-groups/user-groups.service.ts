@@ -40,7 +40,7 @@ export class UserGroupsService {
       },
     });
 
-    return groups.map(group => this.enrichGroupData(group));
+    return groups.map((group) => this.enrichGroupData(group));
   }
 
   /**
@@ -107,7 +107,7 @@ export class UserGroupsService {
     // Создаем новые назначения
     if (groupIds.length > 0) {
       await this.prisma.userGroupMap.createMany({
-        data: groupIds.map(groupId => ({
+        data: groupIds.map((groupId) => ({
           userId,
           groupId,
         })),

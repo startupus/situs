@@ -5,21 +5,25 @@
 До внедрения архитектурного решения наблюдались следующие проблемы:
 
 ### 1. Множественные процессы
+
 - Запускалось несколько экземпляров `browser-tools-server`
 - Запускалось несколько экземпляров `browser-tools-mcp`
 - Процессы не завершались корректно при перезапуске
 
 ### 2. Конфликты портов
+
 - Порт 3025 занят → система переключается на 3026
 - Отсутствие проверки доступности портов
 - Нет автоматического поиска свободных портов
 
 ### 3. Отсутствие мониторинга
+
 - Нет отслеживания состояния процессов
 - Нет автоматического восстановления
 - Нет логирования операций
 
 ### 4. Некорректное завершение
+
 - Процессы оставались в памяти
 - Отсутствие graceful shutdown
 - Накопление "зомби" процессов
@@ -33,20 +37,21 @@
 ```typescript
 class BrowserToolsManager {
   // Управление жизненным циклом процессов
-  async startServer(port: number): Promise<ProcessInfo>
-  async stopAll(): Promise<void>
-  
+  async startServer(port: number): Promise<ProcessInfo>;
+  async stopAll(): Promise<void>;
+
   // Мониторинг и диагностика
-  getStatus(): ProcessInfo[]
-  async healthCheck(): Promise<HealthStatus>
-  
+  getStatus(): ProcessInfo[];
+  async healthCheck(): Promise<HealthStatus>;
+
   // Автоматическое восстановление
-  private async cleanupExistingProcesses()
-  private async findAvailablePort(startPort: number)
+  private async cleanupExistingProcesses();
+  private async findAvailablePort(startPort: number);
 }
 ```
 
 **Ключевые возможности:**
+
 - ✅ Автоматическая очистка существующих процессов
 - ✅ Поиск свободных портов
 - ✅ Graceful shutdown с таймаутами
@@ -60,20 +65,21 @@ class BrowserToolsManager {
 ```typescript
 class MCPBrowserToolsIntegration {
   // Управление интеграцией
-  async start(): Promise<void>
-  async stop(): Promise<void>
-  
+  async start(): Promise<void>;
+  async stop(): Promise<void>;
+
   // Мониторинг состояния
-  async getStatus(): Promise<IntegrationStatus>
-  async isReady(): Promise<boolean>
-  
+  async getStatus(): Promise<IntegrationStatus>;
+  async isReady(): Promise<boolean>;
+
   // Автоматическое восстановление
-  private startHealthMonitoring()
-  private async restartIfNeeded()
+  private startHealthMonitoring();
+  private async restartIfNeeded();
 }
 ```
 
 **Ключевые возможности:**
+
 - ✅ Автоматический мониторинг здоровья каждые 30 секунд
 - ✅ Автоматическое восстановление при проблемах
 - ✅ Интеграция с MCP системой
@@ -103,26 +109,31 @@ npm run browser-tools:cleanup    # Принудительная остановк
 ## Архитектурные принципы
 
 ### 1. Single Responsibility Principle
+
 - `BrowserToolsManager` - только управление процессами
 - `MCPBrowserToolsIntegration` - только интеграция с MCP
 - Каждый класс имеет четкую ответственность
 
 ### 2. Graceful Shutdown
+
 - Обработка сигналов SIGINT, SIGTERM, SIGQUIT
 - Поэтапное завершение процессов
 - Очистка ресурсов и PID файлов
 
 ### 3. Health Monitoring
+
 - Постоянный мониторинг состояния
 - Автоматическое обнаружение проблем
 - Самовосстановление системы
 
 ### 4. Process Isolation
+
 - Каждый процесс изолирован
 - Отслеживание по PID
 - Независимое управление жизненным циклом
 
 ### 5. Error Handling
+
 - Обработка всех возможных ошибок
 - Логирование проблем
 - Graceful degradation
@@ -130,21 +141,25 @@ npm run browser-tools:cleanup    # Принудительная остановк
 ## Преимущества нового решения
 
 ### 1. Надежность
+
 - ✅ Гарантированно только один процесс
 - ✅ Автоматическое восстановление
 - ✅ Graceful shutdown
 
 ### 2. Мониторинг
+
 - ✅ Постоянное отслеживание состояния
 - ✅ Детальное логирование
 - ✅ Диагностика проблем
 
 ### 3. Удобство
+
 - ✅ Простые npm команды
 - ✅ Автоматическое управление
 - ✅ CLI интерфейсы
 
 ### 4. Масштабируемость
+
 - ✅ Легко добавлять новые функции
 - ✅ Модульная архитектура
 - ✅ Расширяемые интерфейсы
@@ -152,6 +167,7 @@ npm run browser-tools:cleanup    # Принудительная остановк
 ## Использование
 
 ### Быстрый старт
+
 ```bash
 # Запуск интеграции (рекомендуется)
 npm run browser-tools:start
@@ -164,6 +180,7 @@ npm run browser-tools:stop
 ```
 
 ### Диагностика проблем
+
 ```bash
 # Проверка здоровья системы
 npm run browser-tools:manager:health
@@ -176,6 +193,7 @@ npm run browser-tools:cleanup
 ```
 
 ### Интеграция с разработкой
+
 ```bash
 # В package.json можно добавить
 "dev:with-browser-tools": "npm run browser-tools:start && npm run dev"
@@ -184,16 +202,19 @@ npm run browser-tools:cleanup
 ## Мониторинг и логи
 
 ### Логи процесса
+
 - `logs/browser-tools.log` - детальные логи операций
 - `logs/browser-tools.pid` - PID файлы для отслеживания
 
 ### Метрики здоровья
+
 - Количество активных процессов
 - Доступность портов
 - Время отклика сервера
 - Статистика ошибок
 
 ### Автоматические действия
+
 - Перезапуск при сбоях
 - Очистка зависших процессов
 - Восстановление соединений
@@ -207,4 +228,4 @@ npm run browser-tools:cleanup
 3. **Автоматизация** - самовосстановление и управление
 4. **Удобство** - простые команды и CLI интерфейсы
 
-Система готова к продуктивному использованию и легко расширяется для новых требований. 
+Система готова к продуктивному использованию и легко расширяется для новых требований.

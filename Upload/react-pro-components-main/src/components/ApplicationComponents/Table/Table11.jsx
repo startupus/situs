@@ -1,101 +1,101 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from "react";
 
 const tableData = [
   {
-    id: '155',
-    name: 'Andrio Maksim',
-    position: 'Designer',
-    duration: '3 years',
-    birthDate: '25 Nov, 1989',
-    email: 'maksim45@gmail.com',
-    phone: '+323(29)-232-44-44',
-    address: 'Block A, Demo Park',
-    status: 'Full-time',
+    id: "155",
+    name: "Andrio Maksim",
+    position: "Designer",
+    duration: "3 years",
+    birthDate: "25 Nov, 1989",
+    email: "maksim45@gmail.com",
+    phone: "+323(29)-232-44-44",
+    address: "Block A, Demo Park",
+    status: "Full-time",
   },
   {
-    id: '155',
-    name: 'Andrio Maksim',
-    position: 'Designer',
-    duration: '3 years',
-    birthDate: '25 Nov, 1989',
-    email: 'maksim45@gmail.com',
-    phone: '+323(29)-232-44-44',
-    address: 'Block A, Demo Park',
-    status: 'Full-time',
+    id: "155",
+    name: "Andrio Maksim",
+    position: "Designer",
+    duration: "3 years",
+    birthDate: "25 Nov, 1989",
+    email: "maksim45@gmail.com",
+    phone: "+323(29)-232-44-44",
+    address: "Block A, Demo Park",
+    status: "Full-time",
   },
   {
-    id: '155',
-    name: 'Andrio Maksim',
-    position: 'Designer',
-    duration: '3 years',
-    birthDate: '25 Nov, 1989',
-    email: 'maksim45@gmail.com',
-    phone: '+323(29)-232-44-44',
-    address: 'Block A, Demo Park',
-    status: 'Full-time',
+    id: "155",
+    name: "Andrio Maksim",
+    position: "Designer",
+    duration: "3 years",
+    birthDate: "25 Nov, 1989",
+    email: "maksim45@gmail.com",
+    phone: "+323(29)-232-44-44",
+    address: "Block A, Demo Park",
+    status: "Full-time",
   },
   {
-    id: '155',
-    name: 'Andrio Maksim',
-    position: 'Designer',
-    duration: '3 years',
-    birthDate: '25 Nov, 1989',
-    email: 'maksim45@gmail.com',
-    phone: '+323(29)-232-44-44',
-    address: 'Block A, Demo Park',
-    status: 'Full-time',
+    id: "155",
+    name: "Andrio Maksim",
+    position: "Designer",
+    duration: "3 years",
+    birthDate: "25 Nov, 1989",
+    email: "maksim45@gmail.com",
+    phone: "+323(29)-232-44-44",
+    address: "Block A, Demo Park",
+    status: "Full-time",
   },
-]
+];
 
 const headers = [
-  { name: '', styles: 'align-top', inputType: 'text', searchIcon: true },
+  { name: "", styles: "align-top", inputType: "text", searchIcon: true },
   {
-    name: 'Name/ID',
-    styles: 'min-w-[160px]',
-    inputType: 'text',
+    name: "Name/ID",
+    styles: "min-w-[160px]",
+    inputType: "text",
     searchIcon: true,
   },
   {
-    name: 'Position',
-    styles: 'min-w-[130px]',
-    inputType: 'text',
+    name: "Position",
+    styles: "min-w-[130px]",
+    inputType: "text",
     arrowIcon: true,
   },
   {
-    name: 'BDay',
-    styles: 'min-w-[170px]',
-    inputType: 'date',
+    name: "BDay",
+    styles: "min-w-[170px]",
+    inputType: "date",
     calendarIcon: true,
   },
   {
-    name: 'Email/Phone',
-    styles: 'min-w-[220px]',
-    inputType: 'text',
+    name: "Email/Phone",
+    styles: "min-w-[220px]",
+    inputType: "text",
     searchIcon: true,
   },
   {
-    name: 'Address',
-    styles: 'min-w-[220px]',
-    inputType: 'text',
+    name: "Address",
+    styles: "min-w-[220px]",
+    inputType: "text",
     arrowIcon: true,
   },
   {
-    name: 'Status',
-    styles: 'min-w-[120px]',
-    inputType: 'text',
+    name: "Status",
+    styles: "min-w-[120px]",
+    inputType: "text",
     arrowIcon: true,
   },
-  { name: '', styles: 'min-w-[100px]' },
-]
+  { name: "", styles: "min-w-[100px]" },
+];
 
 const Table11 = () => {
   return (
-    <section className='bg-gray-2 dark:bg-dark py-20 lg:py-[120px]'>
-      <div className='mx-auto px-4 lg:container'>
-        <div className='bg-white rounded-lg dark:bg-dark-2 shadow-card'>
+    <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
+      <div className="mx-auto px-4 lg:container">
+        <div className="rounded-lg bg-white shadow-card dark:bg-dark-2">
           <TableTop />
-          <div className='max-w-full overflow-x-auto'>
-            <table className='w-full table-auto'>
+          <div className="max-w-full overflow-x-auto">
+            <table className="w-full table-auto">
               <TableHead headers={headers} />
               <TableBody data={tableData} />
             </table>
@@ -103,22 +103,22 @@ const Table11 = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Table11;
 
 const TableTop = () => {
   return (
-    <div className='items-center justify-between space-y-4 border-b border-stroke dark:border-dark-3 py-[18px] px-5 sm:flex sm:space-x-4 sm:space-y-0'>
-      <div className='w-full md:max-w-[420px]'>
-        <div className='relative overflow-hidden rounded-sm'>
+    <div className="items-center justify-between space-y-4 border-b border-stroke px-5 py-[18px] dark:border-dark-3 sm:flex sm:space-x-4 sm:space-y-0">
+      <div className="w-full md:max-w-[420px]">
+        <div className="relative overflow-hidden rounded-sm">
           <input
-            type='text'
-            placeholder='Search here...'
-            className='h-[46px] w-full rounded-md dark:border-dark-3 border bg-transparent dark:text-dark-6 placeholder:opacity-60 border-stroke pl-5 pr-14 text-base text-body-color outline-hidden focus:border-primary'
+            type="text"
+            placeholder="Search here..."
+            className="outline-hidden h-[46px] w-full rounded-md border border-stroke bg-transparent pl-5 pr-14 text-base text-body-color placeholder:opacity-60 focus:border-primary dark:border-dark-3 dark:text-dark-6"
           />
-          <button className='absolute top-0 right-0 flex h-full w-[46px] items-center justify-center bg-primary text-white'>
+          <button className="absolute right-0 top-0 flex h-full w-[46px] items-center justify-center bg-primary text-white">
             <svg
               width="18"
               height="18"
@@ -135,8 +135,8 @@ const TableTop = () => {
         </div>
       </div>
       <div>
-        <button className='flex h-[46px] items-center justify-center whitespace-nowrap rounded-md bg-primary px-6 text-base font-medium text-white hover:bg-primary/90'>
-          <span className='mr-2'>
+        <button className="flex h-[46px] items-center justify-center whitespace-nowrap rounded-md bg-primary px-6 text-base font-medium text-white hover:bg-primary/90">
+          <span className="mr-2">
             <svg
               width={20}
               height={20}
@@ -165,62 +165,62 @@ const TableTop = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const TableHead = ({ headers }) => {
-  const checkboxId = 'checkboxId'
+  const checkboxId = "checkboxId";
 
   return (
     <thead>
-      <tr className='border-b border-stroke dark:border-dark-3'>
+      <tr className="border-b border-stroke dark:border-dark-3">
         {headers.map((header, index) => (
           <th
-            className={`px-4 pt-9 pb-6 first:pl-8 align-top ${header.styles}`}
+            className={`px-4 pb-6 pt-9 align-top first:pl-8 ${header.styles}`}
             key={index}
           >
             {index === 0 && <Checkbox index={checkboxId} />}
             {index !== 0 && index !== headers.length - 1 && (
               <div>
-                <div className='mb-[10px] flex items-center'>
-                  <p className='mr-1 text-base font-medium text-body-color dark:text-dark-6'>
+                <div className="mb-[10px] flex items-center">
+                  <p className="mr-1 text-base font-medium text-body-color dark:text-dark-6">
                     {header.name}
                   </p>
-                  <div className='inline-flex flex-col space-y-[2px] text-body-color dark:text-dark-6'>
-                    <span className='inline-block'>
+                  <div className="inline-flex flex-col space-y-[2px] text-body-color dark:text-dark-6">
+                    <span className="inline-block">
                       <svg
-                        width='10'
-                        height='5'
-                        viewBox='0 0 10 5'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'
+                        width="10"
+                        height="5"
+                        viewBox="0 0 10 5"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d='M5 0L0 5H10L5 0Z' fill='currentColor' />
+                        <path d="M5 0L0 5H10L5 0Z" fill="currentColor" />
                       </svg>
                     </span>
-                    <span className='inline-block'>
+                    <span className="inline-block">
                       <svg
-                        width='10'
-                        height='5'
-                        viewBox='0 0 10 5'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'
+                        width="10"
+                        height="5"
+                        viewBox="0 0 10 5"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d='M5 5L10 0L-4.37114e-07 8.74228e-07L5 5Z'
-                          fill='currentColor'
+                          d="M5 5L10 0L-4.37114e-07 8.74228e-07L5 5Z"
+                          fill="currentColor"
                         />
                       </svg>
                     </span>
                   </div>
                 </div>
-                <div className='relative'>
+                <div className="relative">
                   <input
                     type={header.inputType}
-                    className='h-[34px] w-full rounded-sm border border-stroke pr-3 pl-8 text-sm text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6 bg-transparent'
+                    className="outline-hidden h-[34px] w-full rounded-sm border border-stroke bg-transparent pl-8 pr-3 text-sm text-body-color dark:border-dark-3 dark:text-dark-6"
                   />
                   {header.searchIcon && (
-                    <span className='absolute -translate-y-1/2 top-1/2 left-3 text-body-color dark:text-dark-6'>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg
                         width={14}
                         height={14}
@@ -244,7 +244,7 @@ const TableHead = ({ headers }) => {
                     </span>
                   )}
                   {header.arrowIcon && (
-                    <span className='absolute -translate-y-1/2 text-body-color dark:text-dark-6 right-3 top-1/2'>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg
                         width={10}
                         height={5}
@@ -252,12 +252,15 @@ const TableHead = ({ headers }) => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M5 5L10 0L-4.37114e-07 8.74228e-07L5 5Z" fill="currentColor" />
+                        <path
+                          d="M5 5L10 0L-4.37114e-07 8.74228e-07L5 5Z"
+                          fill="currentColor"
+                        />
                       </svg>
                     </span>
                   )}
                   {header.calendarIcon && (
-                    <span className='absolute -translate-y-1/2 text-body-color dark:text-dark-6 top-1/2 left-3'>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg
                         width={14}
                         height={14}
@@ -282,88 +285,104 @@ const TableHead = ({ headers }) => {
         ))}
       </tr>
     </thead>
-  )
-}
+  );
+};
 
 const TableBody = ({ data }) => {
   return (
     <tbody>
       {data.map((row, index) => (
         <tr
-          className='border-b border-stroke dark:border-dark-3 hover:bg-primary/5'
+          className="border-b border-stroke hover:bg-primary/5 dark:border-dark-3"
           key={index}
         >
-          <td className='py-5 pl-8'>
+          <td className="py-5 pl-8">
             <Checkbox index={index} />
           </td>
-          <td className='py-5 px-4'>
-            <p className='text-base font-medium text-primary'>{row.name}</p>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.id}</p>
+          <td className="px-4 py-5">
+            <p className="text-base font-medium text-primary">{row.name}</p>
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.id}
+            </p>
           </td>
-          <td className='py-5 px-4'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.position}</p>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.duration}</p>
+          <td className="px-4 py-5">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.position}
+            </p>
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.duration}
+            </p>
           </td>
-          <td className='py-5 px-4'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.birthDate}</p>
+          <td className="px-4 py-5">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.birthDate}
+            </p>
           </td>
-          <td className='py-5 px-4'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.email}</p>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.phone}</p>
+          <td className="px-4 py-5">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.email}
+            </p>
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.phone}
+            </p>
           </td>
-          <td className='py-5 px-4'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.address}</p>
+          <td className="px-4 py-5">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.address}
+            </p>
           </td>
-          <td className='py-5 px-4'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.status}</p>
+          <td className="px-4 py-5">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.status}
+            </p>
           </td>
-          <td className='py-5 pl-4 pr-8'>
+          <td className="py-5 pl-4 pr-8">
             <Dropdown />
           </td>
         </tr>
       ))}
     </tbody>
-  )
-}
+  );
+};
 
 const Dropdown = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const trigger = useRef(null)
-  const dropdown = useRef(null)
+  const trigger = useRef(null);
+  const dropdown = useRef(null);
 
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
-      if (!dropdown.current) return
+      if (!dropdown.current) return;
       if (
         !dropdownOpen ||
         dropdown.current.contains(target) ||
         trigger.current.contains(target)
       )
-        return
-      setDropdownOpen(false)
-    }
-    document.addEventListener('click', clickHandler)
-    return () => document.removeEventListener('click', clickHandler)
-  })
+        return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener("click", clickHandler);
+    return () => document.removeEventListener("click", clickHandler);
+  });
 
   // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
-      if (!dropdownOpen || keyCode !== 27) return
-      setDropdownOpen(false)
-    }
-    document.addEventListener('keydown', keyHandler)
-    return () => document.removeEventListener('keydown', keyHandler)
-  })
+      if (!dropdownOpen || keyCode !== 27) return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
+  });
 
   return (
-    <div className='relative'>
+    <div className="relative">
       <button
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className='text-body-color dark:text-dark-6'
+        className="text-body-color dark:text-dark-6"
       >
         <svg
           width={24}
@@ -397,58 +416,60 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark border-stroke dark:border-dark-3 border ${
-          dropdownOpen === true ? 'block' : 'hidden'
+        className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark ${
+          dropdownOpen === true ? "block" : "hidden"
         }`}
       >
-        <button className='w-full px-3 py-2 text-sm text-left rounded-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2'>
+        <button className="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
           Edit
         </button>
-        <button className='w-full px-3 py-2 text-sm text-left rounded-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2'>
+        <button className="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
           Delete
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Checkbox = ({ index }) => {
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <div className='relative mt-1'>
+    <div className="relative mt-1">
       <input
-        type='checkbox'
-        name='tableCheckbox'
+        type="checkbox"
+        name="tableCheckbox"
         id={index}
-        className='tableCheckbox sr-only'
+        className="tableCheckbox sr-only"
         onChange={() => {
-          setIsChecked(!isChecked)
+          setIsChecked(!isChecked);
         }}
       />
       <label
         htmlFor={index}
         className={`flex h-[18px] w-[18px] cursor-pointer items-center justify-center rounded border ${
-          isChecked ? 'bg-primary! border-primary' : 'border-stroke dark:border-dark-4'
+          isChecked
+            ? "bg-primary! border-primary"
+            : "border-stroke dark:border-dark-4"
         }`}
       >
-        <span className={`icon ${isChecked ? '' : 'opacity-0'} text-white`}>
+        <span className={`icon ${isChecked ? "" : "opacity-0"} text-white`}>
           <svg
-            width='14'
-            height='14'
-            viewBox='0 0 14 14'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fillRule='evenodd'
-              clipRule='evenodd'
-              d='M12.0791 3.08687C12.307 3.31468 12.307 3.68402 12.0791 3.91183L5.66248 10.3285C5.43467 10.5563 5.06533 10.5563 4.83752 10.3285L1.92085 7.41183C1.69305 7.18402 1.69305 6.81468 1.92085 6.58687C2.14866 6.35906 2.51801 6.35906 2.74581 6.58687L5.25 9.09106L11.2542 3.08687C11.482 2.85906 11.8513 2.85906 12.0791 3.08687Z'
-              fill='currentColor'
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M12.0791 3.08687C12.307 3.31468 12.307 3.68402 12.0791 3.91183L5.66248 10.3285C5.43467 10.5563 5.06533 10.5563 4.83752 10.3285L1.92085 7.41183C1.69305 7.18402 1.69305 6.81468 1.92085 6.58687C2.14866 6.35906 2.51801 6.35906 2.74581 6.58687L5.25 9.09106L11.2542 3.08687C11.482 2.85906 11.8513 2.85906 12.0791 3.08687Z"
+              fill="currentColor"
             />
           </svg>
         </span>
       </label>
     </div>
-  )
-}
+  );
+};

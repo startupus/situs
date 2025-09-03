@@ -53,9 +53,9 @@ const ShoppingCart = () => {
     <>
       <Breadcrumb pageName="Shopping Cart" />
 
-      <section className="dark:bg-dark bg-white pt-24 pb-[120px]">
+      <section className="bg-white pb-[120px] pt-24 dark:bg-dark">
         <div className="container mx-auto">
-          <h2 className="mb-12 text-2xl font-semibold text-dark sm:text-3xl md:text-4xl dark:text-white">
+          <h2 className="mb-12 text-2xl font-semibold text-dark dark:text-white sm:text-3xl md:text-4xl">
             Shopping cart
           </h2>
 
@@ -63,14 +63,14 @@ const ShoppingCart = () => {
             {cartItems.map((item, index) => (
               <div
                 key={index}
-                className="px-6 py-6 bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark xl:pr-10"
+                className="bg-white px-6 py-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark xl:pr-10"
               >
                 <div className="items-center md:flex">
-                  <div className="mr-9 mb-5 h-[150px] w-full max-w-[150px] md:mb-0">
+                  <div className="mb-5 mr-9 h-[150px] w-full max-w-[150px] md:mb-0">
                     <img
                       src={item.image}
                       alt="product"
-                      className="object-cover object-center w-full h-full"
+                      className="h-full w-full object-cover object-center"
                     />
                   </div>
 
@@ -78,7 +78,7 @@ const ShoppingCart = () => {
                     <h4>
                       <Link
                         to={item.link}
-                        className="block mb-2 text-xl font-semibold text-dark sm:text-2xl dark:text-white"
+                        className="mb-2 block text-xl font-semibold text-dark dark:text-white sm:text-2xl"
                       >
                         {item.name}
                       </Link>
@@ -87,13 +87,13 @@ const ShoppingCart = () => {
                       {item.description}
                     </p>
 
-                    <div className="items-end justify-between w-full sm:flex">
+                    <div className="w-full items-end justify-between sm:flex">
                       <div className="mb-5">
-                        <label className="text-body-color dark:text-dark-6 mb-[6px] block text-sm">
+                        <label className="mb-[6px] block text-sm text-body-color dark:text-dark-6">
                           Color
                         </label>
                         <div className="relative">
-                          <select className="border-stroke text-body-color focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 w-full appearance-none border bg-transparent py-2 pr-10 pl-4 text-sm font-medium outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]">
+                          <select className="outline-hidden w-full appearance-none border border-stroke bg-transparent py-2 pl-4 pr-10 text-sm font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6">
                             {item.colorOptions.map((color, colorIndex) => (
                               <option
                                 key={colorIndex}
@@ -104,7 +104,7 @@ const ShoppingCart = () => {
                               </option>
                             ))}
                           </select>
-                          <span className="absolute -translate-y-1/2 text-body-color dark:text-dark-6 top-1/2 right-3">
+                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                             <svg
                               width="14"
                               height="15"
@@ -119,16 +119,16 @@ const ShoppingCart = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-end mb-5 sm:justify-end">
+                      <div className="mb-5 flex items-end sm:justify-end">
                         <div className="mr-10">
-                          <span className="text-body-color dark:text-dark-6 mb-[6px] block text-sm">
+                          <span className="mb-[6px] block text-sm text-body-color dark:text-dark-6">
                             Quantity
                           </span>
 
-                          <div className="inline-flex items-center text-base font-medium border border-stroke text-dark dark:border-dark-3 dark:text-white">
+                          <div className="inline-flex items-center border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
                             <span
                               onClick={() => decrement(index)}
-                              className="flex items-center justify-center h-10 cursor-pointer select-none text-dark w-9 dark:text-white"
+                              className="flex h-10 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                             >
                               <svg
                                 width="12"
@@ -141,12 +141,12 @@ const ShoppingCart = () => {
                                 <path d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" />
                               </svg>
                             </span>
-                            <span className="px-6 py-2 border-stroke dark:border-dark-3 border-x">
+                            <span className="border-x border-stroke px-6 py-2 dark:border-dark-3">
                               {item.quantity}
                             </span>
                             <span
                               onClick={() => increment(index)}
-                              className="flex items-center justify-center h-10 cursor-pointer select-none text-dark w-9 dark:text-white"
+                              className="flex h-10 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                             >
                               <svg
                                 width="12"
@@ -186,17 +186,17 @@ const ShoppingCart = () => {
                   <input
                     type="text"
                     placeholder="Coupon code"
-                    className="border-stroke text-body-color focus:border-primary active:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6 w-full border bg-white py-3 pr-[84px] pl-5 outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                    className="outline-hidden w-full border border-stroke bg-white py-3 pl-5 pr-[84px] text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
                   />
-                  <button className="bg-primary hover:bg-blue-dark absolute top-1/2 right-2 mb-3 h-[34px] -translate-y-1/2 px-4 text-sm font-medium text-white transition">
+                  <button className="absolute right-2 top-1/2 mb-3 h-[34px] -translate-y-1/2 bg-primary px-4 text-sm font-medium text-white transition hover:bg-blue-dark">
                     Apply
                   </button>
                 </form>
               </div>
 
-              <div className="px-6 ml-auto xl:pr-10">
+              <div className="ml-auto px-6 xl:pr-10">
                 <div className="ml-auto w-full max-w-[320px]">
-                  <p className="text-dark mb-[14px] flex items-center justify-between text-xl font-semibold dark:text-white">
+                  <p className="mb-[14px] flex items-center justify-between text-xl font-semibold text-dark dark:text-white">
                     <span> Subtotal </span>
                     <span> 403.99$ </span>
                   </p>
@@ -205,11 +205,11 @@ const ShoppingCart = () => {
                   </p>
                   <Link
                     to="/order-summary"
-                    className="bg-primary hover:bg-blue-dark mb-[22px] flex w-full justify-center px-5 py-3 text-base font-medium text-white transition"
+                    className="mb-[22px] flex w-full justify-center bg-primary px-5 py-3 text-base font-medium text-white transition hover:bg-blue-dark"
                   >
                     Checkout
                   </Link>
-                  <p className="mb-4 text-base text-center text-body-color dark:text-dark-6">
+                  <p className="mb-4 text-center text-base text-body-color dark:text-dark-6">
                     Secured Payment By
                   </p>
                   <img

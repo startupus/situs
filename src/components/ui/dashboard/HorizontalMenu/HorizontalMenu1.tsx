@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const HorizontalMenu = () => {
   return (
@@ -152,13 +152,8 @@ const HorizontalMenu = () => {
               <div className="group relative">
                 <a href="/#" className="flex items-center">
                   <div className="mr-5 hidden sm:block">
-                    <p className="text-base font-medium leading-none text-dark dark:text-white">
-                      Thomas Anree
-                    </p>
-                    <span className="text-sm text-body-color dark:text-dark-6">
-                      {" "}
-                      Ux Designer{" "}
-                    </span>
+                    <p className="text-base font-medium leading-none text-dark dark:text-white">Thomas Anree</p>
+                    <span className="text-sm text-body-color dark:text-dark-6"> Ux Designer </span>
                   </div>
                   <div className="relative mr-[10px] h-11 w-11 rounded-full sm:h-[50px] sm:w-[50px]">
                     <span className="absolute right-0 top-0 block h-[18px] w-[18px] rounded-full border-4 border-white bg-green dark:border-dark-3"></span>

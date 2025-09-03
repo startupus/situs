@@ -8,7 +8,7 @@ const Calender3 = () => {
           <div className="relative mx-auto mb-5 w-full max-w-[370px]">
             <input
               type="date"
-              className="custom-input-date h-[50px] w-full appearance-none rounded-md border border-stroke bg-white px-5 text-secondary-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+              className="custom-input-date outline-hidden h-[50px] w-full appearance-none rounded-md border border-stroke bg-white px-5 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
             />
 
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-secondary-color dark:text-dark-6">
@@ -40,7 +40,7 @@ const Calender3 = () => {
                 <select
                   name=""
                   id=""
-                  className="appearance-none bg-transparent pr-5 text-base font-medium text-dark outline-hidden dark:text-white"
+                  className="outline-hidden appearance-none bg-transparent pr-5 text-base font-medium text-dark dark:text-white"
                 >
                   <option value="" className="dark:bg-dark-2">
                     January
@@ -96,7 +96,7 @@ const Calender3 = () => {
                 <select
                   name=""
                   id=""
-                  className="appearance-none bg-transparent pr-7 text-base font-medium text-dark outline-hidden dark:text-white"
+                  className="outline-hidden appearance-none bg-transparent pr-7 text-base font-medium text-dark dark:text-white"
                 >
                   <option value="" className="dark:bg-dark-2">
                     2023
@@ -218,12 +218,12 @@ const DayRow = ({ children }) => {
 };
 const Day = ({ active, number }) => {
   return (
-    <td className="max-w-11 h-11 border border-stroke p-[3px] dark:border-dark-3">
+    <td className="h-11 max-w-11 border border-stroke p-[3px] dark:border-dark-3">
       <span className="text-dark dark:text-white"></span>
       <span
         className={`${
           active ? "bg-primary text-white" : "text-dark dark:text-white"
-        } max-w-9 mx-auto flex h-9 items-center justify-center text-sm font-medium`}
+        } mx-auto flex h-9 max-w-9 items-center justify-center text-sm font-medium`}
       >
         {number}
       </span>

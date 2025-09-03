@@ -29,5 +29,3 @@ test.describe('Admin global navigation (admin-sidebar)', () => {
     }
   });
 });
-
-

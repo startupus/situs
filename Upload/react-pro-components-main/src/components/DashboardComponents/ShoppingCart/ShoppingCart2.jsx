@@ -31,7 +31,7 @@ const ShoppingCart2 = () => {
                 <input
                   type="text"
                   placeholder="Coupon code"
-                  className="w-full border border-form-stroke px-6 py-[14px] font-medium text-body-color placeholder-body-color outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]"
+                  className="outline-hidden w-full border border-form-stroke px-6 py-[14px] font-medium text-body-color placeholder-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]"
                 />
                 <button className="absolute right-3 top-1/2 mb-3 h-[34px] -translate-y-1/2 bg-primary px-5 text-sm font-medium text-white transition hover:bg-primary/90">
                   Apply
@@ -98,7 +98,7 @@ const CartItem = ({ img, link, title, subtitle, color, price }) => {
                 {color}
               </label>
               <div className="relative">
-                <select className="w-full appearance-none border border-form-stroke py-2 pl-4 pr-7 text-sm font-semibold text-body-color outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
+                <select className="outline-hidden w-full appearance-none border border-form-stroke py-2 pl-4 pr-7 text-sm font-semibold text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
                   <option value="">White</option>
                   <option value="">Black</option>
                   <option value="">Blue</option>

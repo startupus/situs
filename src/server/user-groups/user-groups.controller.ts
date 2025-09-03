@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UserGroupsService } from './user-groups.service';
 import { CreateUserGroupDto } from './dto/create-user-group.dto';
@@ -30,8 +21,8 @@ export class UserGroupsController {
    */
   @Post()
   @ApiOperation({ summary: 'Создание группы пользователей' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Группа создана',
     type: UserGroup,
   })
@@ -44,8 +35,8 @@ export class UserGroupsController {
    */
   @Get()
   @ApiOperation({ summary: 'Получение списка групп пользователей' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Список групп',
     type: [UserGroup],
   })
@@ -58,8 +49,8 @@ export class UserGroupsController {
    */
   @Get(':id')
   @ApiOperation({ summary: 'Получение группы по ID' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Данные группы',
     type: UserGroup,
   })
@@ -73,8 +64,8 @@ export class UserGroupsController {
    */
   @Patch(':id')
   @ApiOperation({ summary: 'Обновление группы' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Группа обновлена',
     type: UserGroup,
   })

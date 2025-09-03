@@ -120,7 +120,7 @@ const LinkItem = ({ children, NavLink, subMenu, setSubMenu, dropdown }) => {
     <a
       href={NavLink}
       onClick={handleClick}
-      className={`relative flex px-6 py-2 text-base font-medium text-body-color group-hover:text-dark dark:text-dark-6 dark:group-hover:text-white  lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 ${
+      className={`relative flex px-6 py-2 text-base font-medium text-body-color group-hover:text-dark dark:text-dark-6 dark:group-hover:text-white lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 ${
         dropdown &&
         "after:absolute after:right-5 after:top-1/2 after:mt-[-2px] after:h-2 after:w-2 after:translate-y-[-50%] after:rotate-45 after:border-b-2 after:border-r-2 after:border-current lg:after:right-0"
       }`}
@@ -133,8 +133,7 @@ const LinkItem = ({ children, NavLink, subMenu, setSubMenu, dropdown }) => {
 const Dropdown = ({ children, subMenu }) => {
   return (
     <div
-      className={`relative left-0 top-full rounded-lg bg-white px-4 transition-all group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[115%] lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full 
-      ${subMenu ? "hidden lg:block" : "block"}`}
+      className={`relative left-0 top-full rounded-lg bg-white px-4 transition-all group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[115%] lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full ${subMenu ? "hidden lg:block" : "block"}`}
     >
       {children}
     </div>

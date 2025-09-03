@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react';
 
 export default function FileUpload1() {
   return (
     <section className="bg-white py-20 dark:bg-dark">
       <div className="container">
         <div className="w-full max-w-[400px]">
-          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
-            Upload a File:
-          </label>
+          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">Upload a File:</label>
           <div className="relative">
             <input
               type="file"

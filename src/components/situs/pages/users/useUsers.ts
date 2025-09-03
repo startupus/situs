@@ -52,16 +52,14 @@ export const useUsers = () => {
   useUsersSSE({
     onUserUpdated: (userId, updatedUser, changes) => {
       console.log('📡 SSE: Пользователь обновлен', { userId, updatedUser, changes });
-      setUsers(prev => prev.map(user => 
-        user.id === userId ? { ...user, ...updatedUser } : user
-      ));
+      setUsers((prev) => prev.map((user) => (user.id === userId ? { ...user, ...updatedUser } : user)));
     },
     onConnected: () => {
       console.log('🔗 SSE соединение пользователей установлено');
     },
     onError: (error) => {
       console.error('❌ Ошибка SSE пользователей:', error);
-    }
+    },
   });
 
   const loadUsersAndSettings = useCallback(async () => {
@@ -74,9 +72,7 @@ export const useUsers = () => {
         setUsers([]);
       } else {
         // Преобразуем данные с сервера в формат фронтенда
-        const serverUsers = Array.isArray(usersResponse)
-          ? usersResponse
-          : ((usersResponse as any).data || []);
+        const serverUsers = Array.isArray(usersResponse) ? usersResponse : (usersResponse as any).data || [];
         const toFrontendStatus = (s: string | undefined): User['status'] => {
           const v = (s || '').toUpperCase();
           if (v === 'ACTIVE') return 'ACTIVE';
@@ -91,7 +87,9 @@ export const useUsers = () => {
           id: user.id,
           email: user.email,
           name: user.name || user.username || 'Пользователь',
-          avatar: user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || user.username || 'U')}&background=3b82f6&color=fff`,
+          avatar:
+            user.avatar ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || user.username || 'U')}&background=3b82f6&color=fff`,
           globalRole: user.globalRole || 'BUSINESS',
           status: toFrontendStatus(user.status),
           lastLogin: user.lastLogin ? new Date(user.lastLogin) : undefined,
@@ -99,7 +97,7 @@ export const useUsers = () => {
           projectsCount: user.projectsCount || 0,
           permissions: user.permissions || [],
           isEmailVerified: user.isEmailVerified || false,
-          twoFactorEnabled: user.twoFactorEnabled || false
+          twoFactorEnabled: user.twoFactorEnabled || false,
         }));
         setUsers(transformedUsers);
       }
@@ -110,24 +108,24 @@ export const useUsers = () => {
           requireEmailVerification: true,
           allowedDomains: [],
           defaultRole: 'BUSINESS',
-          autoApprove: false
+          autoApprove: false,
         },
         authentication: {
           requireTwoFactor: false,
           sessionTimeout: 24,
           maxLoginAttempts: 5,
-          lockoutDuration: 30
+          lockoutDuration: 30,
         },
         notifications: {
           welcomeEmail: true,
           roleChangeNotification: true,
-          securityAlerts: true
+          securityAlerts: true,
         },
         privacy: {
           showUserList: true,
           allowProfileSearch: true,
-          dataRetentionDays: 365
-        }
+          dataRetentionDays: 365,
+        },
       };
 
       // Настройки пока оставляем как мок данные
@@ -149,9 +147,7 @@ export const useUsers = () => {
       }
 
       // Обновляем локальное состояние
-      setUsers(prev => prev.map(user => 
-        user.id === userId ? { ...user, globalRole: newRole } : user
-      ));
+      setUsers((prev) => prev.map((user) => (user.id === userId ? { ...user, globalRole: newRole } : user)));
     } catch (error) {
       console.error('Ошибка обновления роли пользователя:', error);
     }
@@ -169,67 +165,68 @@ export const useUsers = () => {
       }
 
       // Обновляем локальное состояние
-      setUsers(prev => prev.map(user => 
-        user.id === userId ? { ...user, status: newStatus } : user
-      ));
+      setUsers((prev) => prev.map((user) => (user.id === userId ? { ...user, status: newStatus } : user)));
     } catch (error) {
       console.error('Ошибка обновления статуса пользователя:', error);
     }
   }, []);
 
-  const bulkUpdateUsers = useCallback(async (userIds: string[], action: 'activate' | 'suspend' | 'delete' | 'changeRole', data?: any) => {
-    if (userIds.length === 0) return;
+  const bulkUpdateUsers = useCallback(
+    async (userIds: string[], action: 'activate' | 'suspend' | 'delete' | 'changeRole', data?: any) => {
+      if (userIds.length === 0) return;
 
-    try {
-      let response;
-      
-      switch (action) {
-        case 'activate':
-          response = await apiClient.bulkUpdateUsers(userIds, { status: 'ACTIVE' });
-          if (!response.error) {
-            setUsers(prev => prev.map(user => 
-              userIds.includes(user.id) ? { ...user, status: 'ACTIVE' } : user
-            ));
-          }
-          break;
-          
-        case 'suspend':
-          response = await apiClient.bulkUpdateUsers(userIds, { status: 'SUSPENDED' });
-          if (!response.error) {
-            setUsers(prev => prev.map(user => 
-              userIds.includes(user.id) ? { ...user, status: 'SUSPENDED' } : user
-            ));
-          }
-          break;
-          
-        case 'delete':
-          if (confirm(`Удалить ${userIds.length} пользователей?`)) {
-            response = await apiClient.bulkDeleteUsers(userIds);
-            if (!response.error) {
-              setUsers(prev => prev.filter(user => !userIds.includes(user.id)));
-            }
-          }
-          break;
-          
-        case 'changeRole':
-          if (data?.role) {
-            response = await apiClient.bulkUpdateUsers(userIds, { globalRole: data.role });
-            if (!response.error) {
-              setUsers(prev => prev.map(user => 
-                userIds.includes(user.id) ? { ...user, globalRole: data.role } : user
-              ));
-            }
-          }
-          break;
-      }
+      try {
+        let response;
 
-      if (response?.error) {
-        console.error('Ошибка массовой операции:', response.error);
+        switch (action) {
+          case 'activate':
+            response = await apiClient.bulkUpdateUsers(userIds, { status: 'ACTIVE' });
+            if (!response.error) {
+              setUsers((prev) =>
+                prev.map((user) => (userIds.includes(user.id) ? { ...user, status: 'ACTIVE' } : user)),
+              );
+            }
+            break;
+
+          case 'suspend':
+            response = await apiClient.bulkUpdateUsers(userIds, { status: 'SUSPENDED' });
+            if (!response.error) {
+              setUsers((prev) =>
+                prev.map((user) => (userIds.includes(user.id) ? { ...user, status: 'SUSPENDED' } : user)),
+              );
+            }
+            break;
+
+          case 'delete':
+            if (confirm(`Удалить ${userIds.length} пользователей?`)) {
+              response = await apiClient.bulkDeleteUsers(userIds);
+              if (!response.error) {
+                setUsers((prev) => prev.filter((user) => !userIds.includes(user.id)));
+              }
+            }
+            break;
+
+          case 'changeRole':
+            if (data?.role) {
+              response = await apiClient.bulkUpdateUsers(userIds, { globalRole: data.role });
+              if (!response.error) {
+                setUsers((prev) =>
+                  prev.map((user) => (userIds.includes(user.id) ? { ...user, globalRole: data.role } : user)),
+                );
+              }
+            }
+            break;
+        }
+
+        if (response?.error) {
+          console.error('Ошибка массовой операции:', response.error);
+        }
+      } catch (error) {
+        console.error('Ошибка массовой операции:', error);
       }
-    } catch (error) {
-      console.error('Ошибка массовой операции:', error);
-    }
-  }, []);
+    },
+    [],
+  );
 
   const createUser = useCallback(async (userData: any) => {
     try {
@@ -238,7 +235,7 @@ export const useUsers = () => {
         password: userData.password || 'TempPassword123!',
         name: userData.name,
         globalRole: userData.role,
-        isActive: userData.isActive
+        isActive: userData.isActive,
       });
 
       if (response.error) {
@@ -252,7 +249,9 @@ export const useUsers = () => {
           id: response.data.id,
           email: response.data.email,
           name: response.data.name || response.data.username || 'Пользователь',
-          avatar: response.data.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(response.data.name || 'U')}&background=3b82f6&color=fff`,
+          avatar:
+            response.data.avatar ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(response.data.name || 'U')}&background=3b82f6&color=fff`,
           globalRole: response.data.globalRole || 'BUSINESS',
           status: response.data.status || 'active',
           lastLogin: response.data.lastLogin ? new Date(response.data.lastLogin) : undefined,
@@ -260,10 +259,10 @@ export const useUsers = () => {
           projectsCount: response.data.projectsCount || 0,
           permissions: response.data.permissions || [],
           isEmailVerified: response.data.isEmailVerified || false,
-          twoFactorEnabled: response.data.twoFactorEnabled || false
+          twoFactorEnabled: response.data.twoFactorEnabled || false,
         };
-        
-        setUsers(prev => [newUser, ...prev]);
+
+        setUsers((prev) => [newUser, ...prev]);
       }
     } catch (error) {
       console.error('Ошибка создания пользователя:', error);
@@ -285,6 +284,6 @@ export const useUsers = () => {
     updateUserRole,
     updateUserStatus,
     bulkUpdateUsers,
-    createUser
+    createUser,
   };
 };

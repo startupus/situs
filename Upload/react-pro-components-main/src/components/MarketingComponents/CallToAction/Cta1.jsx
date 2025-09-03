@@ -3,12 +3,12 @@ import React from "react";
 const Cta = () => {
   return (
     <>
-      <section className="py-20 lg:py-[120px] bg-white dark:bg-dark">
+      <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
-          <div className="relative z-10 overflow-hidden rounded-sm bg-primary py-12 px-8 md:p-[70px]">
-            <div className="flex flex-wrap items-center -mx-4">
+          <div className="relative z-10 overflow-hidden rounded-sm bg-primary px-8 py-12 md:p-[70px]">
+            <div className="-mx-4 flex flex-wrap items-center">
               <div className="w-full px-4 lg:w-1/2">
-                <span className="block mb-4 text-base font-medium text-white">
+                <span className="mb-4 block text-base font-medium text-white">
                   Find Your Next Dream App
                 </span>
                 <h2 className="mb-6 text-3xl font-bold leading-tight text-white sm:mb-8 sm:text-[40px]/[48px] lg:mb-0">
@@ -20,13 +20,13 @@ const Cta = () => {
                 <div className="flex flex-wrap lg:justify-end">
                   <a
                     href="/#"
-                    className="inline-flex py-3 my-1 mr-4 text-base font-medium transition bg-white rounded-md hover:bg-shadow-1 text-primary px-7"
+                    className="hover:bg-shadow-1 my-1 mr-4 inline-flex rounded-md bg-white px-7 py-3 text-base font-medium text-primary transition"
                   >
                     Get Pro Version
                   </a>
                   <a
                     href="/#"
-                    className="inline-flex py-3 my-1 text-base font-medium text-white transition rounded-md bg-secondary px-7 hover:bg-secondary/90"
+                    className="my-1 inline-flex rounded-md bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-secondary/90"
                   >
                     Start Free Trial
                   </a>
@@ -35,7 +35,7 @@ const Cta = () => {
             </div>
 
             <div>
-              <span className="absolute top-0 left-0 z-[-1]">
+              <span className="absolute left-0 top-0 z-[-1]">
                 <svg
                   width="189"
                   height="162"

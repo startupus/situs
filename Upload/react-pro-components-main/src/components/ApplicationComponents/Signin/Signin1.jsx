@@ -8,10 +8,7 @@ const Signin = () => {
           <div className="w-full px-4">
             <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
               <div className="mb-10 text-center md:mb-16">
-                <a
-                  href="/#"
-                  className="mx-auto inline-block max-w-[160px]"
-                >
+                <a href="/#" className="mx-auto inline-block max-w-[160px]">
                   <img
                     src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
                     alt="logo"
@@ -103,10 +100,7 @@ const Signin = () => {
               </a>
               <p className="text-base text-body-color dark:text-dark-6">
                 <span className="pr-0.5">Not a member yet?</span>
-                <a
-                  href="/#"
-                  className="text-primary hover:underline"
-                >
+                <a href="/#" className="text-primary hover:underline">
                   Sign Up
                 </a>
               </p>
@@ -346,7 +340,7 @@ const InputBox = ({ type, placeholder, name }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
       />
     </div>
   );

@@ -34,7 +34,7 @@ function HeroFour() {
                   <input
                     type="text"
                     placeholder="Describe what you want to see"
-                    className="h-12 w-full bg-transparent px-5 py-3 text-black outline-hidden dark:text-white"
+                    className="outline-hidden h-12 w-full bg-transparent px-5 py-3 text-black dark:text-white"
                   />
                   <button className="h-12 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary/90">
                     Generate
@@ -62,8 +62,8 @@ function HeroFour() {
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 -z-10 aspect-174/291 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
-              <div className="absolute bottom-3 left-1/2 aspect-150/220 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
+            <div className="aspect-174/291 absolute bottom-0 left-0 -z-10 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
+              <div className="aspect-150/220 absolute bottom-3 left-1/2 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
                 <img
                   src="https://i.ibb.co/Jykt1jX/image-1.jpg"
                   alt="shape image"
@@ -125,8 +125,8 @@ function HeroFour() {
                 </svg>
               </span>
             </div>
-            <div className="absolute right-0 top-0 -z-10 aspect-174/291 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
-              <div className="absolute left-1/2 top-3 aspect-150/220 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
+            <div className="aspect-174/291 absolute right-0 top-0 -z-10 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
+              <div className="aspect-150/220 absolute left-1/2 top-3 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
                 <img
                   src="https://i.ibb.co/525y0z1/image-2.jpg"
                   alt="shape image"
@@ -557,7 +557,7 @@ function Navbar() {
   return (
     <header className="flex w-full items-center py-6">
       <div className="container mx-auto">
-        <div className="rounded-full border border-transparent bg-linear-to-t from-transparent to-white/10 px-5 backdrop-blur-[10px]">
+        <div className="bg-linear-to-t rounded-full border border-transparent from-transparent to-white/10 px-5 backdrop-blur-[10px]">
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-60 max-w-full px-4">
               <a href="#" className="block w-full py-5">
@@ -591,7 +591,7 @@ function Navbar() {
                     <li>
                       <a
                         href="#"
-                        className="hover:border-white/15 flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:bg-white/5 hover:text-white lg:inline-flex"
+                        className="flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:border-white/15 hover:bg-white/5 hover:text-white lg:inline-flex"
                       >
                         Home
                       </a>
@@ -599,7 +599,7 @@ function Navbar() {
                     <li>
                       <a
                         href="#"
-                        className="hover:border-white/15 flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:bg-white/5 hover:text-white lg:inline-flex"
+                        className="flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:border-white/15 hover:bg-white/5 hover:text-white lg:inline-flex"
                       >
                         Payment
                       </a>
@@ -607,7 +607,7 @@ function Navbar() {
                     <li>
                       <a
                         href="#"
-                        className="hover:border-white/15 flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:bg-white/5 hover:text-white lg:inline-flex"
+                        className="flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:border-white/15 hover:bg-white/5 hover:text-white lg:inline-flex"
                       >
                         Features
                       </a>

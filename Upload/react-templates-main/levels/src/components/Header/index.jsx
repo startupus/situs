@@ -14,7 +14,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
             }}
-            className="absolute flex items-center justify-center text-white -translate-y-1/2 rounded-sm top-1/2 left-4 h-9 w-9 bg-white/8 xl:hidden"
+            className="bg-white/8 absolute left-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-sm text-white xl:hidden"
           >
             <svg
               width="20"
@@ -51,17 +51,17 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
               </Link>
             </div>
 
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center mr-4">
+            <div className="flex w-full items-center justify-between">
+              <div className="mr-4 flex items-center">
                 <NavDropdown />
 
                 <div className="relative mr-11 hidden w-full max-w-[250px] lg:block">
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full pl-10 pr-4 text-sm font-medium text-white border border-transparent rounded-sm h-9 bg-white/8 placeholder-white/50 outline-hidden focus:border-white"
+                    className="bg-white/8 outline-hidden h-9 w-full rounded-sm border border-transparent pl-10 pr-4 text-sm font-medium text-white placeholder-white/50 focus:border-white"
                   />
-                  <button className="absolute text-white -translate-y-1/2 opacity-50 top-1/2 left-4">
+                  <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white opacity-50">
                     <svg
                       width="14"
                       height="14"
@@ -88,17 +88,17 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
 
               <div>
                 <div className="flex items-center justify-end">
-                  <div className="relative hidden mr-7 sm:block">
-                    <div className="w-6 h-4">
+                  <div className="relative mr-7 hidden sm:block">
+                    <div className="h-4 w-6">
                       <img
                         src={country}
                         alt="country"
-                        className="object-cover object-center w-full h-full"
+                        className="h-full w-full object-cover object-center"
                       />
                     </div>
                   </div>
 
-                  <div className="relative hidden mr-3 sm:block">
+                  <div className="relative mr-3 hidden sm:block">
                     <button>
                       <svg
                         width="16"
@@ -117,9 +117,9 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
                     </button>
                   </div>
 
-                  <div className="relative hidden mr-4 sm:block">
+                  <div className="relative mr-4 hidden sm:block">
                     <Link to="#" className="relative block">
-                      <span className="absolute -top-2 -right-[6px] block rounded-full bg-red-400 px-[6px] text-xs font-medium text-white">
+                      <span className="absolute -right-[6px] -top-2 block rounded-full bg-red-400 px-[6px] text-xs font-medium text-white">
                         3
                       </span>
                       <svg

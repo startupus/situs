@@ -68,7 +68,7 @@ const Portfolio = () => {
       </style>
 
       <section className="bg-gray-1 dark:bg-dark-2">
-        <div className="container mx-auto overflow-hidden py-20 lg:py-[120px] ">
+        <div className="container mx-auto overflow-hidden py-20 lg:py-[120px]">
           <Swiper
             pagination={{ clickable: true }}
             modules={[Pagination]}

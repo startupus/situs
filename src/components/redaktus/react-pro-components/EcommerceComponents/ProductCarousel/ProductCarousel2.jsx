@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ProductCarousel2 = () => {
   const sliderRef = useRef(null);
@@ -25,8 +25,8 @@ const ProductCarousel2 = () => {
             </h2>
             <span className="bg-primary mx-auto mb-[18px] block h-[3px] w-[100px]"></span>
             <p className="text-body-color dark:text-dark-6 text-base">
-              There are many variations of passages of Lorem Ipsum available but
-              the majority have suffered alteration in some form.
+              There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+              in some form.
             </p>
           </div>
 
@@ -172,16 +172,7 @@ const ProductCarousel2 = () => {
 
 export default ProductCarousel2;
 
-const ProductCard = ({
-  image,
-  newItem,
-  hotItem,
-  discountedPrice,
-  link,
-  name,
-  price,
-  button,
-}) => {
+const ProductCard = ({ image, newItem, hotItem, discountedPrice, link, name, price, button }) => {
   return (
     <div className="shadow-1 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
       <div className="relative">
@@ -215,7 +206,8 @@ const ProductCard = ({
           {discountedPrice && (
             <span>
               <span className="text-secondary-color dark:text-dark-6 text-base line-through">
-                {price}{'  '}
+                {price}
+                {'  '}
               </span>
               {discountedPrice}
             </span>
@@ -241,13 +233,7 @@ const ProductCard = ({
 const Star = () => {
   return (
     <span>
-      <svg
-        width={16}
-        height={16}
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1818_932)">
           <path
             d="M14.925 5.975L10.4 5.275L8.34996 0.975C8.19996 0.675 7.79996 0.675 7.64996 0.975L5.59996 5.3L1.09996 5.975C0.77496 6.025 0.64996 6.45 0.89996 6.675L4.17496 10.05L3.39996 14.775C3.34996 15.1 3.67496 15.375 3.97496 15.175L8.04996 12.95L12.1 15.175C12.375 15.325 12.725 15.075 12.65 14.775L11.875 10.05L15.15 6.675C15.35 6.45 15.25 6.025 14.925 5.975Z"

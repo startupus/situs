@@ -58,43 +58,43 @@ describe('SitusSupport', () => {
 
   it('фильтрует обращения по статусу', async () => {
     const user = userEvent.setup();
-    
+
     // Фильтруем по статусу "Открытые"
     const statusSelect = screen.getByDisplayValue('Все статусы');
     await user.selectOptions(statusSelect, 'open');
-    
+
     // Проверяем, что отображаются только открытые обращения
     expect(screen.getByText('Проблема с подключением API')).toBeInTheDocument();
     expect(screen.getByText('Ошибка в компоненте Modal')).toBeInTheDocument();
-    
+
     // Проверяем, что закрытые обращения не отображаются
     expect(screen.queryByText('Предложение новой функции')).not.toBeInTheDocument();
   });
 
   it('фильтрует обращения по приоритету', async () => {
     const user = userEvent.setup();
-    
+
     // Фильтруем по приоритету "Срочно"
     const prioritySelect = screen.getByDisplayValue('Все приоритеты');
     await user.selectOptions(prioritySelect, 'urgent');
-    
+
     // Проверяем, что отображается только срочное обращение
     expect(screen.getByText('Ошибка в компоненте Modal')).toBeInTheDocument();
-    
+
     // Проверяем, что обращения с другими приоритетами не отображаются
     expect(screen.queryByText('Проблема с подключением API')).not.toBeInTheDocument();
   });
 
   it('выполняет поиск по тексту', async () => {
     const user = userEvent.setup();
-    
+
     // Вводим поисковый запрос
     const searchInput = screen.getByPlaceholderText('Поиск по названию, ID...');
     await user.type(searchInput, 'API');
-    
+
     // Проверяем, что отображается только обращение с API
     expect(screen.getByText('Проблема с подключением API')).toBeInTheDocument();
-    
+
     // Проверяем, что другие обращения не отображаются
     expect(screen.queryByText('Вопрос по тарифам')).not.toBeInTheDocument();
     expect(screen.queryByText('Предложение новой функции')).not.toBeInTheDocument();
@@ -102,22 +102,22 @@ describe('SitusSupport', () => {
 
   it('сбрасывает фильтры при нажатии на кнопку "Сбросить"', async () => {
     const user = userEvent.setup();
-    
+
     // Устанавливаем фильтры
     const statusSelect = screen.getByDisplayValue('Все статусы');
     await user.selectOptions(statusSelect, 'open');
-    
+
     const searchInput = screen.getByPlaceholderText('Поиск по названию, ID...');
     await user.type(searchInput, 'test');
-    
+
     // Нажимаем кнопку сброса
     const resetButton = screen.getByText('Сбросить');
     await user.click(resetButton);
-    
+
     // Проверяем, что фильтры сброшены
     expect(statusSelect).toHaveValue('all');
     expect(searchInput).toHaveValue('');
-    
+
     // Проверяем, что все обращения снова видны
     expect(screen.getByText('Проблема с подключением API')).toBeInTheDocument();
     expect(screen.getByText('Вопрос по тарифам')).toBeInTheDocument();
@@ -140,11 +140,11 @@ describe('SitusSupport', () => {
 
   it('отображает сообщение когда обращения не найдены', async () => {
     const user = userEvent.setup();
-    
+
     // Вводим поисковый запрос, который не даст результатов
     const searchInput = screen.getByPlaceholderText('Поиск по названию, ID...');
     await user.type(searchInput, 'несуществующий запрос');
-    
+
     // Проверяем, что отображается сообщение об отсутствии результатов
     expect(screen.getByText('Обращения не найдены')).toBeInTheDocument();
     expect(screen.getByText('Попробуйте изменить фильтры или создать новое обращение.')).toBeInTheDocument();
@@ -158,7 +158,7 @@ describe('SitusSupport', () => {
   it('отображает правильную статистику', () => {
     // Всего обращений: 5
     expect(screen.getByText('5')).toBeInTheDocument();
-    
+
     // Статистика по статусам должна быть корректной
     // Открытых: 2, В работе: 2, Закрытых: 1
     const statsNumbers = screen.getAllByText(/^[0-9]+$/);
@@ -174,9 +174,9 @@ describe('SitusSupport - Функции помощники', () => {
       month: '2-digit',
       year: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
-    
+
     expect(formatted).toContain('15.01.2024');
   });
-}); 
+});

@@ -37,7 +37,7 @@ const HeroArea = () => {
                 <form className="mb-7 flex max-w-[455px] flex-wrap">
                   <input
                     type="email"
-                    className="mb-3 mr-3 h-[52px] w-full rounded-md border border-stroke bg-white px-5 text-base text-body-color outline-hidden placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary sm:max-w-[220px] md:max-w-[315px] lg:max-w-[250px] xl:max-w-[300px]"
+                    className="outline-hidden mb-3 mr-3 h-[52px] w-full rounded-md border border-stroke bg-white px-5 text-base text-body-color placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary sm:max-w-[220px] md:max-w-[315px] lg:max-w-[250px] xl:max-w-[300px]"
                     placeholder="Your work mail"
                   />
                   <button className="mb-3 h-[52px] rounded-md bg-primary px-7 text-base font-medium text-white transition hover:bg-blue-dark">

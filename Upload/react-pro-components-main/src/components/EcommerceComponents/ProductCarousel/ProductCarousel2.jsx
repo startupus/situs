@@ -20,11 +20,11 @@ const ProductCarousel2 = () => {
       <section className="dark:bg-dark">
         <div className="container mx-auto overflow-hidden py-20 lg:py-[120px]">
           <div className="mx-auto mb-12 max-w-[510px] text-center lg:mb-20">
-            <h2 className="text-dark dark:text-white mb-4 text-3xl font-bold sm:text-4xl md:leading-[1.2] md:text-[40px]">
+            <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
               You may also like
             </h2>
-            <span className="bg-primary mx-auto mb-[18px] block h-[3px] w-[100px]"></span>
-            <p className="text-body-color dark:text-dark-6 text-base">
+            <span className="mx-auto mb-[18px] block h-[3px] w-[100px] bg-primary"></span>
+            <p className="text-base text-body-color dark:text-dark-6">
               There are many variations of passages of Lorem Ipsum available but
               the majority have suffered alteration in some form.
             </p>
@@ -133,9 +133,9 @@ const ProductCarousel2 = () => {
               />
             </SwiperSlide>
 
-            <div className="z-50 absolute left-0 right-0 -bottom-[52px] flex items-center justify-center space-x-4">
+            <div className="absolute -bottom-[52px] left-0 right-0 z-50 flex items-center justify-center space-x-4">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="border-body-color dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-white dark:bg-dark-2 hover:text-white">
+                <button className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-body-color bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
                   <svg
                     width={21}
                     height={20}
@@ -149,7 +149,7 @@ const ProductCarousel2 = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="border-body-color dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-white dark:bg-dark-2 hover:text-white">
+                <button className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-body-color bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
                   <svg
                     width={21}
                     height={20}
@@ -183,16 +183,16 @@ const ProductCard = ({
   button,
 }) => {
   return (
-    <div className="shadow-1 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
+    <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
       <div className="relative">
         <img src={image} alt="product" className="w-full" />
         {discountedPrice && (
-          <span className="bg-primary absolute left-6 top-4 inline-flex items-center justify-center rounded-sm px-[10px] py-[3px] text-sm font-medium text-white">
+          <span className="absolute left-6 top-4 inline-flex items-center justify-center rounded-sm bg-primary px-[10px] py-[3px] text-sm font-medium text-white">
             -50%
           </span>
         )}
         {newItem && (
-          <span className="bg-secondary absolute left-6 top-4 inline-flex items-center justify-center rounded-sm px-[10px] py-[3px] text-sm font-medium text-white">
+          <span className="absolute left-6 top-4 inline-flex items-center justify-center rounded-sm bg-secondary px-[10px] py-[3px] text-sm font-medium text-white">
             New
           </span>
         )}
@@ -202,11 +202,11 @@ const ProductCard = ({
           </span>
         )}
       </div>
-      <div className="px-6 pt-6 pb-8 text-center">
+      <div className="px-6 pb-8 pt-6 text-center">
         <h3>
           <a
             href={link}
-            className="hover:text-primary xs:text-xl text-lg font-semibold text-dark dark:text-white block mb-[5px]"
+            className="mb-[5px] block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl"
           >
             {name}
           </a>
@@ -214,15 +214,16 @@ const ProductCard = ({
         <p className="text-lg font-medium text-dark dark:text-white">
           {discountedPrice && (
             <span>
-              <span className="text-secondary-color dark:text-dark-6 text-base line-through">
-                {price}{'  '}
+              <span className="text-base text-secondary-color line-through dark:text-dark-6">
+                {price}
+                {"  "}
               </span>
               {discountedPrice}
             </span>
           )}
           {!discountedPrice && price}
         </p>
-        <div className="flex items-center gap-1 justify-center pt-[18px] pb-5">
+        <div className="flex items-center justify-center gap-1 pb-5 pt-[18px]">
           <Star />
           <Star />
           <Star />
@@ -230,7 +231,7 @@ const ProductCard = ({
           <Star />
         </div>
         <div className="text-center">
-          <button className="bg-primary inline-flex items-center justify-center rounded-md py-3 px-7 text-center text-base font-medium text-white hover:bg-dark">
+          <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-dark">
             {button}
           </button>
         </div>

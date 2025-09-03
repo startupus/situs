@@ -15,7 +15,7 @@ export default function Select1() {
             <div className="relative">
               <select
                 name="default-select"
-                className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-12 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-12 text-dark focus:border-primary dark:border-dark-3 dark:text-white"
               >
                 <option value="Select option 1">Select option 1</option>
                 <option value="Select option 2">Select option 2</option>

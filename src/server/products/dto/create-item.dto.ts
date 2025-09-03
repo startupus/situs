@@ -26,13 +26,13 @@ export class CreateItemDto {
   price!: number;
 
   @IsOptional()
-  @Transform(({ value }) => value ? parseFloat(value) : undefined)
+  @Transform(({ value }) => (value ? parseFloat(value) : undefined))
   @IsDecimal({ decimal_digits: '0,2' }, { message: 'Цена сравнения должна быть числом' })
   @Min(0, { message: 'Цена сравнения не может быть отрицательной' })
   comparePrice?: number;
 
   @IsOptional()
-  @Transform(({ value }) => value ? parseFloat(value) : undefined)
+  @Transform(({ value }) => (value ? parseFloat(value) : undefined))
   @IsDecimal({ decimal_digits: '0,2' }, { message: 'Себестоимость должна быть числом' })
   @Min(0, { message: 'Себестоимость не может быть отрицательной' })
   costPrice?: number;
@@ -96,7 +96,7 @@ export class CreateItemDto {
   isDigital?: boolean;
 
   @IsOptional()
-  @Transform(({ value }) => value ? parseFloat(value) : undefined)
+  @Transform(({ value }) => (value ? parseFloat(value) : undefined))
   @IsDecimal({ decimal_digits: '0,3' }, { message: 'Вес должен быть числом' })
   @Min(0, { message: 'Вес не может быть отрицательным' })
   weight?: number;

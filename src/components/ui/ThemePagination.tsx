@@ -22,13 +22,13 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
   showFirstLast = false,
   showPrevNext = true,
   maxVisiblePages = 5,
-  className = ''
+  className = '',
 }) => {
   const getSizeStyles = () => {
     const sizes = {
       sm: 'h-8 min-w-8 px-2 text-sm',
       md: 'h-10 min-w-10 px-3 text-base',
-      lg: 'h-12 min-w-12 px-4 text-lg'
+      lg: 'h-12 min-w-12 px-4 text-lg',
     };
     return sizes[size];
   };
@@ -47,7 +47,7 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
         : 'bg-transparent text-gray-700 border-gray-300 hover:bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800',
       minimal: isActive
         ? 'bg-blue-600 text-white'
-        : 'bg-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
+        : 'bg-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800',
     };
     return variants[variant];
   };
@@ -119,7 +119,9 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
                 ${getSizeStyles()}
                 ${getBorderStyles()}
                 ${getVariantStyles()}
-              `.trim().replace(/\s+/g, ' ')}
+              `
+                .trim()
+                .replace(/\s+/g, ' ')}
               aria-label="Первая страница"
             >
               Первая
@@ -138,7 +140,9 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
                 ${getSizeStyles()}
                 ${getBorderStyles()}
                 ${getVariantStyles(false, currentPage <= 1)}
-              `.trim().replace(/\s+/g, ' ')}
+              `
+                .trim()
+                .replace(/\s+/g, ' ')}
               aria-label="Предыдущая страница"
             >
               <FiChevronLeft className="w-4 h-4" />
@@ -150,10 +154,14 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
         {visiblePages.map((page, index) => (
           <li key={index}>
             {page === 'ellipsis' ? (
-              <span className={`
+              <span
+                className={`
                 flex items-center justify-center font-medium text-gray-500 dark:text-gray-400
                 ${getSizeStyles()}
-              `.trim().replace(/\s+/g, ' ')}>
+              `
+                  .trim()
+                  .replace(/\s+/g, ' ')}
+              >
                 <FiMoreHorizontal className="w-4 h-4" />
               </span>
             ) : (
@@ -164,7 +172,9 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
                   ${getSizeStyles()}
                   ${getBorderStyles()}
                   ${getVariantStyles(page === currentPage)}
-                `.trim().replace(/\s+/g, ' ')}
+                `
+                  .trim()
+                  .replace(/\s+/g, ' ')}
                 aria-label={`Страница ${page}`}
                 aria-current={page === currentPage ? 'page' : undefined}
               >
@@ -185,7 +195,9 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
                 ${getSizeStyles()}
                 ${getBorderStyles()}
                 ${getVariantStyles(false, currentPage >= totalPages)}
-              `.trim().replace(/\s+/g, ' ')}
+              `
+                .trim()
+                .replace(/\s+/g, ' ')}
               aria-label="Следующая страница"
             >
               <FiChevronRight className="w-4 h-4" />
@@ -203,7 +215,9 @@ const ThemePagination: React.FC<ThemePaginationProps> = ({
                 ${getSizeStyles()}
                 ${getBorderStyles()}
                 ${getVariantStyles()}
-              `.trim().replace(/\s+/g, ' ')}
+              `
+                .trim()
+                .replace(/\s+/g, ' ')}
               aria-label="Последняя страница"
             >
               Последняя

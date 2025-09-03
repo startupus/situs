@@ -2,60 +2,60 @@ import React from "react";
 
 const tableData = [
   {
-    name: 'Musharof Chowdhury',
-    email: 'musharof@gmail.com',
-    productName: 'Apple Macbook Pro M1',
-    productCapacity: '8/256 GB',
-    orderNumber: '#WE234343',
-    date: '25 Dec 2024',
-    status: 'pending',
+    name: "Musharof Chowdhury",
+    email: "musharof@gmail.com",
+    productName: "Apple Macbook Pro M1",
+    productCapacity: "8/256 GB",
+    orderNumber: "#WE234343",
+    date: "25 Dec 2024",
+    status: "pending",
   },
   {
-    name: 'Shafiq Hammad',
-    email: 'shafiq@gmail.com',
-    productName: 'iPhone 13 Pro Max',
-    productCapacity: '4/256 GB',
-    orderNumber: '#WE234523',
-    date: '25 Dec 2024',
-    status: 'pending',
+    name: "Shafiq Hammad",
+    email: "shafiq@gmail.com",
+    productName: "iPhone 13 Pro Max",
+    productCapacity: "4/256 GB",
+    orderNumber: "#WE234523",
+    date: "25 Dec 2024",
+    status: "pending",
   },
   {
-    name: 'Naimur Rahman',
-    email: 'naim@gmail.com',
-    productName: 'Apple watch series 7',
-    productCapacity: '8/256 GB',
-    orderNumber: '#WE234344',
-    date: '13 Dec 2023',
-    status: 'cancelled',
+    name: "Naimur Rahman",
+    email: "naim@gmail.com",
+    productName: "Apple watch series 7",
+    productCapacity: "8/256 GB",
+    orderNumber: "#WE234344",
+    date: "13 Dec 2023",
+    status: "cancelled",
   },
   {
-    name: 'Jhon Smith',
-    email: 'smith@gmail.com',
-    productName: 'Apple Macbook air M1',
-    productCapacity: '4/256 GB',
-    orderNumber: '#WE234346',
-    date: '20 Dec 2025',
-    status: 'shipped',
+    name: "Jhon Smith",
+    email: "smith@gmail.com",
+    productName: "Apple Macbook air M1",
+    productCapacity: "4/256 GB",
+    orderNumber: "#WE234346",
+    date: "20 Dec 2025",
+    status: "shipped",
   },
-]
+];
 
 const headers = [
-  { name: 'Customer', styles: 'min-w-[260px] text-left' },
-  { name: 'Product', styles: 'min-w-[260px] text-left' },
-  { name: 'Order Number', styles: 'min-w-[160px] text-left' },
-  { name: 'Date', styles: 'min-w-[170px] text-left' },
-  { name: 'Status', styles: 'min-w-[150px] text-left' },
-  { name: 'Confirmation', styles: 'min-w-[200px] text-right' },
-]
+  { name: "Customer", styles: "min-w-[260px] text-left" },
+  { name: "Product", styles: "min-w-[260px] text-left" },
+  { name: "Order Number", styles: "min-w-[160px] text-left" },
+  { name: "Date", styles: "min-w-[170px] text-left" },
+  { name: "Status", styles: "min-w-[150px] text-left" },
+  { name: "Confirmation", styles: "min-w-[200px] text-right" },
+];
 
 const Table10 = () => {
   return (
-    <section className='bg-white py-20 lg:py-[120px] dark:bg-dark'>
-      <div className='mx-auto px-4 lg:container'>
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
+      <div className="mx-auto px-4 lg:container">
         <TableTop />
-        <div className='bg-white border rounded-lg dark:bg-dark-2 dark:border-dark-3 border-stroke'>
-          <div className='max-w-full overflow-x-auto'>
-            <table className='w-full table-auto rounded-lg'>
+        <div className="rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
+          <div className="max-w-full overflow-x-auto">
+            <table className="w-full table-auto rounded-lg">
               <TableHead headers={headers} />
               <TableBody data={tableData} />
             </table>
@@ -63,50 +63,50 @@ const Table10 = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Table10;
 
 const TableTop = () => {
   return (
-    <div className='mb-8 items-center justify-between rounded-lg bg-[#F8F9FD] dark:bg-dark-2 py-4 px-5 md:flex'>
-      <div className='mb-4 w-full md:mb-0 md:max-w-[220px] lg:max-w-[415px]'>
-        <div className='relative'>
+    <div className="mb-8 items-center justify-between rounded-lg bg-[#F8F9FD] px-5 py-4 dark:bg-dark-2 md:flex">
+      <div className="mb-4 w-full md:mb-0 md:max-w-[220px] lg:max-w-[415px]">
+        <div className="relative">
           <input
-            type='text'
-            placeholder='Search here...'
-            className='h-[50px] w-full rounded-lg border border-stroke dark:border-dark-3 dark:text-dark-6 bg-white dark:bg-dark pr-6 pl-14 text-base text-body-color outline-hidden focus:border-primary'
+            type="text"
+            placeholder="Search here..."
+            className="outline-hidden h-[50px] w-full rounded-lg border border-stroke bg-white pl-14 pr-6 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
           />
-          <span className='absolute left-6 top-1/2 -translate-y-1/2'>
+          <span className="absolute left-6 top-1/2 -translate-y-1/2">
             <svg
-              width='18'
-              height='18'
-              viewBox='0 0 18 18'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fillRule='evenodd'
-                clipRule='evenodd'
-                d='M8.25 3C5.3505 3 3 5.3505 3 8.25C3 11.1495 5.3505 13.5 8.25 13.5C11.1495 13.5 13.5 11.1495 13.5 8.25C13.5 5.3505 11.1495 3 8.25 3ZM1.5 8.25C1.5 4.52208 4.52208 1.5 8.25 1.5C11.9779 1.5 15 4.52208 15 8.25C15 11.9779 11.9779 15 8.25 15C4.52208 15 1.5 11.9779 1.5 8.25Z'
-                fill='#637381'
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M8.25 3C5.3505 3 3 5.3505 3 8.25C3 11.1495 5.3505 13.5 8.25 13.5C11.1495 13.5 13.5 11.1495 13.5 8.25C13.5 5.3505 11.1495 3 8.25 3ZM1.5 8.25C1.5 4.52208 4.52208 1.5 8.25 1.5C11.9779 1.5 15 4.52208 15 8.25C15 11.9779 11.9779 15 8.25 15C4.52208 15 1.5 11.9779 1.5 8.25Z"
+                fill="#637381"
               />
               <path
-                fillRule='evenodd'
-                clipRule='evenodd'
-                d='M11.957 11.958C12.2499 11.6651 12.7247 11.6651 13.0176 11.958L16.2801 15.2205C16.573 15.5133 16.573 15.9882 16.2801 16.2811C15.9872 16.574 15.5124 16.574 15.2195 16.2811L11.957 13.0186C11.6641 12.7257 11.6641 12.2508 11.957 11.958Z'
-                fill='#637381'
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M11.957 11.958C12.2499 11.6651 12.7247 11.6651 13.0176 11.958L16.2801 15.2205C16.573 15.5133 16.573 15.9882 16.2801 16.2811C15.9872 16.574 15.5124 16.574 15.2195 16.2811L11.957 13.0186C11.6641 12.7257 11.6641 12.2508 11.957 11.958Z"
+                fill="#637381"
               />
             </svg>
           </span>
         </div>
       </div>
 
-      <div className='w-full'>
-        <div className='items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 md:justify-end'>
-          <button className='flex h-[50px] items-center justify-center rounded-md border border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 dark:bg-dark bg-white hover:text-primary hover:border-primary px-5'>
-            <span className='mr-2'>
+      <div className="w-full">
+        <div className="items-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0 md:justify-end">
+          <button className="flex h-[50px] items-center justify-center rounded-md border border-stroke bg-white px-5 text-body-color hover:border-primary hover:text-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6">
+            <span className="mr-2">
               <svg
                 width="18"
                 height="18"
@@ -123,8 +123,8 @@ const TableTop = () => {
             Mar 28, 2022 - Apr 29, 2022
           </button>
 
-          <button className='flex h-[50px] items-center justify-center hover:border-primary rounded-md border border-stroke dark:border-dark-3 dark:bg-dark text-body-color dark:text-dark-6 hover:text-primary bg-white px-5'>
-            <span className='mr-2'>
+          <button className="flex h-[50px] items-center justify-center rounded-md border border-stroke bg-white px-5 text-body-color hover:border-primary hover:text-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6">
+            <span className="mr-2">
               <svg
                 width="18"
                 height="18"
@@ -143,69 +143,79 @@ const TableTop = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const TableHead = ({ headers }) => {
   return (
     <thead>
-      <tr className='border-b border-stroke dark:border-dark-3'>
+      <tr className="border-b border-stroke dark:border-dark-3">
         {headers.map((header, index) => (
           <th
-            className={`py-5 px-4 first:pl-9 last:pr-9 ${header.styles}`}
+            className={`px-4 py-5 first:pl-9 last:pr-9 ${header.styles}`}
             key={index}
           >
-            <p className='text-base font-medium text-left text-dark dark:text-white'>{header.name}</p>
+            <p className="text-left text-base font-medium text-dark dark:text-white">
+              {header.name}
+            </p>
           </th>
         ))}
       </tr>
     </thead>
-  )
-}
+  );
+};
 
 const TableBody = ({ data }) => {
   return (
     <tbody>
       {data.map((row, index) => (
-        <tr className='border-b border-stroke dark:border-dark-3' key={index}>
-          <td className='py-6 pr-4 pl-9'>
-            <h5 className='text-base font-medium text-body-color dark:text-dark-6'>
+        <tr className="border-b border-stroke dark:border-dark-3" key={index}>
+          <td className="py-6 pl-9 pr-4">
+            <h5 className="text-base font-medium text-body-color dark:text-dark-6">
               {row.name}
             </h5>
-            <p className='text-sm text-body-color dark:text-dark-6'>{row.email}</p>
+            <p className="text-sm text-body-color dark:text-dark-6">
+              {row.email}
+            </p>
           </td>
-          <td className='py-6 px-4'>
-            <h5 className='text-base font-medium text-body-color dark:text-dark-6'>
+          <td className="px-4 py-6">
+            <h5 className="text-base font-medium text-body-color dark:text-dark-6">
               {row.productName}
             </h5>
-            <p className='text-sm text-body-color dark:text-dark-6'>{row.productCapacity}</p>
+            <p className="text-sm text-body-color dark:text-dark-6">
+              {row.productCapacity}
+            </p>
           </td>
-          <td className='py-6 px-4'>
-            <p className='text-sm text-body-color dark:text-dark-6'>{row.orderNumber}</p>
+          <td className="px-4 py-6">
+            <p className="text-sm text-body-color dark:text-dark-6">
+              {row.orderNumber}
+            </p>
           </td>
-          <td className='py-6 px-4'>
-            <p className='text-sm text-body-color dark:text-dark-6'>{row.date}</p>
+          <td className="px-4 py-6">
+            <p className="text-sm text-body-color dark:text-dark-6">
+              {row.date}
+            </p>
           </td>
-          <td className='py-6 px-4'>
-            {row.status === 'pending' && (
-              <p className='inline-flex items-center justify-center rounded-full bg-yellow-light-4 py-1 px-[14px] text-sm font-medium text-yellow-dark-2'>
+          <td className="px-4 py-6">
+            {row.status === "pending" && (
+              <p className="inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium text-yellow-dark-2">
                 Pending
               </p>
             )}
-            {row.status === 'cancelled' && (
-              <p className='bg-red-light-5 inline-flex items-center justify-center rounded-full py-1 px-[14px] text-sm font-medium text-red-dark'>
+            {row.status === "cancelled" && (
+              <p className="inline-flex items-center justify-center rounded-full bg-red-light-5 px-[14px] py-1 text-sm font-medium text-red-dark">
                 Cancelled
               </p>
             )}
-            {row.status === 'shipped' && (
-              <p className='bg-green-light-6 text-green-dark inline-flex items-center justify-center rounded-full py-1 px-[14px] text-sm font-medium'>
+            {row.status === "shipped" && (
+              <p className="inline-flex items-center justify-center rounded-full bg-green-light-6 px-[14px] py-1 text-sm font-medium text-green-dark">
                 Shipped
               </p>
             )}
           </td>
-          <td className='py-6 pl-4 pr-9 text-right'>
-            {row.status === 'pending' && (
-              <button className='inline-flex items-center justify-center px-5 py-2 text-base font-medium border rounded-md border-primary text-primary hover:bg-primary hover:text-white'>
+          <td className="py-6 pl-4 pr-9 text-right">
+            {row.status === "pending" && (
+              <button className="inline-flex items-center justify-center rounded-md border border-primary px-5 py-2 text-base font-medium text-primary hover:bg-primary hover:text-white">
                 Confirm Order
               </button>
             )}
@@ -213,5 +223,5 @@ const TableBody = ({ data }) => {
         </tr>
       ))}
     </tbody>
-  )
-}
+  );
+};

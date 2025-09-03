@@ -16,7 +16,7 @@ export { default as Alert2 } from './Alerts/InfoAlert1';
 export { default as Alert3 } from './Alerts/SuccessAlert1';
 export { default as Alert4 } from './Alerts/WarningAlert1';
 
-// Avatar - безопасные аватары  
+// Avatar - безопасные аватары
 export { default as Avatar1 } from './Avatar/Avatar1';
 export { default as Avatar2 } from './Avatar/Avatar2';
 export { default as Avatar3 } from './Avatar/Avatar3';

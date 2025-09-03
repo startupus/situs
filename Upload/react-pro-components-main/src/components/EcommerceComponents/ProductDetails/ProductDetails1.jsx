@@ -40,7 +40,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-1/2 xl:w-7/12">
@@ -172,20 +172,20 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <p className="text-body-color mb-8 text-base font-medium">
+            <p className="mb-8 text-base font-medium text-body-color">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non
               erat quam. Vestibulum aliquam nibh dui, et aliquet nibh euismod
               quis.
             </p>
 
-            <div className="xs:flex mb-7 flex-wrap justify-between">
-              <div className="xs:mb-0 mb-8">
+            <div className="mb-7 flex-wrap justify-between xs:flex">
+              <div className="mb-8 xs:mb-0">
                 <p className="mb-3 text-base font-medium text-dark dark:text-white">
                   Quantity
                 </p>
-                <div className="inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                  <span 
-                    className="cursor-pointer select-none flex items-center justify-center w-[34px] h-9 text-dark dark:text-white" 
+                <div className="inline-flex items-center rounded-sm border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
+                  <span
+                    className="flex h-9 w-[34px] cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                     onClick={decrement}
                   >
                     <svg
@@ -199,9 +199,11 @@ const ProductDetails = () => {
                       <path d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" />
                     </svg>
                   </span>
-                  <span className="py-[6px] px-[19px] border-x border-stroke dark:border-dark-3">{quantity}</span>
-                  <span 
-                    className="cursor-pointer select-none flex items-center justify-center w-[34px] h-9 text-dark dark:text-white"
+                  <span className="border-x border-stroke px-[19px] py-[6px] dark:border-dark-3">
+                    {quantity}
+                  </span>
+                  <span
+                    className="flex h-9 w-[34px] cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                     onClick={increment}
                   >
                     <svg
@@ -225,17 +227,17 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className="xs:text-right">
-                <span className="block leading-[40px] text-[28px] font-semibold text-dark dark:text-white">
+                <span className="block text-[28px] font-semibold leading-[40px] text-dark dark:text-white">
                   $29.00
                 </span>
-                <span className="text-body-color text-base dark:text-dark-6">
+                <span className="text-base text-body-color dark:text-dark-6">
                   +12% VAT Added
                 </span>
               </div>
             </div>
 
             <div className="mb-8">
-              <button className="bg-primary flex w-full items-center justify-center rounded-md py-[13px] px-10 text-center text-base font-medium text-white hover:bg-blue-dark">
+              <button className="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark">
                 Add to Cart
               </button>
             </div>
@@ -245,21 +247,15 @@ const ProductDetails = () => {
             </h3>
 
             <div className="mb-9 space-y-4">
-              <p
-                className="flex justify-between border-b border-stroke dark:border-dark-3 pb-4 text-base font-medium text-dark dark:text-white"
-              >
+              <p className="flex justify-between border-b border-stroke pb-4 text-base font-medium text-dark dark:border-dark-3 dark:text-white">
                 <span className="whitespace-nowrap"> Size </span>
                 <span> Small, Medium, Large </span>
               </p>
-              <p
-                className="flex justify-between border-b border-stroke dark:border-dark-3 pb-4 text-base font-medium text-dark dark:text-white"
-              >
+              <p className="flex justify-between border-b border-stroke pb-4 text-base font-medium text-dark dark:border-dark-3 dark:text-white">
                 <span className="whitespace-nowrap"> Color </span>
                 <span> White, Black, Gray </span>
               </p>
-              <p
-                className="flex justify-between text-base font-medium text-dark dark:text-white"
-              >
+              <p className="flex justify-between text-base font-medium text-dark dark:text-white">
                 <span className="whitespace-nowrap"> Brand </span>
                 <span> Shirt Flex </span>
               </p>
@@ -278,7 +274,7 @@ const ProductDetails = () => {
                 />
                 <label
                   htmlFor="small"
-                  className="hover:border-primary hover:bg-primary inline-block cursor-pointer text-dark dark:text-white text-base font-medium rounded-[5px] border border-stroke dark:border-dark-3 py-2 px-5 hover:text-white"
+                  className="inline-block cursor-pointer rounded-[5px] border border-stroke px-5 py-2 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                 >
                   Small
                 </label>
@@ -292,7 +288,7 @@ const ProductDetails = () => {
                 />
                 <label
                   htmlFor="medium"
-                  className="hover:border-primary hover:bg-primary inline-block cursor-pointer text-dark dark:text-white text-base font-medium rounded-[5px] border border-stroke dark:border-dark-3 py-2 px-5 hover:text-white"
+                  className="inline-block cursor-pointer rounded-[5px] border border-stroke px-5 py-2 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                 >
                   Medium
                 </label>
@@ -306,7 +302,7 @@ const ProductDetails = () => {
                 />
                 <label
                   htmlFor="large"
-                  className="hover:border-primary hover:bg-primary inline-block cursor-pointer text-dark dark:text-white text-base font-medium rounded-[5px] border border-stroke dark:border-dark-3 py-2 px-5 hover:text-white"
+                  className="inline-block cursor-pointer rounded-[5px] border border-stroke px-5 py-2 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                 >
                   Large
                 </label>
@@ -326,7 +322,7 @@ const ProductDetails = () => {
                 />
                 <label
                   htmlFor="gray"
-                  className="box bg-body-color flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm text-white"
+                  className="box flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm bg-body-color text-white"
                 >
                   <span className="opacity-0">
                     <svg
@@ -379,7 +375,7 @@ const ProductDetails = () => {
                 />
                 <label
                   htmlFor="blue"
-                  className="box bg-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm text-white"
+                  className="box flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm bg-primary text-white"
                 >
                   <span className="opacity-0">
                     <svg
@@ -408,7 +404,7 @@ const ProductDetails = () => {
                 />
                 <label
                   htmlFor="green"
-                  className="box bg-secondary flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm text-white"
+                  className="box flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm bg-secondary text-white"
                 >
                   <span className="opacity-0">
                     <svg

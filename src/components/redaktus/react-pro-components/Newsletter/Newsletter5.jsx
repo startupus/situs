@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const Newsletter5 = () => {
   const [modalOpen, setModalOpen] = useState(true);
 
   const divRef = useRef(null);
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   });
 
@@ -29,7 +29,7 @@ const Newsletter5 = () => {
       </div>
       <div
         className={`fixed left-0 top-0 flex h-full min-h-screen w-full items-center justify-center bg-body-color px-4 py-5 dark:bg-dark-3 ${
-          modalOpen ? "block" : "hidden"
+          modalOpen ? 'block' : 'hidden'
         }`}
       >
         <div className="mx-auto px-4 lg:container">
@@ -41,13 +41,7 @@ const Newsletter5 = () => {
               onClick={() => setModalOpen(false)}
               className="absolute right-5 top-5 text-body-color hover:text-dark dark:hover:text-white"
             >
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
@@ -78,8 +72,7 @@ const Newsletter5 = () => {
                     Subscribe Now to Get Our Latest Offers!
                   </h2>
                   <p className="mb-10 text-base text-body-color dark:text-dark-6">
-                    There are many variations of passages of Lorem Ipsum
-                    available but the majority have.
+                    There are many variations of passages of Lorem Ipsum available but the majority have.
                   </p>
                   <form className="mb-5 space-y-4">
                     <input
@@ -91,9 +84,7 @@ const Newsletter5 = () => {
                       Subscribe Now
                     </button>
                   </form>
-                  <p className="text-center text-base text-body-color dark:text-dark-6">
-                    No spam guaranteed
-                  </p>
+                  <p className="text-center text-base text-body-color dark:text-dark-6">No spam guaranteed</p>
                 </div>
               </div>
             </div>

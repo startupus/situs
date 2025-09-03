@@ -10,7 +10,7 @@ const Portfolio = () => {
         <div className="container">
           <div className="mb-11 flex items-end justify-between gap-4 max-md:flex-wrap">
             <div className="w-full max-w-[500px]">
-              <h2 className="text-3xl font-bold leading-tight! -tracking-[.72px] text-dark dark:text-white sm:text-4xl">
+              <h2 className="leading-tight! text-3xl font-bold -tracking-[.72px] text-dark dark:text-white sm:text-4xl">
                 Exploring the Artistry Within Our Community
               </h2>
             </div>

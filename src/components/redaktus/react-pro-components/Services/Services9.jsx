@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Services9() {
   return (
@@ -9,13 +9,7 @@ export default function Services9() {
             <div className="w-full md:w-1/2 lg:w-1/3">
               <div className="py-24">
                 <div className="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-linear-to-tl from-[#D83BB5] to-primary text-white">
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M28.1563 5.68439C24.8094 2.28439 20.1344 0.637516 15.4063 1.16877C8.0219 1.91252 2.17815 7.80939 1.38127 15.1406C1.06252 18.5406 1.75315 21.8344 3.45315 24.7031L1.32815 30.2281C1.0094 30.9719 1.2219 31.875 1.8594 32.4063C2.23127 32.725 2.7094 32.9375 3.18752 32.9375C3.50627 32.9375 3.7719 32.8844 4.09065 32.725L8.92502 30.2813C11.8469 32.0344 15.1406 32.7781 18.5938 32.4594C26.0313 31.7688 31.9813 25.8719 32.725 18.3813C33.2031 13.6531 31.5563 9.03127 28.1563 5.68439ZM30.3344 18.1688C29.6969 24.4906 24.65 29.4844 18.3281 30.0688C15.1938 30.3875 12.2188 29.5906 9.61565 27.8906C9.40315 27.7313 9.19065 27.6781 8.97815 27.6781C8.81877 27.6781 8.60627 27.7313 8.4469 27.7844L3.93127 30.0156L5.8969 24.9156C6.05627 24.5438 6.00315 24.1719 5.79065 23.8531C4.14377 21.3031 3.45315 18.3281 3.7719 15.2469C4.4094 9.13752 9.40315 4.19689 15.6188 3.55939C19.6563 3.13439 23.6406 4.51564 26.4563 7.38439C29.325 10.2 30.7594 14.1313 30.3344 18.1688Z"
                       fill="currentColor"
@@ -34,12 +28,9 @@ export default function Services9() {
                     />
                   </svg>
                 </div>
-                <h3 className="mb-5 text-2xl font-bold text-white">
-                  Unique Technology
-                </h3>
+                <h3 className="mb-5 text-2xl font-bold text-white">Unique Technology</h3>
                 <p className="w-full max-w-[270px] text-base text-dark-7">
-                  Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                  tincidunt rutrum.
+                  Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
                 </p>
               </div>
             </div>
@@ -47,13 +38,7 @@ export default function Services9() {
             <div className="w-full md:w-1/2 lg:w-1/3">
               <div className="py-24">
                 <div className="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-linear-to-tl from-[#D83BB5] to-primary text-white">
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M31.875 21.7281H30.4406V8.44683C30.4406 6.21558 28.6344 4.3562 26.35 4.3562H7.65001C5.41876 4.3562 3.55939 6.16245 3.55939 8.44683V21.7281H2.12501C1.48751 21.7281 0.903137 22.2593 0.903137 22.95V25.2343C0.903137 27.7312 2.92189 29.6968 5.36564 29.6968H28.5281C31.025 29.6968 32.9906 27.6781 32.9906 25.2343V22.95C33.0969 22.2593 32.5125 21.7281 31.875 21.7281ZM5.95001 8.3937C5.95001 7.43745 6.69376 6.6937 7.65001 6.6937H26.2969C27.2531 6.6937 27.9969 7.43745 27.9969 8.3937V21.675H5.95001V8.3937ZM30.7063 25.1812C30.7063 26.35 29.75 27.2531 28.6344 27.2531H5.41876C4.25001 27.2531 3.34689 26.2968 3.34689 25.1812V24.1187H30.7063V25.1812Z"
                       fill="currentColor"
@@ -64,12 +49,9 @@ export default function Services9() {
                     />
                   </svg>
                 </div>
-                <h3 className="mb-5 text-2xl font-bold text-white">
-                  Unique Technology
-                </h3>
+                <h3 className="mb-5 text-2xl font-bold text-white">Unique Technology</h3>
                 <p className="w-full max-w-[270px] text-base text-dark-7">
-                  Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                  tincidunt rutrum.
+                  Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
                 </p>
               </div>
             </div>
@@ -77,13 +59,7 @@ export default function Services9() {
             <div className="w-full md:w-1/2 lg:w-1/3">
               <div className="py-24">
                 <div className="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-linear-to-tl from-[#D83BB5] to-primary text-white">
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M21.0375 16.8406C23.5344 16.8406 25.6062 14.8219 25.6062 12.2719C25.6062 9.72188 23.5875 7.70312 21.0375 7.70312C18.4875 7.70312 16.4688 9.82813 16.4688 12.325C16.4688 14.8219 18.5406 16.8406 21.0375 16.8406ZM21.0375 10.1469C22.2062 10.1469 23.2156 11.1031 23.2156 12.325C23.2156 13.5469 22.2594 14.5031 21.0375 14.5031C19.8156 14.5031 18.8594 13.5469 18.8594 12.325C18.8594 11.1031 19.8156 10.1469 21.0375 10.1469Z"
                       fill="currentColor"
@@ -94,12 +70,9 @@ export default function Services9() {
                     />
                   </svg>
                 </div>
-                <h3 className="mb-5 text-2xl font-bold text-white">
-                  High Quality Image
-                </h3>
+                <h3 className="mb-5 text-2xl font-bold text-white">High Quality Image</h3>
                 <p className="w-full max-w-[270px] text-base text-dark-7">
-                  Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                  tincidunt rutrum.
+                  Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
                 </p>
               </div>
             </div>

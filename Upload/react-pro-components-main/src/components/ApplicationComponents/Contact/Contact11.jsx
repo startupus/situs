@@ -32,7 +32,7 @@ function Contact11() {
                 <input
                   type="text"
                   placeholder="First name"
-                  className="w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                  className="outline-hidden w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>
@@ -47,7 +47,7 @@ function Contact11() {
                 <input
                   type="text"
                   placeholder="Last name"
-                  className="h-[46px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                  className="outline-hidden h-[46px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>
@@ -62,7 +62,7 @@ function Contact11() {
                 <input
                   type="email"
                   placeholder="yourname@company.com"
-                  className="h-[46px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                  className="outline-hidden h-[46px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>
@@ -77,7 +77,7 @@ function Contact11() {
                 <input
                   type="text"
                   placeholder="+1 (555) 444-0000"
-                  className="h-[46px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                  className="outline-hidden h-[46px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>
@@ -93,7 +93,7 @@ function Contact11() {
                   type="text"
                   rows="6"
                   placeholder="Type your message"
-                  className="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                  className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                 ></textarea>
               </div>
             </div>

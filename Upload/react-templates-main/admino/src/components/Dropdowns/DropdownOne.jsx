@@ -45,12 +45,12 @@ const DropdownOne = () => {
 
         <div ref={dropdownRef}>
           <div
-            className={`shadow-card dark:bg-dark absolute top-full right-0 z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 ${openDropDown ? "block" : "hidden"}`}
+            className={`absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark ${openDropDown ? "block" : "hidden"}`}
           >
-            <button className="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded-sm px-3 py-1.5 text-left text-sm">
+            <button className="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
               Edit
             </button>
-            <button className="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded-sm px-3 py-1.5 text-left text-sm">
+            <button className="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
               Delete
             </button>
           </div>

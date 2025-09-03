@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Testimonial4 = () => {
   const sliderRef = useRef(null);
@@ -22,15 +22,13 @@ const Testimonial4 = () => {
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="mb-2 block text-lg font-semibold text-primary">
-                  Testimonials
-                </span>
+                <span className="mb-2 block text-lg font-semibold text-primary">Testimonials</span>
                 <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   What our Clients Says
                 </h2>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  There are many variations of passages of Lorem Ipsum available
-                  but the majority have suffered alteration in some form.
+                  There are many variations of passages of Lorem Ipsum available but the majority have suffered
+                  alteration in some form.
                 </p>
               </div>
             </div>
@@ -155,13 +153,7 @@ export default Testimonial4;
 
 const SingleTestimonial = ({ image, details, name, position }) => {
   const starIcon = (
-    <svg
-      width="18"
-      height="16"
-      viewBox="0 0 18 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9.09815 0.360596L11.1054 6.06493H17.601L12.3459 9.5904L14.3532 15.2947L9.09815 11.7693L3.84309 15.2947L5.85035 9.5904L0.595291 6.06493H7.0909L9.09815 0.360596Z"
         fill="#FBB040"
@@ -179,20 +171,14 @@ const SingleTestimonial = ({ image, details, name, position }) => {
             <span className="mr-1">{starIcon}</span>
             <span className="mr-1">{starIcon}</span>
           </div>
-          <p className="mb-6 text-base text-body-color dark:text-dark-6">
-            {details}
-          </p>
+          <p className="mb-6 text-base text-body-color dark:text-dark-6">{details}</p>
           <div className="flex items-center">
             <div className="mr-4 h-[50px] w-full max-w-[50px]">
               <img src={image} alt="image" className="w-full" />
             </div>
             <div className="w-full">
-              <h5 className="mb-0.5 text-sm font-semibold text-dark dark:text-white">
-                {name}
-              </h5>
-              <p className="text-xs text-secondary-color dark:text-dark-6">
-                {position}
-              </p>
+              <h5 className="mb-0.5 text-sm font-semibold text-dark dark:text-white">{name}</h5>
+              <p className="text-xs text-secondary-color dark:text-dark-6">{position}</p>
             </div>
           </div>
         </div>

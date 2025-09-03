@@ -2,10 +2,10 @@ import React from "react";
 
 const AttentionAlert3 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-l-yellow dark:bg-dark-2 flex max-w-[655px] items-center rounded-md border-l-[6px] bg-white p-5 pl-6">
-          <div className="bg-yellow mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full">
+        <div className="flex max-w-[655px] items-center rounded-md border-l-[6px] border-l-yellow bg-white p-5 pl-6 dark:bg-dark-2">
+          <div className="mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full bg-yellow">
             <svg
               width="18"
               height="18"
@@ -27,7 +27,7 @@ const AttentionAlert3 = () => {
               />
             </svg>
           </div>
-          <div className="flex items-center justify-between w-full">
+          <div className="flex w-full items-center justify-between">
             <div>
               <h3 className="mb-1 text-lg font-medium text-black dark:text-white">
                 Opps! something went wrong
@@ -38,7 +38,7 @@ const AttentionAlert3 = () => {
               </p>
             </div>
             <div>
-              <button className="duration-300 text-dark-3 hover:text-dark dark:text-dark-4 dark:hover:text-dark-6">
+              <button className="text-dark-3 duration-300 hover:text-dark dark:text-dark-4 dark:hover:text-dark-6">
                 <svg
                   width="20"
                   height="20"

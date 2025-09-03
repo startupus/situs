@@ -1,11 +1,6 @@
 // src/components/ui/ThemeFormElements.tsx
 import React from 'react';
-import { 
-  FormElementInput,
-  FormElementSelect,
-  FormElementTextarea,
-  FormElementFileUpload
-} from './core';
+import { FormElementInput, FormElementSelect, FormElementTextarea, FormElementFileUpload } from './core';
 
 // Интерфейс для пропсов FormElement компонентов
 interface FormElementProps {
@@ -25,13 +20,13 @@ interface FormElementProps {
   rows?: number;
   accept?: string;
   multiple?: boolean;
-  options?: Array<{ value: string; label: string; }>;
+  options?: Array<{ value: string; label: string }>;
 }
 
 // Утилита для адаптации стилей под глобальную тему
 const adaptFormElementProps = (props: FormElementProps) => ({
   ...props,
-  className: `${props.className || ''} transition-all duration-200`
+  className: `${props.className || ''} transition-all duration-200`,
 });
 
 // FormElement Variants

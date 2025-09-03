@@ -42,9 +42,9 @@ const ProductDetails2 = () => {
   useClickOutside([menuRef, menuTrigger], open, setOpen);
 
   return (
-    <section className="bg-gray-2 dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section className="bg-gray-2 pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
-        <div className="overflow-hidden rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-[22px]">
+        <div className="overflow-hidden rounded-xl border border-stroke bg-white p-[22px] dark:border-dark-3 dark:bg-dark-2">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-1/2">
               <div className="mb-12 lg:mb-0 lg:mr-5 xl:mr-10">
@@ -52,7 +52,7 @@ const ProductDetails2 = () => {
                   <button
                     ref={menuTrigger}
                     onClick={() => setOpen(!open)}
-                    className="shadow-card absolute top-6 right-6 flex h-[60px] w-[60px] drop-shadow-three items-center justify-center rounded-full bg-white dark:bg-dark-2 text-dark dark:text-white"
+                    className="absolute right-6 top-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-white text-dark shadow-card drop-shadow-three dark:bg-dark-2 dark:text-white"
                   >
                     <svg
                       width={24}
@@ -176,18 +176,18 @@ const ProductDetails2 = () => {
             </div>
 
             <div className="w-full px-4 lg:w-1/2">
-              <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white lg:text-2xl xl:leading-[1.2] xl:text-[28px]">
+              <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[1.2]">
                 Macbook Pro M1 8/256GB
               </h3>
-              <p className="text-body-color mb-5 text-base dark:text-dark-6">
+              <p className="mb-5 text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
                 non erat quam. Vestibulum aliquam nibh.
               </p>
               <div className="flex flex-wrap items-center">
                 <div className="flex items-center pr-6">
-                  <h3 className="text-lg font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl xl:leading-[1.2] xl:text-[28px]">
+                  <h3 className="text-lg font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl xl:text-[28px] xl:leading-[1.2]">
                     <span className="pr-3"> $1200.99 </span>
-                    <span className="text-body-color dark:text-dark-6 line-through">
+                    <span className="text-body-color line-through dark:text-dark-6">
                       {" "}
                       $1500.99{" "}
                     </span>
@@ -220,7 +220,9 @@ const ProductDetails2 = () => {
               </div>
 
               <div className="mt-8">
-                <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">Color</h4>
+                <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
+                  Color
+                </h4>
                 <div className="flex items-center space-x-3">
                   <div className="relative">
                     <input
@@ -268,32 +270,37 @@ const ProductDetails2 = () => {
               </div>
 
               <div className="mt-[22px]">
-                  <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                    Specification
-                  </h4>
-                  <div className="space-y-3">
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Memory : </span>
-                      <span> 8GB unified memory </span>
-                    </p>
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Storage : </span>
-                      <span> 256GB/512GB SSD storage </span>
-                    </p>
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Display : </span>
-                      <span> 13-inch Retina display with True Tone </span>
-                    </p>
-                    <p className="text-dark dark:text-white text-base sm:flex">
-                      <span className="block w-28 font-medium"> Processor : </span>
-                      <span> Apple M1 chip with 8-core CPU &amp; GPU </span>
-                    </p>
-                  </div>
+                <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
+                  Specification
+                </h4>
+                <div className="space-y-3">
+                  <p className="text-base text-dark dark:text-white sm:flex">
+                    <span className="block w-28 font-medium"> Memory : </span>
+                    <span> 8GB unified memory </span>
+                  </p>
+                  <p className="text-base text-dark dark:text-white sm:flex">
+                    <span className="block w-28 font-medium"> Storage : </span>
+                    <span> 256GB/512GB SSD storage </span>
+                  </p>
+                  <p className="text-base text-dark dark:text-white sm:flex">
+                    <span className="block w-28 font-medium"> Display : </span>
+                    <span> 13-inch Retina display with True Tone </span>
+                  </p>
+                  <p className="text-base text-dark dark:text-white sm:flex">
+                    <span className="block w-28 font-medium">
+                      {" "}
+                      Processor :{" "}
+                    </span>
+                    <span> Apple M1 chip with 8-core CPU &amp; GPU </span>
+                  </p>
                 </div>
+              </div>
 
               <div className="mt-[22px] flex flex-wrap">
                 <div className="mb-[22px] mr-[60px]">
-                  <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">RAM</h4>
+                  <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
+                    RAM
+                  </h4>
                   <div className="flex items-center space-x-3">
                     <div>
                       <input
@@ -304,7 +311,7 @@ const ProductDetails2 = () => {
                       />
                       <label
                         htmlFor="8gb"
-                        className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
+                        className="inline-block cursor-pointer rounded-sm border border-stroke px-4 py-2 text-base font-semibold text-dark dark:border-dark-3 dark:text-white"
                       >
                         8GB
                       </label>
@@ -318,7 +325,7 @@ const ProductDetails2 = () => {
                       />
                       <label
                         htmlFor="16gb"
-                        className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
+                        className="inline-block cursor-pointer rounded-sm border border-stroke px-4 py-2 text-base font-semibold text-dark dark:border-dark-3 dark:text-white"
                       >
                         16GB
                       </label>
@@ -339,7 +346,7 @@ const ProductDetails2 = () => {
                       />
                       <label
                         htmlFor="256gb"
-                        className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
+                        className="inline-block cursor-pointer rounded-sm border border-stroke px-4 py-2 text-base font-semibold text-dark dark:border-dark-3 dark:text-white"
                       >
                         256GB
                       </label>
@@ -353,7 +360,7 @@ const ProductDetails2 = () => {
                       />
                       <label
                         htmlFor="512gb"
-                        className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
+                        className="inline-block cursor-pointer rounded-sm border border-stroke px-4 py-2 text-base font-semibold text-dark dark:border-dark-3 dark:text-white"
                       >
                         512GB
                       </label>
@@ -367,7 +374,7 @@ const ProductDetails2 = () => {
                       />
                       <label
                         htmlFor="1tb"
-                        className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-2 px-4 text-base font-semibold text-dark dark:text-white"
+                        className="inline-block cursor-pointer rounded-sm border border-stroke px-4 py-2 text-base font-semibold text-dark dark:border-dark-3 dark:text-white"
                       >
                         1TB
                       </label>
@@ -377,9 +384,9 @@ const ProductDetails2 = () => {
               </div>
 
               <div className="flex flex-wrap">
-                <div className="mr-5 mb-4 inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                  <span 
-                    className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white" 
+                <div className="mb-4 mr-5 inline-flex items-center rounded-sm border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
+                  <span
+                    className="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                     onClick={decrement}
                   >
                     <svg
@@ -393,9 +400,11 @@ const ProductDetails2 = () => {
                       <path d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" />
                     </svg>
                   </span>
-                  <span className="py-3 px-5 border-x border-stroke dark:border-dark-3">{quantity}</span>
-                  <span 
-                    className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
+                  <span className="border-x border-stroke px-5 py-3 dark:border-dark-3">
+                    {quantity}
+                  </span>
+                  <span
+                    className="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                     onClick={increment}
                   >
                     <svg
@@ -418,12 +427,12 @@ const ProductDetails2 = () => {
                   </span>
                 </div>
                 <div className="mb-4 mr-4">
-                  <button className="bg-primary inline-flex items-center justify-center rounded-md py-3 px-7 text-center text-base font-medium text-white hover:bg-blue-dark">
+                  <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark">
                     Add to Cart
                   </button>
                 </div>
                 <div className="mb-4 mr-4">
-                  <button className="inline-flex items-center justify-center rounded-md bg-dark py-3 px-7 text-center text-base font-medium text-white hover:bg-dark/90">
+                  <button className="inline-flex items-center justify-center rounded-md bg-dark px-7 py-3 text-center text-base font-medium text-white hover:bg-dark/90">
                     Buy Now
                   </button>
                 </div>

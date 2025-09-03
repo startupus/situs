@@ -2,10 +2,10 @@ import React from "react";
 
 export default function About12() {
   return (
-    <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div className="container">
         <div className="mx-auto mb-16 w-full max-w-[970px] text-center">
-          <p className="mb-9 text-xl text-body-color md:text-2xl dark:text-dark-6">
+          <p className="mb-9 text-xl text-body-color dark:text-dark-6 md:text-2xl">
             “Lorem ipsum dolor sit amet, consectetur
             <span className="font-semibold italic text-dark dark:text-white">
               adipiscing elit fusce

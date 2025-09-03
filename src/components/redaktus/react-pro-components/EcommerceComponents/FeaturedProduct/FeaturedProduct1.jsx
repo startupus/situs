@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FeaturedProduct = () => {
   return (
@@ -47,18 +47,9 @@ const FeaturedProduct = () => {
 
 export default FeaturedProduct;
 
-const SingleFeaturedProduct = ({
-  img,
-  link,
-  subtitle,
-  title,
-  price,
-  prevPrice,
-  discount,
-  big,
-}) => {
+const SingleFeaturedProduct = ({ img, link, subtitle, title, price, prevPrice, discount, big }) => {
   return (
-    <div className={`w-full px-4 ${big ? "lg:w-7/12" : "lg:w-5/12"}`}>
+    <div className={`w-full px-4 ${big ? 'lg:w-7/12' : 'lg:w-5/12'}`}>
       <div className="group mb-10 overflow-hidden rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
         <div className="relative">
           <img src={img} alt="product" className="w-full" />
@@ -129,15 +120,11 @@ const SingleFeaturedProduct = ({
         <div className="relative justify-between px-6 py-8 sm:px-8 md:flex lg:px-6 2xl:px-8">
           {discount && (
             <div className="right-8 top-8 mb-2 sm:absolute sm:mb-0">
-              <span className="text-sm font-medium text-primary sm:text-base">
-                {discount}
-              </span>
+              <span className="text-sm font-medium text-primary sm:text-base">{discount}</span>
             </div>
           )}
           <div>
-            <span className="mb-[10px] block text-base font-medium text-body-color dark:text-dark-6">
-              {subtitle}
-            </span>
+            <span className="mb-[10px] block text-base font-medium text-body-color dark:text-dark-6">{subtitle}</span>
             <h3>
               <a
                 href={link}
@@ -148,11 +135,7 @@ const SingleFeaturedProduct = ({
             </h3>
 
             <p className="text-lg font-semibold text-dark dark:text-white">
-              {prevPrice && (
-                <span className="mr-3 text-body-color line-through dark:text-dark-6">
-                  {prevPrice}
-                </span>
-              )}
+              {prevPrice && <span className="mr-3 text-body-color line-through dark:text-dark-6">{prevPrice}</span>}
               <span>{price}</span>
             </p>
           </div>

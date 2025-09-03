@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect as useReactEffect } from 'react';
-import { useProject } from "../../../contexts/ProjectContext";
-import { FiMenu, FiSearch, FiBell, FiX, FiPlus, FiSettings } from "react-icons/fi";
-import { projectsApi } from "../../../api/services/projects.api";
+import { useProject } from '../../../contexts/ProjectContext';
+import { FiMenu, FiSearch, FiBell, FiX, FiPlus, FiSettings } from 'react-icons/fi';
+import { projectsApi } from '../../../api/services/projects.api';
 
 interface SitusHeaderProps {
   sidebarOpen: boolean;
@@ -45,7 +45,9 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
       }
     }
     loadName();
-    return () => { ignore = true; };
+    return () => {
+      ignore = true;
+    };
   }, [isProjectPage, projectId, currentProject?.id, currentProject?.name]);
 
   // Вспомогательные вычисления для заголовка/навигации
@@ -73,7 +75,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
         access: 'Доступ и роли',
         menu: 'Меню',
       };
-      return subsection ? (map[subsection] || 'Настройки проекта') : 'Настройки проекта';
+      return subsection ? map[subsection] || 'Настройки проекта' : 'Настройки проекта';
     }
     if (isProjectPage) return headerProjectName || currentProject?.name || 'Проект';
     const path = location.pathname;
@@ -107,7 +109,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   // Состояние поиска в верхней панели
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const searchWrapperRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [breadcrumbs, setBreadcrumbs] = useState<Array<{ label: string; to?: string }>>([]);
@@ -115,7 +117,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
   const closeSearch = () => {
     setIsSearchOpen(false);
-    setSearchQuery("");
+    setSearchQuery('');
   };
 
   useEffect(() => {
@@ -189,8 +191,11 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
       closeSearch();
       return;
     }
-    const base = isProjectPage ? `/projects/${projectId}` : `/${(location.pathname.split('/')[1] || '').replace(/\/$/, '')}`;
-    const target = base && base !== '/' ? `${base}?search=${encodeURIComponent(q)}` : `/projects?search=${encodeURIComponent(q)}`;
+    const base = isProjectPage
+      ? `/projects/${projectId}`
+      : `/${(location.pathname.split('/')[1] || '').replace(/\/$/, '')}`;
+    const target =
+      base && base !== '/' ? `${base}?search=${encodeURIComponent(q)}` : `/projects?search=${encodeURIComponent(q)}`;
     navigate(target);
     searchInputRef.current?.blur();
   };
@@ -201,7 +206,9 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
   return (
     <>
       <header className="w-full bg-white dark:bg-dark border-b border-stroke dark:border-dark-3">
-        <div className={`relative flex items-center justify-between bg-white dark:bg-dark min-h-[64px] ${headerPaddingY} pl-[70px] pr-4 md:pl-20 md:pr-8 xl:pl-8`}>
+        <div
+          className={`relative flex items-center justify-between bg-white dark:bg-dark min-h-[64px] ${headerPaddingY} pl-[70px] pr-4 md:pl-20 md:pr-8 xl:pl-8`}
+        >
           <button
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
@@ -213,7 +220,8 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
             <FiMenu aria-hidden />
           </button>
           <div className="hidden sm:block w-full">
-            <div className={`flex items-center justify-between w-full transition-opacity duration-150 ${isSearchOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            <div
+              className={`flex items-center justify-between w-full transition-opacity duration-150 ${isSearchOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
             >
               {/* Левая зона: заголовок и компактные крошки для страниц проекта */}
               <div className="flex flex-col gap-0.5 min-w-0">
@@ -221,7 +229,10 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                   {metaTitle || sectionTitle}
                 </h1>
                 {showProjectBreadcrumbs && (
-                  <nav className="hidden md:flex items-center gap-1 text-xs text-body-color dark:text-dark-6 leading-none truncate" aria-label="Хлебные крошки">
+                  <nav
+                    className="hidden md:flex items-center gap-1 text-xs text-body-color dark:text-dark-6 leading-none truncate"
+                    aria-label="Хлебные крошки"
+                  >
                     {breadcrumbs.map((b, idx) => (
                       <React.Fragment key={idx}>
                         {idx > 0 && <span className="shrink-0">/</span>}
@@ -266,7 +277,10 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
                   <button
                     onClick={() => {
                       // Менеджер меню доступен по двум путям: /projects/:id/menus и /projects/:id/settings/menu
-                      if (location.pathname.includes('/menus') || /\/projects\/[^/]+\/settings\/menu/.test(location.pathname)) {
+                      if (
+                        location.pathname.includes('/menus') ||
+                        /\/projects\/[^/]+\/settings\/menu/.test(location.pathname)
+                      ) {
                         const searchParams = new URLSearchParams(location.search);
                         const tab = searchParams.get('tab');
                         if (tab === 'types') {
@@ -297,10 +311,7 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
 
             {/* Поисковая панель поверх контента хедера (только в пределах хедера) */}
             {isSearchOpen && (
-              <div
-                ref={searchWrapperRef}
-                className="absolute inset-0 z-20 flex items-center justify-end px-3 md:px-8"
-              >
+              <div ref={searchWrapperRef} className="absolute inset-0 z-20 flex items-center justify-end px-3 md:px-8">
                 <form onSubmit={onSubmitSearch} className="relative w-full">
                   <FiSearch className="absolute left-2 top-1/2 -translate-y-1/2 text-body-color" aria-hidden />
                   <input
@@ -329,4 +340,4 @@ const SitusHeader: React.FC<SitusHeaderProps> = ({ sidebarOpen, setSidebarOpen }
   );
 };
 
-export default SitusHeader; 
+export default SitusHeader;

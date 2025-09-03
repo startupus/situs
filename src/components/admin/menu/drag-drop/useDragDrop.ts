@@ -5,14 +5,11 @@ import { DragState, ReorderItem } from './types';
 /**
  * Хук для управления состоянием Drag & Drop
  */
-export const useDragDrop = (
-  items: MenuItemData[],
-  onReorder: (reorderedItems: ReorderItem[]) => Promise<void>
-) => {
+export const useDragDrop = (items: MenuItemData[], onReorder: (reorderedItems: ReorderItem[]) => Promise<void>) => {
   const [dragState, setDragState] = useState<DragState>({
     draggedItem: null,
     dragOverItem: null,
-    dropPosition: null
+    dropPosition: null,
   });
 
   // Начало перетаскивания
@@ -24,7 +21,7 @@ export const useDragDrop = (
       return;
     }
 
-    setDragState(prev => ({ ...prev, draggedItem: item }));
+    setDragState((prev) => ({ ...prev, draggedItem: item }));
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', item.title);
   };
@@ -34,7 +31,7 @@ export const useDragDrop = (
     setDragState({
       draggedItem: null,
       dragOverItem: null,
-      dropPosition: null
+      dropPosition: null,
     });
   };
 
@@ -52,7 +49,7 @@ export const useDragDrop = (
     const height = rect.height;
 
     let position: 'before' | 'after' | 'inside';
-    
+
     if (y < height * 0.25) {
       position = 'before';
     } else if (y > height * 0.75) {
@@ -61,38 +58,33 @@ export const useDragDrop = (
       position = 'inside';
     }
 
-    setDragState(prev => ({
+    setDragState((prev) => ({
       ...prev,
       dragOverItem: item,
-      dropPosition: position
+      dropPosition: position,
     }));
   };
 
   // Покидание области перетаскивания
   const handleDragLeave = () => {
-    setDragState(prev => ({
+    setDragState((prev) => ({
       ...prev,
       dragOverItem: null,
-      dropPosition: null
+      dropPosition: null,
     }));
   };
 
   // Сброс элемента
   const handleDrop = async (e: React.DragEvent, targetItem: MenuItemData) => {
     e.preventDefault();
-    
+
     const { draggedItem, dropPosition } = dragState;
     if (!draggedItem || !dropPosition || draggedItem.id === targetItem.id) {
       return;
     }
 
     // Строим новую структуру
-    const reorderedItems = calculateNewOrder(
-      items,
-      draggedItem,
-      targetItem,
-      dropPosition
-    );
+    const reorderedItems = calculateNewOrder(items, draggedItem, targetItem, dropPosition);
 
     try {
       await onReorder(reorderedItems);
@@ -110,7 +102,7 @@ export const useDragDrop = (
     handleDragEnd,
     handleDragOver,
     handleDragLeave,
-    handleDrop
+    handleDrop,
   };
 };
 
@@ -119,16 +111,16 @@ const calculateNewOrder = (
   allItems: MenuItemData[],
   draggedItem: MenuItemData,
   targetItem: MenuItemData,
-  position: 'before' | 'after' | 'inside'
+  position: 'before' | 'after' | 'inside',
 ): ReorderItem[] => {
   const result: ReorderItem[] = [];
 
   // Создаем плоский список всех элементов кроме перетаскиваемого
-  const otherItems = allItems.filter(item => item.id !== draggedItem.id);
-  
+  const otherItems = allItems.filter((item) => item.id !== draggedItem.id);
+
   // Находим позицию для вставки
-  const targetIndex = otherItems.findIndex(item => item.id === targetItem.id);
-  
+  const targetIndex = otherItems.findIndex((item) => item.id === targetItem.id);
+
   let newLevel: number;
   let newParentId: string | null;
   let insertIndex: number;
@@ -139,13 +131,13 @@ const calculateNewOrder = (
       newParentId = targetItem.parentId;
       insertIndex = targetIndex;
       break;
-    
+
     case 'after':
       newLevel = targetItem.level;
       newParentId = targetItem.parentId;
       insertIndex = targetIndex + 1;
       break;
-    
+
     case 'inside':
       newLevel = targetItem.level + 1;
       newParentId = targetItem.id;
@@ -162,7 +154,7 @@ const calculateNewOrder = (
   const reorderedItems = [
     ...otherItems.slice(0, insertIndex),
     { ...draggedItem, level: newLevel, parentId: newParentId },
-    ...otherItems.slice(insertIndex)
+    ...otherItems.slice(insertIndex),
   ];
 
   // Пересчитываем orderIndex для всех элементов
@@ -171,7 +163,7 @@ const calculateNewOrder = (
       id: item.id,
       orderIndex: index,
       level: item.level,
-      parentId: item.parentId
+      parentId: item.parentId,
     });
   });
 

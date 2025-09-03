@@ -17,19 +17,19 @@ async function addAnyTypes() {
     const patterns = [
       // renderWrapper с children
       [/renderWrapper=\{\(\{ children \)\) =>/g, 'renderWrapper={({ children }: any) =>'],
-      
-      // renderBlock с props  
+
+      // renderBlock с props
       [/renderBlock=\{\(([a-zA-Z_]+)\) =>/g, 'renderBlock={($1: any) =>'],
-      
+
       // renderHighlight с props
       [/renderHighlight=\{\(([a-zA-Z_]+)\) =>/g, 'renderHighlight={($1: any) =>'],
-      
+
       // renderLink с props
       [/renderLink=\{\(([a-zA-Z_]+)\) =>/g, 'renderLink={($1: any) =>'],
-      
+
       // renderPlaceholder с children
       [/renderPlaceholder=\{\(\{ children \)\) =>/g, 'renderPlaceholder={({ children }: any) =>'],
-      
+
       // renderItemWrapper с item
       [/renderItemWrapper=\{\(([a-zA-Z_]+)\) =>/g, 'renderItemWrapper={($1: any) =>'],
     ];
@@ -51,4 +51,4 @@ async function addAnyTypes() {
   console.log(`🎉 Исправлено файлов: ${fixedFiles}`);
 }
 
-addAnyTypes().catch(console.error); 
+addAnyTypes().catch(console.error);

@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Step4 = () => {
   const series = [72];
@@ -7,31 +7,31 @@ const Step4 = () => {
   const options = {
     chart: {
       height: 200,
-      type: "radialBar",
+      type: 'radialBar',
     },
     plotOptions: {
       radialBar: {
         hollow: {
-          size: "66%",
+          size: '66%',
         },
         dataLabels: {
           name: {
             show: true,
-            fontSize: "16px",
+            fontSize: '16px',
             fontFamily: '"Inter"',
             offsetY: -12,
           },
           value: {
-            fontSize: "28px",
-            fontWeight: "bold",
-            fontFamily: "inter",
+            fontSize: '28px',
+            fontWeight: 'bold',
+            fontFamily: 'inter',
             offsetY: 2,
           },
           total: {
             show: true,
-            fontFamily: "inter",
-            fontSize: "12px",
-            label: "complete",
+            fontFamily: 'inter',
+            fontSize: '12px',
+            label: 'complete',
             offsetY: -16,
           },
         },
@@ -40,22 +40,17 @@ const Step4 = () => {
     dataLabels: {
       enabled: true,
     },
-    colors: ["#3056D3"],
+    colors: ['#3056D3'],
     legend: {
       show: false,
-      position: "bottom",
+      position: 'bottom',
     },
   };
 
   return (
     <section className="py-14 lg:py-20">
       <div id="chartOne" className="-mx-[11px]">
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="radialBar"
-          height={200}
-        />
+        <ReactApexChart options={options} series={series} type="radialBar" height={200} />
       </div>
     </section>
   );

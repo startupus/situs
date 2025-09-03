@@ -10,7 +10,10 @@ export class AccountMembershipsController {
   @Get(':accountId')
   @Scopes('ACCOUNT_READ')
   async list(@Param('accountId') accountId: string) {
-    const members = await this.prisma.accountMembership.findMany({ where: { accountId }, include: { user: { select: { email: true, username: true } } } });
+    const members = await this.prisma.accountMembership.findMany({
+      where: { accountId },
+      include: { user: { select: { email: true, username: true } } },
+    });
     return { success: true, data: members };
   }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Hero12 = () => {
   return (
@@ -14,9 +14,8 @@ const Hero12 = () => {
                   Build beautiful website with TailGrids blocks.
                 </h2>
                 <p className="mb-8 max-w-[485px] text-base text-body-color dark:text-dark-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam at egestas tortor. Morbi sed odio id purus
-                  pellentesque iaculis nulla facilisi.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at egestas tortor. Morbi sed odio id
+                  purus pellentesque iaculis nulla facilisi.
                 </p>
 
                 <p className="mb-5 text-base font-medium text-dark dark:text-white">
@@ -98,7 +97,7 @@ const Navbar = () => {
               <button
                 onClick={() => setOpen(!open)}
                 className={` ${
-                  open && "navbarTogglerActive"
+                  open && 'navbarTogglerActive'
                 } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
               >
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
@@ -107,7 +106,7 @@ const Navbar = () => {
               </button>
               <nav
                 className={`absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                  !open && "hidden"
+                  !open && 'hidden'
                 } `}
               >
                 <ul className="block lg:flex">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const SelectBox3 = () => {
   return (
-    <section className="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="container mx-auto">
         <div>
           <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">
@@ -41,14 +41,14 @@ const SelectBoxItem = ({ id, name, address1, address2, title, subtitle }) => {
           type="radio"
           name={name}
           id={id}
-          className="shipping select-box sr-only"
+          className="select-box shipping sr-only"
           onChange={() => {
             setIsChecked(!isChecked);
           }}
         />
         <label
           htmlFor={id}
-          className="block cursor-pointer overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 px-4 lg:px-4 xl:px-6"
+          className="block cursor-pointer overflow-hidden rounded-lg border border-stroke bg-white px-4 py-5 dark:border-dark-3 dark:bg-dark-2 lg:px-4 xl:px-6"
         >
           <span className="title mb-[6px] block text-base font-semibold text-dark dark:text-white">
             {title}

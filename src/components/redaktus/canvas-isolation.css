@@ -7,17 +7,22 @@
 .redaktus-canvas {
   /* Сброс всех наследуемых стилей темы интерфейса */
   all: initial;
-  
+
   /* Базовые стили для канваса - используем Inter как в @admino/ */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #1f2937;
   background-color: #ffffff;
-  
+
   /* Изоляция от родительских стилей */
   isolation: isolate;
-  
+
   /* Создание нового stacking context */
   position: relative;
   z-index: 1;
@@ -39,7 +44,7 @@
 .redaktus-canvas * {
   /* Сброс наследуемых стилей */
   box-sizing: border-box;
-  
+
   /* Изоляция от родительских тем */
   color: inherit;
   background-color: transparent;
@@ -64,7 +69,7 @@
 .redaktus-canvas .tailgrids-component {
   /* Сброс всех стилей темы интерфейса */
   all: revert;
-  
+
   /* Применение оригинальных TailGrids стилей */
   font-family: inherit;
   color: inherit;
@@ -106,10 +111,10 @@
   /* Изоляция блока от темы интерфейса */
   position: relative;
   z-index: 2;
-  
+
   /* Сброс наследуемых стилей */
   all: revert;
-  
+
   /* Применение стилей блока */
   font-family: inherit;
   color: inherit;
@@ -123,16 +128,16 @@
 }
 
 /* Специальные стили для мобильного и планшетного режимов */
-.redaktus-canvas[data-device="mobile"] {
+.redaktus-canvas[data-device='mobile'] {
   max-width: 375px;
   margin: 0 auto;
 }
 
-.redaktus-canvas[data-device="tablet"] {
+.redaktus-canvas[data-device='tablet'] {
   max-width: 768px;
   margin: 0 auto;
 }
 
-.redaktus-canvas[data-device="desktop"] {
+.redaktus-canvas[data-device='desktop'] {
   max-width: none;
 }

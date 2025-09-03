@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const HorizontalMenu3 = () => {
   return (
@@ -29,10 +29,7 @@ const HorizontalMenu3 = () => {
 
           <div className="flex items-center">
             <div className="mr-[18px] hidden md:block">
-              <a
-                href="/#"
-                className="text-body-color hover:text-primary dark:text-dark-6"
-              >
+              <a href="/#" className="text-body-color hover:text-primary dark:text-dark-6">
                 <svg
                   width="24"
                   height="24"
@@ -47,10 +44,7 @@ const HorizontalMenu3 = () => {
             </div>
 
             <div className="relative mr-[18px] hidden md:block">
-              <a
-                href="/#"
-                className="relative text-body-color hover:text-primary dark:text-dark-6"
-              >
+              <a href="/#" className="relative text-body-color hover:text-primary dark:text-dark-6">
                 <span className="absolute -right-[2px] -top-[2px] block h-[10px] w-[10px] rounded-full border border-white bg-red-600 dark:border-dark-2"></span>
                 <svg
                   width="24"
@@ -66,10 +60,7 @@ const HorizontalMenu3 = () => {
             </div>
 
             <div className="relative mr-10 hidden md:block">
-              <a
-                href="/#"
-                className="relative text-body-color hover:text-primary dark:text-dark-6"
-              >
+              <a href="/#" className="relative text-body-color hover:text-primary dark:text-dark-6">
                 <span className="absolute -right-[2px] -top-[2px] block h-[10px] w-[10px] rounded-full border border-white bg-red-600 dark:border-dark-2"></span>
                 <svg
                   width="24"
@@ -88,9 +79,7 @@ const HorizontalMenu3 = () => {
               <button className="flex items-center">
                 <p className="mr-4 text-right text-sm font-medium text-dark dark:text-white">
                   <span>Thomas Anree</span>
-                  <span className="block text-xs font-normal text-body-color dark:text-dark-6">
-                    Ux Designer
-                  </span>
+                  <span className="block text-xs font-normal text-body-color dark:text-dark-6">Ux Designer</span>
                 </p>
                 <img
                   src="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-02.jpg"

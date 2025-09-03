@@ -99,10 +99,14 @@ const Map2 = () => {
                     <select
                       name=""
                       id=""
-                      className="relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[9px] pl-3 pr-10 text-sm text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6"
+                      className="outline-hidden relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[9px] pl-3 pr-10 text-sm text-body-color dark:border-dark-3 dark:text-dark-6"
                     >
-                      <option value="" className="dark:bg-dark-2">Last 7 days</option>
-                      <option value="" className="dark:bg-dark-2">Last 15 days</option>
+                      <option value="" className="dark:bg-dark-2">
+                        Last 7 days
+                      </option>
+                      <option value="" className="dark:bg-dark-2">
+                        Last 15 days
+                      </option>
                     </select>
                     <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg

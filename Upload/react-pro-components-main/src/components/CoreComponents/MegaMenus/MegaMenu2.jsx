@@ -27,7 +27,7 @@ export default function MegaMenu2() {
                 <button
                   onClick={() => setOpen(!open)}
                   id="navbarToggler"
-                  className={`  ${
+                  className={` ${
                     open && "navbarTogglerActive"
                   } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
                 >
@@ -36,7 +36,7 @@ export default function MegaMenu2() {
                   <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
                 </button>
                 <nav
-                  className={`absolute right-4 top-full w-full max-w-[300px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none dark:bg-dark-2 lg:dark:bg-transparent ${
+                  className={`absolute right-4 top-full w-full max-w-[300px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent ${
                     !open && "hidden"
                   }`}
                 >
@@ -44,7 +44,7 @@ export default function MegaMenu2() {
                     <li className="relative">
                       <button
                         onClick={() => setShowMegaMenu(!showMegaMenu)}
-                        className="flex w-full items-center justify-between gap-2 py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex lg:w-auto lg:justify-center dark:text-dark-6 dark:hover:text-white"
+                        className="flex w-full items-center justify-between gap-2 py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex lg:w-auto lg:justify-center"
                       >
                         Resources
                         <span
@@ -66,7 +66,7 @@ export default function MegaMenu2() {
                       </button>
 
                       <div
-                        className={`w-full rounded-xl bg-white p-2 lg:absolute lg:left-0 lg:top-full lg:w-[850px] lg:p-8 lg:shadow-lg dark:bg-dark ${showMegaMenu ? "block" : "hidden"}`}
+                        className={`w-full rounded-xl bg-white p-2 dark:bg-dark lg:absolute lg:left-0 lg:top-full lg:w-[850px] lg:p-8 lg:shadow-lg ${showMegaMenu ? "block" : "hidden"}`}
                       >
                         <div className="grid gap-5 lg:grid-cols-2">
                           <div>
@@ -76,7 +76,7 @@ export default function MegaMenu2() {
                             <div className="space-y-2">
                               <a
                                 href="#"
-                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 lg:flex-row dark:hover:bg-white/5"
+                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 dark:hover:bg-white/5 lg:flex-row"
                               >
                                 <div className="text-primary">
                                   <svg
@@ -115,7 +115,7 @@ export default function MegaMenu2() {
                               </a>
                               <a
                                 href="#"
-                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 lg:flex-row dark:hover:bg-white/5"
+                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 dark:hover:bg-white/5 lg:flex-row"
                               >
                                 <div className="text-primary">
                                   <svg
@@ -147,7 +147,7 @@ export default function MegaMenu2() {
                               </a>
                               <a
                                 href="#"
-                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 lg:flex-row dark:hover:bg-white/5"
+                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 dark:hover:bg-white/5 lg:flex-row"
                               >
                                 <div className="text-primary">
                                   <svg
@@ -186,7 +186,7 @@ export default function MegaMenu2() {
                             <div className="space-y-2">
                               <a
                                 href="#"
-                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 lg:flex-row dark:hover:bg-white/5"
+                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 dark:hover:bg-white/5 lg:flex-row"
                               >
                                 <div className="text-primary">
                                   <svg
@@ -226,7 +226,7 @@ export default function MegaMenu2() {
                               </a>
                               <a
                                 href="#"
-                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 lg:flex-row dark:hover:bg-white/5"
+                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 dark:hover:bg-white/5 lg:flex-row"
                               >
                                 <div className="text-primary">
                                   <svg
@@ -262,7 +262,7 @@ export default function MegaMenu2() {
                               </a>
                               <a
                                 href="#"
-                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 lg:flex-row dark:hover:bg-white/5"
+                                className="group flex flex-col gap-4 rounded-lg p-4 duration-200 hover:bg-gray-1 dark:hover:bg-white/5 lg:flex-row"
                               >
                                 <div className="text-primary">
                                   <svg
@@ -300,7 +300,7 @@ export default function MegaMenu2() {
                     <li>
                       <a
                         href="#"
-                        className="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         Home
                       </a>
@@ -308,7 +308,7 @@ export default function MegaMenu2() {
                     <li>
                       <a
                         href="#"
-                        className="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         Features
                       </a>

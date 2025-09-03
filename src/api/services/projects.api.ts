@@ -34,10 +34,7 @@ class ProjectsApiService {
    */
   async getProjects(filters?: ProjectFilters): Promise<ProjectsListResponse> {
     try {
-      const response = await apiClient.get<any>(
-        this.baseEndpoint,
-        filters
-      );
+      const response = await apiClient.get<any>(this.baseEndpoint, filters);
 
       // API возвращает { success: true, data: { projects: [...], total: 4, ... } }
       if (response.success && response.data) {
@@ -56,9 +53,7 @@ class ProjectsApiService {
    */
   async getProject(projectId: string): Promise<Project> {
     try {
-      const response = await apiClient.get<ApiResponse<Project>>(
-        `${this.baseEndpoint}/${projectId}`
-      );
+      const response = await apiClient.get<ApiResponse<Project>>(`${this.baseEndpoint}/${projectId}`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -76,10 +71,7 @@ class ProjectsApiService {
    */
   async createProject(data: CreateProjectData): Promise<Project> {
     try {
-      const response = await apiClient.post<ApiResponse<Project>>(
-        this.baseEndpoint,
-        data
-      );
+      const response = await apiClient.post<ApiResponse<Project>>(this.baseEndpoint, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -97,10 +89,7 @@ class ProjectsApiService {
    */
   async updateProject(projectId: string, data: UpdateProjectData): Promise<Project> {
     try {
-      const response = await apiClient.patch<ApiResponse<Project>>(
-        `${this.baseEndpoint}/${projectId}`,
-        data
-      );
+      const response = await apiClient.patch<ApiResponse<Project>>(`${this.baseEndpoint}/${projectId}`, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -118,9 +107,7 @@ class ProjectsApiService {
    */
   async deleteProject(projectId: string): Promise<void> {
     try {
-      const response = await apiClient.delete<ApiResponse<void>>(
-        `${this.baseEndpoint}/${projectId}`
-      );
+      const response = await apiClient.delete<ApiResponse<void>>(`${this.baseEndpoint}/${projectId}`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при удалении проекта');
@@ -136,9 +123,7 @@ class ProjectsApiService {
    */
   async publishProject(projectId: string): Promise<void> {
     try {
-      const response = await apiClient.put<ApiResponse<void>>(
-        `${this.baseEndpoint}/${projectId}/publish`
-      );
+      const response = await apiClient.put<ApiResponse<void>>(`${this.baseEndpoint}/${projectId}/publish`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при публикации проекта');
@@ -154,9 +139,7 @@ class ProjectsApiService {
    */
   async unpublishProject(projectId: string): Promise<void> {
     try {
-      const response = await apiClient.put<ApiResponse<void>>(
-        `${this.baseEndpoint}/${projectId}/unpublish`
-      );
+      const response = await apiClient.put<ApiResponse<void>>(`${this.baseEndpoint}/${projectId}/unpublish`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при снятии с публикации');
@@ -172,10 +155,7 @@ class ProjectsApiService {
    */
   async updateProjectStatus(projectId: string, status: string): Promise<void> {
     try {
-      const response = await apiClient.patch<ApiResponse<void>>(
-        `${this.baseEndpoint}/${projectId}/status`,
-        { status }
-      );
+      const response = await apiClient.patch<ApiResponse<void>>(`${this.baseEndpoint}/${projectId}/status`, { status });
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при обновлении статуса');
@@ -191,9 +171,7 @@ class ProjectsApiService {
    */
   async getProjectTheme(projectId: string): Promise<any> {
     try {
-      const response = await apiClient.get<ApiResponse<any>>(
-        `${this.baseEndpoint}/${projectId}/theme`
-      );
+      const response = await apiClient.get<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/theme`);
       if (ApiUtils.isSuccess(response)) {
         return response.data;
       }
@@ -211,7 +189,7 @@ class ProjectsApiService {
     try {
       const response = await apiClient.put<ApiResponse<{ success: boolean }>>(
         `${this.baseEndpoint}/${projectId}/theme`,
-        themeConfig
+        themeConfig,
       );
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при сохранении темы проекта');
@@ -227,10 +205,7 @@ class ProjectsApiService {
    */
   async updateProjectDomains(projectId: string, data: { domain?: string; customDomain?: string }): Promise<void> {
     try {
-      const response = await apiClient.patch<ApiResponse<void>>(
-        `${this.baseEndpoint}/${projectId}/domains`,
-        data
-      );
+      const response = await apiClient.patch<ApiResponse<void>>(`${this.baseEndpoint}/${projectId}/domains`, data);
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при обновлении доменных настроек');
       }
@@ -243,7 +218,15 @@ class ProjectsApiService {
   /**
    * Доступы к проекту (список)
    */
-  async listAccesses(projectId: string): Promise<Array<{ id: string; userId: string; role: string; grantedAt?: string; user?: { email?: string; username?: string } }>> {
+  async listAccesses(projectId: string): Promise<
+    Array<{
+      id: string;
+      userId: string;
+      role: string;
+      grantedAt?: string;
+      user?: { email?: string; username?: string };
+    }>
+  > {
     try {
       const response = await apiClient.get<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses`);
       if (ApiUtils.isSuccess(response)) {
@@ -277,7 +260,10 @@ class ProjectsApiService {
    */
   async updateAccess(projectId: string, accessId: string, role: string) {
     try {
-      const response = await apiClient.patch<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses/${accessId}`, { role });
+      const response = await apiClient.patch<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/accesses/${accessId}`,
+        { role },
+      );
       if (ApiUtils.isSuccess(response)) {
         return response.data;
       }
@@ -293,7 +279,9 @@ class ProjectsApiService {
    */
   async revokeAccess(projectId: string, accessId: string) {
     try {
-      const response = await apiClient.delete<ApiResponse<any>>(`${this.baseEndpoint}/${projectId}/accesses/${accessId}`);
+      const response = await apiClient.delete<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/accesses/${accessId}`,
+      );
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при отзыве доступа');
       }
@@ -310,7 +298,7 @@ class ProjectsApiService {
       const params = excludeProjectId ? { exclude: excludeProjectId } : undefined;
       const response = await apiClient.get<ApiResponse<{ slug: string; available: boolean }>>(
         `${this.baseEndpoint}/check-slug/${slug}`,
-        params
+        params,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -332,7 +320,7 @@ class ProjectsApiService {
       const params = excludeProjectId ? { exclude: excludeProjectId } : undefined;
       const response = await apiClient.get<ApiResponse<{ domain: string; available: boolean }>>(
         `${this.baseEndpoint}/check-domain/${domain}`,
-        params
+        params,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -352,13 +340,15 @@ class ProjectsApiService {
    */
   subscribeEvents(onEvent: (e: any) => void): () => void {
     try {
-      const base = (apiClient as any).getBaseURL?.() || (typeof window !== 'undefined' ? `${window.location.protocol}//localhost:3001` : 'http://localhost:3001');
+      const base =
+        (apiClient as any).getBaseURL?.() ||
+        (typeof window !== 'undefined' ? `${window.location.protocol}//localhost:3001` : 'http://localhost:3001');
       // Генерируем/получаем ID подписчика (для отладки кросс-сессий)
       const getSubId = () => {
         try {
           const w: any = typeof window !== 'undefined' ? window : {};
           if (w.__situsSubId) return w.__situsSubId as string;
-          const stored = (typeof localStorage !== 'undefined') ? localStorage.getItem('situs:sub-id') : null;
+          const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('situs:sub-id') : null;
           const id = stored || `sub_${Math.random().toString(36).slice(2)}_${Date.now().toString(36)}`;
           if (typeof localStorage !== 'undefined' && !stored) localStorage.setItem('situs:sub-id', id);
           w.__situsSubId = id;
@@ -369,7 +359,7 @@ class ProjectsApiService {
       };
       const subId = getSubId();
       // Всегда используем тот же origin, чтобы сработал Vite proxy для /api
-      const origin = (typeof window !== 'undefined') ? window.location.origin : base;
+      const origin = typeof window !== 'undefined' ? window.location.origin : base;
       const url = `${origin}/api/realtime/projects?sub=${encodeURIComponent(subId)}`;
       // Локальный журнал событий для отладки
       const pushLog = (entry: any) => {
@@ -390,7 +380,9 @@ class ProjectsApiService {
         const to = setTimeout(() => {
           if (!gotAny) {
             // не получили ничего быстро — переключаемся на fetch-стрим
-            try { es.close(); } catch {}
+            try {
+              es.close();
+            } catch {}
             usedES = false;
           }
         }, 1500);
@@ -408,7 +400,9 @@ class ProjectsApiService {
         es.onerror = () => {
           pushLog({ dir: 'err', transport: 'es' });
           // первый error — переключаемся на fetch
-          try { es.close(); } catch {}
+          try {
+            es.close();
+          } catch {}
           usedES = false;
         };
         pushLog({ dir: 'info', msg: 'EventSource attempt' });
@@ -420,11 +414,20 @@ class ProjectsApiService {
           (window as any).__situsFetchStarted = true;
           const controller = new AbortController();
           let cancelled = false;
-          const abortOnUnload = () => { cancelled = true; try { controller.abort(); } catch {} };
+          const abortOnUnload = () => {
+            cancelled = true;
+            try {
+              controller.abort();
+            } catch {}
+          };
           if (typeof window !== 'undefined') window.addEventListener('beforeunload', abortOnUnload);
           (async () => {
             try {
-              const resp = await fetch(url, { mode: 'cors', cache: 'no-store', signal: controller.signal } as RequestInit);
+              const resp = await fetch(url, {
+                mode: 'cors',
+                cache: 'no-store',
+                signal: controller.signal,
+              } as RequestInit);
               const reader = (resp.body as any)?.getReader?.();
               if (!reader) return;
               const decoder = new TextDecoder('utf-8');
@@ -439,7 +442,7 @@ class ProjectsApiService {
                   buffer = buffer.slice(idx + 2);
                   const dataLine = chunk.split('\n').find((l) => l.startsWith('data:')) || '';
                   const payload = dataLine.replace(/^data:\s?/, '');
-                   if (payload) {
+                  if (payload) {
                     try {
                       const data = JSON.parse(payload);
                       if (data?.type === 'sse_connected') pushLog({ dir: 'info', msg: 'sse_connected', sub: subId });
@@ -448,19 +451,37 @@ class ProjectsApiService {
                     } catch {
                       pushLog({ dir: 'warn', note: 'json parse failed (fetch)' });
                     }
-                   }
+                  }
                 }
               }
             } catch (e: any) {
               pushLog({ dir: 'err', transport: 'fetch', error: e?.message });
             }
           })();
-          closeFns.push(() => { cancelled = true; try { controller.abort(); } catch {}; if (typeof window !== 'undefined') window.removeEventListener('beforeunload', abortOnUnload); });
+          closeFns.push(() => {
+            cancelled = true;
+            try {
+              controller.abort();
+            } catch {}
+            if (typeof window !== 'undefined') window.removeEventListener('beforeunload', abortOnUnload);
+          });
         };
         // Таймер проверит, нужен ли fallback
-        setTimeout(() => { if (!usedES || !gotAny) startFetchFallback(); }, 1600);
-        closeFns.push(() => { try { clearTimeout(to); } catch {}; try { es.close(); } catch {} });
-        return () => { pushLog({ dir: 'info', msg: 'subscription closed' }); closeFns.forEach((fn) => fn()); };
+        setTimeout(() => {
+          if (!usedES || !gotAny) startFetchFallback();
+        }, 1600);
+        closeFns.push(() => {
+          try {
+            clearTimeout(to);
+          } catch {}
+          try {
+            es.close();
+          } catch {}
+        });
+        return () => {
+          pushLog({ dir: 'info', msg: 'subscription closed' });
+          closeFns.forEach((fn) => fn());
+        };
       } catch {
         // упадём на fetch-стрим сразу
       }
@@ -468,7 +489,12 @@ class ProjectsApiService {
       // 2) Надёжный fallback: fetch + ReadableStream (работает в FF/инкогнито)
       const controller = new AbortController();
       let cancelled = false;
-      const abortOnUnload = () => { cancelled = true; try { controller.abort(); } catch {} };
+      const abortOnUnload = () => {
+        cancelled = true;
+        try {
+          controller.abort();
+        } catch {}
+      };
       if (typeof window !== 'undefined') {
         window.addEventListener('beforeunload', abortOnUnload);
       }
@@ -490,7 +516,12 @@ class ProjectsApiService {
               const dataLine = chunk.split('\n').find((l) => l.startsWith('data:')) || '';
               const payload = dataLine.replace(/^data:\s?/, '');
               if (payload) {
-                try { onEvent(JSON.parse(payload)); pushLog({ dir: 'in', transport: 'fetch', data: payload }); } catch { pushLog({ dir: 'warn', note: 'json parse failed' }); }
+                try {
+                  onEvent(JSON.parse(payload));
+                  pushLog({ dir: 'in', transport: 'fetch', data: payload });
+                } catch {
+                  pushLog({ dir: 'warn', note: 'json parse failed' });
+                }
               }
             }
           }
@@ -500,7 +531,9 @@ class ProjectsApiService {
       })();
       return () => {
         cancelled = true;
-        try { controller.abort(); } catch {}
+        try {
+          controller.abort();
+        } catch {}
         if (typeof window !== 'undefined') {
           window.removeEventListener('beforeunload', abortOnUnload);
         }

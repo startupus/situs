@@ -566,7 +566,8 @@ module.exports = plugin(
           border: "inset 0 0 0 2px #3758F9",
           product: "0px 1px 5px 0px rgba(0, 0, 0, 0.14)",
           "quick-view": "0px 4px 10px 0px rgba(0, 0, 0, 0.12)",
-          datepicker: "0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03)",
+          datepicker:
+            "0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03)",
 
           // ==== new
           xs: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   FaCube,
   FaExternalLinkAlt,
@@ -7,10 +7,9 @@ import {
   FaCalendarDay,
   FaSave,
   FaCheck,
-  FaExclamationTriangle
-} from 'react-icons/fa'
-import { useLanguage } from '../../hooks/useLanguage'
-
+  FaExclamationTriangle,
+} from 'react-icons/fa';
+import { useLanguage } from '../../hooks/useLanguage';
 
 interface EditorNavbarProps {
   currentPage?: string;
@@ -22,26 +21,26 @@ interface EditorNavbarProps {
 }
 
 const EditorNavbar: React.FC<EditorNavbarProps> = ({
-  currentPage = "Home",
+  currentPage = 'Home',
   onSave,
   autosaveEnabled = true,
   isSaving = false,
   lastSaved = null,
-  saveError = null
+  saveError = null,
 }) => {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'media' | 'playground'>('editor');
 
   console.log('🎯 EditorNavbar rendering - should be visible at top');
 
   return (
-    <header 
+    <header
       className="redaktus-editor-navbar flex w-full items-center border-b h-14 shadow-sm z-50 relative transition-colors duration-200 bg-white dark:bg-dark border-stroke dark:border-dark-3"
       style={{
         backgroundColor: 'var(--interface-bg, var(--color-gray-50, #ffffff))',
         borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))',
-        color: 'var(--interface-text, var(--color-body-color, #1f2937))'
+        color: 'var(--interface-text, var(--color-body-color, #1f2937))',
       }}
     >
       <div className="w-full px-6">
@@ -49,11 +48,11 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
           {/* Left Section - Logo */}
           <div className="flex items-center">
             <div className="flex items-center space-x-3">
-              <FaCube 
-                className="text-xl transition-colors duration-200" 
+              <FaCube
+                className="text-xl transition-colors duration-200"
                 style={{ color: 'var(--interface-primary, var(--color-primary, #1E40AF))' }}
               />
-              <span 
+              <span
                 className="text-lg font-bold tracking-wide transition-colors duration-200 font-inter"
                 style={{ color: 'var(--interface-text, var(--color-body-color, #1f2937))' }}
               >
@@ -64,22 +63,13 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
 
           {/* Center Section - Navigation Tabs */}
           <div className="flex items-center space-x-8">
-            <NavTab 
-              active={activeTab === 'editor'} 
-              onClick={() => setActiveTab('editor')}
-            >
+            <NavTab active={activeTab === 'editor'} onClick={() => setActiveTab('editor')}>
               {t('editor.tabs.editor')}
             </NavTab>
-            <NavTab 
-              active={activeTab === 'media'} 
-              onClick={() => setActiveTab('media')}
-            >
+            <NavTab active={activeTab === 'media'} onClick={() => setActiveTab('media')}>
               {t('editor.tabs.media')}
             </NavTab>
-            <NavTab 
-              active={activeTab === 'playground'} 
-              onClick={() => setActiveTab('playground')}
-            >
+            <NavTab active={activeTab === 'playground'} onClick={() => setActiveTab('playground')}>
               {t('editor.tabs.playground')}
             </NavTab>
           </div>
@@ -87,9 +77,7 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
           {/* Right Section - Controls & User */}
           <div className="flex items-center space-x-4">
             {/* Текущий заголовок страницы по центру в навигации */}
-            <div className="hidden sm:block text-sm font-semibold opacity-80">
-              {currentPage}
-            </div>
+            <div className="hidden sm:block text-sm font-semibold opacity-80">{currentPage}</div>
             {/* Save Status */}
             <div className="flex items-center space-x-2">
               {isSaving && (
@@ -98,14 +86,14 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
                   <span className="text-sm">{t('editor.navbar.saving')}</span>
                 </div>
               )}
-              
+
               {saveError && (
                 <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
                   <FaExclamationTriangle size={14} />
                   <span className="text-sm">{t('editor.navbar.saveError')}</span>
                 </div>
               )}
-              
+
               {lastSaved && !isSaving && !saveError && (
                 <div className="flex items-center space-x-2 text-green-600 dark:text-green-400">
                   <FaCheck size={14} />
@@ -115,7 +103,7 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
             </div>
 
             {/* Manual Save Button */}
-            <button 
+            <button
               onClick={onSave}
               disabled={isSaving}
               className={`inline-flex items-center space-x-2 px-4 py-2 border rounded-lg text-sm font-medium focus:outline-none transition-all duration-200 font-inter ${
@@ -124,12 +112,12 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
                   : 'border-stroke text-body-color hover:bg-primary hover:text-white hover:border-primary dark:border-dark-3 dark:text-dark-6 dark:hover:bg-primary dark:hover:text-white'
               }`}
               style={{
-                borderColor: isSaving 
+                borderColor: isSaving
                   ? 'var(--interface-border, var(--color-stroke, #e5e7eb))'
                   : 'var(--interface-border, var(--color-stroke, #e5e7eb))',
-                color: isSaving 
+                color: isSaving
                   ? 'var(--interface-text-disabled, var(--color-body-color, #64748b))50'
-                  : 'var(--interface-text, var(--color-body-color, #64748b))'
+                  : 'var(--interface-text, var(--color-body-color, #64748b))',
               }}
             >
               <FaSave size={12} />
@@ -137,11 +125,11 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
             </button>
 
             {/* View Site Button */}
-            <button 
+            <button
               className="inline-flex items-center space-x-2 px-4 py-2 border rounded-lg text-sm font-medium focus:outline-none transition-all duration-200 font-inter border-stroke text-body-color hover:bg-primary hover:text-white hover:border-primary dark:border-dark-3 dark:text-dark-6 dark:hover:bg-primary dark:hover:text-white"
               style={{
                 borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))',
-                color: 'var(--interface-text, var(--color-body-color, #64748b))'
+                color: 'var(--interface-text, var(--color-body-color, #64748b))',
               }}
             >
               <FaExternalLinkAlt size={12} />
@@ -181,8 +169,8 @@ const EditorNavbar: React.FC<EditorNavbarProps> = ({
   );
 };
 
-const NavTab: React.FC<{ 
-  children: React.ReactNode; 
+const NavTab: React.FC<{
+  children: React.ReactNode;
   active?: boolean;
   onClick?: () => void;
 }> = ({ children, active = false, onClick }) => {
@@ -190,20 +178,16 @@ const NavTab: React.FC<{
     <button
       onClick={onClick}
       className={`border-b-2 py-2 px-4 text-sm font-medium transition-all duration-200 font-inter ${
-        active 
+        active
           ? 'border-primary text-primary'
           : 'border-transparent text-body-color hover:border-primary hover:text-primary'
       }`}
       style={{
-        borderBottomColor: active 
-          ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-          : 'transparent',
-        color: active 
+        borderBottomColor: active ? 'var(--interface-primary, var(--color-primary, #1E40AF))' : 'transparent',
+        color: active
           ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
           : 'var(--interface-text, var(--color-body-color, #64748b))',
-        backgroundColor: active 
-          ? 'var(--interface-primary, var(--color-primary, #1E40AF))15'
-          : 'transparent'
+        backgroundColor: active ? 'var(--interface-primary, var(--color-primary, #1E40AF))15' : 'transparent',
       }}
     >
       {children}
@@ -227,4 +211,4 @@ const DropdownItem: React.FC<{
   );
 };
 
-export default EditorNavbar; 
+export default EditorNavbar;

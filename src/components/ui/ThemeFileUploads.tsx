@@ -1,12 +1,6 @@
 // src/components/ui/ThemeFileUploads.tsx
 import React from 'react';
-import { 
-  FileUpload1,
-  FileUpload2,
-  FileUpload3,
-  FileUpload4,
-  FileUpload5
-} from './core';
+import { FileUpload1, FileUpload2, FileUpload3, FileUpload4, FileUpload5 } from './core';
 
 // FileUpload Variants - простые обертки
 export const ThemeFileUpload1: React.FC = () => <FileUpload1 />;

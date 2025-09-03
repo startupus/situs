@@ -28,7 +28,7 @@ function HeroFive() {
                     <input
                       type="text"
                       placeholder="Start with a detailed description"
-                      className="h-12 w-full bg-transparent px-5 py-3 text-dark placeholder-body-color outline-hidden dark:text-white"
+                      className="outline-hidden h-12 w-full bg-transparent px-5 py-3 text-dark placeholder-body-color dark:text-white"
                     />
                     <button className="h-12 rounded-lg bg-primary px-6 py-3 font-medium text-white hover:bg-primary/90">
                       Generate
@@ -60,7 +60,7 @@ function HeroFive() {
             </div>
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div className="relative z-10 p-8">
-                <div className="*:w-full *:rounded-[10px] grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-2 gap-5 *:w-full *:rounded-[10px]">
                   <img
                     src="https://i.ibb.co/f2d8Lqh/image-1.jpg"
                     alt="hero image"

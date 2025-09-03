@@ -1,6 +1,6 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Admin, MediaLibrary } from 'redaktus/core'
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Admin, MediaLibrary } from 'redaktus/core';
 
 const AdminMediaLibrary: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const AdminMediaLibrary: React.FC = () => {
       </Helmet>
       <MediaLibrary />
     </Admin>
-  )
-}
+  );
+};
 
-export default AdminMediaLibrary
+export default AdminMediaLibrary;

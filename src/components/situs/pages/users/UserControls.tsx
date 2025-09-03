@@ -23,7 +23,7 @@ const UserControls: React.FC<UserControlsProps> = ({
   setFilterStatus,
   selectedUsers,
   onInviteClick,
-  onBulkAction
+  onBulkAction,
 }) => {
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
@@ -37,63 +37,48 @@ const UserControls: React.FC<UserControlsProps> = ({
             onChange={(e) => setSearchTerm(e.target.value)}
             icon={<FiSearch className="w-5 h-5" />}
           />
-          
+
           <ThemeSelect
             value={filterRole}
             onChange={(e) => setFilterRole(e.target.value)}
             options={[
-              { value: "", label: "Все роли" },
-              { value: "SUPER_ADMIN", label: "Супер Админ" },
-              { value: "STAFF", label: "Сотрудник" },
-              { value: "AGENCY", label: "Агентство" },
-              { value: "BUSINESS", label: "Бизнес" }
+              { value: '', label: 'Все роли' },
+              { value: 'SUPER_ADMIN', label: 'Супер Админ' },
+              { value: 'STAFF', label: 'Сотрудник' },
+              { value: 'AGENCY', label: 'Агентство' },
+              { value: 'BUSINESS', label: 'Бизнес' },
             ]}
           />
-          
+
           <ThemeSelect
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
             options={[
-              { value: "", label: "Все статусы" },
-              { value: "active", label: "Активные" },
-              { value: "pending", label: "Ожидающие" },
-              { value: "inactive", label: "Неактивные" },
-              { value: "suspended", label: "Заблокированные" },
-              { value: "banned", label: "Забаненные" }
+              { value: '', label: 'Все статусы' },
+              { value: 'active', label: 'Активные' },
+              { value: 'pending', label: 'Ожидающие' },
+              { value: 'inactive', label: 'Неактивные' },
+              { value: 'suspended', label: 'Заблокированные' },
+              { value: 'banned', label: 'Забаненные' },
             ]}
           />
         </div>
 
         {/* Действия */}
         <div className="flex space-x-3">
-          <ThemeButton
-            onClick={onInviteClick}
-            icon={<FiMail className="w-4 h-4" />}
-          >
+          <ThemeButton onClick={onInviteClick} icon={<FiMail className="w-4 h-4" />}>
             Пригласить
           </ThemeButton>
-          
+
           {selectedUsers.length > 0 && (
             <div className="flex space-x-2">
-              <ThemeButton
-                onClick={() => onBulkAction('activate')}
-                variant="success"
-                size="sm"
-              >
+              <ThemeButton onClick={() => onBulkAction('activate')} variant="success" size="sm">
                 Активировать ({selectedUsers.length})
               </ThemeButton>
-              <ThemeButton
-                onClick={() => onBulkAction('suspend')}
-                variant="warning"
-                size="sm"
-              >
+              <ThemeButton onClick={() => onBulkAction('suspend')} variant="warning" size="sm">
                 Заблокировать
               </ThemeButton>
-              <ThemeButton
-                onClick={() => onBulkAction('delete')}
-                variant="danger"
-                size="sm"
-              >
+              <ThemeButton onClick={() => onBulkAction('delete')} variant="danger" size="sm">
                 Удалить
               </ThemeButton>
             </div>

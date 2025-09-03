@@ -67,7 +67,7 @@ export default TableGrid4;
 
 const TableGridItem = ({ image, price, link, title, review }) => {
   return (
-    <div className="w-full border-stroke px-4 dark:border-dark-3 md:w-1/2 md:odd:border-r lg:w-1/3 lg:even:border-r not-last:border-b">
+    <div className="not-last:border-b w-full border-stroke px-4 dark:border-dark-3 md:w-1/2 md:odd:border-r lg:w-1/3 lg:even:border-r">
       <div className="mb-10 mt-6">
         <div className="mb-5 overflow-hidden rounded-md">
           <img src={image} alt="product" className="w-full" />

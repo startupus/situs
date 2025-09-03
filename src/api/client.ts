@@ -72,16 +72,13 @@ class ApiClient {
   /**
    * Базовый метод для выполнения HTTP запросов
    */
-  private async request<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     // Для health endpoint используем прямой путь
     const isHealthCheck = endpoint.startsWith('/health');
     const baseUrl = this.baseURL; // базовый URL без /api — endpoint включает нужный префикс
     const isAbsolute = /^(https?:)?\/\//i.test(endpoint);
     const url = isAbsolute ? endpoint : `${baseUrl}${endpoint}`;
-    
+
     // Автоматически добавляем токен если он есть
     const token = this.getStoredToken();
     const headers = { ...this.defaultHeaders };
@@ -96,7 +93,7 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
-      
+
       // Обработка ответов с ошибками
       if (!response.ok) {
         const status = response.status;
@@ -127,7 +124,7 @@ class ApiClient {
       if (error instanceof ApiClientError) {
         throw error;
       }
-      
+
       // Обработка сетевых ошибок
       // Попробуем fallback в dev: прямое обращение к бэку, минуя Vite proxy
       if (typeof window !== 'undefined' && !isAbsolute && endpoint.startsWith('/api/')) {
@@ -140,7 +137,10 @@ class ApiClient {
           }
         } catch {}
       }
-      throw new ApiClientError('Ошибка сети. Проверьте подключение к интернету.', 0, { error: 'NetworkError', message: String(error) });
+      throw new ApiClientError('Ошибка сети. Проверьте подключение к интернету.', 0, {
+        error: 'NetworkError',
+        message: String(error),
+      });
     }
   }
 
@@ -199,7 +199,7 @@ class ApiClient {
   async upload<T>(endpoint: string, formData: FormData): Promise<T> {
     const headers = { ...this.defaultHeaders };
     delete headers['Content-Type']; // Позволяем браузеру установить правильный Content-Type для FormData
-    
+
     const token = this.getStoredToken();
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
@@ -275,14 +275,16 @@ class ApiClient {
   /**
    * Получение статистики пользователей
    */
-  async getUsersStatistics(): Promise<ApiResponse<{
-    total: number;
-    active: number;
-    pending: number;
-    suspended: number;
-    inactive: number;
-    banned: number;
-  }>> {
+  async getUsersStatistics(): Promise<
+    ApiResponse<{
+      total: number;
+      active: number;
+      pending: number;
+      suspended: number;
+      inactive: number;
+      banned: number;
+    }>
+  > {
     return this.get('/api/users/statistics');
   }
 
@@ -379,7 +381,7 @@ export const ApiUtils = {
       return error.message;
     }
     return 'Произошла неизвестная ошибка';
-  }
-}
+  },
+};
 
 export default apiClient;

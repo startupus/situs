@@ -10,17 +10,8 @@ interface PagesSectionProps {
 }
 
 const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
-  const { 
-    pages, 
-    currentPage, 
-    createPage, 
-    updatePage, 
-    deletePage, 
-    loadPage, 
-    publishPage,
-    isLoading 
-  } = useProject();
-  
+  const { pages, currentPage, createPage, updatePage, deletePage, loadPage, publishPage, isLoading } = useProject();
+
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newPageTitle, setNewPageTitle] = useState('');
   const [newPageSlug, setNewPageSlug] = useState('');
@@ -32,9 +23,9 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
     try {
       const pageData: CreatePageData = {
         title: newPageTitle.trim(),
-        slug: newPageSlug.trim() || undefined
+        slug: newPageSlug.trim() || undefined,
       };
-      
+
       await createPage(pageData);
       setNewPageTitle('');
       setNewPageSlug('');
@@ -98,20 +89,11 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
       {/* Заголовок и кнопка создания */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Страницы сайта
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Управляйте страницами вашего проекта
-          </p>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Страницы сайта</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Управляйте страницами вашего проекта</p>
         </div>
-        
-        <Button
-          onClick={() => setShowCreateForm(true)}
-          variant="primary"
-          size="md"
-          disabled={isLoading}
-        >
+
+        <Button onClick={() => setShowCreateForm(true)} variant="primary" size="md" disabled={isLoading}>
           <FiPlus className="w-4 h-4 mr-2" />
           Новая страница
         </Button>
@@ -120,10 +102,8 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
       {/* Форма создания страницы */}
       {showCreateForm && (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-            Создать новую страницу
-          </h3>
-          
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Создать новую страницу</h3>
+
           <form onSubmit={handleCreatePage} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -138,7 +118,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 URL (необязательно)
@@ -154,7 +134,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                 Если не указан, будет создан автоматически из названия
               </p>
             </div>
-            
+
             <div className="flex space-x-3">
               <button
                 type="submit"
@@ -184,12 +164,8 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
         {pages.length === 0 ? (
           <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg">
             <FiEdit3 className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              Нет страниц
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
-              Создайте первую страницу для вашего сайта
-            </p>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Нет страниц</h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-4">Создайте первую страницу для вашего сайта</p>
             <button
               onClick={() => setShowCreateForm(true)}
               className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -211,10 +187,8 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3">
-                    <h3 className="font-medium text-gray-900 dark:text-white">
-                      {page.title}
-                    </h3>
-                    
+                    <h3 className="font-medium text-gray-900 dark:text-white">{page.title}</h3>
+
                     <span
                       className={`inline-flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(page.status)}`}
                     >
@@ -222,7 +196,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                       <span>{getStatusText(page.status)}</span>
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500 dark:text-gray-400">
                     <span>/{page.slug}</span>
                     <span>•</span>
@@ -235,7 +209,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   {/* Кнопка редактирования */}
                   <button
@@ -248,7 +222,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                   >
                     <FiEdit3 className="w-4 h-4" />
                   </button>
-                  
+
                   {/* Кнопка предпросмотра */}
                   <button
                     className="p-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors"
@@ -256,7 +230,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                   >
                     <FiEye className="w-4 h-4" />
                   </button>
-                  
+
                   {/* Кнопка публикации */}
                   {page.status === 'draft' && (
                     <button
@@ -267,7 +241,7 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
                       <FiCheck className="w-4 h-4" />
                     </button>
                   )}
-                  
+
                   {/* Кнопка удаления */}
                   <button
                     onClick={() => handleDeletePage(page.id)}
@@ -288,28 +262,20 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
         <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                {pages.length}
-              </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                Всего страниц
-              </div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{pages.length}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Всего страниц</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                {pages.filter(p => p.status === 'published').length}
+                {pages.filter((p) => p.status === 'published').length}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                Опубликовано
-              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Опубликовано</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-                {pages.filter(p => p.status === 'draft').length}
+                {pages.filter((p) => p.status === 'draft').length}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                Черновики
-              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Черновики</div>
             </div>
           </div>
         </div>
@@ -318,4 +284,4 @@ const PagesSection: React.FC<PagesSectionProps> = ({ onEditPage }) => {
   );
 };
 
-export default PagesSection; 
+export default PagesSection;

@@ -93,7 +93,7 @@ const Chart7 = () => {
                 <select
                   name=""
                   id=""
-                  className="relative z-20 inline-flex appearance-none bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color outline-hidden dark:text-dark-6"
+                  className="outline-hidden relative z-20 inline-flex appearance-none bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color dark:text-dark-6"
                 >
                   <option value="" className="dark:bg-dark-2">
                     Monthly

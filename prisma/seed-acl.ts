@@ -14,8 +14,8 @@ async function main() {
       email: 'acl-demo@local',
       password: 'x',
       globalRole: 'BUSINESS',
-      status: 'ACTIVE'
-    }
+      status: 'ACTIVE',
+    },
   });
 
   const account = await prisma.account.upsert({
@@ -25,8 +25,8 @@ async function main() {
       id: 'acl-demo-account',
       name: 'ACL Demo Account',
       type: 'BUSINESS',
-      ownerId: user.id
-    }
+      ownerId: user.id,
+    },
   });
 
   const project = await prisma.project.upsert({
@@ -37,8 +37,8 @@ async function main() {
       slug: 'acl-demo-project',
       ownerId: user.id,
       accountId: account.id,
-      accessLevel: 'PUBLIC'
-    }
+      accessLevel: 'PUBLIC',
+    },
   });
 
   // 0.3) Продукты демо‑проекта: WEBSITE + ECOMMERCE с базовыми данными
@@ -128,22 +128,40 @@ async function main() {
     prisma.user.upsert({
       where: { email: 'superadmin@situs.local' },
       update: { globalRole: 'SUPER_ADMIN', status: 'ACTIVE' },
-      create: { username: 'superadmin', email: 'superadmin@situs.local', password: 'x', globalRole: 'SUPER_ADMIN', status: 'ACTIVE' }
+      create: {
+        username: 'superadmin',
+        email: 'superadmin@situs.local',
+        password: 'x',
+        globalRole: 'SUPER_ADMIN',
+        status: 'ACTIVE',
+      },
     }),
     prisma.user.upsert({
       where: { email: 'staff@situs.local' },
       update: { globalRole: 'STAFF', status: 'ACTIVE' },
-      create: { username: 'staff', email: 'staff@situs.local', password: 'x', globalRole: 'STAFF', status: 'ACTIVE' }
+      create: { username: 'staff', email: 'staff@situs.local', password: 'x', globalRole: 'STAFF', status: 'ACTIVE' },
     }),
     prisma.user.upsert({
       where: { email: 'agency@situs.local' },
       update: { globalRole: 'AGENCY', status: 'ACTIVE' },
-      create: { username: 'agency', email: 'agency@situs.local', password: 'x', globalRole: 'AGENCY', status: 'ACTIVE' }
+      create: {
+        username: 'agency',
+        email: 'agency@situs.local',
+        password: 'x',
+        globalRole: 'AGENCY',
+        status: 'ACTIVE',
+      },
     }),
     prisma.user.upsert({
       where: { email: 'business@situs.local' },
       update: { globalRole: 'BUSINESS', status: 'ACTIVE' },
-      create: { username: 'business', email: 'business@situs.local', password: 'x', globalRole: 'BUSINESS', status: 'ACTIVE' }
+      create: {
+        username: 'business',
+        email: 'business@situs.local',
+        password: 'x',
+        globalRole: 'BUSINESS',
+        status: 'ACTIVE',
+      },
     }),
   ]);
 
@@ -184,7 +202,7 @@ async function main() {
       conditions: JSON.stringify({ requireProjectAccess: false }),
       isSystem: false,
       isActive: true,
-    }
+    },
   });
 
   // Пример MenuType / MenuItem c различными уровнями доступа
@@ -194,8 +212,8 @@ async function main() {
     create: {
       projectId: project.id,
       name: 'main',
-      title: 'Main Menu'
-    }
+      title: 'Main Menu',
+    },
   });
 
   await prisma.menuItem.upsert({
@@ -211,7 +229,7 @@ async function main() {
       accessLevel: 'PUBLIC',
       language: '*',
       orderIndex: 0,
-    }
+    },
   });
 
   await prisma.menuItem.upsert({
@@ -227,17 +245,17 @@ async function main() {
       accessLevel: 'CUSTOM',
       language: '*',
       orderIndex: 1,
-    }
+    },
   });
 
   console.log('✅ ACL demo data seeded');
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-}).finally(async () => {
-  await prisma.$disconnect();
-});
-
-
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

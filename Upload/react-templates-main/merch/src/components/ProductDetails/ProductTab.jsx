@@ -44,7 +44,7 @@ const ProductTab = () => {
                 <div key={productIndex}>
                   <button
                     onClick={handleModalOpen}
-                    className="absolute text-base font-medium text-dark top-6 right-6"
+                    className="absolute right-6 top-6 text-base font-medium text-dark"
                   >
                     Click to Zoom
                   </button>
@@ -55,8 +55,8 @@ const ProductTab = () => {
         </div>
       </div>
 
-      <div className="w-full px-4 mb-12 md:order-first md:mb-0 md:w-3/12 lg:w-2/12">
-        <div className="flex flex-wrap items-center justify-between -mx-2">
+      <div className="mb-12 w-full px-4 md:order-first md:mb-0 md:w-3/12 lg:w-2/12">
+        <div className="-mx-2 flex flex-wrap items-center justify-between">
           {productTabItems.map((tab, tabIndex) => (
             <div key={tabIndex} className="w-1/4 px-2 md:w-full">
               <button
@@ -79,8 +79,8 @@ const ProductTab = () => {
           activeTab === productIndex && (
             <div key={productIndex}>
               {modalOpen && (
-                <div className="fixed top-0 left-0 z-20 flex items-center justify-center w-full h-full py-10 bg-black/50">
-                  <div className="inline-block w-4/5 mx-auto sm:w-3/4 lg:w-1/2">
+                <div className="fixed left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-black/50 py-10">
+                  <div className="mx-auto inline-block w-4/5 sm:w-3/4 lg:w-1/2">
                     <ClickOutside onClick={() => setModalOpen(false)}>
                       <img
                         src={product.image}

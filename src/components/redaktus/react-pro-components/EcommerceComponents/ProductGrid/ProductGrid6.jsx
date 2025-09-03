@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid6 = () => {
   return (
@@ -37,16 +37,7 @@ const ProductGrid6 = () => {
 
 export default ProductGrid6;
 
-const SingleProduct = ({
-  img,
-  link,
-  title,
-  subtitle,
-  price,
-  prevPrice,
-  newItem,
-  hotItem,
-}) => {
+const SingleProduct = ({ img, link, title, subtitle, price, prevPrice, newItem, hotItem }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
       <div className="mb-10 overflow-hidden rounded-lg border border-[#e7e7e7] bg-white hover:shadow-card-2 dark:border-dark-3 dark:bg-dark-2">
@@ -72,16 +63,9 @@ const SingleProduct = ({
               {title}
             </a>
           </h3>
-          <p className="mb-5 text-base font-medium text-body-color dark:text-dark-6">
-            {subtitle}
-          </p>
+          <p className="mb-5 text-base font-medium text-body-color dark:text-dark-6">{subtitle}</p>
           <p className="text-lg font-semibold text-dark dark:text-white">
-            {prevPrice && (
-              <span className="mr-2 text-body-color line-through dark:text-dark-6">
-                {" "}
-                {prevPrice}{" "}
-              </span>
-            )}
+            {prevPrice && <span className="mr-2 text-body-color line-through dark:text-dark-6"> {prevPrice} </span>}
             {price}
           </p>
         </div>

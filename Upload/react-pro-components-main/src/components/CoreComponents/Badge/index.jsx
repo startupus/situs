@@ -21,7 +21,7 @@ const Badge = ({
   return (
     <>
       <span
-        className={`inline-block px-3 py-1  text-sm font-semibold  ${
+        className={`inline-block px-3 py-1 text-sm font-semibold ${
           (primary &&
             `${
               outline

@@ -111,13 +111,13 @@ class SitesApiService {
   async getSites(filters?: SiteFilters): Promise<SitesListResponse> {
     try {
       const projectsResponse = await projectsApi.getProjects(filters);
-      
+
       // Преобразуем проекты в сайты
-      const sites: Site[] = projectsResponse.projects.map(project => this.projectToSite(project));
-      
+      const sites: Site[] = projectsResponse.projects.map((project) => this.projectToSite(project));
+
       return {
         sites,
-        pagination: projectsResponse.pagination
+        pagination: projectsResponse.pagination,
       };
     } catch (error) {
       console.error('Sites API Error:', error);
@@ -152,8 +152,8 @@ class SitesApiService {
           theme: 'auto',
           primaryColor: '#3B82F6',
           favicon: '',
-          logo: ''
-        }
+          logo: '',
+        },
       };
 
       const project = await projectsApi.createProject(projectData);
@@ -174,7 +174,7 @@ class SitesApiService {
         description: data.description,
         domain: data.domain,
         template: data.template,
-        settings: data.settings
+        settings: data.settings,
       };
 
       const project = await projectsApi.updateProject(siteId, projectData);
@@ -204,7 +204,7 @@ class SitesApiService {
     try {
       // Используем projects API для создания страницы
       const project = await projectsApi.getProject(siteId);
-      
+
       const newPage: ProjectPage = {
         id: `page_${Date.now()}`,
         title: data.title,
@@ -213,17 +213,17 @@ class SitesApiService {
         meta: data.meta || {
           description: '',
           keywords: [],
-          ogImage: ''
+          ogImage: '',
         },
         status: data.status || 'draft',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       project.pages.push(newPage);
-      
+
       await projectsApi.updateProject(siteId, {
-        pages: project.pages
+        pages: project.pages,
       });
 
       return this.projectPageToPage(newPage);
@@ -244,7 +244,7 @@ class SitesApiService {
       let targetPage: ProjectPage | null = null;
 
       for (const project of projects.projects) {
-        const page = project.pages.find(p => p.id === pageId);
+        const page = project.pages.find((p) => p.id === pageId);
         if (page) {
           targetProject = project;
           targetPage = page;
@@ -259,11 +259,11 @@ class SitesApiService {
       // Обновляем страницу
       Object.assign(targetPage, {
         ...data,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       });
 
       await projectsApi.updateProject(targetProject.id, {
-        pages: targetProject.pages
+        pages: targetProject.pages,
       });
 
       return this.projectPageToPage(targetPage);
@@ -283,7 +283,7 @@ class SitesApiService {
       let targetProject: Project | null = null;
 
       for (const project of projects.projects) {
-        const pageIndex = project.pages.findIndex(p => p.id === pageId);
+        const pageIndex = project.pages.findIndex((p) => p.id === pageId);
         if (pageIndex !== -1) {
           targetProject = project;
           project.pages.splice(pageIndex, 1);
@@ -296,7 +296,7 @@ class SitesApiService {
       }
 
       await projectsApi.updateProject(targetProject.id, {
-        pages: targetProject.pages
+        pages: targetProject.pages,
       });
     } catch (error) {
       console.error('Delete Page API Error:', error);
@@ -329,7 +329,7 @@ class SitesApiService {
         pages = firstProduct.pages;
       }
     }
-    
+
     // Fallback на старые страницы проекта если есть
     if (pages.length === 0 && project.pages) {
       pages = project.pages;
@@ -342,12 +342,12 @@ class SitesApiService {
       domain: project.domain,
       template: project.template,
       settings: project.settings,
-      pages: pages.map(page => this.projectPageToPage(page)),
+      pages: pages.map((page) => this.projectPageToPage(page)),
       createdAt: project.createdAt,
       updatedAt: project.updatedAt,
       owner: project.owner,
       collaborators: project.collaborators,
-      isPublic: project.isPublic
+      isPublic: project.isPublic,
     };
   }
 
@@ -364,7 +364,7 @@ class SitesApiService {
       status: page.status,
       createdAt: page.createdAt,
       updatedAt: page.updatedAt,
-      publishedAt: page.publishedAt
+      publishedAt: page.publishedAt,
     };
   }
 
@@ -382,4 +382,4 @@ class SitesApiService {
 }
 
 export const sitesApi = new SitesApiService();
-export default sitesApi; 
+export default sitesApi;

@@ -22,7 +22,7 @@ const CorporateInput: React.FC<CorporateInputProps> = ({
   placeholder,
   required = false,
   className = '',
-  disabled = false
+  disabled = false,
 }) => {
   return (
     <div className={`w-full ${className}`}>

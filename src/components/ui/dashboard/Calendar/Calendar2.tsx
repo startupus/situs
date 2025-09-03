@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Calender2 = () => {
   return (
@@ -6,9 +6,7 @@ const Calender2 = () => {
       <section className="relative z-10 bg-white py-[120px] dark:bg-dark">
         <div className="mx-auto px-4 lg:container">
           <div className="mb-[30px] flex items-center justify-between rounded-lg border border-stroke bg-gray-2 py-3 pl-[30px] pr-4 dark:border-dark-3 dark:bg-dark-2">
-            <p className="text-base font-semibold text-dark dark:text-white sm:text-xl">
-              December 2026
-            </p>
+            <p className="text-base font-semibold text-dark dark:text-white sm:text-xl">December 2026</p>
             <div className="relative z-20 inline-flex rounded-[5px] bg-white dark:bg-dark">
               <select
                 name=""
@@ -51,12 +49,7 @@ const Calender2 = () => {
               </WeekRow>
               <tbody>
                 <DayRow>
-                  <Day
-                    number="01"
-                    active
-                    eventTitle="Redesign Website"
-                    eventDate="1 Dec - 2 Dec"
-                  />
+                  <Day number="01" active eventTitle="Redesign Website" eventDate="1 Dec - 2 Dec" />
                   <Day number="02" />
                   <Day number="03" />
                   <Day number="04" />
@@ -138,22 +131,14 @@ const Day = ({ active, number, eventTitle, eventDate }) => {
     <td className="ease relative h-28 w-10 cursor-pointer border border-stroke p-1 transition duration-500 hover:bg-gray-2 dark:border-dark-3 dark:hover:bg-dark md:h-[125px] lg:w-28 2xl:w-40">
       <div className="mx-auto flex h-24 w-10 flex-col overflow-hidden sm:w-full md:h-40 md:w-20 lg:w-28 2xl:w-40">
         <div className="top h-5 w-full">
-          <span className="text-base font-semibold text-dark dark:text-white">
-            {number}
-          </span>
+          <span className="text-base font-semibold text-dark dark:text-white">{number}</span>
         </div>
         {active && (
           <div className="bottom md:h-30 group h-16 w-full grow cursor-pointer py-1">
-            <span className="text-dark group-hover:text-primary dark:text-white md:hidden">
-              More
-            </span>
+            <span className="text-dark group-hover:text-primary dark:text-white md:hidden">More</span>
             <div className="event invisible absolute left-2 z-10 mb-1 w-[200%] rounded-sm border-l-[3px] border-primary bg-gray-2 px-[18px] py-[6px] text-left opacity-0 group-hover:visible group-hover:opacity-100 dark:bg-dark md:visible md:w-[190%] md:opacity-100">
-              <span className="event-name block text-sm font-medium text-dark dark:text-white">
-                {eventTitle}
-              </span>
-              <span className="time text-sm text-body-color dark:text-dark-6">
-                {eventDate}
-              </span>
+              <span className="event-name block text-sm font-medium text-dark dark:text-white">{eventTitle}</span>
+              <span className="time text-sm text-body-color dark:text-dark-6">{eventDate}</span>
             </div>
           </div>
         )}

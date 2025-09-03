@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Profile2 = () => {
   return (
@@ -15,23 +15,14 @@ const Profile2 = () => {
                 />
               </div>
               <div>
-                <h5 className="text-base font-medium text-dark dark:text-white">
-                  Devid Strassmann
-                </h5>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  UI/UX Designer
-                </p>
+                <h5 className="text-base font-medium text-dark dark:text-white">Devid Strassmann</h5>
+                <p className="text-sm text-body-color dark:text-dark-6">UI/UX Designer</p>
               </div>
             </div>
             <div>
               <button className="inline-flex items-center justify-center rounded-sm bg-primary px-4 py-[10px] text-sm font-medium text-white hover:bg-primary/90">
                 <span className="pr-[6px]">
-                  <svg
-                    width="15"
-                    height="14"
-                    viewBox="0 0 15 14"
-                    className="fill-current"
-                  >
+                  <svg width="15" height="14" viewBox="0 0 15 14" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -49,37 +40,23 @@ const Profile2 = () => {
             </div>
           </div>
           <div className="p-5">
-            <h5 className="mb-2 text-base font-medium text-dark dark:text-white">
-              About Me
-            </h5>
+            <h5 className="mb-2 text-base font-medium text-dark dark:text-white">About Me</h5>
             <p className="mb-6 text-sm text-body-color dark:text-dark-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque posuere fermentum urna, eu condimentum mauris
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere fermentum urna, eu
+              condimentum mauris
             </p>
             <div className="-mx-5 flex flex-wrap items-center">
               <div className="border-r border-stroke px-5 dark:border-dark-3">
-                <h6 className="text-base font-semibold text-dark dark:text-white">
-                  79
-                </h6>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Followers
-                </p>
+                <h6 className="text-base font-semibold text-dark dark:text-white">79</h6>
+                <p className="text-sm text-body-color dark:text-dark-6">Followers</p>
               </div>
               <div className="border-r border-stroke px-5 dark:border-dark-3">
-                <h6 className="text-base font-semibold text-dark dark:text-white">
-                  528
-                </h6>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Following
-                </p>
+                <h6 className="text-base font-semibold text-dark dark:text-white">528</h6>
+                <p className="text-sm text-body-color dark:text-dark-6">Following</p>
               </div>
               <div className="px-5">
-                <h6 className="text-base font-semibold text-dark dark:text-white">
-                  38
-                </h6>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Lightning
-                </p>
+                <h6 className="text-base font-semibold text-dark dark:text-white">38</h6>
+                <p className="text-sm text-body-color dark:text-dark-6">Lightning</p>
               </div>
             </div>
           </div>

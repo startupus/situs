@@ -2,10 +2,10 @@ import React from "react";
 
 const AttentionAlert2 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-yellow bg-yellow-light-4 flex w-full rounded-lg border-l-[6px] px-7 py-8 md:p-9">
-          <div className="bg-yellow mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
+        <div className="flex w-full rounded-lg border-l-[6px] border-yellow bg-yellow-light-4 px-7 py-8 md:p-9">
+          <div className="mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md bg-yellow">
             <svg
               width="18"
               height="18"

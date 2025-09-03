@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Tab9 = () => {
-  const [open, setOpen] = useState("home");
+  const [open, setOpen] = useState('home');
 
   const handleTabOpen = (tabCategory) => {
     setOpen(tabCategory);
@@ -17,11 +17,9 @@ const Tab9 = () => {
                 <div className="-mx-[6px] flex flex-col md:flex-row">
                   <div className="px-[6px]">
                     <button
-                      onClick={() => handleTabOpen("home")}
+                      onClick={() => handleTabOpen('home')}
                       className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
-                        open === "home"
-                          ? "bg-primary text-white border-primary"
-                          : ""
+                        open === 'home' ? 'bg-primary text-white border-primary' : ''
                       }`}
                     >
                       Home
@@ -29,11 +27,9 @@ const Tab9 = () => {
                   </div>
                   <div className="px-[6px]">
                     <button
-                      onClick={() => handleTabOpen("about")}
+                      onClick={() => handleTabOpen('about')}
                       className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
-                        open === "about"
-                          ? "bg-primary text-white border-primary"
-                          : ""
+                        open === 'about' ? 'bg-primary text-white border-primary' : ''
                       }`}
                     >
                       About Us
@@ -41,11 +37,9 @@ const Tab9 = () => {
                   </div>
                   <div className="px-[6px]">
                     <button
-                      onClick={() => handleTabOpen("team")}
+                      onClick={() => handleTabOpen('team')}
                       className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
-                        open === "team"
-                          ? "bg-primary text-white border-primary"
-                          : ""
+                        open === 'team' ? 'bg-primary text-white border-primary' : ''
                       }`}
                     >
                       Our Team
@@ -53,11 +47,9 @@ const Tab9 = () => {
                   </div>
                   <div className="px-[6px]">
                     <button
-                      onClick={() => handleTabOpen("company")}
+                      onClick={() => handleTabOpen('company')}
                       className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
-                        open === "company"
-                          ? "bg-primary text-white border-primary"
-                          : ""
+                        open === 'company' ? 'bg-primary text-white border-primary' : ''
                       }`}
                     >
                       Company Details
@@ -100,13 +92,7 @@ export default Tab9;
 const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
-      <div
-        className={`mt-8 text-base text-body-color ${
-          open === tabCategory ? "block" : "hidden"
-        } `}
-      >
-        {details}
-      </div>
+      <div className={`mt-8 text-base text-body-color ${open === tabCategory ? 'block' : 'hidden'} `}>{details}</div>
     </div>
   );
 };

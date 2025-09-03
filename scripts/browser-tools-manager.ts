@@ -2,7 +2,7 @@
 
 /**
  * BrowserTools Manager - Архитектурное решение для управления процессами
- * 
+ *
  * Проблемы, которые решает:
  * 1. Множественные запуски процессов
  * 2. Некорректное завершение процессов
@@ -50,7 +50,7 @@ class BrowserToolsManager {
       const child = spawn('npx', ['@agentdeskai/browser-tools-server@latest'], {
         stdio: ['pipe', 'pipe', 'pipe'],
         env: { ...process.env, PORT: availablePort.toString() },
-        detached: true // Запускаем как демон
+        detached: true, // Запускаем как демон
       });
 
       const processInfo: ProcessInfo = {
@@ -58,7 +58,7 @@ class BrowserToolsManager {
         port: availablePort,
         startTime: new Date(),
         status: 'running',
-        type: 'server'
+        type: 'server',
       };
 
       this.processes.set(child.pid!, processInfo);
@@ -89,7 +89,6 @@ class BrowserToolsManager {
 
       console.log(`✅ BrowserTools сервер запущен на порту ${availablePort} (PID: ${child.pid})`);
       return processInfo;
-
     } catch (error) {
       console.error(`❌ Ошибка запуска сервера: ${error}`);
       throw error;
@@ -101,7 +100,7 @@ class BrowserToolsManager {
    */
   async stopAll(): Promise<void> {
     console.log('🛑 Остановка всех процессов BrowserTools...');
-    
+
     this.isShuttingDown = true;
 
     for (const [pid, processInfo] of this.processes) {
@@ -110,7 +109,7 @@ class BrowserToolsManager {
 
     // Очистка PID файлов
     await this.cleanupPidFiles();
-    
+
     console.log('✅ Все процессы BrowserTools остановлены');
   }
 
@@ -160,8 +159,8 @@ class BrowserToolsManager {
     // Убиваем процессы по PID файлу
     try {
       const pidData = await fs.readFile(this.pidFile, 'utf-8');
-      const pids = pidData.split('\n').filter(pid => pid.trim());
-      
+      const pids = pidData.split('\n').filter((pid) => pid.trim());
+
       for (const pidStr of pids) {
         const pid = parseInt(pidStr);
         if (pid && !isNaN(pid)) {
@@ -185,8 +184,8 @@ class BrowserToolsManager {
   private async findAvailablePort(startPort: number): Promise<number> {
     for (let port = startPort; port < startPort + 10; port++) {
       try {
-        const response = await fetch(`http://localhost:${port}/health`, { 
-          signal: AbortSignal.timeout(1000) 
+        const response = await fetch(`http://localhost:${port}/health`, {
+          signal: AbortSignal.timeout(1000),
         });
         // Порт занят, пробуем следующий
       } catch (error) {
@@ -202,11 +201,11 @@ class BrowserToolsManager {
    */
   private async waitForServerStart(port: number, timeout: number = 10000): Promise<void> {
     const startTime = Date.now();
-    
+
     while (Date.now() - startTime < timeout) {
       try {
         const response = await fetch(`http://localhost:${port}/health`, {
-          signal: AbortSignal.timeout(1000)
+          signal: AbortSignal.timeout(1000),
         });
         if (response.ok) {
           return;
@@ -214,9 +213,9 @@ class BrowserToolsManager {
       } catch (error) {
         // Сервер еще не запустился
       }
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
-    
+
     throw new Error(`Сервер не запустился за ${timeout}ms`);
   }
 
@@ -226,25 +225,25 @@ class BrowserToolsManager {
   private async stopProcess(pid: number): Promise<void> {
     try {
       process.kill(pid, 'SIGTERM');
-      
+
       // Ждем завершения
       let attempts = 0;
       while (attempts < 10) {
         try {
           process.kill(pid, 0); // Проверяем существование процесса
-          await new Promise(resolve => setTimeout(resolve, 500));
+          await new Promise((resolve) => setTimeout(resolve, 500));
           attempts++;
         } catch (error) {
           // Процесс завершен
           break;
         }
       }
-      
+
       // Принудительное завершение если не завершился
       if (attempts >= 10) {
         process.kill(pid, 'SIGKILL');
       }
-      
+
       this.processes.delete(pid);
     } catch (error) {
       console.error(`Ошибка остановки процесса ${pid}: ${error}`);
@@ -301,7 +300,7 @@ class BrowserToolsManager {
   private async log(message: string): Promise<void> {
     const timestamp = new Date().toISOString();
     const logMessage = `[${timestamp}] ${message}\n`;
-    
+
     try {
       await fs.mkdir(path.dirname(this.logFile), { recursive: true });
       await fs.appendFile(this.logFile, logMessage);
@@ -317,15 +316,15 @@ class BrowserToolsManager {
     return new Promise((resolve) => {
       const child = spawn(command, [], { shell: true });
       let output = '';
-      
+
       child.stdout?.on('data', (data) => {
         output += data.toString();
       });
-      
+
       child.stderr?.on('data', (data) => {
         output += data.toString();
       });
-      
+
       child.on('close', (code) => {
         resolve({ success: code === 0, output });
       });
@@ -337,8 +336,8 @@ class BrowserToolsManager {
    */
   private setupGracefulShutdown(): void {
     const signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
-    
-    signals.forEach(signal => {
+
+    signals.forEach((signal) => {
       process.on(signal, async () => {
         console.log(`\n📡 Получен сигнал ${signal}, завершение работы...`);
         await this.stopAll();
@@ -358,29 +357,29 @@ async function main() {
       case 'start':
         await manager.startServer();
         break;
-        
+
       case 'stop':
         await manager.stopAll();
         break;
-        
+
       case 'status':
         const status = manager.getStatus();
         console.log('📊 Статус процессов:');
-        status.forEach(proc => {
+        status.forEach((proc) => {
           console.log(`  PID: ${proc.pid}, Порт: ${proc.port}, Статус: ${proc.status}`);
         });
         break;
-        
+
       case 'health':
         const health = await manager.healthCheck();
         if (health.healthy) {
           console.log('✅ Система здорова');
         } else {
           console.log('❌ Проблемы в системе:');
-          health.issues.forEach(issue => console.log(`  - ${issue}`));
+          health.issues.forEach((issue) => console.log(`  - ${issue}`));
         }
         break;
-        
+
       default:
         console.log(`
 BrowserTools Manager - Архитектурное решение для управления процессами
@@ -403,4 +402,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export default BrowserToolsManager; 
+export default BrowserToolsManager;

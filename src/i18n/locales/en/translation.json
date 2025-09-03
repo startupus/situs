@@ -3,7 +3,7 @@
     "title": "Visual Editor",
     "tabs": {
       "editor": "EDITOR",
-      "media": "MEDIA", 
+      "media": "MEDIA",
       "playground": "PLAYGROUND"
     },
     "navbar": {
@@ -48,7 +48,7 @@
           "all": "All Blocks",
           "hero": "Hero Sections",
           "content": "Content Blocks",
-          "testimonial": "Testimonials", 
+          "testimonial": "Testimonials",
           "services": "Services",
           "team": "Team",
           "pricing": "Pricing",
@@ -144,7 +144,7 @@
     },
     "sections": {
       "text": "TEXT",
-      "background": "BACKGROUND", 
+      "background": "BACKGROUND",
       "media": "MEDIA",
       "addNew": "ADD ELEMENTS...",
       "statusVisibility": "STATUS AND VISIBILITY",
@@ -159,7 +159,7 @@
       "align": "ALIGN",
       "type": "TYPE",
       "opacity": "OPACITY",
-      "visibility": "VISIBILITY", 
+      "visibility": "VISIBILITY",
       "schedule": "SCHEDULE PUBLISH (GMT+0)",
       "mediaType": "MEDIA TYPE",
       "mediaSide": "MEDIA SIDE",
@@ -213,4 +213,4 @@
     "warning": "Warning",
     "info": "Information"
   }
-} 
+}

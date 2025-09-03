@@ -261,10 +261,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-auto bg-[#212B36] duration-200 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-auto bg-[#212B36] duration-200 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div>
-          <div className="p-10 pb-2!">
+          <div className="pb-2! p-10">
             <Link to="/" className="block">
               <img src={logoWhite} alt="logo" />
             </Link>
@@ -276,7 +276,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {navList.map((item, index) =>
                   item?.group ? (
                     <li key={index}>
-                      <p className="mt-7 mb-[22px] text-sm font-medium text-white uppercase">
+                      <p className="mb-[22px] mt-7 text-sm font-medium uppercase text-white">
                         {item.group}
                       </p>
                     </li>
@@ -290,7 +290,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         <span className="mr-[10px]">{item.icon}</span>
                         {item.text}
                         <span
-                          className={`absolute top-1/2 right-4 -translate-y-1/2 ${
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 ${
                             openDropDown ? "rotate-180" : "rotate-0"
                           }`}
                         >
@@ -309,12 +309,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
                       {openDropDown && (
                         <div>
-                          <ul className="mt-3 ml-8">
+                          <ul className="ml-8 mt-3">
                             {item?.children.map((child, childIndex) => (
                               <li key={childIndex}>
                                 <Link
                                   to={child.link}
-                                  className="text-dark-6 hover:text-dark-7 flex w-full items-center rounded-[5px] px-[15px] py-[7px] text-base font-medium hover:bg-white/10"
+                                  className="flex w-full items-center rounded-[5px] px-[15px] py-[7px] text-base font-medium text-dark-6 hover:bg-white/10 hover:text-dark-7"
                                 >
                                   {child.text}
                                 </Link>
@@ -328,7 +328,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <li key={index}>
                       <Link
                         to={item.link}
-                        className="text-dark-6 flex w-full items-center rounded-sm px-[18px] py-[10px] text-base font-medium hover:bg-white/10 hover:text-white"
+                        className="flex w-full items-center rounded-sm px-[18px] py-[10px] text-base font-medium text-dark-6 hover:bg-white/10 hover:text-white"
                       >
                         <span className="mr-[10px]">{item.icon}</span>
                         {item.text}
@@ -341,14 +341,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </div>
         </div>
 
-        <div className="border-t border-[#E7E7E733] px-[25px] pt-7 pb-[30px]">
+        <div className="border-t border-[#E7E7E733] px-[25px] pb-[30px] pt-7">
           <form className="relative mb-6">
             <input
               type="text"
-              className="border-dark-3 bg-dark-2 text-dark-5 focus:border-primary h-11 w-full rounded-md border-[.5px] pr-4 pl-[46px] text-sm font-medium outline-hidden focus:bg-transparent"
+              className="outline-hidden h-11 w-full rounded-md border-[.5px] border-dark-3 bg-dark-2 pl-[46px] pr-4 text-sm font-medium text-dark-5 focus:border-primary focus:bg-transparent"
               placeholder="Search"
             />
-            <button className="absolute -translate-y-1/2 top-1/2 left-3">
+            <button className="absolute left-3 top-1/2 -translate-y-1/2">
               <svg
                 width="16"
                 height="16"
@@ -369,7 +369,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <img
                 src={user}
                 alt="profile"
-                className="object-cover object-center w-full h-full rounded-full"
+                className="h-full w-full rounded-full object-cover object-center"
               />
             </div>
             <div>
@@ -382,7 +382,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div
         onClick={handleSidebarToggle}
-        className={`bg-dark/80 fixed top-0 left-0 z-30 h-screen w-full xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-30 h-screen w-full bg-dark/80 xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       ></div>
     </>
   );

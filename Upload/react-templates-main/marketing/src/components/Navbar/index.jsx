@@ -57,8 +57,8 @@ const Navbar = () => {
 
   return (
     <header
-      className={`absolute top-0 left-0 z-50 w-full ${
-        sticky && "bg-dark/70 sticky shadow-xs backdrop-blur-xs"
+      className={`absolute left-0 top-0 z-50 w-full ${
+        sticky && "shadow-xs backdrop-blur-xs sticky bg-dark/70"
       }`}
     >
       <div className="container mx-auto">
@@ -76,7 +76,7 @@ const Navbar = () => {
             <div ref={navRef}>
               <button
                 onClick={handleNavbarToggle}
-                className={`ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden ${
+                className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
                   navbarOpen ? "navbarTogglerActive" : ""
                 }`}
               >
@@ -86,14 +86,14 @@ const Navbar = () => {
               </button>
 
               <nav
-                className={`dark:bg-dark absolute top-full right-4 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none xl:ml-11 lg:dark:bg-transparent ${navbarOpen ? "" : "hidden"}`}
+                className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm dark:bg-dark lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent xl:ml-11 ${navbarOpen ? "" : "hidden"}`}
               >
                 <ul className="block lg:flex">
                   {navList.map((item, index) => (
                     <li key={index}>
                       <Link
                         to={item.link}
-                        className="text-dark hover:text-primary dark:hover:text-primary flex py-2 text-base font-medium lg:ml-10 lg:inline-flex lg:text-white dark:text-white"
+                        className="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary lg:ml-10 lg:inline-flex lg:text-white"
                       >
                         {item.text}
                       </Link>
@@ -106,7 +106,7 @@ const Navbar = () => {
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <Link
                 to="#"
-                className="shadow-1 text-primary hover:bg-gray-2 hover:text-body-color rounded-md bg-white px-7 py-3 text-base font-medium dark:shadow-none"
+                className="rounded-md bg-white px-7 py-3 text-base font-medium text-primary shadow-1 hover:bg-gray-2 hover:text-body-color dark:shadow-none"
               >
                 Get Started
               </Link>

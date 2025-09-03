@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const WhiteOutlineSemiRoundedButtonWithIcon = () => {
   return (
-    <button className='text-body-color border-stroke hover:border-primary hover:text-primary inline-flex items-center justify-center rounded-[5px] border bg-white py-3 px-6 text-center text-base font-medium'>
-      <span className='mr-[10px]'>
+    <button className="text-body-color border-stroke hover:border-primary hover:text-primary inline-flex items-center justify-center rounded-[5px] border bg-white py-3 px-6 text-center text-base font-medium">
+      <span className="mr-[10px]">
         <svg
           width={20}
           height={20}
@@ -25,7 +25,7 @@ const WhiteOutlineSemiRoundedButtonWithIcon = () => {
       </span>
       Button With Icon
     </button>
-  )
-}
+  );
+};
 
-export default WhiteOutlineSemiRoundedButtonWithIcon
+export default WhiteOutlineSemiRoundedButtonWithIcon;

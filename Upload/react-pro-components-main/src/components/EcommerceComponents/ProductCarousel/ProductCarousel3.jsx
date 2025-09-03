@@ -18,12 +18,12 @@ const ProductCarousel3 = () => {
   return (
     <>
       <section className="dark:bg-dark">
-        <div className="container mx-auto overflow-hidden pt-20 pb-20 lg:pt-[120px] lg:pb-[90px]">
+        <div className="container mx-auto overflow-hidden pb-20 pt-20 lg:pb-[90px] lg:pt-[120px]">
           <div className="mx-auto mb-[60px] max-w-[510px] text-center">
             <span className="mb-2 block text-lg font-semibold text-primary">
               Most Popular Products
             </span>
-            <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:leading-[1.2] md:text-[40px]">
+            <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
               Best Selling Items
             </h2>
             <p className="text-base text-body-color dark:text-dark-6">
@@ -134,9 +134,9 @@ const ProductCarousel3 = () => {
                 rating="5.00 Rating"
               />
             </SwiperSlide>
-            <div className="z-50 -bottom-[52px] absolute left-0 right-0 flex items-center justify-center space-x-3">
+            <div className="absolute -bottom-[52px] left-0 right-0 z-50 flex items-center justify-center space-x-3">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="flex h-11 w-11 items-center justify-center border border-body-color dark:border-dark-3 bg-white dark:bg-dark-2 text-body-color dark:text-white hover:border-primary hover:bg-primary hover:text-white">
+                <button className="flex h-11 w-11 items-center justify-center border border-body-color bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-white">
                   <svg
                     width={21}
                     height={20}
@@ -150,7 +150,7 @@ const ProductCarousel3 = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="flex h-11 w-11 items-center justify-center border border-body-color dark:border-dark-3 bg-white dark:bg-dark-2 text-body-color dark:text-white hover:border-primary hover:bg-primary hover:text-white">
+                <button className="flex h-11 w-11 items-center justify-center border border-body-color bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-white">
                   <svg
                     width={21}
                     height={20}
@@ -203,7 +203,7 @@ const ProductCard = ({
           </span>
         )}
         <div className="absolute left-0 top-0 h-full w-full space-y-[10px] p-5 text-right opacity-0 transition-all group-hover:opacity-100">
-          <button className="ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-dark-2 text-dark dark:text-white text-center drop-shadow-three hover:bg-primary hover:text-white">
+          <button className="ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
             <svg
               width={18}
               height={18}
@@ -217,7 +217,7 @@ const ProductCard = ({
               <path d="M16.3687 0.506226H14.85C14.175 0.506226 13.5843 1.01248 13.5 1.68748L13.05 4.92185H1.9406C1.65935 4.92185 1.3781 5.06248 1.18122 5.28748C1.01247 5.51248 0.928096 5.82185 1.01247 6.1031C1.01247 6.13123 1.01247 6.13123 1.01247 6.15935L2.75622 11.4187C2.86872 11.8125 3.23435 12.0937 3.65622 12.0937H11.4187C12.4593 12.0937 13.3593 11.3062 13.5 10.2656L14.6812 1.85623C14.6812 1.79998 14.7375 1.77185 14.7937 1.77185H16.3125C16.65 1.77185 16.9593 1.4906 16.9593 1.12498C16.9593 0.759351 16.7062 0.506226 16.3687 0.506226ZM12.2906 10.0687C12.2343 10.4906 11.8687 10.8 11.4468 10.8H3.90935L2.3906 6.18748H12.8531L12.2906 10.0687Z" />
             </svg>
           </button>
-          <button className="ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-dark-2 text-dark dark:text-white text-center drop-shadow-three hover:bg-primary hover:text-white">
+          <button className="ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
             <svg
               width={18}
               height={18}
@@ -230,7 +230,7 @@ const ProductCard = ({
               <path d="M17.2125 8.01567C15.6094 5.62505 13.3875 3.2063 9 3.2063C4.6125 3.2063 2.39062 5.62505 0.7875 8.01567C0.39375 8.6063 0.39375 9.3938 0.7875 9.98442C2.39062 12.3469 4.6125 14.7938 9 14.7938C13.3875 14.7938 15.6094 12.3469 17.2125 9.98442C17.6063 9.36567 17.6063 8.6063 17.2125 8.01567ZM16.1719 9.2813C14.1187 12.2907 12.0656 13.5282 9 13.5282C5.93438 13.5282 3.88125 12.2907 1.82812 9.2813C1.71563 9.11255 1.71563 8.88755 1.82812 8.7188C3.88125 5.70942 5.93438 4.47192 9 4.47192C12.0656 4.47192 14.1187 5.70942 16.1719 8.7188C16.2563 8.88755 16.2563 9.11255 16.1719 9.2813Z" />
             </svg>
           </button>
-          <button className="ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-dark-2 text-dark dark:text-white text-center drop-shadow-three hover:bg-primary hover:text-white">
+          <button className="ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
             <svg
               width={18}
               height={18}
@@ -248,7 +248,7 @@ const ProductCard = ({
         <h3 className="mb-1">
           <a
             href={link}
-            className="text-lg font-semibold text-dark dark:text-white hover:text-primary xs:text-xl"
+            className="text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl"
           >
             {name}
           </a>
@@ -258,13 +258,13 @@ const ProductCard = ({
           {discountedPrice && (
             <span>
               {discountedPrice}
-              <span className="pl-2 text-body-color dark:text-dark-6 line-through">
+              <span className="pl-2 text-body-color line-through dark:text-dark-6">
                 {price}
               </span>
             </span>
           )}
         </p>
-        <div className="flex gap-1 items-center">
+        <div className="flex items-center gap-1">
           <Star />
           <Star />
           <Star />

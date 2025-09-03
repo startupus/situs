@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ChatBox2 = () => {
   const active = true;
@@ -18,24 +18,14 @@ const ChatBox2 = () => {
                 />
               </div>
               <div>
-                <h5 className="text-base font-medium text-dark dark:text-white">
-                  Robert Henry
-                </h5>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Lase seen 5min ago
-                </p>
+                <h5 className="text-base font-medium text-dark dark:text-white">Robert Henry</h5>
+                <p className="text-sm text-body-color dark:text-dark-6">Lase seen 5min ago</p>
               </div>
             </div>
             <div>
               <div className="inline-flex h-[25px] items-center rounded-[3px] border-stroke text-sm font-medium text-dark dark:border-dark-3 dark:text-white sm:border sm:bg-[#F8FAFC] sm:px-2 dark:sm:bg-dark">
-                <span
-                  className={`block h-2 w-2 rounded-full ${
-                    active ? "bg-green" : "bg-red"
-                  }`}
-                ></span>
-                <span className="ml-[6px] hidden sm:inline">
-                  {active ? "Active Now" : "Inactive Now"}
-                </span>
+                <span className={`block h-2 w-2 rounded-full ${active ? 'bg-green' : 'bg-red'}`}></span>
+                <span className="ml-[6px] hidden sm:inline">{active ? 'Active Now' : 'Inactive Now'}</span>
               </div>
             </div>
           </div>
@@ -90,13 +80,7 @@ const ChatBox2 = () => {
                 />
 
                 <button className="absolute right-[18px] top-1/2 -translate-y-1/2">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_1058_11452)">
                       <path
                         d="M13.0219 9.92812H4.97812C4.78125 9.92812 4.58437 10.0125 4.47187 10.1812C4.35937 10.35 4.30312 10.5469 4.35937 10.7437C4.95 12.825 6.8625 14.2875 9 14.2875C11.1937 14.2875 13.05 12.8812 13.6406 10.7437C13.6969 10.5469 13.6687 10.35 13.5281 10.1812C13.4156 10.0125 13.2187 9.92812 13.0219 9.92812ZM9 12.9937C7.70625 12.9937 6.55312 12.2906 5.90625 11.1937H12.0937C11.475 12.2906 10.3219 12.9937 9 12.9937Z"
@@ -127,13 +111,7 @@ const ChatBox2 = () => {
               <button className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-md bg-primary px-5 text-base font-medium text-white hover:bg-blue-dark">
                 <span className="hidden pr-[10px] sm:inline"> Send </span>
                 <span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M18.625 9.28125C18.5 9.0625 18.3125 8.90625 18.0937 8.78125L3.6875 0.718748C3.4375 0.593748 3.15625 0.531248 2.875 0.562498C2.59375 0.593748 2.34375 0.687498 2.125 0.874998C1.90625 1.0625 1.75 1.3125 1.6875 1.5625C1.59375 1.84375 1.625 2.125 1.71875 2.40625L4.40625 10L1.71875 17.5937C1.625 17.875 1.625 18.1562 1.6875 18.4062C1.75 18.6875 1.90625 18.9062 2.125 19.0937C2.34375 19.2812 2.59375 19.375 2.875 19.4062C2.90625 19.4062 2.96875 19.4062 3 19.4062C3.21875 19.4062 3.46875 19.3437 3.6875 19.2187L18.0937 11.1562C18.3125 11.0312 18.5 10.875 18.625 10.6562C18.75 10.4375 18.8125 10.1875 18.8125 9.96875C18.8125 9.75 18.75 9.5 18.625 9.28125ZM3.0625 1.96875L16.125 9.28125H5.65625L3.0625 1.96875ZM3.0625 18.0312L5.6875 10.7187H16.1562L3.0625 18.0312Z"
                       fill="white"
@@ -155,14 +133,10 @@ const Chat = ({ img, time, text, activePartner }) => {
   return (
     <div className={`flex w-full max-w-[470px]`}>
       <div className="relative mr-[14px] h-10 w-full max-w-[40px] rounded-full">
-        <img
-          src={img}
-          alt="avatar"
-          className="h-full w-full rounded-full object-cover object-center"
-        />
+        <img src={img} alt="avatar" className="h-full w-full rounded-full object-cover object-center" />
         <span
           className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full border-2 border-white dark:border-dark-2 ${
-            activePartner ? "bg-green" : "bg-red"
+            activePartner ? 'bg-green' : 'bg-red'
           }`}
         ></span>
       </div>
@@ -171,9 +145,7 @@ const Chat = ({ img, time, text, activePartner }) => {
         <div className="mb-[10px] inline-block rounded-[5px] bg-white px-5 py-3 shadow-card dark:bg-dark-3">
           <p className="text-base text-body-color dark:text-dark-6">{text}</p>
         </div>
-        <span className="block text-sm text-body-color dark:text-dark-6">
-          {time}
-        </span>
+        <span className="block text-sm text-body-color dark:text-dark-6">{time}</span>
       </div>
     </div>
   );
@@ -186,20 +158,14 @@ const Reply = ({ img, time, text, active }) => {
         <div className="mb-[10px] inline-block rounded-sm bg-dark px-5 py-3 shadow-card">
           <p className="text-base text-white">{text}</p>
         </div>
-        <span className="block text-right text-sm text-body-color dark:text-dark-6">
-          {time}
-        </span>
+        <span className="block text-right text-sm text-body-color dark:text-dark-6">{time}</span>
       </div>
 
       <div className="relative ml-[14px] h-10 w-full max-w-[40px] rounded-full">
-        <img
-          src={img}
-          alt="avatar"
-          className="h-full w-full rounded-full object-cover object-center"
-        />
+        <img src={img} alt="avatar" className="h-full w-full rounded-full object-cover object-center" />
         <span
           className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full border-2 border-white dark:border-dark-2 ${
-            active ? "bg-green" : "bg-red"
+            active ? 'bg-green' : 'bg-red'
           }`}
         ></span>
       </div>

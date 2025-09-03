@@ -12,13 +12,13 @@ interface MenuManagerModalsProps {
   editingItem: MenuItemData | null;
   editingMenuType: MenuTypeData | null;
   deletingMenuType: MenuTypeData | null;
-  
+
   // Данные
   selectedMenuType: string;
   menuItems: MenuItemData[];
   allMenuItems: MenuItemData[];
   projectId: string;
-  
+
   // Обработчики
   onCloseCreateItem: () => void;
   onCloseCreateType: () => void;
@@ -28,7 +28,10 @@ interface MenuManagerModalsProps {
   onCreateMenuItem: (data: CreateMenuItemRequest) => Promise<void>;
   onCreateMenuType: (data: CreateMenuTypeRequest) => Promise<void>;
   onUpdateMenuItem: (id: string, updates: Partial<MenuItemData>) => Promise<void>;
-  onUpdateMenuType: (typeId: string, updates: { title?: string; name?: string; description?: string; isActive?: boolean }) => Promise<void>;
+  onUpdateMenuType: (
+    typeId: string,
+    updates: { title?: string; name?: string; description?: string; isActive?: boolean },
+  ) => Promise<void>;
   onDeleteMenuType: (typeId: string) => Promise<void>;
 }
 
@@ -51,7 +54,7 @@ const MenuManagerModals: React.FC<MenuManagerModalsProps> = ({
   onCreateMenuType,
   onUpdateMenuItem,
   onUpdateMenuType,
-  onDeleteMenuType
+  onDeleteMenuType,
 }) => {
   return (
     <>
@@ -59,7 +62,7 @@ const MenuManagerModals: React.FC<MenuManagerModalsProps> = ({
       {showCreateItemModal && (
         <CreateMenuItemModal
           menuTypeId={selectedMenuType}
-          parentItems={menuItems.filter(item => item.level < 3)} // Максимум 3 уровня
+          parentItems={menuItems.filter((item) => item.level < 3)} // Максимум 3 уровня
           onClose={onCloseCreateItem}
           onCreate={onCreateMenuItem}
         />
@@ -80,20 +83,12 @@ const MenuManagerModals: React.FC<MenuManagerModalsProps> = ({
 
       {/* Модальное окно создания типа меню */}
       {showCreateTypeModal && (
-        <CreateMenuTypeModal
-          projectId={projectId}
-          onClose={onCloseCreateType}
-          onCreate={onCreateMenuType}
-        />
+        <CreateMenuTypeModal projectId={projectId} onClose={onCloseCreateType} onCreate={onCreateMenuType} />
       )}
 
       {/* Модальное окно редактирования типа меню */}
       {editingMenuType && (
-        <EditMenuTypeModal
-          menuType={editingMenuType}
-          onClose={onCloseEditType}
-          onUpdate={onUpdateMenuType}
-        />
+        <EditMenuTypeModal menuType={editingMenuType} onClose={onCloseEditType} onUpdate={onUpdateMenuType} />
       )}
 
       {/* Модальное окно подтверждения удаления типа меню */}
@@ -105,7 +100,8 @@ const MenuManagerModals: React.FC<MenuManagerModalsProps> = ({
               Вы уверены, что хотите удалить тип меню "<strong>{deletingMenuType.title}</strong>"?
             </p>
             <p className="text-sm text-red-500 mb-4">
-              Внимание: Все пункты меню этого типа ({allMenuItems.filter(item => item.menuTypeId === deletingMenuType.id).length} шт.) также будут удалены!
+              Внимание: Все пункты меню этого типа (
+              {allMenuItems.filter((item) => item.menuTypeId === deletingMenuType.id).length} шт.) также будут удалены!
             </p>
             <div className="flex justify-end gap-2">
               <button

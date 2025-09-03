@@ -117,8 +117,7 @@ export const demoProducts = [
     price: 1200,
     category: 'Одежда',
     stock: 50,
-    image:
-      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
     status: 'active',
   },
   {
@@ -127,8 +126,7 @@ export const demoProducts = [
     price: 3500,
     category: 'Одежда',
     stock: 25,
-    image:
-      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop',
+    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop',
     status: 'active',
   },
   {
@@ -137,8 +135,7 @@ export const demoProducts = [
     price: 5000,
     category: 'Обувь',
     stock: 12,
-    image:
-      'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=300&h=300&fit=crop',
+    image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=300&h=300&fit=crop',
     status: 'draft',
   },
 ];
@@ -156,7 +153,7 @@ export const demoSupportTickets = [
     responses: 0,
   },
   {
-    id: 'TICK-002', 
+    id: 'TICK-002',
     title: 'Вопрос по тарифам',
     description: 'Хотел бы узнать подробности о корпоративном тарифе',
     status: 'in_progress',
@@ -205,39 +202,37 @@ export const demoChatbots = [
   {
     id: 3,
     name: "Чат-бот поддержки 'Помощник24'",
-    status: "development",
-    url: "https://t.me/helper24_bot",
-    createdAt: "2024-03-10",
+    status: 'development',
+    url: 'https://t.me/helper24_bot',
+    createdAt: '2024-03-10',
     visitors: 850,
     orders: 120,
     revenue: 85000,
-    platform: "Telegram",
-    messages: 1250
+    platform: 'Telegram',
+    messages: 1250,
   },
   {
     id: 6,
     name: "Чат-бот заказа пиццы 'ПиццаБот'",
-    status: "active",
-    url: "https://t.me/pizzabot",
-    createdAt: "2024-02-15",
+    status: 'active',
+    url: 'https://t.me/pizzabot',
+    createdAt: '2024-02-15',
     visitors: 1800,
     orders: 450,
     revenue: 225000,
-    platform: "Telegram",
-    messages: 3200
+    platform: 'Telegram',
+    messages: 3200,
   },
   {
     id: 9,
     name: "Чат-бот консультаций 'ЮристБот'",
-    status: "active",
-    url: "https://t.me/lawyer_bot",
-    createdAt: "2024-01-25",
+    status: 'active',
+    url: 'https://t.me/lawyer_bot',
+    createdAt: '2024-01-25',
     visitors: 950,
     orders: 75,
     revenue: 150000,
-    platform: "Telegram",
-    messages: 2100
-  }
+    platform: 'Telegram',
+    messages: 2100,
+  },
 ];
-
-

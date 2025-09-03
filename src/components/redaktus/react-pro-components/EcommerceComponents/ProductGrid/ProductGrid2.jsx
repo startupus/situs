@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid2 = () => {
   return (
@@ -65,9 +65,7 @@ const SingleProduct = ({ img, link, title, price, children }) => {
               {price}
             </p>
           </div>
-          <div className="mt-5 flex space-x-2 sm:mt-0 md:mt-5 xl:mt-0">
-            {children}
-          </div>
+          <div className="mt-5 flex space-x-2 sm:mt-0 md:mt-5 xl:mt-0">{children}</div>
         </div>
       </div>
     </div>

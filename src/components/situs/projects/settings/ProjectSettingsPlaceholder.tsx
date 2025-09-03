@@ -10,5 +10,3 @@ const ProjectSettingsPlaceholder: React.FC<{ title: string }> = ({ title }) => {
 };
 
 export default ProjectSettingsPlaceholder;
-
-

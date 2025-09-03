@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Tab2 = () => {
-  const [open, setOpen] = useState("home");
+  const [open, setOpen] = useState('home');
 
   const handleTabOpen = (tabCategory) => {
     setOpen(tabCategory);
@@ -15,41 +15,41 @@ const Tab2 = () => {
             <div className="w-full mb-14">
               <div className="flex flex-wrap bg-[#FAFAFA]">
                 <button
-                  onClick={() => handleTabOpen("home")}
+                  onClick={() => handleTabOpen('home')}
                   className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
-                    open === "home"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                    open === 'home'
+                      ? 'border-primary text-primary bg-[#EDF1FF]'
+                      : 'border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]'
                   }`}
                 >
                   Home
                 </button>
                 <button
-                  onClick={() => handleTabOpen("about")}
+                  onClick={() => handleTabOpen('about')}
                   className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
-                    open === "about"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                    open === 'about'
+                      ? 'border-primary text-primary bg-[#EDF1FF]'
+                      : 'border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]'
                   }`}
                 >
                   About Us
                 </button>
                 <button
-                  onClick={() => handleTabOpen("team")}
+                  onClick={() => handleTabOpen('team')}
                   className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
-                    open === "team"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                    open === 'team'
+                      ? 'border-primary text-primary bg-[#EDF1FF]'
+                      : 'border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]'
                   }`}
                 >
                   Our Team
                 </button>
                 <button
-                  onClick={() => handleTabOpen("company")}
+                  onClick={() => handleTabOpen('company')}
                   className={`border-b-2 py-4 px-6 text-sm font-medium md:text-base lg:py-5 lg:px-12 ${
-                    open === "company"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                    open === 'company'
+                      ? 'border-primary text-primary bg-[#EDF1FF]'
+                      : 'border-[#F1F2F4] text-body-color hover:border-primary hover:text-primary hover:bg-[#EDF1FF]'
                   }`}
                 >
                   Company Details
@@ -90,11 +90,7 @@ export default Tab2;
 const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
-      <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
-          open === tabCategory ? "block" : "hidden"
-        } `}
-      >
+      <div className={`text-body-color p-6 text-base leading-relaxed ${open === tabCategory ? 'block' : 'hidden'} `}>
         {details}
       </div>
     </div>

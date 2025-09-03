@@ -2,9 +2,9 @@ import React from "react";
 
 const FormElementTextarea = () => {
   return (
-    <section className='py-12 dark:bg-dark'>
-      <div className='container'>
-        <div className='-mx-4 flex flex-wrap'>
+    <section className="py-12 dark:bg-dark">
+      <div className="container">
+        <div className="-mx-4 flex flex-wrap">
           <DefaultColumn>
             <DefaultTextarea />
           </DefaultColumn>
@@ -23,79 +23,79 @@ const FormElementTextarea = () => {
         </div>
       </div>
     </section>
-  )
+  );
 };
 
 export default FormElementTextarea;
 
 const DefaultColumn = ({ children }) => {
   return (
-    <div className='w-full px-4 md:w-1/2 lg:w-1/3'>
-      <div className='mb-12'>{children}</div>
+    <div className="w-full px-4 md:w-1/2 lg:w-1/3">
+      <div className="mb-12">{children}</div>
     </div>
-  )
-}
+  );
+};
 
 const DefaultTextarea = () => {
   return (
     <>
-      <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
+      <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
         Default textarea
       </label>
       <textarea
-        rows='5'
-        placeholder='Default textarea'
-        className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+        rows="5"
+        placeholder="Default textarea"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent p-5 text-dark-6 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3"
       />
     </>
-  )
-}
+  );
+};
 
 const ActiveTextarea = () => {
   return (
     <>
-      <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
+      <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
         Active textarea
       </label>
       <textarea
-        rows='5'
-        placeholder='Active textarea'
-        className='w-full bg-transparent rounded-md border border-primary p-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+        rows="5"
+        placeholder="Active textarea"
+        className="outline-hidden w-full rounded-md border border-primary bg-transparent p-5 text-dark-6 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
       />
     </>
-  )
-}
+  );
+};
 
 const DisabledTextarea = () => {
   return (
     <>
-      <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
+      <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
         Disabled textarea
       </label>
       <textarea
-        rows='5'
-        placeholder='Disabled textarea'
+        rows="5"
+        placeholder="Disabled textarea"
         disabled
-        className='w-full rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:disabled:bg-dark-4 dark:disabled:border-dark-4'
+        className="outline-hidden w-full rounded-md border border-stroke p-5 text-dark-6 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:disabled:border-dark-4 dark:disabled:bg-dark-4"
       />
     </>
-  )
-}
+  );
+};
 
 const MessageTextarea = () => {
   return (
     <>
-      <label className='mb-[10px] block text-base font-medium text-dark dark:text-white'>
+      <label className="mb-[10px] block text-base font-medium text-dark dark:text-white">
         Message
       </label>
-      <div className='relative'>
+      <div className="relative">
         <textarea
-          type='email'
-          rows='6'
-          placeholder='Type your message'
-          className='w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-3 pl-12 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2'
+          type="email"
+          rows="6"
+          placeholder="Type your message"
+          className="outline-hidden w-full rounded-md border border-stroke bg-transparent p-3 pl-12 text-dark-6 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3"
         />
-        <span className='absolute top-[18px] left-4'>
+        <span className="absolute left-4 top-[18px]">
           <svg
             width={20}
             height={20}
@@ -121,5 +121,5 @@ const MessageTextarea = () => {
         </span>
       </div>
     </>
-  )
-}
+  );
+};

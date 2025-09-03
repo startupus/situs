@@ -1,20 +1,17 @@
-import React from "react";
+import React from 'react';
 
 export default function Testimonial6() {
   return (
     <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
       <div className="container">
         <div className="mx-auto mb-[60px] w-full max-w-[510px] text-center">
-          <span className="mb-2 block text-lg font-semibold text-primary">
-            {" "}
-            Testimonials{" "}
-          </span>
+          <span className="mb-2 block text-lg font-semibold text-primary"> Testimonials </span>
           <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark sm:text-4xl md:text-[40px] dark:text-white">
             What our Clients Says
           </h2>
           <p className="text-base text-body-color dark:text-dark-6">
-            There are many variations of passages of Lorem Ipsum available but
-            the majority have suffered alteration in some form.
+            There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in
+            some form.
           </p>
         </div>
 
@@ -68,25 +65,15 @@ function TestimonialItem({ image, name, designation, review }) {
     <div className="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
       <div className="mb-6 flex items-center gap-4">
         <div className="aspect-square w-[52px] overflow-hidden rounded-full">
-          <img
-            src={image}
-            alt={name}
-            className="w-full overflow-hidden rounded-full object-cover object-center"
-          />
+          <img src={image} alt={name} className="w-full overflow-hidden rounded-full object-cover object-center" />
         </div>
         <div>
-          <h5 className="text-base font-medium text-black dark:text-white">
-            {name}
-          </h5>
-          <p className="text-sm text-body-color dark:text-dark-6">
-            {designation}
-          </p>
+          <h5 className="text-base font-medium text-black dark:text-white">{name}</h5>
+          <p className="text-sm text-body-color dark:text-dark-6">{designation}</p>
         </div>
       </div>
       <div>
-        <p className="text-base text-body-color dark:text-dark-6">
-          " {review} "
-        </p>
+        <p className="text-base text-body-color dark:text-dark-6">" {review} "</p>
       </div>
     </div>
   );

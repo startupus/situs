@@ -22,5 +22,3 @@ test.describe('Breadcrumbs without clickable leaf', () => {
     expect(linksWithTitle).toBe(0);
   });
 });
-
-

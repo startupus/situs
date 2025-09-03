@@ -93,7 +93,7 @@ const CheckoutForm = () => {
                       {item.label}
                     </label>
                     <div className="relative">
-                      <select className="w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:focus:border-primary">
+                      <select className="outline-hidden w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:focus:border-primary">
                         {item.options.map((option, optionIndex) =>
                           option.index === 0 ? (
                             <option
@@ -148,7 +148,7 @@ const CheckoutForm = () => {
                     <input
                       type={item.type}
                       placeholder={item.placeholder}
-                      className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-5 dark:focus:border-primary"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-5 dark:focus:border-primary"
                     />
                   </div>
                 </div>

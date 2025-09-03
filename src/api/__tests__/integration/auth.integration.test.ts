@@ -10,14 +10,14 @@ const adminUser = {
   email: 'admin@example.com',
   password: 'admin123',
   firstName: 'Админ',
-  lastName: 'Пользователь'
+  lastName: 'Пользователь',
 };
 
 const testUser = {
   email: 'test@example.com',
   password: 'test123',
   firstName: 'Тест',
-  lastName: 'Пользователь'
+  lastName: 'Пользователь',
 };
 
 beforeAll(async () => {
@@ -36,11 +36,11 @@ beforeAll(async () => {
       profile: JSON.stringify({
         name: `${adminUser.firstName} ${adminUser.lastName}`,
         avatar: '',
-        bio: ''
+        bio: '',
       }),
       role: 'ADMIN',
-      status: 'ACTIVE'
-    }
+      status: 'ACTIVE',
+    },
   });
 });
 
@@ -55,7 +55,7 @@ afterAll(async () => {
 beforeEach(async () => {
   // Удаляем тестового пользователя перед каждым тестом (если существует)
   await prisma.user.deleteMany({
-    where: { email: testUser.email }
+    where: { email: testUser.email },
   });
 });
 
@@ -68,7 +68,7 @@ describe('Auth API Integration Tests', () => {
           email: testUser.email,
           password: testUser.password,
           firstName: testUser.firstName,
-          lastName: testUser.lastName
+          lastName: testUser.lastName,
         })
         .expect(201);
 
@@ -79,13 +79,13 @@ describe('Auth API Integration Tests', () => {
         firstName: testUser.firstName,
         lastName: testUser.lastName,
         role: 'user',
-        isActive: true
+        isActive: true,
       });
       expect(response.body.user).not.toHaveProperty('password');
 
       // Проверяем что пользователь создан в базе данных
       const createdUser = await prisma.user.findUnique({
-        where: { email: testUser.email }
+        where: { email: testUser.email },
       });
       expect(createdUser).toBeTruthy();
       expect(createdUser?.role).toBe('USER');
@@ -93,16 +93,10 @@ describe('Auth API Integration Tests', () => {
 
     test('должен возвращать ошибку при попытке зарегистрировать пользователя с существующим email', async () => {
       // Сначала регистрируем пользователя
-      await request(app)
-        .post('/api/auth/register')
-        .send(testUser)
-        .expect(201);
+      await request(app).post('/api/auth/register').send(testUser).expect(201);
 
       // Пытаемся зарегистрировать с тем же email
-      const response = await request(app)
-        .post('/api/auth/register')
-        .send(testUser)
-        .expect(400);
+      const response = await request(app).post('/api/auth/register').send(testUser).expect(400);
 
       expect(response.body).toHaveProperty('error');
       expect(response.body.error.message).toContain('уже существует');
@@ -113,7 +107,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/register')
         .send({
           email: 'invalid-email',
-          password: '123' // слишком короткий
+          password: '123', // слишком короткий
         })
         .expect(400);
 
@@ -128,7 +122,7 @@ describe('Auth API Integration Tests', () => {
           email: 'invalid-email',
           password: 'validpassword123',
           firstName: 'Test',
-          lastName: 'User'
+          lastName: 'User',
         })
         .expect(400);
 
@@ -143,7 +137,7 @@ describe('Auth API Integration Tests', () => {
           email: 'valid@example.com',
           password: '123', // слишком короткий
           firstName: 'Test',
-          lastName: 'User'
+          lastName: 'User',
         })
         .expect(400);
 
@@ -164,11 +158,11 @@ describe('Auth API Integration Tests', () => {
           profile: JSON.stringify({
             name: `${testUser.firstName} ${testUser.lastName}`,
             avatar: '',
-            bio: ''
+            bio: '',
           }),
           role: 'USER',
-          status: 'ACTIVE'
-        }
+          status: 'ACTIVE',
+        },
       });
     });
 
@@ -177,7 +171,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/login')
         .send({
           email: testUser.email,
-          password: testUser.password
+          password: testUser.password,
         })
         .expect(200);
 
@@ -187,13 +181,13 @@ describe('Auth API Integration Tests', () => {
         email: testUser.email,
         firstName: testUser.firstName,
         lastName: testUser.lastName,
-        role: 'user'
+        role: 'user',
       });
       expect(response.body.user).not.toHaveProperty('password');
 
       // Проверяем что пользователь существует в базе данных
       const user = await prisma.user.findUnique({
-        where: { email: testUser.email }
+        where: { email: testUser.email },
       });
       expect(user).toBeTruthy();
     });
@@ -203,7 +197,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/login')
         .send({
           email: testUser.email,
-          password: 'wrongpassword'
+          password: 'wrongpassword',
         })
         .expect(400);
 
@@ -215,7 +209,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/login')
         .send({
           email: 'nonexistent@example.com',
-          password: testUser.password
+          password: testUser.password,
         })
         .expect(400);
 
@@ -226,14 +220,14 @@ describe('Auth API Integration Tests', () => {
       // Деактивируем пользователя
       await prisma.user.update({
         where: { email: testUser.email },
-        data: { status: 'INACTIVE' }
+        data: { status: 'INACTIVE' },
       });
 
       const response = await request(app)
         .post('/api/auth/login')
         .send({
           email: testUser.email,
-          password: testUser.password
+          password: testUser.password,
         })
         .expect(400);
 
@@ -244,7 +238,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/login')
         .send({
-          email: testUser.email
+          email: testUser.email,
           // password отсутствует
         })
         .expect(400);
@@ -267,19 +261,17 @@ describe('Auth API Integration Tests', () => {
           profile: JSON.stringify({
             name: `${testUser.firstName} ${testUser.lastName}`,
             avatar: '',
-            bio: ''
+            bio: '',
           }),
           role: 'USER',
-          status: 'ACTIVE'
-        }
+          status: 'ACTIVE',
+        },
       });
 
-      const loginResponse = await request(app)
-        .post('/api/auth/login')
-        .send({
-          email: testUser.email,
-          password: testUser.password
-        });
+      const loginResponse = await request(app).post('/api/auth/login').send({
+        email: testUser.email,
+        password: testUser.password,
+      });
 
       validToken = loginResponse.body.jwt;
     });
@@ -305,9 +297,7 @@ describe('Auth API Integration Tests', () => {
     });
 
     test('должен возвращать ошибку при отсутствии токена', async () => {
-      const response = await request(app)
-        .post('/api/auth/verify-token')
-        .expect(401);
+      const response = await request(app).post('/api/auth/verify-token').expect(401);
 
       expect(response.body.error.message).toContain('Токен не предоставлен');
     });
@@ -316,7 +306,7 @@ describe('Auth API Integration Tests', () => {
       // Деактивируем пользователя
       await prisma.user.update({
         where: { email: testUser.email },
-        data: { status: 'INACTIVE' }
+        data: { status: 'INACTIVE' },
       });
 
       const response = await request(app)
@@ -342,19 +332,17 @@ describe('Auth API Integration Tests', () => {
           profile: JSON.stringify({
             name: `${testUser.firstName} ${testUser.lastName}`,
             avatar: '',
-            bio: ''
+            bio: '',
           }),
           role: 'USER',
-          status: 'ACTIVE'
-        }
+          status: 'ACTIVE',
+        },
       });
 
-      const loginResponse = await request(app)
-        .post('/api/auth/login')
-        .send({
-          email: testUser.email,
-          password: testUser.password
-        });
+      const loginResponse = await request(app).post('/api/auth/login').send({
+        email: testUser.email,
+        password: testUser.password,
+      });
 
       validToken = loginResponse.body.jwt;
     });
@@ -363,7 +351,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/refresh-token')
         .send({
-          refreshToken: validToken
+          refreshToken: validToken,
         })
         .expect(200);
 
@@ -376,7 +364,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/refresh-token')
         .send({
-          refreshToken: 'invalid-token'
+          refreshToken: 'invalid-token',
         })
         .expect(401);
 
@@ -384,10 +372,7 @@ describe('Auth API Integration Tests', () => {
     });
 
     test('должен валидировать обязательные поля', async () => {
-      const response = await request(app)
-        .post('/api/auth/refresh-token')
-        .send({})
-        .expect(400);
+      const response = await request(app).post('/api/auth/refresh-token').send({}).expect(400);
 
       expect(response.body.error.name).toBe('VALIDATION_ERROR');
     });
@@ -407,19 +392,17 @@ describe('Auth API Integration Tests', () => {
           profile: JSON.stringify({
             name: `${testUser.firstName} ${testUser.lastName}`,
             avatar: '',
-            bio: ''
+            bio: '',
           }),
           role: 'USER',
-          status: 'ACTIVE'
-        }
+          status: 'ACTIVE',
+        },
       });
 
-      const loginResponse = await request(app)
-        .post('/api/auth/login')
-        .send({
-          email: testUser.email,
-          password: testUser.password
-        });
+      const loginResponse = await request(app).post('/api/auth/login').send({
+        email: testUser.email,
+        password: testUser.password,
+      });
 
       validToken = loginResponse.body.jwt;
     });
@@ -428,7 +411,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/logout')
         .send({
-          refreshToken: validToken
+          refreshToken: validToken,
         })
         .expect(200);
 
@@ -440,7 +423,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/logout')
         .send({
-          refreshToken: 'invalid-token'
+          refreshToken: 'invalid-token',
         })
         .expect(401);
 
@@ -448,10 +431,7 @@ describe('Auth API Integration Tests', () => {
     });
 
     test('должен валидировать обязательные поля', async () => {
-      const response = await request(app)
-        .post('/api/auth/logout')
-        .send({})
-        .expect(400);
+      const response = await request(app).post('/api/auth/logout').send({}).expect(400);
 
       expect(response.body.error.name).toBe('VALIDATION_ERROR');
     });
@@ -469,11 +449,11 @@ describe('Auth API Integration Tests', () => {
           profile: JSON.stringify({
             name: `${testUser.firstName} ${testUser.lastName}`,
             avatar: '',
-            bio: ''
+            bio: '',
           }),
           role: 'USER',
-          status: 'ACTIVE'
-        }
+          status: 'ACTIVE',
+        },
       });
     });
 
@@ -481,7 +461,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/forgot-password')
         .send({
-          email: testUser.email
+          email: testUser.email,
         })
         .expect(200);
 
@@ -493,7 +473,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/forgot-password')
         .send({
-          email: 'nonexistent@example.com'
+          email: 'nonexistent@example.com',
         })
         .expect(400);
 
@@ -504,7 +484,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/forgot-password')
         .send({
-          email: 'invalid-email'
+          email: 'invalid-email',
         })
         .expect(400);
 
@@ -512,10 +492,7 @@ describe('Auth API Integration Tests', () => {
     });
 
     test('должен валидировать обязательные поля', async () => {
-      const response = await request(app)
-        .post('/api/auth/forgot-password')
-        .send({})
-        .expect(400);
+      const response = await request(app).post('/api/auth/forgot-password').send({}).expect(400);
 
       expect(response.body.error.name).toBe('VALIDATION_ERROR');
     });
@@ -535,19 +512,17 @@ describe('Auth API Integration Tests', () => {
           profile: JSON.stringify({
             name: `${testUser.firstName} ${testUser.lastName}`,
             avatar: '',
-            bio: ''
+            bio: '',
           }),
           role: 'USER',
-          status: 'ACTIVE'
-        }
+          status: 'ACTIVE',
+        },
       });
 
       // Получаем токен для сброса пароля
-      const forgotResponse = await request(app)
-        .post('/api/auth/forgot-password')
-        .send({
-          email: testUser.email
-        });
+      const forgotResponse = await request(app).post('/api/auth/forgot-password').send({
+        email: testUser.email,
+      });
 
       resetToken = forgotResponse.body.resetToken;
     });
@@ -559,7 +534,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/reset-password')
         .send({
           token: resetToken,
-          password: newPassword
+          password: newPassword,
         })
         .expect(200);
 
@@ -571,7 +546,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/login')
         .send({
           email: testUser.email,
-          password: newPassword
+          password: newPassword,
         })
         .expect(200);
 
@@ -583,7 +558,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/reset-password')
         .send({
           token: 'invalid-token',
-          password: 'newpassword123'
+          password: 'newpassword123',
         })
         .expect(400);
 
@@ -595,7 +570,7 @@ describe('Auth API Integration Tests', () => {
         .post('/api/auth/reset-password')
         .send({
           token: resetToken,
-          password: '123' // слишком короткий
+          password: '123', // слишком короткий
         })
         .expect(400);
 
@@ -606,7 +581,7 @@ describe('Auth API Integration Tests', () => {
       const response = await request(app)
         .post('/api/auth/reset-password')
         .send({
-          token: resetToken
+          token: resetToken,
           // password отсутствует
         })
         .expect(400);

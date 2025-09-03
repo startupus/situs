@@ -7,11 +7,7 @@ interface ComponentViewerProps {
   onClose: () => void;
 }
 
-const ComponentViewer: React.FC<ComponentViewerProps> = ({
-  componentId,
-  componentName,
-  onClose
-}) => {
+const ComponentViewer: React.FC<ComponentViewerProps> = ({ componentId, componentName, onClose }) => {
   const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
 
   // Демо компоненты для разных категорий
@@ -49,9 +45,7 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
         return (
           <div className="space-y-4 max-w-md">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email Address
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
               <input
                 type="email"
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
@@ -59,9 +53,7 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
               <input
                 type="password"
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
@@ -69,9 +61,7 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Message
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
               <textarea
                 rows={4}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
@@ -91,7 +81,11 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
                 <div className="ml-3">
@@ -104,7 +98,11 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
                 <div className="ml-3">
@@ -117,7 +115,11 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
                 <div className="ml-3">
@@ -133,10 +135,16 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img className="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Card" />
+              <img
+                className="w-full h-48 object-cover"
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="Card"
+              />
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Card Title</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">This is a sample card component with image and content.</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  This is a sample card component with image and content.
+                </p>
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                   Learn More
                 </button>
@@ -145,7 +153,12 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
@@ -154,7 +167,9 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
                   <p className="text-gray-600 dark:text-gray-400">Amazing features</p>
                 </div>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">This card showcases a feature with an icon and description.</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                This card showcases a feature with an icon and description.
+              </p>
               <button className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-medium">
                 View Details →
               </button>
@@ -173,12 +188,8 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
         return (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🎨</div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              {componentName}
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Компонент в разработке
-            </p>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{componentName}</h3>
+            <p className="text-gray-600 dark:text-gray-400">Компонент в разработке</p>
           </div>
         );
     }
@@ -255,12 +266,8 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {componentName}
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Просмотр и тестирование компонента
-            </p>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{componentName}</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Просмотр и тестирование компонента</p>
           </div>
           <div className="flex items-center gap-2">
             <button className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -308,9 +315,7 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
         <div className="flex-1 overflow-y-auto">
           {activeTab === 'preview' ? (
             <div className="p-6">
-              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8">
-                {getDemoComponent()}
-              </div>
+              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8">{getDemoComponent()}</div>
             </div>
           ) : (
             <div className="p-6">
@@ -323,9 +328,7 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
 
         {/* Footer */}
         <div className="flex items-center justify-between p-6 border-t border-gray-200 dark:border-gray-700">
-          <div className="text-sm text-gray-600 dark:text-gray-400">
-            Компонент из библиотеки React Pro Components
-          </div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Компонент из библиотеки React Pro Components</div>
           <div className="flex gap-2">
             <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
               Копировать код
@@ -340,4 +343,4 @@ const ComponentViewer: React.FC<ComponentViewerProps> = ({
   );
 };
 
-export default ComponentViewer; 
+export default ComponentViewer;

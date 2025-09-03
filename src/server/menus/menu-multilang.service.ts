@@ -11,7 +11,7 @@ import { MenuItem } from '@prisma/client';
 export class MenuMultilangService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly menusService: MenusService
+    private readonly menusService: MenusService,
   ) {}
 
   /**
@@ -21,23 +21,20 @@ export class MenuMultilangService {
   async getMenuItemsByLanguage(
     menuTypeId: string,
     currentLanguage: string,
-    fallbackLanguage: string = 'en-GB'
+    fallbackLanguage: string = 'en-GB',
   ): Promise<MenuItem[]> {
     // Получаем все пункты меню для типа
     const allItems = await this.prisma.menuItem.findMany({
       where: {
         menuTypeId,
-        isPublished: true
+        isPublished: true,
       },
-      orderBy: [
-        { level: 'asc' },
-        { orderIndex: 'asc' }
-      ]
+      orderBy: [{ level: 'asc' }, { orderIndex: 'asc' }],
     });
 
     // Группируем по alias для обработки языковых вариантов
     const itemsByAlias = new Map<string, MenuItem[]>();
-    
+
     for (const item of allItems) {
       const key = item.alias;
       if (!itemsByAlias.has(key)) {
@@ -48,14 +45,10 @@ export class MenuMultilangService {
 
     // Выбираем лучший вариант для каждого alias
     const resultItems: MenuItem[] = [];
-    
+
     for (const [alias, variants] of itemsByAlias) {
-      const selectedItem = this.selectBestLanguageVariant(
-        variants,
-        currentLanguage,
-        fallbackLanguage
-      );
-      
+      const selectedItem = this.selectBestLanguageVariant(variants, currentLanguage, fallbackLanguage);
+
       if (selectedItem) {
         resultItems.push(selectedItem);
       }
@@ -74,21 +67,21 @@ export class MenuMultilangService {
   private selectBestLanguageVariant(
     variants: MenuItem[],
     currentLanguage: string,
-    fallbackLanguage: string
+    fallbackLanguage: string,
   ): MenuItem | null {
     if (variants.length === 0) return null;
     if (variants.length === 1) return variants[0];
 
     // Приоритет 1: точное совпадение языка
-    const exactMatch = variants.find(v => v.language === currentLanguage);
+    const exactMatch = variants.find((v) => v.language === currentLanguage);
     if (exactMatch) return exactMatch;
 
     // Приоритет 2: универсальные пункты (*)
-    const universalMatch = variants.find(v => v.language === '*');
+    const universalMatch = variants.find((v) => v.language === '*');
     if (universalMatch) return universalMatch;
 
     // Приоритет 3: fallback язык
-    const fallbackMatch = variants.find(v => v.language === fallbackLanguage);
+    const fallbackMatch = variants.find((v) => v.language === fallbackLanguage);
     if (fallbackMatch) return fallbackMatch;
 
     // Приоритет 4: первый доступный
@@ -99,13 +92,10 @@ export class MenuMultilangService {
    * Поиск аналогичного пункта меню на другом языке
    * Для переключения языка с сохранением контекста
    */
-  async findEquivalentMenuItem(
-    currentItemId: string,
-    targetLanguage: string
-  ): Promise<MenuItem | null> {
+  async findEquivalentMenuItem(currentItemId: string, targetLanguage: string): Promise<MenuItem | null> {
     // Получаем текущий пункт меню
     const currentItem = await this.prisma.menuItem.findUnique({
-      where: { id: currentItemId }
+      where: { id: currentItemId },
     });
 
     if (!currentItem) return null;
@@ -116,8 +106,8 @@ export class MenuMultilangService {
         menuTypeId: currentItem.menuTypeId,
         alias: currentItem.alias,
         language: targetLanguage,
-        isPublished: true
-      }
+        isPublished: true,
+      },
     });
 
     if (equivalent) return equivalent;
@@ -128,8 +118,8 @@ export class MenuMultilangService {
         menuTypeId: currentItem.menuTypeId,
         alias: currentItem.alias,
         language: '*',
-        isPublished: true
-      }
+        isPublished: true,
+      },
     });
 
     return universal;
@@ -142,28 +132,24 @@ export class MenuMultilangService {
     const languages = await this.prisma.menuItem.findMany({
       where: {
         menuTypeId,
-        isPublished: true
+        isPublished: true,
       },
       select: {
-        language: true
+        language: true,
       },
-      distinct: ['language']
+      distinct: ['language'],
     });
 
     return languages
-      .map(l => l.language)
-      .filter(lang => lang !== '*') // Исключаем универсальные
+      .map((l) => l.language)
+      .filter((lang) => lang !== '*') // Исключаем универсальные
       .sort();
   }
 
   /**
    * Построение URL с учетом языка
    */
-  buildLanguageUrl(
-    basePath: string,
-    language: string,
-    defaultLanguage: string = 'en-GB'
-  ): string {
+  buildLanguageUrl(basePath: string, language: string, defaultLanguage: string = 'en-GB'): string {
     // Для языка по умолчанию не добавляем префикс
     if (language === defaultLanguage) {
       return basePath;
@@ -177,21 +163,18 @@ export class MenuMultilangService {
   /**
    * Извлечение языка из URL
    */
-  extractLanguageFromUrl(
-    url: string,
-    defaultLanguage: string = 'en-GB'
-  ): { language: string; path: string } {
-    const segments = url.split('/').filter(s => s.length > 0);
-    
+  extractLanguageFromUrl(url: string, defaultLanguage: string = 'en-GB'): { language: string; path: string } {
+    const segments = url.split('/').filter((s) => s.length > 0);
+
     if (segments.length === 0) {
       return { language: defaultLanguage, path: '/' };
     }
 
     const firstSegment = segments[0];
-    
+
     // Проверяем, является ли первый сегмент кодом языка
     const languageCodes = ['ru', 'en', 'es', 'fr', 'de', 'it', 'pt', 'ar', 'zh', 'ja'];
-    
+
     if (languageCodes.includes(firstSegment)) {
       const language = this.expandLanguageCode(firstSegment);
       const path = '/' + segments.slice(1).join('/');
@@ -206,16 +189,16 @@ export class MenuMultilangService {
    */
   private expandLanguageCode(code: string): string {
     const languageMap: { [key: string]: string } = {
-      'ru': 'ru-RU',
-      'en': 'en-GB',
-      'es': 'es-ES',
-      'fr': 'fr-FR',
-      'de': 'de-DE',
-      'it': 'it-IT',
-      'pt': 'pt-PT',
-      'ar': 'ar-SA',
-      'zh': 'zh-CN',
-      'ja': 'ja-JP'
+      ru: 'ru-RU',
+      en: 'en-GB',
+      es: 'es-ES',
+      fr: 'fr-FR',
+      de: 'de-DE',
+      it: 'it-IT',
+      pt: 'pt-PT',
+      ar: 'ar-SA',
+      zh: 'zh-CN',
+      ja: 'ja-JP',
     };
 
     return languageMap[code] || `${code}-${code.toUpperCase()}`;

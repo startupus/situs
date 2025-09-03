@@ -5,7 +5,7 @@ services:
     working_dir: /app
     command: npx @agentdeskai/browser-tools-server@latest
     ports:
-      - "3025:3025"  # BrowserTools Server port
+      - '3025:3025' # BrowserTools Server port
     volumes:
       - ./screenshots:/app/screenshots
       - ./logs:/app/logs
@@ -23,7 +23,7 @@ services:
     working_dir: /app
     command: sh -c "echo 'http://browser-tools-server:3025' > /app/server-url.txt && npx @agentdeskai/browser-tools-mcp@latest"
     ports:
-      - "3001:3001"  # MCP Server port
+      - '3001:3001' # MCP Server port
     volumes:
       - ./mcp-config:/app/config
     environment:
@@ -43,4 +43,4 @@ networks:
 volumes:
   screenshots:
   logs:
-  mcp-config: 
+  mcp-config:

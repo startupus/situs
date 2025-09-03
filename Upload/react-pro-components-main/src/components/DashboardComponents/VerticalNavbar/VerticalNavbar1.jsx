@@ -5,7 +5,7 @@ const VerticalNavbar = () => {
     <section className="h-screen bg-gray-2">
       <div className="flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-card">
         <div>
-          <div className="px-10 pt-10 pb-9">
+          <div className="px-10 pb-9 pt-10">
             <a href="/#">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
@@ -101,14 +101,14 @@ const NavItem = ({ menu, link, submenu, children }) => {
           dropdownOpen
             ? "border-primary bg-gray-2 text-primary"
             : "border-transparent text-body-color"
-        } relative flex items-center border-r-4 py-[10px] pl-10 pr-11 text-base font-medium duration-200 hover:border-primary hover:bg-gray-2 hover:text-primary border-transparent text-body-color`}
+        } relative flex items-center border-r-4 border-transparent py-[10px] pl-10 pr-11 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-gray-2 hover:text-primary`}
       >
         {menu}
         {submenu && (
           <span
             className={`${
               dropdownOpen === true ? "rotate-0" : "rotate-180"
-            } absolute top-1/2 right-10 -translate-y-1/2`}
+            } absolute right-10 top-1/2 -translate-y-1/2`}
           >
             <svg
               width="20"

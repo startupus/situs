@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const ECommerceNavbar2 = () => {
   const [open, setOpen] = useState(false);
@@ -18,17 +18,12 @@ const ECommerceNavbar2 = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -58,7 +53,7 @@ const ECommerceNavbar2 = () => {
                   ref={menuTrigger}
                   onClick={() => setOpen(!open)}
                   className={` ${
-                    open && "navbarTogglerActive"
+                    open && 'navbarTogglerActive'
                   } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
                 >
                   <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"></span>
@@ -68,23 +63,15 @@ const ECommerceNavbar2 = () => {
                 <nav
                   ref={menuRef}
                   className={`absolute right-4 top-full z-50 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:flex lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none ${
-                    !open && "hidden"
+                    !open && 'hidden'
                   } `}
                 >
                   <ul className="block items-center lg:flex">
-                    <ListItem
-                      NavLink="/#"
-                      menuName="All categories"
-                      dropdown
-                    ></ListItem>
+                    <ListItem NavLink="/#" menuName="All categories" dropdown></ListItem>
                     <ListItem NavLink="/#" menuName="Home"></ListItem>
                     <ListItem NavLink="/#" menuName="Shop"></ListItem>
                     <ListItem NavLink="/#" menuName="Products"></ListItem>
-                    <ListItem
-                      NavLink="/#"
-                      menuName="Accessories"
-                      submenu
-                    ></ListItem>
+                    <ListItem NavLink="/#" menuName="Accessories" submenu></ListItem>
                     <ListItem NavLink="/#" menuName="Contact"></ListItem>
                   </ul>
                 </nav>
@@ -112,9 +99,7 @@ const ECommerceNavbar2 = () => {
                     ref={searchForm}
                     onFocus={() => setSearchFormOpen(true)}
                     onBlur={() => setSearchFormOpen(false)}
-                    className={`absolute right-0 top-full mt-5 w-[330px] ${
-                      !searchFormOpen && "hidden"
-                    }`}
+                    className={`absolute right-0 top-full mt-5 w-[330px] ${!searchFormOpen && 'hidden'}`}
                   >
                     <form className="flex items-center justify-between">
                       <input
@@ -165,9 +150,7 @@ const ECommerceNavbar2 = () => {
                     ref={wishlistRef}
                     onFocus={() => setIsWishlist(true)}
                     onBlur={() => setIsWishlist(false)}
-                    className={`absolute right-0 top-full mt-5 w-[330px] ${
-                      !isWishlist && "hidden"
-                    }`}
+                    className={`absolute right-0 top-full mt-5 w-[330px] ${!isWishlist && 'hidden'}`}
                   >
                     <div className="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-8 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
                       <div className="border-b border-stroke pb-3 dark:border-dark-3">
@@ -228,9 +211,7 @@ const ECommerceNavbar2 = () => {
                     ref={cartBox}
                     onFocus={() => setIsCartOpen(true)}
                     onBlur={() => setIsCartOpen(false)}
-                    className={`absolute right-0 top-full mt-5 w-[330px] ${
-                      !isCartOpen && "hidden"
-                    }`}
+                    className={`absolute right-0 top-full mt-5 w-[330px] ${!isCartOpen && 'hidden'}`}
                   >
                     <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
                       <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
@@ -256,51 +237,35 @@ const ECommerceNavbar2 = () => {
                       <div className="-mx-1 border-b border-stroke pb-5 dark:border-dark-3">
                         <div className="mb-3 flex items-center justify-between">
                           <div className="px-1">
-                            <p className="text-base text-dark dark:text-white">
-                              Subtotal
-                            </p>
+                            <p className="text-base text-dark dark:text-white">Subtotal</p>
                           </div>
                           <div className="px-1">
-                            <p className="text-base font-medium text-dark dark:text-white">
-                              $108
-                            </p>
+                            <p className="text-base font-medium text-dark dark:text-white">$108</p>
                           </div>
                         </div>
                         <div className="mb-3 flex items-center justify-between">
                           <div className="px-1">
-                            <p className="text-base text-dark dark:text-white">
-                              Shipping Cost (+)
-                            </p>
+                            <p className="text-base text-dark dark:text-white">Shipping Cost (+)</p>
                           </div>
                           <div className="px-1">
-                            <p className="text-base font-medium text-dark dark:text-white">
-                              $10.85
-                            </p>
+                            <p className="text-base font-medium text-dark dark:text-white">$10.85</p>
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
                           <div className="px-1">
-                            <p className="text-base text-dark dark:text-white">
-                              Discount (-)
-                            </p>
+                            <p className="text-base text-dark dark:text-white">Discount (-)</p>
                           </div>
                           <div className="px-1">
-                            <p className="text-base font-medium text-dark dark:text-white">
-                              $9.00
-                            </p>
+                            <p className="text-base font-medium text-dark dark:text-white">$9.00</p>
                           </div>
                         </div>
                       </div>
                       <div className="-mx-1 flex items-center justify-between pb-6 pt-5">
                         <div className="px-1">
-                          <p className="text-base text-dark dark:text-white">
-                            Total Payable
-                          </p>
+                          <p className="text-base text-dark dark:text-white">Total Payable</p>
                         </div>
                         <div className="px-1">
-                          <p className="text-base font-medium text-dark dark:text-white">
-                            $88.15
-                          </p>
+                          <p className="text-base font-medium text-dark dark:text-white">$88.15</p>
                         </div>
                       </div>
 
@@ -345,31 +310,22 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
   useClickOutside([menuRef, trigger], open, setOpen);
   useClickOutside([submenuTrigger], submenuOpen, setSubmenuOpen);
   useClickOutside([dropdownTrigger], dropdownOpen, setDropdownOpen);
-  useClickOutside(
-    [innerDropdownTrigger],
-    innerDropdownOpen,
-    setInnerDropdownOpen,
-  );
+  useClickOutside([innerDropdownTrigger], innerDropdownOpen, setInnerDropdownOpen);
 
   return (
-    <li className={`relative lg:py-4 ${submenu ? "group" : null}`}>
+    <li className={`relative lg:py-4 ${submenu ? 'group' : null}`}>
       {!dropdown && !submenu && (
         <a
           href={NavLink}
@@ -408,15 +364,12 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
             onFocus={() => setDropdownOpen(true)}
             onBlur={() => setDropdownOpen(false)}
             className={`${
-              dropdownOpen ? "block" : "hidden"
+              dropdownOpen ? 'block' : 'hidden'
             } relative left-0 top-full z-10 rounded-lg bg-white transition-all dark:bg-dark-2 lg:absolute lg:top-[112%] lg:w-[180px] lg:border-[.5px] lg:border-stroke lg:py-4 dark:lg:border-dark-3`}
           >
             <span className="absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 rounded-xs border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"></span>
             <div className="px-2 lg:px-6">
-              <a
-                href="/#"
-                className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-              >
+              <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
                 Arts &amp; Crafts
               </a>
             </div>
@@ -449,15 +402,13 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
                 onFocus={() => setInnerDropdownOpen(true)}
                 onBlur={() => setInnerDropdownOpen(false)}
                 className={`${
-                  innerDropdownOpen ? "hidden lg:block" : "block"
+                  innerDropdownOpen ? 'hidden lg:block' : 'block'
                 } left-full top-0 border-stroke bg-white py-2 group-hover:visible group-hover:opacity-100 dark:border-dark-3 dark:bg-dark-2 lg:invisible lg:absolute lg:w-[600px] lg:rounded-sm lg:border-[.5px] lg:px-8 lg:py-8 lg:opacity-0 xl:w-[650px]`}
               >
                 <div className="-mx-2 flex flex-wrap">
                   <div className="w-full px-2 lg:w-1/3">
                     <div>
-                      <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
-                        New Arrivals
-                      </h3>
+                      <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">New Arrivals</h3>
                       <a
                         href="/#"
                         className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
@@ -492,9 +443,7 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
                   </div>
                   <div className="w-full px-2 lg:w-1/3">
                     <div>
-                      <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
-                        New Arrivals
-                      </h3>
+                      <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">New Arrivals</h3>
                       <a
                         href="/#"
                         className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
@@ -540,18 +489,12 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
               </div>
             </div>
             <div className="px-2 lg:px-6">
-              <a
-                href="/#"
-                className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-              >
+              <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
                 Bags &amp; Shoes
               </a>
             </div>
             <div className="px-2 lg:px-6">
-              <a
-                href="/#"
-                className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-              >
+              <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
                 Jewelry &amp; Watch
               </a>
             </div>
@@ -588,31 +531,19 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
             onFocus={() => setSubmenuOpen(true)}
             onBlur={() => setSubmenuOpen(false)}
             className={`${
-              !submenuOpen ? "hidden lg:block" : "block"
+              !submenuOpen ? 'hidden lg:block' : 'block'
             } relative left-0 top-full rounded-lg bg-white px-2 transition-all group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[115%] lg:w-[180px] lg:border-[.5px] lg:border-stroke lg:px-6 lg:py-4 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full dark:lg:border-dark-3`}
           >
-            <a
-              href="/#"
-              className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-            >
+            <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
               Arts &amp; Crafts
             </a>
-            <a
-              href="/#"
-              className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-            >
+            <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
               Fashion
             </a>
-            <a
-              href="/#"
-              className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-            >
+            <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
               Bags &amp; Shoes
             </a>
-            <a
-              href="/#"
-              className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-            >
+            <a href="/#" className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6">
               Jewelry &amp; Watch
             </a>
           </div>
@@ -630,21 +561,14 @@ const CartItem = ({ image, link, title, desc, price }) => {
           <img src={image} alt="product image" className="w-full" />
         </div>
         <div>
-          <a
-            href={link}
-            className="text-sm font-medium text-dark hover:text-primary dark:text-white"
-          >
+          <a href={link} className="text-sm font-medium text-dark hover:text-primary dark:text-white">
             {title}
           </a>
-          <p className="truncate text-xs font-medium text-body-color dark:text-dark-6">
-            {desc}
-          </p>
+          <p className="truncate text-xs font-medium text-body-color dark:text-dark-6">{desc}</p>
         </div>
       </div>
       <div className="px-1">
-        <p className="text-base font-semibold text-dark dark:text-white">
-          ${price}
-        </p>
+        <p className="text-base font-semibold text-dark dark:text-white">${price}</p>
       </div>
     </>
   );

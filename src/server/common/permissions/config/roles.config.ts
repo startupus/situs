@@ -1,6 +1,6 @@
 /**
  * Конфигурация иерархии ролей
- * 
+ *
  * Компактная версия с четким разделением прав по ролям
  */
 
@@ -16,34 +16,53 @@ const BUSINESS_ROLE: RoleInfo = {
     maxProjects: 5,
     maxClients: 0,
     maxStorage: 10000,
-    allowedComponents: ['projects', 'orders', 'analytics']
-  }
+    allowedComponents: ['projects', 'orders', 'analytics'],
+  },
 };
 
 /** Права роли BUSINESS */
 const BUSINESS_PERMISSIONS: Permission[] = [
   // Собственные проекты
-  'project.create', 'project.view.own', 'project.edit.own', 'project.delete.own',
-  'project.publish.own', 'project.domains.own', 'project.analytics.own',
-  'project.clone', 'project.export',
-  
+  'project.create',
+  'project.view.own',
+  'project.edit.own',
+  'project.delete.own',
+  'project.publish.own',
+  'project.domains.own',
+  'project.analytics.own',
+  'project.clone',
+  'project.export',
+
   // Собственный профиль
-  'user.view.own', 'user.edit.profile',
-  
+  'user.view.own',
+  'user.edit.profile',
+
   // Контент
-  'content.create', 'content.edit.own', 'content.delete.own', 'content.publish.own',
-  
+  'content.create',
+  'content.edit.own',
+  'content.delete.own',
+  'content.publish.own',
+
   // Продукты
-  'product.create', 'product.edit.own', 'product.delete', 'product.publish',
-  
+  'product.create',
+  'product.edit.own',
+  'product.delete',
+  'product.publish',
+
   // Заказы
-  'orders.view.own', 'orders.create', 'orders.edit.own', 'orders.export.own',
-  
+  'orders.view.own',
+  'orders.create',
+  'orders.edit.own',
+  'orders.export.own',
+
   // Аналитика
-  'analytics.view.own', 'analytics.export.own', 'analytics.realtime.own',
-  
+  'analytics.view.own',
+  'analytics.export.own',
+  'analytics.realtime.own',
+
   // Биллинг
-  'billing.view.own', 'billing.manage.own'
+  'billing.view.own',
+  'billing.manage.own',
 ];
 
 /** Конфигурация роли AGENCY */
@@ -57,30 +76,45 @@ const AGENCY_ROLE: RoleInfo = {
     maxProjects: 100,
     maxClients: 50,
     maxStorage: 100000,
-    allowedComponents: ['projects', 'users', 'orders', 'analytics', 'billing']
-  }
+    allowedComponents: ['projects', 'users', 'orders', 'analytics', 'billing'],
+  },
 };
 
 /** Дополнительные права роли AGENCY (к наследуемым от BUSINESS) */
 const AGENCY_ADDITIONAL_PERMISSIONS: Permission[] = [
   // Проекты клиентов
-  'project.create.unlimited', 'project.view.clients', 'project.edit.clients',
-  'project.delete.clients', 'project.publish.clients', 'project.domains.clients',
-  'project.analytics.clients', 'project.transfer',
-  
+  'project.create.unlimited',
+  'project.view.clients',
+  'project.edit.clients',
+  'project.delete.clients',
+  'project.publish.clients',
+  'project.domains.clients',
+  'project.analytics.clients',
+  'project.transfer',
+
   // Управление клиентами
-  'user.create.clients', 'user.edit.clients', 'user.view.clients',
-  'user.manage.permissions.clients', 'user.impersonate.clients',
-  
+  'user.create.clients',
+  'user.edit.clients',
+  'user.view.clients',
+  'user.manage.permissions.clients',
+  'user.impersonate.clients',
+
   // Агентские права
-  'agency.clients.create', 'agency.clients.manage', 'agency.projects.transfer',
-  'agency.billing.manage', 'agency.whitelabel', 'agency.api.access',
-  
+  'agency.clients.create',
+  'agency.clients.manage',
+  'agency.projects.transfer',
+  'agency.billing.manage',
+  'agency.whitelabel',
+  'agency.api.access',
+
   // Расширенная аналитика
-  'analytics.view.clients', 'analytics.custom.create',
-  
+  'analytics.view.clients',
+  'analytics.custom.create',
+
   // Биллинг клиентов
-  'billing.view.clients', 'billing.manage.clients', 'billing.invoices.create'
+  'billing.view.clients',
+  'billing.manage.clients',
+  'billing.invoices.create',
 ];
 
 /** Конфигурация роли STAFF */
@@ -94,21 +128,31 @@ const STAFF_ROLE: RoleInfo = {
     maxProjects: -1,
     maxClients: -1,
     maxStorage: -1,
-    allowedComponents: ['*']
-  }
+    allowedComponents: ['*'],
+  },
 };
 
 /** Дополнительные права роли STAFF */
 const STAFF_ADDITIONAL_PERMISSIONS: Permission[] = [
   // Глобальные права
-  'project.view.all', 'project.edit.all', 'project.delete.all',
-  'user.view.all', 'user.create.staff', 'user.edit.staff',
-  'orders.view.all', 'orders.edit.all',
-  'analytics.view.all', 'analytics.export.all',
-  
+  'project.view.all',
+  'project.edit.all',
+  'project.delete.all',
+  'user.view.all',
+  'user.create.staff',
+  'user.edit.staff',
+  'orders.view.all',
+  'orders.edit.all',
+  'analytics.view.all',
+  'analytics.export.all',
+
   // Системные права
-  'system.admin', 'system.config', 'system.maintenance', 
-  'system.backup', 'system.logs', 'system.cache'
+  'system.admin',
+  'system.config',
+  'system.maintenance',
+  'system.backup',
+  'system.logs',
+  'system.cache',
 ];
 
 /** Конфигурация роли SUPER_ADMIN */
@@ -121,8 +165,8 @@ const SUPER_ADMIN_ROLE: RoleInfo = {
     maxProjects: -1,
     maxClients: -1,
     maxStorage: -1,
-    allowedComponents: ['*']
-  }
+    allowedComponents: ['*'],
+  },
 };
 
 /** Экспортируемая конфигурация ролей */
@@ -130,7 +174,7 @@ export const ROLE_HIERARCHY = {
   BUSINESS: BUSINESS_ROLE,
   AGENCY: AGENCY_ROLE,
   STAFF: STAFF_ROLE,
-  SUPER_ADMIN: SUPER_ADMIN_ROLE
+  SUPER_ADMIN: SUPER_ADMIN_ROLE,
 };
 
 /** Экспортируемые права ролей */
@@ -138,7 +182,7 @@ export const ROLE_PERMISSIONS: Record<string, Permission[]> = {
   BUSINESS: BUSINESS_PERMISSIONS,
   AGENCY: [...BUSINESS_PERMISSIONS, ...AGENCY_ADDITIONAL_PERMISSIONS],
   STAFF: [...BUSINESS_PERMISSIONS, ...AGENCY_ADDITIONAL_PERMISSIONS, ...STAFF_ADDITIONAL_PERMISSIONS],
-  SUPER_ADMIN: ['*' as unknown as Permission]
+  SUPER_ADMIN: ['*' as unknown as Permission],
 };
 
 /**

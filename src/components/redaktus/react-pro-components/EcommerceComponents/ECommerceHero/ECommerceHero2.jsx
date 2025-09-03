@@ -1,8 +1,8 @@
-import React from "react";
-import { Pagination } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from 'react';
+import { Pagination } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ECommerceHero2 = () => {
   return (
@@ -33,11 +33,7 @@ const ECommerceHero2 = () => {
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-8/12">
-              <Swiper
-                pagination={{ clickable: true }}
-                modules={[Pagination]}
-                slidesPerView={1}
-              >
+              <Swiper pagination={{ clickable: true }} modules={[Pagination]} slidesPerView={1}>
                 <SwiperSlide>
                   <HeroItem
                     img="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/headers/header-02/image-01.jpg"
@@ -80,9 +76,7 @@ const ECommerceHero2 = () => {
                 />
                 <div className="absolute left-0 top-0 flex h-full w-full p-6 sm:p-9">
                   <div className="max-w-[320px]">
-                    <span className="mb-[5px] block text-lg font-medium text-white">
-                      Limited Time Offer
-                    </span>
+                    <span className="mb-[5px] block text-lg font-medium text-white">Limited Time Offer</span>
                     <h3>
                       <a
                         href="/#"
@@ -114,21 +108,12 @@ const HeroItem = ({ img, link, title, subtitle, button }) => {
   return (
     <div className="relative">
       <div className="relative mb-8 h-[370px] md:h-[460px]">
-        <img
-          src={img}
-          alt="product"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="product" className="h-full w-full object-cover object-center" />
         <div className="absolute left-0 top-0 flex h-full w-full items-center px-8 md:px-12">
           <div className="max-w-[320px]">
-            <span className="mb-3 block text-lg font-medium text-dark">
-              {subtitle}
-            </span>
+            <span className="mb-3 block text-lg font-medium text-dark">{subtitle}</span>
             <h3>
-              <a
-                href={link}
-                className="mb-7 block text-2xl font-bold text-dark hover:text-primary sm:text-3xl"
-              >
+              <a href={link} className="mb-7 block text-2xl font-bold text-dark hover:text-primary sm:text-3xl">
                 {title}
               </a>
             </h3>

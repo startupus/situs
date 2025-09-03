@@ -1,15 +1,15 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart = () => {
   const series = [
     {
-      name: "Product One",
+      name: 'Product One',
       data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
     },
 
     {
-      name: "Product Two",
+      name: 'Product Two',
       data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
     },
   ];
@@ -17,17 +17,17 @@ const Chart = () => {
   const options = {
     legend: {
       show: false,
-      position: "top",
-      horizontalAlign: "left",
+      position: 'top',
+      horizontalAlign: 'left',
     },
-    colors: ["#3758F9", "#13C296"],
+    colors: ['#3758F9', '#13C296'],
     chart: {
-      fontFamily: "Inter, sans-serif",
+      fontFamily: 'Inter, sans-serif',
       height: 450,
-      type: "line",
+      type: 'line',
       dropShadow: {
         enabled: true,
-        color: "#623CEA14",
+        color: '#623CEA14',
         top: 10,
         blur: 4,
         left: 0,
@@ -58,7 +58,7 @@ const Chart = () => {
     ],
     stroke: {
       width: [4, 4],
-      curve: "smooth",
+      curve: 'smooth',
     },
 
     markers: {
@@ -66,7 +66,7 @@ const Chart = () => {
     },
     labels: {
       show: false,
-      position: "top",
+      position: 'top',
     },
     grid: {
       xaxis: {
@@ -81,21 +81,8 @@ const Chart = () => {
       },
     },
     xaxis: {
-      type: "category",
-      categories: [
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-      ],
+      type: 'category',
+      categories: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
       axisBorder: {
         show: false,
       },
@@ -106,7 +93,7 @@ const Chart = () => {
     yaxis: {
       title: {
         style: {
-          fontSize: "0px",
+          fontSize: '0px',
         },
       },
       min: 0,
@@ -114,7 +101,7 @@ const Chart = () => {
 
       labels: {
         style: {
-          colors: ["white"],
+          colors: ['white'],
         },
       },
     },
@@ -129,9 +116,7 @@ const Chart = () => {
               <h3 className="mb-1 text-xl font-bold leading-none text-dark dark:text-white sm:text-[28px] sm:leading-[35px]">
                 $35,8K
               </h3>
-              <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">
-                Overall Revenue
-              </p>
+              <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">Overall Revenue</p>
             </div>
             <div>
               <div className="relative z-20 inline-block rounded-md bg-transparent">

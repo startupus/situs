@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const Switcher8 = () => {
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked)
-  }
+    setIsChecked(!isChecked);
+  };
 
   return (
     <>
-      <label className='flex cursor-pointer select-none items-center'>
-        <div className='relative'>
+      <label className="flex cursor-pointer select-none items-center">
+        <div className="relative">
           <input
-            type='checkbox'
+            type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
-            className='sr-only'
+            className="sr-only"
           />
           <div
-            className={`box h-5 w-14 rounded-full shadow-inner transition  ${
-              isChecked ? 'bg-[#EAEEFB]' : 'bg-dark'
+            className={`box h-5 w-14 rounded-full shadow-inner transition ${
+              isChecked ? "bg-[#EAEEFB]" : "bg-dark"
             }`}
           ></div>
-          <div className='dot shadow-switch-1 absolute left-0 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-white transition'>
+          <div className="dot absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-switch-1 transition">
             <span
-              className={`active h-4 w-4 rounded-full border  ${
-                isChecked ? 'bg-primary border-white' : 'bg-white border-dark'
+              className={`active h-4 w-4 rounded-full border ${
+                isChecked ? "border-white bg-primary" : "border-dark bg-white"
               }`}
             ></span>
           </div>
         </div>
       </label>
     </>
-  )
-}
+  );
+};
 
-export default Switcher8
+export default Switcher8;

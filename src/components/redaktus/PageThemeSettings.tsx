@@ -5,15 +5,8 @@ import { FaPalette, FaEye, FaCog } from 'react-icons/fa';
 
 const PageThemeSettings: React.FC = () => {
   const { t } = useTranslation();
-  const { 
-    theme, 
-    isDarkMode, 
-    inheritFromSite, 
-    customColors,
-    setTheme, 
-    setInheritFromSite, 
-    setCustomColors 
-  } = useProjectTheme();
+  const { theme, isDarkMode, inheritFromSite, customColors, setTheme, setInheritFromSite, setCustomColors } =
+    useProjectTheme();
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme as any);
@@ -26,7 +19,7 @@ const PageThemeSettings: React.FC = () => {
   const handleColorChange = (colorType: string, value: string) => {
     setCustomColors({
       ...customColors,
-      [colorType]: value
+      [colorType]: value,
     });
   };
 
@@ -83,12 +76,10 @@ const PageThemeSettings: React.FC = () => {
               {t('editor.settings.page.theme.customTheme')}
             </h5>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                Primary
-              </label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Primary</label>
               <input
                 type="color"
                 value={customColors?.primary || '#3b82f6'}
@@ -96,11 +87,9 @@ const PageThemeSettings: React.FC = () => {
                 className="w-full h-8 rounded border border-gray-300 cursor-pointer"
               />
             </div>
-            
+
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                Secondary
-              </label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Secondary</label>
               <input
                 type="color"
                 value={customColors?.secondary || '#6b7280'}
@@ -108,11 +97,9 @@ const PageThemeSettings: React.FC = () => {
                 className="w-full h-8 rounded border border-gray-300 cursor-pointer"
               />
             </div>
-            
+
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                Accent
-              </label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Accent</label>
               <input
                 type="color"
                 value={customColors?.accent || '#10b981'}
@@ -120,11 +107,9 @@ const PageThemeSettings: React.FC = () => {
                 className="w-full h-8 rounded border border-gray-300 cursor-pointer"
               />
             </div>
-            
+
             <div>
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                Background
-              </label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Background</label>
               <input
                 type="color"
                 value={customColors?.background || '#ffffff'}
@@ -132,11 +117,9 @@ const PageThemeSettings: React.FC = () => {
                 className="w-full h-8 rounded border border-gray-300 cursor-pointer"
               />
             </div>
-            
+
             <div className="col-span-2">
-              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                Text
-              </label>
+              <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Text</label>
               <input
                 type="color"
                 value={customColors?.text || '#1f2937'}
@@ -152,27 +135,19 @@ const PageThemeSettings: React.FC = () => {
       <div className="space-y-2">
         <div className="flex items-center space-x-2">
           <FaEye className="text-gray-500" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Preview
-          </span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Preview</span>
         </div>
-        <div 
+        <div
           className="w-full h-16 rounded border border-gray-300 p-3 text-sm"
           style={{
             backgroundColor: customColors?.background || '#ffffff',
-            color: customColors?.text || '#1f2937'
+            color: customColors?.text || '#1f2937',
           }}
         >
           <div className="flex items-center space-x-2">
-            <div 
-              className="w-4 h-4 rounded"
-              style={{ backgroundColor: customColors?.primary || '#3b82f6' }}
-            />
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: customColors?.primary || '#3b82f6' }} />
             <span>Primary Color</span>
-            <div 
-              className="w-4 h-4 rounded"
-              style={{ backgroundColor: customColors?.secondary || '#6b7280' }}
-            />
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: customColors?.secondary || '#6b7280' }} />
             <span>Secondary</span>
           </div>
         </div>

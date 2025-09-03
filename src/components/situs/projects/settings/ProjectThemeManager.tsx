@@ -10,12 +10,30 @@ interface BasicThemeFormProps {
 
 const BasicThemeForm: React.FC<BasicThemeFormProps> = ({ value, onChange }) => {
   const variants: Array<'light' | 'dark'> = ['light', 'dark'];
-  const colorKeys = ['primary','primaryHover','primaryActive','secondary','accent','success','warning','error','info','background','surface','text','textSecondary','border','borderLight'] as const;
+  const colorKeys = [
+    'primary',
+    'primaryHover',
+    'primaryActive',
+    'secondary',
+    'accent',
+    'success',
+    'warning',
+    'error',
+    'info',
+    'background',
+    'surface',
+    'text',
+    'textSecondary',
+    'border',
+    'borderLight',
+  ] as const;
   return (
     <div className="space-y-6">
-      {variants.map(variant => (
+      {variants.map((variant) => (
         <div key={variant} className="border border-stroke dark:border-dark-3 rounded-xl p-4">
-          <div className="font-semibold text-dark dark:text-white mb-3">{variant === 'light' ? 'Светлая палитра' : 'Тёмная палитра'}</div>
+          <div className="font-semibold text-dark dark:text-white mb-3">
+            {variant === 'light' ? 'Светлая палитра' : 'Тёмная палитра'}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {colorKeys.map((key) => (
               <div key={`${variant}-${key}`} className="space-y-1">
@@ -24,31 +42,35 @@ const BasicThemeForm: React.FC<BasicThemeFormProps> = ({ value, onChange }) => {
                   <input
                     type="color"
                     value={value?.colors?.[variant]?.[key] || '#000000'}
-                    onChange={(e) => onChange({
-                      ...value,
-                      colors: {
-                        ...value.colors,
-                        [variant]: {
-                          ...value.colors?.[variant],
-                          [key]: e.target.value,
-                        }
-                      }
-                    })}
+                    onChange={(e) =>
+                      onChange({
+                        ...value,
+                        colors: {
+                          ...value.colors,
+                          [variant]: {
+                            ...value.colors?.[variant],
+                            [key]: e.target.value,
+                          },
+                        },
+                      })
+                    }
                     className="w-12 h-10 rounded border border-stroke"
                   />
                   <input
                     type="text"
                     value={value?.colors?.[variant]?.[key] || ''}
-                    onChange={(e) => onChange({
-                      ...value,
-                      colors: {
-                        ...value.colors,
-                        [variant]: {
-                          ...value.colors?.[variant],
-                          [key]: e.target.value,
-                        }
-                      }
-                    })}
+                    onChange={(e) =>
+                      onChange({
+                        ...value,
+                        colors: {
+                          ...value.colors,
+                          [variant]: {
+                            ...value.colors?.[variant],
+                            [key]: e.target.value,
+                          },
+                        },
+                      })
+                    }
                     placeholder="#000000"
                     className="flex-1 px-3 py-2 border border-stroke rounded-lg focus:border-primary focus:outline-none"
                   />
@@ -64,7 +86,8 @@ const BasicThemeForm: React.FC<BasicThemeFormProps> = ({ value, onChange }) => {
 
 const ProjectThemeManager: React.FC = () => {
   const { projectId } = useParams();
-  const { currentTheme, isDarkMode, updateTheme, toggleDarkMode, saveThemeSettings, settings, updateThemeVariant } = useTheme();
+  const { currentTheme, isDarkMode, updateTheme, toggleDarkMode, saveThemeSettings, settings, updateThemeVariant } =
+    useTheme();
   const [serverTheme, setServerTheme] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);
@@ -91,7 +114,9 @@ const ProjectThemeManager: React.FC = () => {
       }
     };
     load();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [effectiveProjectId]);
 
   const handleSelectPreset = (themeId: string) => {
@@ -154,7 +179,9 @@ const ProjectThemeManager: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-dark dark:text-white">Глобальная тема проекта</h1>
-          <p className="text-body-color dark:text-dark-6">Переключение предустановленных тем, настройка палитры и сохранение</p>
+          <p className="text-body-color dark:text-dark-6">
+            Переключение предустановленных тем, настройка палитры и сохранение
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -200,10 +227,14 @@ const ProjectThemeManager: React.FC = () => {
           className="w-full max-w-sm rounded-lg border border-stroke px-3 py-2 dark:border-dark-3 dark:bg-dark dark:text-white"
         >
           {settings.availableThemes.map((t) => (
-            <option key={t.id} value={t.id}>{t.name}</option>
+            <option key={t.id} value={t.id}>
+              {t.name}
+            </option>
           ))}
         </select>
-        <p className="text-xs text-body-color dark:text-dark-6">Можно настроить палитру ниже и сохранить как активную для проекта.</p>
+        <p className="text-xs text-body-color dark:text-dark-6">
+          Можно настроить палитру ниже и сохранить как активную для проекта.
+        </p>
       </div>
 
       {/* Редактор палитры (MVP) */}
@@ -219,7 +250,7 @@ const ProjectThemeManager: React.FC = () => {
             style={{
               backgroundColor: 'var(--color-surface)',
               color: 'var(--color-text)',
-              borderColor: 'var(--color-border)'
+              borderColor: 'var(--color-border)',
             }}
           >
             <div className="text-lg font-semibold mb-1">Карточка</div>
@@ -227,17 +258,14 @@ const ProjectThemeManager: React.FC = () => {
               Пример текста. Проверьте контраст и читабельность.
             </div>
             <div className="mt-3 flex gap-2">
-              <button
-                className="px-3 py-2 rounded-lg text-white"
-                style={{ backgroundColor: 'var(--color-primary)' }}
-              >
+              <button className="px-3 py-2 rounded-lg text-white" style={{ backgroundColor: 'var(--color-primary)' }}>
                 Кнопка
               </button>
               <button
                 className="px-3 py-2 rounded-lg"
                 style={{
                   color: 'var(--color-primary)',
-                  border: '1px solid var(--color-primary)'
+                  border: '1px solid var(--color-primary)',
                 }}
               >
                 Обводка
@@ -246,11 +274,10 @@ const ProjectThemeManager: React.FC = () => {
           </div>
 
           {/* Формы */}
-          <div
-            className="rounded-xl border p-4 space-y-3"
-            style={{ borderColor: 'var(--color-border)' }}
-          >
-            <label className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>Поле ввода</label>
+          <div className="rounded-xl border p-4 space-y-3" style={{ borderColor: 'var(--color-border)' }}>
+            <label className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
+              Поле ввода
+            </label>
             <input
               type="text"
               placeholder="Текст..."
@@ -258,7 +285,7 @@ const ProjectThemeManager: React.FC = () => {
               style={{
                 backgroundColor: 'var(--color-surface)',
                 color: 'var(--color-text)',
-                border: '1px solid var(--color-border)'
+                border: '1px solid var(--color-border)',
               }}
             />
             <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
@@ -331,4 +358,3 @@ const ProjectThemeManager: React.FC = () => {
 };
 
 export default ProjectThemeManager;
-

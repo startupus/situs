@@ -1,10 +1,6 @@
 // src/components/ui/ThemeMegaMenus.tsx
 import React from 'react';
-import { 
-  MegaMenu1,
-  MegaMenu2,
-  MegaMenu3
-} from './core';
+import { MegaMenu1, MegaMenu2, MegaMenu3 } from './core';
 
 // MegaMenu Variants - простые обертки
 export const ThemeMegaMenu1: React.FC = () => <MegaMenu1 />;

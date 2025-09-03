@@ -105,7 +105,7 @@ const Navbar4 = () => {
                     <input
                       type="text"
                       placeholder="Search Components or UI"
-                      className="w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color shadow-xs outline-hidden focus-visible:shadow-none dark:bg-dark-2 dark:text-white"
+                      className="shadow-xs outline-hidden w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color focus-visible:shadow-none dark:bg-dark-2 dark:text-white"
                     />
                     <button className="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-white">
                       <svg

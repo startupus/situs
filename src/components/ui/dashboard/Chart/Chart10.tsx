@@ -1,26 +1,26 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart10 = () => {
   const series = [65, 34, 45, 12];
   const options = {
     chart: {
-      fontFamily: "Inter, sans-serif",
-      type: "donut",
+      fontFamily: 'Inter, sans-serif',
+      type: 'donut',
       width: 380,
     },
-    colors: ["#3758F9", "#13C296", "#F2C94C", "#F2994A"],
-    labels: ["Desktop", "Tablet", "Mobile", "Unknown"],
+    colors: ['#3758F9', '#13C296', '#F2C94C', '#F2994A'],
+    labels: ['Desktop', 'Tablet', 'Mobile', 'Unknown'],
     legend: {
       show: false,
-      position: "bottom",
+      position: 'bottom',
     },
 
     plotOptions: {
       pie: {
         donut: {
-          size: "65%",
-          background: "transparent",
+          size: '65%',
+          background: 'transparent',
         },
       },
     },
@@ -36,12 +36,8 @@ const Chart10 = () => {
         <div className="mx-auto w-full max-w-[540px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="mb-3 justify-between sm:flex">
             <div className="mb-4 sm:mb-0">
-              <h5 className="text-xl font-semibold text-dark dark:text-white">
-                Website Visitors Analytics
-              </h5>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                your website visitors data
-              </p>
+              <h5 className="text-xl font-semibold text-dark dark:text-white">Website Visitors Analytics</h5>
+              <p className="text-sm text-body-color dark:text-dark-6">your website visitors data</p>
             </div>
             <div>
               <div className="relative z-20 inline-block rounded-md bg-transparent">
@@ -75,12 +71,7 @@ const Chart10 = () => {
 
           <div className="mb-2">
             <div id="chartOne" className="chart-10 mx-auto flex justify-center">
-              <ReactApexChart
-                options={options}
-                series={series}
-                type="donut"
-                width={380}
-              />
+              <ReactApexChart options={options} series={series} type="donut" width={380} />
             </div>
           </div>
 
@@ -102,10 +93,7 @@ const AnalyticsItem = ({ title, percent, color }) => {
   return (
     <div className="mb-3 w-full px-8 sm:w-1/2">
       <div className="flex w-full items-center">
-        <span
-          className={`mr-2 block h-3 w-full max-w-[12px] rounded-full`}
-          style={{ backgroundColor: color }}
-        ></span>
+        <span className={`mr-2 block h-3 w-full max-w-[12px] rounded-full`} style={{ backgroundColor: color }}></span>
         <p className="flex w-full justify-between text-sm text-dark dark:text-white">
           <span> {title} </span>
           <span> {percent} </span>

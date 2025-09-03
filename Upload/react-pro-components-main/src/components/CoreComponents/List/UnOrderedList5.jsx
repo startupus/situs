@@ -18,8 +18,8 @@ export default UnOrderedList5;
 
 const ListItem = ({ text }) => {
   return (
-    <li className="text-body-color dark:text-dark-6 flex text-base">
-      <span className="text-primary mr-2.5 mt-0.5">
+    <li className="flex text-base text-body-color dark:text-dark-6">
+      <span className="mr-2.5 mt-0.5 text-primary">
         <svg
           width={20}
           height={20}

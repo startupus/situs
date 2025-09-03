@@ -33,7 +33,7 @@ const DashboardDropdown = () => {
   });
 
   return (
-    <section className="bg-gray-2 dark:bg-dark py-20">
+    <section className="bg-gray-2 py-20 dark:bg-dark">
       <div className="container">
         <div className="flex items-center justify-center">
           <div className="relative inline-block">
@@ -46,10 +46,12 @@ const DashboardDropdown = () => {
                 <span className="block text-sm font-medium text-dark dark:text-white">
                   Thomas Anree
                 </span>
-                <span className="block text-xs text-body-color dark:text-dark-6">UX Designer</span>
+                <span className="block text-xs text-body-color dark:text-dark-6">
+                  UX Designer
+                </span>
               </span>
 
-              <span className="h-11 w-11 rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-3 p-1">
+              <span className="h-11 w-11 rounded-full border border-stroke bg-white p-1 dark:border-dark-3 dark:bg-dark-3">
                 <img
                   src="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-01.jpg"
                   alt="User"
@@ -79,16 +81,16 @@ const DashboardDropdown = () => {
               ref={dropdown}
               onFocus={() => setDropdownOpen(true)}
               onBlur={() => setDropdownOpen(false)}
-              className={`absolute right-0 mt-4 flex w-[250px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 shadow-card ${
+              className={`absolute right-0 mt-4 flex w-[250px] flex-col gap-1 rounded-lg bg-white shadow-card dark:bg-dark-2 ${
                 dropdownOpen === true ? "block" : "hidden"
               }`}
             >
-              <ul className="flex flex-col gap-5 border-b border-stroke dark:border-dark-3 py-[30px] px-6">
+              <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-[30px] dark:border-dark-3">
                 <DropdownItem link="/#">My Profile</DropdownItem>
                 <DropdownItem link="/#">My Contacts</DropdownItem>
                 <DropdownItem link="/#">Account Settings</DropdownItem>
               </ul>
-              <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium text-body-color dark:text-dark-6 duration-300 ease-in-out hover:text-primary lg:text-base">
+              <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-body-color duration-300 ease-in-out hover:text-primary dark:text-dark-6 lg:text-base">
                 <svg
                   className="fill-current"
                   width="22"
@@ -129,7 +131,7 @@ const DropdownItem = ({
   return (
     <li>
       <a
-        className="flex items-center gap-3.5 text-sm font-medium text-body-color dark:text-dark-6 duration-300 ease-in-out hover:text-primary lg:text-base"
+        className="flex items-center gap-3.5 text-sm font-medium text-body-color duration-300 ease-in-out hover:text-primary dark:text-dark-6 lg:text-base"
         href={link}
       >
         {profile && (

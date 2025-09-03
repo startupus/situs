@@ -2,10 +2,10 @@ import React from "react";
 
 const VerticalNavbar3 = () => {
   return (
-    <section className="bg-gray-2 min-h-screen">
-      <div className="shadow-card flex min-h-screen w-full max-w-[90px] flex-col justify-between bg-white">
+    <section className="min-h-screen bg-gray-2">
+      <div className="flex min-h-screen w-full max-w-[90px] flex-col justify-between bg-white shadow-card">
         <div>
-          <div className="px-7 pt-10 pb-9">
+          <div className="px-7 pb-9 pt-10">
             <a href="/#">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/favicon.svg"
@@ -319,7 +319,7 @@ const VerticalNavbar3 = () => {
             </ul>
           </nav>
         </div>
-        <div className="py-10 px-6">
+        <div className="px-6 py-10">
           <div className="flex items-center">
             <div className="h-[38px] w-full max-w-[38px] rounded-full">
               <img
@@ -342,12 +342,12 @@ const NavItem = ({ menu, link, icon }) => {
     <li className="group relative">
       <a
         href={link}
-        className="text-body-color hover:bg-gray-2 hover:border-primary hover:text-primary relative flex items-center justify-center border-r-4 border-transparent py-3 px-7 text-base font-medium duration-200"
+        className="relative flex items-center justify-center border-r-4 border-transparent px-7 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-gray-2 hover:text-primary"
       >
         <span>{icon}</span>
       </a>
-      <span className="text-body-color drop-shadow-tooltip invisible absolute top-1/2 left-[115%] -translate-y-1/2 whitespace-nowrap rounded-sm bg-white py-1 px-[10px] text-sm font-medium group-hover:visible">
-        <span className="absolute top-1/2 -left-2 -translate-y-1/2">
+      <span className="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-white px-[10px] py-1 text-sm font-medium text-body-color drop-shadow-tooltip group-hover:visible">
+        <span className="absolute -left-2 top-1/2 -translate-y-1/2">
           <svg
             width="9"
             height="12"

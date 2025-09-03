@@ -93,7 +93,7 @@ const mockUsers: User[] = [
     position: 'Главный администратор',
     projectsCount: 15,
     ordersCount: 45,
-    permissions: ['projects.*', 'users.*', 'orders.*', 'marketing.*', 'settings.*', 'reports.*']
+    permissions: ['projects.*', 'users.*', 'orders.*', 'marketing.*', 'settings.*', 'reports.*'],
   },
   {
     id: '2',
@@ -112,7 +112,7 @@ const mockUsers: User[] = [
     position: 'Менеджер проектов',
     projectsCount: 8,
     ordersCount: 23,
-    permissions: ['projects.view', 'projects.edit', 'orders.view', 'orders.edit']
+    permissions: ['projects.view', 'projects.edit', 'orders.view', 'orders.edit'],
   },
   {
     id: '3',
@@ -131,7 +131,7 @@ const mockUsers: User[] = [
     position: 'Ведущий разработчик',
     projectsCount: 12,
     ordersCount: 18,
-    permissions: ['projects.view', 'projects.edit']
+    permissions: ['projects.view', 'projects.edit'],
   },
   {
     id: '4',
@@ -150,7 +150,7 @@ const mockUsers: User[] = [
     position: 'UI/UX дизайнер',
     projectsCount: 6,
     ordersCount: 12,
-    permissions: ['projects.view', 'projects.edit']
+    permissions: ['projects.view', 'projects.edit'],
   },
   {
     id: '5',
@@ -169,8 +169,8 @@ const mockUsers: User[] = [
     position: 'Тестировщик',
     projectsCount: 2,
     ordersCount: 5,
-    permissions: ['projects.view']
-  }
+    permissions: ['projects.view'],
+  },
 ];
 
 class UsersApiService {
@@ -183,7 +183,7 @@ class UsersApiService {
   async login(credentials: AuthCredentials): Promise<AuthResponse> {
     try {
       const res = await apiClient.post<AuthResponse>(`${this.authEndpoint}/login`, credentials);
-      const data = res.data || res as any;
+      const data = res.data || (res as any);
       if (typeof window !== 'undefined' && data?.token) {
         localStorage.setItem('auth_token', data.token);
       }
@@ -200,7 +200,7 @@ class UsersApiService {
   async register(userData: CreateUserData): Promise<AuthResponse> {
     try {
       const res = await apiClient.post<AuthResponse>(`${this.authEndpoint}/register`, userData as any);
-      const data = res.data || res as any;
+      const data = res.data || (res as any);
       if (typeof window !== 'undefined' && data?.token) {
         localStorage.setItem('auth_token', data.token);
       }
@@ -227,7 +227,7 @@ class UsersApiService {
   async getCurrentUser(): Promise<User> {
     try {
       const res = await apiClient.get<User>(`/api/users/me`);
-      const data = res.data || res as any;
+      const data = res.data || (res as any);
       return data;
     } catch (error) {
       console.error('Get Current User API Error:', error);
@@ -241,34 +241,35 @@ class UsersApiService {
   async getUsers(filters?: UserFilters): Promise<UsersListResponse> {
     try {
       // Имитация задержки сети
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
       let filteredUsers = [...mockUsers];
 
       // Применяем фильтры
       if (filters?.search) {
         const searchLower = filters.search.toLowerCase();
-        filteredUsers = filteredUsers.filter(user => 
-          user.firstName.toLowerCase().includes(searchLower) ||
-          user.lastName.toLowerCase().includes(searchLower) ||
-          user.email.toLowerCase().includes(searchLower) ||
-          user.company?.toLowerCase().includes(searchLower)
+        filteredUsers = filteredUsers.filter(
+          (user) =>
+            user.firstName.toLowerCase().includes(searchLower) ||
+            user.lastName.toLowerCase().includes(searchLower) ||
+            user.email.toLowerCase().includes(searchLower) ||
+            user.company?.toLowerCase().includes(searchLower),
         );
       }
 
       if (filters?.role) {
-        filteredUsers = filteredUsers.filter(user => user.role === filters.role);
+        filteredUsers = filteredUsers.filter((user) => user.role === filters.role);
       }
 
       if (filters?.status) {
-        filteredUsers = filteredUsers.filter(user => user.status === filters.status);
+        filteredUsers = filteredUsers.filter((user) => user.status === filters.status);
       }
 
       // Сортировка
       if (filters?.sortBy) {
         filteredUsers.sort((a, b) => {
           let aValue: any, bValue: any;
-          
+
           switch (filters.sortBy) {
             case 'username':
               aValue = `${a.firstName} ${a.lastName}`;
@@ -311,8 +312,8 @@ class UsersApiService {
           page,
           limit,
           total: filteredUsers.length,
-          totalPages: Math.ceil(filteredUsers.length / limit)
-        }
+          totalPages: Math.ceil(filteredUsers.length / limit),
+        },
       };
     } catch (error) {
       console.error('Get Users API Error:', error);
@@ -325,7 +326,7 @@ class UsersApiService {
    */
   async getUser(userId: string): Promise<User> {
     try {
-      const user = mockUsers.find(u => u.id === userId);
+      const user = mockUsers.find((u) => u.id === userId);
       if (!user) {
         throw new Error('Пользователь не найден');
       }
@@ -353,7 +354,7 @@ class UsersApiService {
         isEmailVerified: false,
         projectsCount: 0,
         ordersCount: 0,
-        permissions: ['projects.view']
+        permissions: ['projects.view'],
       };
 
       mockUsers.push(newUser);
@@ -369,7 +370,7 @@ class UsersApiService {
    */
   async updateUser(userId: string, data: UpdateUserData): Promise<User> {
     try {
-      const userIndex = mockUsers.findIndex(u => u.id === userId);
+      const userIndex = mockUsers.findIndex((u) => u.id === userId);
       if (userIndex === -1) {
         throw new Error('Пользователь не найден');
       }
@@ -377,7 +378,7 @@ class UsersApiService {
       mockUsers[userIndex] = {
         ...mockUsers[userIndex],
         ...data,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       return mockUsers[userIndex];
@@ -400,7 +401,7 @@ class UsersApiService {
         phone: data.phone || mockUsers[0].phone,
         company: data.company || mockUsers[0].company,
         position: data.position || mockUsers[0].position,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       return mockUsers[0];
@@ -415,7 +416,7 @@ class UsersApiService {
    */
   async deleteUser(userId: string): Promise<void> {
     try {
-      const userIndex = mockUsers.findIndex(u => u.id === userId);
+      const userIndex = mockUsers.findIndex((u) => u.id === userId);
       if (userIndex === -1) {
         throw new Error('Пользователь не найден');
       }
@@ -432,7 +433,7 @@ class UsersApiService {
    */
   async updateUserStatus(userId: string, status: UserStatus): Promise<void> {
     try {
-      const user = mockUsers.find(u => u.id === userId);
+      const user = mockUsers.find((u) => u.id === userId);
       if (!user) {
         throw new Error('Пользователь не найден');
       }
@@ -451,10 +452,10 @@ class UsersApiService {
   async uploadAvatar(file: File): Promise<{ url: string }> {
     try {
       // Mock загрузка файла
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       return {
-        url: `/images/avatars/${file.name}`
+        url: `/images/avatars/${file.name}`,
       };
     } catch (error) {
       console.error('Upload Avatar API Error:', error);
@@ -468,8 +469,8 @@ class UsersApiService {
   async changePassword(currentPassword: string, newPassword: string): Promise<void> {
     try {
       // Mock смена пароля
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       // В реальном приложении здесь была бы проверка текущего пароля
       if (currentPassword === 'wrong') {
         throw new Error('Неверный текущий пароль');

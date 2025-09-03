@@ -13,7 +13,7 @@ const BlogDetails2 = () => {
                   alt="image"
                   className="lg:min-h-auto min-h-[250px] w-full object-cover"
                 />
-                <div className="absolute left-0 top-0 z-10 flex h-full w-full items-end bg-linear-to-t from-dark/70 to-transparent">
+                <div className="bg-linear-to-t absolute left-0 top-0 z-10 flex h-full w-full items-end from-dark/70 to-transparent">
                   <div className="flex flex-wrap items-center p-5 pb-4 sm:p-8 sm:pb-4">
                     <div className="mb-4 mr-5 flex items-center md:mr-10">
                       <div className="mr-4 h-10 w-10 overflow-hidden rounded-full">
@@ -332,7 +332,7 @@ const BlogDetails2 = () => {
                         <input
                           type="email"
                           placeholder="Your email address"
-                          className="mb-4 w-full rounded-sm border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white/60 outline-hidden focus:border-white focus-visible:shadow-none"
+                          className="outline-hidden mb-4 w-full rounded-sm border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white/60 focus:border-white focus-visible:shadow-none"
                         />
                         <input
                           type="submit"

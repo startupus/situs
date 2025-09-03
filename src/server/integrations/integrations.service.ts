@@ -56,7 +56,9 @@ export class IntegrationsService {
   async create(dto: CreateIntegrationDto) {
     const instanceKey = dto.instanceKey ?? 'default';
     const exists = await this.prisma.integration.findUnique({
-      where: { projectId_provider_instanceKey: { projectId: dto.projectId, provider: dto.provider, instanceKey } as any },
+      where: {
+        projectId_provider_instanceKey: { projectId: dto.projectId, provider: dto.provider, instanceKey } as any,
+      },
     });
     if (exists) throw new BadRequestException('Integration already exists');
 
@@ -102,7 +104,8 @@ export class IntegrationsService {
         secrets: dto.secrets ?? undefined,
         isActive: dto.isActive ?? undefined,
         instanceKey: dto.instanceKey ?? undefined,
-        status: dto.isActive === undefined ? undefined : (dto.isActive ? IntegrationStatus.READY : IntegrationStatus.DISABLED),
+        status:
+          dto.isActive === undefined ? undefined : dto.isActive ? IntegrationStatus.READY : IntegrationStatus.DISABLED,
       },
     });
     this.realtime.publish('integration_updated', { id, projectId: updated.projectId });
@@ -154,9 +157,7 @@ export class IntegrationsService {
       throw new BadRequestException(`REST error ${res.status}: ${text || res.statusText}`);
     }
     const raw = await res.json().catch(() => []);
-    const items = Array.isArray(raw) ? raw : (Array.isArray((raw as any)?.data) ? (raw as any).data : []);
+    const items = Array.isArray(raw) ? raw : Array.isArray((raw as any)?.data) ? (raw as any).data : [];
     return { success: true, data: items };
   }
 }
-
-

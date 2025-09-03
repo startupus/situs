@@ -5,14 +5,14 @@ export enum InvitationStatus {
   PENDING = 'PENDING',
   ACCEPTED = 'ACCEPTED',
   EXPIRED = 'EXPIRED',
-  CANCELLED = 'CANCELLED'
+  CANCELLED = 'CANCELLED',
 }
 
 export class UpdateInvitationDto {
   @ApiProperty({
     description: 'Статус приглашения',
     enum: InvitationStatus,
-    required: false
+    required: false,
   })
   @IsOptional()
   @IsEnum(InvitationStatus)
@@ -20,7 +20,7 @@ export class UpdateInvitationDto {
 
   @ApiProperty({
     description: 'Персональное сообщение',
-    required: false
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -28,7 +28,7 @@ export class UpdateInvitationDto {
 
   @ApiProperty({
     description: 'Дата истечения приглашения (ISO string)',
-    required: false
+    required: false,
   })
   @IsOptional()
   @IsDateString()

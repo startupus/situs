@@ -17,13 +17,13 @@ const ThemeBadge: React.FC<ThemeBadgeProps> = ({
   rounded = 'md',
   outline = false,
   opacity = false,
-  className = ''
+  className = '',
 }) => {
   const getVariantStyles = () => {
     const baseStyles = {
-      primary: outline 
+      primary: outline
         ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-        : opacity 
+        : opacity
           ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400'
           : 'bg-blue-600 text-white dark:bg-blue-500',
       secondary: outline
@@ -65,7 +65,7 @@ const ThemeBadge: React.FC<ThemeBadgeProps> = ({
         ? 'border-gray-500 text-gray-500 dark:text-gray-400 dark:border-gray-400'
         : opacity
           ? 'bg-gray-500/10 text-gray-500 dark:text-gray-400'
-          : 'bg-gray-500 text-white dark:bg-gray-400 dark:text-gray-800'
+          : 'bg-gray-500 text-white dark:bg-gray-400 dark:text-gray-800',
     };
     return baseStyles[variant];
   };
@@ -74,7 +74,7 @@ const ThemeBadge: React.FC<ThemeBadgeProps> = ({
     const sizes = {
       sm: 'px-2 py-0.5 text-xs',
       md: 'px-2.5 py-1 text-xs',
-      lg: 'px-3 py-1.5 text-sm'
+      lg: 'px-3 py-1.5 text-sm',
     };
     return sizes[size];
   };
@@ -85,7 +85,7 @@ const ThemeBadge: React.FC<ThemeBadgeProps> = ({
       sm: 'rounded-sm',
       md: 'rounded-md',
       lg: 'rounded-lg',
-      full: 'rounded-full'
+      full: 'rounded-full',
     };
     return roundedStyles[rounded];
   };
@@ -99,7 +99,9 @@ const ThemeBadge: React.FC<ThemeBadgeProps> = ({
         ${getVariantStyles()}
         ${outline ? 'border' : ''}
         ${className}
-      `.trim().replace(/\s+/g, ' ')}
+      `
+        .trim()
+        .replace(/\s+/g, ' ')}
     >
       {children}
     </span>

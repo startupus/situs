@@ -9,7 +9,7 @@ export default function DatePicker2() {
             <input
               type="text"
               placeholder="Pick a date"
-              className="h-12 w-full appearance-none rounded-lg border border-stroke bg-white pl-12 pr-4 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-white"
+              className="outline-hidden h-12 w-full appearance-none rounded-lg border border-stroke bg-white pl-12 pr-4 text-dark focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-white"
             />
             <span className="absolute inset-y-0 flex h-12 w-12 items-center justify-center text-dark-5">
               <svg

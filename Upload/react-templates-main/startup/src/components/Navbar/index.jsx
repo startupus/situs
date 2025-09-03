@@ -54,13 +54,13 @@ const Navbar = () => {
 
   return (
     <header
-      className={`dark:bg-dark sticky top-0 left-0 z-50 w-full bg-white ${
-        sticky && "bg-white/80 shadow-xs backdrop-blur-xs"
+      className={`sticky left-0 top-0 z-50 w-full bg-white dark:bg-dark ${
+        sticky && "shadow-xs backdrop-blur-xs bg-white/80"
       }`}
     >
       <div className="container mx-auto">
-        <div className="relative flex items-center justify-between -mx-4">
-          <div className="max-w-full px-4 w-60">
+        <div className="relative -mx-4 flex items-center justify-between">
+          <div className="w-60 max-w-full px-4">
             <Link to="/" className="block w-full py-5">
               <img src={logo} alt="logo" className="w-full dark:hidden" />
               <img
@@ -71,28 +71,28 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="flex items-center justify-between w-full px-4">
+          <div className="flex w-full items-center justify-between px-4">
             <div>
               <button
                 onClick={handleNavbarToggle}
-                className={`ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden ${
+                className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
                   navbarOpen ? "navbarTogglerActive" : ""
                 }`}
               >
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
               </button>
 
               <nav
-                className={`dark:bg-dark-2 absolute top-full right-4 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm transition-all lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${navbarOpen ? "" : "hidden"}`}
+                className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm transition-all dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${navbarOpen ? "" : "hidden"}`}
               >
                 <ul className="block lg:flex">
                   {navList.map((item, index) => (
                     <li key={index}>
                       <Link
                         to={item.link}
-                        className="flex py-2 text-base font-medium text-dark hover:text-primary dark:hover:text-primary lg:ml-12 lg:inline-flex dark:text-white"
+                        className="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary lg:ml-12 lg:inline-flex"
                       >
                         {item.text}
                       </Link>
@@ -102,16 +102,16 @@ const Navbar = () => {
               </nav>
             </div>
 
-            <div className="justify-end hidden pr-16 sm:flex lg:pr-0">
+            <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <Link
                 to="#"
-                className="py-3 text-base font-medium text-dark hover:text-primary dark:hover:text-primary px-7 dark:text-white"
+                className="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
               >
                 Login
               </Link>
               <Link
                 to="#"
-                className="py-3 text-base font-medium text-white rounded-lg bg-primary hover:bg-primary/90 px-7"
+                className="rounded-lg bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
               >
                 Sign Up
               </Link>

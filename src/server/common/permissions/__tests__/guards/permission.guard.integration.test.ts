@@ -15,11 +15,11 @@ describe('PermissionGuard Integration', () => {
 
   beforeEach(async () => {
     const mockPermissionsService = {
-      checkPermission: jest.fn()
+      checkPermission: jest.fn(),
     };
 
     const mockReflector = {
-      getAllAndOverride: jest.fn()
+      getAllAndOverride: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -39,21 +39,21 @@ describe('PermissionGuard Integration', () => {
     user: any = { id: 'user-123', globalRole: 'BUSINESS' },
     params: any = {},
     query: any = {},
-    headers: any = {}
+    headers: any = {},
   ): ExecutionContext => {
     const request = {
       user,
       params,
       query,
-      headers
+      headers,
     };
 
     return {
       switchToHttp: () => ({
-        getRequest: () => request
+        getRequest: () => request,
       }),
       getHandler: jest.fn(),
-      getClass: jest.fn()
+      getClass: jest.fn(),
     } as any;
   };
 
@@ -62,12 +62,7 @@ describe('PermissionGuard Integration', () => {
       process.env.NODE_ENV = 'test';
       process.env.AUTH_TEST_TOKEN = 'test-token-12345';
 
-      const context = createMockContext(
-        { id: 'user-123' },
-        {},
-        {},
-        { authorization: 'Bearer test-token-12345' }
-      );
+      const context = createMockContext({ id: 'user-123' }, {}, {}, { authorization: 'Bearer test-token-12345' });
 
       const result = await guard.canActivate(context);
 
@@ -105,10 +100,7 @@ describe('PermissionGuard Integration', () => {
       reflector.getAllAndOverride.mockReturnValue('project.edit.own');
       permissionsService.checkPermission.mockResolvedValue({ allowed: true });
 
-      const context = createMockContext(
-        { id: 'user-123', globalRole: 'BUSINESS' },
-        { projectId: 'project-123' }
-      );
+      const context = createMockContext({ id: 'user-123', globalRole: 'BUSINESS' }, { projectId: 'project-123' });
 
       const result = await guard.canActivate(context);
 
@@ -119,18 +111,15 @@ describe('PermissionGuard Integration', () => {
     it('должен проверять множественные права (any)', async () => {
       reflector.getAllAndOverride.mockReturnValue({
         type: 'any',
-        permissions: ['project.edit.own', 'project.edit.clients']
+        permissions: ['project.edit.own', 'project.edit.clients'],
       });
-      
+
       // Первое право не проходит, второе проходит
       permissionsService.checkPermission
         .mockResolvedValueOnce({ allowed: false })
         .mockResolvedValueOnce({ allowed: true });
 
-      const context = createMockContext(
-        { id: 'user-456', globalRole: 'AGENCY' },
-        { projectId: 'project-123' }
-      );
+      const context = createMockContext({ id: 'user-456', globalRole: 'AGENCY' }, { projectId: 'project-123' });
 
       const result = await guard.canActivate(context);
 
@@ -141,16 +130,13 @@ describe('PermissionGuard Integration', () => {
     it('должен проверять множественные права (all)', async () => {
       reflector.getAllAndOverride.mockReturnValue({
         type: 'all',
-        permissions: ['project.view.own', 'project.edit.own']
+        permissions: ['project.view.own', 'project.edit.own'],
       });
-      
+
       // Оба права проходят
       permissionsService.checkPermission.mockResolvedValue({ allowed: true });
 
-      const context = createMockContext(
-        { id: 'user-123', globalRole: 'BUSINESS' },
-        { projectId: 'project-123' }
-      );
+      const context = createMockContext({ id: 'user-123', globalRole: 'BUSINESS' }, { projectId: 'project-123' });
 
       const result = await guard.canActivate(context);
 
@@ -161,18 +147,15 @@ describe('PermissionGuard Integration', () => {
     it('должен запрещать доступ если не все права есть (all)', async () => {
       reflector.getAllAndOverride.mockReturnValue({
         type: 'all',
-        permissions: ['project.view.own', 'project.delete.own']
+        permissions: ['project.view.own', 'project.delete.own'],
       });
-      
+
       // Первое право проходит, второе нет
       permissionsService.checkPermission
         .mockResolvedValueOnce({ allowed: true })
         .mockResolvedValueOnce({ allowed: false });
 
-      const context = createMockContext(
-        { id: 'user-123', globalRole: 'BUSINESS' },
-        { projectId: 'project-123' }
-      );
+      const context = createMockContext({ id: 'user-123', globalRole: 'BUSINESS' }, { projectId: 'project-123' });
 
       const result = await guard.canActivate(context);
 
@@ -182,17 +165,13 @@ describe('PermissionGuard Integration', () => {
     it('должен проверять владение ресурсом', async () => {
       reflector.getAllAndOverride.mockReturnValue({
         type: 'owner',
-        resourceType: 'project'
+        resourceType: 'project',
       });
 
-      const context = createMockContext(
-        { id: 'user-123', globalRole: 'BUSINESS' },
-        { id: 'project-123' }
-      );
+      const context = createMockContext({ id: 'user-123', globalRole: 'BUSINESS' }, { id: 'project-123' });
 
       // Mock private method через прототип
-      const checkOwnershipSpy = jest.spyOn(guard as any, 'checkOwnership')
-        .mockResolvedValue(true);
+      const checkOwnershipSpy = jest.spyOn(guard as any, 'checkOwnership').mockResolvedValue(true);
 
       const result = await guard.canActivate(context);
 
@@ -202,18 +181,13 @@ describe('PermissionGuard Integration', () => {
     it('должен проверять агентский доступ', async () => {
       reflector.getAllAndOverride.mockReturnValue({
         type: 'agency',
-        scope: 'clients'
+        scope: 'clients',
       });
 
-      const context = createMockContext(
-        { id: 'user-456', globalRole: 'AGENCY' },
-        {},
-        { clientId: 'client-123' }
-      );
+      const context = createMockContext({ id: 'user-456', globalRole: 'AGENCY' }, {}, { clientId: 'client-123' });
 
       // Mock private method
-      const checkAgencyAccessSpy = jest.spyOn(guard as any, 'checkAgencyAccess')
-        .mockResolvedValue(true);
+      const checkAgencyAccessSpy = jest.spyOn(guard as any, 'checkAgencyAccess').mockResolvedValue(true);
 
       const result = await guard.canActivate(context);
 
@@ -223,13 +197,13 @@ describe('PermissionGuard Integration', () => {
     it('должен запрещать агентский доступ не-агентствам', async () => {
       reflector.getAllAndOverride.mockReturnValue({
         type: 'agency',
-        scope: 'clients'
+        scope: 'clients',
       });
 
       const context = createMockContext(
         { id: 'user-123', globalRole: 'BUSINESS' }, // Не агентство
         {},
-        { clientId: 'client-123' }
+        { clientId: 'client-123' },
       );
 
       const result = await guard.canActivate(context);

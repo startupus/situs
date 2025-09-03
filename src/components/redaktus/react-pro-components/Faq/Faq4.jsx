@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 const StateContext = React.createContext();
 
 export default function Faq4() {
-  const [openTab, setOpenTab] = useState("1");
+  const [openTab, setOpenTab] = useState('1');
 
   return (
     <StateContext.Provider value={{ openTab, setOpenTab }}>
@@ -28,14 +28,8 @@ export default function Faq4() {
                   text="Lorem Ipsum, sometimes referred to as 'lipsum', is the placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content to be written and approved."
                   text2="Placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content."
                 >
-                  <FeaturesList
-                    listNumber="1"
-                    listText="Long established fact that a reader will be distracted."
-                  />
-                  <FeaturesList
-                    listNumber="2"
-                    listText="There are many variations of Lorem Ipsum."
-                  />
+                  <FeaturesList listNumber="1" listText="Long established fact that a reader will be distracted." />
+                  <FeaturesList listNumber="2" listText="There are many variations of Lorem Ipsum." />
                   <FeaturesList
                     listNumber="3"
                     listText="The standard chunk of Lorem Ipsum used since for those interested."
@@ -47,14 +41,8 @@ export default function Faq4() {
                   text="Lorem Ipsum, sometimes referred to as 'lipsum', is the placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content to be written and approved."
                   text2="Placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content."
                 >
-                  <FeaturesList
-                    listNumber="1"
-                    listText="Long established fact that a reader will be distracted."
-                  />
-                  <FeaturesList
-                    listNumber="2"
-                    listText="There are many variations of Lorem Ipsum."
-                  />
+                  <FeaturesList listNumber="1" listText="Long established fact that a reader will be distracted." />
+                  <FeaturesList listNumber="2" listText="There are many variations of Lorem Ipsum." />
                   <FeaturesList
                     listNumber="3"
                     listText="The standard chunk of Lorem Ipsum used since for those interested."
@@ -66,14 +54,8 @@ export default function Faq4() {
                   text="Lorem Ipsum, sometimes referred to as 'lipsum', is the placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content to be written and approved."
                   text2="Placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content."
                 >
-                  <FeaturesList
-                    listNumber="1"
-                    listText="Long established fact that a reader will be distracted."
-                  />
-                  <FeaturesList
-                    listNumber="2"
-                    listText="There are many variations of Lorem Ipsum."
-                  />
+                  <FeaturesList listNumber="1" listText="Long established fact that a reader will be distracted." />
+                  <FeaturesList listNumber="2" listText="There are many variations of Lorem Ipsum." />
                   <FeaturesList
                     listNumber="3"
                     listText="The standard chunk of Lorem Ipsum used since for those interested."
@@ -85,14 +67,8 @@ export default function Faq4() {
                   text="Lorem Ipsum, sometimes referred to as 'lipsum', is the placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content to be written and approved."
                   text2="Placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content."
                 >
-                  <FeaturesList
-                    listNumber="1"
-                    listText="Long established fact that a reader will be distracted."
-                  />
-                  <FeaturesList
-                    listNumber="2"
-                    listText="There are many variations of Lorem Ipsum."
-                  />
+                  <FeaturesList listNumber="1" listText="Long established fact that a reader will be distracted." />
+                  <FeaturesList listNumber="2" listText="There are many variations of Lorem Ipsum." />
                   <FeaturesList
                     listNumber="3"
                     listText="The standard chunk of Lorem Ipsum used since for those interested."
@@ -104,14 +80,8 @@ export default function Faq4() {
                   text="Lorem Ipsum, sometimes referred to as 'lipsum', is the placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content to be written and approved."
                   text2="Placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content."
                 >
-                  <FeaturesList
-                    listNumber="1"
-                    listText="Long established fact that a reader will be distracted."
-                  />
-                  <FeaturesList
-                    listNumber="2"
-                    listText="There are many variations of Lorem Ipsum."
-                  />
+                  <FeaturesList listNumber="1" listText="Long established fact that a reader will be distracted." />
+                  <FeaturesList listNumber="2" listText="There are many variations of Lorem Ipsum." />
                   <FeaturesList
                     listNumber="3"
                     listText="The standard chunk of Lorem Ipsum used since for those interested."
@@ -123,14 +93,8 @@ export default function Faq4() {
                   text="Lorem Ipsum, sometimes referred to as 'lipsum', is the placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content to be written and approved."
                   text2="Placeholder text used in design when creating content. It helps designers plan out where the content will sit, without needing to wait for the content."
                 >
-                  <FeaturesList
-                    listNumber="1"
-                    listText="Long established fact that a reader will be distracted."
-                  />
-                  <FeaturesList
-                    listNumber="2"
-                    listText="There are many variations of Lorem Ipsum."
-                  />
+                  <FeaturesList listNumber="1" listText="Long established fact that a reader will be distracted." />
+                  <FeaturesList listNumber="2" listText="There are many variations of Lorem Ipsum." />
                   <FeaturesList
                     listNumber="3"
                     listText="The standard chunk of Lorem Ipsum used since for those interested."
@@ -153,8 +117,8 @@ const Button = ({ children, tabNumber }) => {
           onClick={() => setOpenTab(tabNumber)}
           className={`block w-full border-l-4 px-7 py-6 text-left text-base font-medium md:px-10 lg:px-7 xl:px-10 ${
             tabNumber === openTab
-              ? "border-primary bg-primary/[.13] text-dark dark:bg-dark-2 dark:text-white"
-              : "border-transparent text-body-color hover:border-primary hover:text-dark dark:text-dark-6 dark:hover:text-white"
+              ? 'border-primary bg-primary/[.13] text-dark dark:bg-dark-2 dark:text-white'
+              : 'border-transparent text-body-color hover:border-primary hover:text-dark dark:text-dark-6 dark:hover:text-white'
           }`}
         >
           {children}
@@ -168,16 +132,10 @@ const ContentItem = ({ title, text, text2, children, tabNumber }) => {
   return (
     <StateContext.Consumer>
       {({ openTab }) => (
-        <div className={`${openTab === tabNumber ? "block" : "hidden"}`}>
-          <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white">
-            {title}
-          </h2>
-          <p className="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6">
-            {text}
-          </p>
-          <p className="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6">
-            {text2}
-          </p>
+        <div className={`${openTab === tabNumber ? 'block' : 'hidden'}`}>
+          <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white">{title}</h2>
+          <p className="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6">{text}</p>
+          <p className="mb-8 text-base leading-relaxed text-body-color dark:text-dark-6">{text2}</p>
           <div>{children}</div>
         </div>
       )}
@@ -191,9 +149,7 @@ const FeaturesList = ({ listNumber, listText }) => {
       <span className="mr-5 flex h-[30px] w-full max-w-[30px] items-center justify-center rounded-full bg-primary text-sm font-semibold text-white">
         {listNumber}
       </span>
-      <p className="text-base leading-relaxed text-body-color dark:text-dark-6">
-        {listText}
-      </p>
+      <p className="text-base leading-relaxed text-body-color dark:text-dark-6">{listText}</p>
     </div>
   );
 };

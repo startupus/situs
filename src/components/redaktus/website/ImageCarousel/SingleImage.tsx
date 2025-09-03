@@ -1,11 +1,11 @@
-import React from 'react'
-import { Image } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
+import React from 'react';
+import { Image } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 export interface SingleImageProps {
-  image?: any
-  altText?: string
+  image?: any;
+  altText?: string;
 }
 
 const SingleImage: types.Brick<SingleImageProps> = () => {
@@ -19,8 +19,8 @@ const SingleImage: types.Brick<SingleImageProps> = () => {
         imageClassName="object-cover object-center transition-all duration-300"
       />
     </div>
-  )
-}
+  );
+};
 
 SingleImage.schema = {
   name: blockNames.SingleImage,
@@ -28,6 +28,6 @@ SingleImage.schema = {
   category: 'rb-ui website',
   hideFromAddMenu: true,
   sideEditProps: [],
-}
+};
 
-export default SingleImage
+export default SingleImage;

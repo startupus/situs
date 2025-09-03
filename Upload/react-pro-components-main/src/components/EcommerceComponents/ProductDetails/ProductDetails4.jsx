@@ -37,10 +37,10 @@ const ProductDetails4 = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
-  };  
+  };
 
   return (
-    <section className="bg-white dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap justify-center">
           <div className="w-full px-4 xl:w-10/12">
@@ -68,7 +68,7 @@ const ProductDetails4 = () => {
                   } h-full min-h-[250px] w-full object-cover object-center`}
                 />
               </div>
-              <div className="shadow-testimonial-6 dark:shadow-box-dark absolute bottom-6 left-1/2 mx-auto inline-flex -translate-x-1/2 space-x-[6px] rounded-full bg-white dark:bg-dark-2 px-[18px] py-[10px]">
+              <div className="absolute bottom-6 left-1/2 mx-auto inline-flex -translate-x-1/2 space-x-[6px] rounded-full bg-white px-[18px] py-[10px] shadow-testimonial-6 dark:bg-dark-2 dark:shadow-box-dark">
                 <button
                   onClick={() => {
                     setProductOne(true);
@@ -77,7 +77,7 @@ const ProductDetails4 = () => {
                   }}
                   className={`${
                     productOne ? "w-[14px] opacity-100" : "w-2 opacity-30"
-                  } bg-primary h-2 rounded-full transition-all`}
+                  } h-2 rounded-full bg-primary transition-all`}
                 ></button>
                 <button
                   onClick={() => {
@@ -87,7 +87,7 @@ const ProductDetails4 = () => {
                   }}
                   className={`${
                     productTwo ? "w-[14px] opacity-100" : "w-2 opacity-30"
-                  } bg-primary h-2 rounded-full transition-all`}
+                  } h-2 rounded-full bg-primary transition-all`}
                 ></button>
                 <button
                   onClick={() => {
@@ -97,7 +97,7 @@ const ProductDetails4 = () => {
                   }}
                   className={`${
                     productThree ? "w-[14px] opacity-100" : "w-2 opacity-30"
-                  } bg-primary h-2 rounded-full transition-all`}
+                  } h-2 rounded-full bg-primary transition-all`}
                 ></button>
               </div>
             </div>
@@ -105,10 +105,10 @@ const ProductDetails4 = () => {
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 lg:w-8/12">
                 <div className="max-w-[570px]">
-                  <h3 className="mb-4 text-2xl font-bold text-dark dark:text-white sm:leading-[35px] sm:text-[28px]">
+                  <h3 className="mb-4 text-2xl font-bold text-dark dark:text-white sm:text-[28px] sm:leading-[35px]">
                     Men's Regular T-shirt
                   </h3>
-                  <p className="text-body-color dark:text-dark-6 mb-8 text-base">
+                  <p className="mb-8 text-base text-body-color dark:text-dark-6">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Morbi non erat quam. Vestibulum aliquam nibh dui, et aliquet
                     nibh euismod quis.
@@ -130,7 +130,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="32"
-                              className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
+                              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke text-base font-semibold text-primary dark:border-dark-3"
                             >
                               32
                             </label>
@@ -144,7 +144,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="36"
-                              className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
+                              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke text-base font-semibold text-primary dark:border-dark-3"
                             >
                               36
                             </label>
@@ -158,7 +158,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="40"
-                              className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
+                              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke text-base font-semibold text-primary dark:border-dark-3"
                             >
                               40
                             </label>
@@ -172,7 +172,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="42"
-                              className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
+                              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke text-base font-semibold text-primary dark:border-dark-3"
                             >
                               42
                             </label>
@@ -195,7 +195,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="black"
-                              className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full bg-dark dark:bg-dark-2 text-white"
+                              className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full bg-dark text-white dark:bg-dark-2"
                             >
                               <span className="opacity-0">
                                 <svg
@@ -222,7 +222,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="red"
-                              className="box bg-primary flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full text-white"
+                              className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full bg-primary text-white"
                             >
                               <span className="opacity-0">
                                 <svg
@@ -249,7 +249,7 @@ const ProductDetails4 = () => {
                             />
                             <label
                               htmlFor="blue"
-                              className="box bg-secondary flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full text-white"
+                              className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full bg-secondary text-white"
                             >
                               <span className="opacity-0">
                                 <svg
@@ -275,7 +275,7 @@ const ProductDetails4 = () => {
                         <h3 className="mb-1 text-4xl font-bold text-dark dark:text-white">
                           $159.00
                         </h3>
-                        <p className="text-body-color dark:text-dark-6 text-base font-medium">
+                        <p className="text-base font-medium text-body-color dark:text-dark-6">
                           Offer Available
                         </p>
                       </div>
@@ -311,7 +311,7 @@ const ProductDetails4 = () => {
                               </defs>
                             </svg>
                           </span>
-                          <span className="text-medium text-body-color dark:text-dark-6 text-base">
+                          <span className="text-medium text-base text-body-color dark:text-dark-6">
                             115 Reviews
                           </span>
                         </div>
@@ -326,26 +326,26 @@ const ProductDetails4 = () => {
                   <h4 className="mb-5 text-xl font-semibold text-dark dark:text-white">
                     Product Details
                   </h4>
-                  <p className="text-dark dark:text-white mb-3 flex text-base">
+                  <p className="mb-3 flex text-base text-dark dark:text-white">
                     <span className="w-24 font-medium"> Brand: </span>
                     <span> Nike </span>
                   </p>
-                  <p className="text-dark dark:text-white mb-3 flex text-base">
+                  <p className="mb-3 flex text-base text-dark dark:text-white">
                     <span className="w-24 font-medium"> Warranty: </span>
                     <span> 3 months </span>
                   </p>
-                  <p className="text-dark dark:text-white mb-3 flex text-base">
+                  <p className="mb-3 flex text-base text-dark dark:text-white">
                     <span className="w-24 font-medium"> Color: </span>
                     <span> Blue </span>
                   </p>
-                  <p className="text-dark dark:text-white mb-6 flex text-base">
+                  <p className="mb-6 flex text-base text-dark dark:text-white">
                     <span className="w-24 font-medium"> Size: </span>
                     <span> Medium </span>
                   </p>
                   <div className="flex">
-                    <p className="mr-4 mb-5 inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                      <span 
-                        className="cursor-pointer select-none flex items-center justify-center w-[34px] h-[42px] text-dark dark:text-white"
+                    <p className="mb-5 mr-4 inline-flex items-center rounded-sm border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
+                      <span
+                        className="flex h-[42px] w-[34px] cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                         onClick={decrement}
                       >
                         <svg
@@ -360,8 +360,8 @@ const ProductDetails4 = () => {
                         </svg>
                       </span>
                       <span className="px-3">{quantity}</span>
-                      <span 
-                        className="cursor-pointer select-none flex items-center justify-center w-[34px] h-[42px] text-dark dark:text-white"
+                      <span
+                        className="flex h-[42px] w-[34px] cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                         onClick={increment}
                       >
                         <svg
@@ -383,7 +383,7 @@ const ProductDetails4 = () => {
                         </svg>
                       </span>
                     </p>
-                    <button className="text-primary flex h-[42px] w-[42px] items-center justify-center rounded-sm border border-stroke dark:border-dark-3">
+                    <button className="flex h-[42px] w-[42px] items-center justify-center rounded-sm border border-stroke text-primary dark:border-dark-3">
                       <svg
                         width={20}
                         height={20}
@@ -396,7 +396,7 @@ const ProductDetails4 = () => {
                       </svg>
                     </button>
                   </div>
-                  <button className="bg-primary inline-flex items-center justify-center rounded-md py-[13px] px-10 text-center text-base font-medium text-white hover:bg-blue-dark">
+                  <button className="inline-flex items-center justify-center rounded-md bg-primary px-10 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark">
                     Add to Cart
                   </button>
                 </div>

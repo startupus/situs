@@ -45,7 +45,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = async (credentials: AuthCredentials) => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const authResponse = await usersApi.login(credentials);
       setUser(authResponse.user);
@@ -61,7 +61,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const register = async (userData: CreateUserData) => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const authResponse = await usersApi.register(userData);
       setUser(authResponse.user);
@@ -82,7 +82,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const updateProfile = async (profileData: any) => {
     setError(null);
-    
+
     try {
       const updatedUser = await usersApi.updateProfile(profileData);
       setUser(updatedUser);
@@ -95,7 +95,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const uploadAvatar = async (file: File) => {
     setError(null);
-    
+
     try {
       const result = await usersApi.uploadAvatar(file);
       if (user) {
@@ -103,8 +103,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           ...user,
           profile: {
             ...user.profile,
-            avatar: result.url
-          }
+            avatar: result.url,
+          },
         });
       }
     } catch (err) {
@@ -116,7 +116,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const changePassword = async (currentPassword: string, newPassword: string) => {
     setError(null);
-    
+
     try {
       await usersApi.changePassword(currentPassword, newPassword);
     } catch (err) {
@@ -135,14 +135,10 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     logout,
     updateProfile,
     uploadAvatar,
-    changePassword
+    changePassword,
   };
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export const useUser = (): UserContextType => {
@@ -151,4 +147,4 @@ export const useUser = (): UserContextType => {
     throw new Error('useUser must be used within a UserProvider');
   }
   return context;
-}; 
+};

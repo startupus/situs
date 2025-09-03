@@ -72,7 +72,7 @@ const CheckoutForm = () => {
                 <div key={index} className="w-full px-3 md:w-1/2">
                   <div className="mb-8">
                     <div className="relative">
-                      <select className="w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-[14px] text-dark-5 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2">
+                      <select className="outline-hidden w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-[14px] text-dark-5 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2">
                         {item.options.map((option, optionIndex) =>
                           option.index === 0 ? (
                             <option
@@ -116,7 +116,7 @@ const CheckoutForm = () => {
                     <textarea
                       rows="6"
                       placeholder={item.placeholder}
-                      className="w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
                     ></textarea>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ const CheckoutForm = () => {
                     <input
                       type={item.type}
                       placeholder={item.placeholder}
-                      className="w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
                     />
                   </div>
                 </div>

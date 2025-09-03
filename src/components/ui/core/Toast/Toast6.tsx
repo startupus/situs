@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Toast6() {
   return (
@@ -14,12 +14,8 @@ export default function Toast6() {
               />
             </div>
             <div className="w-full">
-              <h6 className="mb-0.5 text-base font-semibold text-dark dark:text-white sm:text-lg">
-                Devid Miller
-              </h6>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                Started following your
-              </p>
+              <h6 className="mb-0.5 text-base font-semibold text-dark dark:text-white sm:text-lg">Devid Miller</h6>
+              <p className="text-sm text-body-color dark:text-dark-6">Started following your</p>
             </div>
           </div>
           <div className="flex items-center">

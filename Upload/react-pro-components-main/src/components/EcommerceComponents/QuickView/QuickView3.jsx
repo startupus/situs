@@ -47,12 +47,12 @@ const QuickView3 = () => {
           <button
             ref={menuTrigger}
             onClick={() => setOpen(!open)}
-            className="rounded-md bg-primary py-3 px-7 text-base font-medium text-white hover:bg-blue-dark"
+            className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
           >
             Quick View
           </button>
           <div
-            className={`absolute top-0 left-0 min-h-screen w-full bg-gray-2 dark:bg-dark py-20 lg:py-[120px] ${
+            className={`absolute left-0 top-0 min-h-screen w-full bg-gray-2 py-20 dark:bg-dark lg:py-[120px] ${
               !open && "hidden"
             } `}
           >
@@ -61,11 +61,11 @@ const QuickView3 = () => {
                 <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
                   <div
                     ref={menuRef}
-                    className="relative overflow-hidden border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-5 sm:p-8"
+                    className="relative overflow-hidden border border-stroke bg-white p-5 dark:border-dark-3 dark:bg-dark-2 sm:p-8"
                   >
                     <button
                       onClick={() => setOpen(false)}
-                      className="absolute right-7 top-7 flex items-center justify-center rounded-full text-body-color dark:text-dark-6 hover:text-primary"
+                      className="absolute right-7 top-7 flex items-center justify-center rounded-full text-body-color hover:text-primary dark:text-dark-6"
                     >
                       <svg
                         width={20}
@@ -90,11 +90,14 @@ const QuickView3 = () => {
                       />
 
                       <div className="w-full text-left lg:ml-10 lg:max-w-[390px]">
-                        <h3 className="mb-4 text-xl font-bold text-dark dark:text-white xl:leading-[40px] xl:text-[28px]">
+                        <h3 className="mb-4 text-xl font-bold text-dark dark:text-white xl:text-[28px] xl:leading-[40px]">
                           Leather Sneakers For Women
                         </h3>
                         <p className="mb-5 flex items-center text-base font-medium">
-                          <span className="pr-2 text-dark dark:text-white"> 5.0 </span>
+                          <span className="pr-2 text-dark dark:text-white">
+                            {" "}
+                            5.0{" "}
+                          </span>
                           <span className="pr-2">
                             <svg
                               width={20}
@@ -189,7 +192,7 @@ const QuickView3 = () => {
                                 />
                                 <label
                                   htmlFor="32"
-                                  className="inline-block cursor-pointer text-base font-medium text-dark dark:text-white border border-stroke dark:border-dark-3 py-1 px-3 hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer border border-stroke px-3 py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   32
                                 </label>
@@ -203,7 +206,7 @@ const QuickView3 = () => {
                                 />
                                 <label
                                   htmlFor="36"
-                                  className="inline-block cursor-pointer text-base font-medium text-dark dark:text-white border border-stroke dark:border-dark-3 py-1 px-3 hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer border border-stroke px-3 py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   36
                                 </label>
@@ -217,7 +220,7 @@ const QuickView3 = () => {
                                 />
                                 <label
                                   htmlFor="40"
-                                  className="inline-block cursor-pointer text-base font-medium text-dark dark:text-white border border-stroke dark:border-dark-3 py-1 px-3 hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer border border-stroke px-3 py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   40
                                 </label>
@@ -227,10 +230,10 @@ const QuickView3 = () => {
                         </div>
 
                         <div className="mb-9 pt-8">
-                          <button className="mb-3 flex w-full items-center justify-center bg-dark py-[10px] px-10 text-center text-base font-medium text-white hover:bg-dark/90">
+                          <button className="mb-3 flex w-full items-center justify-center bg-dark px-10 py-[10px] text-center text-base font-medium text-white hover:bg-dark/90">
                             Add to Beg
                           </button>
-                          <button className="flex w-full items-center justify-center border border-dark dark:border-white py-[9px] px-10 text-center text-base font-medium text-dark dark:text-white hover:bg-dark hover:text-white dark:hover:border-dark">
+                          <button className="flex w-full items-center justify-center border border-dark px-10 py-[9px] text-center text-base font-medium text-dark hover:bg-dark hover:text-white dark:border-white dark:text-white dark:hover:border-dark">
                             Add to Wishlist
                           </button>
                         </div>
@@ -300,7 +303,9 @@ const ImgBox = ({
                   setProductThree(false);
                 }}
                 className={`${
-                  productOne ? "border-primary" : "border-stroke dark:border-dark-3"
+                  productOne
+                    ? "border-primary"
+                    : "border-stroke dark:border-dark-3"
                 } w-full overflow-hidden border md:mb-5`}
               >
                 <img src={thumbnail1} alt="thumbnail-01" className="w-full" />
@@ -314,7 +319,9 @@ const ImgBox = ({
                   setProductThree(false);
                 }}
                 className={`${
-                  productTwo ? "border-primary" : "border-stroke dark:border-dark-3"
+                  productTwo
+                    ? "border-primary"
+                    : "border-stroke dark:border-dark-3"
                 } w-full overflow-hidden border md:mb-5`}
               >
                 <img src={thumbnail2} alt="thumbnail-01" className="w-full" />
@@ -328,7 +335,9 @@ const ImgBox = ({
                   setProductThree(true);
                 }}
                 className={`${
-                  productThree ? "border-primary" : "border-stroke dark:border-dark-3"
+                  productThree
+                    ? "border-primary"
+                    : "border-stroke dark:border-dark-3"
                 } w-full overflow-hidden border md:mb-5`}
               >
                 <img src={thumbnail3} alt="thumbnail-01" className="w-full" />

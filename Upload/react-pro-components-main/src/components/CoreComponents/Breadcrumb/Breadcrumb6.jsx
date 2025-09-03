@@ -2,15 +2,15 @@ import React from "react";
 
 const Breadcrumb6 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="w-full mb-8">
-          <div className="px-4 py-4 border rounded-lg border-light dark:border-dark-3 shadow-1 dark:shadow-card bg-tg-bg dark:bg-dark-2 sm:px-6 md:px-8 md:py-5">
+        <div className="mb-8 w-full">
+          <div className="rounded-lg border border-light bg-tg-bg px-4 py-4 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-card sm:px-6 md:px-8 md:py-5">
             <ul className="flex items-center">
               <li className="flex items-center">
                 <a
                   href="/#"
-                  className="flex items-center text-base font-medium hover:text-primary dark:hover:text-primary text-dark dark:text-white"
+                  className="flex items-center text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   <span className="pr-2">
                     <svg
@@ -48,7 +48,7 @@ const Breadcrumb6 = () => {
               <li className="flex items-center">
                 <a
                   href="/#"
-                  className="text-base font-medium text-body-color dark:text-dark-6 dark:hover:text-primary hover:text-primary"
+                  className="text-base font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                 >
                   Project
                 </a>

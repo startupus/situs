@@ -59,33 +59,33 @@ const productList = [
 const ProductGrid = () => {
   return (
     <>
-      <div className="flex flex-wrap -mx-4">
+      <div className="-mx-4 flex flex-wrap">
         {productList.map((item, index) => (
-          <div key={index} className="w-full h-full px-4 md:w-1/2 xl:w-1/3">
-            <div className="mb-10 overflow-hidden bg-white rounded-lg shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+          <div key={index} className="h-full w-full px-4 md:w-1/2 xl:w-1/3">
+            <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
               <div className="relative">
                 <img src={item.image} alt="product" className="w-full" />
                 {item.discount && (
-                  <span className="absolute inline-flex items-center justify-center px-3 py-1 text-sm font-semibold text-white rounded-sm bg-primary top-5 left-5">
+                  <span className="absolute left-5 top-5 inline-flex items-center justify-center rounded-sm bg-primary px-3 py-1 text-sm font-semibold text-white">
                     -50%
                   </span>
                 )}
                 {item.newItem && (
-                  <span className="absolute inline-flex items-center justify-center px-3 py-1 text-sm font-semibold text-white rounded-sm bg-secondary top-5 left-5">
+                  <span className="absolute left-5 top-5 inline-flex items-center justify-center rounded-sm bg-secondary px-3 py-1 text-sm font-semibold text-white">
                     New
                   </span>
                 )}
                 {item.hotItem && (
-                  <span className="absolute inline-flex items-center justify-center px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-sm top-5 left-5">
+                  <span className="absolute left-5 top-5 inline-flex items-center justify-center rounded-sm bg-red-600 px-3 py-1 text-sm font-semibold text-white">
                     Hot
                   </span>
                 )}
               </div>
-              <div className="px-5 pt-6 pb-8 text-center">
+              <div className="px-5 pb-8 pt-6 text-center">
                 <h3>
                   <Link
                     to={item.link}
-                    className="text-dark hover:text-primary xs:text-xl mb-[5px] block text-lg font-semibold dark:text-white"
+                    className="mb-[5px] block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl"
                   >
                     {item.title}
                   </Link>
@@ -93,7 +93,7 @@ const ProductGrid = () => {
                 <p className="text-lg font-medium text-dark dark:text-white">
                   {item.priceBeforeDiscount && (
                     <span>
-                      <span className="text-base line-through text-secondary-color dark:text-dark-6">
+                      <span className="text-base text-secondary-color line-through dark:text-dark-6">
                         {item.price}
                         {"  "}
                       </span>
@@ -102,7 +102,7 @@ const ProductGrid = () => {
                   )}
                   {!item.priceBeforeDiscount && item.price}
                 </p>
-                <div className="flex items-center justify-center gap-px pt-4 pb-6">
+                <div className="flex items-center justify-center gap-px pb-6 pt-4">
                   {[...Array(4).keys()].map((index) => (
                     <span key={index}>
                       <svg
@@ -136,7 +136,7 @@ const ProductGrid = () => {
                   </span>
                 </div>
                 <div className="text-center">
-                  <button className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-dark px-7">
+                  <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-dark">
                     {item.button}
                   </button>
                 </div>

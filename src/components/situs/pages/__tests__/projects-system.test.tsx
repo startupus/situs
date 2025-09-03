@@ -12,8 +12,8 @@ vi.mock('react-router-dom', async () => {
   return {
     ...actual,
     useLocation: () => ({
-      pathname: '/projects'
-    })
+      pathname: '/projects',
+    }),
   };
 });
 
@@ -34,11 +34,11 @@ vi.mock('../../../../api/services/sites.api', () => ({
             {
               id: 'startapus-home',
               title: 'Главная',
-              status: 'published'
-            }
-          ]
-        }
-      ]
+              status: 'published',
+            },
+          ],
+        },
+      ],
     }),
     createSite: vi.fn().mockResolvedValue({
       id: 'new-project',
@@ -48,9 +48,9 @@ vi.mock('../../../../api/services/sites.api', () => ({
       domain: 'new-project.situs.ru',
       createdAt: '2024-12-23T15:30:00Z',
       updatedAt: '2024-12-23T15:30:00Z',
-      pages: []
-    })
-  }
+      pages: [],
+    }),
+  },
 }));
 
 // Мокаем UserContext
@@ -63,9 +63,9 @@ vi.mock('../../../../contexts/UserContext', async () => {
         id: 'test-user',
         firstName: 'Test',
         lastName: 'User',
-        email: 'test@example.com'
-      }
-    })
+        email: 'test@example.com',
+      },
+    }),
   };
 });
 
@@ -73,11 +73,9 @@ const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <BrowserRouter>
       <UserProvider>
-        <SiteProvider>
-          {component}
-        </SiteProvider>
+        <SiteProvider>{component}</SiteProvider>
       </UserProvider>
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 };
 
@@ -88,7 +86,7 @@ describe('SitusProjects', () => {
 
   it('отображает заголовок страницы', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Проекты')).toBeInTheDocument();
       expect(screen.getByText('Управление всеми вашими проектами')).toBeInTheDocument();
@@ -97,7 +95,7 @@ describe('SitusProjects', () => {
 
   it('отображает демо-проект Стартапус', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Стартапус - Демо проект')).toBeInTheDocument();
       expect(screen.getByText('Демонстрационный проект')).toBeInTheDocument();
@@ -106,7 +104,7 @@ describe('SitusProjects', () => {
 
   it('отображает кнопку создания проекта', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Создать проект')).toBeInTheDocument();
     });
@@ -114,12 +112,12 @@ describe('SitusProjects', () => {
 
   it('открывает модальное окно при нажатии на кнопку создания проекта', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       const createButton = screen.getByText('Создать проект');
       fireEvent.click(createButton);
     });
-    
+
     await waitFor(() => {
       expect(screen.getByText('Создать новый проект')).toBeInTheDocument();
       expect(screen.getByText('Тип проекта')).toBeInTheDocument();
@@ -128,7 +126,7 @@ describe('SitusProjects', () => {
 
   it('отображает фильтры проектов', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Все')).toBeInTheDocument();
       expect(screen.getByText('Сайты')).toBeInTheDocument();
@@ -139,7 +137,7 @@ describe('SitusProjects', () => {
 
   it('отображает поиск проектов', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByPlaceholderText('Поиск проектов...')).toBeInTheDocument();
     });
@@ -147,7 +145,7 @@ describe('SitusProjects', () => {
 
   it('отображает боковое меню с разделами проектов', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Разделы проектов')).toBeInTheDocument();
       expect(screen.getByText('Выберите тип проекта для просмотра')).toBeInTheDocument();
@@ -162,7 +160,7 @@ describe('SitusProjects', () => {
 
   it('отображает быстрые действия', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Быстрые действия')).toBeInTheDocument();
       expect(screen.getAllByText('+ Создать проект')).toHaveLength(2); // В боковом меню и в основном контенте
@@ -171,7 +169,7 @@ describe('SitusProjects', () => {
 
   it('отображает статус проекта', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Активен')).toBeInTheDocument();
     });
@@ -179,7 +177,7 @@ describe('SitusProjects', () => {
 
   it('отображает URL проекта', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('startapus.com')).toBeInTheDocument();
     });
@@ -187,7 +185,7 @@ describe('SitusProjects', () => {
 
   it('отображает статистику проекта', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Посетители')).toBeInTheDocument();
       expect(screen.getByText('Заказы')).toBeInTheDocument();
@@ -197,10 +195,10 @@ describe('SitusProjects', () => {
 
   it('отображает кнопки действий для проекта', async () => {
     renderWithProviders(<SitusProjects />);
-    
+
     await waitFor(() => {
       expect(screen.getAllByText('Редактировать')).toHaveLength(1);
       expect(screen.getAllByText('Аналитика')).toHaveLength(1);
     });
   });
-}); 
+});

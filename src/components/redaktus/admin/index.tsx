@@ -1,6 +1,6 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Admin, Login } from 'redaktus/core'
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Admin, Login } from 'redaktus/core';
 
 const AdminLogin: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const AdminLogin: React.FC = () => {
       </Helmet>
       <Login />
     </Admin>
-  )
-}
+  );
+};
 
-export default AdminLogin
+export default AdminLogin;

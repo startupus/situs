@@ -17,18 +17,14 @@ interface CreateUserData {
   isActive: boolean;
 }
 
-const CreateUserForm: React.FC<CreateUserFormProps> = ({
-  isOpen,
-  onClose,
-  onSubmit
-}) => {
+const CreateUserForm: React.FC<CreateUserFormProps> = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState<CreateUserData>({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
     role: 'BUSINESS',
-    isActive: true
+    isActive: true,
   });
 
   const [errors, setErrors] = useState<Partial<CreateUserData>>({});
@@ -38,7 +34,7 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
     { value: 'BUSINESS', label: 'Бизнес' },
     { value: 'AGENCY', label: 'Агентство' },
     { value: 'STAFF', label: 'Сотрудник' },
-    { value: 'SUPER_ADMIN', label: 'Супер Админ' }
+    { value: 'SUPER_ADMIN', label: 'Супер Админ' },
   ];
 
   const validateForm = (): boolean => {
@@ -70,7 +66,7 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -91,37 +87,31 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
       password: '',
       confirmPassword: '',
       role: 'BUSINESS',
-      isActive: true
+      isActive: true,
     });
     setErrors({});
     setIsSubmitting(false);
     onClose();
   };
 
-  const handleInputChange = (field: keyof CreateUserData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: e.target.value
-    }));
-    
-    // Очищаем ошибку при изменении поля
-    if (errors[field]) {
-      setErrors(prev => ({
+  const handleInputChange =
+    (field: keyof CreateUserData) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setFormData((prev) => ({
         ...prev,
-        [field]: undefined
+        [field]: e.target.value,
       }));
-    }
-  };
+
+      // Очищаем ошибку при изменении поля
+      if (errors[field]) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: undefined,
+        }));
+      }
+    };
 
   return (
-    <ThemeModal
-      isOpen={isOpen}
-      onClose={handleClose}
-      title="Создать нового пользователя"
-      size="md"
-    >
+    <ThemeModal isOpen={isOpen} onClose={handleClose} title="Создать нового пользователя" size="md">
       <ThemeForm onSubmit={handleSubmit}>
         <ThemeInput
           label="Полное имя"
@@ -175,7 +165,7 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
             type="checkbox"
             id="isActive"
             checked={formData.isActive}
-            onChange={(e) => setFormData(prev => ({ ...prev, isActive: e.target.checked }))}
+            onChange={(e) => setFormData((prev) => ({ ...prev, isActive: e.target.checked }))}
             className="rounded border-gray-300 text-primary focus:ring-primary"
           />
           <label htmlFor="isActive" className="ml-2 text-sm text-gray-700 dark:text-gray-300">
@@ -184,18 +174,10 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
         </div>
 
         <div className="flex justify-end space-x-4 mt-6">
-          <ThemeButton
-            variant="outline"
-            onClick={handleClose}
-            disabled={isSubmitting}
-          >
+          <ThemeButton variant="outline" onClick={handleClose} disabled={isSubmitting}>
             Отмена
           </ThemeButton>
-          <ThemeButton
-            type="submit"
-            disabled={isSubmitting}
-            icon={<FiUser className="w-4 h-4" />}
-          >
+          <ThemeButton type="submit" disabled={isSubmitting} icon={<FiUser className="w-4 h-4" />}>
             {isSubmitting ? 'Создание...' : 'Создать пользователя'}
           </ThemeButton>
         </div>

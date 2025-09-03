@@ -1,11 +1,6 @@
 // src/components/ui/ThemeTags.tsx
 import React from 'react';
-import { 
-  Tag1,
-  Tag2,
-  Tag3,
-  Tag4
-} from './core';
+import { Tag1, Tag2, Tag3, Tag4 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Tag Variants с поддержкой темы

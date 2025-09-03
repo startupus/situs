@@ -7,22 +7,15 @@ interface ToggleSwitchProps {
   size?: 'sm' | 'md';
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ 
-  checked, 
-  onChange, 
-  disabled = false,
-  size = 'sm'
-}) => {
-  const sizeClasses = size === 'sm' 
-    ? 'h-5 w-9' 
-    : 'h-8 w-14';
-  
-  const dotSizeClasses = size === 'sm'
-    ? 'h-4 w-4 left-0.5 top-0.5'
-    : 'h-6 w-6 left-1 top-1';
+const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onChange, disabled = false, size = 'sm' }) => {
+  const sizeClasses = size === 'sm' ? 'h-5 w-9' : 'h-8 w-14';
+
+  const dotSizeClasses = size === 'sm' ? 'h-4 w-4 left-0.5 top-0.5' : 'h-6 w-6 left-1 top-1';
 
   return (
-    <label className={`flex cursor-pointer select-none items-center ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+    <label
+      className={`flex cursor-pointer select-none items-center ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+    >
       <div className="relative">
         <input
           type="checkbox"

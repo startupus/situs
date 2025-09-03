@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const QuickView2 = () => {
   const [open, setOpen] = useState(false);
@@ -9,17 +9,12 @@ const QuickView2 = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -38,16 +33,13 @@ const QuickView2 = () => {
           </button>
           <div
             className={`absolute top-0 left-0 min-h-screen w-full bg-gray-2 dark:bg-dark py-20 lg:py-[120px] ${
-              !open && "hidden"
+              !open && 'hidden'
             } `}
           >
             <div className="container mx-auto">
               <div className="-mx-4 flex justify-center">
                 <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
-                  <div
-                    ref={menuRef}
-                    className="relative overflow-hidden bg-white dark:bg-dark-2"
-                  >
+                  <div ref={menuRef} className="relative overflow-hidden bg-white dark:bg-dark-2">
                     <button
                       onClick={() => setOpen(false)}
                       className="absolute right-8 top-8 flex items-center justify-center rounded-full text-body-color dark:text-dark-6 hover:text-primary"
@@ -77,14 +69,11 @@ const QuickView2 = () => {
                           Winter Denim Jacket
                         </h3>
                         <p className="mb-6 text-base text-body-color dark:text-dark-6">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Praesent quis consequat nunc.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis consequat nunc.
                         </p>
                         <div className="mb-5 flex flex-wrap items-center">
                           <div className="mr-4 flex items-center">
-                            <p className="text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-                              $29.00
-                            </p>
+                            <p className="text-xl font-semibold text-dark dark:text-white sm:text-2xl">$29.00</p>
                           </div>
                           <div className="flex items-center">
                             <span className="pr-2">
@@ -112,25 +101,15 @@ const QuickView2 = () => {
                                 </defs>
                               </svg>
                             </span>
-                            <span className="text-base font-medium text-dark dark:text-white">
-                              {" "}
-                              In Stock{" "}
-                            </span>
+                            <span className="text-base font-medium text-dark dark:text-white"> In Stock </span>
                           </div>
                         </div>
 
                         <div className="mb-6">
-                          <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                            Color
-                          </h4>
+                          <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">Color</h4>
                           <div className="flex items-center gap-3">
                             <div className="relative">
-                              <input
-                                type="radio"
-                                name="productColor"
-                                id="color1"
-                                className="productColor sr-only"
-                              />
+                              <input type="radio" name="productColor" id="color1" className="productColor sr-only" />
                               <label
                                 htmlFor="color1"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-4 border-[#1CA1D6]"
@@ -139,12 +118,7 @@ const QuickView2 = () => {
                               </label>
                             </div>
                             <div className="relative">
-                              <input
-                                type="radio"
-                                name="productColor"
-                                id="color2"
-                                className="productColor sr-only"
-                              />
+                              <input type="radio" name="productColor" id="color2" className="productColor sr-only" />
                               <label
                                 htmlFor="color2"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-4 border-dark"
@@ -153,12 +127,7 @@ const QuickView2 = () => {
                               </label>
                             </div>
                             <div className="relative">
-                              <input
-                                type="radio"
-                                name="productColor"
-                                id="color3"
-                                className="productColor sr-only"
-                              />
+                              <input type="radio" name="productColor" id="color3" className="productColor sr-only" />
                               <label
                                 htmlFor="color3"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-4 border-[#8E6053]"
@@ -170,17 +139,10 @@ const QuickView2 = () => {
                         </div>
 
                         <div className="mb-8">
-                          <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                            Select Size
-                          </h4>
+                          <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">Select Size</h4>
                           <div className="flex items-center gap-3">
                             <div>
-                              <input
-                                type="radio"
-                                name="size"
-                                id="small"
-                                className="filter-size sr-only"
-                              />
+                              <input type="radio" name="size" id="small" className="filter-size sr-only" />
                               <label
                                 htmlFor="small"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-sm font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -189,12 +151,7 @@ const QuickView2 = () => {
                               </label>
                             </div>
                             <div>
-                              <input
-                                type="radio"
-                                name="size"
-                                id="medium"
-                                className="filter-size sr-only"
-                              />
+                              <input type="radio" name="size" id="medium" className="filter-size sr-only" />
                               <label
                                 htmlFor="medium"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-sm font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -203,12 +160,7 @@ const QuickView2 = () => {
                               </label>
                             </div>
                             <div>
-                              <input
-                                type="radio"
-                                name="size"
-                                id="large"
-                                className="filter-size sr-only"
-                              />
+                              <input type="radio" name="size" id="large" className="filter-size sr-only" />
                               <label
                                 htmlFor="large"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-sm font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -217,12 +169,7 @@ const QuickView2 = () => {
                               </label>
                             </div>
                             <div>
-                              <input
-                                type="radio"
-                                name="size"
-                                id="extraLarge"
-                                className="filter-size sr-only"
-                              />
+                              <input type="radio" name="size" id="extraLarge" className="filter-size sr-only" />
                               <label
                                 htmlFor="extraLarge"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-sm font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -231,12 +178,7 @@ const QuickView2 = () => {
                               </label>
                             </div>
                             <div>
-                              <input
-                                type="radio"
-                                name="size"
-                                id="extraExtraLarge"
-                                className="filter-size sr-only"
-                              />
+                              <input type="radio" name="size" id="extraExtraLarge" className="filter-size sr-only" />
                               <label
                                 htmlFor="extraExtraLarge"
                                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-sm font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"

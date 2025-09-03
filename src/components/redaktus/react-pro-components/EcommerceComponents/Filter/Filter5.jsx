@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Filter5 = () => {
-  const [view, setView] = useState("grid");
+  const [view, setView] = useState('grid');
   return (
     <>
       <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
@@ -13,8 +13,8 @@ const Filter5 = () => {
                   Our Newest Items
                 </h2>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  sit amet molestie nunc. Vestibulum tempus justo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet molestie nunc. Vestibulum tempus
+                  justo.
                 </p>
               </div>
             </div>
@@ -25,51 +25,64 @@ const Filter5 = () => {
               <div className="w-full px-4 md:w-9/12 lg:w-9/12 xl:w-8/12">
                 <div className="items-center sm:flex">
                   <div className="mb-4 mr-8 inline-flex items-center sm:block md:mb-0 lg:mr-5 lg:inline-flex xl:mr-8">
-                    <label
-                      htmlFor=""
-                      className="mr-4 text-base font-medium text-dark dark:text-white"
-                    >
+                    <label htmlFor="" className="mr-4 text-base font-medium text-dark dark:text-white">
                       Category
                     </label>
                     <div className="relative">
                       <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                        <option value="" className="dark:bg-dark-2">Jacket</option>
-                        <option value="" className="dark:bg-dark-2">T-Shirt</option>
-                        <option value="" className="dark:bg-dark-2">Trousers</option>
-                        <option value="" className="dark:bg-dark-2">Kitwears</option>
+                        <option value="" className="dark:bg-dark-2">
+                          Jacket
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          T-Shirt
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          Trousers
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          Kitwears
+                        </option>
                       </select>
                       <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-body-color"></span>
                     </div>
                   </div>
                   <div className="mb-4 mr-8 inline-flex items-center sm:block md:mb-0 lg:mr-5 lg:inline-flex xl:mr-8">
-                    <label
-                      htmlFor=""
-                      className="mr-4 text-base font-medium text-dark dark:text-white"
-                    >
+                    <label htmlFor="" className="mr-4 text-base font-medium text-dark dark:text-white">
                       Size
                     </label>
                     <div className="relative">
                       <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                        <option value="" className="dark:bg-dark-2">Small</option>
-                        <option value="" className="dark:bg-dark-2">Medium</option>
-                        <option value="" className="dark:bg-dark-2">Large</option>
-                        <option value="" className="dark:bg-dark-2">Extra Large</option>
+                        <option value="" className="dark:bg-dark-2">
+                          Small
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          Medium
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          Large
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          Extra Large
+                        </option>
                       </select>
                       <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-body-color"></span>
                     </div>
                   </div>
                   <div className="mb-4 inline-flex items-center sm:block md:mb-0 lg:inline-flex">
-                    <label
-                      htmlFor=""
-                      className="mr-4 text-base font-medium text-dark dark:text-white"
-                    >
+                    <label htmlFor="" className="mr-4 text-base font-medium text-dark dark:text-white">
                       Color
                     </label>
                     <div className="relative">
                       <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                        <option value="" className="dark:bg-dark-2">Blue</option>
-                        <option value="" className="dark:bg-dark-2">Black</option>
-                        <option value="" className="dark:bg-dark-2">White</option>
+                        <option value="" className="dark:bg-dark-2">
+                          Blue
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          Black
+                        </option>
+                        <option value="" className="dark:bg-dark-2">
+                          White
+                        </option>
                       </select>
                       <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-body-color"></span>
                     </div>
@@ -79,13 +92,7 @@ const Filter5 = () => {
               <div className="w-full px-4 md:w-3/12 lg:w-3/12 xl:w-4/12">
                 <div className="flex items-center space-x-4 md:justify-end">
                   <div>
-                    <input
-                      type="radio"
-                      name="view"
-                      id="1"
-                      className="peer sr-only"
-                      defaultChecked
-                    />
+                    <input type="radio" name="view" id="1" className="peer sr-only" defaultChecked />
                     <label
                       htmlFor="1"
                       className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-sm border border-stroke bg-white text-body-color peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white dark:border-dark-3 dark:bg-white/5 dark:text-dark-6`}
@@ -119,12 +126,7 @@ const Filter5 = () => {
                   </div>
 
                   <div>
-                    <input
-                      type="radio"
-                      name="view"
-                      id="2"
-                      className="peer sr-only"
-                    />
+                    <input type="radio" name="view" id="2" className="peer sr-only" />
                     <label
                       htmlFor="2"
                       className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-sm border border-stroke bg-white text-body-color peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white dark:border-dark-3 dark:bg-white/5 dark:text-dark-6`}

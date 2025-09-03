@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Hero13 = () => {
   return (
@@ -23,8 +23,8 @@ const Hero13 = () => {
                   Grow your website traffic with TailGrids.
                 </h1>
                 <p className="mb-9 text-base text-white">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  posuere arcu sit amet ligula feugiat eleifend.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin posuere arcu sit amet ligula feugiat
+                  eleifend.
                 </p>
                 <ul className="flex flex-wrap items-center gap-3">
                   <li>
@@ -72,13 +72,7 @@ const Hero13 = () => {
                 <div className="mb-6 flex items-center space-x-4">
                   <button className="flex h-[50px] w-[50px] items-center justify-center rounded-md border border-stroke bg-transparent text-sm font-medium text-body-color shadow-btn-2 dark:border-dark-3 dark:text-dark-6 sm:w-auto sm:px-7">
                     <span className="sm:pr-3">
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_1416_409)">
                           <path
                             d="M18 9.19932C18.0109 8.58059 17.9457 7.96284 17.806 7.35938H9.18372V10.6993H14.2449C14.149 11.2849 13.9333 11.8455 13.6106 12.3473C13.288 12.8491 12.8651 13.2818 12.3674 13.6193L12.3497 13.7311L15.0761 15.8009L15.2649 15.8194C16.9995 14.2493 17.9997 11.9393 17.9997 9.19932"
@@ -104,18 +98,10 @@ const Hero13 = () => {
                         </defs>
                       </svg>
                     </span>
-                    <span className="hidden sm:inline-flex">
-                      Sign up with Google
-                    </span>
+                    <span className="hidden sm:inline-flex">Sign up with Google</span>
                   </button>
                   <button className="flex h-[50px] w-[50px] items-center justify-center rounded-md bg-[#03A9F4]">
-                    <svg
-                      width="23"
-                      height="18"
-                      viewBox="0 0 23 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clipPath="url(#clip0_1416_400)">
                         <path
                           d="M22.8462 2.13028C21.9868 2.49377 21.0779 2.73537 20.1474 2.84761C21.128 2.28345 21.8611 1.39009 22.2078 0.336823C21.2899 0.86471 20.2857 1.2365 19.2386 1.43611C18.5964 0.77076 17.7626 0.308154 16.8457 0.108441C15.9287 -0.0912717 14.971 -0.0188534 14.0971 0.31628C13.2232 0.651413 12.4734 1.23376 11.9454 1.9876C11.4173 2.74144 11.1353 3.63191 11.1361 4.54322C11.1325 4.89097 11.1689 5.23803 11.2447 5.57795C9.38141 5.48937 7.55838 5.02044 5.89479 4.20183C4.23121 3.38322 2.76452 2.23336 1.59061 0.82742C0.987918 1.82652 0.801149 3.011 1.06842 4.13909C1.3357 5.26719 2.03687 6.25384 3.02882 6.89768C2.28774 6.87826 1.56234 6.68639 0.913726 6.33825V6.38774C0.914945 7.43656 1.28875 8.45295 1.97222 9.26583C2.6557 10.0787 3.6071 10.6384 4.66629 10.8508C4.26559 10.9532 3.85262 11.0035 3.43824 11.0004C3.1407 11.0055 2.84345 10.9795 2.55166 10.9228C2.85437 11.8242 3.43776 12.6124 4.22154 13.179C5.00531 13.7456 5.95093 14.0627 6.92822 14.0866C5.27035 15.3438 3.22573 16.0259 1.12111 16.0238C0.74641 16.0262 0.371941 16.0053 0 15.9612C2.14164 17.2995 4.63724 18.0074 7.18501 17.9994C15.8036 17.9994 20.5158 11.0764 20.5158 5.07543C20.5158 4.87456 20.5086 4.68088 20.4986 4.48833C21.4225 3.84724 22.218 3.04815 22.8462 2.13028Z"
@@ -130,13 +116,7 @@ const Hero13 = () => {
                     </svg>
                   </button>
                   <button className="flex h-[50px] w-[50px] items-center justify-center rounded-md bg-[#0080FF]">
-                    <svg
-                      width="10"
-                      height="20"
-                      viewBox="0 0 10 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="10" height="20" viewBox="0 0 10 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clipPath="url(#clip0_1416_404)">
                         <path
                           d="M6.4908 19.9982V10.8773H9.43911L9.88051 7.3228H6.4908V5.05333C6.4908 4.02423 6.76604 3.32284 8.18733 3.32284L10 3.32197V0.14284C9.68636 0.0996795 8.61042 0.00292969 7.35864 0.00292969C4.74517 0.00292969 2.95593 1.65936 2.95593 4.70148V7.3229H0V10.8774H2.95584V19.9983L6.4908 19.9982Z"
@@ -161,32 +141,17 @@ const Hero13 = () => {
                   <div className="-mx-2 flex flex-wrap">
                     <div className="w-full px-2 sm:w-1/2">
                       <div className="mb-4">
-                        <InputBox
-                          labelTitle="Full Name"
-                          type="text"
-                          name="name"
-                          placeholder=""
-                        />
+                        <InputBox labelTitle="Full Name" type="text" name="name" placeholder="" />
                       </div>
                     </div>
                     <div className="w-full px-2 sm:w-1/2">
                       <div className="mb-4">
-                        <InputBox
-                          labelTitle="Email address"
-                          type="email"
-                          name="email"
-                          placeholder=""
-                        />
+                        <InputBox labelTitle="Email address" type="email" name="email" placeholder="" />
                       </div>
                     </div>
                     <div className="w-full px-2">
                       <div className="mb-6">
-                        <InputBox
-                          labelTitle="Password"
-                          type="password"
-                          name="password"
-                          placeholder=""
-                        />
+                        <InputBox labelTitle="Password" type="password" name="password" placeholder="" />
                       </div>
                     </div>
                     <div className="w-full px-2">
@@ -213,10 +178,7 @@ export default Hero13;
 const InputBox = ({ labelTitle, type, name, placeholder }) => {
   return (
     <>
-      <label
-        htmlFor={name}
-        className="mb-2 block text-base font-medium text-dark dark:text-white"
-      >
+      <label htmlFor={name} className="mb-2 block text-base font-medium text-dark dark:text-white">
         {labelTitle}
       </label>
       <input
@@ -250,7 +212,7 @@ const Navbar = () => {
               <button
                 onClick={() => setOpen(!open)}
                 className={` ${
-                  open && "navbarTogglerActive"
+                  open && 'navbarTogglerActive'
                 } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
               >
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
@@ -259,7 +221,7 @@ const Navbar = () => {
               </button>
               <nav
                 className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                  !open && "hidden"
+                  !open && 'hidden'
                 } `}
               >
                 <ul className="block lg:flex">

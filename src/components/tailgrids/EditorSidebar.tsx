@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
-import { FaSearch, FaFile, FaCube, FaHome, FaCircle, FaChevronDown, FaPlus, FaFolder, FaBlog, FaSun, FaMoon, FaChevronUp } from 'react-icons/fa';
+import {
+  FaSearch,
+  FaFile,
+  FaCube,
+  FaHome,
+  FaCircle,
+  FaChevronDown,
+  FaPlus,
+  FaFolder,
+  FaBlog,
+  FaSun,
+  FaMoon,
+  FaChevronUp,
+} from 'react-icons/fa';
 import { useInterfaceTheme } from '../../hooks/useInterfaceTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import LanguageSwitcher from '../LanguageSwitcher';
@@ -29,19 +42,12 @@ interface PageItemProps {
   onClick?: () => void;
 }
 
-const NavSection: React.FC<NavSectionProps> = ({ 
-  title, 
-  icon, 
-  count, 
-  submenu = false, 
-  expanded = false, 
-  children 
-}) => {
+const NavSection: React.FC<NavSectionProps> = ({ title, icon, count, submenu = false, expanded = false, children }) => {
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   return (
     <li>
-      <button 
+      <button
         onClick={() => submenu && setIsExpanded(!isExpanded)}
         className="w-full flex items-center justify-between py-1 px-2 text-xs font-medium rounded-sm hover:bg-primary/5 transition-colors"
         style={{ color: 'var(--interface-text)' }}
@@ -50,11 +56,11 @@ const NavSection: React.FC<NavSectionProps> = ({
           <span style={{ color: 'var(--interface-text, #64748b)' }}>{icon}</span>
           <span className="font-inter">{title}</span>
           {count !== undefined && (
-            <span 
+            <span
               className="text-xs px-1.5 py-0.5 rounded-full"
-              style={{ 
+              style={{
                 backgroundColor: 'var(--interface-border, #e5e7eb)',
-                color: 'var(--interface-text-muted, #6b7280)'
+                color: 'var(--interface-text-muted, #6b7280)',
               }}
             >
               {count}
@@ -67,11 +73,7 @@ const NavSection: React.FC<NavSectionProps> = ({
           </span>
         )}
       </button>
-      {submenu && isExpanded && children && (
-        <ul className="ml-4 mt-1 space-y-1">
-          {children}
-        </ul>
-      )}
+      {submenu && isExpanded && children && <ul className="ml-4 mt-1 space-y-1">{children}</ul>}
     </li>
   );
 };
@@ -79,7 +81,7 @@ const NavSection: React.FC<NavSectionProps> = ({
 const PageItem: React.FC<PageItemProps> = ({ page, active = false, onClick }) => {
   const getPageIcon = (pageType: string, isHomePage: boolean) => {
     if (isHomePage) return <FaHome size={10} />;
-    
+
     switch (pageType.toLowerCase()) {
       case 'blog':
         return <FaBlog size={10} />;
@@ -93,31 +95,27 @@ const PageItem: React.FC<PageItemProps> = ({ page, active = false, onClick }) =>
       <button
         onClick={onClick}
         className={`w-full flex items-center gap-2 py-1 px-2 text-xs rounded-sm transition-colors font-inter ${
-          active 
-            ? 'text-primary bg-primary/10' 
-            : 'hover:bg-primary/5'
+          active ? 'text-primary bg-primary/10' : 'hover:bg-primary/5'
         }`}
         style={{
-          color: active 
-            ? 'var(--interface-primary, #1E40AF)'
-            : 'var(--interface-text, #64748b)'
+          color: active ? 'var(--interface-primary, #1E40AF)' : 'var(--interface-text, #64748b)',
         }}
       >
-        <span className="flex-shrink-0">
-          {getPageIcon(page.pageType, page.isHomePage)}
-        </span>
+        <span className="flex-shrink-0">{getPageIcon(page.pageType, page.isHomePage)}</span>
         <span className="flex-1 text-left truncate">{page.title}</span>
         {active && (
-          <span className="text-[10px] px-1 py-0.5 rounded-sm bg-primary/10" style={{color:'var(--interface-primary)'}}>
+          <span
+            className="text-[10px] px-1 py-0.5 rounded-sm bg-primary/10"
+            style={{ color: 'var(--interface-primary)' }}
+          >
             активная
           </span>
         )}
-        <FaCircle 
-          size={6} 
-          style={{ 
-            color: page.status === 'PUBLISHED' 
-              ? 'var(--interface-success, #10b981)' 
-              : 'var(--interface-warning, #f59e0b)' 
+        <FaCircle
+          size={6}
+          style={{
+            color:
+              page.status === 'PUBLISHED' ? 'var(--interface-success, #10b981)' : 'var(--interface-warning, #f59e0b)',
           }}
         />
       </button>
@@ -125,15 +123,19 @@ const PageItem: React.FC<PageItemProps> = ({ page, active = false, onClick }) =>
   );
 };
 
-const EditorSidebar: React.FC<EditorSidebarProps> = ({ 
+const EditorSidebar: React.FC<EditorSidebarProps> = ({
   availableBricks = [],
   project,
   currentPageId,
   onPageSelect,
   onCreatePage,
-  pages
+  pages,
 }) => {
-  const { theme: interfaceTheme, toggleTheme: toggleInterfaceTheme, resolvedTheme: interfaceResolvedTheme } = useInterfaceTheme();
+  const {
+    theme: interfaceTheme,
+    toggleTheme: toggleInterfaceTheme,
+    resolvedTheme: interfaceResolvedTheme,
+  } = useInterfaceTheme();
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'pages' | 'entities'>('pages');
   const [searchTerm, setSearchTerm] = useState('');
@@ -143,56 +145,52 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
     toggleInterfaceTheme();
   };
 
-  const allPages: PageData[] = (pages && pages.length > 0) ? pages : (project?.pages || []);
-  const filteredPages = allPages.filter(page => 
-    page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    page.slug.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || [];
+  const allPages: PageData[] = pages && pages.length > 0 ? pages : project?.pages || [];
+  const filteredPages =
+    allPages.filter(
+      (page) =>
+        page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        page.slug.toLowerCase().includes(searchTerm.toLowerCase()),
+    ) || [];
 
-  const groupedBricks = availableBricks.reduce((acc, brick) => {
-    const category = brick.category || 'General';
-    if (!acc[category]) acc[category] = [];
-    acc[category].push(brick);
-    return acc;
-  }, {} as Record<string, any[]>);
+  const groupedBricks = availableBricks.reduce(
+    (acc, brick) => {
+      const category = brick.category || 'General';
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(brick);
+      return acc;
+    },
+    {} as Record<string, any[]>,
+  );
 
   return (
-    <section 
+    <section
       className="redaktus-interface-panel h-full border-r w-64 flex flex-col transition-colors duration-200 bg-white dark:bg-dark border-stroke dark:border-dark-3"
       style={{
         backgroundColor: 'var(--interface-bg, var(--color-gray-50, #ffffff))',
         color: 'var(--interface-text, var(--color-body-color, #64748b))',
-        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))'
+        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))',
       }}
     >
       <div className="flex flex-col h-full">
         {/* Заголовок проекта */}
         {project && (
-          <div 
-            className="flex-shrink-0 p-3 border-b"
-            style={{ borderColor: 'var(--interface-border)' }}
-          >
-            <h2 
-              className="text-sm font-semibold font-inter truncate"
-              style={{ color: 'var(--interface-text)' }}
-            >
+          <div className="flex-shrink-0 p-3 border-b" style={{ borderColor: 'var(--interface-border)' }}>
+            <h2 className="text-sm font-semibold font-inter truncate" style={{ color: 'var(--interface-text)' }}>
               {project.name}
             </h2>
-            <p 
-              className="text-xs mt-1 truncate"
-              style={{ color: 'var(--interface-text-muted, #6b7280)' }}
-            >
-              {(pages?.length ?? project.pages?.length ?? 0)} страниц • {project.type}
+            <p className="text-xs mt-1 truncate" style={{ color: 'var(--interface-text-muted, #6b7280)' }}>
+              {pages?.length ?? project.pages?.length ?? 0} страниц • {project.type}
             </p>
           </div>
         )}
 
         {/* Навигационные табы */}
-        <div 
+        <div
           className="flex-shrink-0 p-1"
-          style={{ 
+          style={{
             backgroundColor: 'var(--interface-surface)',
-            borderColor: 'var(--interface-border)'
+            borderColor: 'var(--interface-border)',
           }}
         >
           <nav className="flex gap-1">
@@ -204,12 +202,12 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
                   : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                color: activeTab === 'pages' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'var(--interface-text, var(--color-body-color, #64748b))',
-                backgroundColor: activeTab === 'pages' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
-                  : 'transparent'
+                color:
+                  activeTab === 'pages'
+                    ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                    : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor:
+                  activeTab === 'pages' ? 'var(--interface-primary, var(--color-primary, #1E40AF))10' : 'transparent',
               }}
             >
               {t('editor.panels.pages')}
@@ -222,12 +220,14 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
                   : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                color: activeTab === 'entities' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'var(--interface-text, var(--color-body-color, #64748b))',
-                backgroundColor: activeTab === 'entities' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
-                  : 'transparent'
+                color:
+                  activeTab === 'entities'
+                    ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                    : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor:
+                  activeTab === 'entities'
+                    ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
+                    : 'transparent',
               }}
             >
               {t('editor.panels.entities')}
@@ -236,13 +236,10 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
         </div>
 
         {/* Поиск */}
-        <div 
-          className="p-2 border-b flex-shrink-0"
-          style={{ borderColor: 'var(--interface-border)' }}
-        >
+        <div className="p-2 border-b flex-shrink-0" style={{ borderColor: 'var(--interface-border)' }}>
           <div className="relative">
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder={activeTab === 'pages' ? 'Поиск страниц...' : t('editor.buttons.searchPage')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -250,14 +247,10 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
               style={{
                 backgroundColor: 'var(--interface-surface)',
                 color: 'var(--interface-text)',
-                borderColor: 'var(--interface-border)'
+                borderColor: 'var(--interface-border)',
               }}
             />
-            <FaSearch 
-              className="absolute left-2.5 top-2.5" 
-              size={14}
-              style={{ color: 'var(--interface-text)' }}
-            />
+            <FaSearch className="absolute left-2.5 top-2.5" size={14} style={{ color: 'var(--interface-text)' }} />
           </div>
         </div>
 
@@ -271,7 +264,7 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
                 className="w-full flex items-center gap-2 py-2 px-3 text-sm rounded-md border border-dashed transition-colors hover:bg-primary/5"
                 style={{
                   borderColor: 'var(--interface-border)',
-                  color: 'var(--interface-text)'
+                  color: 'var(--interface-text)',
                 }}
               >
                 <FaPlus size={12} />
@@ -281,9 +274,9 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
               {/* Список страниц */}
               {filteredPages.length > 0 ? (
                 <ul className="space-y-1">
-                  <NavSection 
-                    title="Страницы сайта" 
-                    icon={<FaFile size={12} />} 
+                  <NavSection
+                    title="Страницы сайта"
+                    icon={<FaFile size={12} />}
                     count={filteredPages.length}
                     submenu
                     expanded
@@ -300,29 +293,23 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
                 </ul>
               ) : project ? (
                 <div className="text-center py-8">
-                  <FaFile 
-                    size={24} 
+                  <FaFile
+                    size={24}
                     className="mx-auto mb-2 opacity-40"
                     style={{ color: 'var(--interface-text-muted)' }}
                   />
-                  <p 
-                    className="text-xs font-inter"
-                    style={{ color: 'var(--interface-text-muted)' }}
-                  >
+                  <p className="text-xs font-inter" style={{ color: 'var(--interface-text-muted)' }}>
                     {searchTerm ? 'Страницы не найдены' : 'Нет страниц'}
                   </p>
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <FaFolder 
-                    size={24} 
+                  <FaFolder
+                    size={24}
                     className="mx-auto mb-2 opacity-40"
                     style={{ color: 'var(--interface-text-muted)' }}
                   />
-                  <p 
-                    className="text-xs font-inter"
-                    style={{ color: 'var(--interface-text-muted)' }}
-                  >
+                  <p className="text-xs font-inter" style={{ color: 'var(--interface-text-muted)' }}>
                     Проект не загружен
                   </p>
                 </div>
@@ -331,17 +318,17 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
           ) : (
             <ul className="p-2 space-y-1">
               {Object.entries(groupedBricks).map(([category, bricks]) => (
-                <NavSection 
+                <NavSection
                   key={category}
-                  title={category} 
-                  icon={<FaCube size={12} />} 
+                  title={category}
+                  icon={<FaCube size={12} />}
                   count={bricks.length}
                   submenu
                   expanded
                 >
                   {bricks.map((brick, index) => (
                     <li key={index}>
-                      <button 
+                      <button
                         className="w-full flex items-center gap-2 py-1 px-2 text-xs rounded-sm hover:bg-primary/5 transition-colors font-inter"
                         style={{ color: 'var(--interface-text)' }}
                       >
@@ -357,7 +344,7 @@ const EditorSidebar: React.FC<EditorSidebarProps> = ({
         </nav>
 
         {/* Нижняя панель */}
-        <div 
+        <div
           className="flex-shrink-0 p-2 border-t flex items-center justify-between"
           style={{ borderColor: 'var(--interface-border)' }}
         >

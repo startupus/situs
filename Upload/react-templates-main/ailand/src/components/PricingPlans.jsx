@@ -91,8 +91,7 @@ const PricingPlans = () => {
 
               <span
                 onClick={() => setYearly(!yearly)}
-                className="flex h-8 w-14 cursor-pointer items-center rounded-full bg-dark px-0.5 py-1 duration-200
-              dark:bg-white"
+                className="flex h-8 w-14 cursor-pointer items-center rounded-full bg-dark px-0.5 py-1 duration-200 dark:bg-white"
               >
                 <span
                   className={`block aspect-square w-7 rounded-full bg-white duration-200 dark:bg-primary ${yearly ? "translate-x-6" : "translate-x-0"} `}
@@ -113,7 +112,7 @@ const PricingPlans = () => {
               {plans.map((item, index) => (
                 <div
                   key={index}
-                  className={`w-full max-w-[340px] rounded-xl border-2 ${item.popular ? "relative border-primary bg-white p-10 pt-[60px] shadow-md dark:bg-dark" : " border-transparent bg-gray-2 p-10 dark:bg-dark-2"}`}
+                  className={`w-full max-w-[340px] rounded-xl border-2 ${item.popular ? "relative border-primary bg-white p-10 pt-[60px] shadow-md dark:bg-dark" : "border-transparent bg-gray-2 p-10 dark:bg-dark-2"}`}
                 >
                   {item.popular && (
                     <span className="absolute left-1/2 top-0 inline-flex -translate-x-1/2 items-center justify-center rounded-b-lg bg-primary px-4 py-2 text-sm font-semibold text-white">

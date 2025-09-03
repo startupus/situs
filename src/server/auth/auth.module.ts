@@ -13,7 +13,7 @@ import { CommunicationModule } from '../communication/communication.module';
 
 /**
  * Модуль аутентификации
- * 
+ *
  * Обеспечивает:
  * - Регистрацию и вход пользователей
  * - JWT токены
@@ -37,13 +37,7 @@ import { CommunicationModule } from '../communication/communication.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    LocalStrategy,
-    JwtStrategy,
-    JwtAuthGuard,
-    LocalAuthGuard,
-  ],
+  providers: [AuthService, LocalStrategy, JwtStrategy, JwtAuthGuard, LocalAuthGuard],
   exports: [AuthService, JwtAuthGuard],
 })
 export class AuthModule {}

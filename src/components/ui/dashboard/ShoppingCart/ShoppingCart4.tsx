@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const ShoppingCart4 = () => {
   return (
     <section className="bg-white py-20 lg:py-[120px]">
       <div className="container mx-auto">
-        <h2 className="mb-12 text-2xl font-semibold text-black sm:text-3xl md:text-4xl xl:mb-16">
-          Shopping cart
-        </h2>
+        <h2 className="mb-12 text-2xl font-semibold text-black sm:text-3xl md:text-4xl xl:mb-16">Shopping cart</h2>
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-8/12">
             <div className="mb-5 space-y-10">
@@ -34,9 +32,7 @@ const ShoppingCart4 = () => {
           <div className="w-full px-4 lg:w-4/12">
             <div className="2xl:pl-8">
               <div>
-                <h3 className="mb-5 text-xl font-bold text-black">
-                  Apply Coupon to get discount!
-                </h3>
+                <h3 className="mb-5 text-xl font-bold text-black">Apply Coupon to get discount!</h3>
                 <form className="flex">
                   <input
                     type="email"
@@ -51,9 +47,7 @@ const ShoppingCart4 = () => {
               <div className="-mx-1 border-b border-[#e7e7e7] py-7">
                 <div className="mb-3 flex items-center justify-between">
                   <div className="px-1">
-                    <p className="text-base font-semibold text-black">
-                      Subtotal
-                    </p>
+                    <p className="text-base font-semibold text-black">Subtotal</p>
                   </div>
                   <div className="px-1">
                     <p className="text-base font-semibold text-black">$96.00</p>
@@ -61,9 +55,7 @@ const ShoppingCart4 = () => {
                 </div>
                 <div className="mb-3 flex items-center justify-between">
                   <div className="px-1">
-                    <p className="text-base font-medium text-black">
-                      Shipping Cost (+)
-                    </p>
+                    <p className="text-base font-medium text-black">Shipping Cost (+)</p>
                   </div>
                   <div className="px-1">
                     <p className="text-base font-semibold text-black">$14.00</p>
@@ -71,9 +63,7 @@ const ShoppingCart4 = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="px-1">
-                    <p className="text-base font-medium text-black">
-                      Discount (-)
-                    </p>
+                    <p className="text-base font-medium text-black">Discount (-)</p>
                   </div>
                   <div className="px-1">
                     <p className="text-base font-semibold text-black">$9.00</p>
@@ -82,9 +72,7 @@ const ShoppingCart4 = () => {
               </div>
               <div className="-mx-1 flex items-center justify-between pt-5 pb-6">
                 <div className="px-1">
-                  <p className="text-base font-medium text-black">
-                    Estimated Total
-                  </p>
+                  <p className="text-base font-medium text-black">Estimated Total</p>
                 </div>
                 <div className="px-1">
                   <p className="text-base font-semibold text-black">$110.00</p>
@@ -112,20 +100,13 @@ const CartItem = ({ img, link, title, size, color, price, stock }) => {
   return (
     <div className="justify-between last:border-none border-b border-[#e7e7e7] pb-10 md:flex">
       <div className="mr-7 mb-6 h-[180px] w-full max-w-[150px] md:mb-0">
-        <img
-          src={img}
-          alt="product"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="product" className="h-full w-full object-cover object-center" />
       </div>
       <div className="flex w-full flex-col justify-between">
         <div className="mb-4 w-full justify-between sm:flex">
           <div className="mr-4 mb-4">
             <h3>
-              <a
-                href={link}
-                className="hover:text-primary block text-lg font-semibold text-black sm:text-xl"
-              >
+              <a href={link} className="hover:text-primary block text-lg font-semibold text-black sm:text-xl">
                 {title}
               </a>
             </h3>
@@ -138,9 +119,7 @@ const CartItem = ({ img, link, title, size, color, price, stock }) => {
             <p className="text-xl font-semibold text-black">{price}</p>
           </div>
           <div className="mr-4">
-            <label className="mb-1 block text-base font-medium text-black">
-              Quantity
-            </label>
+            <label className="mb-1 block text-base font-medium text-black">Quantity</label>
             <div className="relative inline-block">
               <select className="border-form-stroke text-body-color focus:border-primary active:border-primary w-full appearance-none border py-1 pl-4 pr-7 text-sm font-semibold outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]">
                 <option value="">1</option>

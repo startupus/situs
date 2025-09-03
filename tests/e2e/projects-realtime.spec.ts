@@ -32,15 +32,26 @@ test.describe('Projects realtime sync (SSE)', () => {
 
     // Дожидаемся handshake SSE в обоих контекстах для надёжности
     const waitHandshake = async (p: any) => {
-      await p.addInitScript(() => { (window as any).__situsEventLog = []; });
-      await expect.poll(async () => {
-        const tail = await p.evaluate(() => (window as any).__situsEventLog?.slice(-10) || []);
-        return tail.some((e: any) => {
-          const dataStr = e?.data;
-          if (!dataStr || typeof dataStr !== 'string') return false;
-          try { return JSON.parse(dataStr)?.type === 'sse_connected'; } catch { return false; }
-        });
-      }, { timeout: 8000 }).toBe(true);
+      await p.addInitScript(() => {
+        (window as any).__situsEventLog = [];
+      });
+      await expect
+        .poll(
+          async () => {
+            const tail = await p.evaluate(() => (window as any).__situsEventLog?.slice(-10) || []);
+            return tail.some((e: any) => {
+              const dataStr = e?.data;
+              if (!dataStr || typeof dataStr !== 'string') return false;
+              try {
+                return JSON.parse(dataStr)?.type === 'sse_connected';
+              } catch {
+                return false;
+              }
+            });
+          },
+          { timeout: 8000 },
+        )
+        .toBe(true);
     };
     await Promise.all([waitHandshake(pageA), waitHandshake(pageB)]);
 
@@ -62,5 +73,3 @@ test.describe('Projects realtime sync (SSE)', () => {
     await Promise.all([contextA.close(), contextB.close()]);
   });
 });
-
-

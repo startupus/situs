@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 const VerticalNavbar4 = () => {
   return (
     <section className="h-screen bg-white">
-      <div className="shadow-card bg-gray-2 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll">
+      <div className="flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-gray-2 shadow-card">
         <div>
-          <div className="px-10 pt-10 pb-9">
+          <div className="px-10 pb-9 pt-10">
             <a href="/#">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo.svg"
@@ -325,8 +325,8 @@ const VerticalNavbar4 = () => {
           </nav>
         </div>
 
-        <div className="py-10 px-6">
-          <div className="shadow-three flex items-center rounded-lg bg-white p-4">
+        <div className="px-6 py-10">
+          <div className="flex items-center rounded-lg bg-white p-4 shadow-three">
             <div className="mr-4 h-[50px] w-full max-w-[50px] rounded-full">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-05.jpg"
@@ -389,12 +389,12 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`${
           dropdownOpen ? "bg-primary text-white" : ""
-        } text-body-color hover:bg-primary group relative mb-[2px] flex items-center rounded py-[10px] px-4 text-base font-medium duration-200 hover:text-white`}
+        } group relative mb-[2px] flex items-center rounded px-4 py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white`}
       >
         <span className="pr-[10px]">{icon}</span>
         {menu}
         {message && (
-          <span className="bg-primary group-hover:text-primary ml-4 rounded-full py-1 px-[10px] text-xs font-semibold text-white group-hover:bg-white">
+          <span className="ml-4 rounded-full bg-primary px-[10px] py-1 text-xs font-semibold text-white group-hover:bg-white group-hover:text-primary">
             {message}
           </span>
         )}
@@ -402,7 +402,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
           <span
             className={`${
               dropdownOpen === true ? "rotate-0" : "rotate-180"
-            } absolute top-1/2 right-10 -translate-y-1/2`}
+            } absolute right-10 top-1/2 -translate-y-1/2`}
           >
             <svg
               width="20"

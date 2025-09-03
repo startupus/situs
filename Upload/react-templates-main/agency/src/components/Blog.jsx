@@ -25,23 +25,23 @@ const blogItems = [
 const Blog = () => {
   return (
     <>
-      <section className="bg-tg-bg dark:bg-dark-2 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+      <section className="bg-tg-bg pb-10 pt-20 dark:bg-dark-2 lg:pb-20 lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="relative z-10 w-full px-4">
               <div className="mb-[60px] max-w-[510px] lg:mb-20">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Latest News
                 </span>
-                <h2 className="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white">
+                <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Recent Blog Articles
                 </h2>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
               </div>
-              <div className="absolute top-0 right-4 z-[-1]">
+              <div className="absolute right-4 top-0 z-[-1]">
                 <ShapeEleven />
               </div>
             </div>
@@ -55,19 +55,19 @@ const Blog = () => {
                     <img src={item.image} alt="image" className="w-full" />
                   </div>
                   <div>
-                    <span className="text-primary mb-3 inline-block text-base font-semibold">
+                    <span className="mb-3 inline-block text-base font-semibold text-primary">
                       {item.subtitle}
                     </span>
                     <h3>
                       <Link
                         to="#"
-                        className="text-dark hover:text-primary mb-5 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                        className="mb-5 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                       >
                         {item.title}
                       </Link>
                     </h3>
                     <div className="flex items-center">
-                      <p className="text-body-color mr-8 flex items-center text-sm font-medium">
+                      <p className="mr-8 flex items-center text-sm font-medium text-body-color">
                         <span className="mr-3">
                           <svg
                             width="15"
@@ -88,7 +88,7 @@ const Blog = () => {
                         </span>
                         <span>{item.date}</span>
                       </p>
-                      <p className="text-body-color flex items-center text-sm font-medium">
+                      <p className="flex items-center text-sm font-medium text-body-color">
                         <span className="mr-3">
                           <svg
                             width="18"
@@ -110,7 +110,7 @@ const Blog = () => {
             ))}
 
             <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div className="bg-primary relative mx-auto mb-10 max-w-[370px] overflow-hidden rounded-sm px-11 py-[60px] text-center lg:px-8">
+              <div className="relative mx-auto mb-10 max-w-[370px] overflow-hidden rounded-sm bg-primary px-11 py-[60px] text-center lg:px-8">
                 <h3 className="mb-2 text-2xl font-semibold text-white">
                   Join our newsletter!
                 </h3>
@@ -121,7 +121,7 @@ const Blog = () => {
                   <input
                     type="email"
                     placeholder="Your email address"
-                    className="placeholder-opacity-60 mb-4 w-full rounded-sm border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white outline-hidden focus:border-white focus-visible:shadow-none"
+                    className="outline-hidden mb-4 w-full rounded-sm border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white placeholder-opacity-60 focus:border-white focus-visible:shadow-none"
                   />
                   <input
                     type="submit"
@@ -133,7 +133,7 @@ const Blog = () => {
                   Don&apos;t worry, we don&apos;t spam
                 </p>
                 <div>
-                  <span className="absolute top-0 right-0">
+                  <span className="absolute right-0 top-0">
                     <ShapeTwelve />
                   </span>
                   <span className="absolute bottom-0 left-0">

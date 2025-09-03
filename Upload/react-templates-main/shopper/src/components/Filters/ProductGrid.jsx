@@ -47,27 +47,27 @@ const ProductGrid = () => {
     <>
       {productList.map((item, index) => (
         <div key={index} className="w-full px-4 md:w-1/2">
-          <div className="border-stroke shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg border bg-white">
+          <div className="mb-10 overflow-hidden rounded-lg border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
             <div>
               <img src={item.image} alt="product" className="w-full" />
             </div>
             <div className="p-6">
               <Link
                 to={item.link}
-                className="text-dark hover:text-primary mb-3 block text-lg font-semibold xl:text-xl dark:text-white"
+                className="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white xl:text-xl"
               >
                 {item.title}
               </Link>
-              <p className="text-body-color dark:text-dark-6 text-base">
+              <p className="text-base text-body-color dark:text-dark-6">
                 {item.details}
               </p>
             </div>
-            <div className="border-stroke dark:border-dark-3 flex justify-between border-t">
-              <div className="xs:px-4 flex items-center px-3 py-4 lg:px-3 xl:px-4">
+            <div className="flex justify-between border-t border-stroke dark:border-dark-3">
+              <div className="flex items-center px-3 py-4 xs:px-4 lg:px-3 xl:px-4">
                 {[...Array(5).keys()].map((index) => (
                   <span className="mr-[2px]" key={index}>
                     <svg
-                      className="xs:h-4 xs:w-4 h-3 w-3 sm:h-5 sm:w-5 lg:h-3 lg:w-3 xl:h-5 xl:w-5"
+                      className="h-3 w-3 xs:h-4 xs:w-4 sm:h-5 sm:w-5 lg:h-3 lg:w-3 xl:h-5 xl:w-5"
                       viewBox="0 0 20 20"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -80,12 +80,12 @@ const ProductGrid = () => {
                   </span>
                 ))}
 
-                <span className="text-body-color pl-2 text-sm font-semibold">
+                <span className="pl-2 text-sm font-semibold text-body-color">
                   ({item.review}) Reviews
                 </span>
               </div>
-              <div className="border-stroke dark:border-dark-3 xs:px-4 border-l px-3 py-4 lg:px-3 xl:px-4">
-                <span className="text-body-color dark:text-dark-6 text-sm font-medium">
+              <div className="border-l border-stroke px-3 py-4 dark:border-dark-3 xs:px-4 lg:px-3 xl:px-4">
+                <span className="text-sm font-medium text-body-color dark:text-dark-6">
                   {item.price}
                 </span>
               </div>

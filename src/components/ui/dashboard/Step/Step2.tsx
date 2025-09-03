@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Step2 = () => {
   return (
@@ -37,23 +37,20 @@ const SingleStep = ({ number, title, details, done, ongoing }) => {
   return (
     <div className="group relative flex pb-16 md:pb-[90px]">
       <span
-        style={{ height: "calc(100% - 70px)" }}
+        style={{ height: 'calc(100% - 70px)' }}
         className={`${
-          done && "border-primary"
+          done && 'border-primary'
         } absolute left-6 top-[60px] w-[2px] border-l-2 border-dashed border-[#e7e7e7] group-last:border-none`}
       ></span>
       <div
         className={`${
-          (done && "border-primary bg-primary text-white") ||
-          (ongoing && "border-primary text-primary")
+          (done && 'border-primary bg-primary text-white') || (ongoing && 'border-primary text-primary')
         } mr-4 flex h-11 w-full max-w-[44px] items-center justify-center rounded-full border border-[#e7e7e7] bg-gray text-base font-semibold text-black md:mr-9 md:h-[50px] md:max-w-[50px] md:text-xl`}
       >
         {number}
       </div>
       <div className="w-full">
-        <h3 className="mb-[10px] text-lg font-semibold text-black md:text-2xl">
-          {title}
-        </h3>
+        <h3 className="mb-[10px] text-lg font-semibold text-black md:text-2xl">{title}</h3>
         <p className="text-base font-medium text-body-color">{details}</p>
       </div>
     </div>

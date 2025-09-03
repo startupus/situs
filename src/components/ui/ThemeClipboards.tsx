@@ -1,11 +1,6 @@
 // src/components/ui/ThemeClipboards.tsx
 import React from 'react';
-import { 
-  Clipboard1,
-  Clipboard2,
-  Clipboard3,
-  Clipboard4
-} from './core';
+import { Clipboard1, Clipboard2, Clipboard3, Clipboard4 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Clipboard Variants с поддержкой темы

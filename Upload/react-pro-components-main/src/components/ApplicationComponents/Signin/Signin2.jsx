@@ -40,10 +40,7 @@ const Signin2 = () => {
                   <p className="mb-2 text-base text-body-color dark:text-dark-6">
                     <span className="pr-0.5"> Not a member yet? </span>
 
-                    <a
-                      href="/#"
-                      className="text-primary hover:underline"
-                    >
+                    <a href="/#" className="text-primary hover:underline">
                       Sign Up
                     </a>
                   </p>
@@ -186,7 +183,7 @@ const InputBox = ({ type, name, labelTitle }) => {
       <input
         type={type}
         name={name}
-        className="w-full rounded-md border border-[#E9EDF4] bg-transparent px-5 py-3 text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
+        className="outline-hidden w-full rounded-md border border-[#E9EDF4] bg-transparent px-5 py-3 text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
       />
     </div>
   );

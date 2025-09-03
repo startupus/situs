@@ -66,9 +66,9 @@ const Pricing1: React.FC<Pricing1Props> = ({
   );
 };
 
-export default Pricing1;`
+export default Pricing1;`,
   },
-  
+
   {
     name: 'FAQ1',
     category: 'interactive',
@@ -149,23 +149,23 @@ const FAQ1: React.FC<FAQ1Props> = ({
   );
 };
 
-export default FAQ1;`
-  }
+export default FAQ1;`,
+  },
 ];
 
 // Создаем компоненты
 let created = 0;
 
-components.forEach(comp => {
+components.forEach((comp) => {
   const targetDir = `src/redactus-components/${comp.category}`;
-  
+
   // Создаем папку если не существует
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true });
   }
-  
+
   const filePath = path.join(targetDir, `${comp.name}.tsx`);
-  
+
   // Создаем файл если не существует
   if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, comp.content);
@@ -191,4 +191,4 @@ export type { FAQ1Props } from './FAQ1';`;
 fs.writeFileSync(indexPath, indexContent);
 console.log('📝 Создан/обновлен index.ts');
 
-console.log(`🎉 Быстрая миграция завершена! Создано ${created} компонентов`); 
+console.log(`🎉 Быстрая миграция завершена! Создано ${created} компонентов`);

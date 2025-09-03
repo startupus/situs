@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Wishlist2 = () => {
   return (
@@ -7,12 +7,8 @@ const Wishlist2 = () => {
         <div className="-mx-4 flex">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[575px] text-center">
-              <h2 className="mb-4 text-3xl font-semibold text-black sm:text-4xl">
-                Your Favorite Items
-              </h2>
-              <p className="text-body-color text-base font-medium md:text-lg">
-                There are 04 products in this list
-              </p>
+              <h2 className="mb-4 text-3xl font-semibold text-black sm:text-4xl">Your Favorite Items</h2>
+              <p className="text-body-color text-base font-medium md:text-lg">There are 04 products in this list</p>
             </div>
           </div>
         </div>
@@ -24,31 +20,31 @@ const Wishlist2 = () => {
                   <th
                     className={`min-w-[300px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
                   >
-                    {" "}
-                    Product Name{" "}
+                    {' '}
+                    Product Name{' '}
                   </th>
                   <th
                     className={`min-w-[180px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
                   >
-                    {" "}
-                    Unit Price{" "}
+                    {' '}
+                    Unit Price{' '}
                   </th>
                   <th
                     className={`min-w-[140px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
                   >
-                    {" "}
-                    Stock Status{" "}
+                    {' '}
+                    Stock Status{' '}
                   </th>
                   <th
                     className={`min-w-[150px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
                   >
-                    {" "}
-                    Action{" "}
+                    {' '}
+                    Action{' '}
                   </th>
                   <th
                     className={`min-w-[140px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
                   >
-                    {" "}
+                    {' '}
                   </th>
                 </tr>
               </thead>
@@ -90,25 +86,12 @@ const Wishlist2 = () => {
 
 export default Wishlist2;
 
-const TableDataRow = ({
-  img,
-  title,
-  subtitle,
-  link,
-  price,
-  prevPrice,
-  stock,
-  button,
-}) => {
+const TableDataRow = ({ img, title, subtitle, link, price, prevPrice, stock, button }) => {
   return (
     <tr>
       <td className="border-t p-4 xl:pl-11">
         <div className="flex items-center">
-          <img
-            src={img}
-            alt="image"
-            className="mr-4 h-[90px] w-[90px] rounded-full"
-          />
+          <img src={img} alt="image" className="mr-4 h-[90px] w-[90px] rounded-full" />
           <div>
             <h5 className="text-dark text-lg font-medium">
               <a href={link} className="hover:text-primary">
@@ -127,7 +110,7 @@ const TableDataRow = ({
       </td>
       <td className="border-t p-4">
         <span className="text-body-color text-lg font-medium">
-          {stock && "In"} Stock {!stock && "Out"}
+          {stock && 'In'} Stock {!stock && 'Out'}
         </span>
       </td>
       <td className="border-t p-4">
@@ -137,13 +120,7 @@ const TableDataRow = ({
       </td>
       <td className="border-t p-4 text-center xl:pr-11">
         <button className="text-body-color hover:text-red-600">
-          <svg
-            width="16"
-            height="20"
-            viewBox="0 0 16 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M13.8438 2.6875H10.8125V1.5625C10.8125 0.90625 10.2812 0.375 9.625 0.375H6.375C5.71875 0.40625 5.1875 0.90625 5.1875 1.5625V2.6875H2.15625C1.5 2.6875 0.96875 3.21875 0.96875 3.875V6.15625C0.96875 6.46875 1.21875 6.71875 1.53125 6.71875H2V17.3125C2 18.5938 3.0625 19.6563 4.34375 19.6563H11.6875C12.9688 19.6563 14.0312 18.5938 14.0312 17.3125V6.65625H14.5C14.8125 6.65625 15.0625 6.40625 15.0625 6.09375V3.8125C15 3.1875 14.5 2.6875 13.8438 2.6875ZM6.28125 1.5625C6.28125 1.53125 6.3125 1.46875 6.375 1.46875H9.625C9.65625 1.46875 9.71875 1.5 9.71875 1.5625V2.6875H6.28125V1.5625ZM2.09375 3.84375C2.09375 3.8125 2.125 3.75 2.1875 3.75H5.78125H10.2812H13.875C13.9062 3.75 13.9688 3.78125 13.9688 3.84375V5.5625H2.09375V3.84375ZM12.9062 17.2813C12.9062 17.9688 12.3438 18.5313 11.6562 18.5313H4.34375C3.65625 18.5313 3.09375 17.9688 3.09375 17.2813V6.65625H12.9375V17.2813H12.9062Z"
               fill="currentColor"

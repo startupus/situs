@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Patch,
-  Body,
-  Param,
-  UseGuards,
-  HttpException,
-  HttpStatus,
-  Request,
-} from '@nestjs/common';
+import { Controller, Patch, Body, Param, UseGuards, HttpException, HttpStatus, Request } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Request as ExpressRequest } from 'express';
 import { PageCategoriesService } from './page-categories.service';
@@ -26,11 +17,7 @@ export class PageCategoriesController {
     @Request() req: ExpressRequest,
   ) {
     try {
-      const result = await this.pageCategoriesService.assignCategories(
-        pageId,
-        assignDto,
-        (req as any).user.id,
-      );
+      const result = await this.pageCategoriesService.assignCategories(pageId, assignDto, (req as any).user.id);
       return { success: true, ...result };
     } catch (error: any) {
       throw new HttpException(

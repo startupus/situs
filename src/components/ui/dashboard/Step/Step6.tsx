@@ -1,22 +1,12 @@
-import React from "react";
+import React from 'react';
 
 const Step6 = () => {
   return (
     <section className="overflow-hidden py-20 lg:py-[120px]">
       <div className="mx-auto px-4 sm:container">
         <div className="flex flex-wrap gap-[30px]">
-          <SingleStep
-            done
-            number="Step 1"
-            name="Credit line Assignment"
-            status="Completed"
-          />
-          <SingleStep
-            inProgress
-            number="Step 2"
-            name="Bank Acceptance"
-            status="In Progress"
-          />
+          <SingleStep done number="Step 1" name="Credit line Assignment" status="Completed" />
+          <SingleStep inProgress number="Step 2" name="Bank Acceptance" status="In Progress" />
           <SingleStep number="Step 3" name="Bank Acceptance" status="Pending" />
         </div>
       </div>
@@ -31,16 +21,14 @@ const SingleStep = ({ number, name, status, done, inProgress }) => {
     <div className="w-full max-w-[210px]">
       <div
         className={`${
-          (done && "border-primary bg-primary") ||
-          (inProgress && "border-primary bg-gray") ||
-          "border-[#e7e7e7] bg-gray"
+          (done && 'border-primary bg-primary') ||
+          (inProgress && 'border-primary bg-gray') ||
+          'border-[#e7e7e7] bg-gray'
         } rounded-lg border p-[18px]`}
       >
         <div
           className={`${
-            (done && "bg-white text-primary") ||
-            (inProgress && "bg-primary text-white") ||
-            "text-body-color"
+            (done && 'bg-white text-primary') || (inProgress && 'bg-primary text-white') || 'text-body-color'
           } mb-[10px] flex h-[30px] w-[30px] items-center justify-center rounded-full border`}
         >
           <svg
@@ -61,27 +49,21 @@ const SingleStep = ({ number, name, status, done, inProgress }) => {
         </div>
         <span
           className={`${
-            (done && "text-white") ||
-            (inProgress && "text-black") ||
-            "text-body-color"
+            (done && 'text-white') || (inProgress && 'text-black') || 'text-body-color'
           } mb-1 block text-xs uppercase`}
         >
           {number}
         </span>
         <h3
           className={`${
-            (done && "text-white") ||
-            (inProgress && "text-black") ||
-            "text-body-color"
+            (done && 'text-white') || (inProgress && 'text-black') || 'text-body-color'
           } mb-[10px] text-sm font-semibold`}
         >
           {name}
         </h3>
         <span
           className={`${
-            (done && "bg-white text-primary") ||
-            (inProgress && "bg-primary text-white") ||
-            "bg-body-color text-white"
+            (done && 'bg-white text-primary') || (inProgress && 'bg-primary text-white') || 'bg-body-color text-white'
           } inline-block rounded px-2 py-1 text-xs font-medium`}
         >
           {status}

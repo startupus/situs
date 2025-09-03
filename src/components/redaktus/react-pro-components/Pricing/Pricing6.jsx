@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Pricing6 = () => {
   return (
@@ -7,15 +7,13 @@ const Pricing6 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[600px] text-center">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Our Pricing Plans
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Our Pricing Plans</span>
               <h2 className="mb-4 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Ready to start with tailGrids?
               </h2>
               <p className="mx-auto max-w-[510px] text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -116,22 +114,12 @@ const PricingCard = ({
           <div className="border-b border-stroke pb-8 dark:border-dark-3">
             <div className="mb-6 flex justify-between">
               <div>
-                <h3 className="mb-1 text-[22px] font-semibold leading-7 text-dark dark:text-white">
-                  {type}
-                </h3>
-                <p className="text-base text-body-color dark:text-dark-6">
-                  {subscription}
-                </p>
+                <h3 className="mb-1 text-[22px] font-semibold leading-7 text-dark dark:text-white">{type}</h3>
+                <p className="text-base text-body-color dark:text-dark-6">{subscription}</p>
               </div>
               <div>
                 {first && (
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M32.407 16.0971C31.8758 16.0971 31.4508 16.5221 31.4508 17.0533V27.4127C31.4508 29.7502 29.7508 31.5564 27.5727 31.5564H6.42891C4.25078 31.5564 2.55078 29.7502 2.55078 27.4127V17.0002C2.55078 16.4689 2.12578 16.0439 1.59453 16.0439C1.06328 16.0439 0.691406 16.4689 0.691406 17.0002V27.3596C0.691406 30.6533 3.29453 33.3627 6.42891 33.3627H27.5727C30.7602 33.3627 33.3102 30.6533 33.3102 27.3596V17.0002C33.3633 16.4689 32.9383 16.0971 32.407 16.0971Z"
                       fill="#3056D3"
@@ -143,13 +131,7 @@ const PricingCard = ({
                   </svg>
                 )}
                 {second && (
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M27.2001 20.3469L24.8625 19.0719V15.3C24.8625 6.90626 21.1969 3.45314 17.6375 1.16876C17.2657 0.903137 16.7344 0.903137 16.3625 1.16876C12.8032 3.40001 9.13755 6.85314 9.13755 15.3531V19.125L6.80005 20.4C5.31255 21.1969 4.40942 22.7375 4.40942 24.4375V28.475C4.40942 28.9 4.62192 29.2719 4.9938 29.4844C5.2063 29.5906 5.4188 29.6438 5.6313 29.6438C5.8438 29.6438 6.00317 29.5906 6.21567 29.4844L9.19067 27.8906V27.9969C9.19067 28.6344 9.72192 29.2188 10.4125 29.2188H11.2094V31.875C11.2094 32.5125 11.7407 33.0969 12.4313 33.0969H21.7282C22.3657 33.0969 22.9501 32.5656 22.9501 31.875V29.1656H23.8C24.4375 29.1656 25.0219 28.6344 25.0219 27.9438V27.8375L27.9969 29.4313C28.1563 29.5375 28.3688 29.5906 28.5813 29.5906C28.7938 29.5906 29.0063 29.5375 29.2188 29.4313C29.5907 29.2188 29.8032 28.8469 29.8032 28.4219V24.3844C29.6438 22.6844 28.6875 21.1438 27.2001 20.3469ZM11.5282 15.3C11.5282 8.50001 14.0782 5.52501 17 3.55939C19.9219 5.57814 22.4719 8.55314 22.4719 15.3V26.775H18.1688V20.4C18.1688 19.7625 17.6375 19.1781 16.9469 19.1781C16.3094 19.1781 15.725 19.7094 15.725 20.4V26.7219H11.4219V15.3H11.5282ZM6.74692 26.4031V24.3844C6.74692 23.5875 7.17192 22.8438 7.91567 22.4188L9.13755 21.7813V25.1281L6.74692 26.4031ZM20.4532 30.7063H13.5469V29.1656H20.4532V30.7063ZM27.2532 26.4031L24.9157 25.1281V21.7813L26.1376 22.4188C26.8282 22.7906 27.3063 23.5344 27.3063 24.3844V26.4031H27.2532Z"
                       fill="#3758F9"
@@ -161,13 +143,7 @@ const PricingCard = ({
                   </svg>
                 )}
                 {third && (
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M13.3359 11.9003C13.3359 13.9722 15.0359 15.6722 17.1078 15.6722C19.1797 15.6722 20.8797 13.9722 20.8797 11.9003C20.8797 9.82842 19.1797 8.12842 17.1078 8.12842C15.0359 8.18154 13.3359 9.88154 13.3359 11.9003ZM18.9672 11.9003C18.9672 12.9628 18.1172 13.8128 17.0547 13.8128C15.9922 13.8128 15.1422 12.9628 15.1422 11.9003C15.1422 10.8378 15.9922 9.98779 17.0547 9.98779C18.1172 9.98779 18.9672 10.8909 18.9672 11.9003Z"
                       fill="#3056D3"
@@ -183,13 +159,7 @@ const PricingCard = ({
                   </svg>
                 )}
                 {fourth && (
-                  <svg
-                    width="34"
-                    height="34"
-                    viewBox="0 0 34 34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M19.7098 25.606C17.5848 25.606 15.8848 27.3591 15.8848 29.4841C15.8848 31.6091 17.5848 33.3622 19.7098 33.3622C21.8348 33.3622 23.5348 31.6091 23.5348 29.4841C23.5348 27.3591 21.8348 25.606 19.7098 25.606ZM19.7098 31.5028C18.5941 31.5028 17.7441 30.5997 17.7441 29.4841C17.7441 28.3685 18.6473 27.4653 19.7098 27.4653C20.8254 27.4653 21.6754 28.3685 21.6754 29.4841C21.6754 30.5997 20.8254 31.5028 19.7098 31.5028Z"
                       fill="#3056D3"
@@ -207,17 +177,13 @@ const PricingCard = ({
               </div>
             </div>
             <h4 className="mb-1 text-[38px] font-bold leading-[46px] text-dark dark:text-white">
-              <span className="mr-2 text-3xl text-body-color line-through">
-                {prevPrice}
-              </span>
+              <span className="mr-2 text-3xl text-body-color line-through">{prevPrice}</span>
               {price}
             </h4>
-            <p className="mb-5 text-base text-body-color dark:text-dark-6">
-              {subtitle}
-            </p>
+            <p className="mb-5 text-base text-body-color dark:text-dark-6">{subtitle}</p>
             <button
               className={`flex w-full items-center justify-center rounded-md py-2.5 text-base font-medium text-white ${
-                active ? "bg-dark" : "bg-primary hover:bg-blue-dark"
+                active ? 'bg-dark' : 'bg-primary hover:bg-blue-dark'
               }`}
             >
               {button}
@@ -234,22 +200,10 @@ const PricingCard = ({
 
 const List = ({ children, disable }) => {
   return (
-    <p
-      className={`flex text-base ${
-        disable
-          ? "text-body-color dark:text-dark-6"
-          : "text-dark dark:text-white"
-      }`}
-    >
+    <p className={`flex text-base ${disable ? 'text-body-color dark:text-dark-6' : 'text-dark dark:text-white'}`}>
       <span className="pr-[10px] pt-[3px]">
         {disable ? (
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_1676_359)">
               <path
                 d="M10 0.5625C4.78125 0.5625 0.5625 4.78125 0.5625 10C0.5625 15.2188 4.78125 19.4688 10 19.4688C15.2188 19.4688 19.4688 15.2188 19.4688 10C19.4688 4.78125 15.2188 0.5625 10 0.5625ZM10 18.0625C5.5625 18.0625 1.96875 14.4375 1.96875 10C1.96875 5.5625 5.5625 1.96875 10 1.96875C14.4375 1.96875 18.0625 5.59375 18.0625 10.0312C18.0625 14.4375 14.4375 18.0625 10 18.0625Z"
@@ -267,13 +221,7 @@ const List = ({ children, disable }) => {
             </defs>
           </svg>
         ) : (
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_1676_331)">
               <path
                 d="M10 0.5625C4.78125 0.5625 0.5625 4.78125 0.5625 10C0.5625 15.2188 4.78125 19.4688 10 19.4688C15.2188 19.4688 19.4688 15.2188 19.4688 10C19.4688 4.78125 15.2188 0.5625 10 0.5625ZM10 18.0625C5.5625 18.0625 1.96875 14.4375 1.96875 10C1.96875 5.5625 5.5625 1.96875 10 1.96875C14.4375 1.96875 18.0625 5.59375 18.0625 10.0312C18.0625 14.4375 14.4375 18.0625 10 18.0625Z"

@@ -36,7 +36,7 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
   onClose,
   role,
   permissions,
-  onSave
+  onSave,
 }) => {
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -50,7 +50,7 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
 
   const getPermissionsByCategory = () => {
     const grouped: { [key: string]: Permission[] } = {};
-    permissions.forEach(permission => {
+    permissions.forEach((permission) => {
       if (!grouped[permission.category]) {
         grouped[permission.category] = [];
       }
@@ -68,9 +68,10 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
         return;
       }
 
-      const filteredPerms = perms.filter(permission =>
-        permission.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        permission.description.toLowerCase().includes(searchTerm.toLowerCase())
+      const filteredPerms = perms.filter(
+        (permission) =>
+          permission.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          permission.description.toLowerCase().includes(searchTerm.toLowerCase()),
       );
 
       if (filteredPerms.length > 0) {
@@ -82,9 +83,9 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
   };
 
   const togglePermission = (permissionId: string) => {
-    setSelectedPermissions(prev => {
+    setSelectedPermissions((prev) => {
       if (prev.includes(permissionId)) {
-        return prev.filter(id => id !== permissionId);
+        return prev.filter((id) => id !== permissionId);
       } else {
         return [...prev, permissionId];
       }
@@ -93,15 +94,15 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
 
   const toggleCategoryPermissions = (category: string) => {
     const categoryPermissions = getPermissionsByCategory()[category];
-    const categoryPermissionIds = categoryPermissions.map(p => p.id);
-    const allSelected = categoryPermissionIds.every(id => selectedPermissions.includes(id));
+    const categoryPermissionIds = categoryPermissions.map((p) => p.id);
+    const allSelected = categoryPermissionIds.every((id) => selectedPermissions.includes(id));
 
     if (allSelected) {
-      setSelectedPermissions(prev => prev.filter(id => !categoryPermissionIds.includes(id)));
+      setSelectedPermissions((prev) => prev.filter((id) => !categoryPermissionIds.includes(id)));
     } else {
-      setSelectedPermissions(prev => {
+      setSelectedPermissions((prev) => {
         const newSelected = [...prev];
-        categoryPermissionIds.forEach(id => {
+        categoryPermissionIds.forEach((id) => {
           if (!newSelected.includes(id)) {
             newSelected.push(id);
           }
@@ -130,18 +131,13 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
           <div className="flex items-center space-x-3">
             <FiShield className="w-6 h-6 text-blue-600" />
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Настройка прав доступа
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Настройка прав доступа</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {role.displayName} (уровень {role.level})
               </p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
             <FiX className="w-6 h-6" />
           </button>
         </div>
@@ -179,7 +175,7 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 options={[
                   { value: 'all', label: 'Все категории' },
-                  ...categories.map(category => ({ value: category, label: category }))
+                  ...categories.map((category) => ({ value: category, label: category })),
                 ]}
                 disabled={hasFullAccess}
                 className="mb-0"
@@ -198,22 +194,20 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
           {Object.entries(filterPermissions()).map(([category, perms]) => (
             <div key={category} className="mb-6">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  {category}
-                </h4>
+                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{category}</h4>
                 {!hasFullAccess && (
                   <button
                     onClick={() => toggleCategoryPermissions(category)}
                     className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                   >
-                    {selectedPermissions.filter(p => perms.some(ap => ap.id === p)).length === perms.length
+                    {selectedPermissions.filter((p) => perms.some((ap) => ap.id === p)).length === perms.length
                       ? 'Снять все'
                       : 'Выбрать все'}
                   </button>
                 )}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {perms.map(permission => (
+                {perms.map((permission) => (
                   <div
                     key={permission.id}
                     className={`flex items-center justify-between p-3 rounded-md border ${
@@ -223,12 +217,8 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
                     }`}
                   >
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">
-                        {permission.displayName}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {permission.description}
-                      </p>
+                      <p className="font-medium text-gray-900 dark:text-white">{permission.displayName}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{permission.description}</p>
                     </div>
                     {!hasFullAccess && (
                       <input
@@ -250,19 +240,13 @@ const ThemePermissionsModal: React.FC<ThemePermissionsModalProps> = ({
           <div className="text-sm text-gray-600 dark:text-gray-400">
             Выбрано прав: {selectedPermissions.length} из {permissions.length}
           </div>
-          
+
           <div className="flex space-x-4">
-            <ThemeButton
-              variant="secondary"
-              onClick={onClose}
-            >
+            <ThemeButton variant="secondary" onClick={onClose}>
               Отмена
             </ThemeButton>
             {!hasFullAccess && (
-              <ThemeButton
-                variant="primary"
-                onClick={handleSave}
-              >
+              <ThemeButton variant="primary" onClick={handleSave}>
                 <FiCheck className="w-4 h-4 mr-2" />
                 Сохранить
               </ThemeButton>

@@ -22,7 +22,7 @@ const HorizontalMenu3 = () => {
               <input
                 type="text"
                 placeholder="Type to search..."
-                className="w-full bg-transparent text-base text-secondary-color outline-hidden dark:text-dark-6"
+                className="outline-hidden w-full bg-transparent text-base text-secondary-color dark:text-dark-6"
               />
             </div>
           </div>

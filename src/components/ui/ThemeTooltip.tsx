@@ -19,7 +19,7 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
   delay = 300,
   disabled = false,
   className = '',
-  children
+  children,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [actualPosition, setActualPosition] = useState(position);
@@ -39,7 +39,7 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
     const sizes = {
       sm: 'px-2 py-1 text-xs',
       md: 'px-3 py-2 text-sm',
-      lg: 'px-4 py-3 text-base'
+      lg: 'px-4 py-3 text-base',
     };
     return sizes[size];
   };
@@ -52,7 +52,7 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
       success: 'bg-green-600 text-white border-green-600',
       danger: 'bg-red-600 text-white border-red-600',
       warning: 'bg-yellow-600 text-white border-yellow-600',
-      info: 'bg-cyan-600 text-white border-cyan-600'
+      info: 'bg-cyan-600 text-white border-cyan-600',
     };
     return variants[variant];
   };
@@ -62,7 +62,7 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
       top: 'bottom-full left-1/2 transform -translate-x-1/2 mb-2',
       bottom: 'top-full left-1/2 transform -translate-x-1/2 mt-2',
       left: 'right-full top-1/2 transform -translate-y-1/2 mr-2',
-      right: 'left-full top-1/2 transform -translate-y-1/2 ml-2'
+      right: 'left-full top-1/2 transform -translate-y-1/2 ml-2',
     };
     return positions[actualPosition];
   };
@@ -70,12 +70,12 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
   const getArrowStyles = () => {
     const arrowBase = 'absolute w-2 h-2 transform rotate-45 border';
     const arrowVariant = getVariantStyles();
-    
+
     const arrows = {
       top: `${arrowBase} ${arrowVariant} top-full left-1/2 -translate-x-1/2 -mt-1`,
       bottom: `${arrowBase} ${arrowVariant} bottom-full left-1/2 -translate-x-1/2 -mb-1`,
       left: `${arrowBase} ${arrowVariant} left-full top-1/2 -translate-y-1/2 -ml-1`,
-      right: `${arrowBase} ${arrowVariant} right-full top-1/2 -translate-y-1/2 -mr-1`
+      right: `${arrowBase} ${arrowVariant} right-full top-1/2 -translate-y-1/2 -mr-1`,
     };
     return arrows[actualPosition];
   };
@@ -89,7 +89,7 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
     const tooltipRect = tooltip.getBoundingClientRect();
     const viewport = {
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
     };
 
     let newPosition = position;
@@ -123,11 +123,11 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
 
   const handleMouseEnter = () => {
     if (disabled) return;
-    
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
+
     timeoutRef.current = setTimeout(() => {
       setIsVisible(true);
       // Проверяем позицию после рендера
@@ -154,7 +154,7 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      
+
       {isVisible && (
         <div
           ref={tooltipRef}
@@ -165,7 +165,9 @@ const ThemeTooltip: React.FC<ThemeTooltipProps> = ({
             ${getVariantStyles()}
             transition-opacity duration-200 ease-in-out
             ${isVisible ? 'opacity-100' : 'opacity-0'}
-          `.trim().replace(/\s+/g, ' ')}
+          `
+            .trim()
+            .replace(/\s+/g, ' ')}
           role="tooltip"
         >
           {content}

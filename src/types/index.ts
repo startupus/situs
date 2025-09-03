@@ -84,7 +84,7 @@ export interface AITool {
   limit: number;
 }
 
-export type ProjectSection = 
+export type ProjectSection =
   | 'dashboard'
   | 'pages'
   | 'menu'
@@ -104,4 +104,4 @@ export interface NavigationItem {
 }
 
 // Экспорт типов системы меню
-export * from './menu'; 
+export * from './menu';

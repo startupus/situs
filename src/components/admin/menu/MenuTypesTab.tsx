@@ -25,7 +25,7 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
   onSelectMenuType,
   onSetActiveTab,
   onBatchToggleStatus,
-  onBatchDelete
+  onBatchDelete,
 }) => {
   // Состояние для пакетной обработки
   const [selectedMenuTypes, setSelectedMenuTypes] = useState<string[]>([]);
@@ -33,15 +33,15 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
   // Функции для пакетной обработки
   const handleSelectMenuType = (typeId: string, selected: boolean) => {
     if (selected) {
-      setSelectedMenuTypes(prev => [...prev, typeId]);
+      setSelectedMenuTypes((prev) => [...prev, typeId]);
     } else {
-      setSelectedMenuTypes(prev => prev.filter(id => id !== typeId));
+      setSelectedMenuTypes((prev) => prev.filter((id) => id !== typeId));
     }
   };
 
   const handleSelectAllMenuTypes = (selected: boolean) => {
     if (selected) {
-      setSelectedMenuTypes(menuTypes.map(type => type.id));
+      setSelectedMenuTypes(menuTypes.map((type) => type.id));
     } else {
       setSelectedMenuTypes([]);
     }
@@ -55,18 +55,18 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
     {
       id: 'activate',
       label: 'Активировать',
-      variant: 'success' as const
+      variant: 'success' as const,
     },
     {
       id: 'deactivate',
       label: 'Деактивировать',
-      variant: 'default' as const
+      variant: 'default' as const,
     },
     {
       id: 'delete',
       label: 'Удалить',
-      variant: 'danger' as const
-    }
+      variant: 'danger' as const,
+    },
   ];
 
   const handleMenuTypesBatchAction = async (actionId: string, typeIds: string[]) => {
@@ -105,7 +105,7 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
       />
 
       <div className="space-y-4">
-        {menuTypes.map(type => (
+        {menuTypes.map((type) => (
           <div key={type.id} className="border border-stroke dark:border-dark-3 rounded-lg">
             <div className="flex items-center justify-between p-4">
               <div className="flex items-center gap-3 flex-1">
@@ -116,17 +116,17 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
                   onChange={(e) => handleSelectMenuType(type.id, e.target.checked)}
                   className="w-4 h-4 text-primary bg-transparent border-2 border-stroke dark:border-dark-3 rounded focus:ring-primary focus:ring-2"
                 />
-                
+
                 <div className="flex-1">
                   <h4 className="font-medium text-dark dark:text-white">{type.title}</h4>
                   <p className="text-sm text-body-color dark:text-dark-6">{type.name}</p>
                   <p className="text-xs text-body-color dark:text-dark-6 mt-1">
-                    {allMenuItems.filter(item => item.menuTypeId === type.id).length} пунктов
+                    {allMenuItems.filter((item) => item.menuTypeId === type.id).length} пунктов
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button 
+                <button
                   onClick={() => {
                     onSelectMenuType(type.id);
                     onSetActiveTab('items');
@@ -136,22 +136,22 @@ const MenuTypesTab: React.FC<MenuTypesTabProps> = ({
                   <FiSettings size={14} />
                   Настроить
                 </button>
-                
+
                 {/* Тумблер активности */}
                 <ToggleSwitch
                   checked={type.isActive ?? true}
                   onChange={(checked) => onToggleStatus(type.id, checked)}
                   size="sm"
                 />
-                
-                <button 
+
+                <button
                   onClick={() => onEditType(type)}
                   className="text-body-color dark:text-dark-6 hover:text-primary transition-colors p-1"
                   title="Редактировать тип меню"
                 >
                   <FiEdit size={16} />
                 </button>
-                <button 
+                <button
                   onClick={() => onDeleteType(type)}
                   className="text-body-color dark:text-dark-6 hover:text-red-500 transition-colors p-1"
                   title="Удалить тип меню"

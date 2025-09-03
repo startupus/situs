@@ -187,7 +187,7 @@ const InputGroup = ({ type, placeholder }) => {
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
       />
     </div>
   );
@@ -199,7 +199,7 @@ const TextAreaGroup = ({ row, placeholder }) => {
       <textarea
         rows={row}
         placeholder={placeholder}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-5 text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-5 text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
       ></textarea>
     </div>
   );

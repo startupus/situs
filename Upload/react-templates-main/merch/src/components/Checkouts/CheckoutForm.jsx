@@ -258,15 +258,15 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <div className="border-stroke shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border bg-white px-5 py-8 xl:p-9">
+      <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-5 py-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark xl:p-9">
         {formSteps.map((step, stepIndex) => (
           <div
             key={stepIndex}
-            className="mb-6 overflow-hidden border rounded-md border-stroke dark:border-dark-3"
+            className="mb-6 overflow-hidden rounded-md border border-stroke dark:border-dark-3"
           >
             <button
               onClick={() => handleButtonToggle(stepIndex)}
-              className="flex items-center justify-between w-full px-5 py-4 xl:px-8"
+              className="flex w-full items-center justify-between px-5 py-4 xl:px-8"
             >
               <span className="text-lg font-semibold text-dark dark:text-white">
                 {step.title}
@@ -294,19 +294,19 @@ const CheckoutForm = () => {
             </button>
 
             <div
-              className={`border-stroke dark:border-dark-3 border-t px-4 pt-6 pb-8 lg:px-5 xl:px-8 ${step.active ? "block" : "hidden"}`}
+              className={`border-t border-stroke px-4 pb-8 pt-6 dark:border-dark-3 lg:px-5 xl:px-8 ${step.active ? "block" : "hidden"}`}
             >
               <form>
-                <div className="flex flex-wrap -mx-3">
+                <div className="-mx-3 flex flex-wrap">
                   {step.formItems.map((item, index) =>
                     item.type === "select" ? (
                       <div key={index} className="w-full px-3 md:w-1/2">
                         <div className="mb-6">
-                          <label className="text-dark mb-2.5 block text-base font-medium dark:text-white">
+                          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
                             {item.label}
                           </label>
                           <div className="relative">
-                            <select className="border-stroke text-dark-5 focus:border-primary active:border-primary dark:border-dark-3 w-full appearance-none rounded-md border bg-transparent px-5 py-3 font-medium outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]">
+                            <select className="outline-hidden w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
                               {item.options.map((option, optionIndex) =>
                                 option.index === 0 ? (
                                   <option
@@ -329,7 +329,7 @@ const CheckoutForm = () => {
                                 ),
                               )}
                             </select>
-                            <span className="absolute -translate-y-1/2 text-body-color dark:text-dark-6 top-1/2 right-5">
+                            <span className="absolute right-5 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                               <svg
                                 width="16"
                                 height="16"
@@ -366,17 +366,17 @@ const CheckoutForm = () => {
                         className={`w-full px-3 ${item.columnClasses}`}
                       >
                         <div className="mb-6">
-                          <label className="text-dark mb-2.5 block text-base font-medium dark:text-white">
+                          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
                             {item.label}
                           </label>
                           <div className="relative">
                             <input
                               type={item.type}
                               placeholder={item.placeholder}
-                              className="border-stroke text-body-color placeholder:text-dark-5 focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary w-full rounded-md border bg-transparent px-5 py-3 font-medium outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                              className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                             />
 
-                            <span className="absolute -translate-y-1/2 top-1/2 right-5">
+                            <span className="absolute right-5 top-1/2 -translate-y-1/2">
                               <svg
                                 width="60"
                                 height="10"
@@ -414,13 +414,13 @@ const CheckoutForm = () => {
                         className={`w-full px-3 ${item.columnClasses}`}
                       >
                         <div className="mb-6">
-                          <label className="text-dark mb-2.5 block text-base font-medium dark:text-white">
+                          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
                             {item.label}
                           </label>
                           <input
                             type={item.type}
                             placeholder={item.placeholder}
-                            className="border-stroke text-body-color placeholder:text-dark-5 focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary w-full rounded-md border bg-transparent px-5 py-3 font-medium outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                            className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                           />
                         </div>
                       </div>
@@ -428,7 +428,7 @@ const CheckoutForm = () => {
                   )}
 
                   <div className="w-full px-3">
-                    <div className="flex flex-wrap items-center -mx-2">
+                    <div className="-mx-2 flex flex-wrap items-center">
                       {step.buttons.map((button, buttonIndex) => (
                         <div key={buttonIndex} className="px-2">
                           <Link
@@ -439,7 +439,7 @@ const CheckoutForm = () => {
                                 button.prevButton ? "prevButton" : "nextButton",
                               )
                             }
-                            className={`inline-flex items-center justify-center rounded-md px-7 py-3 text-center text-base font-medium text-white ${button.nextButton && buttonIndex === 1 ? "bg-secondary hover:bg-secondary/90 whitespace-nowrap" : "bg-primary hover:bg-blue-dark"}`}
+                            className={`inline-flex items-center justify-center rounded-md px-7 py-3 text-center text-base font-medium text-white ${button.nextButton && buttonIndex === 1 ? "whitespace-nowrap bg-secondary hover:bg-secondary/90" : "bg-primary hover:bg-blue-dark"}`}
                           >
                             {button.text}
                           </Link>

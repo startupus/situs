@@ -7,8 +7,8 @@ CREATE TABLE "users" (
     "role" TEXT NOT NULL DEFAULT 'USER',
     "status" TEXT NOT NULL DEFAULT 'ACTIVE',
     "profile" TEXT DEFAULT '{"name":"","avatar":"","bio":""}',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
@@ -24,8 +24,8 @@ CREATE TABLE "currencies" (
     "iconUrl" TEXT,
     "color" TEXT,
     "createdBy" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
@@ -33,9 +33,9 @@ CREATE TABLE "balances" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "userId" TEXT NOT NULL,
     "currencyId" TEXT NOT NULL,
-    "amount" REAL NOT NULL DEFAULT 0,
-    "reserved" REAL NOT NULL DEFAULT 0,
-    "lastUpdated" DATETIME NOT NULL,
+    "amount" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "reserved" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "lastUpdated" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "balances_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "balances_currencyId_fkey" FOREIGN KEY ("currencyId") REFERENCES "currencies" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -46,13 +46,13 @@ CREATE TABLE "transactions" (
     "userId" TEXT NOT NULL,
     "serviceId" TEXT NOT NULL,
     "type" TEXT NOT NULL,
-    "amount" REAL NOT NULL,
+    "amount" DOUBLE PRECISION NOT NULL,
     "currencyId" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
     "description" TEXT,
     "metadata" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "completedAt" DATETIME,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "completedAt" TIMESTAMP(3),
     CONSTRAINT "transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "transactions_currencyId_fkey" FOREIGN KEY ("currencyId") REFERENCES "currencies" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -80,8 +80,8 @@ CREATE TABLE "projects" (
     "hasBlog" BOOLEAN NOT NULL DEFAULT false,
     "hasContactForm" BOOLEAN NOT NULL DEFAULT false,
     "ownerId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "projects_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -96,8 +96,8 @@ CREATE TABLE "products" (
     "editorUrl" TEXT,
     "settings" TEXT DEFAULT '{}',
     "projectId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "products_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -116,8 +116,8 @@ CREATE TABLE "pages" (
     "template" TEXT,
     "layout" TEXT,
     "projectId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "pages_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -136,8 +136,8 @@ CREATE TABLE "media" (
     "projectId" TEXT,
     "folder" TEXT,
     "tags" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateIndex

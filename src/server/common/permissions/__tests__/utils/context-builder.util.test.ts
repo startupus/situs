@@ -10,7 +10,7 @@ import {
   validatePermissionContext,
   createSimpleContext,
   mergeContexts,
-  requiresAdditionalData
+  requiresAdditionalData,
 } from '../../utils/context-builder.util';
 
 describe('ContextBuilderUtil', () => {
@@ -51,7 +51,7 @@ describe('ContextBuilderUtil', () => {
       const mockRequest = {
         params: { id: 'project-123', projectId: 'project-123' },
         query: { accountId: 'account-456' },
-        user: { id: 'user-789' }
+        user: { id: 'user-789' },
       };
 
       const context = buildContextFromRequest('project.edit.own', mockRequest);
@@ -72,7 +72,7 @@ describe('ContextBuilderUtil', () => {
         resource: 'project' as const,
         scope: 'own' as const,
         action: 'project.edit.own' as const,
-        projectId: 'project-123'
+        projectId: 'project-123',
       };
 
       expect(validatePermissionContext(validContext)).toBe(true);
@@ -81,7 +81,7 @@ describe('ContextBuilderUtil', () => {
     it('должен отклонять контекст без обязательных полей', () => {
       const invalidContext = {
         resource: 'project' as const,
-        scope: 'own' as const
+        scope: 'own' as const,
         // Отсутствует action
       } as any;
 
@@ -92,7 +92,7 @@ describe('ContextBuilderUtil', () => {
       const invalidContext = {
         resource: 'project' as const,
         scope: 'own' as const,
-        action: 'project.edit.own' as const
+        action: 'project.edit.own' as const,
         // Отсутствует projectId
       };
 
@@ -103,7 +103,7 @@ describe('ContextBuilderUtil', () => {
       const validContext = {
         resource: 'project' as const,
         scope: 'global' as const,
-        action: 'project.view.all' as const
+        action: 'project.view.all' as const,
         // projectId не требуется для global scope
       };
 
@@ -132,12 +132,12 @@ describe('ContextBuilderUtil', () => {
       const baseContext = {
         resource: 'project' as const,
         scope: 'own' as const,
-        action: 'project.edit.own' as const
+        action: 'project.edit.own' as const,
       };
 
       const override = {
         projectId: 'project-123',
-        ownerId: 'user-456'
+        ownerId: 'user-456',
       };
 
       const merged = mergeContexts(baseContext, override);
@@ -155,7 +155,7 @@ describe('ContextBuilderUtil', () => {
       const context = {
         resource: 'project' as const,
         scope: 'own' as const,
-        action: 'project.edit.own' as const
+        action: 'project.edit.own' as const,
         // Отсутствует ownerId
       };
 
@@ -166,7 +166,7 @@ describe('ContextBuilderUtil', () => {
       const context = {
         resource: 'agency' as const,
         scope: 'agency' as const,
-        action: 'agency.clients.manage' as const
+        action: 'agency.clients.manage' as const,
         // Отсутствуют agencyId и clientId
       };
 
@@ -178,7 +178,7 @@ describe('ContextBuilderUtil', () => {
         resource: 'project' as const,
         scope: 'own' as const,
         action: 'project.edit.own' as const,
-        ownerId: 'user-123'
+        ownerId: 'user-123',
         // Отсутствует projectId
       };
 
@@ -189,7 +189,7 @@ describe('ContextBuilderUtil', () => {
       const context = {
         resource: 'project' as const,
         scope: 'global' as const,
-        action: 'project.view.all' as const
+        action: 'project.view.all' as const,
       };
 
       expect(requiresAdditionalData(context)).toBe(false);

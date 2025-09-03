@@ -2,18 +2,16 @@ import React from "react";
 
 const Popover2 = () => {
   return (
-    <section className="min-h-screen bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="min-h-screen bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto px-4 lg:container">
         <div className="group relative text-center">
           <a
             href="/#"
-            className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline"
+            className="mb-3 inline-block text-base font-medium text-dark underline dark:text-white"
           >
             Popover Text
           </a>
-          <div
-            className="invisible absolute top-full left-0 right-0 mx-auto w-[312px] rounded-sm bg-white dark:bg-dark-2 text-center opacity-0 shadow-2 dark:shadow-box-dark group-hover:visible group-hover:opacity-100"
-          >
+          <div className="invisible absolute left-0 right-0 top-full mx-auto w-[312px] rounded-sm bg-white text-center opacity-0 shadow-2 group-hover:visible group-hover:opacity-100 dark:bg-dark-2 dark:shadow-box-dark">
             <span className="absolute -top-[9px] left-1/2 -translate-x-1/2 text-white dark:text-dark-2">
               <svg
                 width={18}
@@ -26,7 +24,7 @@ const Popover2 = () => {
                 <path d="M6.77012 1.47765C7.96184 0.153508 10.0382 0.153506 11.2299 1.47765L18 9L0 9L6.77012 1.47765Z" />
               </svg>
             </span>
-            <h3 className="border-b border-stroke dark:border-dark-3 p-3 text-xl font-semibold text-dark dark:text-white">
+            <h3 className="border-b border-stroke p-3 text-xl font-semibold text-dark dark:border-dark-3 dark:text-white">
               Popover Title
             </h3>
             <div className="p-5">

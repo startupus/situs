@@ -38,7 +38,7 @@ export default [
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/explicit-function-return-type': 'warn',
       '@typescript-eslint/no-var-requires': 'error',
-      
+
       // Строгие правила TypeScript (постепенно включаем)
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unsafe-assignment': 'warn',
@@ -79,4 +79,4 @@ export default [
       'services/*/src/__tests__/**',
     ],
   },
-]; 
+];

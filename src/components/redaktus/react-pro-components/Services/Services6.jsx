@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Services6() {
   return (
@@ -7,9 +7,7 @@ export default function Services6() {
         <div className="-mx-4 mb-10 flex flex-wrap items-end lg:mb-[70px]">
           <div className="w-full px-4 lg:w-8/12">
             <div className="mb-5 max-w-[625px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Project Planing
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Project Planing</span>
               <h2 className="text-3xl font-bold leading-[1.2] text-white sm:text-4xl md:text-[40px]">
                 We help our clients to build There Dream Projects
               </h2>
@@ -17,10 +15,7 @@ export default function Services6() {
           </div>
           <div className="w-full px-4 lg:w-4/12">
             <div className="mb-5 flex lg:justify-end">
-              <a
-                href="/#"
-                className="group relative text-lg font-medium text-white hover:text-primary"
-              >
+              <a href="/#" className="group relative text-lg font-medium text-white hover:text-primary">
                 EXPLORE SERVICES
                 <span className="absolute bottom-0 left-0 block h-0.5 w-full bg-white duration-300 ease-linear group-hover:w-full group-hover:bg-primary"></span>
               </a>

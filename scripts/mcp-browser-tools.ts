@@ -2,7 +2,7 @@
 
 /**
  * MCP BrowserTools Integration
- * 
+ *
  * Интеграция BrowserTools Manager с MCP системой
  * Обеспечивает автоматическое управление процессами
  */
@@ -41,7 +41,6 @@ class MCPBrowserToolsIntegration {
 
       this.isRunning = true;
       console.log(`✅ MCP BrowserTools интеграция запущена на порту ${processInfo.port}`);
-
     } catch (error) {
       console.error(`❌ Ошибка запуска интеграции: ${error}`);
       throw error;
@@ -83,7 +82,7 @@ class MCPBrowserToolsIntegration {
     return {
       running: this.isRunning,
       processes: status,
-      health
+      health,
     };
   }
 
@@ -106,11 +105,11 @@ class MCPBrowserToolsIntegration {
     this.healthCheckInterval = setInterval(async () => {
       try {
         const health = await this.manager.healthCheck();
-        
+
         if (!health.healthy) {
           console.warn('⚠️  Обнаружены проблемы в системе:');
-          health.issues.forEach(issue => console.warn(`  - ${issue}`));
-          
+          health.issues.forEach((issue) => console.warn(`  - ${issue}`));
+
           // Автоматическое восстановление
           await this.restartIfNeeded();
         }
@@ -136,16 +135,16 @@ class MCPBrowserToolsIntegration {
   private async restartIfNeeded(): Promise<void> {
     try {
       console.log('🔄 Попытка автоматического восстановления...');
-      
+
       // Останавливаем все процессы
       await this.manager.stopAll();
-      
+
       // Ждем немного
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // Запускаем заново
       await this.manager.startServer(3025);
-      
+
       console.log('✅ Автоматическое восстановление завершено');
     } catch (error) {
       console.error(`❌ Ошибка автоматического восстановления: ${error}`);
@@ -163,29 +162,29 @@ async function main() {
       case 'start':
         await integration.start();
         break;
-        
+
       case 'stop':
         await integration.stop();
         break;
-        
+
       case 'status':
         const status = await integration.getStatus();
         console.log('📊 Статус MCP BrowserTools интеграции:');
         console.log(`  Запущена: ${status.running ? '✅' : '❌'}`);
         console.log(`  Процессы: ${status.processes.length}`);
         console.log(`  Здоровье: ${status.health.healthy ? '✅' : '❌'}`);
-        
+
         if (!status.health.healthy) {
           console.log('  Проблемы:');
-          status.health.issues.forEach(issue => console.log(`    - ${issue}`));
+          status.health.issues.forEach((issue) => console.log(`    - ${issue}`));
         }
         break;
-        
+
       case 'ready':
         const ready = await integration.isReady();
         console.log(`Готовность: ${ready ? '✅' : '❌'}`);
         break;
-        
+
       default:
         console.log(`
 MCP BrowserTools Integration
@@ -208,4 +207,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export default MCPBrowserToolsIntegration; 
+export default MCPBrowserToolsIntegration;

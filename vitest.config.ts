@@ -6,16 +6,8 @@ export default defineConfig({
     environment: 'node',
     globals: true,
     setupFiles: ['__tests__/backend/setup.ts'],
-    include: [
-      '__tests__/**/*.test.ts',
-    ],
-    exclude: [
-      'node_modules',
-      'dist',
-      'coverage',
-      '__tests__/security/**',
-      'src/**'
-    ],
+    include: ['__tests__/**/*.test.ts'],
+    exclude: ['node_modules', 'dist', 'coverage', '__tests__/security/**', 'src/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -25,19 +17,17 @@ export default defineConfig({
         'src/api/server.ts',
         '**/*.d.ts',
         '**/*.config.*',
-        '**/coverage/**'
+        '**/coverage/**',
       ],
-      include: [
-        'src/api/**/*.ts'
-      ]
+      include: ['src/api/**/*.ts'],
     },
     testTimeout: 10000,
     hookTimeout: 10000,
-    teardownTimeout: 10000
+    teardownTimeout: 10000,
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
-    }
-  }
+      '@': resolve(__dirname, './src'),
+    },
+  },
 });

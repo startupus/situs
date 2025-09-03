@@ -18,7 +18,7 @@ const ProductCarousel4 = () => {
   return (
     <>
       <section className="bg-gray-2 dark:bg-dark">
-        <div className="container mx-auto overflow-hidden pt-20 pb-20 lg:pt-[120px] lg:pb-[90px]">
+        <div className="container mx-auto overflow-hidden pb-20 pt-20 lg:pb-[90px] lg:pt-[120px]">
           <Swiper
             breakpoints={{
               640: {
@@ -152,9 +152,9 @@ const ProductCarousel4 = () => {
               </ProductCard>
             </SwiperSlide>
 
-            <div className="z-50 -bottom-[65px] absolute left-0 right-0 flex items-center justify-center space-x-3">
+            <div className="absolute -bottom-[65px] left-0 right-0 z-50 flex items-center justify-center space-x-3">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="flex h-10 w-10 items-center justify-center rounded-[5px] bg-white dark:bg-dark-2 text-body-color dark:text-dark-6 shadow-product hover:bg-primary hover:text-white">
+                <button className="shadow-product flex h-10 w-10 items-center justify-center rounded-[5px] bg-white text-body-color hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6">
                   <svg
                     width={21}
                     height={20}
@@ -168,7 +168,7 @@ const ProductCarousel4 = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="flex h-10 w-10 items-center justify-center rounded-[5px] bg-white dark:bg-dark-2 text-body-color dark:text-dark-6 shadow-product hover:bg-primary hover:text-white">
+                <button className="shadow-product flex h-10 w-10 items-center justify-center rounded-[5px] bg-white text-body-color hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6">
                   <svg
                     width={21}
                     height={20}
@@ -201,16 +201,18 @@ const ProductCard = ({
   children,
 }) => {
   return (
-    <div className="rounded-[5px] border-[.5px] border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-[10px] shadow-1 dark:shadow-box-dark">
+    <div className="rounded-[5px] border-[.5px] border-stroke bg-white p-[10px] shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
       <a href={link} className="block">
         <img src={image} alt="product" className="w-full rounded-[5px]" />
       </a>
-      <div className="pt-5 pb-6 text-center">
-        <span className="text-sm font-medium text-body-color dark:text-dark-6 block mb-1">{color}</span>
+      <div className="pb-6 pt-5 text-center">
+        <span className="mb-1 block text-sm font-medium text-body-color dark:text-dark-6">
+          {color}
+        </span>
         <h3 className="mb-2">
           <a
             href={link}
-            className="block text-base font-semibold text-dark dark:text-white hover:text-primary"
+            className="block text-base font-semibold text-dark hover:text-primary dark:text-white"
           >
             {name}
           </a>
@@ -220,7 +222,9 @@ const ProductCard = ({
           {discountedPrice && (
             <span>
               {discountedPrice}
-              <span className="text-body-color dark:text-dark-6 pl-2 line-through">{price}</span>
+              <span className="pl-2 text-body-color line-through dark:text-dark-6">
+                {price}
+              </span>
             </span>
           )}
         </p>
@@ -245,7 +249,7 @@ const InputGroup = ({ id, color }) => {
         className={`flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-${color}`}
       >
         <span
-          className={`absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-${color}`}
+          className={`absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-${color}`}
         ></span>
         <span className="hidden border-[#c7c7c7] bg-[#c7c7c7]"></span>
         <span className="hidden border-[#DAB840] bg-[#DAB840]"></span>

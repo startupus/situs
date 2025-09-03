@@ -6,7 +6,10 @@ test.describe('Chrome normal vs incognito realtime sync', () => {
   test('status toggle propagates between normal and incognito', async () => {
     const userDataDir = path.join(os.tmpdir(), `situs-chrome-persist-${Date.now()}`);
     const normalCtx: BrowserContext = await chromium.launchPersistentContext(userDataDir, { headless: true });
-    const incognitoCtx: BrowserContext = await chromium.launchPersistentContext(path.join(os.tmpdir(), `situs-chrome-incog-${Date.now()}`), { headless: true });
+    const incognitoCtx: BrowserContext = await chromium.launchPersistentContext(
+      path.join(os.tmpdir(), `situs-chrome-incog-${Date.now()}`),
+      { headless: true },
+    );
 
     const pageNormal = await normalCtx.newPage();
     const pageIncog = await incognitoCtx.newPage();
@@ -40,29 +43,42 @@ test.describe('Chrome normal vs incognito realtime sync', () => {
     // Вместо клика по UI — вызываем API напрямую, чтобы исключить влияние DnD/оверлеев
     const projectId = (href || '').split('/').pop();
     const targetStatus = wasChecked ? 'SUSPENDED' : 'ACTIVE';
-    const ok = await pageNormal.evaluate(async ({ projectId, targetStatus, API_BASE }) => {
-      const res = await fetch(`${API_BASE}/api/projects/${projectId}/status`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: targetStatus }),
-      });
-      return res.ok;
-    }, { projectId, targetStatus, API_BASE: process.env.API_BASE || 'http://localhost:3002' });
+    const ok = await pageNormal.evaluate(
+      async ({ projectId, targetStatus, API_BASE }) => {
+        const res = await fetch(`${API_BASE}/api/projects/${projectId}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: targetStatus }),
+        });
+        return res.ok;
+      },
+      { projectId, targetStatus, API_BASE: process.env.API_BASE || 'http://localhost:3002' },
+    );
     expect(ok).toBeTruthy();
 
     // Подтверждаем, что сервер действительно поменял статус (перед тем как ждать фронт)
-    await expect.poll(async () => {
-      const changed = await pageNormal.evaluate(async ({ projectId, targetStatus, API_BASE }) => {
-        const res = await fetch(`${API_BASE}/api/projects/${projectId}`);
-        const json = await res.json();
-        return (json?.data?.status || '').toUpperCase() === targetStatus;
-      }, { projectId, targetStatus, API_BASE: process.env.API_BASE || 'http://localhost:3002' });
-      return changed;
-    }, { timeout: 8000 }).toBe(true);
+    await expect
+      .poll(
+        async () => {
+          const changed = await pageNormal.evaluate(
+            async ({ projectId, targetStatus, API_BASE }) => {
+              const res = await fetch(`${API_BASE}/api/projects/${projectId}`);
+              const json = await res.json();
+              return (json?.data?.status || '').toUpperCase() === targetStatus;
+            },
+            { projectId, targetStatus, API_BASE: process.env.API_BASE || 'http://localhost:3002' },
+          );
+          return changed;
+        },
+        { timeout: 8000 },
+      )
+      .toBe(true);
 
     // Ожидаем синхронизацию: меняется атрибут checked у инпута в инкогнито
     const incogSelector = `div.rounded-xl.border:has(a[href='${href}']) input[type="checkbox"]`;
-    await expect.poll(async () => await pageIncog.locator(incogSelector).isChecked(), { timeout: 20000 }).toBe(!wasChecked);
+    await expect
+      .poll(async () => await pageIncog.locator(incogSelector).isChecked(), { timeout: 20000 })
+      .toBe(!wasChecked);
 
     // Диагностика лога подписки в обоих контекстах
     const [logNormal, logIncog] = await Promise.all([
@@ -75,5 +91,3 @@ test.describe('Chrome normal vs incognito realtime sync', () => {
     await Promise.all([normalCtx.close(), incognitoCtx.close()]);
   });
 });
-
-

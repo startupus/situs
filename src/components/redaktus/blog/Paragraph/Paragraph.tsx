@@ -1,8 +1,8 @@
-import { Link, RichText } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-import Container from '../layout/Container'
-import Section from '../layout/Section'
+import { Link, RichText } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
+import Container from '../layout/Container';
+import Section from '../layout/Section';
 
 const Paragraph: types.Brick = () => {
   return (
@@ -12,9 +12,7 @@ const Paragraph: types.Brick = () => {
           propName="text"
           placeholder="Paragraph..."
           renderBlock={({ children }: { children: any }) => (
-            <p className="text-lg leading-relaxed mb-2 text-gray-700 dark:text-gray-200">
-              {children}
-            </p>
+            <p className="text-lg leading-relaxed mb-2 text-gray-700 dark:text-gray-200">{children}</p>
           )}
           allowedFeatures={[
             types.RichTextFeatures.h2,
@@ -33,53 +31,45 @@ const Paragraph: types.Brick = () => {
               <h2 className="font-content text-4xl font-black text-gray-900 dark:text-gray-100 mb-3 pt-10">
                 {children}
               </h2>
-            )
+            );
           }}
           renderH3={({ children }: { children: any }) => {
             return (
               <h3 className="font-content text-3xl font-black text-gray-900 dark:text-gray-100 mb-3 pt-8">
                 {children}
               </h3>
-            )
+            );
           }}
           renderH4={({ children }: { children: any }) => {
             return (
               <h3 className="font-content text-2xl font-black text-gray-900 dark:text-gray-100 mb-3 pt-8">
                 {children}
               </h3>
-            )
+            );
           }}
           renderUL={({ children }: { children: any }) => (
-            <ul className="list-disc list-outside ml-5 mt-4 text-lg text-gray-700 dark:text-gray-200">
-              {children}
-            </ul>
+            <ul className="list-disc list-outside ml-5 mt-4 text-lg text-gray-700 dark:text-gray-200">{children}</ul>
           )}
           renderOL={({ children }: { children: any }) => (
-            <ol className="list-decimal list-outside ml-5 mt-4 text-lg text-gray-700 dark:text-gray-200">
-              {children}
-            </ol>
+            <ol className="list-decimal list-outside ml-5 mt-4 text-lg text-gray-700 dark:text-gray-200">{children}</ol>
           )}
           renderLink={({ children, href }: { children: any; href: any }) => (
-            <Link
-              href={href}
-              className="text-blue-500 underline dark:text-blue-300"
-            >
+            <Link href={href} className="text-blue-500 underline dark:text-blue-300">
               {children}
             </Link>
           )}
         />
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 Paragraph.schema = {
   name: blockNames.Paragraph,
   label: 'Paragraph',
   category: 'rb-ui blog',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Paragraph/Paragraph.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Paragraph/Paragraph.tsx',
   getDefaultProps: () => ({
     text: [
       {
@@ -100,6 +90,6 @@ Paragraph.schema = {
       },
     ],
   }),
-}
+};
 
-export default Paragraph
+export default Paragraph;

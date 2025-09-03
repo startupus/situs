@@ -8,5 +8,3 @@ export class UpdateProjectAccessDto {
   @IsIn(['ADMIN', 'EDITOR', 'VIEWER'], { message: 'Недопустимая роль' })
   role!: string;
 }
-
-

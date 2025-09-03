@@ -19,9 +19,9 @@ async function createTestData() {
         profile: JSON.stringify({
           name: 'Тестовый пользователь',
           avatar: '',
-          bio: 'Тестовый аккаунт для разработки'
-        })
-      }
+          bio: 'Тестовый аккаунт для разработки',
+        }),
+      },
     });
 
     console.log('✅ Пользователь создан:', user.username);
@@ -44,21 +44,21 @@ async function createTestData() {
         settings: JSON.stringify({
           theme: 'auto',
           language: 'ru',
-          creationType: 'manual'
+          creationType: 'manual',
         }),
-        ownerId: user.id
-      }
+        ownerId: user.id,
+      },
     });
 
     console.log('✅ Проект создан:', project.name);
 
     // Создаем тестовый продукт
     const product = await prisma.product.upsert({
-      where: { 
+      where: {
         projectId_name: {
           projectId: project.id,
-          name: 'Стартапус - Демо проект'
-        }
+          name: 'Стартапус - Демо проект',
+        },
       },
       update: {},
       create: {
@@ -73,21 +73,21 @@ async function createTestData() {
           primaryColor: '#3B82F6',
           favicon: '/favicon.ico',
           logo: '/logo.svg',
-          domain: 'startapus-demo.situs.com'
+          domain: 'startapus-demo.situs.com',
         }),
-        projectId: project.id
-      }
+        projectId: project.id,
+      },
     });
 
     console.log('✅ Продукт создан:', product.name);
 
     // Создаем тестовые страницы
     const homePage = await prisma.page.upsert({
-      where: { 
+      where: {
         projectId_slug: {
           projectId: project.id,
-          slug: 'home'
-        }
+          slug: 'home',
+        },
       },
       update: {},
       create: {
@@ -105,8 +105,8 @@ async function createTestData() {
                 primaryButtonUrl: '/projects',
                 secondaryButtonText: 'Узнать больше',
                 secondaryButtonUrl: '/about',
-                heroImage: 'https://via.placeholder.com/800x600/3B82F6/FFFFFF?text=Стартапус'
-              }
+                heroImage: 'https://via.placeholder.com/800x600/3B82F6/FFFFFF?text=Стартапус',
+              },
             },
             {
               id: 'features-block-1',
@@ -118,22 +118,22 @@ async function createTestData() {
                   {
                     title: 'Быстрый старт',
                     description: 'Создайте проект за несколько минут',
-                    icon: '🚀'
+                    icon: '🚀',
                   },
                   {
                     title: 'Гибкая настройка',
                     description: 'Настройте все под свои нужды',
-                    icon: '⚙️'
+                    icon: '⚙️',
                   },
                   {
                     title: 'Аналитика',
                     description: 'Отслеживайте прогресс и метрики',
-                    icon: '📊'
-                  }
-                ]
-              }
-            }
-          ]
+                    icon: '📊',
+                  },
+                ],
+              },
+            },
+          ],
         }),
         pageType: 'PAGE',
         status: 'PUBLISHED',
@@ -141,18 +141,18 @@ async function createTestData() {
         metaTitle: 'Стартапус - Главная страница',
         metaDescription: 'Инновационная платформа для создания и развития стартапов',
         metaKeywords: 'стартап, платформа, инновации, развитие',
-        projectId: project.id
-      }
+        projectId: project.id,
+      },
     });
 
     console.log('✅ Главная страница создана:', homePage.title);
 
     const aboutPage = await prisma.page.upsert({
-      where: { 
+      where: {
         projectId_slug: {
           projectId: project.id,
-          slug: 'about'
-        }
+          slug: 'about',
+        },
       },
       update: {},
       create: {
@@ -166,11 +166,12 @@ async function createTestData() {
               props: {
                 title: 'О платформе Стартапус',
                 subtitle: 'Мы помогаем предпринимателям создавать успешные проекты',
-                description: 'Стартапус - это комплексная платформа для создания, развития и масштабирования стартапов. Мы предоставляем все необходимые инструменты и ресурсы для успешного запуска вашего бизнеса.',
-                image: 'https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=О нас'
-              }
-            }
-          ]
+                description:
+                  'Стартапус - это комплексная платформа для создания, развития и масштабирования стартапов. Мы предоставляем все необходимые инструменты и ресурсы для успешного запуска вашего бизнеса.',
+                image: 'https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=О нас',
+              },
+            },
+          ],
         }),
         pageType: 'PAGE',
         status: 'PUBLISHED',
@@ -178,8 +179,8 @@ async function createTestData() {
         metaTitle: 'О нас - Стартапус',
         metaDescription: 'Узнайте больше о платформе Стартапус и нашей миссии',
         metaKeywords: 'о нас, миссия, команда, платформа',
-        projectId: project.id
-      }
+        projectId: project.id,
+      },
     });
 
     console.log('✅ Страница "О нас" создана:', aboutPage.title);
@@ -188,7 +189,6 @@ async function createTestData() {
     console.log('📊 Проект ID:', project.id);
     console.log('🛍️ Продукт ID:', product.id);
     console.log('📄 Страницы:', [homePage.id, aboutPage.id]);
-
   } catch (error) {
     console.error('❌ Ошибка при создании тестовых данных:', error);
   } finally {

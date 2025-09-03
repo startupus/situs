@@ -1,13 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const starIcon = (
-  <svg
-    width={18}
-    height={18}
-    viewBox="0 0 18 18"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width={18} height={18} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_1825_1546)">
       <path
         d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z"
@@ -49,17 +43,17 @@ const ProductDetails = () => {
                 <img
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-01/big-image-01.jpg"
                   alt="products-details"
-                  className={`${productOne ? "block" : "hidden"} w-full`}
+                  className={`${productOne ? 'block' : 'hidden'} w-full`}
                 />
                 <img
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-01/big-image-02.jpg"
                   alt="products-details"
-                  className={`${productTwo ? "block" : "hidden"} w-full`}
+                  className={`${productTwo ? 'block' : 'hidden'} w-full`}
                 />
                 <img
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-01/big-image-03.jpg"
                   alt="products-details"
-                  className={`${productThree ? "block" : "hidden"} w-full`}
+                  className={`${productThree ? 'block' : 'hidden'} w-full`}
                 />
               </div>
               <div className="-mx-4 flex items-center justify-between">
@@ -70,9 +64,7 @@ const ProductDetails = () => {
                       setProductTwo(false);
                       setProductThree(false);
                     }}
-                    className={`${
-                      productOne ? "opacity-60" : ""
-                    } w-full overflow-hidden rounded-lg`}
+                    className={`${productOne ? 'opacity-60' : ''} w-full overflow-hidden rounded-lg`}
                   >
                     <img
                       src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-01/thumbnail-01.jpg"
@@ -88,9 +80,7 @@ const ProductDetails = () => {
                       setProductTwo(true);
                       setProductThree(false);
                     }}
-                    className={`${
-                      productTwo ? "opacity-60" : ""
-                    } w-full overflow-hidden rounded-lg`}
+                    className={`${productTwo ? 'opacity-60' : ''} w-full overflow-hidden rounded-lg`}
                   >
                     <img
                       src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-01/thumbnail-02.jpg"
@@ -106,9 +96,7 @@ const ProductDetails = () => {
                       setProductTwo(false);
                       setProductThree(true);
                     }}
-                    className={`${
-                      productThree ? "opacity-60" : ""
-                    } w-full overflow-hidden rounded-lg`}
+                    className={`${productThree ? 'opacity-60' : ''} w-full overflow-hidden rounded-lg`}
                   >
                     <img
                       src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-01/thumbnail-03.jpg"
@@ -134,20 +122,12 @@ const ProductDetails = () => {
                   <span className="pr-1">{starIcon}</span>
                   <span className="pr-1">{starIcon}</span>
                   <span className="pr-1">{starIcon}</span>
-                  <span className="pl-1 text-base font-medium text-dark dark:text-white">
-                    5 Rating
-                  </span>
+                  <span className="pl-1 text-base font-medium text-dark dark:text-white">5 Rating</span>
                 </div>
               </div>
               <div className="flex items-center">
                 <span className="pr-2">
-                  <svg
-                    width={20}
-                    height={20}
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_1031_24115)">
                       <path
                         d="M10 0.5625C4.78125 0.5625 0.5625 4.78125 0.5625 10C0.5625 15.2188 4.78125 19.4688 10 19.4688C15.2188 19.4688 19.4688 15.2188 19.4688 10C19.4688 4.78125 15.2188 0.5625 10 0.5625ZM10 18.0625C5.5625 18.0625 1.96875 14.4375 1.96875 10C1.96875 5.5625 5.5625 1.96875 10 1.96875C14.4375 1.96875 18.0625 5.59375 18.0625 10.0312C18.0625 14.4375 14.4375 18.0625 10 18.0625Z"
@@ -165,27 +145,21 @@ const ProductDetails = () => {
                     </defs>
                   </svg>
                 </span>
-                <span className="text-base font-medium text-dark dark:text-white">
-                  {" "}
-                  In Stock{" "}
-                </span>
+                <span className="text-base font-medium text-dark dark:text-white"> In Stock </span>
               </div>
             </div>
 
             <p className="text-body-color mb-8 text-base font-medium">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non
-              erat quam. Vestibulum aliquam nibh dui, et aliquet nibh euismod
-              quis.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non erat quam. Vestibulum aliquam nibh dui,
+              et aliquet nibh euismod quis.
             </p>
 
             <div className="xs:flex mb-7 flex-wrap justify-between">
               <div className="xs:mb-0 mb-8">
-                <p className="mb-3 text-base font-medium text-dark dark:text-white">
-                  Quantity
-                </p>
+                <p className="mb-3 text-base font-medium text-dark dark:text-white">Quantity</p>
                 <div className="inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                  <span 
-                    className="cursor-pointer select-none flex items-center justify-center w-[34px] h-9 text-dark dark:text-white" 
+                  <span
+                    className="cursor-pointer select-none flex items-center justify-center w-[34px] h-9 text-dark dark:text-white"
                     onClick={decrement}
                   >
                     <svg
@@ -200,7 +174,7 @@ const ProductDetails = () => {
                     </svg>
                   </span>
                   <span className="py-[6px] px-[19px] border-x border-stroke dark:border-dark-3">{quantity}</span>
-                  <span 
+                  <span
                     className="cursor-pointer select-none flex items-center justify-center w-[34px] h-9 text-dark dark:text-white"
                     onClick={increment}
                   >
@@ -225,12 +199,8 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className="xs:text-right">
-                <span className="block leading-[40px] text-[28px] font-semibold text-dark dark:text-white">
-                  $29.00
-                </span>
-                <span className="text-body-color text-base dark:text-dark-6">
-                  +12% VAT Added
-                </span>
+                <span className="block leading-[40px] text-[28px] font-semibold text-dark dark:text-white">$29.00</span>
+                <span className="text-body-color text-base dark:text-dark-6">+12% VAT Added</span>
               </div>
             </div>
 
@@ -240,42 +210,27 @@ const ProductDetails = () => {
               </button>
             </div>
 
-            <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-              Product Details
-            </h3>
+            <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl">Product Details</h3>
 
             <div className="mb-9 space-y-4">
-              <p
-                className="flex justify-between border-b border-stroke dark:border-dark-3 pb-4 text-base font-medium text-dark dark:text-white"
-              >
+              <p className="flex justify-between border-b border-stroke dark:border-dark-3 pb-4 text-base font-medium text-dark dark:text-white">
                 <span className="whitespace-nowrap"> Size </span>
                 <span> Small, Medium, Large </span>
               </p>
-              <p
-                className="flex justify-between border-b border-stroke dark:border-dark-3 pb-4 text-base font-medium text-dark dark:text-white"
-              >
+              <p className="flex justify-between border-b border-stroke dark:border-dark-3 pb-4 text-base font-medium text-dark dark:text-white">
                 <span className="whitespace-nowrap"> Color </span>
                 <span> White, Black, Gray </span>
               </p>
-              <p
-                className="flex justify-between text-base font-medium text-dark dark:text-white"
-              >
+              <p className="flex justify-between text-base font-medium text-dark dark:text-white">
                 <span className="whitespace-nowrap"> Brand </span>
                 <span> Shirt Flex </span>
               </p>
             </div>
 
-            <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-              Select Size
-            </h3>
+            <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl">Select Size</h3>
             <div className="mb-9 flex flex-wrap items-center gap-[14px]">
               <div>
-                <input
-                  type="radio"
-                  name="size"
-                  id="small"
-                  className="filter-size sr-only"
-                />
+                <input type="radio" name="size" id="small" className="filter-size sr-only" />
                 <label
                   htmlFor="small"
                   className="hover:border-primary hover:bg-primary inline-block cursor-pointer text-dark dark:text-white text-base font-medium rounded-[5px] border border-stroke dark:border-dark-3 py-2 px-5 hover:text-white"
@@ -284,12 +239,7 @@ const ProductDetails = () => {
                 </label>
               </div>
               <div>
-                <input
-                  type="radio"
-                  name="size"
-                  id="medium"
-                  className="filter-size sr-only"
-                />
+                <input type="radio" name="size" id="medium" className="filter-size sr-only" />
                 <label
                   htmlFor="medium"
                   className="hover:border-primary hover:bg-primary inline-block cursor-pointer text-dark dark:text-white text-base font-medium rounded-[5px] border border-stroke dark:border-dark-3 py-2 px-5 hover:text-white"
@@ -298,12 +248,7 @@ const ProductDetails = () => {
                 </label>
               </div>
               <div>
-                <input
-                  type="radio"
-                  name="size"
-                  id="large"
-                  className="filter-size sr-only"
-                />
+                <input type="radio" name="size" id="large" className="filter-size sr-only" />
                 <label
                   htmlFor="large"
                   className="hover:border-primary hover:bg-primary inline-block cursor-pointer text-dark dark:text-white text-base font-medium rounded-[5px] border border-stroke dark:border-dark-3 py-2 px-5 hover:text-white"
@@ -313,29 +258,16 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-              Select Color
-            </h3>
+            <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl">Select Color</h3>
             <div className="mb-9 flex items-center gap-[14px]">
               <div>
-                <input
-                  type="radio"
-                  name="color"
-                  id="gray"
-                  className="sr-only"
-                />
+                <input type="radio" name="color" id="gray" className="sr-only" />
                 <label
                   htmlFor="gray"
                   className="box bg-body-color flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm text-white"
                 >
                   <span className="opacity-0">
-                    <svg
-                      width="16"
-                      height="11"
-                      viewBox="0 0 11 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="16" height="11" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                         fill="currentColor"
@@ -353,13 +285,7 @@ const ProductDetails = () => {
                   className="box flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm bg-red-600 text-white"
                 >
                   <span className="opacity-0">
-                    <svg
-                      width="16"
-                      height="11"
-                      viewBox="0 0 11 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="16" height="11" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                         fill="currentColor"
@@ -371,24 +297,13 @@ const ProductDetails = () => {
                 </label>
               </div>
               <div>
-                <input
-                  type="radio"
-                  name="color"
-                  id="blue"
-                  className="sr-only"
-                />
+                <input type="radio" name="color" id="blue" className="sr-only" />
                 <label
                   htmlFor="blue"
                   className="box bg-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm text-white"
                 >
                   <span className="opacity-0">
-                    <svg
-                      width="16"
-                      height="11"
-                      viewBox="0 0 11 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="16" height="11" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                         fill="currentColor"
@@ -400,24 +315,13 @@ const ProductDetails = () => {
                 </label>
               </div>
               <div>
-                <input
-                  type="radio"
-                  name="color"
-                  id="green"
-                  className="sr-only"
-                />
+                <input type="radio" name="color" id="green" className="sr-only" />
                 <label
                   htmlFor="green"
                   className="box bg-secondary flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm text-white"
                 >
                   <span className="opacity-0">
-                    <svg
-                      width="16"
-                      height="11"
-                      viewBox="0 0 11 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="16" height="11" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                         fill="currentColor"

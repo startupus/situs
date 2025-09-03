@@ -10,7 +10,9 @@ test.describe('Project Integrations UI', () => {
     const projectId = (href || '').split('/').pop();
 
     // Переходим в настройки интеграций
-    await page.goto(`http://localhost:5177/projects/${projectId}/settings/integrations`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`http://localhost:5177/projects/${projectId}/settings/integrations`, {
+      waitUntil: 'domcontentloaded',
+    });
     await page.waitForSelector('text=Каталог', { timeout: 10000 });
 
     // Убедимся, что каталог прогружается (видна карточка Email SMTP)
@@ -35,5 +37,3 @@ test.describe('Project Integrations UI', () => {
     await expect.poll(async () => (await toggle.textContent()) || '').not.toBe(before, { timeout: 8000 });
   });
 });
-
-

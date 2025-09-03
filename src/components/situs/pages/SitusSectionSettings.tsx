@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Routes, Route, Navigate } from 'react-router-dom';
-import { FaCog, FaUsers, FaProjectDiagram, FaStore, FaRobot, FaChartBar, FaLock, FaBell, FaGlobe, FaPalette } from 'react-icons/fa';
+import {
+  FaCog,
+  FaUsers,
+  FaProjectDiagram,
+  FaStore,
+  FaRobot,
+  FaChartBar,
+  FaLock,
+  FaBell,
+  FaGlobe,
+  FaPalette,
+} from 'react-icons/fa';
 import EnhancedThemeSettings from '../../admin/EnhancedThemeSettings';
 import EditorInterfaceSettings from '../../admin/EditorInterfaceSettings';
 import {
@@ -9,7 +20,7 @@ import {
   GeneralSettings,
   AppearanceSettings,
   NotificationsSettings,
-  SecuritySettings
+  SecuritySettings,
 } from '../settings';
 
 interface SectionSettings {
@@ -38,7 +49,7 @@ const SitusSectionSettings: React.FC = () => {
   const location = useLocation();
   const [showThemeModal, setShowThemeModal] = useState(false);
   const [showEditorModal, setShowEditorModal] = useState(false);
-  
+
   // Получаем активный раздел из URL
   const getActiveSectionFromUrl = () => {
     const path = location.pathname;
@@ -48,9 +59,9 @@ const SitusSectionSettings: React.FC = () => {
     }
     return 'dashboard';
   };
-  
+
   const [activeSection, setActiveSection] = useState(getActiveSectionFromUrl);
-  
+
   // Синхронизируем activeSection с URL
   useEffect(() => {
     const section = getActiveSectionFromUrl();
@@ -69,8 +80,8 @@ const SitusSectionSettings: React.FC = () => {
       settings: {
         showStats: true,
         autoRefresh: true,
-        refreshInterval: 30
-      }
+        refreshInterval: 30,
+      },
     },
     {
       id: 'projects',
@@ -82,8 +93,8 @@ const SitusSectionSettings: React.FC = () => {
       settings: {
         defaultTemplate: 'modern',
         autoSave: true,
-        versioning: true
-      }
+        versioning: true,
+      },
     },
     {
       id: 'websites',
@@ -95,8 +106,8 @@ const SitusSectionSettings: React.FC = () => {
       settings: {
         maxPages: 100,
         customDomain: true,
-        sslEnabled: true
-      }
+        sslEnabled: true,
+      },
     },
     {
       id: 'stores',
@@ -108,8 +119,8 @@ const SitusSectionSettings: React.FC = () => {
       settings: {
         paymentGateways: ['stripe', 'paypal'],
         inventory: true,
-        analytics: true
-      }
+        analytics: true,
+      },
     },
     {
       id: 'bots',
@@ -121,8 +132,8 @@ const SitusSectionSettings: React.FC = () => {
       settings: {
         aiIntegration: true,
         multiLang: false,
-        analytics: true
-      }
+        analytics: true,
+      },
     },
     {
       id: 'users',
@@ -134,9 +145,9 @@ const SitusSectionSettings: React.FC = () => {
       settings: {
         registration: true,
         emailVerification: true,
-        roleBasedAccess: true
-      }
-    }
+        roleBasedAccess: true,
+      },
+    },
   ]);
 
   // Глобальные настройки
@@ -148,31 +159,27 @@ const SitusSectionSettings: React.FC = () => {
       email: true,
       browser: false,
       mobile: true,
-      marketing: false
-    }
+      marketing: false,
+    },
   });
 
   // Обработчики изменений
   const handleSectionToggle = (sectionId: string) => {
-    setSections(prev => 
-      prev.map(section => 
-        section.id === sectionId 
-          ? { ...section, enabled: !section.enabled }
-          : section
-      )
+    setSections((prev) =>
+      prev.map((section) => (section.id === sectionId ? { ...section, enabled: !section.enabled } : section)),
     );
   };
 
   const handleSectionSettingChange = (sectionId: string, key: string, value: any) => {
-    setSections(prev =>
-      prev.map(section =>
-        section.id === sectionId 
-          ? { 
-              ...section, 
-              settings: { ...section.settings, [key]: value }
+    setSections((prev) =>
+      prev.map((section) =>
+        section.id === sectionId
+          ? {
+              ...section,
+              settings: { ...section.settings, [key]: value },
             }
-          : section
-      )
+          : section,
+      ),
     );
   };
 
@@ -186,11 +193,12 @@ const SitusSectionSettings: React.FC = () => {
   };
 
   const handleGlobalSettingChange = (category: string, setting: string, value: any) => {
-    setGlobalSettings(prev => ({
+    setGlobalSettings((prev) => ({
       ...prev,
-      [category]: typeof prev[category as keyof GlobalSettings] === 'object' 
-        ? { ...prev[category as keyof GlobalSettings] as Record<string, any>, [setting]: value }
-        : value
+      [category]:
+        typeof prev[category as keyof GlobalSettings] === 'object'
+          ? { ...(prev[category as keyof GlobalSettings] as Record<string, any>), [setting]: value }
+          : value,
     }));
   };
 
@@ -198,59 +206,46 @@ const SitusSectionSettings: React.FC = () => {
     console.log('Сохранение настроек');
   };
 
-  const currentSection = sections.find(s => s.id === activeSection);
+  const currentSection = sections.find((s) => s.id === activeSection);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-dark">
       <div className="flex">
         {/* Боковая панель */}
-        <SettingsSidebar 
-          sections={sections}
-          activeSection={activeSection}
-        />
+        <SettingsSidebar sections={sections} activeSection={activeSection} />
 
         {/* Основной контент с роутингом */}
         <div className="flex-1 p-8">
           <Routes>
             {/* Маршрут по умолчанию - перенаправляем на dashboard */}
             <Route path="/" element={<Navigate to="/section-settings/dashboard" replace />} />
-            
+
             {/* Маршруты для разделов платформы */}
-            {sections.map(section => (
-              <Route 
+            {sections.map((section) => (
+              <Route
                 key={section.id}
-                path={`/${section.id}`} 
+                path={`/${section.id}`}
                 element={
-                  <SectionContent 
+                  <SectionContent
                     section={section}
                     updateSectionSettings={updateSectionSettings}
                     updateSectionPermissions={updateSectionPermissions}
                     handleSectionToggle={handleSectionToggle}
                     handleSectionSettingChange={handleSectionSettingChange}
                   />
-                } 
+                }
               />
             ))}
-            
+
             {/* Маршруты для системных настроек */}
-            <Route 
-              path="/general" 
-              element={<Navigate to="/profile-settings?tab=general" replace />} 
-            />
-            
+            <Route path="/general" element={<Navigate to="/profile-settings?tab=general" replace />} />
+
             {/* Внешний вид перенесён в тему проекта (системный проект админки) */}
             <Route path="/appearance" element={<Navigate to="/projects/situs-admin/settings/theme" replace />} />
 
-            
-            <Route 
-              path="/notifications" 
-              element={<Navigate to="/profile-settings?tab=notifications" replace />} 
-            />
-            
-            <Route 
-              path="/security" 
-              element={<Navigate to="/profile-settings?tab=security" replace />} 
-            />
+            <Route path="/notifications" element={<Navigate to="/profile-settings?tab=notifications" replace />} />
+
+            <Route path="/security" element={<Navigate to="/profile-settings?tab=security" replace />} />
           </Routes>
         </div>
       </div>
@@ -260,9 +255,7 @@ const SitusSectionSettings: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white dark:bg-dark-2 rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-auto">
             <div className="flex items-center justify-between p-6 border-b border-stroke dark:border-gray-700">
-              <h2 className="text-xl font-semibold text-dark dark:text-white">
-                Расширенные настройки темы
-              </h2>
+              <h2 className="text-xl font-semibold text-dark dark:text-white">Расширенные настройки темы</h2>
               <button
                 onClick={() => setShowThemeModal(false)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -284,9 +277,7 @@ const SitusSectionSettings: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white dark:bg-dark-2 rounded-lg shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-auto">
             <div className="flex items-center justify-between p-6 border-b border-stroke dark:border-gray-700">
-              <h2 className="text-xl font-semibold text-dark dark:text-white">
-                Настройки интерфейса редактора
-              </h2>
+              <h2 className="text-xl font-semibold text-dark dark:text-white">Настройки интерфейса редактора</h2>
               <button
                 onClick={() => setShowEditorModal(false)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"

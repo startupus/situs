@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Drawer = () => {
   return (
@@ -31,9 +31,7 @@ const Drawer = () => {
             />
           </a>
 
-          <h3 className="mb-5 text-lg font-semibold text-dark dark:text-white">
-            Quick Links
-          </h3>
+          <h3 className="mb-5 text-lg font-semibold text-dark dark:text-white">Quick Links</h3>
           <ul className="mb-[30px] space-y-2 border-b border-stroke pb-[30px] dark:border-dark-3">
             <QuickLinks link="/#" name="Home" />
             <QuickLinks link="/#" name="About Company" />
@@ -42,20 +40,16 @@ const Drawer = () => {
             <QuickLinks link="/#" name="Need Support?" />
           </ul>
           <div>
-            <h3 className="mb-5 text-lg font-semibold text-dark dark:text-white">
-              Quick Links
-            </h3>
+            <h3 className="mb-5 text-lg font-semibold text-dark dark:text-white">Quick Links</h3>
             <p className="text-sm text-body-color dark:text-dark-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              nec neque dolor. Duis auctor justo sit amet pulvinar.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec neque dolor. Duis auctor justo sit
+              amet pulvinar.
             </p>
           </div>
         </div>
 
         <div>
-          <h3 className="mb-5 text-lg font-semibold text-dark dark:text-white">
-            Follow Us
-          </h3>
+          <h3 className="mb-5 text-lg font-semibold text-dark dark:text-white">Follow Us</h3>
           <div className="flex items-center gap-4">
             <a
               href="/#"
@@ -155,10 +149,7 @@ export default Drawer;
 const QuickLinks = ({ link, name }) => {
   return (
     <li>
-      <a
-        href={link}
-        className="inline-block text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
-      >
+      <a href={link} className="inline-block text-sm font-medium text-body-color hover:text-primary dark:text-dark-6">
         {name}
       </a>
     </li>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,13 +16,19 @@
   </head>
   <body>
     <!-- ====== Users List Start -->
-    <section class="relative z-10 overflow-hidden bg-white dark:bg-dark py-20 lg:py-[100px]">
+    <section
+      class="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[100px]"
+    >
       <div class="container mx-auto">
         <div>
-          <h3 class="mb-8 text-2xl font-medium text-dark dark:text-white sm:text-[28px]">
+          <h3
+            class="mb-8 text-2xl font-medium text-dark dark:text-white sm:text-[28px]"
+          >
             Users List
           </h3>
-          <div class="border-stroke dark:border-dark-3 max-w-[370px] border bg-white dark:bg-dark-2 py-[10px]">
+          <div
+            class="max-w-[370px] border border-stroke bg-white py-[10px] dark:border-dark-3 dark:bg-dark-2"
+          >
             <div
               class="flex items-center justify-between p-[18px] hover:bg-gray-1 dark:hover:bg-dark-3"
             >
@@ -37,8 +43,12 @@
                   />
                 </div>
                 <div>
-                  <h4 class="text-base font-medium text-dark dark:text-white">Devid Wilium</h4>
-                  <p class="text-body-color text-sm dark:text-dark-6">Digital marketer</p>
+                  <h4 class="text-base font-medium text-dark dark:text-white">
+                    Devid Wilium
+                  </h4>
+                  <p class="text-sm text-body-color dark:text-dark-6">
+                    Digital marketer
+                  </p>
                 </div>
               </div>
               <div>
@@ -47,38 +57,38 @@
                     @click="openDropDown = !openDropDown"
                     class="text-body-color dark:text-dark-6"
                   >
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 20 20" 
-                      fill="none" 
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       class="fill-current"
                     >
-                      <path 
+                      <path
                         d="M11.6667 15.8333C11.6667 14.9129 10.9205 14.1667 9.99999 14.1667C9.07952 14.1667 8.33333 14.9129 8.33333 15.8333C8.33333 16.7538 9.07952 17.5 9.99999 17.5C10.9205 17.5 11.6667 16.7538 11.6667 15.8333Z"
                       />
-                      <path 
-                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z" 
+                      <path
+                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z"
                       />
-                      <path 
-                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z" 
+                      <path
+                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z"
                       />
-                    </svg>                    
+                    </svg>
                   </button>
 
                   <div
                     x-show="openDropDown"
                     @click.outside="openDropDown = false"
-                    class="shadow-card absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white dark:bg-dark p-2"
+                    class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark"
                   >
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Edit
                     </button>
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Delete
                     </button>
@@ -104,7 +114,9 @@
                   <h4 class="text-base font-medium text-dark dark:text-white">
                     Deniyal Shifer
                   </h4>
-                  <p class="text-body-color text-sm dark:text-dark-6">Graphics designer</p>
+                  <p class="text-sm text-body-color dark:text-dark-6">
+                    Graphics designer
+                  </p>
                 </div>
               </div>
               <div>
@@ -113,38 +125,38 @@
                     @click="openDropDown = !openDropDown"
                     class="text-body-color dark:text-dark-6"
                   >
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 20 20" 
-                      fill="none" 
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       class="fill-current"
                     >
-                      <path 
+                      <path
                         d="M11.6667 15.8333C11.6667 14.9129 10.9205 14.1667 9.99999 14.1667C9.07952 14.1667 8.33333 14.9129 8.33333 15.8333C8.33333 16.7538 9.07952 17.5 9.99999 17.5C10.9205 17.5 11.6667 16.7538 11.6667 15.8333Z"
                       />
-                      <path 
-                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z" 
+                      <path
+                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z"
                       />
-                      <path 
-                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z" 
+                      <path
+                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z"
                       />
-                    </svg>                    
+                    </svg>
                   </button>
 
                   <div
                     x-show="openDropDown"
                     @click.outside="openDropDown = false"
-                    class="shadow-card absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white dark:bg-dark p-2"
+                    class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark"
                   >
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Edit
                     </button>
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Delete
                     </button>
@@ -167,8 +179,12 @@
                   />
                 </div>
                 <div>
-                  <h4 class="text-base font-medium text-dark dark:text-white">Philifs Geno</h4>
-                  <p class="text-body-color text-sm dark:text-dark-6">Content creator</p>
+                  <h4 class="text-base font-medium text-dark dark:text-white">
+                    Philifs Geno
+                  </h4>
+                  <p class="text-sm text-body-color dark:text-dark-6">
+                    Content creator
+                  </p>
                 </div>
               </div>
               <div>
@@ -177,38 +193,38 @@
                     @click="openDropDown = !openDropDown"
                     class="text-body-color dark:text-dark-6"
                   >
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 20 20" 
-                      fill="none" 
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       class="fill-current"
                     >
-                      <path 
+                      <path
                         d="M11.6667 15.8333C11.6667 14.9129 10.9205 14.1667 9.99999 14.1667C9.07952 14.1667 8.33333 14.9129 8.33333 15.8333C8.33333 16.7538 9.07952 17.5 9.99999 17.5C10.9205 17.5 11.6667 16.7538 11.6667 15.8333Z"
                       />
-                      <path 
-                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z" 
+                      <path
+                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z"
                       />
-                      <path 
-                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z" 
+                      <path
+                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z"
                       />
-                    </svg>                    
+                    </svg>
                   </button>
 
                   <div
                     x-show="openDropDown"
                     @click.outside="openDropDown = false"
-                    class="shadow-card absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white dark:bg-dark p-2"
+                    class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark"
                   >
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Edit
                     </button>
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Delete
                     </button>
@@ -231,8 +247,12 @@
                   />
                 </div>
                 <div>
-                  <h4 class="text-base font-medium text-dark dark:text-white">Marko Diyan</h4>
-                  <p class="text-body-color text-sm dark:text-dark-6">Web developer</p>
+                  <h4 class="text-base font-medium text-dark dark:text-white">
+                    Marko Diyan
+                  </h4>
+                  <p class="text-sm text-body-color dark:text-dark-6">
+                    Web developer
+                  </p>
                 </div>
               </div>
               <div>
@@ -241,38 +261,38 @@
                     @click="openDropDown = !openDropDown"
                     class="text-body-color dark:text-dark-6"
                   >
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 20 20" 
-                      fill="none" 
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       class="fill-current"
                     >
-                      <path 
+                      <path
                         d="M11.6667 15.8333C11.6667 14.9129 10.9205 14.1667 9.99999 14.1667C9.07952 14.1667 8.33333 14.9129 8.33333 15.8333C8.33333 16.7538 9.07952 17.5 9.99999 17.5C10.9205 17.5 11.6667 16.7538 11.6667 15.8333Z"
                       />
-                      <path 
-                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z" 
+                      <path
+                        d="M11.6667 9.99996C11.6667 9.07949 10.9205 8.33329 9.99999 8.33329C9.07952 8.33329 8.33333 9.07949 8.33333 9.99996C8.33333 10.9204 9.07952 11.6666 9.99999 11.6666C10.9205 11.6666 11.6667 10.9204 11.6667 9.99996Z"
                       />
-                      <path 
-                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z" 
+                      <path
+                        d="M11.6667 4.16671C11.6667 3.24623 10.9205 2.50004 9.99999 2.50004C9.07952 2.50004 8.33333 3.24623 8.33333 4.16671C8.33333 5.08718 9.07952 5.83337 9.99999 5.83337C10.9205 5.83337 11.6667 5.08718 11.6667 4.16671Z"
                       />
-                    </svg>                    
+                    </svg>
                   </button>
 
                   <div
                     x-show="openDropDown"
                     @click.outside="openDropDown = false"
-                    class="shadow-card absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white dark:bg-dark p-2"
+                    class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark"
                   >
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Edit
                     </button>
                     <button
-                      class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2 w-full rounded-sm py-1.5 px-3 text-left text-sm"
+                      class="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                     >
                       Delete
                     </button>

@@ -17,20 +17,14 @@ export class ProjectProductsController {
   }
 
   @Get()
-  async findAll(
-    @Param('projectId') projectId: string,
-    @Query() query: Omit<ProductQueryDto, 'projectId'>,
-  ) {
+  async findAll(@Param('projectId') projectId: string, @Query() query: Omit<ProductQueryDto, 'projectId'>) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
     const result = await svc.findByProject(projectId, query);
     return { success: true, data: result };
   }
 
   @Post()
-  async create(
-    @Param('projectId') projectId: string,
-    @Body() body: Omit<CreateProductDto, 'projectId'>,
-  ) {
+  async create(@Param('projectId') projectId: string, @Body() body: Omit<CreateProductDto, 'projectId'>) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
     const product = await svc.createInProject(projectId, body);
     return { success: true, data: product };
@@ -48,14 +42,9 @@ export class ProjectProductsController {
   }
 
   @Delete(':productId')
-  async remove(
-    @Param('projectId') projectId: string,
-    @Param('productId') productId: string,
-  ) {
+  async remove(@Param('projectId') projectId: string, @Param('productId') productId: string) {
     const svc = this.productsService ?? new ProductsService(new PrismaService());
     const result = await svc.removeInProject(projectId, productId);
     return { success: true, data: result };
   }
 }
-
-

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 const SuccessBadge = () => {
   return (
-    <div className='flex flex-wrap items-center gap-4'>
+    <div className="flex flex-wrap items-center gap-4">
       <BadgesItem roundedMd>Success</BadgesItem>
       <BadgesItem outline roundedMd>
         Success
@@ -14,14 +14,12 @@ const SuccessBadge = () => {
       <BadgesItem roundedFull bgOpacity>
         Success
       </BadgesItem>
-      <BadgesItem bgOpacity>
-        Success
-      </BadgesItem>
+      <BadgesItem bgOpacity>Success</BadgesItem>
     </div>
-  )
-}
+  );
+};
 
-export default SuccessBadge
+export default SuccessBadge;
 
 const BadgesItem = ({
   children,
@@ -35,7 +33,7 @@ const BadgesItem = ({
 }) => {
   return (
     <span
-      className={`inline-block rounded py-1 px-2.5 text-xs font-medium ${
+      className={`inline-block rounded px-2.5 py-1 text-xs font-medium ${
         outline
           ? `border ${
               (roundedFull && `rounded-full`) ||
@@ -53,10 +51,9 @@ const BadgesItem = ({
               (roundedMd && `rounded-md`) ||
               (bgOpacity && `bg-green-dark/10`)
             } text-white`
-      } ${bgOpacity && 'bg-green-dark/10! text-green-dark!'}
-`}
+      } ${bgOpacity && "bg-green-dark/10! text-green-dark!"} `}
     >
       {children}
     </span>
-  )
-}
+  );
+};

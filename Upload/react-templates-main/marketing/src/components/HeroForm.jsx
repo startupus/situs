@@ -22,7 +22,7 @@ const HeroForm = () => {
   return (
     <>
       <div className="mx-auto max-w-[460px] rounded-[10px] bg-white px-6 py-10 dark:bg-dark-2 sm:px-10">
-        <h2 className="mb-2.5 text-2xl font-bold leading-[1.43]! text-dark dark:text-white sm:text-3xl lg:text-2xl xl:text-[28px]">
+        <h2 className="leading-[1.43]! mb-2.5 text-2xl font-bold text-dark dark:text-white sm:text-3xl lg:text-2xl xl:text-[28px]">
           Sign up to TailGrids
         </h2>
         <p className="mb-8 text-base font-medium text-body-color dark:text-dark-6">
@@ -130,7 +130,7 @@ const HeroForm = () => {
                       type={item.type}
                       name={item.name}
                       autoComplete={item.name}
-                      className="w-full rounded-md border border-stroke bg-transparent px-5 py-2.5 text-base font-medium text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-2.5 text-base font-medium text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -146,7 +146,7 @@ const HeroForm = () => {
                     <input
                       type={item.type}
                       name={item.name}
-                      className="w-full rounded-md border border-stroke bg-transparent px-5 py-2.5 text-base font-medium text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-2.5 text-base font-medium text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                     />
                   </div>
                 </div>

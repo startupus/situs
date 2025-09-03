@@ -110,4 +110,4 @@ export interface UpdateProjectData {
   settings?: Partial<Project['settings']>;
   pages?: ProjectPage[];
   products?: ProjectProduct[];
-} 
+}

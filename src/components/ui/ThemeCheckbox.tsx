@@ -28,13 +28,13 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
   description,
   error,
   className = '',
-  id
+  id,
 }) => {
   const getSizeStyles = () => {
     const sizes = {
       sm: 'w-4 h-4',
       md: 'w-5 h-5',
-      lg: 'w-6 h-6'
+      lg: 'w-6 h-6',
     };
     return sizes[size];
   };
@@ -49,24 +49,30 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
     }
 
     const variants = {
-      primary: checked || indeterminate 
-        ? 'border-blue-600 bg-blue-600' 
-        : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
-      secondary: checked || indeterminate 
-        ? 'border-gray-600 bg-gray-600' 
-        : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
-      success: checked || indeterminate 
-        ? 'border-green-600 bg-green-600' 
-        : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
-      danger: checked || indeterminate 
-        ? 'border-red-600 bg-red-600' 
-        : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
-      warning: checked || indeterminate 
-        ? 'border-yellow-600 bg-yellow-600' 
-        : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
-      info: checked || indeterminate 
-        ? 'border-cyan-600 bg-cyan-600' 
-        : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800'
+      primary:
+        checked || indeterminate
+          ? 'border-blue-600 bg-blue-600'
+          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
+      secondary:
+        checked || indeterminate
+          ? 'border-gray-600 bg-gray-600'
+          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
+      success:
+        checked || indeterminate
+          ? 'border-green-600 bg-green-600'
+          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
+      danger:
+        checked || indeterminate
+          ? 'border-red-600 bg-red-600'
+          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
+      warning:
+        checked || indeterminate
+          ? 'border-yellow-600 bg-yellow-600'
+          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
+      info:
+        checked || indeterminate
+          ? 'border-cyan-600 bg-cyan-600'
+          : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800',
     };
     return variants[variant];
   };
@@ -75,7 +81,7 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
     const shapes = {
       square: 'rounded-sm',
       rounded: 'rounded-md',
-      circle: 'rounded-full'
+      circle: 'rounded-full',
     };
     return shapes[shape];
   };
@@ -84,7 +90,7 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
     const iconSizes = {
       sm: 'w-3 h-3',
       md: 'w-4 h-4',
-      lg: 'w-5 h-5'
+      lg: 'w-5 h-5',
     };
     return iconSizes[size];
   };
@@ -127,13 +133,15 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
             transition-all duration-200 ease-in-out
             hover:${!disabled && !checked && !indeterminate ? 'border-gray-400 dark:border-gray-500' : ''}
             focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500
-          `.trim().replace(/\s+/g, ' ')}
+          `
+            .trim()
+            .replace(/\s+/g, ' ')}
           onClick={handleChange}
         >
           {renderIcon()}
         </div>
       </div>
-      
+
       {(label || description || error) && (
         <div className="ml-3 text-sm">
           {label && (
@@ -143,7 +151,9 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
                 font-medium text-gray-900 dark:text-gray-100
                 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
                 ${error ? 'text-red-900 dark:text-red-100' : ''}
-              `.trim().replace(/\s+/g, ' ')}
+              `
+                .trim()
+                .replace(/\s+/g, ' ')}
             >
               {label}
             </label>
@@ -156,11 +166,7 @@ const ThemeCheckbox: React.FC<ThemeCheckboxProps> = ({
               {description}
             </p>
           )}
-          {error && (
-            <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-              {error}
-            </p>
-          )}
+          {error && <p className="text-red-600 dark:text-red-400 text-sm mt-1">{error}</p>}
         </div>
       )}
     </div>

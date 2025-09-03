@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const SlickTheme = () => {
   return (
     <style>
-                {`@charset 'UTF-8';
+      {`@charset 'UTF-8';
             /* Slider */
             .slick-loading .slick-list
             {
@@ -209,7 +209,7 @@ const SlickTheme = () => {
             }
             `}
     </style>
-  )
-}
+  );
+};
 
-export default SlickTheme
+export default SlickTheme;

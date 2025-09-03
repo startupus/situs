@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Cta2 = () => {
   return (
@@ -8,15 +8,13 @@ const Cta2 = () => {
           <div className="-mx-4 flex">
             <div className="w-full px-4">
               <div className="mx-auto max-w-[570px] text-center">
-                <span className="mb-4 block text-base font-medium text-white">
-                  Get TailGrids Only at 99$
-                </span>
+                <span className="mb-4 block text-base font-medium text-white">Get TailGrids Only at 99$</span>
                 <h2 className="mb-5 text-3xl font-bold leading-tight text-white md:text-[40px]/[48px]">
                   Create You Next Web Project With Our TailGrids
                 </h2>
                 <p className="mb-8 text-base leading-relaxed text-white md:px-5">
-                  There are many variations of passages of Lorem Ipsum available
-                  but the majority have suffered alteration in some form.
+                  There are many variations of passages of Lorem Ipsum available but the majority have suffered
+                  alteration in some form.
                 </p>
                 <a
                   href="/#"
@@ -30,13 +28,7 @@ const Cta2 = () => {
 
           <div className="hidden md:block">
             <span className="absolute left-0 top-0 z-[-1]">
-              <svg
-                width="156"
-                height="343"
-                viewBox="0 0 156 343"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="156" height="343" viewBox="0 0 156 343" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect
                   x="-213"
                   y="175.925"
@@ -59,13 +51,7 @@ const Cta2 = () => {
               </svg>
             </span>
             <span className="absolute bottom-0 right-0 z-[-1]">
-              <svg
-                width="215"
-                height="157"
-                viewBox="0 0 215 157"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="215" height="157" viewBox="0 0 215 157" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect
                   x="255.253"
                   y="448.005"

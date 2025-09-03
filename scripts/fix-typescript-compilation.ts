@@ -21,7 +21,7 @@ function fixTypeScriptFile(filePath: string): FixResult {
   const result: FixResult = {
     file: filePath,
     fixes: [],
-    success: false
+    success: false,
   };
 
   try {
@@ -30,26 +30,32 @@ function fixTypeScriptFile(filePath: string): FixResult {
 
     // 1. Исправляем неявные типы параметров
     content = content.replace(/function\s+(\w+)\s*\(([^)]*)\)\s*{/g, (match, funcName, params) => {
-      const typedParams = params.split(',').map((param: string) => {
-        const trimmed = param.trim();
-        if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
-          return `${trimmed}: any`;
-        }
-        return trimmed;
-      }).join(', ');
+      const typedParams = params
+        .split(',')
+        .map((param: string) => {
+          const trimmed = param.trim();
+          if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
+            return `${trimmed}: any`;
+          }
+          return trimmed;
+        })
+        .join(', ');
       return `function ${funcName}(${typedParams}): any {`;
     });
 
     // 2. Исправляем стрелочные функции
     content = content.replace(/(\w+)\s*\(([^)]*)\)\s*{/g, (match, funcName, params) => {
       if (match.includes('function')) return match;
-      const typedParams = params.split(',').map((param: string) => {
-        const trimmed = param.trim();
-        if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
-          return `${trimmed}: any`;
-        }
-        return trimmed;
-      }).join(', ');
+      const typedParams = params
+        .split(',')
+        .map((param: string) => {
+          const trimmed = param.trim();
+          if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
+            return `${trimmed}: any`;
+          }
+          return trimmed;
+        })
+        .join(', ');
       return `${funcName}(${typedParams}): any {`;
     });
 
@@ -68,35 +74,46 @@ function fixTypeScriptFile(filePath: string): FixResult {
     });
 
     // 4. Исправляем __awaiter функцию
-    content = content.replace(/var __awaiter = \(this && this\.__awaiter\) \|\| function \(thisArg, _arguments, P, generator\) {/g, 
-      'var __awaiter = (this && this.__awaiter) || function (thisArg: any, _arguments: any, P: any, generator: any): any {');
+    content = content.replace(
+      /var __awaiter = \(this && this\.__awaiter\) \|\| function \(thisArg, _arguments, P, generator\) {/g,
+      'var __awaiter = (this && this.__awaiter) || function (thisArg: any, _arguments: any, P: any, generator: any): any {',
+    );
 
     // 5. Исправляем типы в функциях Promise
-    content = content.replace(/function \(resolve\) { resolve\(value\); }/g, 'function (resolve: any) { resolve(value); }');
+    content = content.replace(
+      /function \(resolve\) { resolve\(value\); }/g,
+      'function (resolve: any) { resolve(value); }',
+    );
     content = content.replace(/function \(resolve, reject\) {/g, 'function (resolve: any, reject: any) {');
 
     // 6. Исправляем типы в методах
     content = content.replace(/(\w+)\(([^)]*)\)\s*{/g, (match, methodName, params) => {
       if (match.includes('function') || match.includes('constructor')) return match;
-      const typedParams = params.split(',').map((param: string) => {
-        const trimmed = param.trim();
-        if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
-          return `${trimmed}: any`;
-        }
-        return trimmed;
-      }).join(', ');
+      const typedParams = params
+        .split(',')
+        .map((param: string) => {
+          const trimmed = param.trim();
+          if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
+            return `${trimmed}: any`;
+          }
+          return trimmed;
+        })
+        .join(', ');
       return `${methodName}(${typedParams}): any {`;
     });
 
     // 7. Исправляем типы возвращаемых значений для async функций
     content = content.replace(/(\w+)\s*\(([^)]*)\)\s*{[\s\S]*?return __awaiter/g, (match, funcName, params) => {
-      const typedParams = params.split(',').map((param: string) => {
-        const trimmed = param.trim();
-        if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
-          return `${trimmed}: any`;
-        }
-        return trimmed;
-      }).join(', ');
+      const typedParams = params
+        .split(',')
+        .map((param: string) => {
+          const trimmed = param.trim();
+          if (trimmed && !trimmed.includes(':') && !trimmed.includes('=')) {
+            return `${trimmed}: any`;
+          }
+          return trimmed;
+        })
+        .join(', ');
       return match.replace(`${funcName}(${params})`, `${funcName}(${typedParams}): Promise<any>`);
     });
 
@@ -177,11 +194,11 @@ function fixSpecificFiles(): void {
   const agentsSetupPath = 'services/agents-service/src/__tests__/e2e-setup-real.ts';
   if (fs.existsSync(agentsSetupPath)) {
     let content = fs.readFileSync(agentsSetupPath, 'utf8');
-    
+
     // Исправляем проблему с неинициализированной переменной prisma
     content = content.replace(/let prisma;/, 'let prisma: any;');
     content = content.replace(/prisma = new PrismaClient/, 'prisma = new PrismaClient');
-    
+
     fs.writeFileSync(agentsSetupPath, content, 'utf8');
     console.log('✅ Исправлен agents-service e2e-setup-real.ts');
   }
@@ -190,13 +207,16 @@ function fixSpecificFiles(): void {
   const ecosystemHealthPath = 'src/monitoring/ecosystem-health.ts';
   if (fs.existsSync(ecosystemHealthPath)) {
     let content = fs.readFileSync(ecosystemHealthPath, 'utf8');
-    
+
     // Исправляем импорт logger
-    content = content.replace(/import { logger } from '\.\.\/config\/logger';/, "import { logger } from '../config/logger';");
-    
+    content = content.replace(
+      /import { logger } from '\.\.\/config\/logger';/,
+      "import { logger } from '../config/logger';",
+    );
+
     // Исправляем обращения к healthData
     content = content.replace(/healthData\.(\w+)/g, '(healthData as any).$1');
-    
+
     fs.writeFileSync(ecosystemHealthPath, content, 'utf8');
     console.log('✅ Исправлен ecosystem-health.ts');
   }
@@ -207,13 +227,13 @@ function fixSpecificFiles(): void {
  */
 function main(): void {
   console.log('🔧 Исправление критических ошибок TypeScript компиляции\n');
-  
+
   // Создаем недостающие файлы
   createLoggerFile();
-  
+
   // Исправляем специфические проблемы
   fixSpecificFiles();
-  
+
   // Список файлов для исправления
   const filesToFix = [
     'services/hubus-service/src/services/HubusService.ts',
@@ -225,19 +245,19 @@ function main(): void {
     'services/hubus-service/src/controllers/HubusController.ts',
     'services/hubus-service/src/middleware/authMiddleware.ts',
     'services/hubus-service/src/middleware/errorHandler.ts',
-    'services/hubus-service/src/types/HubusTypes.ts'
+    'services/hubus-service/src/types/HubusTypes.ts',
   ];
-  
+
   console.log(`🚀 Исправление ${filesToFix.length} критических файлов...\n`);
-  
+
   const results: FixResult[] = [];
-  
+
   for (const filePath of filesToFix) {
     if (fs.existsSync(filePath)) {
       console.log(`🔄 Исправляю: ${path.relative(process.cwd(), filePath)}`);
       const result = fixTypeScriptFile(filePath);
       results.push(result);
-      
+
       if (result.success) {
         console.log(`✅ Исправлен: ${result.fixes.join(', ')}`);
       } else {
@@ -247,20 +267,20 @@ function main(): void {
       console.log(`⚠️  Файл не найден: ${filePath}`);
     }
   }
-  
-  const successCount = results.filter(r => r.success).length;
-  
+
+  const successCount = results.filter((r) => r.success).length;
+
   console.log(`\n📊 Результат исправления:`);
   console.log(`   ✅ Исправлено: ${successCount}`);
   console.log(`   ⏭️  Пропущено: ${results.length - successCount}`);
-  
+
   if (successCount > 0) {
     console.log('\n💡 Следующие шаги:');
     console.log('   1. Проверить компиляцию: npx tsc --build');
     console.log('   2. Исправить оставшиеся ошибки вручную');
     console.log('   3. Запустить тесты: npm test');
   }
-  
+
   console.log('\n🎯 Цель: Устранение всех ошибок TypeScript компиляции');
 }
 
@@ -269,8 +289,4 @@ if (require.main === module) {
   main();
 }
 
-export {
-  fixTypeScriptFile,
-  createLoggerFile,
-  fixSpecificFiles
-}; 
+export { fixTypeScriptFile, createLoggerFile, fixSpecificFiles };

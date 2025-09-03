@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,13 +16,13 @@
   </head>
   <body>
     <!-- ====== Chat Box Section Start -->
-    <section class="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section class="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div class="mx-auto px-4 md:container">
         <div
-          class="mx-auto w-full max-w-[560px] overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2"
+          class="mx-auto w-full max-w-[560px] overflow-hidden rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
         >
           <div
-            class="flex items-center justify-between border-b border-stroke dark:border-dark-3 px-6 py-[18px]"
+            class="flex items-center justify-between border-b border-stroke px-6 py-[18px] dark:border-dark-3"
           >
             <div class="flex items-center">
               <div
@@ -47,7 +47,7 @@
               <div x-data="{openDropDown: false}" class="relative">
                 <button
                   @click="openDropDown = !openDropDown"
-                  class="flex h-[30px] w-10 items-center justify-center rounded-sm border border-stroke dark:border-dark-3 bg-[#F8FAFC] dark:bg-dark text-body-color dark:text-dark-6"
+                  class="flex h-[30px] w-10 items-center justify-center rounded-sm border border-stroke bg-[#F8FAFC] text-body-color dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                 >
                   <svg
                     width="22"
@@ -72,15 +72,15 @@
                 <div
                   x-show="openDropDown"
                   @click.outside="openDropDown = false"
-                  class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm bg-white dark:bg-dark p-2 shadow-card"
+                  class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark"
                 >
                   <button
-                    class="w-full rounded-sm py-2 px-3 text-left text-sm text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2"
+                    class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                   >
                     Edit
                   </button>
                   <button
-                    class="w-full rounded-sm py-2 px-3 text-left text-sm text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2"
+                    class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                   >
                     Delete
                   </button>
@@ -89,7 +89,7 @@
             </div>
           </div>
 
-          <div class="space-y-3 pt-6 px-6 pb-[30px]">
+          <div class="space-y-3 px-6 pb-[30px] pt-6">
             <div class="max-w-[355px]">
               <p
                 class="mb-2 text-sm font-medium text-body-color dark:text-dark-6"
@@ -97,7 +97,7 @@
                 Andri Thomas
               </p>
               <div
-                class="mb-2 rounded-2xl rounded-tl-none bg-gray dark:bg-dark-3 py-3 px-5"
+                class="mb-2 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-dark-3"
               >
                 <p class="text-base text-body-color dark:text-dark-6">
                   I want to make an appointment tomorrow from 2:00 to 5:00pm?
@@ -108,7 +108,7 @@
 
             <div class="ml-auto max-w-[355px]">
               <div
-                class="mb-2 rounded-2xl rounded-br-none bg-primary py-3 px-5"
+                class="mb-2 rounded-2xl rounded-br-none bg-primary px-5 py-3"
               >
                 <p class="text-base text-white">
                   Hello, Thomas! I will check the schedule and inform you
@@ -126,7 +126,7 @@
                 Andri Thomas
               </p>
               <div
-                class="mb-2 rounded-2xl rounded-tl-none bg-gray dark:bg-dark-3 py-3 px-5"
+                class="mb-2 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-dark-3"
               >
                 <p class="text-base text-body-color dark:text-dark-6">
                   Ok, Thanks for your reply.
@@ -137,7 +137,7 @@
 
             <div class="ml-auto max-w-[355px]">
               <div
-                class="mb-2 rounded-2xl rounded-br-none bg-primary py-3 px-5"
+                class="mb-2 rounded-2xl rounded-br-none bg-primary px-5 py-3"
               >
                 <p class="text-base text-white">You are welcome!</p>
               </div>
@@ -147,19 +147,19 @@
             </div>
           </div>
 
-          <div class="border-t border-stroke dark:border-dark-3 py-5 px-6">
+          <div class="border-t border-stroke px-6 py-5 dark:border-dark-3">
             <form class="flex items-center justify-between space-x-[18px]">
               <div class="relative w-full">
                 <input
                   type="text"
                   placeholder="Type something here"
-                  class="h-[52px] w-full rounded-md border border-stroke dark:border-dark-3 bg-gray-1 dark:bg-transparent pl-5 pr-[75px] placeholder:text-secondary-color text-body-color dark:text-dark-6 outline-hidden focus:border-primary"
+                  class="outline-hidden h-[52px] w-full rounded-md border border-stroke bg-gray-1 pl-5 pr-[75px] text-body-color placeholder:text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-transparent dark:text-dark-6"
                 />
                 <div
                   class="absolute right-5 top-1/2 inline-flex -translate-y-1/2 items-center justify-end space-x-3"
                 >
                   <button
-                    class="text-body-color dark:text-dark-6 hover:text-primary"
+                    class="text-body-color hover:text-primary dark:text-dark-6"
                   >
                     <svg
                       width="18"
@@ -176,7 +176,7 @@
                   </button>
 
                   <button
-                    class="text-body-color dark:text-dark-6 hover:text-primary"
+                    class="text-body-color hover:text-primary dark:text-dark-6"
                   >
                     <svg
                       width="18"

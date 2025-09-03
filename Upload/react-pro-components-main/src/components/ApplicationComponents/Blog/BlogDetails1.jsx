@@ -940,10 +940,10 @@ const BlogDetails1 = () => {
                 </div>
               </div>
 
-              <BlogWriter 
-                authorImg="https://cdn.tailgrids.com/2.0/image/application/images/blog-details/blog-details-01/author-02.png" 
-                authorName="Melissa Hunter" 
-                authorDetails="Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna, quis rutrum mi semper non." 
+              <BlogWriter
+                authorImg="https://cdn.tailgrids.com/2.0/image/application/images/blog-details/blog-details-01/author-02.png"
+                authorName="Melissa Hunter"
+                authorDetails="Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna, quis rutrum mi semper non."
                 facebookLink="#"
                 twitterLink="#"
                 instagramLink="#"
@@ -977,32 +977,27 @@ const SocialLinkItem = ({ link, children }) => {
   return <a href={link}>{children}</a>;
 };
 
-const BlogWriter = ({ authorImg, authorName, authorDetails, facebookLink, twitterLink, instagramLink}) => {
+const BlogWriter = ({
+  authorImg,
+  authorName,
+  authorDetails,
+  facebookLink,
+  twitterLink,
+  instagramLink,
+}) => {
   return (
-    <div className="flex mb-16">
-      <div
-        className="mr-5 h-20 w-full max-w-[80px] overflow-hidden rounded-full sm:mr-8 sm:h-[100px] sm:max-w-[100px]"
-      >
-        <img
-          src={authorImg}
-          alt={authorName}
-          className="w-full"
-        />
+    <div className="mb-16 flex">
+      <div className="mr-5 h-20 w-full max-w-[80px] overflow-hidden rounded-full sm:mr-8 sm:h-[100px] sm:max-w-[100px]">
+        <img src={authorImg} alt={authorName} className="w-full" />
       </div>
       <div className="w-full lg:mr-20">
-        <span
-          className="block text-xs font-medium text-body-color dark:text-dark-6"
-        >
+        <span className="block text-xs font-medium text-body-color dark:text-dark-6">
           Written By
         </span>
-        <h4
-          className="mb-3 text-base font-semibold text-dark dark:text-white"
-        >
+        <h4 className="mb-3 text-base font-semibold text-dark dark:text-white">
           {authorName}
         </h4>
-        <p
-          className="mb-5 text-base leading-relaxed text-body-color dark:text-dark-6"
-        >
+        <p className="mb-5 text-base leading-relaxed text-body-color dark:text-dark-6">
           {authorDetails}
         </p>
         <div className="flex items-center">
@@ -1019,10 +1014,7 @@ const BlogWriter = ({ authorImg, authorName, authorDetails, facebookLink, twitte
               <path d="M6.91729 5.35603H5.76441H5.35266V4.92409V3.58508V3.15314H5.76441H6.62907C6.85553 3.15314 7.04081 2.98037 7.04081 2.72121V0.431938C7.04081 0.194372 6.87611 0 6.62907 0H5.12621C3.49982 0 2.36752 1.20942 2.36752 3.00197V4.88089V5.31283H1.95578H0.555854C0.267633 5.31283 0 5.5504 0 5.89595V7.45092C0 7.75328 0.226459 8.03404 0.555854 8.03404H1.91461H2.32635V8.46598V12.8069C2.32635 13.1093 2.55281 13.3901 2.8822 13.3901H4.8174C4.94092 13.3901 5.04386 13.3253 5.12621 13.2389C5.20855 13.1525 5.27032 13.0013 5.27032 12.8717V8.48757V8.05563H5.70265H6.62907C6.8967 8.05563 7.10257 7.88286 7.14375 7.6237V7.6021V7.5805L7.43197 6.09032C7.45256 5.93914 7.43197 5.76637 7.30845 5.59359C7.26727 5.48561 7.08199 5.37762 6.91729 5.35603Z" />
             </svg>
           </a>
-          <a
-            href={twitterLink}
-            className="mr-6 text-dark-8 hover:text-primary"
-          >
+          <a href={twitterLink} className="mr-6 text-dark-8 hover:text-primary">
             <svg
               width={14}
               height={11}
@@ -1031,7 +1023,7 @@ const BlogWriter = ({ authorImg, authorName, authorDetails, facebookLink, twitte
             >
               <path d="M12.3393 2.28129L13.16 1.30302C13.3976 1.03807 13.4624 0.834263 13.484 0.73236C12.8361 1.09921 12.2313 1.2215 11.8426 1.2215H11.6914L11.605 1.13997C11.0867 0.71198 10.4388 0.487793 9.74771 0.487793C8.23593 0.487793 7.0481 1.66987 7.0481 3.03537C7.0481 3.11689 7.0481 3.23918 7.06969 3.3207L7.13449 3.72831L6.68095 3.70793C3.91655 3.62641 1.64888 1.38454 1.28173 0.997308C0.677019 2.01634 1.02257 2.99461 1.38972 3.60603L2.12401 4.74734L0.957778 4.13592C0.979375 4.99191 1.32493 5.66447 1.99443 6.1536L2.57754 6.56122L1.99443 6.7854C2.36158 7.82481 3.18226 8.25281 3.78697 8.41585L4.58605 8.61966L3.83016 9.10879C2.62074 9.92402 1.10896 9.86288 0.439453 9.80173C1.80006 10.6985 3.41982 10.9023 4.54286 10.9023C5.38514 10.9023 6.01145 10.8208 6.16263 10.7596C12.2098 9.4145 12.4905 4.31935 12.4905 3.30032V3.15765L12.6201 3.07613C13.3544 2.42395 13.6567 2.07748 13.8295 1.87367C13.7647 1.89406 13.6783 1.93482 13.592 1.9552L12.3393 2.28129Z" />
             </svg>
-        </a>
+          </a>
           <a
             href={instagramLink}
             className="mr-6 text-dark-8 hover:text-primary"
@@ -1050,26 +1042,24 @@ const BlogWriter = ({ authorImg, authorName, authorDetails, facebookLink, twitte
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Comments = () => {
   return (
     <div className="w-full">
-      <h3
-        className="mb-12 text-[28px] font-bold text-dark dark:text-white"
-      >
+      <h3 className="mb-12 text-[28px] font-bold text-dark dark:text-white">
         4 Comments
       </h3>
 
-      <CommentsItem 
+      <CommentsItem
         authorImg="https://cdn.tailgrids.com/2.0/image/application/images/blog-details/blog-details-01/author-03.png"
         authorName="Alisha Williams"
         commentDate="March 15, 2023 at 2:15 pm"
         comments="Eget ipsum elementum venenatis. Aenean maximus urna magna, quis rutrum mi semper non. Cras rhoncus elit non."
       />
 
-      <CommentsItem 
+      <CommentsItem
         isReply
         authorImg="https://cdn.tailgrids.com/2.0/image/application/images/blog-details/blog-details-01/author-04.png"
         authorName="Zecika Farnades"
@@ -1077,51 +1067,45 @@ const Comments = () => {
         comments="Eget ipsum elementum venenatis. Aenean maximus urna magna, quis rutrum mi semper non. Cras rhoncus elit non."
       />
 
-      <CommentsItem 
+      <CommentsItem
         authorImg="https://cdn.tailgrids.com/2.0/image/application/images/blog-details/blog-details-01/author-05.png"
         authorName="Naimur Rahman"
         commentDate="November 25, 2023 at 5:50 am"
         comments="Eget ipsum elementum venenatis. Aenean maximus urna magna, quis rutrum mi semper non. Cras rhoncus elit non."
       />
     </div>
-  )
-}
+  );
+};
 
-const CommentsItem = ({isReply, authorImg, authorName, commentDate, comments}) => {
+const CommentsItem = ({
+  isReply,
+  authorImg,
+  authorName,
+  commentDate,
+  comments,
+}) => {
   return (
-    <div className={`${isReply ? 'ml-16 flex pb-11 md:ml-[110px]' : 'flex pb-11 lg:mr-16 xl:mr-[80px]'}`}>
-        <div
-          className="mr-5 h-14 w-full max-w-[56px] overflow-hidden rounded-full sm:mr-8 sm:h-20 sm:max-w-[80px]"
-        >
-          <img
-            src={authorImg}
-            alt={authorName}
-            className="w-full"
-          />
-        </div>
-        <div className="w-full">
-          <h4
-            className="text-base font-semibold text-dark dark:text-white"
-          >
-            {authorName}
-          </h4>
-          <span
-            className="inline-block mb-3 text-xs text-body-color dark:text-dark-6"
-          >
-            {commentDate}
-          </span>
-          <p className="mb-6 text-base text-body-color">
-            {comments}
-          </p>
-          <button
-            className="px-5 py-2 text-xs font-medium rounded-sm bg-primary/5 text-primary hover:bg-primary hover:text-white"
-          >
-            Reply
-          </button>
-        </div>
+    <div
+      className={`${isReply ? "ml-16 flex pb-11 md:ml-[110px]" : "flex pb-11 lg:mr-16 xl:mr-[80px]"}`}
+    >
+      <div className="mr-5 h-14 w-full max-w-[56px] overflow-hidden rounded-full sm:mr-8 sm:h-20 sm:max-w-[80px]">
+        <img src={authorImg} alt={authorName} className="w-full" />
       </div>
-  )
-}
+      <div className="w-full">
+        <h4 className="text-base font-semibold text-dark dark:text-white">
+          {authorName}
+        </h4>
+        <span className="mb-3 inline-block text-xs text-body-color dark:text-dark-6">
+          {commentDate}
+        </span>
+        <p className="mb-6 text-base text-body-color">{comments}</p>
+        <button className="rounded-sm bg-primary/5 px-5 py-2 text-xs font-medium text-primary hover:bg-primary hover:text-white">
+          Reply
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const CommentForm = () => {
   return (
@@ -1130,7 +1114,7 @@ const CommentForm = () => {
         Leave a comment
       </h3>
       <form>
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 md:w-1/2">
             <FormInput
               label="Your Name"
@@ -1146,13 +1130,10 @@ const CommentForm = () => {
             />
           </div>
           <div className="w-full px-4">
-            <FormTextarea
-              label="Comment"
-              placeholder="Enter your comment"
-            />
+            <FormTextarea label="Comment" placeholder="Enter your comment" />
           </div>
           <div className="w-full px-4">
-            <button className="py-3 text-base font-semibold text-white rounded-md bg-primary px-11">
+            <button className="rounded-md bg-primary px-11 py-3 text-base font-semibold text-white">
               Submit
             </button>
           </div>
@@ -1165,13 +1146,13 @@ const CommentForm = () => {
 const FormInput = ({ label, type, placeholder }) => {
   return (
     <div className="mb-9">
-      <label className="block mb-4 text-base text-body-color dark:text-dark-6">
+      <label className="mb-4 block text-base text-body-color dark:text-dark-6">
         {label} <span className="text-red">*</span>
       </label>
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full rounded-sm border border-stroke dark:border-dark-3 dark:bg-dark bg-white py-3 px-[14px] text-body-color outline-hidden dark:text-dark-6 focus:border-primary"
+        className="outline-hidden w-full rounded-sm border border-stroke bg-white px-[14px] py-3 text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
       />
     </div>
   );
@@ -1180,13 +1161,13 @@ const FormInput = ({ label, type, placeholder }) => {
 const FormTextarea = ({ label, placeholder }) => {
   return (
     <div className="mb-12">
-      <label className="block mb-4 text-base text-body-color dark:text-dark-6">
+      <label className="mb-4 block text-base text-body-color dark:text-dark-6">
         {label} <span className="text-red">*</span>
       </label>
       <textarea
         rows="7"
         placeholder={placeholder}
-        className="w-full resize-none rounded-sm border border-stroke dark:border-dark-3 dark:bg-dark bg-white py-3 px-[14px] text-body-color outline-hidden dark:text-dark-6 focus:border-primary"
+        className="outline-hidden w-full resize-none rounded-sm border border-stroke bg-white px-[14px] py-3 text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
       ></textarea>
     </div>
   );

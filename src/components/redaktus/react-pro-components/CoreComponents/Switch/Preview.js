@@ -1,6 +1,6 @@
-import React from "react";
-import Checkbox from "./Checkbox";
-import Switch from "./index";
+import React from 'react';
+import Checkbox from './Checkbox';
+import Switch from './index';
 
 const Preview = () => {
   return (

@@ -74,7 +74,7 @@ export default function Select3() {
               <div className="relative flex-1">
                 <select
                   name="multiselect-dropdown"
-                  className="appearance-none bg-transparent px-4 text-dark outline-hidden dark:text-white"
+                  className="outline-hidden appearance-none bg-transparent px-4 text-dark dark:text-white"
                 >
                   <option value="USA">USA</option>
                   <option value="UK">UK</option>

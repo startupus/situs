@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const DataStats = () => {
   return (
@@ -13,13 +13,7 @@ const DataStats = () => {
             increment="0.43%"
             percent="93"
             icon={
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M24.2531 6.05315C24.2531 6.01252 24.2125 6.01252 24.2125 5.9719C23.9281 5.56565 23.5219 5.20002 23.0344 4.9969L14.2594 0.975024C13.4469 0.609399 12.5531 0.609399 11.7406 0.975024L3.00625 4.9969C2.51875 5.20002 2.15312 5.56565 1.82812 5.93127C1.7875 5.9719 1.74687 6.01252 1.70625 6.05315C1.70625 6.09377 1.66562 6.09377 1.66562 6.1344C1.38125 6.6219 1.21875 7.15002 1.21875 7.71877V17.875C1.21875 19.0125 1.86875 20.0688 2.88437 20.5563L11.6188 24.9438C12.025 25.1469 12.5125 25.2688 12.9594 25.2688C13.4062 25.2688 13.8938 25.1469 14.3 24.9438L23.0344 20.5563C24.05 20.0281 24.7 19.0125 24.7 17.875V7.71877C24.7812 7.1094 24.5781 6.54065 24.2531 6.05315ZM12.5125 2.64065C12.675 2.5594 12.8375 2.51877 13 2.51877C13.1625 2.51877 13.325 2.5594 13.4875 2.64065L21.6938 6.41877L18.4438 8.00315L10.0344 3.77815L12.5125 2.64065ZM13 10.6844L4.30625 6.41877L7.92188 4.75315L16.4125 9.01877L13 10.6844ZM3.69688 18.9313C3.29063 18.7281 3.04688 18.3219 3.04688 17.875V7.84065L12.0656 12.2688V23.1563L3.69688 18.9313ZM22.3031 18.9313L13.8938 23.1563V12.2688L17.4688 10.5219V13.8125C17.4688 14.3 17.875 14.7063 18.3625 14.7063C18.85 14.7063 19.2563 14.3 19.2563 13.8125V9.62815L22.8719 7.84065V17.875C22.9531 18.3219 22.6688 18.7281 22.3031 18.9313Z"
                   fill="#13C296"
@@ -35,13 +29,7 @@ const DataStats = () => {
             increment="0.39%"
             percent="95"
             icon={
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M8.49062 11.8625C11.0094 11.8625 13.0812 9.87192 13.0812 7.3938C13.0812 4.91567 11.0094 2.92505 8.49062 2.92505C5.97187 2.92505 3.89999 4.91567 3.89999 7.3938C3.89999 9.87192 5.97187 11.8625 8.49062 11.8625ZM8.49062 4.7938C9.99374 4.7938 11.2531 5.97192 11.2531 7.43442C11.2531 8.89692 10.0344 10.075 8.49062 10.075C6.94687 10.075 5.72812 8.89692 5.72812 7.43442C5.72812 5.97192 6.98749 4.7938 8.49062 4.7938Z"
                   fill="#3758F9"
@@ -65,13 +53,7 @@ const DataStats = () => {
             decrement="1.39%"
             percent="75"
             icon={
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13 0.731201C8.45 0.731201 4.79375 4.75308 4.79375 9.70933V16.2906C4.79375 21.2468 8.49063 25.2687 13 25.2687C15.1125 25.2687 17.1031 24.4156 18.6062 22.8718C20.3125 21.1656 21.2469 18.7281 21.2062 16.25V9.70933C21.2062 4.75308 17.5094 0.731201 13 0.731201ZM19.3781 9.70933V10.1562H13.975V2.64058C17.0625 3.1687 19.3781 6.13433 19.3781 9.70933ZM12.1469 2.59995V10.1562H6.58125V9.70933C6.58125 6.05308 9.01875 3.04683 12.1469 2.59995ZM17.3062 21.6125C16.1281 22.7906 14.5844 23.4406 13 23.4406C9.46563 23.4406 6.62188 20.2312 6.62188 16.2906V11.9843H19.4187V16.2906C19.4187 18.3218 18.6469 20.2718 17.3062 21.6125Z"
                   fill="#F2994A"
@@ -87,13 +69,7 @@ const DataStats = () => {
             increment="0.39%"
             percent="75"
             icon={
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 26 26"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M15.0719 19.4187C13.4469 19.4187 12.1469 20.7187 12.1469 22.3437C12.1469 23.9687 13.4469 25.2687 15.0719 25.2687C16.6969 25.2687 17.9969 23.9687 17.9969 22.3437C17.9969 20.7593 16.6562 19.4187 15.0719 19.4187ZM15.0719 23.4812C14.4625 23.4812 13.975 22.9937 13.975 22.3843C13.975 21.775 14.4625 21.2875 15.0719 21.2875C15.6812 21.2875 16.1687 21.775 16.1687 22.3843C16.1687 22.9531 15.6406 23.4812 15.0719 23.4812Z"
                   fill="#9B51E0"
@@ -117,16 +93,7 @@ const DataStats = () => {
 
 export default DataStats;
 
-const DataStatsCard = ({
-  icon,
-  color,
-  title,
-  subtitle,
-  percent,
-  uses,
-  increment,
-  decrement,
-}) => {
+const DataStatsCard = ({ icon, color, title, subtitle, percent, uses, increment, decrement }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4">
       <div className="mb-8 rounded-[5px] bg-white p-5 shadow-1 dark:bg-dark-2 dark:shadow-box-dark lg:p-4 xl:p-5">
@@ -136,41 +103,22 @@ const DataStatsCard = ({
             style={{ color: color }}
           >
             {icon}
-            <div
-              className="absolute inset-0 h-full w-full opacity-[.08]"
-              style={{ backgroundColor: color }}
-            ></div>
+            <div className="absolute inset-0 h-full w-full opacity-[.08]" style={{ backgroundColor: color }}></div>
           </div>
           <div>
-            <h5 className="text-base font-medium text-dark dark:text-white">
-              {title}
-            </h5>
-            <p className="text-sm text-body-color dark:text-dark-6">
-              {subtitle}
-            </p>
+            <h5 className="text-base font-medium text-dark dark:text-white">{title}</h5>
+            <p className="text-sm text-body-color dark:text-dark-6">{subtitle}</p>
           </div>
         </div>
         <div>
           <div className="mb-5 flex items-end">
-            <p className="mr-1 text-2xl font-bold leading-none text-dark dark:text-white">
-              {uses}
-            </p>
-            <p
-              className={`inline-flex items-center text-sm font-medium ${
-                increment ? "text-secondary" : "text-red"
-              }`}
-            >
+            <p className="mr-1 text-2xl font-bold leading-none text-dark dark:text-white">{uses}</p>
+            <p className={`inline-flex items-center text-sm font-medium ${increment ? 'text-secondary' : 'text-red'}`}>
               {increment}
               {decrement}
               <span className="pl-1">
                 {increment && (
-                  <svg
-                    width="10"
-                    height="11"
-                    viewBox="0 0 10 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M4.35716 2.8925L0.908974 6.245L5.0443e-07 5.36125L5 0.499999L10 5.36125L9.09103 6.245L5.64284 2.8925L5.64284 10.5L4.35716 10.5L4.35716 2.8925Z"
                       fill="currentColor"
@@ -178,13 +126,7 @@ const DataStatsCard = ({
                   </svg>
                 )}
                 {decrement && (
-                  <svg
-                    width="10"
-                    height="11"
-                    viewBox="0 0 10 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M5.64284 8.1075L9.09102 4.755L10 5.63875L5 10.5L-8.98488e-07 5.63875L0.908973 4.755L4.35716 8.1075L4.35716 0.500001L5.64284 0.500001L5.64284 8.1075Z"
                       fill="currentColor"

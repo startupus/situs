@@ -2,11 +2,13 @@ import React, { useState } from "react";
 
 const SelectBox = () => {
   return (
-    <section className="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="container mx-auto">
         <div>
-          <h3 className="mb-6 text-lg font-medium text-dark dark:text-white">Team Members</h3>
-          <div className="w-full max-w-[375px] space-y-[10px] rounded-md bg-white dark:bg-dark-2 p-4 shadow-1 dark:shadow-box-dark">
+          <h3 className="mb-6 text-lg font-medium text-dark dark:text-white">
+            Team Members
+          </h3>
+          <div className="w-full max-w-[375px] space-y-[10px] rounded-md bg-white p-4 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
             <SelectBoxItem
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/box-select/box-select-01/image-01.png"
               name="Henry Dholi"
@@ -52,13 +54,13 @@ const SelectBoxItem = ({ img, name, position }) => {
       />
       <label htmlFor={name} className="flex w-full items-center">
         <div
-          className={`user-box flex w-full items-center rounded-[5px] py-[10px] px-4 hover:bg-gray-2 dark:hover:bg-dark  ${
-            isChecked
-              ? "bg-gray-2 dark:bg-dark"
-              : ""
+          className={`user-box flex w-full items-center rounded-[5px] px-4 py-[10px] hover:bg-gray-2 dark:hover:bg-dark ${
+            isChecked ? "bg-gray-2 dark:bg-dark" : ""
           }`}
         >
-          <div className={`box mr-5 flex h-5 w-full max-w-[20px] cursor-pointer items-center justify-center rounded-sm border  ${isChecked ? "border-primary bg-primary" : "border-stroke dark:border-dark-3"}`}>
+          <div
+            className={`box mr-5 flex h-5 w-full max-w-[20px] cursor-pointer items-center justify-center rounded-sm border ${isChecked ? "border-primary bg-primary" : "border-stroke dark:border-dark-3"}`}
+          >
             <span className={`icon ${isChecked ? "" : "opacity-0"}`}>
               <svg
                 width="14"
@@ -84,8 +86,12 @@ const SelectBoxItem = ({ img, name, position }) => {
             />
           </div>
           <div>
-            <h4 className="text-sm font-medium text-dark dark:text-white">{name}</h4>
-            <p className="text-xs text-body-color dark:text-dark-6">{position}</p>
+            <h4 className="text-sm font-medium text-dark dark:text-white">
+              {name}
+            </h4>
+            <p className="text-xs text-body-color dark:text-dark-6">
+              {position}
+            </p>
           </div>
         </div>
       </label>

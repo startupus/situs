@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const About4 = () => {
   return (
@@ -12,22 +12,16 @@ const About4 = () => {
                   Smart solution for starting your business
                 </h2>
                 <p className="mb-10 text-base leading-relaxed dark:text-dark-6 text-body-color">
-                  Proin gravida nibh vel velit auctor aliquet. aks Aenean
-                  sollicitudin, lorem quis bibendum auctor, nisi elit consequat
-                  ipsum, nec sagittis sem.consequat ipsum, nec sagittis sem nibh
-                  id elit.Donec vestibulum justo a diam ultricies. pel
-                  lentesque.
+                  Proin gravida nibh vel velit auctor aliquet. aks Aenean sollicitudin, lorem quis bibendum auctor, nisi
+                  elit consequat ipsum, nec sagittis sem.consequat ipsum, nec sagittis sem nibh id elit.Donec vestibulum
+                  justo a diam ultricies. pel lentesque.
                 </p>
-                <h3 className="mb-8 text-2xl font-bold text-dark dark:text-white">
-                  Marketing solutions
-                </h3>
+                <h3 className="mb-8 text-2xl font-bold text-dark dark:text-white">Marketing solutions</h3>
                 <ul className="pb-6 list-disc list-inside marker:text-primary">
                   <li className="mb-4 text-base text-body-color dark:text-dark-6">
                     Consectetur adipiscing elit in voluptate velit.
                   </li>
-                  <li className="mb-4 text-base text-body-color dark:text-dark-6">
-                    Mattis vulputate cupidatat.
-                  </li>
+                  <li className="mb-4 text-base text-body-color dark:text-dark-6">Mattis vulputate cupidatat.</li>
                 </ul>
                 <a
                   href="/#"
@@ -59,15 +53,9 @@ const About4 = () => {
                   </div>
                   <div className="bg-primary relative z-10 mb-4 flex items-center justify-center overflow-hidden py-12 px-6 sm:mb-8 sm:h-[160px] sm:p-5 lg:mb-4 xl:mb-8">
                     <div>
-                      <span className="block text-5xl font-extrabold text-white">
-                        09
-                      </span>
-                      <span className="block text-base font-semibold text-white">
-                        We have
-                      </span>
-                      <span className="block text-base font-medium text-white/70">
-                        Years of experience
-                      </span>
+                      <span className="block text-5xl font-extrabold text-white">09</span>
+                      <span className="block text-base font-semibold text-white">We have</span>
+                      <span className="block text-base font-medium text-white/70">Years of experience</span>
                     </div>
                     <div>
                       <span className="absolute top-0 left-0 -z-10">
@@ -97,11 +85,7 @@ const About4 = () => {
                               gradientUnits="userSpaceOnUse"
                             >
                               <stop stop-color="white" />
-                              <stop
-                                offset="1"
-                                stop-color="white"
-                                stop-opacity="0"
-                              />
+                              <stop offset="1" stop-color="white" stop-opacity="0" />
                             </linearGradient>
                           </defs>
                         </svg>
@@ -133,11 +117,7 @@ const About4 = () => {
                               gradientUnits="userSpaceOnUse"
                             >
                               <stop stop-color="white" />
-                              <stop
-                                offset="1"
-                                stop-color="white"
-                                stop-opacity="0"
-                              />
+                              <stop offset="1" stop-color="white" stop-opacity="0" />
                             </linearGradient>
                           </defs>
                         </svg>
@@ -169,11 +149,7 @@ const About4 = () => {
                               gradientUnits="userSpaceOnUse"
                             >
                               <stop stop-color="white" />
-                              <stop
-                                offset="1"
-                                stop-color="white"
-                                stop-opacity="0"
-                              />
+                              <stop offset="1" stop-color="white" stop-opacity="0" />
                             </linearGradient>
                           </defs>
                         </svg>

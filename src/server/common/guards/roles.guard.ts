@@ -9,8 +9,10 @@ export class RolesGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     // Test режим: проверяем тестовый токен для e2e тестов
     const request = context.switchToHttp().getRequest();
-    if (process.env.NODE_ENV === 'test' && 
-        request.headers.authorization === `Bearer ${process.env.AUTH_TEST_TOKEN || 'test-token-12345'}`) {
+    if (
+      process.env.NODE_ENV === 'test' &&
+      request.headers.authorization === `Bearer ${process.env.AUTH_TEST_TOKEN || 'test-token-12345'}`
+    ) {
       return true;
     }
     const requiredRoles = this.reflector.getAllAndOverride<GlobalRole[]>(ROLES_KEY, [

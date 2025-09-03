@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import SitusSidebar from "../Sidebar/SitusSidebar";
-import SitusHeader from "../Header/SitusHeader";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import SitusSidebar from '../Sidebar/SitusSidebar';
+import SitusHeader from '../Header/SitusHeader';
+import { Outlet } from 'react-router-dom';
 
 interface SitusMainLayoutProps {}
 
@@ -26,4 +26,4 @@ const SitusMainLayout: React.FC<SitusMainLayoutProps> = () => {
   );
 };
 
-export default SitusMainLayout; 
+export default SitusMainLayout;

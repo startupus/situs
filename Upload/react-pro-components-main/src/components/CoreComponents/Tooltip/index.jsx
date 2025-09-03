@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Tooltip = ({
   children,
@@ -11,12 +11,12 @@ const Tooltip = ({
   danger,
   success,
   info,
-  position = 'top',
+  position = "top",
 }) => {
   return (
     <>
       <div>
-        <div className='group relative inline-block'>
+        <div className="group relative inline-block">
           <button
             className={`inline-flex rounded bg-primary ${
               (secondary && `bg-secondary`) ||
@@ -26,21 +26,21 @@ const Tooltip = ({
               (danger && `bg-danger`) ||
               (success && `bg-success`) ||
               (info && `bg-info`)
-            } py-2 px-[18px] text-base font-semibold text-white`}
+            } px-[18px] py-2 text-base font-semibold text-white`}
           >
             {children}
           </button>
           <div
             className={` ${
-              (position === 'right' &&
-                `absolute left-full top-1/2 z-20 ml-3 -translate-y-1/2 whitespace-nowrap rounded-sm  py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100`) ||
-              (position === 'top' &&
-                `absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded-sm  py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100`) ||
-              (position === 'left' &&
-                `absolute right-full top-1/2 z-20 mr-3 -translate-y-1/2 whitespace-nowrap rounded-sm  py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100`) ||
-              (position === 'bottom' &&
-                `absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded-sm  py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100`)
-            }   ${
+              (position === "right" &&
+                `absolute left-full top-1/2 z-20 ml-3 -translate-y-1/2 whitespace-nowrap rounded-sm px-4 py-[6px] text-sm font-semibold text-white opacity-0 group-hover:opacity-100`) ||
+              (position === "top" &&
+                `absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded-sm px-4 py-[6px] text-sm font-semibold text-white opacity-0 group-hover:opacity-100`) ||
+              (position === "left" &&
+                `absolute right-full top-1/2 z-20 mr-3 -translate-y-1/2 whitespace-nowrap rounded-sm px-4 py-[6px] text-sm font-semibold text-white opacity-0 group-hover:opacity-100`) ||
+              (position === "bottom" &&
+                `absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded-sm px-4 py-[6px] text-sm font-semibold text-white opacity-0 group-hover:opacity-100`)
+            } ${
               (primary ? `bg-dark` : ``) ||
               (secondary && `bg-secondary`) ||
               (gray && `bg-body-color`) ||
@@ -53,15 +53,15 @@ const Tooltip = ({
           >
             <span
               className={` ${
-                (position === 'right' &&
-                  `absolute left-[-3px] top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45 rounded-xs`) ||
-                (position === 'top' &&
-                  `absolute bottom-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-xs`) ||
-                (position === 'left' &&
-                  `absolute right-[-3px] top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45 rounded-xs`) ||
-                (position === 'bottom' &&
-                  `absolute top-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-xs`)
-              }    ${
+                (position === "right" &&
+                  `rounded-xs absolute left-[-3px] top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45`) ||
+                (position === "top" &&
+                  `rounded-xs absolute bottom-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45`) ||
+                (position === "left" &&
+                  `rounded-xs absolute right-[-3px] top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45`) ||
+                (position === "bottom" &&
+                  `rounded-xs absolute left-1/2 top-[-3px] -z-10 h-2 w-2 -translate-x-1/2 rotate-45`)
+              } ${
                 (primary ? `bg-dark` : ``) ||
                 (secondary && `bg-secondary`) ||
                 (gray && `bg-body-color`) ||
@@ -77,7 +77,7 @@ const Tooltip = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Tooltip
+export default Tooltip;

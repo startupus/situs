@@ -20,15 +20,15 @@ export class MenuAccessService {
   async checkMenuItemAccess(
     menuItemId: string,
     userAccessLevels: AccessLevel[] = ['PUBLIC'],
-    userId?: string
+    userId?: string,
   ): Promise<boolean> {
     const menuItem = await this.prisma.menuItem.findUnique({
       where: { id: menuItemId },
       select: {
         accessLevel: true,
         isPublished: true,
-        parameters: true
-      }
+        parameters: true,
+      },
     });
 
     if (!menuItem || !menuItem.isPublished) {
@@ -63,25 +63,21 @@ export class MenuAccessService {
   async filterMenuItemsByAccess(
     menuItems: any[],
     userAccessLevels: AccessLevel[] = ['PUBLIC'],
-    userId?: string
+    userId?: string,
   ): Promise<any[]> {
     const accessibleItems = [];
 
     for (const item of menuItems) {
       const hasAccess = await this.checkMenuItemAccess(item.id, userAccessLevels, userId);
-      
+
       if (hasAccess) {
         // Рекурсивно фильтруем дочерние элементы
         const filteredItem = { ...item };
-        
+
         if (item.children && item.children.length > 0) {
-          filteredItem.children = await this.filterMenuItemsByAccess(
-            item.children,
-            userAccessLevels,
-            userId
-          );
+          filteredItem.children = await this.filterMenuItemsByAccess(item.children, userAccessLevels, userId);
         }
-        
+
         accessibleItems.push(filteredItem);
       }
     }
@@ -95,37 +91,31 @@ export class MenuAccessService {
    * @param userAccessLevels Уровни доступа пользователя
    * @returns Список доступных типов меню
    */
-  async getAccessibleMenuTypes(
-    projectId: string,
-    userAccessLevels: AccessLevel[] = ['PUBLIC']
-  ) {
+  async getAccessibleMenuTypes(projectId: string, userAccessLevels: AccessLevel[] = ['PUBLIC']) {
     const menuTypes = await this.prisma.menuType.findMany({
       where: {
         projectId,
-        isActive: true
+        isActive: true,
       },
       include: {
         items: {
           where: {
-            isPublished: true
-          }
-        }
-      }
+            isPublished: true,
+          },
+        },
+      },
     });
 
     const accessibleMenuTypes = [];
 
     for (const menuType of menuTypes) {
       // Проверяем, есть ли хотя бы один доступный пункт в меню
-      const accessibleItems = await this.filterMenuItemsByAccess(
-        menuType.items,
-        userAccessLevels
-      );
+      const accessibleItems = await this.filterMenuItemsByAccess(menuType.items, userAccessLevels);
 
       if (accessibleItems.length > 0) {
         accessibleMenuTypes.push({
           ...menuType,
-          items: accessibleItems
+          items: accessibleItems,
         });
       }
     }
@@ -140,11 +130,7 @@ export class MenuAccessService {
    * @param userRoles Роли пользователя
    * @returns true если редактирование разрешено
    */
-  async checkEditAccess(
-    menuItemId: string,
-    userId: string,
-    userRoles: string[] = []
-  ): Promise<boolean> {
+  async checkEditAccess(menuItemId: string, userId: string, userRoles: string[] = []): Promise<boolean> {
     // Только администраторы и владельцы проекта могут редактировать меню
     if (userRoles.includes('ADMIN') || userRoles.includes('PROJECT_OWNER')) {
       return true;
@@ -156,10 +142,10 @@ export class MenuAccessService {
       include: {
         menuType: {
           include: {
-            project: true
-          }
-        }
-      }
+            project: true,
+          },
+        },
+      },
     });
 
     if (!menuItem) {
@@ -178,9 +164,9 @@ export class MenuAccessService {
           accountId: menuItem.menuType.project.accountId,
           userId,
           role: {
-            in: ['ADMIN', 'MEMBER'] // Используем существующие роли
-          }
-        }
+            in: ['ADMIN', 'MEMBER'], // Используем существующие роли
+          },
+        },
       });
 
       return !!membership;
@@ -196,12 +182,7 @@ export class MenuAccessService {
    * @param action Действие (view, edit, delete)
    * @param success Результат проверки доступа
    */
-  async logMenuAccess(
-    menuItemId: string,
-    userId: string,
-    action: 'view' | 'edit' | 'delete',
-    success: boolean
-  ) {
+  async logMenuAccess(menuItemId: string, userId: string, action: 'view' | 'edit' | 'delete', success: boolean) {
     // В реальном проекте здесь была бы запись в таблицу аудита
     console.log(`[MENU_ACCESS] User ${userId} ${action} menu item ${menuItemId}: ${success ? 'ALLOWED' : 'DENIED'}`);
   }
@@ -216,28 +197,31 @@ export class MenuAccessService {
       by: ['accessLevel'],
       where: {
         menuType: {
-          projectId
-        }
+          projectId,
+        },
       },
       _count: {
-        accessLevel: true
-      }
+        accessLevel: true,
+      },
     });
 
     const total = await this.prisma.menuItem.count({
       where: {
         menuType: {
-          projectId
-        }
-      }
+          projectId,
+        },
+      },
     });
 
     return {
       total,
-      byAccessLevel: stats.reduce((acc, stat) => {
-        acc[stat.accessLevel] = stat._count.accessLevel;
-        return acc;
-      }, {} as Record<string, number>)
+      byAccessLevel: stats.reduce(
+        (acc, stat) => {
+          acc[stat.accessLevel] = stat._count.accessLevel;
+          return acc;
+        },
+        {} as Record<string, number>,
+      ),
     };
   }
 
@@ -246,11 +230,7 @@ export class MenuAccessService {
   /**
    * Проверка пользовательских правил доступа
    */
-  private async checkCustomAccess(
-    menuItemId: string,
-    userId: string,
-    parameters: string
-  ): Promise<boolean> {
+  private async checkCustomAccess(menuItemId: string, userId: string, parameters: string): Promise<boolean> {
     try {
       const params = JSON.parse(parameters);
       const customRules = params.access_rules;
@@ -282,10 +262,10 @@ export class MenuAccessService {
       if (customRules.time_restrictions) {
         const now = new Date();
         const currentTime = now.getHours() * 100 + now.getMinutes();
-        
+
         const startTime = this.parseTime(customRules.time_restrictions.start);
         const endTime = this.parseTime(customRules.time_restrictions.end);
-        
+
         if (currentTime < startTime || currentTime > endTime) {
           return false;
         }

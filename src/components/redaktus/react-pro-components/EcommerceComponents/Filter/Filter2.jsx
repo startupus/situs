@@ -1,6 +1,6 @@
-import * as noUiSlider from "nouislider";
-import "nouislider/dist/nouislider.css";
-import React, { useEffect } from "react";
+import * as noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
+import React, { useEffect } from 'react';
 
 const Filter2 = () => {
   return (
@@ -10,12 +10,10 @@ const Filter2 = () => {
           <div className="-mx-4 flex">
             <div className="w-full px-4">
               <div className="mb-[60px]">
-                <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-                  New Arrivals
-                </h2>
+                <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl">New Arrivals</h2>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  sit amet molestie nunc. Vestibulum tempus justo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet molestie nunc. Vestibulum tempus
+                  justo.
                 </p>
               </div>
             </div>
@@ -52,33 +50,39 @@ const Filter2 = () => {
                   <div className="w-full px-4 md:w-9/12 lg:w-9/12 xl:w-8/12">
                     <div className="items-center sm:flex">
                       <div className="mb-4 mr-8 inline-flex items-center md:mb-0 lg:mr-5 xl:mr-8">
-                        <label
-                          htmlFor=""
-                          className="mr-4 text-base font-medium text-dark dark:text-white"
-                        >
+                        <label htmlFor="" className="mr-4 text-base font-medium text-dark dark:text-white">
                           Show
                         </label>
                         <div className="relative">
                           <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                            <option value="" className="dark:bg-dark-2">12</option>
-                            <option value="" className="dark:bg-dark-2">09</option>
-                            <option value="" className="dark:bg-dark-2">06</option>
+                            <option value="" className="dark:bg-dark-2">
+                              12
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              09
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              06
+                            </option>
                           </select>
                           <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-dark dark:border-white"></span>
                         </div>
                       </div>
                       <div className="mb-4 inline-flex items-center md:mb-0">
-                        <label
-                          htmlFor=""
-                          className="mr-4 text-base font-medium text-dark dark:text-white"
-                        >
+                        <label htmlFor="" className="mr-4 text-base font-medium text-dark dark:text-white">
                           Sort By:
                         </label>
                         <div className="relative">
                           <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                            <option value="" className="dark:bg-dark-2">Best Selling</option>
-                            <option value="" className="dark:bg-dark-2">Newest Products</option>
-                            <option value="" className="dark:bg-dark-2">Oldest Products</option>
+                            <option value="" className="dark:bg-dark-2">
+                              Best Selling
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              Newest Products
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              Oldest Products
+                            </option>
                           </select>
                           <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-dark dark:border-white"></span>
                         </div>
@@ -88,13 +92,7 @@ const Filter2 = () => {
                   <div className="w-full px-4 md:w-3/12 lg:w-3/12 xl:w-4/12">
                     <div className="flex items-center space-x-4 md:justify-end">
                       <div>
-                        <input
-                          type="radio"
-                          name="view"
-                          id="1"
-                          className="peer sr-only"
-                          defaultChecked
-                        />
+                        <input type="radio" name="view" id="1" className="peer sr-only" defaultChecked />
                         <label
                           htmlFor="1"
                           className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm border border-stroke bg-white text-body-color peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white dark:border-dark-3 dark:bg-white/5 dark:text-dark-6`}
@@ -128,12 +126,7 @@ const Filter2 = () => {
                       </div>
 
                       <div>
-                        <input
-                          type="radio"
-                          name="view"
-                          id="2"
-                          className="peer sr-only"
-                        />
+                        <input type="radio" name="view" id="2" className="peer sr-only" />
                         <label
                           htmlFor="2"
                           className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm border border-stroke bg-white text-body-color peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white dark:border-dark-3 dark:bg-white/5 dark:text-dark-6`}
@@ -207,10 +200,7 @@ const SidebarCard = ({ title, children }) => {
 const CategoriesItem = ({ link, title }) => {
   return (
     <li className="mb-3">
-      <a
-        href={link}
-        className="block text-base font-medium text-body-color hover:text-primary dark:text-dark-6"
-      >
+      <a href={link} className="block text-base font-medium text-body-color hover:text-primary dark:text-dark-6">
         {title}
       </a>
     </li>
@@ -220,12 +210,7 @@ const CategoriesItem = ({ link, title }) => {
 const CheckboxGroup = ({ title, id }) => {
   return (
     <div className="mb-3 mr-3">
-      <input
-        type="radio"
-        name="size"
-        id={id}
-        className="peer filter-size sr-only"
-      ></input>
+      <input type="radio" name="size" id={id} className="peer filter-size sr-only"></input>
       <label
         htmlFor={id}
         className="block cursor-pointer rounded-sm border border-stroke bg-white px-3 py-1 text-base font-medium text-body-color hover:border-primary hover:bg-primary hover:text-white peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white dark:border-dark-3 dark:bg-white/5 dark:text-dark-6"
@@ -238,9 +223,9 @@ const CheckboxGroup = ({ title, id }) => {
 
 const PriceRange = () => {
   useEffect(() => {
-    const stepsSlider = document.getElementById("slider-range-1");
-    const input0 = document.getElementById("minAmount");
-    const input1 = document.getElementById("maxAmount");
+    const stepsSlider = document.getElementById('slider-range-1');
+    const input0 = document.getElementById('minAmount');
+    const input1 = document.getElementById('maxAmount');
     const inputs = [input0, input1];
     noUiSlider.create(stepsSlider, {
       start: [200, 1200],
@@ -252,7 +237,7 @@ const PriceRange = () => {
       },
     });
 
-    stepsSlider.noUiSlider.on("update", function (values, handle) {
+    stepsSlider.noUiSlider.on('update', function (values, handle) {
       inputs[handle].innerHTML = values[handle];
     });
   });
@@ -262,9 +247,7 @@ const PriceRange = () => {
         <div className="price-range">
           <div className="price-amount flex items-center justify-between">
             <div className="amount-input w-1/2">
-              <label className="block text-xs text-body-color dark:text-dark-6">
-                Minimum Price
-              </label>
+              <label className="block text-xs text-body-color dark:text-dark-6">Minimum Price</label>
               <span
                 type="text"
                 id="minAmount"
@@ -272,9 +255,7 @@ const PriceRange = () => {
               ></span>
             </div>
             <div className="amount-input w-1/2 text-right">
-              <label className="block text-xs text-body-color dark:text-dark-6">
-                Maximum Price
-              </label>
+              <label className="block text-xs text-body-color dark:text-dark-6">Maximum Price</label>
               <span
                 type="text"
                 id="maxAmount"

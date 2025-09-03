@@ -5,7 +5,7 @@ function Card16() {
     <section className="bg-gray-2 pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="mx-auto w-full max-w-[570px] overflow-hidden rounded-xl bg-white shadow-md dark:bg-dark-2">
-          <div className="relative bg-linear-to-t from-[#F7F8F2] via-[#E2E2FA] to-[#E7D3EF] p-7 pb-0 dark:from-dark-2 sm:p-11 sm:pb-0">
+          <div className="bg-linear-to-t relative from-[#F7F8F2] via-[#E2E2FA] to-[#E7D3EF] p-7 pb-0 dark:from-dark-2 sm:p-11 sm:pb-0">
             <div className="mb-10 overflow-hidden rounded-2xl border border-dark-6">
               <img
                 src="https://i.ibb.co/G7yJZnY/image-1.jpg"
@@ -13,7 +13,7 @@ function Card16() {
                 className="shaow-[0px_-7px_10px_0px_rgba(166,175,195,0.15)] w-full"
               />
             </div>
-            <div className="absolute bottom-0 left-0 h-1/2 w-full bg-linear-to-b from-transparent to-white dark:to-dark-2"></div>
+            <div className="bg-linear-to-b absolute bottom-0 left-0 h-1/2 w-full from-transparent to-white dark:to-dark-2"></div>
           </div>
           <div className="p-7 pt-0 sm:p-11 sm:pt-0">
             <h3 className="mb-3 text-xl font-bold text-dark dark:text-white sm:text-2xl">

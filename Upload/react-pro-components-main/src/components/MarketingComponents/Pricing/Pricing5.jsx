@@ -398,7 +398,9 @@ const PricingTopItem = ({
         <a
           href={buttonLink}
           className={`block w-full rounded-md p-3 text-center text-base font-medium text-white transition ${
-            active ? "bg-secondary hover:bg-secondary/90" : "bg-primary hover:bg-primary/90"
+            active
+              ? "bg-secondary hover:bg-secondary/90"
+              : "bg-primary hover:bg-primary/90"
           }`}
         >
           {button}

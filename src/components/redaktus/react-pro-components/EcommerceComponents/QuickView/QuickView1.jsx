@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const QuickView = () => {
   const [open, setOpen] = useState(false);
@@ -11,17 +11,12 @@ const QuickView = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -52,7 +47,7 @@ const QuickView = () => {
           </button>
           <div
             className={`absolute top-0 left-0 min-h-screen w-full overflow-y-auto bg-body-color dark:bg-dark py-20 lg:py-[120px] ${
-              !open && "hidden"
+              !open && 'hidden'
             } `}
           >
             <div className="container mx-auto">
@@ -100,10 +95,7 @@ const QuickView = () => {
                           </SwiperSlide>
 
                           <div className="z-50 absolute top-1/2 right-5 left-5 flex -translate-y-1/2 items-center justify-between">
-                            <div
-                              className="prev-arrow cursor-pointer"
-                              onClick={handlePrev}
-                            >
+                            <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
                               <button className="flex h-8 w-8 items-center justify-center rounded-sm bg-dark text-white transition-all hover:bg-primary hover:text-white">
                                 <svg
                                   width={20}
@@ -117,10 +109,7 @@ const QuickView = () => {
                                 </svg>
                               </button>
                             </div>
-                            <div
-                              className="next-arrow cursor-pointer"
-                              onClick={handleNext}
-                            >
+                            <div className="next-arrow cursor-pointer" onClick={handleNext}>
                               <button className="flex h-8 w-8 items-center justify-center rounded-sm bg-dark text-white transition-all hover:bg-primary hover:text-white">
                                 <svg
                                   width={20}
@@ -151,9 +140,7 @@ const QuickView = () => {
                                 <Star />
                                 <Star />
                                 <Star />
-                                <span className="pl-1 text-base font-medium text-dark dark:text-white">
-                                  5 Rating
-                                </span>
+                                <span className="pl-1 text-base font-medium text-dark dark:text-white">5 Rating</span>
                               </div>
                             </div>
                             <div className="flex items-center">
@@ -182,29 +169,18 @@ const QuickView = () => {
                                   </defs>
                                 </svg>
                               </span>
-                              <span className="text-base font-medium text-dark dark:text-white">
-                                In Stock
-                              </span>
+                              <span className="text-base font-medium text-dark dark:text-white">In Stock</span>
                             </div>
                           </div>
                           <p className="text-xl font-semibold text-dark dark:text-white xl:leading-[40px] xl:text-[28px]">
                             $29.00
                           </p>
-                          <p className="mb-6 text-base text-body-color dark:text-dark-6">
-                            +12% VAT Added
-                          </p>
+                          <p className="mb-6 text-base text-body-color dark:text-dark-6">+12% VAT Added</p>
                           <div className="mb-[22px]">
-                            <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                              Select Size
-                            </h4>
+                            <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">Select Size</h4>
                             <div className="flex items-center gap-3">
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="small"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="small" className="filter-size sr-only" />
                                 <label
                                   htmlFor="small"
                                   className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -213,12 +189,7 @@ const QuickView = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="medium"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="medium" className="filter-size sr-only" />
                                 <label
                                   htmlFor="medium"
                                   className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -227,12 +198,7 @@ const QuickView = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="large"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="large" className="filter-size sr-only" />
                                 <label
                                   htmlFor="large"
                                   className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -241,12 +207,7 @@ const QuickView = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="extraLarge"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="extraLarge" className="filter-size sr-only" />
                                 <label
                                   htmlFor="extraLarge"
                                   className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
@@ -257,17 +218,10 @@ const QuickView = () => {
                             </div>
                           </div>
                           <div className="mb-8">
-                            <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
-                              Choose Color
-                            </h4>
+                            <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">Choose Color</h4>
                             <div className="flex items-center gap-3">
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="black"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="black" className="sr-only" />
                                 <label
                                   htmlFor="black"
                                   className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-sm bg-[#56768B] text-white"
@@ -289,12 +243,7 @@ const QuickView = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="red"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="red" className="sr-only" />
                                 <label
                                   htmlFor="red"
                                   className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-sm bg-red-600 text-white"
@@ -316,12 +265,7 @@ const QuickView = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="blue"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="blue" className="sr-only" />
                                 <label
                                   htmlFor="blue"
                                   className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-sm bg-primary text-white"
@@ -343,12 +287,7 @@ const QuickView = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="green"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="green" className="sr-only" />
                                 <label
                                   htmlFor="green"
                                   className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-sm bg-secondary text-white"
@@ -406,13 +345,7 @@ export default QuickView;
 const Star = () => {
   return (
     <span className="pr-1">
-      <svg
-        width={18}
-        height={18}
-        viewBox="0 0 18 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width={18} height={18} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1834_1869)">
           <path
             d="M16.7906 6.72187L11.7 5.93438L9.39375 1.09688C9.225 0.759375 8.775 0.759375 8.60625 1.09688L6.3 5.9625L1.2375 6.72187C0.871876 6.77812 0.731251 7.25625 1.0125 7.50938L4.69688 11.3063L3.825 16.6219C3.76875 16.9875 4.13438 17.2969 4.47188 17.0719L9.05625 14.5687L13.6125 17.0719C13.9219 17.2406 14.3156 16.9594 14.2312 16.6219L13.3594 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z"

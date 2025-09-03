@@ -66,7 +66,7 @@ class IntegrationsApiService {
   }
 
   async listN8nWorkflows(id: string, baseUrl?: string, apiKey?: string): Promise<any[]> {
-    const params: Record<string,string> = {};
+    const params: Record<string, string> = {};
     if (baseUrl) params.baseUrl = baseUrl;
     if (apiKey) params.apiKey = apiKey;
     const query = Object.keys(params).length ? `?${new URLSearchParams(params).toString()}` : '';
@@ -80,5 +80,3 @@ class IntegrationsApiService {
 }
 
 export const integrationsApi = new IntegrationsApiService();
-
-

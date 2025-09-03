@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Brand6 = () => {
   return (
@@ -12,9 +12,8 @@ const Brand6 = () => {
                   Used by the world's most popular companies
                 </h2>
                 <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Pellentesque lobortis lectus ut dui dapibus vestibulum. Aenean
-                  efficitur fermentum vestibulum.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lobortis lectus ut dui dapibus
+                  vestibulum. Aenean efficitur fermentum vestibulum.
                 </p>
 
                 <div className="flex flex-wrap">

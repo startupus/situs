@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Pricing8 = () => {
   return (
@@ -7,15 +7,13 @@ const Pricing8 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Our Pricing Plans
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Our Pricing Plans</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Choose your best plan
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -73,15 +71,7 @@ const Pricing8 = () => {
 
 export default Pricing8;
 
-const PricingCard = ({
-  children,
-  price,
-  type,
-  subscription,
-  subTitle,
-  button,
-  active,
-}) => {
+const PricingCard = ({ children, price, type, subscription, subTitle, button, active }) => {
   return (
     <div className="w-full max-w-[300px] px-4">
       <div
@@ -105,21 +95,11 @@ const PricingCard = ({
         >
           <sup className="-top-5 text-xl font-semibold">$</sup>
           <span> {price} </span>
-          <span
-            className={`block text-base font-normal ${
-              active ? `text-white` : `text-body-color dark:text-dark-6`
-            }`}
-          >
+          <span className={`block text-base font-normal ${active ? `text-white` : `text-body-color dark:text-dark-6`}`}>
             {subscription}
           </span>
         </h2>
-        <p
-          className={`mb-8 text-sm ${
-            active ? `text-white` : `text-body-color dark:text-dark-6`
-          }`}
-        >
-          {subTitle}
-        </p>
+        <p className={`mb-8 text-sm ${active ? `text-white` : `text-body-color dark:text-dark-6`}`}>{subTitle}</p>
         <div className="mb-9">
           <a
             href="/#"
@@ -136,13 +116,7 @@ const PricingCard = ({
         {active && (
           <div>
             <span className="absolute -top-10 left-0 -z-10">
-              <svg
-                width="310"
-                height="279"
-                viewBox="0 0 310 279"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="310" height="279" viewBox="0 0 310 279" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect
                   opacity="0.15"
                   x="-15.1777"
@@ -168,13 +142,7 @@ const PricingCard = ({
               </svg>
             </span>
             <span className="absolute left-0 top-7 -z-10">
-              <svg
-                width="90"
-                height="197"
-                viewBox="0 0 90 197"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="90" height="197" viewBox="0 0 90 197" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect
                   opacity="0.15"
                   x="-38"
@@ -200,13 +168,7 @@ const PricingCard = ({
               </svg>
             </span>
             <span className="absolute -bottom-10 right-0 -z-10">
-              <svg
-                width="310"
-                height="269"
-                viewBox="0 0 310 269"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="310" height="269" viewBox="0 0 310 269" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect
                   opacity="0.15"
                   x="313.564"
@@ -232,13 +194,7 @@ const PricingCard = ({
               </svg>
             </span>
             <span className="absolute bottom-7 right-0 -z-10">
-              <svg
-                width="91"
-                height="191"
-                viewBox="0 0 91 191"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="91" height="191" viewBox="0 0 91 191" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect
                   opacity="0.15"
                   x="129.059"
@@ -271,13 +227,5 @@ const PricingCard = ({
 };
 
 const List = ({ children, active }) => {
-  return (
-    <p
-      className={`text-base ${
-        active ? `text-white` : `text-body-color dark:text-dark-6`
-      }`}
-    >
-      {children}
-    </p>
-  );
+  return <p className={`text-base ${active ? `text-white` : `text-body-color dark:text-dark-6`}`}>{children}</p>;
 };

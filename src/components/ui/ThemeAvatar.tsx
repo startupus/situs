@@ -20,7 +20,7 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
   status,
   showStatus = false,
   className = '',
-  onClick
+  onClick,
 }) => {
   const getSizeStyles = () => {
     const sizes = {
@@ -29,7 +29,7 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
       md: 'w-10 h-10 text-base',
       lg: 'w-12 h-12 text-lg',
       xl: 'w-16 h-16 text-xl',
-      '2xl': 'w-20 h-20 text-2xl'
+      '2xl': 'w-20 h-20 text-2xl',
     };
     return sizes[size];
   };
@@ -39,7 +39,7 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
       online: 'bg-green-500',
       offline: 'bg-gray-400',
       away: 'bg-yellow-500',
-      busy: 'bg-red-500'
+      busy: 'bg-red-500',
     };
     return status ? statusStyles[status] : '';
   };
@@ -51,18 +51,14 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
       md: 'w-2.5 h-2.5',
       lg: 'w-3 h-3',
       xl: 'w-4 h-4',
-      '2xl': 'w-5 h-5'
+      '2xl': 'w-5 h-5',
     };
     return statusSizes[size];
   };
 
   const renderFallback = () => {
     if (fallback) {
-      return (
-        <span className="font-medium text-gray-600 dark:text-gray-300 uppercase">
-          {fallback.slice(0, 2)}
-        </span>
-      );
+      return <span className="font-medium text-gray-600 dark:text-gray-300 uppercase">{fallback.slice(0, 2)}</span>;
     }
     return <FiUser className="w-1/2 h-1/2 text-gray-400" />;
   };
@@ -76,7 +72,9 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
           bg-gray-100 dark:bg-gray-700
           flex items-center justify-center
           ${onClick ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}
-        `.trim().replace(/\s+/g, ' ')}
+        `
+          .trim()
+          .replace(/\s+/g, ' ')}
         onClick={onClick}
       >
         {src ? (
@@ -90,11 +88,9 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
             }}
           />
         ) : null}
-        <div className={src ? 'hidden' : 'flex items-center justify-center w-full h-full'}>
-          {renderFallback()}
-        </div>
+        <div className={src ? 'hidden' : 'flex items-center justify-center w-full h-full'}>{renderFallback()}</div>
       </div>
-      
+
       {showStatus && status && (
         <span
           className={`
@@ -102,7 +98,9 @@ const ThemeAvatar: React.FC<ThemeAvatarProps> = ({
             ${getStatusSize()}
             ${getStatusStyles()}
             rounded-full border-2 border-white dark:border-gray-800
-          `.trim().replace(/\s+/g, ' ')}
+          `
+            .trim()
+            .replace(/\s+/g, ' ')}
         />
       )}
     </div>

@@ -1,13 +1,4 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Put, 
-  Delete, 
-  Body, 
-  Param, 
-  Query 
-} from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, Query } from '@nestjs/common';
 import { MenusService } from './menus.service';
 import { CreateMenuTypeDto } from './dto/create-menu-type.dto';
 import { UpdateMenuTypeDto } from './dto/update-menu-type.dto';

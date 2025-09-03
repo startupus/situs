@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ECommerceFooter3 = () => {
   return (
@@ -18,13 +18,7 @@ const ECommerceFooter3 = () => {
                   </a>
                   <p className="mb-9 flex items-center text-lg font-semibold text-white">
                     <span className="pr-3">
-                      <svg
-                        width="28"
-                        height="28"
-                        viewBox="0 0 28 28"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M14 0.787506C7.9625 0.787506 3.0625 5.51251 3.0625 11.3313C3.0625 15.75 8.925 22.75 12.3812 26.5125C12.8187 26.9938 13.3875 27.2125 14 27.2125C14.6125 27.2125 15.1813 26.95 15.6188 26.5125C19.075 22.75 24.9375 15.75 24.9375 11.3313C24.9375 5.51251 20.0375 0.787506 14 0.787506ZM14.175 25.2C14.0875 25.2875 13.9563 25.2875 13.825 25.2C9.58125 20.5625 5.03125 14.525 5.03125 11.3313C5.03125 6.60626 9.05625 2.75626 14 2.75626C18.9438 2.75626 22.9688 6.60626 22.9688 11.3313C22.9688 14.525 18.4188 20.5625 14.175 25.2Z"
                           fill="white"
@@ -44,9 +38,7 @@ const ECommerceFooter3 = () => {
                   </p>
                   <p className="flex text-base text-[#cacbcf]">
                     <span className="pr-4 font-semibold"> 02. </span>
-                    <span>
-                      68 Jay Street, Suite 902 New Side Brooklyn, NY 11201
-                    </span>
+                    <span>68 Jay Street, Suite 902 New Side Brooklyn, NY 11201</span>
                   </p>
                 </div>
               </div>
@@ -68,15 +60,12 @@ const ECommerceFooter3 = () => {
 
               <div className="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-4/12">
                 <div className="mb-16">
-                  <h3 className="pb-5 text-xl font-semibold text-white">
-                    Newsletter
-                  </h3>
+                  <h3 className="pb-5 text-xl font-semibold text-white">Newsletter</h3>
                   <span className="mb-8 block h-[3px] w-10 rounded-sm bg-white"></span>
 
                   <div>
                     <p className="mb-8 text-base text-[#cacbcf]">
-                      Enter your email to receive our latest updates about our
-                      products.
+                      Enter your email to receive our latest updates about our products.
                     </p>
                     <form className="relative">
                       <input
@@ -96,13 +85,7 @@ const ECommerceFooter3 = () => {
 
           <div>
             <span className="absolute bottom-0 left-0 -z-10">
-              <svg
-                width={138}
-                height={220}
-                viewBox="0 0 138 220"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={138} height={220} viewBox="0 0 138 220" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse
                   cx={-2.5}
                   cy={140.5}
@@ -127,13 +110,7 @@ const ECommerceFooter3 = () => {
               </svg>
             </span>
             <span className="absolute right-5 top-5 -z-10">
-              <svg
-                width={53}
-                height={69}
-                viewBox="0 0 53 69"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={53} height={69} viewBox="0 0 53 69" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M1.88244 32.7854C2.92209 32.7854 3.76488 33.6194 3.76488 34.6483C3.76488 35.6771 2.92209 36.5111 1.88244 36.5111C0.84279 36.5111 4.54444e-08 35.6771 0 34.6483C-4.54444e-08 33.6194 0.84279 32.7854 1.88244 32.7854Z"
                   fill="white"
@@ -237,13 +214,7 @@ const ECommerceFooter3 = () => {
               </svg>
             </span>
             <span className="absolute right-0 top-0 -z-10">
-              <svg
-                width={98}
-                height={94}
-                viewBox="0 0 98 94"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={98} height={94} viewBox="0 0 98 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse
                   cx={98.5}
                   cy={-4.5}
@@ -289,9 +260,7 @@ const ECommerceFooter3 = () => {
               </div>
               <div className="w-full px-4 md:w-1/2 lg:w-3/12 xl:w-1/3">
                 <div className="mb-5 flex items-center justify-center space-x-[18px] md:justify-end lg:mb-0">
-                  <span className="text-base font-medium text-white">
-                    Follow Us:
-                  </span>
+                  <span className="text-base font-medium text-white">Follow Us:</span>
 
                   <a href="/#" className="text-white/50 hover:text-white">
                     <svg
@@ -373,10 +342,7 @@ const LinkGroup = ({ children, header }) => {
 const NavLink = ({ name, link }) => {
   return (
     <li>
-      <a
-        href={link}
-        className="text-base text-[#cacbcf] transition-all hover:text-white hover:underline"
-      >
+      <a href={link} className="text-base text-[#cacbcf] transition-all hover:text-white hover:underline">
         {name}
       </a>
     </li>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FiPlus, FiEdit2, FiTrash2, FiMove, FiEye, FiEyeOff, FiChevronRight, FiChevronDown } from 'react-icons/fi';
-import { 
-  WebCategoryData, 
-  CreateWebCategoryRequest, 
+import {
+  WebCategoryData,
+  CreateWebCategoryRequest,
   UpdateWebCategoryRequest,
   getWebsiteCategories,
   createWebsiteCategory,
   updateWebsiteCategory,
   deleteWebsiteCategory,
-  reorderWebsiteCategories
+  reorderWebsiteCategories,
 } from '../../../services/projectApi';
 
 interface PagesCategoriesManagerProps {
@@ -52,12 +52,12 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
     const rootCategories: CategoryTreeNode[] = [];
 
     // Создаем узлы
-    flatCategories.forEach(cat => {
+    flatCategories.forEach((cat) => {
       categoryMap.set(cat.id, { ...cat, children: [], isExpanded: true });
     });
 
     // Строим дерево
-    flatCategories.forEach(cat => {
+    flatCategories.forEach((cat) => {
       const node = categoryMap.get(cat.id)!;
       if (cat.parentId && categoryMap.has(cat.parentId)) {
         categoryMap.get(cat.parentId)!.children.push(node);
@@ -69,7 +69,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
     // Сортируем по orderIndex
     const sortByOrder = (nodes: CategoryTreeNode[]) => {
       nodes.sort((a, b) => a.orderIndex - b.orderIndex);
-      nodes.forEach(node => sortByOrder(node.children));
+      nodes.forEach((node) => sortByOrder(node.children));
     };
     sortByOrder(rootCategories);
 
@@ -103,7 +103,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
   // Удаление категории
   const handleDeleteCategory = async (categoryId: string, categoryName: string) => {
     if (!confirm(`Удалить категорию "${categoryName}"?`)) return;
-    
+
     try {
       await deleteWebsiteCategory(categoryId);
       await loadCategories();
@@ -116,7 +116,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
   // Переключение видимости узла дерева
   const toggleNodeExpansion = (categoryId: string) => {
     const updateTree = (nodes: CategoryTreeNode[]): CategoryTreeNode[] => {
-      return nodes.map(node => {
+      return nodes.map((node) => {
         if (node.id === categoryId) {
           return { ...node, isExpanded: !node.isExpanded };
         }
@@ -133,7 +133,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
 
     return (
       <div key={node.id} className="border-b border-gray-100 dark:border-gray-700">
-        <div 
+        <div
           className="flex items-center py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-800"
           style={{ paddingLeft: `${16 + indent}px` }}
         >
@@ -163,12 +163,8 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
           {/* Информация о категории */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h4 className="font-medium text-gray-900 dark:text-white truncate">
-                {node.name}
-              </h4>
-              <span className="text-xs text-gray-500 dark:text-gray-400">
-                /{node.slug}
-              </span>
+              <h4 className="font-medium text-gray-900 dark:text-white truncate">{node.name}</h4>
+              <span className="text-xs text-gray-500 dark:text-gray-400">/{node.slug}</span>
               {!node.isPublished && (
                 <span className="px-2 py-1 text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded">
                   Черновик
@@ -176,9 +172,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
               )}
             </div>
             {node.description && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 truncate mt-1">
-                {node.description}
-              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 truncate mt-1">{node.description}</p>
             )}
             <div className="flex items-center gap-4 mt-1 text-xs text-gray-500 dark:text-gray-400">
               <span>Уровень: {node.level}</span>
@@ -209,10 +203,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
             >
               <FiTrash2 className="w-4 h-4" />
             </button>
-            <button
-              className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              title="Переместить"
-            >
+            <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" title="Переместить">
               <FiMove className="w-4 h-4" />
             </button>
           </div>
@@ -220,9 +211,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
 
         {/* Дочерние категории */}
         {hasChildren && node.isExpanded && (
-          <div>
-            {node.children.map(child => renderCategoryNode(child, depth + 1))}
-          </div>
+          <div>{node.children.map((child) => renderCategoryNode(child, depth + 1))}</div>
         )}
       </div>
     );
@@ -241,12 +230,8 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
       {/* Заголовок и действия */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Категории Pages
-          </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            Управление рубриками для страниц сайта
-          </p>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Категории Pages</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Управление рубриками для страниц сайта</p>
         </div>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-sm">
@@ -272,9 +257,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
       <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
         {categoryTree.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-gray-500 dark:text-gray-400 mb-4">
-              Категории не созданы
-            </div>
+            <div className="text-gray-500 dark:text-gray-400 mb-4">Категории не созданы</div>
             <button
               onClick={() => setShowCreateModal(true)}
               className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
@@ -283,9 +266,7 @@ export const PagesCategoriesManager: React.FC<PagesCategoriesManagerProps> = ({ 
             </button>
           </div>
         ) : (
-          <div>
-            {categoryTree.map(node => renderCategoryNode(node))}
-          </div>
+          <div>{categoryTree.map((node) => renderCategoryNode(node))}</div>
         )}
       </div>
 
@@ -321,13 +302,7 @@ interface CategoryFormModalProps {
   onClose: () => void;
 }
 
-const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
-  title,
-  categories,
-  initialData,
-  onSubmit,
-  onClose,
-}) => {
+const CategoryFormModal: React.FC<CategoryFormModalProps> = ({ title, categories, initialData, onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
     slug: initialData?.slug || '',
@@ -340,14 +315,17 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
 
   // Автогенерация slug из name
   const handleNameChange = (name: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       name,
-      slug: prev.slug || name.toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .trim()
+      slug:
+        prev.slug ||
+        name
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim(),
     }));
   };
 
@@ -364,7 +342,7 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
   };
 
   // Доступные родительские категории (исключаем текущую и её потомков)
-  const availableParents = categories.filter(cat => {
+  const availableParents = categories.filter((cat) => {
     if (initialData && cat.id === initialData.id) return false;
     // TODO: исключить потомков текущей категории
     return true;
@@ -373,15 +351,11 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          {title}
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{title}</h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Название *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Название *</label>
             <input
               type="text"
               value={formData.name}
@@ -393,13 +367,11 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Slug *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Slug *</label>
             <input
               type="text"
               value={formData.slug}
-              onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, slug: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               placeholder="url-slug"
               pattern="^[a-z0-9-]+$"
@@ -409,12 +381,10 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Описание
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Описание</label>
             <textarea
               value={formData.description}
-              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               rows={3}
               placeholder="Описание категории"
@@ -427,13 +397,14 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
             </label>
             <select
               value={formData.parentId}
-              onChange={(e) => setFormData(prev => ({ ...prev, parentId: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, parentId: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               <option value="">Корневая категория</option>
-              {availableParents.map(cat => (
+              {availableParents.map((cat) => (
                 <option key={cat.id} value={cat.id}>
-                  {'  '.repeat(cat.level - 1)}{cat.name}
+                  {'  '.repeat(cat.level - 1)}
+                  {cat.name}
                 </option>
               ))}
             </select>
@@ -444,7 +415,7 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
               <input
                 type="checkbox"
                 checked={formData.isActive}
-                onChange={(e) => setFormData(prev => ({ ...prev, isActive: e.target.checked }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, isActive: e.target.checked }))}
                 className="rounded"
               />
               <span className="text-sm text-gray-700 dark:text-gray-300">Активна</span>
@@ -453,7 +424,7 @@ const CategoryFormModal: React.FC<CategoryFormModalProps> = ({
               <input
                 type="checkbox"
                 checked={formData.isPublished}
-                onChange={(e) => setFormData(prev => ({ ...prev, isPublished: e.target.checked }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, isPublished: e.target.checked }))}
                 className="rounded"
               />
               <span className="text-sm text-gray-700 dark:text-gray-300">Опубликована</span>

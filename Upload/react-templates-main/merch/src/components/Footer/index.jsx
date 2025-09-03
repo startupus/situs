@@ -27,11 +27,11 @@ const Footer = () => {
     <>
       <footer className="dark:bg-dark">
         <div className="container mx-auto">
-          <div className="px-6 pt-20 pb-6 border rounded-lg border-stroke bg-gray dark:border-dark-3 dark:bg-dark-2 sm:px-8 xl:px-14">
-            <div className="flex flex-wrap -mx-4">
+          <div className="rounded-lg border border-stroke bg-gray px-6 pb-6 pt-20 dark:border-dark-3 dark:bg-dark-2 sm:px-8 xl:px-14">
+            <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 md:w-5/12 lg:w-1/3">
                 <div className="mb-14">
-                  <Link to="/" className="inline-block mb-8">
+                  <Link to="/" className="mb-8 inline-block">
                     <img
                       src={logo}
                       alt="logo"
@@ -52,7 +52,7 @@ const Footer = () => {
                   <div className="flex items-center space-x-3">
                     <Link
                       to="#"
-                      className="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary flex h-8 w-8 items-center justify-center rounded-full border-[.5px] bg-white transition-all hover:text-white dark:hover:text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border-[.5px] border-stroke bg-white text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white"
                     >
                       <svg
                         width="16"
@@ -67,7 +67,7 @@ const Footer = () => {
                     </Link>
                     <Link
                       to="#"
-                      className="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary flex h-8 w-8 items-center justify-center rounded-full border-[.5px] bg-white transition-all hover:text-white dark:hover:text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border-[.5px] border-stroke bg-white text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white"
                     >
                       <svg
                         width="16"
@@ -82,7 +82,7 @@ const Footer = () => {
                     </Link>
                     <Link
                       to="#"
-                      className="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary flex h-8 w-8 items-center justify-center rounded-full border-[.5px] bg-white transition-all hover:text-white dark:hover:text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border-[.5px] border-stroke bg-white text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white"
                     >
                       <svg
                         width="16"
@@ -97,7 +97,7 @@ const Footer = () => {
                     </Link>
                     <Link
                       to="#"
-                      className="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary flex h-8 w-8 items-center justify-center rounded-full border-[.5px] bg-white transition-all hover:text-white dark:hover:text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border-[.5px] border-stroke bg-white text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white"
                     >
                       <svg
                         width="16"
@@ -119,7 +119,7 @@ const Footer = () => {
                   <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">
                     Useful Links
                   </h3>
-                  <div className="flex flex-wrap -mx-4 space-y-3 sm:space-y-0 lg:space-y-3 xl:space-y-0">
+                  <div className="-mx-4 flex flex-wrap space-y-3 sm:space-y-0 lg:space-y-3 xl:space-y-0">
                     {footerMenu.map((group, groupIndex) => (
                       <div
                         key={groupIndex}
@@ -157,9 +157,9 @@ const Footer = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="border-stroke focus:border-primary dark:border-dark-3 dark:bg-dark dark:focus:border-primary h-[54px] w-full rounded-tl-lg rounded-bl-lg border bg-white px-5 outline-hidden dark:text-white dark:placeholder:text-gray-500"
+                      className="outline-hidden h-[54px] w-full rounded-bl-lg rounded-tl-lg border border-stroke bg-white px-5 focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white dark:placeholder:text-gray-500 dark:focus:border-primary"
                     />
-                    <button className="border-stroke dark:border-dark-3 dark:bg-dark h-[54px] rounded-tr-lg rounded-br-lg border border-l-0 bg-white px-5">
+                    <button className="h-[54px] rounded-br-lg rounded-tr-lg border border-l-0 border-stroke bg-white px-5 dark:border-dark-3 dark:bg-dark">
                       <svg
                         width="24"
                         height="24"

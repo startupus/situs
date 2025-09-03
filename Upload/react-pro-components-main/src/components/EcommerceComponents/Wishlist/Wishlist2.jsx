@@ -2,7 +2,7 @@ import React from "react";
 
 const Wishlist2 = () => {
   return (
-    <section className="bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section className="bg-white pb-12 pt-20 lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex">
           <div className="w-full px-4">
@@ -10,7 +10,7 @@ const Wishlist2 = () => {
               <h2 className="mb-4 text-3xl font-semibold text-black sm:text-4xl">
                 Your Favorite Items
               </h2>
-              <p className="text-body-color text-base font-medium md:text-lg">
+              <p className="text-base font-medium text-body-color md:text-lg">
                 There are 04 products in this list
               </p>
             </div>
@@ -22,31 +22,31 @@ const Wishlist2 = () => {
               <thead>
                 <tr className="border-t text-left">
                   <th
-                    className={`min-w-[300px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
+                    className={`min-w-[300px] px-4 py-4 text-base font-medium text-dark xl:first:pl-11 xl:last:pr-11`}
                   >
                     {" "}
                     Product Name{" "}
                   </th>
                   <th
-                    className={`min-w-[180px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
+                    className={`min-w-[180px] px-4 py-4 text-base font-medium text-dark xl:first:pl-11 xl:last:pr-11`}
                   >
                     {" "}
                     Unit Price{" "}
                   </th>
                   <th
-                    className={`min-w-[140px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
+                    className={`min-w-[140px] px-4 py-4 text-base font-medium text-dark xl:first:pl-11 xl:last:pr-11`}
                   >
                     {" "}
                     Stock Status{" "}
                   </th>
                   <th
-                    className={`min-w-[150px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
+                    className={`min-w-[150px] px-4 py-4 text-base font-medium text-dark xl:first:pl-11 xl:last:pr-11`}
                   >
                     {" "}
                     Action{" "}
                   </th>
                   <th
-                    className={`min-w-[140px] text-dark py-4 px-4 text-base font-medium xl:first:pl-11 xl:last:pr-11`}
+                    className={`min-w-[140px] px-4 py-4 text-base font-medium text-dark xl:first:pl-11 xl:last:pr-11`}
                   >
                     {" "}
                   </th>
@@ -110,28 +110,28 @@ const TableDataRow = ({
             className="mr-4 h-[90px] w-[90px] rounded-full"
           />
           <div>
-            <h5 className="text-dark text-lg font-medium">
+            <h5 className="text-lg font-medium text-dark">
               <a href={link} className="hover:text-primary">
                 {title}
               </a>
             </h5>
-            <p className="text-body-color text-base font-medium">{subtitle}</p>
+            <p className="text-base font-medium text-body-color">{subtitle}</p>
           </div>
         </div>
       </td>
       <td className="border-t p-4">
-        <p className="text-body-color flex items-center text-lg font-medium">
+        <p className="flex items-center text-lg font-medium text-body-color">
           {prevPrice && <span className="mr-2 line-through">{prevPrice}</span>}
           {price}
         </p>
       </td>
       <td className="border-t p-4">
-        <span className="text-body-color text-lg font-medium">
+        <span className="text-lg font-medium text-body-color">
           {stock && "In"} Stock {!stock && "Out"}
         </span>
       </td>
       <td className="border-t p-4">
-        <button className="bg-primary inline-block rounded-full py-1 px-5 text-sm font-medium text-white hover:bg-primary/90">
+        <button className="inline-block rounded-full bg-primary px-5 py-1 text-sm font-medium text-white hover:bg-primary/90">
           {button}
         </button>
       </td>

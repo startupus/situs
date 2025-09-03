@@ -10,19 +10,19 @@ const Tab4 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="w-full mb-14">
+            <div className="mb-14 w-full">
               <div className="flex flex-wrap bg-primary">
                 <button
                   onClick={() => handleTabOpen("home")}
-                  className={`flex items-center text-sm md:text-base font-medium text-white border-b-[3px] py-3 lg:py-4 px-6 lg:px-10 ${
+                  className={`flex items-center border-b-[3px] px-6 py-3 text-sm font-medium text-white md:text-base lg:px-10 lg:py-4 ${
                     open === "home"
                       ? "border-[#1E41B6]"
                       : "border-primary hover:border-[#1E41B6]"
                   }`}
                 >
-                  <span className="text-white mr-2">
+                  <span className="mr-2 text-white">
                     <svg
                       width="16"
                       height="16"
@@ -36,13 +36,13 @@ const Tab4 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("about")}
-                  className={`flex items-center text-sm md:text-base font-medium text-white border-b-[3px] py-3 lg:py-4 px-6 lg:px-10 ${
+                  className={`flex items-center border-b-[3px] px-6 py-3 text-sm font-medium text-white md:text-base lg:px-10 lg:py-4 ${
                     open === "about"
                       ? "border-[#1E41B6]"
                       : "border-primary hover:border-[#1E41B6]"
                   }`}
                 >
-                  <span className="text-white mr-2">
+                  <span className="mr-2 text-white">
                     <svg
                       width="18"
                       height="14"
@@ -56,13 +56,13 @@ const Tab4 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("team")}
-                  className={`flex items-center text-sm md:text-base font-medium text-white border-b-[3px] py-3 lg:py-4 px-6 lg:px-10 ${
+                  className={`flex items-center border-b-[3px] px-6 py-3 text-sm font-medium text-white md:text-base lg:px-10 lg:py-4 ${
                     open === "team"
                       ? "border-[#1E41B6]"
                       : "border-primary hover:border-[#1E41B6]"
                   }`}
                 >
-                  <span className="text-white mr-2">
+                  <span className="mr-2 text-white">
                     <svg
                       width="18"
                       height="12"
@@ -79,13 +79,13 @@ const Tab4 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("company")}
-                  className={`flex items-center text-sm md:text-base font-medium text-white border-b-[3px] py-3 lg:py-4 px-6 lg:px-10 ${
+                  className={`flex items-center border-b-[3px] px-6 py-3 text-sm font-medium text-white md:text-base lg:px-10 lg:py-4 ${
                     open === "company"
                       ? "border-[#1E41B6]"
                       : "border-primary hover:border-[#1E41B6]"
                   }`}
                 >
-                  <span className="text-white mr-2">
+                  <span className="mr-2 text-white">
                     <svg
                       width="18"
                       height="18"
@@ -144,7 +144,7 @@ const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
       <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
+        className={`p-6 text-base leading-relaxed text-body-color ${
           open === tabCategory ? "block" : "hidden"
         } `}
       >

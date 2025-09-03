@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   FaChevronDown,
@@ -30,43 +30,42 @@ import {
   FaCode,
   FaLink,
   FaComments,
-  FaPalette
-} from 'react-icons/fa'
-import PageThemeSettings from '../redaktus/PageThemeSettings'
+  FaPalette,
+} from 'react-icons/fa';
+import PageThemeSettings from '../redaktus/PageThemeSettings';
 import { useLanguage } from '../../contexts/LanguageContext';
-
 
 interface SettingsPanelProps {
   currentPage?: string;
 }
 
-const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) => {
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = 'Home' }) => {
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
   const [activeTab, setActiveTab] = useState<'page' | 'item' | 'blocks'>('page');
 
   return (
-    <div 
+    <div
       className="redaktus-settings-panel w-80 flex-shrink-0 overflow-y-auto transition-colors duration-200 border-l h-full bg-white dark:bg-dark border-stroke dark:border-dark-3"
       style={{
         backgroundColor: 'var(--interface-bg, var(--color-gray-50, #ffffff))',
         color: 'var(--interface-text, var(--color-body-color, #64748b))',
-        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))'
+        borderColor: 'var(--interface-border, var(--color-stroke, #e5e7eb))',
       }}
     >
-      <div 
+      <div
         className="h-full flex flex-col"
         style={{
           backgroundColor: 'var(--interface-bg)',
-          color: 'var(--interface-text)'
+          color: 'var(--interface-text)',
         }}
       >
         {/* Вкладки в стиле TailGrids Tab2 - контрастные и видимые */}
-        <div 
+        <div
           className="flex-shrink-0 bg-[#FAFAFA] dark:bg-gray-700 p-1"
           style={{
             backgroundColor: 'var(--interface-surface)',
-            borderColor: 'var(--interface-border)'
+            borderColor: 'var(--interface-border)',
           }}
         >
           <nav className="flex gap-1">
@@ -78,12 +77,12 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
                   : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                color: activeTab === 'page' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'var(--interface-text, var(--color-body-color, #64748b))',
-                backgroundColor: activeTab === 'page' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
-                  : 'transparent'
+                color:
+                  activeTab === 'page'
+                    ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                    : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor:
+                  activeTab === 'page' ? 'var(--interface-primary, var(--color-primary, #1E40AF))10' : 'transparent',
               }}
             >
               {t('editor.panels.page')}
@@ -96,12 +95,12 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
                   : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                color: activeTab === 'blocks' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'var(--interface-text, var(--color-body-color, #64748b))',
-                backgroundColor: activeTab === 'blocks' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
-                  : 'transparent'
+                color:
+                  activeTab === 'blocks'
+                    ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                    : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor:
+                  activeTab === 'blocks' ? 'var(--interface-primary, var(--color-primary, #1E40AF))10' : 'transparent',
               }}
             >
               {t('editor.panels.block')}
@@ -114,12 +113,12 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
                   : 'text-body-color hover:text-primary hover:bg-primary/5'
               }`}
               style={{
-                color: activeTab === 'item' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
-                  : 'var(--interface-text, var(--color-body-color, #64748b))',
-                backgroundColor: activeTab === 'item' 
-                  ? 'var(--interface-primary, var(--color-primary, #1E40AF))10'
-                  : 'transparent'
+                color:
+                  activeTab === 'item'
+                    ? 'var(--interface-primary, var(--color-primary, #1E40AF))'
+                    : 'var(--interface-text, var(--color-body-color, #64748b))',
+                backgroundColor:
+                  activeTab === 'item' ? 'var(--interface-primary, var(--color-primary, #1E40AF))10' : 'transparent',
               }}
             >
               {t('editor.panels.item')}
@@ -141,7 +140,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ currentPage = "Home" }) =
 // Вкладка Page - настройки страницы
 const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
   const { t } = useTranslation();
-  
+
   return (
     <div>
       {/* Header */}
@@ -149,17 +148,11 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
         <h3 className="text-lg font-semibold transition-colors duration-200 text-gray-800 dark:text-gray-100">
           {t('editor.settings.page.title')}
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-          {t('editor.settings.page.subtitle')}
-        </p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{t('editor.settings.page.subtitle')}</p>
       </div>
 
       {/* Status and Visibility */}
-      <SettingsSection 
-        title={t('editor.settings.page.statusVisibility.title')} 
-        icon={<FaEye size={16} />}
-        collapsible
-      >
+      <SettingsSection title={t('editor.settings.page.statusVisibility.title')} icon={<FaEye size={16} />} collapsible>
         <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.statusVisibility.visibility')}
@@ -168,27 +161,21 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
             options={[
               t('editor.settings.page.statusVisibility.published'),
               t('editor.settings.page.statusVisibility.draft'),
-              t('editor.settings.page.statusVisibility.private')
+              t('editor.settings.page.statusVisibility.private'),
             ]}
           />
-          
-          <div 
+
+          <div
             className="flex items-center justify-between p-4 rounded-[20px] shadow-2 hover:shadow-lg transition-all duration-200"
             style={{
               backgroundColor: 'var(--interface-surface)',
               border: '1px solid var(--interface-border)',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
             }}
           >
             <div className="flex items-center space-x-3">
-              <div 
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: '#10b981' }}
-              ></div>
-              <span 
-                className="text-sm font-medium"
-                style={{ color: '#10b981' }}
-              >
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#10b981' }}></div>
+              <span className="text-sm font-medium" style={{ color: '#10b981' }}>
                 {t('editor.settings.page.statusVisibility.publishedLive')}
               </span>
             </div>
@@ -198,40 +185,21 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
       </SettingsSection>
 
       {/* Schedule Publish */}
-      <SettingsSection 
-        title={t('editor.settings.page.schedulePublish.title')} 
-        icon={<FaClock size={16} />}
-        collapsible
-      >
+      <SettingsSection title={t('editor.settings.page.schedulePublish.title')} icon={<FaClock size={16} />} collapsible>
         <div className="space-y-2">
-          <InputGroup
-            label={t('editor.settings.page.schedulePublish.publishDate')}
-            type="date"
-            value="2025-01-21"
-          />
-          <InputGroup
-            label={t('editor.settings.page.schedulePublish.publishTime')}
-            type="time"
-            value="00:00"
-          />
+          <InputGroup label={t('editor.settings.page.schedulePublish.publishDate')} type="date" value="2025-01-21" />
+          <InputGroup label={t('editor.settings.page.schedulePublish.publishTime')} type="time" value="00:00" />
         </div>
       </SettingsSection>
 
       {/* Page Structure */}
-      <SettingsSection 
-        title={t('editor.settings.page.pageStructure.title')} 
-        icon={<FaCogs size={16} />}
-        collapsible
-      >
+      <SettingsSection title={t('editor.settings.page.pageStructure.title')} icon={<FaCogs size={16} />} collapsible>
         <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.pageStructure.structureLocked')}
             type="select"
             value={t('editor.settings.page.pageStructure.unlocked')}
-            options={[
-              t('editor.settings.page.pageStructure.unlocked'),
-              t('editor.settings.page.pageStructure.locked')
-            ]}
+            options={[t('editor.settings.page.pageStructure.unlocked'), t('editor.settings.page.pageStructure.locked')]}
           />
           <p className="text-sm transition-colors duration-200 text-gray-500 dark:text-gray-400">
             {t('editor.settings.page.pageStructure.description')}
@@ -240,11 +208,7 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
       </SettingsSection>
 
       {/* Page Attributes */}
-      <SettingsSection 
-        title={t('editor.settings.page.pageAttributes.title')} 
-        icon={<FaTag size={16} />}
-        collapsible
-      >
+      <SettingsSection title={t('editor.settings.page.pageAttributes.title')} icon={<FaTag size={16} />} collapsible>
         <div className="space-y-2">
           <InputGroup
             label={t('editor.settings.page.pageAttributes.pageSlug')}
@@ -256,24 +220,19 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
       </SettingsSection>
 
       {/* Page Theme Settings */}
-      <SettingsSection 
-        title={t('editor.settings.page.theme.title')} 
-        icon={<FaPalette size={16} />}
-        collapsible
-      >
+      <SettingsSection title={t('editor.settings.page.theme.title')} icon={<FaPalette size={16} />} collapsible>
         <PageThemeSettings />
       </SettingsSection>
 
       {/* Page Stylistic Settings */}
-      <SettingsSection 
-        title="Стилистические настройки" 
-        icon={<FaCog size={16} />}
-        collapsible
-      >
+      <SettingsSection title="Стилистические настройки" icon={<FaCog size={16} />} collapsible>
         <div className="space-y-2">
           {/* Typography Settings */}
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
+            <label
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1"
+              style={{ color: 'var(--interface-text)', opacity: 0.7 }}
+            >
               Типографика
             </label>
             <div className="space-y-1">
@@ -300,7 +259,10 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
           {/* Spacing Settings */}
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
+            <label
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1"
+              style={{ color: 'var(--interface-text)', opacity: 0.7 }}
+            >
               Отступы и интервалы
             </label>
             <div className="space-y-1">
@@ -321,7 +283,10 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
           {/* Layout Settings */}
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
+            <label
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1"
+              style={{ color: 'var(--interface-text)', opacity: 0.7 }}
+            >
               Макет
             </label>
             <div className="space-y-1">
@@ -342,7 +307,10 @@ const PageTab: React.FC<{ currentPage: string }> = ({ currentPage }) => {
 
           {/* Animation Settings */}
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1" style={{ color: 'var(--interface-text)', opacity: 0.7 }}>
+            <label
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500 mb-1"
+              style={{ color: 'var(--interface-text)', opacity: 0.7 }}
+            >
               Анимации
             </label>
             <div className="space-y-1">
@@ -377,20 +345,20 @@ const BlocksTab: React.FC = () => {
       id: 'all',
       name: 'All Blocks',
       icon: <FaCube size={16} />,
-      count: 3
+      count: 3,
     },
     {
       id: 'hero',
       name: 'Hero Sections',
       icon: <FaStar size={16} />,
-      count: 1
+      count: 1,
     },
     {
       id: 'content',
       name: 'Content Blocks',
       icon: <FaParagraph size={16} />,
-      count: 2
-    }
+      count: 2,
+    },
   ];
 
   // Блоки с их схемами - только TailGrids
@@ -409,8 +377,8 @@ const BlocksTab: React.FC = () => {
         primaryButtonText: { type: 'string', default: 'Get Started' },
         secondaryButtonText: { type: 'string', default: 'Download App' },
         heroImage: { type: 'string', default: 'https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png' },
-        clientLogos: { type: 'array', default: [] }
-      }
+        clientLogos: { type: 'array', default: [] },
+      },
     },
     {
       id: 'testimonial-block',
@@ -420,15 +388,19 @@ const BlocksTab: React.FC = () => {
       icon: <FaComments size={16} />,
       preview: '/preview-images/testimonial-block.png',
       schema: {
-        testimonials: { type: 'array', default: [
-          {
-            image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
-            name: 'Larry Diamond',
-            position: 'Chief Executive Officer',
-            details: 'Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id!'
-          }
-        ] }
-      }
+        testimonials: {
+          type: 'array',
+          default: [
+            {
+              image: 'https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-01/image-01.jpg',
+              name: 'Larry Diamond',
+              position: 'Chief Executive Officer',
+              details:
+                'Velit est sit voluptas eum sapiente omnis! Porro, impedit minus quam reprehenderit tempore sint quaerat id!',
+            },
+          ],
+        },
+      },
     },
     {
       id: 'services-block',
@@ -440,47 +412,60 @@ const BlocksTab: React.FC = () => {
       schema: {
         sectionTitle: { type: 'string', default: 'What We Offer' },
         sectionSubtitle: { type: 'string', default: 'Our Services' },
-        sectionDescription: { type: 'string', default: 'There are many variations of passages of Lorem Ipsum available.' },
-        services: { type: 'array', default: [
-          {
-            title: 'Refreshing Design',
-            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
-            icon: 'design'
-          },
-          {
-            title: 'Based on Tailwind CSS',
-            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
-            icon: 'tailwind'
-          },
-          {
-            title: '100+ Components',
-            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
-            icon: 'components'
-          },
-          {
-            title: 'Speed Optimized',
-            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
-            icon: 'speed'
-          },
-          {
-            title: 'Fully Customizable',
-            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
-            icon: 'customizable'
-          },
-          {
-            title: 'Regular Updates',
-            details: 'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
-            icon: 'updates'
-          }
-        ] }
-      }
-    }
+        sectionDescription: {
+          type: 'string',
+          default: 'There are many variations of passages of Lorem Ipsum available.',
+        },
+        services: {
+          type: 'array',
+          default: [
+            {
+              title: 'Refreshing Design',
+              details:
+                'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+              icon: 'design',
+            },
+            {
+              title: 'Based on Tailwind CSS',
+              details:
+                'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+              icon: 'tailwind',
+            },
+            {
+              title: '100+ Components',
+              details:
+                'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+              icon: 'components',
+            },
+            {
+              title: 'Speed Optimized',
+              details:
+                'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+              icon: 'speed',
+            },
+            {
+              title: 'Fully Customizable',
+              details:
+                'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+              icon: 'customizable',
+            },
+            {
+              title: 'Regular Updates',
+              details:
+                'We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics.',
+              icon: 'updates',
+            },
+          ],
+        },
+      },
+    },
   ];
 
   // Фильтрация блоков
-  const filteredBlocks = blocks.filter(block => {
-    const matchesSearch = block.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         block.description.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredBlocks = blocks.filter((block) => {
+    const matchesSearch =
+      block.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      block.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || block.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -519,7 +504,7 @@ const BlocksTab: React.FC = () => {
       {/* Categories */}
       <div className="mb-4">
         <div className="flex flex-wrap gap-2">
-          {blockCategories.map(category => (
+          {blockCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
@@ -539,7 +524,7 @@ const BlocksTab: React.FC = () => {
 
       {/* Blocks Grid */}
       <div className="space-y-3">
-        {filteredBlocks.map(block => (
+        {filteredBlocks.map((block) => (
           <div
             key={block.id}
             draggable
@@ -548,24 +533,16 @@ const BlocksTab: React.FC = () => {
           >
             <div className="flex items-start space-x-3">
               <div className="flex-shrink-0 p-2 bg-gray-100 rounded-md dark:bg-gray-700">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {block.icon}
-                </span>
+                <span className="text-gray-600 dark:text-gray-400">{block.icon}</span>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                  {block.name}
-                </h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {block.description}
-                </p>
+                <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200">{block.name}</h4>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{block.description}</p>
                 <div className="flex items-center space-x-2 mt-2">
                   <span className="text-xs px-2 py-1 bg-gray-100 rounded dark:bg-gray-700 text-gray-600 dark:text-gray-400">
-                    {blockCategories.find(cat => cat.id === block.category)?.name}
+                    {blockCategories.find((cat) => cat.id === block.category)?.name}
                   </span>
-                  <span className="text-xs text-gray-400">
-                    Drag to add
-                  </span>
+                  <span className="text-xs text-gray-400">Drag to add</span>
                 </div>
               </div>
             </div>
@@ -576,9 +553,7 @@ const BlocksTab: React.FC = () => {
       {filteredBlocks.length === 0 && (
         <div className="text-center py-8">
           <FaCube className="mx-auto h-8 w-8 text-gray-400" />
-          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            No blocks found matching your search
-          </p>
+          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">No blocks found matching your search</p>
         </div>
       )}
     </div>
@@ -586,7 +561,6 @@ const BlocksTab: React.FC = () => {
 };
 
 // Вкладка Block - настройки блока
-
 
 // Вкладка Item - настройки элемента
 const ItemTab: React.FC = () => {
@@ -601,11 +575,7 @@ const ItemTab: React.FC = () => {
         </p>
       </div>
 
-      <SettingsSection 
-        title="Content" 
-        icon={<FaFile size={16} />}
-        collapsible
-      >
+      <SettingsSection title="Content" icon={<FaFile size={16} />} collapsible>
         <div className="space-y-2">
           <InputGroup
             label="TEXT CONTENT"
@@ -616,13 +586,9 @@ const ItemTab: React.FC = () => {
         </div>
       </SettingsSection>
 
-      <SettingsSection 
-        title="Actions" 
-        icon={<FaCog size={16} />}
-        collapsible
-      >
+      <SettingsSection title="Actions" icon={<FaCog size={16} />} collapsible>
         <div className="space-y-3">
-                        <button className="w-full flex items-center justify-center space-x-2 px-4 py-2 rounded-md transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
+          <button className="w-full flex items-center justify-center space-x-2 px-4 py-2 rounded-md transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
             <FaSave size={14} />
             <span>Save Changes</span>
           </button>
@@ -647,12 +613,12 @@ const SettingsSection: React.FC<{
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div 
+    <div
       className="mb-6 rounded-[20px] bg-white p-6 shadow-2 hover:shadow-lg dark:bg-dark-2 dark:shadow-dark transition-colors duration-200 border border-stroke dark:border-dark-3"
-      style={{ 
+      style={{
         borderColor: 'var(--interface-border)',
         backgroundColor: 'var(--interface-surface)',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       }}
     >
       <div
@@ -661,24 +627,20 @@ const SettingsSection: React.FC<{
           collapsible ? 'hover:bg-opacity-50' : ''
         }`}
         style={{
-          backgroundColor: collapsible ? 'var(--interface-bg)' : 'transparent'
+          backgroundColor: collapsible ? 'var(--interface-bg)' : 'transparent',
         }}
       >
         <div className="flex items-center space-x-3">
-          {icon && (
-            <span style={{ color: 'var(--interface-text)' }}>
-              {icon}
-            </span>
-          )}
+          {icon && <span style={{ color: 'var(--interface-text)' }}>{icon}</span>}
           <div>
-            <h4 
+            <h4
               className="text-lg font-semibold transition-colors duration-200"
               style={{ color: 'var(--interface-text)' }}
             >
               {title}
             </h4>
             {subtitle && (
-              <p 
+              <p
                 className="text-sm text-body-color dark:text-dark-6 transition-colors duration-200"
                 style={{ color: 'var(--interface-text)' }}
               >
@@ -688,27 +650,17 @@ const SettingsSection: React.FC<{
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          {actionIcon && (
-            <span style={{ color: 'var(--interface-text)' }}>
-              {actionIcon}
-            </span>
-          )}
+          {actionIcon && <span style={{ color: 'var(--interface-text)' }}>{actionIcon}</span>}
           {collapsible && (
-            <FaChevronDown 
-              size={12} 
+            <FaChevronDown
+              size={12}
               className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
               style={{ color: 'var(--interface-text)' }}
             />
           )}
         </div>
       </div>
-      {(!collapsible || isExpanded) && (
-        <div 
-          className="mt-4"
-        >
-          {children}
-        </div>
-      )}
+      {(!collapsible || isExpanded) && <div className="mt-4">{children}</div>}
     </div>
   );
 };
@@ -722,7 +674,7 @@ const InputGroup: React.FC<{
   disabled?: boolean;
 }> = ({ label, type, value, placeholder, options = [], disabled }) => {
   const handleChange = () => {};
-  
+
   const compactInputStyles = {
     backgroundColor: 'transparent',
     color: 'var(--interface-text)',
@@ -730,12 +682,12 @@ const InputGroup: React.FC<{
     border: '1px solid rgba(0, 0, 0, 0.08)',
     borderRadius: '3px',
     fontSize: '13px',
-    outline: 'none'
+    outline: 'none',
   };
-  
+
   return (
     <div className="space-y-1">
-      <label 
+      <label
         className="text-xs font-medium uppercase tracking-wide text-gray-500"
         style={{ color: 'var(--interface-text)', opacity: 0.7 }}
       >
@@ -780,4 +732,4 @@ const InputGroup: React.FC<{
   );
 };
 
-export default SettingsPanel; 
+export default SettingsPanel;

@@ -1,41 +1,41 @@
 // Redaktus Core - основные компоненты без website/blog (избегаем циклических импортов)
 
 // Types
-export * as types from './types'
+export * as types from './types';
 
 // Основные компоненты - из redaktus-core
-export { 
-  Admin, 
-  Editor, 
-  Login, 
-  Playground, 
-  AppSettings, 
+export {
+  Admin,
+  Editor,
+  Login,
+  Playground,
+  AppSettings,
   MediaLibrary,
-  useRedaktus, 
+  useRedaktus,
   RedaktusContext,
   SsoLogin,
   SsoLoginFailure,
-  SsoLoginSuccess
-} from './redaktus-core'
+  SsoLoginSuccess,
+} from './redaktus-core';
 
 // Компоненты контента - из redaktus-core
-export { 
-  File, 
-  Icon, 
-  Image, 
-  Link, 
-  Meta, 
-  PageViewer, 
-  Preview, 
-  Repeater, 
-  RichText, 
-  RichTextExt, 
-  Slot, 
-  Text 
-} from './redaktus-core'
+export {
+  File,
+  Icon,
+  Image,
+  Link,
+  Meta,
+  PageViewer,
+  Preview,
+  Repeater,
+  RichText,
+  RichTextExt,
+  Slot,
+  Text,
+} from './redaktus-core';
 
 // Хуки и контекст - из redaktus-core
-export { 
+export {
   useAdminContext,
   usePage,
   usePagePublic,
@@ -44,11 +44,11 @@ export {
   usePagesPublic,
   useRedaktusContext,
   useTagsPublic,
-  useVisualEdit
-} from './redaktus-core'
+  useVisualEdit,
+} from './redaktus-core';
 
 // Утилиты - из redaktus-core
-export { 
+export {
   fetchPage,
   fetchPages,
   fetchTags,
@@ -56,35 +56,28 @@ export {
   renderMeta,
   cleanPage,
   getPagePlainText,
-  getSchemaOrgData
-} from './redaktus-core'
+  getSchemaOrgData,
+} from './redaktus-core';
 
 // Плагины - из redaktus-core
-export { 
+export {
   blockPluginConstructor,
   blockWithModalPluginConstructor,
   markPluginConstructor,
-  plugins
-} from './redaktus-core'
+  plugins,
+} from './redaktus-core';
 
 // Дополнительные компоненты - из redaktus-core
-export { 
-  JsonLd,
-  Plain
-} from './redaktus-core'
+export { JsonLd, Plain } from './redaktus-core';
 
 // SSO компоненты - из redaktus-core
-export { 
-  useAuth
-} from './redaktus-core'
+export { useAuth } from './redaktus-core';
 
 // Утилиты - из redaktus-core
-export { 
-  uuid
-} from './redaktus-core'
+export { uuid } from './redaktus-core';
 
 // Inline Edit компоненты - из inline-edit
-export { InlineEdit, InputType } from './inline-edit'
+export { InlineEdit, InputType } from './inline-edit';
 
 // Главный провайдер - Redaktus
-export { Redaktus } from './redaktus-core' 
+export { Redaktus } from './redaktus-core';

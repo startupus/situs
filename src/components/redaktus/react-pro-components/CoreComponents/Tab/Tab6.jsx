@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Tab6 = () => {
-  const [open, setOpen] = useState("home");
+  const [open, setOpen] = useState('home');
 
   const handleTabOpen = (tabCategory) => {
     setOpen(tabCategory);
@@ -15,16 +15,14 @@ const Tab6 = () => {
             <div className="bg-dark mb-14 w-full">
               <div className="flex flex-wrap">
                 <button
-                  onClick={() => handleTabOpen("home")}
+                  onClick={() => handleTabOpen('home')}
                   className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
-                    open === "home" ? "bg-primary" : ""
+                    open === 'home' ? 'bg-primary' : ''
                   }`}
                 >
                   <span
                     className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
-                      open === "home"
-                        ? "bg-white text-body-color border-white"
-                        : ""
+                      open === 'home' ? 'bg-white text-body-color border-white' : ''
                     }`}
                   >
                     01
@@ -32,16 +30,14 @@ const Tab6 = () => {
                   Home
                 </button>
                 <button
-                  onClick={() => handleTabOpen("about")}
+                  onClick={() => handleTabOpen('about')}
                   className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
-                    open === "about" ? "bg-primary" : ""
+                    open === 'about' ? 'bg-primary' : ''
                   }`}
                 >
                   <span
                     className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
-                      open === "about"
-                        ? "bg-white text-body-color border-white"
-                        : ""
+                      open === 'about' ? 'bg-white text-body-color border-white' : ''
                     }`}
                   >
                     02
@@ -49,16 +45,14 @@ const Tab6 = () => {
                   About Us
                 </button>
                 <button
-                  onClick={() => handleTabOpen("team")}
+                  onClick={() => handleTabOpen('team')}
                   className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
-                    open === "team" ? "bg-primary" : ""
+                    open === 'team' ? 'bg-primary' : ''
                   }`}
                 >
                   <span
                     className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
-                      open === "team"
-                        ? "bg-white text-body-color border-white"
-                        : ""
+                      open === 'team' ? 'bg-white text-body-color border-white' : ''
                     }`}
                   >
                     03
@@ -66,16 +60,14 @@ const Tab6 = () => {
                   Our Team
                 </button>
                 <button
-                  onClick={() => handleTabOpen("company")}
+                  onClick={() => handleTabOpen('company')}
                   className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
-                    open === "company" ? "bg-primary" : ""
+                    open === 'company' ? 'bg-primary' : ''
                   }`}
                 >
                   <span
                     className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
-                      open === "company"
-                        ? "bg-white text-body-color border-white"
-                        : ""
+                      open === 'company' ? 'bg-white text-body-color border-white' : ''
                     }`}
                   >
                     04
@@ -118,11 +110,7 @@ export default Tab6;
 const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
-      <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
-          open === tabCategory ? "block" : "hidden"
-        } `}
-      >
+      <div className={`text-body-color p-6 text-base leading-relaxed ${open === tabCategory ? 'block' : 'hidden'} `}>
         {details}
       </div>
     </div>

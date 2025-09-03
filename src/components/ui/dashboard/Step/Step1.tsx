@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Step = () => {
   return (
@@ -25,20 +25,17 @@ const SingleStep = ({ number, name, done, ongoing }) => {
     <div className="group relative px-3 text-center sm:px-7 md:px-10 lg:px-[50px]">
       <span
         className={`${
-          done && "bg-primary"
+          done && 'bg-primary'
         } absolute -right-[45px] top-[17px] block h-[2px] w-[80px] bg-gray group-last:hidden sm:-right-[60px] sm:top-[25px] sm:w-[120px]`}
       ></span>
       <span
         className={`${
-          (done && "border-primary bg-primary text-white") ||
-          (ongoing && "border-primary text-primary")
+          (done && 'border-primary bg-primary text-white') || (ongoing && 'border-primary text-primary')
         } relative z-10 mx-auto mb-[10px] flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#e7e7e7] bg-gray text-base font-medium text-black  sm:h-[50px] sm:w-[50px] sm:text-xl`}
       >
         {number}
       </span>
-      <span className="text-[10px] font-medium text-black sm:text-base md:text-xl">
-        {name}
-      </span>
+      <span className="text-[10px] font-medium text-black sm:text-base md:text-xl">{name}</span>
     </div>
   );
 };

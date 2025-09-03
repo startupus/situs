@@ -1,12 +1,6 @@
 // src/components/ui/ThemePageTitles.tsx
 import React from 'react';
-import { 
-  PageTitle1,
-  PageTitle2,
-  PageTitle3,
-  PageTitle4,
-  PageTitle5
-} from './core';
+import { PageTitle1, PageTitle2, PageTitle3, PageTitle4, PageTitle5 } from './core';
 
 // PageTitle Variants - простые обертки
 export const ThemePageTitle1: React.FC = () => <PageTitle1 />;

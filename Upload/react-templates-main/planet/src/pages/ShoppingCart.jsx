@@ -61,31 +61,31 @@ const ShoppingCart = () => {
     <>
       <Breadcrumb pageName="Sopping Cart" />
 
-      <section className="py-24 bg-tg-bg dark:bg-dark">
+      <section className="bg-tg-bg py-24 dark:bg-dark">
         <div className="container mx-auto">
-          <h2 className="flex items-end mb-10 text-2xl font-semibold text-dark sm:text-3xl md:text-4xl dark:text-white">
+          <h2 className="mb-10 flex items-end text-2xl font-semibold text-dark dark:text-white sm:text-3xl md:text-4xl">
             <span>Shopping cart</span>
             <span className="pl-5 text-lg font-medium text-body-color dark:text-dark-6">
               (04 Items)
             </span>
           </h2>
 
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 xl:w-8/12">
-              <div className="border-stroke dark:border-dark-3 dark:bg-dark-2 mb-10 max-w-full overflow-x-auto rounded-[10px] border bg-white">
+              <div className="mb-10 max-w-full overflow-x-auto rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
                 <table className="w-full table-auto">
                   <thead>
                     <tr className="text-left">
-                      <th className="text-dark min-w-[300px] px-4 py-[18px] text-base font-semibold xl:pl-9 dark:text-white">
+                      <th className="min-w-[300px] px-4 py-[18px] text-base font-semibold text-dark dark:text-white xl:pl-9">
                         Product
                       </th>
-                      <th className="text-dark min-w-[90px] px-4 py-[18px] text-base font-semibold dark:text-white">
+                      <th className="min-w-[90px] px-4 py-[18px] text-base font-semibold text-dark dark:text-white">
                         Price
                       </th>
-                      <th className="text-dark min-w-[150px] px-4 py-[18px] text-base font-semibold dark:text-white">
+                      <th className="min-w-[150px] px-4 py-[18px] text-base font-semibold text-dark dark:text-white">
                         Quantity
                       </th>
-                      <th className="text-dark min-w-[115px] px-4 py-[18px] text-center text-base font-semibold xl:pr-9 dark:text-white">
+                      <th className="min-w-[115px] px-4 py-[18px] text-center text-base font-semibold text-dark dark:text-white xl:pr-9">
                         Remove
                       </th>
                     </tr>
@@ -94,7 +94,7 @@ const ShoppingCart = () => {
                   <tbody>
                     {cartItems.map((item, index) => (
                       <tr key={index}>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px] xl:pl-9">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3 xl:pl-9">
                           <div className="flex items-center">
                             <img
                               src={item.image}
@@ -110,37 +110,37 @@ const ShoppingCart = () => {
                                   {item.title}
                                 </Link>
                               </h5>
-                              <p className="text-body-color dark:text-dark-6 mt-0.5 text-base">
+                              <p className="mt-0.5 text-base text-body-color dark:text-dark-6">
                                 {item.subtitle}
                               </p>
                             </div>
                           </div>
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px]">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3">
                           <p className="text-lg font-medium text-dark dark:text-white">
                             {item.price}
                           </p>
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px]">
-                          <div className="border-stroke text-dark dark:border-dark-3 inline-flex items-center rounded-[5px] border text-base font-medium dark:text-white">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3">
+                          <div className="inline-flex items-center rounded-[5px] border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
                             <span
                               onClick={() => decrement(index)}
-                              className="text-dark flex h-[42px] w-9 cursor-pointer items-center justify-center select-none dark:text-white"
+                              className="flex h-[42px] w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                             >
                               -
                             </span>
-                            <span className="border-stroke dark:border-dark-3 border-x px-6 py-[9px]">
+                            <span className="border-x border-stroke px-6 py-[9px] dark:border-dark-3">
                               {item.quantity}
                             </span>
                             <span
                               onClick={() => increment(index)}
-                              className="text-dark flex h-[42px] w-9 cursor-pointer items-center justify-center select-none dark:text-white"
+                              className="flex h-[42px] w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                             >
                               +
                             </span>
                           </div>
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px] pr-9 text-center">
+                        <td className="border-t border-stroke px-4 py-[30px] pr-9 text-center dark:border-dark-3">
                           <button className="text-red">
                             <svg
                               width="16"
@@ -176,9 +176,9 @@ const ShoppingCart = () => {
             </div>
 
             <div className="w-full px-4 lg:w-1/2 xl:w-4/12">
-              <div className="border-stroke dark:border-dark-3 dark:bg-dark-2 xs:px-8 mb-8 overflow-hidden rounded-[10px] border bg-white px-6 pt-8 pb-5">
+              <div className="mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 pb-5 pt-8 dark:border-dark-3 dark:bg-dark-2 xs:px-8">
                 <div className="mb-5">
-                  <h3 className="mb-2 text-lg font-semibold text-dark sm:text-xl dark:text-white">
+                  <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white sm:text-xl">
                     Apply Coupon
                   </h3>
                   <p className="text-base text-body-color dark:text-dark-6">
@@ -190,22 +190,22 @@ const ShoppingCart = () => {
                   <input
                     type="text"
                     placeholder="Coupon code"
-                    className="border-stroke text-body-color focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 xs:mr-4 mb-3 flex h-10 w-full items-center rounded-[5px] border bg-transparent px-[18px] text-sm outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                    className="outline-hidden mb-3 flex h-10 w-full items-center rounded-[5px] border border-stroke bg-transparent px-[18px] text-sm text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6 xs:mr-4"
                   />
-                  <button className="h-10 px-5 mb-3 text-sm font-semibold text-white transition rounded-md bg-primary hover:bg-blue-dark">
+                  <button className="mb-3 h-10 rounded-md bg-primary px-5 text-sm font-semibold text-white transition hover:bg-blue-dark">
                     Apply
                   </button>
                 </form>
               </div>
 
-              <div className="border-stroke dark:border-dark-3 dark:bg-dark-2 xs:px-8 mb-8 overflow-hidden rounded-[10px] border bg-white px-6 py-8">
-                <div className="pb-5 border-b border-stroke dark:border-dark-3">
-                  <h3 className="text-lg font-semibold text-dark sm:text-xl dark:text-white">
+              <div className="mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 py-8 dark:border-dark-3 dark:bg-dark-2 xs:px-8">
+                <div className="border-b border-stroke pb-5 dark:border-dark-3">
+                  <h3 className="text-lg font-semibold text-dark dark:text-white sm:text-xl">
                     Total
                   </h3>
                 </div>
-                <div className="py-5 -mx-1 border-b border-stroke dark:border-dark-3">
-                  <div className="flex items-center justify-between mb-3">
+                <div className="-mx-1 border-b border-stroke py-5 dark:border-dark-3">
+                  <div className="mb-3 flex items-center justify-between">
                     <div className="px-1">
                       <p className="text-base font-medium text-dark dark:text-white">
                         Total
@@ -217,7 +217,7 @@ const ShoppingCart = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="mb-3 flex items-center justify-between">
                     <div className="px-1">
                       <p className="text-base font-medium text-dark dark:text-white">
                         Delivery
@@ -242,7 +242,7 @@ const ShoppingCart = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-between py-5 -mx-1">
+                <div className="-mx-1 flex items-center justify-between py-5">
                   <div className="px-1">
                     <p className="text-base font-medium text-dark dark:text-white">
                       Subtotal
@@ -258,12 +258,12 @@ const ShoppingCart = () => {
                 <div className="mb-3">
                   <Link
                     to="/order-summary"
-                    className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-primary hover:bg-blue-dark"
+                    className="flex w-full items-center justify-center rounded-md bg-primary px-10 py-3 text-center text-base font-medium text-white hover:bg-blue-dark"
                   >
                     CHECKOUT
                   </Link>
                 </div>
-                <p className="text-body-color dark:text-dark-6 mb-[14px] text-base">
+                <p className="mb-[14px] text-base text-body-color dark:text-dark-6">
                   We Accept:
                 </p>
                 <img src={paymentImage} alt="payment" />

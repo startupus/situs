@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const ChatBox3 = () => {
   const pictures = [
-    "https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-box/chat-box-03/chat-01.jpg",
-    "https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-box/chat-box-03/chat-02.jpg",
+    'https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-box/chat-box-03/chat-01.jpg',
+    'https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-box/chat-box-03/chat-02.jpg',
   ];
 
   const active = false;
@@ -22,16 +22,12 @@ const ChatBox3 = () => {
                 />
               </div>
               <div>
-                <h5 className="text-base font-medium text-dark dark:text-white">
-                  Robert Henry
-                </h5>
+                <h5 className="text-base font-medium text-dark dark:text-white">Robert Henry</h5>
                 <p className="text-sm text-body-color dark:text-dark-6">
                   <span
-                    className={`mr-[6px] inline-block h-2 w-2 rounded-full ${
-                      active ? "bg-green" : "bg-red"
-                    }`}
+                    className={`mr-[6px] inline-block h-2 w-2 rounded-full ${active ? 'bg-green' : 'bg-red'}`}
                   ></span>
-                  {active ? "Active" : "last seen 1h ago"}
+                  {active ? 'Active' : 'last seen 1h ago'}
                 </p>
               </div>
             </div>
@@ -113,13 +109,7 @@ const ChatBox3 = () => {
                     </svg>
                   </button>
                   <button className="flex h-9 w-9 items-center justify-center rounded-full bg-primary hover:bg-blue-dark">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clipPath="url(#clip0_1061_11601)">
                         <path
                           d="M14.8999 7.42497C14.7999 7.24997 14.6499 7.12497 14.4749 7.02497L2.94994 0.574974C2.74994 0.474974 2.52494 0.424974 2.29994 0.449974C2.07494 0.474974 1.87494 0.549974 1.69994 0.699974C1.52494 0.849974 1.39994 1.04997 1.34994 1.24997C1.27494 1.47497 1.29994 1.69997 1.37494 1.92497L3.52494 7.99997L1.37494 14.075C1.29994 14.3 1.29994 14.525 1.34994 14.725C1.39994 14.95 1.52494 15.125 1.69994 15.275C1.87494 15.425 2.07494 15.5 2.29994 15.525C2.32494 15.525 2.37494 15.525 2.39994 15.525C2.57494 15.525 2.77494 15.475 2.94994 15.375L14.4749 8.92497C14.6499 8.82497 14.7999 8.69997 14.8999 8.52497C14.9999 8.34997 15.0499 8.14997 15.0499 7.97497C15.0499 7.79997 14.9999 7.59997 14.8999 7.42497ZM2.44994 1.57497L12.8999 7.42497H4.52494L2.44994 1.57497ZM2.44994 14.425L4.54994 8.57497H12.9249L2.44994 14.425Z"
@@ -149,20 +139,13 @@ const Chat = ({ img, name, time, text, audio, pictures }) => {
   return (
     <div className="flex w-full max-w-[380px]">
       <div className="mr-[14px] h-10 w-full max-w-[40px] rounded-full">
-        <img
-          src={img}
-          alt="avatar"
-          className="h-full w-full rounded-full object-cover object-center"
-        />
+        <img src={img} alt="avatar" className="h-full w-full rounded-full object-cover object-center" />
       </div>
 
       <div>
         <p className="mb-[10px] text-base font-medium text-dark dark:text-white">
           <span>{name}</span>
-          <span className="pl-[10px] text-sm text-body-color dark:text-dark-6">
-            {" "}
-            {time}{" "}
-          </span>
+          <span className="pl-[10px] text-sm text-body-color dark:text-dark-6"> {time} </span>
         </p>
 
         {text && (
@@ -201,9 +184,7 @@ const Reply = ({ name, img, time, text }) => {
       <div>
         <p className="mb-[10px] text-right text-base font-medium text-dark dark:text-white">
           <span>{name}</span>
-          <span className="pl-[10px] text-sm text-body-color dark:text-dark-6">
-            {time}
-          </span>
+          <span className="pl-[10px] text-sm text-body-color dark:text-dark-6">{time}</span>
         </p>
 
         <div className="inline-block rounded-[20px] rounded-tr-none bg-primary px-4 py-2">
@@ -212,11 +193,7 @@ const Reply = ({ name, img, time, text }) => {
       </div>
 
       <div className="ml-[14px] h-10 w-full max-w-[40px] rounded-full">
-        <img
-          src={img}
-          alt="avatar"
-          className="h-full w-full rounded-full object-cover object-center"
-        />
+        <img src={img} alt="avatar" className="h-full w-full rounded-full object-cover object-center" />
       </div>
     </div>
   );

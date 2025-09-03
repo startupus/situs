@@ -14,9 +14,9 @@ interface UserStatsProps {
 
 const UserStats: React.FC<UserStatsProps> = ({ users }) => {
   const totalUsers = users.length;
-  const activeUsers = users.filter(u => u.status === 'ACTIVE').length;
-  const pendingUsers = users.filter(u => u.status === 'PENDING').length;
-  const suspendedUsers = users.filter(u => u.status === 'SUSPENDED' || u.status === 'BANNED').length;
+  const activeUsers = users.filter((u) => u.status === 'ACTIVE').length;
+  const pendingUsers = users.filter((u) => u.status === 'PENDING').length;
+  const suspendedUsers = users.filter((u) => u.status === 'SUSPENDED' || u.status === 'BANNED').length;
 
   return (
     <div className="grid grid-cols-4 gap-4 mb-6">
@@ -26,18 +26,8 @@ const UserStats: React.FC<UserStatsProps> = ({ users }) => {
         icon={<FiUsers className="w-6 h-6" />}
         color="gray"
       />
-      <ThemeStatsCard
-        title="Активных"
-        value={activeUsers}
-        icon={<FiActivity className="w-6 h-6" />}
-        color="success"
-      />
-      <ThemeStatsCard
-        title="Ожидают"
-        value={pendingUsers}
-        icon={<FiClock className="w-6 h-6" />}
-        color="warning"
-      />
+      <ThemeStatsCard title="Активных" value={activeUsers} icon={<FiActivity className="w-6 h-6" />} color="success" />
+      <ThemeStatsCard title="Ожидают" value={pendingUsers} icon={<FiClock className="w-6 h-6" />} color="warning" />
       <ThemeStatsCard
         title="Заблокированных"
         value={suspendedUsers}

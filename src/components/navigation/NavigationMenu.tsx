@@ -27,7 +27,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
   className = '',
   orientation = 'horizontal',
   showIcons = true,
-  maxLevel = 3
+  maxLevel = 3,
 }) => {
   const location = useLocation();
   const { language } = useLanguage();
@@ -44,7 +44,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
 
     // Проверяем дочерние элементы
     if (item.children && item.children.length > 0) {
-      return item.children.some(child => isActiveMenuItem(child));
+      return item.children.some((child) => isActiveMenuItem(child));
     }
 
     // Fallback: проверяем по URL
@@ -91,9 +91,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
   const renderMenuItem = (item: MenuItemData, level = 1): React.ReactNode => {
     if (level > maxLevel) return null;
     if (item.type === 'SEPARATOR') {
-      return (
-        <li key={item.id} className="border-t border-stroke dark:border-dark-3 my-2" />
-      );
+      return <li key={item.id} className="border-t border-stroke dark:border-dark-3 my-2" />;
     }
 
     const isActive = isActiveMenuItem(item);
@@ -101,37 +99,41 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
     const url = buildMenuItemUrl(item);
 
     const itemContent = (
-      <div className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-        isActive 
-          ? 'bg-primary text-white' 
-          : 'text-dark dark:text-white hover:bg-gray-100 dark:hover:bg-dark-3'
-      }`}>
+      <div
+        className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+          isActive ? 'bg-primary text-white' : 'text-dark dark:text-white hover:bg-gray-100 dark:hover:bg-dark-3'
+        }`}
+      >
         {showIcons && (
           <span className="text-sm">
             {item.icon ? (
-              <IconPreview 
+              <IconPreview
                 iconName={item.icon}
                 iconLibrary={item.iconLibrary}
                 size={16}
                 className={isActive ? 'text-white' : 'text-primary'}
               />
+            ) : // Fallback на эмодзи
+            item.type === 'COMPONENT' ? (
+              '🧩'
+            ) : item.type === 'URL' ? (
+              '🔗'
+            ) : item.type === 'HEADING' ? (
+              '📂'
             ) : (
-              // Fallback на эмодзи
-              item.type === 'COMPONENT' ? '🧩' : 
-              item.type === 'URL' ? '🔗' : 
-              item.type === 'HEADING' ? '📂' : '❓'
+              '❓'
             )}
           </span>
         )}
         <span className={level > 1 ? 'text-sm' : ''}>{item.title}</span>
         {hasChildren && (
-          <svg 
-            width="12" 
-            height="12" 
-            viewBox="0 0 12 12" 
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
             className={`fill-current transition-transform ${isActive ? 'rotate-90' : ''}`}
           >
-            <path d="M4 2L8 6L4 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M4 2L8 6L4 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         )}
       </div>
@@ -148,11 +150,11 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
             {itemContent}
           </Link>
         )}
-        
+
         {/* Рендерим дочерние пункты */}
         {hasChildren && (isActive || item.type === 'HEADING') && (
           <ul className={`mt-2 space-y-1 ${orientation === 'vertical' ? 'block' : 'hidden lg:block'}`}>
-            {item.children!.map(child => renderMenuItem(child, level + 1))}
+            {item.children!.map((child) => renderMenuItem(child, level + 1))}
           </ul>
         )}
       </li>
@@ -170,25 +172,17 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
   }
 
   if (error) {
-    return (
-      <div className={`text-red-600 dark:text-red-400 text-sm ${className}`}>
-        Ошибка загрузки меню: {error}
-      </div>
-    );
+    return <div className={`text-red-600 dark:text-red-400 text-sm ${className}`}>Ошибка загрузки меню: {error}</div>;
   }
 
   if (menuTree.length === 0) {
-    return (
-      <div className={`text-body-color dark:text-dark-6 text-sm ${className}`}>
-        Меню пустое
-      </div>
-    );
+    return <div className={`text-body-color dark:text-dark-6 text-sm ${className}`}>Меню пустое</div>;
   }
 
   return (
     <nav className={className}>
       <ul className={`space-y-1 ${orientation === 'horizontal' ? 'lg:flex lg:space-y-0 lg:space-x-4' : ''}`}>
-        {menuTree.map(item => renderMenuItem(item))}
+        {menuTree.map((item) => renderMenuItem(item))}
       </ul>
     </nav>
   );

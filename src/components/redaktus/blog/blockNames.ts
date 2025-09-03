@@ -9,4 +9,4 @@ enum blockNames {
   TweetLight = 'tweet-light',
 }
 
-export default blockNames
+export default blockNames;

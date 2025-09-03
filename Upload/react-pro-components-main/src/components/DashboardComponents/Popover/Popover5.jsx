@@ -2,7 +2,7 @@ import React from "react";
 
 const Popover5 = () => {
   return (
-    <section className="flex min-h-screen items-center bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="flex min-h-screen items-center bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto w-full px-4 lg:container">
         <div className="group relative block pt-2 lg:inline-block">
           <a
@@ -11,9 +11,9 @@ const Popover5 = () => {
           >
             Popover Text
           </a>
-          <div className="invisible absolute top-full left-0 w-full opacity-0 group-hover:visible group-hover:opacity-100 sm:w-[530px] lg:top-1/2 lg:left-full lg:-translate-y-1/2">
-            <div className="relative rounded-md bg-white dark:bg-dark-2 text-left shadow-testimonial-6 dark:shadow-box-dark lg:ml-5">
-              <span className="absolute -left-3 top-1/2 hidden -translate-y-1/2 lg:block text-white dark:text-dark-2">
+          <div className="invisible absolute left-0 top-full w-full opacity-0 group-hover:visible group-hover:opacity-100 sm:w-[530px] lg:left-full lg:top-1/2 lg:-translate-y-1/2">
+            <div className="relative rounded-md bg-white text-left shadow-testimonial-6 dark:bg-dark-2 dark:shadow-box-dark lg:ml-5">
+              <span className="absolute -left-3 top-1/2 hidden -translate-y-1/2 text-white dark:text-dark-2 lg:block">
                 <svg
                   width={13}
                   height={21}
@@ -25,7 +25,7 @@ const Popover5 = () => {
                   <path d="M1.58026 12.7577C0.214281 11.5625 0.214281 9.4375 1.58026 8.24227L11 -5.24537e-07L11 21L1.58026 12.7577Z" />
                 </svg>
               </span>
-              <div className="items-center justify-between border-b border-stroke dark:border-dark-3 py-4 px-[30px] xs:flex">
+              <div className="items-center justify-between border-b border-stroke px-[30px] py-4 dark:border-dark-3 xs:flex">
                 <div className="mb-4 flex items-center xs:mb-0">
                   <div className="mr-3 h-[50px] w-full max-w-[50px] rounded-full">
                     <img
@@ -44,12 +44,12 @@ const Popover5 = () => {
                   </div>
                 </div>
                 <div>
-                  <button className="rounded-sm bg-yellow-dark h-[26px] px-[10px] text-xs font-medium text-white hover:bg-yellow-dark/90">
+                  <button className="h-[26px] rounded-sm bg-yellow-dark px-[10px] text-xs font-medium text-white hover:bg-yellow-dark/90">
                     In Progress
                   </button>
                 </div>
               </div>
-              <div className="pt-6 pb-[30px] px-[30px]">
+              <div className="px-[30px] pb-[30px] pt-6">
                 <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">
                   From Pimjo Labs Team
                 </h3>

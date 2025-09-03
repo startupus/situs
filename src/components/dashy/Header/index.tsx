@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -99,24 +99,19 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
 
           <div className="flex items-center gap-3 2xsm:gap-7">
             <div className="relative">
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-4"
-              >
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-4">
                 <span className="h-12 w-12 rounded-full bg-primary flex items-center justify-center">
                   <span className="text-white font-semibold">П</span>
                 </span>
                 <span className="hidden text-right lg:block">
-                  <span className="block text-sm font-medium text-black dark:text-white">
-                    Пользователь
-                  </span>
+                  <span className="block text-sm font-medium text-black dark:text-white">Пользователь</span>
                   <span className="block text-xs">Администратор</span>
                 </span>
               </button>
 
               <div
                 className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
-                  dropdownOpen === true ? "block" : "hidden"
+                  dropdownOpen === true ? 'block' : 'hidden'
                 }`}
               >
                 <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">

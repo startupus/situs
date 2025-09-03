@@ -2,13 +2,13 @@ import React from "react";
 
 const ProductCategories = () => {
   return (
-    <section className="bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+    <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-          <h2 className="text-dark dark:text-white mb-4 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px]">
+          <h2 className="mb-4 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
             Shop By Category
           </h2>
-          <p className="text-body-color text-base dark:text-dark-6">
+          <p className="text-base text-body-color dark:text-dark-6">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form.
           </p>
@@ -43,7 +43,7 @@ const ProductCategories = () => {
         <div className="mt-10 text-center">
           <a
             href="/#"
-            className="bg-primary inline-flex items-center justify-center rounded-md py-[13px] px-7 text-center text-base font-medium text-white hover:bg-blue-dark"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
           >
             Explore All Category
           </a>
@@ -62,10 +62,10 @@ const CategoriesItem = ({ link, img, title, subtitle }) => {
         <div className="mb-5 overflow-hidden rounded-lg">
           <img src={img} alt="category" className="w-full" />
         </div>
-        <h3 className="group-hover:text-primary mb-1 text-xl font-semibold text-dark dark:text-white md:text-2xl lg:text-xl xl:text-2xl">
+        <h3 className="mb-1 text-xl font-semibold text-dark group-hover:text-primary dark:text-white md:text-2xl lg:text-xl xl:text-2xl">
           {title}
         </h3>
-        <p className="text-body-color text-base dark:text-dark-6">{subtitle}</p>
+        <p className="text-base text-body-color dark:text-dark-6">{subtitle}</p>
       </a>
     </div>
   );

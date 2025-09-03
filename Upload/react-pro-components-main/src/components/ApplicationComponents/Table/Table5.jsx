@@ -2,59 +2,59 @@ import React from "react";
 
 const tableData = [
   {
-    name: 'Musharof Chowdhury',
-    title: 'Multidisciplinary Web Entrepreneur',
-    email: 'musharof@example.com',
-    role: 'Owner',
+    name: "Musharof Chowdhury",
+    title: "Multidisciplinary Web Entrepreneur",
+    email: "musharof@example.com",
+    role: "Owner",
   },
   {
-    name: 'Naimur Rahman',
-    title: 'Website Front-end Developer',
-    email: 'naimurrahman@example.com',
-    role: 'Member',
+    name: "Naimur Rahman",
+    title: "Website Front-end Developer",
+    email: "naimurrahman@example.com",
+    role: "Member",
   },
   {
-    name: 'Shafiq Hammad',
-    title: 'Regional Paradigm Technician',
-    email: 'shafiq.hd@example.com',
-    role: 'Moderator',
+    name: "Shafiq Hammad",
+    title: "Regional Paradigm Technician",
+    email: "shafiq.hd@example.com",
+    role: "Moderator",
   },
   {
-    name: 'Alex Semuyel',
-    title: 'Applications Engineer',
-    email: 'alex.semuel@example.com',
-    role: 'Admin',
+    name: "Alex Semuyel",
+    title: "Applications Engineer",
+    email: "alex.semuel@example.com",
+    role: "Admin",
   },
   {
-    name: 'Sulium Keliym',
-    title: 'Lead Implementation Liaison',
-    email: 'suliym.info@example.com',
-    role: 'Member',
+    name: "Sulium Keliym",
+    title: "Lead Implementation Liaison",
+    email: "suliym.info@example.com",
+    role: "Member",
   },
   {
-    name: 'Devid Deekook',
-    title: 'Central Security Manager',
-    email: 'devid.decok@example.com',
-    role: 'Moderator',
+    name: "Devid Deekook",
+    title: "Central Security Manager",
+    email: "devid.decok@example.com",
+    role: "Moderator",
   },
-]
+];
 
 const headers = [
-  { name: 'Name', styles: 'min-w-[280px]' },
-  { name: 'Position', styles: 'min-w-[280px]' },
-  { name: 'Email', styles: 'min-w-[250px]' },
-  { name: 'Role', styles: 'min-w-[140px]' },
-  { name: 'Edit', styles: 'min-w-[140px] text-right' },
-]
+  { name: "Name", styles: "min-w-[280px]" },
+  { name: "Position", styles: "min-w-[280px]" },
+  { name: "Email", styles: "min-w-[250px]" },
+  { name: "Role", styles: "min-w-[140px]" },
+  { name: "Edit", styles: "min-w-[140px] text-right" },
+];
 
 const Table5 = () => {
   return (
-    <section className='bg-white dark:bg-dark py-20 lg:py-[120px]'>
-      <div className='container mx-auto'>
-        <div className='-mx-4 flex flex-wrap'>
-          <div className='w-full px-4'>
-            <div className='max-w-full overflow-x-auto rounded-xl shadow-[0px_3px_8px_0px_rgba(0,0,0,0.08)] bg-white dark:bg-dark-2'>
-              <table className='w-full table-auto'>
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
+      <div className="container mx-auto">
+        <div className="-mx-4 flex flex-wrap">
+          <div className="w-full px-4">
+            <div className="max-w-full overflow-x-auto rounded-xl bg-white shadow-[0px_3px_8px_0px_rgba(0,0,0,0.08)] dark:bg-dark-2">
+              <table className="w-full table-auto">
                 <TableHead headers={headers} />
                 <TableBody data={tableData} />
               </table>
@@ -63,18 +63,18 @@ const Table5 = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Table5;
 
 const TableHead = ({ headers }) => {
   return (
     <thead>
-      <tr className='bg-primary text-left'>
+      <tr className="bg-primary text-left">
         {headers.map((header, index) => (
           <th
-            className={`py-4 px-4 first:pl-11 last:pr-11 text-base font-medium text-white ${header.styles}`}
+            className={`px-4 py-4 text-base font-medium text-white first:pl-11 last:pr-11 ${header.styles}`}
             key={index}
           >
             {header.name}
@@ -82,39 +82,45 @@ const TableHead = ({ headers }) => {
         ))}
       </tr>
     </thead>
-  )
-}
+  );
+};
 
 const TableBody = ({ data }) => {
   return (
     <tbody>
       {data.map((row, index) => (
         <tr key={index}>
-          <td className='px-4 py-5 border-t border-stroke dark:border-dark-3 pl-11'>
-            <h5 className='text-base text-body-color dark:text-dark-6'>
+          <td className="border-t border-stroke px-4 py-5 pl-11 dark:border-dark-3">
+            <h5 className="text-base text-body-color dark:text-dark-6">
               {row.name}
             </h5>
           </td>
-          <td className='px-4 py-5 border-t border-stroke dark:border-dark-3'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.title}</p>
+          <td className="border-t border-stroke px-4 py-5 dark:border-dark-3">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.title}
+            </p>
           </td>
-          <td className='px-4 py-5 border-t border-stroke dark:border-dark-3'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.email}</p>
+          <td className="border-t border-stroke px-4 py-5 dark:border-dark-3">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.email}
+            </p>
           </td>
-          <td className='px-4 py-5 border-t border-stroke dark:border-dark-3'>
-            <p className='text-base text-body-color dark:text-dark-6'>{row.role}</p>
+          <td className="border-t border-stroke px-4 py-5 dark:border-dark-3">
+            <p className="text-base text-body-color dark:text-dark-6">
+              {row.role}
+            </p>
           </td>
-          <td className='px-4 py-5 text-right border-t border-stroke pr-11 dark:border-dark-3'>
-            <div className='relative'>
-              <select className='text-body-color shadow-1 dark:bg-dark-3 dark:text-dark-6 dark:shadow-card appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm outline-hidden'>
-                <option value='Action' disabled>
+          <td className="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3">
+            <div className="relative">
+              <select className="outline-hidden appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 dark:bg-dark-3 dark:text-dark-6 dark:shadow-card">
+                <option value="Action" disabled>
                   Action
                 </option>
-                <option value=''>Edit</option>
-                <option value=''>Delete</option>
-                <option value=''>Details</option>
+                <option value="">Edit</option>
+                <option value="">Delete</option>
+                <option value="">Details</option>
               </select>
-              <span className='absolute -translate-y-1/2 top-1/2 right-5 text-dark dark:text-dark-7'>
+              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-dark dark:text-dark-7">
                 <svg
                   width={10}
                   height={6}
@@ -134,5 +140,5 @@ const TableBody = ({ data }) => {
         </tr>
       ))}
     </tbody>
-  )
-}
+  );
+};

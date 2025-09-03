@@ -38,7 +38,7 @@ const MenuItemsTab: React.FC<MenuItemsTabProps> = ({
   onBatchDelete,
   onMenuTypeChange,
   onMenuTypesUpdate,
-  onDisplayStyleChange
+  onDisplayStyleChange,
 }) => {
   return (
     <div>
@@ -60,15 +60,11 @@ const MenuItemsTab: React.FC<MenuItemsTabProps> = ({
         projectId={projectId}
         onDisplayStyleChange={onDisplayStyleChange}
       />
-      
+
       {/* Предпросмотр внизу */}
       {selectedMenuType && (
         <div className="mt-8">
-          <MenuPreview 
-            projectId={projectId}
-            selectedMenuType={selectedMenuType}
-            menuItems={menuItems}
-          />
+          <MenuPreview projectId={projectId} selectedMenuType={selectedMenuType} menuItems={menuItems} />
         </div>
       )}
     </div>

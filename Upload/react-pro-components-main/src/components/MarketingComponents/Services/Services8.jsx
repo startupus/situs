@@ -23,7 +23,7 @@ export default function Service8() {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 md:w-1/2 lg:w-1/3">
             <div className="mb-8">
-              <div className="mb-5 rounded-[22px] bg-linear-to-t from-[#F7E8F3] to-[#DDDCF8] p-5">
+              <div className="bg-linear-to-t mb-5 rounded-[22px] from-[#F7E8F3] to-[#DDDCF8] p-5">
                 <div className="flex items-center justify-center rounded-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.41)45.89%,rgba(255,255,255,0.00)100%)] pb-10 pt-5">
                   <img
                     src="./images/services/services-08/image-1.svg"
@@ -65,7 +65,7 @@ export default function Service8() {
 
           <div className="w-full px-4 md:w-1/2 lg:w-1/3">
             <div className="mb-8">
-              <div className="mb-5 rounded-[22px] bg-linear-to-t from-[#F7E8F3] to-[#DDDCF8] p-5">
+              <div className="bg-linear-to-t mb-5 rounded-[22px] from-[#F7E8F3] to-[#DDDCF8] p-5">
                 <div className="flex items-center justify-center rounded-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.41)45.89%,rgba(255,255,255,0.00)100%)] pb-10 pt-5">
                   <img
                     src="./images/services/services-08/image-2.svg"
@@ -107,7 +107,7 @@ export default function Service8() {
 
           <div className="w-full px-4 md:w-1/2 lg:w-1/3">
             <div className="mb-8">
-              <div className="mb-5 rounded-[22px] bg-linear-to-t from-[#F7E8F3] to-[#DDDCF8] p-5">
+              <div className="bg-linear-to-t mb-5 rounded-[22px] from-[#F7E8F3] to-[#DDDCF8] p-5">
                 <div className="flex items-center justify-center rounded-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.41)45.89%,rgba(255,255,255,0.00)100%)] pb-10 pt-5">
                   <img
                     src="./images/services/services-08/image-3.svg"

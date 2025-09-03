@@ -3,26 +3,34 @@
 ## Проблемы, которые были обнаружены и исправлены
 
 ### 1. **Дублирование роутов в App.tsx**
+
 **Проблема**: В `App.tsx` были два конфликтующих роута:
+
 - `/` → `SitusDemo` → `SitusApp`
 - `/projects/*` → `SitusApp`
 
 **Решение**: Убрал дублирование, оставил только:
+
 - `//*` → `SitusApp` (обрабатывает все роуты)
 
 ### 2. **Неправильная логика активного состояния в сайдбаре**
+
 **Проблема**: Использовались простые проверки `location.pathname === item.link`
 **Решение**: Создал функцию `isActiveLink()` которая:
+
 - Обрабатывает главную страницу (`/` и `/dashboard`)
 - Правильно проверяет вложенные роуты через `startsWith()`
 
 ### 3. **Неправильная иконка настроек**
+
 **Проблема**: Использовалась иконка звезды вместо шестеренки
 **Решение**: Заменил на правильную иконку шестеренки из Admino шаблона
 
 ### 4. **Отсутствующие страницы**
+
 **Проблема**: Некоторые разделы не имели контента
 **Решение**: Добавил полноценные страницы для:
+
 - Пользователи (`/users`)
 - Настройки (`/settings`)
 
@@ -31,7 +39,7 @@
 ```
 / (App.tsx)
 ├── /situs → ProjectSelector
-├── /situs/project/:projectId → ProjectWorkspace  
+├── /situs/project/:projectId → ProjectWorkspace
 ├── /redaktus → RedaktusEditor
 ├── /studio/* → StudioInterface
 └── /* → SitusApp
@@ -52,10 +60,10 @@
 
 ```typescript
 const isActiveLink = (link: string) => {
-  if (link === "/dashboard" && (location.pathname === "/" || location.pathname === "/dashboard")) {
+  if (link === '/dashboard' && (location.pathname === '/' || location.pathname === '/dashboard')) {
     return true;
   }
-  return location.pathname === link || location.pathname.startsWith(link + "/");
+  return location.pathname === link || location.pathname.startsWith(link + '/');
 };
 ```
 
@@ -70,4 +78,4 @@ const isActiveLink = (link: string) => {
 
 ## Статус: ✅ ИСПРАВЛЕНО
 
-Все проблемы с роутингом решены. Система теперь работает корректно. 
+Все проблемы с роутингом решены. Система теперь работает корректно.

@@ -45,7 +45,7 @@ const CartDropdown = () => {
         <div className="flex max-w-[200px] justify-end">
           <button
             onClick={handleDropDownToggle}
-            className="text-dark relative flex items-center justify-center dark:text-white"
+            className="relative flex items-center justify-center text-dark dark:text-white"
           >
             <svg
               width="26"
@@ -59,17 +59,17 @@ const CartDropdown = () => {
               <path d="M8.85625 15.7626C8.36875 15.7626 7.92188 16.1688 7.92188 16.6969V19.7438C7.92188 20.2313 8.32812 20.6782 8.85625 20.6782C9.38437 20.6782 9.79062 20.2719 9.79062 19.7438V16.6563C9.79062 16.1688 9.38437 15.7626 8.85625 15.7626Z" />
               <path d="M17.1438 15.7626C16.6563 15.7626 16.2094 16.1688 16.2094 16.6969V19.7438C16.2094 20.2313 16.6156 20.6782 17.1438 20.6782C17.6719 20.6782 18.0781 20.2719 18.0781 19.7438V16.6563C18.0375 16.1688 17.6313 15.7626 17.1438 15.7626Z" />
             </svg>
-            <span className="bg-primary absolute -top-2 -right-2 h-4 w-4 rounded-full text-[10px] font-normal text-white">
+            <span className="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-primary text-[10px] font-normal text-white">
               1
             </span>
           </button>
         </div>
 
         <div
-          className={`absolute top-full right-0 mt-3 w-[330px] ${openDropDown ? "block" : "hidden"}`}
+          className={`absolute right-0 top-full mt-3 w-[330px] ${openDropDown ? "block" : "hidden"}`}
         >
-          <div className="shadow-1 dark:bg-dark-2 dark:shadow-box-dark overflow-hidden rounded-lg bg-white p-8">
-            <div className="border-stroke dark:border-dark-3 mb-5 border-b pb-3">
+          <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+            <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
               {cartList.map((item, index) => (
                 <div
                   key={index}
@@ -86,17 +86,17 @@ const CartDropdown = () => {
                     <div>
                       <Link
                         to={item.link}
-                        className="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                        className="text-sm font-medium text-dark hover:text-primary dark:text-white"
                       >
                         {item.title}
                       </Link>
-                      <p className="text-body-color dark:text-dark-6 truncate text-xs font-medium">
+                      <p className="truncate text-xs font-medium text-body-color dark:text-dark-6">
                         {item.subtitle}
                       </p>
                     </div>
                   </div>
                   <div className="px-1">
-                    <p className="text-dark text-base font-semibold dark:text-white">
+                    <p className="text-base font-semibold text-dark dark:text-white">
                       ${item.price}
                     </p>
                   </div>
@@ -104,52 +104,52 @@ const CartDropdown = () => {
               ))}
             </div>
 
-            <div className="border-stroke dark:border-dark-3 -mx-1 border-b pb-5">
+            <div className="-mx-1 border-b border-stroke pb-5 dark:border-dark-3">
               <div className="mb-3 flex items-center justify-between">
                 <div className="px-1">
-                  <p className="text-dark text-base dark:text-white">
+                  <p className="text-base text-dark dark:text-white">
                     Subtotal
                   </p>
                 </div>
                 <div className="px-1">
-                  <p className="text-dark text-base font-medium dark:text-white">
+                  <p className="text-base font-medium text-dark dark:text-white">
                     $108
                   </p>
                 </div>
               </div>
               <div className="mb-3 flex items-center justify-between">
                 <div className="px-1">
-                  <p className="text-dark text-base dark:text-white">
+                  <p className="text-base text-dark dark:text-white">
                     Shipping Cost (+)
                   </p>
                 </div>
                 <div className="px-1">
-                  <p className="text-dark text-base font-medium dark:text-white">
+                  <p className="text-base font-medium text-dark dark:text-white">
                     $10.85
                   </p>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="px-1">
-                  <p className="text-dark text-base dark:text-white">
+                  <p className="text-base text-dark dark:text-white">
                     Discount (-)
                   </p>
                 </div>
                 <div className="px-1">
-                  <p className="text-dark text-base font-medium dark:text-white">
+                  <p className="text-base font-medium text-dark dark:text-white">
                     $9.00
                   </p>
                 </div>
               </div>
             </div>
-            <div className="-mx-1 flex items-center justify-between pt-5 pb-6">
+            <div className="-mx-1 flex items-center justify-between pb-6 pt-5">
               <div className="px-1">
-                <p className="text-dark text-base dark:text-white">
+                <p className="text-base text-dark dark:text-white">
                   Total Payable
                 </p>
               </div>
               <div className="px-1">
-                <p className="text-dark text-base font-medium dark:text-white">
+                <p className="text-base font-medium text-dark dark:text-white">
                   $88.15
                 </p>
               </div>
@@ -158,7 +158,7 @@ const CartDropdown = () => {
             <div>
               <Link
                 to="/shopping-cart"
-                className="bg-primary hover:bg-blue-dark flex w-full items-center justify-center rounded-md px-10 py-[13px] text-center text-base font-medium text-white"
+                className="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
               >
                 Place Order
               </Link>

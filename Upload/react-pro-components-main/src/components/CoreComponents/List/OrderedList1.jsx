@@ -18,8 +18,8 @@ export default OrderedList1;
 
 const ListItem = ({ count, text }) => {
   return (
-    <li className="text-body-color dark:text-dark-6 flex text-base">
-      <span className="bg-primary mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded-full text-base text-white">
+    <li className="flex text-base text-body-color dark:text-dark-6">
+      <span className="mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded-full bg-primary text-base text-white">
         {count}
       </span>
       {text}

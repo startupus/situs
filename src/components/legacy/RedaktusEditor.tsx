@@ -1,90 +1,87 @@
-import React, { useEffect, useState } from 'react'
-import { FiSave, FiEye, FiGlobe, FiClock, FiArrowLeft } from 'react-icons/fi'
+import React, { useEffect, useState } from 'react';
+import { FiSave, FiEye, FiGlobe, FiClock, FiArrowLeft } from 'react-icons/fi';
 
 // Redaktus Editor - НАГЛО СКОПИРОВАНО С REACTBRICKS!
 
 // Импортируем скопированные админские компоненты (исправленные пути)
-import AdminEditor from '../redaktus/admin/editor'
-import AdminLogin from '../redaktus/admin/index'  
-import AdminPlayground from '../redaktus/admin/playground'
-import AdminMedia from '../redaktus/admin/media'
-import AdminAppSettings from '../redaktus/admin/app-settings'
+import AdminEditor from '../redaktus/admin/editor';
+import AdminLogin from '../redaktus/admin/index';
+import AdminPlayground from '../redaktus/admin/playground';
+import AdminMedia from '../redaktus/admin/media';
+import AdminAppSettings from '../redaktus/admin/app-settings';
 
 // Импортируем конфигурацию
-import config from '../redaktus/config/config'
+import config from '../redaktus/config/config';
 
 // Импортируем главный провайдер из starter
-import RedaktusApp from '../redaktus/starter-components/RedaktusApp'
+import RedaktusApp from '../redaktus/starter-components/RedaktusApp';
 
 // Интеграция с проектами
-import { useProject } from '../../contexts/ProjectContext'
-import { useAutoSave } from '../../hooks/useAutoSave'
+import { useProject } from '../../contexts/ProjectContext';
+import { useAutoSave } from '../../hooks/useAutoSave';
 
 interface RedaktusEditorProps {
-  mode?: 'editor' | 'login' | 'playground' | 'media' | 'app-settings'
-  onBack?: () => void
+  mode?: 'editor' | 'login' | 'playground' | 'media' | 'app-settings';
+  onBack?: () => void;
 }
 
 const RedaktusEditor: React.FC<RedaktusEditorProps> = ({ mode = 'editor', onBack }) => {
-  const { currentPage, currentProject, savePage, updatePage } = useProject()
-  const [isAutoSaveEnabled, setIsAutoSaveEnabled] = useState(true)
-  const [lastSaved, setLastSaved] = useState<Date | null>(null)
+  const { currentPage, currentProject, savePage, updatePage } = useProject();
+  const [isAutoSaveEnabled, setIsAutoSaveEnabled] = useState(true);
+  const [lastSaved, setLastSaved] = useState<Date | null>(null);
 
   // Автосохранение для текущего контента страницы
-  const { isSaving, saveNow } = useAutoSave(
-    currentPage?.content || {},
-    {
-      onSave: async (content: any) => {
-        if (currentPage) {
-          await savePage(currentPage.id, content)
-          setLastSaved(new Date())
-        }
-      },
-      delay: 3000,
-      enabled: isAutoSaveEnabled && !!currentPage
-    }
-  )
+  const { isSaving, saveNow } = useAutoSave(currentPage?.content || {}, {
+    onSave: async (content: any) => {
+      if (currentPage) {
+        await savePage(currentPage.id, content);
+        setLastSaved(new Date());
+      }
+    },
+    delay: 3000,
+    enabled: isAutoSaveEnabled && !!currentPage,
+  });
 
-  console.log('RedaktusEditor render - mode:', mode)
-  console.log('RedaktusEditor config:', config)
-  console.log('Current page:', currentPage)
+  console.log('RedaktusEditor render - mode:', mode);
+  console.log('RedaktusEditor config:', config);
+  console.log('Current page:', currentPage);
 
   // Ручное сохранение
   const handleManualSave = async () => {
     if (currentPage) {
-      await saveNow()
+      await saveNow();
     }
-  }
+  };
 
   // Публикация страницы
   const handlePublish = async () => {
     if (currentPage && currentPage.status === 'draft') {
-      await updatePage(currentPage.id, { 
+      await updatePage(currentPage.id, {
         status: 'published',
-        publishedAt: new Date()
-      })
+        publishedAt: new Date(),
+      });
     }
-  }
+  };
 
   // Роутинг как в ReactBricks
   const renderAdminComponent = () => {
-    console.log('renderAdminComponent called - mode:', mode)
-    
+    console.log('renderAdminComponent called - mode:', mode);
+
     switch (mode) {
       case 'login':
-        console.log('Rendering AdminLogin')
-        return <AdminLogin />
+        console.log('Rendering AdminLogin');
+        return <AdminLogin />;
       case 'playground':
-        console.log('Rendering AdminPlayground')
-        return <AdminPlayground />
+        console.log('Rendering AdminPlayground');
+        return <AdminPlayground />;
       case 'media':
-        console.log('Rendering AdminMedia')
-        return <AdminMedia />
+        console.log('Rendering AdminMedia');
+        return <AdminMedia />;
       case 'app-settings':
-        console.log('Rendering AdminAppSettings')
-        return <AdminAppSettings />
+        console.log('Rendering AdminAppSettings');
+        return <AdminAppSettings />;
       default:
-        console.log('Rendering AdminEditor (default)')
+        console.log('Rendering AdminEditor (default)');
         return (
           <div className="h-full flex flex-col">
             {/* Топ-бар редактора */}
@@ -100,11 +97,9 @@ const RedaktusEditor: React.FC<RedaktusEditorProps> = ({ mode = 'editor', onBack
                       <FiArrowLeft className="w-5 h-5" />
                     </button>
                   )}
-                  
+
                   <div>
-                    <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {currentPage.title}
-                    </h1>
+                    <h1 className="text-lg font-semibold text-gray-900 dark:text-white">{currentPage.title}</h1>
                     <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                       <span>/{currentPage.slug}</span>
                       <span>•</span>
@@ -175,20 +170,20 @@ const RedaktusEditor: React.FC<RedaktusEditorProps> = ({ mode = 'editor', onBack
               <AdminEditor />
             </div>
           </div>
-        )
+        );
     }
-  }
+  };
 
-  console.log('About to render RedaktusApp')
+  console.log('About to render RedaktusApp');
   return (
     <RedaktusApp
       Component={() => {
-        console.log('RedaktusApp Component function called')
-        return renderAdminComponent()
+        console.log('RedaktusApp Component function called');
+        return renderAdminComponent();
       }}
       pageProps={{}}
     />
-  )
-}
+  );
+};
 
-export default RedaktusEditor 
+export default RedaktusEditor;

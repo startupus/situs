@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Checkout = () => {
   return (
@@ -6,20 +6,14 @@ const Checkout = () => {
       <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="mb-12">
-            <h2 className="mb-3 text-4xl font-bold leading-[1.2] text-dark dark:text-white sm:text-[40px]">
-              Checkout
-            </h2>
-            <p className="text-base text-body-color dark:text-dark-6">
-              There are 3 products in your cart
-            </p>
+            <h2 className="mb-3 text-4xl font-bold leading-[1.2] text-dark dark:text-white sm:text-[40px]">Checkout</h2>
+            <p className="text-base text-body-color dark:text-dark-6">There are 3 products in your cart</p>
           </div>
 
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
               <div className="mb-12 lg:mb-0">
-                <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white">
-                  Billing Details
-                </h3>
+                <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white">Billing Details</h3>
                 <form>
                   <div className="-mx-3 flex flex-wrap">
                     <InputGroup type="text" placeholder="First name*" />
@@ -32,32 +26,20 @@ const Checkout = () => {
                     <InputGroup type="text" placeholder="Phone*" />
                     <Textarea rows="06" placeholder="Additional information" />
                     <CheckboxGroup id="1" labelTitle="Create Account" />
-                    <CheckboxGroup
-                      id="2"
-                      labelTitle="Ship to a different address?"
-                    />
-                    <CouponBox
-                      tittle="Apply Coupon to get discount!"
-                      button="Apply Code"
-                    />
+                    <CheckboxGroup id="2" labelTitle="Ship to a different address?" />
+                    <CouponBox tittle="Apply Coupon to get discount!" button="Apply Code" />
                   </div>
                 </form>
               </div>
             </div>
 
             <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
-              <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white">
-                Your Order
-              </h3>
+              <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white">Your Order</h3>
 
               <div className="mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
                 <div className="flex items-center justify-between bg-[#f9f9f9] px-6 py-[18px] dark:bg-dark-4 2xl:px-8">
-                  <p className="text-base font-medium text-dark dark:text-white">
-                    Product
-                  </p>
-                  <p className="text-right text-base font-medium text-dark dark:text-white">
-                    Subtotal
-                  </p>
+                  <p className="text-base font-medium text-dark dark:text-white">Product</p>
+                  <p className="text-right text-base font-medium text-dark dark:text-white">Subtotal</p>
                 </div>
 
                 <CartItem
@@ -85,38 +67,26 @@ const Checkout = () => {
                 <div className="-mx-1 border-b border-stroke p-6 dark:border-dark-3 2xl:px-8">
                   <div className="mb-3 flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-base text-dark dark:text-white">
-                        Subtotal
-                      </p>
+                      <p className="text-base text-dark dark:text-white">Subtotal</p>
                     </div>
                     <div className="px-1">
-                      <p className="text-base font-medium text-dark dark:text-white">
-                        $108
-                      </p>
+                      <p className="text-base font-medium text-dark dark:text-white">$108</p>
                     </div>
                   </div>
                   <div className="mb-3 flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-base text-dark dark:text-white">
-                        Shipping Cost (+)
-                      </p>
+                      <p className="text-base text-dark dark:text-white">Shipping Cost (+)</p>
                     </div>
                     <div className="px-1">
-                      <p className="text-base font-medium text-dark dark:text-white">
-                        $10.85
-                      </p>
+                      <p className="text-base font-medium text-dark dark:text-white">$10.85</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-base text-dark dark:text-white">
-                        Discount (-)
-                      </p>
+                      <p className="text-base text-dark dark:text-white">Discount (-)</p>
                     </div>
                     <div className="px-1">
-                      <p className="text-base font-medium text-dark dark:text-white">
-                        $9.00
-                      </p>
+                      <p className="text-base font-medium text-dark dark:text-white">$9.00</p>
                     </div>
                   </div>
                 </div>
@@ -124,14 +94,10 @@ const Checkout = () => {
                 <div className="-mx-1 p-6 sm:px-7 lg:px-6 2xl:px-7">
                   <div className="flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-base text-dark dark:text-white">
-                        Total Payable
-                      </p>
+                      <p className="text-base text-dark dark:text-white">Total Payable</p>
                     </div>
                     <div className="px-1">
-                      <p className="text-base font-medium text-dark dark:text-white">
-                        $88.15
-                      </p>
+                      <p className="text-base font-medium text-dark dark:text-white">$88.15</p>
                     </div>
                   </div>
                 </div>
@@ -139,73 +105,41 @@ const Checkout = () => {
 
               <div className="mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
                 <div className="bg-[#f9f9f9] px-6 py-[18px] dark:bg-dark-4 2xl:px-8">
-                  <h3 className="text-2xl font-bold text-dark dark:text-white">
-                    Payment
-                  </h3>
+                  <h3 className="text-2xl font-bold text-dark dark:text-white">Payment</h3>
                 </div>
 
                 <div className="px-6 py-9 sm:px-7 lg:px-6 2xl:px-7">
                   <div className="mb-4">
-                    <label
-                      htmlFor="paymentCheckbox"
-                      className="flex cursor-pointer select-none items-center"
-                    >
+                    <label htmlFor="paymentCheckbox" className="flex cursor-pointer select-none items-center">
                       <div className="relative">
-                        <input
-                          type="radio"
-                          id="paymentCheckbox"
-                          name="payment"
-                          className="sr-only"
-                        />
+                        <input type="radio" id="paymentCheckbox" name="payment" className="sr-only" />
                         <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-full border">
                           <span className="circle h-[10px] w-[10px] rounded-full bg-transparent"></span>
                         </div>
                       </div>
-                      <span className="text-dark dark:text-white">
-                        Direct Bank Transfer
-                      </span>
+                      <span className="text-dark dark:text-white">Direct Bank Transfer</span>
                     </label>
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="paymentCheckbox2"
-                      className="flex cursor-pointer select-none items-center"
-                    >
+                    <label htmlFor="paymentCheckbox2" className="flex cursor-pointer select-none items-center">
                       <div className="relative">
-                        <input
-                          type="radio"
-                          id="paymentCheckbox2"
-                          name="payment"
-                          className="sr-only"
-                        />
+                        <input type="radio" id="paymentCheckbox2" name="payment" className="sr-only" />
                         <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-full border">
                           <span className="circle h-[10px] w-[10px] rounded-full bg-transparent"></span>
                         </div>
                       </div>
-                      <span className="text-dark dark:text-white">
-                        Cash on delivery
-                      </span>
+                      <span className="text-dark dark:text-white">Cash on delivery</span>
                     </label>
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="paymentCheckbox3"
-                      className="flex cursor-pointer select-none items-center"
-                    >
+                    <label htmlFor="paymentCheckbox3" className="flex cursor-pointer select-none items-center">
                       <div className="relative">
-                        <input
-                          type="radio"
-                          id="paymentCheckbox3"
-                          name="payment"
-                          className="sr-only"
-                        />
+                        <input type="radio" id="paymentCheckbox3" name="payment" className="sr-only" />
                         <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-full border">
                           <span className="circle h-[10px] w-[10px] rounded-full bg-transparent"></span>
                         </div>
                       </div>
-                      <span className="text-dark dark:text-white">
-                        Online Getway
-                      </span>
+                      <span className="text-dark dark:text-white">Online Getway</span>
                     </label>
                   </div>
                   <div className="block pt-5">
@@ -300,21 +234,12 @@ const CheckboxGroup = ({ id, labelTitle }) => {
   return (
     <div className="w-full px-3">
       <div className="mb-6">
-        <label
-          htmlFor={id}
-          className="flex cursor-pointer select-none items-center"
-        >
+        <label htmlFor={id} className="flex cursor-pointer select-none items-center">
           <div className="relative">
             <input type="checkbox" id={id} className="sr-only" />
             <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-sm border">
               <span className="opacity-0">
-                <svg
-                  width="11"
-                  height="8"
-                  viewBox="0 0 11 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                     fill="#3056D3"
@@ -335,9 +260,7 @@ const CheckboxGroup = ({ id, labelTitle }) => {
 const CouponBox = ({ title, button }) => {
   return (
     <div className="w-full px-4">
-      <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">
-        {title}
-      </h3>
+      <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">{title}</h3>
 
       <input
         type="email"
@@ -359,9 +282,7 @@ const CartItem = ({ img, title, color, size, price }) => {
           <img src={img} alt="product image" className="w-full" />
         </div>
         <div>
-          <p className="mb-0.5 text-base font-medium text-dark dark:text-white">
-            {title}
-          </p>
+          <p className="mb-0.5 text-base font-medium text-dark dark:text-white">{title}</p>
           <p className="flex items-center space-x-3 text-sm text-body-color dark:text-dark-6 sm:space-x-5 lg:space-x-3 2xl:space-x-5">
             <span>{color}</span>
             <span>{size}</span>
@@ -370,9 +291,7 @@ const CartItem = ({ img, title, color, size, price }) => {
         </div>
       </div>
       <div className="px-1">
-        <p className="text-base font-semibold text-dark dark:text-white">
-          {price}
-        </p>
+        <p className="text-base font-semibold text-dark dark:text-white">{price}</p>
       </div>
     </div>
   );

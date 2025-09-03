@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 // Handler hook for when Outside click dropdown close
 let useClickOutside = (handler) => {
@@ -11,10 +11,10 @@ let useClickOutside = (handler) => {
       }
     };
 
-    document.addEventListener("mousedown", maybeHandler);
+    document.addEventListener('mousedown', maybeHandler);
 
     return () => {
-      document.removeEventListener("mousedown", maybeHandler);
+      document.removeEventListener('mousedown', maybeHandler);
     };
   });
 
@@ -33,12 +33,12 @@ const Dropdown3 = () => {
     <>
       {/* <!-- ====== Dropdowns Section Start --> */}
       <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20 dark:bg-dark">
-        <div className='container'>
-          <div className='flex flex-wrap -mx-4'>
+        <div className="container">
+          <div className="flex flex-wrap -mx-4">
             {/* one */}
-            <div ref={domNode} className='w-full px-4 sm:w-1/2 lg:w-1/4'>
-              <div className='py-8 text-center'>
-                <div className='relative inline-block mb-8 text-left'>
+            <div ref={domNode} className="w-full px-4 sm:w-1/2 lg:w-1/4">
+              <div className="py-8 text-center">
+                <div className="relative inline-block mb-8 text-left">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className={`flex items-center rounded-[5px] px-5 py-[13px] bg-dark dark:bg-dark-2 text-base font-medium text-white`}
@@ -59,15 +59,13 @@ const Dropdown3 = () => {
                   </button>
                   <div
                     className={`shadow-1 dark:shadow-box-dark absolute left-0 z-40 mt-2 w-full rounded-md bg-dark dark:bg-dark-2 py-[10px] transition-all ${
-                      dropdownOpen
-                        ? 'top-full opacity-100 visible'
-                        : 'top-[110%] invisible opacity-0'
+                      dropdownOpen ? 'top-full opacity-100 visible' : 'top-[110%] invisible opacity-0'
                     }`}
                   >
-                    <DropdownItem label='Dashboard' href='/#' />
-                    <DropdownItem label='Preview' href='/#' />
-                    <DropdownItem label='Button' href='/#' />
-                    <DropdownItem label='Subscribe' href='/#' />
+                    <DropdownItem label="Dashboard" href="/#" />
+                    <DropdownItem label="Preview" href="/#" />
+                    <DropdownItem label="Button" href="/#" />
+                    <DropdownItem label="Subscribe" href="/#" />
                   </div>
                 </div>
               </div>
@@ -78,18 +76,15 @@ const Dropdown3 = () => {
       </section>
       {/* <!-- ====== Dropdowns Section End -->    */}
     </>
-  )
+  );
 };
 
 export default Dropdown3;
 
 const DropdownItem = ({ label, href }) => {
   return (
-    <a
-      href={href}
-      className='block py-2 px-5 text-base text-dark-5 hover:text-white'
-    >
+    <a href={href} className="block py-2 px-5 text-base text-dark-5 hover:text-white">
       {label}
     </a>
-  )
+  );
 };

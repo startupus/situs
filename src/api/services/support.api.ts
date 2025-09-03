@@ -150,10 +150,7 @@ class SupportApiService {
    */
   async getTickets(filters?: TicketFilters): Promise<TicketsListResponse> {
     try {
-      const response = await apiClient.get<ApiResponse<TicketsListResponse>>(
-        `${this.baseEndpoint}/tickets`,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<TicketsListResponse>>(`${this.baseEndpoint}/tickets`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -171,9 +168,7 @@ class SupportApiService {
    */
   async getTicket(ticketId: string): Promise<SupportTicket> {
     try {
-      const response = await apiClient.get<ApiResponse<SupportTicket>>(
-        `${this.baseEndpoint}/tickets/${ticketId}`
-      );
+      const response = await apiClient.get<ApiResponse<SupportTicket>>(`${this.baseEndpoint}/tickets/${ticketId}`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -195,20 +190,17 @@ class SupportApiService {
       formData.append('title', data.title);
       formData.append('description', data.description);
       formData.append('category', data.category);
-      
+
       if (data.priority) formData.append('priority', data.priority);
       if (data.tags) formData.append('tags', JSON.stringify(data.tags));
-      
+
       if (data.attachments) {
         data.attachments.forEach((file, index) => {
           formData.append(`attachment_${index}`, file);
         });
       }
 
-      const response = await apiClient.upload<ApiResponse<SupportTicket>>(
-        `${this.baseEndpoint}/tickets`,
-        formData
-      );
+      const response = await apiClient.upload<ApiResponse<SupportTicket>>(`${this.baseEndpoint}/tickets`, formData);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -228,7 +220,7 @@ class SupportApiService {
     try {
       const response = await apiClient.put<ApiResponse<SupportTicket>>(
         `${this.baseEndpoint}/tickets/${ticketId}`,
-        data
+        data,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -245,12 +237,17 @@ class SupportApiService {
   /**
    * Добавить сообщение к тикету
    */
-  async addMessage(ticketId: string, content: string, isInternal: boolean = false, attachments?: File[]): Promise<TicketMessage> {
+  async addMessage(
+    ticketId: string,
+    content: string,
+    isInternal: boolean = false,
+    attachments?: File[],
+  ): Promise<TicketMessage> {
     try {
       const formData = new FormData();
       formData.append('content', content);
       formData.append('isInternal', isInternal.toString());
-      
+
       if (attachments) {
         attachments.forEach((file, index) => {
           formData.append(`attachment_${index}`, file);
@@ -259,7 +256,7 @@ class SupportApiService {
 
       const response = await apiClient.upload<ApiResponse<TicketMessage>>(
         `${this.baseEndpoint}/tickets/${ticketId}/messages`,
-        formData
+        formData,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -280,7 +277,7 @@ class SupportApiService {
     try {
       const response = await apiClient.patch<ApiResponse<SupportTicket>>(
         `${this.baseEndpoint}/tickets/${ticketId}/assign`,
-        { assignedTo: agentId }
+        { assignedTo: agentId },
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -301,7 +298,7 @@ class SupportApiService {
     try {
       const response = await apiClient.patch<ApiResponse<SupportTicket>>(
         `${this.baseEndpoint}/tickets/${ticketId}/status`,
-        { status }
+        { status },
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -321,10 +318,7 @@ class SupportApiService {
   async getFAQ(category?: string): Promise<FAQ[]> {
     try {
       const params = category ? { category } : undefined;
-      const response = await apiClient.get<ApiResponse<FAQ[]>>(
-        `${this.baseEndpoint}/faq`,
-        params
-      );
+      const response = await apiClient.get<ApiResponse<FAQ[]>>(`${this.baseEndpoint}/faq`, params);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -342,9 +336,7 @@ class SupportApiService {
    */
   async getFAQCategories(): Promise<FAQCategory[]> {
     try {
-      const response = await apiClient.get<ApiResponse<FAQCategory[]>>(
-        `${this.baseEndpoint}/faq/categories`
-      );
+      const response = await apiClient.get<ApiResponse<FAQCategory[]>>(`${this.baseEndpoint}/faq/categories`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -362,10 +354,7 @@ class SupportApiService {
    */
   async searchFAQ(query: string): Promise<FAQ[]> {
     try {
-      const response = await apiClient.get<ApiResponse<FAQ[]>>(
-        `${this.baseEndpoint}/faq/search`,
-        { q: query }
-      );
+      const response = await apiClient.get<ApiResponse<FAQ[]>>(`${this.baseEndpoint}/faq/search`, { q: query });
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -384,10 +373,7 @@ class SupportApiService {
   async getSupportStats(dateFrom?: string, dateTo?: string): Promise<SupportStats> {
     try {
       const params = { dateFrom, dateTo };
-      const response = await apiClient.get<ApiResponse<SupportStats>>(
-        `${this.baseEndpoint}/stats`,
-        params
-      );
+      const response = await apiClient.get<ApiResponse<SupportStats>>(`${this.baseEndpoint}/stats`, params);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -407,7 +393,7 @@ class SupportApiService {
     try {
       const response = await apiClient.get<ApiResponse<TicketsListResponse>>(
         `${this.baseEndpoint}/my-tickets`,
-        filters
+        filters,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -426,10 +412,10 @@ class SupportApiService {
    */
   async submitFeedback(ticketId: string, rating: number, comment?: string): Promise<void> {
     try {
-      const response = await apiClient.post<ApiResponse<void>>(
-        `${this.baseEndpoint}/tickets/${ticketId}/feedback`,
-        { rating, comment }
-      );
+      const response = await apiClient.post<ApiResponse<void>>(`${this.baseEndpoint}/tickets/${ticketId}/feedback`, {
+        rating,
+        comment,
+      });
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при отправке отзыва');

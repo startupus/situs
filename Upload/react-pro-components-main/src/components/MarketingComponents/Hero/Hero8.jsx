@@ -14,7 +14,7 @@ const Hero8 = () => {
                 <span className="mb-4 block text-base font-medium text-white">
                   We are creative team.
                 </span>
-                <h1 className="mb-3 text-4xl font-bold leading-[1.208]! text-white md:text-5xl lg:text-[40px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-3 text-4xl font-bold text-white md:text-5xl lg:text-[40px] xl:text-5xl">
                   The best way to promote business
                 </h1>
                 <p className="mb-9 max-w-[460px] text-base font-medium text-gray-3">
@@ -125,7 +125,7 @@ const Navbar = () => {
                   <input
                     type="text"
                     placeholder="Search here..."
-                    className="w-full rounded-full border border-white/30 bg-transparent py-2 pl-5 pr-10 text-gray-7 outline-hidden focus:border-white focus-visible:shadow-none"
+                    className="outline-hidden w-full rounded-full border border-white/30 bg-transparent py-2 pl-5 pr-10 text-gray-7 focus:border-white focus-visible:shadow-none"
                   />
                   <button className="absolute right-4 top-1/2 -translate-y-1/2">
                     <svg

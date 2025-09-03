@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Slick = () => {
   return (
@@ -125,7 +125,7 @@ const Slick = () => {
 }
 
     `}</style>
-  )
-}
+  );
+};
 
-export default Slick
+export default Slick;

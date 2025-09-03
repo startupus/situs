@@ -2,7 +2,7 @@ import { registerAs } from '@nestjs/config';
 
 /**
  * Конфигурация базы данных
- * 
+ *
  * Настройки подключения к PostgreSQL через Prisma
  */
 export const databaseConfig = registerAs('database', () => ({

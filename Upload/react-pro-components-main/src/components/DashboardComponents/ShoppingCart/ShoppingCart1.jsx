@@ -11,7 +11,7 @@ const ShoppingCart = () => {
             onClick={() => {
               setModalOpen(!modalOpen);
             }}
-            className="bg-primary rounded-md py-3 px-8 text-base font-semibold text-white hover:bg-primary/90"
+            className="rounded-md bg-primary px-8 py-3 text-base font-semibold text-white hover:bg-primary/90"
           >
             Open Modal
           </button>
@@ -21,17 +21,17 @@ const ShoppingCart = () => {
           onClick={() => setModalOpen(false)}
           className={`${
             modalOpen ? "translate-x-0" : "translate-x-full"
-          } bg-body-color cursor-pointer fixed top-0 right-0 h-full w-full transition-all duration-100`}
+          } fixed right-0 top-0 h-full w-full cursor-pointer bg-body-color transition-all duration-100`}
         ></div>
 
         <div
           className={`${
             modalOpen ? "translate-x-0" : "translate-x-full"
-          } fixed top-0 right-0 h-screen w-full max-w-[500px] overflow-y-auto bg-white py-10 px-5 transition-all duration-200 sm:px-8 md:p-12`}
+          } fixed right-0 top-0 h-screen w-full max-w-[500px] overflow-y-auto bg-white px-5 py-10 transition-all duration-200 sm:px-8 md:p-12`}
         >
           <button
             onClick={() => setModalOpen(false)}
-            className="absolute top-8 right-8"
+            className="absolute right-8 top-8"
           >
             <svg
               width="16"
@@ -86,11 +86,11 @@ const ShoppingCart = () => {
             />
 
             <div className="flex items-center justify-end">
-              <p className="text-body-color mr-5 flex items-center text-base font-medium">
+              <p className="mr-5 flex items-center text-base font-medium text-body-color">
                 Subtotal:{" "}
                 <span className="pl-2 font-semibold text-black">$973</span>
               </p>
-              <button className="bg-primary inline-flex items-center justify-center rounded-sm py-[10px] px-7 text-center text-base font-semibold text-white hover:bg-primary/90">
+              <button className="inline-flex items-center justify-center rounded-sm bg-primary px-7 py-[10px] text-center text-base font-semibold text-white hover:bg-primary/90">
                 Checkout
               </button>
             </div>
@@ -107,7 +107,7 @@ const CartItem = ({ img, link, title, number, button, button2, price }) => {
   return (
     <div className="flex justify-between border-b border-[#e7e7e7] pb-8">
       <div className="flex items-center">
-        <div className="xs:h-[100px] xs:max-w-[100px] mr-5 h-[90px] w-full max-w-[80px] overflow-hidden rounded-sm">
+        <div className="mr-5 h-[90px] w-full max-w-[80px] overflow-hidden rounded-sm xs:h-[100px] xs:max-w-[100px]">
           <img
             src={img}
             alt="product"
@@ -117,15 +117,15 @@ const CartItem = ({ img, link, title, number, button, button2, price }) => {
         <div>
           <a
             href={link}
-            className="hover:text-primary block text-base font-medium text-black sm:text-lg"
+            className="block text-base font-medium text-black hover:text-primary sm:text-lg"
           >
             {title}
           </a>
-          <p className="text-body-color mb-2 text-sm font-medium sm:text-base">
+          <p className="mb-2 text-sm font-medium text-body-color sm:text-base">
             {number}
           </p>
           <div className="flex items-center space-x-3">
-            <button className="hover:border-primary hover:bg-primary rounded-sm border border-black px-4 py-1 text-sm font-medium text-black transition hover:text-white">
+            <button className="rounded-sm border border-black px-4 py-1 text-sm font-medium text-black transition hover:border-primary hover:bg-primary hover:text-white">
               {button}
             </button>
             <button className="hover:border-danger hover:bg-danger rounded-sm border border-black px-4 py-1 text-sm font-medium text-black transition hover:text-white">

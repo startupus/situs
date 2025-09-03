@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const HorizontalMenu4 = () => {
   return (
@@ -7,10 +7,7 @@ const HorizontalMenu4 = () => {
         <div className="flex items-center justify-between bg-dark px-4 dark:bg-dark-2 xl:px-[30px]">
           <div className="mr-4 max-w-[100px] lg:mr-12">
             <a href="/#" className="block py-4">
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                alt="logo"
-              />
+              <img src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg" alt="logo" />
             </a>
           </div>
           <div className="flex w-full items-center justify-end md:justify-between">
@@ -33,13 +30,7 @@ const HorizontalMenu4 = () => {
                   className="shadow-product w-full rounded-sm border border-body-color/30 bg-white/5 py-[5px] pl-4 pr-10 text-sm font-medium text-dark-6 outline-hidden"
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="0.5" clipPath="url(#clip0_1050_7232)">
                       <path
                         d="M13.4313 12.1844L9.82188 9.25313C11.3094 7.21875 11.1563 4.30938 9.29688 2.47188C8.31251 1.4875 7.00001 0.940628 5.60001 0.940628C4.20001 0.940628 2.88751 1.4875 1.90313 2.47188C-0.131244 4.50625 -0.131244 7.83125 1.90313 9.86563C2.88751 10.85 4.20001 11.3969 5.60001 11.3969C6.93438 11.3969 8.18126 10.8938 9.16563 9.99688L12.8188 12.95C12.9063 13.0156 13.0156 13.0594 13.125 13.0594C13.2781 13.0594 13.4094 12.9938 13.4969 12.8844C13.6719 12.6656 13.65 12.3594 13.4313 12.1844ZM5.60001 10.4125C4.46251 10.4125 3.41251 9.975 2.60313 9.16563C0.940631 7.50313 0.940631 4.8125 2.60313 3.17188C3.41251 2.3625 4.46251 1.925 5.60001 1.925C6.73751 1.925 7.78751 2.3625 8.59688 3.17188C10.2594 4.83438 10.2594 7.525 8.59688 9.16563C7.80938 9.975 6.73751 10.4125 5.60001 10.4125Z"
@@ -56,10 +47,7 @@ const HorizontalMenu4 = () => {
               </div>
 
               <div className="relative mr-3 hidden sm:block">
-                <a
-                  href="/#"
-                  className="block text-body-color hover:text-white dark:text-dark-6"
-                >
+                <a href="/#" className="block text-body-color hover:text-white dark:text-dark-6">
                   <svg
                     width="20"
                     height="21"
@@ -74,10 +62,7 @@ const HorizontalMenu4 = () => {
               </div>
 
               <div className="relative mr-3 hidden sm:block">
-                <a
-                  href="/#"
-                  className="relative block text-body-color hover:text-white dark:text-dark-6"
-                >
+                <a href="/#" className="relative block text-body-color hover:text-white dark:text-dark-6">
                   <span className="absolute -right-0.5 -top-0.5 block h-[10px] w-[10px] rounded-full border-[1.5px] border-dark bg-green dark:border-dark-2"></span>
                   <svg
                     width="20"
@@ -92,12 +77,7 @@ const HorizontalMenu4 = () => {
                     </g>
                     <defs>
                       <clipPath id="clip0_1050_7236">
-                        <rect
-                          width="20"
-                          height="20"
-                          fill="white"
-                          transform="translate(0 0.980003)"
-                        />
+                        <rect width="20" height="20" fill="white" transform="translate(0 0.980003)" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -105,10 +85,7 @@ const HorizontalMenu4 = () => {
               </div>
 
               <div className="relative mr-[18px] hidden sm:block">
-                <a
-                  href="/#"
-                  className="relative block text-body-color hover:text-white dark:text-dark-6"
-                >
+                <a href="/#" className="relative block text-body-color hover:text-white dark:text-dark-6">
                   <span className="absolute -right-0.5 -top-0.5 block h-[10px] w-[10px] rounded-full border-[1.5px] border-dark bg-green dark:border-dark-2"></span>
                   <svg
                     width="20"

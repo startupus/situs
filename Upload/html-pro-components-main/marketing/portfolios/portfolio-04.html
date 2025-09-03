@@ -16,7 +16,7 @@
   </head>
   <body>
     <!-- ====== Portfolio Section Start -->
-    <section class="py-20 lg:py-[120px] dark:bg-dark">
+    <section class="py-20 dark:bg-dark lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
@@ -25,7 +25,7 @@
                 Our Portfolio
               </span>
               <h2
-                class="mb-3 text-3xl font-bold leading-[1.208] text-dark sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Our Recent Projects
               </h2>
@@ -1180,7 +1180,7 @@
               </div>
               <div>
                 <button
-                  class="absolute left-auto right-[35%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white md:-right-12 md:top-1/2 lg:-right-[100px] dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none"
+                  class="absolute left-auto right-[35%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-right-12 md:top-1/2 lg:-right-[100px]"
                   @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft + ($refs.carousel.scrollWidth / slides.length); activeSlide += 1"
                 >
                   <svg
@@ -1198,7 +1198,7 @@
                   </svg>
                 </button>
                 <button
-                  class="absolute left-[35%] right-auto top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white md:-left-12 md:top-1/2 lg:-left-[100px] dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none"
+                  class="absolute left-[35%] right-auto top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-left-12 md:top-1/2 lg:-left-[100px]"
                   @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft - ($refs.carousel.scrollWidth / slides.length); activeSlide -= 1"
                 >
                   <svg

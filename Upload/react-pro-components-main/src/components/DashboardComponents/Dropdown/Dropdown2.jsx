@@ -32,16 +32,16 @@ const Dropdown2 = () => {
   return (
     <>
       {/* <!-- ====== Dropdowns Section Start --> */}
-      <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20 dark:bg-dark">
-        <div className='container'>
-          <div className='flex flex-wrap -mx-4'>
+      <section class="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
+        <div className="container">
+          <div className="-mx-4 flex flex-wrap">
             {/* one */}
-            <div ref={domNode} className='w-full px-4 sm:w-1/2 lg:w-1/4'>
-              <div className='py-8 text-center'>
-                <div className='relative inline-block mb-8 text-left'>
+            <div ref={domNode} className="w-full px-4 sm:w-1/2 lg:w-1/4">
+              <div className="py-8 text-center">
+                <div className="relative mb-8 inline-block text-left">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className={`bg-primary flex items-center rounded-[5px] px-5 py-[13px] text-base font-medium text-white`}
+                    className={`flex items-center rounded-[5px] bg-primary px-5 py-[13px] text-base font-medium text-white`}
                   >
                     Dropdown Button
                     <span className="pl-4">
@@ -58,16 +58,16 @@ const Dropdown2 = () => {
                     </span>
                   </button>
                   <div
-                    className={`bg-primary shadow-1 dark:shadow-box-dark absolute left-0 z-40 mt-2 w-full rounded-md py-[10px] transition-all ${
+                    className={`absolute left-0 z-40 mt-2 w-full rounded-md bg-primary py-[10px] shadow-1 transition-all dark:shadow-box-dark ${
                       dropdownOpen
-                        ? 'top-full opacity-100 visible'
-                        : 'top-[110%] invisible opacity-0'
+                        ? "visible top-full opacity-100"
+                        : "invisible top-[110%] opacity-0"
                     }`}
                   >
-                    <DropdownItem label='Dashboard' href='/#' />
-                    <DropdownItem label='Preview' href='/#' />
-                    <DropdownItem label='Button' href='/#' />
-                    <DropdownItem label='Subscribe' href='/#' />
+                    <DropdownItem label="Dashboard" href="/#" />
+                    <DropdownItem label="Preview" href="/#" />
+                    <DropdownItem label="Button" href="/#" />
+                    <DropdownItem label="Subscribe" href="/#" />
                   </div>
                 </div>
               </div>
@@ -78,7 +78,7 @@ const Dropdown2 = () => {
       </section>
       {/* <!-- ====== Dropdowns Section End -->    */}
     </>
-  )
+  );
 };
 
 export default Dropdown2;
@@ -87,9 +87,9 @@ const DropdownItem = ({ label, href }) => {
   return (
     <a
       href={href}
-      className='block py-2 px-5 text-base text-white/60 hover:text-white'
+      className="block px-5 py-2 text-base text-white/60 hover:text-white"
     >
       {label}
     </a>
-  )
+  );
 };

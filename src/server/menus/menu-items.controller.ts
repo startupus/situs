@@ -1,14 +1,4 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Put, 
-  Delete, 
-  Patch,
-  Body, 
-  Param, 
-  Query 
-} from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Patch, Body, Param, Query } from '@nestjs/common';
 import { MenusService } from './menus.service';
 import { MenuResolverService } from './menu-resolver.service';
 import { MenuRulesService } from './menu-rules.service';
@@ -28,7 +18,7 @@ export class MenuItemsController {
     private readonly menusService: MenusService,
     private readonly menuResolverService: MenuResolverService,
     private readonly menuRulesService: MenuRulesService,
-    private readonly menuAccessService: MenuAccessService
+    private readonly menuAccessService: MenuAccessService,
   ) {}
 
   @Get()
@@ -37,17 +27,12 @@ export class MenuItemsController {
     @Query('menuTypeId') menuTypeId?: string,
     @Query('language') language?: string,
     @Query('level') level?: string,
-    @Query('parentId') parentId?: string
+    @Query('parentId') parentId?: string,
   ) {
     const levelNum = level ? parseInt(level, 10) : undefined;
-    
-    const menuItems = await this.menusService.findMenuItems(
-      menuTypeId,
-      language,
-      levelNum,
-      parentId
-    );
-    
+
+    const menuItems = await this.menusService.findMenuItems(menuTypeId, language, levelNum, parentId);
+
     return { success: true, data: menuItems };
   }
 
@@ -57,32 +42,24 @@ export class MenuItemsController {
     @Query('menuTypeId') menuTypeId: string,
     @Query('properties') properties?: string,
     @Query('values') values?: string,
-    @Query('language') language?: string
+    @Query('language') language?: string,
   ) {
     // Парсим массивы из query параметров
     const propertiesArray = properties ? properties.split(',') : [];
     const valuesArray = values ? values.split(',') : [];
 
-    const menuItems = await this.menusService.getItems(
-      menuTypeId,
-      propertiesArray,
-      valuesArray,
-      language
-    );
+    const menuItems = await this.menusService.getItems(menuTypeId, propertiesArray, valuesArray, language);
 
     return { success: true, data: menuItems };
   }
 
   @Get('active')
   @Scopes('PROJECT_READ')
-  async getActive(
-    @Query('menuTypeId') menuTypeId: string,
-    @Query('path') path: string
-  ) {
+  async getActive(@Query('menuTypeId') menuTypeId: string, @Query('path') path: string) {
     if (!menuTypeId || !path) {
-      return { 
-        success: false, 
-        error: 'Параметры menuTypeId и path обязательны' 
+      return {
+        success: false,
+        error: 'Параметры menuTypeId и path обязательны',
       };
     }
 
@@ -92,18 +69,13 @@ export class MenuItemsController {
 
   @Get('authorized')
   @Scopes('PROJECT_READ')
-  async getAuthorized(
-    @Query('menuTypeId') menuTypeId: string,
-    @Query('accessLevels') accessLevels?: string
-  ) {
+  async getAuthorized(@Query('menuTypeId') menuTypeId: string, @Query('accessLevels') accessLevels?: string) {
     if (!menuTypeId) {
       return { success: false, error: 'Параметр menuTypeId обязателен' };
     }
 
     // Парсим уровни доступа
-    const levels = accessLevels 
-      ? accessLevels.split(',') as AccessLevel[]
-      : [AccessLevel.PUBLIC];
+    const levels = accessLevels ? (accessLevels.split(',') as AccessLevel[]) : [AccessLevel.PUBLIC];
 
     const authorizedItems = await this.menusService.getAuthorizedItems(menuTypeId, levels);
     return { success: true, data: authorizedItems };
@@ -111,10 +83,7 @@ export class MenuItemsController {
 
   @Get('lookup')
   @Scopes('PROJECT_READ')
-  async buildLookup(
-    @Query('menuTypeId') menuTypeId: string,
-    @Query('language') language: string = '*'
-  ) {
+  async buildLookup(@Query('menuTypeId') menuTypeId: string, @Query('language') language: string = '*') {
     if (!menuTypeId) {
       return { success: false, error: 'Параметр menuTypeId обязателен' };
     }
@@ -131,43 +100,34 @@ export class MenuItemsController {
     @Query('component') component: string,
     @Query('view') view: string,
     @Query('targetId') targetId?: string,
-    @Query('itemid') requestedItemid?: string
+    @Query('itemid') requestedItemid?: string,
   ) {
     if (!projectId || !component || !view) {
-      return { 
-        success: false, 
-        error: 'Параметры projectId, component и view обязательны' 
+      return {
+        success: false,
+        error: 'Параметры projectId, component и view обязательны',
       };
     }
 
-    const itemid = await this.menuRulesService.getItemidForRoute(
-      projectId, 
-      component, 
-      view, 
-      targetId, 
-      requestedItemid
-    );
+    const itemid = await this.menuRulesService.getItemidForRoute(projectId, component, view, targetId, requestedItemid);
 
-    return { 
-      success: true, 
-      data: { 
+    return {
+      success: true,
+      data: {
         itemid,
-        found: !!itemid
-      } 
+        found: !!itemid,
+      },
     };
   }
 
   // Парсинг URL и определение контекста
   @Get('routing/parse-url')
   @Scopes('PROJECT_READ')
-  async parseUrl(
-    @Query('url') url: string,
-    @Query('projectId') projectId: string
-  ) {
+  async parseUrl(@Query('url') url: string, @Query('projectId') projectId: string) {
     if (!url || !projectId) {
-      return { 
-        success: false, 
-        error: 'Параметры url и projectId обязательны' 
+      return {
+        success: false,
+        error: 'Параметры url и projectId обязательны',
       };
     }
 
@@ -175,9 +135,9 @@ export class MenuItemsController {
       const parsed = await this.menuRulesService.parseUrl(url, projectId);
       return { success: true, data: parsed };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Ошибка парсинга URL' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Ошибка парсинга URL',
       };
     }
   }
@@ -187,9 +147,9 @@ export class MenuItemsController {
   @Scopes('PROJECT_READ')
   async generateSitemap(@Query('projectId') projectId: string) {
     if (!projectId) {
-      return { 
-        success: false, 
-        error: 'Параметр projectId обязателен' 
+      return {
+        success: false,
+        error: 'Параметр projectId обязателен',
       };
     }
 
@@ -197,9 +157,9 @@ export class MenuItemsController {
       const sitemap = await this.menuRulesService.generateSitemap(projectId);
       return { success: true, data: sitemap };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Ошибка генерации sitemap' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Ошибка генерации sitemap',
       };
     }
   }
@@ -208,10 +168,7 @@ export class MenuItemsController {
   // Определение активного пункта меню для текущего пути
   @Get('active-by-path')
   @Scopes('PROJECT_READ')
-  async getActiveByPath(
-    @Query('menuTypeId') menuTypeId: string,
-    @Query('path') path: string
-  ) {
+  async getActiveByPath(@Query('menuTypeId') menuTypeId: string, @Query('path') path: string) {
     if (!menuTypeId || !path) {
       return { success: false, error: 'Параметры menuTypeId и path обязательны' };
     }
@@ -226,8 +183,8 @@ export class MenuItemsController {
       success: true,
       data: {
         activeItem,
-        breadcrumbs
-      }
+        breadcrumbs,
+      },
     };
   }
 
@@ -272,35 +229,29 @@ export class MenuItemsController {
     return { success: true, data: resolved };
   }
 
-  
-
   // Проверка доступа к пункту меню
   @Get('security/check-access/:id')
   @Scopes('PROJECT_READ')
   async checkAccess(
     @Param('id') id: string,
     @Query('accessLevels') accessLevels?: string,
-    @Query('userId') userId?: string
+    @Query('userId') userId?: string,
   ) {
-    const userAccessLevels: AccessLevel[] = accessLevels 
-      ? accessLevels.split(',').filter(level => 
-          ['PUBLIC', 'REGISTERED', 'SPECIAL', 'CUSTOM'].includes(level)
-        ) as AccessLevel[]
+    const userAccessLevels: AccessLevel[] = accessLevels
+      ? (accessLevels
+          .split(',')
+          .filter((level) => ['PUBLIC', 'REGISTERED', 'SPECIAL', 'CUSTOM'].includes(level)) as AccessLevel[])
       : [AccessLevel.PUBLIC];
 
-    const hasAccess = await this.menuAccessService.checkMenuItemAccess(
-      id, 
-      userAccessLevels, 
-      userId
-    );
+    const hasAccess = await this.menuAccessService.checkMenuItemAccess(id, userAccessLevels, userId);
 
-    return { 
-      success: true, 
-      data: { 
+    return {
+      success: true,
+      data: {
         hasAccess,
         menuItemId: id,
-        checkedLevels: userAccessLevels
-      } 
+        checkedLevels: userAccessLevels,
+      },
     };
   }
 
@@ -309,9 +260,9 @@ export class MenuItemsController {
   @Scopes('PROJECT_READ')
   async getAccessStats(@Query('projectId') projectId: string) {
     if (!projectId) {
-      return { 
-        success: false, 
-        error: 'Параметр projectId обязателен' 
+      return {
+        success: false,
+        error: 'Параметр projectId обязателен',
       };
     }
 
@@ -322,17 +273,14 @@ export class MenuItemsController {
   // Построение SEF URL
   @Get(':id/sef-url')
   @Scopes('PROJECT_READ')
-  async buildSefUrl(
-    @Param('id') id: string,
-    @Query() additionalParams: Record<string, any>
-  ) {
+  async buildSefUrl(@Param('id') id: string, @Query() additionalParams: Record<string, any>) {
     try {
       const url = await this.menuRulesService.buildSefUrl(id, additionalParams);
       return { success: true, data: { url } };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Ошибка построения URL' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Ошибка построения URL',
       };
     }
   }

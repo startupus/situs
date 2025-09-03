@@ -16,7 +16,7 @@ export class PageCategoriesService {
     // Получаем страницу с продуктом
     const page = await this.prisma.page.findUnique({
       where: { id: pageId },
-      include: { 
+      include: {
         product: { include: { project: true } },
         webCategories: true,
       },
@@ -48,12 +48,12 @@ export class PageCategoriesService {
 
       // Получаем уже существующие связи
       const existingLinks = page.webCategories.map((link: any) => link.categoryId);
-      const newCategories = assignDto.add.filter(catId => !existingLinks.includes(catId));
+      const newCategories = assignDto.add.filter((catId) => !existingLinks.includes(catId));
 
       // Создаём новые связи
       if (newCategories.length > 0) {
         await this.prisma.pageWebCategory.createMany({
-          data: newCategories.map(categoryId => ({
+          data: newCategories.map((categoryId) => ({
             pageId,
             categoryId,
           })),
@@ -66,7 +66,10 @@ export class PageCategoriesService {
     if (assignDto.remove?.length) {
       // Проверяем что не удаляем основную категорию
       if (page.primaryCategoryId && assignDto.remove.includes(page.primaryCategoryId)) {
-        throw new HttpException('Cannot remove primary category. Set another primary category first.', HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          'Cannot remove primary category. Set another primary category first.',
+          HttpStatus.BAD_REQUEST,
+        );
       }
 
       await this.prisma.pageWebCategory.deleteMany({
@@ -88,7 +91,7 @@ export class PageCategoriesService {
     // Получаем страницу с продуктом
     const page = await this.prisma.page.findUnique({
       where: { id: pageId },
-      include: { 
+      include: {
         product: { include: { project: true } },
         webCategories: true,
       },

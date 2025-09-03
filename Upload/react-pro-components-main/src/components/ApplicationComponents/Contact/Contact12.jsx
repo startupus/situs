@@ -8,7 +8,7 @@ function Contact12() {
           <div className="w-full px-4 lg:w-1/2">
             <div className="h-full border-l border-stroke px-4 pt-20 dark:border-dark-3 max-lg:border-r lg:pt-[120px]">
               <div className="mx-auto w-full max-w-[400px]">
-                <h2 className="mb-24 text-4xl font-bold leading-[1.2]! tracking-[-1.2px] text-dark dark:text-white sm:text-5xl md:text-[60px] lg:text-5xl xl:text-[60px]">
+                <h2 className="leading-[1.2]! mb-24 text-4xl font-bold tracking-[-1.2px] text-dark dark:text-white sm:text-5xl md:text-[60px] lg:text-5xl xl:text-[60px]">
                   Let’s get in touch with us
                 </h2>
 
@@ -62,7 +62,7 @@ function Contact12() {
                   <input
                     type="email"
                     placeholder="yourname@company.com"
-                    className="h-[50px] w-full border border-stroke/10 bg-white/5 px-5 py-3 text-white placeholder-dark-5 outline-hidden duration-200 focus:border-primary"
+                    className="outline-hidden h-[50px] w-full border border-stroke/10 bg-white/5 px-5 py-3 text-white placeholder-dark-5 duration-200 focus:border-primary"
                   />
                 </div>
                 <div className="mb-6">
@@ -75,7 +75,7 @@ function Contact12() {
                   <input
                     type="text"
                     placeholder="+1 (555) 444-0000"
-                    className="h-[50px] w-full border border-stroke/10 bg-white/5 px-5 py-3 text-white placeholder-dark-5 outline-hidden duration-200 focus:border-primary"
+                    className="outline-hidden h-[50px] w-full border border-stroke/10 bg-white/5 px-5 py-3 text-white placeholder-dark-5 duration-200 focus:border-primary"
                   />
                 </div>
                 <div className="mb-6">
@@ -88,7 +88,7 @@ function Contact12() {
                   <textarea
                     rows="6"
                     placeholder="Type your message"
-                    className="w-full border border-stroke/10 bg-white/5 p-5 text-white placeholder-dark-5 outline-hidden duration-200 focus:border-primary"
+                    className="outline-hidden w-full border border-stroke/10 bg-white/5 p-5 text-white placeholder-dark-5 duration-200 focus:border-primary"
                   ></textarea>
                 </div>
                 <div className="mb-6">

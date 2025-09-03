@@ -100,11 +100,11 @@ const formItems = [
 const ContactUs = () => {
   return (
     <>
-      <section className="dark:bg-dark overflow-hidden py-24">
+      <section className="overflow-hidden py-24 dark:bg-dark">
         <div className="container mx-auto">
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 xl:w-10/12">
-              <div className="bg-primary -mx-4 mb-16 flex flex-wrap px-5 py-14 sm:p-14">
+              <div className="-mx-4 mb-16 flex flex-wrap bg-primary px-5 py-14 sm:p-14">
                 {contactList.map((contact, contactIndex) => (
                   <div
                     key={contactIndex}
@@ -134,7 +134,7 @@ const ContactUs = () => {
 
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4 lg:w-7/12 xl:w-6/12">
-              <div className="mb-12 lg:mr-4 lg:mb-0">
+              <div className="mb-12 lg:mb-0 lg:mr-4">
                 <form>
                   <div className="-mx-4 flex flex-wrap">
                     {formItems.map((item, index) =>
@@ -144,7 +144,7 @@ const ContactUs = () => {
                             <textarea
                               placeholder={item.placeholder}
                               rows="6"
-                              className="border-stroke placeholder:text-dark-6 text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary w-full resize-none border bg-transparent px-5 py-[17px] outline-hidden"
+                              className="outline-hidden w-full resize-none border border-stroke bg-transparent px-5 py-[17px] text-body-color placeholder:text-dark-6 focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                             ></textarea>
                           </div>
                         </div>
@@ -154,7 +154,7 @@ const ContactUs = () => {
                             <input
                               type={item.type}
                               placeholder={item.placeholder}
-                              className="placeholder:text-dark-6 border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary w-full border bg-transparent px-5 py-[17px] outline-hidden"
+                              className="outline-hidden w-full border border-stroke bg-transparent px-5 py-[17px] text-body-color placeholder:text-dark-6 focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                             />
                           </div>
                         </div>
@@ -165,7 +165,7 @@ const ContactUs = () => {
                       <div>
                         <button
                           type="submit"
-                          className="bg-primary hover:bg-primary/90 inline-flex items-center justify-center border border-transparent px-7 py-3 text-base font-medium text-white"
+                          className="inline-flex items-center justify-center border border-transparent bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
                         >
                           Submit Message
                         </button>

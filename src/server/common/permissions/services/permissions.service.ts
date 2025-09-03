@@ -2,17 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../database/prisma.service';
 import { RoleHierarchyService } from './role-hierarchy.service';
 import { ContextResolverService } from './context-resolver.service';
-import type { 
-  Permission, 
-  PermissionContext, 
-  PermissionCheckResult,
-  GlobalRole 
-} from '../types';
+import type { Permission, PermissionContext, PermissionCheckResult, GlobalRole } from '../types';
 import { validatePermissionContext } from '../utils';
 
 /**
  * Основной сервис проверки прав доступа
- * 
+ *
  * Координирует работу других сервисов для проверки прав
  * в многоуровневой системе
  */
@@ -21,22 +16,19 @@ export class PermissionsService {
   constructor(
     private prisma: PrismaService,
     private roleHierarchyService: RoleHierarchyService,
-    private contextResolverService: ContextResolverService
+    private contextResolverService: ContextResolverService,
   ) {}
 
   /**
    * Основная функция проверки прав
    */
-  async checkPermission(
-    userId: string,
-    context: PermissionContext
-  ): Promise<PermissionCheckResult> {
+  async checkPermission(userId: string, context: PermissionContext): Promise<PermissionCheckResult> {
     try {
       // Валидируем контекст
       if (!validatePermissionContext(context)) {
         return {
           allowed: false,
-          reason: 'Некорректный контекст проверки прав'
+          reason: 'Некорректный контекст проверки прав',
         };
       }
 
@@ -45,7 +37,7 @@ export class PermissionsService {
       if (!user) {
         return {
           allowed: false,
-          reason: 'Пользователь не найден'
+          reason: 'Пользователь не найден',
         };
       }
 
@@ -55,28 +47,24 @@ export class PermissionsService {
       }
 
       // Проверяем базовое право по роли
-      const hasBasePermission = this.roleHierarchyService.hasPermission(
-        user.globalRole as GlobalRole, 
-        context.action
-      );
+      const hasBasePermission = this.roleHierarchyService.hasPermission(user.globalRole as GlobalRole, context.action);
 
       if (!hasBasePermission) {
         return {
           allowed: false,
           reason: `Роль ${user.globalRole} не имеет права ${context.action}`,
-          missingPermissions: [context.action]
+          missingPermissions: [context.action],
         };
       }
 
       // Проверяем контекстные права
       const contextCheck = await this.checkContextualPermission(user, context);
       return contextCheck;
-
     } catch (error) {
       console.error('Ошибка проверки прав:', error);
       return {
         allowed: false,
-        reason: 'Ошибка при проверке прав доступа'
+        reason: 'Ошибка при проверке прав доступа',
       };
     }
   }
@@ -87,9 +75,9 @@ export class PermissionsService {
   async hasSimplePermission(userId: string, permission: Permission): Promise<boolean> {
     const user = await this.getUser(userId);
     if (!user) return false;
-    
+
     if (user.globalRole === 'SUPER_ADMIN') return true;
-    
+
     return this.roleHierarchyService.hasPermission(user.globalRole as GlobalRole, permission);
   }
 
@@ -106,10 +94,7 @@ export class PermissionsService {
   /**
    * Проверка контекстных прав
    */
-  private async checkContextualPermission(
-    user: any,
-    context: PermissionContext
-  ): Promise<PermissionCheckResult> {
+  private async checkContextualPermission(user: any, context: PermissionContext): Promise<PermissionCheckResult> {
     const { resource, scope } = context;
 
     // Проверяем в зависимости от скоупа
@@ -128,26 +113,17 @@ export class PermissionsService {
   /**
    * Проверка прав на собственные ресурсы
    */
-  private async checkOwnScopePermission(
-    user: any,
-    context: PermissionContext
-  ): Promise<PermissionCheckResult> {
+  private async checkOwnScopePermission(user: any, context: PermissionContext): Promise<PermissionCheckResult> {
     if (context.resource === 'project' && context.projectId) {
-      const isOwner = await this.contextResolverService.checkProjectOwnership(
-        user.id, 
-        context.projectId
-      );
-      
+      const isOwner = await this.contextResolverService.checkProjectOwnership(user.id, context.projectId);
+
       if (!isOwner) {
-        const access = await this.contextResolverService.checkProjectAccess(
-          user.id, 
-          context.projectId
-        );
-        
+        const access = await this.contextResolverService.checkProjectAccess(user.id, context.projectId);
+
         if (!access.hasAccess) {
           return {
             allowed: false,
-            reason: 'Нет доступа к проекту'
+            reason: 'Нет доступа к проекту',
           };
         }
       }
@@ -159,27 +135,21 @@ export class PermissionsService {
   /**
    * Проверка агентских прав
    */
-  private async checkAgencyScopePermission(
-    user: any,
-    context: PermissionContext
-  ): Promise<PermissionCheckResult> {
+  private async checkAgencyScopePermission(user: any, context: PermissionContext): Promise<PermissionCheckResult> {
     if (user.globalRole !== 'AGENCY') {
       return {
         allowed: false,
-        reason: 'Агентские права доступны только агентствам'
+        reason: 'Агентские права доступны только агентствам',
       };
     }
 
     if (context.clientId) {
-      const isClient = await this.contextResolverService.isAgencyClient(
-        user.id, 
-        context.clientId
-      );
-      
+      const isClient = await this.contextResolverService.isAgencyClient(user.id, context.clientId);
+
       if (!isClient) {
         return {
           allowed: false,
-          reason: 'Нет агентских отношений с данным клиентом'
+          reason: 'Нет агентских отношений с данным клиентом',
         };
       }
     }
@@ -190,15 +160,12 @@ export class PermissionsService {
   /**
    * Проверка глобальных прав
    */
-  private async checkGlobalScopePermission(
-    user: any,
-    context: PermissionContext
-  ): Promise<PermissionCheckResult> {
+  private async checkGlobalScopePermission(user: any, context: PermissionContext): Promise<PermissionCheckResult> {
     // Глобальные права только для STAFF и SUPER_ADMIN
     if (!['STAFF', 'SUPER_ADMIN'].includes(user.globalRole)) {
       return {
         allowed: false,
-        reason: 'Глобальные права доступны только персоналу и администраторам'
+        reason: 'Глобальные права доступны только персоналу и администраторам',
       };
     }
 
@@ -211,11 +178,11 @@ export class PermissionsService {
   private async getUser(userId: string) {
     return this.prisma.user.findUnique({
       where: { id: userId },
-      select: { 
-        id: true, 
+      select: {
+        id: true,
         globalRole: true,
-        status: true
-      }
+        status: true,
+      },
     });
   }
 }

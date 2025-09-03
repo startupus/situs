@@ -1,14 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import type { Permission, GlobalRole, RoleInfo } from '../types';
-import { 
-  getGlobalRoleLevel, 
-  canManageRole, 
-  getManageableRoles 
-} from '../utils';
+import { getGlobalRoleLevel, canManageRole, getManageableRoles } from '../utils';
 
 /**
  * Сервис для работы с иерархией ролей
- * 
+ *
  * Отвечает за:
  * - Получение прав роли с учетом наследования
  * - Проверку иерархии ролей
@@ -16,7 +12,6 @@ import {
  */
 @Injectable()
 export class RoleHierarchyService {
-  
   /**
    * Получает все права роли с учетом наследования
    */
@@ -31,12 +26,12 @@ export class RoleHierarchyService {
    */
   hasPermission(roleId: GlobalRole, permission: Permission): boolean {
     const permissions = this.getRolePermissions(roleId);
-    
+
     // Если есть право "*", то все права разрешены
     if (permissions.includes('*' as Permission)) {
       return true;
     }
-    
+
     return permissions.includes(permission);
   }
 
@@ -83,12 +78,12 @@ export class RoleHierarchyService {
    * Проверяет, превышает ли пользователь лимиты роли
    */
   async checkRoleLimitations(
-    roleId: GlobalRole, 
+    roleId: GlobalRole,
     currentUsage: {
       projectsCount?: number;
       clientsCount?: number;
       storageUsed?: number;
-    }
+    },
   ): Promise<{ valid: boolean; violations: string[] }> {
     const limitations = this.getRoleLimitations(roleId);
     const violations: string[] = [];
@@ -113,7 +108,7 @@ export class RoleHierarchyService {
 
     return {
       valid: violations.length === 0,
-      violations
+      violations,
     };
   }
 }

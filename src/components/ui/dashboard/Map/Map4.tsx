@@ -1,39 +1,39 @@
-import jsVectorMap from "jsvectormap";
-import "jsvectormap/dist/css/jsvectormap.css";
-import React, { useEffect } from "react";
-import "./us-aea-en";
+import jsVectorMap from 'jsvectormap';
+import 'jsvectormap/dist/css/jsvectormap.css';
+import React, { useEffect } from 'react';
+import './us-aea-en';
 
 const Map4 = () => {
   useEffect(() => {
     new jsVectorMap({
-      selector: "#mapFour",
-      map: "us_aea_en",
+      selector: '#mapFour',
+      map: 'us_aea_en',
       zoomButtons: true,
 
       regionStyle: {
         initial: {
-          fill: "#A9BDFF",
+          fill: '#A9BDFF',
         },
         hover: {
           fillOpacity: 1,
-          fill: "#3056D3",
+          fill: '#3056D3',
         },
       },
       regionLabelStyle: {
         initial: {
-          fontFamily: "inter",
-          fontWeight: "semibold",
-          fill: "#fff",
+          fontFamily: 'inter',
+          fontWeight: 'semibold',
+          fill: '#fff',
         },
         hover: {
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
 
       labels: {
         regions: {
           render(code) {
-            return code.split("-")[1];
+            return code.split('-')[1];
           },
         },
       },
@@ -84,17 +84,12 @@ const Map4 = () => {
         <div className="mx-auto px-4 md:container">
           <div className="mx-auto w-full max-w-[560px] overflow-hidden rounded-lg border border-stroke bg-white px-[30px] py-6 dark:border-dark-3 dark:bg-dark-2">
             <div className="mb-8">
-              <h4 className="mb-1 text-xl font-semibold text-dark dark:text-white">
-                States statistics
-              </h4>
+              <h4 className="mb-1 text-xl font-semibold text-dark dark:text-white">States statistics</h4>
               <p className="text-sm text-body-color dark:text-dark-6">
                 View states statistics by hovering over the map
               </p>
             </div>
-            <div
-              id="mapFour"
-              className="mapFour h-[260px] overflow-visible"
-            ></div>
+            <div id="mapFour" className="mapFour h-[260px] overflow-visible"></div>
           </div>
         </div>
       </section>

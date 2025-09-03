@@ -1,23 +1,23 @@
-import React from 'react'
-import { HelmetProvider } from 'react-helmet-async'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import './App.css'
-import './i18n' // Инициализация i18n
-import { SiteProvider } from './contexts/SiteContext'
-import { UserProvider } from './contexts/UserContext'
-import { ProjectProvider } from './contexts/ProjectContext'
-import { AdminThemeProvider } from './contexts/AdminThemeContext'
-import { EditorThemeProvider } from './contexts/EditorThemeContext'
-import { ProjectThemeProvider } from './contexts/ProjectThemeContext'
+import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+import './i18n'; // Инициализация i18n
+import { SiteProvider } from './contexts/SiteContext';
+import { UserProvider } from './contexts/UserContext';
+import { ProjectProvider } from './contexts/ProjectContext';
+import { AdminThemeProvider } from './contexts/AdminThemeContext';
+import { EditorThemeProvider } from './contexts/EditorThemeContext';
+import { ProjectThemeProvider } from './contexts/ProjectThemeContext';
 // Legacy components moved to legacy folder
-import { StudioInterface } from './components/legacy/StudioInterface'
-import RedaktusEditor from './components/legacy/RedaktusEditor'
-import ProjectWorkspace from './components/legacy/ProjectWorkspace'
-import ProjectSelector from './pages/ProjectSelector'
-import { useAdminTheme } from './contexts/AdminThemeContext'
-import SitusApp from './components/situs/SitusApp'
-import EnhancedThemeSettings from './components/admin/EnhancedThemeSettings'
-import { McpTestPanel } from './components/mcp/McpTestPanel'
+import { StudioInterface } from './components/legacy/StudioInterface';
+import RedaktusEditor from './components/legacy/RedaktusEditor';
+import ProjectWorkspace from './components/legacy/ProjectWorkspace';
+import ProjectSelector from './pages/ProjectSelector';
+import { useAdminTheme } from './contexts/AdminThemeContext';
+import SitusApp from './components/situs/SitusApp';
+import EnhancedThemeSettings from './components/admin/EnhancedThemeSettings';
+import { McpTestPanel } from './components/mcp/McpTestPanel';
 
 function App() {
   return (
@@ -36,16 +36,16 @@ function App() {
         </EditorThemeProvider>
       </AdminThemeProvider>
     </HelmetProvider>
-  )
+  );
 }
 
 function AppContent() {
-  const { theme, isDarkMode } = useAdminTheme()
-  
-  console.log("App component rendered, admin theme:", theme, "dark mode:", isDarkMode);
+  const { theme, isDarkMode } = useAdminTheme();
+
+  console.log('App component rendered, admin theme:', theme, 'dark mode:', isDarkMode);
 
   return (
-    <div 
+    <div
       className={`min-h-screen w-screen max-w-none overflow-x-hidden transition-colors duration-200 ${
         isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'
       }`}
@@ -53,49 +53,62 @@ function AppContent() {
     >
       <Routes>
         {/* Situs Platform - управление сайтами (1 уровень) */}
-        <Route path="/situs" element={
-          <SiteProvider>
-            <ProjectSelector />
-          </SiteProvider>
-        } />
-        
+        <Route
+          path="/situs"
+          element={
+            <SiteProvider>
+              <ProjectSelector />
+            </SiteProvider>
+          }
+        />
+
         {/* Situs Platform - рабочая область проекта (2 уровень) */}
-        <Route path="/situs/project/:projectId" element={
-          <SiteProvider>
-            <ProjectWorkspace />
-          </SiteProvider>
-        } />
-        
+        <Route
+          path="/situs/project/:projectId"
+          element={
+            <SiteProvider>
+              <ProjectWorkspace />
+            </SiteProvider>
+          }
+        />
+
         {/* Redaktus Studio - сразу редактор */}
-        <Route path="/redaktus" element={
-          <div className="min-h-screen bg-white">
-            <RedaktusEditor mode="editor" />
-          </div>
-        } />
-        
+        <Route
+          path="/redaktus"
+          element={
+            <div className="min-h-screen bg-white">
+              <RedaktusEditor mode="editor" />
+            </div>
+          }
+        />
+
         {/* Studio Interface - интерфейс управления проектами */}
-        <Route path="/studio/*" element={
-          <SiteProvider>
-            <StudioInterface />
-          </SiteProvider>
-        } />
-        
+        <Route
+          path="/studio/*"
+          element={
+            <SiteProvider>
+              <StudioInterface />
+            </SiteProvider>
+          }
+        />
+
         {/* Роуты situs-new удалены: используем единый интерфейс из src/components/situs/** */}
-        
+
         {/* Тестовая страница MCP */}
         <Route path="/mcp-test" element={<McpTestPanel />} />
-        
+
         {/* Основной интерфейс Situs на основе Admino - обрабатывает все остальные роуты */}
-        <Route path="/*" element={
-          <SiteProvider>
-            <SitusApp />
-          </SiteProvider>
-        } />
+        <Route
+          path="/*"
+          element={
+            <SiteProvider>
+              <SitusApp />
+            </SiteProvider>
+          }
+        />
       </Routes>
     </div>
-  )
+  );
 }
 
-
-
-export default App 
+export default App;

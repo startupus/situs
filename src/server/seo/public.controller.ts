@@ -17,7 +17,12 @@ export class PublicSeoController {
 
   @Public()
   @Get('robots.txt')
-  async robots(@Query('project') projectId: string | undefined, @Query('allow') allow: string | undefined, @Res() res: Response, @Req() req: Request) {
+  async robots(
+    @Query('project') projectId: string | undefined,
+    @Query('allow') allow: string | undefined,
+    @Res() res: Response,
+    @Req() req: Request,
+  ) {
     const key = `robots:${projectId || 'host'}`;
     const cached = cache.get(key);
     if (cached && Date.now() - cached.ts < TTL) {
@@ -77,7 +82,10 @@ export class PublicSeoController {
           orderBy: [{ isHomePage: 'desc' }, { orderIndex: 'asc' }],
           select: { slug: true, updatedAt: true, isHomePage: true },
         });
-        const project = await this.prisma.project.findUnique({ where: { id: projectId }, select: { customDomain: true, domain: true } });
+        const project = await this.prisma.project.findUnique({
+          where: { id: projectId },
+          select: { customDomain: true, domain: true },
+        });
         const base = project?.customDomain || project?.domain || 'example.com';
         urls = pages.map((p) => ({
           loc: `https://${base}/${p.isHomePage ? '' : p.slug}`.replace(/\/$/, ''),
@@ -88,7 +96,10 @@ export class PublicSeoController {
     } catch {}
 
     const body = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n${urls
-      .map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}\n    ${u.priority ? `<priority>${u.priority}</priority>` : ''}\n  </url>`)
+      .map(
+        (u) =>
+          `  <url>\n    <loc>${u.loc}</loc>\n    ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}\n    ${u.priority ? `<priority>${u.priority}</priority>` : ''}\n  </url>`,
+      )
       .join('\n')}\n</urlset>`;
     const etag = computeEtag(body);
     cache.set(key, { ts: Date.now(), value: body, etag });

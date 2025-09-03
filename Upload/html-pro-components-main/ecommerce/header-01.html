@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -44,12 +44,12 @@
             <div class="w-full md:w-7/12 lg:w-1/2">
               <div class="mx-8 mb-20 max-w-[520px] md:mb-0 2xl:ml-20">
                 <span
-                  class="mb-3 block text-lg font-semibold text-primary lg:leading-[40px] lg:text-[28px]"
+                  class="mb-3 block text-lg font-semibold text-primary lg:text-[28px] lg:leading-[40px]"
                 >
                   Trending Products
                 </span>
                 <h1
-                  class="mb-[18px] text-3xl font-bold leading-[1.2]! text-dark dark:text-white lg:text-4xl xl:text-[48px]"
+                  class="leading-[1.2]! mb-[18px] text-3xl font-bold text-dark dark:text-white lg:text-4xl xl:text-[48px]"
                 >
                   New Arrival From Mans Collections
                 </h1>
@@ -60,7 +60,7 @@
                 </p>
                 <a
                   href="javascript:void(0)"
-                  class="inline-flex items-center justify-center border border-dark dark:border-white py-3 px-7 text-center text-base font-medium text-dark dark:text-white transition hover:bg-dark hover:text-white dark:hover:bg-white dark:hover:text-dark"
+                  class="inline-flex items-center justify-center border border-dark px-7 py-3 text-center text-base font-medium text-dark transition hover:bg-dark hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-dark"
                 >
                   Shop Now
                 </a>
@@ -83,12 +83,12 @@
             <div class="w-full md:w-7/12 lg:w-1/2">
               <div class="mx-8 mb-20 max-w-[520px] md:mb-0 2xl:ml-20">
                 <span
-                  class="mb-3 block text-lg font-semibold text-primary lg:leading-[40px] lg:text-[28px]"
+                  class="mb-3 block text-lg font-semibold text-primary lg:text-[28px] lg:leading-[40px]"
                 >
                   Trending Products
                 </span>
                 <h1
-                  class="mb-[18px] text-3xl font-bold leading-[1.2]! text-dark dark:text-white lg:text-4xl xl:text-[48px]"
+                  class="leading-[1.2]! mb-[18px] text-3xl font-bold text-dark dark:text-white lg:text-4xl xl:text-[48px]"
                 >
                   New Arrival From Mans Collections
                 </h1>
@@ -99,7 +99,7 @@
                 </p>
                 <a
                   href="javascript:void(0)"
-                  class="inline-flex items-center justify-center border border-dark dark:border-white py-3 px-7 text-center text-base font-medium text-dark dark:text-white transition hover:bg-dark hover:text-white dark:hover:bg-white dark:hover:text-dark"
+                  class="inline-flex items-center justify-center border border-dark px-7 py-3 text-center text-base font-medium text-dark transition hover:bg-dark hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-dark"
                 >
                   Shop Now
                 </a>
@@ -112,38 +112,38 @@
         class="absolute bottom-12 right-12 flex items-center justify-end space-x-4"
       >
         <button
-          class="flex h-[42px] w-[42px] items-center justify-center border border-body-color dark:border-dark-6 text-body-color dark:text-dark-6 transition-all hover:border-primary hover:text-primary"
+          class="flex h-[42px] w-[42px] items-center justify-center border border-body-color text-body-color transition-all hover:border-primary hover:text-primary dark:border-dark-6 dark:text-dark-6"
           @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft - ($refs.carousel.scrollWidth / slides.length); activeSlide -= 1"
         >
-          <svg 
-            width="22" 
-            height="22" 
-            viewBox="0 0 22 22" 
-            fill="none" 
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current"
           >
-            <path 
-              d="M14.8844 19.6969C14.6781 19.6969 14.4719 19.6282 14.3344 19.4563L6.56565 11.55C6.25627 11.2407 6.25627 10.7594 6.56565 10.45L14.3344 2.5438C14.6438 2.23442 15.125 2.23442 15.4344 2.5438C15.7438 2.85317 15.7438 3.33442 15.4344 3.6438L8.21565 11L15.4688 18.3563C15.7781 18.6657 15.7781 19.1469 15.4688 19.4563C15.2625 19.5938 15.0906 19.6969 14.8844 19.6969Z" 
+            <path
+              d="M14.8844 19.6969C14.6781 19.6969 14.4719 19.6282 14.3344 19.4563L6.56565 11.55C6.25627 11.2407 6.25627 10.7594 6.56565 10.45L14.3344 2.5438C14.6438 2.23442 15.125 2.23442 15.4344 2.5438C15.7438 2.85317 15.7438 3.33442 15.4344 3.6438L8.21565 11L15.4688 18.3563C15.7781 18.6657 15.7781 19.1469 15.4688 19.4563C15.2625 19.5938 15.0906 19.6969 14.8844 19.6969Z"
             />
-          </svg>          
+          </svg>
         </button>
         <button
-          class="flex h-[42px] w-[42px] items-center justify-center border border-body-color dark:border-dark-6 text-body-color dark:text-dark-6 transition-all hover:border-primary hover:text-primary"
+          class="flex h-[42px] w-[42px] items-center justify-center border border-body-color text-body-color transition-all hover:border-primary hover:text-primary dark:border-dark-6 dark:text-dark-6"
           @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft + ($refs.carousel.scrollWidth / slides.length); activeSlide += 1"
         >
-          <svg 
-            width="22" 
-            height="22" 
-            viewBox="0 0 22 22" 
-            fill="none" 
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class="fill-current"
           >
-            <path 
+            <path
               d="M7.11565 19.6969C6.9094 19.6969 6.73752 19.6282 6.56565 19.4907C6.25627 19.1813 6.25627 18.7001 6.56565 18.3907L13.7844 11L6.56565 3.6438C6.25627 3.33442 6.25627 2.85317 6.56565 2.5438C6.87502 2.23442 7.35627 2.23442 7.66565 2.5438L15.4344 10.45C15.7438 10.7594 15.7438 11.2407 15.4344 11.55L7.66565 19.4563C7.52815 19.5938 7.3219 19.6969 7.11565 19.6969Z"
             />
-          </svg>          
+          </svg>
         </button>
       </div>
     </section>

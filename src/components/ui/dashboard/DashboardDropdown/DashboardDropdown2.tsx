@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const DashboardDropdown2 = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,16 +10,11 @@ const DashboardDropdown2 = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -28,8 +23,8 @@ const DashboardDropdown2 = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -37,11 +32,7 @@ const DashboardDropdown2 = () => {
       <div className="container">
         <div className="flex items-center justify-center">
           <div className="relative">
-            <button
-              className="relative"
-              ref={trigger}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
+            <button className="relative" ref={trigger} onClick={() => setDropdownOpen(!dropdownOpen)}>
               <span className="z-1 absolute -top-0.5 right-0 h-2 w-2 rounded-full bg-red-500">
                 <span className="-z-1 absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
               </span>
@@ -73,7 +64,7 @@ const DashboardDropdown2 = () => {
               onFocus={() => setDropdownOpen(true)}
               onBlur={() => setDropdownOpen(false)}
               className={`absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 shadow-card sm:-right-[34px] sm:w-[360px] ${
-                dropdownOpen === true ? "block" : "hidden"
+                dropdownOpen === true ? 'block' : 'hidden'
               }`}
             >
               <div className="border-b border-stroke dark:border-dark-3 py-[18px] px-6">
@@ -159,25 +150,12 @@ const DashboardDropdown2 = () => {
 
 export default DashboardDropdown2;
 
-const DropdownItem = ({
-  link,
-  img,
-  name,
-  text,
-  children,
-  totalMsg,
-  time,
-  addedName,
-}) => {
+const DropdownItem = ({ link, img, name, text, children, totalMsg, time, addedName }) => {
   return (
     <li className="group relative flex cursor-pointer items-center justify-between gap-4 rounded-md p-3 hover:bg-gray dark:hover:bg-dark-3">
       <a className="flex items-center gap-5" href={link}>
         <div className="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11">
-          <img
-            src={img}
-            alt="User"
-            className="h-full w-full rounded-full object-cover object-center"
-          />
+          <img src={img} alt="User" className="h-full w-full rounded-full object-cover object-center" />
         </div>
 
         <div>
@@ -204,16 +182,11 @@ const InnerDropdown = ({ children }) => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -222,8 +195,8 @@ const InnerDropdown = ({ children }) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -257,12 +230,7 @@ const InnerDropdown = ({ children }) => {
           </g>
           <defs>
             <clipPath id="clip0_4662_3241">
-              <rect
-                width="14"
-                height="14"
-                fill="white"
-                transform="translate(0 14) rotate(-90)"
-              />
+              <rect width="14" height="14" fill="white" transform="translate(0 14) rotate(-90)" />
             </clipPath>
           </defs>
         </svg>
@@ -272,7 +240,7 @@ const InnerDropdown = ({ children }) => {
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 top-full z-999 mt-5 w-[180px] space-y-1 rounded border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 ${
-          dropdownOpen === true ? "block" : "hidden"
+          dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
         {children}

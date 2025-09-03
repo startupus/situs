@@ -225,13 +225,12 @@ class EcommerceApiService {
     };
   }> {
     try {
-      const response = await apiClient.get<ApiResponse<{
-        stores: Store[];
-        pagination: any;
-      }>>(
-        `${this.baseEndpoint}/stores`,
-        filters
-      );
+      const response = await apiClient.get<
+        ApiResponse<{
+          stores: Store[];
+          pagination: any;
+        }>
+      >(`${this.baseEndpoint}/stores`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -249,9 +248,7 @@ class EcommerceApiService {
    */
   async getStore(storeId: string): Promise<Store> {
     try {
-      const response = await apiClient.get<ApiResponse<Store>>(
-        `${this.baseEndpoint}/stores/${storeId}`
-      );
+      const response = await apiClient.get<ApiResponse<Store>>(`${this.baseEndpoint}/stores/${storeId}`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -269,10 +266,7 @@ class EcommerceApiService {
    */
   async createStore(data: CreateStoreData): Promise<Store> {
     try {
-      const response = await apiClient.post<ApiResponse<Store>>(
-        `${this.baseEndpoint}/stores`,
-        data
-      );
+      const response = await apiClient.post<ApiResponse<Store>>(`${this.baseEndpoint}/stores`, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -290,10 +284,7 @@ class EcommerceApiService {
    */
   async updateStore(storeId: string, data: UpdateStoreData): Promise<Store> {
     try {
-      const response = await apiClient.put<ApiResponse<Store>>(
-        `${this.baseEndpoint}/stores/${storeId}`,
-        data
-      );
+      const response = await apiClient.put<ApiResponse<Store>>(`${this.baseEndpoint}/stores/${storeId}`, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -309,18 +300,20 @@ class EcommerceApiService {
   /**
    * Получить продукты магазина
    */
-  async getProducts(storeId: string, filters?: ProductFilters): Promise<{
+  async getProducts(
+    storeId: string,
+    filters?: ProductFilters,
+  ): Promise<{
     products: Product[];
     pagination: any;
   }> {
     try {
-      const response = await apiClient.get<ApiResponse<{
-        products: Product[];
-        pagination: any;
-      }>>(
-        `${this.baseEndpoint}/stores/${storeId}/products`,
-        filters
-      );
+      const response = await apiClient.get<
+        ApiResponse<{
+          products: Product[];
+          pagination: any;
+        }>
+      >(`${this.baseEndpoint}/stores/${storeId}/products`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -339,7 +332,7 @@ class EcommerceApiService {
   async getProduct(storeId: string, productId: string): Promise<Product> {
     try {
       const response = await apiClient.get<ApiResponse<Product>>(
-        `${this.baseEndpoint}/stores/${storeId}/products/${productId}`
+        `${this.baseEndpoint}/stores/${storeId}/products/${productId}`,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -360,7 +353,7 @@ class EcommerceApiService {
     try {
       const response = await apiClient.post<ApiResponse<Product>>(
         `${this.baseEndpoint}/stores/${storeId}/products`,
-        data
+        data,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -381,7 +374,7 @@ class EcommerceApiService {
     try {
       const response = await apiClient.put<ApiResponse<Product>>(
         `${this.baseEndpoint}/stores/${storeId}/products/${productId}`,
-        data
+        data,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -401,7 +394,7 @@ class EcommerceApiService {
   async deleteProduct(storeId: string, productId: string): Promise<void> {
     try {
       const response = await apiClient.delete<ApiResponse<void>>(
-        `${this.baseEndpoint}/stores/${storeId}/products/${productId}`
+        `${this.baseEndpoint}/stores/${storeId}/products/${productId}`,
       );
 
       if (!ApiUtils.isSuccess(response)) {
@@ -419,7 +412,7 @@ class EcommerceApiService {
   async getCategories(storeId: string): Promise<ProductCategory[]> {
     try {
       const response = await apiClient.get<ApiResponse<ProductCategory[]>>(
-        `${this.baseEndpoint}/stores/${storeId}/categories`
+        `${this.baseEndpoint}/stores/${storeId}/categories`,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -436,11 +429,14 @@ class EcommerceApiService {
   /**
    * Создать категорию
    */
-  async createCategory(storeId: string, data: Omit<ProductCategory, 'id' | 'storeId' | 'productCount'>): Promise<ProductCategory> {
+  async createCategory(
+    storeId: string,
+    data: Omit<ProductCategory, 'id' | 'storeId' | 'productCount'>,
+  ): Promise<ProductCategory> {
     try {
       const response = await apiClient.post<ApiResponse<ProductCategory>>(
         `${this.baseEndpoint}/stores/${storeId}/categories`,
-        data
+        data,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -457,7 +453,11 @@ class EcommerceApiService {
   /**
    * Получить статистику магазина
    */
-  async getStoreAnalytics(storeId: string, dateFrom?: string, dateTo?: string): Promise<{
+  async getStoreAnalytics(
+    storeId: string,
+    dateFrom?: string,
+    dateTo?: string,
+  ): Promise<{
     revenue: { date: string; amount: number }[];
     orders: { date: string; count: number }[];
     topProducts: { product: Product; revenue: number; sales: number }[];
@@ -467,7 +467,7 @@ class EcommerceApiService {
       const params = { dateFrom, dateTo };
       const response = await apiClient.get<ApiResponse<any>>(
         `${this.baseEndpoint}/stores/${storeId}/analytics`,
-        params
+        params,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -493,7 +493,7 @@ class EcommerceApiService {
 
       const response = await apiClient.upload<ApiResponse<ProductImage[]>>(
         `${this.baseEndpoint}/stores/${storeId}/products/${productId}/images`,
-        formData
+        formData,
       );
 
       if (ApiUtils.isSuccess(response)) {

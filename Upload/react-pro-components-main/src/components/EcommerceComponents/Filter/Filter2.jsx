@@ -59,10 +59,16 @@ const Filter2 = () => {
                           Show
                         </label>
                         <div className="relative">
-                          <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                            <option value="" className="dark:bg-dark-2">12</option>
-                            <option value="" className="dark:bg-dark-2">09</option>
-                            <option value="" className="dark:bg-dark-2">06</option>
+                          <select className="outline-hidden w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
+                            <option value="" className="dark:bg-dark-2">
+                              12
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              09
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              06
+                            </option>
                           </select>
                           <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-dark dark:border-white"></span>
                         </div>
@@ -75,10 +81,16 @@ const Filter2 = () => {
                           Sort By:
                         </label>
                         <div className="relative">
-                          <select className="w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
-                            <option value="" className="dark:bg-dark-2">Best Selling</option>
-                            <option value="" className="dark:bg-dark-2">Newest Products</option>
-                            <option value="" className="dark:bg-dark-2">Oldest Products</option>
+                          <select className="outline-hidden w-full appearance-none rounded-[5px] border border-stroke bg-transparent py-[10px] pl-4 pr-8 font-medium text-dark transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-white">
+                            <option value="" className="dark:bg-dark-2">
+                              Best Selling
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              Newest Products
+                            </option>
+                            <option value="" className="dark:bg-dark-2">
+                              Oldest Products
+                            </option>
                           </select>
                           <span className="absolute right-4 top-1/2 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-b-2 border-r-2 border-dark dark:border-white"></span>
                         </div>

@@ -56,19 +56,19 @@ const pricingPlans = [
 const PricingPlans = () => {
   return (
     <>
-      <section className="dark:bg-dark-2 relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+      <section className="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   {" "}
                   Pricing Table{" "}
                 </span>
-                <h2 className="text-dark mb-4 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px] dark:text-white">
+                <h2 className="mb-4 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Our Pricing Plan
                 </h2>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
@@ -79,14 +79,14 @@ const PricingPlans = () => {
           <div className="-mx-4 flex flex-wrap justify-center">
             {pricingPlans.map((plan, index) => (
               <div key={index} className="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div className="shadow-pricing-5 dark:bg-dark-3 relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 text-center sm:p-12 lg:px-6 lg:py-10 xl:p-14">
-                  <span className="text-dark mb-4 block text-xl font-medium dark:text-white">
+                <div className="relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-8 py-10 text-center shadow-pricing-5 dark:bg-dark-3 sm:p-12 lg:px-6 lg:py-10 xl:p-14">
+                  <span className="mb-4 block text-xl font-medium text-dark dark:text-white">
                     {plan.type}
                   </span>
-                  <h2 className="text-dark mb-10 text-4xl font-semibold xl:mb-[50px] xl:text-[42px] xl:leading-[1.24] dark:text-white">
+                  <h2 className="mb-10 text-4xl font-semibold text-dark dark:text-white xl:mb-[50px] xl:text-[42px] xl:leading-[1.24]">
                     <sup className="-top-5 text-xl font-medium">$</sup>
                     <span className="px-0.5">{plan.price}</span>
-                    <span className="text-body-color dark:text-dark-6 text-base">
+                    <span className="text-base text-body-color dark:text-dark-6">
                       {" "}
                       Month{" "}
                     </span>
@@ -95,7 +95,7 @@ const PricingPlans = () => {
                     {plan.features.map((feature, featureIndex) => (
                       <p
                         key={featureIndex}
-                        className="text-body-color dark:text-dark-6 text-base"
+                        className="text-base text-body-color dark:text-dark-6"
                       >
                         {feature}
                       </p>
@@ -115,7 +115,7 @@ const PricingPlans = () => {
                       <ShapeThree />
                     </span>
                     <span
-                      className={`absolute top-3 right-3 -z-10 ${plan.dotShape}`}
+                      className={`absolute right-3 top-3 -z-10 ${plan.dotShape}`}
                     >
                       <ShapeThree />
                     </span>

@@ -101,11 +101,14 @@ export class InvitationsAPI {
   /**
    * Обновление приглашения
    */
-  static async updateInvitation(id: string, data: {
-    status?: string;
-    message?: string;
-    expiresAt?: string;
-  }): Promise<Invitation> {
+  static async updateInvitation(
+    id: string,
+    data: {
+      status?: string;
+      message?: string;
+      expiresAt?: string;
+    },
+  ): Promise<Invitation> {
     const response = await apiClient.patch(`/api/invitations/${id}`, data);
     return response.data;
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid9 = () => {
   return (
@@ -28,13 +28,7 @@ const SingleProduct = ({ img, link, title, subtitle, price, newItem }) => {
           <span className="absolute right-4 top-4 inline-flex items-center justify-center rounded-sm bg-secondary px-3 py-1 text-sm font-semibold text-white">
             New
             <span className="pl-1">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11.1937 4.48125L7.79997 3.95625L6.26247 0.73125C6.14997 0.50625 5.84997 0.50625 5.73747 0.73125L4.19997 3.975L0.82497 4.48125C0.58122 4.51875 0.48747 4.8375 0.67497 5.00625L3.13122 7.5375L2.54997 11.0812C2.51247 11.325 2.75622 11.5312 2.98122 11.3813L6.03747 9.7125L9.07497 11.3813C9.28122 11.4938 9.54372 11.3062 9.48747 11.0812L8.90622 7.5375L11.3625 5.00625C11.5125 4.8375 11.4375 4.51875 11.1937 4.48125Z"
                   fill="white"
@@ -47,13 +41,7 @@ const SingleProduct = ({ img, link, title, subtitle, price, newItem }) => {
         <div className="absolute bottom-7 left-0 right-0 mx-auto flex w-full items-center justify-center space-x-3">
           <div className="group relative">
             <button className="mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark dark:bg-dark dark:text-white">
-              <svg
-                width="16"
-                height="18"
-                viewBox="0 0 16 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M10.5032 13.5557C9.40635 13.5557 8.50635 14.4838 8.50635 15.6088C8.50635 16.7338 9.40635 17.6619 10.5032 17.6619C11.6001 17.6619 12.5001 16.7338 12.5001 15.6088C12.5282 14.4838 11.6282 13.5557 10.5032 13.5557ZM10.5032 16.6775C9.94072 16.6775 9.49072 16.1994 9.49072 15.6088C9.49072 15.0182 9.94072 14.54 10.5032 14.54C11.0657 14.54 11.5157 15.0182 11.5157 15.6088C11.5438 16.1994 11.0657 16.6775 10.5032 16.6775Z"
                   fill="currentColor"
@@ -75,13 +63,7 @@ const SingleProduct = ({ img, link, title, subtitle, price, newItem }) => {
           </div>
           <div className="group relative">
             <button className="mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark dark:bg-dark dark:text-white">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M9 7.03125C7.90312 7.03125 7.03125 7.93125 7.03125 9C7.03125 10.0687 7.93125 10.9688 9 10.9688C10.0687 10.9688 10.9687 10.0687 10.9687 9C10.9687 7.93125 10.0969 7.03125 9 7.03125ZM9 9.98438C8.46562 9.98438 8.01562 9.53437 8.01562 9C8.01562 8.46563 8.46562 8.01562 9 8.01562C9.53437 8.01562 9.98437 8.46563 9.98437 9C9.98437 9.53437 9.53437 9.98438 9 9.98438Z"
                   fill="currentColor"
@@ -99,13 +81,7 @@ const SingleProduct = ({ img, link, title, subtitle, price, newItem }) => {
           </div>
           <div className="group relative">
             <button className="mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark dark:bg-dark dark:text-white">
-              <svg
-                width="18"
-                height="16"
-                viewBox="0 0 18 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M8.9999 15.7066C8.6624 15.7066 8.29678 15.5941 8.04365 15.341C7.39678 14.7785 6.7499 14.2441 6.1874 13.766C4.52803 12.3598 3.09365 11.1504 2.08115 9.94102C0.899902 8.53477 0.337402 7.18477 0.337402 5.69414C0.337402 4.23164 0.843653 2.88164 1.77178 1.89727C2.6999 0.884766 3.99365 0.322266 5.3999 0.322266C6.44053 0.322266 7.4249 0.659766 8.26865 1.30664C8.52178 1.50352 8.7749 1.72852 8.9999 1.98164C9.2249 1.72852 9.47803 1.50352 9.73115 1.30664C10.5749 0.659766 11.5312 0.322266 12.5999 0.322266C14.0062 0.322266 15.2718 0.884766 16.228 1.89727C17.1562 2.88164 17.6624 4.23164 17.6624 5.69414C17.6624 7.18477 17.0999 8.53477 15.9187 9.94102C14.9062 11.1504 13.4718 12.3598 11.8124 13.766C11.2499 14.2441 10.603 14.7785 9.95615 15.341C9.70303 15.566 9.3374 15.7066 8.9999 15.7066ZM5.3999 1.27852C4.2749 1.27852 3.23428 1.72852 2.50303 2.54414C1.74365 3.35977 1.3499 4.45664 1.3499 5.66602C1.3499 6.90352 1.82803 8.05664 2.84053 9.29414C3.79678 10.4473 5.20303 11.6285 6.83428 13.0066C7.39678 13.4848 8.04365 14.0191 8.69053 14.6098C8.85928 14.7504 9.14053 14.7504 9.30928 14.6098C9.98428 14.0473 10.603 13.4848 11.1655 13.0066C12.7968 11.6285 14.203 10.4473 15.1593 9.29414C16.1718 8.05664 16.6499 6.90352 16.6499 5.66602C16.6499 4.45664 16.228 3.35977 15.4968 2.54414C14.7374 1.72852 13.7249 1.27852 12.5999 1.27852C11.7562 1.27852 10.9968 1.53164 10.3499 2.06602C10.0687 2.26289 9.84365 2.51602 9.59053 2.79727C9.4499 2.96602 9.2249 3.07852 8.9999 3.07852C8.7749 3.07852 8.5499 2.96602 8.40928 2.79727C8.18428 2.51602 7.93115 2.26289 7.6499 2.06602C7.00303 1.55977 6.24365 1.27852 5.3999 1.27852Z"
                   fill="currentColor"
@@ -121,16 +97,11 @@ const SingleProduct = ({ img, link, title, subtitle, price, newItem }) => {
       </div>
       <div className="w-full sm:ml-6 md:ml-9">
         <h3 className="mb-2">
-          <a
-            href={link}
-            className="text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl"
-          >
+          <a href={link} className="text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl">
             {title}
           </a>
         </h3>
-        <p className="mb-6 text-base font-medium text-body-color dark:text-dark-6">
-          {price}
-        </p>
+        <p className="mb-6 text-base font-medium text-body-color dark:text-dark-6">{price}</p>
         <p className="text-base text-body-color dark:text-dark-6">{subtitle}</p>
       </div>
     </div>

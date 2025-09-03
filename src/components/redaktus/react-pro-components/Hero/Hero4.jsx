@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Hero4 = () => {
   return (
@@ -15,9 +15,8 @@ const Hero4 = () => {
                 </h1>
 
                 <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                  With TailGrids, business and students thrive together.
-                  Business can perfectly match their staffing to changing demand
-                  throughout the dayed.
+                  With TailGrids, business and students thrive together. Business can perfectly match their staffing to
+                  changing demand throughout the dayed.
                 </p>
 
                 <div>
@@ -109,7 +108,7 @@ const Navbar = () => {
                 onClick={() => setOpen(!open)}
                 id="navbarToggler"
                 className={` ${
-                  open && "navbarTogglerActive"
+                  open && 'navbarTogglerActive'
                 } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
               >
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
@@ -119,7 +118,7 @@ const Navbar = () => {
               <nav
                 id="navbarCollapse"
                 className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                  !open && "hidden"
+                  !open && 'hidden'
                 } `}
               >
                 <ul className="block lg:flex">
@@ -130,10 +129,7 @@ const Navbar = () => {
               </nav>
             </div>
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
-              <a
-                href="/#"
-                className="px-7 py-3 text-base font-medium text-white hover:text-white/90"
-              >
+              <a href="/#" className="px-7 py-3 text-base font-medium text-white hover:text-white/90">
                 Sign in
               </a>
 

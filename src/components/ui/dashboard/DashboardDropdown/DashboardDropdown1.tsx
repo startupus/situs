@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const DashboardDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,16 +10,11 @@ const DashboardDropdown = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -28,8 +23,8 @@ const DashboardDropdown = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -37,15 +32,9 @@ const DashboardDropdown = () => {
       <div className="container">
         <div className="flex items-center justify-center">
           <div className="relative inline-block">
-            <button
-              className="flex items-center gap-4"
-              ref={trigger}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
+            <button className="flex items-center gap-4" ref={trigger} onClick={() => setDropdownOpen(!dropdownOpen)}>
               <span className="hidden text-right lg:block">
-                <span className="block text-sm font-medium text-dark dark:text-white">
-                  Thomas Anree
-                </span>
+                <span className="block text-sm font-medium text-dark dark:text-white">Thomas Anree</span>
                 <span className="block text-xs text-body-color dark:text-dark-6">UX Designer</span>
               </span>
 
@@ -58,9 +47,7 @@ const DashboardDropdown = () => {
               </span>
 
               <svg
-                className={`fill-body hidden duration-150 ease-linear sm:block ${
-                  dropdownOpen && "rotate-180"
-                }`}
+                className={`fill-body hidden duration-150 ease-linear sm:block ${dropdownOpen && 'rotate-180'}`}
                 width="12"
                 height="8"
                 viewBox="0 0 12 8"
@@ -80,7 +67,7 @@ const DashboardDropdown = () => {
               onFocus={() => setDropdownOpen(true)}
               onBlur={() => setDropdownOpen(false)}
               className={`absolute right-0 mt-4 flex w-[250px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 shadow-card ${
-                dropdownOpen === true ? "block" : "hidden"
+                dropdownOpen === true ? 'block' : 'hidden'
               }`}
             >
               <ul className="flex flex-col gap-5 border-b border-stroke dark:border-dark-3 py-[30px] px-6">
@@ -118,14 +105,7 @@ const DashboardDropdown = () => {
 
 export default DashboardDropdown;
 
-const DropdownItem = ({
-  link,
-  profile,
-  contact,
-  settings,
-  logout,
-  children,
-}) => {
+const DropdownItem = ({ link, profile, contact, settings, logout, children }) => {
   return (
     <li>
       <a

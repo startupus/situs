@@ -43,8 +43,8 @@ const Navbar = () => {
 
   return (
     <header
-      className={`dark:bg-dark sticky top-0 left-0 z-50 w-full bg-white ${
-        sticky && "dark:bg-dark/80 bg-white/80 shadow-xs backdrop-blur-xs"
+      className={`sticky left-0 top-0 z-50 w-full bg-white dark:bg-dark ${
+        sticky && "shadow-xs backdrop-blur-xs bg-white/80 dark:bg-dark/80"
       }`}
     >
       <div className="container mx-auto">
@@ -64,28 +64,28 @@ const Navbar = () => {
             <div ref={navRef}>
               <button
                 onClick={handleNavbarToggle}
-                className={`ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden ${
+                className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
                   navbarOpen ? "navbarTogglerActive" : ""
                 }`}
               >
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
-                <span className="bg-body-color relative my-[6px] block h-[2px] w-[30px] dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
               </button>
 
               <nav
-                className={`dark:bg-dark-2 absolute top-full right-4 z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm transition-all duration-300 ease-in-out ${
+                className={`absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow-sm transition-all duration-300 ease-in-out dark:bg-dark-2 ${
                   navbarOpen
                     ? "block scale-100 opacity-100"
                     : "hidden scale-95 opacity-0"
-                } lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none xl:ml-11 lg:dark:bg-transparent`}
+                } lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent xl:ml-11`}
               >
                 <ul className="block lg:flex">
                   {navList.map((item, index) => (
                     <li key={index}>
                       <Link
                         to={item.link}
-                        className="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-10 lg:inline-flex dark:text-white"
+                        className="flex py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:ml-10 lg:inline-flex"
                       >
                         {item.text}
                       </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <Link
                 to="#"
-                className="bg-dark hover:bg-body-color dark:bg-dark-2 dark:hover:bg-dark-3 rounded-md px-7 py-3 text-base font-medium text-white"
+                className="rounded-md bg-dark px-7 py-3 text-base font-medium text-white hover:bg-body-color dark:bg-dark-2 dark:hover:bg-dark-3"
               >
                 Get Started
               </Link>

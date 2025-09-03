@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ECommerceHero4 = () => {
   return (
@@ -15,17 +15,13 @@ const ECommerceHero4 = () => {
               <div className="absolute left-0 top-0 flex h-full w-full items-center px-8 md:px-12">
                 <div className="max-w-[420px]">
                   <h3>
-                    <a
-                      href="/#"
-                      className="mb-5 block text-2xl font-bold text-dark hover:text-primary sm:text-4xl"
-                    >
+                    <a href="/#" className="mb-5 block text-2xl font-bold text-dark hover:text-primary sm:text-4xl">
                       Mega Sale Up To 50% Off For All
                     </a>
                   </h3>
                   <p className="mb-9 text-base text-body-color">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vestibulum ornare vestibulum mollis. Nam vitae augue purus.
-                    Integer ac accumsan nunc.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare vestibulum mollis. Nam
+                    vitae augue purus. Integer ac accumsan nunc.
                   </p>
                   <a
                     href="/#"
@@ -62,25 +58,15 @@ export default ECommerceHero4;
 const HeroSmallItem = ({ img, link, title, button }) => {
   return (
     <div className="relative mb-8 h-[223px]">
-      <img
-        src={img}
-        alt="product"
-        className="h-full w-full object-cover object-center"
-      />
+      <img src={img} alt="product" className="h-full w-full object-cover object-center" />
       <div className="absolute left-0 top-0 flex h-full w-full items-end justify-end p-6 sm:p-9">
         <div className="max-w-[180px] text-right">
           <h3>
-            <a
-              href={link}
-              className="mb-3 block text-xl font-bold text-dark hover:text-primary xl:text-2xl"
-            >
+            <a href={link} className="mb-3 block text-xl font-bold text-dark hover:text-primary xl:text-2xl">
               {title}
             </a>
           </h3>
-          <a
-            href={link}
-            className="text-base font-medium text-dark hover:text-primary"
-          >
+          <a href={link} className="text-base font-medium text-dark hover:text-primary">
             {button}
           </a>
         </div>

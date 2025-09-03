@@ -1,71 +1,58 @@
-import * as React from 'react'
-import { Repeater } from 'redaktus/core'
-import * as types from 'redaktus/types'
+import * as React from 'react';
+import { Repeater } from 'redaktus/core';
+import * as types from 'redaktus/types';
 
-import classNames from 'classnames'
-import blockNames from '../blockNames'
-import { bgColors } from '../colors'
-import Container from '../layout/Container'
-import Section, { Border } from '../layout/Section'
-import { layoutType } from './FeatureItem'
-import { BackgroundColorsSideEditProps } from 'website/LayoutSideProps'
+import classNames from 'classnames';
+import blockNames from '../blockNames';
+import { bgColors } from '../colors';
+import Container from '../layout/Container';
+import Section, { Border } from '../layout/Section';
+import { layoutType } from './FeatureItem';
+import { BackgroundColorsSideEditProps } from 'website/LayoutSideProps';
 
 export interface FeaturesProps {
-  bg?: { color: string; className: string }
-  screenLayout: layoutType
+  bg?: { color: string; className: string };
+  screenLayout: layoutType;
 }
 const getRepeaterWidht = (screenLayout: layoutType) => {
   switch (screenLayout) {
     case 'base':
-      return 'w-full max-w-3xl'
+      return 'w-full max-w-3xl';
     case 'small':
-      return 'w-full max-w-2xl'
+      return 'w-full max-w-2xl';
     case 'small-3cols':
-      return 'md:w-full max-w-5xl md:-mx-8'
+      return 'md:w-full max-w-5xl md:-mx-8';
   }
-}
+};
 
-const Features: types.Brick<FeaturesProps> = ({
-  bg = bgColors.white.value,
-  screenLayout = 'base',
-}) => {
+const Features: types.Brick<FeaturesProps> = ({ bg = bgColors.white.value, screenLayout = 'base' }) => {
   return (
     <Section bg={bg}>
-      <Container
-        size={'lg'}
-        className={classNames(
-          'py-12 flex flex-wrap justify-center items-center'
-        )}
-      >
+      <Container size={'lg'} className={classNames('py-12 flex flex-wrap justify-center items-center')}>
         <Repeater
           propName="feature-item"
           renderWrapper={(items: any) => (
             <div
               className={classNames(
                 'flex flex-wrap justify-between mx-auto px-6 md:px-0',
-                getRepeaterWidht(screenLayout)
+                getRepeaterWidht(screenLayout),
               )}
             >
-              {screenLayout === 'small-3cols' ? (
-                <div className="grid md:grid-cols-3">{items}</div>
-              ) : (
-                items
-              )}
+              {screenLayout === 'small-3cols' ? <div className="grid md:grid-cols-3">{items}</div> : items}
             </div>
           )}
           itemProps={{ screenLayout: screenLayout }}
         />
       </Container>
     </Section>
-  )
-}
+  );
+};
 Features.schema = {
   name: blockNames.Features,
   label: 'Features',
   category: 'rb-ui website',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Features/Features.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Features/Features.tsx',
 
   getDefaultProps: () => ({
     bg: {
@@ -82,9 +69,8 @@ Features.schema = {
         screenLayout: 'base',
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
         },
       },
       {
@@ -93,9 +79,8 @@ Features.schema = {
         screenLayout: 'base',
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
         },
       },
       {
@@ -104,11 +89,11 @@ Features.schema = {
         screenLayout: 'base',
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
         },
-      }],
+      },
+    ],
   }),
   repeaterItems: [
     {
@@ -118,8 +103,9 @@ Features.schema = {
       itemLabel: 'Feature',
       min: 0,
       max: 4,
-    }],
-    sideEditProps: [
+    },
+  ],
+  sideEditProps: [
     BackgroundColorsSideEditProps,
     {
       name: 'screenLayout',
@@ -135,5 +121,5 @@ Features.schema = {
       },
     },
   ],
-}
-export default Features
+};
+export default Features;

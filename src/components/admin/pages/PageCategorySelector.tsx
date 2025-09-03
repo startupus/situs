@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FiTag, FiStar, FiX } from 'react-icons/fi';
-import { 
-  WebCategoryData, 
+import {
+  WebCategoryData,
   getWebsiteCategories,
   assignPageCategories,
-  setPagePrimaryCategory
+  setPagePrimaryCategory,
 } from '../../../services/projectApi';
 
 interface PageCategorySelectorProps {
@@ -47,13 +47,14 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
   }, [projectId]);
 
   // Фильтрация категорий по поиску
-  const filteredCategories = categories.filter(cat =>
-    cat.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    cat.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCategories = categories.filter(
+    (cat) =>
+      cat.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      cat.slug.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // Получение категории по ID
-  const getCategoryById = (id: string) => categories.find(cat => cat.id === id);
+  const getCategoryById = (id: string) => categories.find((cat) => cat.id === id);
 
   // Добавление категории
   const handleAddCategory = async (categoryId: string) => {
@@ -89,8 +90,8 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
       return;
     }
 
-    const newSelected = selectedCategories.filter(id => id !== categoryId);
-    
+    const newSelected = selectedCategories.filter((id) => id !== categoryId);
+
     if (onChange) {
       onChange(newSelected, primaryCategoryId);
     }
@@ -130,23 +131,19 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
   const getCategoryPath = (category: WebCategoryData): string => {
     const path = [category.name];
     let current = category;
-    
+
     while (current.parentId) {
       const parent = getCategoryById(current.parentId);
       if (!parent) break;
       path.unshift(parent.name);
       current = parent;
     }
-    
+
     return path.join(' > ');
   };
 
   if (loading) {
-    return (
-      <div className="text-sm text-gray-500 dark:text-gray-400">
-        Загрузка категорий...
-      </div>
-    );
+    return <div className="text-sm text-gray-500 dark:text-gray-400">Загрузка категорий...</div>;
   }
 
   return (
@@ -154,11 +151,9 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
       {/* Выбранные категории */}
       {selectedCategories.length > 0 && (
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Назначенные категории
-          </label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Назначенные категории</label>
           <div className="flex flex-wrap gap-2">
-            {selectedCategories.map(categoryId => {
+            {selectedCategories.map((categoryId) => {
               const category = getCategoryById(categoryId);
               if (!category) return null;
 
@@ -206,9 +201,7 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
       {/* Добавление категорий */}
       {!disabled && (
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Добавить категорию
-          </label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Добавить категорию</label>
           <div className="relative">
             <input
               type="text"
@@ -226,7 +219,7 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
                     {searchTerm ? 'Категории не найдены' : 'Нет доступных категорий'}
                   </div>
                 ) : (
-                  filteredCategories.map(category => {
+                  filteredCategories.map((category) => {
                     const isSelected = selectedCategories.includes(category.id);
                     const isPrimary = category.id === primaryCategoryId;
 
@@ -240,22 +233,14 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
                         }`}
                       >
                         <div>
-                          <div className="font-medium text-gray-900 dark:text-white">
-                            {category.name}
-                          </div>
+                          <div className="font-medium text-gray-900 dark:text-white">{category.name}</div>
                           <div className="text-xs text-gray-500 dark:text-gray-400">
                             {getCategoryPath(category)} • /{category.slug}
                           </div>
                         </div>
                         <div className="flex items-center gap-1">
-                          {isPrimary && (
-                            <FiStar className="w-3 h-3 text-blue-600 dark:text-blue-400" />
-                          )}
-                          {isSelected && (
-                            <span className="text-xs text-green-600 dark:text-green-400">
-                              Выбрана
-                            </span>
-                          )}
+                          {isPrimary && <FiStar className="w-3 h-3 text-blue-600 dark:text-blue-400" />}
+                          {isSelected && <span className="text-xs text-green-600 dark:text-green-400">Выбрана</span>}
                         </div>
                       </button>
                     );
@@ -266,12 +251,7 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
           </div>
 
           {/* Закрытие dropdown при клике вне */}
-          {showDropdown && (
-            <div
-              className="fixed inset-0 z-0"
-              onClick={() => setShowDropdown(false)}
-            />
-          )}
+          {showDropdown && <div className="fixed inset-0 z-0" onClick={() => setShowDropdown(false)} />}
         </div>
       )}
 
@@ -281,9 +261,7 @@ export const PageCategorySelector: React.FC<PageCategorySelectorProps> = ({
           <FiStar className="w-3 h-3 inline mr-1" />
           Основная категория используется для построения URL страницы.
           {!primaryCategoryId && selectedCategories.length > 1 && (
-            <span className="text-amber-600 dark:text-amber-400 ml-1">
-              Выберите основную категорию.
-            </span>
+            <span className="text-amber-600 dark:text-amber-400 ml-1">Выберите основную категорию.</span>
           )}
         </div>
       )}

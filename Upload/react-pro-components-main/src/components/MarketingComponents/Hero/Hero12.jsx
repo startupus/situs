@@ -10,7 +10,7 @@ const Hero12 = () => {
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
               <div className="mb-12 lg:mb-0">
-                <h2 className="mb-5 text-3xl font-bold leading-[1.208]! text-dark dark:text-white lg:text-[38px] xl:text-[40px]">
+                <h2 className="leading-[1.208]! mb-5 text-3xl font-bold text-dark dark:text-white lg:text-[38px] xl:text-[40px]">
                   Build beautiful website with TailGrids blocks.
                 </h2>
                 <p className="mb-8 max-w-[485px] text-base text-body-color dark:text-dark-6">
@@ -25,7 +25,7 @@ const Hero12 = () => {
                 <form className="mb-7 flex max-w-[455px] flex-wrap">
                   <input
                     type="email"
-                    className="mb-3 mr-3 h-[52px] w-full rounded-md border border-stroke bg-white px-5 text-base text-body-color outline-hidden placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 sm:max-w-[220px] md:max-w-[315px] lg:max-w-[250px] xl:max-w-[300px]"
+                    className="outline-hidden mb-3 mr-3 h-[52px] w-full rounded-md border border-stroke bg-white px-5 text-base text-body-color placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 sm:max-w-[220px] md:max-w-[315px] lg:max-w-[250px] xl:max-w-[300px]"
                     placeholder="Your work mail"
                   />
                   <button className="mb-3 h-[52px] rounded-md bg-primary px-7 text-base font-medium text-white transition hover:bg-blue-dark">
@@ -89,7 +89,7 @@ const Navbar = () => {
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                 alt="logo"
-                className="w-full hidden dark:block"
+                className="hidden w-full dark:block"
               />
             </a>
           </div>

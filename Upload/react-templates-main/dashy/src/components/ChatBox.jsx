@@ -57,7 +57,7 @@ const ChatBox = () => {
           </h3>
           <div>
             <div className="relative z-20">
-              <select className="relative z-20 appearance-none rounded-md border border-stroke bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6">
+              <select className="outline-hidden relative z-20 appearance-none rounded-md border border-stroke bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color dark:border-dark-3 dark:text-dark-6">
                 <option value="" className="dark:bg-dark-2">
                   Latest
                 </option>

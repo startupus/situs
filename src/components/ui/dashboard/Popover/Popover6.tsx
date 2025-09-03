@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const Popover6 = () => {
   return (
     <section className="flex min-h-screen items-center bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
       <div className="mx-auto w-full px-4 lg:container">
         <div className="group relative block pt-2 lg:inline-block">
-          <a
-            href="/#"
-            className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline"
-          >
+          <a href="/#" className="mb-3 inline-block text-base font-medium text-dark dark:text-white underline">
             Popover Text
           </a>
           <div className="invisible absolute top-full left-0 w-full opacity-0 group-hover:visible group-hover:opacity-100 sm:w-[550px] lg:top-1/2 lg:left-full lg:-translate-y-1/2">
@@ -25,7 +22,7 @@ const Popover6 = () => {
                   <path d="M1.58026 12.7577C0.214281 11.5625 0.214281 9.4375 1.58026 8.24227L11 -5.24537e-07L11 21L1.58026 12.7577Z" />
                 </svg>
               </span>
-              
+
               <div className="mb-7 items-center justify-between sm:flex">
                 <a href="/#" className="mb-4 inline-block sm:mb-0">
                   <img
@@ -39,19 +36,15 @@ const Popover6 = () => {
                     className="h-8 hidden dark:block"
                   />
                 </a>
-                <h4 className="text-xl font-semibold text-dark dark:text-white">
-                  Welcome To Pimjo Labs
-                </h4>
+                <h4 className="text-xl font-semibold text-dark dark:text-white">Welcome To Pimjo Labs</h4>
               </div>
 
               <p className="text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Mauris facilisis congue justo nec facilisis. Quisque quis
-                augue ipsum. Aliquam suscipit dui ac dui commodo.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis congue justo nec facilisis.
+                Quisque quis augue ipsum. Aliquam suscipit dui ac dui commodo.
               </p>
-              <div>
-              </div>
-              
+              <div></div>
+
               <div className="flex flex-col-reverse gap-5 xs:flex-row items-center justify-between mt-8">
                 <div className="flex items-center space-x-2">
                   <button className="block h-[10px] w-[10px] rounded-full bg-[#E4E4E4] dark:bg-dark-3 hover:bg-primary"></button>

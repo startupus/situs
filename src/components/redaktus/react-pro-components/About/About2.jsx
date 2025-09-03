@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const About2 = () => {
   return (
@@ -8,9 +8,7 @@ const About2 = () => {
           <div className="-mx-4 mb-10 flex flex-wrap items-center lg:mb-[60px]">
             <div className="w-full px-4 lg:w-6/12">
               <div className="mb-[60px] max-w-[500px] xl:mb-[70px]">
-                <span className="block mb-2 text-lg font-semibold text-primary">
-                  About Our Templates
-                </span>
+                <span className="block mb-2 text-lg font-semibold text-primary">About Our Templates</span>
                 <h2 className="text-dark dark:text-white text-3xl font-bold sm:text-4xl md:text-[40px]">
                   Premium themes and website templates
                 </h2>
@@ -26,8 +24,7 @@ const About2 = () => {
                         Beautifully handcrafted templates
                       </h3>
                       <p className="text-base leading-relaxed text-body-color dark:text-dark-6">
-                        Lorem ipsum amet consectetur adipiscing do eiusmod
-                        tempor incididunt ut labore.
+                        Lorem ipsum amet consectetur adipiscing do eiusmod tempor incididunt ut labore.
                       </p>
                     </div>
                   </div>
@@ -42,8 +39,7 @@ const About2 = () => {
                         Pixel perfect design and code
                       </h3>
                       <p className="text-base leading-relaxed text-body-color dark:text-dark-6">
-                        Lorem ipsum amet consectetur adipiscing do eiusmod
-                        tempor incididunt ut labore.
+                        Lorem ipsum amet consectetur adipiscing do eiusmod tempor incididunt ut labore.
                       </p>
                     </div>
                   </div>
@@ -58,8 +54,7 @@ const About2 = () => {
                         Fully responsive design
                       </h3>
                       <p className="text-base leading-relaxed text-body-color dark:text-dark-6">
-                        Lorem ipsum amet consectetur adipiscing do eiusmod
-                        tempor incididunt ut labore.
+                        Lorem ipsum amet consectetur adipiscing do eiusmod tempor incididunt ut labore.
                       </p>
                     </div>
                   </div>
@@ -68,11 +63,7 @@ const About2 = () => {
             </div>
             <div className="w-full px-4 lg:w-6/12">
               <div className="right-0 hidden w-1/2 top-1/2 lg:absolute lg:flex lg:-translate-y-1/2">
-                <img
-                  src="https://i.ibb.co/932MNH9/image-01.png"
-                  alt="image"
-                  className="max-w-full ml-auto"
-                />
+                <img src="https://i.ibb.co/932MNH9/image-01.png" alt="image" className="max-w-full ml-auto" />
               </div>
             </div>
           </div>

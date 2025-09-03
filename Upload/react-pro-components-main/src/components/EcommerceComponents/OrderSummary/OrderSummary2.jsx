@@ -3,7 +3,7 @@ import React from "react";
 const OrderSummary2 = () => {
   return (
     <>
-      <section className="bg-white dark:bg-dark py-20 lg:py-[120px]">
+      <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-1/2">
@@ -11,51 +11,57 @@ const OrderSummary2 = () => {
                 <h2 className="mb-4 text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
                   Your Order Confirmed!
                 </h2>
-                <p className="text-dark dark:text-white mb-2 text-lg font-medium">
+                <p className="mb-2 text-lg font-medium text-dark dark:text-white">
                   HI, Musharof
                 </p>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   Your order has been confirmed and will be shipping soon.
                 </p>
               </div>
             </div>
             <div className="w-full px-4 md:w-1/2">
               <div className="mb-14 max-w-[400px] md:ml-auto md:text-right">
-                <p className="text-body-color dark:text-dark-6 mb-[10px] text-base">
+                <p className="mb-[10px] text-base text-body-color dark:text-dark-6">
                   We'll send you shipping confirmation when your item(s) are on
                   the way!
                 </p>
-                <h3 className="text-xl font-semibold text-dark dark:text-white">Thank You!</h3>
+                <h3 className="text-xl font-semibold text-dark dark:text-white">
+                  Thank You!
+                </h3>
               </div>
             </div>
           </div>
 
           <div className="flex flex-wrap">
-            <div className="mr-16 mb-10">
+            <div className="mb-10 mr-16">
               <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
                 Order Date
               </h3>
-              <p className="text-body-color dark:text-dark-6 text-base">
+              <p className="text-base text-body-color dark:text-dark-6">
                 25 March, 2025
               </p>
             </div>
-            <div className="mr-16 mb-10">
+            <div className="mb-10 mr-16">
               <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
                 Order Number
               </h3>
-              <p className="text-body-color dark:text-dark-6 text-base">#1278532</p>
+              <p className="text-base text-body-color dark:text-dark-6">
+                #1278532
+              </p>
             </div>
-            <div className="mr-16 mb-10">
-              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">Payment</h3>
-              <p className="text-body-color dark:text-dark-6 text-base">
+            <div className="mb-10 mr-16">
+              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
+                Payment
+              </h3>
+              <p className="text-base text-body-color dark:text-dark-6">
                 VISA - 3324
               </p>
             </div>
-            <div className="mr-16 mb-10">
+            <div className="mb-10 mr-16">
               <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
                 Shipping Address
               </h3>
-              <p className="text-body-color dark:text-dark-6 text-base">
+              <p className="text-base text-body-color dark:text-dark-6">
                 New York, USA 2707 Davis Anenue
               </p>
             </div>
@@ -96,7 +102,7 @@ const OrderSummary2 = () => {
                 <span> Discount (-) </span>
                 <span className="font-semibold"> $9.00 </span>
               </p>
-              <p className="mt-2 mb-4 flex justify-between border-t border-stroke dark:border-dark-3 pt-6 text-base font-medium text-dark dark:text-white">
+              <p className="mb-4 mt-2 flex justify-between border-t border-stroke pt-6 text-base font-medium text-dark dark:border-dark-3 dark:text-white">
                 <span> Total Payable </span>
                 <span className="font-semibold"> $88.15 </span>
               </p>
@@ -112,8 +118,8 @@ export default OrderSummary2;
 
 const ProductItem = ({ img, link, title, color, size, number, price }) => {
   return (
-    <div className="items-center border-y border-stroke dark:border-dark-3 py-8 sm:flex">
-      <div className="mb-3 mr-6 h-20 w-full max-w-[80px] sm:mb-0 rounded-sm overflow-hidden">
+    <div className="items-center border-y border-stroke py-8 dark:border-dark-3 sm:flex">
+      <div className="mb-3 mr-6 h-20 w-full max-w-[80px] overflow-hidden rounded-sm sm:mb-0">
         <img
           src={img}
           alt="product"
@@ -124,11 +130,11 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
         <div className="mb-3 md:mb-0">
           <a
             href={link}
-            className="hover:text-primary inline-block text-base font-medium text-dark dark:text-white mb-1"
+            className="mb-1 inline-block text-base font-medium text-dark hover:text-primary dark:text-white"
           >
             {title}
           </a>
-          <p className="text-body-color dark:text-dark-6 flex text-sm">
+          <p className="flex text-sm text-body-color dark:text-dark-6">
             <span className="mr-5"> Color: {color} </span>
             <span className="mr-5"> Size: {size} </span>
           </p>
@@ -137,7 +143,9 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
           <p className="mr-20 text-base font-medium text-dark dark:text-white">
             Qty: {number}
           </p>
-          <p className="mr-5 text-base font-medium text-dark dark:text-white">{price}</p>
+          <p className="mr-5 text-base font-medium text-dark dark:text-white">
+            {price}
+          </p>
         </div>
       </div>
     </div>

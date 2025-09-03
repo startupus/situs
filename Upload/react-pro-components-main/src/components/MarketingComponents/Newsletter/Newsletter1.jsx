@@ -56,7 +56,7 @@ const Newsletter = () => {
                 <form className="flex flex-wrap pb-1">
                   <input
                     type="email"
-                    className="mb-3 mr-3 h-[50px] w-full max-w-[220px] rounded-md border border-stroke bg-white px-5 text-sm text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 md:max-w-[315px] lg:max-w-[250px] xl:max-w-[315px]"
+                    className="outline-hidden mb-3 mr-3 h-[50px] w-full max-w-[220px] rounded-md border border-stroke bg-white px-5 text-sm text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 md:max-w-[315px] lg:max-w-[250px] xl:max-w-[315px]"
                     placeholder="Your work mail"
                   />
                   <button className="mb-3 h-[50px] rounded-md border border-transparent bg-primary px-7 text-base font-medium text-white transition hover:bg-primary/90">

@@ -8,14 +8,14 @@ import * as bcrypt from 'bcryptjs';
 
 /**
  * Сервис для работы с пользователями
- * 
+ *
  * Обеспечивает CRUD операции через Prisma ORM
  */
 @Injectable()
 export class UsersService {
   constructor(
     private readonly prisma: PrismaService,
-    @Inject(RealtimeEventsService) private readonly realtime: RealtimeEventsService
+    @Inject(RealtimeEventsService) private readonly realtime: RealtimeEventsService,
   ) {}
 
   /**
@@ -23,33 +23,35 @@ export class UsersService {
    */
   async create(createUserDto: CreateUserDto): Promise<User> {
     // Генерируем уникальный username с timestamp для уникальности
-    const baseUsername = (createUserDto.email?.split('@')[0]) || createUserDto.name?.replace(/\s+/g, '.').toLowerCase() || 'user';
+    const baseUsername =
+      createUserDto.email?.split('@')[0] || createUserDto.name?.replace(/\s+/g, '.').toLowerCase() || 'user';
     const username = `${baseUsername}_${Date.now()}`;
     const profile = JSON.stringify({
       name: createUserDto.name || '',
       avatar: createUserDto.avatar || '',
       bio: '',
     });
-    
+
     const globalRole = createUserDto.globalRole || GlobalRole.BUSINESS;
     // Приводим статус к строковому значению, совместимому с Prisma enum
-    const statusDb = createUserDto.isActive !== undefined 
-      ? (createUserDto.isActive ? 'ACTIVE' : 'INACTIVE')
-      : ((createUserDto.status as any) || 'PENDING');
+    const statusDb =
+      createUserDto.isActive !== undefined
+        ? createUserDto.isActive
+          ? 'ACTIVE'
+          : 'INACTIVE'
+        : (createUserDto.status as any) || 'PENDING';
 
     // Хешируем пароль если он предоставлен
-    const hashedPassword = createUserDto.password 
-      ? await this.hashPassword(createUserDto.password)
-      : null;
+    const hashedPassword = createUserDto.password ? await this.hashPassword(createUserDto.password) : null;
 
     const user = await this.prisma.user.create({
-      data: { 
-        email: createUserDto.email || null, 
-        password: hashedPassword, 
-        username, 
+      data: {
+        email: createUserDto.email || null,
+        password: hashedPassword,
+        username,
         profile,
         globalRole,
-        status: statusDb as any
+        status: statusDb as any,
       },
     });
 
@@ -75,25 +77,28 @@ export class UsersService {
       orderBy: { createdAt: 'desc' },
       include: {
         ownedProjects: true,
-      }
+      },
     });
 
-    return users.map(user => this.enrichUserData(this.excludePassword(user)));
+    return users.map((user) => this.enrichUserData(this.excludePassword(user)));
   }
 
   /**
    * Получение пользователей с фильтрами, сортировкой и пагинацией
    */
-  async findAllWithFilters(filters: {
-    search?: string;
-    role?: string;
-    status?: string;
-    sortBy?: string;
-    sortOrder?: string;
-    page?: number;
-    limit?: number;
-    projectId?: string;
-  }, principal?: { id?: string; globalRole?: GlobalRole }) {
+  async findAllWithFilters(
+    filters: {
+      search?: string;
+      role?: string;
+      status?: string;
+      sortBy?: string;
+      sortOrder?: string;
+      page?: number;
+      limit?: number;
+      projectId?: string;
+    },
+    principal?: { id?: string; globalRole?: GlobalRole },
+  ) {
     const { search, role, status, sortBy = 'createdAt', sortOrder = 'desc', page = 1, limit = 20 } = filters;
 
     // Построение условий фильтрации
@@ -132,10 +137,12 @@ export class UsersService {
     // Ограничение доступа: BUSINESS/AGENCY/STAFF видят только пользователей проектов, где есть доступ
     if (principal && principal.globalRole !== GlobalRole.SUPER_ADMIN) {
       // Пользователи, у которых есть ProjectAccess в проектах текущего пользователя/аккаунта
-      const accessibleProjectIds = await this.prisma.projectAccess.findMany({
-        where: { userId: principal.id },
-        select: { projectId: true },
-      }).then(rows => rows.map(r => r.projectId));
+      const accessibleProjectIds = await this.prisma.projectAccess
+        .findMany({
+          where: { userId: principal.id },
+          select: { projectId: true },
+        })
+        .then((rows) => rows.map((r) => r.projectId));
       if (accessibleProjectIds.length > 0) {
         where.OR = (where.OR || []).concat([
           { projectAccesses: { some: { projectId: { in: accessibleProjectIds } } } } as any,
@@ -172,7 +179,7 @@ export class UsersService {
       },
     });
 
-    const enrichedUsers = users.map(user => this.enrichUserData(this.excludePassword(user)));
+    const enrichedUsers = users.map((user) => this.enrichUserData(this.excludePassword(user)));
 
     return {
       data: enrichedUsers,
@@ -193,7 +200,7 @@ export class UsersService {
       where: { id },
       include: {
         ownedProjects: true,
-      }
+      },
     });
 
     return user ? this.enrichUserData(this.excludePassword(user)) : null;
@@ -281,7 +288,7 @@ export class UsersService {
     this.realtime.publish('user_updated', {
       userId: id,
       user: userWithoutPassword,
-      changes: updateUserDto
+      changes: updateUserDto,
     });
 
     return userWithoutPassword;
@@ -327,10 +334,13 @@ export class UsersService {
   /**
    * Массовое обновление пользователей
    */
-  async bulkUpdate(userIds: string[], data: Partial<{ globalRole: GlobalRole; status: UserStatus }>): Promise<{ count: number }> {
+  async bulkUpdate(
+    userIds: string[],
+    data: Partial<{ globalRole: GlobalRole; status: UserStatus }>,
+  ): Promise<{ count: number }> {
     const updateData: any = {};
     if (data.globalRole) updateData.globalRole = data.globalRole;
-    if (data.status) updateData.status = (data.status as any);
+    if (data.status) updateData.status = data.status as any;
 
     const result = await this.prisma.user.updateMany({
       where: { id: { in: userIds } },
@@ -403,14 +413,16 @@ export class UsersService {
 
     // Извлекаем группы пользователя
     const groups = user.groups?.map((groupMap: any) => groupMap.group?.title).filter(Boolean) || [];
-    
+
     // Извлекаем провайдеры аутентификации
     const authProviders = user.authProviders?.map((provider: any) => provider.provider).filter(Boolean) || [];
 
     return {
       ...user,
       name: profileData.name || user.username || '',
-      avatar: profileData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.name || user.username || 'U')}&background=3b82f6&color=fff`,
+      avatar:
+        profileData.avatar ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.name || user.username || 'U')}&background=3b82f6&color=fff`,
       projectsCount: user.ownedProjects?.length || 0,
       permissions: this.getUserPermissions(user.globalRole),
       isEmailVerified: true, // TODO: Implement email verification
@@ -456,7 +468,7 @@ export class UsersService {
     // Создаем новые назначения
     if (groupIds.length > 0) {
       await this.prisma.userGroupMap.createMany({
-        data: groupIds.map(groupId => ({
+        data: groupIds.map((groupId) => ({
           userId,
           groupId,
         })),
@@ -504,13 +516,16 @@ export class UsersService {
   /**
    * Добавление внешнего провайдера к пользователю
    */
-  async addUserAuthProvider(userId: string, providerData: {
-    provider: string;
-    providerUserId: string;
-    accessToken?: string;
-    refreshToken?: string;
-    expiresAt?: Date;
-  }) {
+  async addUserAuthProvider(
+    userId: string,
+    providerData: {
+      provider: string;
+      providerUserId: string;
+      accessToken?: string;
+      refreshToken?: string;
+      expiresAt?: Date;
+    },
+  ) {
     const existingUser = await this.findById(userId);
     if (!existingUser) {
       throw new NotFoundException('Пользователь не найден');

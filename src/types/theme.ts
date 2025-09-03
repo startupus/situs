@@ -182,7 +182,7 @@ export const DEFAULT_TYPOGRAPHY: ThemeTypography = {
   fontFamily: {
     primary: 'Inter, system-ui, -apple-system, sans-serif',
     secondary: 'Georgia, serif',
-    mono: 'JetBrains Mono, Consolas, monospace'
+    mono: 'JetBrains Mono, Consolas, monospace',
   },
   fontSize: {
     xs: '0.75rem',
@@ -192,25 +192,25 @@ export const DEFAULT_TYPOGRAPHY: ThemeTypography = {
     xl: '1.25rem',
     '2xl': '1.5rem',
     '3xl': '1.875rem',
-    '4xl': '2.25rem'
+    '4xl': '2.25rem',
   },
   fontWeight: {
     light: 300,
     normal: 400,
     medium: 500,
     semibold: 600,
-    bold: 700
+    bold: 700,
   },
   lineHeight: {
     tight: '1.25',
     normal: '1.5',
-    relaxed: '1.75'
+    relaxed: '1.75',
   },
   letterSpacing: {
     tight: '-0.025em',
     normal: '0',
-    wide: '0.025em'
-  }
+    wide: '0.025em',
+  },
 };
 
 // Дефолтные настройки макета
@@ -221,7 +221,7 @@ export const DEFAULT_LAYOUT: ThemeLayout = {
     base: '0.5rem',
     lg: '0.75rem',
     xl: '1rem',
-    full: '9999px'
+    full: '9999px',
   },
   spacing: {
     xs: '0.5rem',
@@ -229,17 +229,17 @@ export const DEFAULT_LAYOUT: ThemeLayout = {
     base: '1.5rem',
     lg: '2rem',
     xl: '3rem',
-    '2xl': '4rem'
+    '2xl': '4rem',
   },
   shadows: {
     sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     base: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
     lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
   },
   sidebarWidth: '280px',
   headerHeight: '64px',
-  containerMaxWidth: '1200px'
+  containerMaxWidth: '1200px',
 };
 
 // Дефолтные настройки анимаций
@@ -247,17 +247,17 @@ export const DEFAULT_ANIMATIONS: ThemeAnimations = {
   duration: {
     fast: '150ms',
     normal: '300ms',
-    slow: '500ms'
+    slow: '500ms',
   },
   easing: {
     linear: 'linear',
     ease: 'ease',
     easeIn: 'ease-in',
     easeOut: 'ease-out',
-    easeInOut: 'ease-in-out'
+    easeInOut: 'ease-in-out',
   },
   enabled: true,
-  reducedMotion: false
+  reducedMotion: false,
 };
 
 // Дефолтные градиенты
@@ -267,7 +267,7 @@ export const DEFAULT_GRADIENTS: ThemeGradients = {
   accent: 'linear-gradient(135deg, var(--color-accent) 0%, #F59E0B 100%)',
   success: 'linear-gradient(135deg, #22AD5C 0%, #16A34A 100%)',
   warning: 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%)',
-  error: 'linear-gradient(135deg, #F23030 0%, #EF4444 100%)'
+  error: 'linear-gradient(135deg, #F23030 0%, #EF4444 100%)',
 };
 
 // Предустановленные темы с поддержкой двойных вариантов (светлая/темная)
@@ -277,12 +277,12 @@ export const DEFAULT_THEMES: ThemeConfig[] = [
     name: 'Стандартная тема',
     colors: {
       light: {
-        primary: '#4C1D95',      // цвет 1 (фиолетовый)
+        primary: '#4C1D95', // цвет 1 (фиолетовый)
         primaryHover: '#7C3AED',
         primaryActive: '#5B21B6',
-        secondary: '#13C296',    // цвет 2 (зеленый)
-        accent: '#9055FD',       // цвет 3 (светло-фиолетовый)
-        success: '#22AD5C',      // цвет 4 (зеленый успех)
+        secondary: '#13C296', // цвет 2 (зеленый)
+        accent: '#9055FD', // цвет 3 (светло-фиолетовый)
+        success: '#22AD5C', // цвет 4 (зеленый успех)
         warning: '#FBBF24',
         error: '#F23030',
         info: '#2D68F8',
@@ -294,12 +294,12 @@ export const DEFAULT_THEMES: ThemeConfig[] = [
         borderLight: '#F3F4F6',
       },
       dark: {
-        primary: '#8B5CF6',      // цвет 1 (светло-фиолетовый в темной теме)
+        primary: '#8B5CF6', // цвет 1 (светло-фиолетовый в темной теме)
         primaryHover: '#A78BFA',
         primaryActive: '#7C3AED',
-        secondary: '#10B981',    // цвет 4 (тот же зеленый в темной)
-        accent: '#34D399',       // цвет 5 (зеленый акцент)
-        success: '#34D399',      // цвет 7 (зеленый успех)
+        secondary: '#10B981', // цвет 4 (тот же зеленый в темной)
+        accent: '#34D399', // цвет 5 (зеленый акцент)
+        success: '#34D399', // цвет 7 (зеленый успех)
         warning: '#F59E0B',
         error: '#F87171',
         info: '#60A5FA',
@@ -309,24 +309,24 @@ export const DEFAULT_THEMES: ThemeConfig[] = [
         textSecondary: '#CBD5E1',
         border: '#4C1D95',
         borderLight: '#6D28D9',
-      }
+      },
     },
     typography: DEFAULT_TYPOGRAPHY,
     layout: DEFAULT_LAYOUT,
     animations: DEFAULT_ANIMATIONS,
-    gradients: DEFAULT_GRADIENTS
+    gradients: DEFAULT_GRADIENTS,
   },
   {
     id: 'eco-theme',
     name: 'ЭКО тема',
     colors: {
       light: {
-        primary: '#059669',      // цвет 1 (зеленый)
+        primary: '#059669', // цвет 1 (зеленый)
         primaryHover: '#047857',
         primaryActive: '#065F46',
-        secondary: '#06B6D4',    // цвет 9 (голубой)
-        accent: '#8B5CF6',       // цвет 13 (фиолетовый)
-        success: '#F59E0B',      // цвет 24 (оранжевый)
+        secondary: '#06B6D4', // цвет 9 (голубой)
+        accent: '#8B5CF6', // цвет 13 (фиолетовый)
+        success: '#F59E0B', // цвет 24 (оранжевый)
         warning: '#FBBF24',
         error: '#F23030',
         info: '#2D68F8',
@@ -338,12 +338,12 @@ export const DEFAULT_THEMES: ThemeConfig[] = [
         borderLight: '#F3F4F6',
       },
       dark: {
-        primary: '#10B981',      // цвет 11 (изумрудный)
+        primary: '#10B981', // цвет 11 (изумрудный)
         primaryHover: '#34D399',
         primaryActive: '#059669',
-        secondary: '#8B5CF6',    // цвет 43 (фиолетовый в темной)
-        accent: '#F59E0B',       // цвет 45 (оранжевый в темной)
-        success: '#34D399',      // цвет 73 (зеленый акцент)
+        secondary: '#8B5CF6', // цвет 43 (фиолетовый в темной)
+        accent: '#F59E0B', // цвет 45 (оранжевый в темной)
+        success: '#34D399', // цвет 73 (зеленый акцент)
         warning: '#FBBF24',
         error: '#F87171',
         info: '#60A5FA',
@@ -353,12 +353,12 @@ export const DEFAULT_THEMES: ThemeConfig[] = [
         textSecondary: '#CBD5E1',
         border: '#166534',
         borderLight: '#15803D',
-      }
+      },
     },
     typography: DEFAULT_TYPOGRAPHY,
     layout: DEFAULT_LAYOUT,
     animations: DEFAULT_ANIMATIONS,
-    gradients: DEFAULT_GRADIENTS
+    gradients: DEFAULT_GRADIENTS,
   },
   {
     id: 'blue-classic-theme',
@@ -397,13 +397,13 @@ export const DEFAULT_THEMES: ThemeConfig[] = [
         textSecondary: '#CBD5E1',
         border: '#334155',
         borderLight: '#475569',
-      }
+      },
     },
     typography: DEFAULT_TYPOGRAPHY,
     layout: DEFAULT_LAYOUT,
     animations: DEFAULT_ANIMATIONS,
-    gradients: DEFAULT_GRADIENTS
-  }
+    gradients: DEFAULT_GRADIENTS,
+  },
 ];
 
 export const DEFAULT_THEME_SETTINGS: ThemeSettings = {
@@ -411,7 +411,7 @@ export const DEFAULT_THEME_SETTINGS: ThemeSettings = {
   isDarkMode: false,
   allowCustomization: true,
   availableThemes: DEFAULT_THEMES,
-  templates: []
+  templates: [],
 };
 
 // Новые типы для разделения тем

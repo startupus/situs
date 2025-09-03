@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 interface ProjectConversion {
   id: number;
@@ -7,7 +7,7 @@ interface ProjectConversion {
   visitors: number;
   orders: number;
   revenue: number;
-  trend: "up" | "down" | "stable";
+  trend: 'up' | 'down' | 'stable';
   trendValue: number;
 }
 
@@ -17,13 +17,13 @@ interface ProjectConversionWidgetProps {
 
 const ProjectConversionWidget: React.FC<ProjectConversionWidgetProps> = ({ projects }) => {
   const [showAll, setShowAll] = useState(false);
-  
+
   const displayedProjects = showAll ? projects : projects.slice(0, 4);
   const hasMoreProjects = projects.length > 4;
 
-  const getTrendIcon = (trend: "up" | "down" | "stable") => {
+  const getTrendIcon = (trend: 'up' | 'down' | 'stable') => {
     switch (trend) {
-      case "up":
+      case 'up':
         return (
           <svg
             width="12"
@@ -36,7 +36,7 @@ const ProjectConversionWidget: React.FC<ProjectConversionWidgetProps> = ({ proje
             <path d="M8 2L13.5 7.5L12.09 8.91L9 5.83V14H7V5.83L3.91 8.91L2.5 7.5L8 2Z" />
           </svg>
         );
-      case "down":
+      case 'down':
         return (
           <svg
             width="12"
@@ -132,23 +132,19 @@ const ProjectConversionWidget: React.FC<ProjectConversionWidgetProps> = ({ proje
     <div className="rounded-lg border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-dark-2">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h5 className="text-xl font-semibold text-dark dark:text-white">
-            Конверсия проектов
-          </h5>
-          <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">
-            Показатели эффективности по проектам
-          </p>
+          <h5 className="text-xl font-semibold text-dark dark:text-white">Конверсия проектов</h5>
+          <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">Показатели эффективности по проектам</p>
         </div>
         {hasMoreProjects && (
           <button
             onClick={() => setShowAll(!showAll)}
             className="text-primary hover:text-primary/80 text-xs font-medium"
           >
-            {showAll ? "Скрыть" : "Подробнее"}
+            {showAll ? 'Скрыть' : 'Подробнее'}
           </button>
         )}
       </div>
-      
+
       <div className="-mx-2 flex flex-wrap">
         {displayedProjects.map((project, index) => (
           <div key={project.id} className="w-full px-2">
@@ -157,44 +153,40 @@ const ProjectConversionWidget: React.FC<ProjectConversionWidgetProps> = ({ proje
                 {getProjectIcon(index)}
               </div>
               <div className="flex-1">
-                <h4 className="text-dark dark:text-white text-base font-semibold mb-1">
-                  {project.name}
-                </h4>
+                <h4 className="text-dark dark:text-white text-base font-semibold mb-1">{project.name}</h4>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>
                     <p className="text-body-color dark:text-dark-6">Конверсия</p>
-                    <p className="text-dark dark:text-white font-semibold">
-                      {project.conversionRate}%
-                    </p>
+                    <p className="text-dark dark:text-white font-semibold">{project.conversionRate}%</p>
                   </div>
                   <div>
                     <p className="text-body-color dark:text-dark-6">Посетители</p>
-                    <p className="text-dark dark:text-white font-semibold">
-                      {project.visitors.toLocaleString()}
-                    </p>
+                    <p className="text-dark dark:text-white font-semibold">{project.visitors.toLocaleString()}</p>
                   </div>
                   <div>
                     <p className="text-body-color dark:text-dark-6">Заказы</p>
-                    <p className="text-dark dark:text-white font-semibold">
-                      {project.orders}
-                    </p>
+                    <p className="text-dark dark:text-white font-semibold">{project.orders}</p>
                   </div>
                   <div>
                     <p className="text-body-color dark:text-dark-6">Доход</p>
-                    <p className="text-dark dark:text-white font-semibold">
-                      {project.revenue.toLocaleString()} ₽
-                    </p>
+                    <p className="text-dark dark:text-white font-semibold">{project.revenue.toLocaleString()} ₽</p>
                   </div>
                 </div>
               </div>
-              
+
               <div className="absolute top-2 right-2 flex items-center gap-1">
                 {getTrendIcon(project.trend)}
-                <span className={`text-[10px] font-medium ${
-                  project.trend === 'up' ? 'text-success' : 
-                  project.trend === 'down' ? 'text-danger' : 'text-body-color'
-                }`}>
-                  {project.trendValue > 0 ? '+' : ''}{project.trendValue}%
+                <span
+                  className={`text-[10px] font-medium ${
+                    project.trend === 'up'
+                      ? 'text-success'
+                      : project.trend === 'down'
+                        ? 'text-danger'
+                        : 'text-body-color'
+                  }`}
+                >
+                  {project.trendValue > 0 ? '+' : ''}
+                  {project.trendValue}%
                 </span>
               </div>
             </div>
@@ -205,4 +197,4 @@ const ProjectConversionWidget: React.FC<ProjectConversionWidgetProps> = ({ proje
   );
 };
 
-export default ProjectConversionWidget; 
+export default ProjectConversionWidget;

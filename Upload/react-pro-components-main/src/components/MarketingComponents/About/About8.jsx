@@ -3,9 +3,9 @@ import React from "react";
 const About8 = () => {
   return (
     <>
-      <section className="overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] bg-white dark:bg-dark">
+      <section className="overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap items-center justify-between -mx-4">
+          <div className="-mx-4 flex flex-wrap items-center justify-between">
             <div className="w-full px-4 lg:w-6/12">
               <div className="relative mb-12 lg:mb-0">
                 <div className="mx-auto max-w-[430px] rounded-tl-[50px] sm:rounded-tl-[70px]">
@@ -15,10 +15,10 @@ const About8 = () => {
                     className="w-full rounded-tl-[50px] sm:rounded-tl-[70px]"
                   />
                 </div>
-                <div className="bg-primary absolute bottom-0 right-0 z-10 max-w-[320px] overflow-hidden rounded-tr-[50px] py-10 px-6 text-xl font-bold text-white sm:px-10 sm:text-2xl">
+                <div className="absolute bottom-0 right-0 z-10 max-w-[320px] overflow-hidden rounded-tr-[50px] bg-primary px-6 py-10 text-xl font-bold text-white sm:px-10 sm:text-2xl">
                   We make clean & professional design
                   <div>
-                    <span className="absolute top-0 left-0 -z-10">
+                    <span className="absolute left-0 top-0 -z-10">
                       <svg
                         width="115"
                         height="117"
@@ -54,7 +54,7 @@ const About8 = () => {
                         </defs>
                       </svg>
                     </span>
-                    <span className="absolute top-0 right-0 -z-10">
+                    <span className="absolute right-0 top-0 -z-10">
                       <svg
                         width="239"
                         height="144"
@@ -132,22 +132,22 @@ const About8 = () => {
             </div>
             <div className="w-full px-4 lg:w-1/2 2xl:w-5/12">
               <div className="mt-10 lg:mt-0">
-                <span className="block mb-2 text-lg font-bold text-body-color dark:text-dark-6 md:mb-4">
+                <span className="mb-2 block text-lg font-bold text-body-color dark:text-dark-6 md:mb-4">
                   What We Do!
                 </span>
-                <h2 className="text-3xl font-bold leading-tight text-dark dark:text-white mb-11 sm:text-4xl sm:leading-tight md:text-5xl lg:text-4xl lg:leading-tight xl:text-5xl">
+                <h2 className="mb-11 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-4xl sm:leading-tight md:text-5xl lg:text-4xl lg:leading-tight xl:text-5xl">
                   We develop & create awesome website .
                 </h2>
 
-                <div className="flex mb-8">
-                  <span className="text-primary w-full max-w-[45px] pr-4 text-2xl font-bold">
+                <div className="mb-8 flex">
+                  <span className="w-full max-w-[45px] pr-4 text-2xl font-bold text-primary">
                     01
                   </span>
                   <div className="w-full">
                     <h3 className="mb-4 text-xl font-bold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                       Refreshing Design
                     </h3>
-                    <p className="text-base text-body-color dark:text-dark-6 mb-9">
+                    <p className="mb-9 text-base text-body-color dark:text-dark-6">
                       Clean, refreshing and high-quality that gives positive
                       vibes. Figma source file also provided so you can use to
                       prototype, experiment, play or adjust.
@@ -156,14 +156,14 @@ const About8 = () => {
                 </div>
 
                 <div className="flex">
-                  <span className="text-primary w-full max-w-[45px] pr-4 text-2xl font-bold">
+                  <span className="w-full max-w-[45px] pr-4 text-2xl font-bold text-primary">
                     02
                   </span>
                   <div className="w-full">
                     <h3 className="mb-4 text-xl font-bold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                       Developer Friendly
                     </h3>
-                    <p className="text-base text-body-color dark:text-dark-6 mb-9">
+                    <p className="mb-9 text-base text-body-color dark:text-dark-6">
                       Developer experience is our #1 priority, entire library is
                       designed, coded, and organized in a way that saves
                       hundreds of hours and increases productivity.

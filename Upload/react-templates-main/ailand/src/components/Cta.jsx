@@ -251,7 +251,7 @@ const Cta = () => {
                 </div>
               ))}
             </div>
-            <h2 className="mx-auto mb-6 w-full max-w-[550px] text-3xl font-bold leading-tight! -tracking-[.72px] text-dark dark:text-white sm:text-4xl">
+            <h2 className="leading-tight! mx-auto mb-6 w-full max-w-[550px] text-3xl font-bold -tracking-[.72px] text-dark dark:text-white sm:text-4xl">
               Easily Bring AI in Your Workflow to Create Content
             </h2>
             <p className="mb-8 text-base text-body-color dark:text-dark-6 sm:text-lg">

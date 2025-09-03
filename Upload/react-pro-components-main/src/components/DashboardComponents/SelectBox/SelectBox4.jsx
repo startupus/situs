@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 const SelectBox4 = () => {
   return (
-    <section className="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="container mx-auto">
         <div>
-          <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">Select List</h3>
+          <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">
+            Select List
+          </h3>
           <div className="max-w-[270px] space-y-[10px]">
             <SelectBoxItem id="one" title="List Title Here" />
             <SelectBoxItem id="two" title="List Title Here" />
@@ -39,7 +41,7 @@ const SelectBoxItem = ({ id, title }) => {
         htmlFor={id}
         className={`${
           isChecked ? "border-primary" : "border-stroke dark:border-dark-3"
-        } select-list text-body-color dark:text-dark-6 flex cursor-pointer items-center rounded-md border bg-white dark:bg-dark-2 py-3 px-5`}
+        } select-list flex cursor-pointer items-center rounded-md border bg-white px-5 py-3 text-body-color dark:bg-dark-2 dark:text-dark-6`}
       >
         <span
           className={`${

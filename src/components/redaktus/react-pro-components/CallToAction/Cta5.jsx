@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Cta5 = () => {
   return (
@@ -13,8 +13,7 @@ const Cta5 = () => {
                   <span className="font-normal"> Get Started Now </span>
                 </h2>
                 <p className="mb-6 text-base leading-relaxed text-white md:pr-10">
-                  There are many variations of passages of Lorem Ipsum but the
-                  majority have suffered in some form.
+                  There are many variations of passages of Lorem Ipsum but the majority have suffered in some form.
                 </p>
                 <a
                   href="/#"
@@ -30,28 +29,9 @@ const Cta5 = () => {
 
       <div>
         <span className="absolute left-0 top-0">
-          <svg
-            width="495"
-            height="470"
-            viewBox="0 0 495 470"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="55"
-              cy="442"
-              r="138"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="50"
-            />
-            <circle
-              cx="446"
-              r="39"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="20"
-            />
+          <svg width="495" height="470" viewBox="0 0 495 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="55" cy="442" r="138" stroke="white" stroke-opacity="0.04" stroke-width="50" />
+            <circle cx="446" r="39" stroke="white" stroke-opacity="0.04" stroke-width="20" />
             <path
               d="M245.406 137.609L233.985 94.9852L276.609 106.406L245.406 137.609Z"
               stroke="white"
@@ -61,29 +41,9 @@ const Cta5 = () => {
           </svg>
         </span>
         <span className="absolute bottom-0 right-0">
-          <svg
-            width="493"
-            height="470"
-            viewBox="0 0 493 470"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="462"
-              cy="5"
-              r="138"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="50"
-            />
-            <circle
-              cx="49"
-              cy="470"
-              r="39"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="20"
-            />
+          <svg width="493" height="470" viewBox="0 0 493 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="462" cy="5" r="138" stroke="white" stroke-opacity="0.04" stroke-width="50" />
+            <circle cx="49" cy="470" r="39" stroke="white" stroke-opacity="0.04" stroke-width="20" />
             <path
               d="M222.393 226.701L272.808 213.192L259.299 263.607L222.393 226.701Z"
               stroke="white"

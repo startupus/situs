@@ -1,10 +1,10 @@
-import React from 'react'
-import { useLanguage } from '../hooks/useLanguage'
+import React from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 
 interface LanguageSwitcherProps {
-  className?: string
-  showLabel?: boolean
-  size?: 'sm' | 'md' | 'lg'
+  className?: string;
+  showLabel?: boolean;
+  size?: 'sm' | 'md' | 'lg';
 }
 
 /**
@@ -14,27 +14,27 @@ interface LanguageSwitcherProps {
 export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   className = '',
   showLabel = true,
-  size = 'md'
+  size = 'md',
 }) => {
-  const { language, toggleLanguage, t, isRussian, isEnglish } = useLanguage()
-  
+  const { language, toggleLanguage, t, isRussian, isEnglish } = useLanguage();
+
   // Размеры в зависимости от size
   const sizeClasses = {
     sm: 'text-xs px-2 py-1',
-    md: 'text-sm px-3 py-2', 
-    lg: 'text-base px-4 py-3'
-  }
-  
+    md: 'text-sm px-3 py-2',
+    lg: 'text-base px-4 py-3',
+  };
+
   const iconSize = {
     sm: 12,
     md: 16,
-    lg: 20
-  }
-  
+    lg: 20,
+  };
+
   const handleClick = () => {
-    toggleLanguage()
-  }
-  
+    toggleLanguage();
+  };
+
   return (
     <div className={`language-switcher ${className}`}>
       {showLabel && (
@@ -42,10 +42,10 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           {t('editor.sidebar.language.title')}
         </div>
       )}
-      
-                        <button
-                    onClick={handleClick}
-                    className={`
+
+      <button
+        onClick={handleClick}
+        className={`
                       ${sizeClasses[size]}
                       w-full flex items-center justify-center space-x-2
                       bg-white dark:bg-gray-800
@@ -56,20 +56,16 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
                       transition-all duration-200
                       group
                     `}
-                    title={t('editor.sidebar.language.switch')}
-                  >
-                    {/* Флаг текущего языка */}
-                    <span className="text-lg">
-                      {isRussian ? '🇷🇺' : '🇺🇸'}
-                    </span>
+        title={t('editor.sidebar.language.switch')}
+      >
+        {/* Флаг текущего языка */}
+        <span className="text-lg">{isRussian ? '🇷🇺' : '🇺🇸'}</span>
 
-                    {/* Код языка */}
-                    <span className="font-medium text-gray-900 dark:text-gray-100">
-                      {language.toUpperCase()}
-                    </span>
-                  </button>
+        {/* Код языка */}
+        <span className="font-medium text-gray-900 dark:text-gray-100">{language.toUpperCase()}</span>
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default LanguageSwitcher 
+export default LanguageSwitcher;

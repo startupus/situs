@@ -20,7 +20,9 @@ export class TenantResolverMiddleware implements NestMiddleware {
       // Попытка найти проект по customDomain или domain
       if (hostname) {
         try {
-          const project = await this.prisma.project.findFirst({ where: { OR: [{ customDomain: hostname }, { domain: hostname }] } });
+          const project = await this.prisma.project.findFirst({
+            where: { OR: [{ customDomain: hostname }, { domain: hostname }] },
+          });
           if (project) {
             tenant.projectId = project.id;
             // Найти Website продукт данного проекта

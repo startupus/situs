@@ -2,7 +2,7 @@ import { registerAs } from '@nestjs/config';
 
 /**
  * Конфигурация JWT токенов
- * 
+ *
  * Настройки для аутентификации и авторизации
  */
 export const jwtConfig = registerAs('jwt', () => ({

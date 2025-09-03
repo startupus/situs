@@ -1,16 +1,9 @@
-import {
-  ExceptionFilter,
-  Catch,
-  ArgumentsHost,
-  HttpException,
-  HttpStatus,
-  Logger,
-} from '@nestjs/common';
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { Response } from 'express';
 
 /**
  * Глобальный фильтр исключений
- * 
+ *
  * Обрабатывает все ошибки в приложении
  * и возвращает унифицированный формат ответа
  */
@@ -31,7 +24,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
-      
+
       if (typeof exceptionResponse === 'string') {
         message = exceptionResponse;
       } else if (typeof exceptionResponse === 'object' && exceptionResponse !== null) {
@@ -43,7 +36,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       errorCode = exception.name;
     }
 
-    const traceId = request.headers['x-request-id'] || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+    const traceId =
+      request.headers['x-request-id'] || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
     // Логирование ошибки
     this.logger.error(

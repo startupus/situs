@@ -81,9 +81,7 @@ class AnalyticsApiService {
    */
   async getDashboardStats(): Promise<DashboardStats> {
     try {
-      const response = await apiClient.get<ApiResponse<DashboardStats>>(
-        `${this.baseEndpoint}/dashboard`
-      );
+      const response = await apiClient.get<ApiResponse<DashboardStats>>(`${this.baseEndpoint}/dashboard`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -101,32 +99,29 @@ class AnalyticsApiService {
    */
   async getTrafficData(filters?: AnalyticsFilters): Promise<ChartData> {
     try {
-      const response = await apiClient.get<ApiResponse<TrafficData[]>>(
-        `${this.baseEndpoint}/traffic`,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<TrafficData[]>>(`${this.baseEndpoint}/traffic`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         // Преобразуем данные в формат для графика
         const data = response.data;
         return {
-          labels: data.map(item => item.date),
+          labels: data.map((item) => item.date),
           datasets: [
             {
               label: 'Просмотры',
-              data: data.map(item => item.views),
+              data: data.map((item) => item.views),
               borderColor: '#3B82F6',
               backgroundColor: 'rgba(59, 130, 246, 0.1)',
-              fill: true
+              fill: true,
             },
             {
               label: 'Посетители',
-              data: data.map(item => item.visitors),
+              data: data.map((item) => item.visitors),
               borderColor: '#8B5CF6',
               backgroundColor: 'rgba(139, 92, 246, 0.1)',
-              fill: true
-            }
-          ]
+              fill: true,
+            },
+          ],
         };
       }
 
@@ -142,31 +137,28 @@ class AnalyticsApiService {
    */
   async getConversionData(filters?: AnalyticsFilters): Promise<ChartData> {
     try {
-      const response = await apiClient.get<ApiResponse<ConversionData[]>>(
-        `${this.baseEndpoint}/conversions`,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<ConversionData[]>>(`${this.baseEndpoint}/conversions`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         const data = response.data;
         return {
-          labels: data.map(item => item.date),
+          labels: data.map((item) => item.date),
           datasets: [
             {
               label: 'Конверсии',
-              data: data.map(item => item.conversions),
+              data: data.map((item) => item.conversions),
               borderColor: '#10B981',
               backgroundColor: 'rgba(16, 185, 129, 0.1)',
-              fill: true
+              fill: true,
             },
             {
               label: 'Коэффициент конверсии (%)',
-              data: data.map(item => item.rate),
+              data: data.map((item) => item.rate),
               borderColor: '#F59E0B',
               backgroundColor: 'rgba(245, 158, 11, 0.1)',
-              fill: false
-            }
-          ]
+              fill: false,
+            },
+          ],
         };
       }
 
@@ -182,10 +174,7 @@ class AnalyticsApiService {
    */
   async getProjectMetrics(filters?: AnalyticsFilters): Promise<ProjectMetrics[]> {
     try {
-      const response = await apiClient.get<ApiResponse<ProjectMetrics[]>>(
-        `${this.baseEndpoint}/projects`,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<ProjectMetrics[]>>(`${this.baseEndpoint}/projects`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -201,22 +190,25 @@ class AnalyticsApiService {
   /**
    * Получить топ страницы по трафику
    */
-  async getTopPages(filters?: AnalyticsFilters): Promise<{
-    page: string;
-    views: number;
-    visitors: number;
-    bounceRate: number;
-  }[]> {
+  async getTopPages(filters?: AnalyticsFilters): Promise<
+    {
+      page: string;
+      views: number;
+      visitors: number;
+      bounceRate: number;
+    }[]
+  > {
     try {
-      const response = await apiClient.get<ApiResponse<{
-        page: string;
-        views: number;
-        visitors: number;
-        bounceRate: number;
-      }[]>>(
-        `${this.baseEndpoint}/top-pages`,
-        filters
-      );
+      const response = await apiClient.get<
+        ApiResponse<
+          {
+            page: string;
+            views: number;
+            visitors: number;
+            bounceRate: number;
+          }[]
+        >
+      >(`${this.baseEndpoint}/top-pages`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -232,20 +224,23 @@ class AnalyticsApiService {
   /**
    * Получить источники трафика
    */
-  async getTrafficSources(filters?: AnalyticsFilters): Promise<{
-    source: string;
-    visitors: number;
-    percentage: number;
-  }[]> {
+  async getTrafficSources(filters?: AnalyticsFilters): Promise<
+    {
+      source: string;
+      visitors: number;
+      percentage: number;
+    }[]
+  > {
     try {
-      const response = await apiClient.get<ApiResponse<{
-        source: string;
-        visitors: number;
-        percentage: number;
-      }[]>>(
-        `${this.baseEndpoint}/traffic-sources`,
-        filters
-      );
+      const response = await apiClient.get<
+        ApiResponse<
+          {
+            source: string;
+            visitors: number;
+            percentage: number;
+          }[]
+        >
+      >(`${this.baseEndpoint}/traffic-sources`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -261,20 +256,23 @@ class AnalyticsApiService {
   /**
    * Получить данные о устройствах пользователей
    */
-  async getDeviceStats(filters?: AnalyticsFilters): Promise<{
-    device: string;
-    users: number;
-    percentage: number;
-  }[]> {
+  async getDeviceStats(filters?: AnalyticsFilters): Promise<
+    {
+      device: string;
+      users: number;
+      percentage: number;
+    }[]
+  > {
     try {
-      const response = await apiClient.get<ApiResponse<{
-        device: string;
-        users: number;
-        percentage: number;
-      }[]>>(
-        `${this.baseEndpoint}/devices`,
-        filters
-      );
+      const response = await apiClient.get<
+        ApiResponse<
+          {
+            device: string;
+            users: number;
+            percentage: number;
+          }[]
+        >
+      >(`${this.baseEndpoint}/devices`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -292,19 +290,16 @@ class AnalyticsApiService {
    */
   async exportData(format: 'csv' | 'json' | 'xlsx', filters?: AnalyticsFilters): Promise<Blob> {
     try {
-      const response = await fetch(
-        `${apiClient['baseURL']}${this.baseEndpoint}/export?format=${format}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(localStorage.getItem('auth_token') && {
-              'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-            })
-          },
-          body: JSON.stringify(filters || {})
-        }
-      );
+      const response = await fetch(`${apiClient['baseURL']}${this.baseEndpoint}/export?format=${format}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(localStorage.getItem('auth_token') && {
+            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+          }),
+        },
+        body: JSON.stringify(filters || {}),
+      });
 
       if (!response.ok) {
         throw new Error('Ошибка при экспорте данных');

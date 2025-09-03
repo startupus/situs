@@ -32,7 +32,7 @@ const SingleStep = ({ number, name, done, ongoing }) => {
         className={`${
           (done && "border-primary bg-primary text-white") ||
           (ongoing && "border-primary text-primary")
-        } relative z-10 mx-auto mb-[10px] flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#e7e7e7] bg-gray text-base font-medium text-black  sm:h-[50px] sm:w-[50px] sm:text-xl`}
+        } relative z-10 mx-auto mb-[10px] flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#e7e7e7] bg-gray text-base font-medium text-black sm:h-[50px] sm:w-[50px] sm:text-xl`}
       >
         {number}
       </span>

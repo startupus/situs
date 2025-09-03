@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ButtonGroup2() {
   return (
-    <section className="pb-10 pt-20 lg:pb-20 lg:pt-[120px] dark:bg-dark">
+    <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
       <div className="container">
         <div className="flex justify-center">
           <div className="inline-flex items-center overflow-hidden rounded-lg border border-stroke dark:border-dark-3">

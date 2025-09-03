@@ -3,7 +3,7 @@ import { useMcpClient } from '../../hooks/useMcpClient';
 
 /**
  * Панель для тестирования MCP функциональности
- * 
+ *
  * Позволяет тестировать инструменты, ресурсы и промпты MCP сервера
  */
 export const McpTestPanel: React.FC = () => {
@@ -112,27 +112,20 @@ export const McpTestPanel: React.FC = () => {
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-6">MCP Тестовая Панель</h2>
-      
+
       {/* Статус подключения */}
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-2">
           <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
-          <span className="font-medium">
-            Статус: {isConnected ? 'Подключен' : 'Отключен'}
-          </span>
+          <span className="font-medium">Статус: {isConnected ? 'Подключен' : 'Отключен'}</span>
         </div>
-        
-        {isLoading && (
-          <div className="text-blue-600">Загрузка...</div>
-        )}
-        
+
+        {isLoading && <div className="text-blue-600">Загрузка...</div>}
+
         {error && (
           <div className="text-red-600 mb-2">
             Ошибка: {error}
-            <button
-              onClick={clearError}
-              className="ml-2 text-sm underline"
-            >
+            <button onClick={clearError} className="ml-2 text-sm underline">
               Очистить
             </button>
           </div>

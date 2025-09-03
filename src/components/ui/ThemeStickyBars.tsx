@@ -1,11 +1,6 @@
 // src/components/ui/ThemeStickyBars.tsx
 import React from 'react';
-import { 
-  StickyBar1,
-  StickyBar2,
-  StickyBar3,
-  StickyBar4
-} from './core';
+import { StickyBar1, StickyBar2, StickyBar3, StickyBar4 } from './core';
 
 // StickyBar Variants - простые обертки
 export const ThemeStickyBar1: React.FC = () => <StickyBar1 />;

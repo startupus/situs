@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const StateContext = React.createContext()
+const StateContext = React.createContext();
 
-export default StateContext
+export default StateContext;

@@ -40,5 +40,3 @@ export class DemoController {
     return { success: true, data: demoChatbots };
   }
 }
-
-

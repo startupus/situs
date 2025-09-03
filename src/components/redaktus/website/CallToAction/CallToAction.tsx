@@ -1,42 +1,31 @@
-import classNames from 'classnames'
-import * as React from 'react'
-import { Repeater, RichText } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import {
-  BackgroundColorsSideEditProps,
-  ContainerSizeSideEditProps,
-} from 'website/LayoutSideProps'
-import blockNames from '../blockNames'
-import { bgColors, textColors } from '../colors'
-import Container, { Size } from '../layout/Container'
-import Section, { Border } from '../layout/Section'
+import classNames from 'classnames';
+import * as React from 'react';
+import { Repeater, RichText } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import { BackgroundColorsSideEditProps, ContainerSizeSideEditProps } from 'website/LayoutSideProps';
+import blockNames from '../blockNames';
+import { bgColors, textColors } from '../colors';
+import Container, { Size } from '../layout/Container';
+import Section, { Border } from '../layout/Section';
 
 export interface CallToActionProps {
-  bg?: { color: string; className: string }
-  width?: Size
+  bg?: { color: string; className: string };
+  width?: Size;
 }
 
-const CallToAction: types.Brick<CallToActionProps> = ({
-  bg = bgColors.white.value,
-  width = 'sm',
-}) => {
+const CallToAction: types.Brick<CallToActionProps> = ({ bg = bgColors.white.value, width = 'sm' }) => {
   return (
     <Section bg={bg}>
       <Container
         size={width}
-        className={classNames(
-          'py-12 flex flex-col sm:flex-row items-center text-center sm:text-left'
-        )}
+        className={classNames('py-12 flex flex-col sm:flex-row items-center text-center sm:text-left')}
       >
         <div className="flex-1 sm:pr-12 mb-4 sm:mb-0">
           <RichText
             propName="text"
             renderBlock={(props: any) => (
               <span
-                className={classNames(
-                  'font-extrabold text-xl sm:text-2xl leading-6 sm:leading-8',
-                  textColors.gray800
-                )}
+                className={classNames('font-extrabold text-xl sm:text-2xl leading-6 sm:leading-8', textColors.gray800)}
                 {...props.attributes}
               >
                 {props.children}
@@ -50,16 +39,15 @@ const CallToAction: types.Brick<CallToActionProps> = ({
         </div>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 CallToAction.schema = {
   name: blockNames.CallToAction,
   label: 'Call to action',
   playgroundLinkLabel: 'View source code on Github',
   category: 'rb-ui website',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/CallToAction/CallToAction.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/CallToAction/CallToAction.tsx',
 
   getDefaultProps: () => ({
     bg: {
@@ -78,7 +66,8 @@ CallToAction.schema = {
         href: '',
         isTargetBlank: false,
         isBigButton: false,
-      }],
+      },
+    ],
   }),
   repeaterItems: [
     {
@@ -88,9 +77,9 @@ CallToAction.schema = {
       itemLabel: 'Button',
       min: 0,
       max: 1,
-    }],
-  sideEditProps: [
-    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-}
+    },
+  ],
+  sideEditProps: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
+};
 
-export default CallToAction
+export default CallToAction;

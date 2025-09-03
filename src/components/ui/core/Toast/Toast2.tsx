@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Toast2() {
   return (
@@ -6,13 +6,7 @@ export default function Toast2() {
       <div className="mx-auto px-4 sm:container">
         <div className="relative flex max-w-[422px] items-center rounded-lg border border-stroke bg-white p-4 py-[18px] shadow-pricing-4 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-[30px]">
           <div className="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-full bg-green">
-            <svg
-              width={24}
-              height={25}
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width={24} height={25} viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M12 1.17499C5.7375 1.17499 0.675003 6.23749 0.675003 12.5C0.675003 18.7625 5.7375 23.8625 12 23.8625C18.2625 23.8625 23.3625 18.7625 23.3625 12.5C23.3625 6.23749 18.2625 1.17499 12 1.17499ZM12 22.175C6.675 22.175 2.3625 17.825 2.3625 12.5C2.3625 7.17499 6.675 2.86249 12 2.86249C17.325 2.86249 21.675 7.21249 21.675 12.5375C21.675 17.825 17.325 22.175 12 22.175Z"
                 fill="white"
@@ -25,12 +19,8 @@ export default function Toast2() {
           </div>
           <div className="flex w-full items-center justify-between">
             <div>
-              <h6 className="text-base font-semibold text-dark dark:text-white sm:text-lg">
-                Congratulations
-              </h6>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                your message sent successfully
-              </p>
+              <h6 className="text-base font-semibold text-dark dark:text-white sm:text-lg">Congratulations</h6>
+              <p className="text-sm text-body-color dark:text-dark-6">your message sent successfully</p>
             </div>
             <button className="text-dark-5 hover:text-red">
               <svg

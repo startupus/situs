@@ -239,7 +239,7 @@ const InputGroup = ({ type, placeholder }) => {
         <input
           type={type}
           placeholder={placeholder}
-          className="w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+          className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
         />
       </div>
     </div>
@@ -251,7 +251,7 @@ const SelectGroup = () => {
     <div className="w-full px-3 md:w-1/2">
       <div className="mb-8">
         <div className="relative">
-          <select className="w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-[14px] text-dark-5 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2">
+          <select className="outline-hidden w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-[14px] text-dark-5 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2">
             <option value="" selected="" disabled="">
               Country*
             </option>
@@ -289,7 +289,7 @@ const Textarea = ({ placeholder, rows }) => {
         <textarea
           rows={rows}
           placeholder={placeholder}
-          className="w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+          className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-[14px] text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
         />
       </div>
     </div>
@@ -341,7 +341,7 @@ const CouponBox = ({ title, button }) => {
 
       <input
         type="email"
-        className="mb-3 mr-5 h-[50px] w-full max-w-[325px] rounded-md border border-stroke bg-white px-5 text-base text-body-color outline-hidden placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+        className="outline-hidden mb-3 mr-5 h-[50px] w-full max-w-[325px] rounded-md border border-stroke bg-white px-5 text-base text-body-color placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
         placeholder="Coupon code"
       />
       <button className="mb-3 h-[50px] rounded-md bg-dark px-7 py-2 text-base font-medium text-white transition hover:bg-dark/90 dark:bg-dark-2">

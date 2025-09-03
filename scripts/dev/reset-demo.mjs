@@ -76,5 +76,3 @@ async function resetDemo() {
 }
 
 resetDemo();
-
-

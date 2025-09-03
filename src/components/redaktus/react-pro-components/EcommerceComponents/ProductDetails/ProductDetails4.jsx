@@ -1,13 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const starIcon = (
-  <svg
-    width={18}
-    height={18}
-    viewBox="0 0 18 18"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width={18} height={18} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#clip0_1830_23)">
       <path
         d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z"
@@ -37,7 +31,7 @@ const ProductDetails4 = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
-  };  
+  };
 
   return (
     <section className="bg-white dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
@@ -50,21 +44,21 @@ const ProductDetails4 = () => {
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-04/image-01.jpg"
                   alt="products-details"
                   className={`${
-                    productOne ? "block" : "hidden"
+                    productOne ? 'block' : 'hidden'
                   } h-full min-h-[250px] w-full object-cover object-center`}
                 />
                 <img
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-04/image-02.jpg"
                   alt="products-details"
                   className={`${
-                    productTwo ? "block" : "hidden"
+                    productTwo ? 'block' : 'hidden'
                   } h-full min-h-[250px] w-full object-cover object-center`}
                 />
                 <img
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-04/image-03.jpg"
                   alt="products-details"
                   className={`${
-                    productThree ? "block" : "hidden"
+                    productThree ? 'block' : 'hidden'
                   } h-full min-h-[250px] w-full object-cover object-center`}
                 />
               </div>
@@ -76,7 +70,7 @@ const ProductDetails4 = () => {
                     setProductThree(false);
                   }}
                   className={`${
-                    productOne ? "w-[14px] opacity-100" : "w-2 opacity-30"
+                    productOne ? 'w-[14px] opacity-100' : 'w-2 opacity-30'
                   } bg-primary h-2 rounded-full transition-all`}
                 ></button>
                 <button
@@ -86,7 +80,7 @@ const ProductDetails4 = () => {
                     setProductThree(false);
                   }}
                   className={`${
-                    productTwo ? "w-[14px] opacity-100" : "w-2 opacity-30"
+                    productTwo ? 'w-[14px] opacity-100' : 'w-2 opacity-30'
                   } bg-primary h-2 rounded-full transition-all`}
                 ></button>
                 <button
@@ -96,7 +90,7 @@ const ProductDetails4 = () => {
                     setProductThree(true);
                   }}
                   className={`${
-                    productThree ? "w-[14px] opacity-100" : "w-2 opacity-30"
+                    productThree ? 'w-[14px] opacity-100' : 'w-2 opacity-30'
                   } bg-primary h-2 rounded-full transition-all`}
                 ></button>
               </div>
@@ -109,25 +103,17 @@ const ProductDetails4 = () => {
                     Men's Regular T-shirt
                   </h3>
                   <p className="text-body-color dark:text-dark-6 mb-8 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Morbi non erat quam. Vestibulum aliquam nibh dui, et aliquet
-                    nibh euismod quis.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non erat quam. Vestibulum aliquam
+                    nibh dui, et aliquet nibh euismod quis.
                   </p>
 
                   <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-8">
-                        <h4 className="mb-5 text-lg font-semibold text-dark dark:text-white">
-                          Size
-                        </h4>
+                        <h4 className="mb-5 text-lg font-semibold text-dark dark:text-white">Size</h4>
                         <div className="flex items-center gap-[14px]">
                           <div>
-                            <input
-                              type="radio"
-                              name="size"
-                              id="32"
-                              className="filter-size-2 sr-only"
-                            />
+                            <input type="radio" name="size" id="32" className="filter-size-2 sr-only" />
                             <label
                               htmlFor="32"
                               className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
@@ -136,12 +122,7 @@ const ProductDetails4 = () => {
                             </label>
                           </div>
                           <div>
-                            <input
-                              type="radio"
-                              name="size"
-                              id="36"
-                              className="filter-size-2 sr-only"
-                            />
+                            <input type="radio" name="size" id="36" className="filter-size-2 sr-only" />
                             <label
                               htmlFor="36"
                               className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
@@ -150,12 +131,7 @@ const ProductDetails4 = () => {
                             </label>
                           </div>
                           <div>
-                            <input
-                              type="radio"
-                              name="size"
-                              id="40"
-                              className="filter-size-2 sr-only"
-                            />
+                            <input type="radio" name="size" id="40" className="filter-size-2 sr-only" />
                             <label
                               htmlFor="40"
                               className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
@@ -164,12 +140,7 @@ const ProductDetails4 = () => {
                             </label>
                           </div>
                           <div>
-                            <input
-                              type="radio"
-                              name="size"
-                              id="42"
-                              className="filter-size-2 sr-only"
-                            />
+                            <input type="radio" name="size" id="42" className="filter-size-2 sr-only" />
                             <label
                               htmlFor="42"
                               className="text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-base font-semibold"
@@ -182,17 +153,10 @@ const ProductDetails4 = () => {
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-8">
-                        <h4 className="mb-5 text-lg font-semibold text-dark dark:text-white">
-                          Color
-                        </h4>
+                        <h4 className="mb-5 text-lg font-semibold text-dark dark:text-white">Color</h4>
                         <div className="flex items-center gap-[14px]">
                           <div>
-                            <input
-                              type="radio"
-                              name="color"
-                              id="black"
-                              className="sr-only"
-                            />
+                            <input type="radio" name="color" id="black" className="sr-only" />
                             <label
                               htmlFor="black"
                               className="box flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full bg-dark dark:bg-dark-2 text-white"
@@ -214,12 +178,7 @@ const ProductDetails4 = () => {
                             </label>
                           </div>
                           <div>
-                            <input
-                              type="radio"
-                              name="color"
-                              id="red"
-                              className="sr-only"
-                            />
+                            <input type="radio" name="color" id="red" className="sr-only" />
                             <label
                               htmlFor="red"
                               className="box bg-primary flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full text-white"
@@ -241,12 +200,7 @@ const ProductDetails4 = () => {
                             </label>
                           </div>
                           <div>
-                            <input
-                              type="radio"
-                              name="color"
-                              id="blue"
-                              className="sr-only"
-                            />
+                            <input type="radio" name="color" id="blue" className="sr-only" />
                             <label
                               htmlFor="blue"
                               className="box bg-secondary flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full text-white"
@@ -272,19 +226,13 @@ const ProductDetails4 = () => {
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-8">
-                        <h3 className="mb-1 text-4xl font-bold text-dark dark:text-white">
-                          $159.00
-                        </h3>
-                        <p className="text-body-color dark:text-dark-6 text-base font-medium">
-                          Offer Available
-                        </p>
+                        <h3 className="mb-1 text-4xl font-bold text-dark dark:text-white">$159.00</h3>
+                        <p className="text-body-color dark:text-dark-6 text-base font-medium">Offer Available</p>
                       </div>
                     </div>
                     <div className="w-full px-4 sm:w-1/2">
                       <div className="mb-8">
-                        <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">
-                          Reviews
-                        </h3>
+                        <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">Reviews</h3>
                         <div className="flex items-center">
                           <span className="mr-1">{starIcon}</span>
                           <span className="mr-1">{starIcon}</span>
@@ -311,9 +259,7 @@ const ProductDetails4 = () => {
                               </defs>
                             </svg>
                           </span>
-                          <span className="text-medium text-body-color dark:text-dark-6 text-base">
-                            115 Reviews
-                          </span>
+                          <span className="text-medium text-body-color dark:text-dark-6 text-base">115 Reviews</span>
                         </div>
                       </div>
                     </div>
@@ -323,9 +269,7 @@ const ProductDetails4 = () => {
 
               <div className="w-full px-4 lg:w-4/12">
                 <div>
-                  <h4 className="mb-5 text-xl font-semibold text-dark dark:text-white">
-                    Product Details
-                  </h4>
+                  <h4 className="mb-5 text-xl font-semibold text-dark dark:text-white">Product Details</h4>
                   <p className="text-dark dark:text-white mb-3 flex text-base">
                     <span className="w-24 font-medium"> Brand: </span>
                     <span> Nike </span>
@@ -344,7 +288,7 @@ const ProductDetails4 = () => {
                   </p>
                   <div className="flex">
                     <p className="mr-4 mb-5 inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                      <span 
+                      <span
                         className="cursor-pointer select-none flex items-center justify-center w-[34px] h-[42px] text-dark dark:text-white"
                         onClick={decrement}
                       >
@@ -360,7 +304,7 @@ const ProductDetails4 = () => {
                         </svg>
                       </span>
                       <span className="px-3">{quantity}</span>
-                      <span 
+                      <span
                         className="cursor-pointer select-none flex items-center justify-center w-[34px] h-[42px] text-dark dark:text-white"
                         onClick={increment}
                       >

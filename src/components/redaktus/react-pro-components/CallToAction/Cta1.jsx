@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Cta = () => {
   return (
@@ -8,9 +8,7 @@ const Cta = () => {
           <div className="relative z-10 overflow-hidden rounded-sm bg-primary py-12 px-8 md:p-[70px]">
             <div className="flex flex-wrap items-center -mx-4">
               <div className="w-full px-4 lg:w-1/2">
-                <span className="block mb-4 text-base font-medium text-white">
-                  Find Your Next Dream App
-                </span>
+                <span className="block mb-4 text-base font-medium text-white">Find Your Next Dream App</span>
                 <h2 className="mb-6 text-3xl font-bold leading-tight text-white sm:mb-8 sm:text-[40px]/[48px] lg:mb-0">
                   <span className="xs:block"> Get started with </span>
                   <span>our free trial</span>
@@ -36,13 +34,7 @@ const Cta = () => {
 
             <div>
               <span className="absolute top-0 left-0 z-[-1]">
-                <svg
-                  width="189"
-                  height="162"
-                  viewBox="0 0 189 162"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="189" height="162" viewBox="0 0 189 162" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <ellipse
                     cx="16"
                     cy="-16.5"
@@ -67,20 +59,8 @@ const Cta = () => {
                 </svg>
               </span>
               <span className="absolute bottom-0 right-0 z-[-1]">
-                <svg
-                  width="191"
-                  height="208"
-                  viewBox="0 0 191 208"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <ellipse
-                    cx="173"
-                    cy="178.5"
-                    rx="173"
-                    ry="178.5"
-                    fill="url(#paint0_linear)"
-                  />
+                <svg width="191" height="208" viewBox="0 0 191 208" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="173" cy="178.5" rx="173" ry="178.5" fill="url(#paint0_linear)" />
                   <defs>
                     <linearGradient
                       id="paint0_linear"

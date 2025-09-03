@@ -7,7 +7,7 @@ const Navbar5 = () => {
   return (
     <>
       <div
-        className={`w-full bg-linear-to-r from-primary to-secondary py-3 ${
+        className={`bg-linear-to-r w-full from-primary to-secondary py-3 ${
           !showAlert && "hidden"
         }`}
       >

@@ -2,18 +2,18 @@ import React from "react";
 
 const Portfolio5 = () => {
   return (
-    <section className="pt-20 pb-5 lg:pt-[120px] lg:pb-[60px] dark:bg-dark">
+    <section className="pb-5 pt-20 dark:bg-dark lg:pb-[60px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-1/2">
             <div className="mb-[60px] max-w-[510px]">
-              <span className="text-primary mb-2 block text-lg font-semibold">
+              <span className="mb-2 block text-lg font-semibold text-primary">
                 Portfolio
               </span>
-              <h2 className="text-dark dark:text-white mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
+              <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Check out some of our recent projects below.
               </h2>
-              <p className="text-body-color dark:text-dark-6 text-base">
+              <p className="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -62,15 +62,15 @@ const PortfolioCard = ({ img, subtitle, link, title }) => {
       </div>
       <div className="content">
         <div className="mb-4 flex items-center">
-          <span className="bg-primary mr-3 inline-block h-px w-6"></span>
-          <span className="text-primary text-sm font-semibold uppercase">
+          <span className="mr-3 inline-block h-px w-6 bg-primary"></span>
+          <span className="text-sm font-semibold uppercase text-primary">
             {subtitle}
           </span>
         </div>
         <h3>
           <a
             href={link}
-            className="text-dark dark:text-white hover:text-primary inline-block text-xl font-bold sm:text-2xl"
+            className="inline-block text-xl font-bold text-dark hover:text-primary dark:text-white sm:text-2xl"
           >
             {title}
           </a>

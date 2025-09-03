@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Popover = () => {
   return (
@@ -34,19 +34,13 @@ const Popover = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     className="fill-current"
                   >
-                    <path
-                      d="M1.58026 12.7577C0.214281 11.5625 0.214281 9.4375 1.58026 8.24227L11 -5.24537e-07L11 21L1.58026 12.7577Z"
-                    />
+                    <path d="M1.58026 12.7577C0.214281 11.5625 0.214281 9.4375 1.58026 8.24227L11 -5.24537e-07L11 21L1.58026 12.7577Z" />
                   </svg>
                 </span>
                 <div className="flex items-center justify-between border-b border-stroke dark:border-dark-3 py-[18px] px-[22px]">
                   <div className="text-left">
-                    <h5 className="text-sm font-medium text-dark dark:text-white sm:text-base">
-                      Musharof Chowdhury
-                    </h5>
-                    <p className="text-xs text-body-color dark:text-dark-6 sm:text-sm">
-                      Founder @Pimjolabs
-                    </p>
+                    <h5 className="text-sm font-medium text-dark dark:text-white sm:text-base">Musharof Chowdhury</h5>
+                    <p className="text-xs text-body-color dark:text-dark-6 sm:text-sm">Founder @Pimjolabs</p>
                   </div>
                   <div>
                     <button className="flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:text-primary sm:h-[34px] sm:w-[34px]">
@@ -71,9 +65,7 @@ const Popover = () => {
                   </div>
                 </div>
                 <div className="pt-[22px] pb-5 px-[22px]">
-                  <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
-                    Products
-                  </h4>
+                  <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">Products</h4>
                   <div>
                     <div className="mb-4 overflow-hidden rounded-sm">
                       <img
@@ -82,12 +74,9 @@ const Popover = () => {
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
-                    <h5 className="mb-2 text-base font-medium text-dark dark:text-white">
-                      Pimjolabs
-                    </h5>
+                    <h5 className="mb-2 text-base font-medium text-dark dark:text-white">Pimjolabs</h5>
                     <p className="text-sm text-body-color dark:text-dark-6">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      jesium desotional..
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit jesium desotional..
                     </p>
                   </div>
                 </div>

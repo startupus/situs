@@ -7,13 +7,11 @@ async function fixSideEditSyntax() {
   console.log('🔧 Исправляю синтаксические ошибки в sideEditProps...');
 
   // Список файлов с синтаксическими ошибками
-  const problematicFiles = [
-    'src/components/redaktus/website/TextImage/TextImage.tsx'
-  ];
+  const problematicFiles = ['src/components/redaktus/website/TextImage/TextImage.tsx'];
 
   for (const file of problematicFiles) {
     if (!fs.existsSync(file)) continue;
-    
+
     let content = fs.readFileSync(file, 'utf8');
     console.log(`Исправляю ${file}`);
 
@@ -25,13 +23,13 @@ async function fixSideEditSyntax() {
         // Правильно закрываем массив options
         const fixedOptions = options.trim();
         const fixedRest = rest.trim();
-        
+
         return `${indent}${fixedOptions}
 ${indent}    ],
 ${indent}  },
 ${indent}  ${fixedRest}
 ${indent}],`;
-      }
+      },
     );
 
     // Исправляем проблемы с неправильными скобками
@@ -45,4 +43,4 @@ ${indent}],`;
   console.log('🎉 Синтаксические ошибки исправлены');
 }
 
-fixSideEditSyntax().catch(console.error); 
+fixSideEditSyntax().catch(console.error);

@@ -1,39 +1,39 @@
-import jsVectorMap from "jsvectormap";
-import "jsvectormap/dist/css/jsvectormap.css";
-import "jsvectormap/dist/maps/world";
-import React, { useEffect } from "react";
+import jsVectorMap from 'jsvectormap';
+import 'jsvectormap/dist/css/jsvectormap.css';
+import 'jsvectormap/dist/maps/world';
+import React, { useEffect } from 'react';
 
 const Map2 = () => {
   useEffect(() => {
     const map = new jsVectorMap({
-      selector: "#mapTwo",
-      map: "world",
+      selector: '#mapTwo',
+      map: 'world',
       zoomButtons: true,
 
       regionStyle: {
         initial: {
-          fill: "#A9BDFF",
+          fill: '#A9BDFF',
         },
         hover: {
           fillOpacity: 1,
-          fill: "#3056D3",
+          fill: '#3056D3',
         },
       },
       regionLabelStyle: {
         initial: {
-          fontFamily: "inter",
-          fontWeight: "semibold",
-          fill: "#fff",
+          fontFamily: 'inter',
+          fontWeight: 'semibold',
+          fill: '#fff',
         },
         hover: {
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
 
       labels: {
         regions: {
           render(code) {
-            return code.split("-")[1];
+            return code.split('-')[1];
           },
         },
       },
@@ -101,8 +101,12 @@ const Map2 = () => {
                       id=""
                       className="relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[9px] pl-3 pr-10 text-sm text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6"
                     >
-                      <option value="" className="dark:bg-dark-2">Last 7 days</option>
-                      <option value="" className="dark:bg-dark-2">Last 15 days</option>
+                      <option value="" className="dark:bg-dark-2">
+                        Last 7 days
+                      </option>
+                      <option value="" className="dark:bg-dark-2">
+                        Last 15 days
+                      </option>
                     </select>
                     <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg
@@ -168,9 +172,7 @@ const MapItem = ({ img, name, percent }) => {
     <div className="items-center sm:flex">
       <div className="flex w-full max-w-[170px] items-center">
         <img src={img} alt="usa" className="mr-[14px] h-[14px]" />
-        <p className="text-base font-medium text-dark dark:text-white">
-          {name}
-        </p>
+        <p className="text-base font-medium text-dark dark:text-white">{name}</p>
       </div>
       <div className="relative block h-[18px] w-full rounded-sm bg-[#E5E7EB] dark:bg-dark-3">
         <div

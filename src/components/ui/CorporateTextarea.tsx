@@ -22,7 +22,7 @@ const CorporateTextarea: React.FC<CorporateTextareaProps> = ({
   required = false,
   className = '',
   rows = 4,
-  disabled = false
+  disabled = false,
 }) => {
   return (
     <div className={`w-full ${className}`}>

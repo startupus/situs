@@ -1,5 +1,5 @@
-import { useState } from "react";
-import ClickOutside from "../ClickOutside.jsx";
+import { useState } from 'react';
+import ClickOutside from '../ClickOutside.jsx';
 
 const DropdownTwo = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -10,17 +10,8 @@ const DropdownTwo = () => {
   return (
     <>
       <div className="relative">
-        <button
-          onClick={handleDropDownToggle}
-          className="text-body-color dark:text-dark-6"
-        >
-          <svg
-            width="24"
-            height="25"
-            viewBox="0 0 24 25"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <button onClick={handleDropDownToggle} className="text-body-color dark:text-dark-6">
+          <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -44,7 +35,7 @@ const DropdownTwo = () => {
 
         <ClickOutside onClick={() => setOpenDropDown(false)}>
           <div
-            className={`absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark ${openDropDown ? "block" : "hidden"}`}
+            className={`absolute right-0 top-full z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark ${openDropDown ? 'block' : 'hidden'}`}
           >
             <button className="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
               Edit

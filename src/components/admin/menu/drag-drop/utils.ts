@@ -10,18 +10,18 @@ import { MenuItemData } from '../../../../types/menu';
 export const buildMenuHierarchy = (flatItems: MenuItemData[]): MenuItemData[] => {
   // Создаем карту для быстрого поиска элементов по ID
   const itemsMap = new Map<string, MenuItemData>();
-  
+
   // Инициализируем все элементы с пустым массивом children
-  flatItems.forEach(item => {
+  flatItems.forEach((item) => {
     itemsMap.set(item.id, { ...item, children: [] });
   });
 
   const rootItems: MenuItemData[] = [];
 
   // Строим иерархию
-  flatItems.forEach(item => {
+  flatItems.forEach((item) => {
     const currentItem = itemsMap.get(item.id)!;
-    
+
     if (!item.parentId) {
       // Корневой элемент
       rootItems.push(currentItem);
@@ -44,7 +44,7 @@ export const buildMenuHierarchy = (flatItems: MenuItemData[]): MenuItemData[] =>
   // Сортируем элементы по orderIndex на каждом уровне
   const sortByOrderIndex = (items: MenuItemData[]) => {
     items.sort((a, b) => (a.orderIndex || 0) - (b.orderIndex || 0));
-    items.forEach(item => {
+    items.forEach((item) => {
       if (item.children && item.children.length > 0) {
         sortByOrderIndex(item.children);
       }
@@ -52,7 +52,7 @@ export const buildMenuHierarchy = (flatItems: MenuItemData[]): MenuItemData[] =>
   };
 
   sortByOrderIndex(rootItems);
-  
+
   return rootItems;
 };
 
@@ -69,9 +69,9 @@ export const flattenMenuHierarchy = (hierarchicalItems: MenuItemData[]): MenuIte
         parentId,
         level,
         orderIndex: index,
-        children: [] // Убираем children из плоского списка
+        children: [], // Убираем children из плоского списка
       };
-      
+
       result.push(flatItem);
 
       // Рекурсивно обрабатываем дочерние элементы
@@ -90,9 +90,9 @@ export const flattenMenuHierarchy = (hierarchicalItems: MenuItemData[]): MenuIte
  */
 export const validateMenuHierarchy = (items: MenuItemData[]): { isValid: boolean; errors: string[] } => {
   const errors: string[] = [];
-  const itemIds = new Set(items.map(item => item.id));
+  const itemIds = new Set(items.map((item) => item.id));
 
-  items.forEach(item => {
+  items.forEach((item) => {
     // Проверяем, что parentId существует (если указан)
     if (item.parentId && !itemIds.has(item.parentId)) {
       errors.push(`Item "${item.title}" (${item.id}) has invalid parentId: ${item.parentId}`);
@@ -100,9 +100,11 @@ export const validateMenuHierarchy = (items: MenuItemData[]): { isValid: boolean
 
     // Проверяем корректность level
     if (item.parentId) {
-      const parent = items.find(p => p.id === item.parentId);
+      const parent = items.find((p) => p.id === item.parentId);
       if (parent && item.level !== parent.level + 1) {
-        errors.push(`Item "${item.title}" (${item.id}) has incorrect level ${item.level}, should be ${parent.level + 1}`);
+        errors.push(
+          `Item "${item.title}" (${item.id}) has incorrect level ${item.level}, should be ${parent.level + 1}`,
+        );
       }
     } else if (item.level !== 1) {
       errors.push(`Root item "${item.title}" (${item.id}) should have level 1, but has level ${item.level}`);
@@ -111,6 +113,6 @@ export const validateMenuHierarchy = (items: MenuItemData[]): { isValid: boolean
 
   return {
     isValid: errors.length === 0,
-    errors
+    errors,
   };
 };

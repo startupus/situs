@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 // Next.js Link component shim
 interface LinkProps {
-  href: string
-  children: React.ReactNode
-  className?: string
-  [key: string]: any
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  [key: string]: any;
 }
 
 const Link: React.FC<LinkProps> = ({ href, children, ...props }) => {
@@ -13,7 +13,7 @@ const Link: React.FC<LinkProps> = ({ href, children, ...props }) => {
     <a href={href} {...props}>
       {children}
     </a>
-  )
-}
+  );
+};
 
-export default Link 
+export default Link;

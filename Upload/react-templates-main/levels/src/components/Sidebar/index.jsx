@@ -270,7 +270,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`shadow-1 dark:bg-dark-2 dark:shadow-box-dark fixed top-0 left-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white duration-200 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div>
           <div className="flex items-center p-8">
@@ -278,7 +278,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <img
                 src={user}
                 alt="profile"
-                className="object-cover object-center w-full h-full rounded-full"
+                className="h-full w-full rounded-full object-cover object-center"
               />
             </div>
 
@@ -292,14 +292,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </div>
           </div>
 
-          <div className="p-8 pt-0 mt-2">
+          <div className="mt-2 p-8 pt-0">
             <form className="relative">
               <input
                 type="text"
                 placeholder="Search here..."
-                className="border-stroke bg-gray-1 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark h-11 w-full rounded-md border-[.5px] pr-9 pl-5 text-sm outline-hidden dark:text-white"
+                className="outline-hidden h-11 w-full rounded-md border-[.5px] border-stroke bg-gray-1 pl-5 pr-9 text-sm text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white"
               />
-              <button className="absolute -translate-y-1/2 top-1/2 right-4">
+              <button className="absolute right-4 top-1/2 -translate-y-1/2">
                 <svg
                   width="16"
                   height="16"
@@ -325,7 +325,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     {item?.mail ? (
                       <Link
                         to={item.link}
-                        className="text-body-color hover:bg-primary dark:text-dark-6 relative flex items-center justify-between rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white"
+                        className="relative flex items-center justify-between rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6"
                       >
                         <span className="flex items-center">
                           <span className="pr-[10px]">{item.icon}</span>
@@ -335,17 +335,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           <img
                             src={userOne}
                             alt="avatar"
-                            className="dark:border-dark-3 h-[18px] w-[18px] rounded-full border border-white"
+                            className="h-[18px] w-[18px] rounded-full border border-white dark:border-dark-3"
                           />
                           <img
                             src={userTwo}
                             alt="avatar"
-                            className="dark:border-dark-3 -ml-[6px] h-[18px] w-[18px] rounded-full border border-white"
+                            className="-ml-[6px] h-[18px] w-[18px] rounded-full border border-white dark:border-dark-3"
                           />
                           <img
                             src={userThree}
                             alt="avatar"
-                            className="dark:border-dark-3 -ml-[6px] h-[18px] w-[18px] rounded-full border border-white"
+                            className="-ml-[6px] h-[18px] w-[18px] rounded-full border border-white dark:border-dark-3"
                           />
                           <span className="ml-[10px] flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#FF3D3D] text-[10px] font-semibold text-white">
                             {item.mail}
@@ -355,7 +355,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     ) : (
                       <Link
                         to={item.link}
-                        className="text-body-color hover:bg-primary dark:text-dark-6 relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white"
+                        className="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6"
                       >
                         <span className="pr-[10px]">{item.icon}</span>
                         {item.text}
@@ -368,8 +368,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </div>
         </div>
 
-        <div className="pt-6 m-8 mt-6 border-t border-stroke dark:border-dark-3">
-          <div className="bg-gray-2 dark:bg-dark flex h-[42px] w-full items-center justify-evenly rounded-md">
+        <div className="m-8 mt-6 border-t border-stroke pt-6 dark:border-dark-3">
+          <div className="flex h-[42px] w-full items-center justify-evenly rounded-md bg-gray-2 dark:bg-dark">
             {iconNavlist.map((item, index) => (
               <Link
                 key={index}
@@ -381,7 +381,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             ))}
           </div>
 
-          <div className="flex items-center pt-6 justify-evenly">
+          <div className="flex items-center justify-evenly pt-6">
             {bottomNavlist.map((item, index) => (
               <Link
                 key={index}
@@ -397,7 +397,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div
         onClick={handleSidebarToggle}
-        className={`bg-dark/80 fixed top-0 left-0 z-30 h-screen w-full xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-30 h-screen w-full bg-dark/80 xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       ></div>
     </>
   );

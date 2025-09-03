@@ -1,8 +1,8 @@
-import React from "react";
-import { Pagination } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from 'react';
+import { Pagination } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Portfolio6 = () => {
   return (
@@ -80,15 +80,7 @@ const Portfolio6 = () => {
 
 export default Portfolio6;
 
-const PortfolioCard = ({
-  bgImg,
-  number,
-  subtitle,
-  title,
-  details,
-  link,
-  button,
-}) => {
+const PortfolioCard = ({ bgImg, number, subtitle, title, details, link, button }) => {
   return (
     <div className="-mx-4 flex flex-wrap justify-center">
       <div className="w-full px-4 lg:w-10/12 xl:w-8/12">
@@ -102,12 +94,10 @@ const PortfolioCard = ({
                 {number}
               </span>
               <span className="inline-block mb-2 text-2xl font-bold sm:text-[26px] sm:leading-7 text-dark dark:text-white">
-                {" "}
-                {subtitle}{" "}
+                {' '}
+                {subtitle}{' '}
               </span>
-              <h3 className="text-body-color dark:text-dark-6 mb-5 text-base font-medium">
-                {title}
-              </h3>
+              <h3 className="text-body-color dark:text-dark-6 mb-5 text-base font-medium">{title}</h3>
               <p className="text-body-color dark:text-dark-6 mb-9 text-sm">{details}</p>
               <a
                 href={link}

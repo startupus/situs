@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Breadcrumb3 = () => {
   return (
@@ -14,10 +14,7 @@ const Breadcrumb3 = () => {
                 >
                   Home
                 </a>
-                <span className="px-3 text-body-color dark:text-dark-6">
-                  {" "}
-                  /{" "}
-                </span>
+                <span className="px-3 text-body-color dark:text-dark-6"> / </span>
               </li>
               <li className="flex items-center">
                 <a
@@ -26,14 +23,9 @@ const Breadcrumb3 = () => {
                 >
                   Project
                 </a>
-                <span className="px-3 text-body-color dark:text-dark-6">
-                  {" "}
-                  /{" "}
-                </span>
+                <span className="px-3 text-body-color dark:text-dark-6"> / </span>
               </li>
-              <li className="text-base font-medium text-body-color dark:text-dark-6">
-                Marketing
-              </li>
+              <li className="text-base font-medium text-body-color dark:text-dark-6">Marketing</li>
             </ul>
           </div>
         </div>

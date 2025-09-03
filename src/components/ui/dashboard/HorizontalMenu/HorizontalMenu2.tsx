@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const HorizontalMenu2 = () => {
   return (
@@ -7,12 +7,8 @@ const HorizontalMenu2 = () => {
         <div className="flex items-center justify-end bg-white px-3 py-3 dark:bg-dark-2 sm:justify-between md:px-7 md:py-7">
           <div className="hidden items-center sm:flex">
             <div className="mr-[65px] hidden lg:block">
-              <h5 className="mb-0.5 text-xl font-semibold text-dark dark:text-white">
-                Hello user!
-              </h5>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                Welcome back to dashboard.
-              </p>
+              <h5 className="mb-0.5 text-xl font-semibold text-dark dark:text-white">Hello user!</h5>
+              <p className="text-sm text-body-color dark:text-dark-6">Welcome back to dashboard.</p>
             </div>
 
             <div>

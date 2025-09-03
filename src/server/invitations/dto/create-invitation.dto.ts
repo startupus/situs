@@ -7,14 +7,14 @@ export enum CommunicationChannel {
   SMS = 'SMS',
   TELEGRAM = 'TELEGRAM',
   WHATSAPP = 'WHATSAPP',
-  SLACK = 'SLACK'
+  SLACK = 'SLACK',
 }
 
 export class CreateInvitationDto {
   @ApiProperty({
     description: 'Email адреса для приглашения',
     example: ['user1@example.com', 'user2@example.com'],
-    type: [String]
+    type: [String],
   })
   @IsArray()
   @IsEmail({}, { each: true })
@@ -23,7 +23,7 @@ export class CreateInvitationDto {
   @ApiProperty({
     description: 'Роль по умолчанию для приглашенных пользователей',
     enum: GlobalRole,
-    example: GlobalRole.BUSINESS
+    example: GlobalRole.BUSINESS,
   })
   @IsEnum(GlobalRole)
   role!: GlobalRole;
@@ -31,7 +31,7 @@ export class CreateInvitationDto {
   @ApiProperty({
     description: 'Персональное сообщение (необязательно)',
     example: 'Добро пожаловать в нашу платформу!',
-    required: false
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -40,7 +40,7 @@ export class CreateInvitationDto {
   @ApiProperty({
     description: 'Канал связи для отправки приглашения',
     enum: CommunicationChannel,
-    example: CommunicationChannel.EMAIL
+    example: CommunicationChannel.EMAIL,
   })
   @IsEnum(CommunicationChannel)
   channel!: CommunicationChannel;
@@ -48,7 +48,7 @@ export class CreateInvitationDto {
   @ApiProperty({
     description: 'Дата истечения приглашения (ISO string)',
     example: '2024-12-31T23:59:59.000Z',
-    required: false
+    required: false,
   })
   @IsOptional()
   @IsDateString()

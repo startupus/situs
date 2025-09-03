@@ -29,10 +29,10 @@ const NavDropdown = () => {
   };
 
   return (
-    <div className="relative hidden mr-4 group sm:block">
+    <div className="group relative mr-4 hidden sm:block">
       <button
         onClick={handleDropDownToggle}
-        className="flex items-center justify-center text-white rounded-sm h-9 w-9 bg-white/8"
+        className="bg-white/8 flex h-9 w-9 items-center justify-center rounded-sm text-white"
       >
         <svg
           width="20"
@@ -64,14 +64,14 @@ const NavDropdown = () => {
 
       <ClickOutside onClick={() => setOpenDropDown(false)}>
         <nav
-          className={`bg-primary shadow-card-2 absolute left-0 mt-2 w-[250px] rounded-sm duration-200 ${openDropDown ? "visible top-full opacity-100" : "invisible top-[120%] opacity-0"}`}
+          className={`absolute left-0 mt-2 w-[250px] rounded-sm bg-primary shadow-card-2 duration-200 ${openDropDown ? "visible top-full opacity-100" : "invisible top-[120%] opacity-0"}`}
         >
-          <ul className="px-5 py-6 space-y-5">
+          <ul className="space-y-5 px-5 py-6">
             {navList.map((item, index) => (
               <li key={index}>
                 <Link
                   to={item.link}
-                  className="relative block text-sm font-medium text-white duration-200 opacity-70 hover:opacity-100"
+                  className="relative block text-sm font-medium text-white opacity-70 duration-200 hover:opacity-100"
                 >
                   {item.text}
                 </Link>

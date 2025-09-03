@@ -89,7 +89,7 @@ export default ECommerceFooter5;
 
 const LinkGroup = ({ children, header }) => {
   return (
-    <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12 lg:nth-3:w-4/12 xl:nth-3:w-3/12">
+    <div className="lg:nth-3:w-4/12 xl:nth-3:w-3/12 w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
       <div className="mb-16">
         <h3 className="mb-9 text-xl font-bold uppercase text-dark dark:text-white">
           {header}

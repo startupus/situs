@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import { useCanvasTheme } from "../../hooks/useCanvasTheme";
+import React, { useState } from 'react';
+import { useCanvasTheme } from '../../hooks/useCanvasTheme';
 
 const SitusDarkModeToggle: React.FC = () => {
   const { theme, setTheme } = useCanvasTheme();
-  const [isDark, setIsDark] = useState(theme === "dark");
+  const [isDark, setIsDark] = useState(theme === 'dark');
 
   const toggleDarkMode = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
-    setIsDark(newTheme === "dark");
+    setIsDark(newTheme === 'dark');
   };
 
   return (
     <div className="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded-sm bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark z-50">
-      <label
-        htmlFor="situsDarkModeToggle"
-        className="inline-flex cursor-pointer items-center"
-      >
+      <label htmlFor="situsDarkModeToggle" className="inline-flex cursor-pointer items-center">
         <input
           type="checkbox"
           name="situsDarkModeToggle"
@@ -72,5 +69,3 @@ const SitusDarkModeToggle: React.FC = () => {
 };
 
 export default SitusDarkModeToggle;
-
-

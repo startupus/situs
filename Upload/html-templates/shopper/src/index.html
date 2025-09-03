@@ -18,10 +18,10 @@
     <div
       x-show="loaded"
       x-init="window.addEventListener('DOMContentLoaded', () => {setTimeout(() => loaded = false, 500)})"
-      class="dark:bg-dark fixed top-0 left-0 z-[999999] flex h-screen w-screen items-center justify-center bg-white"
+      class="fixed left-0 top-0 z-[999999] flex h-screen w-screen items-center justify-center bg-white dark:bg-dark"
     >
       <div
-        class="border-primary h-16 w-16 animate-spin rounded-full border-4 border-solid border-t-transparent"
+        class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"
       ></div>
     </div>
 
@@ -40,7 +40,7 @@
           categoryOne: true,
         }
       "
-      class="dark:bg-dark flex w-full items-center bg-white"
+      class="flex w-full items-center bg-white dark:bg-dark"
     >
       <div class="container mx-auto">
         <div class="relative z-50 -mx-4 flex items-center justify-between">
@@ -64,22 +64,22 @@
                 @click="navbarOpen = !navbarOpen"
                 :class="navbarOpen && 'navbarTogglerActive' "
                 id="navbarToggler"
-                class="ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden"
+                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
               >
                 <span
-                  class="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
                 ></span>
                 <span
-                  class="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
                 ></span>
                 <span
-                  class="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"
+                  class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
                 ></span>
               </button>
               <nav
                 :class="!navbarOpen && 'hidden' "
                 id="navbarCollapse"
-                class="dark:bg-dark-2 absolute top-full right-4 z-50 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow lg:static lg:flex lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none lg:dark:bg-transparent"
+                class="absolute right-4 top-full z-50 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:flex lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:shadow-none lg:dark:bg-transparent"
               >
                 <ul class="block items-center lg:flex">
                   <li
@@ -89,7 +89,7 @@
                     <a
                       href="javascript:void(0)"
                       @click="categories = !categories "
-                      class="bg-gray-2 text-dark hover:text-primary dark:bg-dark-2 flex items-center justify-between rounded px-4 py-2 text-base font-medium lg:inline-flex lg:px-5 lg:py-2 dark:text-white"
+                      class="flex items-center justify-between rounded bg-gray-2 px-4 py-2 text-base font-medium text-dark hover:text-primary dark:bg-dark-2 dark:text-white lg:inline-flex lg:px-5 lg:py-2"
                     >
                       All categories
 
@@ -111,15 +111,15 @@
 
                     <div
                       :class="categories ? 'block' : 'hidden' "
-                      class="dark:bg-dark-2 lg:border-stroke dark:lg:border-dark-3 relative top-full left-0 z-50 rounded-lg bg-white transition-all lg:absolute lg:top-[112%] lg:w-[180px] lg:border-[.5px] lg:py-4"
+                      class="relative left-0 top-full z-50 rounded-lg bg-white transition-all dark:bg-dark-2 lg:absolute lg:top-[112%] lg:w-[180px] lg:border-[.5px] lg:border-stroke lg:py-4 dark:lg:border-dark-3"
                     >
                       <span
-                        class="border-stroke dark:border-dark-3 dark:bg-dark-2 absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 rounded-sm border-[.5px] border-r-0 border-b-0 bg-white lg:block"
+                        class="absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 rounded-sm border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"
                       ></span>
-                      <div class="px-2 lg:pr-[18px] lg:pl-6">
+                      <div class="px-2 lg:pl-6 lg:pr-[18px]">
                         <a
                           href="filters.html"
-                          class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                          class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                         >
                           Arts & Crafts
                         </a>
@@ -128,7 +128,7 @@
                         <a
                           href="filters.html"
                           @click="categoryOne = !categoryOne "
-                          class="text-body-color hover:text-primary group-hover:text-primary dark:text-dark-6 flex items-center justify-between py-[6px] text-base"
+                          class="flex items-center justify-between py-[6px] text-base text-body-color hover:text-primary group-hover:text-primary dark:text-dark-6"
                         >
                           Fashion
 
@@ -150,43 +150,43 @@
 
                         <div
                           :class="!categoryOne ? 'hidden lg:block' : 'block' "
-                          class="border-stroke dark:border-dark-3 dark:bg-dark-2 top-0 left-full bg-white py-2 group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:w-[600px] lg:rounded lg:border-[.5px] lg:px-8 lg:py-8 lg:opacity-0 xl:w-[650px]"
+                          class="left-full top-0 border-stroke bg-white py-2 group-hover:visible group-hover:opacity-100 dark:border-dark-3 dark:bg-dark-2 lg:invisible lg:absolute lg:w-[600px] lg:rounded lg:border-[.5px] lg:px-8 lg:py-8 lg:opacity-0 xl:w-[650px]"
                         >
                           <div class="-mx-2 flex flex-wrap">
                             <div class="w-full px-2 lg:w-1/3">
                               <div>
                                 <h3
-                                  class="text-dark mb-[14px] text-base font-semibold dark:text-white"
+                                  class="mb-[14px] text-base font-semibold text-dark dark:text-white"
                                 >
                                   New Arrivals
                                 </h3>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Dresses
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Jackets
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Sweatshirts
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Tops & Tees
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Party Dresses
                                 </a>
@@ -195,37 +195,37 @@
                             <div class="w-full px-2 lg:w-1/3">
                               <div>
                                 <h3
-                                  class="text-dark mb-[14px] text-base font-semibold dark:text-white"
+                                  class="mb-[14px] text-base font-semibold text-dark dark:text-white"
                                 >
                                   New Arrivals
                                 </h3>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Dresses
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Jackets
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Sweatshirts
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Tops & Tees
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Party Dresses
                                 </a>
@@ -246,7 +246,7 @@
                       <div class="px-2 lg:px-6">
                         <a
                           href="filters.html"
-                          class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                          class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                         >
                           Bags & Shoes
                         </a>
@@ -254,7 +254,7 @@
                       <div class="px-2 lg:px-6">
                         <a
                           href="filters.html"
-                          class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                          class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                         >
                           Jewelry & Watch
                         </a>
@@ -264,7 +264,7 @@
                   <li>
                     <a
                       href="index.html"
-                      class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex dark:text-white"
+                      class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex"
                     >
                       Home
                     </a>
@@ -272,7 +272,7 @@
                   <li>
                     <a
                       href="filters.html"
-                      class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex dark:text-white"
+                      class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex"
                     >
                       Shop
                     </a>
@@ -280,7 +280,7 @@
                   <li>
                     <a
                       href="filters.html"
-                      class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex dark:text-white"
+                      class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex"
                     >
                       Products
                     </a>
@@ -289,7 +289,7 @@
                     <a
                       href="javascript:void(0)"
                       @click="submenuOpen = !submenuOpen "
-                      class="text-dark hover:text-primary flex items-center justify-between py-2 text-base font-medium lg:mx-[18px] lg:inline-flex lg:py-2 dark:text-white"
+                      class="flex items-center justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-[18px] lg:inline-flex lg:py-2"
                     >
                       Pages
                       <span class="pl-[6px]">
@@ -310,47 +310,47 @@
 
                     <div
                       :class="!submenuOpen ? 'hidden lg:block' : 'block' "
-                      class="dark:bg-dark-2 lg:border-stroke dark:lg:border-dark-3 relative top-full left-0 rounded-lg bg-white px-2 transition-all group-hover:opacity-100 lg:invisible lg:absolute lg:top-[115%] lg:w-[180px] lg:border-[.5px] lg:px-6 lg:py-4 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full"
+                      class="relative left-0 top-full rounded-lg bg-white px-2 transition-all group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[115%] lg:w-[180px] lg:border-[.5px] lg:border-stroke lg:px-6 lg:py-4 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full dark:lg:border-dark-3"
                     >
                       <a
                         href="filters.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Filters
                       </a>
                       <a
                         href="checkout.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Checkout
                       </a>
                       <a
                         href="order-summary.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Order Summary
                       </a>
                       <a
                         href="product-details.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Product Details
                       </a>
                       <a
                         href="shopping-cart.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Shopping Cart
                       </a>
                       <a
                         href="support.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Support
                       </a>
                       <a
                         href="wishlist.html"
-                        class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                        class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                       >
                         Wishlist
                       </a>
@@ -359,7 +359,7 @@
                   <li>
                     <a
                       href="support.html"
-                      class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex dark:text-white"
+                      class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-[18px] lg:hidden lg:py-6 xl:inline-flex"
                     >
                       Contact
                     </a>
@@ -374,7 +374,7 @@
                 <div class="flex max-w-[200px] justify-end">
                   <button
                     @click="searchForm = !searchForm"
-                    class="text-dark flex items-center justify-center dark:text-white"
+                    class="flex items-center justify-center text-dark dark:text-white"
                   >
                     <svg
                       width="26"
@@ -393,16 +393,16 @@
                 <div
                   x-show="searchForm"
                   @click.outside="searchForm = false"
-                  class="absolute top-full right-0 mt-[23px] w-[330px]"
+                  class="absolute right-0 top-full mt-[23px] w-[330px]"
                 >
                   <form class="flex items-center justify-between">
                     <input
                       type="text"
                       placeholder="Search Components or UI"
-                      class="text-body-color shadow-1 focus:border-primary dark:bg-dark-2 dark:text-dark-6 w-full rounded-md border border-transparent bg-white py-4 pr-8 pl-5 outline-none focus-visible:shadow-none dark:shadow-none"
+                      class="w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color shadow-1 outline-none focus:border-primary focus-visible:shadow-none dark:bg-dark-2 dark:text-dark-6 dark:shadow-none"
                     />
                     <button
-                      class="text-body-color absolute top-1/2 right-5 -translate-y-1/2"
+                      class="absolute right-5 top-1/2 -translate-y-1/2 text-body-color"
                     >
                       <svg
                         width="26"
@@ -425,7 +425,7 @@
                 <div class="flex max-w-[200px] justify-end">
                   <button
                     @click="wishlistOpen = !wishlistOpen"
-                    class="text-dark relative flex items-center justify-center dark:text-white"
+                    class="relative flex items-center justify-center text-dark dark:text-white"
                   >
                     <svg
                       width="26"
@@ -441,7 +441,7 @@
                     </svg>
 
                     <span
-                      class="bg-primary absolute -top-2 -right-2 h-4 w-4 rounded-full text-[10px] font-normal text-white"
+                      class="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-primary text-[10px] font-normal text-white"
                     >
                       3
                     </span>
@@ -450,12 +450,12 @@
                 <div
                   x-show="wishlistOpen"
                   @click.outside="wishlistOpen = false"
-                  class="absolute top-full right-0 mt-5 w-[330px]"
+                  class="absolute right-0 top-full mt-5 w-[330px]"
                 >
                   <div
-                    class="border-stroke shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark overflow-hidden rounded-lg border bg-white px-6 py-8"
+                    class="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-8 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark"
                   >
-                    <div class="border-stroke dark:border-dark-3 border-b pb-3">
+                    <div class="border-b border-stroke pb-3 dark:border-dark-3">
                       <div class="-mx-1 flex items-center justify-between pb-4">
                         <div class="flex items-center px-1">
                           <div
@@ -470,12 +470,12 @@
                           <div>
                             <a
                               href="product-details.html"
-                              class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                              class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                             >
                               Circular Sienna
                             </a>
                             <p
-                              class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                              class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                             >
                               Awesome white shirt
                             </p>
@@ -483,7 +483,7 @@
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $36.00
                           </p>
@@ -503,12 +503,12 @@
                           <div>
                             <a
                               href="product-details.html"
-                              class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                              class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                             >
                               Black T-shirt
                             </a>
                             <p
-                              class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                              class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                             >
                               It's a nice black t-shirt
                             </p>
@@ -516,7 +516,7 @@
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $36.00
                           </p>
@@ -527,7 +527,7 @@
                     <div>
                       <a
                         href="wishlist.html"
-                        class="bg-primary hover:bg-blue-dark flex w-full items-center justify-center rounded-md px-10 py-[10px] text-center text-base font-medium text-white"
+                        class="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[10px] text-center text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Go to Wishlist
                       </a>
@@ -540,7 +540,7 @@
                 <div class="flex max-w-[200px] justify-end">
                   <button
                     @click="cartOpen = !cartOpen"
-                    class="text-dark relative flex items-center justify-center dark:text-white"
+                    class="relative flex items-center justify-center text-dark dark:text-white"
                   >
                     <svg
                       width="26"
@@ -562,7 +562,7 @@
                     </svg>
 
                     <span
-                      class="bg-primary absolute -top-2 -right-2 h-4 w-4 rounded-full text-[10px] font-normal text-white"
+                      class="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-primary text-[10px] font-normal text-white"
                     >
                       1
                     </span>
@@ -571,13 +571,13 @@
                 <div
                   x-show="cartOpen"
                   @click.outside="cartOpen = false"
-                  class="absolute top-full right-0 mt-5 w-[330px]"
+                  class="absolute right-0 top-full mt-5 w-[330px]"
                 >
                   <div
-                    class="shadow-1 dark:bg-dark-2 dark:shadow-box-dark overflow-hidden rounded-lg bg-white p-8"
+                    class="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark"
                   >
                     <div
-                      class="border-stroke dark:border-dark-3 mb-5 border-b pb-3"
+                      class="mb-5 border-b border-stroke pb-3 dark:border-dark-3"
                     >
                       <div class="-mx-1 flex items-center justify-between pb-4">
                         <div class="flex items-center px-1">
@@ -593,12 +593,12 @@
                           <div>
                             <a
                               href="product-details.html"
-                              class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                              class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                             >
                               Circular Sienna
                             </a>
                             <p
-                              class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                              class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                             >
                               Awesome white shirt
                             </p>
@@ -606,7 +606,7 @@
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $36.00
                           </p>
@@ -626,12 +626,12 @@
                           <div>
                             <a
                               href="product-details.html"
-                              class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                              class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                             >
                               Black T-shirt
                             </a>
                             <p
-                              class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                              class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                             >
                               It's a nice black t-shirt
                             </p>
@@ -639,7 +639,7 @@
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $36.00
                           </p>
@@ -647,17 +647,17 @@
                       </div>
                     </div>
                     <div
-                      class="border-stroke dark:border-dark-3 -mx-1 border-b pb-5"
+                      class="-mx-1 border-b border-stroke pb-5 dark:border-dark-3"
                     >
                       <div class="mb-3 flex items-center justify-between">
                         <div class="px-1">
-                          <p class="text-dark text-base dark:text-white">
+                          <p class="text-base text-dark dark:text-white">
                             Subtotal
                           </p>
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-medium dark:text-white"
+                            class="text-base font-medium text-dark dark:text-white"
                           >
                             $108
                           </p>
@@ -665,13 +665,13 @@
                       </div>
                       <div class="mb-3 flex items-center justify-between">
                         <div class="px-1">
-                          <p class="text-dark text-base dark:text-white">
+                          <p class="text-base text-dark dark:text-white">
                             Shipping Cost (+)
                           </p>
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-medium dark:text-white"
+                            class="text-base font-medium text-dark dark:text-white"
                           >
                             $10.85
                           </p>
@@ -679,13 +679,13 @@
                       </div>
                       <div class="flex items-center justify-between">
                         <div class="px-1">
-                          <p class="text-dark text-base dark:text-white">
+                          <p class="text-base text-dark dark:text-white">
                             Discount (-)
                           </p>
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-medium dark:text-white"
+                            class="text-base font-medium text-dark dark:text-white"
                           >
                             $9.00
                           </p>
@@ -693,16 +693,16 @@
                       </div>
                     </div>
                     <div
-                      class="-mx-1 flex items-center justify-between pt-5 pb-6"
+                      class="-mx-1 flex items-center justify-between pb-6 pt-5"
                     >
                       <div class="px-1">
-                        <p class="text-dark text-base dark:text-white">
+                        <p class="text-base text-dark dark:text-white">
                           Total Payable
                         </p>
                       </div>
                       <div class="px-1">
                         <p
-                          class="text-dark text-base font-medium dark:text-white"
+                          class="text-base font-medium text-dark dark:text-white"
                         >
                           $88.15
                         </p>
@@ -712,7 +712,7 @@
                     <div>
                       <a
                         href="shopping-cart.html"
-                        class="bg-primary hover:bg-blue-dark flex w-full items-center justify-center rounded-md px-10 py-[13px] text-center text-base font-medium text-white"
+                        class="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Go to Cart
                       </a>
@@ -742,30 +742,30 @@
         x-ref="carousel"
       >
         <div
-          class="bg-gray dark:bg-dark-2 relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden"
+          class="relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden bg-gray dark:bg-dark-2"
         >
           <div class="container mx-auto">
             <div class="-mx-4 flex flex-wrap items-center">
               <div class="w-full px-4 lg:w-1/2">
                 <div class="mt-20 max-w-[570px] lg:mt-0">
                   <span
-                    class="text-primary mb-[14px] block text-lg font-semibold"
+                    class="mb-[14px] block text-lg font-semibold text-primary"
                   >
                     Start From $299
                   </span>
                   <h2
-                    class="text-dark mb-[18px] text-2xl !leading-[1.25] font-bold xl:text-4xl dark:text-white"
+                    class="mb-[18px] text-2xl font-bold !leading-[1.25] text-dark dark:text-white xl:text-4xl"
                   >
                     Ultra HD Quality Bluetooth Sound Speakers
                   </h2>
-                  <p class="text-body-color dark:text-dark-6 mb-9 text-base">
+                  <p class="mb-9 text-base text-body-color dark:text-dark-6">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vestibulum ornare vestibulum mollis. Nam vitae augue purus.
                   </p>
 
                   <a
                     href="filters.html"
-                    class="bg-primary hover:bg-blue-dark inline-flex items-center justify-center rounded-full px-7 py-[13px] text-center text-base font-medium text-white"
+                    class="inline-flex items-center justify-center rounded-full bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
                   >
                     Shop Now
                   </a>
@@ -784,7 +784,7 @@
             </div>
           </div>
 
-          <div class="absolute top-0 right-0 -z-10">
+          <div class="absolute right-0 top-0 -z-10">
             <svg
               width="620"
               height="560"
@@ -811,7 +811,7 @@
               </defs>
             </svg>
           </div>
-          <div class="absolute top-0 right-0 -z-10">
+          <div class="absolute right-0 top-0 -z-10">
             <svg
               width="536"
               height="560"
@@ -840,30 +840,30 @@
           </div>
         </div>
         <div
-          class="bg-gray dark:bg-dark-2 relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden"
+          class="relative z-10 mx-auto h-full min-w-[100vw] overflow-hidden bg-gray dark:bg-dark-2"
         >
           <div class="container mx-auto">
             <div class="-mx-4 flex flex-wrap items-center">
               <div class="w-full px-4 lg:w-1/2">
                 <div class="mt-20 max-w-[570px] lg:mt-0">
                   <span
-                    class="text-primary mb-[14px] block text-lg font-semibold"
+                    class="mb-[14px] block text-lg font-semibold text-primary"
                   >
                     Start From $299
                   </span>
                   <h2
-                    class="text-dark mb-[18px] text-2xl !leading-[1.25] font-bold xl:text-4xl dark:text-white"
+                    class="mb-[18px] text-2xl font-bold !leading-[1.25] text-dark dark:text-white xl:text-4xl"
                   >
                     Ultra HD Quality Bluetooth Sound Speakers
                   </h2>
-                  <p class="text-body-color dark:text-dark-6 mb-9 text-base">
+                  <p class="mb-9 text-base text-body-color dark:text-dark-6">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vestibulum ornare vestibulum mollis. Nam vitae augue purus.
                   </p>
 
                   <a
                     href="filters.html"
-                    class="bg-primary hover:bg-blue-dark inline-flex items-center justify-center rounded-full px-7 py-[13px] text-center text-base font-medium text-white"
+                    class="inline-flex items-center justify-center rounded-full bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
                   >
                     Shop Now
                   </a>
@@ -882,7 +882,7 @@
             </div>
           </div>
 
-          <div class="absolute top-0 right-0 -z-10">
+          <div class="absolute right-0 top-0 -z-10">
             <svg
               width="620"
               height="560"
@@ -909,7 +909,7 @@
               </defs>
             </svg>
           </div>
-          <div class="absolute top-0 right-0 -z-10">
+          <div class="absolute right-0 top-0 -z-10">
             <svg
               width="536"
               height="560"
@@ -940,7 +940,7 @@
       </div>
       <div>
         <button
-          class="border-body-color text-body-color hover:border-primary hover:bg-primary dark:border-dark-6 dark:text-dark-6 absolute top-1/2 left-4 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-transparent transition-all hover:text-white"
+          class="absolute left-4 top-1/2 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-body-color bg-transparent text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-6 dark:text-dark-6"
           @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft - ($refs.carousel.scrollWidth / slides.length); activeSlide -= 1"
         >
           <svg
@@ -957,7 +957,7 @@
           </svg>
         </button>
         <button
-          class="border-body-color text-body-color hover:border-primary hover:bg-primary dark:border-dark-6 dark:text-dark-6 absolute top-1/2 right-4 left-auto z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border bg-transparent transition-all hover:text-white"
+          class="absolute left-auto right-4 top-1/2 z-40 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-body-color bg-transparent text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-6 dark:text-dark-6"
           @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft + ($refs.carousel.scrollWidth / slides.length); activeSlide += 1"
         >
           <svg
@@ -978,7 +978,7 @@
     <!-- ====== eCommerce Header Section End -->
 
     <!-- ====== Category Section Start -->
-    <section class="dark:bg-dark bg-white py-20">
+    <section class="bg-white py-20 dark:bg-dark">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 lg:w-1/2">
@@ -989,17 +989,17 @@
                 class="h-full w-full object-cover object-center"
               />
               <div
-                class="absolute top-0 left-0 h-full w-full px-6 py-10 sm:px-10"
+                class="absolute left-0 top-0 h-full w-full px-6 py-10 sm:px-10"
               >
                 <div class="max-w-[400px]">
                   <span
-                    class="text-body-color mb-3 block text-base font-medium"
+                    class="mb-3 block text-base font-medium text-body-color"
                   >
                     #House
                   </span>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark text-xl font-semibold lg:text-2xl xl:text-[28px] xl:leading-10"
+                    class="text-xl font-semibold text-dark lg:text-2xl xl:text-[28px] xl:leading-10"
                   >
                     Express Your Beautiful Life Through Furniture
                   </a>
@@ -1018,17 +1018,17 @@
                 class="h-full w-full object-cover object-center"
               />
               <div
-                class="absolute top-0 left-0 h-full w-full px-6 py-10 sm:px-10"
+                class="absolute left-0 top-0 h-full w-full px-6 py-10 sm:px-10"
               >
                 <div class="max-w-[400px]">
                   <span
-                    class="text-body-color mb-3 block text-base font-medium"
+                    class="mb-3 block text-base font-medium text-body-color"
                   >
                     #Accessories
                   </span>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark text-xl font-semibold lg:text-2xl xl:text-[28px] xl:leading-10"
+                    class="text-xl font-semibold text-dark lg:text-2xl xl:text-[28px] xl:leading-10"
                   >
                     Discover Our Accessories Collection
                   </a>
@@ -1045,17 +1045,17 @@
                 class="h-full w-full object-cover object-center"
               />
               <div
-                class="absolute top-0 left-0 h-full w-full px-6 py-10 sm:px-10"
+                class="absolute left-0 top-0 h-full w-full px-6 py-10 sm:px-10"
               >
                 <div class="max-w-[400px]">
                   <span
-                    class="text-body-color mb-3 block text-base font-medium"
+                    class="mb-3 block text-base font-medium text-body-color"
                   >
                     #Office
                   </span>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark text-xl font-semibold lg:text-2xl xl:text-[28px] xl:leading-10"
+                    class="text-xl font-semibold text-dark lg:text-2xl xl:text-[28px] xl:leading-10"
                   >
                     Make Your Workspace More Comfortable
                   </a>
@@ -1070,18 +1070,18 @@
 
     <!-- ====== Products Carousel Section Start -->
     <section
-      class="dark:bg-dark-2 bg-[#fafafa] pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      class="bg-[#fafafa] pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-12 max-w-[510px] text-center lg:mb-[70px]">
               <h2
-                class="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Our Latest Products
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -1101,14 +1101,14 @@
             <div class="relative flex justify-center">
               <div class="relative w-full pb-16">
                 <div
-                  class="flex-no-wrap snap xs:max-w-[400px] mx-auto flex h-auto w-full max-w-[300px] overflow-hidden pb-5 transition-all sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] 2xl:max-w-[1320px]"
+                  class="flex-no-wrap snap mx-auto flex h-auto w-full max-w-[300px] overflow-hidden pb-5 transition-all xs:max-w-[400px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] 2xl:max-w-[1320px]"
                   x-ref="carousel"
                 >
                   <div
-                    class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                    class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                   >
                     <div
-                      class="shadow-1 dark:bg-dark dark:shadow-box-dark overflow-hidden rounded-lg bg-white"
+                      class="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark dark:shadow-box-dark"
                     >
                       <div>
                         <img
@@ -1120,20 +1120,20 @@
                       <div class="p-6">
                         <a
                           href="product-details.html"
-                          class="text-dark hover:text-primary xs:text-xl mb-3 block text-lg font-semibold lg:text-lg xl:text-xl dark:text-white"
+                          class="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl lg:text-lg xl:text-xl"
                         >
                           Apple Watch Series 7
                         </a>
-                        <p class="text-body-color dark:text-dark-6 text-base">
+                        <p class="text-base text-body-color dark:text-dark-6">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit enim luctus et lorem.
                         </p>
                       </div>
                       <div
-                        class="border-stroke dark:border-dark-3 flex justify-between border-t"
+                        class="flex justify-between border-t border-stroke dark:border-dark-3"
                       >
                         <div
-                          class="xs:px-4 flex items-center gap-1 px-3 py-4 lg:px-3 xl:px-6"
+                          class="flex items-center gap-1 px-3 py-4 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span>
                             <svg
@@ -1242,16 +1242,16 @@
                           </span>
 
                           <span
-                            class="text-body-color dark:text-dark-6 pl-1 text-sm font-medium"
+                            class="pl-1 text-sm font-medium text-body-color dark:text-dark-6"
                           >
                             (55) Reviews
                           </span>
                         </div>
                         <div
-                          class="border-stroke dark:border-dark-3 xs:px-4 border-l px-3 py-4 lg:px-3 xl:px-6"
+                          class="border-l border-stroke px-3 py-4 dark:border-dark-3 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $299
                           </span>
@@ -1260,10 +1260,10 @@
                     </div>
                   </div>
                   <div
-                    class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                    class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                   >
                     <div
-                      class="shadow-1 dark:bg-dark dark:shadow-box-dark overflow-hidden rounded-lg bg-white"
+                      class="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark dark:shadow-box-dark"
                     >
                       <div>
                         <img
@@ -1275,20 +1275,20 @@
                       <div class="p-6">
                         <a
                           href="product-details.html"
-                          class="text-dark hover:text-primary xs:text-xl mb-3 block text-lg font-semibold lg:text-lg xl:text-xl dark:text-white"
+                          class="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl lg:text-lg xl:text-xl"
                         >
                           iPhone 13 Pro Max
                         </a>
-                        <p class="text-body-color dark:text-dark-6 text-base">
+                        <p class="text-base text-body-color dark:text-dark-6">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit enim luctus et lorem.
                         </p>
                       </div>
                       <div
-                        class="border-stroke dark:border-dark-3 flex justify-between border-t"
+                        class="flex justify-between border-t border-stroke dark:border-dark-3"
                       >
                         <div
-                          class="xs:px-4 flex items-center gap-1 px-3 py-4 lg:px-3 xl:px-6"
+                          class="flex items-center gap-1 px-3 py-4 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span>
                             <svg
@@ -1397,16 +1397,16 @@
                           </span>
 
                           <span
-                            class="text-body-color dark:text-dark-6 pl-1 text-sm font-medium"
+                            class="pl-1 text-sm font-medium text-body-color dark:text-dark-6"
                           >
                             (32) Reviews
                           </span>
                         </div>
                         <div
-                          class="border-stroke dark:border-dark-3 xs:px-4 border-l px-3 py-4 lg:px-3 xl:px-6"
+                          class="border-l border-stroke px-3 py-4 dark:border-dark-3 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $999
                           </span>
@@ -1415,10 +1415,10 @@
                     </div>
                   </div>
                   <div
-                    class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                    class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                   >
                     <div
-                      class="shadow-1 dark:bg-dark dark:shadow-box-dark overflow-hidden rounded-lg bg-white"
+                      class="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark dark:shadow-box-dark"
                     >
                       <div>
                         <img
@@ -1430,20 +1430,20 @@
                       <div class="p-6">
                         <a
                           href="product-details.html"
-                          class="text-dark hover:text-primary xs:text-xl mb-3 block text-lg font-semibold lg:text-lg xl:text-xl dark:text-white"
+                          class="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl lg:text-lg xl:text-xl"
                         >
                           Macbook Pro 13” M1 2020
                         </a>
-                        <p class="text-body-color dark:text-dark-6 text-base">
+                        <p class="text-base text-body-color dark:text-dark-6">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit enim luctus et lorem.
                         </p>
                       </div>
                       <div
-                        class="border-stroke dark:border-dark-3 flex justify-between border-t"
+                        class="flex justify-between border-t border-stroke dark:border-dark-3"
                       >
                         <div
-                          class="xs:px-4 flex items-center gap-1 px-3 py-4 lg:px-3 xl:px-6"
+                          class="flex items-center gap-1 px-3 py-4 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span>
                             <svg
@@ -1552,16 +1552,16 @@
                           </span>
 
                           <span
-                            class="text-body-color dark:text-dark-6 pl-1 text-sm font-medium"
+                            class="pl-1 text-sm font-medium text-body-color dark:text-dark-6"
                           >
                             (15) Reviews
                           </span>
                         </div>
                         <div
-                          class="border-stroke dark:border-dark-3 xs:px-4 border-l px-3 py-4 lg:px-3 xl:px-6"
+                          class="border-l border-stroke px-3 py-4 dark:border-dark-3 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $1299
                           </span>
@@ -1570,10 +1570,10 @@
                     </div>
                   </div>
                   <div
-                    class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                    class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[350px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                   >
                     <div
-                      class="shadow-1 dark:bg-dark dark:shadow-box-dark overflow-hidden rounded-lg bg-white"
+                      class="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark dark:shadow-box-dark"
                     >
                       <div>
                         <img
@@ -1585,20 +1585,20 @@
                       <div class="p-6">
                         <a
                           href="product-details.html"
-                          class="text-dark hover:text-primary xs:text-xl mb-3 block text-lg font-semibold lg:text-lg xl:text-xl dark:text-white"
+                          class="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl lg:text-lg xl:text-xl"
                         >
                           iPhone 13 Pro Max
                         </a>
-                        <p class="text-body-color dark:text-dark-6 text-base">
+                        <p class="text-base text-body-color dark:text-dark-6">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit enim luctus et lorem.
                         </p>
                       </div>
                       <div
-                        class="border-stroke dark:border-dark-3 flex justify-between border-t"
+                        class="flex justify-between border-t border-stroke dark:border-dark-3"
                       >
                         <div
-                          class="xs:px-4 flex items-center gap-1 px-3 py-4 lg:px-3 xl:px-6"
+                          class="flex items-center gap-1 px-3 py-4 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span>
                             <svg
@@ -1707,16 +1707,16 @@
                           </span>
 
                           <span
-                            class="text-body-color dark:text-dark-6 pl-1 text-sm font-medium"
+                            class="pl-1 text-sm font-medium text-body-color dark:text-dark-6"
                           >
                             (32) Reviews
                           </span>
                         </div>
                         <div
-                          class="border-stroke dark:border-dark-3 xs:px-4 border-l px-3 py-4 lg:px-3 xl:px-6"
+                          class="border-l border-stroke px-3 py-4 dark:border-dark-3 xs:px-4 lg:px-3 xl:px-6"
                         >
                           <span
-                            class="text-dark text-base font-semibold dark:text-white"
+                            class="text-base font-semibold text-dark dark:text-white"
                           >
                             $999
                           </span>
@@ -1726,13 +1726,13 @@
                   </div>
                 </div>
                 <div
-                  class="absolute right-0 bottom-0 left-0 flex items-center justify-center"
+                  class="absolute bottom-0 left-0 right-0 flex items-center justify-center"
                 >
                   <div
-                    class="border-stroke dark:border-dark-3 dark:bg-dark-2 inline-flex space-x-3 rounded-full border p-[6px]"
+                    class="inline-flex space-x-3 rounded-full border border-stroke p-[6px] dark:border-dark-3 dark:bg-dark-2"
                   >
                     <button
-                      class="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6 flex h-[30px] w-[30px] items-center justify-center rounded-full border bg-white hover:text-white"
+                      class="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-stroke bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
                       @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft - ($refs.carousel.scrollWidth / slides.length); activeSlide -= 1"
                     >
                       <svg
@@ -1749,7 +1749,7 @@
                       </svg>
                     </button>
                     <button
-                      class="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6 flex h-[30px] w-[30px] items-center justify-center rounded-full border bg-white hover:text-white"
+                      class="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-stroke bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
                       @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft + ($refs.carousel.scrollWidth / slides.length); activeSlide += 1"
                     >
                       <svg
@@ -1776,17 +1776,17 @@
     <!-- ====== Products Carousel Section End -->
 
     <!-- ====== Product Grids Start -->
-    <section class="dark:bg-dark bg-white py-20 lg:py-[120px]">
+    <section class="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-12 max-w-[510px] text-center lg:mb-[70px]">
               <h2
-                class="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Trending Products
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -1794,10 +1794,10 @@
           </div>
         </div>
 
-        <div class="border-stroke dark:border-dark-3 rounded-[10px] border">
+        <div class="rounded-[10px] border border-stroke dark:border-dark-3">
           <div class="flex flex-wrap">
             <div
-              class="border-stroke dark:border-dark-3 w-full border-b px-6 md:w-1/2 md:border-r lg:w-1/3"
+              class="w-full border-b border-stroke px-6 dark:border-dark-3 md:w-1/2 md:border-r lg:w-1/3"
             >
               <div class="my-6">
                 <div class="mb-5 overflow-hidden rounded-md">
@@ -1809,7 +1809,7 @@
                 </div>
                 <div>
                   <span
-                    class="text-dark mb-[10px] block text-lg font-semibold dark:text-white"
+                    class="mb-[10px] block text-lg font-semibold text-dark dark:text-white"
                   >
                     $59.55
                   </span>
@@ -1817,13 +1817,13 @@
                   <h3>
                     <a
                       href="product-details.html"
-                      class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-2xl md:text-lg 2xl:text-2xl dark:text-white"
+                      class="mb-2 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl md:text-lg 2xl:text-2xl"
                     >
                       Table Top Showpiece
                     </a>
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-1">
                       <svg
@@ -1937,7 +1937,7 @@
               </div>
             </div>
             <div
-              class="border-stroke dark:border-dark-3 w-full border-b px-6 md:w-1/2 lg:w-1/3 lg:border-r"
+              class="w-full border-b border-stroke px-6 dark:border-dark-3 md:w-1/2 lg:w-1/3 lg:border-r"
             >
               <div class="my-6">
                 <div class="mb-5 overflow-hidden rounded-md">
@@ -1949,7 +1949,7 @@
                 </div>
                 <div>
                   <span
-                    class="text-dark mb-[10px] block text-lg font-semibold dark:text-white"
+                    class="mb-[10px] block text-lg font-semibold text-dark dark:text-white"
                   >
                     $40.00
                   </span>
@@ -1957,13 +1957,13 @@
                   <h3>
                     <a
                       href="product-details.html"
-                      class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-2xl md:text-lg 2xl:text-2xl dark:text-white"
+                      class="mb-2 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl md:text-lg 2xl:text-2xl"
                     >
                       Ceramic Coffee Mug
                     </a>
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-1">
                       <svg
@@ -2077,7 +2077,7 @@
               </div>
             </div>
             <div
-              class="border-stroke dark:border-dark-3 w-full border-b px-6 md:w-1/2 md:border-r lg:w-1/3 lg:border-r-0"
+              class="w-full border-b border-stroke px-6 dark:border-dark-3 md:w-1/2 md:border-r lg:w-1/3 lg:border-r-0"
             >
               <div class="my-6">
                 <div class="mb-5 overflow-hidden rounded-md">
@@ -2089,7 +2089,7 @@
                 </div>
                 <div>
                   <span
-                    class="text-dark mb-[10px] block text-lg font-semibold dark:text-white"
+                    class="mb-[10px] block text-lg font-semibold text-dark dark:text-white"
                   >
                     $80.00
                   </span>
@@ -2097,13 +2097,13 @@
                   <h3>
                     <a
                       href="product-details.html"
-                      class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-2xl md:text-lg 2xl:text-2xl dark:text-white"
+                      class="mb-2 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl md:text-lg 2xl:text-2xl"
                     >
                       Modern Coffee Mug
                     </a>
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-1">
                       <svg
@@ -2217,7 +2217,7 @@
               </div>
             </div>
             <div
-              class="border-stroke dark:border-dark-3 w-full border-b px-6 md:w-1/2 lg:w-1/3 lg:border-r lg:border-b-0"
+              class="w-full border-b border-stroke px-6 dark:border-dark-3 md:w-1/2 lg:w-1/3 lg:border-b-0 lg:border-r"
             >
               <div class="my-6">
                 <div class="mb-5 overflow-hidden rounded-md">
@@ -2229,7 +2229,7 @@
                 </div>
                 <div>
                   <span
-                    class="text-dark mb-[10px] block text-lg font-semibold dark:text-white"
+                    class="mb-[10px] block text-lg font-semibold text-dark dark:text-white"
                   >
                     $49.55
                   </span>
@@ -2237,13 +2237,13 @@
                   <h3>
                     <a
                       href="product-details.html"
-                      class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-2xl md:text-lg 2xl:text-2xl dark:text-white"
+                      class="mb-2 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl md:text-lg 2xl:text-2xl"
                     >
                       Metal Table Lamp
                     </a>
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-1">
                       <svg
@@ -2357,7 +2357,7 @@
               </div>
             </div>
             <div
-              class="border-stroke dark:border-dark-3 w-full border-b px-6 md:w-1/2 md:border-r md:border-b-0 lg:w-1/3"
+              class="w-full border-b border-stroke px-6 dark:border-dark-3 md:w-1/2 md:border-b-0 md:border-r lg:w-1/3"
             >
               <div class="my-6">
                 <div class="mb-5 overflow-hidden rounded-md">
@@ -2369,7 +2369,7 @@
                 </div>
                 <div>
                   <span
-                    class="text-dark mb-[10px] block text-lg font-semibold dark:text-white"
+                    class="mb-[10px] block text-lg font-semibold text-dark dark:text-white"
                   >
                     $25.55
                   </span>
@@ -2377,13 +2377,13 @@
                   <h3>
                     <a
                       href="product-details.html"
-                      class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-2xl md:text-lg 2xl:text-2xl dark:text-white"
+                      class="mb-2 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl md:text-lg 2xl:text-2xl"
                     >
                       Rubik's Cube
                     </a>
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-1">
                       <svg
@@ -2497,7 +2497,7 @@
               </div>
             </div>
             <div
-              class="border-stroke dark:border-dark-3 w-full px-6 md:w-1/2 lg:w-1/3"
+              class="w-full border-stroke px-6 dark:border-dark-3 md:w-1/2 lg:w-1/3"
             >
               <div class="my-6">
                 <div class="mb-5 overflow-hidden rounded-md">
@@ -2509,7 +2509,7 @@
                 </div>
                 <div>
                   <span
-                    class="text-dark mb-[10px] block text-lg font-semibold dark:text-white"
+                    class="mb-[10px] block text-lg font-semibold text-dark dark:text-white"
                   >
                     $85.55
                   </span>
@@ -2517,13 +2517,13 @@
                   <h3>
                     <a
                       href="product-details.html"
-                      class="text-dark hover:text-primary mb-2 block text-xl font-semibold sm:text-2xl md:text-lg 2xl:text-2xl dark:text-white"
+                      class="mb-2 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl md:text-lg 2xl:text-2xl"
                     >
                       Table Showpiece
                     </a>
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-1">
                       <svg
@@ -2643,20 +2643,20 @@
     <!-- ====== Product Grids End -->
 
     <!-- ====== Testimonials Section Start -->
-    <section class="dark:bg-dark pb-10 lg:pb-20">
+    <section class="pb-10 dark:bg-dark lg:pb-20">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Testimonials
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 What our Clients Says
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -2677,14 +2677,14 @@
           <div class="relative flex justify-center">
             <div class="relative w-full pb-16">
               <div
-                class="flex-no-wrap snap xs:max-w-[400px] mx-auto flex h-auto w-full max-w-[300px] overflow-hidden transition-all sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] 2xl:max-w-[1320px]"
+                class="flex-no-wrap snap mx-auto flex h-auto w-full max-w-[300px] overflow-hidden transition-all xs:max-w-[400px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] 2xl:max-w-[1320px]"
                 x-ref="carousel"
               >
                 <div
-                  class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                  class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                 >
                   <div
-                    class="shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark mb-10 bg-white p-8 lg:px-6 lg:py-8 xl:p-8"
+                    class="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8"
                   >
                     <div class="mb-5 flex items-center">
                       <span class="mr-1">
@@ -2759,7 +2759,7 @@
                       </span>
                     </div>
 
-                    <p class="text-body-color dark:text-dark-6 mb-6 text-base">
+                    <p class="mb-6 text-base text-body-color dark:text-dark-6">
                       “Our members are so impressed. It's intuitive. It's clean.
                       It's distraction free. If you're building a community.
                     </p>
@@ -2773,12 +2773,12 @@
                       </div>
                       <div class="w-full">
                         <h5
-                          class="text-dark mb-0.5 text-sm font-semibold dark:text-white"
+                          class="mb-0.5 text-sm font-semibold text-dark dark:text-white"
                         >
                           Sabo Masties
                         </h5>
                         <p
-                          class="text-secondary-color dark:text-dark-6 text-xs"
+                          class="text-xs text-secondary-color dark:text-dark-6"
                         >
                           Founder @ Rolex
                         </p>
@@ -2787,10 +2787,10 @@
                   </div>
                 </div>
                 <div
-                  class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                  class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                 >
                   <div
-                    class="shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark mb-10 bg-white p-8 lg:px-6 lg:py-8 xl:p-8"
+                    class="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8"
                   >
                     <div class="mb-5 flex items-center">
                       <span class="mr-1">
@@ -2865,7 +2865,7 @@
                       </span>
                     </div>
 
-                    <p class="text-body-color dark:text-dark-6 mb-6 text-base">
+                    <p class="mb-6 text-base text-body-color dark:text-dark-6">
                       “Our members are so impressed. It's intuitive. It's clean.
                       It's distraction free. If you're building a community.
                     </p>
@@ -2879,12 +2879,12 @@
                       </div>
                       <div class="w-full">
                         <h5
-                          class="text-dark mb-0.5 text-sm font-semibold dark:text-white"
+                          class="mb-0.5 text-sm font-semibold text-dark dark:text-white"
                         >
                           Sabo Masties
                         </h5>
                         <p
-                          class="text-secondary-color dark:text-dark-6 text-xs"
+                          class="text-xs text-secondary-color dark:text-dark-6"
                         >
                           Founder @ Rolex
                         </p>
@@ -2893,10 +2893,10 @@
                   </div>
                 </div>
                 <div
-                  class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                  class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                 >
                   <div
-                    class="shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark mb-10 bg-white p-8 lg:px-6 lg:py-8 xl:p-8"
+                    class="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8"
                   >
                     <div class="mb-5 flex items-center">
                       <span class="mr-1">
@@ -2971,7 +2971,7 @@
                       </span>
                     </div>
 
-                    <p class="text-body-color dark:text-dark-6 mb-6 text-base">
+                    <p class="mb-6 text-base text-body-color dark:text-dark-6">
                       “Our members are so impressed. It's intuitive. It's clean.
                       It's distraction free. If you're building a community.
                     </p>
@@ -2985,12 +2985,12 @@
                       </div>
                       <div class="w-full">
                         <h5
-                          class="text-dark mb-0.5 text-sm font-semibold dark:text-white"
+                          class="mb-0.5 text-sm font-semibold text-dark dark:text-white"
                         >
                           Sabo Masties
                         </h5>
                         <p
-                          class="text-secondary-color dark:text-dark-6 text-xs"
+                          class="text-xs text-secondary-color dark:text-dark-6"
                         >
                           Founder @ Rolex
                         </p>
@@ -2999,10 +2999,10 @@
                   </div>
                 </div>
                 <div
-                  class="xs:min-w-[368px] mx-auto h-full min-w-[300px] px-4 sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
+                  class="mx-auto h-full min-w-[300px] px-4 xs:min-w-[368px] sm:min-w-[510px] md:min-w-[340px] lg:min-w-[465px] xl:min-w-[370px] 2xl:min-w-[430px]"
                 >
                   <div
-                    class="shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark mb-10 bg-white p-8 lg:px-6 lg:py-8 xl:p-8"
+                    class="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8"
                   >
                     <div class="mb-5 flex items-center">
                       <span class="mr-1">
@@ -3077,7 +3077,7 @@
                       </span>
                     </div>
 
-                    <p class="text-body-color dark:text-dark-6 mb-6 text-base">
+                    <p class="mb-6 text-base text-body-color dark:text-dark-6">
                       “Our members are so impressed. It's intuitive. It's clean.
                       It's distraction free. If you're building a community.
                     </p>
@@ -3091,12 +3091,12 @@
                       </div>
                       <div class="w-full">
                         <h5
-                          class="text-dark mb-0.5 text-sm font-semibold dark:text-white"
+                          class="mb-0.5 text-sm font-semibold text-dark dark:text-white"
                         >
                           Sabo Masties
                         </h5>
                         <p
-                          class="text-secondary-color dark:text-dark-6 text-xs"
+                          class="text-xs text-secondary-color dark:text-dark-6"
                         >
                           Founder @ Rolex
                         </p>
@@ -3106,10 +3106,10 @@
                 </div>
               </div>
               <div
-                class="absolute right-0 bottom-0 left-0 flex items-center justify-center gap-3"
+                class="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-3"
               >
                 <button
-                  class="text-dark shadow-btn-3 hover:bg-primary dark:bg-dark-2 flex h-12 w-12 items-center justify-center bg-white transition-all hover:text-white dark:text-white dark:shadow-none"
+                  class="flex h-12 w-12 items-center justify-center bg-white text-dark shadow-btn-3 transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none"
                   @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft - ($refs.carousel.scrollWidth / slides.length); activeSlide -= 1"
                 >
                   <svg
@@ -3127,7 +3127,7 @@
                   </svg>
                 </button>
                 <button
-                  class="text-dark shadow-btn-3 hover:bg-primary dark:bg-dark-2 flex h-12 w-12 items-center justify-center bg-white transition-all hover:text-white dark:text-white dark:shadow-none"
+                  class="flex h-12 w-12 items-center justify-center bg-white text-dark shadow-btn-3 transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none"
                   @click="$refs.carousel.scrollLeft = $refs.carousel.scrollLeft + ($refs.carousel.scrollWidth / slides.length); activeSlide += 1"
                 >
                   <svg
@@ -3153,25 +3153,25 @@
     <!-- ====== Testimonials Section End -->
 
     <!-- ====== Blog Section Start -->
-    <section class="dark:bg-dark pb-10 lg:pb-20">
+    <section class="pb-10 dark:bg-dark lg:pb-20">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap justify-center">
           <div class="relative z-10 w-full px-4">
             <div class="mb-[60px] max-w-[510px] lg:mb-20">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Latest News
               </span>
               <h2
-                class="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Recent Blog Articles
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
             </div>
-            <div class="absolute top-0 right-4 z-[-1]">
+            <div class="absolute right-4 top-0 z-[-1]">
               <svg
                 width="232"
                 height="75"
@@ -3805,21 +3805,21 @@
               </div>
               <div>
                 <span
-                  class="text-primary mb-3 inline-block text-base font-semibold"
+                  class="mb-3 inline-block text-base font-semibold text-primary"
                 >
                   Management
                 </span>
                 <h3>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark hover:text-primary mb-5 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                    class="mb-5 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                   >
                     Meet AutoManage, the best AI management tools
                   </a>
                 </h3>
                 <div class="flex items-center">
                   <p
-                    class="text-body-color mr-8 flex items-center text-sm font-medium"
+                    class="mr-8 flex items-center text-sm font-medium text-body-color"
                   >
                     <span class="mr-3">
                       <svg
@@ -3839,7 +3839,7 @@
                   </p>
 
                   <p
-                    class="text-body-color flex items-center text-sm font-medium"
+                    class="flex items-center text-sm font-medium text-body-color"
                   >
                     <span class="mr-3">
                       <svg
@@ -3880,21 +3880,21 @@
               </div>
               <div>
                 <span
-                  class="text-primary mb-3 inline-block text-base font-semibold"
+                  class="mb-3 inline-block text-base font-semibold text-primary"
                 >
                   Graphic Design
                 </span>
                 <h3>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark hover:text-primary mb-5 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white"
+                    class="mb-5 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                   >
                     50+ best way to learn graphics design in 30 days
                   </a>
                 </h3>
                 <div class="flex items-center">
                   <p
-                    class="text-body-color mr-8 flex items-center text-sm font-medium"
+                    class="mr-8 flex items-center text-sm font-medium text-body-color"
                   >
                     <span class="mr-3">
                       <svg
@@ -3914,7 +3914,7 @@
                   </p>
 
                   <p
-                    class="text-body-color flex items-center text-sm font-medium"
+                    class="flex items-center text-sm font-medium text-body-color"
                   >
                     <span class="mr-3">
                       <svg
@@ -3946,7 +3946,7 @@
           </div>
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="bg-primary relative mx-auto mb-10 max-w-[370px] overflow-hidden rounded px-11 py-[60px] text-center lg:px-8"
+              class="relative mx-auto mb-10 max-w-[370px] overflow-hidden rounded bg-primary px-11 py-[60px] text-center lg:px-8"
             >
               <h3 class="mb-2 text-2xl font-semibold text-white">
                 Join our newsletter!
@@ -3958,7 +3958,7 @@
                 <input
                   type="email"
                   placeholder="Your email address"
-                  class="placeholder:text-dark-6 mb-4 w-full rounded border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white outline-none focus:border-white focus-visible:shadow-none"
+                  class="mb-4 w-full rounded border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white outline-none placeholder:text-dark-6 focus:border-white focus-visible:shadow-none"
                 />
                 <input
                   type="submit"
@@ -3971,7 +3971,7 @@
               </p>
 
               <div>
-                <span class="absolute top-0 right-0">
+                <span class="absolute right-0 top-0">
                   <svg
                     width="46"
                     height="46"
@@ -4426,10 +4426,10 @@
                     <input
                       type="email"
                       placeholder="Email address"
-                      class="h-[50px] w-full bg-[#1f2735] pr-[125px] pl-5 text-[#CACBCF] outline-none placeholder:text-[#CACBCF]"
+                      class="h-[50px] w-full bg-[#1f2735] pl-5 pr-[125px] text-[#CACBCF] outline-none placeholder:text-[#CACBCF]"
                     />
                     <button
-                      class="bg-primary hover:bg-blue-dark absolute top-1/2 right-2 -translate-y-1/2 px-5 py-2 text-sm font-medium text-white"
+                      class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary px-5 py-2 text-sm font-medium text-white hover:bg-blue-dark"
                     >
                       Subscribe
                     </button>
@@ -4473,7 +4473,7 @@
             </svg>
           </span>
 
-          <span class="absolute top-5 right-5 -z-10">
+          <span class="absolute right-5 top-5 -z-10">
             <svg
               width="53"
               height="69"
@@ -4584,7 +4584,7 @@
             </svg>
           </span>
 
-          <span class="absolute top-0 right-0 -z-10">
+          <span class="absolute right-0 top-0 -z-10">
             <svg
               width="98"
               height="94"
@@ -4736,9 +4736,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

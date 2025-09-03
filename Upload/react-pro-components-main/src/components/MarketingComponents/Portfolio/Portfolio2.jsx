@@ -17,15 +17,15 @@ const Portfolio2 = () => {
 
   return (
     <>
-      <section className="py-20 lg:py-[120px] dark:bg-dark">
-        <div className="container mx-auto relative">
+      <section className="py-20 dark:bg-dark lg:py-[120px]">
+        <div className="container relative mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mb-[60px] max-w-[510px]">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Our Portfolio
                 </span>
-                <h2 className="text-dark dark:text-white text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
+                <h2 className="text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Our Recent Works
                 </h2>
               </div>
@@ -117,9 +117,9 @@ const Portfolio2 = () => {
               />
             </SwiperSlide>
           </Swiper>
-          <div className="absolute z-50 right-0 left-0 bottom-[-62px] flex items-center justify-center lg:left-auto lg:bottom-auto lg:top-7 lg:justify-end">
+          <div className="absolute bottom-[-62px] left-0 right-0 z-50 flex items-center justify-center lg:bottom-auto lg:left-auto lg:top-7 lg:justify-end">
             <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-              <button className="border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary mx-2 flex h-[54px] w-[54px] items-center justify-center rounded-full border bg-white dark:bg-dark-2 transition-all hover:text-white">
+              <button className="mx-2 flex h-[54px] w-[54px] items-center justify-center rounded-full border border-stroke bg-white text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
                 <svg
                   width="10"
                   height="21"
@@ -131,7 +131,7 @@ const Portfolio2 = () => {
               </button>
             </div>
             <div className="next-arrow cursor-pointer" onClick={handleNext}>
-              <button className="border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary mx-2 flex h-[54px] w-[54px] items-center justify-center rounded-full border bg-white dark:bg-dark-2 transition-all hover:text-white">
+              <button className="mx-2 flex h-[54px] w-[54px] items-center justify-center rounded-full border border-stroke bg-white text-body-color transition-all hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
                 <svg
                   width="10"
                   height="21"
@@ -157,8 +157,8 @@ const PortfolioCard = ({ subtitle, link, title, details, button, image }) => {
       <div>
         <img src={image} alt="image" className="w-full" />
       </div>
-      <div className="bg-primary relative z-10 p-8 sm:p-9 lg:p-8 lg:px-6 xl:p-9">
-        <span className="text-white mb-4 inline-block rounded-md bg-white/10 py-1 px-4 text-sm font-medium">
+      <div className="relative z-10 bg-primary p-8 sm:p-9 lg:p-8 lg:px-6 xl:p-9">
+        <span className="mb-4 inline-block rounded-md bg-white/10 px-4 py-1 text-sm font-medium text-white">
           {subtitle}
         </span>
         <h3>
@@ -172,11 +172,11 @@ const PortfolioCard = ({ subtitle, link, title, details, button, image }) => {
         <p className="mb-7 text-base text-white">{details}</p>
         <a
           href={link}
-          className="hover:text-primary rounded-md border border-white/30 py-[10px] px-7 text-sm font-medium text-white transition hover:border-white hover:bg-white"
+          className="rounded-md border border-white/30 px-7 py-[10px] text-sm font-medium text-white transition hover:border-white hover:bg-white hover:text-primary"
         >
           {button}
         </a>
-        <div className="absolute right-1 bottom-2 z-[-1]">
+        <div className="absolute bottom-2 right-1 z-[-1]">
           <svg
             width="25"
             height="60"

@@ -12,7 +12,7 @@ import { PermissionGuard } from './guards/permission.guard';
 
 /**
  * Модуль системы прав доступа
- * 
+ *
  * Предоставляет:
  * - Сервисы для проверки прав и работы с ролями
  * - Guards для защиты эндпоинтов
@@ -27,7 +27,7 @@ import { PermissionGuard } from './guards/permission.guard';
     RoleHierarchyService,
     ContextResolverService,
     AccessLevelsService,
-    
+
     // Guards
     PermissionGuard,
   ],
@@ -37,7 +37,7 @@ import { PermissionGuard } from './guards/permission.guard';
     RoleHierarchyService,
     ContextResolverService,
     AccessLevelsService,
-    
+
     // Guards
     PermissionGuard,
   ],

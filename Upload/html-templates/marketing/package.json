@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-"scripts": {
+  "scripts": {
     "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./src/assets/css/output.css --watch"
   },
   "dependencies": {

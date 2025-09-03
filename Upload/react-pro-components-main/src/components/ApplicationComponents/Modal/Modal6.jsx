@@ -154,7 +154,7 @@ const Modal6 = () => {
             <input
               type="text"
               defaultValue="example.com/share-link"
-              className="h-12 w-full rounded-sm border border-stroke bg-transparent pl-[46px] pr-[86px] text-base text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+              className="outline-hidden h-12 w-full rounded-sm border border-stroke bg-transparent pl-[46px] pr-[86px] text-base text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:text-white"
             />
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-dark dark:text-white">
               <svg

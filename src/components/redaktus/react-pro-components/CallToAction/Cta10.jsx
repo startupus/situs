@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Cta10() {
   return (
@@ -13,22 +13,19 @@ export default function Cta10() {
         <div className="mx-auto max-w-[575px] text-center">
           <h4
             className="mb-2.5 text-lg font-medium text-white sm:text-2xl"
-            style={{ textShadow: "0px 0px 1px rgba(0, 0, 0, 0.2)" }}
+            style={{ textShadow: '0px 0px 1px rgba(0, 0, 0, 0.2)' }}
           >
             Extra 30% Off Online
           </h4>
           <h2
             className="mb-3 text-3xl font-bold leading-tight! text-white sm:text-4xl md:text-[44px]"
-            style={{ textShadow: "0px 0px 1px rgba(0, 0, 0, 0.2)" }}
+            style={{ textShadow: '0px 0px 1px rgba(0, 0, 0, 0.2)' }}
           >
             Summer Season Sale
           </h2>
-          <p
-            className="font-medium text-white"
-            style={{ textShadow: "0px 0px 1px rgba(0, 0, 0, 0.2)" }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            vel dolor pellentesque, varius elit quis, malesuada quam.
+          <p className="font-medium text-white" style={{ textShadow: '0px 0px 1px rgba(0, 0, 0, 0.2)' }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel dolor pellentesque, varius elit quis,
+            malesuada quam.
           </p>
 
           <a

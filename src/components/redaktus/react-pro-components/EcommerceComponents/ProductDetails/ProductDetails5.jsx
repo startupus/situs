@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductDetails5 = () => {
   return (
@@ -17,28 +17,22 @@ const ProductDetails5 = () => {
                 </div>
 
                 <div className="p-5 pt-5 pb-9">
-                  <h3
-                    className="mb-5 text-2xl font-bold text-dark dark:text-white lg:text-2xl xl:leading-[35px] xl:text-[28px]"
-                  >
+                  <h3 className="mb-5 text-2xl font-bold text-dark dark:text-white lg:text-2xl xl:leading-[35px] xl:text-[28px]">
                     SaaSwind - Tailwind CSS SaaS Web Template
                   </h3>
                   <p className="text-body-color dark:text-dark-6 mb-[18px] text-base">
-                    SaaSwind is a powerful Tailwind CSS website template for
-                    SaaS, web apps, software websites, and other similar
-                    websites. It boasts all the essential sections to launch
-                    your SaaS website with style and sophistication.
+                    SaaSwind is a powerful Tailwind CSS website template for SaaS, web apps, software websites, and
+                    other similar websites. It boasts all the essential sections to launch your SaaS website with style
+                    and sophistication.
                   </p>
 
                   <p className="text-body-color dark:text-dark-6 mb-6 text-base">
-                    The design is well-thought-out and will look great not only
-                    on desktop screens, but also on mobile screens. But that's
-                    not all! It comes with a bunch of cool features that will
-                    take your website to the next level.
+                    The design is well-thought-out and will look great not only on desktop screens, but also on mobile
+                    screens. But that's not all! It comes with a bunch of cool features that will take your website to
+                    the next level.
                   </p>
 
-                  <h4 className="mb-[18px] text-xl font-semibold text-dark dark:text-white">
-                    Template Features
-                  </h4>
+                  <h4 className="mb-[18px] text-xl font-semibold text-dark dark:text-white">Template Features</h4>
                   <div className="space-y-[10px]">
                     <FeaturesItem feature="High-quality Design" />
                     <FeaturesItem feature="All Essential Sections and Pages" />
@@ -52,9 +46,7 @@ const ProductDetails5 = () => {
                 <div className="border-t border-stroke dark:border-dark-3 px-5 py-5 sm:px-10">
                   <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/2">
-                      <span className="mb-4 inline-block text-sm font-semibold text-dark dark:text-white">
-                        Tags :
-                      </span>
+                      <span className="mb-4 inline-block text-sm font-semibold text-dark dark:text-white">Tags :</span>
                       <div className="flex flex-wrap items-center gap-[10px]">
                         <TagItem tag="Tailwind" />
                         <TagItem tag="Startup" />
@@ -122,31 +114,13 @@ const ProductDetails5 = () => {
           <div className="w-full px-4 lg:w-4/12">
             <div className="mb-10 rounded-[10px] bg-white dark:bg-dark-2">
               <div className="border-b border-stroke dark:border-dark-3 pt-[18px] pb-4 px-8">
-                <h3 className="text-lg font-semibold text-dark dark:text-white">
-                  Download Details
-                </h3>
+                <h3 className="text-lg font-semibold text-dark dark:text-white">Download Details</h3>
               </div>
               <div className="p-8">
-                <DownloadOption
-                  id="free"
-                  price="Free Lite - $0.00"
-                  title="Personal use only"
-                />
-                <DownloadOption
-                  id="starter"
-                  price="Starter - $19.00"
-                  title="Single site"
-                />
-                <DownloadOption
-                  id="business"
-                  price="Business - $39.00"
-                  title="Unlimited sites"
-                />
-                <DownloadOption
-                  id="extended"
-                  price="Extended - $119.00"
-                  title="For paying users"
-                />
+                <DownloadOption id="free" price="Free Lite - $0.00" title="Personal use only" />
+                <DownloadOption id="starter" price="Starter - $19.00" title="Single site" />
+                <DownloadOption id="business" price="Business - $39.00" title="Unlimited sites" />
+                <DownloadOption id="extended" price="Extended - $119.00" title="For paying users" />
               </div>
               <div className="border-t border-stroke dark:border-dark-3 pt-7 pb-8 px-8">
                 <a
@@ -166,9 +140,7 @@ const ProductDetails5 = () => {
 
             <div className="rounded-[10px] bg-white dark:bg-dark-2">
               <div className="border-b border-stroke dark:border-dark-3 pt-[18px] pb-4 px-8">
-                <h3 className="text-lg font-semibold text-dark dark:text-white">
-                  Template Information
-                </h3>
+                <h3 className="text-lg font-semibold text-dark dark:text-white">Template Information</h3>
               </div>
               <div className="p-8">
                 <p className="mb-[10px] flex text-base font-medium gap-1">
@@ -203,23 +175,14 @@ export default ProductDetails5;
 const DownloadOption = ({ id, price, title }) => {
   return (
     <div className="mb-[14px]">
-      <input
-        type="radio"
-        name="download"
-        id={id}
-        className="download-radio sr-only"
-      />
+      <input type="radio" name="download" id={id} className="download-radio sr-only" />
       <label
         htmlFor={id}
         className="flex cursor-pointer items-center justify-between rounded-md border border-stroke dark:border-dark-3 py-3 px-5"
       >
         <span>
-          <span className="block text-base font-medium text-dark dark:text-white">
-            {price}
-          </span>
-          <span className="text-body-color dark:text-dark-6 block text-xs">
-            {title}
-          </span>
+          <span className="block text-base font-medium text-dark dark:text-white">{price}</span>
+          <span className="text-body-color dark:text-dark-6 block text-xs">{title}</span>
         </span>
         <span className="flex h-6 w-6 items-center justify-center rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2">
           <svg

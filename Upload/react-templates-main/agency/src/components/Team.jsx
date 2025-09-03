@@ -43,18 +43,18 @@ const teamItems = [
 const Team = () => {
   return (
     <>
-      <section className="bg-tg-bg dark:bg-dark-2 overflow-hidden pt-20 pb-20 lg:pt-[120px] lg:pb-[120px]">
+      <section className="overflow-hidden bg-tg-bg pb-20 pt-20 dark:bg-dark-2 lg:pb-[120px] lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Our Team Members
                 </span>
-                <h2 className="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white">
+                <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Our Creative Team
                 </h2>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
@@ -67,23 +67,23 @@ const Team = () => {
                 key={index}
                 className="w-full px-4 sm:w-1/2 lg:w-1/4 xl:w-1/4"
               >
-                <div className="group shadow-1 dark:bg-dark dark:shadow-box-dark mb-8 rounded-[5px] bg-white px-5 pt-12 pb-10">
+                <div className="group mb-8 rounded-[5px] bg-white px-5 pb-10 pt-12 shadow-1 dark:bg-dark dark:shadow-box-dark">
                   <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
                     <img
                       src={item.image}
                       alt="team image"
                       className="h-[120px] w-[120px] rounded-full"
                     />
-                    <span className="bg-secondary absolute bottom-0 left-0 -z-10 h-10 w-10 rounded-full opacity-0 transition-all group-hover:opacity-100"></span>
-                    <span className="absolute top-0 right-0 -z-10 opacity-0 transition-all group-hover:opacity-100">
+                    <span className="absolute bottom-0 left-0 -z-10 h-10 w-10 rounded-full bg-secondary opacity-0 transition-all group-hover:opacity-100"></span>
+                    <span className="absolute right-0 top-0 -z-10 opacity-0 transition-all group-hover:opacity-100">
                       <ShapeFour />
                     </span>
                   </div>
                   <div className="text-center">
-                    <h4 className="text-dark mb-1 text-lg font-semibold dark:text-white">
+                    <h4 className="mb-1 text-lg font-semibold text-dark dark:text-white">
                       {item.name}
                     </h4>
-                    <p className="text-body-color dark:text-dark-6 mb-5 text-sm">
+                    <p className="mb-5 text-sm text-body-color dark:text-dark-6">
                       {item.profession}
                     </p>
                     <div className="flex items-center justify-center gap-5">

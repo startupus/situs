@@ -14,7 +14,7 @@ const ChatList3 = () => {
                 <select
                   name=""
                   id=""
-                  className="relative z-20 appearance-none rounded-md border border-stroke bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6"
+                  className="outline-hidden relative z-20 appearance-none rounded-md border border-stroke bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color dark:border-dark-3 dark:text-dark-6"
                 >
                   <option value="" className="dark:bg-dark-2">
                     Latest
@@ -116,7 +116,9 @@ const ChatItem = ({ img, name, text, time, active, number }) => {
               {text}
             </p>
             <span className="mx-2 block h-0.5 w-0.5 rounded-full bg-body-color dark:bg-dark-6"></span>
-            <span className="text-xs text-body-color dark:text-dark-6">{time}</span>
+            <span className="text-xs text-body-color dark:text-dark-6">
+              {time}
+            </span>
           </div>
         </div>
         {number && (

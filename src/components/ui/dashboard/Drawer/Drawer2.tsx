@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Drawer2 = () => {
   return (
@@ -20,9 +20,7 @@ const Drawer2 = () => {
 
         <div>
           <div className="mb-9 flex justify-between border-b border-stroke dark:border-dark-3">
-            <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
-              Cart
-            </h3>
+            <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">Cart</h3>
           </div>
           <div className="space-y-[30px] pb-5">
             <CartItem
@@ -43,12 +41,8 @@ const Drawer2 = () => {
         </div>
         <div className="border-t border-stroke pt-5 dark:border-dark-3">
           <div className="mb-3 flex justify-between">
-            <h3 className="text-2xl font-semibold text-dark dark:text-white">
-              Cart
-            </h3>
-            <p className="text-base font-medium text-dark dark:text-white">
-              $248.00
-            </p>
+            <h3 className="text-2xl font-semibold text-dark dark:text-white">Cart</h3>
+            <p className="text-base font-medium text-dark dark:text-white">$248.00</p>
           </div>
           <p className="mb-[18px] text-sm text-body-color dark:text-dark-6">
             Shipping, taxes, and discount codes calculated
@@ -83,11 +77,7 @@ const CartItem = ({ img, link, name, color, price }) => {
   return (
     <div className="flex w-full">
       <div className="mr-5 h-[86px] w-full max-w-[70px] overflow-hidden rounded-sm sm:max-w-[86px]">
-        <img
-          src={img}
-          alt="product"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="product" className="h-full w-full object-cover object-center" />
       </div>
       <div className="w-full">
         <h5>
@@ -116,9 +106,7 @@ const CartItem = ({ img, link, name, color, price }) => {
                 <path d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" />
               </svg>
             </span>
-            <span className="border-x border-stroke px-3 py-1 dark:border-dark-3">
-              {count}
-            </span>
+            <span className="border-x border-stroke px-3 py-1 dark:border-dark-3">{count}</span>
             <span
               onClick={increase}
               className="flex h-8 w-8 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
@@ -142,9 +130,7 @@ const CartItem = ({ img, link, name, color, price }) => {
               </svg>
             </span>
           </div>
-          <p className="text-sm font-medium text-dark dark:text-white">
-            {price}
-          </p>
+          <p className="text-sm font-medium text-dark dark:text-white">{price}</p>
         </div>
       </div>
     </div>

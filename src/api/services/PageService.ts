@@ -52,30 +52,30 @@ class PageService {
   async findMany(filters?: PageFilters) {
     try {
       const whereClause: any = {};
-      
+
       // Фильтр по проекту
       if (filters?.projectId) {
         whereClause.projectId = filters.projectId;
       }
-      
+
       // Поиск по заголовку или slug
       if (filters?.search) {
         whereClause.OR = [
           { title: { contains: filters.search, mode: 'insensitive' } },
-          { slug: { contains: filters.search, mode: 'insensitive' } }
+          { slug: { contains: filters.search, mode: 'insensitive' } },
         ];
       }
-      
+
       // Фильтр по статусу
       if (filters?.status) {
         whereClause.status = filters.status.toUpperCase();
       }
-      
+
       // Фильтр по главной странице
       if (filters?.isHomePage !== undefined) {
         whereClause.isHomePage = filters.isHomePage;
       }
-      
+
       // Определяем сортировку
       let orderBy: any = { updatedAt: 'desc' };
       if (filters?.sortBy) {
@@ -115,11 +115,11 @@ class PageService {
             select: {
               id: true,
               name: true,
-              slug: true
-            }
-          }
+              slug: true,
+            },
+          },
         },
-        orderBy
+        orderBy,
       });
 
       return pages;
@@ -142,10 +142,10 @@ class PageService {
               id: true,
               name: true,
               slug: true,
-              ownerId: true
-            }
-          }
-        }
+              ownerId: true,
+            },
+          },
+        },
       });
 
       if (!page) {
@@ -165,9 +165,9 @@ class PageService {
   async findBySlug(projectId: string, slug: string) {
     try {
       const page = await prisma.page.findFirst({
-        where: { 
+        where: {
           projectId,
-          slug 
+          slug,
         },
         include: {
           project: {
@@ -175,10 +175,10 @@ class PageService {
               id: true,
               name: true,
               slug: true,
-              ownerId: true
-            }
-          }
-        }
+              ownerId: true,
+            },
+          },
+        },
       });
 
       if (!page) {
@@ -199,7 +199,7 @@ class PageService {
     try {
       // Проверяем, что проект существует
       const project = await prisma.project.findUnique({
-        where: { id: data.projectId }
+        where: { id: data.projectId },
       });
 
       if (!project) {
@@ -210,8 +210,8 @@ class PageService {
       const existingPage = await prisma.page.findFirst({
         where: {
           projectId: data.projectId,
-          slug: data.slug
-        }
+          slug: data.slug,
+        },
       });
 
       if (existingPage) {
@@ -230,17 +230,17 @@ class PageService {
           metaKeywords: data.metaKeywords,
           template: data.template,
           layout: data.layout,
-          status: 'DRAFT'
+          status: 'DRAFT',
         },
         include: {
           project: {
             select: {
               id: true,
               name: true,
-              slug: true
-            }
-          }
-        }
+              slug: true,
+            },
+          },
+        },
       });
 
       return page;
@@ -257,7 +257,7 @@ class PageService {
     try {
       // Проверяем, что страница существует
       const existingPage = await prisma.page.findUnique({
-        where: { id }
+        where: { id },
       });
 
       if (!existingPage) {
@@ -270,8 +270,8 @@ class PageService {
           where: {
             projectId: existingPage.projectId,
             slug: data.slug,
-            id: { not: id }
-          }
+            id: { not: id },
+          },
         });
 
         if (slugExists) {
@@ -283,17 +283,17 @@ class PageService {
         where: { id },
         data: {
           ...data,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         include: {
           project: {
             select: {
               id: true,
               name: true,
-              slug: true
-            }
-          }
-        }
+              slug: true,
+            },
+          },
+        },
       });
 
       return page;
@@ -309,7 +309,7 @@ class PageService {
   async delete(id: string) {
     try {
       const page = await prisma.page.findUnique({
-        where: { id }
+        where: { id },
       });
 
       if (!page) {
@@ -317,7 +317,7 @@ class PageService {
       }
 
       await prisma.page.delete({
-        where: { id }
+        where: { id },
       });
 
       return { message: 'Страница успешно удалена' };
@@ -333,7 +333,7 @@ class PageService {
   async duplicate(id: string, newTitle?: string) {
     try {
       const originalPage = await prisma.page.findUnique({
-        where: { id }
+        where: { id },
       });
 
       if (!originalPage) {
@@ -362,17 +362,17 @@ class PageService {
           template: originalPage.template,
           layout: originalPage.layout,
           isHomePage: false, // Копия не может быть главной страницей
-          status: 'DRAFT'
+          status: 'DRAFT',
         },
         include: {
           project: {
             select: {
               id: true,
               name: true,
-              slug: true
-            }
-          }
-        }
+              slug: true,
+            },
+          },
+        },
       });
 
       return duplicatedPage;
@@ -389,19 +389,19 @@ class PageService {
     try {
       const page = await prisma.page.update({
         where: { id },
-        data: { 
+        data: {
           status: 'PUBLISHED',
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         include: {
           project: {
             select: {
               id: true,
               name: true,
-              slug: true
-            }
-          }
-        }
+              slug: true,
+            },
+          },
+        },
       });
 
       return page;
@@ -418,19 +418,19 @@ class PageService {
     try {
       const page = await prisma.page.update({
         where: { id },
-        data: { 
+        data: {
           status: 'DRAFT',
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         include: {
           project: {
             select: {
               id: true,
               name: true,
-              slug: true
-            }
-          }
-        }
+              slug: true,
+            },
+          },
+        },
       });
 
       return page;
@@ -449,27 +449,27 @@ class PageService {
         by: ['status'],
         where: { projectId },
         _count: {
-          status: true
-        }
+          status: true,
+        },
       });
 
       const totalPages = await prisma.page.count({
-        where: { projectId }
+        where: { projectId },
       });
 
       const homePageExists = await prisma.page.findFirst({
-        where: { 
+        where: {
           projectId,
-          isHomePage: true 
-        }
+          isHomePage: true,
+        },
       });
 
       return {
         total: totalPages,
-        draft: stats.find(s => s.status === 'DRAFT')?._count.status || 0,
-        published: stats.find(s => s.status === 'PUBLISHED')?._count.status || 0,
-        archived: stats.find(s => s.status === 'ARCHIVED')?._count.status || 0,
-        hasHomePage: !!homePageExists
+        draft: stats.find((s) => s.status === 'DRAFT')?._count.status || 0,
+        published: stats.find((s) => s.status === 'PUBLISHED')?._count.status || 0,
+        archived: stats.find((s) => s.status === 'ARCHIVED')?._count.status || 0,
+        hasHomePage: !!homePageExists,
       };
     } catch (error) {
       console.error('Ошибка при получении статистики страниц:', error);
@@ -484,8 +484,8 @@ class PageService {
     const page = await prisma.page.findFirst({
       where: {
         projectId,
-        slug
-      }
+        slug,
+      },
     });
     return !!page;
   }

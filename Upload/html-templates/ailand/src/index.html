@@ -66,7 +66,7 @@
                     @click="navbarOpen = !navbarOpen"
                     :class="navbarOpen && 'navbarTogglerActive' "
                     id="navbarToggler"
-                    class="ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden"
+                    class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                   >
                     <span
                       class="relative my-[6px] block h-[2px] w-[30px] bg-white"
@@ -81,7 +81,7 @@
                   <nav
                     :class="!navbarOpen && 'hidden' "
                     id="navbarCollapse"
-                    class="bg-dark-2 absolute top-full right-4 w-full max-w-[250px] rounded-lg px-6 py-4 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none"
+                    class="absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-dark-2 px-6 py-4 shadow lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none"
                   >
                     <ul class="block lg:flex lg:gap-2">
                       <li>
@@ -114,13 +114,13 @@
                 <div class="hidden justify-end gap-3 pr-16 sm:flex lg:pr-0">
                   <a
                     href="javascript:void(0)"
-                    class="hover:text-primary rounded-full px-5 py-2.5 text-base font-medium text-white"
+                    class="rounded-full px-5 py-2.5 text-base font-medium text-white hover:text-primary"
                   >
                     Login
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-dark rounded-full bg-white px-5 py-2.5 text-base font-medium hover:bg-white/90"
+                    class="rounded-full bg-white px-5 py-2.5 text-base font-medium text-dark hover:bg-white/90"
                   >
                     Sign Up
                   </a>
@@ -133,7 +133,7 @@
       <!-- ====== Navbar Section End -->
 
       <!-- ====== Hero Section Start -->
-      <section class="relative overflow-hidden pt-[120px] pb-[150px]">
+      <section class="relative overflow-hidden pb-[150px] pt-[120px]">
         <div class="container">
           <div class="relative">
             <div class="mx-auto w-full max-w-[590px] text-center">
@@ -142,7 +142,7 @@
               >
                 Turn your Text into the
                 <span
-                  class="from-primary via-primary bg-gradient-to-r to-[#F566D5] bg-clip-text text-transparent"
+                  class="bg-gradient-to-r from-primary via-primary to-[#F566D5] bg-clip-text text-transparent"
                 >
                   Images
                 </span>
@@ -150,7 +150,7 @@
               </h1>
 
               <p
-                class="text-dark-7 mx-auto mb-8 w-full max-w-[570px] text-base"
+                class="mx-auto mb-8 w-full max-w-[570px] text-base text-dark-7"
               >
                 Convert words into an image in mere seconds with the Image
                 Generator. Type a detailed description for the better result
@@ -164,7 +164,7 @@
                     class="h-12 w-full bg-transparent px-5 py-3 text-black outline-none dark:text-white"
                   />
                   <button
-                    class="bg-primary hover:bg-primary/90 h-12 rounded-lg px-6 py-3 text-base font-medium text-white"
+                    class="h-12 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary/90"
                   >
                     Generate
                   </button>
@@ -172,26 +172,26 @@
               </div>
 
               <div class="flex items-center justify-center gap-4">
-                <p class="text-dark-7 text-sm font-medium">Popular Tags:</p>
+                <p class="text-sm font-medium text-dark-7">Popular Tags:</p>
 
                 <div class="flex gap-2.5">
                   <button
-                    class="text-dark-7 rounded bg-white/[.12] px-3 py-1 text-sm font-medium hover:bg-white/30"
+                    class="rounded bg-white/[.12] px-3 py-1 text-sm font-medium text-dark-7 hover:bg-white/30"
                   >
                     Creative
                   </button>
                   <button
-                    class="text-dark-7 rounded bg-white/[.12] px-3 py-1 text-sm font-medium hover:bg-white/30"
+                    class="rounded bg-white/[.12] px-3 py-1 text-sm font-medium text-dark-7 hover:bg-white/30"
                   >
                     Sport
                   </button>
                   <button
-                    class="text-dark-7 rounded bg-white/[.12] px-3 py-1 text-sm font-medium hover:bg-white/30"
+                    class="rounded bg-white/[.12] px-3 py-1 text-sm font-medium text-dark-7 hover:bg-white/30"
                   >
                     Animation
                   </button>
                   <button
-                    class="text-dark-7 rounded bg-white/[.12] px-3 py-1 text-sm font-medium hover:bg-white/30"
+                    class="rounded bg-white/[.12] px-3 py-1 text-sm font-medium text-dark-7 hover:bg-white/30"
                   >
                     Fantasy
                   </button>
@@ -211,7 +211,7 @@
                 />
               </div>
 
-              <span class="absolute top-3.5 right-4">
+              <span class="absolute right-4 top-3.5">
                 <svg
                   width="28"
                   height="28"
@@ -238,7 +238,7 @@
                   </defs>
                 </svg>
               </span>
-              <span class="absolute top-0 right-8">
+              <span class="absolute right-8 top-0">
                 <svg
                   width="19"
                   height="18"
@@ -267,10 +267,10 @@
               </span>
             </div>
             <div
-              class="absolute top-0 right-0 -z-10 aspect-[174/291] w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden"
+              class="absolute right-0 top-0 -z-10 aspect-[174/291] w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden"
             >
               <div
-                class="absolute top-3 left-1/2 aspect-[150/220] w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full"
+                class="absolute left-1/2 top-3 aspect-[150/220] w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full"
               >
                 <img
                   src="./assets/images/hero/hero-04/image-2.jpg"
@@ -701,7 +701,7 @@
             <div class="w-full md:w-1/2 lg:w-1/3">
               <div class="py-24">
                 <div
-                  class="to-primary mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-gradient-to-tl from-[#D83BB5] text-white"
+                  class="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-gradient-to-tl from-[#D83BB5] to-primary text-white"
                 >
                   <svg
                     width="34"
@@ -731,7 +731,7 @@
                 <h3 class="mb-5 text-2xl font-bold text-white">
                   Unique Technology
                 </h3>
-                <p class="text-dark-7 w-full max-w-[270px] text-base">
+                <p class="w-full max-w-[270px] text-base text-dark-7">
                   Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                   tincidunt rutrum.
                 </p>
@@ -741,7 +741,7 @@
             <div class="w-full md:w-1/2 lg:w-1/3">
               <div class="py-24">
                 <div
-                  class="to-primary mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-gradient-to-tl from-[#D83BB5] text-white"
+                  class="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-gradient-to-tl from-[#D83BB5] to-primary text-white"
                 >
                   <svg
                     width="34"
@@ -763,7 +763,7 @@
                 <h3 class="mb-5 text-2xl font-bold text-white">
                   Unique Technology
                 </h3>
-                <p class="text-dark-7 w-full max-w-[270px] text-base">
+                <p class="w-full max-w-[270px] text-base text-dark-7">
                   Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                   tincidunt rutrum.
                 </p>
@@ -773,7 +773,7 @@
             <div class="w-full md:w-1/2 lg:w-1/3">
               <div class="py-24">
                 <div
-                  class="to-primary mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-gradient-to-tl from-[#D83BB5] text-white"
+                  class="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-gradient-to-tl from-[#D83BB5] to-primary text-white"
                 >
                   <svg
                     width="34"
@@ -795,7 +795,7 @@
                 <h3 class="mb-5 text-2xl font-bold text-white">
                   High Quality Image
                 </h3>
-                <p class="text-dark-7 w-full max-w-[270px] text-base">
+                <p class="w-full max-w-[270px] text-base text-dark-7">
                   Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
                   tincidunt rutrum.
                 </p>
@@ -808,21 +808,21 @@
     <!-- ====== Services Section End -->
 
     <!-- ====== Portfolio Section Start -->
-    <section class="bg-gray-1 dark:bg-dark py-20 lg:py-[120px]">
+    <section class="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
       <div class="container">
         <div
           class="mb-11 flex items-end justify-between gap-4 max-md:flex-wrap"
         >
           <div class="w-full max-w-[500px]">
             <h2
-              class="text-dark text-3xl !leading-tight font-bold -tracking-[.72px] sm:text-4xl dark:text-white"
+              class="text-3xl font-bold !leading-tight -tracking-[.72px] text-dark dark:text-white sm:text-4xl"
             >
               Exploring the Artistry Within Our Community
             </h2>
           </div>
           <div>
             <button
-              class="border-primary text-primary hover:bg-primary inline-flex items-center justify-center rounded-lg border px-6 py-3 text-base font-medium duration-200 hover:text-white"
+              class="inline-flex items-center justify-center rounded-lg border border-primary px-6 py-3 text-base font-medium text-primary duration-200 hover:bg-primary hover:text-white"
             >
               Browse All
             </button>
@@ -869,13 +869,13 @@
 
     <!-- ====== Call To Action Section Start -->
     <section
-      class="dark:bg-dark relative z-10 overflow-hidden bg-white py-20 lg:py-[120px]"
+      class="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]"
     >
       <div class="container">
         <div class="mx-auto w-full max-w-[790px] text-center">
           <div class="mb-8 flex flex-wrap items-center justify-center gap-6">
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -915,7 +915,7 @@
               </svg>
             </div>
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -957,7 +957,7 @@
               </svg>
             </div>
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -985,7 +985,7 @@
               </svg>
             </div>
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -1025,7 +1025,7 @@
               </svg>
             </div>
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -1041,7 +1041,7 @@
               </svg>
             </div>
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -1076,7 +1076,7 @@
               </svg>
             </div>
             <div
-              class="dark:bg-dark-2 flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 md:w-[72px]"
+              class="flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_8px_20px_0px_rgba(16,24,40,0.03)] even:mt-3 dark:bg-dark-2 md:w-[72px]"
             >
               <svg
                 width="32"
@@ -1112,24 +1112,24 @@
             </div>
           </div>
           <h2
-            class="text-dark mx-auto mb-6 w-full max-w-[550px] text-3xl !leading-tight font-bold -tracking-[.72px] sm:text-4xl dark:text-white"
+            class="mx-auto mb-6 w-full max-w-[550px] text-3xl font-bold !leading-tight -tracking-[.72px] text-dark dark:text-white sm:text-4xl"
           >
             Easily Bring AI in Your Workflow to Create Content
           </h2>
-          <p class="text-body-color dark:text-dark-6 mb-8 text-base sm:text-lg">
+          <p class="mb-8 text-base text-body-color dark:text-dark-6 sm:text-lg">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form, by more and more
             injected humour.
           </p>
           <button
-            class="bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium text-white duration-200"
+            class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90"
           >
             Get Started for Free
           </button>
         </div>
       </div>
 
-      <div class="absolute top-0 left-20 -z-10">
+      <div class="absolute left-20 top-0 -z-10">
         <svg
           width="605"
           height="237"
@@ -1172,7 +1172,7 @@
           </defs>
         </svg>
       </div>
-      <div class="absolute right-6 bottom-0 -z-10">
+      <div class="absolute bottom-0 right-6 -z-10">
         <svg
           width="531"
           height="197"
@@ -1225,21 +1225,21 @@
           yearly: false
         }
       "
-      class="dark:bg-dark relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 Our Pricing Plans
               </span>
               <h2
-                class="text-dark mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+                class="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                 Pricing and Plans
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -1258,11 +1258,11 @@
             </button>
             <span
               @click="yearly = !yearly"
-              class="bg-dark flex h-8 w-14 cursor-pointer items-center rounded-full px-0.5 py-1 duration-200 dark:bg-white"
+              class="flex h-8 w-14 cursor-pointer items-center rounded-full bg-dark px-0.5 py-1 duration-200 dark:bg-white"
             >
               <span
                 :class="yearly ? 'translate-x-6' : 'translate-x-0' "
-                class="dark:bg-primary block aspect-square w-7 rounded-full bg-white duration-200"
+                class="block aspect-square w-7 rounded-full bg-white duration-200 dark:bg-primary"
               ></span>
             </span>
             <button
@@ -1280,44 +1280,44 @@
             class="grid place-items-end gap-10 md:grid-cols-2 lg:grid-cols-3"
           >
             <div
-              class="bg-gray-2 dark:bg-dark-2 w-full max-w-[340px] rounded-xl border-2 border-transparent p-10"
+              class="w-full max-w-[340px] rounded-xl border-2 border-transparent bg-gray-2 p-10 dark:bg-dark-2"
             >
               <div class="text-center">
                 <h4
-                  class="text-dark mb-4 text-xl font-semibold dark:text-white"
+                  class="mb-4 text-xl font-semibold text-dark dark:text-white"
                 >
                   Standard Plan
                 </h4>
 
                 <div class="mb-1 flex items-center justify-center gap-1">
                   <span
-                    class="text-body-color text-2xl font-semibold line-through"
+                    class="text-2xl font-semibold text-body-color line-through"
                   >
                     $85
                   </span>
-                  <span class="text-dark text-4xl font-bold dark:text-white">
+                  <span class="text-4xl font-bold text-dark dark:text-white">
                     $38<span class="text-2xl">.89</span>
                   </span>
                 </div>
 
-                <p class="text-body-color mb-4 text-sm font-medium">
+                <p class="mb-4 text-sm font-medium text-body-color">
                   /Month (annually billed)
                 </p>
 
                 <div
-                  class="bg-blue-light-5 text-primary relative mb-8 inline-flex items-center justify-center overflow-hidden px-4 py-1 text-xs font-semibold uppercase"
+                  class="relative mb-8 inline-flex items-center justify-center overflow-hidden bg-blue-light-5 px-4 py-1 text-xs font-semibold uppercase text-primary"
                 >
                   <span
-                    class="bg-gray-2 dark:bg-dark-2 absolute top-1/2 -right-[5px] block aspect-square w-2.5 -translate-y-1/2 rounded-full"
+                    class="absolute -right-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
                   ></span>
                   SAVE UP TO $54.89
                   <span
-                    class="bg-gray-2 dark:bg-dark-2 absolute top-1/2 -left-[5px] block aspect-square w-2.5 -translate-y-1/2 rounded-full"
+                    class="absolute -left-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
                   ></span>
                 </div>
 
                 <button
-                  class="bg-dark hover:bg-dark/90 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white duration-200"
+                  class="flex w-full items-center justify-center gap-2 rounded-lg bg-dark px-6 py-3 text-base font-medium text-white duration-200 hover:bg-dark/90"
                 >
                   Choose Plan
                   <span>
@@ -1338,44 +1338,44 @@
               </div>
 
               <div class="mt-8">
-                <ul class="marker:text-primary list-inside list-disc space-y-4">
+                <ul class="list-inside list-disc space-y-4 marker:text-primary">
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Priority email & chat support
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Lifetime Access and Free Updates
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Generate 1,000 AI Words/month
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Personal and Commercial Use
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Personal and Commercial Use
                   </li>
@@ -1384,49 +1384,49 @@
             </div>
 
             <div
-              class="border-primary dark:bg-dark relative w-full max-w-[340px] rounded-xl border-2 bg-white p-10 pt-[60px] shadow-md"
+              class="relative w-full max-w-[340px] rounded-xl border-2 border-primary bg-white p-10 pt-[60px] shadow-md dark:bg-dark"
             >
               <span
-                class="bg-primary absolute top-0 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-b-lg px-4 py-2 text-sm font-semibold text-white"
+                class="absolute left-1/2 top-0 inline-flex -translate-x-1/2 items-center justify-center rounded-b-lg bg-primary px-4 py-2 text-sm font-semibold text-white"
               >
                 BEST CHOICE
               </span>
               <div class="text-center">
                 <h4
-                  class="text-dark mb-4 text-xl font-semibold dark:text-white"
+                  class="mb-4 text-xl font-semibold text-dark dark:text-white"
                 >
                   Standard Plan
                 </h4>
 
                 <div class="mb-1 flex items-center justify-center gap-1">
                   <span
-                    class="text-body-color text-2xl font-semibold line-through"
+                    class="text-2xl font-semibold text-body-color line-through"
                   >
                     $85
                   </span>
-                  <span class="text-dark text-4xl font-bold dark:text-white">
+                  <span class="text-4xl font-bold text-dark dark:text-white">
                     $38<span class="text-2xl">.89</span>
                   </span>
                 </div>
 
-                <p class="text-body-color mb-4 text-sm font-medium">
+                <p class="mb-4 text-sm font-medium text-body-color">
                   /Month (annually billed)
                 </p>
 
                 <div
-                  class="bg-blue-light-5 text-primary relative mb-8 inline-flex items-center justify-center overflow-hidden px-4 py-1 text-xs font-semibold uppercase"
+                  class="relative mb-8 inline-flex items-center justify-center overflow-hidden bg-blue-light-5 px-4 py-1 text-xs font-semibold uppercase text-primary"
                 >
                   <span
-                    class="dark:bg-dark absolute top-1/2 -right-[5px] block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-white"
+                    class="absolute -right-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-white dark:bg-dark"
                   ></span>
                   SAVE UP TO $54.89
                   <span
-                    class="dark:bg-dark absolute top-1/2 -left-[5px] block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-white"
+                    class="absolute -left-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-white dark:bg-dark"
                   ></span>
                 </div>
 
                 <button
-                  class="bg-primary hover:bg-primary/90 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white duration-200"
+                  class="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90"
                 >
                   Choose Plan
                   <span>
@@ -1447,44 +1447,44 @@
               </div>
 
               <div class="mt-8">
-                <ul class="marker:text-primary list-inside list-disc space-y-4">
+                <ul class="list-inside list-disc space-y-4 marker:text-primary">
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Priority email & chat support
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Lifetime Access and Free Updates
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Generate 1,000 AI Words/month
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Personal and Commercial Use
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Personal and Commercial Use
                   </li>
@@ -1493,44 +1493,44 @@
             </div>
 
             <div
-              class="bg-gray-2 dark:bg-dark-2 w-full max-w-[340px] rounded-xl border-2 border-transparent p-10"
+              class="w-full max-w-[340px] rounded-xl border-2 border-transparent bg-gray-2 p-10 dark:bg-dark-2"
             >
               <div class="text-center">
                 <h4
-                  class="text-dark mb-4 text-xl font-semibold dark:text-white"
+                  class="mb-4 text-xl font-semibold text-dark dark:text-white"
                 >
                   Standard Plan
                 </h4>
 
                 <div class="mb-1 flex items-center justify-center gap-1">
                   <span
-                    class="text-body-color text-2xl font-semibold line-through"
+                    class="text-2xl font-semibold text-body-color line-through"
                   >
                     $85
                   </span>
-                  <span class="text-dark text-4xl font-bold dark:text-white">
+                  <span class="text-4xl font-bold text-dark dark:text-white">
                     $38<span class="text-2xl">.89</span>
                   </span>
                 </div>
 
-                <p class="text-body-color mb-4 text-sm font-medium">
+                <p class="mb-4 text-sm font-medium text-body-color">
                   /Month (annually billed)
                 </p>
 
                 <div
-                  class="bg-blue-light-5 text-primary relative mb-8 inline-flex items-center justify-center overflow-hidden px-4 py-1 text-xs font-semibold uppercase"
+                  class="relative mb-8 inline-flex items-center justify-center overflow-hidden bg-blue-light-5 px-4 py-1 text-xs font-semibold uppercase text-primary"
                 >
                   <span
-                    class="bg-gray-2 dark:bg-dark-2 absolute top-1/2 -right-[5px] block aspect-square w-2.5 -translate-y-1/2 rounded-full"
+                    class="absolute -right-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
                   ></span>
                   SAVE UP TO $54.89
                   <span
-                    class="bg-gray-2 dark:bg-dark-2 absolute top-1/2 -left-[5px] block aspect-square w-2.5 -translate-y-1/2 rounded-full"
+                    class="absolute -left-[5px] top-1/2 block aspect-square w-2.5 -translate-y-1/2 rounded-full bg-gray-2 dark:bg-dark-2"
                   ></span>
                 </div>
 
                 <button
-                  class="bg-dark hover:bg-dark/90 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-medium text-white duration-200"
+                  class="flex w-full items-center justify-center gap-2 rounded-lg bg-dark px-6 py-3 text-base font-medium text-white duration-200 hover:bg-dark/90"
                 >
                   Choose Plan
                   <span>
@@ -1551,44 +1551,44 @@
               </div>
 
               <div class="mt-8">
-                <ul class="marker:text-primary list-inside list-disc space-y-4">
+                <ul class="list-inside list-disc space-y-4 marker:text-primary">
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Priority email & chat support
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Lifetime Access and Free Updates
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Generate 1,000 AI Words/month
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Personal and Commercial Use
                   </li>
                   <li
-                    class="text-dark flex items-start gap-3 text-base font-medium dark:text-white"
+                    class="flex items-start gap-3 text-base font-medium text-dark dark:text-white"
                   >
                     <span
-                      class="bg-primary mt-2.5 block aspect-square w-1.5 rounded-full"
+                      class="mt-2.5 block aspect-square w-1.5 rounded-full bg-primary"
                     ></span>
                     Personal and Commercial Use
                   </li>
@@ -1602,18 +1602,18 @@
     <!-- ====== Pricing Section End -->
 
     <!-- ====== Testimonials Section Start -->
-    <section class="bg-gray-1 dark:bg-dark-3 py-20 lg:py-[120px]">
+    <section class="bg-gray-1 py-20 dark:bg-dark-3 lg:py-[120px]">
       <div class="container">
         <div class="mx-auto mb-[60px] w-full max-w-[510px] text-center">
-          <span class="text-primary mb-2 block text-lg font-semibold">
+          <span class="mb-2 block text-lg font-semibold text-primary">
             Testimonials
           </span>
           <h2
-            class="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white"
+            class="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
           >
             What our Clients Says
           </h2>
-          <p class="text-body-color dark:text-dark-6 text-base">
+          <p class="text-base text-body-color dark:text-dark-6">
             There are many variations of passages of Lorem Ipsum available but
             the majority have suffered alteration in some form.
           </p>
@@ -1621,7 +1621,7 @@
 
         <div>
           <div class="gap-8 md:columns-2 lg:columns-3">
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1636,20 +1636,20 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Melissa Hart
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.”
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1664,13 +1664,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Maria Baptista
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.” lot it to all my friends and familys and
@@ -1678,7 +1678,7 @@
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1693,20 +1693,20 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Giana Franci
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.”
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1721,13 +1721,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Maren Press
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more lot it to all my friends and familys and
@@ -1735,7 +1735,7 @@
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1750,13 +1750,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Ryan Donin
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more lot it to all my friends ve learned a lot it
@@ -1764,7 +1764,7 @@
                 </p>
               </div>
             </div>
-            <div class="dark:bg-dark-2 mb-8 rounded-xl bg-white p-10 shadow-lg">
+            <div class="mb-8 rounded-xl bg-white p-10 shadow-lg dark:bg-dark-2">
               <div class="mb-6 flex items-center gap-4">
                 <div
                   class="aspect-square w-[52px] overflow-hidden rounded-full"
@@ -1779,13 +1779,13 @@
                   <h5 class="text-base font-medium text-black dark:text-white">
                     Jakob Press
                   </h5>
-                  <p class="text-body-color dark:text-dark-6 text-sm">
+                  <p class="text-sm text-body-color dark:text-dark-6">
                     Software Engineer
                   </p>
                 </div>
               </div>
               <div>
-                <p class="text-body-color dark:text-dark-6 text-base">
+                <p class="text-base text-body-color dark:text-dark-6">
                   “I believe in lifelong learning and learn is a great place to
                   learn from erts. I've learned a lot it to all my friends and
                   familys and more.”
@@ -1810,21 +1810,21 @@
           openFaq6: false
         }
       "
-      class="dark:bg-dark relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      class="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4">
             <div class="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
-              <span class="text-primary mb-2 block text-lg font-semibold">
+              <span class="mb-2 block text-lg font-semibold text-primary">
                 FAQ
               </span>
               <h2
-                class="text-dark mb-4 text-3xl font-bold sm:text-[40px]/[48px] dark:text-white"
+                class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]"
               >
                 Any Questions? Look Here
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base">
+              <p class="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -1835,14 +1835,14 @@
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 lg:w-1/2">
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq1 = !openFaq1"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq1 && 'rotate-180'"
@@ -1860,7 +1860,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -1868,7 +1868,7 @@
               </button>
               <div x-show="openFaq1" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1878,14 +1878,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq2 = !openFaq2"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq2 && 'rotate-180'"
@@ -1903,7 +1903,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -1911,7 +1911,7 @@
               </button>
               <div x-show="openFaq2" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1921,14 +1921,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq3 = !openFaq3"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq3 && 'rotate-180'"
@@ -1946,7 +1946,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -1954,7 +1954,7 @@
               </button>
               <div x-show="openFaq3" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -1966,14 +1966,14 @@
           </div>
           <div class="w-full px-4 lg:w-1/2">
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq4 = !openFaq4"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq4 && 'rotate-180'"
@@ -1991,7 +1991,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -1999,7 +1999,7 @@
               </button>
               <div x-show="openFaq4" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2009,14 +2009,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq5 = !openFaq5"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq5 && 'rotate-180'"
@@ -2034,7 +2034,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2042,7 +2042,7 @@
               </button>
               <div x-show="openFaq5" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2052,14 +2052,14 @@
               </div>
             </div>
             <div
-              class="dark:bg-dark-2 mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] sm:p-8 lg:px-6 xl:px-8 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)]"
+              class="mb-8 w-full rounded-lg bg-white p-4 shadow-[0px_20px_95px_0px_rgba(201,203,204,0.30)] dark:bg-dark-2 dark:shadow-[0px_20px_95px_0px_rgba(0,0,0,0.30)] sm:p-8 lg:px-6 xl:px-8"
             >
               <button
                 class="faq-btn flex w-full text-left"
                 @click="openFaq6 = !openFaq6"
               >
                 <div
-                  class="bg-primary/5 text-primary mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg dark:bg-white/5"
+                  class="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5"
                 >
                   <svg
                     :class="openFaq6 && 'rotate-180'"
@@ -2077,7 +2077,7 @@
                 </div>
                 <div class="w-full">
                   <h4
-                    class="text-dark mt-1 text-lg font-semibold dark:text-white"
+                    class="mt-1 text-lg font-semibold text-dark dark:text-white"
                   >
                     How long we deliver your first blog post?
                   </h4>
@@ -2085,7 +2085,7 @@
               </button>
               <div x-show="openFaq6" class="faq-content pl-[62px]">
                 <p
-                  class="text-body-color dark:text-dark-6 py-3 text-base leading-relaxed"
+                  class="py-3 text-base leading-relaxed text-body-color dark:text-dark-6"
                 >
                   It takes 2-3 weeks to get your first blog post ready. That
                   includes the in-depth research & creation of your monthly
@@ -2098,7 +2098,7 @@
         </div>
       </div>
 
-      <div class="absolute right-0 bottom-0 z-[-1]">
+      <div class="absolute bottom-0 right-0 z-[-1]">
         <svg
           width="1440"
           height="886"
@@ -2131,35 +2131,35 @@
     <!-- ====== FAQ Section End -->
 
     <!-- ====== Blog Section Start -->
-    <section class="dark:bg-dark bg-white py-20 lg:py-[120px]">
+    <section class="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div class="container">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="group border-stroke dark:border-dark-3 mb-8 rounded-lg border p-5"
+              class="group mb-8 rounded-lg border border-stroke p-5 dark:border-dark-3"
             >
               <div class="mb-7 overflow-hidden rounded">
                 <img
                   src="./assets/images/blogs/blog-08/image-1.jpg"
                   alt="blog image"
-                  class="w-full object-cover object-center duration-200 group-hover:scale-125 group-hover:rotate-6"
+                  class="w-full object-cover object-center duration-200 group-hover:rotate-6 group-hover:scale-125"
                 />
               </div>
               <div>
                 <h3
-                  class="text-dark hover:text-primary dark:hover:text-primary mb-5 line-clamp-2 cursor-pointer text-xl font-bold duration-200 dark:text-white"
+                  class="mb-5 line-clamp-2 cursor-pointer text-xl font-bold text-dark duration-200 hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   How to use Facebook ads to sell online courses
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 mb-7 line-clamp-3 text-base"
+                  class="mb-7 line-clamp-3 text-base text-body-color dark:text-dark-6"
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit duis
                   vehicula orciut ultricies facilisis magna.
                 </p>
                 <a
                   href="javascript:void(0)"
-                  class="text-dark hover:text-primary dark:hover:text-primary inline-flex items-center gap-2 duration-200 hover:gap-3.5 dark:text-white"
+                  class="inline-flex items-center gap-2 text-dark duration-200 hover:gap-3.5 hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   Read More
                   <span>
@@ -2183,30 +2183,30 @@
 
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="group border-stroke dark:border-dark-3 mb-8 rounded-lg border p-5"
+              class="group mb-8 rounded-lg border border-stroke p-5 dark:border-dark-3"
             >
               <div class="mb-7 overflow-hidden rounded">
                 <img
                   src="./assets/images/blogs/blog-08/image-2.jpg"
                   alt="blog image"
-                  class="w-full object-cover object-center duration-200 group-hover:scale-125 group-hover:rotate-6"
+                  class="w-full object-cover object-center duration-200 group-hover:rotate-6 group-hover:scale-125"
                 />
               </div>
               <div>
                 <h3
-                  class="text-dark hover:text-primary dark:hover:text-primary mb-5 line-clamp-2 cursor-pointer text-xl font-bold duration-200 dark:text-white"
+                  class="mb-5 line-clamp-2 cursor-pointer text-xl font-bold text-dark duration-200 hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   What to do if template do not work properly
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 mb-7 line-clamp-3 text-base"
+                  class="mb-7 line-clamp-3 text-base text-body-color dark:text-dark-6"
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit duis
                   vehicula orciut ultricies facilisis magna.
                 </p>
                 <a
                   href="javascript:void(0)"
-                  class="text-dark hover:text-primary dark:hover:text-primary inline-flex items-center gap-2 duration-200 hover:gap-3.5 dark:text-white"
+                  class="inline-flex items-center gap-2 text-dark duration-200 hover:gap-3.5 hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   Read More
                   <span>
@@ -2229,30 +2229,30 @@
           </div>
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div
-              class="group border-stroke dark:border-dark-3 mb-8 rounded-lg border p-5"
+              class="group mb-8 rounded-lg border border-stroke p-5 dark:border-dark-3"
             >
               <div class="mb-7 overflow-hidden rounded">
                 <img
                   src="./assets/images/blogs/blog-08/image-3.jpg"
                   alt="blog image"
-                  class="w-full object-cover object-center duration-200 group-hover:scale-125 group-hover:rotate-6"
+                  class="w-full object-cover object-center duration-200 group-hover:rotate-6 group-hover:scale-125"
                 />
               </div>
               <div>
                 <h3
-                  class="text-dark hover:text-primary dark:hover:text-primary mb-5 line-clamp-2 cursor-pointer text-xl font-bold duration-200 dark:text-white"
+                  class="mb-5 line-clamp-2 cursor-pointer text-xl font-bold text-dark duration-200 hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   Meet AutoManage, the best AI management tools
                 </h3>
                 <p
-                  class="text-body-color dark:text-dark-6 mb-7 line-clamp-3 text-base"
+                  class="mb-7 line-clamp-3 text-base text-body-color dark:text-dark-6"
                 >
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit duis
                   vehicula orciut ultricies facilisis magna.
                 </p>
                 <a
                   href="javascript:void(0)"
-                  class="text-dark hover:text-primary dark:hover:text-primary inline-flex items-center gap-2 duration-200 hover:gap-3.5 dark:text-white"
+                  class="inline-flex items-center gap-2 text-dark duration-200 hover:gap-3.5 hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   Read More
                   <span>
@@ -2280,7 +2280,7 @@
 
     <!-- ====== Contact Section Start -->
     <section
-      class="border-stroke dark:border-dark-3 dark:bg-dark relative z-10 overflow-hidden border-t bg-white py-20 lg:py-[120px]"
+      class="relative z-10 overflow-hidden border-t border-stroke bg-white py-20 dark:border-dark-3 dark:bg-dark lg:py-[120px]"
     >
       <div class="container">
         <div class="-mx-4 flex flex-wrap items-center">
@@ -2288,30 +2288,30 @@
             <div>
               <div class="mb-12 w-full max-w-[435px]">
                 <h2
-                  class="text-dark mb-5 text-4xl !leading-[1.2] font-bold sm:text-5xl md:text-[60px] lg:text-5xl xl:text-[60px] dark:text-white"
+                  class="mb-5 text-4xl font-bold !leading-[1.2] text-dark dark:text-white sm:text-5xl md:text-[60px] lg:text-5xl xl:text-[60px]"
                 >
                   Let’s get in touch with us
                 </h2>
-                <p class="text-body-color dark:text-dark-6 text-lg font-medium">
+                <p class="text-lg font-medium text-body-color dark:text-dark-6">
                   Email, call or complete the form to connect with us We’ll get
                   back to you within 24 hours.
                 </p>
               </div>
               <div class="mb-6">
-                <p class="text-body-color dark:text-dark-6 text-base">Phone</p>
-                <p class="text-dark text-base font-medium dark:text-white">
+                <p class="text-base text-body-color dark:text-dark-6">Phone</p>
+                <p class="text-base font-medium text-dark dark:text-white">
                   +(5) 534-093-762
                 </p>
               </div>
               <div class="mb-6">
-                <p class="text-body-color dark:text-dark-6 text-base">Email</p>
-                <p class="text-dark text-base font-medium dark:text-white">
+                <p class="text-base text-body-color dark:text-dark-6">Email</p>
+                <p class="text-base font-medium text-dark dark:text-white">
                   hello@company.com
                 </p>
               </div>
               <div class="mb-6">
-                <p class="text-body-color dark:text-dark-6 text-base">Office</p>
-                <p class="text-dark text-base font-medium dark:text-white">
+                <p class="text-base text-body-color dark:text-dark-6">Office</p>
+                <p class="text-base font-medium text-dark dark:text-white">
                   230 Norman Street New York, <br />
                   QC (USA) H8R 1A1
                 </p>
@@ -2321,12 +2321,12 @@
 
           <div class="w-full px-4 lg:w-1/2 xl:w-7/12">
             <div
-              class="dark:bg-dark-2 rounded-[20px] bg-white p-8 shadow-xl sm:p-[52px] lg:p-8 xl:ml-16 xl:p-[52px]"
+              class="rounded-[20px] bg-white p-8 shadow-xl dark:bg-dark-2 sm:p-[52px] lg:p-8 xl:ml-16 xl:p-[52px]"
             >
-              <h3 class="text-dark mb-3 text-3xl font-bold dark:text-white">
+              <h3 class="mb-3 text-3xl font-bold text-dark dark:text-white">
                 Get in Touch
               </h3>
-              <p class="text-body-color dark:text-dark-6 mb-10 text-lg">
+              <p class="mb-10 text-lg text-body-color dark:text-dark-6">
                 We’ll get back to you within 24 hours.
               </p>
 
@@ -2335,14 +2335,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       First name
                     </label>
                     <input
                       type="text"
                       placeholder="First name"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2350,14 +2350,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Last name
                     </label>
                     <input
                       type="text"
                       placeholder="Last name"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary h-[50px] w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2365,14 +2365,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Email
                     </label>
                     <input
                       type="email"
                       placeholder="yourname@company.com"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary h-[50px] w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2380,14 +2380,14 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Phone number
                     </label>
                     <input
                       type="text"
                       placeholder="+1 (555) 444-0000"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary h-[50px] w-full rounded-lg border bg-transparent px-5 py-3 duration-200 outline-none dark:text-white"
+                      class="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -2395,7 +2395,7 @@
                   <div class="mb-6">
                     <label
                       for=""
-                      class="text-dark mb-2.5 block text-base font-medium dark:text-white"
+                      class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                     >
                       Message
                     </label>
@@ -2403,13 +2403,13 @@
                       type="text"
                       rows="6"
                       placeholder="Type your message"
-                      class="border-stroke text-dark placeholder-dark-5 focus:border-primary dark:border-dark-3 dark:focus:border-primary w-full rounded-lg border bg-transparent p-5 duration-200 outline-none dark:text-white"
+                      class="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 outline-none duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     ></textarea>
                   </div>
                 </div>
                 <div class="w-full px-4">
                   <button
-                    class="bg-dark hover:bg-dark/90 dark:text-dark flex h-[52px] w-full items-center justify-center rounded-lg px-5 py-3 text-base font-medium text-white duration-200 dark:bg-white dark:hover:bg-white/90"
+                    class="flex h-[52px] w-full items-center justify-center rounded-lg bg-dark px-5 py-3 text-base font-medium text-white duration-200 hover:bg-dark/90 dark:bg-white dark:text-dark dark:hover:bg-white/90"
                   >
                     Send Message
                   </button>
@@ -2428,31 +2428,31 @@
         />
       </div>
 
-      <div class="absolute top-0 right-0 -z-10">
+      <div class="absolute right-0 top-0 -z-10">
         <img
           src="./assets/images/contact/contact-13/shape-2.svg"
           alt="shape-2"
         />
       </div>
 
-      <div class="absolute top-0 right-0 -z-10 max-lg:hidden dark:opacity-40">
+      <div class="absolute right-0 top-0 -z-10 dark:opacity-40 max-lg:hidden">
         <img src="./assets/images/contact/contact-13/line-1.svg" alt="line-1" />
       </div>
 
-      <div class="absolute top-0 right-0 -z-10 max-lg:hidden dark:opacity-40">
+      <div class="absolute right-0 top-0 -z-10 dark:opacity-40 max-lg:hidden">
         <img src="./assets/images/contact/contact-13/line-2.svg" alt="line-2" />
       </div>
     </section>
     <!-- ====== Contact Section End -->
 
     <!-- ====== Brands Section Start -->
-    <section class="bg-gray-1 dark:bg-dark-2 py-20 lg:py-[120px]">
+    <section class="bg-gray-1 py-20 dark:bg-dark-2 lg:py-[120px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap items-center">
           <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
             <div>
               <h2
-                class="text-dark text-3xl font-bold sm:text-4xl lg:text-3xl xl:text-[33px] 2xl:text-4xl dark:text-white"
+                class="text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-3xl xl:text-[33px] 2xl:text-4xl"
               >
                 Tailwind CSS UI Components for Modern Web Apps
               </h2>
@@ -2464,7 +2464,7 @@
             >
               <a
                 href="javascript:void(0)"
-                class="mx-4 flex max-w-[200px] min-w-[150px] items-center justify-center py-5 lg:max-w-[110px] lg:min-w-min xl:max-w-[200px]"
+                class="mx-4 flex min-w-[150px] max-w-[200px] items-center justify-center py-5 lg:min-w-min lg:max-w-[110px] xl:max-w-[200px]"
               >
                 <img
                   src="./assets/images/brands/graygrids.svg"
@@ -2479,7 +2479,7 @@
               </a>
               <a
                 href="javascript:void(0)"
-                class="mx-4 flex max-w-[200px] min-w-[150px] items-center justify-center py-5 lg:max-w-[110px] lg:min-w-min xl:max-w-[200px]"
+                class="mx-4 flex min-w-[150px] max-w-[200px] items-center justify-center py-5 lg:min-w-min lg:max-w-[110px] xl:max-w-[200px]"
               >
                 <img
                   src="./assets/images/brands/lineicons.svg"
@@ -2495,7 +2495,7 @@
 
               <a
                 href="javascript:void(0)"
-                class="mx-4 flex max-w-[200px] min-w-[150px] items-center justify-center py-5 lg:max-w-[110px] lg:min-w-min xl:max-w-[200px]"
+                class="mx-4 flex min-w-[150px] max-w-[200px] items-center justify-center py-5 lg:min-w-min lg:max-w-[110px] xl:max-w-[200px]"
               >
                 <img
                   src="./assets/images/brands/ayroui.svg"
@@ -2533,14 +2533,14 @@
                   class="max-w-full"
                 />
               </a>
-              <p class="text-gray-7 mb-7 text-base">
+              <p class="mb-7 text-base text-gray-7">
                 We create digital experiences for brands and companies by using
                 technology.
               </p>
               <div class="-mx-3 flex items-center">
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="10"
@@ -2555,7 +2555,7 @@
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="19"
@@ -2570,7 +2570,7 @@
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="18"
@@ -2591,7 +2591,7 @@
                 </a>
                 <a
                   href="javascript:void(0)"
-                  class="text-gray-7 px-3 hover:text-white"
+                  class="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="18"
@@ -2614,7 +2614,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     About company
                   </a>
@@ -2622,7 +2622,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Company services
                   </a>
@@ -2630,7 +2630,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Job opportunities
                   </a>
@@ -2638,7 +2638,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Creative people
                   </a>
@@ -2653,7 +2653,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Client support
                   </a>
@@ -2661,7 +2661,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Latest news
                   </a>
@@ -2669,7 +2669,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Company story
                   </a>
@@ -2677,7 +2677,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Pricing packages
                   </a>
@@ -2692,7 +2692,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Our story
                   </a>
@@ -2700,7 +2700,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Who we are
                   </a>
@@ -2708,7 +2708,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Our process
                   </a>
@@ -2716,7 +2716,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white hover:underline"
+                    class="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Latest news
                   </a>
@@ -2729,7 +2729,7 @@
               <h4 class="mb-9 text-lg font-semibold text-white">Latest blog</h4>
               <a
                 href="javascript:void(0)"
-                class="text-gray-7 mb-8 flex items-center hover:text-white"
+                class="mb-8 flex items-center text-gray-7 hover:text-white"
               >
                 <div class="mr-5 w-full max-w-[70px] overflow-hidden rounded">
                   <img
@@ -2742,7 +2742,7 @@
               </a>
               <a
                 href="javascript:void(0)"
-                class="text-gray-7 mb-8 flex items-center hover:text-white"
+                class="mb-8 flex items-center text-gray-7 hover:text-white"
               >
                 <div class="mr-5 w-full max-w-[70px] overflow-hidden rounded">
                   <img
@@ -2768,19 +2768,19 @@
                 >
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 px-3 text-base underline-offset-2 hover:text-white hover:underline"
+                    class="px-3 text-base text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Privacy policy
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 px-3 text-base underline-offset-2 hover:text-white hover:underline"
+                    class="px-3 text-base text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Legal notice
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-7 px-3 text-base underline-offset-2 hover:text-white hover:underline"
+                    class="px-3 text-base text-gray-7 underline-offset-2 hover:text-white hover:underline"
                   >
                     Terms of service
                   </a>
@@ -2789,7 +2789,7 @@
             </div>
             <div class="w-full px-4 md:w-1/3 lg:w-1/2">
               <div class="my-1 flex justify-center md:justify-end">
-                <p class="text-gray-7 text-base">&copy; 2025 TailGrids</p>
+                <p class="text-base text-gray-7">&copy; 2025 TailGrids</p>
               </div>
             </div>
           </div>
@@ -2797,7 +2797,7 @@
       </div>
 
       <div>
-        <span class="absolute top-0 left-0 z-[-1]">
+        <span class="absolute left-0 top-0 z-[-1]">
           <svg
             width="419"
             height="492"
@@ -2829,7 +2829,7 @@
           </svg>
         </span>
 
-        <span class="absolute right-0 bottom-0 z-[-1]">
+        <span class="absolute bottom-0 right-0 z-[-1]">
           <svg
             width="327"
             height="220"
@@ -2861,7 +2861,7 @@
           </svg>
         </span>
 
-        <span class="absolute top-0 right-0 z-[-1]">
+        <span class="absolute right-0 top-0 z-[-1]">
           <svg
             width="102"
             height="102"
@@ -3123,9 +3123,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

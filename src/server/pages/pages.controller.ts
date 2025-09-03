@@ -18,14 +18,15 @@ export class PagesController {
     const p = Math.max(1, parseInt(page || '1', 10) || 1);
     const l = Math.max(1, Math.min(100, parseInt(limit || '20', 10) || 20));
     const skip = (p - 1) * l;
-    const where: any = projectId
-      ? { product: { projectId, type: 'WEBSITE' } }
-      : { product: { type: 'WEBSITE' } };
+    const where: any = projectId ? { product: { projectId, type: 'WEBSITE' } } : { product: { type: 'WEBSITE' } };
     const [pages, total] = await Promise.all([
       this.prisma.page.findMany({ where, skip, take: l, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] }),
       this.prisma.page.count({ where }),
     ]);
-    return { success: true, data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } } };
+    return {
+      success: true,
+      data: { pages, pagination: { page: p, limit: l, total, totalPages: Math.ceil(total / l) } },
+    };
   }
 
   @Get('preview')
@@ -33,8 +34,12 @@ export class PagesController {
   async preview(@Req() req: any) {
     const tenant = req.tenant as { projectId?: string; productId?: string } | undefined;
     const projectId = tenant?.projectId;
-    if (!projectId) return { success: true, data: { pages: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } } };
-    const pages = await this.prisma.page.findMany({ where: { product: { projectId, type: 'WEBSITE' } }, orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }] });
+    if (!projectId)
+      return { success: true, data: { pages: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 0 } } };
+    const pages = await this.prisma.page.findMany({
+      where: { product: { projectId, type: 'WEBSITE' } },
+      orderBy: [{ orderIndex: 'asc' }, { updatedAt: 'desc' }],
+    });
     return { success: true, data: { pages } };
   }
 

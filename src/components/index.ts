@@ -1,15 +1,15 @@
 // UI Components
-export * from './ui'
+export * from './ui';
 
 // Dashboard Components
-export * from './dashboard'
+export * from './dashboard';
 
 // Data Display Components
-export * from './data-display'
+export * from './data-display';
 
 // Navigation Components
-export * from './navigation'
+export * from './navigation';
 
 // Existing components
-export { default as StatsCard } from '@/components/ui/StatsCard'
-export { default as PagesSection } from './sections/PagesSection' 
+export { default as StatsCard } from '@/components/ui/StatsCard';
+export { default as PagesSection } from './sections/PagesSection';

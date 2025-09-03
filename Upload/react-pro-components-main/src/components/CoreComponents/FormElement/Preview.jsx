@@ -4,9 +4,9 @@ import FormElement from "./index";
 const Preview = () => {
   return (
     <>
-      <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+      <section className="pb-10 pt-20 lg:pb-20 lg:pt-[120px]">
         <div className="container">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <FormElement
               input
               placeholder="Default Input"

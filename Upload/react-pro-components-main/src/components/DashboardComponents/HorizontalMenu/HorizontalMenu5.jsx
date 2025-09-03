@@ -36,7 +36,7 @@ const HorizontalMenu5 = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full rounded-full border border-stroke bg-gray-2 py-[6px] pl-[18px] pr-8 text-sm text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                  className="outline-hidden w-full rounded-full border border-stroke bg-gray-2 py-[6px] pl-[18px] pr-8 text-sm text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                   <svg

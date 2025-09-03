@@ -1,8 +1,8 @@
 const FooterNewsletter = () => {
   return (
     <>
-      <div className="border-gray-7/20 border-b pt-[70px] pb-10">
-        <div className="flex flex-wrap items-center -mx-4">
+      <div className="border-b border-gray-7/20 pb-10 pt-[70px]">
+        <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2">
             <div className="mb-5 w-full max-w-[470px]">
               <h3 className="text-2xl font-bold text-white sm:text-[28px] sm:leading-snug">
@@ -11,15 +11,15 @@ const FooterNewsletter = () => {
             </div>
           </div>
           <div className="w-full px-4 lg:w-1/2">
-            <div className="w-full mb-5">
+            <div className="mb-5 w-full">
               <form className="flex flex-wrap">
-                <div className="relative mr-5 mb-3 w-full max-w-[370px]">
+                <div className="relative mb-3 mr-5 w-full max-w-[370px]">
                   <input
                     type="email"
                     placeholder="Enter your email address"
-                    className="placeholder-dark-8 h-[52px] w-full rounded-md border border-white/[.08] bg-white/5 pr-5 pl-14 text-white outline-hidden focus:border-white/40 focus-visible:shadow-none"
+                    className="outline-hidden h-[52px] w-full rounded-md border border-white/[.08] bg-white/5 pl-14 pr-5 text-white placeholder-dark-8 focus:border-white/40 focus-visible:shadow-none"
                   />
-                  <label className="absolute -translate-y-1/2 top-1/2 left-5">
+                  <label className="absolute left-5 top-1/2 -translate-y-1/2">
                     <svg
                       width="18"
                       height="13"
@@ -36,7 +36,7 @@ const FooterNewsletter = () => {
                 </div>
                 <button
                   type="submit"
-                  className="text-dark mb-3 h-[52px] rounded-md border border-transparent bg-white px-7 font-medium transition hover:bg-white/90"
+                  className="mb-3 h-[52px] rounded-md border border-transparent bg-white px-7 font-medium text-dark transition hover:bg-white/90"
                 >
                   Subscribe
                 </button>

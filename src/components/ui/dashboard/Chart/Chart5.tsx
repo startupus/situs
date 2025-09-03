@@ -1,23 +1,23 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart5 = () => {
   const series = [
     {
-      name: "Total Revenue",
+      name: 'Total Revenue',
       data: [76, 85, 101, 98, 105, 91, 115],
     },
     {
-      name: "Total Pipeline",
+      name: 'Total Pipeline',
       data: [44, 57, 56, 61, 58, 60, 66],
     },
   ];
 
   const options = {
-    colors: ["#3758F9", "#13C296"],
+    colors: ['#3758F9', '#13C296'],
     chart: {
-      fontFamily: "Inter, sans-serif",
-      type: "bar",
+      fontFamily: 'Inter, sans-serif',
+      type: 'bar',
       height: 350,
       toolbar: {
         show: false,
@@ -26,8 +26,8 @@ const Chart5 = () => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "55%",
-        endingShape: "rounded-sm",
+        columnWidth: '55%',
+        endingShape: 'rounded-sm',
       },
     },
     dataLabels: {
@@ -36,10 +36,10 @@ const Chart5 = () => {
     stroke: {
       show: true,
       width: 4,
-      colors: ["transparent"],
+      colors: ['transparent'],
     },
     xaxis: {
-      categories: ["Sun", "Mon", "Twe", "Wed", "Thu", "Fri", "Sat"],
+      categories: ['Sun', 'Mon', 'Twe', 'Wed', 'Thu', 'Fri', 'Sat'],
       axisBorder: {
         show: false,
       },
@@ -49,9 +49,9 @@ const Chart5 = () => {
     },
     legend: {
       show: true,
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "inter",
+      position: 'top',
+      horizontalAlign: 'left',
+      fontFamily: 'inter',
 
       markers: {
         radius: 99,
@@ -86,9 +86,7 @@ const Chart5 = () => {
         <div className="mx-auto w-full max-w-[510px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="mb-4 justify-between sm:flex">
             <div className="mb-4 sm:mb-0">
-              <h5 className="text-lg font-semibold text-dark dark:text-white">
-                Revenue Analytics
-              </h5>
+              <h5 className="text-lg font-semibold text-dark dark:text-white">Revenue Analytics</h5>
             </div>
             <div>
               <div className="relative z-20 inline-block rounded-md bg-transparent">
@@ -121,12 +119,7 @@ const Chart5 = () => {
           </div>
 
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart
-              options={options}
-              series={series}
-              type="bar"
-              height={350}
-            />
+            <ReactApexChart options={options} series={series} type="bar" height={350} />
           </div>
         </div>
       </div>

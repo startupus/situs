@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FeaturedProduct4 = () => {
   return (
@@ -86,9 +86,7 @@ const SingleFeaturedProduct = ({ img, link, title, price }) => {
           </div>
         </div>
         <div>
-          <span className="text-lg font-medium text-dark dark:text-white">
-            {price}
-          </span>
+          <span className="text-lg font-medium text-dark dark:text-white">{price}</span>
         </div>
       </div>
     </div>
@@ -97,13 +95,7 @@ const SingleFeaturedProduct = ({ img, link, title, price }) => {
 
 const Star = () => {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_1760_1321)">
         <path
           d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z"

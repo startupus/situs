@@ -14,7 +14,7 @@ export class MenuAccessMiddleware implements NestMiddleware {
     try {
       // Получаем информацию о пользователе из запроса
       const user = (req as any).user;
-      const projectId = req.params.projectId || req.query.projectId as string;
+      const projectId = req.params.projectId || (req.query.projectId as string);
 
       if (!projectId) {
         return next();
@@ -29,7 +29,7 @@ export class MenuAccessMiddleware implements NestMiddleware {
         projectId,
         canViewAll: userAccessLevels.includes('CUSTOM'),
         isAdmin: userAccessLevels.includes('SPECIAL'),
-        isRegistered: userAccessLevels.includes('REGISTERED')
+        isRegistered: userAccessLevels.includes('REGISTERED'),
       };
 
       next();
@@ -99,8 +99,8 @@ export function FilterMenuByAccess() {
     const method = descriptor.value;
 
     descriptor.value = async function (...args: any[]) {
-      const req = args.find(arg => arg && arg.userAccessLevels);
-      
+      const req = args.find((arg) => arg && arg.userAccessLevels);
+
       if (req && req.userAccessLevels) {
         // Добавляем фильтрацию по правам доступа в параметры запроса
         const lastArg = args[args.length - 1];
@@ -135,7 +135,7 @@ export class MenuAccessHelper {
    * Фильтрация списка пунктов меню по правам доступа
    */
   static filterMenuItems(items: any[], userAccessLevels: string[]): any[] {
-    return items.filter(item => this.canView(item, userAccessLevels));
+    return items.filter((item) => this.canView(item, userAccessLevels));
   }
 
   /**

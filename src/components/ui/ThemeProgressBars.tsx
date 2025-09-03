@@ -1,10 +1,6 @@
 // src/components/ui/ThemeProgressBars.tsx
 import React from 'react';
-import { 
-  ProgressBar1,
-  ProgressBar2,
-  ProgressBar3
-} from './core';
+import { ProgressBar1, ProgressBar2, ProgressBar3 } from './core';
 
 // Интерфейс для пропсов ProgressBar компонентов
 interface ProgressBarProps {
@@ -23,7 +19,7 @@ interface ProgressBarProps {
 // Утилита для адаптации стилей под глобальную тему
 const adaptProgressBarProps = (props: ProgressBarProps) => ({
   ...props,
-  className: `${props.className || ''} transition-all duration-200`
+  className: `${props.className || ''} transition-all duration-200`,
 });
 
 // ProgressBar Variants

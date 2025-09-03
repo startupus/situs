@@ -5,7 +5,7 @@ const VerticalNavbar5 = () => {
     <section className="h-screen bg-white">
       <div className="flex h-screen w-full max-w-[280px] flex-col justify-between overflow-y-scroll bg-primary shadow-card">
         <div>
-          <div className="px-10 pt-10 pb-9">
+          <div className="px-10 pb-9 pt-10">
             <a href="/#">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
@@ -320,8 +320,8 @@ const VerticalNavbar5 = () => {
           </nav>
         </div>
 
-        <div className="py-10 px-6">
-          <div className="shadow-three flex items-center rounded-lg bg-white p-4">
+        <div className="px-6 py-10">
+          <div className="flex items-center rounded-lg bg-white p-4 shadow-three">
             <div className="mr-4 h-[50px] w-full max-w-[50px] rounded-full">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-05.jpg"
@@ -384,12 +384,12 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`${
           dropdownOpen ? "bg-white/10 text-white" : ""
-        } relative mb-[2px] flex items-center rounded py-[10px] px-4 text-base font-medium text-white/50 duration-200 hover:bg-white/10 hover:text-white`}
+        } relative mb-[2px] flex items-center rounded px-4 py-[10px] text-base font-medium text-white/50 duration-200 hover:bg-white/10 hover:text-white`}
       >
         <span className="pr-[10px]">{icon}</span>
         {menu}
         {message && (
-          <span className="ml-4 rounded-full bg-white py-1 px-[10px] text-xs font-semibold text-primary">
+          <span className="ml-4 rounded-full bg-white px-[10px] py-1 text-xs font-semibold text-primary">
             {message}
           </span>
         )}
@@ -397,7 +397,7 @@ const NavItem = ({ menu, link, submenu, message, icon, children }) => {
           <span
             className={`${
               dropdownOpen === true ? "rotate-0" : "rotate-180"
-            } absolute top-1/2 right-10 -translate-y-1/2`}
+            } absolute right-10 top-1/2 -translate-y-1/2`}
           >
             <svg
               width="20"

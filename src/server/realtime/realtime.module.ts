@@ -8,5 +8,3 @@ import { RealtimeController } from './realtime.controller';
   controllers: [RealtimeController],
 })
 export class RealtimeModule {}
-
-

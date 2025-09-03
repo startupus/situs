@@ -1,8 +1,8 @@
 const CouponForm = () => {
   return (
     <>
-      <div className="border-stroke shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border bg-white px-8 pt-6 pb-8">
-        <div className="pb-4 mb-8 border-b border-stroke dark:border-dark-3">
+      <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-8 pb-8 pt-6 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+        <div className="mb-8 border-b border-stroke pb-4 dark:border-dark-3">
           <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
             Coupon Code
           </h3>
@@ -15,9 +15,9 @@ const CouponForm = () => {
           <input
             type="text"
             placeholder="Coupon code"
-            className="border-stroke text-body-color focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 w-full rounded-lg border bg-transparent py-3 pr-20 pl-5 font-medium outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+            className="outline-hidden w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-20 font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
           />
-          <button className="bg-dark hover:bg-dark/90 absolute top-1/2 right-2 mb-3 h-[34px] -translate-y-1/2 rounded-sm px-5 text-sm font-medium text-white transition">
+          <button className="absolute right-2 top-1/2 mb-3 h-[34px] -translate-y-1/2 rounded-sm bg-dark px-5 text-sm font-medium text-white transition hover:bg-dark/90">
             Apply
           </button>
         </form>

@@ -1,16 +1,15 @@
-import { Image, RichText, Text } from 'redaktus/frontend'
-import * as types from 'redaktus/types'
-
+import { Image, RichText, Text } from 'redaktus/frontend';
+import * as types from 'redaktus/types';
 
 //=============================
 // Local Types
 //=============================
-type Padding = 'big' | 'small'
+type Padding = 'big' | 'small';
 
 interface HeroUnitProps {
-  padding: Padding
-  title: string
-  text: string
+  padding: Padding;
+  title: string;
+  text: string;
 }
 
 //=============================
@@ -18,19 +17,9 @@ interface HeroUnitProps {
 //=============================
 const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
   return (
-    <div
-      className={`max-w-xl mx-auto px-6 ${
-        padding === 'big' ? 'py-20' : 'py-12'
-      }`}
-    >
+    <div className={`max-w-xl mx-auto px-6 ${padding === 'big' ? 'py-20' : 'py-12'}`}>
       <div>
-        <Image
-          propName="icon"
-          alt="Icon"
-          maxWidth={200}
-          aspectRatio={1}
-          imageClassName="w-20 mb-5 mx-auto"
-        />
+        <Image propName="icon" alt="Icon" maxWidth={200} aspectRatio={1} imageClassName="w-20 mb-5 mx-auto" />
         <Text
           renderBlock={(props: any) => (
             <h1 className="text-3xl sm:text-4xl text-center font-black leading-tight mb-3 transition-colors duration-200 text-gray-900 dark:text-gray-100">
@@ -73,8 +62,8 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 //=============================
 // Brick Schema
@@ -102,6 +91,6 @@ MyHeroUnit.schema = {
       },
     },
   ],
-}
+};
 
-export default MyHeroUnit
+export default MyHeroUnit;

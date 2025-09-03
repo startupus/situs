@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ChatList3 = () => {
   return (
@@ -6,9 +6,7 @@ const ChatList3 = () => {
       <div className="mx-auto px-4 md:container">
         <div className="mx-auto max-w-[400px] rounded-lg bg-white py-[30px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
           <div className="mb-8 flex items-center justify-between px-[30px]">
-            <h3 className="text-xl font-semibold text-dark dark:text-white">
-              Chats
-            </h3>
+            <h3 className="text-xl font-semibold text-dark dark:text-white">Chats</h3>
             <div>
               <div className="relative z-20">
                 <select
@@ -89,28 +87,20 @@ const ChatItem = ({ img, name, text, time, active, number }) => {
   return (
     <div className="flex cursor-pointer items-center px-[30px] py-3 hover:bg-gray-1 dark:hover:bg-dark-3">
       <div className="relative mr-5 h-14 w-full max-w-[56px] rounded-full">
-        <img
-          src={img}
-          alt="profile"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="profile" className="h-full w-full object-cover object-center" />
         <span
           className={`absolute bottom-0 right-0 block h-[14px] w-[14px] rounded-full border-2 border-white dark:border-dark-2 ${
-            active ? "bg-green" : "bg-red"
+            active ? 'bg-green' : 'bg-red'
           }`}
         ></span>
       </div>
       <div className="flex w-full items-center justify-between">
         <div>
-          <h3 className="text-base font-medium text-dark dark:text-white">
-            {name}
-          </h3>
+          <h3 className="text-base font-medium text-dark dark:text-white">{name}</h3>
           <div className="flex items-center">
             <p
               className={`text-sm ${
-                number
-                  ? "font-medium text-dark dark:text-white"
-                  : "text-body-color dark:text-dark-6"
+                number ? 'font-medium text-dark dark:text-white' : 'text-body-color dark:text-dark-6'
               }`}
             >
               {text}

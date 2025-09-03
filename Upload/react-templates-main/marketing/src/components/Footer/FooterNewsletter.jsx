@@ -1,7 +1,7 @@
 const FooterNewsletter = () => {
   return (
     <>
-      <div className="border-gray-7/20 border-b pt-[70px] pb-10">
+      <div className="border-b border-gray-7/20 pb-10 pt-[70px]">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2">
             <div className="mb-5 w-full">
@@ -14,13 +14,13 @@ const FooterNewsletter = () => {
           <div className="w-full px-4 lg:w-1/2">
             <div className="mb-5 w-full">
               <form className="flex flex-wrap">
-                <div className="relative mr-5 mb-3 w-full max-w-[370px]">
+                <div className="relative mb-3 mr-5 w-full max-w-[370px]">
                   <input
                     type="email"
                     placeholder="Enter your email address"
-                    className="text-dark-6 focus:border-primary h-[52px] w-full rounded-sm border border-white/[.08] bg-white/5 pr-5 pl-14 outline-hidden focus-visible:shadow-none"
+                    className="outline-hidden h-[52px] w-full rounded-sm border border-white/[.08] bg-white/5 pl-14 pr-5 text-dark-6 focus:border-primary focus-visible:shadow-none"
                   />
-                  <label className="text-dark-6 absolute top-1/2 left-5 -translate-y-1/2">
+                  <label className="absolute left-5 top-1/2 -translate-y-1/2 text-dark-6">
                     <svg
                       width="16"
                       height="16"
@@ -41,7 +41,7 @@ const FooterNewsletter = () => {
                 </div>
                 <button
                   type="submit"
-                  className="bg-primary hover:bg-primary/90 mb-3 h-[52px] rounded-sm border border-transparent px-7 text-white transition"
+                  className="mb-3 h-[52px] rounded-sm border border-transparent bg-primary px-7 text-white transition hover:bg-primary/90"
                 >
                   Subscribe
                 </button>

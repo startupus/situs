@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const SelectBox2 = () => {
   return (
-    <section className="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="container mx-auto">
         <div>
           <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">
@@ -56,11 +56,11 @@ const SelectBoxItem = ({ id, name, img, price, title, time }) => {
           <div className="mr-5">
             <img src={img} alt="author" className="h-[18px]" />
           </div>
-          <div className="border-l border-stroke dark:border-dark-3 pl-5">
+          <div className="border-l border-stroke pl-5 dark:border-dark-3">
             <span className="mb-1 block text-sm font-semibold text-dark dark:text-white sm:text-base">
               {title}
             </span>
-            <span className="block text-sm text-body-color dark:text-dark-6 mb-1">
+            <span className="mb-1 block text-sm text-body-color dark:text-dark-6">
               {time}
             </span>
             <span className="block text-sm font-medium text-body-color dark:text-dark-6">

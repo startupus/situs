@@ -17,9 +17,9 @@ export class ProjectsEventsService {
   emitStatus(id: string, status: string): void {
     const event: ProjectEvent = { type: 'project_status', payload: { id, status } };
     // серверный лог
-    try { console.log('[SSE] project_status', { id, status, at: new Date().toISOString() }); } catch {}
+    try {
+      console.log('[SSE] project_status', { id, status, at: new Date().toISOString() });
+    } catch {}
     this.subject.next({ data: event });
   }
 }
-
-

@@ -1,6 +1,6 @@
 /**
  * Экспорты утилит системы прав доступа
- * 
+ *
  * Централизованное место для импорта всех утилит
  */
 
@@ -13,7 +13,7 @@ export {
   supportsClientScope,
   getPermissionCategory,
   isSystemPermission,
-  getPermissionLevel
+  getPermissionLevel,
 } from './permission-checker.util';
 
 // Утилиты работы с ролями
@@ -27,7 +27,7 @@ export {
   isAgencyRole,
   isAdminRole,
   getRoleDisplayName,
-  getRoleDescription
+  getRoleDescription,
 } from './role-matcher.util';
 
 // Утилиты контекста
@@ -40,5 +40,5 @@ export {
   validatePermissionContext,
   createSimpleContext,
   mergeContexts,
-  requiresAdditionalData
+  requiresAdditionalData,
 } from './context-builder.util';

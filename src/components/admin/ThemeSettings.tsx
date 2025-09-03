@@ -7,14 +7,7 @@ import { FiSettings, FiEye, FiSave, FiRotateCcw, FiCheck } from 'react-icons/fi'
  * Компонент настроек темы для админ-панели
  */
 const ThemeSettings: React.FC = () => {
-  const { 
-    currentTheme, 
-    settings, 
-    updateTheme, 
-    updateCustomTheme, 
-    resetToDefault, 
-    saveThemeSettings 
-  } = useTheme();
+  const { currentTheme, settings, updateTheme, updateCustomTheme, resetToDefault, saveThemeSettings } = useTheme();
 
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [customColors, setCustomColors] = useState<Partial<ThemeColors>>(currentTheme.colors);
@@ -36,7 +29,7 @@ const ThemeSettings: React.FC = () => {
   const handleColorChange = (colorKey: keyof ThemeColors, value: string) => {
     const newColors = { ...customColors, [colorKey]: value };
     setCustomColors(newColors);
-    
+
     if (previewMode) {
       updateCustomTheme(newColors);
     }
@@ -84,28 +77,24 @@ const ThemeSettings: React.FC = () => {
             <FiSettings className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-dark dark:text-white">
-              Настройки темы
-            </h2>
-            <p className="text-body-color dark:text-dark-6">
-              Управление цветовой схемой интерфейса
-            </p>
+            <h2 className="text-xl font-bold text-dark dark:text-white">Настройки темы</h2>
+            <p className="text-body-color dark:text-dark-6">Управление цветовой схемой интерфейса</p>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <button
             onClick={togglePreview}
             className={`px-4 py-2 rounded-lg border transition-colors ${
-              previewMode 
-                ? 'bg-primary text-white border-primary' 
+              previewMode
+                ? 'bg-primary text-white border-primary'
                 : 'bg-transparent text-primary border-primary hover:bg-primary/10'
             }`}
           >
             <FiEye className="w-4 h-4 mr-2 inline" />
             {previewMode ? 'Предпросмотр включен' : 'Предпросмотр'}
           </button>
-          
+
           <button
             onClick={handleSave}
             disabled={isSaving}
@@ -119,9 +108,7 @@ const ThemeSettings: React.FC = () => {
 
       {/* Предустановленные темы */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-dark dark:text-white mb-4">
-          Предустановленные темы
-        </h3>
+        <h3 className="text-lg font-semibold text-dark dark:text-white mb-4">Предустановленные темы</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {settings.availableThemes.map((theme) => (
             <div
@@ -134,32 +121,28 @@ const ThemeSettings: React.FC = () => {
               onClick={() => handleThemeSelect(theme.id)}
             >
               <div className="flex items-center justify-between mb-3">
-                <h4 className="font-semibold text-dark dark:text-white">
-                  {theme.name}
-                </h4>
-                {currentTheme.id === theme.id && (
-                  <FiCheck className="w-5 h-5 text-primary" />
-                )}
+                <h4 className="font-semibold text-dark dark:text-white">{theme.name}</h4>
+                {currentTheme.id === theme.id && <FiCheck className="w-5 h-5 text-primary" />}
               </div>
-              
+
               {/* Цветовая палитра темы */}
               <div className="flex gap-2">
-                <div 
+                <div
                   className="w-6 h-6 rounded-full border border-stroke"
                   style={{ backgroundColor: theme.colors.primary }}
                   title={`Primary: ${theme.colors.primary}`}
                 />
-                <div 
+                <div
                   className="w-6 h-6 rounded-full border border-stroke"
                   style={{ backgroundColor: theme.colors.secondary }}
                   title={`Secondary: ${theme.colors.secondary}`}
                 />
-                <div 
+                <div
                   className="w-6 h-6 rounded-full border border-stroke"
                   style={{ backgroundColor: theme.colors.accent }}
                   title={`Accent: ${theme.colors.accent}`}
                 />
-                <div 
+                <div
                   className="w-6 h-6 rounded-full border border-stroke"
                   style={{ backgroundColor: theme.colors.success }}
                   title={`Success: ${theme.colors.success}`}
@@ -173,9 +156,7 @@ const ThemeSettings: React.FC = () => {
       {/* Кастомизация цветов */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-dark dark:text-white">
-            Настройка цветов
-          </h3>
+          <h3 className="text-lg font-semibold text-dark dark:text-white">Настройка цветов</h3>
           <div className="flex gap-2">
             <button
               onClick={() => setIsCustomizing(!isCustomizing)}
@@ -197,9 +178,7 @@ const ThemeSettings: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Основные цвета */}
             <div>
-              <h4 className="font-medium text-dark dark:text-white mb-3">
-                Основные цвета
-              </h4>
+              <h4 className="font-medium text-dark dark:text-white mb-3">Основные цвета</h4>
               <div className="space-y-3">
                 <ColorInput
                   label="Основной цвет"
@@ -221,9 +200,7 @@ const ThemeSettings: React.FC = () => {
 
             {/* Статусные цвета */}
             <div>
-              <h4 className="font-medium text-dark dark:text-white mb-3">
-                Статусные цвета
-              </h4>
+              <h4 className="font-medium text-dark dark:text-white mb-3">Статусные цвета</h4>
               <div className="space-y-3">
                 <ColorInput
                   label="Успех"
@@ -245,9 +222,7 @@ const ThemeSettings: React.FC = () => {
 
             {/* Интерфейсные цвета */}
             <div>
-              <h4 className="font-medium text-dark dark:text-white mb-3">
-                Интерфейс
-              </h4>
+              <h4 className="font-medium text-dark dark:text-white mb-3">Интерфейс</h4>
               <div className="space-y-3">
                 <ColorInput
                   label="Фон"
@@ -289,9 +264,7 @@ const ThemeSettings: React.FC = () => {
 
       {/* Информация о текущей теме */}
       <div className="bg-gray-50 dark:bg-dark-3 rounded-lg p-4">
-        <h4 className="font-medium text-dark dark:text-white mb-2">
-          Текущая тема: {currentTheme.name}
-        </h4>
+        <h4 className="font-medium text-dark dark:text-white mb-2">Текущая тема: {currentTheme.name}</h4>
         <p className="text-body-color dark:text-dark-6 text-sm">
           ID: {currentTheme.id} | Тип: {currentTheme.isDark ? 'Темная' : 'Светлая'}
         </p>
@@ -312,9 +285,7 @@ interface ColorInputProps {
 const ColorInput: React.FC<ColorInputProps> = ({ label, value, onChange }) => {
   return (
     <div>
-      <label className="block text-sm font-medium text-dark dark:text-white mb-1">
-        {label}
-      </label>
+      <label className="block text-sm font-medium text-dark dark:text-white mb-1">{label}</label>
       <div className="flex gap-2">
         <input
           type="color"

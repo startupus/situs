@@ -40,7 +40,9 @@ const Checkout2 = () => {
               <div className="-mx-1 border-b border-stroke pb-5 pt-6 dark:border-dark-3">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="px-1">
-                    <p className="text-base text-dark dark:text-white">Subtotal</p>
+                    <p className="text-base text-dark dark:text-white">
+                      Subtotal
+                    </p>
                   </div>
                   <div className="px-1">
                     <p className="text-base font-medium text-dark dark:text-white">
@@ -97,17 +99,11 @@ const Checkout2 = () => {
               <div>
                 <p className="text-sm text-body-color dark:text-dark-6">
                   By placing your order, you agree to our company{" "}
-                  <a
-                    href="/#"
-                    className="text-primary hover:underline"
-                  >
+                  <a href="/#" className="text-primary hover:underline">
                     Privacy Policy
                   </a>
                   <span className="px-0.5"> and </span>
-                  <a
-                    href="/#"
-                    className="text-primary hover:underline"
-                  >
+                  <a href="/#" className="text-primary hover:underline">
                     Conditions of Use
                   </a>
                 </p>
@@ -128,7 +124,7 @@ const Checkout2 = () => {
                 <input
                   type="text"
                   placeholder="Coupon code"
-                  className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-20 font-medium text-body-color outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
+                  className="outline-hidden w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-20 font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
                 />
                 <button className="absolute right-2 top-1/2 mb-3 h-[34px] -translate-y-1/2 rounded-sm bg-dark px-5 text-sm font-medium text-white transition hover:bg-dark/90">
                   Apply
@@ -321,7 +317,9 @@ const CartItem = ({ img, title, subtitle, price }) => {
         </div>
       </div>
       <div className="px-1">
-        <p className="text-base font-medium text-dark dark:text-white">{price}</p>
+        <p className="text-base font-medium text-dark dark:text-white">
+          {price}
+        </p>
       </div>
     </div>
   );
@@ -346,7 +344,7 @@ const InputGroup = ({
           <input
             type={type}
             placeholder={placeholder}
-            className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
+            className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
           />
           {cardNumber && (
             <span className="absolute right-5 top-1/2 -translate-y-1/2">
@@ -392,7 +390,7 @@ const SelectGroup = ({ fullColumn, labelTitle }) => {
           {labelTitle}
         </label>
         <div className="relative">
-          <select className="w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
+          <select className="outline-hidden w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
             <option value="">Option</option>
             <option value="">Option</option>
             <option value="">Option</option>

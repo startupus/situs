@@ -56,14 +56,14 @@ export const ProjectThemeProvider: React.FC<ProjectThemeProviderProps> = ({ chil
     }
 
     let css = '';
-    
+
     if (theme === 'inherit') {
       // Наследуем от сайта - не применяем никаких стилей
       css = '';
     } else {
       // Применяем тему только к контенту сайта
       const isDark = theme === 'dark' || (theme === 'system' && isDarkMode);
-      
+
       css = `
         .redaktus-canvas .site-content {
           ${isDark ? 'background-color: #111827; color: #f9fafb;' : 'background-color: #ffffff; color: #1f2937;'}
@@ -93,7 +93,7 @@ export const ProjectThemeProvider: React.FC<ProjectThemeProviderProps> = ({ chil
 
   const setTheme = (newTheme: ProjectTheme) => {
     setThemeState(newTheme);
-    
+
     let newIsDarkMode = false;
     if (newTheme === 'dark') {
       newIsDarkMode = true;
@@ -102,39 +102,39 @@ export const ProjectThemeProvider: React.FC<ProjectThemeProviderProps> = ({ chil
     } else if (newTheme === 'system') {
       newIsDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-    
+
     setIsDarkMode(newIsDarkMode);
-    
+
     // Сохранение настроек
     const settings: ProjectThemeSettings = {
       theme: newTheme,
       isDarkMode: newIsDarkMode,
       inheritFromSite,
-      customColors
+      customColors,
     };
     localStorage.setItem('project-theme-settings', JSON.stringify(settings));
   };
 
   const setInheritFromSite = (inherit: boolean) => {
     setInheritFromSiteState(inherit);
-    
+
     const settings: ProjectThemeSettings = {
       theme,
       isDarkMode,
       inheritFromSite: inherit,
-      customColors
+      customColors,
     };
     localStorage.setItem('project-theme-settings', JSON.stringify(settings));
   };
 
   const setCustomColors = (colors: ProjectThemeSettings['customColors']) => {
     setCustomColorsState(colors);
-    
+
     const settings: ProjectThemeSettings = {
       theme,
       isDarkMode,
       inheritFromSite,
-      customColors: colors
+      customColors: colors,
     };
     localStorage.setItem('project-theme-settings', JSON.stringify(settings));
   };
@@ -154,14 +154,10 @@ export const ProjectThemeProvider: React.FC<ProjectThemeProviderProps> = ({ chil
     toggleTheme,
     setTheme,
     setInheritFromSite,
-    setCustomColors
+    setCustomColors,
   };
 
-  return (
-    <ProjectThemeContext.Provider value={contextValue}>
-      {children}
-    </ProjectThemeContext.Provider>
-  );
+  return <ProjectThemeContext.Provider value={contextValue}>{children}</ProjectThemeContext.Provider>;
 };
 
 export const useProjectTheme = (): ProjectThemeContextType => {

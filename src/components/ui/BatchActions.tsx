@@ -23,7 +23,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({
   actions,
   onAction,
   onSelectAll,
-  onClearSelection
+  onClearSelection,
 }) => {
   const [selectedAction, setSelectedAction] = useState<string>('');
 
@@ -59,7 +59,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({
             <span className="text-sm font-medium text-dark dark:text-white">
               Выбрано: {selectedItems.length} из {totalItems}
             </span>
-            
+
             {selectedItems.length < totalItems && (
               <button
                 onClick={() => onSelectAll(true)}
@@ -68,7 +68,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({
                 Выбрать все
               </button>
             )}
-            
+
             <button
               onClick={onClearSelection}
               className="text-sm text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white underline"
@@ -87,7 +87,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({
               className="appearance-none bg-white dark:bg-dark-2 border border-stroke dark:border-dark-3 rounded-lg px-4 py-2 pr-8 text-sm text-dark dark:text-white focus:border-primary outline-hidden"
             >
               <option value="">Выберите действие</option>
-              {actions.map(action => (
+              {actions.map((action) => (
                 <option key={action.id} value={action.id}>
                   {action.label}
                 </option>
@@ -103,8 +103,8 @@ const BatchActions: React.FC<BatchActionsProps> = ({
             onClick={handleExecuteAction}
             disabled={!selectedAction}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-              selectedAction 
-                ? getActionVariantClass(actions.find(a => a.id === selectedAction)?.variant)
+              selectedAction
+                ? getActionVariantClass(actions.find((a) => a.id === selectedAction)?.variant)
                 : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400'
             }`}
           >

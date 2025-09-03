@@ -65,7 +65,7 @@ const ChatBox4 = () => {
               <input
                 type="text"
                 placeholder="Type something here..."
-                className="h-[58px] w-full rounded-[10px] border border-transparent bg-white pl-[60px] pr-[100px] text-base text-body-color shadow-chat-box outline-hidden focus:border-secondary dark:bg-dark dark:text-dark-6"
+                className="outline-hidden h-[58px] w-full rounded-[10px] border border-transparent bg-white pl-[60px] pr-[100px] text-base text-body-color shadow-chat-box focus:border-secondary dark:bg-dark dark:text-dark-6"
               />
 
               <button className="absolute left-6 top-1/2 -translate-y-1/2 text-body-color hover:text-primary dark:text-dark-6">

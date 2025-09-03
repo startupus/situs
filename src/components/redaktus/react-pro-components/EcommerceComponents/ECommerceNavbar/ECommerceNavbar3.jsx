@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const ECommerceNavbar3 = () => {
   return (
@@ -12,9 +12,7 @@ const ECommerceNavbar3 = () => {
                 <div className="-mx-3 hidden items-center md:flex">
                   <div className="px-3">
                     <div className="relative flex items-center">
-                      <label className="hidden text-base font-medium text-white lg:inline-flex">
-                        Language:
-                      </label>
+                      <label className="hidden text-base font-medium text-white lg:inline-flex">Language:</label>
                       <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white outline-hidden transition">
                         <option>English</option>
                         <option>Urdu</option>
@@ -25,9 +23,7 @@ const ECommerceNavbar3 = () => {
                   </div>
                   <div className="px-3">
                     <div className="relative flex items-center">
-                      <label className="hidden text-base font-medium text-white lg:inline-flex">
-                        Currency:
-                      </label>
+                      <label className="hidden text-base font-medium text-white lg:inline-flex">Currency:</label>
                       <select className="w-full appearance-none rounded-lg bg-transparent py-3 pl-2 pr-4 text-base font-medium text-white outline-hidden transition">
                         <option value="">USD</option>
                         <option value="">INR</option>
@@ -69,10 +65,7 @@ export default ECommerceNavbar3;
 const TopNavItem = ({ link, name }) => {
   return (
     <li>
-      <a
-        href={link}
-        className="inline-block px-[10px] py-4 text-base font-medium text-white hover:text-white/90"
-      >
+      <a href={link} className="inline-block px-[10px] py-4 text-base font-medium text-white hover:text-white/90">
         {name}
       </a>
     </li>
@@ -91,17 +84,12 @@ const MiddleNavbar = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -171,13 +159,7 @@ const MiddleNavbar = () => {
                     className="hidden items-center pr-1 text-left md:flex"
                   >
                     <span className="relative mr-5 flex items-center justify-center">
-                      <svg
-                        width="26"
-                        height="26"
-                        viewBox="0 0 26 26"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M13 23.9688C12.4719 23.9688 11.9437 23.7656 11.5375 23.4C10.6031 22.5875 9.75 21.8563 8.97812 21.2063C6.6625 19.2156 4.63125 17.55 3.20937 15.8438C1.54375 13.8125 0.731247 11.9031 0.731247 9.75C0.731247 7.67813 1.4625 5.72813 2.7625 4.30625C4.10312 2.84375 5.97187 2.03125 7.9625 2.03125C9.46562 2.03125 10.8875 2.51875 12.1062 3.45312C12.4312 3.69688 12.7156 3.94062 13 4.26562C13.2844 3.98125 13.5687 3.69688 13.8937 3.45312C15.1125 2.51875 16.4937 2.03125 18.0375 2.03125C20.0687 2.03125 21.8969 2.84375 23.2375 4.30625C24.5781 5.72813 25.2687 7.67813 25.2687 9.75C25.2687 11.9031 24.4969 13.8125 22.7906 15.8438C21.3687 17.55 19.3375 19.2563 17.0219 21.2063C16.25 21.8563 15.3562 22.6281 14.4219 23.4C14.0562 23.7656 13.5281 23.9688 13 23.9688ZM7.9625 3.85938C6.45937 3.85938 5.07812 4.46875 4.0625 5.525C3.0875 6.62188 2.55937 8.125 2.55937 9.75C2.55937 11.4156 3.20937 13 4.59062 14.6656C5.93125 16.25 7.88125 17.9156 10.1156 19.825C10.8875 20.475 11.7812 21.2469 12.7156 22.0594C12.8781 22.1812 13.1219 22.1812 13.2844 22.0594C14.2187 21.2469 15.1125 20.5156 15.8844 19.825C18.1594 17.875 20.1094 16.25 21.4094 14.6656C22.7906 13 23.4406 11.4156 23.4406 9.75C23.4406 8.125 22.8719 6.62187 21.8969 5.56562C20.8812 4.46875 19.5 3.85938 18.0375 3.85938C16.9406 3.85938 15.925 4.225 15.0312 4.875C14.6656 5.15937 14.3406 5.48437 14.0156 5.85C13.7719 6.13437 13.4062 6.3375 13 6.3375C12.5937 6.3375 12.2687 6.175 11.9844 5.85C11.6594 5.48437 11.3344 5.15937 10.9687 4.875C10.1156 4.225 9.1 3.85938 7.9625 3.85938Z"
                           fill="white"
@@ -199,9 +181,7 @@ const MiddleNavbar = () => {
                   ref={wishlistRef}
                   onFocus={() => setIsWishlist(true)}
                   onBlur={() => setIsWishlist(false)}
-                  className={`absolute right-0 top-full mt-5 w-[330px] ${
-                    !isWishlist && "hidden"
-                  }`}
+                  className={`absolute right-0 top-full mt-5 w-[330px] ${!isWishlist && 'hidden'}`}
                 >
                   <div className="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-8 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
                     <div className="border-b border-stroke pb-3 dark:border-dark-3">
@@ -241,13 +221,7 @@ const MiddleNavbar = () => {
                     className="flex items-center pr-1 text-left"
                   >
                     <span className="relative mr-5 flex items-center justify-center">
-                      <svg
-                        width="26"
-                        height="26"
-                        viewBox="0 0 26 26"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M22.9125 7.96252H21.9375L19.2969 1.30002C19.0938 0.812515 18.5656 0.60939 18.1188 0.77189C17.6313 0.975015 17.4281 1.50314 17.5906 1.95002L19.9469 7.96252H6.05314L8.40939 1.99064C8.61251 1.50314 8.36876 0.975015 7.88126 0.812515C7.43439 0.60939 6.90626 0.812515 6.70314 1.30002L4.06251 7.96252H3.08751C2.35626 7.96252 1.74689 8.57189 1.74689 9.30314V12.5938C1.74689 13.2844 2.23439 13.8125 2.92501 13.8938L3.94064 22.75C4.10314 24.2125 5.32189 25.3094 6.78439 25.3094H19.2156C20.6781 25.3094 21.8969 24.2125 22.0594 22.75L23.075 13.8938C23.725 13.8125 24.2531 13.2438 24.2531 12.5938V9.26251C24.2531 8.53126 23.6438 7.96252 22.9125 7.96252ZM3.57501 9.79064H22.425V12.1063H3.57501V9.79064ZM19.2156 23.4813H6.78439C6.25626 23.4813 5.80939 23.075 5.72814 22.5469L4.75314 13.9344H21.2469L20.2719 22.5469C20.1906 23.075 19.7438 23.4813 19.2156 23.4813Z"
                           fill="white"
@@ -278,9 +252,7 @@ const MiddleNavbar = () => {
                   ref={cartBox}
                   onFocus={() => setIsCartOpen(true)}
                   onBlur={() => setIsCartOpen(false)}
-                  className={`absolute right-0 top-full mt-5 w-[330px] ${
-                    !isCartOpen && "hidden"
-                  }`}
+                  className={`absolute right-0 top-full mt-5 w-[330px] ${!isCartOpen && 'hidden'}`}
                 >
                   <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
                     <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
@@ -306,51 +278,35 @@ const MiddleNavbar = () => {
                     <div className="-mx-1 border-b border-stroke pb-5 dark:border-dark-3">
                       <div className="mb-3 flex items-center justify-between">
                         <div className="px-1">
-                          <p className="text-base text-dark dark:text-white">
-                            Subtotal
-                          </p>
+                          <p className="text-base text-dark dark:text-white">Subtotal</p>
                         </div>
                         <div className="px-1">
-                          <p className="text-base font-medium text-dark dark:text-white">
-                            $108
-                          </p>
+                          <p className="text-base font-medium text-dark dark:text-white">$108</p>
                         </div>
                       </div>
                       <div className="mb-3 flex items-center justify-between">
                         <div className="px-1">
-                          <p className="text-base text-dark dark:text-white">
-                            Shipping Cost (+)
-                          </p>
+                          <p className="text-base text-dark dark:text-white">Shipping Cost (+)</p>
                         </div>
                         <div className="px-1">
-                          <p className="text-base font-medium text-dark dark:text-white">
-                            $10.85
-                          </p>
+                          <p className="text-base font-medium text-dark dark:text-white">$10.85</p>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="px-1">
-                          <p className="text-base text-dark dark:text-white">
-                            Discount (-)
-                          </p>
+                          <p className="text-base text-dark dark:text-white">Discount (-)</p>
                         </div>
                         <div className="px-1">
-                          <p className="text-base font-medium text-dark dark:text-white">
-                            $9.00
-                          </p>
+                          <p className="text-base font-medium text-dark dark:text-white">$9.00</p>
                         </div>
                       </div>
                     </div>
                     <div className="-mx-1 flex items-center justify-between pb-6 pt-5">
                       <div className="px-1">
-                        <p className="text-base text-dark dark:text-white">
-                          Total Payable
-                        </p>
+                        <p className="text-base text-dark dark:text-white">Total Payable</p>
                       </div>
                       <div className="px-1">
-                        <p className="text-base font-medium text-dark dark:text-white">
-                          $88.15
-                        </p>
+                        <p className="text-base font-medium text-dark dark:text-white">$88.15</p>
                       </div>
                     </div>
 
@@ -382,17 +338,12 @@ const Navbar = ({ children }) => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -408,7 +359,7 @@ const Navbar = ({ children }) => {
                 ref={menuTrigger}
                 onClick={() => setOpen(!open)}
                 className={` ${
-                  open && "navbarTogglerActive"
+                  open && 'navbarTogglerActive'
                 } absolute -top-10 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:top-1/2 lg:hidden`}
               >
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
@@ -418,7 +369,7 @@ const Navbar = ({ children }) => {
               <nav
                 ref={menuRef}
                 className={`absolute right-4 top-full w-full max-w-[250px] justify-center rounded-lg bg-primary px-6 py-5 shadow lg:static lg:flex lg:w-full lg:max-w-full lg:justify-start lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none ${
-                  !open && "hidden"
+                  !open && 'hidden'
                 } `}
               >
                 <ul className="block items-center lg:flex">{children}</ul>
@@ -441,10 +392,7 @@ const Navbar = ({ children }) => {
                   <path d="M2.47812 8.36876C2.55937 10.1563 4.10312 11.0906 5.15937 11.0906H8.00312H8.04374C9.34374 11.0094 10.6437 10.1563 10.6437 8.36876V7.59689C12.025 7.59689 14.6656 7.59689 16.0062 7.59689V8.36876C16.0062 10.1563 17.3062 11.0094 18.6062 11.0906H21.4906C22.5875 11.0906 24.0906 10.1563 24.1719 8.36876C24.1719 8.24689 24.1719 6.78439 24.1719 6.70314C24.1719 6.66251 24.1719 6.62189 24.1719 6.58126C24.05 5.40314 23.6437 4.42814 22.9125 3.65626L22.8719 3.61564C21.8156 2.64064 20.5969 2.11251 19.6625 1.78751C16.9 0.731262 13.4469 0.731262 13.2844 0.731262C10.8469 0.771887 9.30312 0.975012 6.94687 1.78751C5.97187 2.15314 4.75312 2.68126 3.69687 3.61564L3.65624 3.65626C2.92499 4.42814 2.51874 5.40314 2.39687 6.58126C2.39687 6.62189 2.39687 6.66251 2.39687 6.70314C2.43749 6.78439 2.47812 8.20626 2.47812 8.36876ZM4.99687 4.95626C5.80937 4.22501 6.78437 3.81876 7.59687 3.49376C9.70937 2.72189 11.05 2.60001 13.325 2.51876C13.5281 2.51876 16.6156 2.55939 19.0531 3.49376C19.9062 3.81876 20.8812 4.22501 21.6531 4.95626C22.0594 5.40314 22.3031 6.01251 22.3844 6.70314C22.3844 6.82501 22.3844 8.16564 22.3844 8.28751C22.3437 9.14064 21.5312 9.26251 21.5312 9.26251H18.7281C18.3219 9.22189 17.875 9.05939 17.875 8.36876V6.70314C17.875 6.29689 17.6312 5.93126 17.225 5.85001C16.9406 5.68751 9.74999 5.68751 9.46562 5.80939C9.09999 5.93126 8.81562 6.29689 8.81562 6.66251V8.36876C8.81562 9.05939 8.36874 9.22189 7.96249 9.26251H5.15937C5.15937 9.26251 4.34687 9.14064 4.30624 8.32814C4.30624 8.20626 4.30624 7.75939 4.30624 7.35314C4.30624 7.06876 4.30624 6.86564 4.30624 6.74376C4.34687 5.97189 4.59062 5.40314 4.99687 4.95626Z" />
                 </svg>
               </div>
-              <a
-                href="/#"
-                className="whitespace-nowrap text-base font-medium text-white"
-              >
+              <a href="/#" className="whitespace-nowrap text-base font-medium text-white">
                 Need Help? +001 123 456 789
               </a>
             </div>
@@ -464,24 +412,19 @@ const ListItem = ({ children, NavLink, submenu, menuName }) => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
   useClickOutside([submenuTrigger], submenuOpen, setSubmenuOpen);
 
   return (
-    <li className={`${submenu && "group relative lg:py-4"}`}>
+    <li className={`${submenu && 'group relative lg:py-4'}`}>
       {!submenu && (
         <a
           href={NavLink}
@@ -503,13 +446,7 @@ const ListItem = ({ children, NavLink, submenu, menuName }) => {
           >
             {menuName}
             <span className="pl-2">
-              <svg
-                width="11"
-                height="6"
-                viewBox="0 0 11 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M5.39683 5.40046C5.20176 5.40046 5.00669 5.33284 4.84413 5.1807L0.487528 0.920728C0.373737 0.802396 0.373737 0.616445 0.471272 0.498112C0.585064 0.37978 0.76388 0.37978 0.877671 0.481208L5.23427 4.74118C5.31555 4.8257 5.46185 4.8257 5.55939 4.74118L9.91599 0.481208C10.0298 0.362875 10.2086 0.37978 10.3224 0.498112C10.4362 0.616445 10.4199 0.802396 10.3061 0.920728L5.94953 5.16379C5.78697 5.31594 5.5919 5.40046 5.39683 5.40046Z"
                   fill="currentColor"
@@ -528,7 +465,7 @@ const ListItem = ({ children, NavLink, submenu, menuName }) => {
             onFocus={() => setSubmenuOpen(true)}
             onBlur={() => setSubmenuOpen(false)}
             className={`${
-              !submenuOpen ? "hidden lg:block" : "block"
+              !submenuOpen ? 'hidden lg:block' : 'block'
             } relative left-0 top-full rounded-lg px-2 transition-all group-hover:opacity-100 lg:invisible lg:absolute lg:top-[115%] lg:w-[250px] lg:border-[.5px] lg:border-[#e7e7e7] lg:bg-primary lg:px-6 lg:py-4 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full`}
           >
             <SubmenuItem link="/#" name="Arts &amp; Crafts" />
@@ -544,10 +481,7 @@ const ListItem = ({ children, NavLink, submenu, menuName }) => {
 
 const SubmenuItem = ({ link, name }) => {
   return (
-    <a
-      href={link}
-      className="block rounded-sm py-2 text-sm font-medium text-white hover:opacity-90"
-    >
+    <a href={link} className="block rounded-sm py-2 text-sm font-medium text-white hover:opacity-90">
       {name}
     </a>
   );
@@ -561,21 +495,14 @@ const CartItem = ({ image, link, title, desc, price }) => {
           <img src={image} alt="product image" className="w-full" />
         </div>
         <div>
-          <a
-            href={link}
-            className="text-sm font-medium text-dark hover:text-primary dark:text-white"
-          >
+          <a href={link} className="text-sm font-medium text-dark hover:text-primary dark:text-white">
             {title}
           </a>
-          <p className="truncate text-xs font-medium text-body-color dark:text-dark-6">
-            {desc}
-          </p>
+          <p className="truncate text-xs font-medium text-body-color dark:text-dark-6">{desc}</p>
         </div>
       </div>
       <div className="px-1">
-        <p className="text-base font-semibold text-dark dark:text-white">
-          ${price}
-        </p>
+        <p className="text-base font-semibold text-dark dark:text-white">${price}</p>
       </div>
     </>
   );

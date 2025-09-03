@@ -50,7 +50,7 @@ const MapOne = () => {
           Sells by State
         </h4>
         <div className="h-[260px]">
-          <div id="mapOne" className="mapOne overflow-visible!"></div>
+          <div id="mapOne" className="overflow-visible! mapOne"></div>
         </div>
 
         <p className="mt-2 text-sm text-body-color dark:text-dark-6">

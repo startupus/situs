@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ECommerceHero3 = () => {
   const sliderRef = useRef(null);
@@ -83,15 +83,11 @@ const SingleSlide = ({ img, subtitle, title, details, link, button }) => {
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2">
             <div className="mt-20 max-w-[570px] lg:mt-0">
-              <span className="mb-[14px] block text-lg font-semibold text-primary">
-                {subtitle}
-              </span>
+              <span className="mb-[14px] block text-lg font-semibold text-primary">{subtitle}</span>
               <h2 className="mb-[18px] text-2xl font-bold leading-[1.25]! text-dark dark:text-white xl:text-4xl">
                 {title}
               </h2>
-              <p className="mb-9 text-base text-body-color dark:text-dark-6">
-                {details}
-              </p>
+              <p className="mb-9 text-base text-body-color dark:text-dark-6">{details}</p>
               <a
                 href={link}
                 className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
@@ -109,17 +105,8 @@ const SingleSlide = ({ img, subtitle, title, details, link, button }) => {
       </div>
 
       <div className="absolute right-0 top-0 -z-10">
-        <svg
-          width={620}
-          height={560}
-          viewBox="0 0 620 560"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 560L256.5 0H620V560H0Z"
-            fill="url(#paint0_linear_2066_370)"
-          />
+        <svg width={620} height={560} viewBox="0 0 620 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 560L256.5 0H620V560H0Z" fill="url(#paint0_linear_2066_370)" />
           <defs>
             <linearGradient
               id="paint0_linear_2066_370"
@@ -136,17 +123,8 @@ const SingleSlide = ({ img, subtitle, title, details, link, button }) => {
         </svg>
       </div>
       <div className="absolute right-0 top-0 -z-10">
-        <svg
-          width={536}
-          height={560}
-          viewBox="0 0 536 560"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.998535 560L257.499 0H535.999V560H0.998535Z"
-            fill="url(#paint0_linear_2066_368)"
-          />
+        <svg width={536} height={560} viewBox="0 0 536 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.998535 560L257.499 0H535.999V560H0.998535Z" fill="url(#paint0_linear_2066_368)" />
           <defs>
             <linearGradient
               id="paint0_linear_2066_368"

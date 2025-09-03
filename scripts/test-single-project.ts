@@ -1,5 +1,14 @@
 #!/usr/bin/env tsx
-import { PrismaClient, ProductType, PageStatus, PageType, ProjectStatus, GlobalRole, UserStatus, ProductStatus } from '@prisma/client';
+import {
+  PrismaClient,
+  ProductType,
+  PageStatus,
+  PageType,
+  ProjectStatus,
+  GlobalRole,
+  UserStatus,
+  ProductStatus,
+} from '@prisma/client';
 
 const prisma = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
 
@@ -17,7 +26,7 @@ async function ensureDemoOwner() {
   const email = 'demo-owner@example.com';
   const existing = await prisma.user.findUnique({ where: { username } });
   if (existing) return existing;
-  
+
   return prisma.user.create({
     data: {
       username,
@@ -31,13 +40,13 @@ async function ensureDemoOwner() {
 
 async function main() {
   console.log('🚀 Тестирование создания одного проекта...');
-  
+
   const owner = await ensureDemoOwner();
   console.log(`👤 Владелец готов: ${owner.username}`);
 
   const name = 'Test Project Simple';
   const slug = slugify(name);
-  
+
   // Проверяем существование проекта
   const existing = await prisma.project.findUnique({ where: { slug } });
   if (existing) {
@@ -105,7 +114,7 @@ async function main() {
   // Проверяем все проекты в базе
   const allProjects = await prisma.project.findMany();
   console.log(`📊 Всего проектов в базе: ${allProjects.length}`);
-  allProjects.forEach(p => console.log(`  - ${p.name} (${p.slug})`));
+  allProjects.forEach((p) => console.log(`  - ${p.name} (${p.slug})`));
 
   console.log('✅ Тест завершен');
 }

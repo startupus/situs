@@ -5,23 +5,23 @@ import { ApiProperty } from '@nestjs/swagger';
  */
 export enum GlobalRole {
   SUPER_ADMIN = 'SUPER_ADMIN',
-  STAFF = 'STAFF', 
+  STAFF = 'STAFF',
   AGENCY = 'AGENCY',
-  BUSINESS = 'BUSINESS'
+  BUSINESS = 'BUSINESS',
 }
 
 export enum UserStatus {
   ACTIVE = 'active',
-  INACTIVE = 'inactive', 
+  INACTIVE = 'inactive',
   PENDING = 'pending',
   INVITED = 'invited',
   SUSPENDED = 'suspended',
-  BANNED = 'banned'
+  BANNED = 'banned',
 }
 
 /**
  * Сущность пользователя
- * 
+ *
  * Представляет структуру данных пользователя в API
  */
 export class User {

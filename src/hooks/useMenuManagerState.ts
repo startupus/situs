@@ -11,7 +11,7 @@ export const useMenuManagerState = () => {
   const navigate = useNavigate();
 
   // ==================== СОСТОЯНИЕ ====================
-  
+
   const [selectedMenuType, setSelectedMenuType] = useState<string>('');
   const [showCreateItemModal, setShowCreateItemModal] = useState(false);
   const [editingItem, setEditingItem] = useState<MenuItemData | null>(null);
@@ -28,16 +28,19 @@ export const useMenuManagerState = () => {
   const activeTab = (searchParams.get('tab') as 'items' | 'types') || 'items';
 
   // Функция для переключения вкладок с обновлением URL
-  const setActiveTab = useCallback((tab: 'items' | 'types') => {
-    const newSearchParams = new URLSearchParams(location.search);
-    if (tab === 'items') {
-      newSearchParams.delete('tab');
-    } else {
-      newSearchParams.set('tab', tab);
-    }
-    const newSearch = newSearchParams.toString();
-    navigate(`${location.pathname}${newSearch ? `?${newSearch}` : ''}`, { replace: true });
-  }, [location, navigate]);
+  const setActiveTab = useCallback(
+    (tab: 'items' | 'types') => {
+      const newSearchParams = new URLSearchParams(location.search);
+      if (tab === 'items') {
+        newSearchParams.delete('tab');
+      } else {
+        newSearchParams.set('tab', tab);
+      }
+      const newSearch = newSearchParams.toString();
+      navigate(`${location.pathname}${newSearch ? `?${newSearch}` : ''}`, { replace: true });
+    },
+    [location, navigate],
+  );
 
   // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
@@ -53,7 +56,7 @@ export const useMenuManagerState = () => {
 
     window.addEventListener('situs:create-menu-item', handleCreateMenuItem as EventListener);
     window.addEventListener('situs:create-menu-type', handleCreateMenuType as EventListener);
-    
+
     return () => {
       window.removeEventListener('situs:create-menu-item', handleCreateMenuItem as EventListener);
       window.removeEventListener('situs:create-menu-type', handleCreateMenuType as EventListener);
@@ -62,14 +65,17 @@ export const useMenuManagerState = () => {
 
   // ==================== АВТОМАТИЧЕСКИЙ ВЫБОР ГЛАВНОГО МЕНЮ ====================
 
-  const autoSelectMainMenu = useCallback((menuTypes: MenuTypeData[]) => {
-    if (menuTypes.length > 0 && !selectedMenuType) {
-      const mainMenu = menuTypes.find((mt: MenuTypeData) => mt.name === 'main');
-      if (mainMenu) {
-        setSelectedMenuType(mainMenu.id);
+  const autoSelectMainMenu = useCallback(
+    (menuTypes: MenuTypeData[]) => {
+      if (menuTypes.length > 0 && !selectedMenuType) {
+        const mainMenu = menuTypes.find((mt: MenuTypeData) => mt.name === 'main');
+        if (mainMenu) {
+          setSelectedMenuType(mainMenu.id);
+        }
       }
-    }
-  }, [selectedMenuType]);
+    },
+    [selectedMenuType],
+  );
 
   // ==================== МОДАЛЬНЫЕ ОКНА ====================
 
@@ -98,26 +104,26 @@ export const useMenuManagerState = () => {
     deletingMenuType,
     allMenuItems,
     setAllMenuItems,
-    
+
     // URL и вкладки
     activeTab,
     setActiveTab,
-    
+
     // Утилиты
     autoSelectMainMenu,
-    
+
     // Модальные окна - закрытие
     closeCreateItemModal,
     closeCreateTypeModal,
     closeEditItemModal,
     closeEditTypeModal,
     closeDeleteTypeModal,
-    
+
     // Модальные окна - открытие
     openCreateItemModal,
     openCreateTypeModal,
     openEditItemModal,
     openEditTypeModal,
-    openDeleteTypeModal
+    openDeleteTypeModal,
   };
 };

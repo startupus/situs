@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ECommerceFooter = () => {
   return (
@@ -37,28 +37,16 @@ const ECommerceFooter = () => {
 
             <div className="w-full px-4 sm:w-1/2 md:w-6/12 lg:w-4/12 xl:w-3/12 2xl:w-3/12">
               <div className="mb-14 xl:text-right">
-                <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">
-                  Need Help? Call Us Now
-                </h3>
+                <h3 className="mb-3 text-xl font-semibold text-dark dark:text-white">Need Help? Call Us Now</h3>
                 <div>
-                  <a
-                    href="/#"
-                    className="mb-6 block text-lg font-semibold text-dark dark:text-white"
-                  >
+                  <a href="/#" className="mb-6 block text-lg font-semibold text-dark dark:text-white">
                     +99 0214 2542 223
                   </a>
-                  <p className="mb-[10px] text-base text-body-color dark:text-dark-6">
-                    Monday - Friday: 9:00-20:00
-                  </p>
-                  <p className="mb-[50px] text-base text-body-color dark:text-dark-6">
-                    Saturday: 11:00 - 15:00
-                  </p>
+                  <p className="mb-[10px] text-base text-body-color dark:text-dark-6">Monday - Friday: 9:00-20:00</p>
+                  <p className="mb-[50px] text-base text-body-color dark:text-dark-6">Saturday: 11:00 - 15:00</p>
                 </div>
                 <div className="flex items-center space-x-[18px] xl:justify-end">
-                  <a
-                    href="/#"
-                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
-                  >
+                  <a href="/#" className="inline-block text-body-color hover:text-primary dark:text-dark-6">
                     <svg
                       width="24"
                       height="24"
@@ -73,10 +61,7 @@ const ECommerceFooter = () => {
                       />
                     </svg>
                   </a>
-                  <a
-                    href="/#"
-                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
-                  >
+                  <a href="/#" className="inline-block text-body-color hover:text-primary dark:text-dark-6">
                     <svg
                       width="24"
                       height="24"
@@ -91,17 +76,8 @@ const ECommerceFooter = () => {
                       />
                     </svg>
                   </a>
-                  <a
-                    href="/#"
-                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    <svg
-                      width="20"
-                      height="19"
-                      viewBox="0 0 20 19"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                  <a href="/#" className="inline-block text-body-color hover:text-primary dark:text-dark-6">
+                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M9.68534 12.8888C11.6575 12.8888 13.2562 11.3239 13.2562 9.39361C13.2562 7.46328 11.6575 5.89844 9.68534 5.89844C7.71322 5.89844 6.1145 7.46328 6.1145 9.39361C6.1145 11.3239 7.71322 12.8888 9.68534 12.8888Z"
                         fill="currentColor"
@@ -116,17 +92,8 @@ const ECommerceFooter = () => {
                       />
                     </svg>
                   </a>
-                  <a
-                    href="/#"
-                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    <svg
-                      width="20"
-                      height="19"
-                      viewBox="0 0 20 19"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                  <a href="/#" className="inline-block text-body-color hover:text-primary dark:text-dark-6">
+                    <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M18.2014 0.0527344H1.60852C0.824353 0.0527344 0.197021 0.66394 0.197021 1.42795V17.6249C0.197021 18.3583 0.824353 19.0001 1.60852 19.0001H18.1387C18.9229 19.0001 19.5502 18.3889 19.5502 17.6249V1.39739C19.6129 0.66394 18.9856 0.0527344 18.2014 0.0527344ZM5.9371 16.158H3.08275V7.14272H5.9371V16.158ZM4.49424 5.88975C3.55324 5.88975 2.83181 5.1563 2.83181 4.27005C2.83181 3.3838 3.58461 2.65036 4.49424 2.65036C5.40387 2.65036 6.15667 3.3838 6.15667 4.27005C6.15667 5.1563 5.4666 5.88975 4.49424 5.88975ZM16.7586 16.158H13.9042V11.7879C13.9042 10.7488 13.8728 9.37362 12.3986 9.37362C10.893 9.37362 10.6735 10.5349 10.6735 11.6962V16.158H7.8191V7.14272H10.6107V8.39569H10.6421C11.0499 7.66224 11.9595 6.9288 13.371 6.9288C16.2881 6.9288 16.8213 8.76241 16.8213 11.2684V16.158H16.7586Z"
                         fill="currentColor"
@@ -142,8 +109,7 @@ const ECommerceFooter = () => {
               <div className="order-last w-full px-4 lg:order-first lg:w-1/2">
                 <div className="mt-7 lg:mt-0">
                   <p className="text-center text-base font-medium text-body-color dark:text-dark-6 lg:text-left">
-                    Copyright © {new Date().getFullYear()} TailGrids. All
-                    Rights Reserved.
+                    Copyright © {new Date().getFullYear()} TailGrids. All Rights Reserved.
                   </p>
                 </div>
               </div>
@@ -175,10 +141,7 @@ const LinkGroup = ({ children, header }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 md:w-4/12 lg:w-4/12 xl:w-2/12 xl:first:w-3/12 2xl:w-2/12 2xl:first:w-3/12">
       <div className="mb-14">
-        <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">
-          {" "}
-          {header}{" "}
-        </h3>
+        <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white"> {header} </h3>
         <div className="space-y-3">{children}</div>
       </div>
     </div>
@@ -187,10 +150,7 @@ const LinkGroup = ({ children, header }) => {
 
 const NavLink = ({ text, link }) => {
   return (
-    <a
-      href={link}
-      className="block text-base text-body-color hover:text-primary dark:text-dark-6"
-    >
+    <a href={link} className="block text-base text-body-color hover:text-primary dark:text-dark-6">
       {text}
     </a>
   );

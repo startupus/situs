@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ECommerceFooter2 = () => {
   return (
@@ -22,8 +22,7 @@ const ECommerceFooter2 = () => {
                     />
                   </a>
                   <p className="mb-10 text-base text-body-color dark:text-dark-6">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Cras eget lorem.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget lorem.
                   </p>
 
                   <div className="flex items-center space-x-3">
@@ -93,9 +92,7 @@ const ECommerceFooter2 = () => {
 
               <div className="w-full px-4 md:w-7/12 lg:w-1/3">
                 <div className="mb-14">
-                  <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">
-                    Useful Links
-                  </h3>
+                  <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">Useful Links</h3>
                   <div className="-mx-4 flex flex-wrap space-y-3 sm:space-y-0 lg:space-y-3 xl:space-y-0">
                     <LinkGroup>
                       <NavLink link="/#" name="Legal & Privacy" />
@@ -115,9 +112,7 @@ const ECommerceFooter2 = () => {
 
               <div className="w-full px-4 md:w-8/12 lg:w-1/3">
                 <div className="mb-14">
-                  <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">
-                    Subscribe Newsletter
-                  </h3>
+                  <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white">Subscribe Newsletter</h3>
                   <p className="mb-8 text-base text-body-color dark:text-dark-6">
                     Enter your email to receive our valuable newsletters.
                   </p>
@@ -128,13 +123,7 @@ const ECommerceFooter2 = () => {
                       className="h-[54px] w-full rounded-bl-lg rounded-tl-lg border border-stroke bg-white px-5 outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark"
                     />
                     <button className="h-[54px] rounded-br-lg rounded-tr-lg border border-l-0 border-stroke bg-white px-5 dark:border-dark-3 dark:bg-dark">
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M21 3.59998H3.00001C1.72501 3.59998 0.637512 4.64998 0.637512 5.96248V18.1125C0.637512 19.3875 1.68751 20.475 3.00001 20.475H21C22.275 20.475 23.3625 19.425 23.3625 18.1125V5.92498C23.3625 4.64998 22.275 3.59998 21 3.59998ZM21 5.28748C21.0375 5.28748 21.075 5.28748 21.1125 5.28748L12 11.1375L2.88751 5.28748C2.92501 5.28748 2.96251 5.28748 3.00001 5.28748H21ZM21 18.7125H3.00001C2.62501 18.7125 2.32501 18.4125 2.32501 18.0375V6.93748L11.1 12.5625C11.3625 12.75 11.6625 12.825 11.9625 12.825C12.2625 12.825 12.5625 12.75 12.825 12.5625L21.6 6.93748V18.075C21.675 18.45 21.375 18.7125 21 18.7125Z"
                           fill="#3758F9"
@@ -188,10 +177,7 @@ const LinkGroup = ({ children }) => {
 const NavLink = ({ name, link }) => {
   return (
     <li>
-      <a
-        href={link}
-        className="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
-      >
+      <a href={link} className="inline-block text-base text-body-color hover:text-primary dark:text-dark-6">
         {name}
       </a>
     </li>
@@ -200,10 +186,7 @@ const NavLink = ({ name, link }) => {
 
 const BottomLink = ({ href, name }) => {
   return (
-    <a
-      href={href}
-      className="mb-4 inline-flex px-3 text-base text-body-color hover:text-primary dark:text-dark-6"
-    >
+    <a href={href} className="mb-4 inline-flex px-3 text-base text-body-color hover:text-primary dark:text-dark-6">
       {name}
     </a>
   );

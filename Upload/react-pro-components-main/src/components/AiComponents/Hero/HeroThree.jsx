@@ -26,7 +26,7 @@ function HeroThree() {
                   <input
                     type="text"
                     placeholder="Start with a detailed description"
-                    className="h-12 w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                    className="outline-hidden h-12 w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:text-white"
                   />
                   <button className="h-12 rounded-lg bg-primary px-6 py-3 font-medium text-white hover:bg-primary/90">
                     Generate
@@ -36,7 +36,7 @@ function HeroThree() {
             </div>
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div className="flex gap-6">
-                <div className="*:w-full *:rounded-[10px] flex w-1/2 flex-col gap-y-6">
+                <div className="flex w-1/2 flex-col gap-y-6 *:w-full *:rounded-[10px]">
                   <img
                     src="https://i.ibb.co/yYdb2rd/image-1.jpg"
                     alt="hero image"
@@ -51,7 +51,7 @@ function HeroThree() {
                   />
                 </div>
 
-                <div className="*:w-full *:rounded-[10px] flex w-1/2 flex-col gap-y-6">
+                <div className="flex w-1/2 flex-col gap-y-6 *:w-full *:rounded-[10px]">
                   <img
                     src="https://i.ibb.co/pyRQB2r/image-4.jpg"
                     alt="hero image"

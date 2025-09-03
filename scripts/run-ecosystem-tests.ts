@@ -39,7 +39,7 @@ const services: ServiceConfig[] = [
       NODE_ENV: 'test',
       PORT: '3007',
       JWT_SECRET: 'test-secret-ecosystem',
-      DATABASE_URL: 'file:./test-ecosystem.db',
+      DATABASE_URL: 'postgresql://situs:situs_password@localhost:5432/situs_test?schema=public',
     },
   },
   {
@@ -131,7 +131,7 @@ class EcosystemTestRunner {
 
   private async startService(service: ServiceConfig): Promise<void> {
     const servicePath = path.resolve(__dirname, service.path);
-    
+
     console.log(`  🚀 Starting ${service.name}...`);
 
     const process = spawn('npm', ['run', 'dev'], {
@@ -178,10 +178,7 @@ class EcosystemTestRunner {
 
       while (attempts < maxAttempts && !ready) {
         try {
-          const response = await fetch(
-            `http://localhost:${service.port}${service.healthEndpoint}`,
-            { method: 'GET' }
-          );
+          const response = await fetch(`http://localhost:${service.port}${service.healthEndpoint}`, { method: 'GET' });
 
           if (response.ok) {
             console.log(`  ✅ ${service.name} is ready`);
@@ -208,19 +205,23 @@ class EcosystemTestRunner {
   private async runIntegrationTests(): Promise<void> {
     console.log('🧪 Running integration tests...');
 
-    const testProcess = spawn('npx', ['vitest', 'run', '--reporter=verbose', 'src/__tests__/ecosystem-integration.test.ts'], {
-      cwd: process.cwd(),
-      env: {
-        ...process.env,
-        NODE_ENV: 'test',
-        GATEWAY_SERVICE_URL: 'http://localhost:3010',
-        AGENTS_SERVICE_URL: 'http://localhost:3007',
-        LOGINUS_SERVICE_URL: 'http://localhost:3002',
-        BILINGUS_SERVICE_URL: 'http://localhost:3003',
-        JWT_SECRET: 'test-secret-ecosystem',
+    const testProcess = spawn(
+      'npx',
+      ['vitest', 'run', '--reporter=verbose', 'src/__tests__/ecosystem-integration.test.ts'],
+      {
+        cwd: process.cwd(),
+        env: {
+          ...process.env,
+          NODE_ENV: 'test',
+          GATEWAY_SERVICE_URL: 'http://localhost:3010',
+          AGENTS_SERVICE_URL: 'http://localhost:3007',
+          LOGINUS_SERVICE_URL: 'http://localhost:3002',
+          BILINGUS_SERVICE_URL: 'http://localhost:3003',
+          JWT_SECRET: 'test-secret-ecosystem',
+        },
+        stdio: 'inherit',
       },
-      stdio: 'inherit',
-    });
+    );
 
     return new Promise((resolve, reject) => {
       testProcess.on('exit', (code) => {
@@ -242,10 +243,10 @@ class EcosystemTestRunner {
     for (const [name, process] of this.processes) {
       console.log(`  🛑 Stopping ${name}...`);
       process.kill('SIGTERM');
-      
+
       // Даем время на graceful shutdown
       await sleep(1000);
-      
+
       if (!process.killed) {
         process.kill('SIGKILL');
       }
@@ -264,4 +265,4 @@ if (require.main === module) {
   });
 }
 
-export { EcosystemTestRunner }; 
+export { EcosystemTestRunner };

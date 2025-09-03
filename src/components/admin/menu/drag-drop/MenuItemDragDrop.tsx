@@ -16,34 +16,26 @@ const MenuItemDragDrop: React.FC<MenuItemDragDropProps> = ({
   onToggleStatus,
   showSelection = false,
   selectedItems = [],
-  onSelectItem
+  onSelectItem,
 }) => {
-  const {
-    dragState,
-    handleDragStart,
-    handleDragEnd,
-    handleDragOver,
-    handleDragLeave,
-    handleDrop
-  } = useDragDrop(items, onReorder);
+  const { dragState, handleDragStart, handleDragEnd, handleDragOver, handleDragLeave, handleDrop } = useDragDrop(
+    items,
+    onReorder,
+  );
 
   if (items.length === 0) {
     return (
       <div className="text-center py-8">
         <div className="text-4xl mb-4">📋</div>
-        <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
-          Пункты меню не найдены
-        </h3>
-        <p className="text-body-color dark:text-dark-6">
-          Создайте первый пункт меню для начала работы
-        </p>
+        <h3 className="text-lg font-medium text-dark dark:text-white mb-2">Пункты меню не найдены</h3>
+        <p className="text-body-color dark:text-dark-6">Создайте первый пункт меню для начала работы</p>
       </div>
     );
   }
 
   // ИСПРАВЛЕНИЕ: Строим правильную иерархию из плоского списка
   const hierarchicalItems = buildMenuHierarchy(items);
-  
+
   // Валидируем иерархию и выводим предупреждения в консоль (отключено для уменьшения спама)
   // const validation = validateMenuHierarchy(items);
   // if (!validation.isValid) {
@@ -55,7 +47,7 @@ const MenuItemDragDrop: React.FC<MenuItemDragDropProps> = ({
       {/* Список пунктов с Drag & Drop */}
       <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3">
         <div className="p-4 space-y-2">
-          {hierarchicalItems.map(item => (
+          {hierarchicalItems.map((item) => (
             <MenuItemRow
               key={item.id}
               item={item}

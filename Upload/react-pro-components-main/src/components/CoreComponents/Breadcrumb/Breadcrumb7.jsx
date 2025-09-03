@@ -2,10 +2,10 @@ import React from "react";
 
 const Breadcrumb7 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="w-full mb-8">
-          <div className="px-4 py-4 border rounded-lg border-light bg-primary shadow-1 dark:shadow-card dark:border-transparent sm:px-6 md:px-8 md:py-5">
+        <div className="mb-8 w-full">
+          <div className="rounded-lg border border-light bg-primary px-4 py-4 shadow-1 dark:border-transparent dark:shadow-card sm:px-6 md:px-8 md:py-5">
             <ul className="flex items-center">
               <li className="flex items-center">
                 <a
@@ -68,9 +68,7 @@ const Breadcrumb7 = () => {
                   </svg>
                 </span>
               </li>
-              <li className="text-base font-medium text-white/80">
-                Marketing
-              </li>
+              <li className="text-base font-medium text-white/80">Marketing</li>
             </ul>
           </div>
         </div>

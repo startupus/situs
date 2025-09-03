@@ -44,7 +44,7 @@ const HeroArea = () => {
                     <input
                       type="text"
                       placeholder="Describe what you want to see"
-                      className="h-12 w-full bg-transparent px-5 py-3 text-black outline-hidden dark:text-white"
+                      className="outline-hidden h-12 w-full bg-transparent px-5 py-3 text-black dark:text-white"
                     />
                     <button className="h-12 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary/90">
                       Generate
@@ -71,8 +71,8 @@ const HeroArea = () => {
               </div>
 
               {/*graphics*/}
-              <div className="absolute bottom-0 left-0 -z-10 aspect-174/291 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
-                <div className="absolute bottom-3 left-1/2 aspect-150/220 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
+              <div className="aspect-174/291 absolute bottom-0 left-0 -z-10 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
+                <div className="aspect-150/220 absolute bottom-3 left-1/2 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
                   <img src={imageOne} alt="shape image" />
                 </div>
 
@@ -85,8 +85,8 @@ const HeroArea = () => {
                 </span>
               </div>
 
-              <div className="absolute right-0 top-0 -z-10 aspect-174/291 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
-                <div className="absolute left-1/2 top-3 aspect-150/220 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
+              <div className="aspect-174/291 absolute right-0 top-0 -z-10 w-full max-w-[174px] rounded-full border border-dashed bg-clip-border p-3 max-xl:hidden">
+                <div className="aspect-150/220 absolute left-1/2 top-3 w-full max-w-[150px] -translate-x-1/2 overflow-hidden rounded-full">
                   <img src={imageTwo} alt="shape image" />
                 </div>
 

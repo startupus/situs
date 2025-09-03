@@ -26,7 +26,7 @@ export class InvitationsService {
    */
   async create(createInvitationDto: CreateInvitationDto, invitedBy?: string): Promise<Invitation[]> {
     const { emails, role, message, channel, expiresAt } = createInvitationDto;
-    
+
     // Определяем отправителя (fallback: первый пользователь или системный админ)
     let inviter = invitedBy ? await this.usersService.findById(invitedBy) : null;
     if (!inviter) {
@@ -36,7 +36,13 @@ export class InvitationsService {
       } else {
         // создаём системного администратора (dev)
         const admin = await this.prisma.user.create({
-          data: { username: 'admin', email: 'admin@situs.local', password: null, globalRole: 'SUPER_ADMIN' as any, status: 'ACTIVE' as any }
+          data: {
+            username: 'admin',
+            email: 'admin@situs.local',
+            password: null,
+            globalRole: 'SUPER_ADMIN' as any,
+            status: 'ACTIVE' as any,
+          },
         });
         inviter = await this.usersService.findById(admin.id);
       }
@@ -45,14 +51,14 @@ export class InvitationsService {
     // Проверяем, что email'ы еще не зарегистрированы
     const existingUsers = await this.prisma.user.findMany({
       where: {
-        email: { in: emails }
+        email: { in: emails },
       },
-      select: { email: true }
+      select: { email: true },
     });
 
     if (existingUsers.length > 0) {
       throw new ConflictException(
-        `Пользователи с email ${existingUsers.map((u: any) => u.email).join(', ')} уже зарегистрированы`
+        `Пользователи с email ${existingUsers.map((u: any) => u.email).join(', ')} уже зарегистрированы`,
       );
     }
 
@@ -61,14 +67,14 @@ export class InvitationsService {
       where: {
         email: { in: emails },
         status: InvitationStatus.PENDING,
-        expiresAt: { gt: new Date() }
+        expiresAt: { gt: new Date() },
       },
-      select: { email: true }
+      select: { email: true },
     });
 
     if (existingInvitations.length > 0) {
       throw new ConflictException(
-        `Активные приглашения для ${existingInvitations.map((i: any) => i.email).join(', ')} уже существуют`
+        `Активные приглашения для ${existingInvitations.map((i: any) => i.email).join(', ')} уже существуют`,
       );
     }
 
@@ -79,7 +85,7 @@ export class InvitationsService {
     const inviterId = (inviter as any)?.id as string;
     for (const email of emails) {
       const token = this.generateInvitationToken();
-      
+
       const invitation = await this.prisma.invitation.create({
         data: {
           email,
@@ -97,9 +103,9 @@ export class InvitationsService {
               id: true,
               email: true,
               profile: true,
-            }
-          }
-        }
+            },
+          },
+        },
       });
 
       // Отправляем приглашение через выбранный канал
@@ -126,19 +132,26 @@ export class InvitationsService {
             } as any,
           });
           if (this.realtime) {
-            this.realtime.publish('integration_updated', { id: emailIntegration.id, projectId: emailIntegration.projectId });
+            this.realtime.publish('integration_updated', {
+              id: emailIntegration.id,
+              projectId: emailIntegration.projectId,
+            });
             if (sendResult.success) {
-              this.realtime.publish('integration_status_changed', { id: emailIntegration.id, projectId: emailIntegration.projectId, status: 'READY' });
+              this.realtime.publish('integration_status_changed', {
+                id: emailIntegration.id,
+                projectId: emailIntegration.projectId,
+                status: 'READY',
+              });
             }
           }
         }
       } catch {}
-      
+
       // Обновляем дату отправки только если отправка прошла успешно
       if (sendResult.success) {
         await this.prisma.invitation.update({
           where: { id: invitation.id },
-          data: { sentAt: new Date() }
+          data: { sentAt: new Date() },
         });
       }
 
@@ -155,10 +168,10 @@ export class InvitationsService {
     page: number = 1,
     limit: number = 20,
     status?: InvitationStatus,
-    email?: string
+    email?: string,
   ): Promise<{ data: Invitation[]; total: number; page: number; limit: number }> {
     const skip = (page - 1) * limit;
-    
+
     const where: any = {};
     if (status) where.status = status;
     if (email) where.email = { contains: email, mode: 'insensitive' };
@@ -172,28 +185,28 @@ export class InvitationsService {
               id: true,
               email: true,
               profile: true,
-            }
+            },
           },
           acceptedByUser: {
             select: {
               id: true,
               email: true,
               profile: true,
-            }
-          }
+            },
+          },
         },
         orderBy: { createdAt: 'desc' },
         skip,
         take: limit,
       }),
-      this.prisma.invitation.count({ where })
+      this.prisma.invitation.count({ where }),
     ]);
 
     return {
       data: invitations.map((inv: any) => this.mapToEntity(inv)),
       total,
       page,
-      limit
+      limit,
     };
   }
 
@@ -209,16 +222,16 @@ export class InvitationsService {
             id: true,
             email: true,
             profile: true,
-          }
+          },
         },
         acceptedByUser: {
           select: {
             id: true,
             email: true,
             profile: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     if (!invitation) {
@@ -240,9 +253,9 @@ export class InvitationsService {
             id: true,
             email: true,
             profile: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     if (!invitation) {
@@ -253,7 +266,7 @@ export class InvitationsService {
     if (invitation.expiresAt < new Date()) {
       await this.prisma.invitation.update({
         where: { id: invitation.id },
-        data: { status: InvitationStatus.EXPIRED }
+        data: { status: InvitationStatus.EXPIRED },
       });
       throw new BadRequestException('Приглашение истекло');
     }
@@ -280,16 +293,16 @@ export class InvitationsService {
             id: true,
             email: true,
             profile: true,
-          }
+          },
         },
         acceptedByUser: {
           select: {
             id: true,
             email: true,
             profile: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     return this.mapToEntity(updatedInvitation);
@@ -300,13 +313,13 @@ export class InvitationsService {
    */
   async acceptInvitation(acceptInvitationDto: AcceptInvitationDto): Promise<{ user: any; invitation: Invitation }> {
     const { token, email, password, name } = acceptInvitationDto;
-    
+
     console.log('🔍 Accepting invitation:', { token, email, name });
 
     // Находим и валидируем приглашение
     const invitation = await this.findByToken(token);
     console.log('📧 Found invitation:', invitation);
-    
+
     if (invitation.email !== email) {
       throw new BadRequestException('Email не совпадает с приглашением');
     }
@@ -323,20 +336,20 @@ export class InvitationsService {
         email,
         password,
         name: name || email.split('@')[0],
-        isActive: true
+        isActive: true,
       };
       console.log('👤 Creating user with data:', userData);
-      
+
       const newUser = await this.usersService.create(userData);
       console.log('✅ User created:', newUser.id);
-      
+
       // Обновляем приглашение
       const updatedInvitation = await this.prisma.invitation.update({
         where: { id: invitation.id },
         data: {
           status: InvitationStatus.ACCEPTED,
           acceptedBy: newUser.id,
-          acceptedAt: new Date()
+          acceptedAt: new Date(),
         },
         include: {
           invitedByUser: {
@@ -344,21 +357,21 @@ export class InvitationsService {
               id: true,
               email: true,
               profile: true,
-            }
+            },
           },
           acceptedByUser: {
             select: {
               id: true,
               email: true,
               profile: true,
-            }
-          }
-        }
+            },
+          },
+        },
       });
 
       return {
         user: newUser,
-        invitation: this.mapToEntity(updatedInvitation)
+        invitation: this.mapToEntity(updatedInvitation),
       };
     } catch (error) {
       console.error('❌ Error creating user:', error);
@@ -418,10 +431,12 @@ export class InvitationsService {
    */
   private async sendInvitation(invitation: any, channel: CommunicationChannel) {
     const inviteLink = `${process.env.FRONTEND_URL || 'http://localhost:5177'}/accept-invitation?token=${invitation.token}`;
-    
+
     // Получаем шаблон для канала
     const channelSettings = await this.communicationService.getChannelSettings(channel);
-    const template = channelSettings?.inviteTemplate || `
+    const template =
+      channelSettings?.inviteTemplate ||
+      `
 Вы приглашены присоединиться к нашей платформе!
 
 Для принятия приглашения перейдите по ссылке:
@@ -437,7 +452,7 @@ export class InvitationsService {
       inviteLink,
       email: invitation.email,
       expiresAt: new Date(invitation.expiresAt).toLocaleDateString('ru-RU'),
-      message: invitation.message || ''
+      message: invitation.message || '',
     };
 
     return await this.communicationService.sendMessage(channel, {
@@ -445,7 +460,7 @@ export class InvitationsService {
       subject: 'Приглашение на платформу Situs',
       content: '',
       template,
-      variables
+      variables,
     });
   }
 
@@ -454,7 +469,7 @@ export class InvitationsService {
    */
   private mapToEntity(invitation: any): Invitation {
     const entity = new Invitation();
-    
+
     entity.id = invitation.id;
     entity.email = invitation.email;
     entity.role = invitation.role;

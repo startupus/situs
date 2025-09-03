@@ -1,24 +1,18 @@
-import React from 'react'
-import * as types from 'redaktus/types'
+import React from 'react';
+import * as types from 'redaktus/types';
 
 interface PokemonProps {
-  pokemonName: string
-  id: number
-  name: string
-  height: number
-  weight: number
-  imageUrl: string
+  pokemonName: string;
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  imageUrl: string;
 }
 
-const Pokemon: types.Brick<PokemonProps> = ({
-  id,
-  name,
-  height,
-  weight,
-  imageUrl,
-}) => {
+const Pokemon: types.Brick<PokemonProps> = ({ id, name, height, weight, imageUrl }) => {
   if (!id || !name || !height || !weight || !imageUrl) {
-    return null
+    return null;
   }
   return (
     <div className="my-6 pb-6 container max-w-3xl mx-auto border-2 border-slate-200">
@@ -35,8 +29,8 @@ const Pokemon: types.Brick<PokemonProps> = ({
         #{id} - Height {height / 10} m - Weight {weight / 10} Kg
       </p>
     </div>
-  )
-}
+  );
+};
 
 Pokemon.schema = {
   name: 'pokemon',
@@ -72,6 +66,6 @@ Pokemon.schema = {
       // helperText: 'Enter a valid Pokemon name, like "pikachu" or "charizard" and save.',
     },
   ],
-}
+};
 
-export default Pokemon
+export default Pokemon;

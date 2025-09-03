@@ -43,7 +43,7 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
   }, [resendCountdown]);
 
   const handleInputChange = (field: keyof LoginForm, value: string) => {
-    setForm(prev => ({ ...prev, [field]: value }));
+    setForm((prev) => ({ ...prev, [field]: value }));
     if (error) setError('');
   };
 
@@ -128,19 +128,19 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
 
       if (!response.ok) {
         // При ошибке очищаем поле кода и показываем ошибку
-        setForm(prev => ({ ...prev, verificationCode: '' }));
+        setForm((prev) => ({ ...prev, verificationCode: '' }));
         throw new Error(data.message || 'Неверный код');
       }
 
       // Сохраняем токен
       localStorage.setItem('auth-token', data.tokens.accessToken);
-      
+
       // Уведомляем родительский компонент
       onLogin?.(data.user);
-      
+
       setSuccess(true);
       setCurrentStep('complete');
-      
+
       // Переходим к списку проектов через 2 секунды
       setTimeout(() => {
         navigate('/');
@@ -180,7 +180,12 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
 
   const renderProgressBar = () => {
     const steps = [
-      { id: 'contact', label: '1', active: currentStep === 'contact', completed: ['verification', 'complete'].includes(currentStep) },
+      {
+        id: 'contact',
+        label: '1',
+        active: currentStep === 'contact',
+        completed: ['verification', 'complete'].includes(currentStep),
+      },
       { id: 'verification', label: '2', active: currentStep === 'verification', completed: currentStep === 'complete' },
       { id: 'complete', label: <FaCheck className="w-3 h-3" />, active: currentStep === 'complete', completed: false },
     ];
@@ -194,8 +199,8 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
                 step.completed
                   ? 'bg-green-500 text-white'
                   : step.active
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400'
               }`}
             >
               {step.label}
@@ -203,9 +208,7 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
             {index < steps.length - 1 && (
               <div
                 className={`w-12 h-0.5 mx-2 ${
-                  steps[index + 1].completed || steps[index + 1].active
-                    ? 'bg-blue-600'
-                    : 'bg-gray-200 dark:bg-gray-700'
+                  steps[index + 1].completed || steps[index + 1].active ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'
                 }`}
               />
             )}
@@ -266,31 +269,21 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
 
       {error && <ThemeAlert type="error">{error}</ThemeAlert>}
 
-      <ThemeButton
-        onClick={handleSendCode}
-        loading={loading}
-        className="w-full"
-        size="lg"
-      >
+      <ThemeButton onClick={handleSendCode} loading={loading} className="w-full" size="lg">
         Отправить код
       </ThemeButton>
 
       {/* Ссылка на вход по паролю */}
       <div className="text-center space-y-3">
         <div>
-          <button
-            onClick={onBack}
-            className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
-          >
+          <button onClick={onBack} className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
             Войти по паролю
           </button>
         </div>
         <div className="pt-2 border-t border-gray-200 dark:border-gray-600">
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-            Нет аккаунта?
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Нет аккаунта?</p>
           <button
-            onClick={() => window.location.href = '/register'}
+            onClick={() => (window.location.href = '/register')}
             className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
           >
             Создать аккаунт
@@ -326,9 +319,7 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
       {loading && (
         <div className="text-center">
           <ThemeSpinner />
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-            Проверяем код...
-          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Проверяем код...</p>
         </div>
       )}
 
@@ -356,9 +347,7 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
       <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto">
         <FaCheck className="w-8 h-8 text-green-600" />
       </div>
-      <p className="text-gray-600 dark:text-gray-400">
-        Перенаправление в систему...
-      </p>
+      <p className="text-gray-600 dark:text-gray-400">Перенаправление в систему...</p>
       <ThemeSpinner />
     </div>
   );
@@ -372,12 +361,8 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
             <div className="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
               <span className="text-white text-2xl font-bold">S</span>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Situs Platform
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
-              Войдите в свою учетную запись
-            </p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Situs Platform</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">Войдите в свою учетную запись</p>
           </div>
         )}
 
@@ -393,12 +378,8 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
               </button>
             )}
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {getStepTitle()}
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                {getStepDescription()}
-              </p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{getStepTitle()}</h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">{getStepDescription()}</p>
             </div>
           </div>
 

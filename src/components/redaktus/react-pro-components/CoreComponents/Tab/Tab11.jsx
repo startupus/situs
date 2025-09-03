@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Tab11 = () => {
-  const [open, setOpen] = useState("home");
+  const [open, setOpen] = useState('home');
 
   const handleTabOpen = (tabCategory) => {
     setOpen(tabCategory);
@@ -16,11 +16,9 @@ const Tab11 = () => {
               <div className="-mx-[6px] flex flex-col sm:flex-row">
                 <div className="px-[6px]">
                   <button
-                    onClick={() => handleTabOpen("home")}
+                    onClick={() => handleTabOpen('home')}
                     className={`-mb-[1px] w-full border-b-2 px-5 py-2 text-base font-medium text-black hover:border-primary hover:bg-gray hover:text-primary ${
-                      open === "home"
-                        ? "border-primary bg-gray text-primary"
-                        : "border-transparent"
+                      open === 'home' ? 'border-primary bg-gray text-primary' : 'border-transparent'
                     }`}
                   >
                     Home
@@ -28,11 +26,9 @@ const Tab11 = () => {
                 </div>
                 <div className="px-[6px]">
                   <button
-                    onClick={() => handleTabOpen("about")}
+                    onClick={() => handleTabOpen('about')}
                     className={`-mb-[1px] w-full border-b-2 px-5 py-2 text-base font-medium text-black hover:border-primary hover:bg-gray hover:text-primary ${
-                      open === "about"
-                        ? "border-primary bg-gray text-primary"
-                        : "border-transparent"
+                      open === 'about' ? 'border-primary bg-gray text-primary' : 'border-transparent'
                     }`}
                   >
                     About Us
@@ -40,11 +36,9 @@ const Tab11 = () => {
                 </div>
                 <div className="px-[6px]">
                   <button
-                    onClick={() => handleTabOpen("team")}
+                    onClick={() => handleTabOpen('team')}
                     className={`-mb-[1px] w-full border-b-2 px-5 py-2 text-base font-medium text-black hover:border-primary hover:bg-gray hover:text-primary ${
-                      open === "team"
-                        ? "border-primary bg-gray text-primary"
-                        : "border-transparent"
+                      open === 'team' ? 'border-primary bg-gray text-primary' : 'border-transparent'
                     }`}
                   >
                     Our Team
@@ -52,11 +46,9 @@ const Tab11 = () => {
                 </div>
                 <div className="px-[6px]">
                   <button
-                    onClick={() => handleTabOpen("company")}
+                    onClick={() => handleTabOpen('company')}
                     className={`-mb-[1px] w-full border-b-2 px-5 py-2 text-base font-medium text-black hover:border-primary hover:bg-gray hover:text-primary ${
-                      open === "company"
-                        ? "border-primary bg-gray text-primary"
-                        : "border-transparent"
+                      open === 'company' ? 'border-primary bg-gray text-primary' : 'border-transparent'
                     }`}
                   >
                     Company Details
@@ -98,13 +90,7 @@ export default Tab11;
 const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
-      <div
-        className={`mt-8 text-base text-body-color ${
-          open === tabCategory ? "block" : "hidden"
-        } `}
-      >
-        {details}
-      </div>
+      <div className={`mt-8 text-base text-body-color ${open === tabCategory ? 'block' : 'hidden'} `}>{details}</div>
     </div>
   );
 };

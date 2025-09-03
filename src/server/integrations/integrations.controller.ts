@@ -37,13 +37,7 @@ export class IntegrationsController {
 
   // Список воркфлоу n8n для инстанса (по сохранённому конфигу)
   @Get(':id/n8n/workflows')
-  listN8nWorkflows(
-    @Param('id') id: string,
-    @Query('baseUrl') baseUrl?: string,
-    @Query('apiKey') apiKey?: string,
-  ) {
+  listN8nWorkflows(@Param('id') id: string, @Query('baseUrl') baseUrl?: string, @Query('apiKey') apiKey?: string) {
     return this.service.listN8nWorkflows(id, { baseUrl, apiKey });
   }
 }
-
-

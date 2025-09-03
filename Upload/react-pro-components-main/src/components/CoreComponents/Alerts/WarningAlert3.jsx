@@ -2,11 +2,11 @@ import React from "react";
 
 const WarningAlert3 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="bg-red-light-6 inline-flex rounded-lg px-[18px] py-4 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
+        <div className="inline-flex rounded-lg bg-red-light-6 px-[18px] py-4 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.08)]">
           <p className="flex items-center text-sm font-medium text-[#BC1C21]">
-            <span className="flex items-center justify-center w-5 h-5 mr-3 rounded-full bg-red">
+            <span className="mr-3 flex h-5 w-5 items-center justify-center rounded-full bg-red">
               <svg
                 width="12"
                 height="12"

@@ -1,6 +1,6 @@
 // src/components/ui/ThemeLists.tsx
 import React from 'react';
-import { 
+import {
   OrderedList1,
   OrderedList2,
   OrderedList3,
@@ -9,7 +9,7 @@ import {
   UnOrderedList3,
   UnOrderedList4,
   UnOrderedList5,
-  UnOrderedList6
+  UnOrderedList6,
 } from './core';
 import { withTheme } from './ThemeWrapper';
 

@@ -1,6 +1,6 @@
 /**
  * Утилиты для работы с ролями
- * 
+ *
  * Функции для сопоставления ролей, проверки иерархии
  * и определения уровней доступа
  */
@@ -12,7 +12,7 @@ const GLOBAL_ROLE_LEVELS: Record<GlobalRole, number> = {
   SUPER_ADMIN: 100,
   STAFF: 80,
   AGENCY: 60,
-  BUSINESS: 40
+  BUSINESS: 40,
 };
 
 /** Уровни ролей проекта */
@@ -20,7 +20,7 @@ const PROJECT_ROLE_LEVELS: Record<ProjectRole, number> = {
   OWNER: 100,
   ADMIN: 80,
   EDITOR: 60,
-  VIEWER: 40
+  VIEWER: 40,
 };
 
 /** Уровни ролей аккаунта */
@@ -28,7 +28,7 @@ const ACCOUNT_ROLE_LEVELS: Record<AccountRole, number> = {
   OWNER: 100,
   ADMIN: 80,
   MANAGER: 60,
-  MEMBER: 40
+  MEMBER: 40,
 };
 
 /**
@@ -58,20 +58,17 @@ export function getAccountRoleLevel(role: AccountRole): number {
 export function canManageRole(managerRole: GlobalRole, targetRole: GlobalRole): boolean {
   const managerLevel = getGlobalRoleLevel(managerRole);
   const targetLevel = getGlobalRoleLevel(targetRole);
-  
+
   return managerLevel > targetLevel;
 }
 
 /**
  * Проверяет, имеет ли роль достаточный уровень
  */
-export function hasMinimumRoleLevel(
-  userRole: GlobalRole, 
-  requiredRole: GlobalRole
-): boolean {
+export function hasMinimumRoleLevel(userRole: GlobalRole, requiredRole: GlobalRole): boolean {
   const userLevel = getGlobalRoleLevel(userRole);
   const requiredLevel = getGlobalRoleLevel(requiredRole);
-  
+
   return userLevel >= requiredLevel;
 }
 
@@ -80,9 +77,8 @@ export function hasMinimumRoleLevel(
  */
 export function getManageableRoles(managerRole: GlobalRole): GlobalRole[] {
   const managerLevel = getGlobalRoleLevel(managerRole);
-  
-  return (Object.keys(GLOBAL_ROLE_LEVELS) as GlobalRole[])
-    .filter(role => GLOBAL_ROLE_LEVELS[role] < managerLevel);
+
+  return (Object.keys(GLOBAL_ROLE_LEVELS) as GlobalRole[]).filter((role) => GLOBAL_ROLE_LEVELS[role] < managerLevel);
 }
 
 /**
@@ -107,9 +103,9 @@ export function getRoleDisplayName(role: GlobalRole): string {
     SUPER_ADMIN: 'Супер администратор',
     STAFF: 'Персонал',
     AGENCY: 'Агентство',
-    BUSINESS: 'Бизнес-пользователь'
+    BUSINESS: 'Бизнес-пользователь',
   };
-  
+
   return names[role] || role;
 }
 
@@ -121,8 +117,8 @@ export function getRoleDescription(role: GlobalRole): string {
     SUPER_ADMIN: 'Полный контроль над всей платформой',
     STAFF: 'Системные администраторы и служба поддержки',
     AGENCY: 'Агентство с клиентами - управление собственными и клиентскими проектами',
-    BUSINESS: 'Обычный пользователь - управление собственными проектами'
+    BUSINESS: 'Обычный пользователь - управление собственными проектами',
   };
-  
+
   return descriptions[role] || '';
 }

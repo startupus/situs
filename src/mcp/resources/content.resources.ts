@@ -44,17 +44,17 @@ export class ContentResources {
   })
   async getComponentTemplates({ category }: { category: string }) {
     const templates = {
-      'ui': [
+      ui: [
         { name: 'Button', description: 'Кнопка с различными стилями' },
         { name: 'Card', description: 'Карточка для отображения контента' },
         { name: 'Modal', description: 'Модальное окно' },
       ],
-      'forms': [
+      forms: [
         { name: 'Input', description: 'Поле ввода' },
         { name: 'Select', description: 'Выпадающий список' },
         { name: 'Checkbox', description: 'Флажок' },
       ],
-      'navigation': [
+      navigation: [
         { name: 'Navbar', description: 'Навигационная панель' },
         { name: 'Sidebar', description: 'Боковая панель' },
         { name: 'Breadcrumb', description: 'Хлебные крошки' },
@@ -81,7 +81,7 @@ export class ContentResources {
   })
   async getThemeConfig({ themeName }: { themeName: string }) {
     const themes = {
-      'light': {
+      light: {
         name: 'Светлая тема',
         colors: {
           primary: '#3B82F6',
@@ -90,7 +90,7 @@ export class ContentResources {
           text: '#1F2937',
         },
       },
-      'dark': {
+      dark: {
         name: 'Темная тема',
         colors: {
           primary: '#60A5FA',
@@ -121,10 +121,10 @@ export class ContentResources {
   })
   async getDynamicContent({ type, id }: { type: string; id: string }) {
     const contentMap = {
-      'page': `Содержимое страницы ${id}`,
-      'component': `Код компонента ${id}`,
-      'style': `Стили для ${id}`,
-      'script': `Скрипт ${id}`,
+      page: `Содержимое страницы ${id}`,
+      component: `Код компонента ${id}`,
+      style: `Стили для ${id}`,
+      script: `Скрипт ${id}`,
     };
 
     return {

@@ -125,7 +125,7 @@ const ECommerceFooter2 = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="h-[54px] w-full rounded-bl-lg rounded-tl-lg border border-stroke bg-white px-5 outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark"
+                      className="outline-hidden h-[54px] w-full rounded-bl-lg rounded-tl-lg border border-stroke bg-white px-5 focus:border-primary dark:border-dark-3 dark:bg-dark"
                     />
                     <button className="h-[54px] rounded-br-lg rounded-tr-lg border border-l-0 border-stroke bg-white px-5 dark:border-dark-3 dark:bg-dark">
                       <svg

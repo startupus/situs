@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { usersApi } from "../../../api/services/users.api";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { usersApi } from '../../../api/services/users.api';
 
 type UserMenuItem = { title: string; to: string; params?: any };
 
@@ -19,19 +19,22 @@ const SitusUserDropdown: React.FC = () => {
         }
       } catch {
         // fallback — дефолтный набор
-        if (!aborted) setItems([
-          { title: 'Уведомления', to: '/profile-settings?tab=notifications' },
-          { title: 'Настройки профиля', to: '/profile-settings' },
-          { title: 'Дашборд', to: '/' },
-          { title: 'Выйти', to: '/auth/logout', params: { action: 'logout' } },
-        ]);
+        if (!aborted)
+          setItems([
+            { title: 'Уведомления', to: '/profile-settings?tab=notifications' },
+            { title: 'Настройки профиля', to: '/profile-settings' },
+            { title: 'Дашборд', to: '/' },
+            { title: 'Выйти', to: '/auth/logout', params: { action: 'logout' } },
+          ]);
       }
     })();
-    return () => { aborted = true; };
+    return () => {
+      aborted = true;
+    };
   }, []);
 
-  const userName = "Администратор Системы";
-  const userRole = "Системный администратор";
+  const userName = 'Администратор Системы';
+  const userRole = 'Системный администратор';
   const onClickItem = (item: UserMenuItem) => (e: React.MouseEvent) => {
     if (item?.params?.action === 'logout') {
       e.preventDefault();
@@ -48,13 +51,7 @@ const SitusUserDropdown: React.FC = () => {
         </div>
 
         <span className="ml-[8px] text-body-color dark:text-dark-6">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -87,4 +84,4 @@ const SitusUserDropdown: React.FC = () => {
   );
 };
 
-export default SitusUserDropdown; 
+export default SitusUserDropdown;

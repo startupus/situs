@@ -28,7 +28,7 @@ const Hero4 = () => {
                           type="text"
                           name="keyword"
                           placeholder="Job Keyword"
-                          className="h-[46px] w-full rounded-md border border-stroke bg-transparent px-4 text-sm text-body-color outline-hidden placeholder:text-dark-7 focus:bg-[#FCFDFE] focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 dark:focus:bg-dark"
+                          className="outline-hidden h-[46px] w-full rounded-md border border-stroke bg-transparent px-4 text-sm text-body-color placeholder:text-dark-7 focus:bg-[#FCFDFE] focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 dark:focus:bg-dark"
                         />
                       </div>
                       <div className="w-full p-2 sm:w-1/2 md:w-1/3">
@@ -36,7 +36,7 @@ const Hero4 = () => {
                           type="text"
                           name="location"
                           placeholder="Job Location"
-                          className="h-[46px] w-full rounded-md border border-stroke bg-transparent px-4 text-sm text-body-color outline-hidden placeholder:text-dark-7 focus:bg-[#FCFDFE] focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 dark:focus:bg-dark"
+                          className="outline-hidden h-[46px] w-full rounded-md border border-stroke bg-transparent px-4 text-sm text-body-color placeholder:text-dark-7 focus:bg-[#FCFDFE] focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 dark:focus:bg-dark"
                         />
                       </div>
                       <div className="w-full p-2 md:w-1/3">
@@ -99,7 +99,7 @@ const Navbar = () => {
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                 alt="logo"
-                className="w-full hidden dark:block"
+                className="hidden w-full dark:block"
               />
             </a>
           </div>

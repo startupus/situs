@@ -56,7 +56,9 @@ export class RealtimeEventsService {
       console.log('[RT] publish', type, { at: new Date().toISOString(), clients: this.clients.size });
       this.subject.next(evt);
       for (const send of this.clients) {
-        try { send(evt as RealtimeEvent); } catch {}
+        try {
+          send(evt as RealtimeEvent);
+        } catch {}
       }
       this.publishedCounter += 1;
     } catch {
@@ -105,7 +107,9 @@ export class RealtimeEventsService {
   registerClient(send: (data: RealtimeEvent) => void): () => void {
     this.clients.add(send);
     return () => {
-      try { this.clients.delete(send); } catch {}
+      try {
+        this.clients.delete(send);
+      } catch {}
     };
   }
 
@@ -113,5 +117,3 @@ export class RealtimeEventsService {
     return { clients: this.clients.size, published: this.publishedCounter };
   }
 }
-
-

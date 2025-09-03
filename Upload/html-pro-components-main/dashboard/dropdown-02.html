@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,7 +16,7 @@
   </head>
   <body>
     <!-- ======= Dropdown ======== -->
-    <section class="bg-gray-2 dark:bg-dark py-20">
+    <section class="bg-gray-2 py-20 dark:bg-dark">
       <div class="container">
         <div class="flex items-center justify-center">
           <div
@@ -38,7 +38,7 @@
               </span>
 
               <svg
-                class="fill-body-color dark:fill-dark-6 duration-300 ease-in-out hover:fill-primary"
+                class="fill-body-color duration-300 ease-in-out hover:fill-primary dark:fill-dark-6"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -63,10 +63,14 @@
             <!-- Dropdown Start -->
             <div
               x-show="dropdownOpen"
-              class="absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 shadow-card sm:-right-[34px] sm:w-[360px]"
+              class="absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white shadow-card dark:bg-dark-2 sm:-right-[34px] sm:w-[360px]"
             >
-              <div class="border-b border-stroke dark:border-dark-3 py-[18px] px-6">
-                <h5 class="font-semibold text-dark dark:text-white">Notifications (02)</h5>
+              <div
+                class="border-b border-stroke px-6 py-[18px] dark:border-dark-3"
+              >
+                <h5 class="font-semibold text-dark dark:text-white">
+                  Notifications (02)
+                </h5>
               </div>
 
               <ul
@@ -76,9 +80,7 @@
                   class="group relative flex cursor-pointer items-center justify-between gap-4 rounded-md p-3 hover:bg-gray dark:hover:bg-dark-3"
                 >
                   <a class="flex items-center gap-5" href="javascript:void(0)">
-                    <div
-                      class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11"
-                    >
+                    <div class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11">
                       <img
                         src="./images/avatar/image-01.jpg"
                         alt="User"
@@ -142,21 +144,21 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-[180px] space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-[180px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Notification
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Notification
                         </button>
@@ -168,9 +170,7 @@
                   class="group relative flex cursor-pointer items-center justify-between gap-4 rounded-md p-3 hover:bg-gray dark:hover:bg-dark-3"
                 >
                   <a class="flex items-center gap-5" href="javascript:void(0)">
-                    <div
-                      class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11"
-                    >
+                    <div class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11">
                       <img
                         src="./images/avatar/image-02.jpg"
                         alt="User"
@@ -234,21 +234,21 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-[180px] space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-[180px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Notification
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Notification
                         </button>
@@ -260,9 +260,7 @@
                   class="group relative flex cursor-pointer items-center justify-between gap-4 rounded-md p-3 hover:bg-gray dark:hover:bg-dark-3"
                 >
                   <a class="flex items-center gap-5" href="javascript:void(0)">
-                    <div
-                      class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11"
-                    >
+                    <div class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11">
                       <img
                         src="./images/avatar/image-03.jpg"
                         alt="User"
@@ -326,21 +324,21 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-[180px] space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-[180px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Notification
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Notification
                         </button>
@@ -352,9 +350,7 @@
                   class="group relative flex cursor-pointer items-center justify-between gap-4 rounded-md p-3 hover:bg-gray dark:hover:bg-dark-3"
                 >
                   <a class="flex items-center gap-5" href="javascript:void(0)">
-                    <div
-                      class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11"
-                    >
+                    <div class="h-9 w-9 shrink-0 rounded-full sm:h-11 sm:w-11">
                       <img
                         src="./images/avatar/image-04.jpg"
                         alt="User"
@@ -418,21 +414,21 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-[180px] space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-[180px] space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Notification
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Notification
                         </button>
@@ -443,7 +439,7 @@
               </ul>
 
               <div
-                class="absolute bottom-0 z-50 w-full rounded-b-lg border-t border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-3"
+                class="absolute bottom-0 z-50 w-full rounded-b-lg border-t border-stroke bg-white p-3 dark:border-dark-3 dark:bg-dark-2"
               >
                 <a
                   href="javascript:void(0)"

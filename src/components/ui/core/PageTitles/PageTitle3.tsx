@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const PageTitle3 = () => {
   return (
@@ -6,25 +6,16 @@ const PageTitle3 = () => {
       <div className="mx-auto px-4 sm:container">
         <div className="items-center justify-between border-b border-stroke dark:border-dark-3 md:flex">
           <div className="mb-6 w-full">
-            <h2 className="mb-2 text-2xl font-semibold text-dark dark:text-white">
-              Your Favorite Items
-            </h2>
+            <h2 className="mb-2 text-2xl font-semibold text-dark dark:text-white">Your Favorite Items</h2>
             <p className="text-sm font-medium text-body-color dark:text-dark-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-              ultrices lectus sem.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultrices lectus sem.
             </p>
           </div>
           <div className="mb-6">
             <button className="inline-flex items-center justify-center whitespace-nowrap rounded-sm bg-primary px-5 py-[10px] text-sm font-medium text-white hover:bg-primary/90">
               Add New Item
               <span className="pl-2">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"

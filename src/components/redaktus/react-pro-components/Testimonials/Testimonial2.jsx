@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Testimonial2 = () => {
   const sliderRef = useRef(null);
@@ -21,15 +21,13 @@ const Testimonial2 = () => {
         <div className="flex flex-wrap justify-center">
           <div className="w-full md:w-11/12 lg:w-10/12 xl:w-8/12">
             <div className="mb-8 max-w-[510px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                What People Says
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">What People Says</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Client Testimonials
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -108,13 +106,7 @@ const SingleTestimonial = ({ image, details, name, position }) => {
           </div>
           <div className="w-full px-6 py-10 sm:px-10 md:py-14">
             <div className="icon mb-5">
-              <svg
-                width="39"
-                height="22"
-                viewBox="0 0 39 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="39" height="22" viewBox="0 0 39 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M8.8262 0.00109288C4.7637 -0.0614071 1.0762 2.56359 0.201201 6.12609C-0.298799 8.31359 0.138701 10.5011 1.4512 12.2511C2.8262 14.1261 4.9512 15.3136 7.3262 15.6261L9.5137 21.0011C9.7637 21.5636 10.3262 21.9386 10.9512 21.9386C11.5762 21.9386 12.1387 21.5636 12.3887 21.0011C12.7637 20.0636 13.2012 19.0636 13.6387 18.1261C14.7012 15.7511 15.7637 13.3136 16.5762 10.8136C17.4512 8.18859 17.0762 5.37609 15.5762 3.25109C14.0762 1.18859 11.7012 0.0635929 8.8262 0.00109288ZM14.5137 10.1886C13.7012 12.5636 12.6387 15.0011 11.6387 17.3136C11.4512 17.8136 11.2012 18.2511 11.0137 18.7511L8.8887 13.6261L8.2012 13.5636C6.2012 13.4386 4.3262 12.4386 3.2637 11.0011C2.3262 9.75109 2.0137 8.18859 2.3887 6.68859C3.0137 4.12609 5.7012 2.25109 8.7637 2.25109H8.8262C10.9512 2.25109 12.7012 3.12609 13.8262 4.62609C14.8887 6.12609 15.1387 8.25109 14.5137 10.1886Z"
                   fill="#3056D3"
@@ -125,24 +117,12 @@ const SingleTestimonial = ({ image, details, name, position }) => {
                 />
               </svg>
             </div>
-            <h4 className="mb-1 text-xl font-semibold text-dark dark:text-white">
-              {name}
-            </h4>
-            <h6 className="mb-4 text-sm font-normal text-body-color dark:text-dark-6">
-              {position}
-            </h6>
-            <p className="text-sm font-medium text-body-color dark:text-dark-6">
-              “{details}”
-            </p>
+            <h4 className="mb-1 text-xl font-semibold text-dark dark:text-white">{name}</h4>
+            <h6 className="mb-4 text-sm font-normal text-body-color dark:text-dark-6">{position}</h6>
+            <p className="text-sm font-medium text-body-color dark:text-dark-6">“{details}”</p>
           </div>
           <span className="absolute bottom-0 right-0 z-[-1]">
-            <svg
-              width="540"
-              height="340"
-              viewBox="0 0 540 340"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="540" height="340" viewBox="0 0 540 340" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 opacity="0.05"
                 d="M410 -14C411.619 0.0555554 419.59 30 438.528 37.3333C462.201 46.5 474.948 52 481.017 74C487.087 96 501.655 127.778 549 129"

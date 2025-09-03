@@ -1,6 +1,6 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Admin, Playground } from 'redaktus/core'
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Admin, Playground } from 'redaktus/core';
 
 const AdminPlayground: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const AdminPlayground: React.FC = () => {
       </Helmet>
       <Playground />
     </Admin>
-  )
-}
+  );
+};
 
-export default AdminPlayground
+export default AdminPlayground;

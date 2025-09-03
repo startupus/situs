@@ -1,15 +1,15 @@
-import classNames from 'classnames'
-import * as React from 'react'
-import { Repeater, Text } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import { useForm } from 'react-hook-form'
-import blockNames from '../blockNames'
-import Container from '../layout/Container'
-import Section from '../layout/Section'
-import { BackgroundColorsSideEditProps } from '../LayoutSideProps'
+import classNames from 'classnames';
+import * as React from 'react';
+import { Repeater, Text } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import { useForm } from 'react-hook-form';
+import blockNames from '../blockNames';
+import Container from '../layout/Container';
+import Section from '../layout/Section';
+import { BackgroundColorsSideEditProps } from '../LayoutSideProps';
 
 export interface FormBuilderProps {
-  bg?: { color: string; className: string }
+  bg?: { color: string; className: string };
 }
 
 const FormBuilder: types.Brick<FormBuilderProps> = ({ bg }) => {
@@ -17,7 +17,7 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({ bg }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   return (
     <Section bg={bg}>
@@ -27,32 +27,25 @@ const FormBuilder: types.Brick<FormBuilderProps> = ({ bg }) => {
           placeholder="Type a Title..."
           renderBlock={({ children }: { children: any }) => (
             <div className="flex justify-center">
-              <h1 className="text-2xl w-auto font-medium text-gray-900 dark:text-white">
-                {children}
-              </h1>
+              <h1 className="text-2xl w-auto font-medium text-gray-900 dark:text-white">{children}</h1>
             </div>
           )}
         />
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="py-4 max-w-2xl mx-auto px-8 grid grid-cols-2 gap-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="py-4 max-w-2xl mx-auto px-8 grid grid-cols-2 gap-4">
           <Repeater propName="form-elements" itemProps={{ register, errors }} />
           <Repeater
             propName="form-buttons"
             renderWrapper={(items: any) => (
-              <div className="w-full flex justify-center space-x-6 col-span-2">
-                {items}
-              </div>
+              <div className="w-full flex justify-center space-x-6 col-span-2">{items}</div>
             )}
           />
         </form>
       </Container>
     </Section>
-  )
-}
-const onSubmit = (values: any) => console.log(values)
+  );
+};
+const onSubmit = (values: any) => console.log(values);
 
 FormBuilder.schema = {
   name: blockNames.FormBuilder,
@@ -110,9 +103,7 @@ FormBuilder.schema = {
     ],
   }),
 
-  sideEditProps: [
-    BackgroundColorsSideEditProps,
-  ],
-}
+  sideEditProps: [BackgroundColorsSideEditProps],
+};
 
-export default FormBuilder
+export default FormBuilder;

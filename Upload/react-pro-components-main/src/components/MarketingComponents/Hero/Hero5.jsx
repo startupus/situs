@@ -41,7 +41,7 @@ const Hero5 = () => {
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4">
               <div className="hero-content text-center">
-                <h1 className="mx-auto mb-3 max-w-[680px] text-4xl font-bold leading-[1.208]! text-white sm:text-5xl">
+                <h1 className="leading-[1.208]! mx-auto mb-3 max-w-[680px] text-4xl font-bold text-white sm:text-5xl">
                   Landing Template For Startups
                 </h1>
                 <p className="mx-auto mb-9 max-w-[480px] text-base text-white">

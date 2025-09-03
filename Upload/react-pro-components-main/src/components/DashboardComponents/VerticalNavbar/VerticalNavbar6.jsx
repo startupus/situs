@@ -27,9 +27,9 @@ const VerticalNavbar6 = () => {
               <input
                 type="text"
                 placeholder="Search here..."
-                className="h-11 w-full rounded-sm border-[.5px] border-stroke bg-gray-2 pl-4 pr-9 text-sm font-medium text-black placeholder-body-color outline-hidden focus:border-primary"
+                className="outline-hidden h-11 w-full rounded-sm border-[.5px] border-stroke bg-gray-2 pl-4 pr-9 text-sm font-medium text-black placeholder-body-color focus:border-primary"
               />
-              <button className="absolute top-1/2 right-4 -translate-y-1/2">
+              <button className="absolute right-4 top-1/2 -translate-y-1/2">
                 <svg
                   width="18"
                   height="18"
@@ -463,7 +463,7 @@ const NavItem = ({
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`${
           dropdownOpen ? "bg-primary text-white" : ""
-        } relative mb-[2px] flex items-center justify-between rounded py-[10px] px-4 text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white`}
+        } relative mb-[2px] flex items-center justify-between rounded px-4 py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white`}
       >
         <span className="flex items-center">
           <span className="pr-[10px]">{icon}</span>
@@ -495,7 +495,7 @@ const NavItem = ({
           <span
             className={`${
               dropdownOpen === true ? "rotate-0" : "rotate-180"
-            } absolute top-1/2 right-10 -translate-y-1/2`}
+            } absolute right-10 top-1/2 -translate-y-1/2`}
           >
             <svg
               width="20"
@@ -518,7 +518,7 @@ const NavItem = ({
         onBlur={() => setDropdownOpen(false)}
         className={`${dropdownOpen === true ? "block" : "hidden"} `}
       >
-        <ul className="py-1 px-5">{children}</ul>
+        <ul className="px-5 py-1">{children}</ul>
       </div>
     </li>
   );
@@ -529,7 +529,7 @@ const DropdownItem = ({ link, menu }) => {
     <li>
       <a
         href={link}
-        className="flex w-full items-center rounded-sm py-[10px] px-[15px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white"
+        className="flex w-full items-center rounded-sm px-[15px] py-[10px] text-base font-medium text-white/50 hover:bg-white/10 hover:text-white"
       >
         {menu}
       </a>

@@ -83,10 +83,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`shadow-card dark:bg-dark-2 fixed top-0 left-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white duration-200 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-card duration-200 dark:bg-dark-2 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div>
-          <div className="px-10 pt-10 pb-9">
+          <div className="px-10 pb-9 pt-10">
             <Link to="/">
               <img src={logo} alt="logo" className="dark:hidden" />
               <img src={logoWhite} alt="logo" className="hidden dark:block" />
@@ -98,18 +98,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {navList.map((item, index) =>
                 item?.divider ? (
                   <li key={index}>
-                    <div className="bg-stroke dark:bg-dark-3 mx-9 my-5 h-px"></div>
+                    <div className="mx-9 my-5 h-px bg-stroke dark:bg-dark-3"></div>
                   </li>
                 ) : item?.children ? (
                   <li key={index} className="relative">
                     <Link
                       to={item.link}
                       onClick={handleDropDownToggle}
-                      className={`text-body-color hover:border-primary hover:bg-primary/5 dark:text-dark-6 relative flex items-center border-r-4 py-[10px] pr-10 pl-9 text-base font-medium duration-200 ${openDropDown === true ? "border-primary bg-primary/5" : "border-transparent"} `}
+                      className={`relative flex items-center border-r-4 py-[10px] pl-9 pr-10 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 dark:text-dark-6 ${openDropDown === true ? "border-primary bg-primary/5" : "border-transparent"} `}
                     >
                       {item.text}
                       <span
-                        className={`absolute top-1/2 right-10 -translate-y-1/2 ${
+                        className={`absolute right-10 top-1/2 -translate-y-1/2 ${
                           openDropDown ? "rotate-180" : "rotate-0"
                         }`}
                       >
@@ -128,12 +128,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
                     {openDropDown && (
                       <div>
-                        <ul className="py-[6px] pr-10 pl-[50px]">
+                        <ul className="py-[6px] pl-[50px] pr-10">
                           {item?.children.map((child, childIndex) => (
                             <li key={childIndex}>
                               <Link
                                 to={child.link}
-                                className="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex items-center border-r-4 border-transparent py-[9px] text-base font-medium duration-200"
+                                className="flex items-center border-r-4 border-transparent py-[9px] text-base font-medium text-body-color duration-200 hover:text-primary dark:text-dark-6 dark:hover:text-primary"
                               >
                                 {child.text}
                               </Link>
@@ -147,7 +147,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <li key={index}>
                     <Link
                       to={item.link}
-                      className="text-body-color hover:border-primary hover:bg-primary/5 dark:text-dark-6 relative flex items-center border-r-4 border-transparent py-[10px] pr-10 pl-9 text-base font-medium duration-200"
+                      className="relative flex items-center border-r-4 border-transparent py-[10px] pl-9 pr-10 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 dark:text-dark-6"
                     >
                       {item.text}
                     </Link>
@@ -168,10 +168,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               />
             </div>
             <div>
-              <h6 className="text-dark text-base font-medium dark:text-white">
+              <h6 className="text-base font-medium text-dark dark:text-white">
                 Musharof
               </h6>
-              <p className="text-body-color dark:text-dark-6 text-sm">
+              <p className="text-sm text-body-color dark:text-dark-6">
                 hello@tailgrids.com
               </p>
             </div>
@@ -181,7 +181,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div
         onClick={handleSidebarToggle}
-        className={`bg-dark/80 fixed top-0 left-0 z-30 h-screen w-full xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-30 h-screen w-full bg-dark/80 xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       ></div>
     </>
   );

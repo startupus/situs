@@ -8,5 +8,5 @@ export {
   getRolePermissions,
   hasPermission,
   getRoleLevel,
-  canManageRole
+  canManageRole,
 } from './roles.config';

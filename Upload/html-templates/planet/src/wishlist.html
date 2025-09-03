@@ -17,10 +17,10 @@
     <div
       x-show="loaded"
       x-init="window.addEventListener('DOMContentLoaded', () => {setTimeout(() => loaded = false, 500)})"
-      class="dark:bg-dark fixed top-0 left-0 z-[999999] flex h-screen w-screen items-center justify-center bg-white"
+      class="fixed left-0 top-0 z-[999999] flex h-screen w-screen items-center justify-center bg-white dark:bg-dark"
     >
       <div
-        class="border-primary h-16 w-16 animate-spin rounded-full border-4 border-solid border-t-transparent"
+        class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"
       ></div>
     </div>
     <!-- ====== preloader Section End -->
@@ -38,9 +38,9 @@
           categoryOne: true,
         }
       "
-      class="dark:bg-dark w-full bg-white"
+      class="w-full bg-white dark:bg-dark"
     >
-      <div class="border-stroke dark:border-dark-3 hidden border-b sm:block">
+      <div class="hidden border-b border-stroke dark:border-dark-3 sm:block">
         <div class="container mx-auto">
           <div class="-mx-4 flex flex-wrap items-center">
             <div class="w-full px-4 md:w-2/3 lg:w-1/2">
@@ -48,7 +48,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color hover:text-primary dark:text-dark-6 inline-block px-3 py-4 text-sm font-medium"
+                    class="inline-block px-3 py-4 text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
                   >
                     About Us
                   </a>
@@ -56,7 +56,7 @@
                 <li>
                   <a
                     href="order-summary.html"
-                    class="text-body-color hover:text-primary dark:text-dark-6 inline-block px-3 py-4 text-sm font-medium"
+                    class="inline-block px-3 py-4 text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Order Tracking
                   </a>
@@ -64,7 +64,7 @@
                 <li>
                   <a
                     href="support.html"
-                    class="text-body-color hover:text-primary dark:text-dark-6 inline-block px-3 py-4 text-sm font-medium"
+                    class="inline-block px-3 py-4 text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Contact Us
                   </a>
@@ -72,7 +72,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color hover:text-primary dark:text-dark-6 inline-block px-3 py-4 text-sm font-medium"
+                    class="inline-block px-3 py-4 text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
                   >
                     FAQs
                   </a>
@@ -84,14 +84,14 @@
                 <div>
                   <div class="relative">
                     <select
-                      class="text-body-color dark:text-dark-6 w-full appearance-none rounded-lg bg-transparent py-3 pr-5 pl-3 text-sm font-medium transition outline-none"
+                      class="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-none transition dark:text-dark-6"
                     >
                       <option value="" class="dark:bg-dark-2">English</option>
                       <option value="" class="dark:bg-dark-2">Urdu</option>
                       <option value="" class="dark:bg-dark-2">Hindi</option>
                     </select>
                     <span
-                      class="text-body-color dark:text-dark-6 pointer-events-none absolute top-1/2 right-0 -translate-y-1/2"
+                      class="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6"
                     >
                       <svg
                         width="14"
@@ -111,14 +111,14 @@
                 <div>
                   <div class="relative">
                     <select
-                      class="text-body-color dark:text-dark-6 w-full appearance-none rounded-lg bg-transparent py-3 pr-5 pl-3 text-sm font-medium transition outline-none"
+                      class="w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color outline-none transition dark:text-dark-6"
                     >
                       <option value="" class="dark:bg-dark-2">USD</option>
                       <option value="" class="dark:bg-dark-2">INR</option>
                       <option value="" class="dark:bg-dark-2">ERU</option>
                     </select>
                     <span
-                      class="text-body-color dark:text-dark-6 pointer-events-none absolute top-1/2 right-0 -translate-y-1/2"
+                      class="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6"
                     >
                       <svg
                         width="14"
@@ -168,28 +168,28 @@
                     @click="navbarOpen = !navbarOpen"
                     :class="navbarOpen && 'navbarTogglerActive' "
                     id="navbarToggler"
-                    class="ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden"
+                    class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                   >
                     <span
-                      class="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"
+                      class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
                     ></span>
                     <span
-                      class="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"
+                      class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
                     ></span>
                     <span
-                      class="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"
+                      class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"
                     ></span>
                   </button>
                   <nav
                     :class="!navbarOpen && 'hidden' "
                     id="navbarCollapse"
-                    class="dark:bg-dark-2 absolute top-full right-4 z-40 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow lg:static lg:flex lg:w-full lg:max-w-full lg:justify-end lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none dark:lg:bg-transparent"
+                    class="absolute right-4 top-full z-40 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:flex lg:w-full lg:max-w-full lg:justify-end lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none dark:lg:bg-transparent"
                   >
                     <ul class="block items-center lg:flex">
                       <li>
                         <a
                           href="index.html"
-                          class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px] dark:text-white"
+                          class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px]"
                         >
                           Home
                         </a>
@@ -197,7 +197,7 @@
                       <li>
                         <a
                           href="filters.html"
-                          class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px] dark:text-white"
+                          class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px]"
                         >
                           Shop
                         </a>
@@ -206,7 +206,7 @@
                         <a
                           href="javascript:void(0)"
                           @click="submenuOpen = !submenuOpen "
-                          class="text-dark hover:text-primary group-hover:text-primary flex items-center justify-between py-2 text-base font-medium lg:mx-6 lg:inline-flex lg:py-2 2xl:mx-[18px] dark:text-white"
+                          class="flex items-center justify-between py-2 text-base font-medium text-dark hover:text-primary group-hover:text-primary dark:text-white lg:mx-6 lg:inline-flex lg:py-2 2xl:mx-[18px]"
                         >
                           Products
                           <span class="pl-[6px]">
@@ -227,46 +227,46 @@
 
                         <div
                           :class="!submenuOpen ? 'hidden lg:block' : 'block' "
-                          class="dark:bg-dark-2 lg:border-stroke dark:lg:border-dark-3 relative top-full left-0 z-10 z-50 rounded-[5px] bg-white px-2 transition-all group-hover:opacity-100 lg:invisible lg:absolute lg:top-[115%] lg:w-[600px] lg:border-[.5px] lg:px-[50px] lg:pt-9 lg:pb-7 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full xl:w-[700px]"
+                          class="relative left-0 top-full z-10 z-50 rounded-[5px] bg-white px-2 transition-all group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[115%] lg:w-[600px] lg:border-[.5px] lg:border-stroke lg:px-[50px] lg:pb-7 lg:pt-9 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full dark:lg:border-dark-3 xl:w-[700px]"
                         >
                           <span
-                            class="border-stroke dark:border-dark-3 dark:bg-dark-2 absolute -top-[6px] left-8 -z-10 hidden h-3 w-3 rotate-45 rounded-sm border-[.5px] border-r-0 border-b-0 bg-white lg:block xl:left-10"
+                            class="absolute -top-[6px] left-8 -z-10 hidden h-3 w-3 rotate-45 rounded-sm border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block xl:left-10"
                           ></span>
                           <div class="-mx-4 flex flex-wrap lg:justify-center">
                             <div class="w-full px-4 lg:w-1/3">
                               <div>
                                 <h3
-                                  class="text-dark mb-[14px] text-base font-semibold dark:text-white"
+                                  class="mb-[14px] text-base font-semibold text-dark dark:text-white"
                                 >
                                   New Arrivals
                                 </h3>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Dresses
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Jackets
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Sweatshirts
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Tops & Tees
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Party Dresses
                                 </a>
@@ -275,37 +275,37 @@
                             <div class="w-full px-4 lg:w-1/3">
                               <div>
                                 <h3
-                                  class="text-dark mb-[14px] text-base font-semibold dark:text-white"
+                                  class="mb-[14px] text-base font-semibold text-dark dark:text-white"
                                 >
                                   New Arrivals
                                 </h3>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Dresses
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Jackets
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Sweatshirts
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Tops & Tees
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Party Dresses
                                 </a>
@@ -314,37 +314,37 @@
                             <div class="w-full px-4 lg:w-1/3">
                               <div>
                                 <h3
-                                  class="text-dark mb-[14px] text-base font-semibold dark:text-white"
+                                  class="mb-[14px] text-base font-semibold text-dark dark:text-white"
                                 >
                                   New Arrivals
                                 </h3>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Dresses
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Jackets
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Sweatshirts
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Tops & Tees
                                 </a>
                                 <a
                                   href="filters.html"
-                                  class="text-body-color hover:text-primary dark:text-dark-6 block py-[6px] text-base"
+                                  class="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
                                 >
                                   Party Dresses
                                 </a>
@@ -356,7 +356,7 @@
                       <li>
                         <a
                           href="filters.html"
-                          class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px] dark:text-white"
+                          class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px]"
                         >
                           Accessories
                         </a>
@@ -364,7 +364,7 @@
                       <li>
                         <a
                           href="support.html"
-                          class="text-dark hover:text-primary flex justify-between py-2 text-base font-medium lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px] dark:text-white"
+                          class="flex justify-between py-2 text-base font-medium text-dark hover:text-primary dark:text-white lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-[18px]"
                         >
                           Contact
                         </a>
@@ -378,7 +378,7 @@
               >
                 <div class="hidden items-center pr-1 xl:flex">
                   <div
-                    class="border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 mr-3 flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white"
+                    class="mr-3 flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white"
                   >
                     <svg
                       width="22"
@@ -400,7 +400,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-dark text-sm font-medium dark:text-white">
+                    <p class="text-sm font-medium text-dark dark:text-white">
                       Need Help?
                       <br />
                       +001 123 456 789
@@ -409,7 +409,7 @@
                 </div>
                 <div>
                   <button
-                    class="border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white"
+                    class="relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white"
                   >
                     <svg
                       width="22"
@@ -432,7 +432,7 @@
                   <div class="flex max-w-[200px] justify-end">
                     <button
                       @click="wishlistOpen = !wishlistOpen"
-                      class="border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white"
+                      class="relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white"
                     >
                       <svg
                         width="22"
@@ -448,7 +448,7 @@
                       </svg>
 
                       <span
-                        class="bg-primary absolute -top-1 -right-1 h-[18px] w-[18px] rounded-full text-[10px] leading-[18px] font-semibold text-white"
+                        class="absolute -right-1 -top-1 h-[18px] w-[18px] rounded-full bg-primary text-[10px] font-semibold leading-[18px] text-white"
                       >
                         3
                       </span>
@@ -457,13 +457,13 @@
                   <div
                     x-show="wishlistOpen"
                     @click.outside="wishlistOpen = false"
-                    class="absolute top-full right-0 mt-3 w-[330px]"
+                    class="absolute right-0 top-full mt-3 w-[330px]"
                   >
                     <div
-                      class="border-stroke shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark overflow-hidden rounded-lg border bg-white px-6 py-8"
+                      class="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-8 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark"
                     >
                       <div
-                        class="border-stroke dark:border-dark-3 border-b pb-3"
+                        class="border-b border-stroke pb-3 dark:border-dark-3"
                       >
                         <div
                           class="-mx-1 flex items-center justify-between pb-4"
@@ -481,12 +481,12 @@
                             <div>
                               <a
                                 href="product-details.html"
-                                class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                                class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                               >
                                 Circular Sienna
                               </a>
                               <p
-                                class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                                class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                               >
                                 Awesome white shirt
                               </p>
@@ -494,7 +494,7 @@
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-semibold dark:text-white"
+                              class="text-base font-semibold text-dark dark:text-white"
                             >
                               $36.00
                             </p>
@@ -516,12 +516,12 @@
                             <div>
                               <a
                                 href="product-details.html"
-                                class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                                class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                               >
                                 Black T-shirt
                               </a>
                               <p
-                                class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                                class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                               >
                                 It's a nice black t-shirt
                               </p>
@@ -529,7 +529,7 @@
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-semibold dark:text-white"
+                              class="text-base font-semibold text-dark dark:text-white"
                             >
                               $36.00
                             </p>
@@ -540,7 +540,7 @@
                       <div>
                         <a
                           href="wishlist.html"
-                          class="bg-primary hover:bg-blue-dark flex w-full items-center justify-center rounded-md px-10 py-[10px] text-center text-base font-medium text-white"
+                          class="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[10px] text-center text-base font-medium text-white hover:bg-blue-dark"
                         >
                           Go to Wishlist
                         </a>
@@ -553,7 +553,7 @@
                   <div class="flex max-w-[200px] justify-end">
                     <button
                       @click="cartOpen = !cartOpen"
-                      class="border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white"
+                      class="relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white"
                     >
                       <svg
                         width="22"
@@ -575,7 +575,7 @@
                       </svg>
 
                       <span
-                        class="bg-primary absolute -top-1 -right-1 h-[18px] w-[18px] rounded-full text-[10px] leading-[18px] font-semibold text-white"
+                        class="absolute -right-1 -top-1 h-[18px] w-[18px] rounded-full bg-primary text-[10px] font-semibold leading-[18px] text-white"
                       >
                         1
                       </span>
@@ -584,13 +584,13 @@
                   <div
                     x-show="cartOpen"
                     @click.outside="cartOpen = false"
-                    class="absolute top-full right-0 mt-3 w-[330px]"
+                    class="absolute right-0 top-full mt-3 w-[330px]"
                   >
                     <div
-                      class="shadow-1 dark:bg-dark-2 dark:shadow-box-dark overflow-hidden rounded-lg bg-white p-8"
+                      class="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark"
                     >
                       <div
-                        class="border-stroke dark:border-dark-3 mb-5 border-b pb-3"
+                        class="mb-5 border-b border-stroke pb-3 dark:border-dark-3"
                       >
                         <div
                           class="-mx-1 flex items-center justify-between pb-4"
@@ -608,12 +608,12 @@
                             <div>
                               <a
                                 href="product-details.html"
-                                class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                                class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                               >
                                 Circular Sienna
                               </a>
                               <p
-                                class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                                class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                               >
                                 Awesome white shirt
                               </p>
@@ -621,7 +621,7 @@
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-semibold dark:text-white"
+                              class="text-base font-semibold text-dark dark:text-white"
                             >
                               $36.00
                             </p>
@@ -643,12 +643,12 @@
                             <div>
                               <a
                                 href="product-details.html"
-                                class="text-dark hover:text-primary text-sm font-medium dark:text-white"
+                                class="text-sm font-medium text-dark hover:text-primary dark:text-white"
                               >
                                 Black T-shirt
                               </a>
                               <p
-                                class="text-body-color dark:text-dark-6 truncate text-xs font-medium"
+                                class="truncate text-xs font-medium text-body-color dark:text-dark-6"
                               >
                                 It's a nice black t-shirt
                               </p>
@@ -656,7 +656,7 @@
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-semibold dark:text-white"
+                              class="text-base font-semibold text-dark dark:text-white"
                             >
                               $36.00
                             </p>
@@ -664,17 +664,17 @@
                         </div>
                       </div>
                       <div
-                        class="border-stroke dark:border-dark-3 -mx-1 border-b pb-5"
+                        class="-mx-1 border-b border-stroke pb-5 dark:border-dark-3"
                       >
                         <div class="mb-3 flex items-center justify-between">
                           <div class="px-1">
-                            <p class="text-dark text-base dark:text-white">
+                            <p class="text-base text-dark dark:text-white">
                               Subtotal
                             </p>
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-medium dark:text-white"
+                              class="text-base font-medium text-dark dark:text-white"
                             >
                               $108
                             </p>
@@ -682,13 +682,13 @@
                         </div>
                         <div class="mb-3 flex items-center justify-between">
                           <div class="px-1">
-                            <p class="text-dark text-base dark:text-white">
+                            <p class="text-base text-dark dark:text-white">
                               Shipping Cost (+)
                             </p>
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-medium dark:text-white"
+                              class="text-base font-medium text-dark dark:text-white"
                             >
                               $10.85
                             </p>
@@ -696,13 +696,13 @@
                         </div>
                         <div class="flex items-center justify-between">
                           <div class="px-1">
-                            <p class="text-dark text-base dark:text-white">
+                            <p class="text-base text-dark dark:text-white">
                               Discount (-)
                             </p>
                           </div>
                           <div class="px-1">
                             <p
-                              class="text-dark text-base font-medium dark:text-white"
+                              class="text-base font-medium text-dark dark:text-white"
                             >
                               $9.00
                             </p>
@@ -710,16 +710,16 @@
                         </div>
                       </div>
                       <div
-                        class="-mx-1 flex items-center justify-between pt-5 pb-6"
+                        class="-mx-1 flex items-center justify-between pb-6 pt-5"
                       >
                         <div class="px-1">
-                          <p class="text-dark text-base dark:text-white">
+                          <p class="text-base text-dark dark:text-white">
                             Total Payable
                           </p>
                         </div>
                         <div class="px-1">
                           <p
-                            class="text-dark text-base font-medium dark:text-white"
+                            class="text-base font-medium text-dark dark:text-white"
                           >
                             $88.15
                           </p>
@@ -729,7 +729,7 @@
                       <div>
                         <a
                           href="shopping-cart.html"
-                          class="bg-primary hover:bg-blue-dark flex w-full items-center justify-center rounded-md px-10 py-[13px] text-center text-base font-medium text-white"
+                          class="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
                         >
                           Go to Cart
                         </a>
@@ -746,20 +746,20 @@
     <!-- ====== Navbar Section End -->
 
     <!-- ====== Breadcrumb Start ====== -->
-    <section class="bg-tg-bg dark:bg-dark pt-10">
+    <section class="bg-tg-bg pt-10 dark:bg-dark">
       <div class="container mx-auto">
         <div
-          class="border-light shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-card rounded-lg border bg-white px-4 py-4 sm:px-6 md:px-8 md:py-5"
+          class="rounded-lg border border-light bg-white px-4 py-4 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-card sm:px-6 md:px-8 md:py-5"
         >
           <ul class="flex items-center">
             <li class="flex items-center">
               <a
                 href="index.html"
-                class="text-dark hover:text-primary dark:hover:text-primary text-base font-medium dark:text-white"
+                class="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
               >
                 Home
               </a>
-              <span class="text-body-color dark:text-dark-6 px-3">
+              <span class="px-3 text-body-color dark:text-dark-6">
                 <svg
                   width="7"
                   height="12"
@@ -778,7 +778,7 @@
               </span>
             </li>
 
-            <li class="text-primary text-base font-medium">Wishlist</li>
+            <li class="text-base font-medium text-primary">Wishlist</li>
           </ul>
         </div>
       </div>
@@ -786,17 +786,17 @@
     <!-- ====== Breadcrumb End ====== -->
 
     <!-- ====== Wishlist Section Start -->
-    <section class="bg-tg-bg dark:bg-dark pt-24 pb-12 lg:pb-[90px]">
+    <section class="bg-tg-bg pb-12 pt-24 dark:bg-dark lg:pb-[90px]">
       <div class="container mx-auto">
         <div class="-mx-4 flex justify-center">
           <div class="w-full px-4 xl:w-11/12 2xl:w-10/12">
             <div class="mb-9">
               <h2
-                class="text-dark mb-2 text-3xl font-semibold sm:text-4xl dark:text-white"
+                class="mb-2 text-3xl font-semibold text-dark dark:text-white sm:text-4xl"
               >
                 Your Favorite Items
               </h2>
-              <p class="text-body-color dark:text-dark-6 text-base font-medium">
+              <p class="text-base font-medium text-body-color dark:text-dark-6">
                 There are 04 products in this list
               </p>
             </div>
@@ -806,33 +806,33 @@
         <div class="-mx-4 flex justify-center">
           <div class="w-full px-4 xl:w-11/12 2xl:w-10/12">
             <div
-              class="border-stroke dark:border-dark-3 dark:bg-dark-2 max-w-full overflow-x-auto rounded-[10px] border bg-white"
+              class="max-w-full overflow-x-auto rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
             >
               <table class="w-full table-auto">
                 <thead>
                   <tr class="text-left">
                     <th
-                      class="text-dark min-w-[300px] px-4 py-[18px] text-base font-medium xl:pl-9 dark:text-white"
+                      class="min-w-[300px] px-4 py-[18px] text-base font-medium text-dark dark:text-white xl:pl-9"
                     >
                       Product
                     </th>
                     <th
-                      class="text-dark min-w-[90px] px-4 py-[18px] text-base font-medium dark:text-white"
+                      class="min-w-[90px] px-4 py-[18px] text-base font-medium text-dark dark:text-white"
                     >
                       Price
                     </th>
                     <th
-                      class="text-dark min-w-[150px] px-4 py-[18px] text-base font-medium dark:text-white"
+                      class="min-w-[150px] px-4 py-[18px] text-base font-medium text-dark dark:text-white"
                     >
                       Stock Status
                     </th>
                     <th
-                      class="text-dark min-w-[165px] px-4 py-[18px] text-base font-medium dark:text-white"
+                      class="min-w-[165px] px-4 py-[18px] text-base font-medium text-dark dark:text-white"
                     >
                       Action
                     </th>
                     <th
-                      class="text-dark min-w-[115px] px-4 py-[18px] text-center text-base font-medium xl:pr-9 dark:text-white"
+                      class="min-w-[115px] px-4 py-[18px] text-center text-base font-medium text-dark dark:text-white xl:pr-9"
                     >
                       Remove
                     </th>
@@ -841,7 +841,7 @@
                 <tbody>
                   <tr>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px] xl:pl-9"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3 xl:pl-9"
                     >
                       <div class="flex items-center">
                         <img
@@ -851,7 +851,7 @@
                         />
                         <div>
                           <h5
-                            class="text-dark mb-0.5 text-lg font-semibold dark:text-white"
+                            class="mb-0.5 text-lg font-semibold text-dark dark:text-white"
                           >
                             <a
                               href="javascript:void(0)"
@@ -860,39 +860,39 @@
                               Hollow Port
                             </a>
                           </h5>
-                          <p class="text-body-color dark:text-dark-6 text-base">
+                          <p class="text-base text-body-color dark:text-dark-6">
                             Awesome yellow t-shirt
                           </p>
                         </div>
                       </div>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
-                      <p class="text-dark text-lg font-medium dark:text-white">
+                      <p class="text-lg font-medium text-dark dark:text-white">
                         $39.11
                       </p>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
                       <span
-                        class="bg-green-light-6 text-green-dark inline-flex items-center justify-center rounded-full px-[10px] py-[3px] text-xs leading-[1.67] font-medium"
+                        class="inline-flex items-center justify-center rounded-full bg-green-light-6 px-[10px] py-[3px] text-xs font-medium leading-[1.67] text-green-dark"
                       >
                         In Stock
                       </span>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
                       <button
-                        class="bg-primary hover:bg-blue-dark inline-block rounded-md px-5 py-2 text-sm leading-[1.57] font-medium text-white"
+                        class="inline-block rounded-md bg-primary px-5 py-2 text-sm font-medium leading-[1.57] text-white hover:bg-blue-dark"
                       >
                         Add to Cart
                       </button>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px] pr-9 text-center"
+                      class="border-t border-stroke px-4 py-[30px] pr-9 text-center dark:border-dark-3"
                     >
                       <button
                         class="text-body-color hover:text-red dark:text-dark-6"
@@ -923,7 +923,7 @@
                   </tr>
                   <tr>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px] xl:pl-9"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3 xl:pl-9"
                     >
                       <div class="flex items-center">
                         <img
@@ -933,7 +933,7 @@
                         />
                         <div>
                           <h5
-                            class="text-dark mb-0.5 text-lg font-semibold dark:text-white"
+                            class="mb-0.5 text-lg font-semibold text-dark dark:text-white"
                           >
                             <a
                               href="javascript:void(0)"
@@ -942,39 +942,39 @@
                               Circular Sienna
                             </a>
                           </h5>
-                          <p class="text-body-color dark:text-dark-6 text-base">
+                          <p class="text-base text-body-color dark:text-dark-6">
                             Awesome white t-shirt
                           </p>
                         </div>
                       </div>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
-                      <p class="text-dark text-lg font-medium dark:text-white">
+                      <p class="text-lg font-medium text-dark dark:text-white">
                         $24.89
                       </p>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
                       <span
-                        class="bg-green-light-6 text-green-dark inline-flex items-center justify-center rounded-full px-[10px] py-[3px] text-xs leading-[1.67] font-medium"
+                        class="inline-flex items-center justify-center rounded-full bg-green-light-6 px-[10px] py-[3px] text-xs font-medium leading-[1.67] text-green-dark"
                       >
                         In Stock
                       </span>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
                       <button
-                        class="bg-primary hover:bg-blue-dark inline-block rounded-md px-5 py-2 text-sm leading-[1.57] font-medium text-white"
+                        class="inline-block rounded-md bg-primary px-5 py-2 text-sm font-medium leading-[1.57] text-white hover:bg-blue-dark"
                       >
                         Add to Cart
                       </button>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px] pr-9 text-center"
+                      class="border-t border-stroke px-4 py-[30px] pr-9 text-center dark:border-dark-3"
                     >
                       <button
                         class="text-body-color hover:text-red dark:text-dark-6"
@@ -1005,7 +1005,7 @@
                   </tr>
                   <tr>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px] xl:pl-9"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3 xl:pl-9"
                     >
                       <div class="flex items-center">
                         <img
@@ -1015,7 +1015,7 @@
                         />
                         <div>
                           <h5
-                            class="text-dark mb-0.5 text-lg font-semibold dark:text-white"
+                            class="mb-0.5 text-lg font-semibold text-dark dark:text-white"
                           >
                             <a
                               href="javascript:void(0)"
@@ -1024,39 +1024,39 @@
                               Realm Bone
                             </a>
                           </h5>
-                          <p class="text-body-color dark:text-dark-6 text-base">
+                          <p class="text-base text-body-color dark:text-dark-6">
                             Awesome black t-shirt
                           </p>
                         </div>
                       </div>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
-                      <p class="text-dark text-lg font-medium dark:text-white">
+                      <p class="text-lg font-medium text-dark dark:text-white">
                         $22.00
                       </p>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
                       <span
-                        class="bg-red-light-5 text-red-dark inline-flex items-center justify-center rounded-full px-[10px] py-[3px] text-xs leading-[1.67] font-medium"
+                        class="inline-flex items-center justify-center rounded-full bg-red-light-5 px-[10px] py-[3px] text-xs font-medium leading-[1.67] text-red-dark"
                       >
                         Stock Out
                       </span>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px]"
+                      class="border-t border-stroke px-4 py-[30px] dark:border-dark-3"
                     >
                       <button
-                        class="bg-dark hover:bg-dark/90 inline-block rounded-md px-5 py-2 text-sm leading-[1.57] font-medium text-white"
+                        class="inline-block rounded-md bg-dark px-5 py-2 text-sm font-medium leading-[1.57] text-white hover:bg-dark/90"
                       >
                         Contact Us
                       </button>
                     </td>
                     <td
-                      class="border-stroke dark:border-dark-3 border-t px-4 py-[30px] pr-9 text-center"
+                      class="border-t border-stroke px-4 py-[30px] pr-9 text-center dark:border-dark-3"
                     >
                       <button
                         class="text-body-color hover:text-red dark:text-dark-6"
@@ -1095,14 +1095,14 @@
     <!-- ====== Wishlist Section End -->
 
     <!-- ====== eCommerce Footer Section Start -->
-    <footer class="dark:bg-dark-2 bg-white">
-      <div class="border-stroke dark:border-dark-3 border-b pt-[60px] md:pt-0">
+    <footer class="bg-white dark:bg-dark-2">
+      <div class="border-b border-stroke pt-[60px] dark:border-dark-3 md:pt-0">
         <div class="container mx-auto">
           <div class="-mx-4 flex flex-wrap">
             <div class="w-full px-4 md:w-1/3">
               <div class="mb-[60px] text-center md:mt-[60px]">
                 <div
-                  class="shadow-1 dark:bg-dark-2 mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white dark:shadow-none"
+                  class="mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white shadow-1 dark:bg-dark-2 dark:shadow-none"
                 >
                   <svg
                     width="32"
@@ -1120,12 +1120,12 @@
 
                 <div>
                   <h3
-                    class="text-dark mb-[10px] text-xl font-semibold xl:text-2xl dark:text-white"
+                    class="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:text-2xl"
                   >
                     Free delivery
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 mx-auto max-w-[275px] text-base"
+                    class="mx-auto max-w-[275px] text-base text-body-color dark:text-dark-6"
                   >
                     Lorem ipsum dolor sit amet, consect adipiscing eliteget
                     lorem.
@@ -1134,11 +1134,11 @@
               </div>
             </div>
             <div
-              class="md:border-stroke md:dark:border-dark-3 w-full px-4 md:w-1/3 md:border-x"
+              class="w-full px-4 md:w-1/3 md:border-x md:border-stroke md:dark:border-dark-3"
             >
               <div class="mb-[60px] text-center md:mt-[60px]">
                 <div
-                  class="shadow-1 dark:bg-dark-2 mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white dark:shadow-none"
+                  class="mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white shadow-1 dark:bg-dark-2 dark:shadow-none"
                 >
                   <svg
                     width="32"
@@ -1160,12 +1160,12 @@
 
                 <div>
                   <h3
-                    class="text-dark mb-[10px] text-xl font-semibold xl:text-2xl dark:text-white"
+                    class="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:text-2xl"
                   >
                     Online Payment
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 mx-auto max-w-[275px] text-base"
+                    class="mx-auto max-w-[275px] text-base text-body-color dark:text-dark-6"
                   >
                     Lorem ipsum dolor sit amet, consect adipiscing eliteget
                     lorem.
@@ -1176,7 +1176,7 @@
             <div class="w-full px-4 md:w-1/3">
               <div class="mb-[60px] text-center md:mt-[60px]">
                 <div
-                  class="shadow-1 dark:bg-dark-2 mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white dark:shadow-none"
+                  class="mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white shadow-1 dark:bg-dark-2 dark:shadow-none"
                 >
                   <svg
                     width="32"
@@ -1198,12 +1198,12 @@
 
                 <div>
                   <h3
-                    class="text-dark mb-[10px] text-xl font-semibold xl:text-2xl dark:text-white"
+                    class="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:text-2xl"
                   >
                     Easy Return.
                   </h3>
                   <p
-                    class="text-body-color dark:text-dark-6 mx-auto max-w-[275px] text-base"
+                    class="mx-auto max-w-[275px] text-base text-body-color dark:text-dark-6"
                   >
                     Lorem ipsum dolor sit amet, consect adipiscing eliteget
                     lorem.
@@ -1234,7 +1234,7 @@
                 </a>
 
                 <div class="space-y-4">
-                  <p class="text-body-color dark:text-dark-6 flex text-base">
+                  <p class="flex text-base text-body-color dark:text-dark-6">
                     <span class="mt-1 pr-5">
                       <svg
                         width="24"
@@ -1259,7 +1259,7 @@
                     </span>
                   </p>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-5">
                       <svg
@@ -1294,7 +1294,7 @@
                     <span> +1-613-555-0182 </span>
                   </p>
                   <p
-                    class="text-body-color dark:text-dark-6 flex items-center text-base"
+                    class="flex items-center text-base text-body-color dark:text-dark-6"
                   >
                     <span class="pr-5">
                       <svg
@@ -1320,7 +1320,7 @@
             <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-2/12">
               <div class="mb-16">
                 <h3
-                  class="text-dark mb-9 text-2xl font-semibold dark:text-white"
+                  class="mb-9 text-2xl font-semibold text-dark dark:text-white"
                 >
                   My Account
                 </h3>
@@ -1329,7 +1329,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       My Profile
                     </a>
@@ -1337,7 +1337,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       My Order History
                     </a>
@@ -1345,7 +1345,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       Order Tracking
                     </a>
@@ -1353,7 +1353,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       Shopping Cart
                     </a>
@@ -1365,7 +1365,7 @@
             <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
               <div class="mb-16">
                 <h3
-                  class="text-dark mb-9 text-2xl font-semibold dark:text-white"
+                  class="mb-9 text-2xl font-semibold text-dark dark:text-white"
                 >
                   Shop Departments
                 </h3>
@@ -1374,7 +1374,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       Computers & Accessories
                     </a>
@@ -1382,7 +1382,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       Smartphones & Tablets
                     </a>
@@ -1390,7 +1390,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       TV, Video & Audio
                     </a>
@@ -1398,7 +1398,7 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:text-primary dark:text-dark-6 inline-block text-base"
+                      class="inline-block text-base text-body-color hover:text-primary dark:text-dark-6"
                     >
                       Cameras, Photo & Video
                     </a>
@@ -1410,7 +1410,7 @@
             <div class="w-full px-4 md:w-1/2 lg:w-6/12 xl:w-3/12">
               <div class="mb-16">
                 <h3
-                  class="text-dark mb-10 text-2xl font-semibold dark:text-white"
+                  class="mb-10 text-2xl font-semibold text-dark dark:text-white"
                 >
                   Download App
                 </h3>
@@ -1418,7 +1418,7 @@
                 <div class="sm:flex md:block lg:flex xl:block">
                   <a
                     href="javascript:void(0)"
-                    class="bg-primary hover:bg-blue-dark mr-3 mb-3 flex w-full max-w-[230px] items-center rounded-[5px] px-5 py-2"
+                    class="mb-3 mr-3 flex w-full max-w-[230px] items-center rounded-[5px] bg-primary px-5 py-2 hover:bg-blue-dark"
                   >
                     <span class="block pr-[10px]">
                       <svg
@@ -1448,7 +1448,7 @@
                   </a>
                   <a
                     href="javascript:void(0)"
-                    class="bg-dark hover:bg-dark/90 dark:bg-dark-2 mr-3 mb-3 flex w-full max-w-[230px] items-center rounded-[5px] px-[22px] py-2"
+                    class="mb-3 mr-3 flex w-full max-w-[230px] items-center rounded-[5px] bg-dark px-[22px] py-2 hover:bg-dark/90 dark:bg-dark-2"
                   >
                     <span class="block pr-[14px]">
                       <svg
@@ -1479,7 +1479,7 @@
         </div>
       </div>
 
-      <div class="border-stroke dark:border-dark-3 border-t py-8">
+      <div class="border-t border-stroke py-8 dark:border-dark-3">
         <div class="container mx-auto">
           <div class="text-center">
             <div class="mb-5">
@@ -1489,7 +1489,7 @@
                 class="mx-auto max-w-full"
               />
             </div>
-            <p class="text-body-color dark:text-dark-6 text-base">
+            <p class="text-base text-body-color dark:text-dark-6">
               © 2024 TailGrids. All Rights Reserved.
             </p>
           </div>
@@ -1501,9 +1501,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

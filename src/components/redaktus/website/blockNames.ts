@@ -45,4 +45,4 @@ enum blockNames {
   TableCell = 'table-cell',
 }
 
-export default blockNames
+export default blockNames;

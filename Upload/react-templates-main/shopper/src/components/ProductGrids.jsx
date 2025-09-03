@@ -75,7 +75,7 @@ const ProductGrids = () => {
               {productItems.map((item, index) => (
                 <div
                   key={index}
-                  className="odd:md-border-r w-full border-[#e7e7e7] px-4 dark:border-dark-3 md:w-1/2 lg:w-1/3 lg:border-r not-last:border-b lg:nth-[2n]:border-r"
+                  className="odd:md-border-r not-last:border-b lg:nth-[2n]:border-r w-full border-[#e7e7e7] px-4 dark:border-dark-3 md:w-1/2 lg:w-1/3 lg:border-r"
                 >
                   <div className="mb-10 mt-6">
                     <div className="mb-5 overflow-hidden rounded-md">

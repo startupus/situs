@@ -25,20 +25,17 @@ export class CommunicationService {
   /**
    * Отправка сообщения через указанный канал
    */
-  async sendMessage(
-    channel: CommunicationChannel,
-    message: CommunicationMessage
-  ): Promise<CommunicationResult> {
+  async sendMessage(channel: CommunicationChannel, message: CommunicationMessage): Promise<CommunicationResult> {
     try {
       // Получаем настройки канала
       const settings = await this.getChannelSettings(channel);
-      
+
       if (!settings?.enabled) {
         throw new Error(`Канал ${channel} отключен`);
       }
 
       // Обрабатываем шаблон если указан
-      const processedContent = message.template 
+      const processedContent = message.template
         ? this.processTemplate(message.template, message.variables || {})
         : message.content;
 
@@ -46,19 +43,19 @@ export class CommunicationService {
       switch (channel) {
         case CommunicationChannel.EMAIL:
           return await this.sendEmail(message.to, message.subject || 'Уведомление', processedContent, settings.config);
-        
+
         case CommunicationChannel.SMS:
           return await this.sendSMS(message.to, processedContent, settings.config);
-        
+
         case CommunicationChannel.TELEGRAM:
           return await this.sendTelegram(message.to, processedContent, settings.config);
-        
+
         case CommunicationChannel.WHATSAPP:
           return await this.sendWhatsApp(message.to, processedContent, settings.config);
-        
+
         case CommunicationChannel.SLACK:
           return await this.sendSlack(message.to, processedContent, settings.config);
-        
+
         default:
           throw new Error(`Неподдерживаемый канал: ${channel}`);
       }
@@ -66,7 +63,7 @@ export class CommunicationService {
       this.logger.error(`Ошибка отправки через ${channel}:`, error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Неизвестная ошибка'
+        error: error instanceof Error ? error.message : 'Неизвестная ошибка',
       };
     }
   }
@@ -76,7 +73,7 @@ export class CommunicationService {
    */
   async getChannelSettings(channel: CommunicationChannel) {
     return await this.prisma.communicationSettings.findUnique({
-      where: { channel }
+      where: { channel },
     });
   }
 
@@ -88,7 +85,7 @@ export class CommunicationService {
     enabled: boolean,
     config: any,
     inviteTemplate?: string,
-    reminderTemplate?: string
+    reminderTemplate?: string,
   ) {
     return await this.prisma.communicationSettings.upsert({
       where: { channel },
@@ -104,7 +101,7 @@ export class CommunicationService {
         config,
         inviteTemplate,
         reminderTemplate,
-      }
+      },
     });
   }
 
@@ -113,7 +110,7 @@ export class CommunicationService {
    */
   async getAllChannelSettings() {
     return await this.prisma.communicationSettings.findMany({
-      orderBy: { channel: 'asc' }
+      orderBy: { channel: 'asc' },
     });
   }
 
@@ -122,28 +119,25 @@ export class CommunicationService {
    */
   private processTemplate(template: string, variables: Record<string, any>): string {
     let processed = template;
-    
+
     Object.entries(variables).forEach(([key, value]) => {
       const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'g');
       processed = processed.replace(regex, String(value));
     });
-    
+
     return processed;
   }
 
   /**
    * Отправка email (MVP - только логирование)
    */
-  private async sendEmail(
-    to: string,
-    subject: string,
-    content: string,
-    config: any
-  ): Promise<CommunicationResult> {
+  private async sendEmail(to: string, subject: string, content: string, config: any): Promise<CommunicationResult> {
     try {
       // Если nodemailer не установлен — журналируем и имитируем отправку (dev)
       let nodemailer: any = null;
-      try { nodemailer = require('nodemailer'); } catch {}
+      try {
+        nodemailer = require('nodemailer');
+      } catch {}
       if (!nodemailer) {
         this.logger.log(`📧 [DEV] EMAIL → ${to} | ${subject}`);
         this.logger.log(content);
@@ -168,68 +162,52 @@ export class CommunicationService {
   /**
    * Отправка SMS (заглушка)
    */
-  private async sendSMS(
-    to: string,
-    content: string,
-    config: any
-  ): Promise<CommunicationResult> {
+  private async sendSMS(to: string, content: string, config: any): Promise<CommunicationResult> {
     this.logger.log(`📱 SMS (заглушка) на ${to}: ${content}`);
     this.logger.log(`Конфигурация: ${JSON.stringify(config, null, 2)}`);
-    
+
     return {
       success: false,
-      error: 'SMS канал в разработке'
+      error: 'SMS канал в разработке',
     };
   }
 
   /**
    * Отправка в Telegram (заглушка)
    */
-  private async sendTelegram(
-    to: string,
-    content: string,
-    config: any
-  ): Promise<CommunicationResult> {
+  private async sendTelegram(to: string, content: string, config: any): Promise<CommunicationResult> {
     this.logger.log(`📱 TELEGRAM (заглушка) на ${to}: ${content}`);
     this.logger.log(`Конфигурация: ${JSON.stringify(config, null, 2)}`);
-    
+
     return {
       success: false,
-      error: 'Telegram канал в разработке'
+      error: 'Telegram канал в разработке',
     };
   }
 
   /**
    * Отправка в WhatsApp (заглушка)
    */
-  private async sendWhatsApp(
-    to: string,
-    content: string,
-    config: any
-  ): Promise<CommunicationResult> {
+  private async sendWhatsApp(to: string, content: string, config: any): Promise<CommunicationResult> {
     this.logger.log(`📱 WHATSAPP (заглушка) на ${to}: ${content}`);
     this.logger.log(`Конфигурация: ${JSON.stringify(config, null, 2)}`);
-    
+
     return {
       success: false,
-      error: 'WhatsApp канал в разработке'
+      error: 'WhatsApp канал в разработке',
     };
   }
 
   /**
    * Отправка в Slack (заглушка)
    */
-  private async sendSlack(
-    to: string,
-    content: string,
-    config: any
-  ): Promise<CommunicationResult> {
+  private async sendSlack(to: string, content: string, config: any): Promise<CommunicationResult> {
     this.logger.log(`💬 SLACK (заглушка) на ${to}: ${content}`);
     this.logger.log(`Конфигурация: ${JSON.stringify(config, null, 2)}`);
-    
+
     return {
       success: false,
-      error: 'Slack канал в разработке'
+      error: 'Slack канал в разработке',
     };
   }
 }

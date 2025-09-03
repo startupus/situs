@@ -13,7 +13,7 @@ const QuickView4 = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
-  };  
+  };
 
   const menuTrigger = useRef(null);
   const menuRef = useRef(null);
@@ -44,12 +44,12 @@ const QuickView4 = () => {
           <button
             ref={menuTrigger}
             onClick={() => setOpen(!open)}
-            className="rounded-md bg-primary py-3 px-7 text-base font-medium text-white hover:bg-blue-dark"
+            className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
           >
             Quick View
           </button>
           <div
-            className={`absolute top-0 left-0 min-h-screen w-full bg-gray-2 dark:bg-dark py-20 lg:py-[120px] ${
+            className={`absolute left-0 top-0 min-h-screen w-full bg-gray-2 py-20 dark:bg-dark lg:py-[120px] ${
               !open && "hidden"
             } `}
           >
@@ -58,7 +58,7 @@ const QuickView4 = () => {
                 <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
                   <div
                     ref={menuRef}
-                    className="relative overflow-hidden bg-white dark:bg-dark-2 border border-stroke dark:border-dark-3"
+                    className="relative overflow-hidden border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
                   >
                     <button
                       onClick={() => setOpen(false)}
@@ -87,9 +87,9 @@ const QuickView4 = () => {
                         />
                       </div>
 
-                      <div className="w-full py-5 px-5 text-center lg:ml-14">
+                      <div className="w-full px-5 py-5 text-center lg:ml-14">
                         <div className="mx-auto lg:max-w-[350px]">
-                          <h3 className="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:leading-[40px] xl:text-[28px]">
+                          <h3 className="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:text-[28px] xl:leading-[40px]">
                             Trendy Woody Door with handle lock
                           </h3>
                           <p className="mb-5 text-base font-medium text-dark dark:text-white">
@@ -150,9 +150,9 @@ const QuickView4 = () => {
                             <p className="mb-3 text-center text-base text-body-color dark:text-dark-6">
                               Quantity
                             </p>
-                            <div className="mb-[14px] inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                              <span 
-                                className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
+                            <div className="mb-[14px] inline-flex items-center rounded-sm border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
+                              <span
+                                className="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                                 onClick={decrement}
                               >
                                 <svg
@@ -166,11 +166,11 @@ const QuickView4 = () => {
                                   <path d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" />
                                 </svg>
                               </span>
-                              <span className="py-3 px-4 w-[98px] border-x border-stroke dark:border-dark-3">
+                              <span className="w-[98px] border-x border-stroke px-4 py-3 dark:border-dark-3">
                                 {quantity}
                               </span>
-                              <span 
-                                className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
+                              <span
+                                className="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                                 onClick={increment}
                               >
                                 <svg
@@ -186,7 +186,11 @@ const QuickView4 = () => {
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_1032_24236">
-                                      <rect width={12} height={12} fill="white" />
+                                      <rect
+                                        width={12}
+                                        height={12}
+                                        fill="white"
+                                      />
                                     </clipPath>
                                   </defs>
                                 </svg>
@@ -195,14 +199,14 @@ const QuickView4 = () => {
                           </div>
 
                           <div className="mb-2 text-center">
-                            <button className="inline-flex items-center justify-center rounded-md bg-primary py-3 px-7 text-center text-base font-medium text-white hover:bg-blue-dark md:px-10">
+                            <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark md:px-10">
                               Add to Cart
                             </button>
                           </div>
 
                           <a
                             href="/#"
-                            className="inline-block py-2 text-base font-medium text-body-color dark:text-dark-6 hover:text-primary hover:underline"
+                            className="inline-block py-2 text-base font-medium text-body-color hover:text-primary hover:underline dark:text-dark-6"
                           >
                             View Full Details
                           </a>

@@ -41,5 +41,3 @@ const WebsiteWidget: React.FC<WebsiteWidgetProps> = ({ projectId }) => {
 };
 
 export default WebsiteWidget;
-
-

@@ -30,7 +30,7 @@ const ProductDetails3 = () => {
 
   return (
     <>
-      <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
+      <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-9/12 lg:w-5/12">
@@ -38,7 +38,7 @@ const ProductDetails3 = () => {
                 <button
                   ref={menuTrigger}
                   onClick={() => setOpen(!open)}
-                  className="absolute top-6 right-6 text-dark text-base font-medium"
+                  className="absolute right-6 top-6 text-base font-medium text-dark"
                 >
                   Click to Zoom
                 </button>
@@ -149,7 +149,7 @@ const ProductDetails3 = () => {
                   ( <span className="underline">14 reviews</span> )
                 </span>
               </p>
-              <p className="text-body-color dark:text-dark-6 mb-8 text-base">
+              <p className="mb-8 text-base text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
                 non erat quam. Vestibulum aliquam.
               </p>
@@ -159,7 +159,7 @@ const ProductDetails3 = () => {
                     Color
                   </h4>
                   <div className="flex items-center">
-                    <div className="mr-3 mb-4">
+                    <div className="mb-4 mr-3">
                       <input
                         type="radio"
                         name="color"
@@ -186,7 +186,7 @@ const ProductDetails3 = () => {
                         </span>
                       </label>
                     </div>
-                    <div className="mr-3 mb-4">
+                    <div className="mb-4 mr-3">
                       <input
                         type="radio"
                         name="color"
@@ -213,7 +213,7 @@ const ProductDetails3 = () => {
                         </span>
                       </label>
                     </div>
-                    <div className="mr-3 mb-4">
+                    <div className="mb-4 mr-3">
                       <input
                         type="radio"
                         name="color"
@@ -222,7 +222,7 @@ const ProductDetails3 = () => {
                       />
                       <label
                         htmlFor="blue"
-                        className="box bg-primary flex h-[34px] w-11 cursor-pointer items-center justify-center text-white"
+                        className="box flex h-[34px] w-11 cursor-pointer items-center justify-center bg-primary text-white"
                       >
                         <span className="opacity-0">
                           <svg
@@ -248,7 +248,7 @@ const ProductDetails3 = () => {
                     Size
                   </h4>
                   <div className="flex items-center">
-                    <div className="mr-[10px] mb-4">
+                    <div className="mb-4 mr-[10px]">
                       <input
                         type="radio"
                         name="size"
@@ -257,12 +257,12 @@ const ProductDetails3 = () => {
                       />
                       <label
                         htmlFor="32"
-                        className="hover:border-primary hover:bg-primary inline-block cursor-pointer border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white py-1 px-3 hover:text-white"
+                        className="inline-block cursor-pointer border border-stroke px-3 py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                       >
                         32
                       </label>
                     </div>
-                    <div className="mr-[10px] mb-4">
+                    <div className="mb-4 mr-[10px]">
                       <input
                         type="radio"
                         name="size"
@@ -271,12 +271,12 @@ const ProductDetails3 = () => {
                       />
                       <label
                         htmlFor="36"
-                        className="hover:border-primary hover:bg-primary inline-block cursor-pointer border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white py-1 px-3 hover:text-white"
+                        className="inline-block cursor-pointer border border-stroke px-3 py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                       >
                         36
                       </label>
                     </div>
-                    <div className="mr-[10px] mb-4">
+                    <div className="mb-4 mr-[10px]">
                       <input
                         type="radio"
                         name="size"
@@ -285,7 +285,7 @@ const ProductDetails3 = () => {
                       />
                       <label
                         htmlFor="40"
-                        className="hover:border-primary hover:bg-primary inline-block cursor-pointer border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white py-1 px-3 hover:text-white"
+                        className="inline-block cursor-pointer border border-stroke px-3 py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                       >
                         40
                       </label>
@@ -295,7 +295,7 @@ const ProductDetails3 = () => {
               </div>
 
               <div className="mb-8 pt-2">
-                <button className="flex w-full items-center justify-center bg-dark-2 py-3 px-10 text-center text-base font-medium text-white hover:bg-dark-2/90">
+                <button className="flex w-full items-center justify-center bg-dark-2 px-10 py-3 text-center text-base font-medium text-white hover:bg-dark-2/90">
                   Add to Beg
                 </button>
               </div>
@@ -312,13 +312,13 @@ const ProductDetails3 = () => {
               </div>
 
               <div className="flex flex-wrap items-center">
-                <p className="text-body-color dark:text-dark-6 pr-4 text-base font-medium">
+                <p className="pr-4 text-base font-medium text-body-color dark:text-dark-6">
                   Share This Product:
                 </p>
                 <div className="flex items-center space-x-[18px]">
                   <a
                     href="/#"
-                    className="text-body-color dark:text-dark-6 hover:text-primary inline-block"
+                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
                   >
                     <svg
                       width={20}
@@ -333,7 +333,7 @@ const ProductDetails3 = () => {
                   </a>
                   <a
                     href="/#"
-                    className="text-body-color dark:text-dark-6 hover:text-primary inline-block"
+                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
                   >
                     <svg
                       width={20}
@@ -348,7 +348,7 @@ const ProductDetails3 = () => {
                   </a>
                   <a
                     href="/#"
-                    className="text-body-color dark:text-dark-6 hover:text-primary inline-block"
+                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
                   >
                     <svg
                       width={20}
@@ -365,7 +365,7 @@ const ProductDetails3 = () => {
                   </a>
                   <a
                     href="/#"
-                    className="text-body-color dark:text-dark-6 hover:text-primary inline-block"
+                    className="inline-block text-body-color hover:text-primary dark:text-dark-6"
                   >
                     <svg
                       width={20}
@@ -384,7 +384,7 @@ const ProductDetails3 = () => {
           </div>
 
           <div
-            className={`fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black/50 py-10 ${
+            className={`fixed left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-black/50 py-10 ${
               !open && "hidden"
             } `}
           >
@@ -430,13 +430,17 @@ const TabItem = ({ title, details }) => {
         }}
         className="mb-4 flex w-full items-center justify-between text-left"
       >
-        <span className="text-base font-medium text-dark dark:text-white">{title}</span>
+        <span className="text-base font-medium text-dark dark:text-white">
+          {title}
+        </span>
         <span className="text-xl font-medium text-dark dark:text-white">
           {tabOpen ? " - " : " + "}
         </span>
       </button>
       <div className={`${!tabOpen && "hidden"}`}>
-        <p className="text-body-color dark:text-dark-6 mb-4 text-base">{details}</p>
+        <p className="mb-4 text-base text-body-color dark:text-dark-6">
+          {details}
+        </p>
       </div>
     </div>
   );

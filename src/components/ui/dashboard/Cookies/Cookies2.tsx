@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Cookies2 = () => {
   const [open, setOpen] = useState(true);
@@ -16,13 +16,7 @@ const Cookies2 = () => {
               <div className="w-full md:w-7/12 lg:w-2/3">
                 <div className="mb-6 items-center sm:flex md:mb-0">
                   <div className="mb-3 mr-5 sm:mb-0">
-                    <svg
-                      width="64"
-                      height="64"
-                      viewBox="0 0 64 64"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M51.9 33C47.7 31.8 44.4 28.5 43.3 24.2L43 23L41.7 22.7C37.4 21.6 34 18.2 32.9 13.9L32.6 12.7L22 9.39999L21.3 9.69999C16.5 11.4 12.2 14.5 9 18.6C1.4 28.4 1.5 42.5 9.3 52.1C14.2 58.2 21.2 61.8 29 62.2C29.5 62.2 30 62.2 30.4 62.2C37.6 62.2 44.5 59.3 49.6 54.3C52.4 51.5 54.6 48.1 55.9 44.3L56.1 43.6L53.3 33H51.9ZM46.5 51.1C42 55.7 35.7 58 29.3 57.7C22.8 57.4 17 54.4 12.9 49.3C6.4 41.3 6.3 29.5 12.6 21.4C15.1 18.2 18.4 15.7 22.1 14.2L28.8 16.2C30.5 21.1 34.4 25 39.3 26.7C41 31.6 44.8 35.4 49.7 37.1L51.5 43.5C50.4 46.4 48.7 48.9 46.5 51.1Z"
                         fill="white"
@@ -54,8 +48,7 @@ const Cookies2 = () => {
                       We use cookies
                     </h4>
                     <p className="text-base text-white">
-                      This website uses cookies to ensure you get the best
-                      experience on our website.
+                      This website uses cookies to ensure you get the best experience on our website.
                     </p>
                   </div>
                 </div>
@@ -70,13 +63,7 @@ const Cookies2 = () => {
                     onClick={handleHide}
                     className="inline-flex h-12 w-12 items-center justify-center rounded-sm bg-white/10 text-center  text-base font-semibold text-white shadow-card hover:bg-white/5"
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M11 10L18.625 2.375C18.9062 2.09375 18.9062 1.65625 18.625 1.375C18.3438 1.09375 17.9062 1.09375 17.625 1.375L10 9L2.375 1.375C2.09375 1.09375 1.65625 1.09375 1.375 1.375C1.09375 1.65625 1.09375 2.09375 1.375 2.375L9 10L1.375 17.625C1.09375 17.9062 1.09375 18.3438 1.375 18.625C1.5 18.75 1.6875 18.8438 1.875 18.8438C2.0625 18.8438 2.25 18.7812 2.375 18.625L10 11L17.625 18.625C17.75 18.75 17.9375 18.8438 18.125 18.8438C18.3125 18.8438 18.5 18.7812 18.625 18.625C18.9062 18.3438 18.9062 17.9062 18.625 17.625L11 10Z"
                         fill="white"

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Text } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
+import React from 'react';
+import { Text } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 export interface TableCellProps {
-  isHeader: boolean
+  isHeader: boolean;
 }
 
 const TableCell: types.Brick<TableCellProps> = ({ isHeader }) => {
@@ -28,8 +28,8 @@ const TableCell: types.Brick<TableCellProps> = ({ isHeader }) => {
         renderBlock={({ children }: { children: any }) => <span>{children}</span>}
       />
     </td>
-  )
-}
+  );
+};
 
 TableCell.schema = {
   name: blockNames.TableCell,
@@ -44,6 +44,6 @@ TableCell.schema = {
 
   // Sidebar Edit controls for props
   sideEditProps: [],
-}
+};
 
-export default TableCell
+export default TableCell;

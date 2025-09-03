@@ -640,5 +640,5 @@ module.exports = plugin(
         },
       },
     },
-  }
+  },
 );

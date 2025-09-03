@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,13 +15,13 @@
   </head>
   <body>
     <!-- ====== Chart Section Start -->
-    <section class="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section class="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div class="mx-auto px-4 md:container">
         <div
-          class="relative mx-auto w-full max-w-[350px] rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 px-5 py-6 sm:px-[30px]"
+          class="relative mx-auto w-full max-w-[350px] rounded-lg border border-stroke bg-white px-5 py-6 dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]"
         >
           <button
-            class="absolute -right-[22px] top-[41%] -rotate-90 rounded-t-md bg-secondary py-1 px-4 text-sm font-medium text-white"
+            class="absolute -right-[22px] top-[41%] -rotate-90 rounded-t-md bg-secondary px-4 py-1 text-sm font-medium text-white"
           >
             Clean
           </button>
@@ -31,13 +31,20 @@
             </div>
 
             <div class="w-full">
-              <p class="mb-2 text-xl font-semibold leading-none text-dark dark:text-white">
+              <p
+                class="mb-2 text-xl font-semibold leading-none text-dark dark:text-white"
+              >
                 Available Storage
               </p>
               <p class="text-sm font-medium text-dark dark:text-white">
-                <span>150</span> <span class="text-xs text-body-color dark:text-dark-6"> GB </span>
+                <span>150</span>
+                <span class="text-xs text-body-color dark:text-dark-6">
+                  GB
+                </span>
                 <span>/ 512</span>
-                <span class="text-xs text-body-color dark:text-dark-6"> GB </span>
+                <span class="text-xs text-body-color dark:text-dark-6">
+                  GB
+                </span>
               </p>
             </div>
           </div>
@@ -88,7 +95,7 @@
 
       const chartOne = new ApexCharts(
         document.querySelector("#chartOne"),
-        chartOneOptions
+        chartOneOptions,
       );
       chartOne.render();
     </script>

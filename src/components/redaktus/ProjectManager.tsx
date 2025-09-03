@@ -28,14 +28,14 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({
   onProjectLoad,
   onPageLoad,
   onPageUpdate,
-  children
+  children,
 }) => {
   const [state, setState] = useState<ProjectManagerState>({
     project: null,
     currentPage: null,
     loading: false,
     error: null,
-    saving: false
+    saving: false,
   });
 
   // Загрузка проекта
@@ -45,28 +45,28 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({
     let cancelled = false;
 
     const loadProject = async () => {
-      setState(prev => ({ ...prev, loading: true, error: null }));
-      
+      setState((prev) => ({ ...prev, loading: true, error: null }));
+
       try {
         console.log('🚀 ProjectManager: Загрузка проекта', projectId);
         const project = await getProject(projectId);
-        
+
         if (cancelled) return;
-        
+
         console.log('✅ ProjectManager: Проект загружен', project.name);
-        setState(prev => ({ ...prev, project, loading: false }));
-        
+        setState((prev) => ({ ...prev, project, loading: false }));
+
         if (onProjectLoad) {
           onProjectLoad(project);
         }
       } catch (error) {
         if (cancelled) return;
-        
+
         console.error('❌ ProjectManager: Ошибка загрузки проекта:', error);
-        setState(prev => ({ 
-          ...prev, 
-          loading: false, 
-          error: error instanceof Error ? error.message : 'Неизвестная ошибка'
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          error: error instanceof Error ? error.message : 'Неизвестная ошибка',
         }));
       }
     };
@@ -85,28 +85,28 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({
     let cancelled = false;
 
     const loadPage = async () => {
-      setState(prev => ({ ...prev, loading: true, error: null }));
-      
+      setState((prev) => ({ ...prev, loading: true, error: null }));
+
       try {
         console.log('📄 ProjectManager: Загрузка страницы', pageId);
         const page = await getPage(pageId);
-        
+
         if (cancelled) return;
-        
+
         console.log('✅ ProjectManager: Страница загружена', page.title);
-        setState(prev => ({ ...prev, currentPage: page, loading: false }));
-        
+        setState((prev) => ({ ...prev, currentPage: page, loading: false }));
+
         if (onPageLoad) {
           onPageLoad(page);
         }
       } catch (error) {
         if (cancelled) return;
-        
+
         console.error('❌ ProjectManager: Ошибка загрузки страницы:', error);
-        setState(prev => ({ 
-          ...prev, 
-          loading: false, 
-          error: error instanceof Error ? error.message : 'Неизвестная ошибка'
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          error: error instanceof Error ? error.message : 'Неизвестная ошибка',
         }));
       }
     };
@@ -124,24 +124,24 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({
       throw new Error('Нет текущей страницы для сохранения');
     }
 
-    setState(prev => ({ ...prev, saving: true, error: null }));
+    setState((prev) => ({ ...prev, saving: true, error: null }));
 
     try {
       console.log('💾 ProjectManager: Сохранение страницы', state.currentPage.id);
       const updatedPage = await updatePage(state.currentPage.id, pageData);
-      
+
       console.log('✅ ProjectManager: Страница сохранена');
-      setState(prev => ({ ...prev, currentPage: updatedPage, saving: false }));
-      
+      setState((prev) => ({ ...prev, currentPage: updatedPage, saving: false }));
+
       if (onPageUpdate) {
         onPageUpdate(updatedPage);
       }
     } catch (error) {
       console.error('❌ ProjectManager: Ошибка сохранения страницы:', error);
-      setState(prev => ({ 
-        ...prev, 
-        saving: false, 
-        error: error instanceof Error ? error.message : 'Ошибка сохранения'
+      setState((prev) => ({
+        ...prev,
+        saving: false,
+        error: error instanceof Error ? error.message : 'Ошибка сохранения',
       }));
       throw error;
     }
@@ -154,15 +154,11 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({
     loading: state.loading,
     error: state.error,
     saving: state.saving,
-    savePage
+    savePage,
   };
 
   // Передаем контекст через React Context или пропсы
-  return (
-    <ProjectManagerContext.Provider value={contextValue}>
-      {children}
-    </ProjectManagerContext.Provider>
-  );
+  return <ProjectManagerContext.Provider value={contextValue}>{children}</ProjectManagerContext.Provider>;
 };
 
 // React Context для доступа к данным проекта

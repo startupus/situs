@@ -1,48 +1,48 @@
-import userOne from "../assets/images/chat-list/image-01.png";
-import userTwo from "../assets/images/chat-list/image-02.png";
-import userThree from "../assets/images/chat-list/image-03.png";
-import userFour from "../assets/images/chat-list/image-04.png";
-import userFive from "../assets/images/chat-list/image-05.png";
+import userOne from '../assets/images/chat-list/image-01.png';
+import userTwo from '../assets/images/chat-list/image-02.png';
+import userThree from '../assets/images/chat-list/image-03.png';
+import userFour from '../assets/images/chat-list/image-04.png';
+import userFive from '../assets/images/chat-list/image-05.png';
 
 const chatList = [
   {
     active: true,
     image: userOne,
-    name: "Devid Heilo",
-    text: "Hello, how are you?",
-    time: "1:34 PM",
+    name: 'Devid Heilo',
+    text: 'Hello, how are you?',
+    time: '1:34 PM',
     number: 3,
   },
   {
     active: true,
     image: userTwo,
-    name: "Henry Fisher",
-    text: "I am waiting for you",
-    time: "5:54 PM",
+    name: 'Henry Fisher',
+    text: 'I am waiting for you',
+    time: '5:54 PM',
     number: 0,
   },
   {
     active: false,
     image: userThree,
-    name: "Wilium Smith",
-    text: "Where are you now?",
-    time: "10:12 PM",
+    name: 'Wilium Smith',
+    text: 'Where are you now?',
+    time: '10:12 PM',
     number: 0,
   },
   {
     active: true,
     image: userFour,
-    name: "Henry Deco",
-    text: "Thank you so much!",
-    time: "Sun",
+    name: 'Henry Deco',
+    text: 'Thank you so much!',
+    time: 'Sun',
     number: 2,
   },
   {
     active: false,
     image: userFive,
-    name: "Jubin Jack",
-    text: "I really love that!",
-    time: "Oct 23",
+    name: 'Jubin Jack',
+    text: 'I really love that!',
+    time: 'Oct 23',
     number: 0,
   },
 ];
@@ -52,9 +52,7 @@ const ChatBox = () => {
     <>
       <div className="mx-auto max-w-[400px] rounded-lg bg-white py-[30px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
         <div className="mb-8 flex items-center justify-between px-[30px]">
-          <h3 className="text-xl font-semibold text-dark dark:text-white">
-            Chats
-          </h3>
+          <h3 className="text-xl font-semibold text-dark dark:text-white">Chats</h3>
           <div>
             <div className="relative z-20">
               <select className="relative z-20 appearance-none rounded-md border border-stroke bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color outline-hidden dark:border-dark-3 dark:text-dark-6">
@@ -88,32 +86,24 @@ const ChatBox = () => {
               className="flex cursor-pointer items-center px-[30px] py-3 hover:bg-gray-1 dark:hover:bg-dark-3"
             >
               <div className="relative mr-5 h-14 w-full max-w-[56px] rounded-full">
-                <img
-                  src={chat.image}
-                  alt="profile"
-                  className="h-full w-full object-cover object-center"
-                />
+                <img src={chat.image} alt="profile" className="h-full w-full object-cover object-center" />
 
                 <span
-                  className={`absolute bottom-0 right-0 block h-[14px] w-[14px] rounded-full border-2 border-white dark:border-dark-2 ${chat.active === true ? "bg-green" : "bg-red"}`}
+                  className={`absolute bottom-0 right-0 block h-[14px] w-[14px] rounded-full border-2 border-white dark:border-dark-2 ${chat.active === true ? 'bg-green' : 'bg-red'}`}
                 ></span>
               </div>
 
               <div className="flex w-full items-center justify-between">
                 <div>
-                  <h3 className="text-base font-medium text-dark dark:text-white">
-                    {chat.name}
-                  </h3>
+                  <h3 className="text-base font-medium text-dark dark:text-white">{chat.name}</h3>
                   <div className="flex items-center">
                     <p
-                      className={`text-sm ${chat.number !== 0 ? "font-medium text-dark dark:text-white" : "text-body-color dark:text-dark-6"}`}
+                      className={`text-sm ${chat.number !== 0 ? 'font-medium text-dark dark:text-white' : 'text-body-color dark:text-dark-6'}`}
                     >
                       {chat.text}
                     </p>
                     <span className="mx-2 block h-0.5 w-0.5 rounded-full bg-body-color dark:bg-dark-6"></span>
-                    <span className="text-xs text-body-color dark:text-dark-6">
-                      {chat.time}
-                    </span>
+                    <span className="text-xs text-body-color dark:text-dark-6">{chat.time}</span>
                   </div>
                 </div>
 

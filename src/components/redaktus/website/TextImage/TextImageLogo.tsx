@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Image } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
+import * as React from 'react';
+import { Image } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 const TextImageLogo: types.Brick = () => {
   return (
@@ -17,8 +17,8 @@ const TextImageLogo: types.Brick = () => {
         )}
       />
     </div>
-  )
-}
+  );
+};
 
 TextImageLogo.schema = {
   name: blockNames.TextImageLogo,
@@ -26,17 +26,15 @@ TextImageLogo.schema = {
   category: 'rb-ui website',
   hideFromAddMenu: true,
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/TextImage/TextImageLogo.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/TextImage/TextImageLogo.tsx',
 
   getDefaultProps: () => ({
     imageSource: {
       src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-        'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+      placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
       srcSet: '',
     },
   }),
-}
+};
 
-export default TextImageLogo
+export default TextImageLogo;

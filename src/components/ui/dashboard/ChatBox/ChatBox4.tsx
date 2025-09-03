@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const ChatBox4 = () => {
   const active = true;
@@ -17,17 +17,13 @@ const ChatBox4 = () => {
                 />
                 <span
                   className={`absolute bottom-[2px] right-0 inline-block h-[14px] w-[14px] rounded-full border-2 border-white dark:border-dark-2 ${
-                    active ? "bg-green" : "bg-red"
+                    active ? 'bg-green' : 'bg-red'
                   }`}
                 ></span>
               </div>
               <div>
-                <h5 className="text-base font-medium text-dark dark:text-white">
-                  Robert Henry
-                </h5>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  {active ? "Active" : "last seen 5m ago"}
-                </p>
+                <h5 className="text-base font-medium text-dark dark:text-white">Robert Henry</h5>
+                <p className="text-sm text-body-color dark:text-dark-6">{active ? 'Active' : 'last seen 5m ago'}</p>
               </div>
             </div>
             <div>
@@ -37,28 +33,10 @@ const ChatBox4 = () => {
 
           <div className="p-[30px]">
             <div className="mb-[30px] space-y-[10px]">
-              <Chat
-                width="270px"
-                time="18:03"
-                text="Hi Saif, How are you doing? You are so cute."
-              />
-              <Reply
-                seen
-                width="270px"
-                time="18:03"
-                text="Yoo..! I am doing great. Owww Leon Thanks."
-              />
-              <Chat
-                width="270px"
-                time="18:03"
-                text="I'm waiting for you response!"
-              />
-              <Reply
-                seen
-                width="270px"
-                time="18:03"
-                text="Yes, I am here now, please tell me how can I help you?"
-              />
+              <Chat width="270px" time="18:03" text="Hi Saif, How are you doing? You are so cute." />
+              <Reply seen width="270px" time="18:03" text="Yoo..! I am doing great. Owww Leon Thanks." />
+              <Chat width="270px" time="18:03" text="I'm waiting for you response!" />
+              <Reply seen width="270px" time="18:03" text="Yes, I am here now, please tell me how can I help you?" />
             </div>
 
             <form className="relative">
@@ -96,13 +74,7 @@ const ChatBox4 = () => {
                   </svg>
                 </button>
                 <button className="flex h-9 w-9 items-center justify-center rounded-md bg-secondary hover:bg-secondary/90">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_1061_11654)">
                       <path
                         fill-rule="evenodd"
@@ -119,12 +91,7 @@ const ChatBox4 = () => {
                     </g>
                     <defs>
                       <clipPath id="clip0_1061_11654">
-                        <rect
-                          width="16"
-                          height="16"
-                          fill="white"
-                          transform="translate(0.000488281)"
-                        />
+                        <rect width="16" height="16" fill="white" transform="translate(0.000488281)" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -146,13 +113,7 @@ const Chat = ({ width, time, text }) => {
       <div className="relative">
         <div className="relative mb-1 ml-4 rounded-[10px] rounded-bl-none bg-[#EBECF2] px-4 py-2 dark:bg-dark-3">
           <span className="absolute -left-3 bottom-0 text-[#EBECF2] dark:text-dark-3">
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 13 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 13H13V0L0 13Z" fill="currentColor" />
             </svg>
           </span>
@@ -170,17 +131,8 @@ const Reply = ({ width, seen, time, text }) => {
       <div className="relative">
         <div className="relative mb-1 mr-4 rounded-[10px] rounded-br-none bg-secondary px-4 py-2">
           <span className="absolute -right-3 bottom-0 text-secondary">
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 13 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.53674e-07 -5.68248e-07L3.85426e-07 13L13 13L9.53674e-07 -5.68248e-07Z"
-                fill="currentColor"
-              />
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.53674e-07 -5.68248e-07L3.85426e-07 13L13 13L9.53674e-07 -5.68248e-07Z" fill="currentColor" />
             </svg>
           </span>
           <p className="text-base text-white">{text}</p>
@@ -226,16 +178,11 @@ const Dropdown = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -244,8 +191,8 @@ const Dropdown = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -273,7 +220,7 @@ const Dropdown = () => {
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
-          dropdownOpen === true ? "block" : "hidden"
+          dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
         <button className="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">

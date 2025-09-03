@@ -42,7 +42,7 @@ const SingleImage = ({ href, imgSrc, Alt }) => {
     <>
       <a
         href={href}
-        className="mx-4 flex w-[150px] items-center justify-center  2xl:w-[180px]"
+        className="mx-4 flex w-[150px] items-center justify-center 2xl:w-[180px]"
       >
         <img src={imgSrc} alt={Alt} className="h-10 w-full" />
       </a>

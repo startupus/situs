@@ -1,7 +1,7 @@
-import { types } from 'redaktus/frontend'
+import { types } from 'redaktus/frontend';
 
-import HeroUnit from './custom/MyHeroUnit'
-import Pokemon from './custom/Pokemon'
+import HeroUnit from './custom/MyHeroUnit';
+import Pokemon from './custom/Pokemon';
 
 const bricks: types.Theme[] = [
   {
@@ -17,6 +17,6 @@ const bricks: types.Theme[] = [
       },
     ],
   },
-]
+];
 
-export default bricks
+export default bricks;

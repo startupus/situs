@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Cta4 = () => {
   return (
@@ -13,8 +13,7 @@ const Cta4 = () => {
                   <span className="font-light"> collection. </span>
                 </h2>
                 <p className="mb-8 text-base leading-relaxed text-white md:pr-10">
-                  There are many variations of passages of Lorem Ipsum but the
-                  majority have suffered in some form.
+                  There are many variations of passages of Lorem Ipsum but the majority have suffered in some form.
                 </p>
                 <a
                   href="/#"
@@ -25,13 +24,7 @@ const Cta4 = () => {
 
                 <div>
                   <span className="absolute bottom-0 left-0">
-                    <svg
-                      width="33"
-                      height="33"
-                      viewBox="0 0 33 33"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle
                         cx="6.288"
                         cy="25.9913"
@@ -107,13 +100,7 @@ const Cta4 = () => {
                     </svg>
                   </span>
                   <span className="absolute right-0 top-0 z-10 lg:right-[-100px]">
-                    <svg
-                      width="33"
-                      height="33"
-                      viewBox="0 0 33 33"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle
                         cx="6.288"
                         cy="25.9913"

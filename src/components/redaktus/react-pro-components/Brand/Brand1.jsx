@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Brand = () => {
   return (
@@ -40,10 +40,7 @@ export default Brand;
 const SingleImage = ({ href, imgSrc, Alt }) => {
   return (
     <>
-      <a
-        href={href}
-        className="mx-4 flex w-[150px] items-center justify-center  2xl:w-[180px]"
-      >
+      <a href={href} className="mx-4 flex w-[150px] items-center justify-center  2xl:w-[180px]">
         <img src={imgSrc} alt={Alt} className="h-10 w-full" />
       </a>
     </>

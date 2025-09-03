@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const ShoppingCart2 = () => {
   return (
     <section className="bg-gray py-20 lg:py-[120px]">
       <div className="container mx-auto">
-        <h2 className="mb-12 text-2xl font-semibold text-black sm:text-3xl md:text-4xl">
-          Shopping cart
-        </h2>
+        <h2 className="mb-12 text-2xl font-semibold text-black sm:text-3xl md:text-4xl">Shopping cart</h2>
         <div className="space-y-10">
           <CartItem
             img="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/shopping-carts/shopping-cart-02/image-01.jpg"
@@ -50,9 +48,7 @@ const ShoppingCart2 = () => {
                 <button className="mb-4 flex w-full justify-center bg-primary px-5 py-[10px] text-sm font-semibold text-white transition hover:bg-primary/90">
                   Checkout
                 </button>
-                <p className="mb-4 text-center text-base font-medium text-body-color">
-                  Secured Payment By
-                </p>
+                <p className="mb-4 text-center text-base font-medium text-body-color">Secured Payment By</p>
                 <img
                   src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/shopping-carts/shopping-cart-02/payment.svg"
                   alt="payment"
@@ -74,29 +70,18 @@ const CartItem = ({ img, link, title, subtitle, color, price }) => {
     <div className="bg-white px-6 py-6 shadow-card xl:pr-10">
       <div className="items-center md:flex">
         <div className="mb-5 mr-9 h-[150px] w-full max-w-[150px] md:mb-0">
-          <img
-            src={img}
-            alt="product"
-            className="h-full w-full object-cover object-center"
-          />
+          <img src={img} alt="product" className="h-full w-full object-cover object-center" />
         </div>
         <div className="w-full">
           <h4>
-            <a
-              href={link}
-              className="mb-2 block text-xl font-semibold text-black sm:text-2xl"
-            >
+            <a href={link} className="mb-2 block text-xl font-semibold text-black sm:text-2xl">
               {title}
             </a>
           </h4>
-          <p className="mb-4 text-base font-medium text-body-color">
-            {subtitle}
-          </p>
+          <p className="mb-4 text-base font-medium text-body-color">{subtitle}</p>
           <div className="w-full items-end justify-between sm:flex">
             <div className="mb-5">
-              <label className="mb-1 block text-sm font-medium text-body-color">
-                {color}
-              </label>
+              <label className="mb-1 block text-sm font-medium text-body-color">{color}</label>
               <div className="relative">
                 <select className="w-full appearance-none border border-form-stroke py-2 pl-4 pr-7 text-sm font-semibold text-body-color outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
                   <option value="">White</option>
@@ -108,23 +93,15 @@ const CartItem = ({ img, link, title, subtitle, color, price }) => {
             </div>
             <div className="mb-5 flex items-end sm:justify-end">
               <div className="mr-10">
-                <span className="mb-1 block text-sm font-medium text-body-color">
-                  Quantity
-                </span>
+                <span className="mb-1 block text-sm font-medium text-body-color">Quantity</span>
                 <div className="inline-flex items-center border border-[#e7e7e7] text-base font-medium text-black">
-                  <span className="cursor-pointer select-none border-r border-[#e7e7e7] px-4 py-[6px]">
-                    -
-                  </span>
+                  <span className="cursor-pointer select-none border-r border-[#e7e7e7] px-4 py-[6px]">-</span>
                   <span className="px-4 py-[6px]">1</span>
-                  <span className="cursor-pointer select-none border-l border-[#e7e7e7] px-4 py-[6px]">
-                    +
-                  </span>
+                  <span className="cursor-pointer select-none border-l border-[#e7e7e7] px-4 py-[6px]">+</span>
                 </div>
               </div>
               <div>
-                <span className="text-lg font-semibold text-black">
-                  {price}
-                </span>
+                <span className="text-lg font-semibold text-black">{price}</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,16 @@
 #!/usr/bin/env tsx
-import { PrismaClient, ProductType, PageStatus, PageType, ProjectStatus, GlobalRole, UserStatus, ProductStatus, MenuItemType, AccessLevel } from '@prisma/client';
+import {
+  PrismaClient,
+  ProductType,
+  PageStatus,
+  PageType,
+  ProjectStatus,
+  GlobalRole,
+  UserStatus,
+  ProductStatus,
+  MenuItemType,
+  AccessLevel,
+} from '@prisma/client';
 
 const prisma = new PrismaClient({ log: ['warn', 'error'] });
 
@@ -17,7 +28,7 @@ async function ensureDemoOwner() {
   const email = 'demo-owner@example.com';
   const existing = await prisma.user.findUnique({ where: { username } });
   if (existing) return existing;
-  
+
   return prisma.user.create({
     data: {
       username,
@@ -31,7 +42,7 @@ async function ensureDemoOwner() {
 
 async function createDemoProject(name: string, description: string, owner: any) {
   const slug = slugify(name);
-  
+
   // Проверяем существование проекта
   const existing = await prisma.project.findUnique({ where: { slug } });
   if (existing) {
@@ -48,11 +59,11 @@ async function createDemoProject(name: string, description: string, owner: any) 
       ownerId: owner.id,
       status: ProjectStatus.ACTIVE,
       isPublished: true,
-      settings: JSON.stringify({ 
-        theme: 'auto', 
+      settings: JSON.stringify({
+        theme: 'auto',
         language: 'ru',
         primaryColor: '#4F46E5',
-        secondaryColor: '#10B981' 
+        secondaryColor: '#10B981',
       }),
     },
   });
@@ -68,7 +79,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
       projectId: project.id,
       settings: JSON.stringify({
         theme: 'modern',
-        layout: 'responsive'
+        layout: 'responsive',
       }),
     },
   });
@@ -85,7 +96,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
       settings: JSON.stringify({
         currency: 'RUB',
         paymentMethods: ['card', 'cash', 'online'],
-        shippingMethods: ['pickup', 'courier', 'post']
+        shippingMethods: ['pickup', 'courier', 'post'],
       }),
     },
   });
@@ -102,7 +113,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
       settings: JSON.stringify({
         postsPerPage: 10,
         allowComments: true,
-        moderateComments: true
+        moderateComments: true,
       }),
     },
   });
@@ -110,10 +121,10 @@ async function createDemoProject(name: string, description: string, owner: any) 
 
   // Создаем страницы для WEBSITE
   const websitePages = [
-    { 
-      title: 'Главная', 
-      slug: 'home', 
-      isHomePage: true, 
+    {
+      title: 'Главная',
+      slug: 'home',
+      isHomePage: true,
       content: {
         blocks: [
           {
@@ -123,8 +134,8 @@ async function createDemoProject(name: string, description: string, owner: any) 
               title: `Добро пожаловать в ${name}`,
               subtitle: description,
               buttonText: 'Узнать больше',
-              backgroundImage: '/images/hero-bg.jpg'
-            }
+              backgroundImage: '/images/hero-bg.jpg',
+            },
           },
           {
             id: 'features-1',
@@ -134,15 +145,15 @@ async function createDemoProject(name: string, description: string, owner: any) 
               features: [
                 { title: 'Качество', description: 'Высокое качество продукции', icon: 'star' },
                 { title: 'Скорость', description: 'Быстрая доставка', icon: 'zap' },
-                { title: 'Поддержка', description: '24/7 поддержка клиентов', icon: 'headphones' }
-              ]
-            }
-          }
-        ]
-      }
+                { title: 'Поддержка', description: '24/7 поддержка клиентов', icon: 'headphones' },
+              ],
+            },
+          },
+        ],
+      },
     },
-    { 
-      title: 'О компании', 
+    {
+      title: 'О компании',
       slug: 'about',
       content: {
         blocks: [
@@ -151,14 +162,14 @@ async function createDemoProject(name: string, description: string, owner: any) 
             type: 'text',
             props: {
               title: 'О нашей компании',
-              content: `<p>Компания "${name}" работает на рынке уже много лет и зарекомендовала себя как надежный партнер.</p><p>Мы предлагаем качественные услуги и продукты, которые помогают нашим клиентам достигать поставленных целей.</p>`
-            }
-          }
-        ]
-      }
+              content: `<p>Компания "${name}" работает на рынке уже много лет и зарекомендовала себя как надежный партнер.</p><p>Мы предлагаем качественные услуги и продукты, которые помогают нашим клиентам достигать поставленных целей.</p>`,
+            },
+          },
+        ],
+      },
     },
-    { 
-      title: 'Услуги', 
+    {
+      title: 'Услуги',
       slug: 'services',
       content: {
         blocks: [
@@ -170,15 +181,15 @@ async function createDemoProject(name: string, description: string, owner: any) 
               services: [
                 { title: 'Консультации', description: 'Профессиональные консультации', price: 'от 5000₽' },
                 { title: 'Разработка', description: 'Разработка под ключ', price: 'от 50000₽' },
-                { title: 'Поддержка', description: 'Техническая поддержка', price: 'от 10000₽/мес' }
-              ]
-            }
-          }
-        ]
-      }
+                { title: 'Поддержка', description: 'Техническая поддержка', price: 'от 10000₽/мес' },
+              ],
+            },
+          },
+        ],
+      },
     },
-    { 
-      title: 'Контакты', 
+    {
+      title: 'Контакты',
       slug: 'contacts',
       content: {
         blocks: [
@@ -190,12 +201,12 @@ async function createDemoProject(name: string, description: string, owner: any) 
               phone: '+7 (495) 123-45-67',
               email: 'info@example.com',
               address: 'Москва, ул. Примерная, д. 1',
-              workingHours: 'Пн-Пт: 9:00-18:00'
-            }
-          }
-        ]
-      }
-    }
+              workingHours: 'Пн-Пт: 9:00-18:00',
+            },
+          },
+        ],
+      },
+    },
   ];
 
   for (let i = 0; i < websitePages.length; i++) {
@@ -222,7 +233,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
     { name: 'Электроника', slug: 'electronics', description: 'Смартфоны, ноутбуки, аксессуары' },
     { name: 'Одежда', slug: 'clothing', description: 'Мужская и женская одежда' },
     { name: 'Дом и сад', slug: 'home-garden', description: 'Товары для дома и дачи' },
-    { name: 'Спорт', slug: 'sport', description: 'Спортивные товары и инвентарь' }
+    { name: 'Спорт', slug: 'sport', description: 'Спортивные товары и инвентарь' },
   ];
 
   const createdCategories = [];
@@ -244,12 +255,12 @@ async function createDemoProject(name: string, description: string, owner: any) 
   }
 
   // Создаем подкатегории для Электроники
-  const electronicsCategory = createdCategories.find(c => c.slug === 'electronics');
+  const electronicsCategory = createdCategories.find((c) => c.slug === 'electronics');
   if (electronicsCategory) {
     const subCategories = [
       { name: 'Смартфоны', slug: 'smartphones', description: 'Мобильные телефоны' },
       { name: 'Ноутбуки', slug: 'laptops', description: 'Портативные компьютеры' },
-      { name: 'Аксессуары', slug: 'accessories', description: 'Чехлы, зарядки, наушники' }
+      { name: 'Аксессуары', slug: 'accessories', description: 'Чехлы, зарядки, наушники' },
     ];
 
     for (let i = 0; i < subCategories.length; i++) {
@@ -277,29 +288,29 @@ async function createDemoProject(name: string, description: string, owner: any) 
       slug: 'iphone-15-pro',
       description: 'Новейший смартфон Apple с титановым корпусом',
       price: 99999,
-      categorySlug: 'smartphones'
+      categorySlug: 'smartphones',
     },
     {
       name: 'MacBook Pro M3',
       slug: 'macbook-pro-m3',
       description: 'Мощный ноутбук для профессионалов',
       price: 199999,
-      categorySlug: 'laptops'
+      categorySlug: 'laptops',
     },
     {
       name: 'AirPods Pro',
       slug: 'airpods-pro',
       description: 'Беспроводные наушники с шумоподавлением',
       price: 24999,
-      categorySlug: 'accessories'
-    }
+      categorySlug: 'accessories',
+    },
   ];
 
   for (const itemData of items) {
     const category = await prisma.category.findFirst({
-      where: { slug: itemData.categorySlug, productId: store.id }
+      where: { slug: itemData.categorySlug, productId: store.id },
     });
-    
+
     if (category) {
       await prisma.item.create({
         data: {
@@ -327,11 +338,12 @@ async function createDemoProject(name: string, description: string, owner: any) 
             id: 'post-1',
             type: 'text',
             props: {
-              content: '<p>Добро пожаловать в официальный блог нашей компании! Здесь мы будем делиться новостями, полезными советами и интересными материалами.</p>'
-            }
-          }
-        ]
-      }
+              content:
+                '<p>Добро пожаловать в официальный блог нашей компании! Здесь мы будем делиться новостями, полезными советами и интересными материалами.</p>',
+            },
+          },
+        ],
+      },
     },
     {
       title: 'Как выбрать качественный продукт',
@@ -342,12 +354,13 @@ async function createDemoProject(name: string, description: string, owner: any) 
             id: 'post-2',
             type: 'text',
             props: {
-              content: '<p>В этой статье мы расскажем о том, на что стоит обращать внимание при выборе качественного продукта.</p><p>Основные критерии выбора:</p><ul><li>Качество материалов</li><li>Репутация производителя</li><li>Отзывы покупателей</li><li>Соотношение цена-качество</li></ul>'
-            }
-          }
-        ]
-      }
-    }
+              content:
+                '<p>В этой статье мы расскажем о том, на что стоит обращать внимание при выборе качественного продукта.</p><p>Основные критерии выбора:</p><ul><li>Качество материалов</li><li>Репутация производителя</li><li>Отзывы покупателей</li><li>Соотношение цена-качество</li></ul>',
+            },
+          },
+        ],
+      },
+    },
   ];
 
   for (let i = 0; i < blogPosts.length; i++) {
@@ -385,52 +398,52 @@ async function createDemoProject(name: string, description: string, owner: any) 
 
   // Пункты главного меню
   const mainMenuItems = [
-    { 
-      title: 'Главная', 
-      alias: 'home', 
-      component: 'Website', 
-      view: 'page', 
+    {
+      title: 'Главная',
+      alias: 'home',
+      component: 'Website',
+      view: 'page',
       targetId: 'home',
-      orderIndex: 0
+      orderIndex: 0,
     },
-    { 
-      title: 'О компании', 
-      alias: 'about', 
-      component: 'Website', 
-      view: 'page', 
+    {
+      title: 'О компании',
+      alias: 'about',
+      component: 'Website',
+      view: 'page',
       targetId: 'about',
-      orderIndex: 1
+      orderIndex: 1,
     },
-    { 
-      title: 'Услуги', 
-      alias: 'services', 
-      component: 'Website', 
-      view: 'page', 
+    {
+      title: 'Услуги',
+      alias: 'services',
+      component: 'Website',
+      view: 'page',
       targetId: 'services',
-      orderIndex: 2
+      orderIndex: 2,
     },
-    { 
-      title: 'Каталог', 
-      alias: 'catalog', 
-      component: 'Store', 
+    {
+      title: 'Каталог',
+      alias: 'catalog',
+      component: 'Store',
       view: 'categories',
-      orderIndex: 3
+      orderIndex: 3,
     },
-    { 
-      title: 'Блог', 
-      alias: 'blog', 
-      component: 'Blog', 
+    {
+      title: 'Блог',
+      alias: 'blog',
+      component: 'Blog',
       view: 'posts',
-      orderIndex: 4
+      orderIndex: 4,
     },
-    { 
-      title: 'Контакты', 
-      alias: 'contacts', 
-      component: 'Website', 
-      view: 'page', 
+    {
+      title: 'Контакты',
+      alias: 'contacts',
+      component: 'Website',
+      view: 'page',
       targetId: 'contacts',
-      orderIndex: 5
-    }
+      orderIndex: 5,
+    },
   ];
 
   for (const item of mainMenuItems) {
@@ -449,7 +462,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
         language: '*',
         parameters: JSON.stringify({
           menu_show: true,
-          css_class: 'nav-link'
+          css_class: 'nav-link',
         }),
         menuTypeId: mainMenu.id,
       },
@@ -459,7 +472,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
 
   // Подменю для каталога
   const catalogMenuItem = await prisma.menuItem.findFirst({
-    where: { menuTypeId: mainMenu.id, alias: 'catalog' }
+    where: { menuTypeId: mainMenu.id, alias: 'catalog' },
   });
 
   if (catalogMenuItem && createdCategories.length > 0) {
@@ -482,7 +495,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
           parameters: JSON.stringify({
             menu_show: true,
             itemsPerPage: 20,
-            showFilters: true
+            showFilters: true,
           }),
           menuTypeId: mainMenu.id,
         },
@@ -504,7 +517,7 @@ async function createDemoProject(name: string, description: string, owner: any) 
   const footerItems = [
     { title: 'Политика конфиденциальности', alias: 'privacy', externalUrl: '/privacy' },
     { title: 'Условия использования', alias: 'terms', externalUrl: '/terms' },
-    { title: 'Поддержка', alias: 'support', externalUrl: '/support' }
+    { title: 'Поддержка', alias: 'support', externalUrl: '/support' },
   ];
 
   for (let i = 0; i < footerItems.length; i++) {
@@ -527,29 +540,29 @@ async function createDemoProject(name: string, description: string, owner: any) 
 
   console.log('🧭 Система меню создана успешно');
   console.log(`✅ Проект "${name}" полностью настроен!`);
-  
+
   return project;
 }
 
 async function main() {
   console.log('🚀 Создание полноценных демо-проектов...');
-  
+
   const owner = await ensureDemoOwner();
   console.log(`👤 Владелец готов: ${owner.username}`);
 
   const demoProjects = [
     {
       name: 'TechStore - Магазин электроники',
-      description: 'Современный интернет-магазин с широким ассортиментом электроники и гаджетов'
+      description: 'Современный интернет-магазин с широким ассортиментом электроники и гаджетов',
     },
     {
       name: 'WebDev Agency - Веб-студия',
-      description: 'Профессиональное агентство по созданию сайтов и веб-приложений'
+      description: 'Профессиональное агентство по созданию сайтов и веб-приложений',
     },
     {
       name: 'Delicious Food - Ресторан',
-      description: 'Уютный ресторан с авторской кухней и домашней атмосферой'
-    }
+      description: 'Уютный ресторан с авторской кухней и домашней атмосферой',
+    },
   ];
 
   for (const projectData of demoProjects) {

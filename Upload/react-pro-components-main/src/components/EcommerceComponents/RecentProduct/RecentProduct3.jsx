@@ -2,7 +2,7 @@ import React from "react";
 
 const RecentProduct3 = () => {
   return (
-    <section className="pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+    <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <ProductCard
           subtitle="Start From $50"
@@ -30,21 +30,21 @@ export default RecentProduct3;
 const ProductCard = ({ subtitle, title, details, link, button, img }) => {
   return (
     <>
-      <div className="group -mx-4 flex sm:odd:flex-row sm:even:flex-row-reverse flex-wrap items-center justify-center mb-24 last:mb-5">
+      <div className="group -mx-4 mb-24 flex flex-wrap items-center justify-center last:mb-5 sm:odd:flex-row sm:even:flex-row-reverse">
         <div className="w-full px-4 lg:w-1/2 2xl:w-5/12">
           <div className="mb-12 max-w-[465px] lg:mb-0 lg:group-even:ml-auto">
-            <span className="text-primary mb-4 block text-lg font-semibold md:text-2xl">
+            <span className="mb-4 block text-lg font-semibold text-primary md:text-2xl">
               {subtitle}
             </span>
-            <h2 className="mb-5 text-2xl font-semibold leading-tight! text-dark dark:text-white xl:text-4xl">
+            <h2 className="leading-tight! mb-5 text-2xl font-semibold text-dark dark:text-white xl:text-4xl">
               {title}
             </h2>
-            <p className="text-body-color dark:text-dark-6 mb-9 text-base">
+            <p className="mb-9 text-base text-body-color dark:text-dark-6">
               {details}
             </p>
             <a
               href={link}
-              className="bg-primary inline-flex items-center justify-center rounded-md py-[13px] px-7 text-center text-base font-medium text-white hover:bg-blue-dark"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark"
             >
               {button}
             </a>

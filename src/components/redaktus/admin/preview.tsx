@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import React from 'react'
-import { Preview } from 'redaktus/frontend'
+import Head from 'next/head';
+import React from 'react';
+import { Preview } from 'redaktus/frontend';
 
 const PagePreview: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const PagePreview: React.FC = () => {
       </Head>
       <Preview />
     </>
-  )
-}
+  );
+};
 
-export default PagePreview
+export default PagePreview;

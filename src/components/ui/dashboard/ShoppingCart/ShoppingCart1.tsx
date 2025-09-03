@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const ShoppingCart = () => {
   const [modalOpen, setModalOpen] = useState(true);
@@ -20,26 +20,17 @@ const ShoppingCart = () => {
         <div
           onClick={() => setModalOpen(false)}
           className={`${
-            modalOpen ? "translate-x-0" : "translate-x-full"
+            modalOpen ? 'translate-x-0' : 'translate-x-full'
           } bg-body-color cursor-pointer fixed top-0 right-0 h-full w-full transition-all duration-100`}
         ></div>
 
         <div
           className={`${
-            modalOpen ? "translate-x-0" : "translate-x-full"
+            modalOpen ? 'translate-x-0' : 'translate-x-full'
           } fixed top-0 right-0 h-screen w-full max-w-[500px] overflow-y-auto bg-white py-10 px-5 transition-all duration-200 sm:px-8 md:p-12`}
         >
-          <button
-            onClick={() => setModalOpen(false)}
-            className="absolute top-8 right-8"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <button onClick={() => setModalOpen(false)} className="absolute top-8 right-8">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M8.62996 8.00296L15.4749 1.1413C15.6478 0.968524 15.6478 0.69702 15.4749 0.524244C15.3019 0.351469 15.0301 0.351469 14.8571 0.524244L8.01219 7.3859L1.14259 0.548926C0.96961 0.376151 0.697791 0.376151 0.524815 0.548926C0.35184 0.721702 0.35184 0.993207 0.524815 1.16598L7.39442 8.00296L0.549526 14.8646C0.37655 15.0374 0.37655 15.3089 0.549526 15.4817C0.623658 15.5557 0.747213 15.6051 0.846056 15.6051C0.944899 15.6051 1.06845 15.5557 1.14259 15.4817L8.01219 8.62001L14.8571 15.4817C14.9312 15.5557 15.0548 15.6051 15.1536 15.6051C15.2525 15.6051 15.376 15.5557 15.4501 15.4817C15.6231 15.3089 15.6231 15.0374 15.4501 14.8646L8.62996 8.00296Z"
                 fill="#637381"
@@ -52,9 +43,7 @@ const ShoppingCart = () => {
               />
             </svg>
           </button>
-          <h3 className="mb-10 text-2xl font-semibold text-black md:text-3xl">
-            Shopping cart
-          </h3>
+          <h3 className="mb-10 text-2xl font-semibold text-black md:text-3xl">Shopping cart</h3>
 
           <div className="space-y-8">
             <CartItem
@@ -87,8 +76,7 @@ const ShoppingCart = () => {
 
             <div className="flex items-center justify-end">
               <p className="text-body-color mr-5 flex items-center text-base font-medium">
-                Subtotal:{" "}
-                <span className="pl-2 font-semibold text-black">$973</span>
+                Subtotal: <span className="pl-2 font-semibold text-black">$973</span>
               </p>
               <button className="bg-primary inline-flex items-center justify-center rounded-sm py-[10px] px-7 text-center text-base font-semibold text-white hover:bg-primary/90">
                 Checkout
@@ -108,22 +96,13 @@ const CartItem = ({ img, link, title, number, button, button2, price }) => {
     <div className="flex justify-between border-b border-[#e7e7e7] pb-8">
       <div className="flex items-center">
         <div className="xs:h-[100px] xs:max-w-[100px] mr-5 h-[90px] w-full max-w-[80px] overflow-hidden rounded-sm">
-          <img
-            src={img}
-            alt="product"
-            className="h-full w-full object-cover object-center"
-          />
+          <img src={img} alt="product" className="h-full w-full object-cover object-center" />
         </div>
         <div>
-          <a
-            href={link}
-            className="hover:text-primary block text-base font-medium text-black sm:text-lg"
-          >
+          <a href={link} className="hover:text-primary block text-base font-medium text-black sm:text-lg">
             {title}
           </a>
-          <p className="text-body-color mb-2 text-sm font-medium sm:text-base">
-            {number}
-          </p>
+          <p className="text-body-color mb-2 text-sm font-medium sm:text-base">{number}</p>
           <div className="flex items-center space-x-3">
             <button className="hover:border-primary hover:bg-primary rounded-sm border border-black px-4 py-1 text-sm font-medium text-black transition hover:text-white">
               {button}

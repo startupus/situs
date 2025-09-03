@@ -2,14 +2,14 @@ import React from "react";
 
 export default function Testimonial6() {
   return (
-    <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div className="container">
         <div className="mx-auto mb-[60px] w-full max-w-[510px] text-center">
           <span className="mb-2 block text-lg font-semibold text-primary">
             {" "}
             Testimonials{" "}
           </span>
-          <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark sm:text-4xl md:text-[40px] dark:text-white">
+          <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
             What our Clients Says
           </h2>
           <p className="text-base text-body-color dark:text-dark-6">

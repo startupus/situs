@@ -55,7 +55,7 @@ export enum BillingEventType {
   PAYMENT_INITIATED = 'payment.initiated',
   PAYMENT_COMPLETED = 'payment.completed',
   PAYMENT_FAILED = 'payment.failed',
-  PAYMENT_REFUNDED = 'payment.refunded'
+  PAYMENT_REFUNDED = 'payment.refunded',
 }
 
 export interface EventHandler {
@@ -81,9 +81,7 @@ export class EventBus {
 
     // Notify handlers
     const handlers = this.handlers.get(event.type) || [];
-    await Promise.all(handlers.map(handler =>
-      this.safeExecute(handler, event)
-    ));
+    await Promise.all(handlers.map((handler) => this.safeExecute(handler, event)));
 
     // Notify webhooks
     await this.notifyWebhooks(event);
@@ -134,8 +132,8 @@ export class PostgresEventStore implements EventStore {
         timestamp: event.timestamp,
         tenantId: event.tenantId,
         userId: event.userId,
-        metadata: event.metadata
-      }
+        metadata: event.metadata,
+      },
     });
   }
 
@@ -260,11 +258,13 @@ export class PluginManager {
   private subscribePluginToEvents(plugin: BillingPlugin): void {
     // Auto-subscribe plugin to events based on its type
     if (this.isPaymentPlugin(plugin)) {
-      this.eventBus.subscribe(BillingEventType.PAYMENT_INITIATED,
-        async (event) => await plugin.execute({
-          eventType: event.type,
-          payload: event.payload
-        })
+      this.eventBus.subscribe(
+        BillingEventType.PAYMENT_INITIATED,
+        async (event) =>
+          await plugin.execute({
+            eventType: event.type,
+            payload: event.payload,
+          }),
       );
     }
   }
@@ -336,12 +336,12 @@ model WebhookEndpoint {
 export class UserService {
   constructor(
     private prisma: PrismaClient,
-    private eventBus: EventBus
+    private eventBus: EventBus,
   ) {}
 
   async createUser(userData: CreateUserRequest): Promise<User> {
     const user = await this.prisma.user.create({
-      data: userData
+      data: userData,
     });
 
     // Publish event
@@ -349,7 +349,7 @@ export class UserService {
       id: generateId(),
       type: BillingEventType.USER_CREATED,
       payload: { user },
-      timestamp: new Date()
+      timestamp: new Date(),
     });
 
     return user;
@@ -413,18 +413,18 @@ export default class StripePaymentPlugin implements PaymentPlugin {
       const paymentIntent = await this.stripe.paymentIntents.create({
         amount: request.amount,
         currency: request.currency,
-        payment_method: request.paymentMethodId
+        payment_method: request.paymentMethodId,
       });
 
       return {
         success: true,
         paymentId: paymentIntent.id,
-        status: 'pending'
+        status: 'pending',
       };
     } catch (error) {
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -451,8 +451,9 @@ export default class EmailNotificationPlugin implements NotificationPlugin {
     this.transporter = nodemailer.createTransporter(config.settings.smtp);
 
     // Subscribe to events
-    config.eventBus.subscribe(BillingEventType.INVOICE_GENERATED,
-      async (event) => await this.handleInvoiceGenerated(event)
+    config.eventBus.subscribe(
+      BillingEventType.INVOICE_GENERATED,
+      async (event) => await this.handleInvoiceGenerated(event),
     );
   }
 
@@ -467,7 +468,7 @@ export default class EmailNotificationPlugin implements NotificationPlugin {
       to: user.email,
       subject: 'New Invoice Generated',
       template: 'invoice-generated',
-      data: { invoice, user }
+      data: { invoice, user },
     });
   }
 
@@ -475,7 +476,7 @@ export default class EmailNotificationPlugin implements NotificationPlugin {
     await this.transporter.sendMail({
       to: notification.to,
       subject: notification.subject,
-      html: await this.renderTemplate(notification.template, notification.data)
+      html: await this.renderTemplate(notification.template, notification.data),
     });
   }
 
@@ -535,9 +536,9 @@ export default class EmailNotificationPlugin implements NotificationPlugin {
 3. **Complexity**: Архитектура становится сложнее
    - Mitigation: Хорошая документация, примеры, тесты
 
-- --
+---
 
-* *Дата создания**: 2025-01-27
-* *Приоритет**: High
-* *Estimated Effort**: 4 weeks
-* *Dependencies**: Existing Bilingus Service
+- \*Дата создания\*\*: 2025-01-27
+- \*Приоритет\*\*: High
+- \*Estimated Effort\*\*: 4 weeks
+- \*Dependencies\*\*: Existing Bilingus Service

@@ -17,7 +17,7 @@ const ALLOWED_DIRECTORIES: string[] = [
   'vendor',
   'build',
   'out',
-  'generated'
+  'generated',
 ];
 
 // Разрешенные файлы
@@ -30,7 +30,7 @@ const ALLOWED_FILES: string[] = [
   'vite.config.js',
   'prettier.config.js',
   'postcss.config.js',
-  '.eslintrc.js'
+  '.eslintrc.js',
 ];
 
 interface CheckResult {
@@ -44,17 +44,15 @@ interface CheckResult {
 function isAllowedFile(filePath: string): boolean {
   const fileName = path.basename(filePath);
   const dirName = path.dirname(filePath);
-  
+
   // Проверяем разрешенные файлы
   if (ALLOWED_FILES.includes(fileName)) {
     return true;
   }
-  
+
   // Проверяем разрешенные директории
   const pathParts = dirName.split(path.sep);
-  return ALLOWED_DIRECTORIES.some(allowedDir => 
-    pathParts.includes(allowedDir)
-  );
+  return ALLOWED_DIRECTORIES.some((allowedDir) => pathParts.includes(allowedDir));
 }
 
 /**
@@ -66,7 +64,7 @@ function findJavaScriptFiles(dir: string, files: string[] = []): string[] {
 
     for (const item of items) {
       const fullPath = path.join(dir, item);
-      
+
       try {
         const stat = fs.statSync(fullPath);
 
@@ -100,10 +98,10 @@ function checkNoJavaScriptFiles(): CheckResult {
   console.log('🔍 Проверка отсутствия JavaScript файлов...\n');
 
   const foundFiles = findJavaScriptFiles(process.cwd());
-  
+
   const result: CheckResult = {
     foundFiles,
-    isValid: foundFiles.length === 0
+    isValid: foundFiles.length === 0,
   };
 
   if (result.isValid) {
@@ -111,10 +109,10 @@ function checkNoJavaScriptFiles(): CheckResult {
     console.log('🎯 Проект соответствует строгим стандартам TypeScript');
   } else {
     console.log('❌ Найдены недопустимые JavaScript файлы:');
-    foundFiles.forEach(file => {
+    foundFiles.forEach((file) => {
       console.log(`   - ${path.relative(process.cwd(), file)}`);
     });
-    
+
     console.log('\n💡 Действия для исправления:');
     console.log('   1. Конвертируйте .js файлы в .ts');
     console.log('   2. Добавьте строгую типизацию');
@@ -130,17 +128,17 @@ function checkNoJavaScriptFiles(): CheckResult {
  */
 function main(): void {
   const result = checkNoJavaScriptFiles();
-  
+
   console.log(`\n📊 Результат проверки:`);
   console.log(`   Найдено JS файлов: ${result.foundFiles.length}`);
   console.log(`   Статус: ${result.isValid ? '✅ ПРОЙДЕНО' : '❌ НЕ ПРОЙДЕНО'}`);
-  
+
   if (!result.isValid) {
     console.log('\n🚨 КРИТИЧЕСКОЕ НАРУШЕНИЕ стандартов TypeScript!');
     console.log('📖 См. TYPESCRIPT_STANDARDS.md для подробностей');
     process.exit(1);
   }
-  
+
   console.log('\n🎉 Все проверки пройдены успешно!');
 }
 
@@ -149,8 +147,4 @@ if (require.main === module) {
   main();
 }
 
-export {
-  checkNoJavaScriptFiles,
-  findJavaScriptFiles,
-  isAllowedFile
-}; 
+export { checkNoJavaScriptFiles, findJavaScriptFiles, isAllowedFile };

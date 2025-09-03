@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const VerticalNavbar = () => {
   return (
@@ -7,10 +7,7 @@ const VerticalNavbar = () => {
         <div>
           <div className="px-10 pt-10 pb-9">
             <a href="/#">
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
-                alt="logo"
-              />
+              <img src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg" alt="logo" />
             </a>
           </div>
 
@@ -45,9 +42,7 @@ const VerticalNavbar = () => {
               />
             </div>
             <div>
-              <h6 className="text-base font-medium text-body-color">
-                Musharof
-              </h6>
+              <h6 className="text-base font-medium text-body-color">Musharof</h6>
               <p className="text-sm text-body-color">hello@tailgrids.com</p>
             </div>
           </div>
@@ -69,16 +64,11 @@ const NavItem = ({ menu, link, submenu, children }) => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -87,8 +77,8 @@ const NavItem = ({ menu, link, submenu, children }) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -98,24 +88,17 @@ const NavItem = ({ menu, link, submenu, children }) => {
         ref={trigger}
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`${
-          dropdownOpen
-            ? "border-primary bg-gray-2 text-primary"
-            : "border-transparent text-body-color"
+          dropdownOpen ? 'border-primary bg-gray-2 text-primary' : 'border-transparent text-body-color'
         } relative flex items-center border-r-4 py-[10px] pl-10 pr-11 text-base font-medium duration-200 hover:border-primary hover:bg-gray-2 hover:text-primary border-transparent text-body-color`}
       >
         {menu}
         {submenu && (
           <span
             className={`${
-              dropdownOpen === true ? "rotate-0" : "rotate-180"
+              dropdownOpen === true ? 'rotate-0' : 'rotate-180'
             } absolute top-1/2 right-10 -translate-y-1/2`}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              className="fill-current"
-            >
+            <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -129,7 +112,7 @@ const NavItem = ({ menu, link, submenu, children }) => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`${dropdownOpen === true ? "block" : "hidden"} `}
+        className={`${dropdownOpen === true ? 'block' : 'hidden'} `}
       >
         <ul className="py-1 pl-14 pr-10">{children}</ul>
       </div>

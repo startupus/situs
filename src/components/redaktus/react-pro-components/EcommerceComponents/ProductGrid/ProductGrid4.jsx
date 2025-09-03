@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid4 = () => {
   return (
@@ -59,15 +59,7 @@ const ProductGrid4 = () => {
 
 export default ProductGrid4;
 
-const SingleProduct = ({
-  img,
-  link,
-  title,
-  price,
-  prevPrice,
-  color,
-  children,
-}) => {
+const SingleProduct = ({ img, link, title, price, prevPrice, color, children }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3 xl:w-1/4">
       <div className="mb-10 rounded-md border-[.5px] border-[#e7e7e7] bg-white p-[10px] shadow-card dark:border-dark-3 dark:bg-dark-3">
@@ -75,10 +67,7 @@ const SingleProduct = ({
           <img src={img} alt="product" className="w-full" />
         </a>
         <div className="pb-6 pt-5 text-center">
-          <span className="text-sm font-medium text-body-color dark:text-dark-6">
-            {" "}
-            {color}{" "}
-          </span>
+          <span className="text-sm font-medium text-body-color dark:text-dark-6"> {color} </span>
           <div>
             <h3>
               <a
@@ -90,15 +79,10 @@ const SingleProduct = ({
             </h3>
             <p className="mb-6 text-lg font-semibold text-dark dark:text-white">
               {price}
-              <span className="pl-2 text-body-color line-through dark:text-dark-6">
-                {" "}
-                {prevPrice}{" "}
-              </span>
+              <span className="pl-2 text-body-color line-through dark:text-dark-6"> {prevPrice} </span>
             </p>
           </div>
-          <div className="flex items-center justify-center space-x-2">
-            {children}
-          </div>
+          <div className="flex items-center justify-center space-x-2">{children}</div>
         </div>
       </div>
     </div>

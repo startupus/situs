@@ -17,7 +17,7 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
   projectId,
   menuTypeName = 'main',
   onActiveItemChange,
-  children
+  children,
 }) => {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState<MenuItemData | null>(null);
@@ -32,7 +32,7 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
       // Получаем тип меню
       const menuTypesResponse = await fetch(`http://localhost:3002/api/menu-types?projectId=${projectId}`);
       const menuTypesResult = await menuTypesResponse.json();
-      
+
       if (!menuTypesResult.success) return;
 
       const menuType = menuTypesResult.data.find((mt: any) => mt.name === menuTypeName);
@@ -40,16 +40,16 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
 
       // Ищем активный пункт меню
       const activeResponse = await fetch(
-        `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuType.id}&path=${encodeURIComponent(currentPath)}`
+        `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuType.id}&path=${encodeURIComponent(currentPath)}`,
       );
       const activeResult = await activeResponse.json();
 
       if (activeResult.success && activeResult.data) {
         const { activeItem: foundItem, breadcrumbs: foundBreadcrumbs } = activeResult.data;
-        
+
         setActiveItem(foundItem);
         setBreadcrumbs(foundBreadcrumbs || []);
-        
+
         // Уведомляем родительский компонент
         if (onActiveItemChange) {
           onActiveItemChange(foundItem, foundBreadcrumbs || []);
@@ -57,10 +57,10 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
       } else {
         // Если точного совпадения нет, пытаемся найти по алгоритму
         const fallbackItem = await findFallbackMenuItem(menuType.id, currentPath);
-        
+
         setActiveItem(fallbackItem);
         setBreadcrumbs(fallbackItem ? await buildBreadcrumbs(fallbackItem) : []);
-        
+
         if (onActiveItemChange) {
           onActiveItemChange(fallbackItem, fallbackItem ? await buildBreadcrumbs(fallbackItem) : []);
         }
@@ -69,7 +69,7 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
       console.error('Ошибка определения активного пункта меню:', error);
       setActiveItem(null);
       setBreadcrumbs([]);
-      
+
       if (onActiveItemChange) {
         onActiveItemChange(null, []);
       }
@@ -84,47 +84,47 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
       // Получаем все пункты меню
       const response = await fetch(`http://localhost:3002/api/menu-items?menuTypeId=${menuTypeId}`);
       const result = await response.json();
-      
+
       if (!result.success) return null;
 
       const allItems: MenuItemData[] = result.data;
-      const pathSegments = currentPath.split('/').filter(s => s.length > 0);
+      const pathSegments = currentPath.split('/').filter((s) => s.length > 0);
 
       // Алгоритм поиска (по приоритету):
-      
+
       // 1. Точное совпадение по alias
       for (const segment of pathSegments) {
-        const exactMatch = allItems.find(item => item.alias === segment);
+        const exactMatch = allItems.find((item) => item.alias === segment);
         if (exactMatch) return exactMatch;
       }
 
       // 2. Совпадение по targetId
       for (const segment of pathSegments) {
-        const targetMatch = allItems.find(item => item.targetId === segment);
+        const targetMatch = allItems.find((item) => item.targetId === segment);
         if (targetMatch) return targetMatch;
       }
 
       // 3. Частичное совпадение по alias
       for (const segment of pathSegments) {
-        const partialMatch = allItems.find(item => 
-          item.alias && (item.alias.includes(segment) || segment.includes(item.alias))
+        const partialMatch = allItems.find(
+          (item) => item.alias && (item.alias.includes(segment) || segment.includes(item.alias)),
         );
         if (partialMatch) return partialMatch;
       }
 
       // 4. Совпадение по компоненту и view
       if (pathSegments.includes('pages')) {
-        const pagesMatch = allItems.find(item => item.component === 'Website');
+        const pagesMatch = allItems.find((item) => item.component === 'Website');
         if (pagesMatch) return pagesMatch;
       }
 
       if (pathSegments.includes('store') || pathSegments.includes('shop')) {
-        const storeMatch = allItems.find(item => item.component === 'Store');
+        const storeMatch = allItems.find((item) => item.component === 'Store');
         if (storeMatch) return storeMatch;
       }
 
       if (pathSegments.includes('blog') || pathSegments.includes('news')) {
-        const blogMatch = allItems.find(item => item.component === 'Blog');
+        const blogMatch = allItems.find((item) => item.component === 'Blog');
         if (blogMatch) return blogMatch;
       }
 
@@ -143,7 +143,7 @@ const ActiveMenuTracker: React.FC<ActiveMenuTrackerProps> = ({
     // Идем вверх по иерархии
     while (currentItem) {
       breadcrumbs.unshift(currentItem);
-      
+
       if (currentItem.parentId) {
         try {
           const response = await fetch(`http://localhost:3002/api/menu-items/${currentItem.parentId}`);
@@ -188,7 +188,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   breadcrumbs,
   className = '',
   separator = '/',
-  showIcons = true
+  showIcons = true,
 }) => {
   if (breadcrumbs.length === 0) {
     return null;
@@ -198,28 +198,32 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     <nav className={`flex items-center space-x-2 text-sm ${className}`} aria-label="Хлебные крошки">
       {breadcrumbs.map((item, index) => (
         <React.Fragment key={item.id}>
-          {index > 0 && (
-            <span className="text-body-color dark:text-dark-6 mx-2">
-              {separator}
-            </span>
-          )}
-          
+          {index > 0 && <span className="text-body-color dark:text-dark-6 mx-2">{separator}</span>}
+
           <div className="flex items-center gap-1">
             {showIcons && item.component && (
               <span className="text-xs">
-                {item.component === 'Website' ? '🌐' :
-                 item.component === 'Store' ? '🛒' :
-                 item.component === 'Blog' ? '📝' :
-                 item.component === 'Landing' ? '🎯' : '🧩'}
+                {item.component === 'Website'
+                  ? '🌐'
+                  : item.component === 'Store'
+                    ? '🛒'
+                    : item.component === 'Blog'
+                      ? '📝'
+                      : item.component === 'Landing'
+                        ? '🎯'
+                        : '🧩'}
               </span>
             )}
-            
-            <span className={`
-              ${index === breadcrumbs.length - 1 
-                ? 'text-dark dark:text-white font-medium' 
-                : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white cursor-pointer'
+
+            <span
+              className={`
+              ${
+                index === breadcrumbs.length - 1
+                  ? 'text-dark dark:text-white font-medium'
+                  : 'text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white cursor-pointer'
               }
-            `}>
+            `}
+            >
               {item.title}
             </span>
           </div>
@@ -242,11 +246,11 @@ export const useActiveMenuItem = (projectId: string, menuTypeName: string = 'mai
     const findActive = async () => {
       try {
         setLoading(true);
-        
+
         // Получаем тип меню
         const menuTypesResponse = await fetch(`http://localhost:3002/api/menu-types?projectId=${projectId}`);
         const menuTypesResult = await menuTypesResponse.json();
-        
+
         if (!menuTypesResult.success) return;
 
         const menuType = menuTypesResult.data.find((mt: any) => mt.name === menuTypeName);
@@ -254,7 +258,7 @@ export const useActiveMenuItem = (projectId: string, menuTypeName: string = 'mai
 
         // Ищем активный пункт
         const activeResponse = await fetch(
-          `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuType.id}&path=${encodeURIComponent(location.pathname)}`
+          `http://localhost:3002/api/menu-items/active-by-path?menuTypeId=${menuType.id}&path=${encodeURIComponent(location.pathname)}`,
         );
         const activeResult = await activeResponse.json();
 

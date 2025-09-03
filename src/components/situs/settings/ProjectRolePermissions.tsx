@@ -25,10 +25,7 @@ interface ProjectRolePermissionsProps {
   onSave: (rolePermissions: RolePermissions[]) => void;
 }
 
-const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
-  projectId,
-  onSave
-}) => {
+const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({ projectId, onSave }) => {
   const [rolePermissions, setRolePermissions] = useState<RolePermissions[]>([]);
   const [availablePermissions, setAvailablePermissions] = useState<Permission[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,7 +41,7 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
     { id: 'OWNER', name: 'Владелец', level: 100, color: 'red' },
     { id: 'ADMIN', name: 'Администратор', level: 70, color: 'orange' },
     { id: 'EDITOR', name: 'Редактор', level: 30, color: 'blue' },
-    { id: 'VIEWER', name: 'Наблюдатель', level: 10, color: 'green' }
+    { id: 'VIEWER', name: 'Наблюдатель', level: 10, color: 'green' },
   ];
 
   useEffect(() => {
@@ -57,34 +54,194 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
       // Здесь будут API вызовы
       const mockPermissions: Permission[] = [
         // Административные права
-        { id: 'project.view', name: 'project.view', displayName: 'Просмотр проекта', description: 'Доступ к административной панели проекта', category: 'admin', subcategory: 'Основные', isSystem: true },
-        { id: 'project.edit', name: 'project.edit', displayName: 'Редактирование проекта', description: 'Изменение настроек и конфигурации проекта', category: 'admin', subcategory: 'Основные', isSystem: true },
-        { id: 'project.delete', name: 'project.delete', displayName: 'Удаление проекта', description: 'Полное удаление проекта', category: 'admin', subcategory: 'Основные', isSystem: true },
-        { id: 'project.publish', name: 'project.publish', displayName: 'Публикация проекта', description: 'Публикация и снятие с публикации', category: 'admin', subcategory: 'Основные', isSystem: true },
-        
-        { id: 'content.create', name: 'content.create', displayName: 'Создание контента', description: 'Создание новых страниц и контента', category: 'admin', subcategory: 'Контент', isSystem: true },
-        { id: 'content.edit', name: 'content.edit', displayName: 'Редактирование контента', description: 'Изменение существующего контента', category: 'admin', subcategory: 'Контент', isSystem: true },
-        { id: 'content.delete', name: 'content.delete', displayName: 'Удаление контента', description: 'Удаление страниц и контента', category: 'admin', subcategory: 'Контент', isSystem: true },
-        { id: 'content.publish', name: 'content.publish', displayName: 'Публикация контента', description: 'Публикация и снятие с публикации контента', category: 'admin', subcategory: 'Контент', isSystem: true },
-        
-        { id: 'media.upload', name: 'media.upload', displayName: 'Загрузка медиа', description: 'Загрузка изображений и файлов', category: 'admin', subcategory: 'Медиа', isSystem: true },
-        { id: 'media.manage', name: 'media.manage', displayName: 'Управление медиа', description: 'Организация и удаление медиафайлов', category: 'admin', subcategory: 'Медиа', isSystem: true },
-        
-        { id: 'users.invite', name: 'users.invite', displayName: 'Приглашение пользователей', description: 'Приглашение новых пользователей в проект', category: 'admin', subcategory: 'Пользователи', isSystem: true },
-        { id: 'users.manage', name: 'users.manage', displayName: 'Управление пользователями', description: 'Изменение ролей и удаление пользователей', category: 'admin', subcategory: 'Пользователи', isSystem: true },
-        
-        { id: 'analytics.view', name: 'analytics.view', displayName: 'Просмотр аналитики', description: 'Доступ к статистике и отчетам', category: 'admin', subcategory: 'Аналитика', isSystem: true },
-        { id: 'analytics.export', name: 'analytics.export', displayName: 'Экспорт данных', description: 'Экспорт аналитических данных', category: 'admin', subcategory: 'Аналитика', isSystem: true },
-        
+        {
+          id: 'project.view',
+          name: 'project.view',
+          displayName: 'Просмотр проекта',
+          description: 'Доступ к административной панели проекта',
+          category: 'admin',
+          subcategory: 'Основные',
+          isSystem: true,
+        },
+        {
+          id: 'project.edit',
+          name: 'project.edit',
+          displayName: 'Редактирование проекта',
+          description: 'Изменение настроек и конфигурации проекта',
+          category: 'admin',
+          subcategory: 'Основные',
+          isSystem: true,
+        },
+        {
+          id: 'project.delete',
+          name: 'project.delete',
+          displayName: 'Удаление проекта',
+          description: 'Полное удаление проекта',
+          category: 'admin',
+          subcategory: 'Основные',
+          isSystem: true,
+        },
+        {
+          id: 'project.publish',
+          name: 'project.publish',
+          displayName: 'Публикация проекта',
+          description: 'Публикация и снятие с публикации',
+          category: 'admin',
+          subcategory: 'Основные',
+          isSystem: true,
+        },
+
+        {
+          id: 'content.create',
+          name: 'content.create',
+          displayName: 'Создание контента',
+          description: 'Создание новых страниц и контента',
+          category: 'admin',
+          subcategory: 'Контент',
+          isSystem: true,
+        },
+        {
+          id: 'content.edit',
+          name: 'content.edit',
+          displayName: 'Редактирование контента',
+          description: 'Изменение существующего контента',
+          category: 'admin',
+          subcategory: 'Контент',
+          isSystem: true,
+        },
+        {
+          id: 'content.delete',
+          name: 'content.delete',
+          displayName: 'Удаление контента',
+          description: 'Удаление страниц и контента',
+          category: 'admin',
+          subcategory: 'Контент',
+          isSystem: true,
+        },
+        {
+          id: 'content.publish',
+          name: 'content.publish',
+          displayName: 'Публикация контента',
+          description: 'Публикация и снятие с публикации контента',
+          category: 'admin',
+          subcategory: 'Контент',
+          isSystem: true,
+        },
+
+        {
+          id: 'media.upload',
+          name: 'media.upload',
+          displayName: 'Загрузка медиа',
+          description: 'Загрузка изображений и файлов',
+          category: 'admin',
+          subcategory: 'Медиа',
+          isSystem: true,
+        },
+        {
+          id: 'media.manage',
+          name: 'media.manage',
+          displayName: 'Управление медиа',
+          description: 'Организация и удаление медиафайлов',
+          category: 'admin',
+          subcategory: 'Медиа',
+          isSystem: true,
+        },
+
+        {
+          id: 'users.invite',
+          name: 'users.invite',
+          displayName: 'Приглашение пользователей',
+          description: 'Приглашение новых пользователей в проект',
+          category: 'admin',
+          subcategory: 'Пользователи',
+          isSystem: true,
+        },
+        {
+          id: 'users.manage',
+          name: 'users.manage',
+          displayName: 'Управление пользователями',
+          description: 'Изменение ролей и удаление пользователей',
+          category: 'admin',
+          subcategory: 'Пользователи',
+          isSystem: true,
+        },
+
+        {
+          id: 'analytics.view',
+          name: 'analytics.view',
+          displayName: 'Просмотр аналитики',
+          description: 'Доступ к статистике и отчетам',
+          category: 'admin',
+          subcategory: 'Аналитика',
+          isSystem: true,
+        },
+        {
+          id: 'analytics.export',
+          name: 'analytics.export',
+          displayName: 'Экспорт данных',
+          description: 'Экспорт аналитических данных',
+          category: 'admin',
+          subcategory: 'Аналитика',
+          isSystem: true,
+        },
+
         // Права на сайте
-        { id: 'site.view', name: 'site.view', displayName: 'Просмотр сайта', description: 'Доступ к просмотру опубликованного сайта', category: 'site', subcategory: 'Основные', isSystem: true },
-        { id: 'site.comment', name: 'site.comment', displayName: 'Комментирование', description: 'Возможность оставлять комментарии', category: 'site', subcategory: 'Интерактив', isSystem: true },
-        { id: 'site.rate', name: 'site.rate', displayName: 'Оценка контента', description: 'Возможность ставить оценки и лайки', category: 'site', subcategory: 'Интерактив', isSystem: true },
-        { id: 'site.download', name: 'site.download', displayName: 'Скачивание файлов', description: 'Доступ к скачиванию файлов и ресурсов', category: 'site', subcategory: 'Файлы', isSystem: true },
-        { id: 'site.contact', name: 'site.contact', displayName: 'Обратная связь', description: 'Использование форм обратной связи', category: 'site', subcategory: 'Интерактив', isSystem: true },
-        
+        {
+          id: 'site.view',
+          name: 'site.view',
+          displayName: 'Просмотр сайта',
+          description: 'Доступ к просмотру опубликованного сайта',
+          category: 'site',
+          subcategory: 'Основные',
+          isSystem: true,
+        },
+        {
+          id: 'site.comment',
+          name: 'site.comment',
+          displayName: 'Комментирование',
+          description: 'Возможность оставлять комментарии',
+          category: 'site',
+          subcategory: 'Интерактив',
+          isSystem: true,
+        },
+        {
+          id: 'site.rate',
+          name: 'site.rate',
+          displayName: 'Оценка контента',
+          description: 'Возможность ставить оценки и лайки',
+          category: 'site',
+          subcategory: 'Интерактив',
+          isSystem: true,
+        },
+        {
+          id: 'site.download',
+          name: 'site.download',
+          displayName: 'Скачивание файлов',
+          description: 'Доступ к скачиванию файлов и ресурсов',
+          category: 'site',
+          subcategory: 'Файлы',
+          isSystem: true,
+        },
+        {
+          id: 'site.contact',
+          name: 'site.contact',
+          displayName: 'Обратная связь',
+          description: 'Использование форм обратной связи',
+          category: 'site',
+          subcategory: 'Интерактив',
+          isSystem: true,
+        },
+
         // Универсальные права
-        { id: 'notifications.receive', name: 'notifications.receive', displayName: 'Получение уведомлений', description: 'Получение уведомлений о изменениях', category: 'both', subcategory: 'Уведомления', isSystem: true }
+        {
+          id: 'notifications.receive',
+          name: 'notifications.receive',
+          displayName: 'Получение уведомлений',
+          description: 'Получение уведомлений о изменениях',
+          category: 'both',
+          subcategory: 'Уведомления',
+          isSystem: true,
+        },
       ];
 
       const mockRolePermissions: RolePermissions[] = [
@@ -92,32 +249,61 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
           roleId: 'OWNER',
           roleName: 'Владелец',
           roleLevel: 100,
-          adminPermissions: mockPermissions.filter(p => p.category === 'admin' || p.category === 'both').map(p => p.id),
-          sitePermissions: mockPermissions.filter(p => p.category === 'site' || p.category === 'both').map(p => p.id)
+          adminPermissions: mockPermissions
+            .filter((p) => p.category === 'admin' || p.category === 'both')
+            .map((p) => p.id),
+          sitePermissions: mockPermissions
+            .filter((p) => p.category === 'site' || p.category === 'both')
+            .map((p) => p.id),
         },
         {
           roleId: 'ADMIN',
           roleName: 'Администратор',
           roleLevel: 70,
-          adminPermissions: ['project.view', 'project.edit', 'content.create', 'content.edit', 'content.publish', 'media.upload', 'media.manage', 'users.invite', 'analytics.view', 'notifications.receive'],
-          sitePermissions: ['site.view', 'site.comment', 'site.rate', 'site.download', 'site.contact', 'notifications.receive'],
-          inheritsFrom: 'EDITOR'
+          adminPermissions: [
+            'project.view',
+            'project.edit',
+            'content.create',
+            'content.edit',
+            'content.publish',
+            'media.upload',
+            'media.manage',
+            'users.invite',
+            'analytics.view',
+            'notifications.receive',
+          ],
+          sitePermissions: [
+            'site.view',
+            'site.comment',
+            'site.rate',
+            'site.download',
+            'site.contact',
+            'notifications.receive',
+          ],
+          inheritsFrom: 'EDITOR',
         },
         {
           roleId: 'EDITOR',
           roleName: 'Редактор',
           roleLevel: 30,
-          adminPermissions: ['project.view', 'content.create', 'content.edit', 'media.upload', 'analytics.view', 'notifications.receive'],
+          adminPermissions: [
+            'project.view',
+            'content.create',
+            'content.edit',
+            'media.upload',
+            'analytics.view',
+            'notifications.receive',
+          ],
           sitePermissions: ['site.view', 'site.comment', 'site.rate', 'site.download', 'notifications.receive'],
-          inheritsFrom: 'VIEWER'
+          inheritsFrom: 'VIEWER',
         },
         {
           roleId: 'VIEWER',
           roleName: 'Наблюдатель',
           roleLevel: 10,
           adminPermissions: ['project.view', 'analytics.view', 'notifications.receive'],
-          sitePermissions: ['site.view', 'notifications.receive']
-        }
+          sitePermissions: ['site.view', 'notifications.receive'],
+        },
       ];
 
       setAvailablePermissions(mockPermissions);
@@ -129,88 +315,91 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
     }
   };
 
-  const updateRolePermission = useCallback(async (roleId: string, permissionId: string, context: 'admin' | 'site', enabled: boolean) => {
-    // Обновляем локальное состояние
-    setRolePermissions(prev => prev.map(role => {
-      if (role.roleId !== roleId) return role;
-      
-      const permissionsKey = context === 'admin' ? 'adminPermissions' : 'sitePermissions';
-      const currentPermissions = role[permissionsKey];
-      
-      if (enabled) {
-        return {
-          ...role,
-          [permissionsKey]: [...currentPermissions, permissionId]
-        };
-      } else {
-        return {
-          ...role,
-          [permissionsKey]: currentPermissions.filter(p => p !== permissionId)
-        };
-      }
-    }));
+  const updateRolePermission = useCallback(
+    async (roleId: string, permissionId: string, context: 'admin' | 'site', enabled: boolean) => {
+      // Обновляем локальное состояние
+      setRolePermissions((prev) =>
+        prev.map((role) => {
+          if (role.roleId !== roleId) return role;
 
-    // Автоматически отправляем изменение через SSE
-    try {
-      setAutoSaveStatus('saving');
-      await sendPermissionChange({
-        roleId,
-        permissionId,
-        context,
-        enabled,
-        timestamp: Date.now()
-      });
-      setAutoSaveStatus('saved');
-      
-      // Сбрасываем статус через 2 секунды
-      setTimeout(() => setAutoSaveStatus('idle'), 2000);
-    } catch (error) {
-      console.error('Ошибка автосохранения:', error);
-      setAutoSaveStatus('error');
-      
-      // Сбрасываем статус через 3 секунды
-      setTimeout(() => setAutoSaveStatus('idle'), 3000);
-    }
-  }, [sendPermissionChange]);
+          const permissionsKey = context === 'admin' ? 'adminPermissions' : 'sitePermissions';
+          const currentPermissions = role[permissionsKey];
+
+          if (enabled) {
+            return {
+              ...role,
+              [permissionsKey]: [...currentPermissions, permissionId],
+            };
+          } else {
+            return {
+              ...role,
+              [permissionsKey]: currentPermissions.filter((p) => p !== permissionId),
+            };
+          }
+        }),
+      );
+
+      // Автоматически отправляем изменение через SSE
+      try {
+        setAutoSaveStatus('saving');
+        await sendPermissionChange({
+          roleId,
+          permissionId,
+          context,
+          enabled,
+          timestamp: Date.now(),
+        });
+        setAutoSaveStatus('saved');
+
+        // Сбрасываем статус через 2 секунды
+        setTimeout(() => setAutoSaveStatus('idle'), 2000);
+      } catch (error) {
+        console.error('Ошибка автосохранения:', error);
+        setAutoSaveStatus('error');
+
+        // Сбрасываем статус через 3 секунды
+        setTimeout(() => setAutoSaveStatus('idle'), 3000);
+      }
+    },
+    [sendPermissionChange],
+  );
 
   const getPermissionsByCategory = (context: 'admin' | 'site') => {
-    const contextPermissions = availablePermissions.filter(p => 
-      p.category === context || p.category === 'both'
-    );
-    
+    const contextPermissions = availablePermissions.filter((p) => p.category === context || p.category === 'both');
+
     const categories: Record<string, Permission[]> = {};
-    contextPermissions.forEach(permission => {
+    contextPermissions.forEach((permission) => {
       if (!categories[permission.subcategory]) {
         categories[permission.subcategory] = [];
       }
       categories[permission.subcategory].push(permission);
     });
-    
+
     return categories;
   };
 
   const getCurrentRolePermissions = () => {
-    return rolePermissions.find(r => r.roleId === activeRole);
+    return rolePermissions.find((r) => r.roleId === activeRole);
   };
 
   const hasPermission = (permissionId: string, context: 'admin' | 'site') => {
     const role = getCurrentRolePermissions();
     if (!role) return false;
-    
+
     const permissions = context === 'admin' ? role.adminPermissions : role.sitePermissions;
     return permissions.includes(permissionId);
   };
 
   const getInheritedPermissions = (roleId: string, context: 'admin' | 'site'): string[] => {
-    const role = rolePermissions.find(r => r.roleId === roleId);
+    const role = rolePermissions.find((r) => r.roleId === roleId);
     if (!role || !role.inheritsFrom) return [];
-    
-    const parentRole = rolePermissions.find(r => r.roleId === role.inheritsFrom);
+
+    const parentRole = rolePermissions.find((r) => r.roleId === role.inheritsFrom);
     if (!parentRole) return [];
-    
+
     const parentPermissions = context === 'admin' ? parentRole.adminPermissions : parentRole.sitePermissions;
     const inheritedFromParent = getInheritedPermissions(role.inheritsFrom, context);
-    
+
     return [...new Set([...parentPermissions, ...inheritedFromParent])];
   };
 
@@ -233,30 +422,38 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
       <div>
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Настройка прав ролей в проекте
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Настройка прав ролей в проекте</h2>
             <p className="text-gray-600 dark:text-gray-400 mt-2">
               Определите, какие действия может выполнять каждая роль в административной панели и на сайте
             </p>
           </div>
-          
+
           {/* Индикатор статуса SSE и автосохранения */}
           <div className="flex items-center space-x-4">
             {/* Статус подключения */}
             <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${
-                connectionStatus === 'connected' ? 'bg-green-500' :
-                connectionStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' :
-                connectionStatus === 'error' ? 'bg-red-500' : 'bg-gray-400'
-              }`}></div>
+              <div
+                className={`w-2 h-2 rounded-full ${
+                  connectionStatus === 'connected'
+                    ? 'bg-green-500'
+                    : connectionStatus === 'connecting'
+                      ? 'bg-yellow-500 animate-pulse'
+                      : connectionStatus === 'error'
+                        ? 'bg-red-500'
+                        : 'bg-gray-400'
+                }`}
+              ></div>
               <span className="text-sm text-gray-600 dark:text-gray-400">
-                {connectionStatus === 'connected' ? 'Подключено' :
-                 connectionStatus === 'connecting' ? 'Подключение...' :
-                 connectionStatus === 'error' ? 'Ошибка подключения' : 'Отключено'}
+                {connectionStatus === 'connected'
+                  ? 'Подключено'
+                  : connectionStatus === 'connecting'
+                    ? 'Подключение...'
+                    : connectionStatus === 'error'
+                      ? 'Ошибка подключения'
+                      : 'Отключено'}
               </span>
             </div>
-            
+
             {/* Статус автосохранения */}
             {autoSaveStatus !== 'idle' && (
               <div className="flex items-center space-x-2">
@@ -284,7 +481,7 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
                 )}
               </div>
             )}
-            
+
             {/* Время последнего обновления */}
             {lastUpdate && (
               <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -297,14 +494,12 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
 
       {/* Выбор роли */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          Выберите роль для настройки
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Выберите роль для настройки</h3>
         <div className="flex flex-wrap gap-3">
-          {projectRoles.map(role => {
+          {projectRoles.map((role) => {
             const roleData = getCurrentRolePermissions();
             const isActive = activeRole === role.id;
-            
+
             return (
               <button
                 key={role.id}
@@ -320,7 +515,7 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
                   <div className="text-sm opacity-75">Уровень: {role.level}</div>
                   {roleData?.inheritsFrom && (
                     <div className="text-xs opacity-60">
-                      Наследует от: {projectRoles.find(r => r.id === roleData.inheritsFrom)?.name}
+                      Наследует от: {projectRoles.find((r) => r.id === roleData.inheritsFrom)?.name}
                     </div>
                   )}
                 </div>
@@ -333,9 +528,7 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
       {/* Переключатель контекста */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
         <div className="flex items-center space-x-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Контекст прав:
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Контекст прав:</h3>
           <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
             <button
               onClick={() => setActiveContext('admin')}
@@ -360,65 +553,63 @@ const ProjectRolePermissions: React.FC<ProjectRolePermissionsProps> = ({
           </div>
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-          {activeContext === 'admin' 
+          {activeContext === 'admin'
             ? 'Права для работы в административной панели проекта'
-            : 'Права для взаимодействия с опубликованным сайтом'
-          }
+            : 'Права для взаимодействия с опубликованным сайтом'}
         </p>
       </div>
 
       {/* Настройка прав */}
       <div className="space-y-6">
         {Object.entries(getPermissionsByCategory(activeContext)).map(([category, permissions]) => (
-          <div key={category} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              {category}
-            </h4>
+          <div
+            key={category}
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6"
+          >
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{category}</h4>
             <div className="space-y-4">
-              {permissions.map(permission => {
+              {permissions.map((permission) => {
                 const hasCurrentPermission = hasPermission(permission.id, activeContext);
                 const isInherited = isPermissionInherited(permission.id, activeContext);
-                
+
                 return (
                   <div
                     key={permission.id}
                     className={`flex items-start justify-between p-4 border rounded-lg ${
-                      isInherited 
+                      isInherited
                         ? 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20'
                         : 'border-gray-200 dark:border-gray-700'
                     }`}
                   >
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
-                        <h5 className="font-medium text-gray-900 dark:text-white">
-                          {permission.displayName}
-                        </h5>
+                        <h5 className="font-medium text-gray-900 dark:text-white">{permission.displayName}</h5>
                         {isInherited && (
                           <span className="px-2 py-1 text-xs font-medium text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/40 rounded-full">
                             Наследуется
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        {permission.description}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                        ID: {permission.name}
-                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{permission.description}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">ID: {permission.name}</p>
                     </div>
                     <label className="relative inline-flex cursor-pointer items-center ml-4">
                       <input
                         type="checkbox"
                         checked={hasCurrentPermission || isInherited}
                         disabled={isInherited}
-                        onChange={(e) => updateRolePermission(activeRole, permission.id, activeContext, e.target.checked)}
+                        onChange={(e) =>
+                          updateRolePermission(activeRole, permission.id, activeContext, e.target.checked)
+                        }
                         className="peer sr-only"
                       />
-                      <div className={`peer h-6 w-11 rounded-full after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white ${
-                        isInherited
-                          ? 'bg-green-400 cursor-not-allowed'
-                          : 'bg-gray-200 peer-checked:bg-blue-600 dark:border-gray-600 dark:bg-gray-700'
-                      }`}></div>
+                      <div
+                        className={`peer h-6 w-11 rounded-full after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white ${
+                          isInherited
+                            ? 'bg-green-400 cursor-not-allowed'
+                            : 'bg-gray-200 peer-checked:bg-blue-600 dark:border-gray-600 dark:bg-gray-700'
+                        }`}
+                      ></div>
                     </label>
                   </div>
                 );

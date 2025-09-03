@@ -371,8 +371,4 @@ if (require.main === module) {
   main();
 }
 
-export {
-  findMarkdownFiles,
-  fixMarkdownContent,
-  fixMarkdownFile,
-}; 
+export { findMarkdownFiles, fixMarkdownContent, fixMarkdownFile };

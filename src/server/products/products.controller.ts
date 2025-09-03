@@ -78,10 +78,7 @@ export class ProductsController {
 
   @Put(':id')
   @Scopes('PROJECT_WRITE')
-  async update(
-    @Param('id') id: string,
-    @Body() body: UpdateProductDto,
-  ) {
+  async update(@Param('id') id: string, @Body() body: UpdateProductDto) {
     try {
       const svc = this.productsService ?? new ProductsService(new PrismaService());
       const result = await svc.update(id, body);

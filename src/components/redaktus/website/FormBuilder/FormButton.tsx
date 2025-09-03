@@ -1,13 +1,13 @@
-import * as React from 'react'
-import clsx from 'clsx'
+import * as React from 'react';
+import clsx from 'clsx';
 
-import { Text } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
+import { Text } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 export interface FormButtonProps {
-  type: 'submit' | 'reset'
-  color?: { color: string; className: string }
+  type: 'submit' | 'reset';
+  color?: { color: string; className: string };
 }
 
 const FormButton: types.Brick<FormButtonProps> = ({ type, color }) => {
@@ -16,20 +16,18 @@ const FormButton: types.Brick<FormButtonProps> = ({ type, color }) => {
       type={type}
       className={clsx(
         'py-3 px-5 mx-2 my-2 rounded-full font-bold leading-none translate-hover-2 hover:shadow-lg transition-all ease-in-out duration-150',
-        color?.className
+        color?.className,
       )}
     >
       <Text
         propName="buttonLabel"
         placeholder="Type a button label..."
         renderBlock={({ children }: { children: any }) => <span>{children}</span>}
-        renderPlaceholder={({ children }: { children: any }) => (
-          <span className="block text-inherit">{children}</span>
-        )}
+        renderPlaceholder={({ children }: { children: any }) => <span className="block text-inherit">{children}</span>}
       />
     </button>
-  )
-}
+  );
+};
 
 FormButton.schema = {
   name: blockNames.FormButton,
@@ -78,24 +76,21 @@ FormButton.schema = {
           {
             value: {
               color: '#0ea5e9',
-              className:
-                'bg-sky-500 text-white hover:bg-sky-600 hover:text-white',
+              className: 'bg-sky-500 text-white hover:bg-sky-600 hover:text-white',
             },
             label: 'Blue',
           },
           {
             value: {
               color: '#ec489a',
-              className:
-                'bg-pink-500 text-white hover:bg-pink-600 hover:text-white',
+              className: 'bg-pink-500 text-white hover:bg-pink-600 hover:text-white',
             },
             label: 'Pink',
           },
           {
             value: {
               color: '#6b7280',
-              className:
-                'bg-gray-500 text-white hover:bg-gray-600 hover:text-white',
+              className: 'bg-gray-500 text-white hover:bg-gray-600 hover:text-white',
             },
             label: 'Gray',
           },
@@ -103,6 +98,6 @@ FormButton.schema = {
       },
     },
   ],
-}
+};
 
-export default FormButton
+export default FormButton;

@@ -8,14 +8,14 @@ const prisma = new PrismaClient();
  */
 async function fixCategoriesAlias() {
   console.log('🔄 Обновление alias в категориях...');
-  
+
   // Получаем все категории
   const categories = await prisma.category.findMany({
-    select: { id: true, slug: true }
+    select: { id: true, slug: true },
   });
-  
+
   console.log(`📊 Найдено ${categories.length} категорий для обновления`);
-  
+
   // Обновляем каждую категорию
   for (const category of categories) {
     await prisma.$executeRaw`
@@ -25,7 +25,7 @@ async function fixCategoriesAlias() {
     `;
     console.log(`✅ Обновлена категория ${category.id}: alias = ${category.slug}`);
   }
-  
+
   console.log('🎉 Все категории обновлены!');
 }
 

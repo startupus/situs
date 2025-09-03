@@ -1,8 +1,8 @@
-import { useState } from "react";
-import Sidebar from "../components/Sidebar/index.jsx";
-import DarkModeToggle from "../components/DarkModeToggle.jsx";
-import Header from "../components/Header/index.jsx";
-import { Outlet } from "react-router-dom";
+import { useState } from 'react';
+import Sidebar from '../components/Sidebar/index.jsx';
+import DarkModeToggle from '../components/DarkModeToggle.jsx';
+import Header from '../components/Header/index.jsx';
+import { Outlet } from 'react-router-dom';
 
 const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);

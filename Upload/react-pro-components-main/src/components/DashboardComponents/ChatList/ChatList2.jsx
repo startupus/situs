@@ -15,7 +15,7 @@ const ChatList2 = () => {
           <form className="relative mb-7">
             <input
               type="text"
-              className="w-full rounded-full border border-stroke bg-transparent py-[10px] pl-5 pr-10 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6"
+              className="outline-hidden w-full rounded-full border border-stroke bg-transparent py-[10px] pl-5 pr-10 text-base text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
               placeholder="Search.."
             />
             <button className="absolute right-4 top-1/2 -translate-y-1/2 text-body-color hover:text-primary dark:text-dark-6">

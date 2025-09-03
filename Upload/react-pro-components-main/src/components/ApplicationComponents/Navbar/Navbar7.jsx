@@ -47,7 +47,7 @@ const Navbar7 = () => {
                 <input
                   type="text"
                   placeholder="Search here..."
-                  className="w-full rounded-sm border border-transparent bg-[#FCFDFE]/[.2] py-2 pl-12 pr-5 text-white placeholder-white/50 outline-hidden focus:border-stroke focus-visible:shadow-none"
+                  className="outline-hidden w-full rounded-sm border border-transparent bg-[#FCFDFE]/[.2] py-2 pl-12 pr-5 text-white placeholder-white/50 focus:border-stroke focus-visible:shadow-none"
                 />
                 <button className="absolute left-4 top-1/2 -translate-y-1/2">
                   <svg

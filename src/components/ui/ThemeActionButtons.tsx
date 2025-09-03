@@ -16,9 +16,9 @@ interface ThemeActionButtonsProps {
 export const ThemeActionButtons: React.FC<ThemeActionButtonsProps> = ({
   onEdit,
   onDelete,
-  editTitle = "Редактировать",
-  deleteTitle = "Удалить",
-  className = ""
+  editTitle = 'Редактировать',
+  deleteTitle = 'Удалить',
+  className = '',
 }) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>

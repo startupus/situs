@@ -29,13 +29,13 @@ export class TokensDto {
 }
 
 export class AuthResponseDto {
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Данные пользователя',
     type: UserResponseDto,
   })
   user!: UserResponseDto;
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'JWT токены',
     type: TokensDto,
   })

@@ -1,6 +1,6 @@
 /**
  * Главный экспорт модуля системы прав доступа
- * 
+ *
  * Предоставляет все необходимые компоненты для работы
  * с правами доступа в приложении
  */
@@ -9,7 +9,7 @@
 export { PermissionsModule } from './permissions.module';
 
 // Типы
-export type { 
+export type {
   CorePermission,
   ProjectPermission,
   UserPermission,
@@ -34,7 +34,7 @@ export type {
   AccessScope,
   PermissionCheckResult,
   Permission,
-  AllPermissions
+  AllPermissions,
 } from './types';
 
 // Сервисы
@@ -75,7 +75,7 @@ export {
   validatePermissionContext,
   createSimpleContext,
   mergeContexts,
-  requiresAdditionalData
+  requiresAdditionalData,
 } from './utils';
 
 // Конфигурация (будет создана)

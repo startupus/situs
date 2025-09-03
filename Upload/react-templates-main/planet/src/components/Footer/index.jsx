@@ -33,10 +33,10 @@ const Footer = () => {
 
         <div className="pt-[70px]">
           <div className="container mx-auto">
-            <div className="flex flex-wrap -mx-4">
+            <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-4/12">
                 <div className="mb-16 max-w-[270px]">
-                  <Link to="/" className="inline-block mb-8">
+                  <Link to="/" className="mb-8 inline-block">
                     <img
                       src={logo}
                       alt="logo"
@@ -51,7 +51,7 @@ const Footer = () => {
 
                   <div className="space-y-4">
                     <p className="flex text-base text-body-color dark:text-dark-6">
-                      <span className="pr-5 mt-1">
+                      <span className="mt-1 pr-5">
                         <svg
                           width="24"
                           height="24"
@@ -136,7 +136,7 @@ const Footer = () => {
                   className={`w-full px-4 sm:w-1/2 md:w-1/2 ${index === 0 ? "lg:w-3/12 xl:w-2/12" : "lg:w-4/12 xl:w-3/12"}`}
                 >
                   <div className="mb-16">
-                    <h3 className="text-2xl font-semibold text-dark mb-9 dark:text-white">
+                    <h3 className="mb-9 text-2xl font-semibold text-dark dark:text-white">
                       {item.title}
                     </h3>
 
@@ -165,7 +165,7 @@ const Footer = () => {
                   <div className="sm:flex md:block lg:flex xl:block">
                     <Link
                       to="#"
-                      className="bg-primary hover:bg-blue-dark mr-3 mb-3 flex w-full max-w-[230px] items-center rounded-[5px] px-5 py-2"
+                      className="mb-3 mr-3 flex w-full max-w-[230px] items-center rounded-[5px] bg-primary px-5 py-2 hover:bg-blue-dark"
                     >
                       <span className="block pr-[10px]">
                         <svg
@@ -195,7 +195,7 @@ const Footer = () => {
                     </Link>
                     <Link
                       to="#"
-                      className="bg-dark hover:bg-dark/90 dark:bg-dark-2 mr-3 mb-3 flex w-full max-w-[230px] items-center rounded-[5px] px-[22px] py-2"
+                      className="mb-3 mr-3 flex w-full max-w-[230px] items-center rounded-[5px] bg-dark px-[22px] py-2 hover:bg-dark/90 dark:bg-dark-2"
                     >
                       <span className="block pr-[14px]">
                         <svg
@@ -226,14 +226,14 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="py-8 border-t border-stroke dark:border-dark-3">
+        <div className="border-t border-stroke py-8 dark:border-dark-3">
           <div className="container mx-auto">
             <div className="text-center">
               <div className="mb-5">
                 <img
                   src={paymentImage}
                   alt="payment"
-                  className="max-w-full mx-auto"
+                  className="mx-auto max-w-full"
                 />
               </div>
               <p className="text-base text-body-color dark:text-dark-6">

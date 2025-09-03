@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Toast3() {
   return (
@@ -30,20 +30,11 @@ export default function Toast3() {
             </div>
             <div className="flex w-full items-center justify-between">
               <div>
-                <h6 className="text-base font-semibold text-black sm:text-lg">
-                  Uh oh, something went wrong
-                </h6>
-                <p className="text-sm font-medium text-body-color">
-                  Sorry! There was a problem with your request
-                </p>
+                <h6 className="text-base font-semibold text-black sm:text-lg">Uh oh, something went wrong</h6>
+                <p className="text-sm font-medium text-body-color">Sorry! There was a problem with your request</p>
               </div>
               <button className="ml-2 flex h-7 w-7 items-center justify-center rounded-sm bg-white text-body-color hover:bg-[#EA4E2C] hover:text-white">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  className="fill-current"
-                >
+                <svg width="20" height="20" viewBox="0 0 20 20" className="fill-current">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"

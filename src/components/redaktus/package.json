@@ -6,4 +6,4 @@
     ".": "./index.ts",
     "./frontend": "./frontend.ts"
   }
-} 
+}

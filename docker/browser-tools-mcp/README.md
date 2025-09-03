@@ -126,11 +126,13 @@ docker/browser-tools-mcp/
 ### Проблема с подключением
 
 1. Проверьте, что контейнеры запущены:
+
    ```bash
    docker-compose ps
    ```
 
 2. Проверьте логи:
+
    ```bash
    docker-compose logs browser-tools-mcp
    ```
@@ -164,4 +166,4 @@ docker-compose up -d --build
 
 ## Лицензия
 
-MIT License - см. [лицензию BrowserTools MCP](https://github.com/AgentDeskAI/browser-tools-mcp/blob/main/LICENSE) 
+MIT License - см. [лицензию BrowserTools MCP](https://github.com/AgentDeskAI/browser-tools-mcp/blob/main/LICENSE)

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const InfoAlert1 = () => {
   return (
@@ -6,13 +6,7 @@ const InfoAlert1 = () => {
       <div className="container">
         <div className="shadow-1 dark:bg-dark-2 flex w-full rounded-lg border-l-[6px] border-transparent bg-white px-7 py-8 md:p-9">
           <div className="bg-cyan-light-2/30 text-cyan-dark mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M8.99998 0.506256C4.3031 0.506256 0.506226 4.30313 0.506226 9.00001C0.506226 13.6969 4.3031 17.5219 8.99998 17.5219C13.6969 17.5219 17.5219 13.6969 17.5219 9.00001C17.5219 4.30313 13.6969 0.506256 8.99998 0.506256ZM8.99998 16.2563C5.00623 16.2563 1.77185 12.9938 1.77185 9.00001C1.77185 5.00626 5.00623 1.77188 8.99998 1.77188C12.9937 1.77188 16.2562 5.03438 16.2562 9.02813C16.2562 12.9938 12.9937 16.2563 8.99998 16.2563Z"
                 fill="#0B76B7"
@@ -28,13 +22,10 @@ const InfoAlert1 = () => {
             </svg>
           </div>
           <div className="w-full">
-            <h5 className="mb-3 text-lg font-semibold text-cyan-dark">
-              Important Notice
-            </h5>
+            <h5 className="mb-3 text-lg font-semibold text-cyan-dark">Important Notice</h5>
             <p className="text-base leading-relaxed text-body-color dark:text-dark-6">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s, when
             </p>
           </div>
         </div>

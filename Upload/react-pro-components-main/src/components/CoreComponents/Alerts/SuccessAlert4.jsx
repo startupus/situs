@@ -2,9 +2,9 @@ import React from "react";
 
 const SuccessAlert4 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-stroke dark:border-dark-3 mb-11 flex items-center rounded-md border border-l-[8px] border-l-[#00B078] bg-white dark:bg-dark-2 p-5 pl-8">
+        <div className="mb-11 flex items-center rounded-md border border-l-[8px] border-stroke border-l-[#00B078] bg-white p-5 pl-8 dark:border-dark-3 dark:bg-dark-2">
           <div className="mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full bg-[#00B078]">
             <svg
               width={20}
@@ -26,8 +26,9 @@ const SuccessAlert4 = () => {
               <h3 className="mb-1 text-lg font-medium text-dark dark:text-white">
                 Message Sent Successfully
               </h3>
-              <p className="text-body-color dark:text-dark-6 text-sm">
-                Lorem Ipsum is simply dummy text of the printing and  typesetting industry.
+              <p className="text-sm text-body-color dark:text-dark-6">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
               </p>
             </div>
             <div>

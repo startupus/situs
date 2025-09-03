@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid8 = () => {
   return (
@@ -51,9 +51,7 @@ const SingleProduct = ({ img, link, title, subtitle, price }) => {
                 {title}
               </a>
             </h3>
-            <p className="mb-4 text-sm font-medium text-body-color dark:text-dark-6">
-              {subtitle}
-            </p>
+            <p className="mb-4 text-sm font-medium text-body-color dark:text-dark-6">{subtitle}</p>
           </div>
           <div>
             <span className="inline-flex items-center justify-center rounded-full bg-primary px-3 py-[2px] text-center text-base font-semibold text-white">

@@ -3,6 +3,7 @@
 Оформлено по образцу `genr8r/coding-standards`, адаптировано под наш стек TypeScript/React + NestJS. Этот раздел дополняет `docs/DEVELOPMENT_STANDARDS.md` (процессы).
 
 ## Навигация
+
 - 00 — Введение: `./00-introduction.md`
 - 01 — Общие правила: `./01-general.md`
 - 02 — TypeScript: `./02-typescript.md`
@@ -19,4 +20,5 @@
 - 13 — Структура файлов и модулей: `./13-structure.md`
 
 ## Примечание
+
 Все разделы заполнены. Ниже перечислены темы и ссылки. Для обновлений см. `00-introduction.md`.

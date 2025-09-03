@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const SuccessAlert4 = () => {
   return (
@@ -6,13 +6,7 @@ const SuccessAlert4 = () => {
       <div className="container">
         <div className="border-stroke dark:border-dark-3 mb-11 flex items-center rounded-md border border-l-[8px] border-l-[#00B078] bg-white dark:bg-dark-2 p-5 pl-8">
           <div className="mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full bg-[#00B078]">
-            <svg
-              width={20}
-              height={20}
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -23,21 +17,14 @@ const SuccessAlert4 = () => {
           </div>
           <div className="flex w-full items-center justify-between">
             <div>
-              <h3 className="mb-1 text-lg font-medium text-dark dark:text-white">
-                Message Sent Successfully
-              </h3>
+              <h3 className="mb-1 text-lg font-medium text-dark dark:text-white">Message Sent Successfully</h3>
               <p className="text-body-color dark:text-dark-6 text-sm">
-                Lorem Ipsum is simply dummy text of the printing and  typesetting industry.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               </p>
             </div>
             <div>
               <button className="hover:text-danger text-[#ACACB0]">
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  className="fill-current"
-                >
+                <svg width={24} height={24} viewBox="0 0 24 24" className="fill-current">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"

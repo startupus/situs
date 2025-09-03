@@ -1,10 +1,6 @@
 // src/components/ui/ThemeInputRanges.tsx
 import React from 'react';
-import { 
-  InputRange1,
-  InputRange2,
-  InputRange3
-} from './core';
+import { InputRange1, InputRange2, InputRange3 } from './core';
 
 // Интерфейс для пропсов InputRange компонентов
 interface InputRangeProps {
@@ -27,21 +23,15 @@ interface InputRangeProps {
 // Утилита для адаптации стилей под глобальную тему
 const adaptInputRangeProps = (props: InputRangeProps) => ({
   ...props,
-  className: `${props.className || ''} transition-all duration-200`
+  className: `${props.className || ''} transition-all duration-200`,
 });
 
 // InputRange Variants
-export const ThemeInputRange1: React.FC<InputRangeProps> = (props) => (
-  <InputRange1 {...adaptInputRangeProps(props)} />
-);
+export const ThemeInputRange1: React.FC<InputRangeProps> = (props) => <InputRange1 {...adaptInputRangeProps(props)} />;
 
-export const ThemeInputRange2: React.FC<InputRangeProps> = (props) => (
-  <InputRange2 {...adaptInputRangeProps(props)} />
-);
+export const ThemeInputRange2: React.FC<InputRangeProps> = (props) => <InputRange2 {...adaptInputRangeProps(props)} />;
 
-export const ThemeInputRange3: React.FC<InputRangeProps> = (props) => (
-  <InputRange3 {...adaptInputRangeProps(props)} />
-);
+export const ThemeInputRange3: React.FC<InputRangeProps> = (props) => <InputRange3 {...adaptInputRangeProps(props)} />;
 
 // Экспорт всех InputRange компонентов как единый объект для удобства
 export const ThemeInputRanges = {

@@ -16,17 +16,13 @@ interface CreateRoleData {
   basedOnRole?: string;
 }
 
-const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
-  isOpen,
-  onClose,
-  onSubmit
-}) => {
+const CreateRoleForm: React.FC<CreateRoleFormProps> = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState<CreateRoleData>({
     name: '',
     displayName: '',
     description: '',
     level: 50,
-    basedOnRole: ''
+    basedOnRole: '',
   });
 
   const [errors, setErrors] = useState<Partial<CreateRoleData>>({});
@@ -36,7 +32,7 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
     { value: '', label: 'Создать с нуля' },
     { value: 'BUSINESS', label: 'На основе роли "Бизнес"' },
     { value: 'AGENCY', label: 'На основе роли "Агентство"' },
-    { value: 'STAFF', label: 'На основе роли "Сотрудник"' }
+    { value: 'STAFF', label: 'На основе роли "Сотрудник"' },
   ];
 
   const validateForm = (): boolean => {
@@ -66,7 +62,7 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -86,35 +82,35 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
       displayName: '',
       description: '',
       level: 50,
-      basedOnRole: ''
+      basedOnRole: '',
     });
     setErrors({});
     setIsSubmitting(false);
     onClose();
   };
 
-  const handleInputChange = (field: keyof CreateRoleData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    let value: string | number = e.target.value;
-    
-    if (field === 'level') {
-      value = parseInt(value) || 0;
-    }
+  const handleInputChange =
+    (field: keyof CreateRoleData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+      let value: string | number = e.target.value;
 
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-    
-    // Очищаем ошибку при изменении поля
-    if (errors[field]) {
-      setErrors(prev => ({
+      if (field === 'level') {
+        value = parseInt(value) || 0;
+      }
+
+      setFormData((prev) => ({
         ...prev,
-        [field]: undefined
+        [field]: value,
       }));
-    }
-  };
+
+      // Очищаем ошибку при изменении поля
+      if (errors[field]) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: undefined,
+        }));
+      }
+    };
 
   // Автоматическое заполнение системного имени на основе отображаемого
   const handleDisplayNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,38 +121,61 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
       .replace(/\s+/g, '_')
       .replace(/[А-Я]/g, (match) => {
         const rusToEng: { [key: string]: string } = {
-          'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'E',
-          'Ж': 'ZH', 'З': 'Z', 'И': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M',
-          'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U',
-          'Ф': 'F', 'Х': 'H', 'Ц': 'TS', 'Ч': 'CH', 'Ш': 'SH', 'Щ': 'SCH',
-          'Ъ': '', 'Ы': 'Y', 'Ь': '', 'Э': 'E', 'Ю': 'YU', 'Я': 'YA'
+          А: 'A',
+          Б: 'B',
+          В: 'V',
+          Г: 'G',
+          Д: 'D',
+          Е: 'E',
+          Ё: 'E',
+          Ж: 'ZH',
+          З: 'Z',
+          И: 'I',
+          Й: 'Y',
+          К: 'K',
+          Л: 'L',
+          М: 'M',
+          Н: 'N',
+          О: 'O',
+          П: 'P',
+          Р: 'R',
+          С: 'S',
+          Т: 'T',
+          У: 'U',
+          Ф: 'F',
+          Х: 'H',
+          Ц: 'TS',
+          Ч: 'CH',
+          Ш: 'SH',
+          Щ: 'SCH',
+          Ъ: '',
+          Ы: 'Y',
+          Ь: '',
+          Э: 'E',
+          Ю: 'YU',
+          Я: 'YA',
         };
         return rusToEng[match] || match;
       });
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       displayName,
-      name: systemName
+      name: systemName,
     }));
 
     // Очищаем ошибки
     if (errors.displayName || errors.name) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
         displayName: undefined,
-        name: undefined
+        name: undefined,
       }));
     }
   };
 
   return (
-    <ThemeModal
-      isOpen={isOpen}
-      onClose={handleClose}
-      title="Создать новую роль"
-      size="md"
-    >
+    <ThemeModal isOpen={isOpen} onClose={handleClose} title="Создать новую роль" size="md">
       <ThemeForm onSubmit={handleSubmit}>
         <ThemeInput
           label="Отображаемое имя"
@@ -193,9 +212,7 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
             <span className="font-medium">{formData.level}</span>
             <span>100 (Максимальный)</span>
           </div>
-          {errors.level && (
-            <p className="text-red-500 text-sm mt-1">{errors.level}</p>
-          )}
+          {errors.level && <p className="text-red-500 text-sm mt-1">{errors.level}</p>}
         </div>
 
         <ThemeTextarea
@@ -230,18 +247,10 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({
         </div>
 
         <div className="flex justify-end space-x-4 mt-6">
-          <ThemeButton
-            variant="outline"
-            onClick={handleClose}
-            disabled={isSubmitting}
-          >
+          <ThemeButton variant="outline" onClick={handleClose} disabled={isSubmitting}>
             Отмена
           </ThemeButton>
-          <ThemeButton
-            type="submit"
-            disabled={isSubmitting}
-            icon={<FiShield className="w-4 h-4" />}
-          >
+          <ThemeButton type="submit" disabled={isSubmitting} icon={<FiShield className="w-4 h-4" />}>
             {isSubmitting ? 'Создание...' : 'Создать роль'}
           </ThemeButton>
         </div>

@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ECommerceHero = () => {
   const sliderRef = useRef(null);
@@ -42,12 +42,7 @@ const ECommerceHero = () => {
         <div className="absolute bottom-12 right-12 z-50 flex items-center justify-end space-x-4">
           <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
             <button className="flex h-[42px] w-[42px] items-center justify-center border border-body-color text-body-color transition-all hover:border-primary hover:text-primary dark:border-dark-6 dark:text-dark-6">
-              <svg
-                width="10"
-                height="18"
-                viewBox="0 0 10 18"
-                className="fill-current"
-              >
+              <svg width="10" height="18" viewBox="0 0 10 18" className="fill-current">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -58,12 +53,7 @@ const ECommerceHero = () => {
           </div>
           <div className="next-arrow cursor-pointer" onClick={handleNext}>
             <button className="flex h-[42px] w-[42px] items-center justify-center border border-body-color text-body-color transition-all hover:border-primary hover:text-primary dark:border-dark-6 dark:text-dark-6">
-              <svg
-                width="10"
-                height="18"
-                viewBox="0 0 10 18"
-                className="fill-current"
-              >
+              <svg width="10" height="18" viewBox="0 0 10 18" className="fill-current">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -96,9 +86,7 @@ const SingleSlide = ({ img, subtitle, title, details, link, button }) => {
           <h1 className="mb-[18px] text-3xl font-bold leading-[1.2]! text-dark dark:text-white lg:text-4xl xl:text-[48px]">
             {title}
           </h1>
-          <p className="mb-10 text-base text-body-color dark:text-dark-6">
-            {details}
-          </p>
+          <p className="mb-10 text-base text-body-color dark:text-dark-6">{details}</p>
           <a
             href={link}
             className="inline-flex items-center justify-center border border-dark px-7 py-3 text-center text-base font-medium text-dark transition hover:bg-dark hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-dark"

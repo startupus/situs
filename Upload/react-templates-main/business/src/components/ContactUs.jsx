@@ -93,23 +93,23 @@ const ContactUs = () => {
   return (
     <>
       <section>
-        <div className="dark:bg-dark bg-white pt-20 pb-10 lg:pt-[110px] lg:pb-[70px]">
+        <div className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-[110px]">
           <div className="container mx-auto">
             <div className="-mx-4 flex flex-wrap">
               {contactList.map((contact, contactIndex) => (
                 <div key={contactIndex} className="w-full px-4 md:w-1/3">
                   <div className="mb-10 text-center">
-                    <div className="bg-tg-bg text-primary mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full sm:h-[130px] sm:w-[130px] dark:bg-white/5">
+                    <div className="mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-tg-bg text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
                       {contact.icon}
                     </div>
                     <div className="text-center">
-                      <h4 className="text-dark mb-3 text-lg font-semibold dark:text-white">
+                      <h4 className="mb-3 text-lg font-semibold text-dark dark:text-white">
                         {contact.title}
                       </h4>
                       {contact.child.map((child, childIndex) => (
                         <p
                           key={childIndex}
-                          className="text-body-color dark:text-dark-6 text-base"
+                          className="text-base text-body-color dark:text-dark-6"
                         >
                           {child}
                         </p>
@@ -122,18 +122,18 @@ const ContactUs = () => {
           </div>
         </div>
 
-        <div className="bg-tg-bg dark:bg-dark-2 py-20 lg:py-[120px]">
+        <div className="bg-tg-bg py-20 dark:bg-dark-2 lg:py-[120px]">
           <div className="container mx-auto">
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4">
                 <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-                  <span className="text-primary mb-2 block text-lg font-semibold">
+                  <span className="mb-2 block text-lg font-semibold text-primary">
                     Contact Us
                   </span>
-                  <h2 className="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px] dark:text-white">
+                  <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]">
                     How Can We Help You?
                   </h2>
-                  <p className="text-body-color dark:text-dark-6 text-base">
+                  <p className="text-base text-body-color dark:text-dark-6">
                     There are many variations of passages of Lorem Ipsum
                     available but the majority have suffered alteration in some
                     form.
@@ -149,7 +149,7 @@ const ContactUs = () => {
                     item.type === "textarea" ? (
                       <div key={index} className="w-full px-4">
                         <div className="mb-7 lg:mb-9">
-                          <label className="text-dark mb-3 block text-base font-medium md:mb-5 dark:text-white">
+                          <label className="mb-3 block text-base font-medium text-dark dark:text-white md:mb-5">
                             <span>{item.label}</span>
                             {item.required && (
                               <span className="text-red-500">*</span>
@@ -157,14 +157,14 @@ const ContactUs = () => {
                           </label>
                           <textarea
                             rows="4"
-                            className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary w-full resize-none rounded-sm border bg-white px-[14px] py-3 text-base leading-relaxed outline-hidden focus-visible:shadow-none md:px-[18px] md:py-4"
+                            className="outline-hidden w-full resize-none rounded-sm border border-stroke bg-white px-[14px] py-3 text-base leading-relaxed text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary md:px-[18px] md:py-4"
                           ></textarea>
                         </div>
                       </div>
                     ) : (
                       <div key={index} className="w-full px-4 md:w-1/2">
                         <div className="mb-7 lg:mb-9">
-                          <label className="text-dark mb-3 block text-base font-medium md:mb-5 dark:text-white">
+                          <label className="mb-3 block text-base font-medium text-dark dark:text-white md:mb-5">
                             <span>{item.label}</span>
                             {item.required && (
                               <span className="text-red-500">*</span>
@@ -172,7 +172,7 @@ const ContactUs = () => {
                           </label>
                           <input
                             type={item.type}
-                            className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary w-full rounded-sm border bg-white px-[14px] py-3 text-base leading-relaxed outline-hidden focus-visible:shadow-none md:px-[18px] md:py-4"
+                            className="outline-hidden w-full rounded-sm border border-stroke bg-white px-[14px] py-3 text-base leading-relaxed text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary md:px-[18px] md:py-4"
                           />
                         </div>
                       </div>
@@ -182,7 +182,7 @@ const ContactUs = () => {
                   <div className="w-full px-4">
                     <label
                       htmlFor="checkboxLabelTwo"
-                      className="text-body-color mb-12 flex cursor-pointer items-center text-base md:mb-[70px]"
+                      className="mb-12 flex cursor-pointer items-center text-base text-body-color md:mb-[70px]"
                     >
                       <div className="relative">
                         <input
@@ -194,7 +194,7 @@ const ContactUs = () => {
                           }}
                         />
                         <div
-                          className={`dark:bg-dark mr-4 flex h-5 w-5 items-center justify-center rounded border ${
+                          className={`mr-4 flex h-5 w-5 items-center justify-center rounded border dark:bg-dark ${
                             isChecked
                               ? "border-primary"
                               : "border-stroke dark:border-dark-3"
@@ -231,7 +231,7 @@ const ContactUs = () => {
                     <div className="text-center">
                       <button
                         type="submit"
-                        className="bg-primary hover:bg-primary/90 block w-full rounded-md px-10 py-5 text-center text-base font-medium text-white transition"
+                        className="block w-full rounded-md bg-primary px-10 py-5 text-center text-base font-medium text-white transition hover:bg-primary/90"
                       >
                         Send Message
                       </button>

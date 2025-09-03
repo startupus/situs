@@ -16,7 +16,7 @@ export class AuthTestController {
   @Post('login')
   login(@Body() loginDto: any) {
     console.log('Получен запрос login:', loginDto);
-    
+
     // Простейшая проверка без JWT
     if (loginDto?.email === 'test@example.com' && loginDto?.password === 'password') {
       return {

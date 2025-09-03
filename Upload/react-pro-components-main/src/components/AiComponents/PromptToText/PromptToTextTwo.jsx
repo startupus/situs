@@ -16,7 +16,7 @@ function PromptToTextTwo() {
               <input
                 type="text"
                 placeholder="Type your text..."
-                className="flex h-[60px] w-full items-center rounded-lg border border-stroke bg-transparent px-5 py-3 pr-20 text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
+                className="outline-hidden flex h-[60px] w-full items-center rounded-lg border border-stroke bg-transparent px-5 py-3 pr-20 text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
               />
               <button className="absolute right-2 top-1/2 inline-flex h-11 -translate-y-1/2 items-center justify-center gap-2 rounded-lg bg-primary py-2.5 pl-4 pr-5 font-medium text-white hover:bg-primary/90">
                 <span>
@@ -57,7 +57,7 @@ function PromptToTextTwo() {
               <textarea
                 rows="5"
                 placeholder="Generated content will appear here..."
-                className="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-6 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white dark:placeholder-dark-6"
+                className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-6 focus:border-primary dark:border-dark-3 dark:text-white dark:placeholder-dark-6"
               ></textarea>
             </div>
             <div className="flex items-center gap-3.5">

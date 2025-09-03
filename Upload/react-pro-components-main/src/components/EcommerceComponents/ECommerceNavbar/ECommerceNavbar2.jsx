@@ -120,7 +120,7 @@ const ECommerceNavbar2 = () => {
                       <input
                         type="text"
                         placeholder="Search Components or UI"
-                        className="w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color shadow-1 outline-hidden focus:border-primary focus-visible:shadow-none dark:bg-dark-2 dark:text-dark-6 dark:shadow-none"
+                        className="outline-hidden w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color shadow-1 focus:border-primary focus-visible:shadow-none dark:bg-dark-2 dark:text-dark-6 dark:shadow-none"
                       />
                       <button className="absolute right-5 top-1/2 -translate-y-1/2 text-body-color">
                         <svg
@@ -411,7 +411,7 @@ const ListItem = ({ NavLink, dropdown, submenu, menuName }) => {
               dropdownOpen ? "block" : "hidden"
             } relative left-0 top-full z-10 rounded-lg bg-white transition-all dark:bg-dark-2 lg:absolute lg:top-[112%] lg:w-[180px] lg:border-[.5px] lg:border-stroke lg:py-4 dark:lg:border-dark-3`}
           >
-            <span className="absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 rounded-xs border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"></span>
+            <span className="rounded-xs absolute -top-[6px] left-6 -z-10 hidden h-3 w-3 rotate-45 border-[.5px] border-b-0 border-r-0 border-stroke bg-white dark:border-dark-3 dark:bg-dark-2 lg:block"></span>
             <div className="px-2 lg:px-6">
               <a
                 href="/#"

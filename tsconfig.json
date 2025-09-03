@@ -47,7 +47,5 @@
     "**/*.test.ts",
     "**/*.test.tsx"
   ],
-  "references": [
-    { "path": "./src/server" }
-  ]
+  "references": [{ "path": "./src/server" }]
 }

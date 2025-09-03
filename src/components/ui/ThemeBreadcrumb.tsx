@@ -21,14 +21,14 @@ const ThemeBreadcrumb: React.FC<ThemeBreadcrumbProps> = ({
   separator = <FiChevronRight className="w-4 h-4" />,
   showHomeIcon = false,
   className = '',
-  onItemClick
+  onItemClick,
 }) => {
   const handleItemClick = (item: BreadcrumbItem, index: number, e: React.MouseEvent) => {
     if (item.current) {
       e.preventDefault();
       return;
     }
-    
+
     if (onItemClick) {
       e.preventDefault();
       onItemClick(item, index);
@@ -40,23 +40,15 @@ const ThemeBreadcrumb: React.FC<ThemeBreadcrumbProps> = ({
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         {items.map((item, index) => (
           <li key={index} className="inline-flex items-center">
-            {index > 0 && (
-              <div className="flex items-center text-gray-400 dark:text-gray-600 mx-1">
-                {separator}
-              </div>
-            )}
-            
+            {index > 0 && <div className="flex items-center text-gray-400 dark:text-gray-600 mx-1">{separator}</div>}
+
             <div className="flex items-center">
-              {item.icon && (
-                <span className="mr-2 text-gray-500 dark:text-gray-400">
-                  {item.icon}
-                </span>
-              )}
-              
+              {item.icon && <span className="mr-2 text-gray-500 dark:text-gray-400">{item.icon}</span>}
+
               {showHomeIcon && index === 0 && !item.icon && (
                 <FiHome className="w-4 h-4 mr-2 text-gray-500 dark:text-gray-400" />
               )}
-              
+
               {item.current ? (
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400 cursor-default">
                   {item.label}

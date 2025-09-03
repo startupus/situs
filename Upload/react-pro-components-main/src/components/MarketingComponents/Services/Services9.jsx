@@ -8,7 +8,7 @@ export default function Services9() {
           <div className="flex flex-wrap justify-around">
             <div className="w-full md:w-1/2 lg:w-1/3">
               <div className="py-24">
-                <div className="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-linear-to-tl from-[#D83BB5] to-primary text-white">
+                <div className="bg-linear-to-tl mb-7 flex aspect-square w-16 items-center justify-center rounded-xl from-[#D83BB5] to-primary text-white">
                   <svg
                     width="34"
                     height="34"
@@ -46,7 +46,7 @@ export default function Services9() {
 
             <div className="w-full md:w-1/2 lg:w-1/3">
               <div className="py-24">
-                <div className="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-linear-to-tl from-[#D83BB5] to-primary text-white">
+                <div className="bg-linear-to-tl mb-7 flex aspect-square w-16 items-center justify-center rounded-xl from-[#D83BB5] to-primary text-white">
                   <svg
                     width="34"
                     height="34"
@@ -76,7 +76,7 @@ export default function Services9() {
 
             <div className="w-full md:w-1/2 lg:w-1/3">
               <div className="py-24">
-                <div className="mb-7 flex aspect-square w-16 items-center justify-center rounded-xl bg-linear-to-tl from-[#D83BB5] to-primary text-white">
+                <div className="bg-linear-to-tl mb-7 flex aspect-square w-16 items-center justify-center rounded-xl from-[#D83BB5] to-primary text-white">
                   <svg
                     width="34"
                     height="34"

@@ -1,51 +1,43 @@
-import * as React from 'react'
-import { useEffect, useRef, useState, useContext } from 'react'
-import * as types from 'redaktus/types'
+import * as React from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
+import * as types from 'redaktus/types';
 
-import blockNames from '../blockNames'
+import blockNames from '../blockNames';
 
-import Container from '../layout/Container'
-import Section from '../layout/Section'
+import Container from '../layout/Container';
+import Section from '../layout/Section';
 
 export interface TweetProps {
-  id: string
-  placeholder: string
-  align: string
-  cards: string
-  conversation: string
-  theme: string
+  id: string;
+  placeholder: string;
+  align: string;
+  cards: string;
+  conversation: string;
+  theme: string;
 }
 
-const Tweet: types.Brick<TweetProps> = ({
-  id,
-  placeholder,
-  align,
-  cards,
-  conversation,
-  theme,
-}) => {
-  const twitterEmbedRef = useRef<HTMLDivElement>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const { isDarkColorMode } = useContext(React.createContext({ isDarkColorMode: false }))
+const Tweet: types.Brick<TweetProps> = ({ id, placeholder, align, cards, conversation, theme }) => {
+  const twitterEmbedRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { isDarkColorMode } = useContext(React.createContext({ isDarkColorMode: false }));
 
   useEffect(() => {
-    const isBlackTheme: boolean =
-      theme === 'dark' || (theme === 'auto' && !!isDarkColorMode)
-    const twTheme: string = isBlackTheme ? 'dark' : ''
+    const isBlackTheme: boolean = theme === 'dark' || (theme === 'auto' && !!isDarkColorMode);
+    const twTheme: string = isBlackTheme ? 'dark' : '';
 
     if (twitterEmbedRef?.current) {
-      const currentDocument = twitterEmbedRef?.current.ownerDocument
-      const currentWindow = twitterEmbedRef?.current.ownerDocument.defaultView
+      const currentDocument = twitterEmbedRef?.current.ownerDocument;
+      const currentWindow = twitterEmbedRef?.current.ownerDocument.defaultView;
 
-      var script = currentDocument.createElement('script')
-      script.setAttribute('src', 'https://platform.twitter.com/widgets.js')
+      var script = currentDocument.createElement('script');
+      script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
       script.onload = () => {
         // @ts-ignore
-        const twttr = currentWindow!['twttr']
+        const twttr = currentWindow!['twttr'];
         twttr.ready().then(({ widgets }: any) => {
           // Clear previously rendered tweet before rendering the updated tweet id
           if (twitterEmbedRef.current) {
-            twitterEmbedRef.current.innerHTML = ''
+            twitterEmbedRef.current.innerHTML = '';
           }
 
           widgets
@@ -56,22 +48,13 @@ const Tweet: types.Brick<TweetProps> = ({
               theme: twTheme,
             })
             .then(() => {
-              setIsLoading(false)
-            })
-        })
-      }
-      currentDocument.body.appendChild(script)
+              setIsLoading(false);
+            });
+        });
+      };
+      currentDocument.body.appendChild(script);
     }
-  }, [
-    isLoading,
-    id,
-    placeholder,
-    align,
-    cards,
-    conversation,
-    theme,
-    isDarkColorMode,
-  ])
+  }, [isLoading, id, placeholder, align, cards, conversation, theme, isDarkColorMode]);
 
   return (
     <Section>
@@ -79,16 +62,15 @@ const Tweet: types.Brick<TweetProps> = ({
         <div ref={twitterEmbedRef}>{isLoading && placeholder}</div>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 Tweet.schema = {
   name: blockNames.Tweet,
   label: 'Tweet',
   category: 'rb-ui blog',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Tweet/Tweet.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Tweet/Tweet.tsx',
   getDefaultProps: () => ({
     bg: {
       color: '#fff',
@@ -164,6 +146,6 @@ Tweet.schema = {
       },
     },
   ],
-}
+};
 
-export default Tweet
+export default Tweet;

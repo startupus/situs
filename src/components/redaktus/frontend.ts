@@ -2,9 +2,9 @@
 // Переэкспортирует core компоненты + website и blog как независимые модули
 
 // Re-export всех core компонентов
-export * from './core'
+export * from './core';
 
 // Website и Blog экспортируются как отдельные модули
-// Импортируются напрямую: 
+// Импортируются напрямую:
 // import website from 'website'
-// import blog from 'blog' 
+// import blog from 'blog'

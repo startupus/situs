@@ -2,10 +2,10 @@ import React from "react";
 
 const WarningAlert1 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="shadow-1 dark:bg-dark-2 flex w-full rounded-lg border-l-[6px] border-transparent bg-white px-7 py-8 md:p-9">
-          <div className="bg-red-light-5 dark:bg-red-dark text-red-dark mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-lg dark:text-white">
+        <div className="flex w-full rounded-lg border-l-[6px] border-transparent bg-white px-7 py-8 shadow-1 dark:bg-dark-2 md:p-9">
+          <div className="mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-lg bg-red-light-5 text-red-dark dark:bg-red-dark dark:text-white">
             <svg
               width="18"
               height="18"
@@ -34,7 +34,7 @@ const WarningAlert1 = () => {
             <h5 className="mb-3 text-base font-semibold text-[#BC1C21]">
               There were 2 errors with your submission
             </h5>
-            <ul className="list-disc list-inside">
+            <ul className="list-inside list-disc">
               <li className="text-base leading-relaxed text-red-light">
                 Lorem Ipsum is simply dummy text of the printing
               </li>

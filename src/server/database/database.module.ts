@@ -3,7 +3,7 @@ import { PrismaService } from './prisma.service';
 
 /**
  * Модуль базы данных
- * 
+ *
  * Предоставляет глобальный доступ к Prisma ORM
  */
 @Global()

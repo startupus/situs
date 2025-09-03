@@ -23,16 +23,16 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const { i18n, t } = useTranslation();
-  
+
   // Получаем язык из localStorage или используем русский по умолчанию
   const getInitialLanguage = (): Language => {
     if (typeof window === 'undefined') return 'ru';
-    
+
     const saved = localStorage.getItem(LANGUAGE_STORAGE_KEY) as Language;
     if (saved === 'ru' || saved === 'en' || saved === 'de') {
       return saved;
     }
-    
+
     // Определяем язык браузера
     const browserLang = navigator.language.toLowerCase();
     if (browserLang.startsWith('ru')) {
@@ -40,32 +40,32 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     } else if (browserLang.startsWith('de')) {
       return 'de';
     }
-    
+
     return 'en'; // По умолчанию английский для международной аудитории
   };
-  
+
   const [language, setLanguageState] = useState<Language>(getInitialLanguage);
-  
+
   // Синхронизируем с i18next при инициализации
   useEffect(() => {
     const initialLang = getInitialLanguage();
     setLanguageState(initialLang);
     i18n.changeLanguage(initialLang);
   }, [i18n]);
-  
+
   // Функция для изменения языка
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     i18n.changeLanguage(lang);
-    
+
     // Сохраняем в localStorage
     if (typeof window !== 'undefined') {
       localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
     }
-    
+
     console.log(`🌍 Editor Language changed to: ${lang}`);
   };
-  
+
   // Функция для переключения языка
   const toggleLanguage = () => {
     const languages: Language[] = ['ru', 'en', 'de'];
@@ -74,7 +74,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     const newLang = languages[nextIndex];
     setLanguage(newLang);
   };
-  
+
   const value: LanguageContextType = {
     language,
     setLanguage,
@@ -82,14 +82,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     t,
     isRussian: language === 'ru',
     isEnglish: language === 'en',
-    isGerman: language === 'de'
+    isGerman: language === 'de',
   };
-  
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
 
 export const useLanguage = (): LanguageContextType => {

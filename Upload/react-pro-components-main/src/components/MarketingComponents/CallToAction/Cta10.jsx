@@ -18,7 +18,7 @@ export default function Cta10() {
             Extra 30% Off Online
           </h4>
           <h2
-            className="mb-3 text-3xl font-bold leading-tight! text-white sm:text-4xl md:text-[44px]"
+            className="leading-tight! mb-3 text-3xl font-bold text-white sm:text-4xl md:text-[44px]"
             style={{ textShadow: "0px 0px 1px rgba(0, 0, 0, 0.2)" }}
           >
             Summer Season Sale

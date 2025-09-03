@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const SuccessAlert2 = () => {
   return (
@@ -6,13 +6,7 @@ const SuccessAlert2 = () => {
       <div className="container">
         <div className="border-green bg-green-light-6 flex w-full rounded-lg border-l-[6px] px-7 py-8 md:p-9">
           <div className="bg-green mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_961_15637)">
                 <path
                   d="M8.99998 0.506248C4.3031 0.506248 0.506226 4.30312 0.506226 9C0.506226 13.6969 4.3031 17.5219 8.99998 17.5219C13.6969 17.5219 17.5219 13.6969 17.5219 9C17.5219 4.30312 13.6969 0.506248 8.99998 0.506248ZM8.99998 16.2562C5.00623 16.2562 1.77185 12.9937 1.77185 9C1.77185 5.00625 5.00623 1.77187 8.99998 1.77187C12.9937 1.77187 16.2562 5.03437 16.2562 9.02812C16.2562 12.9937 12.9937 16.2562 8.99998 16.2562Z"
@@ -31,12 +25,9 @@ const SuccessAlert2 = () => {
             </svg>
           </div>
           <div className="w-full">
-            <h5 className="mb-3 text-lg font-semibold text-[#004434]">
-              Message Sent Successfully
-            </h5>
+            <h5 className="mb-3 text-lg font-semibold text-[#004434]">Message Sent Successfully</h5>
             <p className="text-base leading-relaxed text-body-color">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             </p>
           </div>
         </div>

@@ -15,20 +15,20 @@ import ThemeActionButtons from '@/components/ui/ThemeActionButtons';
 import ThemePermissionsModal from '@/components/ui/ThemePermissionsModal';
 
 // Core Badge Components - новые интегрированные компоненты
-import { 
-  ThemeDangerBadge, 
-  ThemePrimaryBadge, 
-  ThemeSuccessBadge, 
-  ThemeWarningBadge, 
+import {
+  ThemeDangerBadge,
+  ThemePrimaryBadge,
+  ThemeSuccessBadge,
+  ThemeWarningBadge,
   ThemeInfoBadge,
   ThemeDarkBadge,
   ThemeGrayBadge,
   ThemeLightBadge,
-  ThemeSecondaryBadge
+  ThemeSecondaryBadge,
 } from '@/components/ui';
 
 // Core Button Components - новые интегрированные компоненты
-import { 
+import {
   ThemePrimaryButton,
   ThemePrimaryButtonWithIcon,
   ThemePrimaryOutlineButton,
@@ -38,42 +38,33 @@ import {
   ThemeDarkButton,
   ThemeDarkButtonWithIcon,
   ThemeWhiteButton,
-  ThemeWhiteButtonWithIcon
+  ThemeWhiteButtonWithIcon,
 } from '@/components/ui';
 
 // Core Alert Components - новые интегрированные компоненты
-import { 
-  ThemeSuccessAlert1,
-  ThemeInfoAlert1,
-  ThemeWarningAlert1,
-  ThemeAttentionAlert1
-} from '@/components/ui';
+import { ThemeSuccessAlert1, ThemeInfoAlert1, ThemeWarningAlert1, ThemeAttentionAlert1 } from '@/components/ui';
 
 // Core Form Elements - новые интегрированные компоненты
-import { 
+import {
   ThemeFormElementInput,
   ThemeFormElementSelect,
   ThemeFormElementTextarea,
-  ThemeFormElementFileUpload
+  ThemeFormElementFileUpload,
 } from '@/components/ui';
 
 // Core Input Range Components - новые интегрированные компоненты
-import { 
-  ThemeInputRange1,
-  ThemeInputRange2,
-  ThemeInputRange3
-} from '@/components/ui';
+import { ThemeInputRange1, ThemeInputRange2, ThemeInputRange3 } from '@/components/ui';
 
 // Core Verification Code Input Components - новые интегрированные компоненты
-import { 
+import {
   ThemeVerificationCodeInput1,
   ThemeVerificationCodeInput2,
   ThemeVerificationCodeInput3,
-  ThemeVerificationCodeInput4
+  ThemeVerificationCodeInput4,
 } from '@/components/ui';
 
 // Dashboard Components - существующие компоненты панели управления
-import { 
+import {
   Calendar1,
   Calendar2,
   Chart1,
@@ -87,78 +78,94 @@ import {
   Dropdown1,
   Dropdown2,
   HorizontalMenu1,
-  VerticalNavbar1
+  VerticalNavbar1,
 } from '@/components/ui/dashboard';
 
 // Core Avatar Components - новые интегрированные компоненты
-import { 
-  ThemeAvatar1,
-  ThemeAvatar2,
-  ThemeAvatar3,
-  ThemeAvatar4,
-  ThemeAvatar5
-} from '@/components/ui';
+import { ThemeAvatar1, ThemeAvatar2, ThemeAvatar3, ThemeAvatar4, ThemeAvatar5 } from '@/components/ui';
 
 // Core Breadcrumb Components - новые интегрированные компоненты
-import { 
+import {
   ThemeBreadcrumb1,
   ThemeBreadcrumb2,
   ThemeBreadcrumb3,
   ThemeBreadcrumb4,
-  ThemeBreadcrumb5
+  ThemeBreadcrumb5,
 } from '@/components/ui';
 
 // Core Checkbox Components - новые интегрированные компоненты
-import { 
-  ThemeCheckbox1,
-  ThemeCheckbox2,
-  ThemeCheckbox3,
-  ThemeCheckbox4,
-  ThemeCheckbox5
-} from '@/components/ui';
+import { ThemeCheckbox1, ThemeCheckbox2, ThemeCheckbox3, ThemeCheckbox4, ThemeCheckbox5 } from '@/components/ui';
 
 // Core Progress & Spinner Components - новые интегрированные компоненты
-import { 
+import {
   ThemeProgressBar1,
   ThemeProgressBar2,
   ThemeProgressBar3,
   ThemeSpinner1,
   ThemeSpinner2,
   ThemeSpinner3,
-  ThemeSpinner4
+  ThemeSpinner4,
 } from '@/components/ui';
 
 // Additional Theme Components - дополнительные компоненты
-import { 
+import {
   ThemeTooltip1,
   ThemeTooltip2,
   ThemeTooltip3,
   ThemePagination1,
   ThemePagination2,
-  ThemePagination3
+  ThemePagination3,
 } from '@/components/ui';
 
 // Additional Core Components - все новые категории
-import { 
-  ThemeTab1, ThemeTab2, ThemeTab3,
-  ThemeTag1, ThemeTag2, ThemeTag3, ThemeTag4,
-  ThemeOrderedList1, ThemeUnOrderedList1, ThemeUnOrderedList2,
-  ThemeSwitcher1, ThemeSwitcher2, ThemeSwitcher3,
-  ThemeClipboard1, ThemeClipboard2,
-  ThemeRating1, ThemeRating2, ThemeRating3,
-  ThemeSkeleton1, ThemeSkeleton2, ThemeSkeleton3,
-  ThemeToast1, ThemeToast2, ThemeToast3,
-  ThemeFileUpload1, ThemeFileUpload2, ThemeFileUpload3,
-  ThemeDatePicker1, ThemeDatePicker2,
-  ThemeButtonGroup1, ThemeButtonGroup2, ThemeButtonGroup3,
-  ThemeGallery1, ThemeGallery2, ThemeGallery3,
-  ThemePageTitle1, ThemePageTitle2, ThemePageTitle3,
-  ThemeStickyBar1, ThemeStickyBar2,
-  ThemeMegaMenu1, ThemeMegaMenu2, ThemeMegaMenu3
+import {
+  ThemeTab1,
+  ThemeTab2,
+  ThemeTab3,
+  ThemeTag1,
+  ThemeTag2,
+  ThemeTag3,
+  ThemeTag4,
+  ThemeOrderedList1,
+  ThemeUnOrderedList1,
+  ThemeUnOrderedList2,
+  ThemeSwitcher1,
+  ThemeSwitcher2,
+  ThemeSwitcher3,
+  ThemeClipboard1,
+  ThemeClipboard2,
+  ThemeRating1,
+  ThemeRating2,
+  ThemeRating3,
+  ThemeSkeleton1,
+  ThemeSkeleton2,
+  ThemeSkeleton3,
+  ThemeToast1,
+  ThemeToast2,
+  ThemeToast3,
+  ThemeFileUpload1,
+  ThemeFileUpload2,
+  ThemeFileUpload3,
+  ThemeDatePicker1,
+  ThemeDatePicker2,
+  ThemeButtonGroup1,
+  ThemeButtonGroup2,
+  ThemeButtonGroup3,
+  ThemeGallery1,
+  ThemeGallery2,
+  ThemeGallery3,
+  ThemePageTitle1,
+  ThemePageTitle2,
+  ThemePageTitle3,
+  ThemeStickyBar1,
+  ThemeStickyBar2,
+  ThemeMegaMenu1,
+  ThemeMegaMenu2,
+  ThemeMegaMenu3,
 } from '@/components/ui';
 
 // Core Components - Selects и Forms (временно отключено для диагностики)
-// import { 
+// import {
 //   Select1, Select2, Select3,
 //   FormElementInput, FormElementSelect, FormElementTextarea, FormElementFileUpload,
 //   InputRange1, InputRange2, InputRange3,
@@ -176,22 +183,28 @@ interface DemoSectionProps {
 }
 
 const DemoSection: React.FC<DemoSectionProps> = ({ title, children, id }) => (
-  <section id={id} className="mb-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 scroll-mt-20">
+  <section
+    id={id}
+    className="mb-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 scroll-mt-20"
+  >
     <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-3">
       {title}
     </h2>
-    <div className="space-y-6">
-      {children}
-    </div>
+    <div className="space-y-6">{children}</div>
   </section>
 );
 
-const ComponentDemo: React.FC<{ title: string; children: React.ReactNode; id?: string }> = ({ title, children, id }) => (
-  <div id={id} className="p-4 border border-gray-200 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-900 scroll-mt-20">
+const ComponentDemo: React.FC<{ title: string; children: React.ReactNode; id?: string }> = ({
+  title,
+  children,
+  id,
+}) => (
+  <div
+    id={id}
+    className="p-4 border border-gray-200 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-900 scroll-mt-20"
+  >
     <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">{title}</h3>
-    <div className="flex flex-wrap gap-4 items-center">
-      {children}
-    </div>
+    <div className="flex flex-wrap gap-4 items-center">{children}</div>
   </div>
 );
 
@@ -204,7 +217,7 @@ const AppearanceDemoSimple: React.FC = () => {
   const breadcrumbItems = [
     { label: 'Главная', href: '/' },
     { label: 'Настройки', href: '/settings' },
-    { label: 'Внешний вид', current: true }
+    { label: 'Внешний вид', current: true },
   ];
 
   // Демо данные для модального окна прав
@@ -215,7 +228,7 @@ const AppearanceDemoSimple: React.FC = () => {
     level: 50,
     description: 'Демонстрационная роль для показа модального окна',
     permissions: ['users.view', 'projects.create'],
-    isSystem: false
+    isSystem: false,
   };
 
   const demoPermissions = [
@@ -226,7 +239,7 @@ const AppearanceDemoSimple: React.FC = () => {
       description: 'Доступ к списку пользователей',
       category: 'users',
       subcategory: 'view',
-      isSystem: false
+      isSystem: false,
     },
     {
       id: 'users.manage',
@@ -235,7 +248,7 @@ const AppearanceDemoSimple: React.FC = () => {
       description: 'Создание, редактирование и удаление пользователей',
       category: 'users',
       subcategory: 'manage',
-      isSystem: false
+      isSystem: false,
     },
     {
       id: 'projects.create',
@@ -244,7 +257,7 @@ const AppearanceDemoSimple: React.FC = () => {
       description: 'Создание новых проектов',
       category: 'projects',
       subcategory: 'create',
-      isSystem: false
+      isSystem: false,
     },
     {
       id: 'projects.manage',
@@ -253,8 +266,8 @@ const AppearanceDemoSimple: React.FC = () => {
       description: 'Редактирование и удаление проектов',
       category: 'projects',
       subcategory: 'manage',
-      isSystem: false
-    }
+      isSystem: false,
+    },
   ];
 
   return (
@@ -265,20 +278,34 @@ const AppearanceDemoSimple: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Демонстрация компонентов глобальной темы
           </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Основные компоненты UI библиотеки проекта Situs
-          </p>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">Основные компоненты UI библиотеки проекта Situs</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto p-6">
         {/* Theme Components - Наши кастомные компоненты */}
-        <DemoSection title={<><FiLayers className="inline mr-2" />Theme Components (Кастомные)</>} id="theme-components">
+        <DemoSection
+          title={
+            <>
+              <FiLayers className="inline mr-2" />
+              Theme Components (Кастомные)
+            </>
+          }
+          id="theme-components"
+        >
           <ComponentDemo title="Alerts" id="theme-alerts">
-            <ThemeAlert type="success" title="Успех">Операция выполнена успешно</ThemeAlert>
-            <ThemeAlert type="error" title="Ошибка">Произошла ошибка</ThemeAlert>
-            <ThemeAlert type="warning" title="Предупреждение">Внимание!</ThemeAlert>
-            <ThemeAlert type="info" title="Информация">Полезная информация</ThemeAlert>
+            <ThemeAlert type="success" title="Успех">
+              Операция выполнена успешно
+            </ThemeAlert>
+            <ThemeAlert type="error" title="Ошибка">
+              Произошла ошибка
+            </ThemeAlert>
+            <ThemeAlert type="warning" title="Предупреждение">
+              Внимание!
+            </ThemeAlert>
+            <ThemeAlert type="info" title="Информация">
+              Полезная информация
+            </ThemeAlert>
           </ComponentDemo>
 
           <ComponentDemo title="Avatars" id="theme-avatars">
@@ -291,8 +318,12 @@ const AppearanceDemoSimple: React.FC = () => {
             <ThemeBadge variant="primary">Primary</ThemeBadge>
             <ThemeBadge variant="success">Success</ThemeBadge>
             <ThemeBadge variant="danger">Danger</ThemeBadge>
-            <ThemeBadge variant="warning" outline>Warning</ThemeBadge>
-            <ThemeBadge variant="info" rounded="full">Info</ThemeBadge>
+            <ThemeBadge variant="warning" outline>
+              Warning
+            </ThemeBadge>
+            <ThemeBadge variant="info" rounded="full">
+              Info
+            </ThemeBadge>
           </ComponentDemo>
 
           <ComponentDemo title="Breadcrumb" id="theme-breadcrumb">
@@ -302,18 +333,10 @@ const AppearanceDemoSimple: React.FC = () => {
           <ComponentDemo title="Forms" id="theme-forms">
             <div className="w-full space-y-4">
               <div className="flex flex-wrap gap-4">
-                <ThemeCheckbox 
-                  checked={checkboxState} 
-                  onChange={setCheckboxState}
-                  label="Согласен с условиями"
-                />
-                <ThemeSwitch 
-                  checked={switchState} 
-                  onChange={setSwitchState}
-                  label="Включить уведомления"
-                />
+                <ThemeCheckbox checked={checkboxState} onChange={setCheckboxState} label="Согласен с условиями" />
+                <ThemeSwitch checked={switchState} onChange={setSwitchState} label="Включить уведомления" />
               </div>
-              
+
               <div className="w-full max-w-md">
                 <Select1 />
               </div>
@@ -327,22 +350,27 @@ const AppearanceDemoSimple: React.FC = () => {
           </ComponentDemo>
 
           <ComponentDemo title="Pagination" id="theme-pagination">
-            <ThemePagination 
-              currentPage={currentPage}
-              totalPages={10}
-              onPageChange={setCurrentPage}
-              showFirstLast
-            />
+            <ThemePagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} showFirstLast />
           </ComponentDemo>
         </DemoSection>
 
         {/* Core Components */}
-        <DemoSection title={<><FiSettings className="inline mr-2" />Core Components</>} id="core-components">
+        <DemoSection
+          title={
+            <>
+              <FiSettings className="inline mr-2" />
+              Core Components
+            </>
+          }
+          id="core-components"
+        >
           <ComponentDemo title="Core Badges" id="core-badges">
             <div className="w-full space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Danger, Warning, Success</h4>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                    Danger, Warning, Success
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     <ThemeDangerBadge />
                   </div>
@@ -354,7 +382,9 @@ const AppearanceDemoSimple: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Primary, Info, Secondary</h4>
+                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                    Primary, Info, Secondary
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     <ThemePrimaryBadge />
                   </div>
@@ -387,31 +417,51 @@ const AppearanceDemoSimple: React.FC = () => {
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Primary Variants</h4>
                   <div className="space-y-2">
-                    <div><ThemePrimaryButton /></div>
-                    <div><ThemePrimaryButtonWithIcon /></div>
-                    <div><ThemePrimaryOutlineButton /></div>
-                    <div><ThemePrimaryRoundedButton /></div>
+                    <div>
+                      <ThemePrimaryButton />
+                    </div>
+                    <div>
+                      <ThemePrimaryButtonWithIcon />
+                    </div>
+                    <div>
+                      <ThemePrimaryOutlineButton />
+                    </div>
+                    <div>
+                      <ThemePrimaryRoundedButton />
+                    </div>
                   </div>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Secondary Variants</h4>
                   <div className="space-y-2">
-                    <div><ThemeSecondaryButton /></div>
-                    <div><ThemeSecondaryButtonWithIcon /></div>
+                    <div>
+                      <ThemeSecondaryButton />
+                    </div>
+                    <div>
+                      <ThemeSecondaryButtonWithIcon />
+                    </div>
                   </div>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Dark Variants</h4>
                   <div className="space-y-2">
-                    <div><ThemeDarkButton /></div>
-                    <div><ThemeDarkButtonWithIcon /></div>
+                    <div>
+                      <ThemeDarkButton />
+                    </div>
+                    <div>
+                      <ThemeDarkButtonWithIcon />
+                    </div>
                   </div>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">White Variants</h4>
                   <div className="space-y-2 p-2 bg-gray-800 rounded">
-                    <div><ThemeWhiteButton /></div>
-                    <div><ThemeWhiteButtonWithIcon /></div>
+                    <div>
+                      <ThemeWhiteButton />
+                    </div>
+                    <div>
+                      <ThemeWhiteButtonWithIcon />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -853,9 +903,15 @@ const AppearanceDemoSimple: React.FC = () => {
                 <div>
                   <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Galleries</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="scale-75 origin-left"><ThemeGallery1 /></div>
-                    <div className="scale-75 origin-left"><ThemeGallery2 /></div>
-                    <div className="scale-75 origin-left"><ThemeGallery3 /></div>
+                    <div className="scale-75 origin-left">
+                      <ThemeGallery1 />
+                    </div>
+                    <div className="scale-75 origin-left">
+                      <ThemeGallery2 />
+                    </div>
+                    <div className="scale-75 origin-left">
+                      <ThemeGallery3 />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -975,12 +1031,18 @@ const AppearanceDemoSimple: React.FC = () => {
               </div>
             </div>
           </ComponentDemo>
-
-
         </DemoSection>
 
         {/* Dashboard Components */}
-        <DemoSection title={<><FiBarChart2 className="inline mr-2" />Dashboard Components</>} id="dashboard-components">
+        <DemoSection
+          title={
+            <>
+              <FiBarChart2 className="inline mr-2" />
+              Dashboard Components
+            </>
+          }
+          id="dashboard-components"
+        >
           <ComponentDemo title="Calendar" id="dashboard-calendar">
             <div className="space-y-6">
               <div>
@@ -1074,27 +1136,28 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Кнопки действий */}
-        <DemoSection title={<><FiTool className="inline mr-2" />Кнопки действий</>} id="action-buttons">
+        <DemoSection
+          title={
+            <>
+              <FiTool className="inline mr-2" />
+              Кнопки действий
+            </>
+          }
+          id="action-buttons"
+        >
           <ComponentDemo title="ThemeActionButtons" id="theme-action-buttons">
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Обе кнопки:</span>
-                <ThemeActionButtons
-                  onEdit={() => alert('Редактировать')}
-                  onDelete={() => alert('Удалить')}
-                />
+                <ThemeActionButtons onEdit={() => alert('Редактировать')} onDelete={() => alert('Удалить')} />
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Только редактирование:</span>
-                <ThemeActionButtons
-                  onEdit={() => alert('Редактировать')}
-                />
+                <ThemeActionButtons onEdit={() => alert('Редактировать')} />
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Только удаление:</span>
-                <ThemeActionButtons
-                  onDelete={() => alert('Удалить')}
-                />
+                <ThemeActionButtons onDelete={() => alert('Удалить')} />
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 dark:text-gray-400 w-32">Кастомные подсказки:</span>
@@ -1125,8 +1188,8 @@ const AppearanceDemoSimple: React.FC = () => {
               </div>
             </div>
             <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-400">
-              <strong>Использование:</strong> В разделе управления ролями и правами пользователей.
-              Поддерживает поиск, фильтрацию по категориям и массовые операции.
+              <strong>Использование:</strong> В разделе управления ролями и правами пользователей. Поддерживает поиск,
+              фильтрацию по категориям и массовые операции.
             </div>
           </ComponentDemo>
         </DemoSection>
@@ -1134,9 +1197,7 @@ const AppearanceDemoSimple: React.FC = () => {
         {/* Информация о полной библиотеке */}
         <DemoSection title="📚 Полная библиотека компонентов" id="full-library">
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-4">
-              300+ компонентов доступно
-            </h3>
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-4">300+ компонентов доступно</h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div>
                 <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Theme Components (13)</h4>
@@ -1161,8 +1222,14 @@ const AppearanceDemoSimple: React.FC = () => {
                   <li>✅ Skeletons (3) • Toasts (8) • FileUploads (5) • DatePickers (2)</li>
                   <li>✅ ButtonGroups (3) • Galleries (5) • PageTitles (5) • StickyBars (4)</li>
                   <li>✅ MegaMenus (3) • Switch (1) • И все остальные!</li>
-                  <li className="flex items-center"><FiAward className="mr-2" /><strong>100% ПОКРЫТИЕ ДОСТИГНУТО!</strong></li>
-                  <li className="flex items-center"><FiLayers className="mr-2" /><strong>Все компоненты поддерживают глобальную тему!</strong></li>
+                  <li className="flex items-center">
+                    <FiAward className="mr-2" />
+                    <strong>100% ПОКРЫТИЕ ДОСТИГНУТО!</strong>
+                  </li>
+                  <li className="flex items-center">
+                    <FiLayers className="mr-2" />
+                    <strong>Все компоненты поддерживают глобальную тему!</strong>
+                  </li>
                 </ul>
               </div>
               <div>
@@ -1177,8 +1244,8 @@ const AppearanceDemoSimple: React.FC = () => {
             </div>
             <div className="mt-4 p-3 bg-white dark:bg-gray-800 rounded border">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                <strong>Примечание:</strong> Некоторые компоненты требуют дополнительных зависимостей (например, jsvectormap для карт). 
-                Выше показаны основные компоненты, готовые к использованию.
+                <strong>Примечание:</strong> Некоторые компоненты требуют дополнительных зависимостей (например,
+                jsvectormap для карт). Выше показаны основные компоненты, готовые к использованию.
               </p>
             </div>
           </div>

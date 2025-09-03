@@ -14,10 +14,10 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
     { code: 'ru', name: 'Русский', flag: '🇷🇺' },
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' }
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
   ];
 
-  const currentLang = languages.find(lang => lang.code === currentLanguage) || languages[0];
+  const currentLang = languages.find((lang) => lang.code === currentLanguage) || languages[0];
 
   const handleLanguageChange = (langCode: string) => {
     setCurrentLanguage(langCode);
@@ -34,13 +34,9 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
           className="w-full flex items-center justify-center p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
           title={theme === 'dark' ? 'Светлая тема' : 'Темная тема'}
         >
-          {theme === 'dark' ? (
-            <FiSun className="w-5 h-5" />
-          ) : (
-            <FiMoon className="w-5 h-5" />
-          )}
+          {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
         </button>
-        
+
         {/* Язык */}
         <div className="relative group">
           <button
@@ -49,14 +45,12 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
           >
             <FiGlobe className="w-5 h-5" />
           </button>
-          
+
           {/* Выпадающее меню языков */}
           <div className="absolute bottom-full left-0 mb-2 w-48 bg-surface dark:bg-gray-800 rounded-lg shadow-xl border border-stroke dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div className="p-3">
               <h3 className="text-sm font-medium text-dark dark:text-white mb-2">Настройки интерфейса</h3>
-              <p className="text-xs text-body-color dark:text-gray-400 mb-3">
-                Управление темой и языком интерфейса
-              </p>
+              <p className="text-xs text-body-color dark:text-gray-400 mb-3">Управление темой и языком интерфейса</p>
             </div>
           </div>
         </div>
@@ -68,15 +62,11 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
     <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-3">
       {/* Переключатель темы */}
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Тема интерфейса
-        </span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Тема интерфейса</span>
         <button
           onClick={toggleTheme}
           className={`relative inline-flex items-center h-6 w-11 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-            theme === 'dark'
-              ? 'bg-blue-600'
-              : 'bg-gray-200'
+            theme === 'dark' ? 'bg-blue-600' : 'bg-gray-200'
           }`}
         >
           <span
@@ -104,10 +94,8 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
 
       {/* Выбор языка */}
       <div className="space-y-2">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Язык интерфейса
-        </span>
-        
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Язык интерфейса</span>
+
         <div className="relative">
           <select
             value={currentLanguage}
@@ -134,4 +122,4 @@ const InterfaceControls: React.FC<InterfaceControlsProps> = ({ collapsed = false
   );
 };
 
-export default InterfaceControls; 
+export default InterfaceControls;

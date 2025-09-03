@@ -19,26 +19,33 @@ src/api/
 ## Основные компоненты
 
 ### Навигатор
+
 - `client.ts`, `client/ApiClient.ts` — базовый HTTP‑клиент
 - `services/*.api.ts` — сервисы доменов (`projects.api.ts`, `products.api.ts`, `analytics.api.ts`, и др.)
 - `middleware/`, `validation/`, `routes/`, `controllers/` — вспомогательные части (по мере миграции)
 - `__tests__/` — unit/integration тесты API (Vitest)
 
 ### ApiClient
+
 Центральный класс для выполнения HTTP запросов:
+
 - Автоматическая обработка ошибок
 - Единообразные заголовки
 - Поддержка проксирования
 - Типизированные ответы
 
 ### API Сервисы
+
 Каждый сервис отвечает за свой домен:
+
 - `projects.api.ts` - управление проектами
 - `orders.api.ts` - управление заказами
 - `sites.api.ts` - адаптер для совместимости с SiteContext
 
 ### Формат ответов
+
 Все API методы возвращают данные в формате:
+
 ```typescript
 {
   success: boolean;
@@ -50,6 +57,7 @@ src/api/
 ## Использование
 
 ### В компонентах
+
 ```typescript
 import { projectsApi } from '../api/services/projects.api';
 
@@ -59,11 +67,12 @@ const projects = await projectsApi.getProjects();
 // Создать проект
 const newProject = await projectsApi.createProject({
   name: 'Новый проект',
-  description: 'Описание'
+  description: 'Описание',
 });
 ```
 
 ### В контекстах
+
 ```typescript
 import { sitesApi } from '../api/services/sites.api';
 
@@ -74,7 +83,9 @@ const sites = await sitesApi.getSites();
 ## Обработка ошибок
 
 ### ApiUtils
+
 Утилиты для обработки ошибок:
+
 ```typescript
 import { ApiUtils } from '../api/client';
 
@@ -87,6 +98,7 @@ try {
 ```
 
 ### Типы ошибок
+
 - `ApiClientError` - ошибки сети
 - `ValidationError` - ошибки валидации
 - `ServerError` - ошибки сервера
@@ -94,7 +106,9 @@ try {
 ## Конфигурация
 
 ### Проксирование
+
 В `vite.config.ts` настроено проксирование:
+
 ```typescript
 proxy: {
   '/api': {
@@ -105,6 +119,7 @@ proxy: {
 ```
 
 ### Переменные окружения
+
 ```env
 VITE_API_BASE_URL=http://localhost:3002
 VITE_API_TIMEOUT=10000
@@ -113,12 +128,14 @@ VITE_API_TIMEOUT=10000
 ## Разработка
 
 ### Добавление нового API сервиса
+
 1. Создать файл в `src/api/services/`
 2. Определить интерфейсы типов
 3. Создать класс сервиса
 4. Экспортировать экземпляр
 
 ### Пример нового сервиса
+
 ```typescript
 // src/api/services/users.api.ts
 import { apiClient, ApiResponse } from '../client';
@@ -144,11 +161,13 @@ export const usersApi = new UsersApiService();
 ## Интеграция с backend
 
 ### Формат запросов
+
 - GET запросы с параметрами
 - POST/PUT с JSON телом
 - Правильные заголовки Content-Type
 
 ### Формат ответов
+
 - Единообразная структура `{success, data, error}`
 - Правильная обработка HTTP статусов
 - Типизированные данные
@@ -156,14 +175,17 @@ export const usersApi = new UsersApiService();
 ## Тестирование
 
 ### Моковые данные
+
 Временно используются моковые данные в backend для демонстрации. В будущем будут заменены на реальную базу данных.
 
 ### Отладка
+
 - Логирование всех API запросов
 - Отображение ошибок в консоли
 - Возможность переключения на моковые данные
 
 ## Следующие шаги
+
 - Добавление кэширования
 - Оптимизация запросов
 - Добавление retry логики

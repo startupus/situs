@@ -99,7 +99,7 @@ async function run() {
     }
 
     // Создаем подкатегории для Электроники (аналог подменю)
-    const electronicsCategory = createdCategories.find(c => c.slug === 'electronics');
+    const electronicsCategory = createdCategories.find((c) => c.slug === 'electronics');
     if (electronicsCategory) {
       const subCategories = [
         { name: 'Смартфоны', slug: 'smartphones', description: 'Мобильные телефоны' },
@@ -130,7 +130,7 @@ async function run() {
     }
 
     // Создаем подкатегории для Одежды
-    const clothingCategory = createdCategories.find(c => c.slug === 'clothing');
+    const clothingCategory = createdCategories.find((c) => c.slug === 'clothing');
     if (clothingCategory) {
       const clothingSubCategories = [
         { name: 'Мужская одежда', slug: 'mens-clothing', description: 'Одежда для мужчин' },
@@ -229,7 +229,9 @@ async function run() {
     }
     // Подменю для каталога (если есть тип main и пункт catalog)
     const mainMenu = await prisma.menuType.findFirst({ where: { projectId: project.id, name: 'main' } });
-    const catalogMenuItem = mainMenu ? await prisma.menuItem.findFirst({ where: { menuTypeId: mainMenu.id, alias: 'catalog' } }) : null;
+    const catalogMenuItem = mainMenu
+      ? await prisma.menuItem.findFirst({ where: { menuTypeId: mainMenu.id, alias: 'catalog' } })
+      : null;
 
     if (catalogMenuItem && createdCategories.length > 0) {
       let subMenuOrder = 0;
@@ -253,7 +255,7 @@ async function run() {
             parameters: JSON.stringify({
               menu_show: true,
               itemsPerPage: 20,
-              showFilters: true
+              showFilters: true,
             }),
             menuTypeId: mainMenu.id,
           },
@@ -310,5 +312,3 @@ async function run() {
 }
 
 run();
-
-

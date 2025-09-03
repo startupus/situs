@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { 
-  ThemeConfig, 
-  ThemeSettings, 
-  ThemeContextType, 
+import {
+  ThemeConfig,
+  ThemeSettings,
+  ThemeContextType,
   ThemeColors,
   ThemeTypography,
   ThemeLayout,
@@ -11,7 +11,7 @@ import {
   ThemeTemplate,
   CustomColorPalette,
   DEFAULT_THEMES,
-  DEFAULT_THEME_SETTINGS 
+  DEFAULT_THEME_SETTINGS,
 } from '../types/theme';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -44,23 +44,23 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
    */
   const applyThemeToDOM = (theme: ThemeConfig, darkMode: boolean) => {
     const root = document.documentElement;
-    
+
     // Выбираем нужный вариант цветов (светлый или темный)
     const colors = darkMode ? theme.colors.dark : theme.colors.light;
-    
+
     // Применяем основные цвета
     root.style.setProperty('--color-primary', colors.primary);
     root.style.setProperty('--color-primary-hover', colors.primaryHover);
     root.style.setProperty('--color-primary-active', colors.primaryActive);
     root.style.setProperty('--color-secondary', colors.secondary);
     root.style.setProperty('--color-accent', colors.accent);
-    
+
     // Статусные цвета
     root.style.setProperty('--color-success', colors.success);
     root.style.setProperty('--color-warning', colors.warning);
     root.style.setProperty('--color-error', colors.error);
     root.style.setProperty('--color-info', colors.info);
-    
+
     // Базовые цвета
     root.style.setProperty('--color-background', colors.background);
     root.style.setProperty('--color-surface', colors.surface);
@@ -73,7 +73,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     root.style.setProperty('--color-body-color', colors.textSecondary);
     root.style.setProperty('--color-dark', colors.text);
     root.style.setProperty('--color-gray-3', colors.borderLight);
-    
+
     // Управление темной темой
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -101,10 +101,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setIsDarkMode(newDarkMode);
     const newSettings = {
       ...settings,
-      isDarkMode: newDarkMode
+      isDarkMode: newDarkMode,
     };
     setSettings(newSettings);
-    
+
     // Автоматически сохраняем настройки
     localStorage.setItem('situs-theme-settings', JSON.stringify(newSettings));
     console.log('Режим темы изменен:', newDarkMode ? 'темный' : 'светлый');
@@ -114,16 +114,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
    * Обновление темы по ID
    */
   const updateTheme = (themeId: string) => {
-    const theme = settings.availableThemes.find(t => t.id === themeId);
+    const theme = settings.availableThemes.find((t) => t.id === themeId);
     if (theme) {
       setCurrentTheme(theme);
       const newSettings = {
         ...settings,
         currentTheme: themeId,
-        customTheme: undefined // Сбрасываем кастомную тему при выборе предустановленной
+        customTheme: undefined, // Сбрасываем кастомную тему при выборе предустановленной
       };
       setSettings(newSettings);
-      
+
       // Автоматически сохраняем настройки
       localStorage.setItem('situs-theme-settings', JSON.stringify(newSettings));
       console.log('Тема автоматически сохранена:', theme.name);
@@ -140,18 +140,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         ...currentTheme.colors,
         [variant]: {
           ...currentTheme.colors[variant],
-          ...colors
-        }
-      }
+          ...colors,
+        },
+      },
     };
 
     setCurrentTheme(updatedTheme);
     const newSettings = {
       ...settings,
-      customTheme: updatedTheme
+      customTheme: updatedTheme,
     };
     setSettings(newSettings);
-    
+
     // Автоматически сохраняем кастомную тему
     localStorage.setItem('situs-theme-settings', JSON.stringify(newSettings));
     console.log(`${variant === 'light' ? 'Светлый' : 'Темный'} вариант темы сохранен`);
@@ -165,8 +165,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ...currentTheme,
       typography: {
         ...currentTheme.typography,
-        ...typography
-      }
+        ...typography,
+      },
     };
     setCurrentTheme(updatedTheme);
     saveThemeChanges(updatedTheme);
@@ -180,8 +180,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ...currentTheme,
       layout: {
         ...currentTheme.layout,
-        ...layout
-      }
+        ...layout,
+      },
     };
     setCurrentTheme(updatedTheme);
     saveThemeChanges(updatedTheme);
@@ -195,8 +195,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ...currentTheme,
       animations: {
         ...currentTheme.animations,
-        ...animations
-      }
+        ...animations,
+      },
     };
     setCurrentTheme(updatedTheme);
     saveThemeChanges(updatedTheme);
@@ -210,8 +210,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ...currentTheme,
       gradients: {
         ...currentTheme.gradients,
-        ...gradients
-      }
+        ...gradients,
+      },
     };
     setCurrentTheme(updatedTheme);
     saveThemeChanges(updatedTheme);
@@ -223,7 +223,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const saveThemeChanges = (theme: ThemeConfig) => {
     const newSettings = {
       ...settings,
-      customTheme: theme
+      customTheme: theme,
     };
     setSettings(newSettings);
     localStorage.setItem('situs-theme-settings', JSON.stringify(newSettings));
@@ -238,10 +238,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const newSettings = {
       ...settings,
       currentTheme: defaultTheme.id,
-      customTheme: undefined
+      customTheme: undefined,
     };
     setSettings(newSettings);
-    
+
     // Автоматически сохраняем сброс
     localStorage.setItem('situs-theme-settings', JSON.stringify(newSettings));
     console.log('Сброс к дефолтной теме сохранен');
@@ -254,10 +254,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     try {
       // Сохраняем в localStorage
       localStorage.setItem('situs-theme-settings', JSON.stringify(settings));
-      
+
       // TODO: Сохранение в API для синхронизации между устройствами
       // await apiClient.saveThemeSettings(settings);
-      
+
       console.log('Настройки темы сохранены');
     } catch (error) {
       console.error('Ошибка сохранения настроек темы:', error);
@@ -273,7 +273,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       isDarkMode: false,
       allowCustomization: true,
       availableThemes: DEFAULT_THEMES,
-      templates: []
+      templates: [],
     };
 
     // Если есть старые темы, пытаемся найти аналог
@@ -309,7 +309,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       const saved = localStorage.getItem('situs-theme-settings');
       if (saved) {
         const savedData = JSON.parse(saved);
-        
+
         // Проверяем, нужна ли миграция (если нет isDarkMode поля)
         let savedSettings: ThemeSettings;
         if (savedData.isDarkMode === undefined) {
@@ -320,29 +320,28 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         } else {
           savedSettings = savedData;
         }
-        
+
         setSettings(savedSettings);
         setIsDarkMode(savedSettings.isDarkMode || false);
-        
+
         // Находим текущую тему
-        let theme = savedSettings.availableThemes.find(t => t.id === savedSettings.currentTheme);
-        
+        let theme = savedSettings.availableThemes.find((t) => t.id === savedSettings.currentTheme);
+
         // Если кастомная тема
         if (savedSettings.customTheme) {
           theme = savedSettings.customTheme;
         }
-        
+
         if (theme) {
           setCurrentTheme(theme);
         }
       }
-      
+
       // Загружаем палитры
       const savedPalettes = localStorage.getItem('situs-color-palettes');
       if (savedPalettes) {
         setColorPalettes(JSON.parse(savedPalettes));
       }
-      
     } catch (error) {
       console.error('Ошибка загрузки настроек темы:', error);
       // В случае ошибки используем дефолтные настройки
@@ -360,13 +359,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       id: `palette-${Date.now()}`,
       name,
       colors,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
-    
+
     const updatedPalettes = [...colorPalettes, newPalette];
     setColorPalettes(updatedPalettes);
     localStorage.setItem('situs-color-palettes', JSON.stringify(updatedPalettes));
-    
+
     return newPalette;
   };
 
@@ -374,7 +373,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
    * Удаление цветовой палитры
    */
   const deleteColorPalette = (id: string) => {
-    const updatedPalettes = colorPalettes.filter(p => p.id !== id);
+    const updatedPalettes = colorPalettes.filter((p) => p.id !== id);
     setColorPalettes(updatedPalettes);
     localStorage.setItem('situs-color-palettes', JSON.stringify(updatedPalettes));
   };
@@ -390,16 +389,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       config: currentTheme,
       createdAt: new Date(),
       isBuiltIn: false,
-      tags
+      tags,
     };
-    
+
     const updatedSettings = {
       ...settings,
-      templates: [...settings.templates, template]
+      templates: [...settings.templates, template],
     };
     setSettings(updatedSettings);
     localStorage.setItem('situs-theme-settings', JSON.stringify(updatedSettings));
-    
+
     return template;
   };
 
@@ -409,7 +408,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const deleteTemplate = (id: string) => {
     const updatedSettings = {
       ...settings,
-      templates: settings.templates.filter(t => t.id !== id)
+      templates: settings.templates.filter((t) => t.id !== id),
     };
     setSettings(updatedSettings);
     localStorage.setItem('situs-theme-settings', JSON.stringify(updatedSettings));
@@ -419,7 +418,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
    * Загрузка шаблона
    */
   const loadTemplate = (id: string) => {
-    const template = settings.templates.find(t => t.id === id);
+    const template = settings.templates.find((t) => t.id === id);
     if (template) {
       setCurrentTheme(template.config);
       console.log('Шаблон загружен:', template.name);
@@ -433,7 +432,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const exportData = {
       theme: currentTheme,
       isDarkMode,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
     return JSON.stringify(exportData, null, 2);
   };
@@ -484,14 +483,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     deleteTemplate,
     loadTemplate,
     exportTheme,
-    importTheme
+    importTheme,
   };
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 };
 
 /**

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Calender4 = () => {
   return (
@@ -6,9 +6,7 @@ const Calender4 = () => {
       <div className="mx-auto px-4 lg:container">
         <div className="mx-auto flex w-full max-w-[380px] flex-col rounded-lg bg-white px-4 py-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark sm:px-6 sm:py-[30px]">
           <div className="flex items-center justify-between pb-2">
-            <p className="text-base font-medium text-dark dark:text-white">
-              December 2025
-            </p>
+            <p className="text-base font-medium text-dark dark:text-white">December 2025</p>
             <div className="flex items-center justify-end space-x-[10px]">
               <span className="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-sm border-[.5px] border-stroke bg-gray-2 text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-white">
                 <svg
@@ -116,25 +114,17 @@ const WeekRow = ({ children }) => {
   );
 };
 const Week = ({ name }) => {
-  return (
-    <span className="flex h-[38px] w-[38px] items-center justify-center">
-      {name}
-    </span>
-  );
+  return <span className="flex h-[38px] w-[38px] items-center justify-center">{name}</span>;
 };
 
 const DayRow = ({ children }) => {
-  return (
-    <div className="flex justify-between pb-2 text-sm font-medium text-dark dark:text-white">
-      {children}
-    </div>
-  );
+  return <div className="flex justify-between pb-2 text-sm font-medium text-dark dark:text-white">{children}</div>;
 };
 const Day = ({ active, number }) => {
   return (
     <span
       className={`${
-        active && "border-primary bg-primary! text-white"
+        active && 'border-primary bg-primary! text-white'
       } flex h-[38px] w-[38px] items-center justify-center rounded-full hover:bg-gray dark:hover:bg-dark`}
     >
       {number}

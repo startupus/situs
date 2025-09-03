@@ -17,18 +17,18 @@ const Portfolio4 = () => {
 
   return (
     <>
-      <section className="py-20 lg:py-[120px] dark:bg-dark">
+      <section className="py-20 dark:bg-dark lg:py-[120px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Our Portfolio
                 </span>
-                <h2 className="text-dark dark:text-white mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
+                <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   Our Recent Projects
                 </h2>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
@@ -72,7 +72,7 @@ const Portfolio4 = () => {
               </Swiper>
               <div>
                 <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                  <button className="text-body-color dark:text-dark-6 drop-shadow-portfolio dark:drop-shadow-none absolute left-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white dark:bg-dark-2 transition-all hover:bg-primary hover:text-white md:-left-12 md:top-1/2 lg:-left-16">
+                  <button className="absolute left-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-left-12 md:top-1/2 lg:-left-16">
                     <svg
                       width={22}
                       height={22}
@@ -85,11 +85,11 @@ const Portfolio4 = () => {
                         d="M14.8844 19.6969C14.6781 19.6969 14.4719 19.6281 14.3344 19.4562L6.56562 11.55C6.25624 11.2406 6.25624 10.7594 6.56562 10.45L14.3344 2.54374C14.6437 2.23436 15.125 2.23436 15.4344 2.54374C15.7437 2.85311 15.7437 3.33436 15.4344 3.64374L8.21562 11L15.4687 18.3562C15.7781 18.6656 15.7781 19.1469 15.4687 19.4562C15.2625 19.5937 15.0906 19.6969 14.8844 19.6969Z"
                         fill=""
                       />
-                    </svg>                    
+                    </svg>
                   </button>
                 </div>
                 <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                  <button className="text-body-color dark:text-dark-6 drop-shadow-portfolio dark:drop-shadow-none absolute top-full left-auto right-[30%] flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white dark:bg-dark-2 transition-all hover:bg-primary hover:text-white md:top-1/2 md:-right-12 lg:-right-16">
+                  <button className="absolute left-auto right-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-right-12 md:top-1/2 lg:-right-16">
                     <svg
                       width={22}
                       height={22}
@@ -120,11 +120,13 @@ const PortfolioCard = ({ subtitle, title, details, link, button, image }) => {
   return (
     <div className="relative w-full items-stretch overflow-hidden rounded-md md:flex">
       <div className="w-full">
-        <div className="bg-primary xs:px-8 py-12 px-5 md:px-11 xl:py-20">
+        <div className="bg-primary px-5 py-12 xs:px-8 md:px-11 xl:py-20">
           <span className="mb-2 inline-block text-xs font-medium text-white">
             {subtitle}
           </span>
-          <h3 className="mb-5 text-[22px] leading-[26px] font-bold text-white">{title}</h3>
+          <h3 className="mb-5 text-[22px] font-bold leading-[26px] text-white">
+            {title}
+          </h3>
           <p className="mb-[50px] text-sm text-white">{details}</p>
           <a
             href={link}
@@ -157,7 +159,7 @@ const PortfolioCard = ({ subtitle, title, details, link, button, image }) => {
           />
         </div>
       </div>
-      <div className="absolute left-1/2 bottom-0 hidden -translate-x-1/2 md:block">
+      <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 md:block">
         <svg
           width="40"
           height="86"

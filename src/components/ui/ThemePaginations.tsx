@@ -1,10 +1,6 @@
 // src/components/ui/ThemePaginations.tsx
 import React from 'react';
-import { 
-  Pagination1,
-  Pagination2,
-  Pagination3
-} from './core';
+import { Pagination1, Pagination2, Pagination3 } from './core';
 
 // Интерфейс для пропсов Pagination компонентов
 interface PaginationProps {
@@ -24,21 +20,15 @@ interface PaginationProps {
 // Утилита для адаптации стилей под глобальную тему
 const adaptPaginationProps = (props: PaginationProps) => ({
   ...props,
-  className: `${props.className || ''} transition-all duration-200`
+  className: `${props.className || ''} transition-all duration-200`,
 });
 
 // Pagination Variants
-export const ThemePagination1: React.FC<PaginationProps> = (props) => (
-  <Pagination1 {...adaptPaginationProps(props)} />
-);
+export const ThemePagination1: React.FC<PaginationProps> = (props) => <Pagination1 {...adaptPaginationProps(props)} />;
 
-export const ThemePagination2: React.FC<PaginationProps> = (props) => (
-  <Pagination2 {...adaptPaginationProps(props)} />
-);
+export const ThemePagination2: React.FC<PaginationProps> = (props) => <Pagination2 {...adaptPaginationProps(props)} />;
 
-export const ThemePagination3: React.FC<PaginationProps> = (props) => (
-  <Pagination3 {...adaptPaginationProps(props)} />
-);
+export const ThemePagination3: React.FC<PaginationProps> = (props) => <Pagination3 {...adaptPaginationProps(props)} />;
 
 // Экспорт всех Pagination компонентов как единый объект для удобства
 export const ThemePaginations = {

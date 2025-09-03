@@ -2,13 +2,13 @@ import React from "react";
 
 const RecentProduct5 = () => {
   return (
-    <section className="bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+    <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="mb-[50px] max-w-[575px]">
           <h2 className="mb-[22px] text-3xl font-bold text-dark dark:text-white sm:text-4xl">
             Trending Items
           </h2>
-          <p className="text-body-color dark:text-dark-6 text-base">
+          <p className="text-base text-body-color dark:text-dark-6">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet
             molestie nunc. Vestibulum tempus justo.
           </p>
@@ -58,10 +58,10 @@ const ProductCard = ({ subtitle, title, details, link, img, bgColor }) => {
             className="w-full object-cover object-center"
           />
           <div
-            className={`from-${bgColor} xs:px-8 absolute left-0 top-0 flex h-full w-full items-end justify-between rounded-md bg-linear-to-tr to-transparent py-8 px-5 md:px-5 xl:px-8`}
+            className={`from-${bgColor} bg-linear-to-tr absolute left-0 top-0 flex h-full w-full items-end justify-between rounded-md to-transparent px-5 py-8 xs:px-8 md:px-5 xl:px-8`}
           >
             <div className="w-full">
-              <span 
+              <span
                 className="mb-2 block text-base font-semibold text-white"
                 style={{
                   textShadow: "0px 1px 5px rgba(0, 0, 0, 0.14)",
@@ -78,7 +78,7 @@ const ProductCard = ({ subtitle, title, details, link, img, bgColor }) => {
               >
                 {title}
               </a>
-              <p 
+              <p
                 className="max-w-[255px] text-sm text-white/80"
                 style={{
                   textShadow: "0px 1px 5px rgba(0, 0, 0, 0.14)",
@@ -90,7 +90,7 @@ const ProductCard = ({ subtitle, title, details, link, img, bgColor }) => {
             <div className="w-full max-w-[36px] text-right">
               <a
                 href={link}
-                className="hover:bg-primary flex h-[34px] w-[34px] items-center justify-center rounded-full drop-shadow-three bg-white dark:bg-dark-2 text-dark dark:text-white hover:text-white"
+                className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-white text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white"
               >
                 <svg
                   width={16}

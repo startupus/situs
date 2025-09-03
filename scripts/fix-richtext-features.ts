@@ -12,11 +12,11 @@ async function fixRichTextFeatures() {
   const replacements = [
     // Исправляем неправильные имена заголовков
     ['types.RichTextFeatures.Heading2', 'types.RichTextFeatures.h2'],
-    ['types.RichTextFeatures.Heading3', 'types.RichTextFeatures.h3'], 
+    ['types.RichTextFeatures.Heading3', 'types.RichTextFeatures.h3'],
     ['types.RichTextFeatures.Heading4', 'types.RichTextFeatures.h4'],
     ['types.RichTextFeatures.Heading5', 'types.RichTextFeatures.h5'],
     ['types.RichTextFeatures.Heading6', 'types.RichTextFeatures.h6'],
-    
+
     // Исправляем остальные неправильные имена
     ['types.RichTextFeatures.Italic', 'types.RichTextFeatures.italic'],
     ['types.RichTextFeatures.Code', 'types.RichTextFeatures.code'],
@@ -46,4 +46,4 @@ async function fixRichTextFeatures() {
   console.log(`🎉 Исправлено файлов: ${fixedFiles}`);
 }
 
-fixRichTextFeatures().catch(console.error); 
+fixRichTextFeatures().catch(console.error);

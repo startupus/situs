@@ -33,7 +33,7 @@ export const AdminThemeProvider: React.FC<AdminThemeProviderProps> = ({ children
   // Применение темы к DOM
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (isDarkMode) {
       root.classList.add('admin-dark');
       root.classList.remove('admin-light');
@@ -45,7 +45,7 @@ export const AdminThemeProvider: React.FC<AdminThemeProviderProps> = ({ children
 
   const setTheme = (newTheme: AdminTheme) => {
     setThemeState(newTheme);
-    
+
     let newIsDarkMode = false;
     if (newTheme === 'dark') {
       newIsDarkMode = true;
@@ -54,13 +54,13 @@ export const AdminThemeProvider: React.FC<AdminThemeProviderProps> = ({ children
     } else if (newTheme === 'system') {
       newIsDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-    
+
     setIsDarkMode(newIsDarkMode);
-    
+
     // Сохранение настроек
     const settings: AdminThemeSettings = {
       theme: newTheme,
-      isDarkMode: newIsDarkMode
+      isDarkMode: newIsDarkMode,
     };
     localStorage.setItem('admin-theme-settings', JSON.stringify(settings));
   };
@@ -75,7 +75,7 @@ export const AdminThemeProvider: React.FC<AdminThemeProviderProps> = ({ children
   const applyCustomTheme = (themeConfig: any) => {
     // Применяем кастомную тему
     const root = document.documentElement;
-    
+
     if (themeConfig.customColors) {
       Object.entries(themeConfig.customColors).forEach(([key, value]) => {
         if (value) {
@@ -114,14 +114,14 @@ export const AdminThemeProvider: React.FC<AdminThemeProviderProps> = ({ children
   // Загружаем сохранённую тему при инициализации
   useEffect(() => {
     loadSavedTheme();
-    
+
     // Слушаем события изменения темы
     const handleThemeChange = (event: CustomEvent) => {
       applyCustomTheme(event.detail);
     };
 
     window.addEventListener('themeChanged', handleThemeChange as EventListener);
-    
+
     return () => {
       window.removeEventListener('themeChanged', handleThemeChange as EventListener);
     };
@@ -133,14 +133,10 @@ export const AdminThemeProvider: React.FC<AdminThemeProviderProps> = ({ children
     toggleTheme,
     setTheme,
     applyCustomTheme,
-    loadSavedTheme
+    loadSavedTheme,
   };
 
-  return (
-    <AdminThemeContext.Provider value={contextValue}>
-      {children}
-    </AdminThemeContext.Provider>
-  );
+  return <AdminThemeContext.Provider value={contextValue}>{children}</AdminThemeContext.Provider>;
 };
 
 export const useAdminTheme = (): AdminThemeContextType => {

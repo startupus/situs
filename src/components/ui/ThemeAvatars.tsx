@@ -1,16 +1,6 @@
 // src/components/ui/ThemeAvatars.tsx
 import React from 'react';
-import { 
-  Avatar1,
-  Avatar2,
-  Avatar3,
-  Avatar4,
-  Avatar5,
-  Avatar6,
-  Avatar7,
-  Avatar8,
-  Avatar9
-} from './core';
+import { Avatar1, Avatar2, Avatar3, Avatar4, Avatar5, Avatar6, Avatar7, Avatar8, Avatar9 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Avatar Variants с поддержкой темы

@@ -17,10 +17,10 @@ export const useMenuSystem = (projectId?: string) => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await fetch(`/api/menu-types?projectId=${projectId}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setMenuTypes(data.data);
       } else {
@@ -38,7 +38,7 @@ export const useMenuSystem = (projectId?: string) => {
     try {
       const response = await fetch(`/api/menu-items?menuTypeId=${menuTypeId}`);
       const data = await response.json();
-      
+
       if (data.success) {
         return data.data;
       } else {
@@ -51,19 +51,17 @@ export const useMenuSystem = (projectId?: string) => {
 
   // Получение авторизованных пунктов меню (с учетом прав доступа)
   const getAuthorizedMenuItems = async (
-    menuTypeId: string, 
+    menuTypeId: string,
     accessLevels: string[] = ['PUBLIC'],
-    language: string = '*'
+    language: string = '*',
   ): Promise<MenuItemData[]> => {
     try {
       const levels = accessLevels.join(',');
       const params = new URLSearchParams({ menuTypeId, accessLevels: levels });
       if (language) params.set('language', language);
-      const response = await fetch(
-        `/api/menu-items/authorized?${params.toString()}`
-      );
+      const response = await fetch(`/api/menu-items/authorized?${params.toString()}`);
       const data = await response.json();
-      
+
       if (data.success) {
         return data.data;
       } else {
@@ -77,11 +75,9 @@ export const useMenuSystem = (projectId?: string) => {
   // Получение lookup таблицы для роутинга
   const getMenuLookup = async (menuTypeId: string, language = '*') => {
     try {
-      const response = await fetch(
-        `/api/menu-items/lookup?menuTypeId=${menuTypeId}&language=${language}`
-      );
+      const response = await fetch(`/api/menu-items/lookup?menuTypeId=${menuTypeId}&language=${language}`);
       const data = await response.json();
-      
+
       if (data.success) {
         return data.data;
       } else {
@@ -97,7 +93,7 @@ export const useMenuSystem = (projectId?: string) => {
     try {
       const response = await fetch(`/api/menu-items/${menuItemId}/resolve`);
       const data = await response.json();
-      
+
       if (data.success) {
         return data.data;
       } else {
@@ -112,10 +108,10 @@ export const useMenuSystem = (projectId?: string) => {
   const getActiveMenuItem = async (menuTypeId: string, currentPath: string, language: string = '*') => {
     try {
       const response = await fetch(
-        `/api/menu-items/active-by-path?menuTypeId=${menuTypeId}&path=${encodeURIComponent(currentPath)}&language=${language}`
+        `/api/menu-items/active-by-path?menuTypeId=${menuTypeId}&path=${encodeURIComponent(currentPath)}&language=${language}`,
       );
       const data = await response.json();
-      
+
       if (data.success) {
         return data.data; // { activeItem, breadcrumbs }
       } else {
@@ -132,14 +128,14 @@ export const useMenuSystem = (projectId?: string) => {
     const rootItems: MenuItemData[] = [];
 
     // Создаем карту всех пунктов
-    items.forEach(item => {
+    items.forEach((item) => {
       itemsMap.set(item.id, { ...item, children: [] });
     });
 
     // Строим дерево
-    items.forEach(item => {
+    items.forEach((item) => {
       const itemWithChildren = itemsMap.get(item.id)!;
-      
+
       if (item.parentId) {
         const parent = itemsMap.get(item.parentId);
         if (parent) {
@@ -159,8 +155,8 @@ export const useMenuSystem = (projectId?: string) => {
         }
         return a.title.localeCompare(b.title);
       });
-      
-      items.forEach(item => {
+
+      items.forEach((item) => {
         if (item.children && item.children.length > 0) {
           sortItems(item.children);
         }
@@ -176,11 +172,11 @@ export const useMenuSystem = (projectId?: string) => {
     if (!projectId) return;
 
     const eventSource = new EventSource('/api/realtime/projects');
-    
+
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        
+
         // Обрабатываем только события для нашего проекта
         if (data.payload?.projectId !== projectId) return;
 
@@ -191,7 +187,7 @@ export const useMenuSystem = (projectId?: string) => {
             // Перезагружаем типы меню
             loadMenuTypes();
             break;
-            
+
           case 'menu_item_created':
           case 'menu_item_updated':
           case 'menu_item_deleted':
@@ -231,7 +227,7 @@ export const useMenuSystem = (projectId?: string) => {
     getMenuLookup,
     resolveMenuItem,
     getActiveMenuItem,
-    buildMenuTree
+    buildMenuTree,
   };
 };
 
@@ -240,10 +236,10 @@ export const useMenuSystem = (projectId?: string) => {
  * Автоматически загружает и строит дерево меню для отображения
  */
 export const useNavigationMenu = (
-  projectId: string, 
+  projectId: string,
   menuTypeName: string = 'main',
   accessLevels: string[] = ['PUBLIC'],
-  language: string = '*'
+  language: string = '*',
 ) => {
   const [menuItems, setMenuItems] = useState<MenuItemData[]>([]);
   const [menuTree, setMenuTree] = useState<MenuItemData[]>([]);
@@ -259,7 +255,7 @@ export const useNavigationMenu = (
         setError(null);
 
         // Находим нужный тип меню
-        const menuType = menuTypes.find(mt => mt.name === menuTypeName);
+        const menuType = menuTypes.find((mt) => mt.name === menuTypeName);
         if (!menuType) {
           if (menuTypes.length > 0) {
             setError(`Тип меню "${menuTypeName}" не найден`);
@@ -290,6 +286,6 @@ export const useNavigationMenu = (
     menuItems,
     menuTree,
     loading,
-    error
+    error,
   };
 };

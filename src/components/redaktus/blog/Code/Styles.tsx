@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Styles = () => (
   <style>{`
@@ -115,6 +115,6 @@ const Styles = () => (
           }
             
       `}</style>
-)
+);
 
-export default Styles
+export default Styles;

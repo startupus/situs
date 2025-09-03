@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProjectData } from '../../../services/projectApi';
-import { FiHome, FiFileText, FiBookOpen, FiPhone, FiInfo, FiPlus, FiSearch, FiEdit, FiEye, FiX, FiSettings } from 'react-icons/fi';
+import {
+  FiHome,
+  FiFileText,
+  FiBookOpen,
+  FiPhone,
+  FiInfo,
+  FiPlus,
+  FiSearch,
+  FiEdit,
+  FiEye,
+  FiX,
+  FiSettings,
+} from 'react-icons/fi';
 import { testIds } from '../../ui/testids';
 
 interface ProjectPagesProps {
@@ -13,9 +25,10 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const filteredPages = project.pages.filter(page => {
-    const matchesSearch = page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         page.slug.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredPages = project.pages.filter((page) => {
+    const matchesSearch =
+      page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      page.slug.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || page.status.toLowerCase() === statusFilter.toLowerCase();
     return matchesSearch && matchesStatus;
   });
@@ -66,12 +79,8 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
     <div className="p-6" data-testid={testIds.pages.container}>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-dark dark:text-white mb-2">
-            Страницы сайта
-          </h2>
-          <p className="text-body-color dark:text-dark-6">
-            Управляйте страницами проекта {project.name}
-          </p>
+          <h2 className="text-xl font-semibold text-dark dark:text-white mb-2">Страницы сайта</h2>
+          <p className="text-body-color dark:text-dark-6">Управляйте страницами проекта {project.name}</p>
         </div>
         <div className="flex gap-2">
           <Link
@@ -103,7 +112,10 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white placeholder-body-color dark:placeholder-dark-6 focus:border-primary focus:outline-none transition-colors"
               />
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6" aria-hidden />
+              <FiSearch
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6"
+                aria-hidden
+              />
             </div>
           </div>
 
@@ -126,24 +138,25 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
 
       {/* Список страниц */}
       {filteredPages.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="text-4xl mb-4 flex items-center justify-center"><FiFileText aria-hidden /></div>
+        <div className="text-center py-12">
+          <div className="text-4xl mb-4 flex items-center justify-center">
+            <FiFileText aria-hidden />
+          </div>
           <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
             {searchTerm || statusFilter !== 'all' ? 'Страницы не найдены' : 'Нет страниц'}
           </h3>
           <p className="text-body-color dark:text-dark-6 mb-4">
-            {searchTerm || statusFilter !== 'all' 
+            {searchTerm || statusFilter !== 'all'
               ? 'Попробуйте изменить фильтры поиска'
-              : 'Создайте первую страницу в редакторе'
-            }
+              : 'Создайте первую страницу в редакторе'}
           </p>
           {!searchTerm && statusFilter === 'all' && (
-                  <Link
-                    to={`/redaktus?projectId=${project.id}`}
-                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-                  >
-                    <FiEdit aria-hidden /> Открыть редактор
-                  </Link>
+            <Link
+              to={`/redaktus?projectId=${project.id}`}
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
+            >
+              <FiEdit aria-hidden /> Открыть редактор
+            </Link>
           )}
         </div>
       ) : (
@@ -157,39 +170,31 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xl">
-                      {getPageTypeIcon(page.pageType, page.isHomePage)}
-                    </span>
+                    <span className="text-xl">{getPageTypeIcon(page.pageType, page.isHomePage)}</span>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-dark dark:text-white">
                         {page.title}
                         {page.isHomePage && (
-                          <span className="ml-2 text-xs bg-primary text-white px-2 py-1 rounded-full">
-                            Главная
-                          </span>
+                          <span className="ml-2 text-xs bg-primary text-white px-2 py-1 rounded-full">Главная</span>
                         )}
                       </h3>
-                      <p className="text-sm text-body-color dark:text-dark-6">
-                        /{page.slug}
-                      </p>
+                      <p className="text-sm text-body-color dark:text-dark-6">/{page.slug}</p>
                     </div>
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(page.status)}`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(page.status)}`}
+                    >
                       {getStatusText(page.status)}
                     </span>
                   </div>
 
                   {page.metaDescription && (
-                    <p className="text-sm text-body-color dark:text-dark-6 mb-3 line-clamp-2">
-                      {page.metaDescription}
-                    </p>
+                    <p className="text-sm text-body-color dark:text-dark-6 mb-3 line-clamp-2">{page.metaDescription}</p>
                   )}
 
                   <div className="flex items-center gap-4 text-xs text-body-color dark:text-dark-6">
                     <span>Тип: {page.pageType}</span>
                     <span>Обновлена: {new Date(page.updatedAt).toLocaleDateString('ru-RU')}</span>
-                    {page.content?.blocks && (
-                      <span>Блоков: {page.content.blocks.length}</span>
-                    )}
+                    {page.content?.blocks && <span>Блоков: {page.content.blocks.length}</span>}
                   </div>
                 </div>
 
@@ -219,9 +224,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-dark-2 rounded-lg w-full max-w-md">
             <div className="flex items-center justify-between p-6 border-b border-stroke dark:border-dark-3">
-              <h2 className="text-xl font-semibold text-dark dark:text-white">
-                Создать страницу
-              </h2>
+              <h2 className="text-xl font-semibold text-dark dark:text-white">Создать страницу</h2>
               <button
                 onClick={() => setShowCreateModal(false)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"

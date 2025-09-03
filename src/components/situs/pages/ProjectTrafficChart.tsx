@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 interface ProjectTrafficChartProps {
   data: {
@@ -10,7 +10,7 @@ interface ProjectTrafficChartProps {
 }
 
 const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLabels }) => {
-  const series = data.map(project => ({
+  const series = data.map((project) => ({
     name: project.projectName,
     data: project.traffic,
   }));
@@ -18,17 +18,17 @@ const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLab
   const options = {
     legend: {
       show: false,
-      position: "top" as const,
-      horizontalAlign: "left" as const,
+      position: 'top' as const,
+      horizontalAlign: 'left' as const,
     },
-    colors: ["#3758F9", "#13C296", "#F2994A", "#E53E3E", "#805AD5"],
+    colors: ['#3758F9', '#13C296', '#F2994A', '#E53E3E', '#805AD5'],
     chart: {
-      fontFamily: "Inter, sans-serif",
+      fontFamily: 'Inter, sans-serif',
       height: 450,
-      type: "line" as const,
+      type: 'line' as const,
       dropShadow: {
         enabled: true,
-        color: "#623CEA14",
+        color: '#623CEA14',
         top: 10,
         blur: 4,
         left: 0,
@@ -58,7 +58,7 @@ const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLab
     ],
     stroke: {
       width: [4, 4, 4, 4, 4],
-      curve: "smooth" as const,
+      curve: 'smooth' as const,
     },
     markers: {
       size: 0,
@@ -79,7 +79,7 @@ const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLab
       },
     },
     xaxis: {
-      type: "category" as const,
+      type: 'category' as const,
       categories: timeLabels,
       axisBorder: {
         show: false,
@@ -89,35 +89,35 @@ const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLab
       },
       labels: {
         style: {
-          colors: "#64748B",
-          fontSize: "12px",
-          fontFamily: "Inter, sans-serif",
+          colors: '#64748B',
+          fontSize: '12px',
+          fontFamily: 'Inter, sans-serif',
         },
       },
     },
     yaxis: {
       title: {
-        text: "Посетители",
+        text: 'Посетители',
         style: {
-          fontSize: "14px",
-          fontFamily: "Inter, sans-serif",
-          color: "#64748B",
+          fontSize: '14px',
+          fontFamily: 'Inter, sans-serif',
+          color: '#64748B',
         },
       },
       min: 0,
       max: 1000,
       labels: {
         style: {
-          colors: "#64748B",
-          fontSize: "12px",
-          fontFamily: "Inter, sans-serif",
+          colors: '#64748B',
+          fontSize: '12px',
+          fontFamily: 'Inter, sans-serif',
         },
       },
     },
     tooltip: {
       y: {
         formatter: function (val: number) {
-          return val + " посетителей";
+          return val + ' посетителей';
         },
       },
     },
@@ -127,12 +127,8 @@ const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLab
     <div className="mx-auto w-full max-w-[760px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
       <div className="flex justify-between">
         <div>
-          <h5 className="text-xl font-semibold text-dark dark:text-white">
-            Динамика посещаемости
-          </h5>
-          <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">
-            Тренды посещаемости по проектам
-          </p>
+          <h5 className="text-xl font-semibold text-dark dark:text-white">Динамика посещаемости</h5>
+          <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">Тренды посещаемости по проектам</p>
         </div>
         <div>
           <div className="relative z-20 inline-block rounded-md bg-transparent">
@@ -160,15 +156,10 @@ const ProjectTrafficChart: React.FC<ProjectTrafficChartProps> = ({ data, timeLab
         </div>
       </div>
       <div id="chartTwo" className="-mx-5">
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="line"
-          height={350}
-        />
+        <ReactApexChart options={options} series={series} type="line" height={350} />
       </div>
     </div>
   );
 };
 
-export default ProjectTrafficChart; 
+export default ProjectTrafficChart;

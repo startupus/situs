@@ -37,12 +37,12 @@ const Wishlist = () => {
     <>
       <Breadcrumb pageName="Wishlist" />
 
-      <section className="bg-tg-bg dark:bg-dark pt-24 pb-12 lg:pb-[90px]">
+      <section className="bg-tg-bg pb-12 pt-24 dark:bg-dark lg:pb-[90px]">
         <div className="container mx-auto">
-          <div className="flex justify-center -mx-4">
+          <div className="-mx-4 flex justify-center">
             <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
               <div className="mb-9">
-                <h2 className="mb-2 text-3xl font-semibold text-dark sm:text-4xl dark:text-white">
+                <h2 className="mb-2 text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
                   Your Favorite Items
                 </h2>
                 <p className="text-base font-medium text-body-color dark:text-dark-6">
@@ -52,25 +52,25 @@ const Wishlist = () => {
             </div>
           </div>
 
-          <div className="flex justify-center -mx-4">
+          <div className="-mx-4 flex justify-center">
             <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
-              <div className="border-stroke dark:border-dark-3 dark:bg-dark-2 max-w-full overflow-x-auto rounded-[10px] border bg-white">
+              <div className="max-w-full overflow-x-auto rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
                 <table className="w-full table-auto">
                   <thead>
                     <tr className="text-left">
-                      <th className="text-dark min-w-[300px] px-4 py-[18px] text-base font-medium xl:pl-9 dark:text-white">
+                      <th className="min-w-[300px] px-4 py-[18px] text-base font-medium text-dark dark:text-white xl:pl-9">
                         Product
                       </th>
-                      <th className="text-dark min-w-[90px] px-4 py-[18px] text-base font-medium dark:text-white">
+                      <th className="min-w-[90px] px-4 py-[18px] text-base font-medium text-dark dark:text-white">
                         Price
                       </th>
-                      <th className="text-dark min-w-[150px] px-4 py-[18px] text-base font-medium dark:text-white">
+                      <th className="min-w-[150px] px-4 py-[18px] text-base font-medium text-dark dark:text-white">
                         Stock Status
                       </th>
-                      <th className="text-dark min-w-[165px] px-4 py-[18px] text-base font-medium dark:text-white">
+                      <th className="min-w-[165px] px-4 py-[18px] text-base font-medium text-dark dark:text-white">
                         Action
                       </th>
-                      <th className="text-dark min-w-[115px] px-4 py-[18px] text-center text-base font-medium xl:pr-9 dark:text-white">
+                      <th className="min-w-[115px] px-4 py-[18px] text-center text-base font-medium text-dark dark:text-white xl:pr-9">
                         Remove
                       </th>
                     </tr>
@@ -78,7 +78,7 @@ const Wishlist = () => {
                   <tbody>
                     {wishlistItems.map((item, index) => (
                       <tr key={index}>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px] xl:pl-9">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3 xl:pl-9">
                           <div className="flex items-center">
                             <img
                               src={item.image}
@@ -86,7 +86,7 @@ const Wishlist = () => {
                               className="mr-5 h-[70px] w-[70px] rounded-[5px]"
                             />
                             <div>
-                              <h5 className="text-dark mb-0.5 text-lg font-semibold dark:text-white">
+                              <h5 className="mb-0.5 text-lg font-semibold text-dark dark:text-white">
                                 <Link
                                   to={item.link}
                                   className="hover:text-primary"
@@ -100,32 +100,32 @@ const Wishlist = () => {
                             </div>
                           </div>
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px]">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3">
                           <p className="text-lg font-medium text-dark dark:text-white">
                             {item.price}
                           </p>
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px]">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3">
                           <span
-                            className={`inline-flex items-center justify-center rounded-full px-[10px] py-[3px] text-xs leading-[1.67] font-medium ${item.stockStatus === "In Stock" && "bg-green-light-6 text-green-dark"} ${item.stockStatus === "Stock Out" && "bg-red-light-5 text-red-dark"}`}
+                            className={`inline-flex items-center justify-center rounded-full px-[10px] py-[3px] text-xs font-medium leading-[1.67] ${item.stockStatus === "In Stock" && "bg-green-light-6 text-green-dark"} ${item.stockStatus === "Stock Out" && "bg-red-light-5 text-red-dark"}`}
                           >
                             {item.stockStatus}
                           </span>
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px]">
+                        <td className="border-t border-stroke px-4 py-[30px] dark:border-dark-3">
                           {item.stockStatus === "In Stock" && (
-                            <button className="bg-primary hover:bg-blue-dark inline-block rounded-md px-5 py-2 text-sm leading-[1.57] font-medium text-white">
+                            <button className="inline-block rounded-md bg-primary px-5 py-2 text-sm font-medium leading-[1.57] text-white hover:bg-blue-dark">
                               Add to Cart
                             </button>
                           )}
 
                           {item.stockStatus === "Stock Out" && (
-                            <button className="bg-dark hover:bg-dark/90 inline-block rounded-md px-5 py-2 text-sm leading-[1.57] font-medium text-white">
+                            <button className="inline-block rounded-md bg-dark px-5 py-2 text-sm font-medium leading-[1.57] text-white hover:bg-dark/90">
                               Contact Us
                             </button>
                           )}
                         </td>
-                        <td className="border-stroke dark:border-dark-3 border-t px-4 py-[30px] pr-9 text-center">
+                        <td className="border-t border-stroke px-4 py-[30px] pr-9 text-center dark:border-dark-3">
                           <button className="text-body-color hover:text-red dark:text-dark-6 dark:hover:text-red">
                             <svg
                               width="20"

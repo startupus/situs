@@ -1,18 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 interface InputTypeProps {
-  value: string
-  onChange: (value: string) => void
-  type?: string
-  placeholder?: string
+  value: string;
+  onChange: (value: string) => void;
+  type?: string;
+  placeholder?: string;
 }
 
-const InputType: React.FC<InputTypeProps> = ({ 
-  value, 
-  onChange, 
-  type = 'text',
-  placeholder 
-}) => {
+const InputType: React.FC<InputTypeProps> = ({ value, onChange, type = 'text', placeholder }) => {
   return (
     <input
       type={type}
@@ -21,7 +16,7 @@ const InputType: React.FC<InputTypeProps> = ({
       placeholder={placeholder}
       className="redaktus-input-type"
     />
-  )
-}
+  );
+};
 
-export default InputType 
+export default InputType;

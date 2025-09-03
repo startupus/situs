@@ -3,15 +3,15 @@ import React from "react";
 const About4 = () => {
   return (
     <>
-      <section className="relative pt-[150px] pb-[110px] lg:pt-[170px] bg-white dark:bg-dark">
+      <section className="relative bg-white pb-[110px] pt-[150px] dark:bg-dark lg:pt-[170px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap items-center -mx-4">
+          <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
               <div className="mb-12 max-w-[540px] lg:mb-0">
                 <h2 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px]/[48px]">
                   Smart solution for starting your business
                 </h2>
-                <p className="mb-10 text-base leading-relaxed dark:text-dark-6 text-body-color">
+                <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
                   Proin gravida nibh vel velit auctor aliquet. aks Aenean
                   sollicitudin, lorem quis bibendum auctor, nisi elit consequat
                   ipsum, nec sagittis sem.consequat ipsum, nec sagittis sem nibh
@@ -21,7 +21,7 @@ const About4 = () => {
                 <h3 className="mb-8 text-2xl font-bold text-dark dark:text-white">
                   Marketing solutions
                 </h3>
-                <ul className="pb-6 list-disc list-inside marker:text-primary">
+                <ul className="list-inside list-disc pb-6 marker:text-primary">
                   <li className="mb-4 text-base text-body-color dark:text-dark-6">
                     Consectetur adipiscing elit in voluptate velit.
                   </li>
@@ -31,7 +31,7 @@ const About4 = () => {
                 </ul>
                 <a
                   href="/#"
-                  className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-primary hover:bg-primary/90"
+                  className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-primary/90"
                 >
                   Know More
                 </a>
@@ -39,13 +39,13 @@ const About4 = () => {
             </div>
 
             <div className="w-full px-4 lg:w-1/2">
-              <div className="flex flex-wrap -mx-2 sm:-mx-4 lg:-mx-2 xl:-mx-4">
+              <div className="-mx-2 flex flex-wrap sm:-mx-4 lg:-mx-2 xl:-mx-4">
                 <div className="w-full px-2 sm:w-1/2 sm:px-4 lg:px-2 xl:px-4">
                   <div className="mb-4 sm:mb-8 sm:h-[400px] md:h-[540px] lg:h-[400px] xl:h-[500px]">
                     <img
                       src="https://i.ibb.co/8mB6K20/image-01.jpg"
                       alt="about image"
-                      className="object-cover object-center w-full h-full"
+                      className="h-full w-full object-cover object-center"
                     />
                   </div>
                 </div>
@@ -54,10 +54,10 @@ const About4 = () => {
                     <img
                       src="https://i.ibb.co/fp6kRJc/image-02.jpg"
                       alt="about image"
-                      className="object-cover object-center w-full h-full"
+                      className="h-full w-full object-cover object-center"
                     />
                   </div>
-                  <div className="bg-primary relative z-10 mb-4 flex items-center justify-center overflow-hidden py-12 px-6 sm:mb-8 sm:h-[160px] sm:p-5 lg:mb-4 xl:mb-8">
+                  <div className="relative z-10 mb-4 flex items-center justify-center overflow-hidden bg-primary px-6 py-12 sm:mb-8 sm:h-[160px] sm:p-5 lg:mb-4 xl:mb-8">
                     <div>
                       <span className="block text-5xl font-extrabold text-white">
                         09
@@ -70,7 +70,7 @@ const About4 = () => {
                       </span>
                     </div>
                     <div>
-                      <span className="absolute top-0 left-0 -z-10">
+                      <span className="absolute left-0 top-0 -z-10">
                         <svg
                           width="106"
                           height="144"
@@ -106,7 +106,7 @@ const About4 = () => {
                           </defs>
                         </svg>
                       </span>
-                      <span className="absolute top-0 right-0 -z-10">
+                      <span className="absolute right-0 top-0 -z-10">
                         <svg
                           width="130"
                           height="97"

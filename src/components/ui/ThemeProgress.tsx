@@ -23,7 +23,7 @@ const ThemeProgress: React.FC<ThemeProgressProps> = ({
   showPercentage = false,
   animated = false,
   striped = false,
-  className = ''
+  className = '',
 }) => {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
@@ -31,7 +31,7 @@ const ThemeProgress: React.FC<ThemeProgressProps> = ({
     const sizes = {
       sm: 'h-2',
       md: 'h-3',
-      lg: 'h-4'
+      lg: 'h-4',
     };
     return sizes[size];
   };
@@ -43,7 +43,7 @@ const ThemeProgress: React.FC<ThemeProgressProps> = ({
       success: 'bg-green-600',
       danger: 'bg-red-600',
       warning: 'bg-yellow-600',
-      info: 'bg-cyan-600'
+      info: 'bg-cyan-600',
     };
     return variants[variant];
   };
@@ -62,23 +62,21 @@ const ThemeProgress: React.FC<ThemeProgressProps> = ({
     <div className={`w-full ${className}`}>
       {(showLabel || showPercentage) && (
         <div className="flex justify-between items-center mb-2">
-          {showLabel && label && (
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {label}
-            </span>
-          )}
+          {showLabel && label && <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</span>}
           {showPercentage && (
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {Math.round(percentage)}%
-            </span>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{Math.round(percentage)}%</span>
           )}
         </div>
       )}
-      
-      <div className={`
+
+      <div
+        className={`
         w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden
         ${getSizeStyles()}
-      `.trim().replace(/\s+/g, ' ')}>
+      `
+          .trim()
+          .replace(/\s+/g, ' ')}
+      >
         <div
           className={`
             ${getSizeStyles()}
@@ -86,7 +84,9 @@ const ThemeProgress: React.FC<ThemeProgressProps> = ({
             ${getStripedStyles()}
             ${getAnimatedStyles()}
             rounded-full transition-all duration-300 ease-in-out
-          `.trim().replace(/\s+/g, ' ')}
+          `
+            .trim()
+            .replace(/\s+/g, ' ')}
           style={{ width: `${percentage}%` }}
           role="progressbar"
           aria-valuenow={value}

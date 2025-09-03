@@ -11,7 +11,7 @@ const Hero10 = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-6/12 xl:w-5/12">
               <div className="hero-content max-w-[575px]">
-                <h1 className="mb-4 text-4xl font-bold capitalize leading-[1.208]! text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-4 text-4xl font-bold capitalize text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
                   <span className="pr-1">
                     Business site templates Crafted with
                   </span>
@@ -113,7 +113,7 @@ const Navbar = () => {
                 <img
                   src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                   alt="logo"
-                  className="w-full hidden dark:block"
+                  className="hidden w-full dark:block"
                 />
               </a>
             </div>

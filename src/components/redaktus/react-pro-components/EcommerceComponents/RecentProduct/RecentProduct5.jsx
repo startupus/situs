@@ -1,16 +1,13 @@
-import React from "react";
+import React from 'react';
 
 const RecentProduct5 = () => {
   return (
     <section className="bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
       <div className="container mx-auto">
         <div className="mb-[50px] max-w-[575px]">
-          <h2 className="mb-[22px] text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            Trending Items
-          </h2>
+          <h2 className="mb-[22px] text-3xl font-bold text-dark dark:text-white sm:text-4xl">Trending Items</h2>
           <p className="text-body-color dark:text-dark-6 text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet
-            molestie nunc. Vestibulum tempus justo.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet molestie nunc. Vestibulum tempus justo.
           </p>
         </div>
 
@@ -52,19 +49,15 @@ const ProductCard = ({ subtitle, title, details, link, img, bgColor }) => {
     <>
       <div className="w-full px-4 md:w-1/2 lg:w-1/3">
         <div className="relative mb-10 overflow-hidden rounded-lg">
-          <img
-            src={img}
-            alt="Recent Product"
-            className="w-full object-cover object-center"
-          />
+          <img src={img} alt="Recent Product" className="w-full object-cover object-center" />
           <div
             className={`from-${bgColor} xs:px-8 absolute left-0 top-0 flex h-full w-full items-end justify-between rounded-md bg-linear-to-tr to-transparent py-8 px-5 md:px-5 xl:px-8`}
           >
             <div className="w-full">
-              <span 
+              <span
                 className="mb-2 block text-base font-semibold text-white"
                 style={{
-                  textShadow: "0px 1px 5px rgba(0, 0, 0, 0.14)",
+                  textShadow: '0px 1px 5px rgba(0, 0, 0, 0.14)',
                 }}
               >
                 {subtitle}
@@ -73,15 +66,15 @@ const ProductCard = ({ subtitle, title, details, link, img, bgColor }) => {
                 href={link}
                 className="mb-3 block text-lg font-bold text-white 2xl:text-2xl"
                 style={{
-                  textShadow: "0px 1px 5px rgba(0, 0, 0, 0.14)",
+                  textShadow: '0px 1px 5px rgba(0, 0, 0, 0.14)',
                 }}
               >
                 {title}
               </a>
-              <p 
+              <p
                 className="max-w-[255px] text-sm text-white/80"
                 style={{
-                  textShadow: "0px 1px 5px rgba(0, 0, 0, 0.14)",
+                  textShadow: '0px 1px 5px rgba(0, 0, 0, 0.14)',
                 }}
               >
                 {details}

@@ -19,7 +19,7 @@ const Hero13 = () => {
                 <span className="mb-5 block text-base font-semibold text-white sm:text-lg md:text-xl">
                   Digital Marketing
                 </span>
-                <h1 className="mb-4 text-3xl font-bold leading-[1.208]! text-white sm:text-4xl lg:text-[42px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-[42px] xl:text-5xl">
                   Grow your website traffic with TailGrids.
                 </h1>
                 <p className="mb-9 text-base text-white">
@@ -63,7 +63,7 @@ const Hero13 = () => {
             </div>
             <div className="w-full px-4 lg:w-1/2">
               <div className="mx-auto max-w-[460px] rounded-[10px] bg-white px-6 py-10 dark:bg-dark-2 sm:px-10">
-                <h2 className="mb-2.5 text-2xl font-bold leading-[1.43]! text-dark dark:text-white sm:text-3xl lg:text-2xl xl:text-[28px]">
+                <h2 className="leading-[1.43]! mb-2.5 text-2xl font-bold text-dark dark:text-white sm:text-3xl lg:text-2xl xl:text-[28px]">
                   Sign up to TailGrids
                 </h2>
                 <p className="mb-8 text-base font-medium text-body-color dark:text-dark-6">
@@ -223,7 +223,7 @@ const InputBox = ({ labelTitle, type, name, placeholder }) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-2.5 text-base font-medium text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-2.5 text-base font-medium text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
       />
     </>
   );

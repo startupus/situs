@@ -7,6 +7,7 @@
 - Аккаунтные роли (`AccountMembership.role`): `OWNER`, `ADMIN`, `MANAGER`, `MEMBER`.
 
 Скоупы (используются с декоратором `@Scopes()`):
+
 - Проектные: `PROJECT_READ`, `PROJECT_WRITE`, `PROJECT_ADMIN`.
   - OWNER/ADMIN → admin/write/read; EDITOR → write/read; VIEWER → read.
 - Аккаунтные: `ACCOUNT_READ`, `ACCOUNT_WRITE`, `ACCOUNT_ADMIN`.
@@ -15,6 +16,7 @@
 `@Roles()` — ограничивает доступ по глобальным ролям при необходимости.
 
 Гварды:
+
 - `JwtAuthGuard` — глобальный, пропускает `@Public` и публичный allowlist.
 - `PoliciesGuard` — глобальный, проверяет скоупы через `ProjectAccess`/`AccountMembership`.
 

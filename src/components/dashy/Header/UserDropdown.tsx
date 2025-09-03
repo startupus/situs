@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const navList = [
   {
-    link: "#",
-    text: "Account Settings",
+    link: '#',
+    text: 'Account Settings',
   },
   {
-    link: "#",
-    text: "Dashboard",
+    link: '#',
+    text: 'Dashboard',
   },
   {
-    link: "#",
-    text: "Sign Out",
+    link: '#',
+    text: 'Sign Out',
   },
 ];
 
@@ -21,34 +21,18 @@ const UserDropdown = () => {
       <Link to="#" className="flex items-center">
         <p className="mr-4 text-right text-sm font-medium text-dark dark:text-white">
           Thomas Anree
-          <span className="block text-xs font-normal text-body-color dark:text-dark-6">
-            Ux Designer
-          </span>
+          <span className="block text-xs font-normal text-body-color dark:text-dark-6">Ux Designer</span>
         </p>
 
         {/* Заменяем отсутствующее изображение на SVG placeholder */}
         <div className="h-[46px] w-[46px] rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
-          <svg
-            className="h-6 w-6 text-gray-600 dark:text-gray-300"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              clipRule="evenodd"
-            />
+          <svg className="h-6 w-6 text-gray-600 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
           </svg>
         </div>
 
         <span className="ml-[10px] text-body-color dark:text-dark-6">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
               clipRule="evenodd"

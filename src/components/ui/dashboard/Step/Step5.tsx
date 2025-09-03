@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Step5 = () => {
   return (
@@ -22,9 +22,7 @@ const SingleStep = ({ number, name, done, inProgress }) => {
     <div className="group relative flex items-center justify-end pb-[62px]">
       <span
         className={`${
-          (done && "bg-primary") ||
-          (inProgress &&
-            "bg-linear-to-b from-primary via-[#3056d37f] to-[#3056d300]")
+          (done && 'bg-primary') || (inProgress && 'bg-linear-to-b from-primary via-[#3056d37f] to-[#3056d300]')
         } absolute right-[18px] top-4 -z-10 h-full w-1 bg-gray group-last:hidden`}
       ></span>
       <div className="mr-8 text-right">
@@ -34,22 +32,16 @@ const SingleStep = ({ number, name, done, inProgress }) => {
       <div>
         <div
           className={`${
-            done || inProgress ? "bg-primary" : "bg-gray"
+            done || inProgress ? 'bg-primary' : 'bg-gray'
           } flex h-10 w-10 items-center justify-center rounded-full`}
         >
           <span
             className={`${
-              done || inProgress ? "bg-primary" : "bg-white"
+              done || inProgress ? 'bg-primary' : 'bg-white'
             } flex h-6 w-6 items-center justify-center rounded-full`}
           >
             {done || inProgress ? (
-              <svg
-                width={16}
-                height={12}
-                viewBox="0 0 16 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={16} height={12} viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"

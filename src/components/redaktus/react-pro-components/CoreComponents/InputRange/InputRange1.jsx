@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function InputRange1() {
   const [minValue, setMinValue] = useState(1000);
@@ -49,17 +49,17 @@ function InputRange1() {
 
             <div
               className="absolute bottom-0 top-0 z-20 rounded-md bg-primary"
-              style={{ right: maxThumb + "%", left: minThumb + "%" }}
+              style={{ right: maxThumb + '%', left: minThumb + '%' }}
             ></div>
 
             <div
               className="absolute left-0 top-0 z-30 -ml-1 -mt-2 h-6 w-6 rounded-full border-2 border-primary bg-white"
-              style={{ left: minThumb + "%" }}
+              style={{ left: minThumb + '%' }}
             ></div>
 
             <div
               className="absolute right-0 top-0 z-30 -mr-3 -mt-2 h-6 w-6 rounded-full border-2 border-primary bg-white"
-              style={{ right: maxThumb + "%" }}
+              style={{ right: maxThumb + '%' }}
             ></div>
           </div>
         </div>

@@ -182,7 +182,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="w-full rounded-sm border border-stroke bg-white px-[14px] py-3 text-base leading-relaxed text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-dark-6 md:px-[18px] md:py-4"
+          className="outline-hidden w-full rounded-sm border border-stroke bg-white px-[14px] py-3 text-base leading-relaxed text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-dark-6 md:px-[18px] md:py-4"
         />
       </div>
     </div>
@@ -200,7 +200,7 @@ const TextArea = ({ row, placeholder, name, defaultValue, labelTitle }) => {
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="w-full resize-none rounded-sm border border-stroke bg-white px-[14px] py-3 text-base leading-relaxed text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-dark-6 md:px-[18px] md:py-4"
+          className="outline-hidden w-full resize-none rounded-sm border border-stroke bg-white px-[14px] py-3 text-base leading-relaxed text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-dark-6 md:px-[18px] md:py-4"
           defaultValue={defaultValue}
         />
       </div>

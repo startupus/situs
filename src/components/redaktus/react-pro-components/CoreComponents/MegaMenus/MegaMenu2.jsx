@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function MegaMenu2() {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function MegaMenu2() {
                   onClick={() => setOpen(!open)}
                   id="navbarToggler"
                   className={`  ${
-                    open && "navbarTogglerActive"
+                    open && 'navbarTogglerActive'
                   } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
                 >
                   <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
@@ -37,7 +37,7 @@ export default function MegaMenu2() {
                 </button>
                 <nav
                   className={`absolute right-4 top-full w-full max-w-[300px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none dark:bg-dark-2 lg:dark:bg-transparent ${
-                    !open && "hidden"
+                    !open && 'hidden'
                   }`}
                 >
                   <ul className="block lg:flex">
@@ -47,9 +47,7 @@ export default function MegaMenu2() {
                         className="flex w-full items-center justify-between gap-2 py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex lg:w-auto lg:justify-center dark:text-dark-6 dark:hover:text-white"
                       >
                         Resources
-                        <span
-                          className={`${showMegaMenu ? "-scale-y-100" : ""} duration-200`}
-                        >
+                        <span className={`${showMegaMenu ? '-scale-y-100' : ''} duration-200`}>
                           <svg
                             width="20"
                             height="20"
@@ -66,13 +64,11 @@ export default function MegaMenu2() {
                       </button>
 
                       <div
-                        className={`w-full rounded-xl bg-white p-2 lg:absolute lg:left-0 lg:top-full lg:w-[850px] lg:p-8 lg:shadow-lg dark:bg-dark ${showMegaMenu ? "block" : "hidden"}`}
+                        className={`w-full rounded-xl bg-white p-2 lg:absolute lg:left-0 lg:top-full lg:w-[850px] lg:p-8 lg:shadow-lg dark:bg-dark ${showMegaMenu ? 'block' : 'hidden'}`}
                       >
                         <div className="grid gap-5 lg:grid-cols-2">
                           <div>
-                            <h4 className="mb-3 text-sm font-semibold text-dark dark:text-white">
-                              Get Started
-                            </h4>
+                            <h4 className="mb-3 text-sm font-semibold text-dark dark:text-white">Get Started</h4>
                             <div className="space-y-2">
                               <a
                                 href="#"
@@ -94,11 +90,7 @@ export default function MegaMenu2() {
                                     </g>
                                     <defs>
                                       <clipPath id="clip0_2436_4206">
-                                        <rect
-                                          width="24"
-                                          height="24"
-                                          fill="white"
-                                        />
+                                        <rect width="24" height="24" fill="white" />
                                       </clipPath>
                                     </defs>
                                   </svg>
@@ -108,8 +100,7 @@ export default function MegaMenu2() {
                                     About Company
                                   </h3>
                                   <p className="text-sm text-body-color dark:text-dark-6">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                   </p>
                                 </div>
                               </a>
@@ -140,8 +131,7 @@ export default function MegaMenu2() {
                                     Our Pricing
                                   </h3>
                                   <p className="text-sm text-body-color dark:text-dark-6">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                   </p>
                                 </div>
                               </a>
@@ -172,17 +162,14 @@ export default function MegaMenu2() {
                                     Read Blog
                                   </h3>
                                   <p className="text-sm text-body-color dark:text-dark-6">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                   </p>
                                 </div>
                               </a>
                             </div>
                           </div>
                           <div>
-                            <h4 className="mb-3 text-sm font-semibold text-dark dark:text-white">
-                              Support
-                            </h4>
+                            <h4 className="mb-3 text-sm font-semibold text-dark dark:text-white">Support</h4>
                             <div className="space-y-2">
                               <a
                                 href="#"
@@ -219,8 +206,7 @@ export default function MegaMenu2() {
                                     Help Center
                                   </h3>
                                   <p className="text-sm text-body-color dark:text-dark-6">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                   </p>
                                 </div>
                               </a>
@@ -255,8 +241,7 @@ export default function MegaMenu2() {
                                     Documentation
                                   </h3>
                                   <p className="text-sm text-body-color dark:text-dark-6">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                   </p>
                                 </div>
                               </a>
@@ -287,8 +272,7 @@ export default function MegaMenu2() {
                                     Manage Accounts
                                   </h3>
                                   <p className="text-sm text-body-color dark:text-dark-6">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                   </p>
                                 </div>
                               </a>

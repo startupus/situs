@@ -1,6 +1,6 @@
 /**
  * Утилиты для построения контекста проверки прав
- * 
+ *
  * Функции для создания и валидации контекста
  * проверки прав доступа
  */
@@ -10,10 +10,7 @@ import type { Permission, PermissionContext, AccessScope } from '../types';
 /**
  * Строит контекст проверки прав из HTTP запроса
  */
-export function buildContextFromRequest(
-  permission: Permission,
-  request: any
-): PermissionContext {
+export function buildContextFromRequest(permission: Permission, request: any): PermissionContext {
   const params = request.params || {};
   const query = request.query || {};
 
@@ -27,22 +24,20 @@ export function buildContextFromRequest(
     clientId: params.clientId || query.clientId,
     agencyId: params.agencyId || query.agencyId,
     component: getComponentFromPermission(permission),
-    ownerId: determineOwnerId(request)
+    ownerId: determineOwnerId(request),
   };
 }
 
 /**
  * Определяет тип ресурса из права доступа
  */
-export function determineResourceType(
-  permission: Permission
-): PermissionContext['resource'] {
+export function determineResourceType(permission: Permission): PermissionContext['resource'] {
   if (permission.includes('project.')) return 'project';
   if (permission.includes('account.')) return 'account';
   if (permission.includes('user.')) return 'component';
   if (permission.includes('agency.')) return 'agency';
   if (permission.includes('system.')) return 'global';
-  
+
   return 'global';
 }
 
@@ -54,22 +49,20 @@ export function determineAccessScope(permission: Permission): AccessScope {
   if (permission.includes('.clients')) return 'agency';
   if (permission.includes('.own')) return 'own';
   if (permission.includes('system.')) return 'platform';
-  
+
   return 'own';
 }
 
 /**
  * Получает компонент из права доступа
  */
-export function getComponentFromPermission(
-  permission: Permission
-): PermissionContext['component'] {
+export function getComponentFromPermission(permission: Permission): PermissionContext['component'] {
   if (permission.includes('orders.')) return 'orders';
   if (permission.includes('analytics.')) return 'analytics';
   if (permission.includes('billing.')) return 'billing';
   if (permission.includes('user.')) return 'users';
   if (permission.includes('project.')) return 'projects';
-  
+
   return undefined;
 }
 
@@ -79,7 +72,7 @@ export function getComponentFromPermission(
 export function determineOwnerId(request: any): string | undefined {
   const user = request.user;
   if (!user) return undefined;
-  
+
   return user.id;
 }
 
@@ -111,27 +104,21 @@ export function validatePermissionContext(context: PermissionContext): boolean {
 /**
  * Создает минимальный контекст для простой проверки
  */
-export function createSimpleContext(
-  action: Permission,
-  scope: AccessScope = 'own'
-): PermissionContext {
+export function createSimpleContext(action: Permission, scope: AccessScope = 'own'): PermissionContext {
   return {
     resource: determineResourceType(action),
     scope,
-    action
+    action,
   };
 }
 
 /**
  * Объединяет контексты (переопределение)
  */
-export function mergeContexts(
-  base: PermissionContext,
-  override: Partial<PermissionContext>
-): PermissionContext {
+export function mergeContexts(base: PermissionContext, override: Partial<PermissionContext>): PermissionContext {
   return {
     ...base,
-    ...override
+    ...override,
   };
 }
 

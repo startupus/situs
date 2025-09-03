@@ -1,7 +1,7 @@
-import dts from 'rollup-plugin-dts'
+import dts from 'rollup-plugin-dts';
 // import postcss from 'rollup-plugin-postcss'
-import { terser } from 'rollup-plugin-terser'
-import typescript from '@rollup/plugin-typescript'
+import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 const config = [
   //  >> create ts definitions in "dist" folder
@@ -58,6 +58,6 @@ const config = [
       },
     ],
   },
-]
+];
 
-export default config
+export default config;

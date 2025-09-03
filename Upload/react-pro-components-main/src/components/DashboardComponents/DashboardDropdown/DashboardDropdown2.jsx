@@ -33,7 +33,7 @@ const DashboardDropdown2 = () => {
   });
 
   return (
-    <section className="bg-gray-2 dark:bg-dark py-20">
+    <section className="bg-gray-2 py-20 dark:bg-dark">
       <div className="container">
         <div className="flex items-center justify-center">
           <div className="relative">
@@ -47,7 +47,7 @@ const DashboardDropdown2 = () => {
               </span>
 
               <svg
-                className="fill-body-color dark:fill-dark-6 duration-300 ease-in-out hover:fill-primary"
+                className="fill-body-color duration-300 ease-in-out hover:fill-primary dark:fill-dark-6"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -72,12 +72,14 @@ const DashboardDropdown2 = () => {
               ref={dropdown}
               onFocus={() => setDropdownOpen(true)}
               onBlur={() => setDropdownOpen(false)}
-              className={`absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 shadow-card sm:-right-[34px] sm:w-[360px] ${
+              className={`absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white shadow-card dark:bg-dark-2 sm:-right-[34px] sm:w-[360px] ${
                 dropdownOpen === true ? "block" : "hidden"
               }`}
             >
-              <div className="border-b border-stroke dark:border-dark-3 py-[18px] px-6">
-                <h5 className="font-semibold text-dark dark:text-white">Notifications (02)</h5>
+              <div className="border-b border-stroke px-6 py-[18px] dark:border-dark-3">
+                <h5 className="font-semibold text-dark dark:text-white">
+                  Notifications (02)
+                </h5>
               </div>
               <ul className="flex h-auto flex-col gap-2 overflow-y-auto px-4 pb-20 pt-4">
                 <DropdownItem
@@ -141,7 +143,7 @@ const DashboardDropdown2 = () => {
                   </InnerDropdown>
                 </DropdownItem>
               </ul>
-              <div className="absolute bottom-0 z-50 w-full rounded-b-lg border-t border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-3">
+              <div className="absolute bottom-0 z-50 w-full rounded-b-lg border-t border-stroke bg-white p-3 dark:border-dark-3 dark:bg-dark-2">
                 <a
                   href="/#"
                   className="flex items-center justify-center rounded-md bg-primary p-2 font-medium text-white hover:bg-blue-dark"
@@ -271,7 +273,7 @@ const InnerDropdown = ({ children }) => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-999 mt-5 w-[180px] space-y-1 rounded border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 ${
+        className={`z-999 absolute right-0 top-full mt-5 w-[180px] space-y-1 rounded border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2 ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >
@@ -283,7 +285,7 @@ const InnerDropdown = ({ children }) => {
 
 const InnerItem = ({ children }) => {
   return (
-    <button className="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark">
+    <button className="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark">
       {children}
     </button>
   );

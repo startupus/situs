@@ -80,14 +80,14 @@ const ProductGrid = () => {
               <h3>
                 <Link
                   to={item.link}
-                  className="text-dark hover:text-primary mb-[5px] block text-lg font-semibold md:text-xl dark:text-white"
+                  className="mb-[5px] block text-lg font-semibold text-dark hover:text-primary dark:text-white md:text-xl"
                 >
                   {item.title}
                 </Link>
               </h3>
               <p className="mb-5 text-base font-medium text-dark dark:text-white">
                 {item.priceBeforeDiscount && (
-                  <span className="pr-2 line-through text-body-color dark:text-dark-6">
+                  <span className="pr-2 text-body-color line-through dark:text-dark-6">
                     {item.priceBeforeDiscount}
                   </span>
                 )}
@@ -96,7 +96,7 @@ const ProductGrid = () => {
               </p>
               <Link
                 to={item.link}
-                className="border-dark-2 hover:bg-dark-2 inline-flex items-center justify-center rounded-md border px-5 py-[9px] text-center text-base font-medium transition hover:text-white dark:text-white"
+                className="inline-flex items-center justify-center rounded-md border border-dark-2 px-5 py-[9px] text-center text-base font-medium transition hover:bg-dark-2 hover:text-white dark:text-white"
               >
                 {item.button}
               </Link>

@@ -5,13 +5,13 @@ const Cta = () => {
     <>
       <section className="dark:bg-dark">
         <div className="container mx-auto">
-          <div className="bg-primary relative z-10 overflow-hidden rounded-sm px-8 py-12 md:p-[70px]">
-            <div className="flex flex-wrap items-center -mx-4">
+          <div className="relative z-10 overflow-hidden rounded-sm bg-primary px-8 py-12 md:p-[70px]">
+            <div className="-mx-4 flex flex-wrap items-center">
               <div className="w-full px-4 lg:w-1/2">
-                <span className="block mb-4 text-base font-medium text-white">
+                <span className="mb-4 block text-base font-medium text-white">
                   Find Your Next Dream App
                 </span>
-                <h2 className="mb-6 text-3xl leading-tight font-bold text-white sm:mb-8 sm:text-[40px]/[48px] lg:mb-0">
+                <h2 className="mb-6 text-3xl font-bold leading-tight text-white sm:mb-8 sm:text-[40px]/[48px] lg:mb-0">
                   <span className="xs:block"> Get started with </span>
                   <span>our free trial</span>
                 </h2>
@@ -20,13 +20,13 @@ const Cta = () => {
                 <div className="flex flex-wrap lg:justify-end">
                   <Link
                     to="#"
-                    className="inline-flex py-3 my-1 mr-4 text-base font-medium transition bg-white rounded-md hover:bg-shadow-1 text-primary px-7"
+                    className="hover:bg-shadow-1 my-1 mr-4 inline-flex rounded-md bg-white px-7 py-3 text-base font-medium text-primary transition"
                   >
                     Get Pro Version
                   </Link>
                   <Link
                     to="#"
-                    className="inline-flex py-3 my-1 text-base font-medium text-white transition rounded-md bg-secondary hover:bg-secondary/90 px-7"
+                    className="my-1 inline-flex rounded-md bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-secondary/90"
                   >
                     Start Free Trial
                   </Link>
@@ -35,7 +35,7 @@ const Cta = () => {
             </div>
 
             <div>
-              <span className="absolute top-0 left-0 z-[-1]">
+              <span className="absolute left-0 top-0 z-[-1]">
                 <svg
                   width="189"
                   height="162"
@@ -66,7 +66,7 @@ const Cta = () => {
                   </defs>
                 </svg>
               </span>
-              <span className="absolute right-0 bottom-0 z-[-1]">
+              <span className="absolute bottom-0 right-0 z-[-1]">
                 <svg
                   width="191"
                   height="208"

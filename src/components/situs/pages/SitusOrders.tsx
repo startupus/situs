@@ -11,7 +11,7 @@ const SitusOrders: React.FC = () => {
     page: 1,
     limit: 20,
     total: 0,
-    totalPages: 0
+    totalPages: 0,
   });
   const [filters, setFilters] = useState<OrderFilters>({
     search: '',
@@ -20,7 +20,7 @@ const SitusOrders: React.FC = () => {
     sortBy: 'date',
     sortOrder: 'desc',
     page: 1,
-    limit: 20
+    limit: 20,
   });
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -29,7 +29,7 @@ const SitusOrders: React.FC = () => {
   const loadOrders = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const response = await ordersApi.getOrders(filters);
       setOrders(response.orders);
@@ -49,15 +49,15 @@ const SitusOrders: React.FC = () => {
   }, [filters]);
 
   const handleFilterChange = (newFilters: Partial<OrderFilters>) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
       ...newFilters,
-      page: 1 // Сбрасываем страницу при изменении фильтров
+      page: 1, // Сбрасываем страницу при изменении фильтров
     }));
   };
 
   const handlePageChange = (page: number) => {
-    setFilters(prev => ({ ...prev, page }));
+    setFilters((prev) => ({ ...prev, page }));
   };
 
   const handleViewOrder = (order: Order) => {
@@ -81,7 +81,7 @@ const SitusOrders: React.FC = () => {
       processing: 'В обработке',
       completed: 'Завершен',
       cancelled: 'Отменен',
-      refunded: 'Возврат'
+      refunded: 'Возврат',
     };
     return statusNames[status as keyof typeof statusNames] || status;
   };
@@ -92,7 +92,7 @@ const SitusOrders: React.FC = () => {
       processing: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
       completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
       cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-      refunded: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+      refunded: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
     };
     return colors[status as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
@@ -102,7 +102,7 @@ const SitusOrders: React.FC = () => {
       product: 'Товар',
       service: 'Услуга',
       form: 'Форма',
-      subscription: 'Подписка'
+      subscription: 'Подписка',
     };
     return typeNames[type as keyof typeof typeNames] || type;
   };
@@ -113,14 +113,14 @@ const SitusOrders: React.FC = () => {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
   const formatCurrency = (amount: number, currency: string) => {
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
-      currency: currency || 'RUB'
+      currency: currency || 'RUB',
     }).format(amount);
   };
 
@@ -137,21 +137,13 @@ const SitusOrders: React.FC = () => {
       {/* Заголовок */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Заказы
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Всего заказов: {pagination.total}
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Заказы</h1>
+          <p className="text-gray-600 dark:text-gray-400">Всего заказов: {pagination.total}</p>
         </div>
       </div>
 
       {/* Ошибка */}
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">{error}</div>}
 
       {/* Статистика */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -161,21 +153,15 @@ const SitusOrders: React.FC = () => {
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Новые</h3>
-          <p className="text-2xl font-bold text-blue-600">
-            {orders.filter(o => o.status === 'new').length}
-          </p>
+          <p className="text-2xl font-bold text-blue-600">{orders.filter((o) => o.status === 'new').length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">В обработке</h3>
-          <p className="text-2xl font-bold text-yellow-600">
-            {orders.filter(o => o.status === 'processing').length}
-          </p>
+          <p className="text-2xl font-bold text-yellow-600">{orders.filter((o) => o.status === 'processing').length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Завершено</h3>
-          <p className="text-2xl font-bold text-green-600">
-            {orders.filter(o => o.status === 'completed').length}
-          </p>
+          <p className="text-2xl font-bold text-green-600">{orders.filter((o) => o.status === 'completed').length}</p>
         </div>
       </div>
 
@@ -183,9 +169,7 @@ const SitusOrders: React.FC = () => {
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Поиск
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Поиск</label>
             <input
               type="text"
               value={filters.search || ''}
@@ -195,9 +179,7 @@ const SitusOrders: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Статус
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Статус</label>
             <select
               value={filters.status || ''}
               onChange={(e) => handleFilterChange({ status: e.target.value })}
@@ -212,9 +194,7 @@ const SitusOrders: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Тип
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Тип</label>
             <select
               value={filters.type || ''}
               onChange={(e) => handleFilterChange({ type: e.target.value })}
@@ -228,9 +208,7 @@ const SitusOrders: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Сортировка
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Сортировка</label>
             <select
               value={`${filters.sortBy}_${filters.sortOrder}`}
               onChange={(e) => {
@@ -282,23 +260,15 @@ const SitusOrders: React.FC = () => {
                 <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-gray-900 dark:text-white">
-                        {order.orderNumber}
-                      </div>
-                                              <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {order.customerName}
-                        </div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">{order.orderNumber}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{order.customerName}</div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                                          <div>
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          {order.customerName}
-                        </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {order.customerEmail}
-                        </div>
-                      </div>
+                    <div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">{order.customerName}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{order.customerEmail}</div>
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
@@ -309,7 +279,9 @@ const SitusOrders: React.FC = () => {
                     {formatCurrency(order.amount, order.currency)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}
+                    >
                       {getStatusDisplayName(order.status)}
                     </span>
                   </td>
@@ -422,15 +394,17 @@ const SitusOrders: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Статус</h3>
-                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(selectedOrder.status)}`}>
+                  <span
+                    className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(selectedOrder.status)}`}
+                  >
                     {getStatusDisplayName(selectedOrder.status)}
                   </span>
                 </div>
-                                  <div>
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Клиент</h3>
-                    <p className="text-gray-900 dark:text-white">{selectedOrder.customerName}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{selectedOrder.customerEmail}</p>
-                  </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Клиент</h3>
+                  <p className="text-gray-900 dark:text-white">{selectedOrder.customerName}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{selectedOrder.customerEmail}</p>
+                </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Сумма</h3>
                   <p className="text-lg font-bold text-gray-900 dark:text-white">
@@ -451,9 +425,15 @@ const SitusOrders: React.FC = () => {
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
                       <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Название</th>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Кол-во</th>
-                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Цена</th>
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">
+                            Название
+                          </th>
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">
+                            Кол-во
+                          </th>
+                          <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">
+                            Цена
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
@@ -494,4 +474,4 @@ const SitusOrders: React.FC = () => {
   );
 };
 
-export default SitusOrders; 
+export default SitusOrders;

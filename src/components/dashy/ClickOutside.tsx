@@ -1,5 +1,5 @@
-import { useRef, useEffect, ReactNode } from "react";
-import PropTypes from "prop-types";
+import { useRef, useEffect, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
 interface ClickOutsideProps {
   children: ReactNode;
@@ -12,10 +12,10 @@ const ClickOutside = ({ children, exceptionRef, onClick, className }: ClickOutsi
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickListener);
+    document.addEventListener('mousedown', handleClickListener);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickListener);
+      document.removeEventListener('mousedown', handleClickListener);
     };
   });
 
@@ -35,7 +35,7 @@ const ClickOutside = ({ children, exceptionRef, onClick, className }: ClickOutsi
   };
 
   return (
-    <div ref={wrapperRef} className={`${className || ""}`}>
+    <div ref={wrapperRef} className={`${className || ''}`}>
       {children}
     </div>
   );

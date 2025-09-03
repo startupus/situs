@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Toast1() {
   return (
@@ -32,16 +32,10 @@ export default function Toast1() {
             />
           </div>
           <div className="w-full">
-            <h6 className="text-base font-medium text-dark dark:text-white">
-              Nelly Miller
-            </h6>
+            <h6 className="text-base font-medium text-dark dark:text-white">Nelly Miller</h6>
             <div className="flex flex-wrap items-end justify-between gap-2">
-              <p className="text-sm text-body-color dark:text-dark-6">
-                Purchased polo t-shirt for man
-              </p>
-              <span className="text-xs text-body-color dark:text-dark-6">
-                2 min ago
-              </span>
+              <p className="text-sm text-body-color dark:text-dark-6">Purchased polo t-shirt for man</p>
+              <span className="text-xs text-body-color dark:text-dark-6">2 min ago</span>
             </div>
           </div>
         </div>

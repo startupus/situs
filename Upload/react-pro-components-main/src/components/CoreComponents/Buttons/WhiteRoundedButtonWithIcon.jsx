@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const WhiteRoundedButtonWithIcon = () => {
   return (
-    <button className='text-body-color shadow-card hover:text-primary inline-flex items-center justify-center rounded-full bg-white py-3 px-6 text-center text-base font-medium'>
-      <span className='mr-[10px]'>
+    <button className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-center text-base font-medium text-body-color shadow-card hover:text-primary">
+      <span className="mr-[10px]">
         <svg
           width={20}
           height={20}
@@ -25,7 +25,7 @@ const WhiteRoundedButtonWithIcon = () => {
       </span>
       Button With Icon
     </button>
-  )
-}
+  );
+};
 
-export default WhiteRoundedButtonWithIcon
+export default WhiteRoundedButtonWithIcon;

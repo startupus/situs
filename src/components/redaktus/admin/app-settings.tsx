@@ -1,6 +1,6 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Admin, AppSettings } from 'redaktus/core'
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Admin, AppSettings } from 'redaktus/core';
 
 const AdminAppSettings: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const AdminAppSettings: React.FC = () => {
       </Helmet>
       <AppSettings />
     </Admin>
-  )
-}
+  );
+};
 
-export default AdminAppSettings
+export default AdminAppSettings;

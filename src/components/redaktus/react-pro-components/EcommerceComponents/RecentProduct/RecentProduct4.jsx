@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const RecentProduct4 = () => {
   return (
@@ -7,17 +7,14 @@ const RecentProduct4 = () => {
         <div className="-mx-4 flex flex-wrap items-center justify-center">
           <div className="w-full px-4 lg:w-1/2">
             <div className="mb-12 max-w-[465px] lg:mb-0">
-              <span className="text-primary xs:text-xl mb-[18px] block text-lg font-semibold">
-                FEATURED PRODUCT
-              </span>
+              <span className="text-primary xs:text-xl mb-[18px] block text-lg font-semibold">FEATURED PRODUCT</span>
               <h2 className="mb-6 text-2xl font-semibold leading-tight! text-dark dark:text-white xl:text-[36px]">
                 New Arrival From Creative Clock Collections
               </h2>
               <span className="bg-primary mb-6 block h-[3px] w-[100px]"></span>
               <p className="text-body-color dark:text-dark-6 mb-9 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit
-                amet molestie nunc. Vestibulum tempus justo et venenatis tempus.
-                Nulla tincidunt,
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet molestie nunc. Vestibulum tempus
+                justo et venenatis tempus. Nulla tincidunt,
               </p>
               <a
                 href="/#"

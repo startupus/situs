@@ -1,32 +1,26 @@
-import * as React from 'react'
-import classNames from 'classnames'
+import * as React from 'react';
+import classNames from 'classnames';
 
-import { Text, RichText, Image } from 'redaktus/core'
-import * as types from 'redaktus/types'
+import { Text, RichText, Image } from 'redaktus/core';
+import * as types from 'redaktus/types';
 
-import { bgColors, textColors } from '../colors'
-import Section, { type Border } from '../layout/Section'
-import Container, { type Size } from '../layout/Container'
-import blockNames from '../blockNames'
-import {
-  BackgroundColorsSideEditProps,
-  ContainerSizeSideEditProps,
-} from 'website/LayoutSideProps'
+import { bgColors, textColors } from '../colors';
+import Section, { type Border } from '../layout/Section';
+import Container, { type Size } from '../layout/Container';
+import blockNames from '../blockNames';
+import { BackgroundColorsSideEditProps, ContainerSizeSideEditProps } from 'website/LayoutSideProps';
 
 export interface FeatureCalloutProps {
-  bg?: { color: string; className: string }
-  width?: Size
+  bg?: { color: string; className: string };
+  width?: Size;
 }
 
 interface RenderBlockProps {
-  attributes: React.HTMLAttributes<HTMLElement>
-  children: React.ReactNode
+  attributes: React.HTMLAttributes<HTMLElement>;
+  children: React.ReactNode;
 }
 
-const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
-  bg = bgColors.white.value,
-  width = 'md',
-}) => {
+const FeatureCallout: types.Brick<FeatureCalloutProps> = ({ bg = bgColors.white.value, width = 'md' }) => {
   return (
     <Section bg={bg} borderTop="none" borderBottom="none">
       <Container
@@ -46,10 +40,7 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
             propName="title"
             renderBlock={(props: RenderBlockProps) => (
               <div
-                className={classNames(
-                  'font-extrabold text-xl leading-6 mb-1',
-                  textColors.gray900
-                )}
+                className={classNames('font-extrabold text-xl leading-6 mb-1', textColors.gray900)}
                 {...props.attributes}
               >
                 {props.children}
@@ -60,10 +51,7 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
           <RichText
             propName="text"
             renderBlock={(props: RenderBlockProps) => (
-              <span
-                className={classNames('leading-6', textColors.gray700)}
-                {...props.attributes}
-              >
+              <span className={classNames('leading-6', textColors.gray700)} {...props.attributes}>
                 {props.children}
               </span>
             )}
@@ -73,8 +61,8 @@ const FeatureCallout: types.Brick<FeatureCalloutProps> = ({
         </div>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 FeatureCallout.schema = {
   name: blockNames.FeatureCallout,
@@ -88,17 +76,13 @@ FeatureCallout.schema = {
     width: 'lg',
     image: {
       src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-        'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+      placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
       srcSet: '',
       alt: 'Content creators',
       seoName: 'content-creators',
     },
   }),
-  sideEditProps: [
-    BackgroundColorsSideEditProps, 
-    ContainerSizeSideEditProps
-  ],
-}
+  sideEditProps: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
+};
 
-export default FeatureCallout
+export default FeatureCallout;

@@ -82,7 +82,7 @@ function Modal9() {
                   <input
                     type="email"
                     placeholder="Enter user email"
-                    className="placehoder-dark-6 h-12 w-full rounded-lg border border-stroke bg-transparent py-3 pl-12 pr-4 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                    className="placehoder-dark-6 outline-hidden h-12 w-full rounded-lg border border-stroke bg-transparent py-3 pl-12 pr-4 text-dark focus:border-primary dark:border-dark-3 dark:text-white"
                   />
                   <span className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center text-dark-5">
                     <svg
@@ -127,7 +127,7 @@ function Modal9() {
                     <select
                       name=""
                       id=""
-                      className="appearance-none rounded-lg bg-gray-3 py-2.5 pl-4 pr-9 text-base font-medium text-dark-4 outline-hidden dark:bg-white/5 dark:text-dark-7"
+                      className="outline-hidden appearance-none rounded-lg bg-gray-3 py-2.5 pl-4 pr-9 text-base font-medium text-dark-4 dark:bg-white/5 dark:text-dark-7"
                     >
                       <option value="">Editor</option>
                       <option value="">Admin</option>
@@ -171,7 +171,7 @@ function Modal9() {
                     <select
                       name=""
                       id=""
-                      className="appearance-none rounded-lg bg-gray-3 py-2.5 pl-4 pr-9 text-base font-medium text-dark-4 outline-hidden dark:bg-white/5 dark:text-dark-7"
+                      className="outline-hidden appearance-none rounded-lg bg-gray-3 py-2.5 pl-4 pr-9 text-base font-medium text-dark-4 dark:bg-white/5 dark:text-dark-7"
                     >
                       <option value="">Editor</option>
                       <option value="">Admin</option>
@@ -215,7 +215,7 @@ function Modal9() {
                     <select
                       name=""
                       id=""
-                      className="appearance-none rounded-lg bg-gray-3 py-2.5 pl-4 pr-9 text-base font-medium text-dark-4 outline-hidden dark:bg-white/5 dark:text-dark-7"
+                      className="outline-hidden appearance-none rounded-lg bg-gray-3 py-2.5 pl-4 pr-9 text-base font-medium text-dark-4 dark:bg-white/5 dark:text-dark-7"
                     >
                       <option value="">Editor</option>
                       <option value="">Admin</option>

@@ -21,7 +21,7 @@ describe('Permissions System E2E', () => {
       username: 'superadmin',
       password: 'password',
       globalRole: 'SUPER_ADMIN',
-      status: 'ACTIVE'
+      status: 'ACTIVE',
     },
     staff: {
       id: 'staff-123',
@@ -29,7 +29,7 @@ describe('Permissions System E2E', () => {
       username: 'staff',
       password: 'password',
       globalRole: 'STAFF',
-      status: 'ACTIVE'
+      status: 'ACTIVE',
     },
     agency: {
       id: 'agency-123',
@@ -37,7 +37,7 @@ describe('Permissions System E2E', () => {
       username: 'agency',
       password: 'password',
       globalRole: 'AGENCY',
-      status: 'ACTIVE'
+      status: 'ACTIVE',
     },
     business: {
       id: 'business-123',
@@ -45,8 +45,8 @@ describe('Permissions System E2E', () => {
       username: 'business',
       password: 'password',
       globalRole: 'BUSINESS',
-      status: 'ACTIVE'
-    }
+      status: 'ACTIVE',
+    },
   };
 
   beforeAll(async () => {
@@ -73,15 +73,9 @@ describe('Permissions System E2E', () => {
       const token = await getAuthToken('superadmin@test.com');
 
       // Тестируем доступ к различным эндпоинтам
-      await request(app.getHttpServer())
-        .get('/api/projects')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      await request(app.getHttpServer()).get('/api/projects').set('Authorization', `Bearer ${token}`).expect(200);
 
-      await request(app.getHttpServer())
-        .get('/api/users')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      await request(app.getHttpServer()).get('/api/users').set('Authorization', `Bearer ${token}`).expect(200);
 
       await request(app.getHttpServer())
         .get('/api/analytics/dashboard')
@@ -95,26 +89,17 @@ describe('Permissions System E2E', () => {
       const token = await getAuthToken('staff@test.com');
 
       // Должен иметь доступ к пользователям
-      await request(app.getHttpServer())
-        .get('/api/users')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      await request(app.getHttpServer()).get('/api/users').set('Authorization', `Bearer ${token}`).expect(200);
 
       // Должен иметь доступ ко всем проектам
-      await request(app.getHttpServer())
-        .get('/api/projects')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
+      await request(app.getHttpServer()).get('/api/projects').set('Authorization', `Bearer ${token}`).expect(200);
     });
 
     it('не должен иметь доступ к супер-админским функциям', async () => {
       const token = await getAuthToken('staff@test.com');
 
       // Системные настройки только для SUPER_ADMIN
-      await request(app.getHttpServer())
-        .post('/api/system/config')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(403);
+      await request(app.getHttpServer()).post('/api/system/config').set('Authorization', `Bearer ${token}`).expect(403);
     });
   });
 
@@ -147,7 +132,7 @@ describe('Permissions System E2E', () => {
 
     it('не должен иметь доступ к проектам других агентств', async () => {
       const token = await getAuthToken('agency@test.com');
-      
+
       // Создаем проект другого пользователя
       const otherProject = await createTestProject(testUsers.business.id);
 
@@ -183,10 +168,7 @@ describe('Permissions System E2E', () => {
       const token = await getAuthToken('business@test.com');
 
       // Управление пользователями запрещено
-      await request(app.getHttpServer())
-        .get('/api/users')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(403);
+      await request(app.getHttpServer()).get('/api/users').set('Authorization', `Bearer ${token}`).expect(403);
 
       // Системная аналитика запрещена
       await request(app.getHttpServer())
@@ -249,7 +231,7 @@ describe('Permissions System E2E', () => {
       await prismaService.user.upsert({
         where: { email: user.email },
         create: user,
-        update: user
+        update: user,
       });
     }
   }
@@ -262,8 +244,8 @@ describe('Permissions System E2E', () => {
     await prismaService.account.deleteMany({});
     await prismaService.user.deleteMany({
       where: {
-        email: { in: Object.values(testUsers).map(u => u.email) }
-      }
+        email: { in: Object.values(testUsers).map((u) => u.email) },
+      },
     });
   }
 
@@ -282,8 +264,8 @@ describe('Permissions System E2E', () => {
         name: `Test Project ${Date.now()}`,
         slug: `test-project-${Date.now()}`,
         ownerId,
-        status: 'ACTIVE'
-      }
+        status: 'ACTIVE',
+      },
     });
   }
 
@@ -294,8 +276,8 @@ describe('Permissions System E2E', () => {
         username: `client-${Date.now()}`,
         password: 'password',
         globalRole: 'BUSINESS',
-        status: 'ACTIVE'
-      }
+        status: 'ACTIVE',
+      },
     });
   }
 
@@ -305,24 +287,24 @@ describe('Permissions System E2E', () => {
       data: {
         name: 'Agency Account',
         type: 'AGENCY',
-        ownerId: agencyUserId
-      }
+        ownerId: agencyUserId,
+      },
     });
 
     const clientAccount = await prismaService.account.create({
       data: {
         name: 'Client Account',
         type: 'BUSINESS',
-        ownerId: clientUserId
-      }
+        ownerId: clientUserId,
+      },
     });
 
     // Создаем связь
     return prismaService.agencyClient.create({
       data: {
         agencyAccountId: agencyAccount.id,
-        clientAccountId: clientAccount.id
-      }
+        clientAccountId: clientAccount.id,
+      },
     });
   }
 });

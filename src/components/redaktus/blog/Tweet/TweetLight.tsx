@@ -1,37 +1,26 @@
-import React, { useState } from 'react'
-import {
-  Image,
-  RichTextExt,
-  Text,
-  types,
-  useAdminContext,
-  plugins,
-  RichText,
-} from 'redaktus/core'
-import { FaTwitter } from 'react-icons/fa'
-import Section from '../layout/Section'
-import blockNames from '../blockNames'
+import React, { useState } from 'react';
+import { Image, RichTextExt, Text, types, useAdminContext, plugins, RichText } from 'redaktus/core';
+import { FaTwitter } from 'react-icons/fa';
+import Section from '../layout/Section';
+import blockNames from '../blockNames';
 
 export interface TweetLightProps {
-  tweetLink: string
-  authorLink: string
+  tweetLink: string;
+  authorLink: string;
 }
 
-const TweetLight: types.Brick<TweetLightProps> = ({
-  tweetLink,
-  authorLink,
-}) => {
-  const { isAdmin } = useAdminContext()
-  const [isMouseOver, setIsMouseOver] = useState(false)
+const TweetLight: types.Brick<TweetLightProps> = ({ tweetLink, authorLink }) => {
+  const { isAdmin } = useAdminContext();
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const handleClick = (tweetLink: string) => (event: React.MouseEvent) => {
     if (isAdmin) {
-      return event.preventDefault()
+      return event.preventDefault();
     }
     if (typeof window !== undefined) {
-      window.open(tweetLink)
+      window.open(tweetLink);
     }
-  }
+  };
 
   return (
     <Section>
@@ -49,11 +38,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mr-2 w-12 h-12">
-                <Image
-                  propName="author"
-                  alt="athor-name"
-                  imageClassName="rounded-full filter hover:brightness-90"
-                />
+                <Image propName="author" alt="athor-name" imageClassName="rounded-full filter hover:brightness-90" />
               </div>
               <div className="group">
                 <Text
@@ -69,17 +54,12 @@ const TweetLight: types.Brick<TweetLightProps> = ({
                   propName="authorTwitterHandle"
                   placeholder="Author @"
                   renderBlock={({ children }: { children: any }) => (
-                    <div className="text-sm text-gray-500 font-medium tracking-tight">
-                      {children}
-                    </div>
+                    <div className="text-sm text-gray-500 font-medium tracking-tight">{children}</div>
                   )}
                 />
               </div>
             </a>
-            <div
-              className="text-2xl dark:text-neutral-300"
-              style={{ color: '#1d9bf0' }}
-            >
+            <div className="text-2xl dark:text-neutral-300" style={{ color: '#1d9bf0' }}>
               <FaTwitter />
             </div>
           </div>
@@ -87,9 +67,7 @@ const TweetLight: types.Brick<TweetLightProps> = ({
             propName="tweetContent"
             placeholder="tweet content"
             renderBlock={({ children }: { children: any }) => (
-              <div className="mb-2 text-xl font-medium leading-tight dark:text-neutral-300">
-                {children}
-              </div>
+              <div className="mb-2 text-xl font-medium leading-tight dark:text-neutral-300">{children}</div>
             )}
             allowedFeatures={[types.RichTextFeatures.link]}
             renderLink={({ children, href, attributes }: { children: any; href: any; attributes: any }) => (
@@ -113,24 +91,21 @@ const TweetLight: types.Brick<TweetLightProps> = ({
             propName="date"
             placeholder="Date"
             renderBlock={({ children }: { children: any }) => (
-              <div className="inline-block font-normal text-gray-500 tracking-tight hover:underline">
-                {children}
-              </div>
+              <div className="inline-block font-normal text-gray-500 tracking-tight hover:underline">{children}</div>
             )}
           />
         </div>
       </div>
     </Section>
-  )
-}
+  );
+};
 
 TweetLight.schema = {
   name: blockNames.TweetLight,
   label: 'Tweet light',
   category: 'rb-ui blog',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Tweet/TweetLight.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Tweet/TweetLight.tsx',
   getDefaultProps: () => ({
     authorName: [
       {
@@ -144,8 +119,7 @@ TweetLight.schema = {
     ],
     author: {
       src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-        'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+      placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
       srcSet: '',
       width: 1249.24,
       height: 1249.24,
@@ -204,9 +178,8 @@ TweetLight.schema = {
       type: types.SideEditPropType.Custom,
       component: () => (
         <div className="text-sm">
-          This is a light version of the Tweet content block: it doesn't load
-          the Twitter JavaScript, so it is much better performance-wise, but it
-          requires manually entering the Tweet content and properties.
+          This is a light version of the Tweet content block: it doesn't load the Twitter JavaScript, so it is much
+          better performance-wise, but it requires manually entering the Tweet content and properties.
         </div>
       ),
     },
@@ -221,6 +194,6 @@ TweetLight.schema = {
       type: types.SideEditPropType.Text,
     },
   ],
-}
+};
 
-export default TweetLight
+export default TweetLight;

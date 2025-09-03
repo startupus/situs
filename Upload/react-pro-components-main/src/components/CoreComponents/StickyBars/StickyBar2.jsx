@@ -18,7 +18,7 @@ export default function StickyBar2() {
                 className="hidden dark:inline-block"
               />
             </a>
-            <span className="hidden h-8 w-px bg-stroke md:inline-block dark:bg-white/10"></span>
+            <span className="hidden h-8 w-px bg-stroke dark:bg-white/10 md:inline-block"></span>
             <p className="text-base font-medium text-body-color dark:text-dark-6">
               500+ Tailwind CSS UI Components, Blocks and Templates Collections
             </p>

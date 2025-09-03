@@ -4,7 +4,7 @@ export type GlobalRole = 'SUPER_ADMIN' | 'STAFF' | 'AGENCY' | 'BUSINESS';
 // Роли проекта
 export type ProjectRole = 'OWNER' | 'ADMIN' | 'EDITOR' | 'VIEWER';
 
-// Роли аккаунта  
+// Роли аккаунта
 export type AccountRole = 'OWNER' | 'ADMIN' | 'MANAGER' | 'MEMBER';
 
 // Статусы пользователей (синхронизировано с бэкендом)
@@ -96,4 +96,4 @@ export interface UserForm {
   // Для новых пользователей
   password?: string;
   sendWelcomeEmail?: boolean;
-} 
+}

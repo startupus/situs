@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ProductCarousel3 = () => {
   const sliderRef = useRef(null);
@@ -20,15 +20,13 @@ const ProductCarousel3 = () => {
       <section className="dark:bg-dark">
         <div className="container mx-auto overflow-hidden pt-20 pb-20 lg:pt-[120px] lg:pb-[90px]">
           <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-            <span className="mb-2 block text-lg font-semibold text-primary">
-              Most Popular Products
-            </span>
+            <span className="mb-2 block text-lg font-semibold text-primary">Most Popular Products</span>
             <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:leading-[1.2] md:text-[40px]">
               Best Selling Items
             </h2>
             <p className="text-base text-body-color dark:text-dark-6">
-              There are many variations of passages of Lorem Ipsum available but
-              the majority have suffered alteration in some form.
+              There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+              in some form.
             </p>
           </div>
 
@@ -173,16 +171,7 @@ const ProductCarousel3 = () => {
 
 export default ProductCarousel3;
 
-const ProductCard = ({
-  image,
-  newItem,
-  hotItem,
-  discountedPrice,
-  link,
-  name,
-  price,
-  rating,
-}) => {
+const ProductCard = ({ image, newItem, hotItem, discountedPrice, link, name, price, rating }) => {
   return (
     <div className="group mb-10">
       <div className="relative mb-5 overflow-hidden">
@@ -246,10 +235,7 @@ const ProductCard = ({
       </div>
       <div className="text-left">
         <h3 className="mb-1">
-          <a
-            href={link}
-            className="text-lg font-semibold text-dark dark:text-white hover:text-primary xs:text-xl"
-          >
+          <a href={link} className="text-lg font-semibold text-dark dark:text-white hover:text-primary xs:text-xl">
             {name}
           </a>
         </h3>
@@ -258,9 +244,7 @@ const ProductCard = ({
           {discountedPrice && (
             <span>
               {discountedPrice}
-              <span className="pl-2 text-body-color dark:text-dark-6 line-through">
-                {price}
-              </span>
+              <span className="pl-2 text-body-color dark:text-dark-6 line-through">{price}</span>
             </span>
           )}
         </p>
@@ -270,9 +254,7 @@ const ProductCard = ({
           <Star />
           <Star />
           <Star />
-          <span className="pl-[6px] text-sm font-medium text-body-color dark:text-dark-6">
-            {rating}
-          </span>
+          <span className="pl-[6px] text-sm font-medium text-body-color dark:text-dark-6">{rating}</span>
         </div>
       </div>
     </div>
@@ -282,13 +264,7 @@ const ProductCard = ({
 const Star = () => {
   return (
     <span>
-      <svg
-        width={16}
-        height={16}
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_1818_932)">
           <path
             d="M14.925 5.975L10.4 5.275L8.34996 0.975C8.19996 0.675 7.79996 0.675 7.64996 0.975L5.59996 5.3L1.09996 5.975C0.77496 6.025 0.64996 6.45 0.89996 6.675L4.17496 10.05L3.39996 14.775C3.34996 15.1 3.67496 15.375 3.97496 15.175L8.04996 12.95L12.1 15.175C12.375 15.325 12.725 15.075 12.65 14.775L11.875 10.05L15.15 6.675C15.35 6.45 15.25 6.025 14.925 5.975Z"

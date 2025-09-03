@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Services7() {
   return (
@@ -7,15 +7,13 @@ export default function Services7() {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[90px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Core Features
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Core Features</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Our Awesome Features
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -59,12 +57,9 @@ export default function Services7() {
                   </defs>
                 </svg>
               </div>
-              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
-                Easy To Use
-              </h3>
+              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">Easy To Use</h3>
               <p className="text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                tincidunt rutrum.
+                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
               </p>
             </div>
           </div>
@@ -87,12 +82,9 @@ export default function Services7() {
                   />
                 </svg>
               </div>
-              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
-                Awesome Design
-              </h3>
+              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">Awesome Design</h3>
               <p className="text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                tincidunt rutrum.
+                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
               </p>
             </div>
           </div>
@@ -127,12 +119,9 @@ export default function Services7() {
                   />
                 </svg>
               </div>
-              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
-                Easy To Customize
-              </h3>
+              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">Easy To Customize</h3>
               <p className="text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                tincidunt rutrum.
+                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
               </p>
             </div>
           </div>
@@ -166,12 +155,9 @@ export default function Services7() {
                   />
                 </svg>
               </div>
-              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">
-                Any Time Support
-              </h3>
+              <h3 className="mb-5 text-2xl font-semibold text-dark dark:text-white">Any Time Support</h3>
               <p className="text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum
-                tincidunt rutrum.
+                Lorem ipsum dolor sit amet sitim consectetur elit. Vestibulum tincidunt rutrum.
               </p>
             </div>
           </div>

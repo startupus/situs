@@ -1,7 +1,6 @@
 import "./../css/apexcharts.css";
 import "./../css/jsvectormap.min.css";
 
-
 import intersect from "@alpinejs/intersect";
 import Alpine from "alpinejs";
 

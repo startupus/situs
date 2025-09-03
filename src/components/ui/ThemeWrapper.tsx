@@ -11,11 +11,7 @@ interface ThemeWrapperProps {
  * Универсальный компонент для адаптации Core компонентов к глобальной теме
  * Применяет CSS классы для интеграции с системой тем проекта
  */
-export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({
-  children,
-  className = '',
-  themeType = 'primary'
-}) => {
+export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children, className = '', themeType = 'primary' }) => {
   // Базовые классы для адаптации к теме
   const themeClasses = [
     // Основной класс для применения тематических стилей
@@ -23,20 +19,18 @@ export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({
     // Цветовая адаптация
     'theme-colors',
     // Типографика
-    'theme-typography', 
+    'theme-typography',
     // Переходы и анимации
     'transition-all duration-200',
     // Тип темы
     `theme-${themeType}`,
     // Кастомные классы
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  return (
-    <div className={themeClasses}>
-      {children}
-    </div>
-  );
+  return <div className={themeClasses}>{children}</div>;
 };
 
 /**
@@ -44,16 +38,16 @@ export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({
  */
 export const withTheme = <P extends object>(
   Component: React.ComponentType<P>,
-  themeType: ThemeWrapperProps['themeType'] = 'primary'
+  themeType: ThemeWrapperProps['themeType'] = 'primary',
 ) => {
   const ThemedComponent: React.FC<P & { className?: string }> = ({ className, ...props }) => (
     <ThemeWrapper className={className} themeType={themeType}>
       <Component {...(props as P)} />
     </ThemeWrapper>
   );
-  
+
   ThemedComponent.displayName = `withTheme(${Component.displayName || Component.name})`;
-  
+
   return ThemedComponent;
 };
 

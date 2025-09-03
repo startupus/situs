@@ -34,7 +34,7 @@ const Video2 = () => {
           <span className="mb-3 block text-base font-medium text-white">
             Watch Our Intro Video
           </span>
-          <h2 className="mb-5 text-3xl font-bold leading-[1.2]! text-white sm:text-4xl md:text-[40px]">
+          <h2 className="leading-[1.2]! mb-5 text-3xl font-bold text-white sm:text-4xl md:text-[40px]">
             Innovative solutions to boost your projects
           </h2>
           <p className="mb-9 text-base text-white">

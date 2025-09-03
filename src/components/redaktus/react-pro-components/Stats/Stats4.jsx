@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Stats4 = () => {
   return (
@@ -14,8 +14,8 @@ const Stats4 = () => {
                 Our achievements
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -43,9 +43,7 @@ const StatsItem = ({ user, title }) => {
         <h4 className="mb-1 text-2xl font-bold leading-tight text-dark group-hover:text-white dark:text-white sm:text-[28px]">
           {user}
         </h4>
-        <p className="text-base text-body-color group-hover:text-white dark:text-dark-6">
-          {title}
-        </p>
+        <p className="text-base text-body-color group-hover:text-white dark:text-dark-6">{title}</p>
       </div>
     </div>
   );

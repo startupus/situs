@@ -4,9 +4,9 @@ import { GatewayMcpServer } from '../src/mcp/server/McpServer';
 
 async function main(): Promise<void> {
   console.log('🚀 Starting Startupus Gateway MCP Server...');
-  
+
   const mcpServer = new GatewayMcpServer();
-  
+
   // Обработка graceful shutdown
   process.on('SIGINT', async () => {
     console.log('\n📡 Shutting down MCP server...');
@@ -43,4 +43,4 @@ async function main(): Promise<void> {
 main().catch((error) => {
   console.error('❌ Fatal error:', error);
   process.exit(1);
-}); 
+});

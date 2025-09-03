@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react';
 
 export default function VerificationCodeInput3() {
   return (
     <section className="bg-white py-10 dark:bg-dark">
       <div className="container">
         <div>
-          <p className="mb-1.5 text-sm font-medium text-dark dark:text-white">
-            Secure code
-          </p>
+          <p className="mb-1.5 text-sm font-medium text-dark dark:text-white">Secure code</p>
           <div className="flex gap-2">
             <div
               contentEditable
@@ -34,9 +32,7 @@ export default function VerificationCodeInput3() {
               0
             </div>
           </div>
-          <p className="mt-1.5 text-sm text-body-color">
-            This is a hint text to help user.
-          </p>
+          <p className="mt-1.5 text-sm text-body-color">This is a hint text to help user.</p>
         </div>
       </div>
     </section>

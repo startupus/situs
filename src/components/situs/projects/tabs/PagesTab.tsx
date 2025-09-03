@@ -60,9 +60,15 @@ const PagesTab: React.FC<PagesTabProps> = () => {
                   <td className="py-2 pr-4">{row.type === 'product' ? 'Продукт' : 'Страница'}</td>
                   <td className="py-2 pr-4">
                     <div className="flex items-center gap-2 text-body-color">
-                      <button title="Открыть на сайте" className="hover:text-primary"><FiExternalLink /></button>
-                      <button title="Редактировать" className="hover:text-primary"><FiEdit3 /></button>
-                      <button title="Удалить" className="hover:text-red-500"><FiTrash2 /></button>
+                      <button title="Открыть на сайте" className="hover:text-primary">
+                        <FiExternalLink />
+                      </button>
+                      <button title="Редактировать" className="hover:text-primary">
+                        <FiEdit3 />
+                      </button>
+                      <button title="Удалить" className="hover:text-red-500">
+                        <FiTrash2 />
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -76,5 +82,3 @@ const PagesTab: React.FC<PagesTabProps> = () => {
 };
 
 export default PagesTab;
-
-

@@ -202,9 +202,4 @@ const __dirname = path.dirname(__filename);
 // Всегда запускаем скрипт (убираем проверку для простоты)
 void main();
 
-export {
-  findMarkdownFiles,
-  fixMarkdownFile,
-  fixCommonIssues,
-  fixLongLines,
-}; 
+export { findMarkdownFiles, fixMarkdownFile, fixCommonIssues, fixLongLines };

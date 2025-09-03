@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const SelectBox2 = () => {
   return (
     <section className="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
       <div className="container mx-auto">
         <div>
-          <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">
-            Shipping Address
-          </h3>
+          <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">Shipping Address</h3>
           <div className="flex flex-wrap">
             <SelectBoxItem
               name="shipping"
@@ -51,21 +49,15 @@ const SelectBoxItem = ({ id, name, img, price, title, time }) => {
         />
         <label
           htmlFor={id}
-          className={`flex cursor-pointer items-center overflow-hidden rounded-lg border-2 p-[14px] shadow-1 dark:shadow-box-dark sm:px-[22px] ${isChecked ? "border-primary bg-primary/5" : "border-transparent bg-white dark:bg-dark-2"}`}
+          className={`flex cursor-pointer items-center overflow-hidden rounded-lg border-2 p-[14px] shadow-1 dark:shadow-box-dark sm:px-[22px] ${isChecked ? 'border-primary bg-primary/5' : 'border-transparent bg-white dark:bg-dark-2'}`}
         >
           <div className="mr-5">
             <img src={img} alt="author" className="h-[18px]" />
           </div>
           <div className="border-l border-stroke dark:border-dark-3 pl-5">
-            <span className="mb-1 block text-sm font-semibold text-dark dark:text-white sm:text-base">
-              {title}
-            </span>
-            <span className="block text-sm text-body-color dark:text-dark-6 mb-1">
-              {time}
-            </span>
-            <span className="block text-sm font-medium text-body-color dark:text-dark-6">
-              {price}
-            </span>
+            <span className="mb-1 block text-sm font-semibold text-dark dark:text-white sm:text-base">{title}</span>
+            <span className="block text-sm text-body-color dark:text-dark-6 mb-1">{time}</span>
+            <span className="block text-sm font-medium text-body-color dark:text-dark-6">{price}</span>
           </div>
         </label>
       </div>

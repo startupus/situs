@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Stats5 = () => {
   return (
@@ -6,15 +6,11 @@ const Stats5 = () => {
       <div className="bg-primary pb-[140px] pt-20 lg:pt-[120px]">
         <div className="mx-auto px-4 sm:container">
           <div className="mx-auto max-w-[570px] text-center">
-            <span className="mb-2 block text-lg font-semibold text-white">
-              Some Fun Facts
-            </span>
-            <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-white md:text-[40px]">
-              Our achievements
-            </h2>
+            <span className="mb-2 block text-lg font-semibold text-white">Some Fun Facts</span>
+            <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-white md:text-[40px]">Our achievements</h2>
             <p className="text-base text-gray-7">
-              There are many variations of passages of Lorem Ipsum available but
-              the majority have suffered alteration in some form.
+              There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+              in some form.
             </p>
           </div>
         </div>
@@ -41,9 +37,7 @@ const StatsItem = ({ count, title }) => {
     <div className="w-1/2 md:w-1/4">
       <div className="mb-10 text-center md:mb-0">
         <p className="mb-1 text-body-color dark:text-dark-6">{title}</p>
-        <span className="block text-4xl font-bold leading-[1.2] text-dark dark:text-white sm:text-[40px]">
-          {count}
-        </span>
+        <span className="block text-4xl font-bold leading-[1.2] text-dark dark:text-white sm:text-[40px]">{count}</span>
       </div>
     </div>
   );

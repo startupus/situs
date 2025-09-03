@@ -2,8 +2,22 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { FaPlus, FaGlobe, FaStore, FaBlog, FaCubes, FaFileAlt, FaFolderOpen } from 'react-icons/fa';
 import { FiTrash2 } from 'react-icons/fi';
-import { DndContext, PointerSensor, useSensor, useSensors, DragEndEvent, closestCenter, DragOverlay } from '@dnd-kit/core';
-import { SortableContext, rectSortingStrategy, useSortable, arrayMove, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
+import {
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+  closestCenter,
+  DragOverlay,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  rectSortingStrategy,
+  useSortable,
+  arrayMove,
+  defaultAnimateLayoutChanges,
+} from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { FiChevronLeft, FiChevronRight, FiPauseCircle } from 'react-icons/fi';
 import { useSite } from '../../../contexts/SiteContext';
@@ -55,7 +69,11 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
   const projects = useMemo(() => {
     const mapped = projectsData.map((project: any) => {
       const settingsObj = (() => {
-        try { return typeof project.settings === 'string' ? JSON.parse(project.settings) : (project.settings || {}); } catch { return {}; }
+        try {
+          return typeof project.settings === 'string' ? JSON.parse(project.settings) : project.settings || {};
+        } catch {
+          return {};
+        }
       })();
       return {
         id: project.id,
@@ -76,7 +94,8 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     return mapped
       .map((p: any, i: number) => ({ ...p, __orig: i }))
       .sort((a: any, b: any) => {
-        const ai = a.orderIndex; const bi = b.orderIndex;
+        const ai = a.orderIndex;
+        const bi = b.orderIndex;
         if (ai == null && bi == null) return a.__orig - b.__orig;
         if (ai == null) return 1;
         if (bi == null) return -1;
@@ -108,7 +127,8 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     return arr
       .map((p: any, i: number) => ({ ...p, __orig: i }))
       .sort((a: any, b: any) => {
-        const ai = a.orderIndex; const bi = b.orderIndex;
+        const ai = a.orderIndex;
+        const bi = b.orderIndex;
         if (ai == null && bi == null) return a.__orig - b.__orig;
         if (ai == null) return 1;
         if (bi == null) return -1;
@@ -137,13 +157,18 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
 
   const handleToggleActive = async (projectId: string, nextActive: boolean) => {
     // Оптимистично обновляем UI без перезагрузки
-    setOrderedProjects((prev) => prev.map(p => p.id === projectId ? { ...p, status: nextActive ? 'ACTIVE' : 'SUSPENDED' } : p));
+    setOrderedProjects((prev) =>
+      prev.map((p) => (p.id === projectId ? { ...p, status: nextActive ? 'ACTIVE' : 'SUSPENDED' } : p)),
+    );
     try {
       const { projectsApi } = await import('../../../api/services/projects.api');
       await projectsApi.updateProjectStatus(projectId, nextActive ? 'ACTIVE' : 'SUSPENDED');
       // Рассылаем событие, чтобы другие вкладки синхронизировались
       try {
-        localStorage.setItem('situs:project-status', JSON.stringify({ id: projectId, at: Date.now(), active: nextActive }));
+        localStorage.setItem(
+          'situs:project-status',
+          JSON.stringify({ id: projectId, at: Date.now(), active: nextActive }),
+        );
         // Также отправим BroadcastChannel, если поддерживается
         if ('BroadcastChannel' in window) {
           const ch = new BroadcastChannel('situs-projects');
@@ -153,7 +178,9 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
       } catch {}
     } catch (e: any) {
       // Откат на ошибке
-      setOrderedProjects((prev) => prev.map(p => p.id === projectId ? { ...p, status: !nextActive ? 'active' : 'inactive' } : p));
+      setOrderedProjects((prev) =>
+        prev.map((p) => (p.id === projectId ? { ...p, status: !nextActive ? 'active' : 'inactive' } : p)),
+      );
       alert(e?.message || 'Не удалось изменить статус проекта');
     }
   };
@@ -162,7 +189,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     if (!confirm(`Отправить запрос на восстановление проекта "${projectName}"?`)) {
       return;
     }
-    
+
     try {
       const { projectsApi } = await import('../../../api/services/projects.api');
       await projectsApi.updateProjectStatus(projectId, 'ACTIVE');
@@ -177,7 +204,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
   // DnD
   const sensors = useSensors(
     // Небольшая задержка и толеранс делают перетаскивание нативнее и уменьшают случайные перетаскивания
-    useSensor(PointerSensor, { activationConstraint: { delay: 150, tolerance: 5 } })
+    useSensor(PointerSensor, { activationConstraint: { delay: 150, tolerance: 5 } }),
   );
 
   const onDragEnd = async (event: DragEndEvent) => {
@@ -194,10 +221,14 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
       await Promise.all(
         newOrder.map((p, idx) => {
           const settingsObj = (() => {
-            try { return typeof p.settings === 'string' ? JSON.parse(p.settings) : (p.settings || {}); } catch { return {}; }
+            try {
+              return typeof p.settings === 'string' ? JSON.parse(p.settings) : p.settings || {};
+            } catch {
+              return {};
+            }
           })();
           return projectsApi.updateProject(p.id, { settings: { ...settingsObj, orderIndex: idx } } as any);
-        })
+        }),
       );
     } catch {
       // Молча — UI уже перерисован; при ошибке порядок не сохранится на сервере
@@ -206,7 +237,10 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
 
   // Sync между вкладками/окнами
   useEffect(() => {
-    const apply = (id: string, active: boolean) => setOrderedProjects((prev) => prev.map(p => p.id === id ? { ...p, status: active ? 'active' : 'inactive' } : p));
+    const apply = (id: string, active: boolean) =>
+      setOrderedProjects((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, status: active ? 'active' : 'inactive' } : p)),
+      );
     // Дебаунс общего обновления по SSE
     const reloadTimerRef = { current: 0 as any } as React.MutableRefObject<any>;
     const scheduleReload = () => {
@@ -218,13 +252,19 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     };
     const onStorage = (e: StorageEvent) => {
       if (e.key !== 'situs:project-status' || !e.newValue) return;
-      try { const { id, active } = JSON.parse(e.newValue); apply(id, active); } catch {}
+      try {
+        const { id, active } = JSON.parse(e.newValue);
+        apply(id, active);
+      } catch {}
     };
     window.addEventListener('storage', onStorage);
     let bc: BroadcastChannel | undefined;
     if ('BroadcastChannel' in window) {
       bc = new BroadcastChannel('situs-projects');
-      bc.onmessage = (msg) => { const d = msg?.data; if (d?.type === 'status') apply(d.id, d.active); };
+      bc.onmessage = (msg) => {
+        const d = msg?.data;
+        if (d?.type === 'status') apply(d.id, d.active);
+      };
     }
     // Универсальная подписка на SSE/Fetch-стрим (работает в Chrome и FF)
     const unsubscribe = projectsApi.subscribeEvents((evt: any) => {
@@ -237,7 +277,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
         const id = evt?.payload?.id as string;
         const orderIndex = evt?.payload?.orderIndex as number | undefined;
         if (id && typeof orderIndex === 'number') {
-          setOrderedProjects((prev) => sortByOrderIndex(prev.map((p) => p.id === id ? { ...p, orderIndex } : p)));
+          setOrderedProjects((prev) => sortByOrderIndex(prev.map((p) => (p.id === id ? { ...p, orderIndex } : p))));
         }
         return;
       }
@@ -245,7 +285,20 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
         scheduleReload();
       }
     });
-    return () => { window.removeEventListener('storage', onStorage); try { bc?.close(); } catch {}; try { unsubscribe(); } catch {}; if (reloadTimerRef.current) { try { clearTimeout(reloadTimerRef.current); } catch {} } };
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      try {
+        bc?.close();
+      } catch {}
+      try {
+        unsubscribe();
+      } catch {}
+      if (reloadTimerRef.current) {
+        try {
+          clearTimeout(reloadTimerRef.current);
+        } catch {}
+      }
+    };
   }, []);
 
   // (удалено) Дублирующая подписка на SSE была объединена в единый эффект выше
@@ -259,9 +312,15 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
       opacity: isDragging ? 0.85 : 1,
     };
 
-    const activeProducts = (project.products || []).filter((p: any) => (p.status || '').toString().toUpperCase() === 'ACTIVE');
+    const activeProducts = (project.products || []).filter(
+      (p: any) => (p.status || '').toString().toUpperCase() === 'ACTIVE',
+    );
 
-    const ActiveSwitcher: React.FC<{ checked: boolean; onChange: (v: boolean) => void; disabled?: boolean }> = ({ checked, onChange, disabled }) => {
+    const ActiveSwitcher: React.FC<{ checked: boolean; onChange: (v: boolean) => void; disabled?: boolean }> = ({
+      checked,
+      onChange,
+      disabled,
+    }) => {
       return (
         <label className="flex cursor-pointer select-none items-center">
           <div className="relative">
@@ -272,8 +331,12 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
               className="sr-only peer"
               disabled={disabled}
             />
-            <div className={`block h-6 w-10 rounded-full border ${disabled ? 'border-gray-300 bg-gray-200' : 'border-[#BFCEFF] bg-[#EAEEFB]'} peer-checked:bg-green-500/90 transition-colors`}></div>
-            <div className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4 pointer-events-none ${disabled ? 'opacity-60' : ''}`} />
+            <div
+              className={`block h-6 w-10 rounded-full border ${disabled ? 'border-gray-300 bg-gray-200' : 'border-[#BFCEFF] bg-[#EAEEFB]'} peer-checked:bg-green-500/90 transition-colors`}
+            ></div>
+            <div
+              className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4 pointer-events-none ${disabled ? 'opacity-60' : ''}`}
+            />
           </div>
         </label>
       );
@@ -295,12 +358,18 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
           className="p-4 flex-1"
           role="button"
           tabIndex={0}
-          onClick={() => { if (!isDragging && project.status !== 'DELETED') navigate(`/projects/${project.id}`); }}
-          onKeyDown={(e) => { if (e.key === 'Enter' && project.status !== 'DELETED') navigate(`/projects/${project.id}`); }}
+          onClick={() => {
+            if (!isDragging && project.status !== 'DELETED') navigate(`/projects/${project.id}`);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && project.status !== 'DELETED') navigate(`/projects/${project.id}`);
+          }}
         >
           {/* Верхняя строка: иконка + тумблер */}
           <div className="flex items-start justify-between mb-4">
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${project.status === 'DELETED' ? 'bg-red-100/50' : isInactive ? 'bg-gray-300/30' : 'bg-primary/10'}`}>
+            <div
+              className={`w-12 h-12 rounded-lg flex items-center justify-center ${project.status === 'DELETED' ? 'bg-red-100/50' : isInactive ? 'bg-gray-300/30' : 'bg-primary/10'}`}
+            >
               {project.status === 'DELETED' ? (
                 <FiTrash2 className="w-6 h-6 text-red-500" />
               ) : isInactive ? (
@@ -309,39 +378,65 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
                 <FaFolderOpen className="w-6 h-6 text-primary" />
               )}
             </div>
-            <div onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()} data-testid={testIds.projects.statusToggle}>
+            <div
+              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+              data-testid={testIds.projects.statusToggle}
+            >
               {project.status === 'DELETED' ? (
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                <span
+                  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}
+                >
                   {getStatusText(project.status)}
                 </span>
               ) : (
-                <ActiveSwitcher checked={project.status === 'ACTIVE'} onChange={(v) => handleToggleActive(project.id, v)} disabled={isSystem} />
+                <ActiveSwitcher
+                  checked={project.status === 'ACTIVE'}
+                  onChange={(v) => handleToggleActive(project.id, v)}
+                  disabled={isSystem}
+                />
               )}
             </div>
           </div>
 
           {/* Сведения */}
           <div className="mb-0">
-            <h3 className={`text-lg font-semibold mb-1 ${isInactive ? 'text-gray-500 dark:text-dark-6' : 'text-dark dark:text-white'}`}>
+            <h3
+              className={`text-lg font-semibold mb-1 ${isInactive ? 'text-gray-500 dark:text-dark-6' : 'text-dark dark:text-white'}`}
+            >
               {project.name}
               {isSystem && (
-                <span className="ml-2 inline-flex items-center rounded-md bg-purple-100 px-2 py-0.5 text-[10px] font-semibold text-purple-700 align-middle uppercase">system</span>
+                <span className="ml-2 inline-flex items-center rounded-md bg-purple-100 px-2 py-0.5 text-[10px] font-semibold text-purple-700 align-middle uppercase">
+                  system
+                </span>
               )}
             </h3>
-            <div className={`${isInactive ? 'text-gray-400 dark:text-dark-5' : 'text-body-color dark:text-dark-6'} text-sm mb-3`}>
+            <div
+              className={`${isInactive ? 'text-gray-400 dark:text-dark-5' : 'text-body-color dark:text-dark-6'} text-sm mb-3`}
+            >
               <div className="flex items-center justify-between">
                 {project.domain ? (
                   <span className="text-xs">{project.domain}</span>
                 ) : (
-                  <span className="text-xs ${isInactive ? 'text-gray-400' : 'text-body-color/70'}">домен не настроен</span>
+                  <span className="text-xs ${isInactive ? 'text-gray-400' : 'text-body-color/70'}">
+                    домен не настроен
+                  </span>
                 )}
               </div>
             </div>
 
-            <div className={`flex items-center justify-between text-sm ${isInactive ? 'text-gray-400 dark:text-dark-5' : 'text-body-color dark:text-dark-6'}`}>
+            <div
+              className={`flex items-center justify-between text-sm ${isInactive ? 'text-gray-400 dark:text-dark-5' : 'text-body-color dark:text-dark-6'}`}
+            >
               <div className="flex items-center gap-1">
                 {(activeProducts.length ? activeProducts : []).map((p: any) => (
-                  <a key={p.id} href={`/projects/${project.id}`} title={p.type} className={`inline-flex items-center justify-center w-7 h-7 rounded ${isInactive ? 'bg-gray-300/30 text-gray-500' : 'bg-primary/10 text-primary hover:bg-primary/20'}`} data-testid={testIds.projects.detailLink}>
+                  <a
+                    key={p.id}
+                    href={`/projects/${project.id}`}
+                    title={p.type}
+                    className={`inline-flex items-center justify-center w-7 h-7 rounded ${isInactive ? 'bg-gray-300/30 text-gray-500' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}
+                    data-testid={testIds.projects.detailLink}
+                  >
                     {getProductTypeIcon((p.type || '').toString().toUpperCase())}
                   </a>
                 ))}
@@ -352,20 +447,41 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
         </div>
 
         {/* Нижняя панель действий под разделителем */}
-          <div className={`border-t rounded-b-xl px-4 py-2.5 flex items-center justify-between ${isInactive || project.status === 'DELETED' ? 'border-gray-200 bg-gray-100/60 dark:border-dark-4 dark:bg-dark-3/50' : 'border-stroke dark:border-dark-3 bg-gray-50/60 dark:bg-dark-3/50'}`}>
+        <div
+          className={`border-t rounded-b-xl px-4 py-2.5 flex items-center justify-between ${isInactive || project.status === 'DELETED' ? 'border-gray-200 bg-gray-100/60 dark:border-dark-4 dark:bg-dark-3/50' : 'border-stroke dark:border-dark-3 bg-gray-50/60 dark:bg-dark-3/50'}`}
+        >
           {project.status === 'DELETED' ? (
-            <button onClick={(e)=> { e.stopPropagation(); handleRestoreProject(project.id, project.name); }} className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRestoreProject(project.id, project.name);
+              }}
+              className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors"
+            >
               Восстановить
             </button>
           ) : (
-            <Link to={`/projects/${project.id}`} onClick={(e)=> e.stopPropagation()} className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium ${isInactive ? 'bg-gray-200 text-gray-600 dark:bg-dark-4/60 dark:text-dark-6 pointer-events-none' : 'bg-gray-100 dark:bg-dark-4 text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark transition-colors'}`}>
+            <Link
+              to={`/projects/${project.id}`}
+              onClick={(e) => e.stopPropagation()}
+              className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium ${isInactive ? 'bg-gray-200 text-gray-600 dark:bg-dark-4/60 dark:text-dark-6 pointer-events-none' : 'bg-gray-100 dark:bg-dark-4 text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-dark transition-colors'}`}
+            >
               Подробнее
             </Link>
           )}
           {isSystem ? (
-            <span className="inline-flex items-center justify-center px-2 py-1 rounded-md text-[11px] font-medium text-purple-700 bg-purple-50">system</span>
+            <span className="inline-flex items-center justify-center px-2 py-1 rounded-md text-[11px] font-medium text-purple-700 bg-purple-50">
+              system
+            </span>
           ) : (
-            <button onClick={(e)=>{ e.stopPropagation(); handleDelete(project.id, project.name); }} className={`inline-flex items-center justify-center w-9 h-9 rounded-md ${isInactive || project.status === 'DELETED' ? 'text-body-color hover:text-red-600 hover:bg-red-50/40 dark:hover:bg-red-900/10' : 'text-body-color hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'} transition-colors`} title="Удалить проект">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(project.id, project.name);
+              }}
+              className={`inline-flex items-center justify-center w-9 h-9 rounded-md ${isInactive || project.status === 'DELETED' ? 'text-body-color hover:text-red-600 hover:bg-red-50/40 dark:hover:bg-red-900/10' : 'text-body-color hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'} transition-colors`}
+              title="Удалить проект"
+            >
               <FiTrash2 />
             </button>
           )}
@@ -379,7 +495,10 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="bg-white dark:bg-dark-2 rounded-lg p-6 border border-stroke dark:border-dark-3 animate-pulse">
+            <div
+              key={index}
+              className="bg-white dark:bg-dark-2 rounded-lg p-6 border border-stroke dark:border-dark-3 animate-pulse"
+            >
               <div className="h-40 bg-gray-200 dark:bg-dark-3 rounded-lg mb-4"></div>
               <div className="h-4 bg-gray-200 dark:bg-dark-3 rounded mb-2"></div>
               <div className="h-3 bg-gray-200 dark:bg-dark-3 rounded mb-4"></div>
@@ -398,18 +517,11 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
     return (
       <div className="space-y-6">
         <div className="text-center py-12">
-          <svg
-            width="64"
-            height="64"
-            viewBox="0 0 64 64"
-            className="fill-current text-red-500 mx-auto mb-4"
-          >
-            <path d="M32 8C18.745 8 8 18.745 8 32C8 45.255 18.745 56 32 56C45.255 56 56 45.255 56 32C56 18.745 45.255 8 32 8ZM32 52C21.177 52 12 42.823 12 32C12 21.177 21.177 12 32 12C42.823 12 52 21.177 52 32C52 42.823 42.823 52 32 52Z"/>
-            <path d="M32 20C25.373 20 20 25.373 20 32C20 38.627 25.373 44 32 44C38.627 44 44 38.627 44 32C44 25.373 38.627 20 32 20ZM32 40C27.589 40 24 36.411 24 32C24 27.589 27.589 24 32 24C36.411 24 40 27.589 40 32C40 36.411 36.411 40 32 40Z"/>
+          <svg width="64" height="64" viewBox="0 0 64 64" className="fill-current text-red-500 mx-auto mb-4">
+            <path d="M32 8C18.745 8 8 18.745 8 32C8 45.255 18.745 56 32 56C45.255 56 56 45.255 56 32C56 18.745 45.255 8 32 8ZM32 52C21.177 52 12 42.823 12 32C12 21.177 21.177 12 32 12C42.823 12 52 21.177 52 32C52 42.823 42.823 52 32 52Z" />
+            <path d="M32 20C25.373 20 20 25.373 20 32C20 38.627 25.373 44 32 44C38.627 44 44 38.627 44 32C44 25.373 38.627 20 32 20ZM32 40C27.589 40 24 36.411 24 32C24 27.589 27.589 24 32 24C36.411 24 40 27.589 40 32C40 36.411 36.411 40 32 40Z" />
           </svg>
-          <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
-            Ошибка загрузки проектов
-          </h3>
+          <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">Ошибка загрузки проектов</h3>
           <p className="text-body-color dark:text-dark-6 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
@@ -432,29 +544,23 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
             viewBox="0 0 64 64"
             className="fill-current text-gray-400 dark:text-dark-6 mx-auto mb-4"
           >
-            <path d="M32 8C18.745 8 8 18.745 8 32C8 45.255 18.745 56 32 56C45.255 56 56 45.255 56 32C56 18.745 45.255 8 32 8ZM32 52C21.177 52 12 42.823 12 32C12 21.177 21.177 12 32 12C42.823 12 52 21.177 52 32C52 42.823 42.823 52 32 52Z"/>
-            <path d="M16 16H48V48H16V16ZM18 18V46H46V18H18Z"/>
-            <path d="M24 24H40V32H24V24ZM24 36H40V44H24V36Z"/>
+            <path d="M32 8C18.745 8 8 18.745 8 32C8 45.255 18.745 56 32 56C45.255 56 56 45.255 56 32C56 18.745 45.255 8 32 8ZM32 52C21.177 52 12 42.823 12 32C12 21.177 21.177 12 32 12C42.823 12 52 21.177 52 32C52 42.823 42.823 52 32 52Z" />
+            <path d="M16 16H48V48H16V16ZM18 18V46H46V18H18Z" />
+            <path d="M24 24H40V32H24V24ZM24 36H40V44H24V36Z" />
           </svg>
-          <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">
-            Проекты не найдены
-          </h3>
-          <p className="text-body-color dark:text-dark-6 mb-4">
-            Создайте свой первый проект
-          </p>
+          <h3 className="text-lg font-semibold text-dark dark:text-white mb-2">Проекты не найдены</h3>
+          <p className="text-body-color dark:text-dark-6 mb-4">Создайте свой первый проект</p>
         </div>
       </div>
     );
   }
-
-
 
   return (
     <div className="space-y-6" data-testid={testIds.projects.list}>
       {/* Список проектов */}
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-        <SortableContext items={pagedProjects.map(p => p.id)} strategy={rectSortingStrategy}>
+        <SortableContext items={pagedProjects.map((p) => p.id)} strategy={rectSortingStrategy}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {pagedProjects.map((project) => (
               <SortableCard key={project.id} project={project} />
@@ -497,13 +603,16 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ onCreateProject, refreshKey
                   </button>
                 </li>
 
-                {Array.from({ length: totalPages }).map((_, i) => i + 1)
+                {Array.from({ length: totalPages })
+                  .map((_, i) => i + 1)
                   .filter((n) => n === 1 || n === totalPages || (n >= clampedPage - 2 && n <= clampedPage + 2))
                   .map((n) => (
                     <li key={n}>
                       <button
                         className={`flex h-10 min-w-10 items-center justify-center rounded-full px-2 ${
-                          n === clampedPage ? 'bg-primary text-white' : 'text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-white/5'
+                          n === clampedPage
+                            ? 'bg-primary text-white'
+                            : 'text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-white/5'
                         }`}
                         onClick={() => setCurrentPage(n)}
                       >

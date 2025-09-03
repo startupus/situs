@@ -2,10 +2,10 @@ import React from "react";
 
 const SuccessAlert1 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-green shadow-1 dark:bg-dark-2 flex w-full rounded-lg border-l-[6px] bg-white px-7 py-8 md:p-9">
-          <div className="bg-green/10 mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
+        <div className="flex w-full rounded-lg border-l-[6px] border-green bg-white px-7 py-8 shadow-1 dark:bg-dark-2 md:p-9">
+          <div className="mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md bg-green/10">
             <svg
               width="18"
               height="18"
@@ -42,7 +42,7 @@ const SuccessAlert1 = () => {
             <div className="flex">
               <a
                 href="/#"
-                className="inline-block mr-6 text-sm font-medium text-green hover:text-green-dark"
+                className="mr-6 inline-block text-sm font-medium text-green hover:text-green-dark"
               >
                 View Status
               </a>

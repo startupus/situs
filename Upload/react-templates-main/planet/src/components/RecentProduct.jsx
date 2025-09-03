@@ -37,7 +37,7 @@ const RecentProduct = () => {
                   <span className="mb-4 block text-lg font-semibold text-primary md:text-2xl">
                     {collection.subtitle}
                   </span>
-                  <h2 className="mb-5 text-2xl font-semibold leading-tight! text-dark dark:text-white xl:text-4xl">
+                  <h2 className="leading-tight! mb-5 text-2xl font-semibold text-dark dark:text-white xl:text-4xl">
                     {collection.title}
                   </h2>
                   <p className="mb-9 text-base text-body-color dark:text-dark-6">

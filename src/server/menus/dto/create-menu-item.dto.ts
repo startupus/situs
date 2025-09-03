@@ -1,15 +1,4 @@
-import { 
-  IsString, 
-  IsOptional, 
-  IsBoolean, 
-  IsInt, 
-  IsEnum, 
-  IsUrl,
-  IsJSON,
-  MaxLength, 
-  Min, 
-  Max 
-} from 'class-validator';
+import { IsString, IsOptional, IsBoolean, IsInt, IsEnum, IsUrl, IsJSON, MaxLength, Min, Max } from 'class-validator';
 import { MenuItemType, AccessLevel } from '@prisma/client';
 
 /**

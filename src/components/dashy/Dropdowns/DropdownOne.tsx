@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
 const DropdownOne = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -11,24 +11,21 @@ const DropdownOne = () => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target) &&
-        !event.target.closest(".dropdown-toggle")
+        !event.target.closest('.dropdown-toggle')
       ) {
         setOpenDropDown(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
   return (
     <>
       <div className="relative">
-        <button
-          onClick={handleDropDownToggle}
-          className="text-body-color dark:text-dark-6 dropdown-toggle"
-        >
+        <button onClick={handleDropDownToggle} className="text-body-color dark:text-dark-6 dropdown-toggle">
           <svg
             width="24"
             height="24"
@@ -46,7 +43,7 @@ const DropdownOne = () => {
         <div ref={dropdownRef}>
           {openDropDown && (
             <div
-              className={`shadow-card dark:bg-dark absolute top-full right-0 z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 ${openDropDown ? "block" : "hidden"}`}
+              className={`shadow-card dark:bg-dark absolute top-full right-0 z-40 w-[150px] space-y-1 rounded-sm bg-white p-2 ${openDropDown ? 'block' : 'hidden'}`}
             >
               <button className="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded-sm px-3 py-1.5 text-left text-sm">
                 Edit

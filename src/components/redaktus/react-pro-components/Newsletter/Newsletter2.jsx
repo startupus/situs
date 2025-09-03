@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Newsletter2 = () => {
   return (
@@ -7,15 +7,13 @@ const Newsletter2 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto max-w-[570px] text-center">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Newsletter
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Newsletter</span>
               <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]">
                 Subscribe to our newsletter
               </h2>
               <p className="mb-12 text-base text-body-color dark:text-dark-6 md:mb-[60px]">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
               <form className="mx-auto flex max-w-[500px] flex-wrap items-center rounded-xl bg-white p-5 shadow-2 dark:bg-dark-2 sm:flex-nowrap">
                 <input
@@ -33,13 +31,7 @@ const Newsletter2 = () => {
       </div>
 
       <div className="absolute left-0 top-0 -z-10 flex h-full w-full items-center justify-center">
-        <svg
-          width="1440"
-          height="533"
-          viewBox="0 0 1440 533"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="1440" height="533" viewBox="0 0 1440 533" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M3.99415 174.999C6.20006 174.999 7.9883 176.788 7.9883 178.995C7.9883 181.201 6.20006 182.99 3.99415 182.99C1.78824 182.99 9.64233e-08 181.201 0 178.995C-9.64233e-08 176.788 1.78824 174.999 3.99415 174.999Z"
             fill="#3056D3"

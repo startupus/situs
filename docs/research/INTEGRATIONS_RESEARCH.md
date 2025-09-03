@@ -9,19 +9,20 @@
 - Манифест и обновления — хранение метаданных плагина (имя, версия, возможности), возможность обновлений через update‑сервер (в текущей итерации фиксируем версию в коде и БД, удалённые обновления — в план).
 
 Ссылки на идеи из Joomla (для ориентира):
-- Event‑подписка плагинов и диспетчер событий (importPlugin + dispatch) — on* события → обработчики.
+
+- Event‑подписка плагинов и диспетчер событий (importPlugin + dispatch) — on\* события → обработчики.
 - Update servers в манифестах — блок `<updateservers>` (у нас аналог — поля метаданных + возможный URL источника обновлений в будущем).
 
 ## Архитектура в Situs
 
 ### Слои и роли
 
-1) Registry/Реестр плагинов (runtime):
+1. Registry/Реестр плагинов (runtime):
    - Регистрирует доступные провайдеры (метаданные + фабрика создания инстансов).
    - Предоставляет список провайдеров для UI «Каталог интеграций».
    - Типобезопасные capabilities плагина (sendMessage/import/export/healthCheck …).
 
-2) IntegrationPlugin (интерфейс):
+2. IntegrationPlugin (интерфейс):
    - `key: string` (уникальный идентификатор провайдера, например `EMAIL_SMTP`).
    - `name: string`, `version: string`, `category: 'EMAIL' | 'WEBHOOK' | ...`.
    - `capabilities: { sendMessage?: boolean; importData?: boolean; exportData?: boolean; }`.
@@ -31,18 +32,18 @@
    - `healthCheck(projectId): Promise<HealthStatus>`.
    - Опционально: обработчики событий (подписки) по типам данных.
 
-3) EventBus (внутренний):
+3. EventBus (внутренний):
    - Используем уже существующий `RealtimeEventsService` как шину и для SSE.
    - Стандартизируем события: `integration_created|updated|deleted|status_changed`, а также доменные (`invitations_send_requested` → маршрутизация в Email‑плагин и т.п.).
 
-4) Persistence (Prisma):
+4. Persistence (Prisma):
    - `Integration` (инстанс плагина на проекте):
      - `id`, `projectId`, `provider` (key), `title`, `isActive`, `status` (`READY|DISABLED|ERROR`), `version`, `config` (Json), `secrets` (Json, шифровать в дальнейшем), `createdAt`, `updatedAt`.
      - `@@unique([projectId, provider])`.
    - `IntegrationEvent` (аудит/лог): `id`, `integrationId`, `event`, `payload` (Json), `createdAt`.
    - (Опционально) `IntegrationDefinition` — кэш метаданных провайдеров на случай UI/поиска, но на старте достаточно runtime‑реестра.
 
-5) Безопасность
+5. Безопасность
    - Доступ к CRUD интеграций — через `PermissionGuard` (роль проекта: Owner/Admin). Просмотр статуса — члены проекта с правом чтения настроек.
    - Секреты: хранение отдельно (поле `secrets`), последующее шифрование (план: KMS/локальный keyring).
 
@@ -62,6 +63,7 @@
 - `GET /api/realtime/integrations` (SSE) — события о составе и статусах.
 
 Примечания:
+
 - Канал EMAIL в инвайтах: `InvitationsService` испускает событие `invitations_send_requested`, диспетчер интеграций находит активный EMAIL‑инстанс для `projectId` и делегирует в плагин.
 - Публичность эндпоинтов — нет, только аутентифицированным с правами проекта.
 
@@ -87,13 +89,13 @@
 
 ## План внедрения (итерации)
 
-1) БД (Prisma): модели `Integration`, `IntegrationEvent`.
-2) Backend: `IntegrationsModule` (реестр + контроллер + сервис), интерфейс `IntegrationPlugin`, реализация `EmailIntegrationPlugin` (мост к CommunicationService).
-3) API: providers/list/create/update/test/delete (+ SSE).
-4) UI: страницы `/projects/:id/integrations` и `/:id/integrations/:integrationId`.
-5) Включение в навигацию: пункт «Интеграции» (ссылка ведёт в компонент интеграций), «Настройки → Интеграции» делает редирект.
-6) Связка с инвайтами: перевести отправку на события + интеграции.
-7) Документация: README раздела и DevGuide по добавлению новых плагинов.
+1. БД (Prisma): модели `Integration`, `IntegrationEvent`.
+2. Backend: `IntegrationsModule` (реестр + контроллер + сервис), интерфейс `IntegrationPlugin`, реализация `EmailIntegrationPlugin` (мост к CommunicationService).
+3. API: providers/list/create/update/test/delete (+ SSE).
+4. UI: страницы `/projects/:id/integrations` и `/:id/integrations/:integrationId`.
+5. Включение в навигацию: пункт «Интеграции» (ссылка ведёт в компонент интеграций), «Настройки → Интеграции» делает редирект.
+6. Связка с инвайтами: перевести отправку на события + интеграции.
+7. Документация: README раздела и DevGuide по добавлению новых плагинов.
 
 ## Риски и открытые вопросы
 
@@ -112,5 +114,3 @@
 - [x] Роутинг/меню: пункт «Интеграции» на уровне проекта; редирект из «Настройки → Интеграции`.
 - [x] Связка инвайтов с интеграциями (событие → EMAIL, лог в IntegrationEvent + SSE).
 - [ ] README в папке интеграций и обновление корневого README со ссылками.
-
-

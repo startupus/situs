@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import React, { useEffect, useRef, useState } from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const DataStats2 = () => {
   return (
@@ -13,13 +13,7 @@ const DataStats2 = () => {
             usdRate="11,032,37 USD"
             increment="+12.05"
             icon={
-              <svg
-                width={20}
-                height={20}
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_2955_1208)">
                   <path
                     d="M9.17388 19.912V17.4156H8.34779V19.912H6.69562V17.4156H2.59079L3.00384 14.9555H3.89519C4.62545 14.9555 5.04345 14.2525 5.04345 13.5454V6.20229C5.04345 5.51415 4.64279 5.04246 3.91584 5.04246H2.56519V2.5642H6.69562V0.0859375H8.34779V2.5642H9.17388V0.0859375H10.8261V2.60798C14.3906 2.72859 15.8024 4.07924 16.2072 5.60255C16.6863 7.40342 15.4992 8.91516 14.4782 9.28359C15.7181 9.59916 17.4348 10.5153 17.4348 12.6292C17.4348 15.5065 15.2142 17.4338 10.8261 17.4338V19.912H9.17388ZM8.34779 10.8201V14.9555C11.6265 14.9555 13.8727 14.6457 13.8727 12.8771C13.8727 10.9804 11.4456 10.8201 8.34779 10.8201ZM8.34779 9.17289C10.1743 9.17289 12.9557 9.04403 12.9557 7.10768C12.9557 5.4555 11.2391 5.04246 8.34779 5.04246V9.17289Z"
@@ -28,12 +22,7 @@ const DataStats2 = () => {
                 </g>
                 <defs>
                   <clipPath id="clip0_2955_1208">
-                    <rect
-                      width={19.8261}
-                      height={19.8261}
-                      fill="white"
-                      transform="translate(0.0869141 0.0859375)"
-                    />
+                    <rect width={19.8261} height={19.8261} fill="white" transform="translate(0.0869141 0.0859375)" />
                   </clipPath>
                 </defs>
               </svg>
@@ -48,13 +37,7 @@ const DataStats2 = () => {
             usdRate="9,047,32 USD"
             increment="+8.05"
             icon={
-              <svg
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -79,13 +62,7 @@ const DataStats2 = () => {
             usdRate="3,059,02 USD"
             increment="+5.09"
             icon={
-              <svg
-                width={20}
-                height={20}
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_2955_1293)">
                   <path
                     d="M9.99995 18.9174C14.925 18.9174 18.9176 14.9248 18.9176 9.99971C18.9176 5.07461 14.925 1.08203 9.99995 1.08203C5.07485 1.08203 1.08228 5.07461 1.08228 9.99971C1.08228 14.9248 5.07485 18.9174 9.99995 18.9174Z"
@@ -113,13 +90,7 @@ const DataStats2 = () => {
             usdRate="1,082,19 USD"
             decrement="-8.25"
             icon={
-              <svg
-                width={20}
-                height={20}
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M10 0C4.47717 0 0 4.47716 0 10C0 15.5228 4.47717 20 10 20C15.5228 20 20 15.5228 20 10C19.9937 4.47978 15.5202 0.00632384 10 0ZM14.9066 8.90009C14.5347 9.22856 14.1053 9.48537 13.6399 9.65714C13.3105 9.76371 13.0093 9.94266 12.7582 10.1811C12.4249 10.9748 12.6295 11.8928 13.2689 12.4698C13.2907 12.4916 13.3112 12.5149 13.3302 12.5395C14.1345 13.5702 14.0528 15.0365 13.139 15.9715C12.1273 16.9814 10.4887 16.9814 9.47686 15.9715C8.83662 15.2031 8.62738 14.1635 8.92033 13.2072C8.99119 12.6546 8.80219 12.1001 8.40828 11.706C8.01742 11.3293 7.47551 11.1525 6.93775 11.226C5.98146 11.5185 4.94212 11.3086 4.17416 10.6681C3.16297 9.65823 3.16206 8.01984 4.17197 7.00884C4.17264 7.00798 4.1735 7.00731 4.17416 7.00665C5.10864 6.09221 6.5757 6.01045 7.60609 6.8155C8.32742 7.52827 9.39595 7.76827 9.96381 7.38617C10.2031 7.13569 10.3823 6.83422 10.4883 6.50441C10.6601 6.03945 10.9164 5.61045 11.2445 5.23902C12.2557 4.22778 13.8949 4.22777 14.9062 5.23883C15.9176 6.25002 15.9176 7.88927 14.9066 8.90051V8.90009Z"
                   fill="white"
@@ -141,23 +112,12 @@ const DataStats2 = () => {
 
 export default DataStats2;
 
-const DataStatsCard = ({
-  children,
-  name,
-  rate,
-  usdRate,
-  decrement,
-  increment,
-  color,
-  icon,
-}) => {
+const DataStatsCard = ({ children, name, rate, usdRate, decrement, increment, color, icon }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4">
       <div className="mb-8 rounded-[5px] bg-white p-4 shadow-pricing-4 dark:bg-dark-2 dark:shadow-box-dark">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-medium uppercase text-dark dark:text-white">
-            {name}
-          </p>
+          <p className="text-xs font-medium uppercase text-dark dark:text-white">{name}</p>
           <Dropdown />
         </div>
         {children}
@@ -170,29 +130,15 @@ const DataStatsCard = ({
               {icon}
             </div>
             <div>
-              <p className="mb-1 text-sm font-medium text-dark dark:text-white">
-                {rate}
-              </p>
-              <p className="text-xs font-medium text-body-color dark:text-dark-6">
-                {usdRate}
-              </p>
+              <p className="mb-1 text-sm font-medium text-dark dark:text-white">{rate}</p>
+              <p className="text-xs font-medium text-body-color dark:text-dark-6">{usdRate}</p>
             </div>
           </div>
           <div>
-            <p
-              className={`flex items-center justify-end text-xs font-medium ${
-                increment ? "text-green" : "text-red"
-              }`}
-            >
+            <p className={`flex items-center justify-end text-xs font-medium ${increment ? 'text-green' : 'text-red'}`}>
               <span className="pr-1">
                 {increment && (
-                  <svg
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M4.35716 2.3925L0.908974 5.745L5.0443e-07 4.86125L5 -5.1656e-07L10 4.86125L9.09103 5.745L5.64284 2.3925L5.64284 10L4.35716 10L4.35716 2.3925Z"
                       fill="currentColor"
@@ -200,13 +146,7 @@ const DataStatsCard = ({
                   </svg>
                 )}
                 {decrement && (
-                  <svg
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M5.64284 7.6075L9.09102 4.255L10 5.13875L5 10L-8.98488e-07 5.13875L0.908973 4.255L4.35716 7.6075L4.35716 7.6183e-07L5.64284 9.86625e-07L5.64284 7.6075Z"
                       fill="currentColor"
@@ -234,16 +174,11 @@ const Dropdown = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -252,17 +187,13 @@ const Dropdown = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
     <div className="relative">
-      <button
-        ref={trigger}
-        onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="text-body-color dark:text-dark-6"
-      >
+      <button ref={trigger} onClick={() => setDropdownOpen(!dropdownOpen)} className="text-body-color dark:text-dark-6">
         <svg
           width="18"
           height="18"
@@ -281,7 +212,7 @@ const Dropdown = () => {
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
-          dropdownOpen === true ? "block" : "hidden"
+          dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
         <button className="w-full rounded-sm px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">
@@ -312,7 +243,7 @@ const Chart = (props) => {
     },
     chart: {
       height: 90,
-      type: "area",
+      type: 'area',
       parentHeightOffset: 0,
 
       toolbar: {
@@ -323,18 +254,18 @@ const Chart = (props) => {
       enabled: false,
     },
     stroke: {
-      curve: "smooth",
+      curve: 'smooth',
     },
     xaxis: {
-      type: "datetime",
+      type: 'datetime',
       categories: [
-        "2018-09-19T00:00:00.000Z",
-        "2018-09-19T01:30:00.000Z",
-        "2018-09-19T02:30:00.000Z",
-        "2018-09-19T03:30:00.000Z",
-        "2018-09-19T04:30:00.000Z",
-        "2018-09-19T05:30:00.000Z",
-        "2018-09-19T06:30:00.000Z",
+        '2018-09-19T00:00:00.000Z',
+        '2018-09-19T01:30:00.000Z',
+        '2018-09-19T02:30:00.000Z',
+        '2018-09-19T03:30:00.000Z',
+        '2018-09-19T04:30:00.000Z',
+        '2018-09-19T05:30:00.000Z',
+        '2018-09-19T06:30:00.000Z',
       ],
       labels: {
         show: false,
@@ -354,19 +285,14 @@ const Chart = (props) => {
     },
     tooltip: {
       x: {
-        format: "dd/MM/yy HH:mm",
+        format: 'dd/MM/yy HH:mm',
       },
     },
   };
 
   return (
     <div id="chartOne" className="-mx-[11px]">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="area"
-        height={90}
-      />
+      <ReactApexChart options={options} series={series} type="area" height={90} />
     </div>
   );
 };

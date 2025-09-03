@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Newsletter3 = () => {
   return (
@@ -11,9 +11,7 @@ const Newsletter3 = () => {
       <div className="absolute left-0 top-0 -z-10 h-full w-full bg-[#000]/70"></div>
       <div className="container mx-auto">
         <div className="mx-auto w-full max-w-[510px] text-center">
-          <h2 className="mb-9 text-2xl font-bold text-white sm:text-4xl">
-            Join Our Newsletter Now
-          </h2>
+          <h2 className="mb-9 text-2xl font-bold text-white sm:text-4xl">Join Our Newsletter Now</h2>
           <form className="mb-5 flex flex-wrap items-center justify-center space-y-4 sm:flex-nowrap sm:justify-between sm:space-x-4 sm:space-y-0">
             <input
               type="email"

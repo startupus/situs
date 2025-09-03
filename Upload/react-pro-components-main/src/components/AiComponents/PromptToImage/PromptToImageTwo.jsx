@@ -45,7 +45,7 @@ function PromptToImageTwo() {
                 id=""
                 rows="5"
                 placeholder="Type here a detailed description of what you want to see"
-                className="w-full rounded-lg border border-stroke bg-transparent p-5 text-base text-dark placeholder-dark-6 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-base text-dark placeholder-dark-6 focus:border-primary dark:border-dark-3 dark:text-white"
               ></textarea>
             </div>
 
@@ -55,7 +55,7 @@ function PromptToImageTwo() {
                   <select
                     name=""
                     id=""
-                    className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                    className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                   >
                     <option value="">Style One</option>
                     <option value="">Style Two</option>
@@ -80,7 +80,7 @@ function PromptToImageTwo() {
                   <select
                     name=""
                     id=""
-                    className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                    className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                   >
                     <option value="">Model One</option>
                     <option value="">Model Two</option>
@@ -105,7 +105,7 @@ function PromptToImageTwo() {
                   <select
                     name=""
                     id=""
-                    className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                    className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                   >
                     <option value="">Ratio One</option>
                     <option value="">Ratio Two</option>
@@ -633,7 +633,7 @@ function PromptToImageTwo() {
               Result
             </h3>
             <div className="grid grid-cols-3 gap-8">
-              <div className="flex aspect-326/304 items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-white/10 dark:bg-white/5 dark:text-dark-5">
+              <div className="aspect-326/304 flex items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-white/10 dark:bg-white/5 dark:text-dark-5">
                 <svg
                   width="60"
                   height="60"
@@ -665,7 +665,7 @@ function PromptToImageTwo() {
                   />
                 </svg>
               </div>
-              <div className="flex aspect-326/304 items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-white/10 dark:bg-white/5 dark:text-dark-5">
+              <div className="aspect-326/304 flex items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-white/10 dark:bg-white/5 dark:text-dark-5">
                 <svg
                   width="60"
                   height="60"
@@ -697,7 +697,7 @@ function PromptToImageTwo() {
                   />
                 </svg>
               </div>
-              <div className="flex aspect-326/304 items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-white/10 dark:bg-white/5 dark:text-dark-5">
+              <div className="aspect-326/304 flex items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-white/10 dark:bg-white/5 dark:text-dark-5">
                 <svg
                   width="60"
                   height="60"
@@ -774,7 +774,7 @@ function PromptToImageTwo() {
                 id=""
                 rows="5"
                 value="Type here a detailed description of what you want to see"
-                className="w-full rounded-lg border border-stroke bg-transparent p-5 text-base text-dark placeholder-dark-6 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-base text-dark placeholder-dark-6 focus:border-primary dark:border-dark-3 dark:text-white"
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                 ultrices augue sit amet odio posuere, sit amet porttitor ex
@@ -788,7 +788,7 @@ function PromptToImageTwo() {
                   <select
                     name=""
                     id=""
-                    className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                    className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                   >
                     <option value="">Style One</option>
                     <option value="">Style Two</option>
@@ -813,7 +813,7 @@ function PromptToImageTwo() {
                   <select
                     name=""
                     id=""
-                    className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                    className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                   >
                     <option value="">Model One</option>
                     <option value="">Model Two</option>
@@ -838,7 +838,7 @@ function PromptToImageTwo() {
                   <select
                     name=""
                     id=""
-                    className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                    className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-2.5 pl-4 pr-10 text-dark dark:border-dark-3 dark:text-white"
                   >
                     <option value="">Ratio One</option>
                     <option value="">Ratio Two</option>
@@ -1367,7 +1367,7 @@ function PromptToImageTwo() {
             </h3>
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               <div className="text-center">
-                <div className="mb-6 flex aspect-326/304 items-center justify-center overflow-hidden rounded-xl border border-gray-3 dark:border-dark-3">
+                <div className="aspect-326/304 mb-6 flex items-center justify-center overflow-hidden rounded-xl border border-gray-3 dark:border-dark-3">
                   <img
                     src="https://i.ibb.co/920rKYr/image-1.jpg"
                     alt="result image"
@@ -1397,7 +1397,7 @@ function PromptToImageTwo() {
                 </button>
               </div>
               <div className="text-center">
-                <div className="mb-6 flex aspect-326/304 items-center justify-center overflow-hidden rounded-xl border border-gray-3 dark:border-dark-3">
+                <div className="aspect-326/304 mb-6 flex items-center justify-center overflow-hidden rounded-xl border border-gray-3 dark:border-dark-3">
                   <img
                     src="https://i.ibb.co/ws04t7r/image-2.jpg"
                     alt="result image"
@@ -1427,7 +1427,7 @@ function PromptToImageTwo() {
                 </button>
               </div>
               <div className="text-center">
-                <div className="mb-6 flex aspect-326/304 items-center justify-center overflow-hidden rounded-xl border border-gray-3 dark:border-dark-3">
+                <div className="aspect-326/304 mb-6 flex items-center justify-center overflow-hidden rounded-xl border border-gray-3 dark:border-dark-3">
                   <img
                     src="https://i.ibb.co/w77yQtL/image-3.jpg"
                     alt="result image"

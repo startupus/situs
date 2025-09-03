@@ -1,10 +1,6 @@
 // src/components/ui/ThemeRatings.tsx
 import React from 'react';
-import { 
-  Rating1,
-  Rating2,
-  Rating3
-} from './core';
+import { Rating1, Rating2, Rating3 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Rating Variants с поддержкой темы

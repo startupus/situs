@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Testimonial5 = () => {
   return (
@@ -7,15 +7,13 @@ const Testimonial5 = () => {
         <div className="-mx-4 flex flex-wrap justify-center">
           <div className="w-full px-4">
             <div className="mb-[60px] max-w-[510px] lg:mb-[70px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Testimonials
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Testimonials</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 What our Clients Says
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -63,26 +61,14 @@ const SingleTestimonial = ({ image, name, position, details }) => {
             <img src={image} alt="image" className="w-full" />
           </div>
           <div className="w-full">
-            <h5 className="mb-1 text-lg font-semibold text-dark dark:text-white">
-              {name}
-            </h5>
-            <p className="text-xs text-body-color dark:text-dark-6">
-              {position}
-            </p>
+            <h5 className="mb-1 text-lg font-semibold text-dark dark:text-white">{name}</h5>
+            <p className="text-xs text-body-color dark:text-dark-6">{position}</p>
           </div>
         </div>
-        <p className="text-base text-body-color dark:text-dark-6">
-          “{details}”
-        </p>
+        <p className="text-base text-body-color dark:text-dark-6">“{details}”</p>
         <div>
           <span className="absolute right-0 top-0">
-            <svg
-              width="104"
-              height="102"
-              viewBox="0 0 104 102"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="104" height="102" viewBox="0 0 104 102" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 opacity="0.6"
                 d="M28.707 23.8032C31.0493 22.4301 33.9507 22.4301 36.293 23.8032L56.4389 35.6133C58.7351 36.9594 60.1458 39.4218 60.1458 42.0835V65.9165C60.1458 68.5782 58.7351 71.0406 56.4388 72.3867L36.293 84.1968C33.9507 85.5699 31.0493 85.5699 28.707 84.1968L8.56115 72.3867C6.26492 71.0406 4.85417 68.5782 4.85417 65.9165V42.0835C4.85417 39.4218 6.26492 36.9594 8.56115 35.6133L28.707 23.8032Z"

@@ -43,9 +43,9 @@ const blogList = [
 const Footer = () => {
   return (
     <>
-      <footer className="bg-dark relative z-10">
-        <span className="bg-primary absolute top-0 left-0 block h-2 w-1/2"></span>
-        <span className="bg-secondary absolute top-0 right-0 block h-2 w-1/2"></span>
+      <footer className="relative z-10 bg-dark">
+        <span className="absolute left-0 top-0 block h-2 w-1/2 bg-primary"></span>
+        <span className="absolute right-0 top-0 block h-2 w-1/2 bg-secondary"></span>
 
         <div className="container mx-auto">
           <FooterNewsletter />
@@ -59,13 +59,13 @@ const Footer = () => {
                   <img src={logoWhite} alt="logo" className="max-w-full" />
                 </Link>
 
-                <p className="text-gray-7 mb-7 text-base">
+                <p className="mb-7 text-base text-gray-7">
                   We create digital experiences for brands and companies by
                   using technology.
                 </p>
 
                 <div className="-mx-3 flex items-center">
-                  <Link to="#" className="text-gray-7 px-3 hover:text-white">
+                  <Link to="#" className="px-3 text-gray-7 hover:text-white">
                     <svg
                       width="10"
                       height="18"
@@ -76,7 +76,7 @@ const Footer = () => {
                     </svg>
                   </Link>
 
-                  <Link to="#" className="text-gray-7 px-3 hover:text-white">
+                  <Link to="#" className="px-3 text-gray-7 hover:text-white">
                     <svg
                       width="19"
                       height="15"
@@ -87,7 +87,7 @@ const Footer = () => {
                     </svg>
                   </Link>
 
-                  <Link to="#" className="text-gray-7 px-3 hover:text-white">
+                  <Link to="#" className="px-3 text-gray-7 hover:text-white">
                     <svg
                       width="18"
                       height="18"
@@ -100,7 +100,7 @@ const Footer = () => {
                     </svg>
                   </Link>
 
-                  <Link to="#" className="text-gray-7 px-3 hover:text-white">
+                  <Link to="#" className="px-3 text-gray-7 hover:text-white">
                     <svg
                       width="18"
                       height="18"
@@ -123,7 +123,7 @@ const Footer = () => {
                   <Link
                     key={index}
                     to={item.link}
-                    className="text-gray-7 mb-8 flex items-center hover:text-white"
+                    className="mb-8 flex items-center text-gray-7 hover:text-white"
                   >
                     <div className="mr-5 w-full max-w-[70px] overflow-hidden rounded-sm">
                       <img src={item.image} alt="image" className="w-full" />
@@ -149,7 +149,7 @@ const Footer = () => {
                       <li key={index}>
                         <Link
                           to={item.link}
-                          className="text-gray-7 inline-block text-base leading-loose underline-offset-2 hover:text-white"
+                          className="inline-block text-base leading-loose text-gray-7 underline-offset-2 hover:text-white"
                         >
                           {item.text}
                         </Link>
@@ -167,8 +167,8 @@ const Footer = () => {
                 </h4>
                 <ul>
                   <li>
-                    <p className="text-gray-7 mb-3 inline-flex items-start text-base leading-loose">
-                      <span className="mt-[10px] mr-3">
+                    <p className="mb-3 inline-flex items-start text-base leading-loose text-gray-7">
+                      <span className="mr-3 mt-[10px]">
                         <svg
                           width="20"
                           height="20"
@@ -187,8 +187,8 @@ const Footer = () => {
                   </li>
 
                   <li>
-                    <p className="text-gray-7 mb-3 inline-flex items-start text-base leading-loose">
-                      <span className="mt-[10px] mr-3">
+                    <p className="mb-3 inline-flex items-start text-base leading-loose text-gray-7">
+                      <span className="mr-3 mt-[10px]">
                         <svg
                           width="20"
                           height="20"
@@ -222,8 +222,8 @@ const Footer = () => {
                   </li>
 
                   <li>
-                    <p className="text-gray-7 mb-3 inline-flex items-start text-base leading-loose">
-                      <span className="mt-[10px] mr-3">
+                    <p className="mb-3 inline-flex items-start text-base leading-loose text-gray-7">
+                      <span className="mr-3 mt-[10px]">
                         <svg
                           width="20"
                           height="20"

@@ -1,6 +1,6 @@
 // src/components/ui/ThemeButtons.tsx
 import React from 'react';
-import { 
+import {
   PrimaryButton,
   PrimaryButtonWithIcon,
   PrimaryOutlineButton,
@@ -33,7 +33,7 @@ import {
   WhiteRoundedButton,
   WhiteRoundedButtonWithIcon,
   WhiteSemiRoundedButton,
-  WhiteSemiRoundedButtonWithIcon
+  WhiteSemiRoundedButtonWithIcon,
 } from './core';
 import { withTheme } from './ThemeWrapper';
 
@@ -42,8 +42,14 @@ export const ThemePrimaryButton = withTheme(PrimaryButton, 'primary');
 export const ThemePrimaryButtonWithIcon = withTheme(PrimaryButtonWithIcon, 'primary');
 export const ThemePrimaryOutlineButton = withTheme(PrimaryOutlineButton, 'primary');
 export const ThemePrimaryOutlineButtonWithIcon = withTheme(PrimaryOutlineButtonWithIcon, 'primary');
-export const ThemePrimaryOutlineFullRoundedButtonWithIcon = withTheme(PrimaryOutlineFullRoundedButtonWithIcon, 'primary');
-export const ThemePrimaryOutlineSemiRoundedButtonWithIcon = withTheme(PrimaryOutlineSemiRoundedButtonWithIcon, 'primary');
+export const ThemePrimaryOutlineFullRoundedButtonWithIcon = withTheme(
+  PrimaryOutlineFullRoundedButtonWithIcon,
+  'primary',
+);
+export const ThemePrimaryOutlineSemiRoundedButtonWithIcon = withTheme(
+  PrimaryOutlineSemiRoundedButtonWithIcon,
+  'primary',
+);
 export const ThemePrimaryRoundedButton = withTheme(PrimaryRoundedButton, 'primary');
 export const ThemePrimaryRoundedButtonWithIcon = withTheme(PrimaryRoundedButtonWithIcon, 'primary');
 export const ThemePrimarySemiRoundedButton = withTheme(PrimarySemiRoundedButton, 'primary');
@@ -91,7 +97,7 @@ export const ThemeButtons = {
   PrimaryRoundedWithIcon: ThemePrimaryRoundedButtonWithIcon,
   PrimarySemiRounded: ThemePrimarySemiRoundedButton,
   PrimarySemiRoundedWithIcon: ThemePrimarySemiRoundedButtonWithIcon,
-  
+
   // Secondary variants
   Secondary: ThemeSecondaryButton,
   SecondaryWithIcon: ThemeSecondaryButtonWithIcon,
@@ -100,7 +106,7 @@ export const ThemeButtons = {
   SecondaryRoundedWithIcon: ThemeSecondaryRoundedButtonWithIcon,
   SecondarySemiRounded: ThemeSecondarySemiRoundedButton,
   SecondarySemiRoundedWithIcon: ThemeSecondarySemiRoundedButtonWithIcon,
-  
+
   // Dark variants
   Dark: ThemeDarkButton,
   DarkWithIcon: ThemeDarkButtonWithIcon,
@@ -109,7 +115,7 @@ export const ThemeButtons = {
   DarkRoundedWithIcon: ThemeDarkRoundedButtonWithIcon,
   DarkSemiRounded: ThemeDarkSemiRoundedButton,
   DarkSemiRoundedWithIcon: ThemeDarkSemiRoundedButtonWithIcon,
-  
+
   // White variants
   White: ThemeWhiteButton,
   WhiteWithIcon: ThemeWhiteButtonWithIcon,

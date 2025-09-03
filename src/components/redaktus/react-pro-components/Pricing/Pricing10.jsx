@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Pricing10 = () => {
-  const [subscribe, setSubscribe] = useState("monthly");
+  const [subscribe, setSubscribe] = useState('monthly');
 
   return (
     <section className="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
@@ -9,15 +9,13 @@ const Pricing10 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Our Pricing Plans
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Our Pricing Plans</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Pricing and Plans
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -26,21 +24,17 @@ const Pricing10 = () => {
         <div className="mb-10 text-center">
           <div className="flex items-center justify-center">
             <button
-              onClick={() => setSubscribe("monthly")}
+              onClick={() => setSubscribe('monthly')}
               className={`relative border-b-[3px] px-6 py-4 text-lg font-semibold ${
-                subscribe === "monthly"
-                  ? "border-primary text-primary"
-                  : "border-[#E9EEFF] text-dark dark:text-white"
+                subscribe === 'monthly' ? 'border-primary text-primary' : 'border-[#E9EEFF] text-dark dark:text-white'
               }`}
             >
               Monthly
             </button>
             <button
-              onClick={() => setSubscribe("yearly")}
+              onClick={() => setSubscribe('yearly')}
               className={`relative border-b-[3px] px-6 py-4 text-lg font-semibold ${
-                subscribe === "yearly"
-                  ? "border-primary text-primary"
-                  : "border-[#E9EEFF] text-dark dark:text-white"
+                subscribe === 'yearly' ? 'border-primary text-primary' : 'border-[#E9EEFF] text-dark dark:text-white'
               }`}
             >
               Yearly
@@ -129,13 +123,7 @@ const PricingCard = ({
         <div className="relative z-10 mb-10 rounded-[15px] border-2 border-stroke bg-white px-8 py-11 dark:border-dark-3 dark:bg-dark-2 sm:px-11 md:px-9 lg:px-8 xl:px-11">
           <span className="absolute right-6 top-6 -z-10">
             {first && (
-              <svg
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.2">
                   <path
                     d="M52.5001 38.5C51.4501 38.5 50.4876 39.375 50.4876 40.5125V48.3C50.4876 49.0875 49.875 49.7 49.0876 49.7H6.91255C6.12505 49.7 5.51255 49.0875 5.51255 48.3V40.5125C5.51255 39.375 4.55005 38.5 3.50005 38.5C2.45005 38.5 1.48755 39.375 1.48755 40.5125V48.3C1.48755 51.275 3.85005 53.6375 6.82505 53.6375H49.0876C52.0625 53.6375 54.4251 51.275 54.4251 48.3V40.5125C54.5126 39.375 53.5501 38.5 52.5001 38.5Z"
@@ -149,13 +137,7 @@ const PricingCard = ({
               </svg>
             )}
             {second && (
-              <svg
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.2">
                   <path
                     d="M21.9624 20.6498C21.9624 24.1498 24.7624 26.9498 28.2624 26.9498C31.7624 26.9498 34.5624 24.1498 34.5624 20.6498C34.5624 17.1498 31.7624 14.3498 28.2624 14.3498C24.8499 14.2623 21.9624 17.1498 21.9624 20.6498ZM31.1499 20.6498C31.1499 22.2248 29.8374 23.4498 28.3499 23.4498C26.8624 23.4498 25.5499 22.1373 25.5499 20.6498C25.5499 19.1623 26.8624 17.8498 28.3499 17.8498C29.8374 17.8498 31.1499 19.0748 31.1499 20.6498Z"
@@ -173,13 +155,7 @@ const PricingCard = ({
               </svg>
             )}
             {third && (
-              <svg
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.2">
                   <path
                     d="M32.4626 41.825C28.9626 41.825 26.1626 44.625 26.1626 48.125C26.1626 51.625 28.9626 54.425 32.4626 54.425C35.9626 54.425 38.7626 51.625 38.7626 48.125C38.7626 44.7125 35.8751 41.825 32.4626 41.825ZM32.4626 50.575C31.1501 50.575 30.1001 49.525 30.1001 48.2125C30.1001 46.9 31.1501 45.85 32.4626 45.85C33.7751 45.85 34.8251 46.9 34.8251 48.2125C34.8251 49.4375 33.6876 50.575 32.4626 50.575Z"
@@ -201,35 +177,29 @@ const PricingCard = ({
             <h3 className="mb-2 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
               {type}
             </h3>
-            <p className="mb-8 max-w-[185px] text-sm text-body-color dark:text-dark-6">
-              {subTitle}
-            </p>
+            <p className="mb-8 max-w-[185px] text-sm text-body-color dark:text-dark-6">{subTitle}</p>
           </div>
           <div className="mb-9 rounded-[10px] bg-[#F1F4FF] py-[18px] text-center dark:bg-dark">
             <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-3xl xl:text-[38px] xl:leading-[46px]">
-              <sup className="text-xl font-medium text-body-color dark:text-dark-6">
-                $
-              </sup>
+              <sup className="text-xl font-medium text-body-color dark:text-dark-6">$</sup>
               <span>
-                {" "}
-                {subscribe === "monthly" && priceMonthly}
-                {subscribe === "yearly" && priceYearly}{" "}
+                {' '}
+                {subscribe === 'monthly' && priceMonthly}
+                {subscribe === 'yearly' && priceYearly}{' '}
               </span>
               <span className="text-base font-medium text-body-color dark:text-dark-6">
-                /{subscribe === "monthly" && "month"}
-                {subscribe === "yearly" && "year"}
+                /{subscribe === 'monthly' && 'month'}
+                {subscribe === 'yearly' && 'year'}
               </span>
             </h2>
           </div>
-          <h5 className="mb-6 text-lg font-medium text-dark dark:text-white">
-            {title}
-          </h5>
+          <h5 className="mb-6 text-lg font-medium text-dark dark:text-white">{title}</h5>
           <div className="mb-9 space-y-[14px]">{children}</div>
           <a
             href="/#"
             className={`flex w-full items-center justify-center rounded-md border p-3 text-base font-medium capitalize ${
               active
-                ? "border-transparent bg-primary text-white hover:bg-blue-dark"
+                ? 'border-transparent bg-primary text-white hover:bg-blue-dark'
                 : `border-primary text-primary hover:bg-primary hover:text-white`
             } `}
           >
@@ -245,13 +215,7 @@ const List = ({ children }) => {
   return (
     <p className="flex items-center gap-3 text-base text-body-color dark:text-dark-6">
       <span>
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M18.9374 4.1875C18.6562 3.90625 18.2187 3.90625 17.9374 4.1875L7.31243 14.5L2.06243 9.34375C1.78118 9.0625 1.34368 9.09375 1.06243 9.34375C0.781178 9.625 0.812428 10.0625 1.06243 10.3437L6.59368 15.7187C6.78118 15.9062 7.03118 16 7.31243 16C7.59368 16 7.81243 15.9062 8.03118 15.7187L18.9374 5.125C19.2187 4.90625 19.2187 4.46875 18.9374 4.1875Z"
             fill="#13C296"

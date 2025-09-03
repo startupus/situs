@@ -18,7 +18,7 @@ export class ProjectTools {
   })
   async createProject({ name, description, template }, context: Context) {
     await context.reportProgress({ progress: 25, total: 100, message: 'Создание проекта...' });
-    
+
     // Здесь будет логика создания проекта
     const project = {
       id: `project-${Date.now()}`,
@@ -27,10 +27,10 @@ export class ProjectTools {
       template: template || 'default',
       createdAt: new Date().toISOString(),
     };
-    
+
     await context.reportProgress({ progress: 75, total: 100, message: 'Настройка проекта...' });
     await context.reportProgress({ progress: 100, total: 100, message: 'Проект создан!' });
-    
+
     return {
       success: true,
       project,
@@ -51,7 +51,7 @@ export class ProjectTools {
   })
   async listProjects({ limit, offset }, context: Context) {
     await context.reportProgress({ progress: 50, total: 100, message: 'Загрузка проектов...' });
-    
+
     // Здесь будет логика получения проектов
     const projects = [
       {
@@ -61,9 +61,9 @@ export class ProjectTools {
         createdAt: '2024-01-01T00:00:00Z',
       },
     ];
-    
+
     await context.reportProgress({ progress: 100, total: 100, message: 'Проекты загружены!' });
-    
+
     return {
       projects,
       total: projects.length,
@@ -86,7 +86,7 @@ export class ProjectTools {
   })
   async updateProject({ projectId, name, description }, context: Context) {
     await context.reportProgress({ progress: 50, total: 100, message: 'Обновление проекта...' });
-    
+
     // Здесь будет логика обновления проекта
     const updatedProject = {
       id: projectId,
@@ -94,9 +94,9 @@ export class ProjectTools {
       description: description || '',
       updatedAt: new Date().toISOString(),
     };
-    
+
     await context.reportProgress({ progress: 100, total: 100, message: 'Проект обновлен!' });
-    
+
     return {
       success: true,
       project: updatedProject,

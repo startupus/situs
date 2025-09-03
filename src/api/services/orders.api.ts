@@ -121,10 +121,7 @@ class OrdersApiService {
    */
   async getOrders(filters?: OrderFilters): Promise<OrdersListResponse> {
     try {
-      const response = await apiClient.get<ApiResponse<OrdersListResponse>>(
-        this.baseEndpoint,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<OrdersListResponse>>(this.baseEndpoint, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -142,9 +139,7 @@ class OrdersApiService {
    */
   async getOrder(orderId: string): Promise<Order> {
     try {
-      const response = await apiClient.get<ApiResponse<Order>>(
-        `${this.baseEndpoint}/${orderId}`
-      );
+      const response = await apiClient.get<ApiResponse<Order>>(`${this.baseEndpoint}/${orderId}`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -162,10 +157,7 @@ class OrdersApiService {
    */
   async createOrder(data: CreateOrderData): Promise<Order> {
     try {
-      const response = await apiClient.post<ApiResponse<Order>>(
-        this.baseEndpoint,
-        data
-      );
+      const response = await apiClient.post<ApiResponse<Order>>(this.baseEndpoint, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -183,10 +175,7 @@ class OrdersApiService {
    */
   async updateOrder(orderId: string, data: UpdateOrderData): Promise<Order> {
     try {
-      const response = await apiClient.put<ApiResponse<Order>>(
-        `${this.baseEndpoint}/${orderId}`,
-        data
-      );
+      const response = await apiClient.put<ApiResponse<Order>>(`${this.baseEndpoint}/${orderId}`, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -204,9 +193,7 @@ class OrdersApiService {
    */
   async deleteOrder(orderId: string): Promise<void> {
     try {
-      const response = await apiClient.delete<ApiResponse<void>>(
-        `${this.baseEndpoint}/${orderId}`
-      );
+      const response = await apiClient.delete<ApiResponse<void>>(`${this.baseEndpoint}/${orderId}`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при удалении заказа');
@@ -222,10 +209,7 @@ class OrdersApiService {
    */
   async updateOrderStatus(orderId: string, status: Order['status']): Promise<Order> {
     try {
-      const response = await apiClient.patch<ApiResponse<Order>>(
-        `${this.baseEndpoint}/${orderId}/status`,
-        { status }
-      );
+      const response = await apiClient.patch<ApiResponse<Order>>(`${this.baseEndpoint}/${orderId}/status`, { status });
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -241,16 +225,9 @@ class OrdersApiService {
   /**
    * Получить статистику заказов
    */
-  async getOrderStats(filters?: { 
-    dateFrom?: string; 
-    dateTo?: string; 
-    projectId?: string;
-  }): Promise<OrderStats> {
+  async getOrderStats(filters?: { dateFrom?: string; dateTo?: string; projectId?: string }): Promise<OrderStats> {
     try {
-      const response = await apiClient.get<ApiResponse<OrderStats>>(
-        `${this.baseEndpoint}/stats`,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<OrderStats>>(`${this.baseEndpoint}/stats`, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -270,7 +247,7 @@ class OrdersApiService {
     try {
       const response = await apiClient.get<ApiResponse<OrdersListResponse>>(
         `${this.baseEndpoint}/project/${projectId}`,
-        filters
+        filters,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -289,19 +266,16 @@ class OrdersApiService {
    */
   async exportOrders(format: 'csv' | 'xlsx' | 'json', filters?: OrderFilters): Promise<Blob> {
     try {
-      const response = await fetch(
-        `${apiClient['baseURL']}${this.baseEndpoint}/export?format=${format}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(localStorage.getItem('auth_token') && {
-              'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-            })
-          },
-          body: JSON.stringify(filters || {})
-        }
-      );
+      const response = await fetch(`${apiClient['baseURL']}${this.baseEndpoint}/export?format=${format}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(localStorage.getItem('auth_token') && {
+            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+          }),
+        },
+        body: JSON.stringify(filters || {}),
+      });
 
       if (!response.ok) {
         throw new Error('Ошибка при экспорте заказов');
@@ -319,10 +293,10 @@ class OrdersApiService {
    */
   async refundOrder(orderId: string, amount?: number, reason?: string): Promise<Order> {
     try {
-      const response = await apiClient.post<ApiResponse<Order>>(
-        `${this.baseEndpoint}/${orderId}/refund`,
-        { amount, reason }
-      );
+      const response = await apiClient.post<ApiResponse<Order>>(`${this.baseEndpoint}/${orderId}/refund`, {
+        amount,
+        reason,
+      });
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;

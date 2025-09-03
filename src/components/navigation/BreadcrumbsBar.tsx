@@ -22,37 +22,25 @@ const BreadcrumbsBar: React.FC<BreadcrumbsBarProps> = ({
   className = '',
   showHome = true,
   homeTitle = 'Главная',
-  homeUrl = '/'
+  homeUrl = '/',
 }) => {
   return (
     <div className={`bg-gray-50 dark:bg-gray-800 border-b border-stroke dark:border-dark-3 px-6 py-3 ${className}`}>
-      <ActiveMenuTracker
-        projectId={projectId}
-        menuTypeName={menuTypeName}
-      >
+      <ActiveMenuTracker projectId={projectId} menuTypeName={menuTypeName}>
         {(activeItem, breadcrumbs) => (
           <div className="flex items-center justify-between">
             {/* Хлебные крошки */}
             <nav className="flex items-center space-x-2 text-sm" aria-label="Навигация">
               {showHome && (
                 <>
-                  <Link 
-                    to={homeUrl}
-                    className="text-body-color dark:text-dark-6 hover:text-primary transition-colors"
-                  >
+                  <Link to={homeUrl} className="text-body-color dark:text-dark-6 hover:text-primary transition-colors">
                     🏠 {homeTitle}
                   </Link>
-                  {breadcrumbs.length > 0 && (
-                    <span className="text-body-color dark:text-dark-6 mx-2">/</span>
-                  )}
+                  {breadcrumbs.length > 0 && <span className="text-body-color dark:text-dark-6 mx-2">/</span>}
                 </>
               )}
-              
-              <Breadcrumbs 
-                breadcrumbs={breadcrumbs}
-                showIcons={true}
-                separator="/"
-              />
+
+              <Breadcrumbs breadcrumbs={breadcrumbs} showIcons={true} separator="/" />
             </nav>
 
             {/* Информация об активном пункте */}
@@ -60,15 +48,11 @@ const BreadcrumbsBar: React.FC<BreadcrumbsBarProps> = ({
               <div className="flex items-center gap-3 text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-body-color dark:text-dark-6">Активный пункт:</span>
-                  <span className="font-medium text-dark dark:text-white">
-                    {activeItem.title}
-                  </span>
+                  <span className="font-medium text-dark dark:text-white">{activeItem.title}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
-                  <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">
-                    {activeItem.component}
-                  </span>
+                  <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">{activeItem.component}</span>
                   {activeItem.view && (
                     <span className="text-xs bg-gray-100 dark:bg-gray-700 text-body-color dark:text-dark-6 px-2 py-1 rounded">
                       {activeItem.view}

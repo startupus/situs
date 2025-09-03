@@ -53,7 +53,7 @@ const CustomerReview = () => {
                 {reviewItems.map((review, index) => (
                   <div
                     key={index}
-                    className="mb-11 border-b border-stroke pb-11 last:mb-0! last:border-b-0! dark:border-dark-3"
+                    className="last:mb-0! last:border-b-0! mb-11 border-b border-stroke pb-11 dark:border-dark-3"
                   >
                     <div className="mb-0">
                       <div className="items-center justify-between md:flex">

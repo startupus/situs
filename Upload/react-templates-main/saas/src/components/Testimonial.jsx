@@ -60,18 +60,18 @@ const Testimonial = () => {
 
   return (
     <>
-      <section className="bg-tg-bg dark:bg-dark-2 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
-        <div className="relative container mx-auto overflow-hidden">
+      <section className="bg-tg-bg pb-10 pt-20 dark:bg-dark-2 lg:pb-20 lg:pt-[120px]">
+        <div className="container relative mx-auto overflow-hidden">
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Testimonials
                 </span>
-                <h2 className="text-dark mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px] dark:text-white">
+                <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                   What our Clients Says
                 </h2>
-                <p className="text-body-color dark:text-dark-6 text-base">
+                <p className="text-base text-body-color dark:text-dark-6">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
@@ -107,7 +107,7 @@ const Testimonial = () => {
               <SwiperSlide key={index}>
                 <div className="relative flex justify-center">
                   <div className="relative w-full pb-16">
-                    <div className="shadow-testimonial-5 dark:bg-dark dark:shadow-box-dark mb-10 bg-white p-8 lg:px-6 lg:py-8 xl:p-8">
+                    <div className="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8">
                       <div className="mb-5 flex items-center">
                         {[...Array(5).keys()].map((index) => (
                           <span className="mr-1" key={index}>
@@ -126,7 +126,7 @@ const Testimonial = () => {
                           </span>
                         ))}
                       </div>
-                      <p className="text-body-color dark:text-dark-6 mb-6 text-base">
+                      <p className="mb-6 text-base text-body-color dark:text-dark-6">
                         {item.details}
                       </p>
                       <div className="flex items-center">
@@ -138,10 +138,10 @@ const Testimonial = () => {
                           />
                         </div>
                         <div className="w-full">
-                          <h5 className="text-dark mb-0.5 text-sm font-semibold dark:text-white">
+                          <h5 className="mb-0.5 text-sm font-semibold text-dark dark:text-white">
                             {item.name}
                           </h5>
-                          <p className="text-secondary-color dark:text-dark-6 text-xs">
+                          <p className="text-xs text-secondary-color dark:text-dark-6">
                             {item.position}
                           </p>
                         </div>
@@ -152,9 +152,9 @@ const Testimonial = () => {
               </SwiperSlide>
             ))}
 
-            <div className="absolute right-0 bottom-0 left-0 z-10 flex items-center justify-center gap-3">
+            <div className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center gap-3">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="text-dark shadow-btn-3 hover:bg-primary dark:bg-dark dark:hover:bg-primary flex h-12 w-12 items-center justify-center bg-white transition-all hover:text-white dark:text-white dark:shadow-none">
+                <button className="flex h-12 w-12 items-center justify-center bg-white text-dark shadow-btn-3 transition-all hover:bg-primary hover:text-white dark:bg-dark dark:text-white dark:shadow-none dark:hover:bg-primary">
                   <svg
                     width="22"
                     height="22"
@@ -171,7 +171,7 @@ const Testimonial = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="text-dark shadow-btn-3 hover:bg-primary dark:bg-dark dark:hover:bg-primary flex h-12 w-12 items-center justify-center bg-white transition-all hover:text-white dark:text-white dark:shadow-none">
+                <button className="flex h-12 w-12 items-center justify-center bg-white text-dark shadow-btn-3 transition-all hover:bg-primary hover:text-white dark:bg-dark dark:text-white dark:shadow-none dark:hover:bg-primary">
                   <svg
                     width="22"
                     height="22"

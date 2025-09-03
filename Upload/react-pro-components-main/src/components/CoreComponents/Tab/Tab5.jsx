@@ -10,20 +10,20 @@ const Tab5 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="w-full mb-14">
+            <div className="mb-14 w-full">
               <div className="flex flex-wrap bg-[#FAFAFA]">
                 <button
                   onClick={() => handleTabOpen("home")}
-                  className={`group text-body-color hover:border-primary hover:text-primary flex items-center border-b-2 border-[#F1F2F4] py-3 px-6 text-sm font-medium hover:bg-[#EDF1FF] md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center border-b-2 border-[#F1F2F4] px-6 py-3 text-sm font-medium text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "home"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   <span
-                    className={`group-hover:bg-primary mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:text-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:bg-primary group-hover:text-white ${
                       open === "home" ? "bg-primary text-white" : ""
                     }`}
                   >
@@ -33,14 +33,14 @@ const Tab5 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("about")}
-                  className={`group text-body-color hover:border-primary hover:text-primary flex items-center border-b-2 border-[#F1F2F4] py-3 px-6 text-sm font-medium hover:bg-[#EDF1FF] md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center border-b-2 border-[#F1F2F4] px-6 py-3 text-sm font-medium text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "about"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   <span
-                    className={`group-hover:bg-primary mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:text-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:bg-primary group-hover:text-white ${
                       open === "about" ? "bg-primary text-white" : ""
                     }`}
                   >
@@ -50,14 +50,14 @@ const Tab5 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("team")}
-                  className={`group text-body-color hover:border-primary hover:text-primary flex items-center border-b-2 border-[#F1F2F4] py-3 px-6 text-sm font-medium hover:bg-[#EDF1FF] md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center border-b-2 border-[#F1F2F4] px-6 py-3 text-sm font-medium text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "team"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   <span
-                    className={`group-hover:bg-primary mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:text-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:bg-primary group-hover:text-white ${
                       open === "team" ? "bg-primary text-white" : ""
                     }`}
                   >
@@ -67,14 +67,14 @@ const Tab5 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("company")}
-                  className={`group text-body-color hover:border-primary hover:text-primary flex items-center border-b-2 border-[#F1F2F4] py-3 px-6 text-sm font-medium hover:bg-[#EDF1FF] md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center border-b-2 border-[#F1F2F4] px-6 py-3 text-sm font-medium text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "company"
-                      ? "border-primary text-primary bg-[#EDF1FF]"
-                      : "text-body-color border-[#F1F2F4] hover:border-primary hover:text-primary hover:bg-[#EDF1FF]"
+                      ? "border-primary bg-[#EDF1FF] text-primary"
+                      : "border-[#F1F2F4] text-body-color hover:border-primary hover:bg-[#EDF1FF] hover:text-primary"
                   }`}
                 >
                   <span
-                    className={`group-hover:bg-primary mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:text-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border text-sm group-hover:bg-primary group-hover:text-white ${
                       open === "company" ? "bg-primary text-white" : ""
                     }`}
                   >
@@ -119,7 +119,7 @@ const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
       <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
+        className={`p-6 text-base leading-relaxed text-body-color ${
           open === tabCategory ? "block" : "hidden"
         } `}
       >

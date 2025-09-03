@@ -19,57 +19,57 @@ export class AccessLevelsService {
       title: 'Общедоступный',
       description: 'Доступен всем пользователям, включая неавторизованных',
       allowedRoles: ['*'],
-      level: 0
+      level: 0,
     },
     REGISTERED: {
       name: 'REGISTERED',
       title: 'Зарегистрированные',
       description: 'Доступен только зарегистрированным пользователям',
       allowedRoles: ['BUSINESS', 'AGENCY', 'STAFF', 'SUPER_ADMIN'],
-      level: 10
+      level: 10,
     },
     BUSINESS: {
       name: 'BUSINESS',
       title: 'Бизнес-пользователи',
       description: 'Доступен бизнес-пользователям и выше',
       allowedRoles: ['BUSINESS', 'AGENCY', 'STAFF', 'SUPER_ADMIN'],
-      level: 40
+      level: 40,
     },
     AGENCY: {
       name: 'AGENCY',
       title: 'Агентства',
       description: 'Доступен агентствам, персоналу и администраторам',
       allowedRoles: ['AGENCY', 'STAFF', 'SUPER_ADMIN'],
-      level: 60
+      level: 60,
     },
     STAFF: {
       name: 'STAFF',
       title: 'Персонал',
       description: 'Доступен только персоналу и администраторам',
       allowedRoles: ['STAFF', 'SUPER_ADMIN'],
-      level: 80
+      level: 80,
     },
     ADMIN: {
       name: 'ADMIN',
       title: 'Администраторы',
       description: 'Доступен только супер-администраторам',
       allowedRoles: ['SUPER_ADMIN'],
-      level: 100
+      level: 100,
     },
     SPECIAL: {
       name: 'SPECIAL',
       title: 'Специальный',
       description: 'Специальный уровень доступа с кастомными правилами',
       allowedRoles: [],
-      level: 50
+      level: 50,
     },
     CUSTOM: {
       name: 'CUSTOM',
       title: 'Пользовательский',
       description: 'Пользовательский уровень доступа',
       allowedRoles: [],
-      level: 30
-    }
+      level: 30,
+    },
   } as const;
 
   /**
@@ -122,8 +122,8 @@ export class AccessLevelsService {
         projectId: data.projectId,
         accountId: data.accountId,
         isSystem: false,
-        isActive: true
-      }
+        isActive: true,
+      },
     });
   }
 
@@ -134,9 +134,9 @@ export class AccessLevelsService {
     return this.prisma.customAccessLevel.findMany({
       where: {
         projectId,
-        isActive: true
+        isActive: true,
       },
-      orderBy: { name: 'asc' }
+      orderBy: { name: 'asc' },
     });
   }
 
@@ -147,32 +147,29 @@ export class AccessLevelsService {
     return this.prisma.customAccessLevel.findMany({
       where: {
         accountId,
-        isActive: true
+        isActive: true,
       },
-      orderBy: { name: 'asc' }
+      orderBy: { name: 'asc' },
     });
   }
 
   /**
    * Проверить доступ к кастомному уровню
    */
-  async hasCustomAccess(
-    userId: string,
-    customAccessLevelId: string
-  ): Promise<boolean> {
+  async hasCustomAccess(userId: string, customAccessLevelId: string): Promise<boolean> {
     const customLevel = await this.prisma.customAccessLevel.findUnique({
-      where: { id: customAccessLevelId }
+      where: { id: customAccessLevelId },
     });
 
     if (!customLevel || !customLevel.isActive) return false;
 
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      include: { 
+      include: {
         accountMemberships: { select: { accountId: true, role: true } },
-        projectAccesses: { select: { projectId: true, role: true } }
+        projectAccesses: { select: { projectId: true, role: true } },
       },
-      select: undefined as any
+      select: undefined as any,
     } as any);
 
     if (!user) return false;
@@ -186,15 +183,13 @@ export class AccessLevelsService {
     // Проверяем дополнительные условия
     if (conditions.requireAccountMembership && customLevel.accountId) {
       const hasMembership = (user as any).accountMemberships.some(
-        (membership: any) => membership.accountId === customLevel.accountId
+        (membership: any) => membership.accountId === customLevel.accountId,
       );
       if (!hasMembership) return false;
     }
 
     if (conditions.requireProjectAccess && customLevel.projectId) {
-      const hasAccess = (user as any).projectAccesses.some(
-        (access: any) => access.projectId === customLevel.projectId
-      );
+      const hasAccess = (user as any).projectAccesses.some((access: any) => access.projectId === customLevel.projectId);
       if (!hasAccess) return false;
     }
 
@@ -212,7 +207,7 @@ export class AccessLevelsService {
       allowedRoles?: string[];
       conditions?: Record<string, any>;
       isActive?: boolean;
-    }
+    },
   ) {
     const updateData: any = {};
 
@@ -230,7 +225,7 @@ export class AccessLevelsService {
 
     return this.prisma.customAccessLevel.update({
       where: { id },
-      data: updateData
+      data: updateData,
     });
   }
 
@@ -239,7 +234,7 @@ export class AccessLevelsService {
    */
   async deleteCustomAccessLevel(id: string) {
     return this.prisma.customAccessLevel.delete({
-      where: { id }
+      where: { id },
     });
   }
 
@@ -253,28 +248,32 @@ export class AccessLevelsService {
 
     if (projectId) {
       const projectCustomLevels = await this.getProjectCustomAccessLevels(projectId);
-      customLevels.push(...projectCustomLevels.map(level => ({
-        ...level,
-        allowedRoles: JSON.parse(level.allowedRoles as any),
-        conditions: JSON.parse(level.conditions as any),
-        isCustom: true
-      })));
+      customLevels.push(
+        ...projectCustomLevels.map((level) => ({
+          ...level,
+          allowedRoles: JSON.parse(level.allowedRoles as any),
+          conditions: JSON.parse(level.conditions as any),
+          isCustom: true,
+        })),
+      );
     }
 
     if (accountId) {
       const accountCustomLevels = await this.getAccountCustomAccessLevels(accountId);
-      customLevels.push(...accountCustomLevels.map(level => ({
-        ...level,
-        allowedRoles: JSON.parse(level.allowedRoles as any),
-        conditions: JSON.parse(level.conditions as any),
-        isCustom: true
-      })));
+      customLevels.push(
+        ...accountCustomLevels.map((level) => ({
+          ...level,
+          allowedRoles: JSON.parse(level.allowedRoles as any),
+          conditions: JSON.parse(level.conditions as any),
+          isCustom: true,
+        })),
+      );
     }
 
     return {
       system: systemLevels as any,
       custom: customLevels,
-      all: [...(systemLevels as any), ...customLevels]
+      all: [...(systemLevels as any), ...customLevels],
     };
   }
 
@@ -284,7 +283,7 @@ export class AccessLevelsService {
   async checkResourceAccess(
     userId: string,
     resourceType: 'project' | 'product' | 'page',
-    resourceId: string
+    resourceId: string,
   ): Promise<boolean> {
     // Получаем ресурс с его уровнем доступа
     let resource: any;
@@ -292,17 +291,17 @@ export class AccessLevelsService {
     switch (resourceType) {
       case 'project':
         resource = await this.prisma.project.findUnique({
-          where: { id: resourceId }
+          where: { id: resourceId },
         });
         break;
       case 'product':
         resource = await this.prisma.product.findUnique({
-          where: { id: resourceId }
+          where: { id: resourceId },
         });
         break;
       case 'page':
         resource = await this.prisma.page.findUnique({
-          where: { id: resourceId }
+          where: { id: resourceId },
         });
         break;
     }
@@ -311,7 +310,7 @@ export class AccessLevelsService {
 
     // Получаем пользователя
     const user = await this.prisma.user.findUnique({
-      where: { id: userId }
+      where: { id: userId },
     });
 
     if (!user) return false;
@@ -339,15 +338,15 @@ export class AccessLevelsService {
 
     const customLevels = await this.prisma.customAccessLevel.findMany({
       where: whereClause,
-      select: { name: true, isActive: true }
+      select: { name: true, isActive: true },
     });
 
     return {
       total: customLevels.length,
-      active: customLevels.filter(level => level.isActive).length,
-      inactive: customLevels.filter(level => !level.isActive).length,
+      active: customLevels.filter((level) => level.isActive).length,
+      inactive: customLevels.filter((level) => !level.isActive).length,
       systemLevels: Object.keys(this.systemAccessLevels).length,
-      customLevels: customLevels.length
+      customLevels: customLevels.length,
     };
   }
 }

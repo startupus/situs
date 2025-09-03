@@ -25,13 +25,13 @@ const Dropdown = ({ name, options, selectedOption, toggleOptionSelect }) => {
   return (
     <>
       <div className="mb-4 inline-flex items-center md:mb-0 lg:mr-[22px]">
-        <span className="text-dark mr-4 text-base font-medium dark:text-white">
+        <span className="mr-4 text-base font-medium text-dark dark:text-white">
           {name}
         </span>
         <div className="relative">
           <button
             onClick={handleDropDownToggle}
-            className="border-stroke text-dark dark:border-dark-3 inline-flex items-center gap-[6px] rounded-[5px] border bg-transparent py-[7px] pr-[14px] pl-4 text-base font-medium dark:text-white"
+            className="inline-flex items-center gap-[6px] rounded-[5px] border border-stroke bg-transparent py-[7px] pl-4 pr-[14px] text-base font-medium text-dark dark:border-dark-3 dark:text-white"
           >
             {selectedOption
               ? options.find((option) => option.value === selectedOption)
@@ -54,12 +54,12 @@ const Dropdown = ({ name, options, selectedOption, toggleOptionSelect }) => {
           </button>
           {openDropDown && (
             <div ref={dropdownRef}>
-              <div className="border-stroke dark:border-dark-3 dark:bg-dark-2 absolute top-full left-0 mt-2 w-full max-w-[150px] min-w-[150px] rounded-[5px] border bg-white py-5">
+              <div className="absolute left-0 top-full mt-2 w-full min-w-[150px] max-w-[150px] rounded-[5px] border border-stroke bg-white py-5 dark:border-dark-3 dark:bg-dark-2">
                 <ul className="flex flex-col">
                   {options.map((option, optionIndex) => (
                     <li
                       key={optionIndex}
-                      className="text-body-color hover:text-primary dark:text-dark-6 dark:hover:bg-dark-3 cursor-pointer px-5 py-[7px] text-base hover:bg-[#F5F7FD]"
+                      className="cursor-pointer px-5 py-[7px] text-base text-body-color hover:bg-[#F5F7FD] hover:text-primary dark:text-dark-6 dark:hover:bg-dark-3"
                       onClick={() => toggleOptionSelect(optionIndex)}
                     >
                       {option.name || option}

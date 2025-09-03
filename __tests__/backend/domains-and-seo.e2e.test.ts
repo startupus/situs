@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 const BASE = process.env.TEST_BASE || 'http://localhost:3002';
 
-async function get(path: string, headers: Record<string,string> = {}) {
+async function get(path: string, headers: Record<string, string> = {}) {
   const res = await fetch(`${BASE}${path}`, { method: 'GET', headers } as any);
   return { status: res.status, text: await res.text(), res };
 }

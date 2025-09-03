@@ -37,11 +37,11 @@ const SingleStep = ({ number, name, details, done }) => {
           done ? "border-primary" : "border-[#E7E7E7]"
         } mb-8 border-b-[3px]`}
       >
-        <span className="border-stroke mb-[18px] inline-block border py-1 px-4 text-sm font-medium text-black">
+        <span className="mb-[18px] inline-block border border-stroke px-4 py-1 text-sm font-medium text-black">
           {number}
         </span>
         <h3 className="mb-[10px] text-xl font-medium text-black">{name}</h3>
-        <p className="text-body-color mb-5 text-base">{details}</p>
+        <p className="mb-5 text-base text-body-color">{details}</p>
       </div>
     </div>
   );

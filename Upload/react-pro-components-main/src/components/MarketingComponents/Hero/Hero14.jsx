@@ -150,9 +150,9 @@ export default function Hero14() {
               </div>
 
               <div className="w-full px-4 lg:w-1/2">
-                <div className="relative z-10 mx-auto aspect-432/578 max-w-[432px] rounded-full lg:mr-0">
+                <div className="aspect-432/578 relative z-10 mx-auto max-w-[432px] rounded-full lg:mr-0">
                   <div className="absolute left-0 top-0 -z-20 h-full w-full rounded-full bg-primary"></div>
-                  <div className="absolute left-0 top-0 z-10 aspect-432/595 h-full w-full -rotate-[8deg] rounded-full border border-primary bg-transparent"></div>
+                  <div className="aspect-432/595 absolute left-0 top-0 z-10 h-full w-full -rotate-[8deg] rounded-full border border-primary bg-transparent"></div>
                   <div className="absolute inset-0 -z-10 flex h-full w-full items-end overflow-hidden rounded-full">
                     <img
                       src="https://i.ibb.co/g4bqwMB/image-01.png"

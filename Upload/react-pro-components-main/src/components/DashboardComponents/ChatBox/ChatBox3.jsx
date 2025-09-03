@@ -83,7 +83,7 @@ const ChatBox3 = () => {
                 <input
                   type="text"
                   placeholder="Type something here..."
-                  className="h-[58px] w-full rounded-lg border border-stroke bg-gray-1 pl-4 pr-[135px] text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-transparent dark:text-dark-6 sm:pl-6"
+                  className="outline-hidden h-[58px] w-full rounded-lg border border-stroke bg-gray-1 pl-4 pr-[135px] text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-transparent dark:text-dark-6 sm:pl-6"
                 />
 
                 <div className="absolute right-4 top-1/2 inline-flex -translate-y-1/2 items-center justify-end">

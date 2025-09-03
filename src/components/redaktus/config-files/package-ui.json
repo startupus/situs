@@ -23,10 +23,7 @@
       "default": "./dist/website/react-bricks-ui-website.esm.js"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist", "src"],
   "engines": {
     "node": ">=10"
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Services2() {
   return (
@@ -7,15 +7,13 @@ export default function Services2() {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mb-[60px] max-w-[510px] lg:mb-[70px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                What we Serve
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">What we Serve</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Our Best Services
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -28,13 +26,7 @@ export default function Services2() {
             btnLink="/#"
             btnText="Learn More"
             icon={
-              <svg
-                width="36"
-                height="36"
-                viewBox="0 0 36 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M30.8811 5.28745H30.7123V4.49995C30.7123 2.58745 29.1373 1.01245 27.2248 1.01245H11.6436C9.73108 1.01245 8.15608 2.58745 8.15608 4.49995V5.28745H6.18733C4.89358 5.28745 3.82483 6.3562 3.82483 7.64995V15.525C3.82483 16.8187 4.89358 17.8875 6.18733 17.8875H21.0373V19.6875C19.4061 19.9687 18.1686 21.4312 18.1686 23.1187V31.5C18.1686 33.4125 19.7436 34.9875 21.6561 34.9875H22.8936C24.8061 34.9875 26.3811 33.4125 26.3811 31.5V23.1187C26.3811 21.4312 25.1436 19.9687 23.5123 19.6875V17.6625C23.5123 16.3687 22.4436 15.3 21.1498 15.3H6.35608V7.8187H8.09983V8.6062C8.09983 10.5187 9.67483 12.0937 11.5873 12.0937H27.1123C29.0248 12.0937 30.5998 10.5187 30.5998 8.6062V7.8187H30.7686C31.4436 7.8187 32.0061 7.2562 32.0061 6.5812C32.0061 5.9062 31.6123 5.28745 30.8811 5.28745ZM23.9061 23.1187V31.5C23.9061 32.0625 23.4561 32.5125 22.8936 32.5125H21.6561C21.0936 32.5125 20.6436 32.0625 20.6436 31.5V23.1187C20.6436 22.5562 21.0936 22.1062 21.6561 22.1062H22.8936C23.4561 22.1062 23.9061 22.5562 23.9061 23.1187ZM28.1811 8.6062C28.1811 9.1687 27.7311 9.6187 27.1686 9.6187H11.6436C11.0811 9.6187 10.6311 9.1687 10.6311 8.6062V4.49995C10.6311 3.93745 11.0811 3.48745 11.6436 3.48745H27.1686C27.7311 3.48745 28.1811 3.93745 28.1811 4.49995V8.6062V8.6062Z"
                   fill="white"
@@ -48,13 +40,7 @@ export default function Services2() {
             btnLink="/#"
             btnText="Learn More"
             icon={
-              <svg
-                width="36"
-                height="36"
-                viewBox="0 0 36 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1697_2734)">
                   <path
                     d="M14.1186 13.2749C14.1186 15.5249 15.9186 17.3249 18.1686 17.3249C20.4186 17.3249 22.2186 15.5249 22.2186 13.2749C22.2186 11.0249 20.4186 9.22488 18.1686 9.22488C15.9748 9.16863 14.1186 11.0249 14.1186 13.2749ZM20.0248 13.2749C20.0248 14.2874 19.1811 15.0749 18.2248 15.0749C17.2686 15.0749 16.4248 14.2311 16.4248 13.2749C16.4248 12.3186 17.2686 11.4749 18.2248 11.4749C19.1811 11.4749 20.0248 12.2624 20.0248 13.2749Z"
@@ -83,13 +69,7 @@ export default function Services2() {
             btnLink="/#"
             btnText="Learn More"
             icon={
-              <svg
-                width="36"
-                height="36"
-                viewBox="0 0 36 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1697_2807)">
                   <path
                     d="M33.7498 31.05H30.7123V19.9688C30.7123 18.1688 29.2498 16.7625 27.5061 16.7625H24.2436C22.4436 16.7625 21.0373 18.225 21.0373 19.9688V31.05H17.6623V11.475C17.6623 9.67505 16.1998 8.2688 14.4561 8.2688H11.1936C9.39358 8.2688 7.98734 9.7313 7.98734 11.475V31.05H3.54359V3.6563C3.54359 2.9813 2.98109 2.36255 2.24984 2.36255C1.51859 2.36255 0.956085 2.92505 0.956085 3.6563V31.1625C0.956085 32.4563 2.02484 33.5813 3.37484 33.5813H33.7498C34.4248 33.5813 35.0436 33.0188 35.0436 32.2875C35.0436 31.5563 34.4248 31.05 33.7498 31.05ZM10.5186 31.05V11.475C10.5186 11.0813 10.8561 10.8 11.1936 10.8H14.4561C14.8498 10.8 15.1311 11.1375 15.1311 11.475V31.05H10.5186V31.05ZM23.5686 31.05V19.9688C23.5686 19.575 23.9061 19.2938 24.2436 19.2938H27.5061C27.8998 19.2938 28.1811 19.6313 28.1811 19.9688V31.05H23.5686Z"
@@ -110,13 +90,7 @@ export default function Services2() {
             btnLink="/#"
             btnText="Learn More"
             icon={
-              <svg
-                width="36"
-                height="36"
-                viewBox="0 0 36 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M31.4436 1.01245H26.8873C25.0873 1.01245 23.5686 2.36245 23.3998 4.1062L9.67483 5.4562H4.55608C2.64358 5.4562 1.06858 6.97495 1.06858 8.8312V18.1125C1.06858 19.4062 1.85608 20.5875 2.98108 21.15L4.94983 32.0062C5.34358 33.75 6.97483 35.0437 8.83108 35.0437C10.0686 35.0437 11.2498 34.4812 12.0373 33.525C12.7123 32.6812 12.9936 31.6125 12.7686 30.6L11.2498 21.825L23.3436 24.1875C23.4561 26.0437 24.9748 27.5062 26.8311 27.5062H31.3873C33.2998 27.5062 34.9311 25.9312 34.9311 23.9625V4.49995C34.9311 2.58745 33.3561 1.01245 31.4436 1.01245ZM11.0248 7.87495L23.3436 6.63745V21.6L11.0248 19.1812V7.87495ZM3.59983 8.8312C3.59983 8.43745 3.99358 7.98745 4.55608 7.98745H8.49358V18.9562H4.55608C4.04983 18.9562 3.59983 18.5625 3.59983 18.1125V8.8312V8.8312ZM10.0686 31.95C9.78733 32.2875 9.33733 32.5125 8.83108 32.5125C8.15608 32.5125 7.53733 32.0625 7.42483 31.5562L5.62483 21.4875H8.60608L10.2373 31.05V31.1062C10.3498 31.5 10.1811 31.7812 10.0686 31.95ZM32.3998 23.9625C32.3998 24.525 31.9498 24.975 31.3873 24.975H26.8311C26.2686 24.975 25.8186 24.525 25.8186 23.9625V4.49995C25.8186 3.93745 26.2686 3.48745 26.8311 3.48745H31.3873C31.9498 3.48745 32.3998 3.93745 32.3998 4.49995V23.9625Z"
                   fill="white"
@@ -138,14 +112,9 @@ const ServiceCard = ({ icon, title, details, btnText, btnLink }) => {
           <span className="absolute left-0 top-0 z-[-1] flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-primary/30 duration-300 group-hover:rotate-45"></span>
           {icon}
         </div>
-        <h4 className="mb-3 text-xl font-bold text-dark dark:text-white">
-          {title}
-        </h4>
+        <h4 className="mb-3 text-xl font-bold text-dark dark:text-white">{title}</h4>
         <p className="mb-9 text-body-color dark:text-dark-6">{details}</p>
-        <a
-          href={btnLink}
-          className="text-base font-medium text-dark hover:text-primary dark:text-white"
-        >
+        <a href={btnLink} className="text-base font-medium text-dark hover:text-primary dark:text-white">
           {btnText}
         </a>
       </div>

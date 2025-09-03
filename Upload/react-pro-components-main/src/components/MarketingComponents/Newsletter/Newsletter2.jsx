@@ -21,7 +21,7 @@ const Newsletter2 = () => {
                 <input
                   type="email"
                   placeholder="Your Email Address"
-                  className="mb-5 mr-2 h-[50px] w-full rounded-md border border-stroke bg-transparent px-5 text-base text-body-color placeholder-[#8E8E8E] outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 sm:mb-0"
+                  className="outline-hidden mb-5 mr-2 h-[50px] w-full rounded-md border border-stroke bg-transparent px-5 text-base text-body-color placeholder-[#8E8E8E] focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6 sm:mb-0"
                 />
                 <button className="inline-flex h-[50px] items-center justify-center rounded-md border border-transparent bg-primary px-7 text-base font-medium text-white transition hover:bg-primary/90">
                   Subscribe

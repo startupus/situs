@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function About13() {
   return (
@@ -9,10 +9,7 @@ export default function About13() {
             <div className="relative z-10 pl-10 pt-10">
               <div className="absolute left-0 top-0 -z-10 aspect-430/508 w-full max-w-[430px] bg-purple-light-3"></div>
               <div className="shadow-lg">
-                <img
-                  src="https://i.ibb.co/9yxC7vs/image-1.png"
-                  alt="about image"
-                />
+                <img src="https://i.ibb.co/9yxC7vs/image-1.png" alt="about image" />
               </div>
             </div>
           </div>
@@ -25,20 +22,14 @@ export default function About13() {
                 Powerful AI Features Built for Conversations
               </h2>
               <p className="mb-9 text-lg text-body-color dark:text-dark-6">
-                Boost your conversions with automation. And provide human-like
-                answers to customers 24/7 with an AI chatbot.
+                Boost your conversions with automation. And provide human-like answers to customers 24/7 with an AI
+                chatbot.
               </p>
 
               <ul className="mb-9 space-y-3">
                 <li className="flex gap-3 text-base text-dark-2 dark:text-white/80">
                   <span className="pt-0.5">
-                    <svg
-                      width="21"
-                      height="20"
-                      viewBox="0 0 21 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_2648_1790)">
                         <path
                           d="M10.6893 0.566406C5.47058 0.566406 1.25183 4.78516 1.25183 10.0039C1.25183 15.2227 5.47058 19.4727 10.6893 19.4727C15.9081 19.4727 20.1581 15.2227 20.1581 10.0039C20.1581 4.78516 15.9081 0.566406 10.6893 0.566406ZM10.6893 18.0664C6.25183 18.0664 2.65808 14.4414 2.65808 10.0039C2.65808 5.56641 6.25183 1.97266 10.6893 1.97266C15.1268 1.97266 18.7518 5.59766 18.7518 10.0352C18.7518 14.4414 15.1268 18.0664 10.6893 18.0664Z"
@@ -51,12 +42,7 @@ export default function About13() {
                       </g>
                       <defs>
                         <clipPath id="clip0_2648_1790">
-                          <rect
-                            width="20"
-                            height="20"
-                            fill="white"
-                            transform="translate(0.689331 0.00390625)"
-                          />
+                          <rect width="20" height="20" fill="white" transform="translate(0.689331 0.00390625)" />
                         </clipPath>
                       </defs>
                     </svg>
@@ -65,13 +51,7 @@ export default function About13() {
                 </li>
                 <li className="flex gap-3 text-base text-dark-2 dark:text-white/80">
                   <span className="pt-0.5">
-                    <svg
-                      width="21"
-                      height="20"
-                      viewBox="0 0 21 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_2648_1790)">
                         <path
                           d="M10.6893 0.566406C5.47058 0.566406 1.25183 4.78516 1.25183 10.0039C1.25183 15.2227 5.47058 19.4727 10.6893 19.4727C15.9081 19.4727 20.1581 15.2227 20.1581 10.0039C20.1581 4.78516 15.9081 0.566406 10.6893 0.566406ZM10.6893 18.0664C6.25183 18.0664 2.65808 14.4414 2.65808 10.0039C2.65808 5.56641 6.25183 1.97266 10.6893 1.97266C15.1268 1.97266 18.7518 5.59766 18.7518 10.0352C18.7518 14.4414 15.1268 18.0664 10.6893 18.0664Z"
@@ -84,12 +64,7 @@ export default function About13() {
                       </g>
                       <defs>
                         <clipPath id="clip0_2648_1790">
-                          <rect
-                            width="20"
-                            height="20"
-                            fill="white"
-                            transform="translate(0.689331 0.00390625)"
-                          />
+                          <rect width="20" height="20" fill="white" transform="translate(0.689331 0.00390625)" />
                         </clipPath>
                       </defs>
                     </svg>
@@ -98,13 +73,7 @@ export default function About13() {
                 </li>
                 <li className="flex gap-3 text-base text-dark-2 dark:text-white/80">
                   <span className="pt-0.5">
-                    <svg
-                      width="21"
-                      height="20"
-                      viewBox="0 0 21 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_2648_1790)">
                         <path
                           d="M10.6893 0.566406C5.47058 0.566406 1.25183 4.78516 1.25183 10.0039C1.25183 15.2227 5.47058 19.4727 10.6893 19.4727C15.9081 19.4727 20.1581 15.2227 20.1581 10.0039C20.1581 4.78516 15.9081 0.566406 10.6893 0.566406ZM10.6893 18.0664C6.25183 18.0664 2.65808 14.4414 2.65808 10.0039C2.65808 5.56641 6.25183 1.97266 10.6893 1.97266C15.1268 1.97266 18.7518 5.59766 18.7518 10.0352C18.7518 14.4414 15.1268 18.0664 10.6893 18.0664Z"
@@ -117,12 +86,7 @@ export default function About13() {
                       </g>
                       <defs>
                         <clipPath id="clip0_2648_1790">
-                          <rect
-                            width="20"
-                            height="20"
-                            fill="white"
-                            transform="translate(0.689331 0.00390625)"
-                          />
+                          <rect width="20" height="20" fill="white" transform="translate(0.689331 0.00390625)" />
                         </clipPath>
                       </defs>
                     </svg>

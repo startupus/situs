@@ -1,22 +1,22 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart7 = () => {
   const series = [
     {
-      name: "Sales",
+      name: 'Sales',
       data: [44, 55, 41, 67, 22, 43],
     },
     {
-      name: "Revenue",
+      name: 'Revenue',
       data: [13, 23, 20, 8, 13, 27],
     },
   ];
   const options = {
-    colors: ["#3758F9", "#13C296"],
+    colors: ['#3758F9', '#13C296'],
     chart: {
-      fontFamily: "Inter, sans-serif",
-      type: "bar",
+      fontFamily: 'Inter, sans-serif',
+      type: 'bar',
       height: 350,
       stacked: true,
       toolbar: {
@@ -32,7 +32,7 @@ const Chart7 = () => {
         breakpoint: 480,
         options: {
           legend: {
-            position: "bottom",
+            position: 'bottom',
             offsetX: -10,
             offsetY: 0,
           },
@@ -43,7 +43,7 @@ const Chart7 = () => {
       bar: {
         horizontal: false,
         borderRadius: 8,
-        columnWidth: "25%",
+        columnWidth: '25%',
       },
     },
     dataLabels: {
@@ -51,20 +51,20 @@ const Chart7 = () => {
     },
 
     xaxis: {
-      type: "datetime",
+      type: 'datetime',
       categories: [
-        "01/01/2011 GMT",
-        "01/02/2011 GMT",
-        "01/03/2011 GMT",
-        "01/04/2011 GMT",
-        "01/05/2011 GMT",
-        "01/06/2011 GMT",
+        '01/01/2011 GMT',
+        '01/02/2011 GMT',
+        '01/03/2011 GMT',
+        '01/04/2011 GMT',
+        '01/05/2011 GMT',
+        '01/06/2011 GMT',
       ],
     },
     legend: {
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "inter",
+      position: 'top',
+      horizontalAlign: 'left',
+      fontFamily: 'inter',
 
       markers: {
         radius: 99,
@@ -81,12 +81,8 @@ const Chart7 = () => {
         <div className="mx-auto w-full max-w-[460px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="mb-4 justify-between sm:flex">
             <div className="mb-4 sm:mb-0">
-              <h5 className="text-xl font-semibold text-dark dark:text-white">
-                Sales Graph
-              </h5>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                your total sales data analytics
-              </p>
+              <h5 className="text-xl font-semibold text-dark dark:text-white">Sales Graph</h5>
+              <p className="text-sm text-body-color dark:text-dark-6">your total sales data analytics</p>
             </div>
             <div>
               <div className="relative z-20 inline-block rounded-md bg-transparent">
@@ -119,12 +115,7 @@ const Chart7 = () => {
           </div>
 
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart
-              options={options}
-              series={series}
-              type="bar"
-              height={350}
-            />
+            <ReactApexChart options={options} series={series} type="bar" height={350} />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const VerticalNavbar3 = () => {
   return (
@@ -20,12 +20,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -43,12 +38,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -76,12 +66,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -104,12 +89,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -127,12 +107,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -155,12 +130,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -188,12 +158,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -211,12 +176,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -250,12 +210,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -268,12 +223,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -291,12 +241,7 @@ const VerticalNavbar3 = () => {
               <NavItem
                 link="/#"
                 icon={
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 18 18"
-                    className="fill-current"
-                  >
+                  <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -348,13 +293,7 @@ const NavItem = ({ menu, link, icon }) => {
       </a>
       <span className="text-body-color drop-shadow-tooltip invisible absolute top-1/2 left-[115%] -translate-y-1/2 whitespace-nowrap rounded-sm bg-white py-1 px-[10px] text-sm font-medium group-hover:visible">
         <span className="absolute top-1/2 -left-2 -translate-y-1/2">
-          <svg
-            width="9"
-            height="12"
-            viewBox="0 0 9 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M1.23134 6.8294C0.642883 6.43303 0.642882 5.56697 1.23133 5.1706L7.44134 0.987699C8.10557 0.540292 9 1.01624 9 1.81709L9 10.1829C9 10.9838 8.10557 11.4597 7.44134 11.0123L1.23134 6.8294Z"
               fill="white"

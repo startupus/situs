@@ -10,7 +10,7 @@ const Tab9 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="rounded-[10px] bg-white p-6 shadow-card">
               <div className="border-stroke md:border-b">
@@ -18,9 +18,9 @@ const Tab9 = () => {
                   <div className="px-[6px]">
                     <button
                       onClick={() => handleTabOpen("home")}
-                      className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`mb-1 w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white md:mb-0 md:rounded-b-none md:rounded-t md:border-b-0 ${
                         open === "home"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >
@@ -30,9 +30,9 @@ const Tab9 = () => {
                   <div className="px-[6px]">
                     <button
                       onClick={() => handleTabOpen("about")}
-                      className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`mb-1 w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white md:mb-0 md:rounded-b-none md:rounded-t md:border-b-0 ${
                         open === "about"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >
@@ -42,9 +42,9 @@ const Tab9 = () => {
                   <div className="px-[6px]">
                     <button
                       onClick={() => handleTabOpen("team")}
-                      className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`mb-1 w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white md:mb-0 md:rounded-b-none md:rounded-t md:border-b-0 ${
                         open === "team"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >
@@ -54,9 +54,9 @@ const Tab9 = () => {
                   <div className="px-[6px]">
                     <button
                       onClick={() => handleTabOpen("company")}
-                      className={`mb-1 w-full rounded border py-2 px-5 text-base font-medium md:mb-0 md:rounded-t md:rounded-b-none md:border-b-0 text-black bg-gray border-stroke hover:bg-primary hover:text-white ${
+                      className={`mb-1 w-full rounded border border-stroke bg-gray px-5 py-2 text-base font-medium text-black hover:bg-primary hover:text-white md:mb-0 md:rounded-b-none md:rounded-t md:border-b-0 ${
                         open === "company"
-                          ? "bg-primary text-white border-primary"
+                          ? "border-primary bg-primary text-white"
                           : ""
                       }`}
                     >

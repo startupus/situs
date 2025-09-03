@@ -29,7 +29,7 @@ export default function Services10() {
                 alt="service image"
                 className="w-full object-cover object-center"
               />
-              <div className="absolute bottom-0 left-0 flex h-full w-full items-end bg-linear-to-t from-[#000] to-transparent">
+              <div className="bg-linear-to-t absolute bottom-0 left-0 flex h-full w-full items-end from-[#000] to-transparent">
                 <div className="p-5 sm:p-11">
                   <a
                     href="#"

@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Portfolio3 = () => {
   const sliderRef = useRef(null);
@@ -110,273 +110,63 @@ const PortfolioCard = ({ subtitle, title, details, date, image }) => {
             <span className="bg-primary mb-5 inline-block py-[6px] px-4 text-sm font-medium text-white">
               {subtitle}
             </span>
-            <h2 className="text-dark dark:text-white mb-6 text-3xl leading-[1.29] font-bold sm:text-[35px]">
-              {title}
-            </h2>
-            <p className="text-body-color dark:text-dark-6 mb-8 xl:mb-[76px] text-base">
-              {details}
-            </p>
+            <h2 className="text-dark dark:text-white mb-6 text-3xl leading-[1.29] font-bold sm:text-[35px]">{title}</h2>
+            <p className="text-body-color dark:text-dark-6 mb-8 xl:mb-[76px] text-base">{details}</p>
             <span className="text-dark dark:text-white text-sm font-medium">{date}</span>
           </div>
           <div className="text-center">
             <div className="relative z-10 inline-block">
               <img src={image} alt="image" className="mx-auto lg:ml-auto" />
               <div className="absolute -left-6 bottom-3 z-[-1]">
-                <svg
-                  width="62"
-                  height="134"
-                  viewBox="0 0 62 134"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="1.66667"
-                    cy="1.66667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="16.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="30.9999"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="45.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="60.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="88.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="117.667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="1.66667"
-                    cy="74.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
+                <svg width="62" height="134" viewBox="0 0 62 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="1.66667" cy="1.66667" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="16.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="30.9999" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="45.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="60.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="88.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="117.667" r="1.66667" fill="#3056D3" />
+                  <circle cx="1.66667" cy="74.6667" r="1.66667" fill="#3056D3" />
                   <circle cx="1.66667" cy="103" r="1.66667" fill="#3056D3" />
                   <circle cx="1.66667" cy="132" r="1.66667" fill="#3056D3" />
-                  <circle
-                    cx="16.3334"
-                    cy="1.66667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3334"
-                    cy="16.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3334"
-                    cy="30.9999"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3334"
-                    cy="45.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3332"
-                    cy="60.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3332"
-                    cy="88.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3332"
-                    cy="117.667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="16.3332"
-                    cy="74.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
+                  <circle cx="16.3334" cy="1.66667" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3334" cy="16.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3334" cy="30.9999" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3334" cy="45.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3332" cy="60.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3332" cy="88.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3332" cy="117.667" r="1.66667" fill="#3056D3" />
+                  <circle cx="16.3332" cy="74.6667" r="1.66667" fill="#3056D3" />
                   <circle cx="16.3332" cy="103" r="1.66667" fill="#3056D3" />
                   <circle cx="16.3332" cy="132" r="1.66667" fill="#3056D3" />
-                  <circle
-                    cx="30.9999"
-                    cy="1.66667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="30.9999"
-                    cy="16.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="30.9999"
-                    cy="30.9999"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="30.9999"
-                    cy="45.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="31.0002"
-                    cy="60.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="31.0002"
-                    cy="88.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="31.0002"
-                    cy="117.667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="31.0002"
-                    cy="74.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
+                  <circle cx="30.9999" cy="1.66667" r="1.66667" fill="#3056D3" />
+                  <circle cx="30.9999" cy="16.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="30.9999" cy="30.9999" r="1.66667" fill="#3056D3" />
+                  <circle cx="30.9999" cy="45.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="31.0002" cy="60.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="31.0002" cy="88.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="31.0002" cy="117.667" r="1.66667" fill="#3056D3" />
+                  <circle cx="31.0002" cy="74.6667" r="1.66667" fill="#3056D3" />
                   <circle cx="31.0002" cy="103" r="1.66667" fill="#3056D3" />
                   <circle cx="31.0002" cy="132" r="1.66667" fill="#3056D3" />
-                  <circle
-                    cx="45.6667"
-                    cy="1.66667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="16.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="30.9999"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="45.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="60.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="88.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="117.667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="45.6667"
-                    cy="74.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
+                  <circle cx="45.6667" cy="1.66667" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="16.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="30.9999" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="45.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="60.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="88.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="117.667" r="1.66667" fill="#3056D3" />
+                  <circle cx="45.6667" cy="74.6667" r="1.66667" fill="#3056D3" />
                   <circle cx="45.6667" cy="103" r="1.66667" fill="#3056D3" />
                   <circle cx="45.6667" cy="132" r="1.66667" fill="#3056D3" />
-                  <circle
-                    cx="60.3334"
-                    cy="1.66667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3334"
-                    cy="16.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3334"
-                    cy="30.9999"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3334"
-                    cy="45.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3332"
-                    cy="60.3334"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3332"
-                    cy="88.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3332"
-                    cy="117.667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
-                  <circle
-                    cx="60.3332"
-                    cy="74.6667"
-                    r="1.66667"
-                    fill="#3056D3"
-                  />
+                  <circle cx="60.3334" cy="1.66667" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3334" cy="16.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3334" cy="30.9999" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3334" cy="45.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3332" cy="60.3334" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3332" cy="88.6667" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3332" cy="117.667" r="1.66667" fill="#3056D3" />
+                  <circle cx="60.3332" cy="74.6667" r="1.66667" fill="#3056D3" />
                   <circle cx="60.3332" cy="103" r="1.66667" fill="#3056D3" />
                   <circle cx="60.3332" cy="132" r="1.66667" fill="#3056D3" />
                 </svg>

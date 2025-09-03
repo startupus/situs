@@ -14,7 +14,7 @@ const Hero6 = () => {
                 <span className="mb-4 block text-lg font-medium text-primary">
                   Download our app
                 </span>
-                <h1 className="mb-4 text-4xl font-bold leading-[1.208]! text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-4 text-4xl font-bold text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
                   Get the Online <br />
                   Payment more easily.
                 </h1>
@@ -152,7 +152,7 @@ const Navbar = () => {
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                 alt="logo"
-                className="w-full hidden dark:block"
+                className="hidden w-full dark:block"
               />
             </a>
           </div>

@@ -51,29 +51,26 @@ export function StudioInterface() {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${
-      resolvedTheme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
-    }`}>
+    <div
+      className={`min-h-screen transition-colors duration-200 ${
+        resolvedTheme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+      }`}
+    >
       {/* Верхняя панель */}
-      <header className={`border-b transition-colors duration-200 ${
-        resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-      }`}>
+      <header
+        className={`border-b transition-colors duration-200 ${
+          resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}
+      >
         <div className="px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <h1 className="text-xl font-bold">Redaktus Studio</h1>
-            {state.currentSite && (
-              <div className="text-sm text-gray-500">
-                {state.currentSite.name}
-              </div>
-            )}
+            {state.currentSite && <div className="text-sm text-gray-500">{state.currentSite.name}</div>}
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {/* Ссылка на Situs Platform */}
-            <a
-              href="/situs"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-            >
+            <a href="/situs" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
               🏢 Situs Platform
             </a>
 
@@ -117,12 +114,14 @@ export function StudioInterface() {
 
       <div className="flex h-[calc(100vh-73px)]">
         {/* Левая панель - сайты и страницы */}
-        <aside className={`w-80 border-r transition-colors duration-200 ${
-          resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-        }`}>
+        <aside
+          className={`w-80 border-r transition-colors duration-200 ${
+            resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}
+        >
           <div className="p-4">
             <h2 className="text-lg font-semibold mb-4">Проекты</h2>
-            
+
             {/* Список сайтов */}
             <div className="space-y-2 mb-6">
               {state.sites.map((site) => (
@@ -164,12 +163,10 @@ export function StudioInterface() {
                       }}
                     >
                       <div className="font-medium text-sm">{page.title}</div>
-                      <div className="text-xs text-gray-500">
-                        {page.isHomePage ? '🏠 Главная' : `/${page.slug}`}
-                      </div>
+                      <div className="text-xs text-gray-500">{page.isHomePage ? '🏠 Главная' : `/${page.slug}`}</div>
                     </div>
                   ))}
-                  
+
                   {/* Кнопка добавления страницы */}
                   <button
                     onClick={() => {
@@ -181,7 +178,7 @@ export function StudioInterface() {
                           slug,
                           content: [],
                           isHomePage: false,
-                          isPublished: false
+                          isPublished: false,
                         });
                       }
                     }}
@@ -198,9 +195,11 @@ export function StudioInterface() {
         {/* Основная область - канвас */}
         <main className="flex-1 flex flex-col">
           {/* Тулбар канваса */}
-          <div className={`border-b p-3 transition-colors duration-200 ${
-            resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-          }`}>
+          <div
+            className={`border-b p-3 transition-colors duration-200 ${
+              resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 {state.currentPage && (
@@ -212,10 +211,10 @@ export function StudioInterface() {
                   </div>
                 )}
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 {state.currentPage && (
-                  <button 
+                  <button
                     onClick={() => setIsEditMode(true)}
                     className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
                   >
@@ -227,36 +226,34 @@ export function StudioInterface() {
           </div>
 
           {/* Канвас просмотра */}
-          <div 
+          <div
             className={`flex-1 redaktus-canvas transition-colors duration-200 ${
               canvasResolvedTheme === 'dark' ? 'dark' : ''
             }`}
             style={{
               backgroundColor: canvasResolvedTheme === 'dark' ? '#111827' : '#ffffff',
               color: canvasResolvedTheme === 'dark' ? '#f9fafb' : '#1f2937',
-              colorScheme: canvasResolvedTheme === 'dark' ? 'dark' : 'light'
+              colorScheme: canvasResolvedTheme === 'dark' ? 'dark' : 'light',
             }}
           >
             <div className="h-full overflow-y-auto p-8">
               {state.currentPage ? (
                 <div className="max-w-4xl mx-auto">
                   <h1 className="text-3xl font-bold mb-8">{state.currentPage.title}</h1>
-                  
+
                   {/* Отображение контента страницы */}
                   {state.currentPage.content.length > 0 ? (
                     <div className="space-y-6">
                       {state.currentPage.content.map((block) => (
-                        <div 
-                          key={block.id} 
+                        <div
+                          key={block.id}
                           className={`p-4 border-2 border-dashed rounded-lg transition-colors ${
-                            canvasResolvedTheme === 'dark' 
-                              ? 'border-gray-600 bg-gray-800' 
+                            canvasResolvedTheme === 'dark'
+                              ? 'border-gray-600 bg-gray-800'
                               : 'border-gray-300 bg-gray-50'
                           }`}
                         >
-                          <div className="text-sm text-gray-500 mb-2">
-                            Блок: {block.type}
-                          </div>
+                          <div className="text-sm text-gray-500 mb-2">Блок: {block.type}</div>
                           {block.type === 'hero-unit' && (
                             <div>
                               <h2 className="text-2xl font-bold mb-4">{block.props.title}</h2>
@@ -265,9 +262,7 @@ export function StudioInterface() {
                           )}
                           {block.type === 'text-content' && (
                             <div>
-                              {block.props.title && (
-                                <h3 className="text-xl font-semibold mb-2">{block.props.title}</h3>
-                              )}
+                              {block.props.title && <h3 className="text-xl font-semibold mb-2">{block.props.title}</h3>}
                               <p>{block.props.content}</p>
                             </div>
                           )}
@@ -275,9 +270,11 @@ export function StudioInterface() {
                       ))}
                     </div>
                   ) : (
-                    <div className={`text-center py-16 ${
-                      canvasResolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                    }`}>
+                    <div
+                      className={`text-center py-16 ${
+                        canvasResolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                      }`}
+                    >
                       <div className="text-4xl mb-4">📝</div>
                       <h3 className="text-xl font-semibold mb-2">Страница пуста</h3>
                       <p>Нажмите "Открыть редактор" для создания контента</p>
@@ -285,9 +282,9 @@ export function StudioInterface() {
                   )}
                 </div>
               ) : (
-                <div className={`text-center py-16 ${
-                  canvasResolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                }`}>
+                <div
+                  className={`text-center py-16 ${canvasResolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}
+                >
                   <div className="text-4xl mb-4">🎨</div>
                   <h3 className="text-xl font-semibold mb-2">Выберите страницу</h3>
                   <p>Выберите страницу из левой панели для начала работы</p>
@@ -299,4 +296,4 @@ export function StudioInterface() {
       </div>
     </div>
   );
-} 
+}

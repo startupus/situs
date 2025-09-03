@@ -8,7 +8,7 @@ const ECommerceHero5 = () => {
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
               <div className="mt-20 max-w-[570px] px-8 md:pl-12 md:pr-0 lg:mt-0 xl:pl-16">
-                <h1 className="mb-5 text-3xl font-bold leading-[1.2]! text-dark dark:text-white sm:text-4xl xl:text-[40px]">
+                <h1 className="leading-[1.2]! mb-5 text-3xl font-bold text-dark dark:text-white sm:text-4xl xl:text-[40px]">
                   Our Newest & Trendy Shoes Collection
                 </h1>
                 <h2 className="mb-4 text-lg font-semibold text-dark dark:text-white sm:text-xl xl:text-2xl">

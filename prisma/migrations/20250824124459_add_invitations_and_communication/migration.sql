@@ -30,25 +30,19 @@
 
 */
 -- DropIndex
-DROP INDEX "balances_userId_currencyId_key";
+DROP INDEX IF EXISTS "balances_userId_currencyId_key";
 
 -- DropIndex
-DROP INDEX "currencies_code_key";
+DROP INDEX IF EXISTS "currencies_code_key";
 
 -- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "balances";
-PRAGMA foreign_keys=on;
+DROP TABLE IF EXISTS "balances" CASCADE;
 
 -- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "currencies";
-PRAGMA foreign_keys=on;
+DROP TABLE IF EXISTS "currencies" CASCADE;
 
 -- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "transactions";
-PRAGMA foreign_keys=on;
+DROP TABLE IF EXISTS "transactions" CASCADE;
 
 -- CreateTable
 CREATE TABLE "user_groups" (
@@ -57,8 +51,8 @@ CREATE TABLE "user_groups" (
     "description" TEXT,
     "isCore" BOOLEAN NOT NULL DEFAULT false,
     "parentId" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "user_groups_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "user_groups" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -78,8 +72,8 @@ CREATE TABLE "view_levels" (
     "description" TEXT,
     "ordering" INTEGER NOT NULL DEFAULT 0,
     "groupIds" TEXT NOT NULL DEFAULT '[]',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
@@ -90,9 +84,9 @@ CREATE TABLE "user_auth_providers" (
     "providerUserId" TEXT NOT NULL,
     "accessToken" TEXT,
     "refreshToken" TEXT,
-    "expiresAt" DATETIME,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "expiresAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "user_auth_providers_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -107,11 +101,11 @@ CREATE TABLE "invitations" (
     "channel" TEXT NOT NULL DEFAULT 'EMAIL',
     "invitedBy" TEXT NOT NULL,
     "acceptedBy" TEXT,
-    "expiresAt" DATETIME NOT NULL,
-    "sentAt" DATETIME,
-    "acceptedAt" DATETIME,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+    "sentAt" TIMESTAMP(3),
+    "acceptedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "invitations_invitedBy_fkey" FOREIGN KEY ("invitedBy") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "invitations_acceptedBy_fkey" FOREIGN KEY ("acceptedBy") REFERENCES "users" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -124,8 +118,8 @@ CREATE TABLE "communication_settings" (
     "config" JSONB NOT NULL,
     "inviteTemplate" TEXT,
     "reminderTemplate" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
@@ -138,10 +132,10 @@ CREATE TABLE "user_invitations" (
     "accountId" TEXT,
     "projectId" TEXT,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
-    "expiresAt" DATETIME,
+    "expiresAt" TIMESTAMP(3),
     "acceptedById" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "user_invitations_invitedById_fkey" FOREIGN KEY ("invitedById") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "user_invitations_acceptedById_fkey" FOREIGN KEY ("acceptedById") REFERENCES "users" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -153,7 +147,7 @@ CREATE TABLE "project_accesses" (
     "userId" TEXT NOT NULL,
     "role" TEXT NOT NULL,
     "grantedBy" TEXT NOT NULL,
-    "grantedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "grantedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "project_accesses_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "project_accesses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "project_accesses_grantedBy_fkey" FOREIGN KEY ("grantedBy") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
@@ -165,8 +159,8 @@ CREATE TABLE "accounts" (
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "ownerId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "accounts_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -176,8 +170,8 @@ CREATE TABLE "account_memberships" (
     "accountId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "role" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "account_memberships_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "account_memberships_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -187,7 +181,7 @@ CREATE TABLE "agency_clients" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "agencyAccountId" TEXT NOT NULL,
     "clientAccountId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "agency_clients_agencyAccountId_fkey" FOREIGN KEY ("agencyAccountId") REFERENCES "accounts" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "agency_clients_clientAccountId_fkey" FOREIGN KEY ("clientAccountId") REFERENCES "accounts" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -208,8 +202,8 @@ CREATE TABLE "categories" (
     "language" TEXT NOT NULL DEFAULT '*',
     "accessLevel" TEXT NOT NULL DEFAULT 'PUBLIC',
     "productId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "categories_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "categories" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "categories_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -241,8 +235,8 @@ CREATE TABLE "items" (
     "productId" TEXT NOT NULL,
     "orderIndex" INTEGER NOT NULL DEFAULT 0,
     "isFeatured" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "items_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "items_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -255,8 +249,8 @@ CREATE TABLE "menu_types" (
     "description" TEXT,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "projectId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "menu_types_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -284,8 +278,8 @@ CREATE TABLE "menu_items" (
     "cssClass" TEXT,
     "menuImage" TEXT,
     "menuTypeId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "menu_items_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "menu_items" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "menu_items_menuTypeId_fkey" FOREIGN KEY ("menuTypeId") REFERENCES "menu_types" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -302,15 +296,13 @@ CREATE TABLE "custom_access_levels" (
     "accountId" TEXT,
     "isSystem" BOOLEAN NOT NULL DEFAULT false,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "custom_access_levels_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "custom_access_levels_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- RedefineTables
-PRAGMA defer_foreign_keys=ON;
-PRAGMA foreign_keys=OFF;
+-- RedefineTables (PostgreSQL)
 CREATE TABLE "new_media" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "filename" TEXT NOT NULL,
@@ -324,13 +316,13 @@ CREATE TABLE "new_media" (
     "description" TEXT,
     "projectId" TEXT NOT NULL,
     "uploadedBy" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "media_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "media_uploadedBy_fkey" FOREIGN KEY ("uploadedBy") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO "new_media" ("alt", "createdAt", "filename", "id", "mimeType", "originalName", "projectId", "size", "updatedAt", "url") SELECT "alt", "createdAt", "filename", "id", "mimeType", "originalName", "projectId", "size", "updatedAt", "url" FROM "media";
-DROP TABLE "media";
+DROP TABLE IF EXISTS "media" CASCADE;
 ALTER TABLE "new_media" RENAME TO "media";
 CREATE TABLE "new_pages" (
     "id" TEXT NOT NULL PRIMARY KEY,
@@ -349,12 +341,12 @@ CREATE TABLE "new_pages" (
     "accessLevel" TEXT NOT NULL DEFAULT 'PUBLIC',
     "customAccessLevelId" TEXT,
     "productId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "pages_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO "new_pages" ("content", "createdAt", "id", "isHomePage", "layout", "metaDescription", "metaKeywords", "metaTitle", "pageType", "slug", "status", "template", "title", "updatedAt") SELECT "content", "createdAt", "id", "isHomePage", "layout", "metaDescription", "metaKeywords", "metaTitle", "pageType", "slug", "status", "template", "title", "updatedAt" FROM "pages";
-DROP TABLE "pages";
+DROP TABLE IF EXISTS "pages" CASCADE;
 ALTER TABLE "new_pages" RENAME TO "pages";
 CREATE UNIQUE INDEX "pages_productId_slug_key" ON "pages"("productId", "slug");
 CREATE TABLE "new_products" (
@@ -370,12 +362,12 @@ CREATE TABLE "new_products" (
     "accessLevel" TEXT NOT NULL DEFAULT 'PUBLIC',
     "customAccessLevelId" TEXT,
     "projectId" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "products_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO "new_products" ("createdAt", "description", "id", "name", "projectId", "settings", "status", "type", "updatedAt") SELECT "createdAt", "description", "id", "name", "projectId", "settings", "status", "type", "updatedAt" FROM "products";
-DROP TABLE "products";
+DROP TABLE IF EXISTS "products" CASCADE;
 ALTER TABLE "new_products" RENAME TO "products";
 CREATE UNIQUE INDEX "products_projectId_name_key" ON "products"("projectId", "name");
 CREATE TABLE "new_projects" (
@@ -393,13 +385,13 @@ CREATE TABLE "new_projects" (
     "ownerId" TEXT NOT NULL,
     "accountId" TEXT,
     "status" TEXT NOT NULL DEFAULT 'ACTIVE',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     CONSTRAINT "projects_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "projects_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO "new_projects" ("createdAt", "customDomain", "description", "domain", "id", "isPublished", "name", "ownerId", "settings", "slug", "status", "updatedAt") SELECT "createdAt", "customDomain", "description", "domain", "id", "isPublished", "name", "ownerId", "settings", "slug", "status", "updatedAt" FROM "projects";
-DROP TABLE "projects";
+DROP TABLE IF EXISTS "projects" CASCADE;
 ALTER TABLE "new_projects" RENAME TO "projects";
 CREATE UNIQUE INDEX "projects_slug_key" ON "projects"("slug");
 CREATE TABLE "new_users" (
@@ -420,8 +412,7 @@ DROP TABLE "users";
 ALTER TABLE "new_users" RENAME TO "users";
 CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
-PRAGMA foreign_keys=ON;
-PRAGMA defer_foreign_keys=OFF;
+-- End RedefineTables
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_groups_title_key" ON "user_groups"("title");

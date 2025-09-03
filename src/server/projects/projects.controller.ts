@@ -32,7 +32,7 @@ import { Roles, Scopes } from '../common/decorators/roles.decorator';
 
 /**
  * Контроллер проектов
- * 
+ *
  * Мигрированная логика из Express /api/projects
  */
 // @ApiTags('projects')
@@ -45,19 +45,24 @@ export class ProjectsController {
   private readonly realtime?: RealtimeEventsService;
 
   constructor(
-    projectsService: ProjectsService, 
-    @Optional() @Inject(RealtimeEventsService) realtime?: RealtimeEventsService
+    projectsService: ProjectsService,
+    @Optional() @Inject(RealtimeEventsService) realtime?: RealtimeEventsService,
   ) {
     this.projectsService = projectsService;
     this.realtime = realtime;
-    console.log('[BOOT] ProjectsController manual injection, projectsService:', !!this.projectsService, 'realtime:', !!this.realtime);
+    console.log(
+      '[BOOT] ProjectsController manual injection, projectsService:',
+      !!this.projectsService,
+      'realtime:',
+      !!this.realtime,
+    );
   }
 
   /**
    * Получение всех проектов с пагинацией и фильтрами
    */
   @Get()
-  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Roles('BUSINESS', 'AGENCY', 'STAFF', 'SUPER_ADMIN')
   @Scopes('PROJECT_READ')
   // @ApiOperation({ summary: 'Получение списка проектов' })
   // @ApiResponse({ status: 200, description: 'Список проектов с пагинацией' })
@@ -86,7 +91,9 @@ export class ProjectsController {
    */
   @Get('check-slug/:slug')
   async checkSlug(@Param('slug') slug: string, @Query('exclude') excludeProjectId?: string) {
-    const existing = await this.projectsService['prisma'].project.findFirst({ where: { slug, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any });
+    const existing = await this.projectsService['prisma'].project.findFirst({
+      where: { slug, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any,
+    });
     return { success: true, data: { slug, available: !existing } };
   }
 
@@ -95,7 +102,9 @@ export class ProjectsController {
    */
   @Get('check-domain/:domain')
   async checkDomain(@Param('domain') domain: string, @Query('exclude') excludeProjectId?: string) {
-    const existing = await this.projectsService['prisma'].project.findFirst({ where: { customDomain: domain, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any });
+    const existing = await this.projectsService['prisma'].project.findFirst({
+      where: { customDomain: domain, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any,
+    });
     return { success: true, data: { domain, available: !existing } };
   }
 
@@ -132,18 +141,24 @@ export class ProjectsController {
   async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
     // Жёсткая защита системного проекта на уровне контроллера (ранний возврат)
     if (id === 'situs-admin') {
-      const body = (req && req.body) ? req.body : updateProjectDto as any;
-      const hasForbidden = body && (('slug' in body) || ('ownerId' in body));
+      const body = req && req.body ? req.body : (updateProjectDto as any);
+      const hasForbidden = body && ('slug' in body || 'ownerId' in body);
       if (hasForbidden) {
         throw new ForbiddenException('Slug/ownerId системного проекта нельзя изменять');
       }
     }
-    return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
+    return {
+      success: true,
+      data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev'),
+    };
   }
 
   @Put(':id')
   async updatePut(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto, @Request() req: any) {
-    return { success: true, data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev') };
+    return {
+      success: true,
+      data: await this.projectsService.update(id, updateProjectDto, req.user?.id ?? 'owner-dev'),
+    };
   }
 
   /**
@@ -227,7 +242,11 @@ export class ProjectsController {
   }
 
   @Patch(':id/accesses/:accessId')
-  async updateAccess(@Param('id') id: string, @Param('accessId') accessId: string, @Body() dto: UpdateProjectAccessDto) {
+  async updateAccess(
+    @Param('id') id: string,
+    @Param('accessId') accessId: string,
+    @Body() dto: UpdateProjectAccessDto,
+  ) {
     return { success: true, data: await this.projectsService.updateAccessRole(id, accessId, dto.role) };
   }
 

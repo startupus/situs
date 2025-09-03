@@ -33,11 +33,11 @@ app.use((req, res, next) => {
 // ВСТРОЕННЫЕ МАРШРУТЫ (без внешних файлов)
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'healthy', 
+  res.json({
+    status: 'healthy',
     timestamp: new Date().toISOString(),
     service: 'startupus-platform',
-    architecture: 'monolithic-self-contained'
+    architecture: 'monolithic-self-contained',
   });
 });
 
@@ -47,9 +47,9 @@ app.get('/api/currencies', (req, res) => {
     currencies: [
       { id: 'usd', name: 'US Dollar', symbol: '$', rate: 1.0 },
       { id: 'eur', name: 'Euro', symbol: '€', rate: 0.85 },
-      { id: 'mnt', name: 'Mongolian Tugrik', symbol: '₮', rate: 2800 }
+      { id: 'mnt', name: 'Mongolian Tugrik', symbol: '₮', rate: 2800 },
     ],
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -57,7 +57,7 @@ app.get('/api/currencies/stats', (req, res) => {
   res.json({
     totalCurrencies: 3,
     activeCurrencies: 3,
-    lastUpdated: new Date().toISOString()
+    lastUpdated: new Date().toISOString(),
   });
 });
 
@@ -68,17 +68,17 @@ app.get('/api/currencies/:id', (req, res) => {
     name: `Currency ${id.toUpperCase()}`,
     symbol: '$',
     rate: 1.0,
-    active: true
+    active: true,
   });
 });
 
 // Root endpoint
 app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Startupus Platform - Monolithic Architecture', 
+  res.json({
+    message: 'Startupus Platform - Monolithic Architecture',
     status: 'running',
     endpoints: ['/health', '/api/currencies', '/api/currencies/stats'],
-    architecture: 'self-contained'
+    architecture: 'self-contained',
   });
 });
 
@@ -92,7 +92,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 async function startServer() {
   try {
     const PORT = await findFreePort(3000);
-    
+
     app.listen(PORT, () => {
       console.log(`[${new Date().toISOString()}] 🚀 Startupus Platform running on port ${PORT}`);
       console.log(`[${new Date().toISOString()}] 📊 Health check: http://localhost:${PORT}/health`);
@@ -107,4 +107,4 @@ async function startServer() {
 // Архитектурно правильный запуск
 startServer();
 
-export default app; 
+export default app;

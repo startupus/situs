@@ -89,7 +89,7 @@ function Modal11() {
                   <input
                     type="text"
                     value="www.tailgrids.com/figma"
-                    class="h-12 w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                    class="outline-hidden h-12 w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-base text-dark focus:border-primary dark:border-dark-3 dark:text-white"
                   />
                   <button class="flex h-12 items-center justify-center gap-2 rounded-lg bg-gray-2 px-6 py-3 text-dark duration-200 hover:bg-primary hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-primary">
                     <span>

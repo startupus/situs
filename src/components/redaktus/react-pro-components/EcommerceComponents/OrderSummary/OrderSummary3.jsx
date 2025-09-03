@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const OrderSummary3 = () => {
   return (
@@ -8,16 +8,12 @@ const OrderSummary3 = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-1/2">
               <div className="mb-12">
-                <h2 className="text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
-                  Order Summary
-                </h2>
+                <h2 className="text-3xl font-semibold text-dark dark:text-white sm:text-4xl">Order Summary</h2>
               </div>
             </div>
             <div className="w-full px-4 md:w-1/2">
               <div className="mb-[50px] md:text-right">
-                <h3 className="text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-                  Order #15478
-                </h3>
+                <h3 className="text-xl font-semibold text-dark dark:text-white sm:text-2xl">Order #15478</h3>
               </div>
             </div>
           </div>
@@ -28,9 +24,7 @@ const OrderSummary3 = () => {
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 md:w-1/2 lg:w-4/12">
                 <div className="mb-8 max-w-[270px]">
-                  <h4 className="mb-[10px] text-base font-medium text-dark dark:text-white">
-                    Note:
-                  </h4>
+                  <h4 className="mb-[10px] text-base font-medium text-dark dark:text-white">Note:</h4>
                   <p className="text-body-color dark:text-dark-6 text-base">
                     Your order has been confirmed and will be shipping soon.
                   </p>
@@ -38,18 +32,12 @@ const OrderSummary3 = () => {
               </div>
               <div className="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-4/12">
                 <div className="mb-12">
-                  <h4 className="mb-[10px] text-base font-medium text-dark dark:text-white">
-                    Receiver Details
-                  </h4>
-                  <p className="mb-1 text-base font-medium text-body-color dark:text-dark-6">
-                    Name: Jhon Smith
-                  </p>
+                  <h4 className="mb-[10px] text-base font-medium text-dark dark:text-white">Receiver Details</h4>
+                  <p className="mb-1 text-base font-medium text-body-color dark:text-dark-6">Name: Jhon Smith</p>
                   <p className="mb-1 text-base font-medium text-body-color dark:text-dark-6">
                     Email: contact@yourmail.com
                   </p>
-                  <p className="text-body-color dark:text-dark-6 text-base">
-                    Address: New York, USA 2707 Davis Anenue
-                  </p>
+                  <p className="text-body-color dark:text-dark-6 text-base">Address: New York, USA 2707 Davis Anenue</p>
                 </div>
               </div>
             </div>
@@ -123,11 +111,7 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
     <div className="rounded-md border-[.5px] border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 pl-5 pr-8">
       <div className="items-center sm:flex">
         <div className="mb-3 mr-6 h-20 w-full max-w-[80px] sm:mb-0 rounded-sm overflow-hidden">
-          <img
-            src={img}
-            alt="product"
-            className="h-full w-full object-cover object-center"
-          />
+          <img src={img} alt="product" className="h-full w-full object-cover object-center" />
         </div>
         <div className="w-full items-center justify-between md:flex">
           <div className="mb-3 md:mb-0">
@@ -143,9 +127,7 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
             </p>
           </div>
           <div className="flex items-center md:justify-end">
-            <p className="mr-20 text-base font-medium text-dark dark:text-white">
-              Qty: {number}
-            </p>
+            <p className="mr-20 text-base font-medium text-dark dark:text-white">Qty: {number}</p>
             <p className="mr-5 text-base font-medium text-dark dark:text-white">{price}</p>
           </div>
         </div>

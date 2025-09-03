@@ -1,46 +1,26 @@
-export type TextColorName =
-  | 'gray900'
-  | 'gray800'
-  | 'gray700'
-  | 'gray600'
-  | 'gray500'
-  | 'purple500'
+export type TextColorName = 'gray900' | 'gray800' | 'gray700' | 'gray600' | 'gray500' | 'purple500';
 
-export type BgColorName =
-  | 'white'
-  | 'light'
-  | 'gray'
-  | 'lightBlue'
-  | 'orange'
-  | 'green'
-  | 'darkBlue'
-  | 'dark'
+export type BgColorName = 'white' | 'light' | 'gray' | 'lightBlue' | 'orange' | 'green' | 'darkBlue' | 'dark';
 
-export type GradientName = 'none' | 'ocean' | 'violet' | 'sun'
-export type BadgeColorName = 'gray' | 'pink' | 'green' | 'blue'
+export type GradientName = 'none' | 'ocean' | 'violet' | 'sun';
+export type BadgeColorName = 'gray' | 'pink' | 'green' | 'blue';
 
-export type BulletColorName =
-  | 'pink'
-  | 'pinkLight'
-  | 'sky'
-  | 'skyLight'
-  | 'green'
-  | 'greenLight'
+export type BulletColorName = 'pink' | 'pinkLight' | 'sky' | 'skyLight' | 'green' | 'greenLight';
 
 type Color = {
-  label: string
+  label: string;
   value: {
-    color: string
-    className: string
-    className2?: string
-  }
-}
+    color: string;
+    className: string;
+    className2?: string;
+  };
+};
 
-type TextColors = { [key in TextColorName]: string }
-type BgColors = { [key in BgColorName]: Color }
-type BadgeColors = { [key in BadgeColorName]: Color }
-type BulletColors = { [key in BulletColorName]: Color }
-type Gradients = { [key in GradientName]: string }
+type TextColors = { [key in TextColorName]: string };
+type BgColors = { [key in BgColorName]: Color };
+type BadgeColors = { [key in BadgeColorName]: Color };
+type BulletColors = { [key in BulletColorName]: Color };
+type Gradients = { [key in GradientName]: string };
 
 export const textColors: TextColors = {
   gray900: 'text-gray-900 dark:text-gray-100',
@@ -49,7 +29,7 @@ export const textColors: TextColors = {
   gray600: 'text-gray-600 dark:text-gray-400',
   gray500: 'text-gray-500 dark:text-gray-400',
   purple500: 'text-purple-500 dark:text-purple-300',
-}
+};
 
 export const bgColors: BgColors = {
   white: {
@@ -87,7 +67,7 @@ export const bgColors: BgColors = {
     label: 'Dark',
     value: { color: '#111827', className: 'bg-gray-900 dark:bg-gray-900 dark' },
   },
-}
+};
 
 export const badgeColors: BadgeColors = {
   gray: {
@@ -112,7 +92,7 @@ export const badgeColors: BadgeColors = {
     label: 'Blue',
     value: { color: '#60a5fa', className: 'text-blue-400 dark:text-blue-300' },
   },
-}
+};
 
 export const bulletColors: BulletColors = {
   pink: {
@@ -163,11 +143,11 @@ export const bulletColors: BulletColors = {
       className2: 'text-lime-600',
     },
   },
-}
+};
 
 export const gradients: Gradients = {
   ocean: 'from-blue-500 to-teal-400',
   violet: 'from-purple-700 to-pink-500',
   sun: 'from-red-500 to-yellow-400',
   none: '',
-}
+};

@@ -17,7 +17,7 @@ const Footer = () => {
                   <img
                     src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                     alt="logo"
-                    className="max-w-full hidden dark:block"
+                    className="hidden max-w-full dark:block"
                   />
                 </a>
                 <p className="mb-7 text-base text-body-color dark:text-dark-6">

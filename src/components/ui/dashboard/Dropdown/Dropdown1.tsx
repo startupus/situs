@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 // Handler hook for when Outside click dropdown close
 let useClickOutside = (handler) => {
@@ -11,10 +11,10 @@ let useClickOutside = (handler) => {
       }
     };
 
-    document.addEventListener("mousedown", maybeHandler);
+    document.addEventListener('mousedown', maybeHandler);
 
     return () => {
-      document.removeEventListener("mousedown", maybeHandler);
+      document.removeEventListener('mousedown', maybeHandler);
     };
   });
 
@@ -59,9 +59,7 @@ const Dropdown = () => {
                   </button>
                   <div
                     className={`shadow-1 dark:shadow-box-dark absolute left-0 z-40 mt-2 w-full rounded-md bg-white dark:bg-dark-2 py-[10px] transition-all ${
-                      dropdownOpen
-                        ? "top-full opacity-100 visible"
-                        : "top-[110%] invisible opacity-0"
+                      dropdownOpen ? 'top-full opacity-100 visible' : 'top-[110%] invisible opacity-0'
                     }`}
                   >
                     <DropdownItem label="Dashboard" href="/#" />

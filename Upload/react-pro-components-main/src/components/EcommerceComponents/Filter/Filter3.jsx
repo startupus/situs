@@ -251,7 +251,7 @@ const PriceRange = () => {
               <span
                 type="text"
                 id="minAmount"
-                className="text-block w-full rounded-sm border-[.3px] border-stroke bg-gray-1 px-3 py-1 text-center text-sm font-semibold text-dark outline-hidden dark:border-dark-3 dark:bg-dark-4 dark:text-white"
+                className="text-block outline-hidden w-full rounded-sm border-[.3px] border-stroke bg-gray-1 px-3 py-1 text-center text-sm font-semibold text-dark dark:border-dark-3 dark:bg-dark-4 dark:text-white"
               >
                 200.00
               </span>
@@ -263,7 +263,7 @@ const PriceRange = () => {
               <span
                 type="text"
                 id="maxAmount"
-                className="text-block w-full rounded-sm border-[.3px] border-stroke bg-gray-1 px-3 py-1 text-center text-sm font-semibold text-dark outline-hidden dark:border-dark-3 dark:bg-dark-4 dark:text-white"
+                className="text-block outline-hidden w-full rounded-sm border-[.3px] border-stroke bg-gray-1 px-3 py-1 text-center text-sm font-semibold text-dark dark:border-dark-3 dark:bg-dark-4 dark:text-white"
               >
                 1200.00
               </span>

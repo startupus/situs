@@ -16,11 +16,7 @@ import { EditorPrompts } from './prompts/editor.prompts';
       },
     }),
   ],
-  providers: [
-    ProjectTools,
-    ContentResources,
-    EditorPrompts,
-  ],
+  providers: [ProjectTools, ContentResources, EditorPrompts],
   exports: [McpModule],
 })
 export class SitusMcpHttpModule {}

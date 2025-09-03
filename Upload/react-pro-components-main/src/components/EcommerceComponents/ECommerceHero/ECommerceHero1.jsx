@@ -93,7 +93,7 @@ const SingleSlide = ({ img, subtitle, title, details, link, button }) => {
           <span className="mb-3 block text-lg font-semibold text-primary lg:text-[28px] lg:leading-[40px]">
             {subtitle}
           </span>
-          <h1 className="mb-[18px] text-3xl font-bold leading-[1.2]! text-dark dark:text-white lg:text-4xl xl:text-[48px]">
+          <h1 className="leading-[1.2]! mb-[18px] text-3xl font-bold text-dark dark:text-white lg:text-4xl xl:text-[48px]">
             {title}
           </h1>
           <p className="mb-10 text-base text-body-color dark:text-dark-6">

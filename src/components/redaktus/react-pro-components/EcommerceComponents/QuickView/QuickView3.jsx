@@ -1,14 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const QuickView3 = () => {
   const checkIcon = (
-    <svg
-      width={20}
-      height={20}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.9375 4.1875C18.6562 3.90625 18.2187 3.90625 17.9375 4.1875L7.3125 14.5L2.0625 9.34375C1.78125 9.0625 1.34375 9.09375 1.0625 9.34375C0.781247 9.625 0.812497 10.0625 1.0625 10.3437L6.59375 15.7187C6.78125 15.9062 7.03125 16 7.3125 16C7.59375 16 7.8125 15.9062 8.03125 15.7187L18.9375 5.125C19.2187 4.90625 19.2187 4.46875 18.9375 4.1875Z"
         fill="white"
@@ -24,17 +18,12 @@ const QuickView3 = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -53,7 +42,7 @@ const QuickView3 = () => {
           </button>
           <div
             className={`absolute top-0 left-0 min-h-screen w-full bg-gray-2 dark:bg-dark py-20 lg:py-[120px] ${
-              !open && "hidden"
+              !open && 'hidden'
             } `}
           >
             <div className="mx-auto px-4 sm:container sm:px-0">
@@ -121,22 +110,15 @@ const QuickView3 = () => {
                           </span>
                         </p>
                         <p className="mb-8 text-base text-body-color dark:text-dark-6">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Morbi non erat quam. Vestibulum aliquam.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non erat quam. Vestibulum
+                          aliquam.
                         </p>
                         <div className="flex flex-wrap justify-between gap-5">
                           <div>
-                            <h4 className="mb-3 text-xl font-semibold text-dark dark:text-white">
-                              Color
-                            </h4>
+                            <h4 className="mb-3 text-xl font-semibold text-dark dark:text-white">Color</h4>
                             <div className="flex items-center gap-[10px]">
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="black"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="black" className="sr-only" />
                                 <label
                                   htmlFor="black"
                                   className="box flex h-[34px] w-11 cursor-pointer items-center justify-center bg-dark text-white"
@@ -145,12 +127,7 @@ const QuickView3 = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="red"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="red" className="sr-only" />
                                 <label
                                   htmlFor="red"
                                   className="box flex h-[34px] w-11 cursor-pointer items-center justify-center bg-[#C13130] text-white"
@@ -159,12 +136,7 @@ const QuickView3 = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="color"
-                                  id="blue"
-                                  className="sr-only"
-                                />
+                                <input type="radio" name="color" id="blue" className="sr-only" />
                                 <label
                                   htmlFor="blue"
                                   className="box flex h-[34px] w-11 cursor-pointer items-center justify-center bg-primary text-white"
@@ -176,17 +148,10 @@ const QuickView3 = () => {
                           </div>
 
                           <div>
-                            <h4 className="mb-3 text-xl font-semibold text-dark dark:text-white">
-                              Size
-                            </h4>
+                            <h4 className="mb-3 text-xl font-semibold text-dark dark:text-white">Size</h4>
                             <div className="flex items-center gap-[10px]">
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="32"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="32" className="filter-size sr-only" />
                                 <label
                                   htmlFor="32"
                                   className="inline-block cursor-pointer text-base font-medium text-dark dark:text-white border border-stroke dark:border-dark-3 py-1 px-3 hover:border-primary hover:bg-primary hover:text-white"
@@ -195,12 +160,7 @@ const QuickView3 = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="36"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="36" className="filter-size sr-only" />
                                 <label
                                   htmlFor="36"
                                   className="inline-block cursor-pointer text-base font-medium text-dark dark:text-white border border-stroke dark:border-dark-3 py-1 px-3 hover:border-primary hover:bg-primary hover:text-white"
@@ -209,12 +169,7 @@ const QuickView3 = () => {
                                 </label>
                               </div>
                               <div>
-                                <input
-                                  type="radio"
-                                  name="size"
-                                  id="40"
-                                  className="filter-size sr-only"
-                                />
+                                <input type="radio" name="size" id="40" className="filter-size sr-only" />
                                 <label
                                   htmlFor="40"
                                   className="inline-block cursor-pointer text-base font-medium text-dark dark:text-white border border-stroke dark:border-dark-3 py-1 px-3 hover:border-primary hover:bg-primary hover:text-white"
@@ -249,15 +204,7 @@ const QuickView3 = () => {
 
 export default QuickView3;
 
-const ImgBox = ({
-  detailsLink,
-  thumbnail1,
-  thumbnail2,
-  thumbnail3,
-  bigImg1,
-  bigImg2,
-  bigImg3,
-}) => {
+const ImgBox = ({ detailsLink, thumbnail1, thumbnail2, thumbnail3, bigImg1, bigImg2, bigImg3 }) => {
   const [productOne, setProductOne] = useState(true);
   const [productTwo, setProductTwo] = useState(false);
   const [productThree, setProductThree] = useState(false);
@@ -273,21 +220,9 @@ const ImgBox = ({
             >
               View Product Details
             </a>
-            <img
-              src={bigImg1}
-              alt="products-details"
-              className={`${productOne ? "block" : "hidden"} w-full`}
-            />
-            <img
-              src={bigImg2}
-              alt="products-details"
-              className={`${productTwo ? "block" : "hidden"} w-full`}
-            />
-            <img
-              src={bigImg3}
-              alt="products-details"
-              className={`${productThree ? "block" : "hidden"} w-full`}
-            />
+            <img src={bigImg1} alt="products-details" className={`${productOne ? 'block' : 'hidden'} w-full`} />
+            <img src={bigImg2} alt="products-details" className={`${productTwo ? 'block' : 'hidden'} w-full`} />
+            <img src={bigImg3} alt="products-details" className={`${productThree ? 'block' : 'hidden'} w-full`} />
           </div>
         </div>
         <div className="mb-12 w-full px-4 md:order-first md:mb-0 lg:max-w-[136px]">
@@ -300,7 +235,7 @@ const ImgBox = ({
                   setProductThree(false);
                 }}
                 className={`${
-                  productOne ? "border-primary" : "border-stroke dark:border-dark-3"
+                  productOne ? 'border-primary' : 'border-stroke dark:border-dark-3'
                 } w-full overflow-hidden border md:mb-5`}
               >
                 <img src={thumbnail1} alt="thumbnail-01" className="w-full" />
@@ -314,7 +249,7 @@ const ImgBox = ({
                   setProductThree(false);
                 }}
                 className={`${
-                  productTwo ? "border-primary" : "border-stroke dark:border-dark-3"
+                  productTwo ? 'border-primary' : 'border-stroke dark:border-dark-3'
                 } w-full overflow-hidden border md:mb-5`}
               >
                 <img src={thumbnail2} alt="thumbnail-01" className="w-full" />
@@ -328,7 +263,7 @@ const ImgBox = ({
                   setProductThree(true);
                 }}
                 className={`${
-                  productThree ? "border-primary" : "border-stroke dark:border-dark-3"
+                  productThree ? 'border-primary' : 'border-stroke dark:border-dark-3'
                 } w-full overflow-hidden border md:mb-5`}
               >
                 <img src={thumbnail3} alt="thumbnail-01" className="w-full" />

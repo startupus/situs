@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function DatePicker2() {
   return (
@@ -12,13 +12,7 @@ export default function DatePicker2() {
               className="h-12 w-full appearance-none rounded-lg border border-stroke bg-white pl-12 pr-4 text-dark outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-white"
             />
             <span className="absolute inset-y-0 flex h-12 w-12 items-center justify-center text-dark-5">
-              <svg
-                width="21"
-                height="20"
-                viewBox="0 0 21 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M18 3.3125H16.3125V2.625C16.3125 2.25 16 1.90625 15.5937 1.90625C15.1875 1.90625 14.875 2.21875 14.875 2.625V3.28125H6.09375V2.625C6.09375 2.25 5.78125 1.90625 5.375 1.90625C4.96875 1.90625 4.65625 2.21875 4.65625 2.625V3.28125H3C1.9375 3.28125 1.03125 4.15625 1.03125 5.25V16.125C1.03125 17.1875 1.90625 18.0938 3 18.0938H18C19.0625 18.0938 19.9687 17.2187 19.9687 16.125V5.25C19.9687 4.1875 19.0625 3.3125 18 3.3125ZM3 4.71875H4.6875V5.34375C4.6875 5.71875 5 6.0625 5.40625 6.0625C5.8125 6.0625 6.125 5.75 6.125 5.34375V4.71875H14.9687V5.34375C14.9687 5.71875 15.2812 6.0625 15.6875 6.0625C16.0937 6.0625 16.4062 5.75 16.4062 5.34375V4.71875H18C18.3125 4.71875 18.5625 4.96875 18.5625 5.28125V7.34375H2.46875V5.28125C2.46875 4.9375 2.6875 4.71875 3 4.71875ZM18 16.6562H3C2.6875 16.6562 2.4375 16.4062 2.4375 16.0937V8.71875H18.5312V16.125C18.5625 16.4375 18.3125 16.6562 18 16.6562Z"
                   fill="currentColor"
@@ -68,9 +62,7 @@ export default function DatePicker2() {
           </div>
           <div className="shadow-2xs flex w-full flex-col rounded-lg border border-stroke bg-white px-4 py-6 dark:border-dark-3 dark:bg-dark-2 sm:px-6 sm:py-[30px]">
             <div className="flex items-center justify-between pb-2">
-              <p className="text-base font-medium text-dark dark:text-white">
-                December 2025
-              </p>
+              <p className="text-base font-medium text-dark dark:text-white">December 2025</p>
               <div className="flex items-center justify-end space-x-[10px]">
                 <span className="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-sm border-[.5px] border-stroke bg-gray-2 text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark dark:text-white">
                   <svg
@@ -99,33 +91,19 @@ export default function DatePicker2() {
               </div>
             </div>
             <div className="flex justify-between pb-2 pt-4 text-sm font-normal capitalize text-body-color dark:text-dark-6">
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                Mo
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">Mo</span>
 
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                Tu
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">Tu</span>
 
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                We
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">We</span>
 
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                Th
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">Th</span>
 
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                Fr
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">Fr</span>
 
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                Sa
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">Sa</span>
 
-              <span className="flex h-[38px] w-[38px] items-center justify-center">
-                Su
-              </span>
+              <span className="flex h-[38px] w-[38px] items-center justify-center">Su</span>
             </div>
 
             <div className="flex justify-between pb-2 text-sm font-medium text-dark dark:text-white">

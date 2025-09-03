@@ -8,26 +8,26 @@
 /* ===== CSS ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ ===== */
 :root {
   /* Основные цвета темы - будут перезаписаны ThemeProvider */
-  --color-primary: #2881C6;
-  --color-primary-hover: #3B92D4;
-  --color-primary-active: #1F6AA3;
+  --color-primary: #2881c6;
+  --color-primary-hover: #3b92d4;
+  --color-primary-active: #1f6aa3;
   --color-secondary: #13c296;
-  --color-accent: #9055FD;
-  
+  --color-accent: #9055fd;
+
   /* Статусные цвета */
-  --color-success: #22AD5C;
-  --color-warning: #FBBF24;
-  --color-error: #F23030;
-  --color-info: #2D68F8;
-  
+  --color-success: #22ad5c;
+  --color-warning: #fbbf24;
+  --color-error: #f23030;
+  --color-info: #2d68f8;
+
   /* Базовые цвета интерфейса */
-  --color-background: #FFFFFF;
-  --color-surface: #F9FAFB;
-  --color-text: #1F2937;
-  --color-text-secondary: #6B7280;
-  --color-border: #E5E7EB;
-  --color-border-light: #F3F4F6;
-  
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+  --color-text: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f6;
+
   /* Совместимость с существующими переменными */
   --color-body-color: var(--color-text-secondary);
   --color-dark: var(--color-text);
@@ -35,7 +35,7 @@
   --color-dark-5: var(--color-text-secondary);
   --color-dark-6: var(--color-text-secondary);
   --color-blue-dark: var(--color-primary-active);
-  
+
   /* Тени */
   --shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.14);
 }
@@ -43,26 +43,26 @@
 /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
 html.dark {
   /* Основные цвета темы для темного режима */
-  --color-primary: #2881C6;
-  --color-primary-hover: #3B92D4;
-  --color-primary-active: #1F6AA3;
-  --color-secondary: #10B981;
-  --color-accent: #A855F7;
-  
+  --color-primary: #2881c6;
+  --color-primary-hover: #3b92d4;
+  --color-primary-active: #1f6aa3;
+  --color-secondary: #10b981;
+  --color-accent: #a855f7;
+
   /* Статусные цвета для темного режима */
-  --color-success: #34D399;
-  --color-warning: #FCD34D;
-  --color-error: #F87171;
-  --color-info: #60A5FA;
-  
+  --color-success: #34d399;
+  --color-warning: #fcd34d;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
+
   /* Базовые цвета интерфейса для темного режима */
   --color-background: #111827;
-  --color-surface: #1F2937;
-  --color-text: #F9FAFB;
-  --color-text-secondary: #9CA3AF;
+  --color-surface: #1f2937;
+  --color-text: #f9fafb;
+  --color-text-secondary: #9ca3af;
   --color-border: #374151;
-  --color-border-light: #4B5563;
-  
+  --color-border-light: #4b5563;
+
   /* Совместимость с существующими переменными для темного режима */
   --color-body-color: var(--color-text-secondary);
   --color-dark: var(--color-text);
@@ -70,7 +70,7 @@ html.dark {
   --color-dark-5: var(--color-text-secondary);
   --color-dark-6: var(--color-text-secondary);
   --color-blue-dark: var(--color-primary-active);
-  
+
   /* Тени для темного режима */
   --shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
@@ -81,145 +81,145 @@ html.dark {
   .bg-primary {
     background-color: var(--color-primary);
   }
-  
+
   .bg-primary-hover {
     background-color: var(--color-primary-hover);
   }
-  
+
   .bg-primary-active {
     background-color: var(--color-primary-active);
   }
-  
+
   .border-primary {
     border-color: var(--color-primary);
   }
-  
+
   .text-primary {
     color: var(--color-primary);
   }
-  
+
   .bg-secondary {
     background-color: var(--color-secondary);
   }
-  
+
   .border-secondary {
     border-color: var(--color-secondary);
   }
-  
+
   .text-secondary {
     color: var(--color-secondary);
   }
-  
+
   /* Статусные цвета */
   .bg-success {
     background-color: var(--color-success);
   }
-  
+
   .text-success {
     color: var(--color-success);
   }
-  
+
   .bg-warning {
     background-color: var(--color-warning);
   }
-  
+
   .text-warning {
     color: var(--color-warning);
   }
-  
+
   .bg-error {
     background-color: var(--color-error);
   }
-  
+
   .text-error {
     color: var(--color-error);
   }
-  
+
   .bg-info {
     background-color: var(--color-info);
   }
-  
+
   .text-info {
     color: var(--color-info);
   }
-  
+
   /* Базовые цвета интерфейса */
   .bg-surface {
     background-color: var(--color-surface);
   }
-  
+
   .text-body-color {
     color: var(--color-text-secondary);
   }
-  
+
   .text-dark {
     color: var(--color-text);
   }
-  
+
   .border-stroke {
     border-color: var(--color-border);
   }
-  
+
   .border-stroke-light {
     border-color: var(--color-border-light);
   }
-  
+
   /* Hover состояния */
   .hover\:bg-primary:hover {
     background-color: var(--color-primary);
   }
-  
+
   .hover\:bg-primary-hover:hover {
     background-color: var(--color-primary-hover);
   }
-  
+
   .hover\:text-primary:hover {
     color: var(--color-primary);
   }
-  
+
   .hover\:border-primary:hover {
     border-color: var(--color-primary);
   }
-  
+
   /* Совместимость с существующими классами */
   .bg-gray-3 {
     background-color: var(--color-border-light);
   }
-  
+
   .border-gray-3 {
     border-color: var(--color-border-light);
   }
-  
+
   .text-dark-5 {
     color: var(--color-text-secondary);
   }
-  
+
   .text-dark-6 {
     color: var(--color-text-secondary);
   }
-  
+
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
-  
+
   .bg-blue-dark {
     background-color: var(--color-primary-active);
   }
-  
+
   .hover\:bg-blue-dark:hover {
     background-color: var(--color-primary-active);
   }
-  
+
   .bg-dark {
     background-color: var(--color-text);
   }
-  
+
   .bg-dark-2 {
     background-color: #1e293b;
   }
-  
+
   .shadow-2 {
-    box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -229,7 +229,9 @@ html {
   color-scheme: light !important;
   background-color: #ffffff !important;
   color: #1f2937 !important;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* Поддержка темной темы через Tailwind dark: класс на root */
@@ -246,7 +248,9 @@ body {
   color: inherit !important;
   margin: 0 !important;
   padding: 0 !important;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* ===== ИЗОЛЯЦИЯ БЛОКОВ ОТ СТИЛЕЙ РЕДАКТОРА ===== */
@@ -262,7 +266,9 @@ body {
 /* Контейнер интерфейса (панели, меню, кнопки) */
 .redaktus-interface {
   /* Базовые стили - следуют системной теме по умолчанию */
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* Принудительная светлая тема интерфейса */
@@ -280,24 +286,26 @@ body {
   /* Полная изоляция от родительского контекста */
   isolation: isolate !important;
   contain: layout style paint !important;
-  
+
   /* Восстанавливаем базовые свойства */
   display: block !important;
   overflow-y: auto !important;
   min-width: 0 !important;
   flex: 1 !important;
-  
+
   /* Защита от внешних стилей */
   position: relative !important;
   z-index: 1 !important;
-  
+
   /* Принудительные базовые стили */
   font-family: inherit !important;
   font-size: 1rem !important;
   line-height: 1.5 !important;
-  
+
   /* Плавные переходы */
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* ПРИНУДИТЕЛЬНАЯ ИЗОЛЯЦИЯ - ПЕРЕОПРЕДЕЛЯЕМ ВСЕ ВОЗМОЖНЫЕ НАСЛЕДОВАНИЯ */
@@ -332,51 +340,51 @@ body {
 }
 
 /* Светлая тема - переопределяем только критичные классы */
-.redaktus-canvas:not(.dark) .text-dark { 
-  color: #1e293b !important; 
+.redaktus-canvas:not(.dark) .text-dark {
+  color: #1e293b !important;
 }
-.redaktus-canvas:not(.dark) .text-body-color { 
-  color: #637381 !important; 
+.redaktus-canvas:not(.dark) .text-body-color {
+  color: #637381 !important;
 }
-.redaktus-canvas:not(.dark) .text-primary { 
-  color: #3056d3 !important; 
+.redaktus-canvas:not(.dark) .text-primary {
+  color: #3056d3 !important;
 }
 
-.redaktus-canvas:not(.dark) .bg-white { 
-  background-color: #ffffff !important; 
+.redaktus-canvas:not(.dark) .bg-white {
+  background-color: #ffffff !important;
 }
-.redaktus-canvas:not(.dark) .text-gray-500 { 
-  color: #6b7280 !important; 
+.redaktus-canvas:not(.dark) .text-gray-500 {
+  color: #6b7280 !important;
 }
-.redaktus-canvas:not(.dark) .text-gray-600 { 
-  color: #4b5563 !important; 
+.redaktus-canvas:not(.dark) .text-gray-600 {
+  color: #4b5563 !important;
 }
 
 /* Темная тема - переопределяем только критичные классы */
-.redaktus-canvas.dark .text-dark { 
-  color: #f9fafb !important; 
+.redaktus-canvas.dark .text-dark {
+  color: #f9fafb !important;
 }
-.redaktus-canvas.dark .text-body-color { 
-  color: #9ca3af !important; 
+.redaktus-canvas.dark .text-body-color {
+  color: #9ca3af !important;
 }
-.redaktus-canvas.dark .text-primary { 
-  color: #60a5fa !important; 
+.redaktus-canvas.dark .text-primary {
+  color: #60a5fa !important;
 }
 
-.redaktus-canvas.dark .bg-dark-2 { 
-  background-color: #1f2937 !important; 
+.redaktus-canvas.dark .bg-dark-2 {
+  background-color: #1f2937 !important;
 }
-.redaktus-canvas.dark .text-dark-6 { 
-  color: #9ca3af !important; 
+.redaktus-canvas.dark .text-dark-6 {
+  color: #9ca3af !important;
 }
-.redaktus-canvas.dark .text-white { 
-  color: #ffffff !important; 
+.redaktus-canvas.dark .text-white {
+  color: #ffffff !important;
 }
-.redaktus-canvas.dark .text-gray-300 { 
-  color: #d1d5db !important; 
+.redaktus-canvas.dark .text-gray-300 {
+  color: #d1d5db !important;
 }
-.redaktus-canvas.dark .text-gray-400 { 
-  color: #9ca3af !important; 
+.redaktus-canvas.dark .text-gray-400 {
+  color: #9ca3af !important;
 }
 
 /* ===== TAILGRIDS БЛОКИ ИСПОЛЬЗУЮТ СТАНДАРТНЫЕ TAILWINDCSS КЛАССЫ ===== */
@@ -405,5 +413,4 @@ body {
 
 .redaktus-vertical-navbar {
   @apply border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800;
-} 
-
+}

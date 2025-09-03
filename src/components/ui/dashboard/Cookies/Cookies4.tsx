@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Cookies4 = () => {
   const [Open, setOpen] = useState(true);
@@ -12,10 +12,7 @@ const Cookies4 = () => {
       {Open && (
         <div className="container">
           <div className="relative ml-auto w-full max-w-[350px] overflow-hidden rounded-lg bg-white px-6 py-10 text-center shadow-1 dark:bg-dark-2 dark:shadow-box-dark xs:px-10">
-            <button
-              onClick={handleOpen}
-              className="absolute right-6 top-6 text-body-color dark:text-dark-6"
-            >
+            <button onClick={handleOpen} className="absolute right-6 top-6 text-body-color dark:text-dark-6">
               <svg
                 className="fill-current"
                 width="18"
@@ -31,13 +28,7 @@ const Cookies4 = () => {
               </svg>
             </button>
             <div className="mx-auto mb-9 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-primary">
-              <svg
-                width="54"
-                height="54"
-                viewBox="0 0 54 54"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M43.7907 27.8438C40.2469 26.8313 37.4625 24.0469 36.5344 20.4188L36.2813 19.4063L35.1844 19.1531C31.5563 18.225 28.6875 15.3563 27.7594 11.7281L27.5063 10.7156L18.5625 7.93125L17.9719 8.18438C13.9219 9.61875 10.2938 12.2344 7.59378 15.6938C1.18128 23.9625 1.26565 35.8594 7.8469 43.9594C11.9813 49.1062 17.8875 52.1438 24.4688 52.4813C24.8907 52.4813 25.3125 52.4813 25.65 52.4813C31.725 52.4813 37.5469 50.0344 41.85 45.8156C44.2125 43.4531 46.0688 40.5844 47.1657 37.3781L47.3344 36.7875L44.9719 27.8438H43.7907ZM39.2344 43.1156C35.4375 46.9969 30.1219 48.9375 24.7219 48.6844C19.2375 48.4313 14.3438 45.9 10.8844 41.5969C5.40003 34.8469 5.31565 24.8906 10.6313 18.0563C12.7407 15.3563 15.525 13.2469 18.6469 11.9813L24.3 13.6688C25.7344 17.8031 29.025 21.0938 33.1594 22.5281C34.5938 26.6625 37.8 29.8688 41.9344 31.3031L43.4532 36.7031C42.525 39.15 41.0907 41.2594 39.2344 43.1156Z"
                   fill="white"
@@ -69,13 +60,9 @@ const Cookies4 = () => {
               We use cookies
             </h4>
             <p className="mb-7 text-base text-body-color dark:text-dark-6">
-              This website uses cookies to ensure you get the best experience on
-              our website.
+              This website uses cookies to ensure you get the best experience on our website.
             </p>
-            <div
-              onClick={handleOpen}
-              className="flex items-center justify-center space-x-4"
-            >
+            <div onClick={handleOpen} className="flex items-center justify-center space-x-4">
               <button className="inline-flex items-center justify-center rounded-md border border-primary px-7 py-[11px] text-center text-base font-medium text-primary hover:bg-primary hover:text-white xs:px-8">
                 Exit
               </button>

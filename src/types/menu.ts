@@ -12,8 +12,8 @@ export type ComponentType = 'Website' | 'Store' | 'Blog' | 'Landing';
  */
 export interface MenuTypeData {
   id: string;
-  name: string;           // "main", "footer", "sidebar"
-  title: string;          // "Главное меню"
+  name: string; // "main", "footer", "sidebar"
+  title: string; // "Главное меню"
   description?: string;
   isActive: boolean;
   projectId: string;
@@ -25,20 +25,20 @@ export interface MenuTypeData {
  * Языковая версия пункта меню
  */
 export interface MenuItemLanguageVersion {
-  language: string;       // "ru-RU", "en-GB", "es-ES"
-  title: string;          // "Каталог товаров" / "Product Catalog"
-  alias: string;          // "catalog" / "catalog-en"
-  externalUrl?: string;   // Может отличаться для разных языков
-  
+  language: string; // "ru-RU", "en-GB", "es-ES"
+  title: string; // "Каталог товаров" / "Product Catalog"
+  alias: string; // "catalog" / "catalog-en"
+  externalUrl?: string; // Может отличаться для разных языков
+
   // SEO метаданные для конкретного языка
   metaTitle?: string;
   metaDescription?: string;
   metaKeywords?: string;
-  
+
   // CSS и стили для конкретного языка
   cssClass?: string;
   menuImage?: string;
-  
+
   // Параметры для конкретного языка
   parameters?: Partial<MenuParameters>;
 }
@@ -48,47 +48,47 @@ export interface MenuItemLanguageVersion {
  */
 export interface MenuItemData {
   id: string;
-  title: string;          // "Каталог товаров" (основной язык)
-  alias: string;          // "catalog" (основной язык)
+  title: string; // "Каталог товаров" (основной язык)
+  alias: string; // "catalog" (основной язык)
   type: MenuItemType;
-  
+
   // Иерархия (как в Joomla)
-  level: number;          // 1, 2, 3...
+  level: number; // 1, 2, 3...
   parentId?: string;
   children?: MenuItemData[];
   orderIndex: number;
-  
+
   // Привязка к компоненту (универсальная как в Joomla)
   component?: ComponentType;
-  view?: string;          // "page", "category", "item", "list"
-  layout?: string;        // "default", "blog", "grid", "form"
-  targetId?: string;      // pageId, categoryId, itemId
-  externalUrl?: string;   // Для type = URL (основной язык)
-  
+  view?: string; // "page", "category", "item", "list"
+  layout?: string; // "default", "blog", "grid", "form"
+  targetId?: string; // pageId, categoryId, itemId
+  externalUrl?: string; // Для type = URL (основной язык)
+
   // Иконка для пункта меню
-  icon?: string;          // Название React иконки (например: "FiHome", "FiUsers")
-  iconLibrary?: string;   // Библиотека иконок (fi, fa, md, etc.)
-  
+  icon?: string; // Название React иконки (например: "FiHome", "FiUsers")
+  iconLibrary?: string; // Библиотека иконок (fi, fa, md, etc.)
+
   // Настройки отображения
   isPublished: boolean;
   accessLevel: AccessLevel;
-  language: string;       // Основной язык: "*", "ru-RU", "en-GB"
-  
+  language: string; // Основной язык: "*", "ru-RU", "en-GB"
+
   // Мультиязычность - языковые версии
   languageVersions?: MenuItemLanguageVersion[];
-  
+
   // Параметры (JSON как в Joomla)
   parameters: MenuParameters;
-  
+
   // SEO метаданные (основной язык)
   metaTitle?: string;
   metaDescription?: string;
   metaKeywords?: string;
-  
+
   // CSS и стили (основной язык)
   cssClass?: string;
   menuImage?: string;
-  
+
   // Связи
   menuTypeId: string;
   createdAt: string;
@@ -100,12 +100,12 @@ export interface MenuItemData {
  */
 export interface MenuParameters {
   // Базовые параметры отображения
-  menu_show?: boolean;        // Показывать в меню
-  menu_image?: string;        // Изображение пункта
-  css_class?: string;         // CSS класс
+  menu_show?: boolean; // Показывать в меню
+  menu_image?: string; // Изображение пункта
+  css_class?: string; // CSS класс
   target?: '_blank' | '_self' | '_parent' | '_top';
-  rel?: string;              // rel атрибут для ссылок
-  
+  rel?: string; // rel атрибут для ссылок
+
   // Параметры по типам компонентов
   website?: WebsiteMenuParameters;
   store?: StoreMenuParameters;
@@ -209,7 +209,7 @@ export const SUPPORTED_LANGUAGES = [
   { code: 'de-DE', name: 'Deutsch', flag: '' },
 ] as const;
 
-export type SupportedLanguageCode = typeof SUPPORTED_LANGUAGES[number]['code'];
+export type SupportedLanguageCode = (typeof SUPPORTED_LANGUAGES)[number]['code'];
 
 /**
  * Данные для создания пункта меню
@@ -225,8 +225,8 @@ export interface CreateMenuItemRequest {
   layout?: string;
   targetId?: string;
   externalUrl?: string;
-  icon?: string;          // Название React иконки
-  iconLibrary?: string;   // Библиотека иконок
+  icon?: string; // Название React иконки
+  iconLibrary?: string; // Библиотека иконок
   accessLevel?: AccessLevel;
   language?: string;
   languageVersions?: MenuItemLanguageVersion[];
@@ -292,23 +292,17 @@ export class MenuItemLanguageUtils {
   /**
    * Получить языковую версию пункта меню
    */
-  static getLanguageVersion(
-    item: MenuItemData, 
-    languageCode: string
-  ): MenuItemLanguageVersion | null {
+  static getLanguageVersion(item: MenuItemData, languageCode: string): MenuItemLanguageVersion | null {
     if (!item.languageVersions) return null;
-    return item.languageVersions.find(v => v.language === languageCode) || null;
+    return item.languageVersions.find((v) => v.language === languageCode) || null;
   }
 
   /**
    * Получить локализованные данные пункта меню для конкретного языка
    */
-  static getLocalizedMenuItem(
-    item: MenuItemData, 
-    languageCode: string
-  ): MenuItemData {
+  static getLocalizedMenuItem(item: MenuItemData, languageCode: string): MenuItemData {
     const version = this.getLanguageVersion(item, languageCode);
-    
+
     if (!version) {
       return item; // Возвращаем основную версию
     }
@@ -324,22 +318,17 @@ export class MenuItemLanguageUtils {
       metaKeywords: version.metaKeywords || item.metaKeywords,
       cssClass: version.cssClass || item.cssClass,
       menuImage: version.menuImage || item.menuImage,
-      parameters: version.parameters ? 
-        { ...item.parameters, ...version.parameters } : 
-        item.parameters
+      parameters: version.parameters ? { ...item.parameters, ...version.parameters } : item.parameters,
     };
   }
 
   /**
    * Добавить или обновить языковую версию
    */
-  static setLanguageVersion(
-    item: MenuItemData, 
-    version: MenuItemLanguageVersion
-  ): MenuItemData {
+  static setLanguageVersion(item: MenuItemData, version: MenuItemLanguageVersion): MenuItemData {
     const versions = item.languageVersions || [];
-    const existingIndex = versions.findIndex(v => v.language === version.language);
-    
+    const existingIndex = versions.findIndex((v) => v.language === version.language);
+
     if (existingIndex >= 0) {
       versions[existingIndex] = version;
     } else {
@@ -348,22 +337,19 @@ export class MenuItemLanguageUtils {
 
     return {
       ...item,
-      languageVersions: versions
+      languageVersions: versions,
     };
   }
 
   /**
    * Удалить языковую версию
    */
-  static removeLanguageVersion(
-    item: MenuItemData, 
-    languageCode: string
-  ): MenuItemData {
+  static removeLanguageVersion(item: MenuItemData, languageCode: string): MenuItemData {
     if (!item.languageVersions) return item;
-    
+
     return {
       ...item,
-      languageVersions: item.languageVersions.filter(v => v.language !== languageCode)
+      languageVersions: item.languageVersions.filter((v) => v.language !== languageCode),
     };
   }
 
@@ -373,9 +359,9 @@ export class MenuItemLanguageUtils {
   static getAvailableLanguages(item: MenuItemData): string[] {
     const languages = [item.language];
     if (item.languageVersions) {
-      languages.push(...item.languageVersions.map(v => v.language));
+      languages.push(...item.languageVersions.map((v) => v.language));
     }
-    return [...new Set(languages)].filter(lang => lang !== '*');
+    return [...new Set(languages)].filter((lang) => lang !== '*');
   }
 
   /**
@@ -383,6 +369,6 @@ export class MenuItemLanguageUtils {
    */
   static hasLanguageVersion(item: MenuItemData, languageCode: string): boolean {
     if (item.language === languageCode) return true;
-    return item.languageVersions?.some(v => v.language === languageCode) || false;
+    return item.languageVersions?.some((v) => v.language === languageCode) || false;
   }
 }

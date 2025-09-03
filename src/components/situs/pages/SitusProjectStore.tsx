@@ -48,53 +48,42 @@ const SitusProjectStore: React.FC = () => {
   // Функция для иерархического отображения категорий (аналог системы меню)
   const renderCategoriesHierarchy = (parentCategories: Category[], level = 1): React.ReactNode => {
     return parentCategories.map((category) => (
-      <div key={category.id} className={`${level > 1 ? 'ml-6 border-l-2 border-gray-200 dark:border-gray-600 pl-4' : ''}`}>
+      <div
+        key={category.id}
+        className={`${level > 1 ? 'ml-6 border-l-2 border-gray-200 dark:border-gray-600 pl-4' : ''}`}
+      >
         <div className="border border-stroke dark:border-dark-3 rounded-lg p-4 hover:shadow-md transition-shadow mb-2">
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <span className="text-lg">
-                  {level === 1 ? '📁' : level === 2 ? '📂' : '📄'}
-                </span>
+                <span className="text-lg">{level === 1 ? '📁' : level === 2 ? '📂' : '📄'}</span>
                 <h4 className="font-medium text-dark dark:text-white">
                   {category.name}
-                  <span className="text-xs text-body-color dark:text-dark-6 ml-2">
-                    (Уровень {level})
-                  </span>
+                  <span className="text-xs text-body-color dark:text-dark-6 ml-2">(Уровень {level})</span>
                 </h4>
               </div>
               {category.description && (
-                <p className="text-sm text-body-color dark:text-dark-6 mt-1 line-clamp-2">
-                  {category.description}
-                </p>
+                <p className="text-sm text-body-color dark:text-dark-6 mt-1 line-clamp-2">{category.description}</p>
               )}
               <div className="flex items-center gap-4 mt-2 text-sm">
-                <span className="text-body-color dark:text-dark-6">
-                  {category._count.items} товаров
-                </span>
+                <span className="text-body-color dark:text-dark-6">{category._count.items} товаров</span>
                 {category.children && category.children.length > 0 && (
-                  <span className="text-body-color dark:text-dark-6">
-                    {category.children.length} подкатегорий
-                  </span>
+                  <span className="text-body-color dark:text-dark-6">{category.children.length} подкатегорий</span>
                 )}
               </div>
             </div>
             <div className="flex gap-2">
-              <button className="text-primary hover:text-primary/80 text-sm px-2 py-1 rounded">
-                Редактировать
-              </button>
+              <button className="text-primary hover:text-primary/80 text-sm px-2 py-1 rounded">Редактировать</button>
               <button className="text-red-600 hover:text-red-700 dark:text-red-400 text-sm px-2 py-1 rounded">
                 Удалить
               </button>
             </div>
           </div>
         </div>
-        
+
         {/* Рекурсивно отображаем дочерние категории */}
         {category.children && category.children.length > 0 && (
-          <div className="mt-2">
-            {renderCategoriesHierarchy(category.children, level + 1)}
-          </div>
+          <div className="mt-2">{renderCategoriesHierarchy(category.children, level + 1)}</div>
         )}
       </div>
     ));
@@ -113,7 +102,7 @@ const SitusProjectStore: React.FC = () => {
         setError(null);
         const data = await getProject(projectId);
         setProject(data);
-        
+
         // Найдем ECOMMERCE продукт
         const storeProduct = (data as any).products?.find((p: any) => p.type === 'ECOMMERCE');
         if (storeProduct) {
@@ -257,7 +246,7 @@ const SitusProjectStore: React.FC = () => {
                 data-testid={testIds.products.createCategoryButton}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
-                  <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+                  <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z" />
                 </svg>
                 Создать категорию
               </button>
@@ -266,17 +255,14 @@ const SitusProjectStore: React.FC = () => {
             {categories.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-body-color dark:text-dark-6 mb-4">Категории не созданы</p>
-                <button
-                  onClick={() => setShowCreateCategoryModal(true)}
-                  className="text-primary hover:text-primary/80"
-                >
+                <button onClick={() => setShowCreateCategoryModal(true)} className="text-primary hover:text-primary/80">
                   Создать первую категорию
                 </button>
               </div>
             ) : (
               <div className="space-y-4">
                 {/* Иерархическое отображение категорий (как в системе меню) */}
-                {renderCategoriesHierarchy(categories.filter(cat => !cat.parentId))}
+                {renderCategoriesHierarchy(categories.filter((cat) => !cat.parentId))}
               </div>
             )}
           </div>
@@ -292,7 +278,7 @@ const SitusProjectStore: React.FC = () => {
                 data-testid={testIds.products.createItemButton}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current">
-                  <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z"/>
+                  <path d="M8 1C8.55228 1 9 1.44772 9 2V7H14C14.5523 7 15 7.44772 15 8C15 8.55228 14.5523 9 14 9H9V14C9 14.5523 8.55228 15 8 15C7.44772 15 7 14.5523 7 14V9H2C1.44772 9 1 8.55228 1 8C1 7.44772 1.44772 7 2 7H7V2C7 1.44772 7.44772 1 8 1Z" />
                 </svg>
                 Добавить товар
               </button>
@@ -301,10 +287,7 @@ const SitusProjectStore: React.FC = () => {
             {items.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-body-color dark:text-dark-6 mb-4">Товары не добавлены</p>
-                <button
-                  onClick={() => setShowCreateItemModal(true)}
-                  className="text-primary hover:text-primary/80"
-                >
+                <button onClick={() => setShowCreateItemModal(true)} className="text-primary hover:text-primary/80">
                   Добавить первый товар
                 </button>
               </div>
@@ -320,7 +303,11 @@ const SitusProjectStore: React.FC = () => {
                 </div>
                 <ul className="divide-y divide-stroke dark:divide-dark-3">
                   {items.map((item) => (
-                    <li key={item.id} className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3" data-testid={testIds.products.itemRow}>
+                    <li
+                      key={item.id}
+                      className="px-4 py-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50 dark:hover:bg-dark-3"
+                      data-testid={testIds.products.itemRow}
+                    >
                       <div className="col-span-4 flex items-center gap-3">
                         {item.images && JSON.parse(item.images)[0] ? (
                           <img
@@ -331,20 +318,16 @@ const SitusProjectStore: React.FC = () => {
                         ) : (
                           <div className="w-10 h-10 bg-gray-200 dark:bg-gray-600 rounded flex items-center justify-center">
                             <svg width="16" height="16" viewBox="0 0 16 16" className="fill-current text-gray-400">
-                              <path d="M2 2h12v12H2V2zm2 2v8h8V4H4z"/>
+                              <path d="M2 2h12v12H2V2zm2 2v8h8V4H4z" />
                             </svg>
                           </div>
                         )}
                         <div>
                           <h4 className="font-medium text-dark dark:text-white">{item.name}</h4>
-                          {item.sku && (
-                            <p className="text-xs text-body-color dark:text-dark-6">SKU: {item.sku}</p>
-                          )}
+                          {item.sku && <p className="text-xs text-body-color dark:text-dark-6">SKU: {item.sku}</p>}
                         </div>
                       </div>
-                      <div className="col-span-2 text-sm text-body-color dark:text-dark-6">
-                        {item.category.name}
-                      </div>
+                      <div className="col-span-2 text-sm text-body-color dark:text-dark-6">{item.category.name}</div>
                       <div className="col-span-2">
                         <div className="text-sm font-medium text-dark dark:text-white">
                           {item.price.toLocaleString('ru-RU')} ₽
@@ -355,18 +338,24 @@ const SitusProjectStore: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      <div className="col-span-1 text-sm text-body-color dark:text-dark-6">
-                        {item.quantity}
-                      </div>
+                      <div className="col-span-1 text-sm text-body-color dark:text-dark-6">{item.quantity}</div>
                       <div className="col-span-1">
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          item.status === 'ACTIVE' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                          item.status === 'OUT_OF_STOCK' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
-                          'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                        }`}>
-                          {item.status === 'ACTIVE' ? 'Активен' :
-                           item.status === 'OUT_OF_STOCK' ? 'Нет в наличии' :
-                           item.status === 'DRAFT' ? 'Черновик' : item.status}
+                        <span
+                          className={`text-xs px-2 py-1 rounded-full ${
+                            item.status === 'ACTIVE'
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                              : item.status === 'OUT_OF_STOCK'
+                                ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                                : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                          }`}
+                        >
+                          {item.status === 'ACTIVE'
+                            ? 'Активен'
+                            : item.status === 'OUT_OF_STOCK'
+                              ? 'Нет в наличии'
+                              : item.status === 'DRAFT'
+                                ? 'Черновик'
+                                : item.status}
                         </span>
                       </div>
                       <div className="col-span-2 text-right flex gap-2 justify-end">

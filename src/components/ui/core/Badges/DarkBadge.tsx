@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const DarkBadge = () => {
   return (
-    <div className='flex flex-wrap items-center gap-4'>
+    <div className="flex flex-wrap items-center gap-4">
       <BadgesItem roundedMd>Dark</BadgesItem>
       <BadgesItem outline roundedMd>
         Dark
@@ -14,25 +14,14 @@ const DarkBadge = () => {
       <BadgesItem roundedFull bgOpacity>
         Dark
       </BadgesItem>
-      <BadgesItem bgOpacity>
-        Dark
-      </BadgesItem>
+      <BadgesItem bgOpacity>Dark</BadgesItem>
     </div>
-  )
-}
+  );
+};
 
-export default DarkBadge
+export default DarkBadge;
 
-const BadgesItem = ({
-  children,
-  outline,
-  roundedFull,
-  roundedLg,
-  roundedNone,
-  roundedSm,
-  roundedMd,
-  bgOpacity,
-}) => {
+const BadgesItem = ({ children, outline, roundedFull, roundedLg, roundedNone, roundedSm, roundedMd, bgOpacity }) => {
   return (
     <span
       className={`inline-block rounded py-1 px-2.5 text-xs font-medium ${
@@ -53,12 +42,10 @@ const BadgesItem = ({
               (roundedMd && `rounded-md`) ||
               (bgOpacity && `bg-dark/10`)
             } text-white`
-      } ${
-        bgOpacity && 'bg-dark/10'
-      }
+      } ${bgOpacity && 'bg-dark/10'}
 `}
     >
       {children}
     </span>
-  )
-}
+  );
+};

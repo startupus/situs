@@ -12,7 +12,7 @@ import { PermissionsModule } from './permissions/permissions.module';
 
 /**
  * Модуль общих утилит с обновленной системой прав доступа
- * 
+ *
  * Содержит:
  * - Фильтры, интерцепторы, пайпы
  * - Новые guards для детальной проверки прав
@@ -26,11 +26,11 @@ import { PermissionsModule } from './permissions/permissions.module';
     GlobalExceptionFilter,
     LoggingInterceptor,
     ValidationPipe,
-    
+
     // Старые guards (пока оставляем для совместимости)
     RolesGuard,
     PoliciesGuard,
-    
+
     // Новая система прав доступа
     PermissionGuard,
     PermissionsService,
@@ -41,11 +41,11 @@ import { PermissionsModule } from './permissions/permissions.module';
     GlobalExceptionFilter,
     LoggingInterceptor,
     ValidationPipe,
-    
+
     // Старые guards
     RolesGuard,
     PoliciesGuard,
-    
+
     // Новая система прав доступа
     PermissionGuard,
     PermissionsService,

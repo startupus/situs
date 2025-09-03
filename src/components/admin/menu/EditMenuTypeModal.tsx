@@ -5,19 +5,18 @@ import { MenuTypeData } from '../../../types/menu';
 interface EditMenuTypeModalProps {
   menuType: MenuTypeData;
   onClose: () => void;
-  onUpdate: (typeId: string, updates: { title?: string; name?: string; description?: string; isActive?: boolean }) => Promise<void>;
+  onUpdate: (
+    typeId: string,
+    updates: { title?: string; name?: string; description?: string; isActive?: boolean },
+  ) => Promise<void>;
 }
 
-const EditMenuTypeModal: React.FC<EditMenuTypeModalProps> = ({
-  menuType,
-  onClose,
-  onUpdate
-}) => {
+const EditMenuTypeModal: React.FC<EditMenuTypeModalProps> = ({ menuType, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
     title: menuType.title || '',
     name: menuType.name || '',
     description: menuType.description || '',
-    isActive: menuType.isActive ?? true
+    isActive: menuType.isActive ?? true,
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,22 +39,15 @@ const EditMenuTypeModal: React.FC<EditMenuTypeModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white dark:bg-dark-2 rounded-lg border border-stroke dark:border-dark-3 p-6 w-full max-w-md">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-medium text-dark dark:text-white">
-            Редактировать тип меню
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white"
-          >
+          <h3 className="text-lg font-medium text-dark dark:text-white">Редактировать тип меню</h3>
+          <button onClick={onClose} className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white">
             <FiX size={20} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-              Название типа меню *
-            </label>
+            <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Название типа меню *</label>
             <input
               type="text"
               value={formData.title}
@@ -67,9 +59,7 @@ const EditMenuTypeModal: React.FC<EditMenuTypeModalProps> = ({
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-              Системное имя *
-            </label>
+            <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Системное имя *</label>
             <input
               type="text"
               value={formData.name}
@@ -84,9 +74,7 @@ const EditMenuTypeModal: React.FC<EditMenuTypeModalProps> = ({
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-              Описание
-            </label>
+            <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Описание</label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}

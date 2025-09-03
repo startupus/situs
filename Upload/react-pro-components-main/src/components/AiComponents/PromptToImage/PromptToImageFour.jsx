@@ -20,7 +20,7 @@ function PromptToImageFour() {
                   id=""
                   rows="5"
                   placeholder="Generated content will appear here..."
-                  className="mb-4 w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                  className="outline-hidden mb-4 w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 focus:border-primary dark:border-dark-3 dark:text-white"
                 ></textarea>
                 <p className="flex items-center gap-2.5 text-base text-body-color dark:text-dark-6">
                   <svg
@@ -55,7 +55,7 @@ function PromptToImageFour() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">Style One</option>
                       <option value="">Style Two</option>
@@ -92,7 +92,7 @@ function PromptToImageFour() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">Artist One</option>
                       <option value="">Artist Two</option>
@@ -129,7 +129,7 @@ function PromptToImageFour() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">800*400</option>
                       <option value="">1200*600</option>
@@ -218,7 +218,7 @@ function PromptToImageFour() {
               </div>
 
               <div className="space-y-8">
-                <div className="flex aspect-490/254 w-full items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3 dark:bg-white/5 dark:text-dark-6">
+                <div className="aspect-490/254 flex w-full items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3 dark:bg-white/5 dark:text-dark-6">
                   <svg
                     width="60"
                     height="60"
@@ -250,7 +250,7 @@ function PromptToImageFour() {
                     />
                   </svg>
                 </div>
-                <div className="flex aspect-490/254 w-full items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3 dark:bg-white/5 dark:text-dark-6">
+                <div className="aspect-490/254 flex w-full items-center justify-center rounded-xl border border-dashed border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3 dark:bg-white/5 dark:text-dark-6">
                   <svg
                     width="60"
                     height="60"
@@ -303,7 +303,7 @@ function PromptToImageFour() {
                   id=""
                   rows="6"
                   placeholder="Generated content will appear here..."
-                  className="mb-4 w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+                  className="outline-hidden mb-4 w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-7 focus:border-primary dark:border-dark-3 dark:text-white"
                 ></textarea>
                 <p className="flex items-center gap-2.5 text-base text-body-color dark:text-dark-6">
                   <svg
@@ -338,7 +338,7 @@ function PromptToImageFour() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">Style One</option>
                       <option value="">Style Two</option>
@@ -375,7 +375,7 @@ function PromptToImageFour() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">Artist One</option>
                       <option value="">Artist Two</option>
@@ -412,7 +412,7 @@ function PromptToImageFour() {
                     <select
                       name=""
                       id=""
-                      className="w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                      className="outline-hidden w-full appearance-none rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
                     >
                       <option value="">800*400</option>
                       <option value="">1200*600</option>
@@ -501,14 +501,14 @@ function PromptToImageFour() {
               </div>
 
               <div className="space-y-8">
-                <div className="flex aspect-490/254 w-full items-center justify-center overflow-hidden rounded-lg border border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3">
+                <div className="aspect-490/254 flex w-full items-center justify-center overflow-hidden rounded-lg border border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3">
                   <img
                     src="https://i.ibb.co/7p3gMqp/image-1.jpg"
                     alt="result text"
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
-                <div className="flex aspect-490/254 w-full items-center justify-center overflow-hidden rounded-lg border border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3">
+                <div className="aspect-490/254 flex w-full items-center justify-center overflow-hidden rounded-lg border border-gray-5 bg-gray-2 text-dark-7 dark:border-dark-3">
                   <img
                     src="https://i.ibb.co/smQS8CF/image-2.jpg"
                     alt="result text"

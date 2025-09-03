@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductGrid3 = () => {
   return (
@@ -53,15 +53,11 @@ const SingleProduct = ({ img, link, title, subtitle, price, reviews }) => {
               {title}
             </a>
           </h3>
-          <p className="text-base font-medium text-body-color dark:text-dark-6">
-            {subtitle}
-          </p>
+          <p className="text-base font-medium text-body-color dark:text-dark-6">{subtitle}</p>
         </div>
         <div className="flex justify-between border-t border-[#e7e7e7] dark:border-dark-3">
           <div className="w-1/2 border-r border-[#e7e7e7] py-4 text-center dark:border-dark-3">
-            <span className="text-base font-semibold text-dark dark:text-white">
-              Price: {price}
-            </span>
+            <span className="text-base font-semibold text-dark dark:text-white">Price: {price}</span>
           </div>
           <div className="flex w-1/2 items-center justify-center py-4">
             <span className="mr-[2px]">
@@ -77,9 +73,7 @@ const SingleProduct = ({ img, link, title, subtitle, price, reviews }) => {
                 ></path>
               </svg>
             </span>
-            <span className="pl-2 text-sm font-semibold text-body-color">
-              {reviews}
-            </span>
+            <span className="pl-2 text-sm font-semibold text-body-color">{reviews}</span>
           </div>
         </div>
       </div>

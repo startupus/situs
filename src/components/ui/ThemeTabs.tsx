@@ -1,18 +1,6 @@
 // src/components/ui/ThemeTabs.tsx
 import React from 'react';
-import { 
-  Tab1,
-  Tab2,
-  Tab3,
-  Tab4,
-  Tab5,
-  Tab6,
-  Tab7,
-  Tab8,
-  Tab9,
-  Tab10,
-  Tab11
-} from './core';
+import { Tab1, Tab2, Tab3, Tab4, Tab5, Tab6, Tab7, Tab8, Tab9, Tab10, Tab11 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Tab Variants с поддержкой темы

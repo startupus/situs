@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Stats3 = () => {
   return (
@@ -9,8 +9,8 @@ const Stats3 = () => {
             Why Choose Us
           </h2>
           <p className="text-base text-body-color dark:text-dark-6">
-            There are many variations of passages of Lorem Ipsum available but
-            the majority have suffered alteration in some form.
+            There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in
+            some form.
           </p>
         </div>
 
@@ -43,17 +43,11 @@ const StatsItem = ({ subtitle, title, number }) => {
     <div className="w-full px-4 md:w-1/2 xl:w-1/3">
       <div className="mb-10 flex">
         <div className="mr-6">
-          <span className="text-[40px] font-bold leading-[1.1] text-primary lg:text-[50px]">
-            {number}
-          </span>
+          <span className="text-[40px] font-bold leading-[1.1] text-primary lg:text-[50px]">{number}</span>
         </div>
         <div className="w-full">
-          <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-            {title}
-          </h3>
-          <p className="text-base text-body-color dark:text-dark-6">
-            {subtitle}
-          </p>
+          <h3 className="mb-4 text-xl font-semibold text-dark dark:text-white sm:text-2xl">{title}</h3>
+          <p className="text-base text-body-color dark:text-dark-6">{subtitle}</p>
         </div>
       </div>
     </div>

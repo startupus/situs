@@ -51,11 +51,11 @@ layer(base);
 }
 
 .noUi-base {
-  @apply dark:bg-dark-2 bg-white;
+  @apply bg-white dark:bg-dark-2;
 }
 
 .priceSlideOne .noUi-target {
-  @apply bg-gray mt-8 border-none shadow-none;
+  @apply mt-8 border-none bg-gray shadow-none;
 }
 
 .priceSlideOne .noUi-connects {
@@ -63,11 +63,11 @@ layer(base);
 }
 
 .priceSlideOne .noUi-connect {
-  @apply bg-primary h-[6px] rounded-full;
+  @apply h-[6px] rounded-full bg-primary;
 }
 
 .priceSlideOne .noUi-horizontal .noUi-handle {
-  @apply border-primary dark:bg-dark-2 -top-2 h-[22px] w-[22px] rounded-full border-[6px] bg-white shadow-none;
+  @apply -top-2 h-[22px] w-[22px] rounded-full border-[6px] border-primary bg-white shadow-none dark:bg-dark-2;
 }
 
 .priceSlideTwo .noUi-target {
@@ -79,11 +79,11 @@ layer(base);
 }
 
 .priceSlideTwo .noUi-connect {
-  @apply bg-primary h-1 rounded-full;
+  @apply h-1 rounded-full bg-primary;
 }
 
 .priceSlideTwo .noUi-horizontal .noUi-handle {
-  @apply border-primary -top-3 h-[30px] w-[30px] rounded-full border bg-white shadow-none;
+  @apply -top-3 h-[30px] w-[30px] rounded-full border border-primary bg-white shadow-none;
 }
 
 .noUi-horizontal .noUi-handle:after,

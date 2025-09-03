@@ -2,10 +2,10 @@ import React from "react";
 
 const InfoAlert3 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-l-cyan-dark dark:bg-dark-2 flex max-w-[655px] items-center rounded-md border-l-[6px] bg-white p-5 pl-6">
-          <div className="bg-cyan-dark mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full text-white">
+        <div className="flex max-w-[655px] items-center rounded-md border-l-[6px] border-l-cyan-dark bg-white p-5 pl-6 dark:bg-dark-2">
+          <div className="mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full bg-cyan-dark text-white">
             <svg
               width="18"
               height="18"
@@ -34,7 +34,7 @@ const InfoAlert3 = () => {
               </defs>
             </svg>
           </div>
-          <div className="flex items-center justify-between w-full">
+          <div className="flex w-full items-center justify-between">
             <div>
               <h3 className="mb-1 text-lg font-medium text-dark dark:text-white">
                 Did you know?
@@ -45,7 +45,7 @@ const InfoAlert3 = () => {
               </p>
             </div>
             <div>
-              <button className="duration-300 text-dark-3 hover:text-dark dark:text-dark-4 dark:hover:text-dark-6">
+              <button className="text-dark-3 duration-300 hover:text-dark dark:text-dark-4 dark:hover:text-dark-6">
                 <svg
                   width="20"
                   height="20"

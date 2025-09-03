@@ -970,7 +970,7 @@ const ContactTextArea = ({ row, placeholder, name, defaultValue }) => {
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="w-full resize-none rounded-sm border border-stroke px-[14px] py-3 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+          className="outline-hidden w-full resize-none rounded-sm border border-stroke px-[14px] py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
           defaultValue={defaultValue}
         />
       </div>
@@ -986,7 +986,7 @@ const ContactInputBox = ({ type, placeholder, name }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="w-full rounded-sm border border-stroke px-[14px] py-3 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+          className="outline-hidden w-full rounded-sm border border-stroke px-[14px] py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
         />
       </div>
     </>

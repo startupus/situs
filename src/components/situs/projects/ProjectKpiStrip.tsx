@@ -6,22 +6,26 @@ interface ProjectKpiStripProps {
 }
 
 const ProjectKpiStrip: React.FC<ProjectKpiStripProps> = ({ project }) => {
-  const total = project.products?.reduce((acc, product) => {
-    const a: any = (product as any).analytics;
-    if (a) {
-      acc.visitors += a.visitors || 0;
-      acc.pageViews += a.pageViews || 0;
-      acc.revenue += a.revenue || 0;
-      acc._convSum += a.conversionRate || 0;
-      acc._convCount += 1;
-    }
-    return acc;
-  }, { visitors: 0, pageViews: 0, revenue: 0, _convSum: 0, _convCount: 0 }) as any;
+  const total = project.products?.reduce(
+    (acc, product) => {
+      const a: any = (product as any).analytics;
+      if (a) {
+        acc.visitors += a.visitors || 0;
+        acc.pageViews += a.pageViews || 0;
+        acc.revenue += a.revenue || 0;
+        acc._convSum += a.conversionRate || 0;
+        acc._convCount += 1;
+      }
+      return acc;
+    },
+    { visitors: 0, pageViews: 0, revenue: 0, _convSum: 0, _convCount: 0 },
+  ) as any;
 
   const conversionRate = total._convCount > 0 ? total._convSum / total._convCount : 0;
 
   const formatNumber = (num: number) => new Intl.NumberFormat('ru-RU').format(num);
-  const formatCurrency = (amount: number) => new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(amount);
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(amount);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -46,5 +50,3 @@ const ProjectKpiStrip: React.FC<ProjectKpiStripProps> = ({ project }) => {
 };
 
 export default ProjectKpiStrip;
-
-

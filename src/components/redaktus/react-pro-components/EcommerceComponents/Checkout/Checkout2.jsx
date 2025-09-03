@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Checkout2 = () => {
   return (
@@ -8,12 +8,8 @@ const Checkout2 = () => {
           <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
             <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
               <div className="mb-4 border-b border-stroke pb-4 dark:border-dark-3">
-                <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
-                  Shopping Cart
-                </h3>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  You have 3 items in your cart
-                </p>
+                <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">Shopping Cart</h3>
+                <p className="text-sm text-body-color dark:text-dark-6">You have 3 items in your cart</p>
               </div>
 
               <div className="border-b border-stroke pb-6 dark:border-dark-3">
@@ -43,46 +39,32 @@ const Checkout2 = () => {
                     <p className="text-base text-dark dark:text-white">Subtotal</p>
                   </div>
                   <div className="px-1">
-                    <p className="text-base font-medium text-dark dark:text-white">
-                      $108
-                    </p>
+                    <p className="text-base font-medium text-dark dark:text-white">$108</p>
                   </div>
                 </div>
                 <div className="mb-4 flex items-center justify-between">
                   <div className="px-1">
-                    <p className="text-base text-dark dark:text-white">
-                      Shipping Cost (+)
-                    </p>
+                    <p className="text-base text-dark dark:text-white">Shipping Cost (+)</p>
                   </div>
                   <div className="px-1">
-                    <p className="text-base font-medium text-dark dark:text-white">
-                      $10.85
-                    </p>
+                    <p className="text-base font-medium text-dark dark:text-white">$10.85</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="px-1">
-                    <p className="text-base text-dark dark:text-white">
-                      Discount (-)
-                    </p>
+                    <p className="text-base text-dark dark:text-white">Discount (-)</p>
                   </div>
                   <div className="px-1">
-                    <p className="text-base font-medium text-dark dark:text-white">
-                      $9.00
-                    </p>
+                    <p className="text-base font-medium text-dark dark:text-white">$9.00</p>
                   </div>
                 </div>
               </div>
               <div className="-mx-1 flex items-center justify-between pb-6 pt-5">
                 <div className="px-1">
-                  <p className="text-base text-dark dark:text-white">
-                    Total Payable
-                  </p>
+                  <p className="text-base text-dark dark:text-white">Total Payable</p>
                 </div>
                 <div className="px-1">
-                  <p className="text-base font-medium text-dark dark:text-white">
-                    $88.15
-                  </p>
+                  <p className="text-base font-medium text-dark dark:text-white">$88.15</p>
                 </div>
               </div>
 
@@ -96,18 +78,12 @@ const Checkout2 = () => {
               </div>
               <div>
                 <p className="text-sm text-body-color dark:text-dark-6">
-                  By placing your order, you agree to our company{" "}
-                  <a
-                    href="/#"
-                    className="text-primary hover:underline"
-                  >
+                  By placing your order, you agree to our company{' '}
+                  <a href="/#" className="text-primary hover:underline">
                     Privacy Policy
                   </a>
                   <span className="px-0.5"> and </span>
-                  <a
-                    href="/#"
-                    className="text-primary hover:underline"
-                  >
+                  <a href="/#" className="text-primary hover:underline">
                     Conditions of Use
                   </a>
                 </p>
@@ -116,12 +92,8 @@ const Checkout2 = () => {
 
             <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-8 pb-8 pt-6 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
               <div className="mb-8 border-b border-stroke pb-4 dark:border-dark-3">
-                <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
-                  Coupon Code
-                </h3>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Enter code to get discount instantly
-                </p>
+                <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">Coupon Code</h3>
+                <p className="text-sm text-body-color dark:text-dark-6">Enter code to get discount instantly</p>
               </div>
 
               <form className="relative">
@@ -140,43 +112,14 @@ const Checkout2 = () => {
           <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
             <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-5 py-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark xl:p-9">
               <FormStep title="Your Personal Details">
-                <InputGroup
-                  labelTitle="First Name"
-                  type="text"
-                  placeholder="First Name"
-                />
-                <InputGroup
-                  labelTitle="Last Name"
-                  type="text"
-                  placeholder="Last Name"
-                />
-                <InputGroup
-                  labelTitle="Email Address"
-                  type="email"
-                  placeholder="Email Address"
-                />
-                <InputGroup
-                  labelTitle="Phone"
-                  type="text"
-                  placeholder="Enter your Phone"
-                />
-                <InputGroup
-                  fullColumn
-                  labelTitle="Mailing Address"
-                  type="text"
-                  placeholder="Mailing Address"
-                />
+                <InputGroup labelTitle="First Name" type="text" placeholder="First Name" />
+                <InputGroup labelTitle="Last Name" type="text" placeholder="Last Name" />
+                <InputGroup labelTitle="Email Address" type="email" placeholder="Email Address" />
+                <InputGroup labelTitle="Phone" type="text" placeholder="Enter your Phone" />
+                <InputGroup fullColumn labelTitle="Mailing Address" type="text" placeholder="Mailing Address" />
                 <InputGroup labelTitle="City" type="text" placeholder="City" />
-                <InputGroup
-                  labelTitle="Post Code"
-                  type="text"
-                  placeholder="Post Code"
-                />
-                <InputGroup
-                  labelTitle="Country"
-                  type="text"
-                  placeholder="Country"
-                />
+                <InputGroup labelTitle="Post Code" type="text" placeholder="Post Code" />
+                <InputGroup labelTitle="Country" type="text" placeholder="Country" />
                 <SelectGroup labelTitle="Region/State" />
                 <CheckboxGroup labelTitle="My delivery and mailing addresses are the same." />
                 <div className="w-full px-3">
@@ -187,43 +130,14 @@ const Checkout2 = () => {
               </FormStep>
 
               <FormStep title="Shipping Address">
-                <InputGroup
-                  labelTitle="First Name"
-                  type="text"
-                  placeholder="First Name"
-                />
-                <InputGroup
-                  labelTitle="Last Name"
-                  type="text"
-                  placeholder="Last Name"
-                />
-                <InputGroup
-                  labelTitle="Email Address"
-                  type="email"
-                  placeholder="Email Address"
-                />
-                <InputGroup
-                  labelTitle="Phone"
-                  type="text"
-                  placeholder="Enter your Phone"
-                />
-                <InputGroup
-                  fullColumn
-                  labelTitle="Mailing Address"
-                  type="text"
-                  placeholder="Mailing Address"
-                />
+                <InputGroup labelTitle="First Name" type="text" placeholder="First Name" />
+                <InputGroup labelTitle="Last Name" type="text" placeholder="Last Name" />
+                <InputGroup labelTitle="Email Address" type="email" placeholder="Email Address" />
+                <InputGroup labelTitle="Phone" type="text" placeholder="Enter your Phone" />
+                <InputGroup fullColumn labelTitle="Mailing Address" type="text" placeholder="Mailing Address" />
                 <InputGroup labelTitle="City" type="text" placeholder="City" />
-                <InputGroup
-                  labelTitle="Post Code"
-                  type="text"
-                  placeholder="Post Code"
-                />
-                <InputGroup
-                  labelTitle="Country"
-                  type="text"
-                  placeholder="Country"
-                />
+                <InputGroup labelTitle="Post Code" type="text" placeholder="Post Code" />
+                <InputGroup labelTitle="Country" type="text" placeholder="Country" />
                 <SelectGroup labelTitle="Region/State" />
                 <div className="w-full px-3">
                   <div className="-mx-3 flex flex-wrap items-center">
@@ -256,12 +170,7 @@ const Checkout2 = () => {
               </FormStep>
 
               <FormStep title="Payment Info">
-                <InputGroup
-                  fullColumn
-                  labelTitle="Cardholder Name"
-                  type="text"
-                  placeholder="Cardholder Name"
-                />
+                <InputGroup fullColumn labelTitle="Cardholder Name" type="text" placeholder="Cardholder Name" />
                 <InputGroup
                   fullColumn
                   cardNumber
@@ -270,23 +179,13 @@ const Checkout2 = () => {
                   placeholder="0000 0000 0000 0000"
                 />
                 <div className="-mx-3 w-full px-3 md:w-1/3">
-                  <InputGroup
-                    fullColumn
-                    labelTitle="Expiration"
-                    type="text"
-                    placeholder="MM"
-                  />
+                  <InputGroup fullColumn labelTitle="Expiration" type="text" placeholder="MM" />
                 </div>
                 <div className="-mx-3 w-full self-end px-3 md:w-1/3">
                   <InputGroup fullColumn type="text" placeholder="YYYY" />
                 </div>
                 <div className="-ml-3 w-full px-3 md:w-1/3">
-                  <InputGroup
-                    fullColumn
-                    labelTitle="CVC/CVV"
-                    type="text"
-                    placeholder="CVC/CVV"
-                  />
+                  <InputGroup fullColumn labelTitle="CVC/CVV" type="text" placeholder="CVC/CVV" />
                 </div>
                 <div className="w-full px-3">
                   <button className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-[10px] text-center text-sm font-semibold text-white hover:bg-primary/90">
@@ -312,12 +211,8 @@ const CartItem = ({ img, title, subtitle, price }) => {
           <img src={img} alt="product image" className="w-full" />
         </div>
         <div>
-          <p className="mb-0.5 text-base font-medium text-dark dark:text-white">
-            {title}
-          </p>
-          <p className="truncate text-sm text-body-color dark:text-dark-6">
-            {subtitle}
-          </p>
+          <p className="mb-0.5 text-base font-medium text-dark dark:text-white">{title}</p>
+          <p className="truncate text-sm text-body-color dark:text-dark-6">{subtitle}</p>
         </div>
       </div>
       <div className="px-1">
@@ -327,20 +222,12 @@ const CartItem = ({ img, title, subtitle, price }) => {
   );
 };
 
-const InputGroup = ({
-  labelTitle,
-  type,
-  placeholder,
-  fullColumn,
-  cardNumber,
-}) => {
+const InputGroup = ({ labelTitle, type, placeholder, fullColumn, cardNumber }) => {
   return (
-    <div className={`${fullColumn ? "w-full px-3" : "w-full px-3 md:w-1/2"}`}>
+    <div className={`${fullColumn ? 'w-full px-3' : 'w-full px-3 md:w-1/2'}`}>
       <div className="mb-6">
         {labelTitle && (
-          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
-            {labelTitle}
-          </label>
+          <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">{labelTitle}</label>
         )}
         <div className="relative">
           <input
@@ -350,17 +237,8 @@ const InputGroup = ({
           />
           {cardNumber && (
             <span className="absolute right-5 top-1/2 -translate-y-1/2">
-              <svg
-                width="60"
-                height="10"
-                viewBox="0 0 60 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M53.617 1.03516H49.1125V8.96614H53.617V1.03516Z"
-                  fill="#F26122"
-                ></path>
+              <svg width="60" height="10" viewBox="0 0 60 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M53.617 1.03516H49.1125V8.96614H53.617V1.03516Z" fill="#F26122"></path>
                 <path
                   d="M49.6008 4.99991C49.5922 3.4701 50.3068 2.02137 51.5378 1.06982C49.4309 -0.542193 46.4047 -0.308103 44.5861 1.60748C42.7675 3.52315 42.7675 6.47691 44.5861 8.39258C46.4047 10.308 49.4309 10.5423 51.5378 8.93006C50.3068 7.97869 49.5922 6.52997 49.6008 4.99991Z"
                   fill="#EA1D25"
@@ -386,11 +264,9 @@ const InputGroup = ({
 
 const SelectGroup = ({ fullColumn, labelTitle }) => {
   return (
-    <div className={`${fullColumn ? "w-full px-3" : "w-full px-3 md:w-1/2"}`}>
+    <div className={`${fullColumn ? 'w-full px-3' : 'w-full px-3 md:w-1/2'}`}>
       <div className="mb-6">
-        <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
-          {labelTitle}
-        </label>
+        <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">{labelTitle}</label>
         <div className="relative">
           <select className="w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
             <option value="">Option</option>
@@ -408,22 +284,10 @@ const FormStep = ({ title, children }) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="mb-6 overflow-hidden rounded-md border border-stroke dark:border-dark-3">
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between px-5 py-4 xl:px-8"
-      >
-        <span className="text-lg font-semibold text-dark dark:text-white">
-          {title}
-        </span>
-        <span
-          className={`text-body-color dark:text-dark-6 ${open && "rotate-180"}`}
-        >
-          <svg
-            width="16"
-            height="8"
-            viewBox="0 0 16 8"
-            className="fill-current"
-          >
+      <button onClick={() => setOpen(!open)} className="flex w-full items-center justify-between px-5 py-4 xl:px-8">
+        <span className="text-lg font-semibold text-dark dark:text-white">{title}</span>
+        <span className={`text-body-color dark:text-dark-6 ${open && 'rotate-180'}`}>
+          <svg width="16" height="8" viewBox="0 0 16 8" className="fill-current">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -432,11 +296,7 @@ const FormStep = ({ title, children }) => {
           </svg>
         </span>
       </button>
-      <div
-        className={`${
-          !open && "hidden"
-        } border-t border-stroke px-4 pb-8 pt-6 dark:border-dark-3 lg:px-5 xl:px-8`}
-      >
+      <div className={`${!open && 'hidden'} border-t border-stroke px-4 pb-8 pt-6 dark:border-dark-3 lg:px-5 xl:px-8`}>
         <form>
           <div className="-mx-3 flex flex-wrap">{children}</div>
         </form>
@@ -457,12 +317,8 @@ const ShippingOption = ({ name, id, img, price, title }) => {
           <img src={img} alt="shipping" />
         </div>
         <div className="border-l border-[#E0E0E0] pl-4 dark:border-dark-3">
-          <span className="block text-base font-semibold text-dark dark:text-white">
-            {price}
-          </span>
-          <span className="block text-xs font-medium text-body-color dark:text-dark-6">
-            {title}
-          </span>
+          <span className="block text-base font-semibold text-dark dark:text-white">{price}</span>
+          <span className="block text-xs font-medium text-body-color dark:text-dark-6">{title}</span>
         </div>
       </label>
     </div>
@@ -481,13 +337,7 @@ const CheckboxGroup = ({ labelTitle }) => {
             <input type="checkbox" id="checkboxLabelTwo" className="sr-only" />
             <div className="box mr-4 flex h-5 w-5 items-center justify-center rounded-sm bg-primary">
               <span className="opacity-0">
-                <svg
-                  width="11"
-                  height="8"
-                  viewBox="0 0 11 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
                     fill="white"

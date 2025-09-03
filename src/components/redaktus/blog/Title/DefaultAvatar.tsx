@@ -1,25 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 interface DefaultAvatarProps {
-  className: string
+  className: string;
 }
 
 const DefaultAvatar: React.FC<DefaultAvatarProps> = ({ className }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1249.24 1249.24"
-      {...{ className }}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1249.24 1249.24" {...{ className }}>
       <defs>
-        <linearGradient
-          id="a"
-          x1="412.94"
-          y1="1046.05"
-          x2="847.4"
-          y2="1046.05"
-          gradientUnits="userSpaceOnUse"
-        >
+        <linearGradient id="a" x1="412.94" y1="1046.05" x2="847.4" y2="1046.05" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#a1a1a1" />
           <stop offset="0.06" stopColor="#b2b2b2" />
           <stop offset="0.19" stopColor="#d4d4d4" />
@@ -32,14 +21,7 @@ const DefaultAvatar: React.FC<DefaultAvatarProps> = ({ className }) => {
           <stop offset="0.96" stopColor="#c6c6c5" />
           <stop offset="1" stopColor="#babab9" />
         </linearGradient>
-        <linearGradient
-          id="b"
-          x1="636.17"
-          y1="1275.38"
-          x2="636.17"
-          y2="824.19"
-          gradientUnits="userSpaceOnUse"
-        >
+        <linearGradient id="b" x1="636.17" y1="1275.38" x2="636.17" y2="824.19" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#fff" />
           <stop offset="0.24" stopColor="#fbfbfb" />
           <stop offset="0.48" stopColor="#f0f0ef" />
@@ -50,10 +32,7 @@ const DefaultAvatar: React.FC<DefaultAvatarProps> = ({ className }) => {
       </defs>
       <title>Risorsa 1</title>
       <rect width="1249.24" height="1248.73" fill="#dbdbdb" />
-      <path
-        d="M847.4,1127.71c-143.89-51-289.4-49.27-434.46,0V991.51c146-37.36,290.76-34.92,434.46,0Z"
-        fill="url(#a)"
-      />
+      <path d="M847.4,1127.71c-143.89-51-289.4-49.27-434.46,0V991.51c146-37.36,290.76-34.92,434.46,0Z" fill="url(#a)" />
       <path
         d="M786.3,875.53c-10.86-.06,8.71,138,18.76,171.11,22.91,75.51,303.29,139.44,305.36,189.53.54,13.06,0,13.07,0,13.07H161.68l88.34-85,67.22-17.43L353,1130a110.24,110.24,0,0,0,19.46-11.81l73.47-55.77S469,1033.57,467,990s-1.92-114.47-1.92-114.47Z"
         fill="url(#b)"
@@ -75,7 +54,7 @@ const DefaultAvatar: React.FC<DefaultAvatarProps> = ({ className }) => {
         fill="#fff"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default DefaultAvatar
+export default DefaultAvatar;

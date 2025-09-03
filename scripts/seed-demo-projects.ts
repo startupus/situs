@@ -1,5 +1,14 @@
 /* eslint-disable no-console */
-import { PrismaClient, ProjectStatus, GlobalRole, UserStatus, ProductType, ProductStatus, PageStatus, PageType } from '@prisma/client';
+import {
+  PrismaClient,
+  ProjectStatus,
+  GlobalRole,
+  UserStatus,
+  ProductType,
+  ProductStatus,
+  PageStatus,
+  PageType,
+} from '@prisma/client';
 
 const prisma = new PrismaClient({ log: ['warn', 'error'] });
 
@@ -30,13 +39,7 @@ async function ensureDemoOwner() {
 
 async function main() {
   const owner = await ensureDemoOwner();
-  const baseNames = [
-    'Demo Project 1',
-    'Demo Project 2',
-    'Demo Project 3',
-    'Demo Project 4',
-    'Demo Project 5',
-  ];
+  const baseNames = ['Demo Project 1', 'Demo Project 2', 'Demo Project 3', 'Demo Project 4', 'Demo Project 5'];
 
   for (const name of baseNames) {
     const s = slugify(name);
@@ -104,5 +107,3 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
-
-

@@ -10,11 +10,11 @@
   position: relative;
   z-index: 1;
   contain: layout style paint;
-  
+
   /* ТОЛЬКО фон/цвет канваса по теме */
   background-color: var(--canvas-bg, #ffffff);
   color: var(--canvas-text, #1f2937);
-  
+
   /* ПРИНУДИТЕЛЬНАЯ ИЗОЛЯЦИЯ ОТ ПЕРЕМЕННЫХ ИНТЕРФЕЙСА */
   --interface-bg: initial !important;
   --interface-text: initial !important;
@@ -27,7 +27,7 @@
   --interface-warning: initial !important;
   --interface-error: initial !important;
   --interface-info: initial !important;
-  
+
   /* Принудительная изоляция от родительских тем */
   --interface-theme-inheritance: none !important;
 }
@@ -39,18 +39,18 @@ html body .redaktus-canvas.canvas-light,
   --canvas-text: #1f2937;
   --canvas-border: #e5e7eb;
   --canvas-surface: #f9fafb;
-  
+
   --canvas-ui-bg: #f9fafb;
   --canvas-ui-text: #1f2937;
   --canvas-ui-border: #e5e7eb;
-  
+
   --canvas-content-bg: #ffffff;
   --canvas-content-text: #1f2937;
   --canvas-content-surface: #f9fafb;
-  
+
   /* ПРИНУДИТЕЛЬНОЕ переопределение primary цвета для TailGrids */
-  --canvas-primary: #3758F9 !important;
-  
+  --canvas-primary: #3758f9 !important;
+
   /* Принудительная светлая тема с высоким приоритетом */
   color-scheme: light !important;
   background-color: #ffffff !important;
@@ -65,7 +65,7 @@ html body .redaktus-canvas.canvas-dark .text-dark,
 
 html body .redaktus-canvas.canvas-dark .text-body-color,
 .redaktus-canvas.canvas-dark.canvas-dark .text-body-color {
-  color: #9CA3AF !important; /* В темной теме text-body-color становится dark-6 через dark:text-dark-6 */
+  color: #9ca3af !important; /* В темной теме text-body-color становится dark-6 через dark:text-dark-6 */
 }
 
 /* ПРИНУДИТЕЛЬНЫЙ темный фон секции - серый как в оригинале TailGrids */
@@ -81,15 +81,15 @@ html body .redaktus-canvas.canvas-dark,
   --canvas-text: #f9fafb;
   --canvas-border: #374151;
   --canvas-surface: #1f2937;
-  
+
   --canvas-ui-bg: #1f2937;
   --canvas-ui-text: #f9fafb;
   --canvas-ui-border: #374151;
-  
+
   --canvas-content-bg: #111827;
   --canvas-content-text: #f9fafb;
   --canvas-content-surface: #1f2937;
-  
+
   /* ПРИНУДИТЕЛЬНАЯ темная тема с МАКСИМАЛЬНЫМ приоритетом */
   color-scheme: dark !important;
   background-color: #111827 !important;
@@ -114,19 +114,19 @@ html body .redaktus-canvas.canvas-dark,
 
 /* ПРИНУДИТЕЛЬНОЕ переопределение Tailwind primary в канвасе на СИНИЙ */
 .redaktus-canvas .bg-primary {
-  background-color: #3758F9 !important; /* Оригинальный TailGrids синий */
+  background-color: #3758f9 !important; /* Оригинальный TailGrids синий */
 }
 
 .redaktus-canvas .text-primary {
-  color: #3758F9 !important;
+  color: #3758f9 !important;
 }
 
 .redaktus-canvas .border-primary {
-  border-color: #3758F9 !important;
+  border-color: #3758f9 !important;
 }
 
 .redaktus-canvas .hover\\:bg-blue-dark:hover {
-  background-color: #1B44C8 !important; /* hover состояние */
+  background-color: #1b44c8 !important; /* hover состояние */
 }
 
 /* ИСКЛЮЧЕНИЕ: белый текст на кнопках должен оставаться белым */
@@ -161,10 +161,10 @@ html body .redaktus-canvas.canvas-dark,
   /* Изоляция блока от темы интерфейса */
   position: relative;
   z-index: 2;
-  
+
   /* Сброс наследуемых стилей */
   all: revert;
-  
+
   /* Применение стилей блока */
   font-family: inherit;
   color: inherit;
@@ -175,7 +175,7 @@ html body .redaktus-canvas.canvas-dark,
 .redaktus-canvas .tailgrids-component {
   /* Сброс всех стилей темы интерфейса */
   all: revert;
-  
+
   /* Применение оригинальных TailGrids стилей */
   font-family: inherit;
   color: inherit;
@@ -205,17 +205,17 @@ html body .redaktus-canvas.canvas-dark,
 }
 
 /* Специальные стили для мобильного и планшетного режимов */
-.redaktus-canvas[data-device="mobile"] {
+.redaktus-canvas[data-device='mobile'] {
   max-width: 375px;
   margin: 0 auto;
 }
 
-.redaktus-canvas[data-device="tablet"] {
+.redaktus-canvas[data-device='tablet'] {
   max-width: 768px;
   margin: 0 auto;
 }
 
-.redaktus-canvas[data-device="desktop"] {
+.redaktus-canvas[data-device='desktop'] {
   max-width: none;
 }
 
@@ -225,7 +225,7 @@ html body .redaktus-canvas.canvas-dark,
   --tw-bg-opacity: 1;
   --tw-text-opacity: 1;
   --tw-border-opacity: 1;
-  
+
   /* Отключаем наследование темы интерфейса */
   --redaktus-interface-theme: none;
   --interface-theme-inheritance: none;
@@ -236,10 +236,10 @@ html body .redaktus-canvas.canvas-dark,
   /* Полная изоляция блока */
   contain: layout style paint;
   isolation: isolate;
-  
+
   /* Сброс всех наследуемых стилей */
   all: revert;
-  
+
   /* Применение стилей блока */
   font-family: inherit;
   color: inherit;

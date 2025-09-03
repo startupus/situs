@@ -5,13 +5,24 @@ const BASE = process.env.TEST_BASE || 'http://localhost:3002';
 async function get(path: string, opts: RequestInit = {}) {
   const res = await fetch(`${BASE}${path}`, { ...opts, method: 'GET' });
   const text = await res.text();
-  let json: any = null; try { json = JSON.parse(text); } catch {}
+  let json: any = null;
+  try {
+    json = JSON.parse(text);
+  } catch {}
   return { status: res.status, text, json };
 }
 async function post(path: string, body?: any, opts: RequestInit = {}) {
-  const res = await fetch(`${BASE}${path}`, { ...opts, method: 'POST', headers: { 'Content-Type': 'application/json', ...(opts.headers||{}) }, body: body ? JSON.stringify(body) : undefined });
+  const res = await fetch(`${BASE}${path}`, {
+    ...opts,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
   const text = await res.text();
-  let json: any = null; try { json = JSON.parse(text); } catch {}
+  let json: any = null;
+  try {
+    json = JSON.parse(text);
+  } catch {}
   return { status: res.status, text, json };
 }
 

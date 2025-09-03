@@ -3,16 +3,16 @@ import { SitusMcpHttpModule } from './mcp-http.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(SitusMcpHttpModule);
-  
+
   // Настройка CORS для веб-интеграции
   app.enableCors({
     origin: ['http://localhost:3000', 'http://localhost:5173'],
     credentials: true,
   });
-  
+
   // Запуск MCP сервера на порту 3001
   await app.listen(3001);
-  
+
   console.log('🚀 Situs MCP HTTP Server запущен на порту 3001');
   console.log('📡 Доступные инструменты:');
   console.log('  - create-project: Создание нового проекта');

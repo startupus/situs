@@ -15,14 +15,14 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
   // Загрузка типов меню
   const loadMenuTypes = useCallback(async () => {
     if (!projectId) return;
-    
+
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await fetch(`/api/menu-types?projectId=${projectId}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setMenuTypes(data.data);
         setLastUpdate(new Date());
@@ -39,11 +39,11 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
   // Загрузка пунктов меню
   const loadMenuItems = useCallback(async (menuTypeId: string) => {
     if (!menuTypeId) return;
-    
+
     try {
       const response = await fetch(`/api/menu-items?menuTypeId=${menuTypeId}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setMenuItems(data.data);
         setLastUpdate(new Date());
@@ -61,11 +61,11 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
 
     console.log('[MENU_RT] Подключение к SSE для проекта:', projectId);
     const eventSource = new EventSource('/api/realtime/projects');
-    
+
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        
+
         // Фильтруем события только для нашего проекта
         if (data.payload?.projectId !== projectId) return;
 
@@ -74,65 +74,59 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
         switch (data.type) {
           case 'menu_type_created':
             // Добавляем новый тип меню
-            setMenuTypes(prev => [...prev, data.payload.menuType]);
+            setMenuTypes((prev) => [...prev, data.payload.menuType]);
             setLastUpdate(new Date());
             break;
-            
+
           case 'menu_type_updated':
             // Обновляем существующий тип меню
-            setMenuTypes(prev => 
-              prev.map(mt => 
-                mt.id === data.payload.menuType.id 
-                  ? { ...mt, ...data.payload.menuType }
-                  : mt
-              )
+            setMenuTypes((prev) =>
+              prev.map((mt) => (mt.id === data.payload.menuType.id ? { ...mt, ...data.payload.menuType } : mt)),
             );
             setLastUpdate(new Date());
             break;
-            
+
           case 'menu_type_deleted':
             // Удаляем тип меню
-            setMenuTypes(prev => prev.filter(mt => mt.id !== data.payload.menuTypeId));
+            setMenuTypes((prev) => prev.filter((mt) => mt.id !== data.payload.menuTypeId));
             setLastUpdate(new Date());
             break;
-            
+
           case 'menu_item_created':
             // Добавляем новый пункт меню (только если это текущий тип)
             if (data.payload.menuItem.menuTypeId === selectedMenuTypeId) {
-              setMenuItems(prev => [...prev, data.payload.menuItem]);
+              setMenuItems((prev) => [...prev, data.payload.menuItem]);
               setLastUpdate(new Date());
             }
             break;
-            
+
           case 'menu_item_updated':
             // Обновляем пункт меню
             if (data.payload.menuItem.menuTypeId === selectedMenuTypeId) {
-              setMenuItems(prev => 
-                prev.map(item => 
-                  item.id === data.payload.menuItem.id 
-                    ? { ...item, ...data.payload.menuItem }
-                    : item
-                )
+              setMenuItems((prev) =>
+                prev.map((item) =>
+                  item.id === data.payload.menuItem.id ? { ...item, ...data.payload.menuItem } : item,
+                ),
               );
               setLastUpdate(new Date());
             }
             break;
-            
+
           case 'menu_item_deleted':
             // Удаляем пункт меню
             if (data.payload.menuTypeId === selectedMenuTypeId) {
-              setMenuItems(prev => prev.filter(item => item.id !== data.payload.menuItemId));
+              setMenuItems((prev) => prev.filter((item) => item.id !== data.payload.menuItemId));
               setLastUpdate(new Date());
             }
             break;
-            
+
           case 'menu_items_reordered':
             // Обновляем порядок пунктов меню
             if (data.payload.menuTypeId === selectedMenuTypeId) {
               loadMenuItems(selectedMenuTypeId); // Полная перезагрузка для правильного порядка
             }
             break;
-            
+
           case 'menu_structure_changed':
             // Изменилась структура меню
             if (data.payload.menuTypeId === selectedMenuTypeId) {
@@ -180,6 +174,6 @@ export const useMenuSystemRealtime = (projectId: string, selectedMenuTypeId?: st
     error,
     lastUpdate,
     loadMenuTypes,
-    loadMenuItems
+    loadMenuItems,
   };
 };

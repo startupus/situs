@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 
 /**
  * JWT стратегия для авторизации
- * 
+ *
  * Проверяет валидность JWT токена
  */
 @Injectable()
@@ -14,7 +14,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: (configService && configService.get<string>('jwt.secret')) || process.env.JWT_SECRET || 'fallback-secret',
+      secretOrKey:
+        (configService && configService.get<string>('jwt.secret')) || process.env.JWT_SECRET || 'fallback-secret',
     });
   }
 

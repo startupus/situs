@@ -1,51 +1,38 @@
-import classNames from 'classnames'
-import * as React from 'react'
-import { Repeater } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import {
-  BackgroundColorsSideEditProps,
-  ContainerSizeSideEditProps,
-} from 'website/LayoutSideProps'
-import blockNames from '../blockNames'
-import { bgColors } from '../colors'
-import Container, { Size } from '../layout/Container'
-import Section, { Border } from '../layout/Section'
+import classNames from 'classnames';
+import * as React from 'react';
+import { Repeater } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import { BackgroundColorsSideEditProps, ContainerSizeSideEditProps } from 'website/LayoutSideProps';
+import blockNames from '../blockNames';
+import { bgColors } from '../colors';
+import Container, { Size } from '../layout/Container';
+import Section, { Border } from '../layout/Section';
 
 export interface CustomersProps {
-  bg?: { color: string; className: string }
-  borderTop?: Border
-  borderBottom?: Border
-  size?: 'medium' | 'large'
-  width?: Size
-  grayscale?: boolean
+  bg?: { color: string; className: string };
+  borderTop?: Border;
+  borderBottom?: Border;
+  size?: 'medium' | 'large';
+  width?: Size;
+  grayscale?: boolean;
 }
 
-const Customers: types.Brick<CustomersProps> = ({
-  bg = bgColors.white.value,
-  width = 'lg',
-  grayscale = true,
-}) => {
+const Customers: types.Brick<CustomersProps> = ({ bg = bgColors.white.value, width = 'lg', grayscale = true }) => {
   return (
     <Section bg={bg}>
-      <Container
-        size={width}
-        className={classNames(
-          'py-12 flex flex-wrap justify-center items-center'
-        )}
-      >
+      <Container size={width} className={classNames('py-12 flex flex-wrap justify-center items-center')}>
         <Repeater propName="customers" itemProps={{ grayscale }} />
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 Customers.schema = {
   name: blockNames.Customers,
   label: 'Customers',
   category: 'rb-ui website',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Customers/Customers.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Customers/Customers.tsx',
 
   getDefaultProps: () => ({
     bg: {
@@ -60,9 +47,8 @@ Customers.schema = {
       {
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
           alt: 'Airbnb',
           seoName: 'airbnb',
         },
@@ -70,9 +56,8 @@ Customers.schema = {
       {
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
           alt: 'Dribble',
           seoName: 'dribble',
         },
@@ -80,9 +65,8 @@ Customers.schema = {
       {
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
           alt: 'Netflix',
           seoName: 'netflix',
         },
@@ -90,9 +74,8 @@ Customers.schema = {
       {
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
           alt: 'Pinterest',
           seoName: 'pinterest',
         },
@@ -100,9 +83,8 @@ Customers.schema = {
       {
         image: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet: '',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: '',
           alt: 'Next.js',
           seoName: 'next-js',
         },
@@ -132,6 +114,6 @@ Customers.schema = {
       defaultOpen: true,
     },
   ],
-}
+};
 
-export default Customers
+export default Customers;

@@ -23,13 +23,13 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
   onToggleStatus,
   showSelection = false,
   selectedItems = [],
-  onSelectItem
+  onSelectItem,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   // Получение CSS классов для индикации drop зоны
   const getDropIndicatorClass = () => {
     if (dragState.dragOverItem?.id !== item.id) return '';
-    
+
     switch (dragState.dropPosition) {
       case 'before':
         return 'border-t-2 border-primary';
@@ -62,7 +62,9 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
         style={{ marginLeft: `${displayDepth * 20}px` }}
       >
         {/* Иконка перетаскивания */}
-        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid={testIds.menu.dragHandle}>⋮⋮</div>
+        <div className="text-body-color dark:text-dark-6 cursor-move" data-testid={testIds.menu.dragHandle}>
+          ⋮⋮
+        </div>
 
         {/* Чекбокс для пакетной обработки */}
         {showSelection && onSelectItem && (
@@ -97,7 +99,7 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
             }}
             onMouseDown={(e) => e.stopPropagation()}
             className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
-            title={isCollapsed ? "Развернуть подменю" : "Свернуть подменю"}
+            title={isCollapsed ? 'Развернуть подменю' : 'Свернуть подменю'}
           >
             {isCollapsed ? <FiChevronRight size={12} /> : <FiChevronDown size={12} />}
           </button>
@@ -107,18 +109,20 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
 
         {/* Название */}
         <div className="flex-1">
-          <h4 className="font-medium text-dark dark:text-white">
-            {item.title}
-          </h4>
+          <h4 className="font-medium text-dark dark:text-white">{item.title}</h4>
           <p className="text-sm text-body-color dark:text-dark-6">
             /{item.alias}
             {item.component && ` • ${item.component}`}
             {item.view && ` • ${item.view}`}
             {item.targetId && ` → ${item.targetId}`}
             {' • '}
-            {item.accessLevel === 'PUBLIC' ? 'PUBLIC' : 
-             item.accessLevel === 'REGISTERED' ? 'REGISTERED' : 
-             item.accessLevel === 'SPECIAL' ? 'SPECIAL' : 'ALL'}
+            {item.accessLevel === 'PUBLIC'
+              ? 'PUBLIC'
+              : item.accessLevel === 'REGISTERED'
+                ? 'REGISTERED'
+                : item.accessLevel === 'SPECIAL'
+                  ? 'SPECIAL'
+                  : 'ALL'}
             {' • '}
             {item.language === '*' ? 'Все языки' : item.language}
           </p>
@@ -203,7 +207,7 @@ const MenuItemRow: React.FC<MenuItemProps> = ({
       {/* Рендерим дочерние элементы (только если не свернуто) */}
       {item.children && item.children.length > 0 && !isCollapsed && (
         <div className="ml-4">
-          {item.children.map(child => (
+          {item.children.map((child) => (
             <MenuItemRow
               key={child.id}
               item={child}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Step7 = () => {
   return (
@@ -22,7 +22,7 @@ const SingleStep = ({ number, name, done }) => {
       <div className="mb-5 inline-flex items-center pr-4 lg:pr-0">
         <span
           className={`${
-            done ? "border-primary" : "border-[#E7E7E7]"
+            done ? 'border-primary' : 'border-[#E7E7E7]'
           } mr-3 flex h-[34px] w-[34px] items-center justify-center rounded-full border bg-gray-2 text-base font-medium text-black`}
         >
           {number}
@@ -30,13 +30,7 @@ const SingleStep = ({ number, name, done }) => {
         <p className="text-base text-black">{name}</p>
       </div>
       <div className="mb-5 group-last:hidden hidden px-8 lg:block">
-        <svg
-          width={32}
-          height={16}
-          viewBox="0 0 32 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width={32} height={16} viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
             clipRule="evenodd"

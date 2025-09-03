@@ -29,7 +29,7 @@ const initialState: SiteState = {
   currentSite: null,
   currentPage: null,
   loading: false,
-  error: null
+  error: null,
 };
 
 // Reducer для управления состоянием
@@ -56,62 +56,54 @@ function siteReducer(state: SiteState, action: SiteAction): SiteState {
     case 'UPDATE_SITE':
       return {
         ...state,
-        sites: state.sites.map(site => 
-          site.id === action.payload.id ? action.payload : site
-        ),
-        currentSite: state.currentSite?.id === action.payload.id ? action.payload : state.currentSite
+        sites: state.sites.map((site) => (site.id === action.payload.id ? action.payload : site)),
+        currentSite: state.currentSite?.id === action.payload.id ? action.payload : state.currentSite,
       };
 
     case 'ADD_PAGE':
       if (state.currentSite) {
         const updatedSite = {
           ...state.currentSite,
-          pages: [...state.currentSite.pages, action.payload]
+          pages: [...state.currentSite.pages, action.payload],
         };
         return {
           ...state,
           currentSite: updatedSite,
-          sites: state.sites.map(site => 
-            site.id === updatedSite.id ? updatedSite : site
-          )
+          sites: state.sites.map((site) => (site.id === updatedSite.id ? updatedSite : site)),
         };
       }
       return state;
 
     case 'UPDATE_PAGE':
       if (state.currentSite) {
-        const updatedPages = state.currentSite.pages.map(page => 
-          page.id === action.payload.id ? action.payload : page
+        const updatedPages = state.currentSite.pages.map((page) =>
+          page.id === action.payload.id ? action.payload : page,
         );
         const updatedSite = {
           ...state.currentSite,
-          pages: updatedPages
+          pages: updatedPages,
         };
         return {
           ...state,
           currentSite: updatedSite,
           currentPage: state.currentPage?.id === action.payload.id ? action.payload : state.currentPage,
-          sites: state.sites.map(site => 
-            site.id === updatedSite.id ? updatedSite : site
-          )
+          sites: state.sites.map((site) => (site.id === updatedSite.id ? updatedSite : site)),
         };
       }
       return state;
 
     case 'DELETE_PAGE':
       if (state.currentSite) {
-        const updatedPages = state.currentSite.pages.filter(page => page.id !== action.payload);
+        const updatedPages = state.currentSite.pages.filter((page) => page.id !== action.payload);
         const updatedSite = {
           ...state.currentSite,
-          pages: updatedPages
+          pages: updatedPages,
         };
         return {
           ...state,
           currentSite: updatedSite,
           currentPage: state.currentPage?.id === action.payload ? null : state.currentPage,
-          sites: state.sites.map(site => 
-            site.id === updatedSite.id ? updatedSite : site
-          )
+          sites: state.sites.map((site) => (site.id === updatedSite.id ? updatedSite : site)),
         };
       }
       return state;
@@ -166,7 +158,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
     try {
       const site = await sitesApi.getSite(siteId);
       dispatch({ type: 'SET_CURRENT_SITE', payload: site });
-      
+
       // Выбираем первую страницу, если есть
       if (site.pages.length > 0) {
         dispatch({ type: 'SET_CURRENT_PAGE', payload: site.pages[0] });
@@ -179,7 +171,7 @@ export function SiteProvider({ children }: SiteProviderProps) {
   // Выбор страницы
   const selectPage = (pageId: string) => {
     if (state.currentSite) {
-      const page = state.currentSite.pages.find(p => p.id === pageId);
+      const page = state.currentSite.pages.find((p) => p.id === pageId);
       if (page) {
         dispatch({ type: 'SET_CURRENT_PAGE', payload: page });
       }
@@ -194,9 +186,9 @@ export function SiteProvider({ children }: SiteProviderProps) {
         description: data.description,
         domain: data.domain,
         template: data.template,
-        settings: data.settings
+        settings: data.settings,
       };
-      
+
       const newSite = await sitesApi.createSite(siteData);
       dispatch({ type: 'ADD_SITE', payload: newSite });
       return newSite;
@@ -221,9 +213,9 @@ export function SiteProvider({ children }: SiteProviderProps) {
         meta: data.meta || {
           description: '',
           keywords: [],
-          ogImage: ''
+          ogImage: '',
         },
-        status: data.status || 'draft'
+        status: data.status || 'draft',
       };
 
       const newPage = await sitesApi.createPage(state.currentSite.id, pageData);
@@ -283,15 +275,11 @@ export function SiteProvider({ children }: SiteProviderProps) {
       createPage,
       updatePage,
       deletePage,
-      savePageContent
-    }
+      savePageContent,
+    },
   };
 
-  return (
-    <SiteContext.Provider value={contextValue}>
-      {children}
-    </SiteContext.Provider>
-  );
+  return <SiteContext.Provider value={contextValue}>{children}</SiteContext.Provider>;
 }
 
 // Хук для использования контекста
@@ -301,4 +289,4 @@ export function useSite() {
     throw new Error('useSite must be used within a SiteProvider');
   }
   return context;
-} 
+}

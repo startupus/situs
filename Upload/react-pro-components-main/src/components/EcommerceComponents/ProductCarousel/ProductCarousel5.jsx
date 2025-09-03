@@ -18,7 +18,7 @@ const ProductCarousel5 = () => {
   return (
     <>
       <section className="bg-white dark:bg-dark">
-        <div className="container mx-auto overflow-hidden pt-20 pb-20 lg:pt-[120px] lg:pb-[90px]">
+        <div className="container mx-auto overflow-hidden pb-20 pt-20 lg:pb-[90px] lg:pt-[120px]">
           <Swiper
             breakpoints={{
               640: {
@@ -104,10 +104,10 @@ const ProductCarousel5 = () => {
               />
             </SwiperSlide>
 
-            <div className="z-50 -bottom-[65px] absolute left-0 right-0 flex items-center justify-center">
-              <div className="inline-flex space-x-3 rounded-full border border-stroke dark:border-dark-3 p-[6px] dark:bg-dark-2">
+            <div className="absolute -bottom-[65px] left-0 right-0 z-50 flex items-center justify-center">
+              <div className="inline-flex space-x-3 rounded-full border border-stroke p-[6px] dark:border-dark-3 dark:bg-dark-2">
                 <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                  <button className="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary hover:text-white">
+                  <button className="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-stroke bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
                     <svg
                       width={14}
                       height={14}
@@ -121,7 +121,7 @@ const ProductCarousel5 = () => {
                   </button>
                 </div>
                 <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                  <button className="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary hover:text-white">
+                  <button className="flex h-[30px] w-[30px] items-center justify-center rounded-full border border-stroke bg-white text-body-color hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6">
                     <svg
                       width={14}
                       height={14}
@@ -147,7 +147,7 @@ export default ProductCarousel5;
 
 const ProductCard = ({ image, details, link, name, price, reviews }) => {
   return (
-    <div className="overflow-hidden rounded-lg bg-white dark:bg-dark-2 shadow-1 dark:shadow-box-dark">
+    <div className="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
       <div>
         <img src={image} alt="product" className="w-full" />
       </div>
@@ -155,7 +155,7 @@ const ProductCard = ({ image, details, link, name, price, reviews }) => {
         <h3>
           <a
             href={link}
-            className="mb-3 block text-lg font-semibold text-dark dark:text-white hover:text-primary xs:text-xl lg:text-lg xl:text-xl"
+            className="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl lg:text-lg xl:text-xl"
           >
             {name}
           </a>
@@ -163,7 +163,7 @@ const ProductCard = ({ image, details, link, name, price, reviews }) => {
         <p className="text-base text-body-color dark:text-dark-6">{details}</p>
       </div>
       <div className="flex justify-between border-t border-stroke dark:border-dark-3">
-        <div className="flex gap-1 items-center py-4 px-3 xs:px-4 lg:px-3 xl:px-6">
+        <div className="flex items-center gap-1 px-3 py-4 xs:px-4 lg:px-3 xl:px-6">
           <Star />
           <Star />
           <Star />
@@ -173,8 +173,10 @@ const ProductCard = ({ image, details, link, name, price, reviews }) => {
             ({reviews}) Reviews
           </span>
         </div>
-        <div className="border-l border-stroke dark:border-dark-3 py-4 px-3 xs:px-4 lg:px-3 xl:px-6">
-          <span className="text-base font-semibold text-dark dark:text-white">{price}</span>
+        <div className="border-l border-stroke px-3 py-4 dark:border-dark-3 xs:px-4 lg:px-3 xl:px-6">
+          <span className="text-base font-semibold text-dark dark:text-white">
+            {price}
+          </span>
         </div>
       </div>
     </div>

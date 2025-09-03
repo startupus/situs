@@ -2,7 +2,7 @@ import React from "react";
 
 const Popover = () => {
   return (
-    <section className="flex min-h-screen bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section className="flex min-h-screen bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto px-4 lg:container">
         <div className="block text-center">
           <div className="group relative lg:inline-block">
@@ -23,9 +23,9 @@ const Popover = () => {
                 alt="avatar"
               />
             </div>
-            <div className="invisible absolute top-[110%] left-1/2 w-[250px] -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100 xs:w-[330px] lg:top-0 lg:left-full lg:translate-x-0">
-              <div className="relative ml-3 rounded-lg bg-white dark:bg-dark-2 shadow-product dark:shadow-box-dark">
-                <span className="absolute left-1/2 -top-3 block -translate-x-1/2 rotate-90 lg:-left-[11px] lg:top-8 lg:translate-x-0 lg:rotate-0 text-white dark:text-dark-2">
+            <div className="invisible absolute left-1/2 top-[110%] w-[250px] -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100 xs:w-[330px] lg:left-full lg:top-0 lg:translate-x-0">
+              <div className="shadow-product relative ml-3 rounded-lg bg-white dark:bg-dark-2 dark:shadow-box-dark">
+                <span className="absolute -top-3 left-1/2 block -translate-x-1/2 rotate-90 text-white dark:text-dark-2 lg:-left-[11px] lg:top-8 lg:translate-x-0 lg:rotate-0">
                   <svg
                     width="11"
                     height="21"
@@ -34,12 +34,10 @@ const Popover = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     className="fill-current"
                   >
-                    <path
-                      d="M1.58026 12.7577C0.214281 11.5625 0.214281 9.4375 1.58026 8.24227L11 -5.24537e-07L11 21L1.58026 12.7577Z"
-                    />
+                    <path d="M1.58026 12.7577C0.214281 11.5625 0.214281 9.4375 1.58026 8.24227L11 -5.24537e-07L11 21L1.58026 12.7577Z" />
                   </svg>
                 </span>
-                <div className="flex items-center justify-between border-b border-stroke dark:border-dark-3 py-[18px] px-[22px]">
+                <div className="flex items-center justify-between border-b border-stroke px-[22px] py-[18px] dark:border-dark-3">
                   <div className="text-left">
                     <h5 className="text-sm font-medium text-dark dark:text-white sm:text-base">
                       Musharof Chowdhury
@@ -49,7 +47,7 @@ const Popover = () => {
                     </p>
                   </div>
                   <div>
-                    <button className="flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:text-primary sm:h-[34px] sm:w-[34px]">
+                    <button className="flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-stroke text-body-color hover:border-primary hover:text-primary dark:border-dark-3 dark:text-dark-6 sm:h-[34px] sm:w-[34px]">
                       <svg
                         width={14}
                         height={14}
@@ -70,7 +68,7 @@ const Popover = () => {
                     </button>
                   </div>
                 </div>
-                <div className="pt-[22px] pb-5 px-[22px]">
+                <div className="px-[22px] pb-5 pt-[22px]">
                   <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
                     Products
                   </h4>
@@ -91,10 +89,10 @@ const Popover = () => {
                     </p>
                   </div>
                 </div>
-                <div className="border-t border-stroke dark:border-dark-3 py-3 px-[22px]">
+                <div className="border-t border-stroke px-[22px] py-3 dark:border-dark-3">
                   <a
                     href="/#"
-                    className="block w-full text-center text-sm font-medium text-body-color dark:text-dark-6 hover:text-primary"
+                    className="block w-full text-center text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Connect with me
                   </a>

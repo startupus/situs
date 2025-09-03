@@ -8,7 +8,7 @@ function Contact13() {
           <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
             <div>
               <div className="mb-12 w-full max-w-[435px]">
-                <h2 className="mb-5 text-4xl font-bold leading-[1.2]! text-dark dark:text-white sm:text-5xl md:text-[60px] lg:text-5xl xl:text-[60px]">
+                <h2 className="leading-[1.2]! mb-5 text-4xl font-bold text-dark dark:text-white sm:text-5xl md:text-[60px] lg:text-5xl xl:text-[60px]">
                   Let’s get in touch with us
                 </h2>
                 <p className="text-lg font-medium text-body-color dark:text-dark-6">
@@ -65,7 +65,7 @@ function Contact13() {
                     <input
                       type="text"
                       placeholder="First name"
-                      className="w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                      className="outline-hidden w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -80,7 +80,7 @@ function Contact13() {
                     <input
                       type="text"
                       placeholder="Last name"
-                      className="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                      className="outline-hidden h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -95,7 +95,7 @@ function Contact13() {
                     <input
                       type="email"
                       placeholder="yourname@company.com"
-                      className="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                      className="outline-hidden h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -110,7 +110,7 @@ function Contact13() {
                     <input
                       type="text"
                       placeholder="+1 (555) 444-0000"
-                      className="h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                      className="outline-hidden h-[50px] w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     />
                   </div>
                 </div>
@@ -126,7 +126,7 @@ function Contact13() {
                       type="text"
                       rows="6"
                       placeholder="Type your message"
-                      className="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                      className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                     ></textarea>
                   </div>
                 </div>

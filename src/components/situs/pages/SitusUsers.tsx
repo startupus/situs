@@ -26,7 +26,7 @@ interface InviteForm {
 const SitusUsers: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Используем хук для управления пользователями
   const {
     users,
@@ -37,7 +37,7 @@ const SitusUsers: React.FC = () => {
     updateUserRole,
     updateUserStatus,
     bulkUpdateUsers,
-    createUser
+    createUser,
   } = useUsers();
 
   // Локальное состояние
@@ -57,7 +57,7 @@ const SitusUsers: React.FC = () => {
     const tab = searchParams.get('tab') as TabId;
     return tab || 'users';
   };
-  
+
   const [activeTab, setActiveTab] = useState<TabId>(getActiveTabFromUrl());
 
   // Системное уведомление об ошибках SSE
@@ -73,11 +73,14 @@ const SitusUsers: React.FC = () => {
   }, [location.search]);
 
   // Функция для изменения вкладки с обновлением URL
-  const handleTabChange = useCallback((tab: TabId) => {
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set('tab', tab);
-    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-  }, [location.pathname, location.search, navigate]);
+  const handleTabChange = useCallback(
+    (tab: TabId) => {
+      const searchParams = new URLSearchParams(location.search);
+      searchParams.set('tab', tab);
+      navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+    },
+    [location.pathname, location.search, navigate],
+  );
 
   // Загружаем данные при монтировании
   useEffect(() => {
@@ -112,15 +115,15 @@ const SitusUsers: React.FC = () => {
   // Обработчики для таблицы пользователей
   const handleSelectUser = (userId: string, selected: boolean) => {
     if (selected) {
-      setSelectedUsers(prev => [...prev, userId]);
+      setSelectedUsers((prev) => [...prev, userId]);
     } else {
-      setSelectedUsers(prev => prev.filter(id => id !== userId));
+      setSelectedUsers((prev) => prev.filter((id) => id !== userId));
     }
   };
 
   const handleSelectAll = (selected: boolean) => {
     if (selected) {
-      setSelectedUsers(filteredUsers.map(u => u.id));
+      setSelectedUsers(filteredUsers.map((u) => u.id));
     } else {
       setSelectedUsers([]);
     }
@@ -138,7 +141,7 @@ const SitusUsers: React.FC = () => {
   };
 
   const handleDeleteUser = (userId: string) => {
-    const user = users.find(u => u.id === userId);
+    const user = users.find((u) => u.id === userId);
     if (user && window.confirm(`Вы уверены, что хотите удалить пользователя "${user.name}"?`)) {
       console.log('Удаление пользователя:', userId);
       // TODO: Реализовать удаление пользователя
@@ -160,9 +163,9 @@ const SitusUsers: React.FC = () => {
   // Обработчик отправки приглашений
   const handleSendInvitations = useCallback(async (inviteData: InviteForm) => {
     try {
-      const emails = inviteData.emails.split('\n').filter(email => email.trim());
+      const emails = inviteData.emails.split('\n').filter((email) => email.trim());
       console.log('Отправка приглашений:', { emails, role: inviteData.role, message: inviteData.message });
-      
+
       // Компонент UserInvites сам обрабатывает отправку через API
       // Здесь можно добавить дополнительную логику если нужно
       console.log('Приглашения отправлены успешно');
@@ -172,12 +175,13 @@ const SitusUsers: React.FC = () => {
   }, []);
 
   // Фильтрация пользователей
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = !filterRole || user.globalRole === filterRole;
     const matchesStatus = !filterStatus || user.status === filterStatus;
-    
+
     return matchesSearch && matchesRole && matchesStatus;
   });
 
@@ -211,7 +215,7 @@ const SitusUsers: React.FC = () => {
             onInviteClick={() => setActiveTab('invites')}
             onBulkAction={handleBulkAction}
           />
-          
+
           <UserTable
             users={filteredUsers}
             selectedUsers={selectedUsers}
@@ -225,27 +229,16 @@ const SitusUsers: React.FC = () => {
         </div>
       )}
 
-        {activeTab === 'roles' && (
-          <GlobalRolesManager />
-        )}
+      {activeTab === 'roles' && <GlobalRolesManager />}
 
       {activeTab === 'settings' && settings && (
-        <UserSettingsComponent
-          settings={settings}
-          onUpdateSettings={setSettings}
-        />
+        <UserSettingsComponent settings={settings} onUpdateSettings={setSettings} />
       )}
 
-      {activeTab === 'invites' && (
-        <UserInvites onSendInvitations={handleSendInvitations} />
-      )}
+      {activeTab === 'invites' && <UserInvites onSendInvitations={handleSendInvitations} />}
 
       {/* Формы создания */}
-      <CreateUserForm
-        isOpen={showCreateUserForm}
-        onClose={() => setShowCreateUserForm(false)}
-        onSubmit={createUser}
-      />
+      <CreateUserForm isOpen={showCreateUserForm} onClose={() => setShowCreateUserForm(false)} onSubmit={createUser} />
 
       <CreateRoleForm
         isOpen={showCreateRoleForm}

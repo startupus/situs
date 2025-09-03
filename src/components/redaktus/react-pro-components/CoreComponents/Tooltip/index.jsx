@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Tooltip = ({
   children,
@@ -16,7 +16,7 @@ const Tooltip = ({
   return (
     <>
       <div>
-        <div className='group relative inline-block'>
+        <div className="group relative inline-block">
           <button
             className={`inline-flex rounded bg-primary ${
               (secondary && `bg-secondary`) ||
@@ -77,7 +77,7 @@ const Tooltip = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Tooltip
+export default Tooltip;

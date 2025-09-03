@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
-import { Admin, SsoLoginSuccess } from 'redaktus'
+import React, { useEffect } from 'react';
+import { Admin, SsoLoginSuccess } from 'redaktus';
 
 const AdminSsoSuccess: React.FC = () => {
   useEffect(() => {
-    document.title = 'SSO Login Success'
-  }, [])
+    document.title = 'SSO Login Success';
+  }, []);
 
   return (
     <Admin isLogin>
       <SsoLoginSuccess />
     </Admin>
-  )
-}
+  );
+};
 
-export default AdminSsoSuccess
+export default AdminSsoSuccess;

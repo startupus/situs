@@ -1,5 +1,5 @@
-import React from "react";
-import Button from "../Buttons";
+import React from 'react';
+import Button from '../Buttons';
 
 const Preview = () => {
   return (
@@ -19,30 +19,12 @@ const Preview = () => {
           <Button roundedFull color="dark" label="Get Started" />
           {/*  */}
           <Button outline danger roundedLg label="Get Started" />
-          <Button
-            outline
-            info
-            roundedLg
-            color="secondary"
-            label="Get Started"
-          />
+          <Button outline info roundedLg color="secondary" label="Get Started" />
           <Button outline warning roundedLg color="dark" label="Get Started" />
           {/*  */}
           <Button outline danger roundedFull label="Get Started" />
-          <Button
-            outline
-            info
-            roundedFull
-            color="secondary"
-            label="Get Started"
-          />
-          <Button
-            outline
-            warning
-            roundedFull
-            color="dark"
-            label="Get Started"
-          />
+          <Button outline info roundedFull color="secondary" label="Get Started" />
+          <Button outline warning roundedFull color="dark" label="Get Started" />
         </div>
       </div>
     </>

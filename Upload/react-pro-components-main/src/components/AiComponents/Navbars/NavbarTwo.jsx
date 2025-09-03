@@ -6,7 +6,7 @@ function NavbarTwo() {
   return (
     <header className="flex w-full items-center bg-dark py-12">
       <div className="container mx-auto">
-        <div className="rounded-full border border-transparent bg-linear-to-t from-transparent to-white/10 px-5 backdrop-blur-[10px]">
+        <div className="bg-linear-to-t rounded-full border border-transparent from-transparent to-white/10 px-5 backdrop-blur-[10px]">
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-60 max-w-full px-4">
               <a href="#" className="block w-full py-5">
@@ -40,7 +40,7 @@ function NavbarTwo() {
                     <li>
                       <a
                         href="#"
-                        className="hover:border-white/15 flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:bg-white/5 hover:text-white lg:inline-flex"
+                        className="flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:border-white/15 hover:bg-white/5 hover:text-white lg:inline-flex"
                       >
                         Home
                       </a>
@@ -48,7 +48,7 @@ function NavbarTwo() {
                     <li>
                       <a
                         href="#"
-                        className="hover:border-white/15 flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:bg-white/5 hover:text-white lg:inline-flex"
+                        className="flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:border-white/15 hover:bg-white/5 hover:text-white lg:inline-flex"
                       >
                         Payment
                       </a>
@@ -56,7 +56,7 @@ function NavbarTwo() {
                     <li>
                       <a
                         href="#"
-                        className="hover:border-white/15 flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:bg-white/5 hover:text-white lg:inline-flex"
+                        className="flex rounded-full border border-transparent px-3.5 py-1.5 text-base font-medium text-white/50 hover:border-white/15 hover:bg-white/5 hover:text-white lg:inline-flex"
                       >
                         Features
                       </a>

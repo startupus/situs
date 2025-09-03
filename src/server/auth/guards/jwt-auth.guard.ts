@@ -5,12 +5,14 @@ import { IS_PUBLIC_KEY } from '../../common/decorators/public.decorator';
 
 /**
  * Guard для JWT авторизации
- * 
+ *
  * Используется для защиты приватных endpoint'ов
  */
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private reflector: Reflector) { super(); }
+  constructor(private reflector: Reflector) {
+    super();
+  }
 
   canActivate(context: ExecutionContext) {
     // В development режимe: разрешаем доступ и подставляем dev-пользователя,
@@ -23,7 +25,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
           email: 'dev@situs.local',
           name: 'Dev User',
           globalRole: 'SUPER_ADMIN',
-          scopes: ['PROJECT_READ','PROJECT_WRITE','PROJECT_ADMIN']
+          scopes: ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'],
         };
       }
       return true;
@@ -42,9 +44,15 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       const expected = process.env.AUTH_TEST_TOKEN || 'test-token-12345';
       const authHeader: string | undefined = req.headers?.authorization;
       const qToken: string | undefined = (req.query?.token as string) || undefined;
-      const token = (authHeader && authHeader.startsWith('Bearer ')) ? authHeader.substring(7) : qToken;
+      const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.substring(7) : qToken;
       if (token === expected) {
-        (req as any).user = { id: 'test-user-id', email: 'test@example.com', name: 'Test User', globalRole: 'SUPER_ADMIN', scopes: [] };
+        (req as any).user = {
+          id: 'test-user-id',
+          email: 'test@example.com',
+          name: 'Test User',
+          globalRole: 'SUPER_ADMIN',
+          scopes: [],
+        };
         return true;
       }
     }

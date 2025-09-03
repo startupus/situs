@@ -2,10 +2,10 @@ import React from "react";
 
 const InfoAlert2 = () => {
   return (
-    <div className="py-10 bg-white dark:bg-dark">
+    <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-cyan-dark flex w-full rounded-lg border-l-[6px] bg-[#E9F9FF] px-7 py-8 md:p-9">
-          <div className="bg-cyan-dark mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md text-white">
+        <div className="flex w-full rounded-lg border-l-[6px] border-cyan-dark bg-[#E9F9FF] px-7 py-8 md:p-9">
+          <div className="mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md bg-cyan-dark text-white">
             <svg
               width="18"
               height="18"

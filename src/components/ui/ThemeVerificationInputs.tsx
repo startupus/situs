@@ -1,11 +1,6 @@
 // src/components/ui/ThemeVerificationInputs.tsx
 import React from 'react';
-import { 
-  VerificationCodeInput1,
-  VerificationCodeInput2,
-  VerificationCodeInput3,
-  VerificationCodeInput4
-} from './core';
+import { VerificationCodeInput1, VerificationCodeInput2, VerificationCodeInput3, VerificationCodeInput4 } from './core';
 
 // Интерфейс для пропсов VerificationCodeInput компонентов
 interface VerificationCodeInputProps {
@@ -25,7 +20,7 @@ interface VerificationCodeInputProps {
 // Утилита для адаптации стилей под глобальную тему
 const adaptVerificationCodeInputProps = (props: VerificationCodeInputProps) => ({
   ...props,
-  className: `${props.className || ''} transition-all duration-200`
+  className: `${props.className || ''} transition-all duration-200`,
 });
 
 // VerificationCodeInput Variants

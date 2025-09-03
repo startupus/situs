@@ -134,13 +134,13 @@ const ContactUs = () => {
                             <textarea
                               rows="5"
                               placeholder={item.placeholder}
-                              className="w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                              className="outline-hidden w-full rounded-lg border border-stroke bg-transparent p-5 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                             ></textarea>
                           ) : (
                             <input
                               type={item.type}
                               placeholder={item.placeholder}
-                              className="w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
+                              className="outline-hidden w-full rounded-lg border border-stroke bg-transparent px-5 py-3 text-dark placeholder-dark-5 duration-200 focus:border-primary dark:border-dark-3 dark:text-white dark:focus:border-primary"
                             />
                           )}
                         </div>
@@ -157,7 +157,7 @@ const ContactUs = () => {
             </div>
 
             <div className="flex w-full flex-col gap-8 lg:max-w-[530px]">
-              <div className="relative z-10 aspect-530/450 overflow-hidden rounded-[20px] bg-[#CCDDF6]">
+              <div className="aspect-530/450 relative z-10 overflow-hidden rounded-[20px] bg-[#CCDDF6]">
                 <img src={Person} alt="person image" className="w-full" />
                 <div className="absolute -bottom-[140px] -left-[140px] -z-10 aspect-square w-[290px] rounded-full border-2 border-primary/20 bg-transparent"></div>
                 <div className="absolute -right-[40px] -top-[164px] -z-10 aspect-square w-[390px] rounded-full border-2 border-primary/20 bg-transparent"></div>

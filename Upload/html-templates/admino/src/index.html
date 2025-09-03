@@ -19,14 +19,14 @@
   <body>
     <section
       x-data="{'openDropDown': false, 'sidebarOpen': true}"
-      class="bg-gray dark:bg-dark relative flex min-h-screen w-full items-start"
+      class="relative flex min-h-screen w-full items-start bg-gray dark:bg-dark"
     >
       <div
-        class="shadow-1 dark:bg-dark-2 dark:shadow-box-dark absolute top-0 left-0 z-40 flex h-full min-h-screen w-full max-w-[90px] flex-col justify-between bg-white duration-200 xl:translate-x-0"
+        class="absolute left-0 top-0 z-40 flex h-full min-h-screen w-full max-w-[90px] flex-col justify-between bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0"
         :class="sidebarOpen ? '-translate-x-full' : 'translate-x-0'"
       >
         <div>
-          <div class="px-7 pt-10 pb-9">
+          <div class="px-7 pb-9 pt-10">
             <a href="javascript:void(0)">
               <img
                 src="./assets/images/logo/logo.svg"
@@ -40,7 +40,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -64,10 +64,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -88,7 +88,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -122,10 +122,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -146,7 +146,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -175,10 +175,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -199,7 +199,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -223,10 +223,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -247,7 +247,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -275,10 +275,10 @@
                   </span>
                 </a>
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -299,7 +299,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -333,10 +333,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -357,7 +357,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -381,10 +381,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -405,7 +405,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -444,10 +444,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -466,12 +466,12 @@
                 </span>
               </li>
               <li>
-                <div class="bg-stroke dark:bg-dark-3 mx-7 my-3 h-[1px]"></div>
+                <div class="mx-7 my-3 h-[1px] bg-stroke dark:bg-dark-3"></div>
               </li>
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -490,10 +490,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -514,7 +514,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -538,10 +538,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -562,7 +562,7 @@
               <li class="group relative">
                 <a
                   href="javascript:void(0)"
-                  class="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                  class="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                 >
                   <span>
                     <svg
@@ -591,10 +591,10 @@
                 </a>
 
                 <span
-                  class="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible"
+                  class="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark"
                 >
                   <span
-                    class="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white"
+                    class="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2"
                   >
                     <svg
                       width="9"
@@ -631,17 +631,17 @@
       <div
         @click="sidebarOpen = !sidebarOpen"
         :class="sidebarOpen ? '-translate-x-full' : 'translate-x-0'"
-        class="fixed top-0 left-0 z-30 h-screen w-full bg-black/80 xl:hidden"
+        class="fixed left-0 top-0 z-30 h-screen w-full bg-black/80 xl:hidden"
       ></div>
       <div class="w-full xl:pl-[90px]">
         <!-- ====== Horizontal Menu Section Start -->
-        <header class="dark:bg-dark w-full bg-white">
+        <header class="w-full bg-white dark:bg-dark">
           <div
-            class="dark:bg-dark relative flex items-center justify-end bg-white py-3 pr-3 pl-[70px] sm:justify-between md:pr-8 md:pl-20 xl:pl-8"
+            class="relative flex items-center justify-end bg-white py-3 pl-[70px] pr-3 dark:bg-dark sm:justify-between md:pl-20 md:pr-8 xl:pl-8"
           >
             <button
               @click="sidebarOpen = false"
-              class="border-stroke text-dark hover:bg-gray dark:border-dark-3 dark:bg-dark-2 dark:hover:bg-dark-3 absolute top-1/2 left-4 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-lg border bg-white xl:hidden dark:text-white"
+              class="absolute left-4 top-1/2 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-lg border border-stroke bg-white text-dark hover:bg-gray dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:bg-dark-3 xl:hidden"
             >
               <svg
                 width="20"
@@ -666,7 +666,7 @@
             </button>
             <div class="hidden sm:block">
               <div class="flex items-center">
-                <span class="text-body-color dark:text-dark-6 mr-4">
+                <span class="mr-4 text-body-color dark:text-dark-6">
                   <svg
                     width="20"
                     height="20"
@@ -691,7 +691,7 @@
                 <input
                   type="text"
                   placeholder="Type to search..."
-                  class="text-body-color dark:text-dark-6 w-full bg-transparent text-base outline-none"
+                  class="w-full bg-transparent text-base text-body-color outline-none dark:text-dark-6"
                 />
               </div>
             </div>
@@ -811,11 +811,11 @@
                 <div class="group relative">
                   <a href="javascript:void(0)" class="flex items-center">
                     <p
-                      class="text-dark mr-4 text-right text-sm font-medium dark:text-white"
+                      class="mr-4 text-right text-sm font-medium text-dark dark:text-white"
                     >
                       Thomas Anree
                       <span
-                        class="text-body-color dark:text-dark-6 block text-xs font-normal"
+                        class="block text-xs font-normal text-body-color dark:text-dark-6"
                       >
                         Ux Designer
                       </span>
@@ -827,7 +827,7 @@
                       class="h-[46px] w-[46px] rounded-full object-cover object-center"
                     />
 
-                    <span class="text-body-color dark:text-dark-6 ml-[10px]">
+                    <span class="ml-[10px] text-body-color dark:text-dark-6">
                       <svg
                         width="20"
                         height="20"
@@ -846,23 +846,23 @@
                   </a>
 
                   <div
-                    class="shadow-card-2 dark:bg-dark-2 invisible absolute top-[120%] right-0 mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100"
+                    class="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2"
                   >
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark block rounded px-4 py-2 text-sm font-medium"
+                      class="block rounded px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
                     >
                       Account Settings
                     </a>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark block rounded px-4 py-2 text-sm font-medium"
+                      class="block rounded px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
                     >
                       Dashboard
                     </a>
                     <a
                       href="javascript:void(0)"
-                      class="text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark block rounded px-4 py-2 text-sm font-medium"
+                      class="block rounded px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
                     >
                       Sign Out
                     </a>
@@ -876,22 +876,22 @@
         <div class="p-[30px]">
           <div class="mb-10 w-full">
             <div
-              class="border-stroke dark:border-dark-3 items-center justify-between border-b md:flex"
+              class="items-center justify-between border-b border-stroke dark:border-dark-3 md:flex"
             >
               <div class="mb-6 w-full">
                 <h2
-                  class="text-dark mb-2 text-2xl font-semibold dark:text-white"
+                  class="mb-2 text-2xl font-semibold text-dark dark:text-white"
                 >
                   Sales Analytics
                 </h2>
-                <p class="text-body-color dark:text-dark-6 text-sm font-medium">
+                <p class="text-sm font-medium text-body-color dark:text-dark-6">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
                   ultrices lectus sem.
                 </p>
               </div>
               <div class="mb-6">
                 <button
-                  class="bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded px-5 py-[10px] text-sm font-medium whitespace-nowrap text-white"
+                  class="inline-flex items-center justify-center whitespace-nowrap rounded bg-primary px-5 py-[10px] text-sm font-medium text-white hover:bg-primary/90"
                 >
                   Add New Item
                   <span class="pl-2">
@@ -931,16 +931,16 @@
             <div class="-mx-4 flex flex-wrap">
               <div class="w-full px-4 lg:w-1/2 xl:w-7/12 2xl:w-5/12">
                 <div
-                  class="border-stroke dark:border-dark-3 dark:bg-dark-2 mb-8 w-full rounded-lg border bg-white px-5 pt-[30px] pb-5 sm:px-[30px]"
+                  class="mb-8 w-full rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]"
                 >
                   <div class="justify-between sm:flex">
                     <div class="mb-4 sm:mb-0">
                       <h5
-                        class="text-dark text-xl font-semibold dark:text-white"
+                        class="text-xl font-semibold text-dark dark:text-white"
                       >
                         Email Sent
                       </h5>
-                      <p class="text-body-color dark:text-dark-6 text-sm">
+                      <p class="text-sm text-body-color dark:text-dark-6">
                         Detailed data of your email inbox
                       </p>
                     </div>
@@ -949,7 +949,7 @@
                         class="relative z-20 inline-block rounded-md bg-transparent"
                       >
                         <select
-                          class="border-stroke text-body-color dark:border-dark-3 dark:text-dark-6 relative z-20 inline-flex appearance-none rounded-md border bg-transparent py-[5px] pr-10 pl-3 text-base outline-none"
+                          class="relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color outline-none dark:border-dark-3 dark:text-dark-6"
                         >
                           <option value="" class="dark:bg-dark-2">
                             Monthly
@@ -959,7 +959,7 @@
                           </option>
                         </select>
                         <span
-                          class="text-body-color dark:text-dark-6 absolute top-1/2 right-3 z-10 -translate-y-1/2"
+                          class="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-body-color dark:text-dark-6"
                         >
                           <svg
                             width="18"
@@ -985,16 +985,16 @@
               </div>
               <div class="w-full px-4 lg:w-1/2 xl:w-5/12 2xl:w-4/12">
                 <div
-                  class="border-stroke dark:border-dark-3 dark:bg-dark-2 mb-8 w-full rounded-lg border bg-white px-5 pt-[30px] pb-5 sm:px-[30px]"
+                  class="mb-8 w-full rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]"
                 >
                   <div class="mb-4 justify-between sm:flex">
                     <div class="mb-4 sm:mb-0">
                       <h5
-                        class="text-dark text-xl font-semibold dark:text-white"
+                        class="text-xl font-semibold text-dark dark:text-white"
                       >
                         Sales Graph
                       </h5>
-                      <p class="text-body-color dark:text-dark-6 text-sm">
+                      <p class="text-sm text-body-color dark:text-dark-6">
                         your total sales data analytics
                       </p>
                     </div>
@@ -1003,13 +1003,13 @@
                         <select
                           name=""
                           id=""
-                          class="text-body-color dark:text-dark-6 relative z-20 inline-flex appearance-none bg-transparent py-[5px] pr-10 pl-3 text-base outline-none"
+                          class="relative z-20 inline-flex appearance-none bg-transparent py-[5px] pl-3 pr-10 text-base text-body-color outline-none dark:text-dark-6"
                         >
                           <option value="">This Week</option>
                           <option value="">Last Week</option>
                         </select>
                         <span
-                          class="text-body-color dark:text-dark-6 absolute top-1/2 right-3 z-10 -translate-y-1/2"
+                          class="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-body-color dark:text-dark-6"
                         >
                           <svg
                             width="18"
@@ -1037,10 +1037,10 @@
                 <div class="-mx-4 flex flex-wrap">
                   <div class="w-full px-4 md:w-1/2 lg:w-1/3 2xl:w-full">
                     <div
-                      class="shadow-1 dark:bg-dark-2 dark:shadow-box-dark relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 sm:px-10 md:px-6 xl:px-10"
+                      class="relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 shadow-1 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 md:px-6 xl:px-10"
                     >
                       <div
-                        class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]"
+                        class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]"
                       >
                         <svg
                           width="30"
@@ -1057,18 +1057,18 @@
                       </div>
                       <div>
                         <p
-                          class="text-dark text-2xl font-bold xl:text-[28px] xl:leading-[35px] dark:text-white"
+                          class="text-2xl font-bold text-dark dark:text-white xl:text-[28px] xl:leading-[35px]"
                         >
                           $4,350
                         </p>
                         <p
-                          class="text-body-color dark:text-dark-6 mt-1 text-base"
+                          class="mt-1 text-base text-body-color dark:text-dark-6"
                         >
                           Earned this month
                         </p>
                       </div>
 
-                      <div class="absolute top-5 right-5">
+                      <div class="absolute right-5 top-5">
                         <div x-data="{openDropDown: false}" class="relative">
                           <button
                             @click="openDropDown = !openDropDown"
@@ -1097,15 +1097,15 @@
                           <div
                             x-show="openDropDown"
                             @click.outside="openDropDown = false"
-                            class="shadow-card dark:bg-dark absolute top-full right-0 z-40 w-[150px] space-y-1 rounded bg-white p-2"
+                            class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark"
                           >
                             <button
-                              class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-1.5 text-left text-sm"
+                              class="w-full rounded px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                             >
                               Edit
                             </button>
                             <button
-                              class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-1.5 text-left text-sm"
+                              class="w-full rounded px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                             >
                               Delete
                             </button>
@@ -1117,10 +1117,10 @@
 
                   <div class="w-full px-4 md:w-1/2 lg:w-1/3 2xl:w-full">
                     <div
-                      class="shadow-1 dark:bg-dark-2 dark:shadow-box-dark relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 sm:px-10 md:px-6 xl:px-10"
+                      class="relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 shadow-1 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 md:px-6 xl:px-10"
                     >
                       <div
-                        class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]"
+                        class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]"
                       >
                         <svg
                           width="30"
@@ -1137,18 +1137,18 @@
                       </div>
                       <div>
                         <p
-                          class="text-dark text-2xl font-bold xl:text-[28px] xl:leading-[35px] dark:text-white"
+                          class="text-2xl font-bold text-dark dark:text-white xl:text-[28px] xl:leading-[35px]"
                         >
                           583
                         </p>
                         <p
-                          class="text-body-color dark:text-dark-6 mt-1 text-base"
+                          class="mt-1 text-base text-body-color dark:text-dark-6"
                         >
                           New Clients
                         </p>
                       </div>
 
-                      <div class="absolute top-5 right-5">
+                      <div class="absolute right-5 top-5">
                         <div x-data="{openDropDown: false}" class="relative">
                           <button
                             @click="openDropDown = !openDropDown"
@@ -1177,15 +1177,15 @@
                           <div
                             x-show="openDropDown"
                             @click.outside="openDropDown = false"
-                            class="shadow-card dark:bg-dark absolute top-full right-0 z-40 w-[150px] space-y-1 rounded bg-white p-2"
+                            class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark"
                           >
                             <button
-                              class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-1.5 text-left text-sm"
+                              class="w-full rounded px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                             >
                               Edit
                             </button>
                             <button
-                              class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-1.5 text-left text-sm"
+                              class="w-full rounded px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                             >
                               Delete
                             </button>
@@ -1197,10 +1197,10 @@
 
                   <div class="w-full px-4 md:w-1/2 lg:w-1/3 2xl:w-full">
                     <div
-                      class="shadow-1 dark:bg-dark-2 dark:shadow-box-dark relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 sm:px-10 md:px-6 xl:px-10"
+                      class="relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 shadow-1 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 md:px-6 xl:px-10"
                     >
                       <div
-                        class="bg-primary mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]"
+                        class="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]"
                       >
                         <svg
                           width="30"
@@ -1223,18 +1223,18 @@
                       </div>
                       <div>
                         <p
-                          class="text-dark text-2xl font-bold xl:text-[28px] xl:leading-[35px] dark:text-white"
+                          class="text-2xl font-bold text-dark dark:text-white xl:text-[28px] xl:leading-[35px]"
                         >
                           1289
                         </p>
                         <p
-                          class="text-body-color dark:text-dark-6 mt-1 text-base"
+                          class="mt-1 text-base text-body-color dark:text-dark-6"
                         >
                           New Sales
                         </p>
                       </div>
 
-                      <div class="absolute top-5 right-5">
+                      <div class="absolute right-5 top-5">
                         <div x-data="{openDropDown: false}" class="relative">
                           <button
                             @click="openDropDown = !openDropDown"
@@ -1263,15 +1263,15 @@
                           <div
                             x-show="openDropDown"
                             @click.outside="openDropDown = false"
-                            class="shadow-card dark:bg-dark absolute top-full right-0 z-40 w-[150px] space-y-1 rounded bg-white p-2"
+                            class="absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark"
                           >
                             <button
-                              class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-1.5 text-left text-sm"
+                              class="w-full rounded px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                             >
                               Edit
                             </button>
                             <button
-                              class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-1.5 text-left text-sm"
+                              class="w-full rounded px-3 py-1.5 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                             >
                               Delete
                             </button>
@@ -1289,17 +1289,17 @@
             <div class="-mx-4 flex flex-wrap">
               <div class="w-full px-4 2xl:w-5/12">
                 <div
-                  class="border-stroke dark:border-dark-3 dark:bg-dark-2 mb-8 w-full rounded-lg border bg-white px-5 pt-[30px] pb-5 sm:px-[30px] 2xl:mb-0"
+                  class="mb-8 w-full rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px] 2xl:mb-0"
                 >
                   <div class="flex justify-between">
                     <div>
                       <h3
-                        class="text-dark mb-1 text-xl leading-none font-bold sm:text-[28px] sm:leading-[35px] dark:text-white"
+                        class="mb-1 text-xl font-bold leading-none text-dark dark:text-white sm:text-[28px] sm:leading-[35px]"
                       >
                         $35,8K
                       </h3>
                       <p
-                        class="text-body-color dark:text-dark-6 text-sm sm:text-base"
+                        class="text-sm text-body-color dark:text-dark-6 sm:text-base"
                       >
                         Overall Revenue
                       </p>
@@ -1311,7 +1311,7 @@
                         <select
                           name=""
                           id=""
-                          class="border-stroke text-body-color dark:border-dark-3 dark:text-dark-6 relative z-20 inline-flex appearance-none rounded-md border bg-transparent py-[7px] pr-10 pl-3 text-base outline-none"
+                          class="relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[7px] pl-3 pr-10 text-base text-body-color outline-none dark:border-dark-3 dark:text-dark-6"
                         >
                           <option value="" class="dark:bg-dark-2">
                             Monthly
@@ -1321,7 +1321,7 @@
                           </option>
                         </select>
                         <span
-                          class="text-body-color dark:text-dark-6 absolute top-1/2 right-3 z-10 -translate-y-1/2"
+                          class="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-body-color dark:text-dark-6"
                         >
                           <svg
                             width="18"
@@ -1347,43 +1347,43 @@
               </div>
               <div class="w-full px-4 2xl:w-7/12">
                 <div
-                  class="border-stroke dark:border-dark-3 dark:bg-dark-2 w-full rounded-lg border bg-white"
+                  class="w-full rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
                 >
                   <div class="max-w-full overflow-x-auto">
                     <table class="w-full table-auto">
                       <thead>
-                        <tr class="border-stroke dark:border-dark-3 border-b">
-                          <th class="min-w-[300px] py-5 pr-4 pl-8">
+                        <tr class="border-b border-stroke dark:border-dark-3">
+                          <th class="min-w-[300px] py-5 pl-8 pr-4">
                             <p
-                              class="text-dark text-left text-base font-medium dark:text-white"
+                              class="text-left text-base font-medium text-dark dark:text-white"
                             >
                               Product Name
                             </p>
                           </th>
                           <th class="min-w-[90px] px-4 py-5">
                             <p
-                              class="text-dark text-left text-base font-medium dark:text-white"
+                              class="text-left text-base font-medium text-dark dark:text-white"
                             >
                               Category
                             </p>
                           </th>
                           <th class="min-w-[90px] px-4 py-5">
                             <p
-                              class="text-dark text-left text-base font-medium dark:text-white"
+                              class="text-left text-base font-medium text-dark dark:text-white"
                             >
                               Price
                             </p>
                           </th>
                           <th class="min-w-[90px] px-4 py-5">
                             <p
-                              class="text-dark text-left text-base font-medium dark:text-white"
+                              class="text-left text-base font-medium text-dark dark:text-white"
                             >
                               Sold
                             </p>
                           </th>
-                          <th class="min-w-[90px] py-5 pr-8 pl-4">
+                          <th class="min-w-[90px] py-5 pl-4 pr-8">
                             <p
-                              class="text-dark text-left text-base font-medium dark:text-white"
+                              class="text-left text-base font-medium text-dark dark:text-white"
                             >
                               Profit
                             </p>
@@ -1393,9 +1393,9 @@
 
                       <tbody>
                         <tr
-                          class="border-stroke dark:border-dark-3 border-b last-of-type:border-none"
+                          class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
                         >
-                          <td class="py-[18px] pr-3 pl-6">
+                          <td class="py-[18px] pl-6 pr-3">
                             <div class="flex items-center">
                               <div class="relative">
                                 <input
@@ -1407,10 +1407,10 @@
 
                                 <label
                                   for="checkbox-2"
-                                  class="text-body-color dark:text-dark-6 flex cursor-pointer items-center text-base"
+                                  class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
                                 >
                                   <span
-                                    class="icon-box border-stroke dark:border-dark-3 mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] bg-transparent text-white"
+                                    class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
                                   >
                                     <svg
                                       width="14"
@@ -1436,7 +1436,7 @@
                                   class="mr-4 h-[50px] w-[60px] rounded object-cover object-center"
                                 />
                                 <p
-                                  class="text-body-color dark:text-dark-6 text-base"
+                                  class="text-base text-body-color dark:text-dark-6"
                                 >
                                   Apple Watch Series 7
                                 </p>
@@ -1445,33 +1445,33 @@
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               Electronics
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $269
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               22
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $45
                             </p>
                           </td>
-                          <td class="py-[18px] pr-6 pl-4">
+                          <td class="py-[18px] pl-4 pr-6">
                             <div
                               x-data="{openDropDown: false}"
                               class="relative"
@@ -1514,15 +1514,15 @@
                               <div
                                 x-show="openDropDown"
                                 @click.outside="openDropDown = false"
-                                class="border-stroke shadow-card dark:border-dark-3 dark:bg-dark absolute top-full right-0 z-40 w-[200px] space-y-1 rounded border bg-white p-2"
+                                class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
                               >
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Edit
                                 </button>
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Delete
                                 </button>
@@ -1532,9 +1532,9 @@
                         </tr>
 
                         <tr
-                          class="border-stroke dark:border-dark-3 border-b last-of-type:border-none"
+                          class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
                         >
-                          <td class="py-[18px] pr-3 pl-6">
+                          <td class="py-[18px] pl-6 pr-3">
                             <div class="flex items-center">
                               <div class="relative">
                                 <input
@@ -1546,10 +1546,10 @@
 
                                 <label
                                   for="checkbox-3"
-                                  class="text-body-color dark:text-dark-6 flex cursor-pointer items-center text-base"
+                                  class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
                                 >
                                   <span
-                                    class="icon-box border-stroke dark:border-dark-3 mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] bg-transparent text-white"
+                                    class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
                                   >
                                     <svg
                                       width="14"
@@ -1575,7 +1575,7 @@
                                   class="mr-4 h-[50px] w-[60px] rounded object-cover object-center"
                                 />
                                 <p
-                                  class="text-body-color dark:text-dark-6 text-base"
+                                  class="text-base text-body-color dark:text-dark-6"
                                 >
                                   Macbook Pro M1
                                 </p>
@@ -1584,33 +1584,33 @@
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               Electronics
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $546
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               34
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $125
                             </p>
                           </td>
-                          <td class="py-[18px] pr-6 pl-4">
+                          <td class="py-[18px] pl-4 pr-6">
                             <div
                               x-data="{openDropDown: false}"
                               class="relative"
@@ -1653,15 +1653,15 @@
                               <div
                                 x-show="openDropDown"
                                 @click.outside="openDropDown = false"
-                                class="border-stroke shadow-card dark:border-dark-3 dark:bg-dark absolute top-full right-0 z-40 w-[200px] space-y-1 rounded border bg-white p-2"
+                                class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
                               >
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Edit
                                 </button>
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Delete
                                 </button>
@@ -1671,9 +1671,9 @@
                         </tr>
 
                         <tr
-                          class="border-stroke dark:border-dark-3 border-b last-of-type:border-none"
+                          class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
                         >
-                          <td class="py-[18px] pr-3 pl-6">
+                          <td class="py-[18px] pl-6 pr-3">
                             <div class="flex items-center">
                               <div class="relative">
                                 <input
@@ -1685,10 +1685,10 @@
 
                                 <label
                                   for="checkbox-4"
-                                  class="text-body-color dark:text-dark-6 flex cursor-pointer items-center text-base"
+                                  class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
                                 >
                                   <span
-                                    class="icon-box border-stroke dark:border-dark-3 mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] bg-transparent text-white"
+                                    class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
                                   >
                                     <svg
                                       width="14"
@@ -1714,7 +1714,7 @@
                                   class="mr-4 h-[50px] w-[60px] rounded object-cover object-center"
                                 />
                                 <p
-                                  class="text-body-color dark:text-dark-6 text-base"
+                                  class="text-base text-body-color dark:text-dark-6"
                                 >
                                   Dell Inspiron 15
                                 </p>
@@ -1723,33 +1723,33 @@
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               Electronics
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $444
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               64
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $247
                             </p>
                           </td>
-                          <td class="py-[18px] pr-6 pl-4">
+                          <td class="py-[18px] pl-4 pr-6">
                             <div
                               x-data="{openDropDown: false}"
                               class="relative"
@@ -1792,15 +1792,15 @@
                               <div
                                 x-show="openDropDown"
                                 @click.outside="openDropDown = false"
-                                class="border-stroke shadow-card dark:border-dark-3 dark:bg-dark absolute top-full right-0 z-40 w-[200px] space-y-1 rounded border bg-white p-2"
+                                class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
                               >
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Edit
                                 </button>
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Delete
                                 </button>
@@ -1810,9 +1810,9 @@
                         </tr>
 
                         <tr
-                          class="border-stroke dark:border-dark-3 border-b last-of-type:border-none"
+                          class="border-b border-stroke last-of-type:border-none dark:border-dark-3"
                         >
-                          <td class="py-[18px] pr-3 pl-6">
+                          <td class="py-[18px] pl-6 pr-3">
                             <div class="flex items-center">
                               <div class="relative">
                                 <input
@@ -1824,10 +1824,10 @@
 
                                 <label
                                   for="checkbox-5"
-                                  class="text-body-color dark:text-dark-6 flex cursor-pointer items-center text-base"
+                                  class="flex cursor-pointer items-center text-base text-body-color dark:text-dark-6"
                                 >
                                   <span
-                                    class="icon-box border-stroke dark:border-dark-3 mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] bg-transparent text-white"
+                                    class="icon-box mr-5 flex h-5 w-5 items-center justify-center rounded-[3px] border-[.5px] border-stroke bg-transparent text-white dark:border-dark-3"
                                   >
                                     <svg
                                       width="14"
@@ -1853,7 +1853,7 @@
                                   class="mr-4 h-[50px] w-[60px] rounded object-cover object-center"
                                 />
                                 <p
-                                  class="text-body-color dark:text-dark-6 text-base"
+                                  class="text-base text-body-color dark:text-dark-6"
                                 >
                                   HP Probook 450
                                 </p>
@@ -1862,33 +1862,33 @@
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               Electronics
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $499
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               72
                             </p>
                           </td>
                           <td class="px-4 py-[18px]">
                             <p
-                              class="text-body-color dark:text-dark-6 text-base"
+                              class="text-base text-body-color dark:text-dark-6"
                             >
                               $103
                             </p>
                           </td>
-                          <td class="py-[18px] pr-6 pl-4">
+                          <td class="py-[18px] pl-4 pr-6">
                             <div
                               x-data="{openDropDown: false}"
                               class="relative"
@@ -1931,15 +1931,15 @@
                               <div
                                 x-show="openDropDown"
                                 @click.outside="openDropDown = false"
-                                class="border-stroke shadow-card dark:border-dark-3 dark:bg-dark absolute top-full right-0 z-40 w-[200px] space-y-1 rounded border bg-white p-2"
+                                class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 shadow-card dark:border-dark-3 dark:bg-dark"
                               >
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Edit
                                 </button>
                                 <button
-                                  class="text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2 w-full rounded px-3 py-2 text-left text-sm"
+                                  class="w-full rounded px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                                 >
                                   Delete
                                 </button>
@@ -1961,9 +1961,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

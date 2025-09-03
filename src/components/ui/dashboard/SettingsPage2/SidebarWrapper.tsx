@@ -1,5 +1,5 @@
 import React from 'react';
-import StateContext from './StateContext'
+import StateContext from './StateContext';
 
 const SidebarWrapper = ({ children }) => {
   return (
@@ -15,7 +15,7 @@ const SidebarWrapper = ({ children }) => {
         </div>
       )}
     </StateContext.Consumer>
-  )
-}
+  );
+};
 
 export default SidebarWrapper;

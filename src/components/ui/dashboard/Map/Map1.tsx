@@ -1,26 +1,26 @@
-import jsVectorMap from "jsvectormap";
-import "jsvectormap/dist/css/jsvectormap.css";
-import "jsvectormap/dist/maps/world-merc";
-import React, { useEffect } from "react";
+import jsVectorMap from 'jsvectormap';
+import 'jsvectormap/dist/css/jsvectormap.css';
+import 'jsvectormap/dist/maps/world-merc';
+import React, { useEffect } from 'react';
 
 const Map1 = () => {
   useEffect(() => {
     const markers = [
-      { name: "Russia", coords: [61, 105], sales: 580 },
-      { name: "Geenland", coords: [72, -42], sales: 600 },
-      { name: "Canada", coords: [56.1304, -106.3468], sales: 820 },
-      { name: "Palestine", coords: [31.5, 34.8], sales: 350 },
-      { name: "Brazil", coords: [-14.235, -51.9253], sales: 490 },
+      { name: 'Russia', coords: [61, 105], sales: 580 },
+      { name: 'Geenland', coords: [72, -42], sales: 600 },
+      { name: 'Canada', coords: [56.1304, -106.3468], sales: 820 },
+      { name: 'Palestine', coords: [31.5, 34.8], sales: 350 },
+      { name: 'Brazil', coords: [-14.235, -51.9253], sales: 490 },
     ];
 
     const map = new jsVectorMap({
-      selector: "#mapOne",
-      map: "world_merc",
+      selector: '#mapOne',
+      map: 'world_merc',
       zoomButtons: true,
 
       regionStyle: {
         initial: {
-          fill: "#C8D0D8",
+          fill: '#C8D0D8',
         },
       },
 
@@ -29,9 +29,9 @@ const Map1 = () => {
       markerStyle: {
         initial: {
           r: 7,
-          fill: "#3056D3",
+          fill: '#3056D3',
           fillOpacity: 1,
-          stroke: "#FFF",
+          stroke: '#FFF',
           strokeWidth: 5,
           strokeOpacity: 1,
         },
@@ -40,7 +40,7 @@ const Map1 = () => {
       labels: {
         regions: {
           render(code) {
-            return code.split("-")[1];
+            return code.split('-')[1];
           },
         },
       },
@@ -92,9 +92,7 @@ const Map1 = () => {
       <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
         <div className="mx-auto px-4 md:container">
           <div className="mx-auto w-full max-w-[430px] overflow-hidden rounded-lg border border-stroke bg-white px-[30px] pb-[30px] pt-6 dark:border-dark-3 dark:bg-dark-2">
-            <h4 className="mb-2 text-lg font-semibold text-dark dark:text-white">
-              Sells by State
-            </h4>
+            <h4 className="mb-2 text-lg font-semibold text-dark dark:text-white">Sells by State</h4>
 
             <div id="mapOne" className="mapOne h-[260px]"></div>
             <p className="mt-2 text-sm text-body-color dark:text-dark-6">

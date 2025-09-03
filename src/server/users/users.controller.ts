@@ -1,16 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-  Request,
-  Put,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,7 +9,7 @@ import { Request as ExpressRequest } from 'express';
 
 /**
  * Контроллер пользователей
- * 
+ *
  * Обрабатывает запросы для работы с пользователями
  */
 @ApiTags('users')
@@ -36,8 +24,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Создание пользователя' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Пользователь создан',
     type: User,
   })
@@ -50,8 +38,8 @@ export class UsersController {
    */
   @Get()
   @ApiOperation({ summary: 'Получение списка пользователей' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Список пользователей',
     schema: {
       type: 'object',
@@ -64,10 +52,10 @@ export class UsersController {
             limit: { type: 'number' },
             total: { type: 'number' },
             totalPages: { type: 'number' },
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   })
   async findAll(
     @Query('search') search?: string,
@@ -99,8 +87,8 @@ export class UsersController {
    */
   @Get('statistics')
   @ApiOperation({ summary: 'Получение статистики пользователей' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Статистика пользователей',
     schema: {
       type: 'object',
@@ -111,8 +99,8 @@ export class UsersController {
         suspended: { type: 'number' },
         inactive: { type: 'number' },
         banned: { type: 'number' },
-      }
-    }
+      },
+    },
   })
   getStatistics() {
     return this.usersService.getStatistics();
@@ -128,8 +116,8 @@ export class UsersController {
    */
   @Get('me')
   @ApiOperation({ summary: 'Получение профиля текущего пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Профиль пользователя (обернутый в стандартный ответ)',
   })
   async getProfile(@Request() req: ExpressRequest): Promise<{ success: true; data: User | null }> {
@@ -150,8 +138,8 @@ export class UsersController {
    */
   @Get(':id')
   @ApiOperation({ summary: 'Получение пользователя по ID' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Данные пользователя',
     type: User,
   })
@@ -167,8 +155,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Обновление пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователь обновлен',
     type: User,
   })
@@ -197,8 +185,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Активация пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователь активирован',
     type: User,
   })
@@ -214,8 +202,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Блокировка пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователь заблокирован',
     type: User,
   })
@@ -231,8 +219,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Изменение роли пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Роль пользователя изменена',
     type: User,
   })
@@ -248,20 +236,17 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Массовое обновление пользователей' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователи обновлены',
     schema: {
       type: 'object',
       properties: {
-        count: { type: 'number' }
-      }
-    }
+        count: { type: 'number' },
+      },
+    },
   })
-  bulkUpdate(@Body() body: { 
-    userIds: string[]; 
-    data: Partial<{ globalRole: GlobalRole; status: UserStatus }> 
-  }) {
+  bulkUpdate(@Body() body: { userIds: string[]; data: Partial<{ globalRole: GlobalRole; status: UserStatus }> }) {
     return this.usersService.bulkUpdate(body.userIds, body.data);
   }
 
@@ -272,15 +257,15 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Массовое удаление пользователей' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователи удалены',
     schema: {
       type: 'object',
       properties: {
-        count: { type: 'number' }
-      }
-    }
+        count: { type: 'number' },
+      },
+    },
   })
   bulkDelete(@Body() body: { userIds: string[] }) {
     return this.usersService.bulkDelete(body.userIds);
@@ -293,8 +278,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Назначение пользователя в группы' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователь назначен в группы',
   })
   @ApiResponse({ status: 404, description: 'Пользователь не найден' })
@@ -309,8 +294,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Удаление пользователя из группы' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Пользователь удален из группы',
   })
   @ApiResponse({ status: 404, description: 'Пользователь не найден' })
@@ -325,8 +310,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Получение внешних провайдеров пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Список провайдеров',
     schema: {
       type: 'array',
@@ -337,9 +322,9 @@ export class UsersController {
           provider: { type: 'string' },
           providerUserId: { type: 'string' },
           createdAt: { type: 'string', format: 'date-time' },
-        }
-      }
-    }
+        },
+      },
+    },
   })
   @ApiResponse({ status: 404, description: 'Пользователь не найден' })
   getUserAuthProviders(@Param('id') id: string) {
@@ -353,18 +338,22 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Добавление внешнего провайдера к пользователю' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Провайдер добавлен',
   })
   @ApiResponse({ status: 404, description: 'Пользователь не найден' })
-  addUserAuthProvider(@Param('id') id: string, @Body() body: { 
-    provider: string; 
-    providerUserId: string; 
-    accessToken?: string; 
-    refreshToken?: string; 
-    expiresAt?: Date 
-  }) {
+  addUserAuthProvider(
+    @Param('id') id: string,
+    @Body()
+    body: {
+      provider: string;
+      providerUserId: string;
+      accessToken?: string;
+      refreshToken?: string;
+      expiresAt?: Date;
+    },
+  ) {
     return this.usersService.addUserAuthProvider(id, body);
   }
 
@@ -375,8 +364,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Удаление внешнего провайдера пользователя' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Провайдер удален',
   })
   @ApiResponse({ status: 404, description: 'Пользователь или провайдер не найден' })
@@ -391,8 +380,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Получение настроек пользователей' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Настройки пользователей',
     schema: {
       type: 'object',
@@ -403,7 +392,7 @@ export class UsersController {
             allowSelfRegistration: { type: 'boolean' },
             requireEmailVerification: { type: 'boolean' },
             defaultRole: { type: 'string' },
-          }
+          },
         },
         authentication: {
           type: 'object',
@@ -411,24 +400,24 @@ export class UsersController {
             enableTwoFactor: { type: 'boolean' },
             sessionTimeout: { type: 'number' },
             allowedProviders: { type: 'array', items: { type: 'string' } },
-          }
+          },
         },
         notifications: {
           type: 'object',
           properties: {
             emailNotifications: { type: 'boolean' },
             invitationNotifications: { type: 'boolean' },
-          }
+          },
         },
         privacy: {
           type: 'object',
           properties: {
             showOnlineStatus: { type: 'boolean' },
             allowProfileViewing: { type: 'boolean' },
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   })
   updateUserSettings(@Body() settings: any) {
     return this.usersService.updateUserSettings(settings);

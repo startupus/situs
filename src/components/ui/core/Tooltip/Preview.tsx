@@ -1,5 +1,5 @@
-import React from "react";
-import Tooltip from ".";
+import React from 'react';
+import Tooltip from '.';
 
 const Preview = () => {
   return (

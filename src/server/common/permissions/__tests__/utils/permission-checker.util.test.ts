@@ -10,7 +10,7 @@ import {
   supportsClientScope,
   getPermissionCategory,
   isSystemPermission,
-  getPermissionLevel
+  getPermissionLevel,
 } from '../../utils/permission-checker.util';
 
 describe('PermissionCheckerUtil', () => {

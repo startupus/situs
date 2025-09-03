@@ -32,7 +32,7 @@ export const useUsersSSE = ({ onUserUpdated, onConnected, onError }: UseUsersSSE
     eventSource.onmessage = (event) => {
       try {
         const data: UserSSEEvent = JSON.parse(event.data);
-        
+
         switch (data.type) {
           case 'sse_connected':
             console.log('✅ SSE handshake для пользователей завершен');
@@ -68,6 +68,6 @@ export const useUsersSSE = ({ onUserUpdated, onConnected, onError }: UseUsersSSE
     close: () => {
       eventSourceRef.current?.close();
       eventSourceRef.current = null;
-    }
+    },
   };
 };

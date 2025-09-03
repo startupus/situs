@@ -2,55 +2,55 @@ import React from "react";
 
 const tableData = [
   {
-    name: 'Free Package',
-    rate: '$0.00',
-    invoiceDate: '25 Dec, 2024',
+    name: "Free Package",
+    rate: "$0.00",
+    invoiceDate: "25 Dec, 2024",
     paid: true,
     unpaid: false,
     pending: false,
   },
   {
-    name: 'Standard Package',
-    rate: '$59.00',
-    invoiceDate: '25 Dec, 2024',
+    name: "Standard Package",
+    rate: "$59.00",
+    invoiceDate: "25 Dec, 2024",
     paid: true,
     unpaid: false,
     pending: false,
   },
   {
-    name: 'Business Package',
-    rate: '$99.00',
-    invoiceDate: '25 Dec, 2024',
+    name: "Business Package",
+    rate: "$99.00",
+    invoiceDate: "25 Dec, 2024",
     paid: false,
     unpaid: true,
     pending: false,
   },
   {
-    name: 'Standard Package',
-    rate: '$59.00',
-    invoiceDate: '25 Dec, 2024',
+    name: "Standard Package",
+    rate: "$59.00",
+    invoiceDate: "25 Dec, 2024",
     paid: false,
     unpaid: false,
     pending: true,
   },
-]
+];
 
 const headers = [
-  { name: 'Package', styles: 'min-w-[220px] text-black' },
-  { name: 'Invoice date ', styles: 'min-w-[150px] text-black' },
-  { name: 'Status', styles: 'min-w-[120px] text-body-color' },
-  { name: 'Actions', styles: 'min-w-[100px] text-body-color' },
-]
+  { name: "Package", styles: "min-w-[220px] text-black" },
+  { name: "Invoice date ", styles: "min-w-[150px] text-black" },
+  { name: "Status", styles: "min-w-[120px] text-body-color" },
+  { name: "Actions", styles: "min-w-[100px] text-body-color" },
+];
 
 const Table6 = () => {
   return (
-    <section className='bg-white dark:bg-dark py-20 lg:py-[120px]'>
-      <div className='container mx-auto'>
-        <div className='-mx-4 flex flex-wrap justify-center'>
-          <div className='w-full px-4 lg:w-10/12'>
-            <div className='p-6 bg-white rounded-[10px] dark:bg-dark-2 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.15)] lg:p-9'>
-              <div className='max-w-full overflow-x-auto'>
-                <table className='w-full table-auto'>
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
+      <div className="container mx-auto">
+        <div className="-mx-4 flex flex-wrap justify-center">
+          <div className="w-full px-4 lg:w-10/12">
+            <div className="rounded-[10px] bg-white p-6 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.15)] dark:bg-dark-2 lg:p-9">
+              <div className="max-w-full overflow-x-auto">
+                <table className="w-full table-auto">
                   <TableHead headers={headers} />
                   <TableBody data={tableData} />
                 </table>
@@ -60,18 +60,18 @@ const Table6 = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Table6;
 
 const TableHead = ({ headers }) => {
   return (
     <thead>
-      <tr className='text-left rounded-sm bg-gray-2 dark:bg-dark-3'>
+      <tr className="rounded-sm bg-gray-2 text-left dark:bg-dark-3">
         {headers.map((header, index) => (
           <th
-            className={`py-4 px-4 first:pl-9 xl:first:pl-11 last:pr-9 xl:last:pr-11 text-base font-medium uppercase text-dark dark:text-white ${header.styles}`}
+            className={`px-4 py-4 text-base font-medium uppercase text-dark first:pl-9 last:pr-9 dark:text-white xl:first:pl-11 xl:last:pr-11 ${header.styles}`}
             key={index}
           >
             {header.name}
@@ -79,41 +79,47 @@ const TableHead = ({ headers }) => {
         ))}
       </tr>
     </thead>
-  )
-}
+  );
+};
 
 const TableBody = ({ data }) => {
   return (
     <tbody>
       {data.map((row, index) => (
         <tr key={index}>
-          <td className='px-4 py-5 border-b border-stroke dark:border-dark-3 pl-9 xl:pl-11'>
-            <h5 className='text-base font-medium text-dark dark:text-white'>{row.name}</h5>
-            <p className='text-sm dark:text-dark-6 text-body-color'>{row.rate}</p>
+          <td className="border-b border-stroke px-4 py-5 pl-9 dark:border-dark-3 xl:pl-11">
+            <h5 className="text-base font-medium text-dark dark:text-white">
+              {row.name}
+            </h5>
+            <p className="text-sm text-body-color dark:text-dark-6">
+              {row.rate}
+            </p>
           </td>
-          <td className='px-4 py-5 border-b border-stroke dark:border-dark-3'>
-            <p className='text-base text-dark dark:text-dark-6'>{row.invoiceDate}</p>
+          <td className="border-b border-stroke px-4 py-5 dark:border-dark-3">
+            <p className="text-base text-dark dark:text-dark-6">
+              {row.invoiceDate}
+            </p>
           </td>
-          <td className='px-4 py-5 border-b border-stroke dark:border-dark-3'>
+          <td className="border-b border-stroke px-4 py-5 dark:border-dark-3">
             {row.paid && (
-              <p className='inline-flex px-3 py-1 text-sm font-medium rounded-full bg-green-light-6 text-green-dark'>
+              <p className="inline-flex rounded-full bg-green-light-6 px-3 py-1 text-sm font-medium text-green-dark">
                 Paid
               </p>
             )}
             {row.unpaid && (
-              <p className='inline-flex px-3 py-1 text-sm font-medium rounded-full bg-red-light-5 text-red-dark'>
+              <p className="inline-flex rounded-full bg-red-light-5 px-3 py-1 text-sm font-medium text-red-dark">
                 Unpaid
               </p>
             )}
             {row.pending && (
-              <p className='inline-flex px-3 py-1 text-sm font-medium rounded-full bg-yellow-light-4 text-yellow-dark-2'>
+              <p className="inline-flex rounded-full bg-yellow-light-4 px-3 py-1 text-sm font-medium text-yellow-dark-2">
                 Pending
               </p>
             )}
           </td>
-          <td className='px-4 py-5 border-b border-stroke dark:border-dark-3'>
-            <div className='flex items-center space-x-4'>
-              <button className='text-body-color hover:text-primary dark:text-dark-6'>
+          <td className="border-b border-stroke px-4 py-5 dark:border-dark-3">
+            <div className="flex items-center space-x-4">
+              <button className="text-body-color hover:text-primary dark:text-dark-6">
                 <svg
                   width={22}
                   height={22}
@@ -131,7 +137,7 @@ const TableBody = ({ data }) => {
                   />
                 </svg>
               </button>
-              <button className='text-body-color hover:text-primary dark:text-dark-6'>
+              <button className="text-body-color hover:text-primary dark:text-dark-6">
                 <svg
                   width={22}
                   height={22}
@@ -154,5 +160,5 @@ const TableBody = ({ data }) => {
         </tr>
       ))}
     </tbody>
-  )
-}
+  );
+};

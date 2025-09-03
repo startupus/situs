@@ -1,13 +1,13 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart6 = () => {
   const series = [72, 27];
   const options = {
     chart: {
-      fontFamily: "Inter, sans-serif",
+      fontFamily: 'Inter, sans-serif',
       height: 250,
-      type: "radialBar",
+      type: 'radialBar',
     },
 
     responsive: [
@@ -26,16 +26,16 @@ const Chart6 = () => {
         dataLabels: {
           name: {
             show: true,
-            fontSize: "22px",
+            fontSize: '22px',
             offsetY: -2,
           },
           value: {
-            fontSize: "16px",
+            fontSize: '16px',
             offsetY: 2,
           },
           total: {
             show: true,
-            label: "Total",
+            label: 'Total',
           },
         },
       },
@@ -43,11 +43,11 @@ const Chart6 = () => {
     dataLabels: {
       enabled: true,
     },
-    colors: ["#3758F9", "#13C296"],
-    labels: ["Sent", "Receive"],
+    colors: ['#3758F9', '#13C296'],
+    labels: ['Sent', 'Receive'],
     legend: {
       show: true,
-      position: "bottom",
+      position: 'bottom',
     },
   };
 
@@ -57,12 +57,8 @@ const Chart6 = () => {
         <div className="mx-auto w-full max-w-[500px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="justify-between sm:flex">
             <div className="mb-4 sm:mb-0">
-              <h5 className="text-xl font-semibold text-dark dark:text-white">
-                Email Sent
-              </h5>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                Detailed data of your email inbox
-              </p>
+              <h5 className="text-xl font-semibold text-dark dark:text-white">Email Sent</h5>
+              <p className="text-sm text-body-color dark:text-dark-6">Detailed data of your email inbox</p>
             </div>
             <div>
               <div className="relative z-20 inline-block rounded-md bg-transparent">
@@ -95,12 +91,7 @@ const Chart6 = () => {
           </div>
 
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart
-              options={options}
-              series={series}
-              type="radialBar"
-              height={250}
-            />
+            <ReactApexChart options={options} series={series} type="radialBar" height={250} />
           </div>
         </div>
       </div>

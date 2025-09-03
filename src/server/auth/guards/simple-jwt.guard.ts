@@ -17,14 +17,14 @@ export class SimpleJwtGuard implements CanActivate {
     }
 
     const token = authHeader.substring(7);
-    
+
     // Простая проверка тестового токена
     if (token === 'test-token-12345') {
       request.user = {
         id: 'test-user-id',
         sub: 'test-user-id',
         email: 'test@example.com',
-        name: 'Test User'
+        name: 'Test User',
       };
       return true;
     }

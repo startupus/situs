@@ -7,11 +7,11 @@ interface ProjectContextType {
   currentProject: Project | null;
   currentPage: ProjectPage | null;
   pages: ProjectPage[];
-  
+
   // Управление проектом
   loadProject: (projectId: string) => Promise<void>;
   updateProject: (updates: Partial<Project>) => Promise<void>;
-  
+
   // Управление страницами
   createPage: (data: CreatePageData) => Promise<ProjectPage>;
   updatePage: (pageId: string, data: UpdatePageData) => Promise<void>;
@@ -19,7 +19,7 @@ interface ProjectContextType {
   loadPage: (pageId: string) => Promise<void>;
   savePage: (pageId: string, content: any) => Promise<void>;
   publishPage: (pageId: string) => Promise<void>;
-  
+
   // Состояние
   isLoading: boolean;
   error: string | null;
@@ -60,13 +60,13 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
   const loadProject = async (projectId: string) => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
       const project = await projectsApi.getProject(projectId);
-      
+
       setCurrentProject(project);
       setPages(project.pages || []);
-      
+
       // Автоматически загружаем первую страницу
       if (project.pages && project.pages.length > 0) {
         setCurrentPage(project.pages[0]);
@@ -83,10 +83,10 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
   // Обновление проекта
   const updateProject = async (updates: Partial<Project>) => {
     if (!currentProject) return;
-    
+
     setIsLoading(true);
     setError(null);
-    
+
     try {
       const updatedProject = await projectsApi.updateProject(currentProject.id, updates);
       setCurrentProject(updatedProject);
@@ -103,7 +103,7 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
   // Создание страницы
   const createPage = async (data: CreatePageData): Promise<ProjectPage> => {
     if (!currentProject) throw new Error('Проект не загружен');
-    
+
     setIsLoading(true);
     try {
       const newPage: ProjectPage = {
@@ -114,15 +114,15 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
         meta: {},
         status: 'draft',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       const updatedPages = [...pages, newPage];
       setPages(updatedPages);
-      
+
       // Обновляем проект
       await updateProject({ pages: updatedPages });
-      
+
       return newPage;
     } catch (err) {
       setError('Ошибка создания страницы');
@@ -136,27 +136,27 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
   const updatePage = async (pageId: string, data: UpdatePageData) => {
     setIsLoading(true);
     try {
-      const updatedPages = pages.map(page => {
+      const updatedPages = pages.map((page) => {
         if (page.id === pageId) {
           const updated = {
             ...page,
             ...data,
-            updatedAt: new Date()
+            updatedAt: new Date(),
           };
-          
+
           // Если обновляем текущую страницу
           if (currentPage?.id === pageId) {
             setCurrentPage(updated);
           }
-          
+
           return updated;
         }
         return page;
       });
-      
+
       setPages(updatedPages);
       await updateProject({ pages: updatedPages });
-      
+
       console.log('Page updated:', data);
     } catch (err) {
       setError('Ошибка обновления страницы');
@@ -170,14 +170,14 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
   const deletePage = async (pageId: string) => {
     setIsLoading(true);
     try {
-      const updatedPages = pages.filter(page => page.id !== pageId);
+      const updatedPages = pages.filter((page) => page.id !== pageId);
       setPages(updatedPages);
-      
+
       // Если удаляем текущую страницу, сбрасываем её
       if (currentPage?.id === pageId) {
         setCurrentPage(updatedPages.length > 0 ? updatedPages[0] : null);
       }
-      
+
       await updateProject({ pages: updatedPages });
       console.log('Page deleted:', pageId);
     } catch (err) {
@@ -190,7 +190,7 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
 
   // Загрузка страницы
   const loadPage = async (pageId: string) => {
-    const page = pages.find(p => p.id === pageId);
+    const page = pages.find((p) => p.id === pageId);
     if (page) {
       setCurrentPage(page);
     } else {
@@ -205,9 +205,9 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
 
   // Публикация страницы
   const publishPage = async (pageId: string) => {
-    await updatePage(pageId, { 
+    await updatePage(pageId, {
       status: 'published',
-      publishedAt: new Date()
+      publishedAt: new Date(),
     });
   };
 
@@ -224,14 +224,10 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
     savePage,
     publishPage,
     isLoading,
-    error
+    error,
   };
 
-  return (
-    <ProjectContext.Provider value={value}>
-      {children}
-    </ProjectContext.Provider>
-  );
+  return <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>;
 };
 
-export default ProjectContext; 
+export default ProjectContext;

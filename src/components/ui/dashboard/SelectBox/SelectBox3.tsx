@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const SelectBox3 = () => {
   return (
     <section className="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
       <div className="container mx-auto">
         <div>
-          <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">
-            Shipping Address
-          </h3>
+          <h3 className="mb-6 text-lg font-semibold text-dark dark:text-white">Shipping Address</h3>
           <div className="flex flex-wrap">
             <SelectBoxItem
               name="one"
@@ -50,9 +48,7 @@ const SelectBoxItem = ({ id, name, address1, address2, title, subtitle }) => {
           htmlFor={id}
           className="block cursor-pointer overflow-hidden rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 py-5 px-4 lg:px-4 xl:px-6"
         >
-          <span className="title mb-[6px] block text-base font-semibold text-dark dark:text-white">
-            {title}
-          </span>
+          <span className="title mb-[6px] block text-base font-semibold text-dark dark:text-white">{title}</span>
           <span className="block text-sm text-dark dark:text-white">
             {subtitle}
             {address1} <br />

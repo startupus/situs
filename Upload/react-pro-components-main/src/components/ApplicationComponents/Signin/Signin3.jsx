@@ -165,7 +165,7 @@ const InputBox = ({ type, placeholder, name }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="h-12 w-full border border-transparent bg-gray-2 px-5 text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-white"
+        className="outline-hidden h-12 w-full border border-transparent bg-gray-2 px-5 text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark dark:text-white"
       />
     </div>
   );

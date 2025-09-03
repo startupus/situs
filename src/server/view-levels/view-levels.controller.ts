@@ -1,14 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ViewLevelsService } from './view-levels.service';
 import { CreateViewLevelDto } from './dto/create-view-level.dto';
@@ -31,8 +21,8 @@ export class ViewLevelsController {
    */
   @Post()
   @ApiOperation({ summary: 'Создание уровня доступа' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Уровень доступа создан',
     type: ViewLevel,
   })
@@ -45,8 +35,8 @@ export class ViewLevelsController {
    */
   @Get()
   @ApiOperation({ summary: 'Получение списка уровней доступа' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Список уровней доступа',
     type: [ViewLevel],
   })
@@ -59,8 +49,8 @@ export class ViewLevelsController {
    */
   @Get(':id')
   @ApiOperation({ summary: 'Получение уровня доступа по ID' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Данные уровня доступа',
     type: ViewLevel,
   })
@@ -74,8 +64,8 @@ export class ViewLevelsController {
    */
   @Patch(':id')
   @ApiOperation({ summary: 'Обновление уровня доступа' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Уровень доступа обновлен',
     type: ViewLevel,
   })
@@ -100,8 +90,8 @@ export class ViewLevelsController {
    */
   @Put(':id/groups')
   @ApiOperation({ summary: 'Назначение групп к уровню доступа' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Группы назначены к уровню доступа',
     type: ViewLevel,
   })

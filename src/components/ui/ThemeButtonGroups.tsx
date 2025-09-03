@@ -1,10 +1,6 @@
 // src/components/ui/ThemeButtonGroups.tsx
 import React from 'react';
-import { 
-  ButtonGroup1,
-  ButtonGroup2,
-  ButtonGroup3
-} from './core';
+import { ButtonGroup1, ButtonGroup2, ButtonGroup3 } from './core';
 
 // ButtonGroup Variants - простые обертки
 export const ThemeButtonGroup1: React.FC = () => <ButtonGroup1 />;

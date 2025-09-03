@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FeaturedProduct5 = () => {
   return (
@@ -21,14 +21,7 @@ const FeaturedProduct5 = () => {
 
 export default FeaturedProduct5;
 
-const SingleFeaturedProduct = ({
-  img,
-  details,
-  subtitle,
-  title,
-  link,
-  button,
-}) => {
+const SingleFeaturedProduct = ({ img, details, subtitle, title, link, button }) => {
   return (
     <div className="w-full lg:w-11/12 xl:w-10/12 2xl:w-9/12">
       <div className="shadow-product items-center overflow-hidden bg-white dark:bg-dark-2 md:flex">
@@ -38,15 +31,9 @@ const SingleFeaturedProduct = ({
 
         <div className="w-full">
           <div className="mx-auto max-w-[510px] px-5 py-8 xs:px-8">
-            <span className="mb-[14px] block text-lg font-semibold text-primary">
-              {subtitle}
-            </span>
-            <h2 className="mb-4 text-xl font-bold text-dark dark:text-white sm:text-3xl lg:text-4xl">
-              {title}
-            </h2>
-            <p className="mb-8 text-base text-body-color dark:text-dark-6">
-              {details}
-            </p>
+            <span className="mb-[14px] block text-lg font-semibold text-primary">{subtitle}</span>
+            <h2 className="mb-4 text-xl font-bold text-dark dark:text-white sm:text-3xl lg:text-4xl">{title}</h2>
+            <p className="mb-8 text-base text-body-color dark:text-dark-6">{details}</p>
             <a
               href={link}
               className="inline-flex items-center justify-center bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark"

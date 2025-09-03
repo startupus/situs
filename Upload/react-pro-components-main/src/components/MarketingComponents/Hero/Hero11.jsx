@@ -13,7 +13,7 @@ const Hero11 = () => {
                 <span className="mb-5 block text-base font-semibold text-primary sm:text-lg md:text-xl">
                   Built With TailGrids Components
                 </span>
-                <h1 className="mb-5 text-3xl font-bold capitalize leading-[1.208]! text-dark dark:text-white sm:text-[42px] xl:text-5xl">
+                <h1 className="leading-[1.208]! mb-5 text-3xl font-bold capitalize text-dark dark:text-white sm:text-[42px] xl:text-5xl">
                   Ready for Any Websites Crafted by TailGrids
                 </h1>
                 <p className="mb-9 text-base font-medium text-body-color dark:text-dark-6 md:text-lg">
@@ -199,7 +199,7 @@ const Navbar = () => {
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                 alt="logo"
-                className="w-full hidden dark:block"
+                className="hidden w-full dark:block"
               />
             </a>
           </div>

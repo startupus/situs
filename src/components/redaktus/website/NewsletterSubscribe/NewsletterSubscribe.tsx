@@ -1,11 +1,11 @@
-import * as React from 'react'
-import jsonp from 'jsonp'
-import { validate } from 'email-validator'
-import classNames from 'classnames'
+import * as React from 'react';
+import jsonp from 'jsonp';
+import { validate } from 'email-validator';
+import classNames from 'classnames';
 
-import { Text } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
+import { Text } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
 
 enum NewsletterProvider {
   MailChimp = 'MAILCHIMP',
@@ -13,16 +13,16 @@ enum NewsletterProvider {
 }
 
 export interface NewsletterSubscribeProps {
-  centered?: boolean
-  provider: NewsletterProvider
-  mailchimpUrl: string
-  buttonText: string
-  resultOkText: string
+  centered?: boolean;
+  provider: NewsletterProvider;
+  mailchimpUrl: string;
+  buttonText: string;
+  resultOkText: string;
 }
 
 interface IStatus {
-  status: string
-  message: string
+  status: string;
+  message: string;
 }
 
 const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
@@ -32,75 +32,68 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
   buttonText,
   resultOkText = `Thank you, we'll keep in touch with you!`,
 }) => {
-  const [email, setEmail] = React.useState('')
+  const [email, setEmail] = React.useState('');
   const [status, setStatus] = React.useState<IStatus>({
     status: 'IDLE',
     message: '',
-  })
+  });
 
   const sendData = (url: string) => {
-    setStatus({ status: 'SENDING', message: '' })
+    setStatus({ status: 'SENDING', message: '' });
     jsonp(url, { param: 'c', timeout: 3500 }, (err: any, data: any) => {
       if (err) {
         setStatus({
           status: 'ERROR',
           message: 'An error occurred. Please, try again.',
-        })
+        });
       } else if (data.msg.includes('already subscribed')) {
-        setStatus({ status: 'ERROR', message: 'You were already subscribed' })
+        setStatus({ status: 'ERROR', message: 'You were already subscribed' });
       } else if (data.result !== 'success') {
         setStatus({
           status: 'ERROR',
           message: 'An error occurred. Please, try again.',
-        })
+        });
       } else {
-        setStatus({ status: 'SUCCESS', message: '' })
+        setStatus({ status: 'SUCCESS', message: '' });
       }
-    })
-  }
+    });
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     if (provider !== NewsletterProvider.MailChimp) {
       setStatus({
         status: 'ERROR',
         message: 'Provider not implemented',
-      })
-      return
+      });
+      return;
     }
-    const isEmailValid = validate(email)
+    const isEmailValid = validate(email);
 
     if (!isEmailValid) {
       setStatus({
         status: 'ERROR',
         message: 'Please, enter a valid email address',
-      })
-      return
+      });
+      return;
     }
 
-    if (
-      !mailchimpUrl ||
-      mailchimpUrl.length < 10 ||
-      mailchimpUrl.indexOf('post') === -1
-    ) {
+    if (!mailchimpUrl || mailchimpUrl.length < 10 || mailchimpUrl.indexOf('post') === -1) {
       setStatus({
         status: 'ERROR',
         message: 'Invalid Mailchimp URL',
-      })
-      return
+      });
+      return;
     }
 
-    const emailEncoded = encodeURIComponent(email)
-    const endpoint = mailchimpUrl.replace(/\/post/g, '/post-json')
-    const url = `${endpoint}?EMAIL=${emailEncoded}`
-    sendData(url)
-  }
+    const emailEncoded = encodeURIComponent(email);
+    const endpoint = mailchimpUrl.replace(/\/post/g, '/post-json');
+    const url = `${endpoint}?EMAIL=${emailEncoded}`;
+    sendData(url);
+  };
 
   return (
-    <section
-      className="py-12"
-      style={{ backgroundColor: '#deeffc', color: '#113d5f' }}
-    >
+    <section className="py-12" style={{ backgroundColor: '#deeffc', color: '#113d5f' }}>
       <div
         className={classNames('max-w-xl mx-auto flex flex-col', {
           'items-center': centered,
@@ -141,9 +134,7 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
             {buttonText}
           </button>
         </form>
-        {status.status === 'SUCCESS' && (
-          <div className="text-xl mt-4">{resultOkText}</div>
-        )}
+        {status.status === 'SUCCESS' && <div className="text-xl mt-4">{resultOkText}</div>}
         {status.status === 'ERROR' && (
           <div className="mt-4" style={{ color: '#c00' }}>
             {status.message}
@@ -151,8 +142,8 @@ const NewsletterSubscribe: types.Brick<NewsletterSubscribeProps> = ({
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
 NewsletterSubscribe.schema = {
   name: blockNames.NewsletterSubscribe,
@@ -171,28 +162,29 @@ NewsletterSubscribe.schema = {
   }),
   sideEditProps: [
     {
-          name: 'centered',
-          label: 'Centered',
-          type: types.SideEditPropType.Boolean,
-        },
-        {
-          name: 'mailchimpUrl',
-          label: 'Mailchimp Form URL',
-          type: types.SideEditPropType.Text,
-          // validate: (value: any) =>
-          //   value && value.length > 10 && value.indexOf('https://') !== -1,
-          //   //&& value.indexOf('list-manage.com/subscribe/post?') !== -1,
-        },
-        {
-          name: 'buttonText',
-          label: 'Button text',
-          type: types.SideEditPropType.Text,
-        },
-        {
-          name: 'resultOkText',
-          label: 'Result OK text',
-          type: types.SideEditPropType.Text,
-        }],
-}
+      name: 'centered',
+      label: 'Centered',
+      type: types.SideEditPropType.Boolean,
+    },
+    {
+      name: 'mailchimpUrl',
+      label: 'Mailchimp Form URL',
+      type: types.SideEditPropType.Text,
+      // validate: (value: any) =>
+      //   value && value.length > 10 && value.indexOf('https://') !== -1,
+      //   //&& value.indexOf('list-manage.com/subscribe/post?') !== -1,
+    },
+    {
+      name: 'buttonText',
+      label: 'Button text',
+      type: types.SideEditPropType.Text,
+    },
+    {
+      name: 'resultOkText',
+      label: 'Result OK text',
+      type: types.SideEditPropType.Text,
+    },
+  ],
+};
 
-export default NewsletterSubscribe
+export default NewsletterSubscribe;

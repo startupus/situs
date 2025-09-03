@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  FiChevronRight, 
-  FiChevronDown, 
-  FiLayers, 
-  FiAlertTriangle, 
-  FiUser, 
-  FiTag, 
-  FiNavigation, 
-  FiEdit3, 
-  FiBarChart2, 
-  FiFileText, 
-  FiSettings, 
-  FiList, 
-  FiSliders, 
-  FiLock, 
-  FiCircle, 
-  FiCalendar, 
-  FiTrendingUp, 
-  FiUserCheck, 
-  FiMessageCircle, 
-  FiChevronDown as FiDropdown, 
-  FiCompass 
+import {
+  FiChevronRight,
+  FiChevronDown,
+  FiLayers,
+  FiAlertTriangle,
+  FiUser,
+  FiTag,
+  FiNavigation,
+  FiEdit3,
+  FiBarChart2,
+  FiFileText,
+  FiSettings,
+  FiList,
+  FiSliders,
+  FiLock,
+  FiCircle,
+  FiCalendar,
+  FiTrendingUp,
+  FiUserCheck,
+  FiMessageCircle,
+  FiChevronDown as FiDropdown,
+  FiCompass,
 } from 'react-icons/fi';
 
 interface MenuItem {
@@ -43,7 +43,7 @@ const menuItems: MenuItem[] = [
       { id: 'theme-forms', title: 'Forms', icon: <FiEdit3 size={16} /> },
       { id: 'theme-progress', title: 'Progress', icon: <FiBarChart2 size={16} /> },
       { id: 'theme-pagination', title: 'Pagination', icon: <FiFileText size={16} /> },
-    ]
+    ],
   },
   {
     id: 'core-components',
@@ -55,7 +55,7 @@ const menuItems: MenuItem[] = [
       { id: 'core-input-range', title: 'Input Range', icon: <FiSliders size={16} /> },
       { id: 'core-verification', title: 'Verification Inputs', icon: <FiLock size={16} /> },
       { id: 'core-buttons', title: 'Buttons', icon: <FiCircle size={16} /> },
-    ]
+    ],
   },
   {
     id: 'dashboard-components',
@@ -69,8 +69,8 @@ const menuItems: MenuItem[] = [
       { id: 'dashboard-chat', title: 'Chat', icon: <FiMessageCircle size={16} /> },
       { id: 'dashboard-dropdown', title: 'Dropdown', icon: <FiDropdown size={16} /> },
       { id: 'dashboard-navigation', title: 'Navigation', icon: <FiCompass size={16} /> },
-    ]
-  }
+    ],
+  },
 ];
 
 interface AppearanceDemoSidebarProps {
@@ -78,10 +78,7 @@ interface AppearanceDemoSidebarProps {
   onSectionChange?: (sectionId: string) => void;
 }
 
-const AppearanceDemoSidebar: React.FC<AppearanceDemoSidebarProps> = ({
-  activeSection,
-  onSectionChange
-}) => {
+const AppearanceDemoSidebar: React.FC<AppearanceDemoSidebarProps> = ({ activeSection, onSectionChange }) => {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['theme-components']));
   const [currentActive, setCurrentActive] = useState(activeSection || 'theme-components');
 
@@ -145,12 +142,15 @@ const AppearanceDemoSidebar: React.FC<AppearanceDemoSidebarProps> = ({
           className={`
             w-full flex items-center justify-between px-3 py-2 text-left rounded-md transition-colors
             ${level === 0 ? 'font-medium' : 'font-normal text-sm'}
-            ${isActive 
-              ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' 
-              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+            ${
+              isActive
+                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }
             ${level > 0 ? 'ml-4' : ''}
-          `.trim().replace(/\s+/g, ' ')}
+          `
+            .trim()
+            .replace(/\s+/g, ' ')}
         >
           <div className="flex items-center">
             <span className="mr-2">{item.icon}</span>
@@ -165,7 +165,7 @@ const AppearanceDemoSidebar: React.FC<AppearanceDemoSidebarProps> = ({
 
         {hasChildren && isExpanded && (
           <div className="mt-1 ml-2 border-l border-gray-200 dark:border-gray-600 pl-2">
-            {item.children!.map(child => renderMenuItem(child, level + 1))}
+            {item.children!.map((child) => renderMenuItem(child, level + 1))}
           </div>
         )}
       </div>
@@ -175,26 +175,18 @@ const AppearanceDemoSidebar: React.FC<AppearanceDemoSidebarProps> = ({
   return (
     <div className="w-64 h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto sticky top-0">
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          Компоненты
-        </h2>
-        
-        <nav className="space-y-1">
-          {menuItems.map(item => renderMenuItem(item))}
-        </nav>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Компоненты</h2>
+
+        <nav className="space-y-1">{menuItems.map((item) => renderMenuItem(item))}</nav>
 
         {/* Дополнительная информация */}
         <div className="mt-8 p-3 bg-gray-50 dark:bg-gray-900 rounded-md">
-          <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
-            Статистика
-          </h3>
+          <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Статистика</h3>
           <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
             <div>Theme Components: 11</div>
             <div>Core Components: 200+</div>
             <div>Dashboard Components: 100+</div>
-            <div className="font-medium text-blue-600 dark:text-blue-400 mt-2">
-              Всего: 300+ компонентов
-            </div>
+            <div className="font-medium text-blue-600 dark:text-blue-400 mt-2">Всего: 300+ компонентов</div>
           </div>
         </div>
 

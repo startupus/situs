@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const About8 = () => {
   return (
@@ -45,11 +45,7 @@ const About8 = () => {
                             gradientUnits="userSpaceOnUse"
                           >
                             <stop stop-color="white" />
-                            <stop
-                              offset="1"
-                              stop-color="white"
-                              stop-opacity="0"
-                            />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -81,11 +77,7 @@ const About8 = () => {
                             gradientUnits="userSpaceOnUse"
                           >
                             <stop stop-color="white" />
-                            <stop
-                              offset="1"
-                              stop-color="white"
-                              stop-opacity="0"
-                            />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -117,11 +109,7 @@ const About8 = () => {
                             gradientUnits="userSpaceOnUse"
                           >
                             <stop stop-color="white" />
-                            <stop
-                              offset="1"
-                              stop-color="white"
-                              stop-opacity="0"
-                            />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -140,33 +128,27 @@ const About8 = () => {
                 </h2>
 
                 <div className="flex mb-8">
-                  <span className="text-primary w-full max-w-[45px] pr-4 text-2xl font-bold">
-                    01
-                  </span>
+                  <span className="text-primary w-full max-w-[45px] pr-4 text-2xl font-bold">01</span>
                   <div className="w-full">
                     <h3 className="mb-4 text-xl font-bold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                       Refreshing Design
                     </h3>
                     <p className="text-base text-body-color dark:text-dark-6 mb-9">
-                      Clean, refreshing and high-quality that gives positive
-                      vibes. Figma source file also provided so you can use to
-                      prototype, experiment, play or adjust.
+                      Clean, refreshing and high-quality that gives positive vibes. Figma source file also provided so
+                      you can use to prototype, experiment, play or adjust.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex">
-                  <span className="text-primary w-full max-w-[45px] pr-4 text-2xl font-bold">
-                    02
-                  </span>
+                  <span className="text-primary w-full max-w-[45px] pr-4 text-2xl font-bold">02</span>
                   <div className="w-full">
                     <h3 className="mb-4 text-xl font-bold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                       Developer Friendly
                     </h3>
                     <p className="text-base text-body-color dark:text-dark-6 mb-9">
-                      Developer experience is our #1 priority, entire library is
-                      designed, coded, and organized in a way that saves
-                      hundreds of hours and increases productivity.
+                      Developer experience is our #1 priority, entire library is designed, coded, and organized in a way
+                      that saves hundreds of hours and increases productivity.
                     </p>
                   </div>
                 </div>

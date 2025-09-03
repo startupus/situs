@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseGuards,
-  Request,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Request, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -24,7 +16,7 @@ import { Public } from '../common/decorators/public.decorator';
 
 /**
  * Контроллер аутентификации
- * 
+ *
  * Обрабатывает запросы:
  * - Регистрация пользователей
  * - Вход в систему
@@ -42,8 +34,8 @@ export class AuthController {
   @Public()
   @Post('register')
   @ApiOperation({ summary: 'Регистрация нового пользователя' })
-  @ApiResponse({ 
-    status: 201, 
+  @ApiResponse({
+    status: 201,
     description: 'Пользователь успешно зарегистрирован',
     type: AuthResponseDto,
   })
@@ -61,8 +53,8 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Вход в систему' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Успешный вход',
     type: AuthResponseDto,
   })
@@ -91,8 +83,8 @@ export class AuthController {
   @Post('send-code')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Отправка кода подтверждения для входа' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Код отправлен',
   })
   @ApiResponse({ status: 400, description: 'Некорректные данные' })
@@ -108,8 +100,8 @@ export class AuthController {
   @Post('verify-code')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Вход по коду подтверждения' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Успешный вход',
     type: AuthResponseDto,
   })
@@ -126,8 +118,8 @@ export class AuthController {
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Обновление access токена' })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Токен обновлен',
     type: AuthResponseDto,
   })

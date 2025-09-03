@@ -14,8 +14,8 @@ async function fixRedaktusTypes() {
   console.log('🔧 Начинаю исправление ошибок типизации в redaktus компонентах...');
 
   // Находим все tsx файлы в папке redaktus
-  const files = await glob('src/components/redaktus/**/*.tsx', { 
-    ignore: ['**/node_modules/**', '**/dist/**']
+  const files = await glob('src/components/redaktus/**/*.tsx', {
+    ignore: ['**/node_modules/**', '**/dist/**'],
   });
 
   let fixedFiles = 0;
@@ -82,4 +82,4 @@ async function fixRedaktusTypes() {
 }
 
 // Запускаем
-fixRedaktusTypes().catch(console.error); 
+fixRedaktusTypes().catch(console.error);

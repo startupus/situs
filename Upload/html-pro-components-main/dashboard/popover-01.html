@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,7 +14,9 @@
   </head>
   <body>
     <!-- ====== Popover Section Start -->
-    <section class="flex min-h-screen bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section
+      class="flex min-h-screen bg-gray-2 py-20 dark:bg-dark lg:py-[120px]"
+    >
       <div class="mx-auto px-4 lg:container">
         <div class="block text-center">
           <div class="group relative lg:inline-block">
@@ -37,11 +39,13 @@
             </div>
 
             <div
-              class="invisible absolute top-[110%] left-1/2 w-[250px] -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100 xs:w-[330px] lg:top-0 lg:left-full lg:translate-x-0"
+              class="invisible absolute left-1/2 top-[110%] w-[250px] -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100 xs:w-[330px] lg:left-full lg:top-0 lg:translate-x-0"
             >
-              <div class="relative ml-3 rounded-lg bg-white dark:bg-dark-2 shadow-product dark:shadow-box-dark">
+              <div
+                class="shadow-product relative ml-3 rounded-lg bg-white dark:bg-dark-2 dark:shadow-box-dark"
+              >
                 <span
-                  class="absolute left-1/2 -top-3 block -translate-x-1/2 rotate-90 lg:-left-[11px] lg:top-8 lg:translate-x-0 lg:rotate-0 text-white dark:text-dark-2"
+                  class="absolute -top-3 left-1/2 block -translate-x-1/2 rotate-90 text-white dark:text-dark-2 lg:-left-[11px] lg:top-8 lg:translate-x-0 lg:rotate-0"
                 >
                   <svg
                     width="11"
@@ -57,49 +61,51 @@
                   </svg>
                 </span>
                 <div
-                  class="flex items-center justify-between border-b border-stroke dark:border-dark-3 py-[18px] px-[22px]"
+                  class="flex items-center justify-between border-b border-stroke px-[22px] py-[18px] dark:border-dark-3"
                 >
                   <div class="text-left">
-                    <h5 class="text-sm font-medium text-dark dark:text-white sm:text-base">
+                    <h5
+                      class="text-sm font-medium text-dark dark:text-white sm:text-base"
+                    >
                       Musharof Chowdhury
                     </h5>
-                    <p class="text-xs text-body-color dark:text-dark-6 sm:text-sm">
+                    <p
+                      class="text-xs text-body-color dark:text-dark-6 sm:text-sm"
+                    >
                       Founder @Pimjolabs
                     </p>
                   </div>
                   <div>
                     <button
-                      class="flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 hover:border-primary hover:text-primary sm:h-[34px] sm:w-[34px]"
+                      class="flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-stroke text-body-color hover:border-primary hover:text-primary dark:border-dark-3 dark:text-dark-6 sm:h-[34px] sm:w-[34px]"
                     >
-                      <svg 
-                        width="14" 
-                        height="14" 
-                        viewBox="0 0 14 14" 
-                        fill="none" 
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         class="fill-current"
                       >
                         <g clip-path="url(#clip0_1070_23810)">
-                          <path 
-                            d="M13.125 6.5187H7.50312V0.874951C7.50312 0.612451 7.28437 0.371826 7 0.371826C6.7375 0.371826 6.49687 0.590576 6.49687 0.874951V6.5187H0.875C0.6125 6.5187 0.371875 6.73745 0.371875 7.02183C0.371875 7.28433 0.590625 7.52495 0.875 7.52495H6.51875V13.125C6.51875 13.3875 6.7375 13.6281 7.02187 13.6281C7.28437 13.6281 7.525 13.4093 7.525 13.125V7.50308H13.125C13.3875 7.50308 13.6281 7.28433 13.6281 6.99995C13.6281 6.73745 13.3875 6.5187 13.125 6.5187Z" 
+                          <path
+                            d="M13.125 6.5187H7.50312V0.874951C7.50312 0.612451 7.28437 0.371826 7 0.371826C6.7375 0.371826 6.49687 0.590576 6.49687 0.874951V6.5187H0.875C0.6125 6.5187 0.371875 6.73745 0.371875 7.02183C0.371875 7.28433 0.590625 7.52495 0.875 7.52495H6.51875V13.125C6.51875 13.3875 6.7375 13.6281 7.02187 13.6281C7.28437 13.6281 7.525 13.4093 7.525 13.125V7.50308H13.125C13.3875 7.50308 13.6281 7.28433 13.6281 6.99995C13.6281 6.73745 13.3875 6.5187 13.125 6.5187Z"
                           />
                         </g>
                         <defs>
                           <clipPath id="clip0_1070_23810">
-                          <rect 
-                            width="14" 
-                            height="14" 
-                            fill="white"
-                          />
+                            <rect width="14" height="14" fill="white" />
                           </clipPath>
                         </defs>
-                      </svg>                      
+                      </svg>
                     </button>
                   </div>
                 </div>
 
-                <div class="pt-[22px] pb-5 px-[22px]">
-                  <h4 class="mb-4 text-lg font-semibold text-dark dark:text-white">
+                <div class="px-[22px] pb-5 pt-[22px]">
+                  <h4
+                    class="mb-4 text-lg font-semibold text-dark dark:text-white"
+                  >
                     Products
                   </h4>
 
@@ -111,7 +117,9 @@
                         class="h-full w-full object-cover object-center"
                       />
                     </div>
-                    <h5 class="mb-2 text-base font-medium text-dark dark:text-white">
+                    <h5
+                      class="mb-2 text-base font-medium text-dark dark:text-white"
+                    >
                       Pimjolabs
                     </h5>
                     <p class="text-sm text-body-color dark:text-dark-6">
@@ -120,10 +128,12 @@
                     </p>
                   </div>
                 </div>
-                <div class="border-t border-stroke dark:border-dark-3 py-3 px-[22px]">
+                <div
+                  class="border-t border-stroke px-[22px] py-3 dark:border-dark-3"
+                >
                   <a
                     href="javascript:void(0)"
-                    class="block w-full text-center text-sm font-medium text-body-color dark:text-dark-6 hover:text-primary"
+                    class="block w-full text-center text-sm font-medium text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Connect with me
                   </a>

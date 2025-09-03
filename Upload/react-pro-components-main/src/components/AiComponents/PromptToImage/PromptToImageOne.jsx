@@ -6,7 +6,7 @@ function PromptToImageOne() {
       <div className="container space-y-24">
         <div className="mx-auto w-full max-w-[970px] rounded-2xl bg-white p-8 dark:bg-dark-2">
           <div className="mb-10 rounded-xl bg-white p-6 shadow-[0px_10px_30px_0px_rgba(0,0,0,0.05)] dark:bg-white/5">
-            <div className="flex aspect-860/500 w-full items-center justify-center rounded-xl bg-gray-2 text-dark-7 dark:bg-dark-3 dark:text-dark-5">
+            <div className="aspect-860/500 flex w-full items-center justify-center rounded-xl bg-gray-2 text-dark-7 dark:bg-dark-3 dark:text-dark-5">
               <svg
                 width="80"
                 height="80"
@@ -44,7 +44,7 @@ function PromptToImageOne() {
               <input
                 type="text"
                 placeholder="Type your text..."
-                className="flex h-[60px] w-full items-center rounded-full border border-stroke bg-gray-1 px-5 py-3 pr-20 text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-white/5 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
+                className="outline-hidden flex h-[60px] w-full items-center rounded-full border border-stroke bg-gray-1 px-5 py-3 pr-20 text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:bg-white/5 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
               />
               <button className="absolute right-2 top-1/2 inline-flex h-11 -translate-y-1/2 items-center justify-center gap-2 rounded-full bg-primary py-2.5 pl-4 pr-5 font-medium text-white hover:bg-primary/90">
                 <span>
@@ -77,14 +77,14 @@ function PromptToImageOne() {
 
         <div className="mx-auto w-full max-w-[970px] rounded-2xl bg-white p-8 dark:bg-dark-2">
           <div className="mb-10 rounded-xl bg-white p-6 shadow-[0px_10px_30px_0px_rgba(0,0,0,0.05)] dark:bg-white/5">
-            <div className="flex aspect-860/500 w-full items-center justify-center gap-4 rounded-xl max-sm:flex-col">
+            <div className="aspect-860/500 flex w-full items-center justify-center gap-4 rounded-xl max-sm:flex-col">
               <div className="*:overflow-hidden *:rounded-xl">
                 <img
                   src="https://i.ibb.co/CsYGphJ/image-1.jpg"
                   alt="image alt text"
                 />
               </div>
-              <div className="*:overflow-hidden *:rounded-xl flex flex-col gap-y-5">
+              <div className="flex flex-col gap-y-5 *:overflow-hidden *:rounded-xl">
                 <img
                   src="https://i.ibb.co/GMr1MT6/image-2.jpg"
                   alt="image alt text"
@@ -191,7 +191,7 @@ function PromptToImageOne() {
               <input
                 type="text"
                 value="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-                className="flex h-[60px] w-full items-center rounded-full border border-stroke bg-gray-1 px-5 py-3 pr-20 text-dark placeholder-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-white/5 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
+                className="outline-hidden flex h-[60px] w-full items-center rounded-full border border-stroke bg-gray-1 px-5 py-3 pr-20 text-dark placeholder-body-color focus:border-primary dark:border-dark-3 dark:bg-white/5 dark:text-white dark:placeholder-dark-6 md:pr-[160px]"
               />
               <button className="absolute right-2 top-1/2 inline-flex h-11 -translate-y-1/2 items-center justify-center gap-2 rounded-full bg-primary py-2.5 pl-4 pr-5 font-medium text-white hover:bg-primary/90">
                 <span>

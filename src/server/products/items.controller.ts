@@ -18,7 +18,7 @@ export class ItemsController {
     @Query('categoryId') categoryId?: string,
     @Query('status') status?: string,
     @Query('page') page?: string,
-    @Query('limit') limit?: string
+    @Query('limit') limit?: string,
   ) {
     const p = Math.max(1, parseInt(page || '1', 10) || 1);
     const l = Math.max(1, Math.min(100, parseInt(limit || '20', 10) || 20));
@@ -35,11 +35,11 @@ export class ItemsController {
         skip,
         take: l,
         include: {
-          category: { select: { id: true, name: true, slug: true } }
+          category: { select: { id: true, name: true, slug: true } },
         },
-        orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }]
+        orderBy: [{ orderIndex: 'asc' }, { name: 'asc' }],
       }),
-      this.prisma.item.count({ where })
+      this.prisma.item.count({ where }),
     ]);
 
     return {
@@ -50,9 +50,9 @@ export class ItemsController {
           page: p,
           limit: l,
           total,
-          totalPages: Math.ceil(total / l)
-        }
-      }
+          totalPages: Math.ceil(total / l),
+        },
+      },
     };
   }
 
@@ -63,8 +63,8 @@ export class ItemsController {
       where: { id },
       include: {
         category: true,
-        product: { select: { id: true, name: true, type: true } }
-      }
+        product: { select: { id: true, name: true, type: true } },
+      },
     });
 
     if (!item) {
@@ -102,11 +102,11 @@ export class ItemsController {
         categoryId: dto.categoryId,
         productId: dto.productId,
         orderIndex: dto.orderIndex ?? 0,
-        isFeatured: dto.isFeatured ?? false
+        isFeatured: dto.isFeatured ?? false,
       },
       include: {
-        category: { select: { id: true, name: true, slug: true } }
-      }
+        category: { select: { id: true, name: true, slug: true } },
+      },
     });
 
     return { success: true, data: item };
@@ -139,11 +139,11 @@ export class ItemsController {
         weight: dto.weight,
         dimensions: dto.dimensions,
         orderIndex: dto.orderIndex,
-        isFeatured: dto.isFeatured
+        isFeatured: dto.isFeatured,
       },
       include: {
-        category: { select: { id: true, name: true, slug: true } }
-      }
+        category: { select: { id: true, name: true, slug: true } },
+      },
     });
 
     return { success: true, data: item };

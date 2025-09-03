@@ -16,14 +16,14 @@ console.log('🎨 Editor theme:', editorTheme);
 // Проверяем DOM элементы
 const canvasElement = document.querySelector('[data-canvas-container]');
 if (canvasElement) {
-    console.log('🎨 Canvas element found');
-    console.log('🎨 Canvas data-canvas-theme:', canvasElement.getAttribute('data-canvas-theme'));
-    console.log('🎨 Canvas has dark class:', canvasElement.classList.contains('dark'));
+  console.log('🎨 Canvas element found');
+  console.log('🎨 Canvas data-canvas-theme:', canvasElement.getAttribute('data-canvas-theme'));
+  console.log('🎨 Canvas has dark class:', canvasElement.classList.contains('dark'));
 } else {
-    console.log('🎨 Canvas element not found');
+  console.log('🎨 Canvas element not found');
 }
 
 // Проверяем html элемент
 const htmlElement = document.documentElement;
 console.log('🎨 HTML has dark class:', htmlElement.classList.contains('dark'));
-console.log('🎨 HTML data-editor-theme:', htmlElement.getAttribute('data-editor-theme')); 
+console.log('🎨 HTML data-editor-theme:', htmlElement.getAttribute('data-editor-theme'));

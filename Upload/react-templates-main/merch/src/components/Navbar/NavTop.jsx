@@ -24,9 +24,9 @@ const NavTop = () => {
     <>
       <div className="hidden border-b border-stroke dark:border-dark-3 sm:block">
         <div className="container mx-auto">
-          <div className="flex flex-wrap items-center -mx-4">
+          <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 md:w-2/3 lg:w-1/2">
-              <ul className="flex items-center -mx-3">
+              <ul className="-mx-3 flex items-center">
                 {navList.map((item, index) => (
                   <li key={index}>
                     <Link
@@ -40,10 +40,10 @@ const NavTop = () => {
               </ul>
             </div>
             <div className="w-full px-4 md:w-1/3 lg:w-1/2">
-              <div className="items-center justify-end hidden md:flex">
+              <div className="hidden items-center justify-end md:flex">
                 <div>
                   <div className="relative">
-                    <select className="w-full py-3 pl-3 pr-5 text-sm font-medium transition bg-transparent rounded-lg appearance-none text-body-color dark:text-dark-6 outline-hidden">
+                    <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                       <option value="English" className="dark:bg-dark-2">
                         English
                       </option>
@@ -54,7 +54,7 @@ const NavTop = () => {
                         Hindi
                       </option>
                     </select>
-                    <span className="absolute right-0 -translate-y-1/2 text-body-color dark:text-dark-6 top-1/2">
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg
                         width="14"
                         height="14"
@@ -70,7 +70,7 @@ const NavTop = () => {
                 </div>
                 <div>
                   <div className="relative">
-                    <select className="w-full py-3 pl-3 pr-5 text-sm font-medium transition bg-transparent rounded-lg appearance-none text-body-color dark:text-dark-6 outline-hidden">
+                    <select className="outline-hidden w-full appearance-none rounded-lg bg-transparent py-3 pl-3 pr-5 text-sm font-medium text-body-color transition dark:text-dark-6">
                       <option value="USD" className="dark:bg-dark-2">
                         USD
                       </option>
@@ -81,7 +81,7 @@ const NavTop = () => {
                         ERU
                       </option>
                     </select>
-                    <span className="absolute right-0 -translate-y-1/2 text-body-color dark:text-dark-6 top-1/2">
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                       <svg
                         width="14"
                         height="14"

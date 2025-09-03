@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Wishlist3 = () => {
   return (
@@ -7,12 +7,8 @@ const Wishlist3 = () => {
         <div className="-mx-4 flex">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[575px] text-center">
-              <h2 className="mb-4 text-3xl font-semibold text-black sm:text-4xl">
-                Your Favorite Items
-              </h2>
-              <p className="text-base font-medium text-body-color md:text-lg">
-                There are 04 products in this list
-              </p>
+              <h2 className="mb-4 text-3xl font-semibold text-black sm:text-4xl">Your Favorite Items</h2>
+              <p className="text-base font-medium text-body-color md:text-lg">There are 04 products in this list</p>
             </div>
           </div>
         </div>
@@ -70,18 +66,11 @@ const WishlistItem = ({ img, title, color, link, price, button2, button }) => {
         </a>
         <div>
           <div className="flex items-center justify-between">
-            <span className="mb-2 block text-base font-medium text-body-color">
-              {color}
-            </span>
-            <span className="mb-2 block text-base font-semibold text-black">
-              {price}
-            </span>
+            <span className="mb-2 block text-base font-medium text-body-color">{color}</span>
+            <span className="mb-2 block text-base font-semibold text-black">{price}</span>
           </div>
           <h3>
-            <a
-              href={link}
-              className="mb-4 block text-lg font-semibold text-black hover:text-primary md:text-xl"
-            >
+            <a href={link} className="mb-4 block text-lg font-semibold text-black hover:text-primary md:text-xl">
               {title}
             </a>
           </h3>

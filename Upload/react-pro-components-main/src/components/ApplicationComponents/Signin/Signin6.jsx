@@ -9,7 +9,7 @@ const Signin6 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto max-w-[630px] rounded-[20px] border border-stroke bg-white px-6 py-10 dark:border-dark-3 dark:bg-dark-2 sm:p-[70px]">
-              <h3 className="mb-2.5 text-2xl font-bold leading-[1.6]! text-dark dark:text-white sm:text-[28px]">
+              <h3 className="leading-[1.6]! mb-2.5 text-2xl font-bold text-dark dark:text-white sm:text-[28px]">
                 Sign up to TailGrids
               </h3>
               <p className="mb-7 max-w-[315px] text-base text-body-color dark:text-dark-6">
@@ -250,7 +250,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full rounded-md border border-stroke bg-gray-2 px-5 py-3 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white"
+        className="outline-hidden w-full rounded-md border border-stroke bg-gray-2 px-5 py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white"
       />
     </div>
   );

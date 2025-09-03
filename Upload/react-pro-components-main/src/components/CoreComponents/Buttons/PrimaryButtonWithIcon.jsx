@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const PrimaryButtonWithIcon = () => {
   return (
-    <button className='bg-primary border-primary border inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-[#1B44C8] hover:border-[#1B44C8] disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5 active:bg-[#1B44C8] active:border-[#1B44C8]'>
-      <span className='mr-[10px]'>
+    <button className="inline-flex items-center justify-center border border-primary bg-primary px-7 py-3 text-center text-base font-medium text-white hover:border-[#1B44C8] hover:bg-[#1B44C8] active:border-[#1B44C8] active:bg-[#1B44C8] disabled:border-gray-3 disabled:bg-gray-3 disabled:text-dark-5">
+      <span className="mr-[10px]">
         <svg
           width={20}
           height={20}
@@ -25,7 +25,7 @@ const PrimaryButtonWithIcon = () => {
       </span>
       Button With Icon
     </button>
-  )
-}
+  );
+};
 
-export default PrimaryButtonWithIcon
+export default PrimaryButtonWithIcon;

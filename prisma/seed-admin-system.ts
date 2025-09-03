@@ -265,14 +265,56 @@ async function main() {
     });
 
     // Пункты меню project-sidebar (шаблон): пути начинаются с /project и маппятся на /projects/:id/**
-    const projectSidebarItems: Array<{ alias: string; title: string; path: string; orderIndex: number; icon?: string; iconLibrary?: string }>= [
+    const projectSidebarItems: Array<{
+      alias: string;
+      title: string;
+      path: string;
+      orderIndex: number;
+      icon?: string;
+      iconLibrary?: string;
+    }> = [
       { alias: 'overview', title: 'Обзор', path: '/project', orderIndex: 0, icon: 'FiGrid', iconLibrary: 'fi' },
-      { alias: 'pages', title: 'Страницы', path: '/project/pages', orderIndex: 1, icon: 'FiFileText', iconLibrary: 'fi' },
-      { alias: 'store', title: 'Магазин', path: '/project/store', orderIndex: 2, icon: 'FiShoppingCart', iconLibrary: 'fi' },
+      {
+        alias: 'pages',
+        title: 'Страницы',
+        path: '/project/pages',
+        orderIndex: 1,
+        icon: 'FiFileText',
+        iconLibrary: 'fi',
+      },
+      {
+        alias: 'store',
+        title: 'Магазин',
+        path: '/project/store',
+        orderIndex: 2,
+        icon: 'FiShoppingCart',
+        iconLibrary: 'fi',
+      },
       { alias: 'seo', title: 'SEO', path: '/project/settings/seo', orderIndex: 3, icon: 'FiTarget', iconLibrary: 'fi' },
-      { alias: 'integrations', title: 'Интеграции', path: '/project/settings/integrations', orderIndex: 4, icon: 'FiTool', iconLibrary: 'fi' },
-      { alias: 'team', title: 'Команда', path: '/project/settings/team', orderIndex: 5, icon: 'FiUsers', iconLibrary: 'fi' },
-      { alias: 'access', title: 'Доступ', path: '/project/settings/access', orderIndex: 6, icon: 'FiLock', iconLibrary: 'fi' },
+      {
+        alias: 'integrations',
+        title: 'Интеграции',
+        path: '/project/settings/integrations',
+        orderIndex: 4,
+        icon: 'FiTool',
+        iconLibrary: 'fi',
+      },
+      {
+        alias: 'team',
+        title: 'Команда',
+        path: '/project/settings/team',
+        orderIndex: 5,
+        icon: 'FiUsers',
+        iconLibrary: 'fi',
+      },
+      {
+        alias: 'access',
+        title: 'Доступ',
+        path: '/project/settings/access',
+        orderIndex: 6,
+        icon: 'FiLock',
+        iconLibrary: 'fi',
+      },
     ];
     for (const it of projectSidebarItems) {
       await prisma.menuItem.upsert({
@@ -438,9 +480,9 @@ async function main() {
             secure: false,
             auth: {
               user: process.env.SMTP_USER || '',
-              pass: process.env.SMTP_PASS || ''
+              pass: process.env.SMTP_PASS || '',
             },
-            from: process.env.SMTP_FROM || 'Situs <no-reply@situs.local>'
+            from: process.env.SMTP_FROM || 'Situs <no-reply@situs.local>',
           },
           inviteTemplate: undefined,
           reminderTemplate: undefined,
@@ -454,9 +496,9 @@ async function main() {
             secure: false,
             auth: {
               user: process.env.SMTP_USER || '',
-              pass: process.env.SMTP_PASS || ''
+              pass: process.env.SMTP_PASS || '',
             },
-            from: process.env.SMTP_FROM || 'Situs <no-reply@situs.local>'
+            from: process.env.SMTP_FROM || 'Situs <no-reply@situs.local>',
           },
         },
       });
@@ -469,7 +511,13 @@ async function main() {
     try {
       // EMAIL_SMTP (placeholder, not active)
       await prisma.integration.upsert({
-        where: { projectId_provider_instanceKey: { projectId: project.id, provider: 'EMAIL_SMTP' as any, instanceKey: 'default' } as any },
+        where: {
+          projectId_provider_instanceKey: {
+            projectId: project.id,
+            provider: 'EMAIL_SMTP' as any,
+            instanceKey: 'default',
+          } as any,
+        },
         update: {},
         create: {
           projectId: project.id,
@@ -484,7 +532,13 @@ async function main() {
 
       // N8N (placeholder, not active)
       await prisma.integration.upsert({
-        where: { projectId_provider_instanceKey: { projectId: project.id, provider: 'N8N' as any, instanceKey: 'default' } as any },
+        where: {
+          projectId_provider_instanceKey: {
+            projectId: project.id,
+            provider: 'N8N' as any,
+            instanceKey: 'default',
+          } as any,
+        },
         update: {},
         create: {
           projectId: project.id,
@@ -510,5 +564,3 @@ main().finally(async () => {
   const prisma = new PrismaClient();
   await prisma.$disconnect();
 });
-
-

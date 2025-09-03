@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About10() {
   return (
-    <section className="bg-white py-20 lg:py-[120px] dark:bg-dark">
+    <section className="bg-white py-20 dark:bg-dark lg:py-[120px]">
       <div className="container">
         <div className="flex flex-wrap items-center gap-10 lg:flex-nowrap lg:gap-14 2xl:gap-[100px]">
           <div className="w-full">
@@ -20,7 +20,7 @@ export default function About10() {
               <span className="mb-2 block text-lg font-semibold text-primary">
                 Sub Heading
               </span>
-              <h2 className="mb-3 text-3xl font-bold leading-tight! text-dark sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl dark:text-white">
+              <h2 className="leading-tight! mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl">
                 Making Credit history with nightcard
               </h2>
               <p className="mb-12 text-base text-body-color dark:text-dark-6">

@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
 import { useInterfaceTheme } from '../../hooks/useInterfaceTheme';
-import { 
-  FiMonitor, 
-  FiSun, 
-  FiMoon, 
-  FiSettings, 
-  FiEye,
-  FiZap,
-  FiGrid,
-  FiEdit,
-  FiBox
-} from 'react-icons/fi';
+import { FiMonitor, FiSun, FiMoon, FiSettings, FiEye, FiZap, FiGrid, FiEdit, FiBox } from 'react-icons/fi';
 
 /**
  * Компонент настроек интерфейса редактора
  * Позволяет управлять темой интерфейса редактора отдельно от темы сайта
  */
 const EditorInterfaceSettings: React.FC = () => {
-  const { 
-    theme: interfaceTheme, 
-    toggleTheme: toggleInterfaceTheme, 
-    resolvedTheme: interfaceResolvedTheme 
+  const {
+    theme: interfaceTheme,
+    toggleTheme: toggleInterfaceTheme,
+    resolvedTheme: interfaceResolvedTheme,
   } = useInterfaceTheme();
 
   const [activeTab, setActiveTab] = useState<'theme' | 'appearance' | 'layout' | 'typography' | 'animations'>('theme');
@@ -31,41 +21,41 @@ const EditorInterfaceSettings: React.FC = () => {
     borderStyle: 'solid', // solid, dashed, dotted
     borderWidth: '1px',
     borderRadius: '8px',
-    
+
     // Настройки макета
     sidebarWidth: '280px',
     panelSpacing: '16px',
     contentPadding: '24px',
-    
+
     // Настройки типографики
     fontSize: '14px',
     lineHeight: '1.5',
     fontFamily: 'Inter, system-ui, sans-serif',
-    
+
     // Настройки анимаций
     animationsEnabled: true,
     animationSpeed: 'normal', // slow, normal, fast
-    reducedMotion: false
+    reducedMotion: false,
   });
 
   const handleSettingChange = (key: string, value: any) => {
-    setSettings(prev => ({
+    setSettings((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
   const applySettings = () => {
     // Применяем настройки к интерфейсу редактора
     const root = document.documentElement;
-    
+
     // Применяем CSS переменные
     root.style.setProperty('--interface-border-width', settings.borderWidth);
     root.style.setProperty('--interface-border-radius', settings.borderRadius);
     root.style.setProperty('--interface-font-size', settings.fontSize);
     root.style.setProperty('--interface-line-height', settings.lineHeight);
     root.style.setProperty('--interface-font-family', settings.fontFamily);
-    
+
     // Сохраняем в localStorage
     localStorage.setItem('editor-interface-settings', JSON.stringify(settings));
   };
@@ -85,9 +75,9 @@ const EditorInterfaceSettings: React.FC = () => {
       fontFamily: 'Inter, system-ui, sans-serif',
       animationsEnabled: true,
       animationSpeed: 'normal',
-      reducedMotion: false
+      reducedMotion: false,
     };
-    
+
     setSettings(defaultSettings);
     localStorage.setItem('editor-interface-settings', JSON.stringify(defaultSettings));
   };
@@ -97,19 +87,15 @@ const EditorInterfaceSettings: React.FC = () => {
       {/* Заголовок */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-dark dark:text-white">
-            Настройки интерфейса редактора
-          </h2>
+          <h2 className="text-2xl font-bold text-dark dark:text-white">Настройки интерфейса редактора</h2>
           <p className="text-body-color dark:text-dark-6 mt-1">
             Управление внешним видом и поведением интерфейса редактора
           </p>
         </div>
-        
+
         {/* Переключатель темы интерфейса */}
         <div className="flex items-center space-x-3">
-          <span className="text-sm text-body-color dark:text-dark-6">
-            Тема интерфейса:
-          </span>
+          <span className="text-sm text-body-color dark:text-dark-6">Тема интерфейса:</span>
           <button
             onClick={toggleInterfaceTheme}
             className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-dark text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -138,8 +124,8 @@ const EditorInterfaceSettings: React.FC = () => {
             { id: 'appearance', label: 'Внешний вид', icon: FiGrid },
             { id: 'layout', label: 'Макет', icon: FiBox },
             { id: 'typography', label: 'Типографика', icon: FiEdit },
-            { id: 'animations', label: 'Анимации', icon: FiZap }
-          ].map(tab => (
+            { id: 'animations', label: 'Анимации', icon: FiZap },
+          ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
@@ -162,22 +148,20 @@ const EditorInterfaceSettings: React.FC = () => {
         {activeTab === 'theme' && (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-dark dark:text-white mb-4">
-                Настройки темы
-              </h3>
-              
+              <h3 className="text-lg font-semibold text-dark dark:text-white mb-4">Настройки темы</h3>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Текущая тема */}
                 <div className="bg-gray-50 dark:bg-dark rounded-lg p-4">
-                  <h4 className="font-medium text-dark dark:text-white mb-3">
-                    Текущая тема интерфейса
-                  </h4>
+                  <h4 className="font-medium text-dark dark:text-white mb-3">Текущая тема интерфейса</h4>
                   <div className="flex items-center space-x-3">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                      interfaceResolvedTheme === 'dark' 
-                        ? 'bg-gray-800 text-white' 
-                        : 'bg-white text-gray-800 border border-gray-200'
-                    }`}>
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        interfaceResolvedTheme === 'dark'
+                          ? 'bg-gray-800 text-white'
+                          : 'bg-white text-gray-800 border border-gray-200'
+                      }`}
+                    >
                       {interfaceResolvedTheme === 'dark' ? <FiMoon size={16} /> : <FiSun size={16} />}
                     </div>
                     <div>
@@ -185,10 +169,7 @@ const EditorInterfaceSettings: React.FC = () => {
                         {interfaceResolvedTheme === 'dark' ? 'Темная тема' : 'Светлая тема'}
                       </p>
                       <p className="text-sm text-body-color dark:text-dark-6">
-                        {interfaceResolvedTheme === 'dark' 
-                          ? 'Контрастный темный интерфейс' 
-                          : 'Яркий светлый интерфейс'
-                        }
+                        {interfaceResolvedTheme === 'dark' ? 'Контрастный темный интерфейс' : 'Яркий светлый интерфейс'}
                       </p>
                     </div>
                   </div>
@@ -196,9 +177,7 @@ const EditorInterfaceSettings: React.FC = () => {
 
                 {/* Автоматическое переключение */}
                 <div className="bg-gray-50 dark:bg-dark rounded-lg p-4">
-                  <h4 className="font-medium text-dark dark:text-white mb-3">
-                    Автоматическое переключение
-                  </h4>
+                  <h4 className="font-medium text-dark dark:text-white mb-3">Автоматическое переключение</h4>
                   <div className="space-y-3">
                     <label className="flex items-center">
                       <input
@@ -209,9 +188,7 @@ const EditorInterfaceSettings: React.FC = () => {
                         }}
                         className="mr-3"
                       />
-                      <span className="text-sm text-dark dark:text-white">
-                        Следовать системной теме
-                      </span>
+                      <span className="text-sm text-dark dark:text-white">Следовать системной теме</span>
                     </label>
                     <p className="text-xs text-body-color dark:text-dark-6">
                       Автоматически переключаться между светлой и темной темой в зависимости от настроек системы
@@ -241,7 +218,7 @@ const EditorInterfaceSettings: React.FC = () => {
         >
           Сбросить к умолчаниям
         </button>
-        
+
         <div className="flex space-x-3">
           <button
             onClick={applySettings}

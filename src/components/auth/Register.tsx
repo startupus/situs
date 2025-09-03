@@ -17,7 +17,7 @@ type ContactMethod = 'email' | 'phone';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  
+
   const [currentStep, setCurrentStep] = useState<Step>('info');
   const [contactMethod, setContactMethod] = useState<ContactMethod>('email');
   const [loading, setLoading] = useState(false);
@@ -36,15 +36,14 @@ const Register: React.FC = () => {
   });
 
   const handleInputChange = (field: keyof RegisterForm, value: string) => {
-    setForm(prev => ({ ...prev, [field]: value }));
+    setForm((prev) => ({ ...prev, [field]: value }));
     if (error) setError('');
   };
 
   const validateForm = () => {
     switch (currentStep) {
       case 'info':
-        return form.name.length > 0 && 
-               (contactMethod === 'email' ? form.email.length > 0 : form.phone.length > 0);
+        return form.name.length > 0 && (contactMethod === 'email' ? form.email.length > 0 : form.phone.length > 0);
       case 'verification':
         return form.verificationCode.length === 6;
       case 'password':
@@ -109,10 +108,10 @@ const Register: React.FC = () => {
 
       setSuccess(true);
       setCurrentStep('complete');
-      
+
       // Автоматический редирект через 5 секунд
       const interval = setInterval(() => {
-        setRedirectCountdown(prev => {
+        setRedirectCountdown((prev) => {
           if (prev <= 1) {
             clearInterval(interval);
             navigate('/login');
@@ -181,7 +180,7 @@ const Register: React.FC = () => {
   const renderProgressBar = () => {
     const steps = ['info', 'verification', 'password'];
     const currentIndex = steps.indexOf(currentStep);
-    
+
     return (
       <div className="flex items-center justify-center mb-8">
         {steps.map((step, index) => (
@@ -197,11 +196,7 @@ const Register: React.FC = () => {
             </div>
             {index < steps.length - 1 && (
               <div
-                className={`w-12 h-0.5 mx-2 ${
-                  index < currentIndex
-                    ? 'bg-blue-600'
-                    : 'bg-gray-200 dark:bg-gray-600'
-                }`}
+                className={`w-12 h-0.5 mx-2 ${index < currentIndex ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-600'}`}
               />
             )}
           </React.Fragment>
@@ -290,12 +285,7 @@ const Register: React.FC = () => {
         </div>
       )}
 
-      <ThemeButton
-        onClick={handleNext}
-        disabled={!validateForm() || loading}
-        className="w-full"
-        loading={loading}
-      >
+      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full" loading={loading}>
         Далее
       </ThemeButton>
     </div>
@@ -356,17 +346,10 @@ const Register: React.FC = () => {
       </div>
 
       {form.password && form.confirmPassword && form.password !== form.confirmPassword && (
-        <p className="text-red-600 dark:text-red-400 text-sm">
-          Пароли не совпадают
-        </p>
+        <p className="text-red-600 dark:text-red-400 text-sm">Пароли не совпадают</p>
       )}
 
-      <ThemeButton
-        onClick={handleNext}
-        disabled={!validateForm() || loading}
-        className="w-full"
-        loading={loading}
-      >
+      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full" loading={loading}>
         Создать аккаунт
       </ThemeButton>
     </div>
@@ -375,22 +358,22 @@ const Register: React.FC = () => {
   const renderCompleteStep = () => (
     <div className="text-center space-y-6">
       <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto">
-        <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="w-8 h-8 text-green-600 dark:text-green-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-          Аккаунт создан!
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Аккаунт создан!</h3>
         <p className="text-gray-600 dark:text-gray-400">
           Добро пожаловать в Situs Platform. Переход к входу через {redirectCountdown} сек.
         </p>
       </div>
-      <ThemeButton
-        onClick={() => navigate('/login')}
-        className="w-full"
-      >
+      <ThemeButton onClick={() => navigate('/login')} className="w-full">
         Войти в систему
       </ThemeButton>
     </div>
@@ -404,12 +387,8 @@ const Register: React.FC = () => {
           <div className="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
             <span className="text-white text-2xl font-bold">S</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Situs Platform
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Создание нового аккаунта
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Situs Platform</h1>
+          <p className="text-gray-600 dark:text-gray-400">Создание нового аккаунта</p>
         </div>
 
         {/* Прогресс-бар */}
@@ -432,20 +411,14 @@ const Register: React.FC = () => {
 
           {/* Заголовок */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {getStepTitle()}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {getStepDescription()}
-            </p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{getStepTitle()}</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">{getStepDescription()}</p>
           </div>
 
           {/* Ошибка */}
           {error && (
             <div className="mb-6">
-              <ThemeAlert variant="error">
-                {error}
-              </ThemeAlert>
+              <ThemeAlert variant="error">{error}</ThemeAlert>
             </div>
           )}
 
@@ -458,9 +431,7 @@ const Register: React.FC = () => {
           {/* Ссылка на вход */}
           {currentStep === 'info' && (
             <div className="mt-6 text-center">
-              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-                Уже есть аккаунт?
-              </p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Уже есть аккаунт?</p>
               <button
                 onClick={() => navigate('/login')}
                 className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"

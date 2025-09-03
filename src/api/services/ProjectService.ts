@@ -43,22 +43,22 @@ class ProjectService {
   async findMany(userId: string, filters?: ProjectFilters) {
     try {
       const whereClause: any = {
-        ownerId: userId
+        ownerId: userId,
       };
-      
+
       // Поиск по названию или описанию
       if (filters?.search) {
         whereClause.OR = [
           { name: { contains: filters.search, mode: 'insensitive' } },
-          { description: { contains: filters.search, mode: 'insensitive' } }
+          { description: { contains: filters.search, mode: 'insensitive' } },
         ];
       }
-      
+
       // Фильтр по статусу
       if (filters?.status) {
         whereClause.status = filters.status.toUpperCase();
       }
-      
+
       // Определяем сортировку
       let orderBy: any = { updatedAt: 'desc' };
       if (filters?.sortBy) {
@@ -92,13 +92,13 @@ class ProjectService {
           createdAt: true,
           updatedAt: true,
           _count: {
-            select: { pages: true }
-          }
+            select: { pages: true },
+          },
         },
-        orderBy
+        orderBy,
       });
 
-      return projects.map(project => ({
+      return projects.map((project) => ({
         id: project.id,
         name: project.name,
         description: project.description,
@@ -111,7 +111,7 @@ class ProjectService {
         isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
         updatedAt: project.updatedAt.toISOString(),
-        pageCount: project._count.pages
+        pageCount: project._count.pages,
       }));
     } catch (error) {
       console.error('Ошибка при получении проектов:', error);
@@ -144,8 +144,8 @@ class ProjectService {
               id: true,
               email: true,
               firstName: true,
-              lastName: true
-            }
+              lastName: true,
+            },
           },
           pages: {
             select: {
@@ -154,11 +154,11 @@ class ProjectService {
               slug: true,
               status: true,
               isPublished: true,
-              createdAt: true
+              createdAt: true,
             },
-            orderBy: { updatedAt: 'desc' }
-          }
-        }
+            orderBy: { updatedAt: 'desc' },
+          },
+        },
       });
 
       if (!project) {
@@ -183,16 +183,16 @@ class ProjectService {
           email: project.owner.email,
           firstName: project.owner.firstName,
           lastName: project.owner.lastName,
-          fullName: this.getFullName(project.owner.firstName, project.owner.lastName)
+          fullName: this.getFullName(project.owner.firstName, project.owner.lastName),
         },
-        pages: project.pages.map(page => ({
+        pages: project.pages.map((page) => ({
           id: page.id,
           title: page.title,
           slug: page.slug,
           status: page.status.toLowerCase(),
           isPublished: page.isPublished,
-          createdAt: page.createdAt.toISOString()
-        }))
+          createdAt: page.createdAt.toISOString(),
+        })),
       };
     } catch (error) {
       console.error('Ошибка при получении проекта:', error);
@@ -212,8 +212,8 @@ class ProjectService {
       const existingProject = await prisma.project.findFirst({
         where: {
           slug,
-          ownerId: data.ownerId
-        }
+          ownerId: data.ownerId,
+        },
       });
 
       if (existingProject) {
@@ -231,7 +231,7 @@ class ProjectService {
           settings: data.settings || {},
           status: 'DRAFT',
           isPublished: false,
-          ownerId: data.ownerId
+          ownerId: data.ownerId,
         },
         select: {
           id: true,
@@ -245,8 +245,8 @@ class ProjectService {
           status: true,
           isPublished: true,
           createdAt: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       return {
@@ -261,7 +261,7 @@ class ProjectService {
         status: project.status.toLowerCase(),
         isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
-        updatedAt: project.updatedAt.toISOString()
+        updatedAt: project.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при создании проекта:', error);
@@ -276,7 +276,7 @@ class ProjectService {
     try {
       const updateData: any = {
         ...data,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       // Если изменяется название, генерируем новый slug
@@ -299,8 +299,8 @@ class ProjectService {
           status: true,
           isPublished: true,
           createdAt: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       return {
@@ -315,7 +315,7 @@ class ProjectService {
         status: project.status.toLowerCase(),
         isPublished: project.isPublished,
         createdAt: project.createdAt.toISOString(),
-        updatedAt: project.updatedAt.toISOString()
+        updatedAt: project.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при обновлении проекта:', error);
@@ -330,12 +330,12 @@ class ProjectService {
     try {
       // Сначала удаляем все страницы проекта
       await prisma.page.deleteMany({
-        where: { projectId }
+        where: { projectId },
       });
 
       // Затем удаляем проект
       await prisma.project.delete({
-        where: { id: projectId }
+        where: { id: projectId },
       });
 
       return { success: true };
@@ -355,15 +355,15 @@ class ProjectService {
         data: {
           status: 'PUBLISHED',
           isPublished: true,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         select: {
           id: true,
           name: true,
           status: true,
           isPublished: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       return {
@@ -371,7 +371,7 @@ class ProjectService {
         name: project.name,
         status: project.status.toLowerCase(),
         isPublished: project.isPublished,
-        updatedAt: project.updatedAt.toISOString()
+        updatedAt: project.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при публикации проекта:', error);
@@ -389,15 +389,15 @@ class ProjectService {
         data: {
           status: 'DRAFT',
           isPublished: false,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         },
         select: {
           id: true,
           name: true,
           status: true,
           isPublished: true,
-          updatedAt: true
-        }
+          updatedAt: true,
+        },
       });
 
       return {
@@ -405,7 +405,7 @@ class ProjectService {
         name: project.name,
         status: project.status.toLowerCase(),
         isPublished: project.isPublished,
-        updatedAt: project.updatedAt.toISOString()
+        updatedAt: project.updatedAt.toISOString(),
       };
     } catch (error) {
       console.error('Ошибка при снятии проекта с публикации:', error);
@@ -422,14 +422,14 @@ class ProjectService {
         prisma.project.count({ where: { ownerId: userId } }),
         prisma.project.count({ where: { ownerId: userId, status: 'PUBLISHED' } }),
         prisma.project.count({ where: { ownerId: userId, status: 'DRAFT' } }),
-        prisma.project.count({ where: { ownerId: userId, status: 'ARCHIVED' } })
+        prisma.project.count({ where: { ownerId: userId, status: 'ARCHIVED' } }),
       ]);
 
       return {
         totalProjects,
         publishedProjects,
         draftProjects,
-        archivedProjects
+        archivedProjects,
       };
     } catch (error) {
       console.error('Ошибка при получении статистики проектов:', error);

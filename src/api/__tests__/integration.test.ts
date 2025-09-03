@@ -27,7 +27,7 @@ const mockPrisma = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
-    count: vi.fn()
+    count: vi.fn(),
   },
   project: {
     findMany: vi.fn(),
@@ -35,8 +35,8 @@ const mockPrisma = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
-    count: vi.fn()
-  }
+    count: vi.fn(),
+  },
 };
 
 (PrismaClient as vi.MockedClass<typeof PrismaClient>).mockImplementation(() => mockPrisma as any);
@@ -62,7 +62,7 @@ describe('API Integration Tests', () => {
           role: 'USER',
           isActive: true,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         const hashedPassword = 'hashedPassword123';
@@ -80,7 +80,7 @@ describe('API Integration Tests', () => {
             email: 'new@example.com',
             password: 'password123',
             firstName: 'New',
-            lastName: 'User'
+            lastName: 'User',
           })
           .expect(201);
 
@@ -93,7 +93,7 @@ describe('API Integration Tests', () => {
       it('должен вернуть ошибку при регистрации с существующим email', async () => {
         mockPrisma.user.findUnique.mockResolvedValue({
           id: 'existing-user',
-          email: 'existing@example.com'
+          email: 'existing@example.com',
         });
 
         const response = await request(app)
@@ -102,7 +102,7 @@ describe('API Integration Tests', () => {
             email: 'existing@example.com',
             password: 'password123',
             firstName: 'Test',
-            lastName: 'User'
+            lastName: 'User',
           })
           .expect(409);
 
@@ -114,7 +114,7 @@ describe('API Integration Tests', () => {
         const response = await request(app)
           .post('/api/auth/register')
           .send({
-            email: 'test@example.com'
+            email: 'test@example.com',
             // password отсутствует
           })
           .expect(400);
@@ -135,7 +135,7 @@ describe('API Integration Tests', () => {
           password: 'hashedPassword123',
           isActive: true,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         const mockToken = 'mock-jwt-token';
@@ -149,7 +149,7 @@ describe('API Integration Tests', () => {
           .post('/api/auth/login')
           .send({
             email: 'test@example.com',
-            password: 'password123'
+            password: 'password123',
           })
           .expect(200);
 
@@ -166,7 +166,7 @@ describe('API Integration Tests', () => {
           .post('/api/auth/login')
           .send({
             email: 'nonexistent@example.com',
-            password: 'password123'
+            password: 'password123',
           })
           .expect(401);
 
@@ -183,7 +183,7 @@ describe('API Integration Tests', () => {
           firstName: 'Test',
           lastName: 'User',
           role: 'USER',
-          isActive: true
+          isActive: true,
         };
 
         const mockDecoded = { userId: testUserId };
@@ -194,7 +194,7 @@ describe('API Integration Tests', () => {
         const response = await request(app)
           .post('/api/auth/verify-token')
           .send({
-            token: 'valid-token'
+            token: 'valid-token',
           })
           .expect(200);
 
@@ -210,7 +210,7 @@ describe('API Integration Tests', () => {
         const response = await request(app)
           .post('/api/auth/verify-token')
           .send({
-            token: 'invalid-token'
+            token: 'invalid-token',
           })
           .expect(401);
 
@@ -227,7 +227,7 @@ describe('API Integration Tests', () => {
         id: testUserId,
         email: 'test@example.com',
         role: 'USER',
-        fullName: 'Test User'
+        fullName: 'Test User',
       });
     });
 
@@ -241,7 +241,7 @@ describe('API Integration Tests', () => {
             status: 'DRAFT',
             userId: testUserId,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
           },
           {
             id: '2',
@@ -250,8 +250,8 @@ describe('API Integration Tests', () => {
             status: 'PUBLISHED',
             userId: testUserId,
             createdAt: new Date(),
-            updatedAt: new Date()
-          }
+            updatedAt: new Date(),
+          },
         ];
 
         mockPrisma.project.findMany.mockResolvedValue(mockProjects);
@@ -292,7 +292,7 @@ describe('API Integration Tests', () => {
           status: 'DRAFT',
           userId: testUserId,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         mockPrisma.project.findUnique.mockResolvedValue(mockProject);
@@ -328,7 +328,7 @@ describe('API Integration Tests', () => {
           status: 'DRAFT',
           userId: testUserId,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         mockPrisma.project.create.mockResolvedValue(mockProject);
@@ -339,7 +339,7 @@ describe('API Integration Tests', () => {
           .send({
             name: 'New Project',
             description: 'Test description',
-            type: 'WEBSITE'
+            type: 'WEBSITE',
           })
           .expect(201);
 
@@ -353,7 +353,7 @@ describe('API Integration Tests', () => {
           .post('/api/projects')
           .set('Authorization', `Bearer ${authToken}`)
           .send({
-            description: 'Test description'
+            description: 'Test description',
             // name отсутствует
           })
           .expect(400);
@@ -372,7 +372,7 @@ describe('API Integration Tests', () => {
           status: 'DRAFT',
           userId: testUserId,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         mockPrisma.project.update.mockResolvedValue(mockProject);
@@ -382,7 +382,7 @@ describe('API Integration Tests', () => {
           .set('Authorization', `Bearer ${authToken}`)
           .send({
             name: 'Updated Project',
-            description: 'Updated description'
+            description: 'Updated description',
           })
           .expect(200);
 
@@ -397,7 +397,7 @@ describe('API Integration Tests', () => {
           .put('/api/projects/999')
           .set('Authorization', `Bearer ${authToken}`)
           .send({
-            name: 'Updated Project'
+            name: 'Updated Project',
           })
           .expect(404);
 
@@ -441,7 +441,7 @@ describe('API Integration Tests', () => {
           status: 'PUBLISHED',
           userId: testUserId,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         mockPrisma.project.update.mockResolvedValue(mockProject);
@@ -465,7 +465,7 @@ describe('API Integration Tests', () => {
           status: 'DRAFT',
           userId: testUserId,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         };
 
         mockPrisma.project.update.mockResolvedValue(mockProject);
@@ -486,7 +486,7 @@ describe('API Integration Tests', () => {
           total: 10,
           published: 5,
           draft: 3,
-          archived: 2
+          archived: 2,
         };
 
         const mockRecentProjects = [
@@ -494,8 +494,8 @@ describe('API Integration Tests', () => {
             id: '1',
             name: 'Recent Project',
             status: 'PUBLISHED',
-            updatedAt: new Date()
-          }
+            updatedAt: new Date(),
+          },
         ];
 
         mockPrisma.project.count.mockResolvedValueOnce(mockStats.total);
@@ -521,9 +521,7 @@ describe('API Integration Tests', () => {
 
   describe('Error Handling', () => {
     it('должен вернуть 404 для несуществующих маршрутов', async () => {
-      const response = await request(app)
-        .get('/api/nonexistent')
-        .expect(404);
+      const response = await request(app).get('/api/nonexistent').expect(404);
 
       expect(response.body.message).toContain('не найден');
     });
@@ -531,10 +529,7 @@ describe('API Integration Tests', () => {
     it('должен обрабатывать внутренние ошибки сервера', async () => {
       mockPrisma.project.findMany.mockRejectedValue(new Error('Database error'));
 
-      const response = await request(app)
-        .get('/api/projects')
-        .set('Authorization', `Bearer ${authToken}`)
-        .expect(500);
+      const response = await request(app).get('/api/projects').set('Authorization', `Bearer ${authToken}`).expect(500);
 
       expect(response.body.success).toBe(false);
       expect(response.body.error).toContain('Ошибка базы данных');

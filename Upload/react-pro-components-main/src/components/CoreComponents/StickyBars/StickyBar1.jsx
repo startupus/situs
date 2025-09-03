@@ -8,7 +8,7 @@ export default function StickyBar1() {
           <span className="inline-flex h-6 items-center justify-center rounded-sm bg-primary/10 px-2.5 text-sm font-medium text-primary">
             New
           </span>
-          <p className="inline-flex px-3 text-sm font-medium text-dark lg:text-base dark:text-white">
+          <p className="inline-flex px-3 text-sm font-medium text-dark dark:text-white lg:text-base">
             We have launched Brand new Blocks featuring over 300+ UI Elements!
           </p>
           <a

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const SelectBox4 = () => {
   return (
@@ -38,21 +38,15 @@ const SelectBoxItem = ({ id, title }) => {
       <label
         htmlFor={id}
         className={`${
-          isChecked ? "border-primary" : "border-stroke dark:border-dark-3"
+          isChecked ? 'border-primary' : 'border-stroke dark:border-dark-3'
         } select-list text-body-color dark:text-dark-6 flex cursor-pointer items-center rounded-md border bg-white dark:bg-dark-2 py-3 px-5`}
       >
         <span
           className={`${
-            isChecked ? "bg-primary" : "bg-secondary-color"
+            isChecked ? 'bg-primary' : 'bg-secondary-color'
           } rounded-ful icon flex h-5 w-5 items-center justify-center rounded-full`}
         >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
               clipRule="evenodd"

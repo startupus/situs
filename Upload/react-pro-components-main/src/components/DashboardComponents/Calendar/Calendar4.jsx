@@ -134,7 +134,7 @@ const Day = ({ active, number }) => {
   return (
     <span
       className={`${
-        active && "border-primary bg-primary! text-white"
+        active && "bg-primary! border-primary text-white"
       } flex h-[38px] w-[38px] items-center justify-center rounded-full hover:bg-gray dark:hover:bg-dark`}
     >
       {number}

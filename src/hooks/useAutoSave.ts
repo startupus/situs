@@ -13,20 +13,17 @@ interface UseAutoSaveReturn {
   saveNow: () => Promise<void>;
 }
 
-export const useAutoSave = <T>(
-  data: T,
-  options: UseAutoSaveOptions = {}
-): UseAutoSaveReturn => {
+export const useAutoSave = <T>(data: T, options: UseAutoSaveOptions = {}): UseAutoSaveReturn => {
   const {
     delay = 3000, // 3 секунды по умолчанию
     onSave,
-    enabled = true
+    enabled = true,
   } = options;
 
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
-  
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastDataRef = useRef<T>(data);
 
@@ -100,6 +97,6 @@ export const useAutoSave = <T>(
     isSaving,
     lastSaved,
     saveError,
-    saveNow
+    saveNow,
   };
-}; 
+};

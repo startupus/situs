@@ -748,7 +748,7 @@ const BlogNewsletter = ({ subtitle, title, metaText }) => {
           <input
             type="email"
             placeholder="Your email address"
-            className="mb-4 w-full rounded-sm border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white/60 outline-hidden focus:border-white focus-visible:shadow-none"
+            className="outline-hidden mb-4 w-full rounded-sm border border-transparent bg-white/20 p-3 text-center text-sm font-medium text-white placeholder-white/60 focus:border-white focus-visible:shadow-none"
           />
           <input
             type="submit"

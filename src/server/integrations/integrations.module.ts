@@ -13,5 +13,3 @@ import { IntegrationRegistry } from './plugins/registry';
   exports: [IntegrationsService, IntegrationRegistry],
 })
 export class IntegrationsModule {}
-
-

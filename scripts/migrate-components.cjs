@@ -6,9 +6,9 @@ const MIGRATION_CONFIG = {
   // Исходные файлы TailGrids компонентов
   sourcePaths: [
     'src/redactus-components/TailGridsPricingComponents.tsx',
-    'src/redactus-components/TailGridsFAQComponents.tsx'
+    'src/redactus-components/TailGridsFAQComponents.tsx',
   ],
-  
+
   // Целевая папка
   targetDir: 'src/redactus-components/interactive',
 };
@@ -16,7 +16,7 @@ const MIGRATION_CONFIG = {
 // Функция для создания улучшенного компонента
 const enhanceComponent = (originalCode, componentName, category) => {
   let enhanced = originalCode;
-  
+
   // Удаляем интернационализацию и заменяем на contentEditable
   enhanced = enhanced
     // Заменяем t('...') на прямой текст с contentEditable
@@ -25,34 +25,31 @@ const enhanceComponent = (originalCode, componentName, category) => {
         'pricing.title': 'Flexible Pricing Plans',
         'pricing.subtitle': 'Choose the plan that fits your needs',
         'faq.title': 'Frequently Asked Questions',
-        'faq.subtitle': 'Get answers to common questions'
+        'faq.subtitle': 'Get answers to common questions',
       };
       return `"${defaultTexts['pricing.title'] || 'Default Text'}"`;
     })
-    
+
     // Добавляем contentEditable к текстовым элементам
-    .replace(/<h([1-6])([^>]*?)>([^<{]+)</g, 
-      '<h$1$2 contentEditable suppressContentEditableWarning={true}>$3<')
-    .replace(/<p([^>]*?)>([^<{]+)</g, 
-      '<p$1 contentEditable suppressContentEditableWarning={true}>$2<')
-    .replace(/<span([^>]*?)>([^<{]+)</g, 
-      '<span$1 contentEditable suppressContentEditableWarning={true}>$2<')
-    
+    .replace(/<h([1-6])([^>]*?)>([^<{]+)</g, '<h$1$2 contentEditable suppressContentEditableWarning={true}>$3<')
+    .replace(/<p([^>]*?)>([^<{]+)</g, '<p$1 contentEditable suppressContentEditableWarning={true}>$2<')
+    .replace(/<span([^>]*?)>([^<{]+)</g, '<span$1 contentEditable suppressContentEditableWarning={true}>$2<')
+
     // Заменяем CDN ссылки
     .replace(/https:\/\/cdn\.(tailgrids|redactus)\.com[^"']*/g, '/images')
     .replace(/https:\/\/i\.ibb\.co[^"']*/g, '/images')
-    
+
     // Добавляем useState если есть интерактивность
-    .replace(/^export const/, 'import React, { useState } from \'react\';\n\nexport const')
-    
+    .replace(/^export const/, "import React, { useState } from 'react';\n\nexport const")
+
     // Добавляем TypeScript interface
     .replace(/export const (\w+) = \(\{([^}]*)\}\) =>/, (match, name, props) => {
       const interfaceName = `${name}Props`;
       const propsInterface = generatePropsInterface(name, category);
-      
+
       return `${propsInterface}\n\nconst ${name}: React.FC<${interfaceName}> = ({${props}}) =>`;
     });
-  
+
   return enhanced;
 };
 
@@ -83,7 +80,7 @@ export interface FAQItem {
   id: number;
   question: string;
   answer: string;
-}`
+}`,
   };
 
   return baseProps[category] || `export interface ${componentName}Props {}`;
@@ -92,7 +89,7 @@ export interface FAQItem {
 // Главная функция миграции
 async function migrateComponents() {
   console.log('🚀 Начинаю быструю миграцию TailGrids компонентов...');
-  
+
   // Создаем целевую папку
   if (!fs.existsSync(MIGRATION_CONFIG.targetDir)) {
     fs.mkdirSync(MIGRATION_CONFIG.targetDir, { recursive: true });
@@ -115,10 +112,10 @@ async function migrateComponents() {
     if (fs.existsSync(comp.source)) {
       const content = fs.readFileSync(comp.source, 'utf8');
       const enhanced = enhanceExistingComponent(content, path.basename(comp.target, '.tsx'), comp.category);
-      
+
       const targetPath = path.join(MIGRATION_CONFIG.targetDir, comp.target);
       fs.writeFileSync(targetPath, enhanced);
-      
+
       console.log(`✅ Мигрирован: ${comp.target}`);
       migratedComponents.push(path.basename(comp.target, '.tsx'));
       totalMigrated++;
@@ -127,7 +124,7 @@ async function migrateComponents() {
 
   // Создаем index.ts
   createIndexFile(migratedComponents);
-  
+
   console.log(`🎉 Быстрая миграция завершена! Создано ${totalMigrated} компонентов`);
   console.log('📦 Созданы компоненты:', migratedComponents.join(', '));
 }
@@ -135,48 +132,49 @@ async function migrateComponents() {
 // Улучшение существующих компонентов
 const enhanceExistingComponent = (content, componentName, category) => {
   let enhanced = content;
-  
+
   // Добавляем React import если отсутствует
   if (!enhanced.includes('import React')) {
     enhanced = `import React, { useState } from 'react';\n\n${enhanced}`;
   }
-  
+
   // Добавляем TypeScript интерфейс если отсутствует
   if (!enhanced.includes('interface') && !enhanced.includes('Props')) {
     const propsInterface = generatePropsInterface(componentName, category);
-    enhanced = enhanced.replace('import React', `import React, { useState } from 'react';\n\n${propsInterface}\n\n// Original component enhanced for Redactus\nconst ${componentName}: React.FC<${componentName}Props> = () =>`);
+    enhanced = enhanced.replace(
+      'import React',
+      `import React, { useState } from 'react';\n\n${propsInterface}\n\n// Original component enhanced for Redactus\nconst ${componentName}: React.FC<${componentName}Props> = () =>`,
+    );
   }
-  
+
   // Добавляем contentEditable где нужно
   enhanced = enhanced
-    .replace(/<h([1-6])([^>]*?)>([^<{]+)</g, 
-      '<h$1$2 contentEditable suppressContentEditableWarning={true}>$3<')
-    .replace(/<p([^>]*?)>([^<{]+)</g, 
-      '<p$1 contentEditable suppressContentEditableWarning={true}>$2<')
+    .replace(/<h([1-6])([^>]*?)>([^<{]+)</g, '<h$1$2 contentEditable suppressContentEditableWarning={true}>$3<')
+    .replace(/<p([^>]*?)>([^<{]+)</g, '<p$1 contentEditable suppressContentEditableWarning={true}>$2<')
     .replace(/>\s*([^<{][^<]*?)\s*</g, (match, text) => {
       if (text.trim() && !text.includes('{') && !text.includes('svg') && text.length > 3) {
         return `><span contentEditable suppressContentEditableWarning={true}>${text.trim()}</span><`;
       }
       return match;
     });
-  
+
   return enhanced;
 };
 
 // Создание index.ts файла
 function createIndexFile(components) {
-  const pricingExports = components.filter(c => c.startsWith('Pricing')).map(c => 
-    `export { default as ${c} } from './${c}';`
-  ).join('\n');
-  
-  const faqExports = components.filter(c => c.startsWith('FAQ')).map(c => 
-    `export { default as ${c} } from './${c}';`
-  ).join('\n');
-  
-  const typeExports = components.map(c => 
-    `export type { ${c}Props } from './${c}';`
-  ).join('\n');
-  
+  const pricingExports = components
+    .filter((c) => c.startsWith('Pricing'))
+    .map((c) => `export { default as ${c} } from './${c}';`)
+    .join('\n');
+
+  const faqExports = components
+    .filter((c) => c.startsWith('FAQ'))
+    .map((c) => `export { default as ${c} } from './${c}';`)
+    .join('\n');
+
+  const typeExports = components.map((c) => `export type { ${c}Props } from './${c}';`).join('\n');
+
   const indexContent = `// Interactive Components (Pricing & FAQ)
 // Auto-generated by migrate-components script
 
@@ -202,4 +200,4 @@ if (require.main === module) {
   migrateComponents().catch(console.error);
 }
 
-module.exports = { migrateComponents }; 
+module.exports = { migrateComponents };

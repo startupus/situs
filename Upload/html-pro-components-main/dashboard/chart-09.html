@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,10 +17,10 @@
   </head>
   <body>
     <!-- ====== Chart Section Start -->
-    <section class="bg-gray-2 dark:bg-dark py-20 lg:py-[120px]">
+    <section class="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div class="mx-auto px-4 md:container">
         <div
-          class="mx-auto w-full max-w-[500px] rounded-lg border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 px-5 pt-[30px] pb-5 sm:px-[30px]"
+          class="mx-auto w-full max-w-[500px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]"
         >
           <div class="flex justify-between">
             <div>
@@ -33,39 +33,42 @@
             </div>
             <div>
               <div x-data="{openDropDown: false}" class="relative">
-                <button class="text-body-color dark:text-dark-6" @click="openDropDown = !openDropDown">
-                  <svg 
-                    width="24" 
-                    height="24" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
+                <button
+                  class="text-body-color dark:text-dark-6"
+                  @click="openDropDown = !openDropDown"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     class="fill-current"
                   >
-                    <path 
-                      d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14Z" 
+                    <path
+                      d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14Z"
                     />
-                    <path 
-                      d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" 
+                    <path
+                      d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
                     />
-                    <path 
-                      d="M19 14C20.1046 14 21 13.1046 21 12C21 10.8954 20.1046 10 19 10C17.8954 10 17 10.8954 17 12C17 13.1046 17.8954 14 19 14Z" 
+                    <path
+                      d="M19 14C20.1046 14 21 13.1046 21 12C21 10.8954 20.1046 10 19 10C17.8954 10 17 10.8954 17 12C17 13.1046 17.8954 14 19 14Z"
                     />
-                  </svg>                    
+                  </svg>
                 </button>
 
                 <div
                   x-show="openDropDown"
                   @click.outside="openDropDown = false"
-                  class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm bg-white dark:bg-dark p-2 shadow-card"
+                  class="absolute right-0 top-full z-40 w-[200px] space-y-1 rounded-sm bg-white p-2 shadow-card dark:bg-dark"
                 >
                   <button
-                    class="w-full rounded-sm py-2 px-3 text-left text-sm text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2"
+                    class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                   >
                     Edit
                   </button>
                   <button
-                    class="w-full rounded-sm py-2 px-3 text-left text-sm text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark-2"
+                    class="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2"
                   >
                     Delete
                   </button>
@@ -82,7 +85,7 @@
               class="flex flex-wrap items-center justify-center text-xs font-medium text-body-color dark:text-dark-6"
             >
               <span
-                class="mr-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#E6F9EC] dark:bg-green-light-4 text-green"
+                class="mr-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#E6F9EC] text-green dark:bg-green-light-4"
               >
                 <svg
                   width="14"
@@ -97,7 +100,7 @@
                   />
                 </svg>
               </span>
-              <span class="text-green text-sm"> (+8%) </span>
+              <span class="text-sm text-green"> (+8%) </span>
               <span class="pl-1">Compared to prev month</span>
             </p>
           </div>
@@ -182,7 +185,7 @@
 
       const chartOne = new ApexCharts(
         document.querySelector("#chartOne"),
-        chartOneOptions
+        chartOneOptions,
       );
       chartOne.render();
     </script>

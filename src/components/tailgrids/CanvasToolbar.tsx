@@ -25,8 +25,8 @@ interface CanvasToolbarProps {
   onSave?: () => void;
 }
 
-const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ 
-  currentDevice, 
+const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
+  currentDevice,
   onDeviceChange,
   currentPageTitle,
   currentPageLanguage = 'ru',
@@ -36,7 +36,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   onCode,
   onUndo,
   onRedo,
-  onSave
+  onSave,
 }) => {
   const { theme: canvasTheme, resolvedTheme: canvasResolvedTheme, toggleTheme: toggleCanvasTheme } = useCanvasTheme();
   const { language, setLanguage, t } = useLanguage();
@@ -46,7 +46,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   const languages: Language[] = [
     { id: 'ru', code: 'ru', name: 'Russian', flag: '🇷🇺', isDefault: true },
     { id: 'en', code: 'en', name: 'English', flag: '🇺🇸' },
-    { id: 'de', code: 'de', name: 'German', flag: '🇩🇪' }
+    { id: 'de', code: 'de', name: 'German', flag: '🇩🇪' },
   ];
 
   const toggleCodeView = () => {
@@ -69,17 +69,13 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
 
   const getCanvasThemeLabel = () => {
     // Простое переключение только между light и dark
-    return canvasResolvedTheme === 'light' 
+    return canvasResolvedTheme === 'light'
       ? 'Текущая тема канваса: Светлая → Темная. Нажмите для смены.'
       : 'Текущая тема канваса: Темная → Светлая. Нажмите для смены.';
   };
 
-
-
-
-
   return (
-    <div 
+    <div
       className="redaktus-canvas-toolbar border-b px-4 py-3 transition-colors duration-200 bg-white dark:bg-gray-800 shadow-sm border-gray-200 dark:border-gray-700 font-inter"
       style={{ zIndex: 10 }}
     >
@@ -87,21 +83,21 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
         {/* Левая часть - языковые версии страницы */}
         <div className="flex items-center space-x-1">
           {languages
-            .filter(lang => availablePageLanguages.includes(lang.code))
+            .filter((lang) => availablePageLanguages.includes(lang.code))
             .map((lang) => (
-            <button
-              key={lang.id}
-              onClick={() => handleLanguageChange(lang.code)}
-              className={`flex items-center justify-center w-8 h-8 rounded text-sm transition-colors ${
-                currentPageLanguage === lang.code
-                  ? 'bg-white text-gray-700 shadow-sm dark:bg-gray-600 dark:text-gray-200'
-                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
-              }`}
-              title={`${lang.name} version`}
-            >
-              <span>{lang.flag}</span>
-            </button>
-          ))}
+              <button
+                key={lang.id}
+                onClick={() => handleLanguageChange(lang.code)}
+                className={`flex items-center justify-center w-8 h-8 rounded text-sm transition-colors ${
+                  currentPageLanguage === lang.code
+                    ? 'bg-white text-gray-700 shadow-sm dark:bg-gray-600 dark:text-gray-200'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
+                }`}
+                title={`${lang.name} version`}
+              >
+                <span>{lang.flag}</span>
+              </button>
+            ))}
           {/* Кнопка добавления языковой версии */}
           <button
             className="flex items-center justify-center w-8 h-8 rounded text-sm transition-colors text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -149,11 +145,17 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
             }}
             className={`p-1.5 rounded transition-colors border border-gray-300 dark:border-gray-600 ${
               canvasResolvedTheme === 'dark'
-                ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200' 
+                ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
                 : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
             }`}
             title={getCanvasThemeLabel()}
-            style={{ minWidth: '32px', minHeight: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{
+              minWidth: '32px',
+              minHeight: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
           >
             {getCanvasThemeIcon()}
           </button>
@@ -161,8 +163,8 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
           <button
             onClick={toggleCodeView}
             className={`p-1.5 rounded transition-colors ${
-              showCode 
-                ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200' 
+              showCode
+                ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
                 : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
             }`}
             title="Toggle code view"
@@ -185,7 +187,7 @@ const DeviceButton: React.FC<{
     <button
       onClick={onClick}
       className={`p-1.5 rounded transition-colors ${
-        active 
+        active
           ? 'bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200'
           : 'text-gray-600 hover:text-gray-800 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-gray-700'
       }`}
@@ -196,4 +198,4 @@ const DeviceButton: React.FC<{
   );
 };
 
-export default CanvasToolbar; 
+export default CanvasToolbar;

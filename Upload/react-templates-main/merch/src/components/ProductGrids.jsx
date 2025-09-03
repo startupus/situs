@@ -36,9 +36,9 @@ const productItems = [
 const ProductGrids = () => {
   return (
     <>
-      <section className="py-20 bg-white dark:bg-dark">
+      <section className="bg-white py-20 dark:bg-dark">
         <div className="container mx-auto">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             {productItems.map((item, index) => (
               <div
                 key={index}
@@ -52,14 +52,14 @@ const ProductGrids = () => {
                     <h3>
                       <Link
                         to={item.link}
-                        className="block mb-2 text-lg font-semibold text-dark hover:text-primary xs:text-xl sm:text-lg md:text-xl dark:text-white"
+                        className="mb-2 block text-lg font-semibold text-dark hover:text-primary dark:text-white xs:text-xl sm:text-lg md:text-xl"
                       >
                         {item.name}
                       </Link>
                     </h3>
                     <p className="mb-4 text-base font-semibold text-dark dark:text-white">
                       {item.originalPrice && (
-                        <span className="pr-1 line-through text-body-color dark:text-dark-6">
+                        <span className="pr-1 text-body-color line-through dark:text-dark-6">
                           {" "}
                           {item.originalPrice}{" "}
                         </span>
@@ -68,7 +68,7 @@ const ProductGrids = () => {
                     </p>
                     <Link
                       to={item.link}
-                      className="border-dark-2 hover:bg-dark-2 inline-flex items-center justify-center rounded-md border px-5 py-[9px] text-center text-base font-medium transition hover:text-white dark:text-white"
+                      className="inline-flex items-center justify-center rounded-md border border-dark-2 px-5 py-[9px] text-center text-base font-medium transition hover:bg-dark-2 hover:text-white dark:text-white"
                     >
                       Shop Now
                     </Link>

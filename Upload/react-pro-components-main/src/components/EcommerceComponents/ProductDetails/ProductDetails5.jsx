@@ -2,12 +2,12 @@ import React from "react";
 
 const ProductDetails5 = () => {
   return (
-    <section className="bg-gray-2 dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section className="bg-gray-2 pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-8/12">
             <div>
-              <div className="rounded-[10px] border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2">
+              <div className="rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
                 <div className="overflow-hidden rounded-md p-5">
                   <img
                     src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products-details/details-05/image-01.jpg"
@@ -16,20 +16,18 @@ const ProductDetails5 = () => {
                   />
                 </div>
 
-                <div className="p-5 pt-5 pb-9">
-                  <h3
-                    className="mb-5 text-2xl font-bold text-dark dark:text-white lg:text-2xl xl:leading-[35px] xl:text-[28px]"
-                  >
+                <div className="p-5 pb-9 pt-5">
+                  <h3 className="mb-5 text-2xl font-bold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[35px]">
                     SaaSwind - Tailwind CSS SaaS Web Template
                   </h3>
-                  <p className="text-body-color dark:text-dark-6 mb-[18px] text-base">
+                  <p className="mb-[18px] text-base text-body-color dark:text-dark-6">
                     SaaSwind is a powerful Tailwind CSS website template for
                     SaaS, web apps, software websites, and other similar
                     websites. It boasts all the essential sections to launch
                     your SaaS website with style and sophistication.
                   </p>
 
-                  <p className="text-body-color dark:text-dark-6 mb-6 text-base">
+                  <p className="mb-6 text-base text-body-color dark:text-dark-6">
                     The design is well-thought-out and will look great not only
                     on desktop screens, but also on mobile screens. But that's
                     not all! It comes with a bunch of cool features that will
@@ -49,7 +47,7 @@ const ProductDetails5 = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-stroke dark:border-dark-3 px-5 py-5 sm:px-10">
+                <div className="border-t border-stroke px-5 py-5 dark:border-dark-3 sm:px-10">
                   <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/2">
                       <span className="mb-4 inline-block text-sm font-semibold text-dark dark:text-white">
@@ -62,13 +60,13 @@ const ProductDetails5 = () => {
                       </div>
                     </div>
                     <div className="w-full md:w-1/2">
-                      <span className="text-body-color dark:text-dark-6 mb-4 block text-sm font-medium md:text-right">
+                      <span className="mb-4 block text-sm font-medium text-body-color dark:text-dark-6 md:text-right">
                         Share this post :
                       </span>
-                      <div className="flex flex-wrap md:justify-end gap-3">
+                      <div className="flex flex-wrap gap-3 md:justify-end">
                         <a
                           href="/#"
-                          className="bg-gray-2 dark:bg-dark text-body-color hover:bg-primary flex h-[34px] w-[34px] items-center justify-center rounded-sm hover:text-white"
+                          className="flex h-[34px] w-[34px] items-center justify-center rounded-sm bg-gray-2 text-body-color hover:bg-primary hover:text-white dark:bg-dark"
                         >
                           <svg
                             width={18}
@@ -83,7 +81,7 @@ const ProductDetails5 = () => {
                         </a>
                         <a
                           href="/#"
-                          className="bg-gray-2 dark:bg-dark text-body-color hover:bg-primary flex h-[34px] w-[34px] items-center justify-center rounded-sm hover:text-white"
+                          className="flex h-[34px] w-[34px] items-center justify-center rounded-sm bg-gray-2 text-body-color hover:bg-primary hover:text-white dark:bg-dark"
                         >
                           <svg
                             width={18}
@@ -98,7 +96,7 @@ const ProductDetails5 = () => {
                         </a>
                         <a
                           href="/#"
-                          className="bg-gray-2 dark:bg-dark text-body-color hover:bg-primary flex h-[34px] w-[34px] items-center justify-center rounded-sm hover:text-white"
+                          className="flex h-[34px] w-[34px] items-center justify-center rounded-sm bg-gray-2 text-body-color hover:bg-primary hover:text-white dark:bg-dark"
                         >
                           <svg
                             width={18}
@@ -121,7 +119,7 @@ const ProductDetails5 = () => {
 
           <div className="w-full px-4 lg:w-4/12">
             <div className="mb-10 rounded-[10px] bg-white dark:bg-dark-2">
-              <div className="border-b border-stroke dark:border-dark-3 pt-[18px] pb-4 px-8">
+              <div className="border-b border-stroke px-8 pb-4 pt-[18px] dark:border-dark-3">
                 <h3 className="text-lg font-semibold text-dark dark:text-white">
                   Download Details
                 </h3>
@@ -148,16 +146,16 @@ const ProductDetails5 = () => {
                   title="For paying users"
                 />
               </div>
-              <div className="border-t border-stroke dark:border-dark-3 pt-7 pb-8 px-8">
+              <div className="border-t border-stroke px-8 pb-8 pt-7 dark:border-dark-3">
                 <a
                   href="/#"
-                  className="bg-primary flex w-full items-center justify-center rounded-md py-3 px-10 text-center text-base font-medium text-white hover:bg-blue-dark"
+                  className="flex w-full items-center justify-center rounded-md bg-primary px-10 py-3 text-center text-base font-medium text-white hover:bg-blue-dark"
                 >
                   Purchase Now
                 </a>
                 <a
                   href="/#"
-                  className="mt-4 flex w-full items-center justify-center rounded-md bg-dark py-3 px-10 text-center text-base font-medium text-white hover:bg-dark/90"
+                  className="mt-4 flex w-full items-center justify-center rounded-md bg-dark px-10 py-3 text-center text-base font-medium text-white hover:bg-dark/90"
                 >
                   Live Demo
                 </a>
@@ -165,29 +163,47 @@ const ProductDetails5 = () => {
             </div>
 
             <div className="rounded-[10px] bg-white dark:bg-dark-2">
-              <div className="border-b border-stroke dark:border-dark-3 pt-[18px] pb-4 px-8">
+              <div className="border-b border-stroke px-8 pb-4 pt-[18px] dark:border-dark-3">
                 <h3 className="text-lg font-semibold text-dark dark:text-white">
                   Template Information
                 </h3>
               </div>
               <div className="p-8">
-                <p className="mb-[10px] flex text-base font-medium gap-1">
-                  <span className="text-dark dark:text-white"> Released on: </span>
-                  <span className="text-body-color dark:text-dark-6"> Nov 30, 2022 </span>
+                <p className="mb-[10px] flex gap-1 text-base font-medium">
+                  <span className="text-dark dark:text-white">
+                    {" "}
+                    Released on:{" "}
+                  </span>
+                  <span className="text-body-color dark:text-dark-6">
+                    {" "}
+                    Nov 30, 2022{" "}
+                  </span>
                 </p>
-                <p className="mb-[10px] flex text-base font-medium gap-1">
-                  <span className="text-dark dark:text-white"> Last Updated on: </span>
-                  <span className="text-body-color dark:text-dark-6"> Dec 13, 2022 </span>
+                <p className="mb-[10px] flex gap-1 text-base font-medium">
+                  <span className="text-dark dark:text-white">
+                    {" "}
+                    Last Updated on:{" "}
+                  </span>
+                  <span className="text-body-color dark:text-dark-6">
+                    {" "}
+                    Dec 13, 2022{" "}
+                  </span>
                 </p>
-                <p className="mb-[10px] flex text-base font-medium gap-1">
-                  <span className="text-dark dark:text-white"> Built with: </span>
+                <p className="mb-[10px] flex gap-1 text-base font-medium">
+                  <span className="text-dark dark:text-white">
+                    {" "}
+                    Built with:{" "}
+                  </span>
                   <a href="/#" className="text-primary">
                     Tailwind
                   </a>
                 </p>
-                <p className="flex text-base font-medium gap-1">
+                <p className="flex gap-1 text-base font-medium">
                   <span className="text-dark dark:text-white"> Version: </span>
-                  <span className="text-body-color dark:text-dark-6"> 1.0 </span>
+                  <span className="text-body-color dark:text-dark-6">
+                    {" "}
+                    1.0{" "}
+                  </span>
                 </p>
               </div>
             </div>
@@ -211,17 +227,17 @@ const DownloadOption = ({ id, price, title }) => {
       />
       <label
         htmlFor={id}
-        className="flex cursor-pointer items-center justify-between rounded-md border border-stroke dark:border-dark-3 py-3 px-5"
+        className="flex cursor-pointer items-center justify-between rounded-md border border-stroke px-5 py-3 dark:border-dark-3"
       >
         <span>
           <span className="block text-base font-medium text-dark dark:text-white">
             {price}
           </span>
-          <span className="text-body-color dark:text-dark-6 block text-xs">
+          <span className="block text-xs text-body-color dark:text-dark-6">
             {title}
           </span>
         </span>
-        <span className="flex h-6 w-6 items-center justify-center rounded-full border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2">
+        <span className="flex h-6 w-6 items-center justify-center rounded-full border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
           <svg
             width={14}
             height={15}
@@ -242,11 +258,13 @@ const DownloadOption = ({ id, price, title }) => {
 };
 const TagItem = ({ tag }) => {
   return (
-    <button className="bg-primary/[0.08] text-dark dark:text-white hover:bg-primary inline-block rounded-sm py-[5px] px-[14px] text-base hover:text-white">
+    <button className="inline-block rounded-sm bg-primary/[0.08] px-[14px] py-[5px] text-base text-dark hover:bg-primary hover:text-white dark:text-white">
       {tag}
     </button>
   );
 };
 const FeaturesItem = ({ feature }) => {
-  return <p className="text-body-color dark:text-dark-6 text-base">{feature}</p>;
+  return (
+    <p className="text-base text-body-color dark:text-dark-6">{feature}</p>
+  );
 };

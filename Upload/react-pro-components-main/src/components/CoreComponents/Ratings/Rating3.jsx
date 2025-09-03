@@ -5,8 +5,8 @@ export default function Rating3() {
     <section className="bg-gray-2 py-20 dark:bg-dark">
       <div className="container">
         <div className="mx-auto w-full max-w-[470px]">
-          <div className="overflow-hidden rounded-lg bg-white px-8 py-10 text-center shadow-three lg:mb-0 xl:px-[60px] dark:bg-dark-2 dark:shadow-box-dark">
-            <h3 className="mb-5 font-semibold text-dark lg:text-2xl xl:text-[28px] xl:leading-[1.43] dark:text-white">
+          <div className="overflow-hidden rounded-lg bg-white px-8 py-10 text-center shadow-three dark:bg-dark-2 dark:shadow-box-dark lg:mb-0 xl:px-[60px]">
+            <h3 className="mb-5 font-semibold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[1.43]">
               Customer reviews
             </h3>
             <div className="inline-flex flex-wrap items-center justify-center gap-4 rounded-md border-[.5px] border-stroke bg-gray-1 px-6 py-[10px] dark:border-dark-3 dark:bg-dark">

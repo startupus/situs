@@ -50,7 +50,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                  className="outline-hidden w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                   <svg
@@ -104,7 +104,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
             </div>
 
             <div className="relative hidden md:block">
-              <select className="appearance-none bg-transparent pl-6 pr-5 text-sm font-medium text-body-color outline-hidden dark:text-dark-6">
+              <select className="outline-hidden appearance-none bg-transparent pl-6 pr-5 text-sm font-medium text-body-color dark:text-dark-6">
                 <option value="" className="dark:bg-dark-2">
                   English
                 </option>
@@ -115,7 +115,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
               <img
                 src={country}
                 alt="usa"
-                className="absolute left-0 top-1/2 h-3 w-5 -translate-y-1/2 rounded-xs"
+                className="rounded-xs absolute left-0 top-1/2 h-3 w-5 -translate-y-1/2"
               />
               <span className="absolute right-0 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                 <svg

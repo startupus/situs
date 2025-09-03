@@ -98,7 +98,7 @@ const InputBox = ({ type, placeholder, name, labelFor, labelTitle }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="w-full rounded-md border border-white/20 bg-white/5 px-5 py-3 text-white placeholder-white/50 outline-hidden focus:border-white"
+          className="outline-hidden w-full rounded-md border border-white/20 bg-white/5 px-5 py-3 text-white placeholder-white/50 focus:border-white"
         />
       </div>
     </div>
@@ -126,7 +126,7 @@ const TextArea = ({
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="w-full resize-none rounded-md border border-white/20 bg-white/5 px-5 py-3 text-white placeholder-white/50 outline-hidden focus:border-white"
+          className="outline-hidden w-full resize-none rounded-md border border-white/20 bg-white/5 px-5 py-3 text-white placeholder-white/50 focus:border-white"
           defaultValue={defaultValue}
         />
       </div>

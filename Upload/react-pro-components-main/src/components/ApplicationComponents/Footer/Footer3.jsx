@@ -16,7 +16,7 @@ const Footer3 = () => {
                 <img
                   src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
                   alt="logo"
-                  className="max-w-full hidden dark:block"
+                  className="hidden max-w-full dark:block"
                 />
               </a>
               <p className="mb-7 text-base text-body-color dark:text-dark-6">
@@ -109,7 +109,7 @@ const Footer3 = () => {
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="h-12 w-full rounded-sm border border-stroke bg-transparent px-5 text-sm text-body-color outline-hidden focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
+                  className="outline-hidden h-12 w-full rounded-sm border border-stroke bg-transparent px-5 text-sm text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
                 />
                 <button
                   type="submit"

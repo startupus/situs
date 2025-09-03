@@ -46,12 +46,12 @@ const QuickView = () => {
           <button
             ref={menuTrigger}
             onClick={() => setOpen(!open)}
-            className="rounded-md bg-primary py-3 px-7 text-base font-medium text-white hover:bg-blue-dark"
+            className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
           >
             Quick View
           </button>
           <div
-            className={`absolute top-0 left-0 min-h-screen w-full overflow-y-auto bg-body-color dark:bg-dark py-20 lg:py-[120px] ${
+            className={`absolute left-0 top-0 min-h-screen w-full overflow-y-auto bg-body-color py-20 dark:bg-dark lg:py-[120px] ${
               !open && "hidden"
             } `}
           >
@@ -60,11 +60,11 @@ const QuickView = () => {
                 <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
                   <div
                     ref={menuRef}
-                    className="relative overflow-hidden rounded-lg bg-white dark:bg-dark-2 p-4 xs:p-[22px] shadow-quick-view dark:shadow-box-dark"
+                    className="shadow-quick-view relative overflow-hidden rounded-lg bg-white p-4 dark:bg-dark-2 dark:shadow-box-dark xs:p-[22px]"
                   >
                     <button
                       onClick={() => setOpen(false)}
-                      className="absolute right-9 top-9 flex h-11 w-11 items-center justify-center rounded-full border border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 transition hover:border-primary hover:bg-primary hover:text-white"
+                      className="absolute right-9 top-9 flex h-11 w-11 items-center justify-center rounded-full border border-stroke text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
                     >
                       <svg
                         width={20}
@@ -78,7 +78,7 @@ const QuickView = () => {
                       </svg>
                     </button>
                     <div className="items-center lg:flex">
-                      <div className="lg:w-5/12 w-full">
+                      <div className="w-full lg:w-5/12">
                         <Swiper slidesPerView={1} loop={true} ref={sliderRef}>
                           <SwiperSlide>
                             <div className="overflow-hidden rounded-lg">
@@ -99,7 +99,7 @@ const QuickView = () => {
                             </div>
                           </SwiperSlide>
 
-                          <div className="z-50 absolute top-1/2 right-5 left-5 flex -translate-y-1/2 items-center justify-between">
+                          <div className="absolute left-5 right-5 top-1/2 z-50 flex -translate-y-1/2 items-center justify-between">
                             <div
                               className="prev-arrow cursor-pointer"
                               onClick={handlePrev}
@@ -139,8 +139,8 @@ const QuickView = () => {
                       </div>
 
                       <div className="w-full lg:w-7/12">
-                        <div className="lg:ml-9 xl:ml-11 text-left">
-                          <h3 className="mb-4 pr-5 text-xl font-bold text-dark dark:text-white lg:text-2xl xl:leading-[35px] xl:text-[28px]">
+                        <div className="text-left lg:ml-9 xl:ml-11">
+                          <h3 className="mb-4 pr-5 text-xl font-bold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[35px]">
                             Men's Regular T-shirt
                           </h3>
                           <div className="mb-8 flex flex-wrap items-center">
@@ -177,7 +177,11 @@ const QuickView = () => {
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_1109_50268">
-                                      <rect width={20} height={20} fill="white" />
+                                      <rect
+                                        width={20}
+                                        height={20}
+                                        fill="white"
+                                      />
                                     </clipPath>
                                   </defs>
                                 </svg>
@@ -187,7 +191,7 @@ const QuickView = () => {
                               </span>
                             </div>
                           </div>
-                          <p className="text-xl font-semibold text-dark dark:text-white xl:leading-[40px] xl:text-[28px]">
+                          <p className="text-xl font-semibold text-dark dark:text-white xl:text-[28px] xl:leading-[40px]">
                             $29.00
                           </p>
                           <p className="mb-6 text-base text-body-color dark:text-dark-6">
@@ -207,7 +211,7 @@ const QuickView = () => {
                                 />
                                 <label
                                   htmlFor="small"
-                                  className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer rounded-sm border border-stroke px-[15px] py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   S
                                 </label>
@@ -221,7 +225,7 @@ const QuickView = () => {
                                 />
                                 <label
                                   htmlFor="medium"
-                                  className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer rounded-sm border border-stroke px-[15px] py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   M
                                 </label>
@@ -235,7 +239,7 @@ const QuickView = () => {
                                 />
                                 <label
                                   htmlFor="large"
-                                  className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer rounded-sm border border-stroke px-[15px] py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   XL
                                 </label>
@@ -249,7 +253,7 @@ const QuickView = () => {
                                 />
                                 <label
                                   htmlFor="extraLarge"
-                                  className="inline-block cursor-pointer rounded-sm border border-stroke dark:border-dark-3 py-1 px-[15px] text-base font-medium text-dark dark:text-white hover:border-primary hover:bg-primary hover:text-white"
+                                  className="inline-block cursor-pointer rounded-sm border border-stroke px-[15px] py-1 text-base font-medium text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white"
                                 >
                                   XXL
                                 </label>
@@ -374,14 +378,14 @@ const QuickView = () => {
 
                           <div className="flex flex-wrap gap-4">
                             <div>
-                              <button className="inline-flex items-center justify-center rounded-md bg-primary py-3 px-7 text-center text-base font-medium text-white hover:bg-blue-dark">
+                              <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark">
                                 Add to Cart
                               </button>
                             </div>
                             <div>
                               <a
                                 href="/#"
-                                className="inline-flex items-center justify-center rounded-md bg-dark py-3 px-7 text-center text-base font-medium text-white hover:bg-dark/90"
+                                className="inline-flex items-center justify-center rounded-md bg-dark px-7 py-3 text-center text-base font-medium text-white hover:bg-dark/90"
                               >
                                 View Details
                               </a>

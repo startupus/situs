@@ -463,7 +463,7 @@ const InputBox = ({ type, placeholder, name }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="w-full border-b border-stroke bg-transparent py-4 text-sm text-body-color outline-hidden placeholder:opacity-50 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
+          className="outline-hidden w-full border-b border-stroke bg-transparent py-4 text-sm text-body-color placeholder:opacity-50 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
         />
       </div>
     </div>
@@ -477,7 +477,7 @@ const TextArea = ({ row, placeholder, name, defaultValue }) => {
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="w-full resize-none border-b border-stroke bg-transparent py-4 text-sm text-body-color outline-hidden placeholder:opacity-50 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
+          className="outline-hidden w-full resize-none border-b border-stroke bg-transparent py-4 text-sm text-body-color placeholder:opacity-50 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
           defaultValue={defaultValue}
         />
       </div>

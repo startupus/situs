@@ -1,36 +1,34 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { FaUser, FaLock, FaEye, FaEyeSlash, FaEnvelope, FaPhone } from 'react-icons/fa'
-import CodeLogin from '../components/auth/CodeLogin'
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaEnvelope, FaPhone } from 'react-icons/fa';
+import CodeLogin from '../components/auth/CodeLogin';
 
 interface LoginPageProps {
-  onLogin?: (user: any) => void
+  onLogin?: (user: any) => void;
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [contactMethod, setContactMethod] = useState<'email' | 'phone'>('email')
-  const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
-  
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [contactMethod, setContactMethod] = useState<'email' | 'phone'>('email');
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   // Проверяем, нужно ли показать вход по коду
-  const loginMethod = searchParams.get('method')
-  const showCodeLogin = loginMethod === 'code'
+  const loginMethod = searchParams.get('method');
+  const showCodeLogin = loginMethod === 'code';
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError('')
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
 
     try {
-      const loginData = contactMethod === 'email' 
-        ? { email, password }
-        : { phone, password } // TODO: Добавить поддержку входа по телефону в API
+      const loginData = contactMethod === 'email' ? { email, password } : { phone, password }; // TODO: Добавить поддержку входа по телефону в API
 
       const response = await fetch('/api/auth/login', {
         method: 'POST',
@@ -38,37 +36,32 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginData),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error('Неверные учетные данные')
+        throw new Error('Неверные учетные данные');
       }
 
-      const { user, token } = await response.json()
-      
+      const { user, token } = await response.json();
+
       // Сохраняем токен
-      localStorage.setItem('auth-token', token)
-      
+      localStorage.setItem('auth-token', token);
+
       // Уведомляем родительский компонент
-      onLogin?.(user)
-      
+      onLogin?.(user);
+
       // Переходим к списку проектов
-      navigate('/projects')
+      navigate('/projects');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Ошибка входа')
+      setError(err instanceof Error ? err.message : 'Ошибка входа');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // Если выбран вход по коду, показываем CodeLogin
   if (showCodeLogin) {
-    return (
-      <CodeLogin 
-        onLogin={onLogin} 
-        onBack={() => navigate('/login')}
-      />
-    );
+    return <CodeLogin onLogin={onLogin} onBack={() => navigate('/login')} />;
   }
 
   return (
@@ -79,21 +72,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <div className="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
             <span className="text-white text-2xl font-bold">S</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Situs Platform
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Войдите в свою учетную запись
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Situs Platform</h1>
+          <p className="text-gray-600 dark:text-gray-400">Войдите в свою учетную запись</p>
         </div>
 
         {/* Форма входа */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
           {/* Заголовок */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Вход по паролю
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Вход по паролю</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
               Введите {contactMethod === 'email' ? 'email' : 'телефон'} и пароль
             </p>
@@ -205,16 +192,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               <div>
                 <button
                   type="button"
-                  onClick={() => window.location.href = '/login?method=code'}
+                  onClick={() => (window.location.href = '/login?method=code')}
                   className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
                 >
                   Войти по коду
                 </button>
               </div>
               <div className="pt-2 border-t border-gray-200 dark:border-gray-600">
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-                  Нет аккаунта?
-                </p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Нет аккаунта?</p>
                 <button
                   type="button"
                   onClick={() => navigate('/register')}
@@ -226,11 +211,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             </div>
           </form>
         </div>
-
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage 
+export default LoginPage;

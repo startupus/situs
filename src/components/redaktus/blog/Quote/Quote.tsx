@@ -1,9 +1,9 @@
-import React from 'react'
-import { RichText } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-import Container from '../layout/Container'
-import Section from '../layout/Section'
+import React from 'react';
+import { RichText } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
+import Container from '../layout/Container';
+import Section from '../layout/Section';
 
 const Quote: types.Brick = () => {
   return (
@@ -14,27 +14,24 @@ const Quote: types.Brick = () => {
             propName="quote"
             placeholder="Insert a quote"
             renderBlock={({ children }: { children: any }) => (
-              <p className="text-2xl italic text-gray-500 dark:text-gray-200">
-                {children}
-              </p>
+              <p className="text-2xl italic text-gray-500 dark:text-gray-200">{children}</p>
             )}
           />
         </div>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 Quote.schema = {
   name: blockNames.Quote,
   label: 'Quote',
   category: 'rb-ui blog',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Quote/Quote.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Quote/Quote.tsx',
   getDefaultProps: () => ({
     quote: 'Innovation distinguishes between a leader and a follower.',
   }),
-}
+};
 
-export default Quote
+export default Quote;

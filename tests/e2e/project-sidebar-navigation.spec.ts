@@ -26,10 +26,11 @@ test.describe('Project sidebar navigation from system menu', () => {
     expect(tplItems.length).toBeGreaterThan(0);
 
     // 2) Маппим префикс /project → /projects/:id
-    const mapped = tplItems.map(it => {
-      const to = (!it.to || it.to === '/project')
-        ? `/projects/${project.id}`
-        : it.to.replace(/^\/project(\/|$)/, `/projects/${project.id}$1`);
+    const mapped = tplItems.map((it) => {
+      const to =
+        !it.to || it.to === '/project'
+          ? `/projects/${project.id}`
+          : it.to.replace(/^\/project(\/|$)/, `/projects/${project.id}$1`);
       return { title: it.title, to };
     });
 
@@ -39,7 +40,9 @@ test.describe('Project sidebar navigation from system menu', () => {
     // 4) Находим сайдбар и собираем ссылки
     const sidebar = page.locator('div.fixed.left-0 nav ul li a');
     await expect(sidebar.first()).toBeVisible();
-    const hrefs = await sidebar.evaluateAll(anchors => anchors.map(a => (a as HTMLAnchorElement).getAttribute('href')));
+    const hrefs = await sidebar.evaluateAll((anchors) =>
+      anchors.map((a) => (a as HTMLAnchorElement).getAttribute('href')),
+    );
 
     // 5) Каждая ожидаемая ссылка присутствует в DOM
     for (const it of mapped) {
@@ -48,10 +51,8 @@ test.describe('Project sidebar navigation from system menu', () => {
 
     // 6) Кликаем по 1-2 ссылкам и проверяем смену URL
     // Первая не-"обзор" ссылка, если есть
-    const firstNav = mapped.find(x => x.to !== `/projects/${project.id}`) || mapped[0];
+    const firstNav = mapped.find((x) => x.to !== `/projects/${project.id}`) || mapped[0];
     await page.click(`a[href="${firstNav.to}"]`);
     await expect(page).toHaveURL(new RegExp(firstNav.to.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   });
 });
-
-

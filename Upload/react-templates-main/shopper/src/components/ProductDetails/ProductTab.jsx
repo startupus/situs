@@ -56,7 +56,7 @@ const ProductTab = () => {
   return (
     <>
       <div className="w-full px-4 lg:w-1/2">
-        <div className="mb-12 lg:mr-5 lg:mb-0 xl:mr-10">
+        <div className="mb-12 lg:mb-0 lg:mr-5 xl:mr-10">
           <div className="relative mb-5 overflow-hidden">
             {productTabItems.map(
               (product, productIndex) =>
@@ -64,7 +64,7 @@ const ProductTab = () => {
                   <div key={productIndex}>
                     <button
                       onClick={handleModalOpen}
-                      className="text-dark shadow-card drop-shadow-three dark:bg-dark-2 absolute top-6 right-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-white dark:text-white"
+                      className="absolute right-6 top-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-white text-dark shadow-card drop-shadow-three dark:bg-dark-2 dark:text-white"
                     >
                       <svg
                         width="24"
@@ -118,7 +118,7 @@ const ProductTab = () => {
             activeTab === productIndex && (
               <div key={productIndex}>
                 {modalOpen && (
-                  <div className="fixed top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-black/50">
+                  <div className="fixed left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-black/50">
                     <div className="mx-auto inline-block w-4/5 sm:w-3/4 lg:w-1/2">
                       <div ref={tabRef}>
                         <img

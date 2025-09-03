@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Newsletter = () => {
   return (
@@ -13,36 +13,17 @@ const Newsletter = () => {
                   for Free
                 </h2>
                 <p className="max-w-[300px] text-base text-white">
-                  And because your company is unique, you will need an
-                  extensible identity solution.
+                  And because your company is unique, you will need an extensible identity solution.
                 </p>
                 <div>
                   <span className="absolute bottom-0 left-0 z-[-1]">
-                    <svg
-                      width="585"
-                      height="400"
-                      viewBox="0 0 585 400"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M585 -6H0V400C168.393 400 570.581 310.231 585 -6Z"
-                        fill="#3056D3"
-                      />
+                    <svg width="585" height="400" viewBox="0 0 585 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M585 -6H0V400C168.393 400 570.581 310.231 585 -6Z" fill="#3056D3" />
                     </svg>
                   </span>
                   <span className="absolute bottom-0 left-0 z-[-2]">
-                    <svg
-                      width="392"
-                      height="189"
-                      viewBox="0 0 392 189"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M391.516 189H0V28C301.088 -64.8 386.464 96.6667 391.516 189Z"
-                        fill="#13C296"
-                      />
+                    <svg width="392" height="189" viewBox="0 0 392 189" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M391.516 189H0V28C301.088 -64.8 386.464 96.6667 391.516 189Z" fill="#13C296" />
                     </svg>
                   </span>
                 </div>
@@ -50,9 +31,7 @@ const Newsletter = () => {
             </div>
             <div className="w-full self-center px-4 lg:w-1/2">
               <div className="relative z-10 px-6 py-9 sm:p-10">
-                <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
-                  Subscribe Now
-                </h2>
+                <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white sm:text-4xl">Subscribe Now</h2>
                 <form className="flex flex-wrap pb-1">
                   <input
                     type="email"
@@ -63,9 +42,7 @@ const Newsletter = () => {
                     Submit
                   </button>
                 </form>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  You will receive every news and pro tips.
-                </p>
+                <p className="text-sm text-body-color dark:text-dark-6">You will receive every news and pro tips.</p>
               </div>
             </div>
           </div>

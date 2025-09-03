@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ProductCarousel4 = () => {
   const sliderRef = useRef(null);
@@ -191,15 +191,7 @@ const ProductCarousel4 = () => {
 
 export default ProductCarousel4;
 
-const ProductCard = ({
-  image,
-  color,
-  discountedPrice,
-  link,
-  name,
-  price,
-  children,
-}) => {
+const ProductCard = ({ image, color, discountedPrice, link, name, price, children }) => {
   return (
     <div className="rounded-[5px] border-[.5px] border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-[10px] shadow-1 dark:shadow-box-dark">
       <a href={link} className="block">
@@ -208,10 +200,7 @@ const ProductCard = ({
       <div className="pt-5 pb-6 text-center">
         <span className="text-sm font-medium text-body-color dark:text-dark-6 block mb-1">{color}</span>
         <h3 className="mb-2">
-          <a
-            href={link}
-            className="block text-base font-semibold text-dark dark:text-white hover:text-primary"
-          >
+          <a href={link} className="block text-base font-semibold text-dark dark:text-white hover:text-primary">
             {name}
           </a>
         </h3>
@@ -224,9 +213,7 @@ const ProductCard = ({
             </span>
           )}
         </p>
-        <div className="flex items-center justify-center space-x-2">
-          {children}
-        </div>
+        <div className="flex items-center justify-center space-x-2">{children}</div>
       </div>
     </div>
   );
@@ -234,12 +221,7 @@ const ProductCard = ({
 const InputGroup = ({ id, color }) => {
   return (
     <div className="relative">
-      <input
-        type="radio"
-        name="productOneColor"
-        id={id}
-        className="color sr-only"
-      />
+      <input type="radio" name="productOneColor" id={id} className="color sr-only" />
       <label
         htmlFor={id}
         className={`flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-${color}`}

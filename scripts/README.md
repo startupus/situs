@@ -31,7 +31,6 @@ node scripts/fix-markdown.cjs
 #### До исправления
 
 `````markdown
-
 ## Заголовок
 
 Текст

@@ -9,18 +9,18 @@ const Portfolio = () => {
 
   return (
     <>
-      <section className="pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+      <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="text-primary mb-2 block text-lg font-semibold">
+                <span className="mb-2 block text-lg font-semibold text-primary">
                   Our Portfolio
                 </span>
-                <h2 className="text-dark mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
+                <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark sm:text-4xl md:text-[40px]">
                   Our Recent Projects
                 </h2>
-                <p className="text-body-color text-base dark:text-dark-6">
+                <p className="text-base text-body-color dark:text-dark-6">
                   There are many variations of passages of Lorem Ipsum available
                   but the majority have suffered alteration in some form.
                 </p>
@@ -28,16 +28,16 @@ const Portfolio = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-wrap justify-center -mx-4">
+          <div className="-mx-4 flex w-full flex-wrap justify-center">
             <div className="w-full px-4">
-              <ul className="flex flex-wrap justify-center mb-12 space-x-1">
+              <ul className="mb-12 flex flex-wrap justify-center space-x-1">
                 <li className="mb-1">
                   <button
                     onClick={() => handleProject("all")}
-                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                    className={`inline-block rounded-lg px-5 py-2 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "all"
                         ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        : "inactiveClasses text-body-color hover:bg-primary hover:text-white dark:text-dark-6"
                     }`}
                   >
                     All Projects
@@ -46,10 +46,10 @@ const Portfolio = () => {
                 <li className="mb-1">
                   <button
                     onClick={() => handleProject("branding")}
-                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                    className={`inline-block rounded-lg px-5 py-2 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "branding"
                         ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        : "inactiveClasses text-body-color hover:bg-primary hover:text-white dark:text-dark-6"
                     }`}
                   >
                     Branding
@@ -58,10 +58,10 @@ const Portfolio = () => {
                 <li className="mb-1">
                   <button
                     onClick={() => handleProject("design")}
-                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                    className={`inline-block rounded-lg px-5 py-2 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "design"
                         ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        : "inactiveClasses text-body-color hover:bg-primary hover:text-white dark:text-dark-6"
                     }`}
                   >
                     Design
@@ -70,10 +70,10 @@ const Portfolio = () => {
                 <li className="mb-1">
                   <button
                     onClick={() => handleProject("marketing")}
-                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                    className={`inline-block rounded-lg px-5 py-2 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "marketing"
                         ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        : "inactiveClasses text-body-color hover:bg-primary hover:text-white dark:text-dark-6"
                     }`}
                   >
                     Marketing
@@ -82,10 +82,10 @@ const Portfolio = () => {
                 <li className="mb-1">
                   <button
                     onClick={() => handleProject("development")}
-                    className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                    className={`inline-block rounded-lg px-5 py-2 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       showCard === "development"
                         ? "activeClasses bg-primary text-white"
-                        : "inactiveClasses text-body-color dark:text-dark-6 hover:bg-primary hover:text-white"
+                        : "inactiveClasses text-body-color hover:bg-primary hover:text-white dark:text-dark-6"
                     }`}
                   >
                     Development
@@ -94,7 +94,7 @@ const Portfolio = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-wrap -mx-4">
+          <div className="-mx-4 flex flex-wrap">
             <PortfolioCard
               ImageHref="https://i.ibb.co/64WfFPt/image-01.jpg"
               category="Branding"
@@ -173,14 +173,16 @@ const PortfolioCard = ({
           <div className="overflow-hidden rounded-[10px]">
             <img src={ImageHref} alt="portfolio" className="w-full" />
           </div>
-          <div className="relative z-10 mx-7 -mt-20 rounded-lg bg-white dark:bg-dark-2 py-[34px] px-3 text-center shadow-portfolio dark:shadow-box-dark">
-            <span className="text-primary mb-2 block text-sm font-medium">
+          <div className="relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center shadow-portfolio dark:bg-dark-2 dark:shadow-box-dark">
+            <span className="mb-2 block text-sm font-medium text-primary">
               {category}
             </span>
-            <h3 className="text-dark dark:text-white mb-5 text-xl font-bold">{title}</h3>
+            <h3 className="mb-5 text-xl font-bold text-dark dark:text-white">
+              {title}
+            </h3>
             <a
               href={buttonHref}
-              className="text-body-color dark:text-dark-6 hover:border-primary hover:bg-primary inline-block rounded-md border border-stroke dark:border-dark-3 py-[10px] px-7 text-sm font-medium transition hover:text-white"
+              className="inline-block rounded-md border border-stroke px-7 py-[10px] text-sm font-medium text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
             >
               {button}
             </a>

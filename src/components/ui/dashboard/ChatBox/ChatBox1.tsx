@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const ChatBox = () => {
   return (
@@ -15,12 +15,8 @@ const ChatBox = () => {
                 />
               </div>
               <div>
-                <h5 className="text-base font-medium text-dark dark:text-white">
-                  Andri Thomas
-                </h5>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Reply to message
-                </p>
+                <h5 className="text-base font-medium text-dark dark:text-white">Andri Thomas</h5>
+                <p className="text-sm text-body-color dark:text-dark-6">Reply to message</p>
               </div>
             </div>
             <div>
@@ -34,15 +30,8 @@ const ChatBox = () => {
               time="1:55pm"
               text="I want to make an appointment tomorrow from 2:00 to 5:00pm?"
             />
-            <Reply
-              time="1:55pm"
-              text="Hello, Thomas! I will check the schedule and inform you"
-            />
-            <Chat
-              name="Andri Thomas"
-              time="1:55pm"
-              text="Ok, Thanks for your reply."
-            />
+            <Reply time="1:55pm" text="Hello, Thomas! I will check the schedule and inform you" />
+            <Chat name="Andri Thomas" time="1:55pm" text="Ok, Thanks for your reply." />
             <Reply time="1:55pm" text="You are welcome!" />
           </div>
 
@@ -93,13 +82,7 @@ const ChatBox = () => {
                 </div>
               </div>
               <button className="flex h-[52px] w-full max-w-[52px] items-center justify-center rounded-md bg-primary text-white hover:bg-blue-dark">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M20.4875 10.2094C20.35 9.96875 20.1438 9.79687 19.9031 9.65937L4.05626 0.79062C3.78126 0.65312 3.47188 0.58437 3.16251 0.618745C2.85313 0.65312 2.57813 0.756245 2.33751 0.962495C2.09688 1.16875 1.92501 1.44375 1.85626 1.71875C1.75313 2.02812 1.78751 2.3375 1.89063 2.64687L4.84688 11L1.89063 19.3531C1.78751 19.6625 1.78751 19.9719 1.85626 20.2469C1.92501 20.5562 2.09688 20.7969 2.33751 21.0031C2.57813 21.2094 2.85313 21.3125 3.16251 21.3469C3.19688 21.3469 3.26563 21.3469 3.30001 21.3469C3.54063 21.3469 3.81563 21.2781 4.05626 21.1406L19.9031 12.2719C20.1438 12.1344 20.35 11.9625 20.4875 11.7219C20.625 11.4812 20.6938 11.2062 20.6938 10.9656C20.6938 10.725 20.625 10.45 20.4875 10.2094ZM3.36876 2.16562L17.7375 10.2094H6.22188L3.36876 2.16562ZM3.36876 19.8344L6.25626 11.7906H17.7719L3.36876 19.8344Z"
                     fill="white"
@@ -119,9 +102,7 @@ export default ChatBox;
 const Chat = ({ name, time, text }) => {
   return (
     <div className={`max-w-[355px]`}>
-      <p className="mb-2 text-sm font-medium text-body-color dark:text-dark-6">
-        {name}
-      </p>
+      <p className="mb-2 text-sm font-medium text-body-color dark:text-dark-6">{name}</p>
       <div className="mb-2 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-dark-3">
         <p className="text-base text-body-color dark:text-dark-6">{text}</p>
       </div>
@@ -135,9 +116,7 @@ const Reply = ({ time, text }) => {
       <div className="mb-2 rounded-2xl rounded-br-none bg-primary px-5 py-3">
         <p className="text-base text-white">{text}</p>
       </div>
-      <p className="text-right text-xs text-body-color dark:text-dark-6">
-        {time}
-      </p>
+      <p className="text-right text-xs text-body-color dark:text-dark-6">{time}</p>
     </div>
   );
 };
@@ -152,16 +131,11 @@ const Dropdown = () => {
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
   });
 
   // close if the esc key is pressed
@@ -170,8 +144,8 @@ const Dropdown = () => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
@@ -199,7 +173,7 @@ const Dropdown = () => {
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
-          dropdownOpen === true ? "block" : "hidden"
+          dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
         <button className="w-full rounded-sm px-3 py-2 text-left text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-2">

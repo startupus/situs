@@ -66,7 +66,7 @@ const Checkout3 = () => {
                         <input
                           type="text"
                           placeholder="Coupon code"
-                          className="w-full rounded-[5px] border border-stroke bg-transparent py-3 pl-5 pr-20 text-body-color outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
+                          className="outline-hidden w-full rounded-[5px] border border-stroke bg-transparent py-3 pl-5 pr-20 text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
                         />
                         <button className="absolute right-2 top-1/2 mb-3 h-[34px] -translate-y-1/2 rounded-sm bg-dark px-5 text-sm font-medium text-white transition hover:bg-dark/90">
                           Apply
@@ -290,7 +290,7 @@ const InputGroup = ({ labelTitle, type, placeholder }) => {
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-dark-6"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
       />
     </div>
   );

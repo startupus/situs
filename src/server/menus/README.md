@@ -7,20 +7,23 @@
 ## 🏗️ Архитектура
 
 ### Модели
+
 - **MenuType** - типы меню (main, footer, sidebar, admin)
 - **MenuItem** - пункты меню с иерархической структурой
 
 ### Ключевые принципы
+
 1. **Универсальная привязка**: пункт меню → компонент + параметры
 2. **Иерархия**: level (1,2,3...), parent-child структура
 3. **Права доступа**: AccessLevel (PUBLIC, REGISTERED, SPECIAL, CUSTOM)
-4. **Мультиязычность**: language filtering ('*', 'ru-RU', 'en-GB')
+4. **Мультиязычность**: language filtering ('\*', 'ru-RU', 'en-GB')
 5. **Параметры**: JSON поле с настройками отображения
 6. **SEF URLs**: lookup таблицы для роутинга
 
 ## 📡 API эндпоинты
 
 ### MenuTypes
+
 ```
 GET    /api/menu-types?projectId=xxx        - список типов меню
 GET    /api/menu-types/:id                  - получить тип меню
@@ -30,6 +33,7 @@ DELETE /api/menu-types/:id                  - удалить тип меню
 ```
 
 ### MenuItems
+
 ```
 GET    /api/menu-items                      - список пунктов (с фильтрами)
 GET    /api/menu-items/:id                  - получить пункт меню
@@ -47,6 +51,7 @@ GET    /api/menu-items/lookup               - lookup таблица для ро�
 ## 🔍 Фильтрация (аналог Joomla)
 
 ### Простая фильтрация
+
 ```typescript
 // Получить все пункты главного меню на русском языке
 GET /api/menu-items?menuTypeId=main&language=ru-RU
@@ -59,6 +64,7 @@ GET /api/menu-items?parentId=menu-item-id
 ```
 
 ### Мультипараметровая фильтрация (как в Joomla)
+
 ```typescript
 // Аналог $sitemenu->getItems(['menutype','level'], ['mainmenu', [1,2]])
 GET /api/menu-items/items-by-filters?menuTypeId=main&properties=level,component&values=1,Website
@@ -67,12 +73,14 @@ GET /api/menu-items/items-by-filters?menuTypeId=main&properties=level,component&
 ## 🔐 Права доступа
 
 ### Уровни доступа
+
 - **PUBLIC** - доступно всем
 - **REGISTERED** - только авторизованным пользователям
 - **SPECIAL** - по специальным ролям (ADMIN, EDITOR)
 - **CUSTOM** - пользовательские уровни
 
 ### Интеграция с системой ролей
+
 ```typescript
 // Получить пункты меню с учетом прав пользователя
 GET /api/menu-items/authorized?menuTypeId=main&accessLevels=PUBLIC,REGISTERED
@@ -81,11 +89,13 @@ GET /api/menu-items/authorized?menuTypeId=main&accessLevels=PUBLIC,REGISTERED
 ## 🌐 Мультиязычность
 
 ### Поддержка языков
+
 - `language = '*'` - универсальные пункты (для всех языков)
 - `language = 'ru-RU'` - пункты на русском языке
 - `language = 'en-GB'` - пункты на английском языке
 
 ### Фильтрация
+
 ```typescript
 // Получить пункты для текущего языка + универсальные
 const items = await menusService.getItems(menuTypeId, ['language'], [currentLang]);
@@ -94,6 +104,7 @@ const items = await menusService.getItems(menuTypeId, ['language'], [currentLang
 ## 🔗 Привязка к компонентам
 
 ### Структура привязки
+
 ```typescript
 {
   component: 'Website',     // Тип компонента
@@ -108,6 +119,7 @@ const items = await menusService.getItems(menuTypeId, ['language'], [currentLang
 ```
 
 ### Поддерживаемые компоненты
+
 - **Website**: pageId, view: page|list
 - **Store**: categoryId|itemId, view: category|item|list
 - **Blog**: articleId|categoryId, view: article|category|list
@@ -116,6 +128,7 @@ const items = await menusService.getItems(menuTypeId, ['language'], [currentLang
 ## 🛣️ Роутинг и SEF URLs
 
 ### Lookup система
+
 ```typescript
 // Построение lookup таблицы для быстрого поиска
 const lookup = await menusService.buildLookup(menuTypeId, language);
@@ -127,6 +140,7 @@ const lookup = await menusService.buildLookup(menuTypeId, language);
 ```
 
 ### Определение активного пункта
+
 ```typescript
 // Поиск активного пункта по текущему пути
 const active = await menusService.getActiveMenuItem(menuTypeId, currentPath);
@@ -135,6 +149,7 @@ const active = await menusService.getActiveMenuItem(menuTypeId, currentPath);
 ## 📊 Примеры использования
 
 ### Создание типа меню
+
 ```typescript
 POST /api/menu-types
 {
@@ -146,13 +161,14 @@ POST /api/menu-types
 ```
 
 ### Создание пункта меню
+
 ```typescript
 POST /api/menu-items
 {
   "title": "Каталог товаров",
   "alias": "catalog",
   "type": "COMPONENT",
-  "component": "Store", 
+  "component": "Store",
   "view": "categories",
   "layout": "grid",
   "accessLevel": "PUBLIC",
@@ -163,6 +179,7 @@ POST /api/menu-items
 ```
 
 ### Изменение порядка пунктов
+
 ```typescript
 PATCH /api/menu-items/reorder
 {
@@ -177,6 +194,7 @@ PATCH /api/menu-items/reorder
 ## 🎯 Drag & Drop интерфейс
 
 ### Возможности
+
 - **Бесконечная вложенность** - как в Joomla CMS
 - **Перетаскивание** любого пункта на любой другой для создания подменю
 - **Защита от циклов** - невозможно сделать элемент потомком самого себя
@@ -184,6 +202,7 @@ PATCH /api/menu-items/reorder
 - **Визуальная обратная связь** - drag overlay с информацией об элементе
 
 ### Принцип работы
+
 1. Перетащите ⋮⋮ любой пункт меню на другой пункт
 2. Элемент автоматически становится подменю цели
 3. Уровень вложенности рассчитывается автоматически
@@ -192,6 +211,7 @@ PATCH /api/menu-items/reorder
 ## 🧪 Тестирование
 
 Модуль включает:
+
 - Unit-тесты для всех методов сервиса
 - E2E тесты для всех API эндпоинтов
 - Тесты прав доступа и мультиязычности
@@ -201,6 +221,7 @@ PATCH /api/menu-items/reorder
 ## 🔧 Конфигурация
 
 ### Подключение в AppModule
+
 ```typescript
 @Module({
   imports: [
@@ -212,5 +233,6 @@ export class AppModule {}
 ```
 
 ---
-*Создано: 18.08.2025*  
-*Основано на архитектуре: Joomla CMS Menu System*
+
+_Создано: 18.08.2025_  
+_Основано на архитектуре: Joomla CMS Menu System_

@@ -1,21 +1,20 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 const Chart3 = () => {
   const series = [
     {
       data: [
-        168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112, 123, 212,
-        270, 190, 310, 115, 90, 380, 112, 223, 292, 170, 290, 110, 115, 290,
-        380, 312,
+        168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112, 123, 212, 270, 190, 310, 115, 90, 380, 112, 223,
+        292, 170, 290, 110, 115, 290, 380, 312,
       ],
     },
   ];
   const options = {
-    colors: ["#3758F9"],
+    colors: ['#3758F9'],
     chart: {
-      fontFamily: "Inter, sans-serif",
-      type: "bar",
+      fontFamily: 'Inter, sans-serif',
+      type: 'bar',
       height: 350,
       toolbar: {
         show: false,
@@ -24,8 +23,8 @@ const Chart3 = () => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "55%",
-        endingShape: "rounded-sm",
+        columnWidth: '55%',
+        endingShape: 'rounded-sm',
         borderRadius: 2,
       },
     },
@@ -35,40 +34,40 @@ const Chart3 = () => {
     stroke: {
       show: true,
       width: 4,
-      colors: ["transparent"],
+      colors: ['transparent'],
     },
     xaxis: {
       categories: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-        "22",
-        "23",
-        "24",
-        "25",
-        "26",
-        "27",
-        "28",
-        "29",
-        "30",
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21',
+        '22',
+        '23',
+        '24',
+        '25',
+        '26',
+        '27',
+        '28',
+        '29',
+        '30',
       ],
       axisBorder: {
         show: false,
@@ -79,9 +78,9 @@ const Chart3 = () => {
     },
     legend: {
       show: true,
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "inter",
+      position: 'top',
+      horizontalAlign: 'left',
+      fontFamily: 'inter',
 
       markers: {
         radius: 99,
@@ -119,9 +118,7 @@ const Chart3 = () => {
         <div className="mx-auto w-full max-w-[930px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="mb-3 justify-between sm:flex">
             <div className="mb-4 sm:mb-0">
-              <h3 className="mb-1 text-xl font-semibold text-dark dark:text-white sm:text-2xl">
-                Daily Visitors
-              </h3>
+              <h3 className="mb-1 text-xl font-semibold text-dark dark:text-white sm:text-2xl">Daily Visitors</h3>
               <p className="text-sm text-body-color dark:text-dark-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </p>
@@ -198,12 +195,7 @@ const Chart3 = () => {
           </div>
 
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart
-              options={options}
-              series={series}
-              type="bar"
-              height={350}
-            />
+            <ReactApexChart options={options} series={series} type="bar" height={350} />
           </div>
         </div>
       </div>

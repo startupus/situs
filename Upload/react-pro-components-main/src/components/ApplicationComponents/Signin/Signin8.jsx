@@ -8,7 +8,7 @@ const Signin8 = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2">
-            <h2 className="mb-4 text-3xl font-bold leading-[1.22]! text-dark dark:text-white sm:text-[45px]">
+            <h2 className="leading-[1.22]! mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[45px]">
               Sign Up
             </h2>
             <p className="mb-8 max-w-[510px] text-base text-body-color dark:text-dark-6">
@@ -208,7 +208,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:text-white"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:text-white"
       />
     </div>
   );

@@ -25,7 +25,7 @@ const SitusUsersNew: React.FC = () => {
     page: 1,
     limit: 10,
     total: 0,
-    totalPages: 0
+    totalPages: 0,
   });
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectId, setProjectId] = useState<string>('');
@@ -39,9 +39,9 @@ const SitusUsersNew: React.FC = () => {
         search: searchTerm || undefined,
         projectId: projectId || undefined,
         page: currentPage,
-        limit: pageSize
+        limit: pageSize,
       };
-      
+
       const response = await usersApi.getUsers(searchFilters);
       setUsers(response.users);
       setPagination(response.pagination);
@@ -101,7 +101,7 @@ const SitusUsersNew: React.FC = () => {
       } else {
         await usersApi.createUser(userData);
       }
-      
+
       setShowUserModal(false);
       setEditingUser(null);
       await loadUsers();
@@ -134,23 +134,19 @@ const SitusUsersNew: React.FC = () => {
   };
 
   const handleFilterChange = (newFilters: Partial<UserFilters>) => {
-    setFilters(prev => ({ ...prev, ...newFilters }));
+    setFilters((prev) => ({ ...prev, ...newFilters }));
     setCurrentPage(1);
   };
 
   const handleSelectUser = (userId: string) => {
-    setSelectedUsers(prev => 
-      prev.includes(userId) 
-        ? prev.filter(id => id !== userId)
-        : [...prev, userId]
-    );
+    setSelectedUsers((prev) => (prev.includes(userId) ? prev.filter((id) => id !== userId) : [...prev, userId]));
   };
 
   const handleSelectAll = () => {
     if (selectedUsers.length === users.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(users.map(user => user.id));
+      setSelectedUsers(users.map((user) => user.id));
     }
   };
 
@@ -158,7 +154,7 @@ const SitusUsersNew: React.FC = () => {
   const getRoleDisplay = (role: 'ADMIN' | 'USER'): string => {
     const roleMap = {
       ADMIN: 'Администратор',
-      USER: 'Пользователь'
+      USER: 'Пользователь',
     };
     return roleMap[role] || role;
   };
@@ -167,7 +163,7 @@ const SitusUsersNew: React.FC = () => {
     const statusMap = {
       ACTIVE: 'Активен',
       INACTIVE: 'Неактивен',
-      SUSPENDED: 'Заблокирован'
+      SUSPENDED: 'Заблокирован',
     };
     return statusMap[status] || status;
   };
@@ -176,7 +172,7 @@ const SitusUsersNew: React.FC = () => {
     const colorMap = {
       ACTIVE: 'text-green-600 bg-green-100',
       INACTIVE: 'text-gray-600 bg-gray-100',
-      SUSPENDED: 'text-red-600 bg-red-100'
+      SUSPENDED: 'text-red-600 bg-red-100',
     };
     return colorMap[status] || 'text-gray-600 bg-gray-100';
   };
@@ -184,7 +180,7 @@ const SitusUsersNew: React.FC = () => {
   const getRoleColor = (role: 'ADMIN' | 'USER'): string => {
     const colorMap = {
       ADMIN: 'text-purple-600 bg-purple-100',
-      USER: 'text-blue-600 bg-blue-100'
+      USER: 'text-blue-600 bg-blue-100',
     };
     return colorMap[role] || 'text-gray-600 bg-gray-100';
   };
@@ -228,12 +224,17 @@ const SitusUsersNew: React.FC = () => {
           <div>
             <select
               value={projectId}
-              onChange={(e) => { setProjectId(e.target.value); setCurrentPage(1); }}
+              onChange={(e) => {
+                setProjectId(e.target.value);
+                setCurrentPage(1);
+              }}
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">Все проекты</option>
-              {projects.map(p => (
-                <option key={p.id} value={p.id}>{p.name}</option>
+              {projects.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
               ))}
             </select>
           </div>
@@ -303,9 +304,7 @@ const SitusUsersNew: React.FC = () => {
                 <td className="border border-gray-200 px-4 py-2">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium text-gray-700">
-                        {user.username.charAt(0).toUpperCase()}
-                      </span>
+                      <span className="text-sm font-medium text-gray-700">{user.username.charAt(0).toUpperCase()}</span>
                     </div>
                     <div>
                       <div className="font-medium text-gray-900">{user.username}</div>
@@ -333,10 +332,7 @@ const SitusUsersNew: React.FC = () => {
                 </td>
                 <td className="border border-gray-200 px-4 py-2">
                   <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEditUser(user)}
-                      className="text-blue-600 hover:text-blue-800 text-sm"
-                    >
+                    <button onClick={() => handleEditUser(user)} className="text-blue-600 hover:text-blue-800 text-sm">
                       Редактировать
                     </button>
                     <button
@@ -357,18 +353,19 @@ const SitusUsersNew: React.FC = () => {
       {pagination.totalPages > 1 && (
         <div className="flex justify-between items-center mt-6">
           <div className="text-sm text-gray-700">
-            Показано {((pagination.page - 1) * pagination.limit) + 1} - {Math.min(pagination.page * pagination.limit, pagination.total)} из {pagination.total}
+            Показано {(pagination.page - 1) * pagination.limit + 1} -{' '}
+            {Math.min(pagination.page * pagination.limit, pagination.total)} из {pagination.total}
           </div>
           <div className="flex space-x-2">
             <button
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={pagination.page === 1}
               className="px-3 py-1 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Назад
             </button>
             <button
-              onClick={() => setCurrentPage(prev => Math.min(pagination.totalPages, prev + 1))}
+              onClick={() => setCurrentPage((prev) => Math.min(pagination.totalPages, prev + 1))}
               disabled={pagination.page === pagination.totalPages}
               className="px-3 py-1 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -403,4 +400,4 @@ const SitusUsersNew: React.FC = () => {
   );
 };
 
-export default SitusUsersNew; 
+export default SitusUsersNew;

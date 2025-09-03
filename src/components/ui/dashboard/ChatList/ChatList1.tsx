@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ChatList = () => {
   return (
@@ -79,21 +79,15 @@ const ChatItem = ({ img, name, text, active }) => {
   return (
     <div className="flex cursor-pointer items-center rounded-[5px] px-4 py-[10px] hover:bg-gray-1 dark:hover:bg-dark-3">
       <div className="relative mr-[14px] h-11 w-full max-w-[44px] rounded-full">
-        <img
-          src={img}
-          alt="profile"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="profile" className="h-full w-full object-cover object-center" />
         <span
           className={`absolute bottom-0 right-0 block h-3 w-3 rounded-full border-2 border-gray-2 dark:border-dark-2 ${
-            active ? "bg-green" : "bg-red"
+            active ? 'bg-green' : 'bg-red'
           }`}
         ></span>
       </div>
       <div className="w-full">
-        <h5 className="text-sm font-medium text-dark dark:text-white">
-          {name}
-        </h5>
+        <h5 className="text-sm font-medium text-dark dark:text-white">{name}</h5>
         <p className="text-xs text-dark dark:text-white">{text}</p>
       </div>
     </div>

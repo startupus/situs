@@ -15,13 +15,13 @@ describe('AuthController', () => {
     mockRequest = {
       body: {},
       headers: {},
-      user: undefined
+      user: undefined,
     };
 
     mockResponse = {
       status: vi.fn().mockReturnThis(),
       json: vi.fn().mockReturnThis(),
-      send: vi.fn().mockReturnThis()
+      send: vi.fn().mockReturnThis(),
     };
 
     mockUserService = UserService;
@@ -34,18 +34,18 @@ describe('AuthController', () => {
         email: 'test@example.com',
         firstName: 'Test',
         lastName: 'User',
-        role: 'USER'
+        role: 'USER',
       };
 
       const mockLoginResult = {
         user: mockUser,
         token: 'mock-jwt-token',
-        refreshToken: 'mock-refresh-token'
+        refreshToken: 'mock-refresh-token',
       };
 
       mockRequest.body = {
         email: 'test@example.com',
-        password: 'password123'
+        password: 'password123',
       };
 
       mockUserService.login = vi.fn().mockResolvedValue(mockLoginResult);
@@ -54,19 +54,19 @@ describe('AuthController', () => {
 
       expect(mockUserService.login).toHaveBeenCalledWith({
         email: 'test@example.com',
-        password: 'password123'
+        password: 'password123',
       });
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
         jwt: 'mock-jwt-token',
-        user: mockUser
+        user: mockUser,
       });
     });
 
     it('должен вернуть ошибку при невалидных данных', async () => {
       mockRequest.body = {
         email: 'invalid@example.com',
-        password: 'wrongpassword'
+        password: 'wrongpassword',
       };
 
       mockUserService.login = vi.fn().mockRejectedValue(new Error('Неверные учетные данные'));
@@ -78,14 +78,14 @@ describe('AuthController', () => {
         error: {
           status: 500,
           name: 'InternalServerError',
-          message: 'Внутренняя ошибка сервера'
-        }
+          message: 'Внутренняя ошибка сервера',
+        },
       });
     });
 
     it('должен вернуть ошибку при отсутствии email или password', async () => {
       mockRequest.body = {
-        email: 'test@example.com'
+        email: 'test@example.com',
         // password отсутствует
       };
 
@@ -96,8 +96,8 @@ describe('AuthController', () => {
         error: {
           status: 400,
           name: 'ValidationError',
-          message: 'Email и пароль обязательны'
-        }
+          message: 'Email и пароль обязательны',
+        },
       });
     });
   });
@@ -109,20 +109,20 @@ describe('AuthController', () => {
         email: 'new@example.com',
         firstName: 'New',
         lastName: 'User',
-        role: 'USER'
+        role: 'USER',
       };
 
       const mockRegisterResult = {
         user: mockUser,
         token: 'mock-jwt-token',
-        refreshToken: 'mock-refresh-token'
+        refreshToken: 'mock-refresh-token',
       };
 
       mockRequest.body = {
         email: 'new@example.com',
         password: 'password123',
         firstName: 'New',
-        lastName: 'User'
+        lastName: 'User',
       };
 
       mockUserService.register = vi.fn().mockResolvedValue(mockRegisterResult);
@@ -133,12 +133,12 @@ describe('AuthController', () => {
         email: 'new@example.com',
         password: 'password123',
         firstName: 'New',
-        lastName: 'User'
+        lastName: 'User',
       });
       expect(mockResponse.status).toHaveBeenCalledWith(201);
       expect(mockResponse.json).toHaveBeenCalledWith({
         jwt: 'mock-jwt-token',
-        user: mockUser
+        user: mockUser,
       });
     });
 
@@ -147,7 +147,7 @@ describe('AuthController', () => {
         email: 'existing@example.com',
         password: 'password123',
         firstName: 'Existing',
-        lastName: 'User'
+        lastName: 'User',
       };
 
       mockUserService.register = vi.fn().mockRejectedValue(new Error('Пользователь с таким email уже существует'));
@@ -159,8 +159,8 @@ describe('AuthController', () => {
         error: {
           status: 400,
           name: 'ValidationError',
-          message: 'Пользователь с таким email уже существует'
-        }
+          message: 'Пользователь с таким email уже существует',
+        },
       });
     });
   });
@@ -172,11 +172,11 @@ describe('AuthController', () => {
         email: 'test@example.com',
         firstName: 'Test',
         lastName: 'User',
-        role: 'USER'
+        role: 'USER',
       };
 
       mockRequest.headers = {
-        authorization: 'Bearer valid-jwt-token'
+        authorization: 'Bearer valid-jwt-token',
       };
 
       mockUserService.verifyToken = vi.fn().mockResolvedValue(mockUser);
@@ -187,7 +187,7 @@ describe('AuthController', () => {
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
         user: mockUser,
-        valid: true
+        valid: true,
       });
     });
 
@@ -201,8 +201,8 @@ describe('AuthController', () => {
         error: {
           status: 401,
           name: 'UnauthorizedError',
-          message: 'Токен не предоставлен'
-        }
+          message: 'Токен не предоставлен',
+        },
       });
     });
   });
@@ -214,11 +214,11 @@ describe('AuthController', () => {
         email: 'test@example.com',
         firstName: 'Test',
         lastName: 'User',
-        role: 'USER'
+        role: 'USER',
       };
 
       mockRequest.headers = {
-        authorization: 'Bearer old-refresh-token'
+        authorization: 'Bearer old-refresh-token',
       };
 
       mockUserService.verifyToken = vi.fn().mockResolvedValue(mockUser);
@@ -230,7 +230,7 @@ describe('AuthController', () => {
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
         jwt: 'new-jwt-token',
-        user: mockUser
+        user: mockUser,
       });
     });
   });
@@ -241,7 +241,7 @@ describe('AuthController', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        message: 'Выход выполнен успешно'
+        message: 'Выход выполнен успешно',
       });
     });
   });
@@ -249,7 +249,7 @@ describe('AuthController', () => {
   describe('forgotPassword', () => {
     it('должен успешно отправить email для сброса пароля', async () => {
       mockRequest.body = {
-        email: 'test@example.com'
+        email: 'test@example.com',
       };
 
       mockUserService.findByEmail = vi.fn().mockResolvedValue({ id: '1', email: 'test@example.com' });
@@ -266,7 +266,7 @@ describe('AuthController', () => {
     it('должен успешно сбросить пароль', async () => {
       mockRequest.body = {
         token: 'reset-token',
-        password: 'newpassword123'
+        password: 'newpassword123',
       };
 
       mockUserService.resetPassword = vi.fn().mockResolvedValue(true);
@@ -278,4 +278,4 @@ describe('AuthController', () => {
       expect(mockResponse.json).toHaveProperty('message');
     });
   });
-}); 
+});

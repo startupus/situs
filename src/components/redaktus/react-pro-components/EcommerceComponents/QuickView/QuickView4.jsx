@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 const QuickView4 = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +13,7 @@ const QuickView4 = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
-  };  
+  };
 
   const menuTrigger = useRef(null);
   const menuRef = useRef(null);
@@ -21,17 +21,12 @@ const QuickView4 = () => {
   const useClickOutside = (refs, isOpen, setIsOpen) => {
     useEffect(() => {
       const clickHandler = ({ target }) => {
-        if (
-          !refs.some((ref) => ref.current) ||
-          !isOpen ||
-          refs.some((ref) => ref.current.contains(target))
-        )
-          return;
+        if (!refs.some((ref) => ref.current) || !isOpen || refs.some((ref) => ref.current.contains(target))) return;
         setIsOpen(false);
       };
 
-      document.addEventListener("click", clickHandler);
-      return () => document.removeEventListener("click", clickHandler);
+      document.addEventListener('click', clickHandler);
+      return () => document.removeEventListener('click', clickHandler);
     }, [refs, isOpen, setIsOpen]);
   };
 
@@ -50,7 +45,7 @@ const QuickView4 = () => {
           </button>
           <div
             className={`absolute top-0 left-0 min-h-screen w-full bg-gray-2 dark:bg-dark py-20 lg:py-[120px] ${
-              !open && "hidden"
+              !open && 'hidden'
             } `}
           >
             <div className="container mx-auto">
@@ -64,12 +59,7 @@ const QuickView4 = () => {
                       onClick={() => setOpen(false)}
                       className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full text-body-color hover:text-primary"
                     >
-                      <svg
-                        width={14}
-                        height={14}
-                        viewBox="0 0 14 14"
-                        className="fill-current"
-                      >
+                      <svg width={14} height={14} viewBox="0 0 14 14" className="fill-current">
                         <path d="M7.55122 7.00259L13.5405 0.998637C13.6919 0.847459 13.6919 0.609892 13.5405 0.458714C13.3891 0.307535 13.1513 0.307535 13 0.458714L7.01067 6.46266L0.999762 0.480311C0.848409 0.329132 0.610567 0.329132 0.459213 0.480311C0.30786 0.631489 0.30786 0.869056 0.459213 1.02023L6.47012 7.00259L0.480835 13.0065C0.329482 13.1577 0.329482 13.3953 0.480835 13.5465C0.545701 13.6113 0.653811 13.6544 0.740299 13.6544C0.826787 13.6544 0.934896 13.6113 0.999762 13.5465L7.01067 7.54251L13 13.5465C13.0648 13.6113 13.1729 13.6544 13.2594 13.6544C13.3459 13.6544 13.454 13.6113 13.5189 13.5465C13.6702 13.3953 13.6702 13.1577 13.5189 13.0065L7.55122 7.00259Z" />
                         <path
                           fillRule="evenodd"
@@ -97,17 +87,10 @@ const QuickView4 = () => {
                             <span className="text-green"> In Stock </span>
                           </p>
                           <div className="mb-5">
-                            <h4 className="mb-3 text-base text-body-color dark:text-dark-6">
-                              Choose Color
-                            </h4>
+                            <h4 className="mb-3 text-base text-body-color dark:text-dark-6">Choose Color</h4>
                             <div className="flex items-center justify-center gap-3">
                               <div className="relative">
-                                <input
-                                  type="radio"
-                                  name="productColor"
-                                  id="color1"
-                                  className="productColor2 sr-only"
-                                />
+                                <input type="radio" name="productColor" id="color1" className="productColor2 sr-only" />
                                 <label
                                   htmlFor="color1"
                                   className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-4 border-[#1CA1D6]"
@@ -116,12 +99,7 @@ const QuickView4 = () => {
                                 </label>
                               </div>
                               <div className="relative">
-                                <input
-                                  type="radio"
-                                  name="productColor"
-                                  id="color2"
-                                  className="productColor2 sr-only"
-                                />
+                                <input type="radio" name="productColor" id="color2" className="productColor2 sr-only" />
                                 <label
                                   htmlFor="color2"
                                   className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-4 border-dark"
@@ -130,12 +108,7 @@ const QuickView4 = () => {
                                 </label>
                               </div>
                               <div className="relative">
-                                <input
-                                  type="radio"
-                                  name="productColor"
-                                  id="color3"
-                                  className="productColor2 sr-only"
-                                />
+                                <input type="radio" name="productColor" id="color3" className="productColor2 sr-only" />
                                 <label
                                   htmlFor="color3"
                                   className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-4 border-[#8E6053]"
@@ -147,11 +120,9 @@ const QuickView4 = () => {
                           </div>
 
                           <div>
-                            <p className="mb-3 text-center text-base text-body-color dark:text-dark-6">
-                              Quantity
-                            </p>
+                            <p className="mb-3 text-center text-base text-body-color dark:text-dark-6">Quantity</p>
                             <div className="mb-[14px] inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white">
-                              <span 
+                              <span
                                 className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
                                 onClick={decrement}
                               >
@@ -169,7 +140,7 @@ const QuickView4 = () => {
                               <span className="py-3 px-4 w-[98px] border-x border-stroke dark:border-dark-3">
                                 {quantity}
                               </span>
-                              <span 
+                              <span
                                 className="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
                                 onClick={increment}
                               >

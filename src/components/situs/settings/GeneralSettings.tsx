@@ -16,23 +16,15 @@ interface GeneralSettingsProps {
 /**
  * Компонент общих настроек системы
  */
-const GeneralSettings: React.FC<GeneralSettingsProps> = ({ 
-  globalSettings, 
-  handleGlobalSettingChange,
-  handleSave 
-}) => {
+const GeneralSettings: React.FC<GeneralSettingsProps> = ({ globalSettings, handleGlobalSettingChange, handleSave }) => {
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg dark:bg-dark-2">
-      <h3 className="text-xl font-semibold text-dark dark:text-white mb-6">
-        Общие настройки
-      </h3>
-      
+      <h3 className="text-xl font-semibold text-dark dark:text-white mb-6">Общие настройки</h3>
+
       <div className="grid gap-6 md:grid-cols-2">
         {/* Тема оформления */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-            Тема оформления
-          </label>
+          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Тема оформления</label>
           <select
             value={globalSettings.theme}
             onChange={(e) => handleGlobalSettingChange('theme', '', e.target.value)}
@@ -46,9 +38,7 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
 
         {/* Язык интерфейса */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-            Язык интерфейса
-          </label>
+          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Язык интерфейса</label>
           <select
             value={globalSettings.language}
             onChange={(e) => handleGlobalSettingChange('language', '', e.target.value)}
@@ -61,9 +51,7 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
 
         {/* Часовой пояс */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-            Часовой пояс
-          </label>
+          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Часовой пояс</label>
           <select
             value={globalSettings.timezone}
             onChange={(e) => handleGlobalSettingChange('timezone', '', e.target.value)}
@@ -78,12 +66,8 @@ const GeneralSettings: React.FC<GeneralSettingsProps> = ({
 
         {/* Формат даты */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-            Формат даты
-          </label>
-          <select
-            className="w-full rounded-lg border border-stroke px-4 py-3 text-dark outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white"
-          >
+          <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Формат даты</label>
+          <select className="w-full rounded-lg border border-stroke px-4 py-3 text-dark outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white">
             <option value="dd.mm.yyyy">ДД.ММ.ГГГГ</option>
             <option value="mm/dd/yyyy">ММ/ДД/ГГГГ</option>
             <option value="yyyy-mm-dd">ГГГГ-ММ-ДД</option>

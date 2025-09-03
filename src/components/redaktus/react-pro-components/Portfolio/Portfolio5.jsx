@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Portfolio5 = () => {
   return (
@@ -7,15 +7,13 @@ const Portfolio5 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-1/2">
             <div className="mb-[60px] max-w-[510px]">
-              <span className="text-primary mb-2 block text-lg font-semibold">
-                Portfolio
-              </span>
+              <span className="text-primary mb-2 block text-lg font-semibold">Portfolio</span>
               <h2 className="text-dark dark:text-white mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
                 Check out some of our recent projects below.
               </h2>
               <p className="text-body-color dark:text-dark-6 text-base">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
 
@@ -63,9 +61,7 @@ const PortfolioCard = ({ img, subtitle, link, title }) => {
       <div className="content">
         <div className="mb-4 flex items-center">
           <span className="bg-primary mr-3 inline-block h-px w-6"></span>
-          <span className="text-primary text-sm font-semibold uppercase">
-            {subtitle}
-          </span>
+          <span className="text-primary text-sm font-semibold uppercase">{subtitle}</span>
         </div>
         <h3>
           <a

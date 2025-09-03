@@ -57,11 +57,7 @@ async function seedViewLevels() {
   }
 
   if (authorGroup && editorGroup && publisherGroup) {
-    viewLevels[3].groupIds = JSON.stringify([
-      authorGroup.id,
-      editorGroup.id,
-      publisherGroup.id,
-    ]);
+    viewLevels[3].groupIds = JSON.stringify([authorGroup.id, editorGroup.id, publisherGroup.id]);
   }
 
   for (const level of viewLevels) {

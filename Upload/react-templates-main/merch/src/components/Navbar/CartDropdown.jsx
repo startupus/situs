@@ -51,7 +51,7 @@ const CartDropdown = () => {
         <div className="flex max-w-[200px] justify-end">
           <button
             onClick={handleDropDownToggle}
-            className="border-stroke dropdown-toggle bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white"
+            className="dropdown-toggle relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white"
           >
             <svg
               width="22"
@@ -65,7 +65,7 @@ const CartDropdown = () => {
               <path d="M7.49375 13.3375C7.08125 13.3375 6.70312 13.6812 6.70312 14.1281V16.7062C6.70312 17.1187 7.04687 17.4969 7.49375 17.4969C7.94062 17.4969 8.28438 17.1531 8.28438 16.7062V14.0937C8.28438 13.6812 7.94062 13.3375 7.49375 13.3375Z" />
               <path d="M14.5062 13.3375C14.0937 13.3375 13.7156 13.6812 13.7156 14.1281V16.7062C13.7156 17.1187 14.0594 17.4969 14.5062 17.4969C14.9531 17.4969 15.2969 17.1531 15.2969 16.7062V14.0937C15.2625 13.6812 14.9187 13.3375 14.5062 13.3375Z" />
             </svg>
-            <span className="bg-primary absolute -top-1 -right-1 h-[18px] w-[18px] rounded-full text-[10px] leading-[18px] font-semibold text-white">
+            <span className="absolute -right-1 -top-1 h-[18px] w-[18px] rounded-full bg-primary text-[10px] font-semibold leading-[18px] text-white">
               1
             </span>
           </button>
@@ -73,10 +73,10 @@ const CartDropdown = () => {
 
         <div ref={dropdownRef}>
           <div
-            className={`absolute top-full right-0 mt-3 w-[330px] ${openDropDown ? "block" : "hidden"}`}
+            className={`absolute right-0 top-full mt-3 w-[330px] ${openDropDown ? "block" : "hidden"}`}
           >
-            <div className="p-8 overflow-hidden bg-white rounded-lg shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
-              <div className="pb-3 mb-5 border-b border-stroke dark:border-dark-3">
+            <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+              <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
                 {cartList.map((item, index) => (
                   <div
                     key={index}
@@ -97,7 +97,7 @@ const CartDropdown = () => {
                         >
                           {item.title}
                         </Link>
-                        <p className="text-xs font-medium truncate text-body-color dark:text-dark-6">
+                        <p className="truncate text-xs font-medium text-body-color dark:text-dark-6">
                           {item.subtitle}
                         </p>
                       </div>
@@ -111,8 +111,8 @@ const CartDropdown = () => {
                 ))}
               </div>
 
-              <div className="pb-5 -mx-1 border-b border-stroke dark:border-dark-3">
-                <div className="flex items-center justify-between mb-3">
+              <div className="-mx-1 border-b border-stroke pb-5 dark:border-dark-3">
+                <div className="mb-3 flex items-center justify-between">
                   <div className="px-1">
                     <p className="text-base text-dark dark:text-white">
                       Subtotal
@@ -124,7 +124,7 @@ const CartDropdown = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3 flex items-center justify-between">
                   <div className="px-1">
                     <p className="text-base text-dark dark:text-white">
                       Shipping Cost (+)
@@ -149,7 +149,7 @@ const CartDropdown = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-between pt-5 pb-6 -mx-1">
+              <div className="-mx-1 flex items-center justify-between pb-6 pt-5">
                 <div className="px-1">
                   <p className="text-base text-dark dark:text-white">
                     Total Payable
@@ -163,7 +163,7 @@ const CartDropdown = () => {
               </div>
 
               <div>
-                <button className="bg-primary hover:bg-blue-dark flex w-full items-center justify-center rounded-md px-10 py-[13px] text-center text-base font-medium text-white">
+                <button className="flex w-full items-center justify-center rounded-md bg-primary px-10 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark">
                   Place Order
                 </button>
               </div>

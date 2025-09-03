@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 interface ProjectOrdersChartProps {
   data: {
@@ -9,21 +9,21 @@ interface ProjectOrdersChartProps {
 }
 
 const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
-  const chartData = data.map(item => item.orders);
-  const categories = data.map(item => item.projectName);
+  const chartData = data.map((item) => item.orders);
+  const categories = data.map((item) => item.projectName);
 
   const series = [
     {
-      name: "Заказы",
+      name: 'Заказы',
       data: chartData,
     },
   ];
 
   const options = {
-    colors: ["#3758F9"],
+    colors: ['#3758F9'],
     chart: {
-      fontFamily: "Inter, sans-serif",
-      type: "bar" as const,
+      fontFamily: 'Inter, sans-serif',
+      type: 'bar' as const,
       height: 350,
       toolbar: {
         show: false,
@@ -32,8 +32,8 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "55%",
-        endingShape: "rounded-sm",
+        columnWidth: '55%',
+        endingShape: 'rounded-sm',
         borderRadius: 2,
       },
     },
@@ -43,7 +43,7 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
     stroke: {
       show: true,
       width: 4,
-      colors: ["transparent"],
+      colors: ['transparent'],
     },
     xaxis: {
       categories: categories,
@@ -55,17 +55,17 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
       },
       labels: {
         style: {
-          colors: "#64748B",
-          fontSize: "12px",
-          fontFamily: "Inter, sans-serif",
+          colors: '#64748B',
+          fontSize: '12px',
+          fontFamily: 'Inter, sans-serif',
         },
       },
     },
     legend: {
       show: true,
-      position: "top" as const,
-      horizontalAlign: "left" as const,
-      fontFamily: "inter",
+      position: 'top' as const,
+      horizontalAlign: 'left' as const,
+      fontFamily: 'inter',
       markers: {
         radius: 12,
         offsetY: 2,
@@ -73,18 +73,18 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
     },
     yaxis: {
       title: {
-        text: "Количество заказов",
+        text: 'Количество заказов',
         style: {
-          fontSize: "14px",
-          fontFamily: "Inter, sans-serif",
-          color: "#64748B",
+          fontSize: '14px',
+          fontFamily: 'Inter, sans-serif',
+          color: '#64748B',
         },
       },
       labels: {
         style: {
-          colors: "#64748B",
-          fontSize: "12px",
-          fontFamily: "Inter, sans-serif",
+          colors: '#64748B',
+          fontSize: '12px',
+          fontFamily: 'Inter, sans-serif',
         },
       },
     },
@@ -101,7 +101,7 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
     tooltip: {
       y: {
         formatter: function (val: number) {
-          return val + " заказов";
+          return val + ' заказов';
         },
       },
     },
@@ -111,9 +111,7 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
     <div className="mx-auto w-full max-w-[760px] rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
       <div className="flex justify-between">
         <div>
-          <h5 className="text-xl font-semibold text-dark dark:text-white">
-            Заказы по проектам
-          </h5>
+          <h5 className="text-xl font-semibold text-dark dark:text-white">Заказы по проектам</h5>
           <p className="text-sm text-body-color dark:text-dark-6 sm:text-base">
             Количество лидов и заказов за текущий месяц
           </p>
@@ -144,15 +142,10 @@ const ProjectOrdersChart: React.FC<ProjectOrdersChartProps> = ({ data }) => {
         </div>
       </div>
       <div id="chartOne" className="-mx-5">
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="bar"
-          height={350}
-        />
+        <ReactApexChart options={options} series={series} type="bar" height={350} />
       </div>
     </div>
   );
 };
 
-export default ProjectOrdersChart; 
+export default ProjectOrdersChart;

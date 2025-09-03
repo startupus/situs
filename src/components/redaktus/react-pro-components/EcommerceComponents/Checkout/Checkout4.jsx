@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Checkout4 = () => {
   return (
@@ -13,41 +13,23 @@ const Checkout4 = () => {
                 </h3>
 
                 <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10">
-                  <h4 className="mb-8 text-lg font-semibold text-dark dark:text-white">
-                    Personal Details
-                  </h4>
+                  <h4 className="mb-8 text-lg font-semibold text-dark dark:text-white">Personal Details</h4>
                   <form className="mb-10 border-b border-stroke pb-4 dark:border-dark-3">
                     <div className="-mx-3 flex flex-wrap">
                       <div className="w-full px-3 md:w-1/2">
-                        <InputGroup
-                          type="text"
-                          placeholder="Mark Litho"
-                          labelTitle="Full Name"
-                        />
+                        <InputGroup type="text" placeholder="Mark Litho" labelTitle="Full Name" />
                       </div>
 
                       <div className="w-full px-3 md:w-1/2">
-                        <InputGroup
-                          type="text"
-                          placeholder="883-992-145"
-                          labelTitle="Phone Number"
-                        />
+                        <InputGroup type="text" placeholder="883-992-145" labelTitle="Phone Number" />
                       </div>
 
                       <div className="w-full px-3 md:w-1/2">
-                        <InputGroup
-                          type="email"
-                          placeholder="yourmail@gmail.com"
-                          labelTitle="Email"
-                        />
+                        <InputGroup type="email" placeholder="yourmail@gmail.com" labelTitle="Email" />
                       </div>
 
                       <div className="w-full px-3 md:w-1/2">
-                        <InputGroup
-                          type="text"
-                          placeholder="2707 Davis Anenue"
-                          labelTitle="Address"
-                        />
+                        <InputGroup type="text" placeholder="2707 Davis Anenue" labelTitle="Address" />
                       </div>
 
                       <div className="w-full px-3 md:w-1/3">
@@ -55,26 +37,16 @@ const Checkout4 = () => {
                       </div>
 
                       <div className="w-full px-3 md:w-1/3">
-                        <InputGroup
-                          type="text"
-                          placeholder="New York"
-                          labelTitle="City"
-                        />
+                        <InputGroup type="text" placeholder="New York" labelTitle="City" />
                       </div>
 
                       <div className="w-full px-3 md:w-1/3">
-                        <InputGroup
-                          type="text"
-                          placeholder="94612"
-                          labelTitle="Post Code"
-                        />
+                        <InputGroup type="text" placeholder="94612" labelTitle="Post Code" />
                       </div>
                     </div>
                   </form>
 
-                  <h4 className="mb-6 text-xl font-semibold text-dark dark:text-white">
-                    Your Saved Cards
-                  </h4>
+                  <h4 className="mb-6 text-xl font-semibold text-dark dark:text-white">Your Saved Cards</h4>
                   <div className="-mx-3 flex flex-wrap">
                     <div className="w-1/2 px-3">
                       <div>
@@ -101,9 +73,7 @@ const Checkout4 = () => {
                   Shipping Details
                 </h3>
                 <div className="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10">
-                  <h4 className="mb-[22px] text-lg font-semibold text-dark dark:text-white">
-                    Shipping Address
-                  </h4>
+                  <h4 className="mb-[22px] text-lg font-semibold text-dark dark:text-white">Shipping Address</h4>
                   <div className="-mx-3 mb-8 flex flex-wrap">
                     <AddressItem
                       id="shippingAddress1"
@@ -118,9 +88,7 @@ const Checkout4 = () => {
                     />
                   </div>
 
-                  <h4 className="mb-6 text-lg font-semibold text-black">
-                    Shipping Method
-                  </h4>
+                  <h4 className="mb-6 text-lg font-semibold text-black">Shipping Method</h4>
                   <div className="-mx-3 mb-8 flex flex-wrap">
                     <MethodItem
                       id="shipping1"
@@ -187,9 +155,7 @@ const Checkout4 = () => {
 
               <div className="mb-10 overflow-hidden rounded-lg border border-stroke px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 lg:px-8 2xl:px-10">
                 <div className="mb-8 border-b border-stroke pb-3 dark:border-dark-3">
-                  <h3 className="mb-1 text-lg font-semibold text-dark dark:text-white">
-                    Coupon Code
-                  </h3>
+                  <h3 className="mb-1 text-lg font-semibold text-dark dark:text-white">Coupon Code</h3>
                   <p className="text-sm font-medium text-body-color dark:text-dark-6">
                     Enter code to get discount instantly
                   </p>
@@ -224,12 +190,8 @@ const CartItem = ({ img, title, quantity, price }) => {
       </div>
       <div className="w-full">
         <div className="w-full">
-          <p className="mb-[6px] text-base font-medium text-dark dark:text-white">
-            {title}
-          </p>
-          <p className="text-sm font-medium text-body-color dark:text-dark-6">
-            {price}
-          </p>
+          <p className="mb-[6px] text-base font-medium text-dark dark:text-white">{title}</p>
+          <p className="text-sm font-medium text-body-color dark:text-dark-6">{price}</p>
           <p className="text-sm font-medium text-body-color dark:text-dark-6">
             <span className="pr-0.5"> Quantity: </span> <span>{quantity}</span>
           </p>
@@ -242,9 +204,7 @@ const CartItem = ({ img, title, quantity, price }) => {
 const InputGroup = ({ type, placeholder, labelTitle }) => {
   return (
     <div className="mb-5">
-      <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">
-        {labelTitle}
-      </label>
+      <label className="mb-2.5 block text-base font-medium text-dark dark:text-white">{labelTitle}</label>
       <input
         type={type}
         placeholder={placeholder}
@@ -257,10 +217,7 @@ const InputGroup = ({ type, placeholder, labelTitle }) => {
 const SelectGroup = ({ labelTitle }) => {
   return (
     <div className="mb-5">
-      <label
-        for=""
-        className="mb-2.5 block text-base font-medium text-dark dark:text-white"
-      >
+      <label for="" className="mb-2.5 block text-base font-medium text-dark dark:text-white">
         {labelTitle}
       </label>
       <div className="relative">
@@ -301,12 +258,7 @@ const AddressItem = ({ id, title, address1, address2 }) => {
   return (
     <div className="w-full px-3 md:w-1/2 xl:w-1/2">
       <div className="mb-3">
-        <input
-          type="radio"
-          name="shippingAddress"
-          id={id}
-          className="shipping sr-only"
-        />
+        <input type="radio" name="shippingAddress" id={id} className="shipping sr-only" />
         <label
           htmlFor={id}
           className="block cursor-pointer overflow-hidden rounded-md border border-transparent bg-white px-6 py-4 dark:bg-white/5 sm:px-4 md:px-6 lg:px-4 xl:px-6"
@@ -328,12 +280,7 @@ const MethodItem = ({ id, img, title, time, price }) => {
   return (
     <div className="w-full px-3 md:w-1/2 lg:w-full xl:w-1/2">
       <div className="mb-3">
-        <input
-          type="radio"
-          name="shipping"
-          id={id}
-          className="shipping sr-only"
-        />
+        <input type="radio" name="shipping" id={id} className="shipping sr-only" />
         <label
           htmlFor={id}
           className="flex cursor-pointer items-center overflow-hidden rounded-md border border-transparent bg-white px-6 py-4 dark:bg-white/5 sm:px-4 md:px-6 lg:px-4 xl:px-6"
@@ -345,12 +292,8 @@ const MethodItem = ({ id, img, title, time, price }) => {
             <span className="mb-1 block text-sm font-semibold text-dark dark:text-white sm:text-base md:text-sm lg:text-base">
               {title}
             </span>
-            <span className="block text-sm text-body-color dark:text-dark-6">
-              {time}
-            </span>
-            <span className="block text-sm font-medium text-body-color dark:text-dark-6">
-              {price}
-            </span>
+            <span className="block text-sm text-body-color dark:text-dark-6">{time}</span>
+            <span className="block text-sm font-medium text-body-color dark:text-dark-6">{price}</span>
           </div>
         </label>
       </div>

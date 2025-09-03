@@ -6,9 +6,4 @@ export { default as MenuItemDragDrop } from './MenuItemDragDrop';
 export { default as MenuItemRow } from './MenuItemRow';
 export { useDragDrop } from './useDragDrop';
 export { buildMenuHierarchy, flattenMenuHierarchy, validateMenuHierarchy } from './utils';
-export type { 
-  MenuItemDragDropProps, 
-  MenuItemProps, 
-  DragState, 
-  ReorderItem 
-} from './types';
+export type { MenuItemDragDropProps, MenuItemProps, DragState, ReorderItem } from './types';

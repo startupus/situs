@@ -132,13 +132,13 @@ import { mcpClient } from '../mcp/client/mcp-client';
 
 async function example() {
   await mcpClient.connect();
-  
+
   // Создание проекта
   const project = await mcpClient.createProject('Тест', 'Описание');
-  
+
   // Получение ресурса
   const docs = await mcpClient.getProjectDocs('project-1');
-  
+
   await mcpClient.disconnect();
 }
 ```
@@ -170,12 +170,13 @@ McpModule.forRoot({
     type: 'http-sse',
     port: 3001,
   },
-})
+});
 ```
 
 ### CORS
 
 Сервер настроен для работы с:
+
 - `http://localhost:3000` (основное приложение)
 - `http://localhost:5173` (Vite dev server)
 
@@ -249,6 +250,7 @@ async myPrompt() {
 ### Логи сервера
 
 MCP сервер выводит подробные логи о:
+
 - Запуске и остановке
 - Доступных инструментах/ресурсах/промптах
 - Ошибках подключения
@@ -256,6 +258,7 @@ MCP сервер выводит подробные логи о:
 ### Статус клиента
 
 React хук предоставляет:
+
 - Статус подключения
 - Состояние загрузки
 - Ошибки
@@ -293,6 +296,7 @@ MCP сервер совместим с Claude Desktop и другими MCP-со
 ### Проблемы зависимостей
 
 При конфликтах зависимостей используйте:
+
 ```bash
 npm install --legacy-peer-deps
 ```
@@ -300,6 +304,7 @@ npm install --legacy-peer-deps
 ### Проблемы транспорта
 
 MCP сервер поддерживает:
+
 - HTTP+SSE (рекомендуется для веб)
 - Streamable HTTP
 - STDIO

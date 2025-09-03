@@ -1,10 +1,6 @@
 // src/components/ui/ThemeSkeletons.tsx
 import React from 'react';
-import { 
-  Skeleton1,
-  Skeleton2,
-  Skeleton3
-} from './core';
+import { Skeleton1, Skeleton2, Skeleton3 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Skeleton Variants с поддержкой темы

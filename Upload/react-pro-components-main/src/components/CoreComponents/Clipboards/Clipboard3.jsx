@@ -9,7 +9,7 @@ export default function Clipboard3() {
             <input
               type="text"
               value="www.tailgrids.com/figma"
-              className="h-12 w-full rounded-lg border border-stroke bg-gray-1 py-3 pl-5 pr-14 text-dark outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-white"
+              className="outline-hidden h-12 w-full rounded-lg border border-stroke bg-gray-1 py-3 pl-5 pr-14 text-dark duration-200 focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-white"
             />
             <button className="absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center gap-1 rounded-md bg-dark px-2.5 py-1.5 text-sm font-medium text-white duration-200 hover:bg-dark/90">
               <span>

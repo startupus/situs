@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Hero10 = () => {
   return (
@@ -12,15 +12,12 @@ const Hero10 = () => {
             <div className="w-full px-4 lg:w-6/12 xl:w-5/12">
               <div className="hero-content max-w-[575px]">
                 <h1 className="mb-4 text-4xl font-bold capitalize leading-[1.208]! text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
-                  <span className="pr-1">
-                    Business site templates Crafted with
-                  </span>
+                  <span className="pr-1">Business site templates Crafted with</span>
                   <span className="text-primary"> TailGrids.</span>
                 </h1>
                 <p className="mb-9 max-w-[477px] text-base text-body-color dark:text-dark-6">
-                  With TailGrids, business and students thrive together.
-                  Business can perfectly match their staffing to changing demand
-                  throughout the dayed.
+                  With TailGrids, business and students thrive together. Business can perfectly match their staffing to
+                  changing demand throughout the dayed.
                 </p>
                 <ul className="flex flex-wrap items-center gap-4">
                   <li>
@@ -51,11 +48,7 @@ const Hero10 = () => {
                     className="h-full max-w-full lg:ml-auto"
                   />
                   <span className="absolute right-3 top-0 z-[-2] h-full w-[105%] xl:right-8 xl:w-full">
-                    <svg
-                      viewBox="0 0 743 710"
-                      fill="none"
-                      className="max-h-full w-full"
-                    >
+                    <svg viewBox="0 0 743 710" fill="none" className="max-h-full w-full">
                       <path
                         opacity="0.2"
                         d="M170.825 0H908V753H186.118C61.1679 753 -27.8471 631.69 9.64041 512.496L170.825 0Z"
@@ -71,11 +64,7 @@ const Hero10 = () => {
                           gradientUnits="userSpaceOnUse"
                         >
                           <stop stopColor="#3056D3" />
-                          <stop
-                            offset="1"
-                            stopColor="#3056D3"
-                            stopOpacity="0"
-                          />
+                          <stop offset="1" stopColor="#3056D3" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -122,7 +111,7 @@ const Navbar = () => {
                 <button
                   onClick={() => setOpen(!open)}
                   className={` ${
-                    open && "navbarTogglerActive"
+                    open && 'navbarTogglerActive'
                   } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
                 >
                   <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
@@ -131,7 +120,7 @@ const Navbar = () => {
                 </button>
                 <nav
                   className={`absolute right-4 top-full z-40 w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:shadow-none lg:dark:bg-transparent ${
-                    !open && "hidden"
+                    !open && 'hidden'
                   } `}
                 >
                   <ul className="block lg:flex">

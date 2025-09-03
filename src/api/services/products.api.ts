@@ -88,10 +88,7 @@ class ProductsApiService {
    */
   async getProducts(filters?: ProductFilters): Promise<ProductsListResponse> {
     try {
-      const response = await apiClient.get<ApiResponse<ProductsListResponse>>(
-        this.baseEndpoint,
-        filters
-      );
+      const response = await apiClient.get<ApiResponse<ProductsListResponse>>(this.baseEndpoint, filters);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -110,7 +107,7 @@ class ProductsApiService {
   async getProjectProducts(projectId: string): Promise<{ products: Product[]; project: any }> {
     try {
       const response = await apiClient.get<ApiResponse<{ products: Product[]; project: any }>>(
-        `/projects/${projectId}/products`
+        `/projects/${projectId}/products`,
       );
 
       if (ApiUtils.isSuccess(response)) {
@@ -129,10 +126,7 @@ class ProductsApiService {
    */
   async createProjectProduct(projectId: string, data: Omit<CreateProductData, 'projectId'>): Promise<Product> {
     try {
-      const response = await apiClient.post<ApiResponse<Product>>(
-        `/projects/${projectId}/products`,
-        data
-      );
+      const response = await apiClient.post<ApiResponse<Product>>(`/projects/${projectId}/products`, data);
       if (ApiUtils.isSuccess(response)) {
         return response.data;
       }
@@ -148,9 +142,7 @@ class ProductsApiService {
    */
   async getProduct(productId: string): Promise<Product> {
     try {
-      const response = await apiClient.get<ApiResponse<Product>>(
-        `${this.baseEndpoint}/${productId}`
-      );
+      const response = await apiClient.get<ApiResponse<Product>>(`${this.baseEndpoint}/${productId}`);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -168,10 +160,7 @@ class ProductsApiService {
    */
   async createProduct(data: CreateProductData): Promise<Product> {
     try {
-      const response = await apiClient.post<ApiResponse<Product>>(
-        this.baseEndpoint,
-        data
-      );
+      const response = await apiClient.post<ApiResponse<Product>>(this.baseEndpoint, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -189,10 +178,7 @@ class ProductsApiService {
    */
   async updateProduct(productId: string, data: UpdateProductData): Promise<Product> {
     try {
-      const response = await apiClient.put<ApiResponse<Product>>(
-        `${this.baseEndpoint}/${productId}`,
-        data
-      );
+      const response = await apiClient.put<ApiResponse<Product>>(`${this.baseEndpoint}/${productId}`, data);
 
       if (ApiUtils.isSuccess(response)) {
         return response.data;
@@ -210,9 +196,7 @@ class ProductsApiService {
    */
   async deleteProduct(productId: string): Promise<void> {
     try {
-      const response = await apiClient.delete<ApiResponse<void>>(
-        `${this.baseEndpoint}/${productId}`
-      );
+      const response = await apiClient.delete<ApiResponse<void>>(`${this.baseEndpoint}/${productId}`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при удалении продукта');
@@ -228,9 +212,7 @@ class ProductsApiService {
    */
   async publishProduct(productId: string): Promise<void> {
     try {
-      const response = await apiClient.patch<ApiResponse<void>>(
-        `${this.baseEndpoint}/${productId}/publish`
-      );
+      const response = await apiClient.patch<ApiResponse<void>>(`${this.baseEndpoint}/${productId}/publish`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при публикации продукта');
@@ -246,9 +228,7 @@ class ProductsApiService {
    */
   async unpublishProduct(productId: string): Promise<void> {
     try {
-      const response = await apiClient.patch<ApiResponse<void>>(
-        `${this.baseEndpoint}/${productId}/unpublish`
-      );
+      const response = await apiClient.patch<ApiResponse<void>>(`${this.baseEndpoint}/${productId}/unpublish`);
 
       if (!ApiUtils.isSuccess(response)) {
         throw new Error(response.error || 'Ошибка при снятии с публикации');
@@ -261,9 +241,9 @@ class ProductsApiService {
   /** Каталог доступных типов продуктов */
   async getAvailableProductTypes(): Promise<Array<{ key: string; title: string; type: string; icon: string }>> {
     try {
-      const response = await apiClient.get<ApiResponse<Array<{ key: string; title: string; type: string; icon: string }>>>(
-        `${this.baseEndpoint}/catalog/types`
-      );
+      const response = await apiClient.get<
+        ApiResponse<Array<{ key: string; title: string; type: string; icon: string }>>
+      >(`${this.baseEndpoint}/catalog/types`);
       if (ApiUtils.isSuccess(response)) {
         return response.data;
       }

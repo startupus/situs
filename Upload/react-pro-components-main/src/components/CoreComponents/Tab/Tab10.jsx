@@ -10,7 +10,7 @@ const Tab10 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="rounded-[10px] bg-white p-6 shadow-card">
               <div className="border-b border-stroke">
@@ -20,7 +20,7 @@ const Tab10 = () => {
                       onClick={() => handleTabOpen("profile")}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
                         open === "profile"
-                          ? "text-primary border-primary"
+                          ? "border-primary text-primary"
                           : "border-stroke md:border-transparent"
                       }`}
                     >
@@ -32,7 +32,7 @@ const Tab10 = () => {
                       onClick={() => handleTabOpen("password")}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
                         open === "password"
-                          ? "text-primary border-primary"
+                          ? "border-primary text-primary"
                           : "border-stroke md:border-transparent"
                       }`}
                     >
@@ -44,7 +44,7 @@ const Tab10 = () => {
                       onClick={() => handleTabOpen("team")}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
                         open === "team"
-                          ? "text-primary border-primary"
+                          ? "border-primary text-primary"
                           : "border-stroke md:border-transparent"
                       }`}
                     >
@@ -56,7 +56,7 @@ const Tab10 = () => {
                       onClick={() => handleTabOpen("notification")}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
                         open === "notification"
-                          ? "text-primary border-primary"
+                          ? "border-primary text-primary"
                           : "border-stroke md:border-transparent"
                       }`}
                     >
@@ -68,7 +68,7 @@ const Tab10 = () => {
                       onClick={() => handleTabOpen("integration")}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
                         open === "integration"
-                          ? "text-primary border-primary"
+                          ? "border-primary text-primary"
                           : "border-stroke md:border-transparent"
                       }`}
                     >
@@ -80,7 +80,7 @@ const Tab10 = () => {
                       onClick={() => handleTabOpen("license")}
                       className={`-mb-[1px] w-full border-b-2 py-2 text-base font-medium text-black hover:border-primary hover:text-primary ${
                         open === "license"
-                          ? "text-primary border-primary"
+                          ? "border-primary text-primary"
                           : "border-stroke md:border-transparent"
                       }`}
                     >

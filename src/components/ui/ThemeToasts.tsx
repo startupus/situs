@@ -1,15 +1,6 @@
 // src/components/ui/ThemeToasts.tsx
 import React from 'react';
-import { 
-  Toast1,
-  Toast2,
-  Toast3,
-  Toast4,
-  Toast5,
-  Toast6,
-  Toast7,
-  Toast8
-} from './core';
+import { Toast1, Toast2, Toast3, Toast4, Toast5, Toast6, Toast7, Toast8 } from './core';
 import { withTheme } from './ThemeWrapper';
 
 // Toast Variants с поддержкой темы

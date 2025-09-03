@@ -1,4 +1,4 @@
-import { types } from 'redaktus/frontend'
+import { types } from 'redaktus/frontend';
 
 const pageTypes: types.PageType[] = [
   {
@@ -35,6 +35,6 @@ const pageTypes: types.PageType[] = [
     // isEntity: true,
     allowedBlockTypes: ['header', 'footer'],
   },
-]
+];
 
-export default pageTypes
+export default pageTypes;

@@ -119,20 +119,20 @@ const DetailsBox = () => {
   return (
     <>
       <div>
-        <h2 className="text-dark mb-4 text-xl font-semibold lg:text-2xl xl:text-[28px] xl:leading-[1.2] dark:text-white">
+        <h2 className="mb-4 text-xl font-semibold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[1.2]">
           Macbook Pro M1 8/256GB
         </h2>
 
-        <p className="text-body-color dark:text-dark-6 mb-5 text-base">
+        <p className="mb-5 text-base text-body-color dark:text-dark-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non
           erat quam. Vestibulum aliquam nibh.
         </p>
 
         <div className="flex flex-wrap items-center">
           <div className="flex items-center pr-6">
-            <h3 className="text-dark text-lg font-bold sm:text-2xl lg:text-2xl xl:text-[28px] xl:leading-[1.2] dark:text-white">
+            <h3 className="text-lg font-bold text-dark dark:text-white sm:text-2xl lg:text-2xl xl:text-[28px] xl:leading-[1.2]">
               <span className="pr-3"> $1200.99 </span>
-              <span className="text-body-color dark:text-dark-6 line-through">
+              <span className="text-body-color line-through dark:text-dark-6">
                 $1500.99
               </span>
             </h3>
@@ -156,14 +156,14 @@ const DetailsBox = () => {
                 />
               </svg>
             </span>
-            <span className="text-dark text-base font-medium dark:text-white">
+            <span className="text-base font-medium text-dark dark:text-white">
               In Stock
             </span>
           </div>
         </div>
 
         <div className="mt-8">
-          <h4 className="text-dark mb-[18px] text-lg font-semibold dark:text-white">
+          <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
             Color
           </h4>
 
@@ -191,14 +191,14 @@ const DetailsBox = () => {
         </div>
 
         <div className="mt-[22px]">
-          <h4 className="text-dark mb-4 text-lg font-semibold dark:text-white">
+          <h4 className="mb-4 text-lg font-semibold text-dark dark:text-white">
             Specification
           </h4>
           <div className="space-y-3">
             {specificationList.map((item, index) => (
               <p
                 key={index}
-                className="text-dark text-base sm:flex dark:text-white"
+                className="text-base text-dark dark:text-white sm:flex"
               >
                 <span className="block w-28 font-medium"> {item.title} : </span>
                 <span> {item.details} </span>
@@ -209,8 +209,8 @@ const DetailsBox = () => {
 
         <div className="mt-[22px] flex flex-wrap">
           {sizeList.map((listItem, listIndex) => (
-            <div key={listIndex} className="mr-[60px] mb-[22px]">
-              <h4 className="text-dark mb-[18px] text-lg font-semibold dark:text-white">
+            <div key={listIndex} className="mb-[22px] mr-[60px]">
+              <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
                 {listItem.name}
               </h4>
 
@@ -248,9 +248,9 @@ const DetailsBox = () => {
         </div>
 
         <div className="flex flex-wrap">
-          <div className="border-stroke text-dark dark:border-dark-3 mr-5 mb-4 inline-flex items-center rounded-sm border text-base font-medium dark:text-white">
+          <div className="mb-4 mr-5 inline-flex items-center rounded-sm border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white">
             <span
-              className="dark:text-whitee text-dark flex h-12 w-9 cursor-pointer items-center justify-center select-none"
+              className="dark:text-whitee flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark"
               onClick={decrement}
             >
               <svg
@@ -264,11 +264,11 @@ const DetailsBox = () => {
                 <path d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" />
               </svg>
             </span>
-            <span className="border-stroke dark:border-dark-3 border-x px-5 py-3">
+            <span className="border-x border-stroke px-5 py-3 dark:border-dark-3">
               {quantity}
             </span>
             <span
-              className="text-dark flex h-12 w-9 cursor-pointer items-center justify-center select-none dark:text-white"
+              className="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
               onClick={increment}
             >
               <svg
@@ -291,13 +291,13 @@ const DetailsBox = () => {
             </span>
           </div>
 
-          <div className="mr-4 mb-4">
-            <button className="bg-primary hover:bg-blue-dark inline-flex items-center justify-center rounded-md px-7 py-3 text-center text-base font-medium text-white">
+          <div className="mb-4 mr-4">
+            <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark">
               Add to Cart
             </button>
           </div>
-          <div className="mr-4 mb-4">
-            <button className="bg-dark hover:bg-dark/90 inline-flex items-center justify-center rounded-md px-7 py-3 text-center text-base font-medium text-white">
+          <div className="mb-4 mr-4">
+            <button className="inline-flex items-center justify-center rounded-md bg-dark px-7 py-3 text-center text-base font-medium text-white hover:bg-dark/90">
               Buy Now
             </button>
           </div>

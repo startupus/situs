@@ -1,14 +1,14 @@
-import React from 'react'
-import Link from 'next/link'
-import { useTheme } from '../../../hooks/useTheme'
+import React from 'react';
+import Link from 'next/link';
+import { useTheme } from '../../../hooks/useTheme';
 
 interface TagListItemProps {
-  tag: string
+  tag: string;
 }
 
 const TagListItem: React.FC<TagListItemProps> = ({ tag }) => {
   const { resolvedTheme } = useTheme();
-  
+
   return (
     <Link
       href={`/blog/tag/${tag}`}
@@ -20,7 +20,7 @@ const TagListItem: React.FC<TagListItemProps> = ({ tag }) => {
     >
       {tag}
     </Link>
-  )
-}
+  );
+};
 
-export default TagListItem
+export default TagListItem;

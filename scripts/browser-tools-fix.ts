@@ -21,18 +21,18 @@ class BrowserToolsManager {
 
   async start(): Promise<void> {
     console.log('🚀 Запуск BrowserTools сервера...');
-    
+
     // Останавливаем существующие процессы
     await this.stop();
-    
+
     // Ждем освобождения порта
     await this.waitForPortAvailable();
-    
+
     // Запускаем сервер
     this.process = spawn('npx', ['@agentdeskai/browser-tools-server@latest'], {
       stdio: ['pipe', 'pipe', 'pipe'],
       detached: false,
-      env: { ...process.env, PORT: this.port.toString() }
+      env: { ...process.env, PORT: this.port.toString() },
     });
 
     // Сохраняем PID
@@ -67,7 +67,7 @@ class BrowserToolsManager {
 
   async stop(): Promise<void> {
     console.log('🛑 Остановка BrowserTools сервера...');
-    
+
     // Останавливаем процесс если он запущен
     if (this.process) {
       this.process.kill('SIGTERM');
@@ -99,15 +99,18 @@ class BrowserToolsManager {
   private async waitForPortAvailable(): Promise<void> {
     return new Promise((resolve) => {
       const checkPort = () => {
-        const req = http.request({
-          host: 'localhost',
-          port: this.port,
-          method: 'HEAD',
-          timeout: 1000
-        }, () => {
-          // Порт занят, ждем
-          setTimeout(checkPort, 1000);
-        });
+        const req = http.request(
+          {
+            host: 'localhost',
+            port: this.port,
+            method: 'HEAD',
+            timeout: 1000,
+          },
+          () => {
+            // Порт занят, ждем
+            setTimeout(checkPort, 1000);
+          },
+        );
 
         req.on('error', () => {
           // Порт свободен
@@ -129,14 +132,17 @@ class BrowserToolsManager {
   private async waitForServerReady(): Promise<void> {
     return new Promise((resolve) => {
       const checkServer = () => {
-        const req = http.request({
-          host: 'localhost',
-          port: this.port,
-          method: 'HEAD',
-          timeout: 1000
-        }, () => {
-          resolve();
-        });
+        const req = http.request(
+          {
+            host: 'localhost',
+            port: this.port,
+            method: 'HEAD',
+            timeout: 1000,
+          },
+          () => {
+            resolve();
+          },
+        );
 
         req.on('error', () => {
           // Сервер еще не готов, ждем
@@ -157,36 +163,39 @@ class BrowserToolsManager {
 
   async testScreenshot(): Promise<void> {
     console.log('📸 Тестирование скриншота...');
-    
+
     return new Promise((resolve, reject) => {
       const data = JSON.stringify({ url: 'http://localhost:4000/' });
-      
-      const req = http.request({
-        host: 'localhost',
-        port: this.port,
-        method: 'POST',
-        path: '/capture-screenshot',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': Buffer.byteLength(data)
-        }
-      }, (res) => {
-        let body = '';
-        res.on('data', (chunk) => {
-          body += chunk;
-        });
-        res.on('end', () => {
-          if (res.statusCode === 200) {
-            console.log('✅ Скриншот создан успешно!');
-            console.log('📄 Ответ:', body);
-            resolve();
-          } else {
-            console.error(`❌ Ошибка создания скриншота: ${res.statusCode}`);
-            console.error('📄 Ответ:', body);
-            reject(new Error(`HTTP ${res.statusCode}: ${body}`));
-          }
-        });
-      });
+
+      const req = http.request(
+        {
+          host: 'localhost',
+          port: this.port,
+          method: 'POST',
+          path: '/capture-screenshot',
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(data),
+          },
+        },
+        (res) => {
+          let body = '';
+          res.on('data', (chunk) => {
+            body += chunk;
+          });
+          res.on('end', () => {
+            if (res.statusCode === 200) {
+              console.log('✅ Скриншот создан успешно!');
+              console.log('📄 Ответ:', body);
+              resolve();
+            } else {
+              console.error(`❌ Ошибка создания скриншота: ${res.statusCode}`);
+              console.error('📄 Ответ:', body);
+              reject(new Error(`HTTP ${res.statusCode}: ${body}`));
+            }
+          });
+        },
+      );
 
       req.on('error', (error) => {
         console.error('❌ Ошибка запроса:', error.message);
@@ -202,27 +211,26 @@ class BrowserToolsManager {
 // Основная функция
 async function main() {
   const manager = new BrowserToolsManager();
-  
+
   try {
     // Запускаем сервер
     await manager.start();
-    
+
     // Ждем немного для стабилизации
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     // Тестируем скриншот
     await manager.testScreenshot();
-    
+
     console.log('🎉 Все работает! BrowserTools сервер запущен и готов к работе.');
     console.log('💡 Для остановки нажмите Ctrl+C');
-    
+
     // Держим процесс живым
     process.on('SIGINT', async () => {
       console.log('\n🛑 Получен сигнал остановки...');
       await manager.stop();
       process.exit(0);
     });
-    
   } catch (error) {
     console.error('❌ Ошибка:', error);
     await manager.stop();
@@ -235,4 +243,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export { BrowserToolsManager }; 
+export { BrowserToolsManager };

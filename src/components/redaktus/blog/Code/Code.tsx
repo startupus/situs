@@ -1,27 +1,27 @@
-import * as Prism from 'prismjs'
-import * as React from 'react'
-import { useVisualEdit } from 'redaktus/core'
-import * as types from 'redaktus/types'
-import Editor from './SimpleCodeEditor'
-import blockNames from '../blockNames'
-import Container from '../layout/Container'
-import Section from '../layout/Section'
-import PrismCode from './PrismCode'
-import Styles from './Styles'
+import * as Prism from 'prismjs';
+import * as React from 'react';
+import { useVisualEdit } from 'redaktus/core';
+import * as types from 'redaktus/types';
+import Editor from './SimpleCodeEditor';
+import blockNames from '../blockNames';
+import Container from '../layout/Container';
+import Section from '../layout/Section';
+import PrismCode from './PrismCode';
+import Styles from './Styles';
 
 // Prism components for syntax highlighting
-import 'prismjs/components/prism-typescript'
-import 'prismjs/components/prism-bash'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/components/prism-tsx'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.js'
-import 'prismjs/plugins/show-language/prism-show-language.js'
-import 'prismjs/plugins/line-highlight/prism-line-highlight.js'
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/show-language/prism-show-language.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
 export interface CodeBrickProps {
-  language: string
-  dataline?: string
-  showLineNumbers: boolean
+  language: string;
+  dataline?: string;
+  showLineNumbers: boolean;
 }
 
 const CodeBrick: types.Brick<CodeBrickProps> = ({
@@ -29,25 +29,25 @@ const CodeBrick: types.Brick<CodeBrickProps> = ({
   dataline = '',
   showLineNumbers = false,
 }) => {
-  const [hasMount, setHasMount] = React.useState(false)
+  const [hasMount, setHasMount] = React.useState(false);
   React.useEffect(() => {
-    setHasMount(true)
-  }, [])
+    setHasMount(true);
+  }, []);
 
   const [value, onChange, isReadOnly] = useVisualEdit(`import React from 'react'
 console.log('hello')
 const a = 2
-let b = 3`)
-  const plugins = []
+let b = 3`);
+  const plugins = [];
   if (showLineNumbers) {
-    plugins.push('line-numbers')
+    plugins.push('line-numbers');
   }
   if (dataline !== '') {
-    plugins.push('line-highlight')
+    plugins.push('line-highlight');
   }
 
   if (!hasMount) {
-    return null
+    return null;
   }
   if (isReadOnly) {
     return (
@@ -65,15 +65,10 @@ let b = 3`)
           content: '';
         }
       `}</style>
-          <PrismCode
-            code={value}
-            language={language}
-            plugins={plugins}
-            dataLine={dataline}
-          />
+          <PrismCode code={value} language={language} plugins={plugins} dataLine={dataline} />
         </Container>
       </Section>
-    )
+    );
   }
 
   // return null
@@ -114,18 +109,12 @@ let b = 3`)
               value={value}
               onValueChange={onChange}
               highlight={(code: any) => {
-                return Prism.highlight(
-                  code || '',
-                  Prism.languages[language],
-                  `${language}`
-                )
+                return Prism.highlight(code || '', Prism.languages[language], `${language}`)
                   .split('\n')
                   .map((line: string, i: number) =>
-                    showLineNumbers
-                      ? `<span class='row-line-number'>${i + 1}</span>${line}`
-                      : line
+                    showLineNumbers ? `<span class='row-line-number'>${i + 1}</span>${line}` : line,
                   )
-                  .join('\n')
+                  .join('\n');
               }}
               padding={10}
               textareaId="codeArea"
@@ -135,16 +124,15 @@ let b = 3`)
         </pre>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 CodeBrick.schema = {
   name: blockNames.CodeBlock,
   label: 'Code',
   category: 'rb-ui blog',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Code/Code.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/blog/Code/Code.tsx',
   getDefaultProps: () => ({
     code: "import React from 'react'\nconsole.log('hello')\nconst a = 2\nlet b = 3",
     language: 'typescript',
@@ -183,16 +171,13 @@ CodeBrick.schema = {
       label: 'Warning',
       type: types.SideEditPropType.Custom,
       component: () => (
-        <div className="text-sm">
-          The highlighted lines are visible only in preview mode and in the
-          frontend site.
-        </div>
+        <div className="text-sm">The highlighted lines are visible only in preview mode and in the frontend site.</div>
       ),
     },
 
     // With Line Numbers
     // Show Code
   ],
-}
+};
 
-export default CodeBrick
+export default CodeBrick;

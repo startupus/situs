@@ -35,9 +35,7 @@ export class RealtimeController {
     const source$ = this.realtime.asObservable();
     // Handshake: сразу после подключения клиент получает техническое событие, чтобы UI зафиксировал соединение
     const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
-    return merge(handshake$, source$).pipe(
-      map((evt) => ({ data: evt }) as MessageEvent),
-    );
+    return merge(handshake$, source$).pipe(map((evt) => ({ data: evt }) as MessageEvent));
   }
 
   /**
@@ -50,9 +48,7 @@ export class RealtimeController {
     const source$ = this.realtime.asObservable();
     // Handshake: сразу после подключения клиент получает техническое событие, чтобы UI зафиксировал соединение
     const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
-    return merge(handshake$, source$).pipe(
-      map((evt) => ({ data: evt }) as MessageEvent),
-    );
+    return merge(handshake$, source$).pipe(map((evt) => ({ data: evt }) as MessageEvent));
   }
 
   /**
@@ -64,9 +60,7 @@ export class RealtimeController {
   integrationsEvents(): any {
     const source$ = this.realtime.asObservable();
     const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
-    return merge(handshake$, source$).pipe(
-      map((evt) => ({ data: evt }) as MessageEvent),
-    );
+    return merge(handshake$, source$).pipe(map((evt) => ({ data: evt }) as MessageEvent));
   }
 
   /**
@@ -91,5 +85,3 @@ export class RealtimeController {
     return { success: true };
   }
 }
-
-

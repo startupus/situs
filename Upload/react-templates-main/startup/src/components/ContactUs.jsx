@@ -95,18 +95,18 @@ const inputList = [
 const ContactUs = () => {
   return (
     <>
-      <section className="dark:bg-dark relative z-10 overflow-hidden bg-white py-20 lg:py-[120px]">
+      <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap -mx-4 lg:justify-between">
+          <div className="-mx-4 flex flex-wrap lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
               <div className="mb-12 max-w-[570px] lg:mb-0">
-                <span className="block mb-4 text-base font-semibold text-primary">
+                <span className="mb-4 block text-base font-semibold text-primary">
                   Contact Us
                 </span>
-                <h2 className="text-dark mb-6 text-[32px] font-bold uppercase sm:text-[40px] lg:text-[36px] xl:text-[40px] dark:text-white">
+                <h2 className="mb-6 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px]">
                   GET IN TOUCH WITH US
                 </h2>
-                <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-9">
+                <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eius tempor incididunt ut labore et dolore magna aliqua. Ut
                   enim adiqua minim veniam quis nostrud exercitation ullamco
@@ -114,7 +114,7 @@ const ContactUs = () => {
 
                 {contactList.map((item, index) => (
                   <div key={index} className="mb-8 flex w-full max-w-[370px]">
-                    <div className="bg-primary/5 text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-sm sm:h-[70px] sm:max-w-[70px]">
+                    <div className="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded-sm bg-primary/5 text-primary sm:h-[70px] sm:max-w-[70px]">
                       {item.icon}
                     </div>
                     <div className="w-full">
@@ -130,7 +130,7 @@ const ContactUs = () => {
               </div>
             </div>
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
-              <div className="relative p-8 bg-white rounded-lg shadow-lg dark:bg-dark-2 sm:p-12">
+              <div className="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12">
                 <form>
                   {inputList.map((item, index) => (
                     <div key={index} className="mb-6">
@@ -138,13 +138,13 @@ const ContactUs = () => {
                         <textarea
                           rows="6"
                           placeholder={item.placeholder}
-                          className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary w-full resize-none rounded-sm border px-[14px] py-3 text-base outline-hidden"
+                          className="outline-hidden w-full resize-none rounded-sm border border-stroke px-[14px] py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary"
                         ></textarea>
                       ) : (
                         <input
                           type={item.type}
                           placeholder={item.placeholder}
-                          className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary w-full rounded-sm border px-[14px] py-3 text-base outline-hidden"
+                          className="outline-hidden w-full rounded-sm border border-stroke px-[14px] py-3 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 dark:focus:border-primary"
                         />
                       )}
                     </div>
@@ -153,14 +153,14 @@ const ContactUs = () => {
                   <div>
                     <button
                       type="submit"
-                      className="w-full p-3 text-white transition border rounded-sm border-primary bg-primary hover:bg-primary/90"
+                      className="w-full rounded-sm border border-primary bg-primary p-3 text-white transition hover:bg-primary/90"
                     >
                       Send Message
                     </button>
                   </div>
                 </form>
                 <div>
-                  <span className="absolute -top-10 -right-9 z-[-1]">
+                  <span className="absolute -right-9 -top-10 z-[-1]">
                     <svg
                       width="100"
                       height="100"
@@ -176,7 +176,7 @@ const ContactUs = () => {
                       />
                     </svg>
                   </span>
-                  <span className="absolute top-[90px] -right-10 z-[-1]">
+                  <span className="absolute -right-10 top-[90px] z-[-1]">
                     <ShapeNine />
                   </span>
                   <span className="absolute -bottom-7 -left-7 z-[-1]">

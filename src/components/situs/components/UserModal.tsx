@@ -18,7 +18,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
     phone: '',
     company: '',
     position: '',
-    password: ''
+    password: '',
   });
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
         phone: user.phone || '',
         company: user.company || '',
         position: user.position || '',
-        password: ''
+        password: '',
       });
     } else {
       setFormData({
@@ -44,7 +44,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
         phone: '',
         company: '',
         position: '',
-        password: ''
+        password: '',
       });
     }
   }, [user]);
@@ -56,9 +56,9 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -70,12 +70,10 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           {user ? 'Редактировать пользователя' : 'Добавить пользователя'}
         </h2>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Email *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
             <input
               type="email"
               name="email"
@@ -88,9 +86,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Имя
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Имя</label>
               <input
                 type="text"
                 name="firstName"
@@ -100,9 +96,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Фамилия
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Фамилия</label>
               <input
                 type="text"
                 name="lastName"
@@ -115,9 +109,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Роль
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Роль</label>
               <select
                 name="globalRole"
                 value={formData.globalRole}
@@ -131,9 +123,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Статус
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Статус</label>
               <select
                 name="status"
                 value={formData.status}
@@ -149,9 +139,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Телефон
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Телефон</label>
             <input
               type="tel"
               name="phone"
@@ -162,9 +150,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Компания
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Компания</label>
             <input
               type="text"
               name="company"
@@ -175,9 +161,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Должность
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Должность</label>
             <input
               type="text"
               name="position"
@@ -189,9 +173,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
 
           {!user && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Пароль *
-              </label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Пароль *</label>
               <input
                 type="password"
                 name="password"
@@ -211,10 +193,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
             >
               Отмена
             </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
+            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
               {user ? 'Сохранить' : 'Создать'}
             </button>
           </div>
@@ -224,4 +203,4 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, user, onSave }) 
   );
 };
 
-export default UserModal; 
+export default UserModal;

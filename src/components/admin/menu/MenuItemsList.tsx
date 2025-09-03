@@ -29,8 +29,6 @@ interface MenuItemsListProps {
   onDisplayStyleChange?: (style: 'tree' | 'list') => void;
 }
 
-
-
 const MenuItemsList: React.FC<MenuItemsListProps> = ({
   menuItems,
   onEditItem,
@@ -48,22 +46,22 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
   menuTypes = [],
   onMenuTypesUpdate,
   projectId,
-  onDisplayStyleChange
+  onDisplayStyleChange,
 }) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   // Функции для пакетной обработки
   const handleSelectItem = (itemId: string, selected: boolean) => {
     if (selected) {
-      setSelectedItems(prev => [...prev, itemId]);
+      setSelectedItems((prev) => [...prev, itemId]);
     } else {
-      setSelectedItems(prev => prev.filter(id => id !== itemId));
+      setSelectedItems((prev) => prev.filter((id) => id !== itemId));
     }
   };
 
   const handleSelectAll = (selected: boolean) => {
     if (selected) {
-      setSelectedItems(menuItems.map(item => item.id));
+      setSelectedItems(menuItems.map((item) => item.id));
     } else {
       setSelectedItems([]);
     }
@@ -78,20 +76,20 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
       id: 'activate',
       label: 'Активировать',
       icon: <FiCheck size={14} />,
-      variant: 'success'
+      variant: 'success',
     },
     {
       id: 'deactivate',
       label: 'Деактивировать',
       icon: <FiEyeOff size={14} />,
-      variant: 'default'
+      variant: 'default',
     },
     {
       id: 'delete',
       label: 'Удалить',
       icon: <FiTrash2 size={14} />,
-      variant: 'danger'
-    }
+      variant: 'danger',
+    },
   ];
 
   const handleBatchAction = async (actionId: string, itemIds: string[]) => {
@@ -122,17 +120,17 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
       alert('Произошла ошибка при выполнении операции');
     }
   };
-  
+
   // Функция для создания подменю
   const handleMakeSubmenu = async (itemId: string, parentId: string) => {
     if (onUpdateMenuItem) {
-      const parentItem = menuItems.find(item => item.id === parentId);
-      const childrenCount = menuItems.filter(item => item.parentId === parentId).length;
-      
+      const parentItem = menuItems.find((item) => item.id === parentId);
+      const childrenCount = menuItems.filter((item) => item.parentId === parentId).length;
+
       onUpdateMenuItem(itemId, {
         parentId: parentId,
         level: (parentItem?.level || 1) + 1,
-        orderIndex: childrenCount
+        orderIndex: childrenCount,
       });
     }
   };
@@ -140,13 +138,13 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
   // Функция для перемещения на корневой уровень
   const handleMakeRoot = async (itemId: string) => {
     if (onUpdateMenuItem) {
-      const rootItems = menuItems.filter(item => !item.parentId);
-      const maxOrderIndex = Math.max(...rootItems.map(item => item.orderIndex || 0), -1);
-      
+      const rootItems = menuItems.filter((item) => !item.parentId);
+      const maxOrderIndex = Math.max(...rootItems.map((item) => item.orderIndex || 0), -1);
+
       onUpdateMenuItem(itemId, {
         parentId: undefined,
         level: 1,
-        orderIndex: maxOrderIndex + 1
+        orderIndex: maxOrderIndex + 1,
       });
     }
   };
@@ -157,28 +155,19 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
         <div className="text-6xl mb-4 flex justify-center">
           <FiCompass size={64} className="text-body-color dark:text-dark-6" />
         </div>
-        <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
-          Меню пустое
-        </h3>
-        <p className="text-body-color dark:text-dark-6 mb-4">
-          Создайте первый пункт меню для начала работы
-        </p>
-        <button
-          onClick={onCreateItem}
-          className="text-primary hover:text-primary/80 font-medium"
-        >
+        <h3 className="text-lg font-medium text-dark dark:text-white mb-2">Меню пустое</h3>
+        <p className="text-body-color dark:text-dark-6 mb-4">Создайте первый пункт меню для начала работы</p>
+        <button onClick={onCreateItem} className="text-primary hover:text-primary/80 font-medium">
           Создать первый пункт
         </button>
       </div>
     );
   }
 
-  const rootItems = menuItems.filter(item => !item.parentId);
+  const rootItems = menuItems.filter((item) => !item.parentId);
 
   return (
     <div>
-
-
       {/* Компонент пакетной обработки */}
       <BatchActions
         selectedItems={selectedItems}
@@ -195,43 +184,39 @@ const MenuItemsList: React.FC<MenuItemsListProps> = ({
           <div className="text-6xl mb-4 flex justify-center">
             <FiCompass size={64} className="text-body-color dark:text-dark-6" />
           </div>
-          <h3 className="text-lg font-medium text-dark dark:text-white mb-2">
-            Выберите тип меню
-          </h3>
+          <h3 className="text-lg font-medium text-dark dark:text-white mb-2">Выберите тип меню</h3>
           <p className="text-body-color dark:text-dark-6">
             Выберите тип меню из выпадающего списка выше для начала работы
           </p>
         </div>
       ) : (
         <>
-
-
-      {/* Drag & Drop с бесконечной вложенностью (как в Joomla) */}
-      {onReorderItems ? (
-        <MenuItemDragDrop
-          items={menuItems}
-          onReorder={async (reorderedItems) => {
-            // Преобразуем данные для совместимости
-            const updatedItems = reorderedItems.map(item => ({
-              ...menuItems.find(mi => mi.id === item.id)!,
-              orderIndex: item.orderIndex,
-              level: item.level,
-              parentId: item.parentId || undefined
-            }));
-            onReorderItems(updatedItems);
-          }}
-          onEditItem={onEditItem}
-          onDeleteItem={onDeleteItem}
-          onToggleStatus={onToggleItemStatus}
-          showSelection={true}
-          selectedItems={selectedItems}
-          onSelectItem={handleSelectItem}
-        />
-      ) : (
-        <div className="text-center py-8 text-body-color dark:text-dark-6" data-testid="menu-dragdrop">
-          Функция перестановки недоступна
-        </div>
-      )}
+          {/* Drag & Drop с бесконечной вложенностью (как в Joomla) */}
+          {onReorderItems ? (
+            <MenuItemDragDrop
+              items={menuItems}
+              onReorder={async (reorderedItems) => {
+                // Преобразуем данные для совместимости
+                const updatedItems = reorderedItems.map((item) => ({
+                  ...menuItems.find((mi) => mi.id === item.id)!,
+                  orderIndex: item.orderIndex,
+                  level: item.level,
+                  parentId: item.parentId || undefined,
+                }));
+                onReorderItems(updatedItems);
+              }}
+              onEditItem={onEditItem}
+              onDeleteItem={onDeleteItem}
+              onToggleStatus={onToggleItemStatus}
+              showSelection={true}
+              selectedItems={selectedItems}
+              onSelectItem={handleSelectItem}
+            />
+          ) : (
+            <div className="text-center py-8 text-body-color dark:text-dark-6" data-testid="menu-dragdrop">
+              Функция перестановки недоступна
+            </div>
+          )}
         </>
       )}
     </div>

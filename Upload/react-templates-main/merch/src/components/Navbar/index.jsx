@@ -67,7 +67,7 @@ const Navbar = () => {
 
       <div className="border-b border-stroke dark:border-dark-3 lg:py-4">
         <div className="container mx-auto">
-          <div className="relative flex items-center justify-center -mx-4 sm:justify-between">
+          <div className="relative -mx-4 flex items-center justify-center sm:justify-between">
             <div className="w-48 max-w-full px-4 sm:w-60 lg:w-48">
               <Link to="/" className="block w-full py-5 lg:py-3">
                 <img src={logo} alt="logo" className="w-full dark:hidden" />
@@ -79,12 +79,12 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="items-center justify-end hidden w-full px-4 sm:flex lg:justify-between">
+            <div className="hidden w-full items-center justify-end px-4 sm:flex lg:justify-between">
               <SearchForm />
 
-              <div className="flex items-center justify-end w-full space-x-4">
-                <div className="items-center hidden pr-1 md:flex">
-                  <div className="border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 mr-3 flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white">
+              <div className="flex w-full items-center justify-end space-x-4">
+                <div className="hidden items-center pr-1 md:flex">
+                  <div className="mr-3 flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white">
                     <svg
                       width="22"
                       height="22"
@@ -108,7 +108,7 @@ const Navbar = () => {
                 </div>
 
                 <div>
-                  <button className="border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] dark:text-white">
+                  <button className="relative flex h-[42px] w-[42px] items-center justify-center rounded-full border-[.5px] border-stroke bg-gray-2 text-dark dark:border-dark-3 dark:bg-dark-2 dark:text-white">
                     <svg
                       width="22"
                       height="22"
@@ -134,28 +134,28 @@ const Navbar = () => {
 
       <div>
         <div className="container mx-auto">
-          <div className="relative flex items-center justify-between -mx-4">
+          <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-full max-w-full px-4 lg:w-60">
               <AllCategories />
             </div>
 
-            <div className="flex items-center justify-between w-full px-4">
+            <div className="flex w-full items-center justify-between px-4">
               <div className="w-full" ref={navRef}>
                 <button
                   onClick={handleNavbarToggle}
-                  className={`ring-primary absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-[6px] focus:ring-2 lg:hidden ${
+                  className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
                     navbarOpen ? "navbarTogglerActive" : ""
                   }`}
                 >
-                  <span className="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"></span>
-                  <span className="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"></span>
-                  <span className="bg-body-color dark:bg-dark-6 relative my-[6px] block h-[2px] w-[30px]"></span>
+                  <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"></span>
+                  <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"></span>
+                  <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-dark-6"></span>
                 </button>
 
                 <nav
-                  className={`dark:bg-dark-2 absolute top-full right-4 z-50 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow-sm lg:static lg:flex lg:w-full lg:max-w-full lg:justify-end lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none dark:lg:bg-transparent ${navbarOpen ? "" : "hidden"}`}
+                  className={`absolute right-4 top-full z-50 w-full max-w-[250px] justify-center rounded-lg bg-white px-6 py-5 shadow-sm dark:bg-dark-2 lg:static lg:flex lg:w-full lg:max-w-full lg:justify-end lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none dark:lg:bg-transparent ${navbarOpen ? "" : "hidden"}`}
                 >
-                  <ul className="items-center block lg:flex">
+                  <ul className="block items-center lg:flex">
                     {navList.map((item, index) => (
                       <li key={index}>
                         <Link

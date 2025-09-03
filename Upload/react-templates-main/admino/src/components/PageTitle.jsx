@@ -2,18 +2,18 @@ const PageTitle = () => {
   return (
     <>
       <div className="mb-10 w-full">
-        <div className="border-stroke dark:border-dark-3 items-center justify-between border-b md:flex">
+        <div className="items-center justify-between border-b border-stroke dark:border-dark-3 md:flex">
           <div className="mb-6 w-full">
-            <h2 className="text-dark mb-2 text-2xl font-semibold dark:text-white">
+            <h2 className="mb-2 text-2xl font-semibold text-dark dark:text-white">
               Sales Analytics
             </h2>
-            <p className="text-body-color dark:text-dark-6 text-sm font-medium">
+            <p className="text-sm font-medium text-body-color dark:text-dark-6">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
               ultrices lectus sem.
             </p>
           </div>
           <div className="mb-6">
-            <button className="bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-sm px-5 py-[10px] text-sm font-medium whitespace-nowrap text-white">
+            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-sm bg-primary px-5 py-[10px] text-sm font-medium text-white hover:bg-primary/90">
               Add New Item
               <span className="pl-2">
                 <svg

@@ -106,26 +106,26 @@ const socialList = [
 const HeroArea = () => {
   return (
     <>
-      <section className="dark:bg-dark relative bg-white px-4 pt-[105px] pb-10 md:px-10">
-        <div className="dark:bg-dark-2 rounded-[20px] bg-[#F6F8FC] px-2 py-14 sm:px-6">
+      <section className="relative bg-white px-4 pb-10 pt-[105px] dark:bg-dark md:px-10">
+        <div className="rounded-[20px] bg-[#F6F8FC] px-2 py-14 dark:bg-dark-2 sm:px-6">
           <div className="container">
-            <div className="flex flex-wrap items-center -mx-4">
+            <div className="-mx-4 flex flex-wrap items-center">
               <div className="w-full px-4 lg:w-1/2">
                 <div className="w-full max-w-[480px] max-lg:mb-12">
-                  <span className="block mb-6 text-lg font-semibold text-dark dark:text-white">
+                  <span className="mb-6 block text-lg font-semibold text-dark dark:text-white">
                     Hello Welcome
                   </span>
-                  <h2 className="mb-5 text-3xl font-bold text-dark sm:text-4xl md:text-5xl dark:text-white">
+                  <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-5xl">
                     I&apos;m Edward <br />
                     Product Designer
                   </h2>
-                  <p className="text-base text-body-color dark:text-dark-6 mb-9">
+                  <p className="mb-9 text-base text-body-color dark:text-dark-6">
                     I Create bold and modern interface design with UX knowledge
                     for companies all around the world.
                   </p>
 
                   <div className="mb-[70px] flex flex-wrap items-center gap-6">
-                    <button className="inline-flex items-center justify-center h-12 gap-2 px-6 py-3 text-base font-medium text-white duration-200 rounded-lg bg-primary hover:bg-primary/90">
+                    <button className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-medium text-white duration-200 hover:bg-primary/90">
                       <span>
                         <svg
                           width="20"
@@ -144,7 +144,7 @@ const HeroArea = () => {
                     </button>
                     <Link
                       to="#"
-                      className="text-base font-medium underline text-dark hover:text-primary dark:text-white"
+                      className="text-base font-medium text-dark underline hover:text-primary dark:text-white"
                     >
                       See Portfolio
                     </Link>
@@ -158,7 +158,7 @@ const HeroArea = () => {
                       {socialList.map((item, index) => (
                         <button
                           key={index}
-                          className="flex items-center justify-center w-12 h-12 duration-200 bg-white rounded-full text-dark hover:bg-dark dark:hover:text-dark shadow-2xs hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white"
+                          className="shadow-2xs flex h-12 w-12 items-center justify-center rounded-full bg-white text-dark duration-200 hover:bg-dark hover:text-white dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-dark"
                         >
                           {item.icon}
                         </button>
@@ -169,13 +169,13 @@ const HeroArea = () => {
               </div>
 
               <div className="w-full px-4 lg:w-1/2">
-                <div className="relative z-10 mx-auto aspect-432/578 max-w-[432px] rounded-full lg:mr-0">
-                  <div className="absolute top-0 left-0 w-full h-full rounded-full bg-primary -z-20"></div>
-                  <div className="border-primary absolute top-0 left-0 z-10 aspect-432/595 h-full w-full -rotate-[8deg] rounded-full border bg-transparent"></div>
-                  <div className="absolute inset-0 flex items-end w-full h-full overflow-hidden rounded-full -z-10">
+                <div className="aspect-432/578 relative z-10 mx-auto max-w-[432px] rounded-full lg:mr-0">
+                  <div className="absolute left-0 top-0 -z-20 h-full w-full rounded-full bg-primary"></div>
+                  <div className="aspect-432/595 absolute left-0 top-0 z-10 h-full w-full -rotate-[8deg] rounded-full border border-primary bg-transparent"></div>
+                  <div className="absolute inset-0 -z-10 flex h-full w-full items-end overflow-hidden rounded-full">
                     <img src={imageOne} alt="hero image" />
                   </div>
-                  <div className="absolute top-0 left-0 w-full h-full overflow-hidden rounded-full -z-20">
+                  <div className="absolute left-0 top-0 -z-20 h-full w-full overflow-hidden rounded-full">
                     <img src={dotshape} alt="dots-shape" />
                   </div>
                 </div>

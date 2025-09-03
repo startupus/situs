@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const DangerBadge = () => {
   return (
-    <div className='flex flex-wrap items-center gap-4'>
+    <div className="flex flex-wrap items-center gap-4">
       <BadgesItem roundedMd>Danger</BadgesItem>
       <BadgesItem outline roundedMd>
         Danger
@@ -14,25 +14,14 @@ const DangerBadge = () => {
       <BadgesItem roundedFull bgOpacity>
         Danger
       </BadgesItem>
-      <BadgesItem bgOpacity>
-        Danger
-      </BadgesItem>
+      <BadgesItem bgOpacity>Danger</BadgesItem>
     </div>
-  )
-}
+  );
+};
 
-export default DangerBadge
+export default DangerBadge;
 
-const BadgesItem = ({
-  children,
-  outline,
-  roundedFull,
-  roundedLg,
-  roundedNone,
-  roundedSm,
-  roundedMd,
-  bgOpacity,
-}) => {
+const BadgesItem = ({ children, outline, roundedFull, roundedLg, roundedNone, roundedSm, roundedMd, bgOpacity }) => {
   return (
     <span
       className={`inline-block rounded py-1 px-2.5 text-xs font-medium ${
@@ -58,5 +47,5 @@ const BadgesItem = ({
     >
       {children}
     </span>
-  )
-}
+  );
+};

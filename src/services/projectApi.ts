@@ -63,7 +63,7 @@ export interface PageData {
   }>;
 }
 
-const base = typeof window !== 'undefined' ? '' : (process.env.API_BASE_URL || 'http://localhost:3001');
+const base = typeof window !== 'undefined' ? '' : process.env.API_BASE_URL || 'http://localhost:3001';
 
 async function http<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${base}${url}`, init);
@@ -157,7 +157,10 @@ export const updateWebsiteCategory = updatePagesCategory;
 export const deleteWebsiteCategory = deletePagesCategory;
 export const reorderWebsiteCategories = reorderPagesCategories;
 
-export async function createPagesCategory(projectId: string, categoryData: CreateWebCategoryRequest): Promise<WebCategoryData> {
+export async function createPagesCategory(
+  projectId: string,
+  categoryData: CreateWebCategoryRequest,
+): Promise<WebCategoryData> {
   const data = await http<{ category: WebCategoryData }>(`/api/projects/${projectId}/pages/categories`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -166,7 +169,10 @@ export async function createPagesCategory(projectId: string, categoryData: Creat
   return data.category;
 }
 
-export async function updatePagesCategory(categoryId: string, updateData: UpdateWebCategoryRequest): Promise<WebCategoryData> {
+export async function updatePagesCategory(
+  categoryId: string,
+  updateData: UpdateWebCategoryRequest,
+): Promise<WebCategoryData> {
   const data = await http<{ category: WebCategoryData }>(`/api/pages/categories/${categoryId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -191,7 +197,10 @@ export async function reorderPagesCategories(reorderData: ReorderWebCategoriesRe
 
 // ==================== PAGE CATEGORIES ====================
 
-export async function assignPageCategories(pageId: string, assignData: AssignCategoriesRequest): Promise<{ added: string[]; removed: string[] }> {
+export async function assignPageCategories(
+  pageId: string,
+  assignData: AssignCategoriesRequest,
+): Promise<{ added: string[]; removed: string[] }> {
   const data = await http<{ added: string[]; removed: string[] }>(`/api/pages/${pageId}/categories`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -216,11 +225,11 @@ export function buildCanonicalUrl(page: PageData, menuUrl?: string): string {
   if (menuUrl) {
     return menuUrl;
   }
-  
+
   if (page.primaryCategory) {
     return `/${page.primaryCategory.slug}/${page.slug}`;
   }
-  
+
   // Fallback: только slug страницы
   return `/${page.slug}`;
 }

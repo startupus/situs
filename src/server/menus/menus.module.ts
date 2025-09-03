@@ -20,21 +20,21 @@ import { MenuItemsController } from './menu-items.controller';
   imports: [DatabaseModule, RealtimeModule, ScheduleModule.forRoot()],
   controllers: [MenuTypesController, MenuItemsController],
   providers: [
-    MenusService, 
-    MenuResolverService, 
-    MenuRulesService, 
+    MenusService,
+    MenuResolverService,
+    MenuRulesService,
     MenuAccessService,
     MenuLookupService,
     MenuMultilangService,
-    MenuAccessMiddleware
+    MenuAccessMiddleware,
   ],
   exports: [
-    MenusService, 
-    MenuResolverService, 
-    MenuRulesService, 
+    MenusService,
+    MenuResolverService,
+    MenuRulesService,
     MenuAccessService,
     MenuLookupService,
-    MenuMultilangService
+    MenuMultilangService,
   ],
 })
 export class MenusModule {
@@ -43,7 +43,7 @@ export class MenusModule {
       .apply(MenuAccessMiddleware)
       .forRoutes(
         { path: 'menu-items/*', method: RequestMethod.GET },
-        { path: 'menu-types/*', method: RequestMethod.GET }
+        { path: 'menu-types/*', method: RequestMethod.GET },
       );
   }
 }

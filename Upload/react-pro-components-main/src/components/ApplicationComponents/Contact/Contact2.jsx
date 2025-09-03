@@ -145,7 +145,7 @@ const TextArea = ({ row, placeholder, name, defaultValue, labelTitle }) => {
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="w-full resize-none border-b border-[#f1f1f1] bg-transparent py-4 text-base text-body-color outline-hidden placeholder:opacity-30 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
+          className="outline-hidden w-full resize-none border-b border-[#f1f1f1] bg-transparent py-4 text-base text-body-color placeholder:opacity-30 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
           defaultValue={defaultValue}
         />
       </div>
@@ -164,7 +164,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full border-b border-[#f1f1f1] bg-transparent py-4 text-base text-body-color outline-hidden placeholder:opacity-30 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
+        className="outline-hidden w-full border-b border-[#f1f1f1] bg-transparent py-4 text-base text-body-color placeholder:opacity-30 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
       />
     </div>
   );

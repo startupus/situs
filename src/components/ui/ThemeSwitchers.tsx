@@ -1,6 +1,6 @@
 // src/components/ui/ThemeSwitchers.tsx
 import React from 'react';
-import { 
+import {
   Switcher1,
   Switcher2,
   Switcher3,
@@ -13,7 +13,7 @@ import {
   Switcher10,
   Switcher11,
   Switcher12,
-  Switcher13
+  Switcher13,
 } from './core';
 import { withTheme } from './ThemeWrapper';
 

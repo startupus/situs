@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
   ArcElement,
-  Filler
+  Filler,
 } from 'chart.js';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
 
@@ -24,7 +24,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   ArcElement,
-  Filler
+  Filler,
 );
 
 /**
@@ -77,7 +77,7 @@ const StatsChart: React.FC<StatsChartProps> = ({
   options: customOptions = {},
   showLegend = true,
   showTooltip = true,
-  theme = 'light'
+  theme = 'light',
 }) => {
   // Цветовая схема для темной и светлой темы
   const colors = {
@@ -89,7 +89,7 @@ const StatsChart: React.FC<StatsChartProps> = ({
       primary: '#3b82f6',
       secondary: '#10b981',
       accent: '#f59e0b',
-      danger: '#ef4444'
+      danger: '#ef4444',
     },
     dark: {
       background: '#1f2937',
@@ -99,8 +99,8 @@ const StatsChart: React.FC<StatsChartProps> = ({
       primary: '#60a5fa',
       secondary: '#34d399',
       accent: '#fbbf24',
-      danger: '#f87171'
-    }
+      danger: '#f87171',
+    },
   };
 
   const currentColors = colors[theme];
@@ -114,7 +114,7 @@ const StatsChart: React.FC<StatsChartProps> = ({
     '#8b5cf6', // purple
     '#ec4899', // pink
     '#06b6d4', // cyan
-    '#84cc16'  // lime
+    '#84cc16', // lime
   ];
 
   // Обработка данных с применением цветовой схемы
@@ -122,15 +122,15 @@ const StatsChart: React.FC<StatsChartProps> = ({
     ...data,
     datasets: data.datasets.map((dataset, index) => ({
       ...dataset,
-      backgroundColor: dataset.backgroundColor || (
-        type === 'doughnut' 
+      backgroundColor:
+        dataset.backgroundColor ||
+        (type === 'doughnut'
           ? defaultColors.slice(0, data.labels.length)
-          : `${defaultColors[index % defaultColors.length]}20`
-      ),
+          : `${defaultColors[index % defaultColors.length]}20`),
       borderColor: dataset.borderColor || defaultColors[index % defaultColors.length],
       borderWidth: dataset.borderWidth || 2,
-      tension: dataset.tension || 0.4
-    }))
+      tension: dataset.tension || 0.4,
+    })),
   };
 
   // Базовые опции для всех типов графиков
@@ -144,9 +144,9 @@ const StatsChart: React.FC<StatsChartProps> = ({
         labels: {
           color: currentColors.text,
           font: {
-            size: 12
-          }
-        }
+            size: 12,
+          },
+        },
       },
       title: {
         display: !!title,
@@ -154,8 +154,8 @@ const StatsChart: React.FC<StatsChartProps> = ({
         color: currentColors.text,
         font: {
           size: 16,
-          weight: 'bold'
-        }
+          weight: 'bold',
+        },
       },
       tooltip: {
         enabled: showTooltip,
@@ -163,38 +163,41 @@ const StatsChart: React.FC<StatsChartProps> = ({
         titleColor: currentColors.text,
         bodyColor: currentColors.text,
         borderColor: currentColors.border,
-        borderWidth: 1
-      }
-    },
-    scales: type !== 'doughnut' ? {
-      x: {
-        display: true,
-        grid: {
-          color: currentColors.grid,
-          drawBorder: false
-        },
-        ticks: {
-          color: currentColors.text,
-          font: {
-            size: 11
-          }
-        }
+        borderWidth: 1,
       },
-      y: {
-        display: true,
-        grid: {
-          color: currentColors.grid,
-          drawBorder: false
-        },
-        ticks: {
-          color: currentColors.text,
-          font: {
-            size: 11
+    },
+    scales:
+      type !== 'doughnut'
+        ? {
+            x: {
+              display: true,
+              grid: {
+                color: currentColors.grid,
+                drawBorder: false,
+              },
+              ticks: {
+                color: currentColors.text,
+                font: {
+                  size: 11,
+                },
+              },
+            },
+            y: {
+              display: true,
+              grid: {
+                color: currentColors.grid,
+                drawBorder: false,
+              },
+              ticks: {
+                color: currentColors.text,
+                font: {
+                  size: 11,
+                },
+              },
+            },
           }
-        }
-      }
-    } : undefined,
-    ...customOptions
+        : undefined,
+    ...customOptions,
   };
 
   // Контейнер для графика
@@ -205,10 +208,7 @@ const StatsChart: React.FC<StatsChartProps> = ({
 
   const containerClasses = `
     p-4 rounded-lg border
-    ${theme === 'dark' 
-      ? 'bg-gray-800 border-gray-700' 
-      : 'bg-white border-gray-200'
-    }
+    ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}
     ${className}
   `.trim();
 
@@ -227,9 +227,7 @@ const StatsChart: React.FC<StatsChartProps> = ({
 
   return (
     <div className={containerClasses}>
-      <div style={chartStyle}>
-        {renderChart()}
-      </div>
+      <div style={chartStyle}>{renderChart()}</div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const Portfolio3 = () => {
 
   return (
     <>
-      <section className="pt-20 pb-20 lg:pt-[120px] lg:pb-[120px] dark:bg-dark">
+      <section className="pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
         <div className="container mx-auto">
           <Swiper slidesPerView={1} ref={sliderRef}>
             <SwiperSlide>
@@ -47,9 +47,9 @@ const Portfolio3 = () => {
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/portfolio/portfolio-03/image-01.svg"
               />
             </SwiperSlide>
-            <div className="absolute left-0 right-0 bottom-4 z-50 flex items-center gap-2 sm:gap-5 justify-center xl:right-auto xl:left-[70px] xl:bottom-8 xl:justify-start">
+            <div className="absolute bottom-4 left-0 right-0 z-50 flex items-center justify-center gap-2 sm:gap-5 xl:bottom-8 xl:left-[70px] xl:right-auto xl:justify-start">
               <div className="prev-arrow" onClick={handlePrev}>
-                <button className="text-body-color dark:text-dark-6 hover:text-primary flex items-center justify-center text-sm font-medium transition-all">
+                <button className="flex items-center justify-center text-sm font-medium text-body-color transition-all hover:text-primary dark:text-dark-6">
                   <span className="mr-3">
                     <svg
                       width={22}
@@ -69,10 +69,10 @@ const Portfolio3 = () => {
                 </button>
               </div>
 
-              <span className="block w-px h-7 bg-stroke dark:bg-dark-3"></span>
+              <span className="block h-7 w-px bg-stroke dark:bg-dark-3"></span>
 
               <div className="next-arrow" onClick={handleNext}>
-                <button className="text-body-color dark:text-dark-6 hover:text-primary flex items-center justify-center text-sm font-medium transition-all">
+                <button className="flex items-center justify-center text-sm font-medium text-body-color transition-all hover:text-primary dark:text-dark-6">
                   Next Project
                   <span className="ml-3">
                     <svg
@@ -105,18 +105,20 @@ const PortfolioCard = ({ subtitle, title, details, date, image }) => {
   return (
     <div className="-mx-4 flex flex-wrap">
       <div className="w-full px-4">
-        <div className="border-stroke dark:border-dark-3 items-center justify-between overflow-hidden border lg:flex">
-          <div className="w-full py-10 px-6 sm:px-8 md:p-16 lg:max-w-[565px] lg:py-9 lg:px-16 xl:max-w-[640px] xl:p-[70px]">
-            <span className="bg-primary mb-5 inline-block py-[6px] px-4 text-sm font-medium text-white">
+        <div className="items-center justify-between overflow-hidden border border-stroke dark:border-dark-3 lg:flex">
+          <div className="w-full px-6 py-10 sm:px-8 md:p-16 lg:max-w-[565px] lg:px-16 lg:py-9 xl:max-w-[640px] xl:p-[70px]">
+            <span className="mb-5 inline-block bg-primary px-4 py-[6px] text-sm font-medium text-white">
               {subtitle}
             </span>
-            <h2 className="text-dark dark:text-white mb-6 text-3xl leading-[1.29] font-bold sm:text-[35px]">
+            <h2 className="mb-6 text-3xl font-bold leading-[1.29] text-dark dark:text-white sm:text-[35px]">
               {title}
             </h2>
-            <p className="text-body-color dark:text-dark-6 mb-8 xl:mb-[76px] text-base">
+            <p className="mb-8 text-base text-body-color dark:text-dark-6 xl:mb-[76px]">
               {details}
             </p>
-            <span className="text-dark dark:text-white text-sm font-medium">{date}</span>
+            <span className="text-sm font-medium text-dark dark:text-white">
+              {date}
+            </span>
           </div>
           <div className="text-center">
             <div className="relative z-10 inline-block">

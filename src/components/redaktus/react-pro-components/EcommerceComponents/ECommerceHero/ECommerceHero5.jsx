@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ECommerceHero5 = () => {
   return (
@@ -15,8 +15,7 @@ const ECommerceHero5 = () => {
                   Discover Your Own Shoes
                 </h2>
                 <p className="mb-10 text-base text-body-color dark:text-dark-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum ornare vestibulum mollis.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare vestibulum mollis.
                 </p>
                 <a
                   href="/#"

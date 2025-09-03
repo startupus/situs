@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useCallback, useRef } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ProductCarousel = () => {
   const sliderRef = useRef(null);
@@ -20,15 +20,13 @@ const ProductCarousel = () => {
       <section className="dark:bg-dark">
         <div className="container mx-auto overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
           <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-            <span className="text-primary mb-2 block text-lg font-semibold">
-              Most Popular Products
-            </span>
+            <span className="text-primary mb-2 block text-lg font-semibold">Most Popular Products</span>
             <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:leading-[1.2] md:text-[40px]">
               Best Selling Items
             </h2>
             <p className="text-base text-body-color dark:text-dark-6">
-              There are many variations of passages of Lorem Ipsum available but
-              the majority have suffered alteration in some form.
+              There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+              in some form.
             </p>
           </div>
 
@@ -173,13 +171,7 @@ const ProductCard = ({ image, newItem, hotItem, link, name, price }) => {
           <span className="absolute right-4 top-4 inline-flex items-center justify-center rounded-sm bg-secondary pl-[10px] pr-2 py-[3px] text-sm font-medium text-white">
             New
             <span className="pl-1">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11.1937 4.48125L7.79997 3.95625L6.26247 0.73125C6.14997 0.50625 5.84997 0.50625 5.73747 0.73125L4.19997 3.975L0.82497 4.48125C0.58122 4.51875 0.48747 4.8375 0.67497 5.00625L3.13122 7.5375L2.54997 11.0812C2.51247 11.325 2.75622 11.5312 2.98122 11.3813L6.03747 9.7125L9.07497 11.3813C9.28122 11.4938 9.54372 11.3062 9.48747 11.0812L8.90622 7.5375L11.3625 5.00625C11.5125 4.8375 11.4375 4.51875 11.1937 4.48125Z"
                   fill="white"
@@ -192,13 +184,7 @@ const ProductCard = ({ image, newItem, hotItem, link, name, price }) => {
           <span className="absolute right-4 top-4 inline-flex items-center justify-center rounded-sm bg-red-600 pl-[10px] pr-2 py-[3px] text-sm font-medium text-white">
             Hot
             <span className="pl-1">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"

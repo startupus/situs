@@ -17,13 +17,13 @@ const mockPrisma = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
-    count: vi.fn()
+    count: vi.fn(),
   },
   page: {
     create: vi.fn(),
     deleteMany: vi.fn(),
-    count: vi.fn()
-  }
+    count: vi.fn(),
+  },
 };
 
 // Мокаем модуль PrismaClient
@@ -55,8 +55,8 @@ describe('ProjectService', () => {
           createdAt: new Date('2024-01-01'),
           updatedAt: new Date('2024-01-02'),
           pages: [],
-          _count: { pages: 0 }
-        }
+          _count: { pages: 0 },
+        },
       ];
 
       mockPrisma.project.findMany.mockResolvedValue(mockProjects);
@@ -67,13 +67,13 @@ describe('ProjectService', () => {
         where: { ownerId: 'user-1' },
         include: {
           pages: {
-            orderBy: { createdAt: 'desc' }
+            orderBy: { createdAt: 'desc' },
           },
           _count: {
-            select: { pages: true }
-          }
+            select: { pages: true },
+          },
         },
-        orderBy: { updatedAt: 'desc' }
+        orderBy: { updatedAt: 'desc' },
       });
 
       expect(result).toHaveLength(1);
@@ -81,7 +81,7 @@ describe('ProjectService', () => {
         id: 'project-1',
         name: 'Тестовый проект',
         type: 'website',
-        status: 'DRAFT'
+        status: 'DRAFT',
       });
     });
 
@@ -90,7 +90,7 @@ describe('ProjectService', () => {
         search: 'тест',
         status: 'DRAFT',
         sortBy: 'name' as const,
-        sortOrder: 'asc' as const
+        sortOrder: 'asc' as const,
       };
 
       mockPrisma.project.findMany.mockResolvedValue([]);
@@ -102,19 +102,19 @@ describe('ProjectService', () => {
           ownerId: 'user-1',
           OR: [
             { name: { contains: 'тест', mode: 'insensitive' } },
-            { description: { contains: 'тест', mode: 'insensitive' } }
+            { description: { contains: 'тест', mode: 'insensitive' } },
           ],
-          status: 'DRAFT'
+          status: 'DRAFT',
         },
         include: {
           pages: {
-            orderBy: { createdAt: 'desc' }
+            orderBy: { createdAt: 'desc' },
           },
           _count: {
-            select: { pages: true }
-          }
+            select: { pages: true },
+          },
         },
-        orderBy: { name: 'asc' }
+        orderBy: { name: 'asc' },
       });
     });
   });
@@ -135,7 +135,7 @@ describe('ProjectService', () => {
         createdAt: new Date('2024-01-01'),
         updatedAt: new Date('2024-01-02'),
         pages: [],
-        _count: { pages: 0 }
+        _count: { pages: 0 },
       };
 
       mockPrisma.project.findUnique.mockResolvedValue(mockProject);
@@ -146,17 +146,17 @@ describe('ProjectService', () => {
         where: { id: 'project-1' },
         include: {
           pages: {
-            orderBy: { createdAt: 'desc' }
+            orderBy: { createdAt: 'desc' },
           },
           _count: {
-            select: { pages: true }
-          }
-        }
+            select: { pages: true },
+          },
+        },
       });
 
       expect(result).toMatchObject({
         id: 'project-1',
-        name: 'Тестовый проект'
+        name: 'Тестовый проект',
       });
     });
 
@@ -174,7 +174,7 @@ describe('ProjectService', () => {
       const projectData = {
         name: 'Новый проект',
         description: 'Описание нового проекта',
-        ownerId: 'user-1'
+        ownerId: 'user-1',
       };
 
       const mockCreatedProject = {
@@ -190,7 +190,7 @@ describe('ProjectService', () => {
         settings: { theme: 'auto', language: 'ru', creationType: 'manual' },
         createdAt: new Date(),
         updatedAt: new Date(),
-        pages: []
+        pages: [],
       };
 
       mockPrisma.project.findUnique.mockResolvedValue(null); // slug не существует
@@ -212,12 +212,12 @@ describe('ProjectService', () => {
           settings: {
             theme: 'auto',
             language: 'ru',
-            creationType: 'manual'
-          }
+            creationType: 'manual',
+          },
         },
         include: {
-          pages: true
-        }
+          pages: true,
+        },
       });
 
       expect(mockPrisma.page.create).toHaveBeenCalledWith({
@@ -233,23 +233,23 @@ describe('ProjectService', () => {
                 type: 'heading',
                 data: {
                   text: 'Добро пожаловать на Новый проект',
-                  level: 1
-                }
+                  level: 1,
+                },
               },
               {
                 type: 'paragraph',
                 data: {
-                  text: 'Это ваша новая домашняя страница. Начните редактирование!'
-                }
-              }
-            ]
-          }
-        }
+                  text: 'Это ваша новая домашняя страница. Начните редактирование!',
+                },
+              },
+            ],
+          },
+        },
       });
 
       expect(result).toMatchObject({
         id: 'project-1',
-        name: 'Новый проект'
+        name: 'Новый проект',
       });
     });
 
@@ -257,14 +257,12 @@ describe('ProjectService', () => {
       const projectData = {
         name: 'Существующий проект',
         slug: 'existing-project',
-        ownerId: 'user-1'
+        ownerId: 'user-1',
       };
 
       mockPrisma.project.findUnique.mockResolvedValue({ id: 'existing' });
 
-      await expect(ProjectService.create(projectData)).rejects.toThrow(
-        'Проект с таким названием уже существует'
-      );
+      await expect(ProjectService.create(projectData)).rejects.toThrow('Проект с таким названием уже существует');
     });
   });
 
@@ -272,7 +270,7 @@ describe('ProjectService', () => {
     test('должен обновлять проект', async () => {
       const updateData = {
         name: 'Обновленное название',
-        description: 'Новое описание'
+        description: 'Новое описание',
       };
 
       const mockUpdatedProject = {
@@ -287,7 +285,7 @@ describe('ProjectService', () => {
         isPublished: false,
         settings: { theme: 'auto' },
         createdAt: new Date('2024-01-01'),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       mockPrisma.project.update.mockResolvedValue(mockUpdatedProject);
@@ -298,13 +296,13 @@ describe('ProjectService', () => {
         where: { id: 'project-1' },
         data: {
           ...updateData,
-          updatedAt: expect.any(Date)
-        }
+          updatedAt: expect.any(Date),
+        },
       });
 
       expect(result).toMatchObject({
         id: 'project-1',
-        name: 'Обновленное название'
+        name: 'Обновленное название',
       });
     });
   });
@@ -317,11 +315,11 @@ describe('ProjectService', () => {
       const result = await ProjectService.delete('project-1');
 
       expect(mockPrisma.page.deleteMany).toHaveBeenCalledWith({
-        where: { projectId: 'project-1' }
+        where: { projectId: 'project-1' },
       });
 
       expect(mockPrisma.project.delete).toHaveBeenCalledWith({
-        where: { id: 'project-1' }
+        where: { id: 'project-1' },
       });
 
       expect(result).toEqual({ success: true });
@@ -334,7 +332,7 @@ describe('ProjectService', () => {
         id: 'project-1',
         isPublished: true,
         status: 'PUBLISHED',
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       mockPrisma.project.update.mockResolvedValue(mockPublishedProject);
@@ -346,14 +344,14 @@ describe('ProjectService', () => {
         data: {
           isPublished: true,
           status: 'PUBLISHED',
-          updatedAt: expect.any(Date)
-        }
+          updatedAt: expect.any(Date),
+        },
       });
 
       expect(result).toMatchObject({
         id: 'project-1',
         isPublished: true,
-        status: 'PUBLISHED'
+        status: 'PUBLISHED',
       });
     });
   });
@@ -362,7 +360,7 @@ describe('ProjectService', () => {
     test('должен возвращать статистику проектов', async () => {
       mockPrisma.project.count
         .mockResolvedValueOnce(10) // totalProjects
-        .mockResolvedValueOnce(5)  // publishedProjects
+        .mockResolvedValueOnce(5) // publishedProjects
         .mockResolvedValueOnce(5); // draftProjects
 
       mockPrisma.page.count.mockResolvedValue(25); // totalPages
@@ -374,7 +372,7 @@ describe('ProjectService', () => {
         publishedProjects: 5,
         draftProjects: 5,
         totalPages: 25,
-        averagePagesPerProject: 3
+        averagePagesPerProject: 3,
       });
     });
 
@@ -393,7 +391,7 @@ describe('ProjectService', () => {
         publishedProjects: 0,
         draftProjects: 0,
         totalPages: 0,
-        averagePagesPerProject: 0
+        averagePagesPerProject: 0,
       });
     });
   });

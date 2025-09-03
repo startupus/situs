@@ -18,8 +18,8 @@ export default UnOrderedList1;
 
 const ListItem = ({ text }) => {
   return (
-    <li className="text-body-color dark:text-dark-6 flex text-base">
-      <span className="bg-primary mr-2 mt-2 flex h-2 w-full max-w-[8px] items-center justify-center rounded-full text-base"></span>
+    <li className="flex text-base text-body-color dark:text-dark-6">
+      <span className="mr-2 mt-2 flex h-2 w-full max-w-[8px] items-center justify-center rounded-full bg-primary text-base"></span>
       {text}
     </li>
   );

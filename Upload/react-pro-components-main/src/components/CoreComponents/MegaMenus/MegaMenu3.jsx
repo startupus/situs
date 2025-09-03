@@ -27,7 +27,7 @@ export default function MegaMenu3() {
                 <button
                   onClick={() => setOpen(!open)}
                   id="navbarToggler"
-                  className={`  ${
+                  className={` ${
                     open && "navbarTogglerActive"
                   } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
                 >
@@ -37,7 +37,7 @@ export default function MegaMenu3() {
                 </button>
                 <nav
                   id="navbarCollapse"
-                  className={`absolute right-4 top-full w-full max-w-[300px] rounded-lg bg-white px-6 py-5 shadow lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none dark:bg-dark-2 lg:dark:bg-transparent ${
+                  className={`absolute right-4 top-full w-full max-w-[300px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent ${
                     !open && "hidden"
                   }`}
                 >
@@ -45,7 +45,7 @@ export default function MegaMenu3() {
                     <li className="relative">
                       <button
                         onClick={() => setShowMegaMenu(!showMegaMenu)}
-                        className="flex w-full items-center justify-between gap-2 py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex lg:w-auto lg:justify-center dark:text-dark-6 dark:hover:text-white"
+                        className="flex w-full items-center justify-between gap-2 py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex lg:w-auto lg:justify-center"
                       >
                         Products
                         <span
@@ -67,7 +67,7 @@ export default function MegaMenu3() {
                       </button>
 
                       <div
-                        className={`w-full rounded-xl bg-white p-2 lg:absolute lg:left-0 lg:top-full lg:w-[630px] lg:p-8 lg:shadow-lg dark:bg-dark ${showMegaMenu ? "block" : "hidden"}`}
+                        className={`w-full rounded-xl bg-white p-2 dark:bg-dark lg:absolute lg:left-0 lg:top-full lg:w-[630px] lg:p-8 lg:shadow-lg ${showMegaMenu ? "block" : "hidden"}`}
                       >
                         <div className="grid gap-5 lg:grid-cols-3">
                           <div>
@@ -188,7 +188,7 @@ export default function MegaMenu3() {
                     <li>
                       <a
                         href="#"
-                        className="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         Home
                       </a>
@@ -196,7 +196,7 @@ export default function MegaMenu3() {
                     <li>
                       <a
                         href="#"
-                        className="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex dark:text-dark-6 dark:hover:text-white"
+                        className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         Features
                       </a>

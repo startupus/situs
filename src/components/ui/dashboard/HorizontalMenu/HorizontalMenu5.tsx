@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const HorizontalMenu5 = () => {
   return (
@@ -60,10 +60,7 @@ const HorizontalMenu5 = () => {
               </div>
 
               <div className="relative mr-[18px] hidden sm:block">
-                <a
-                  href="/#"
-                  className="relative block text-body-color hover:text-primary dark:text-dark-6"
-                >
+                <a href="/#" className="relative block text-body-color hover:text-primary dark:text-dark-6">
                   <span className="absolute -right-0.5 -top-0.5 block h-[10px] w-[10px] rounded-full border border-white bg-[#DC3545] dark:border-dark-2"></span>
                   <svg
                     width="24"
@@ -79,10 +76,7 @@ const HorizontalMenu5 = () => {
               </div>
 
               <div className="relative mr-6 hidden sm:block">
-                <a
-                  href="/#"
-                  className="relative block text-body-color hover:text-primary dark:text-dark-6"
-                >
+                <a href="/#" className="relative block text-body-color hover:text-primary dark:text-dark-6">
                   <span className="absolute -right-0.5 -top-0.5 block h-[10px] w-[10px] rounded-full border border-white bg-[#DC3545] dark:border-dark-2"></span>
                   <svg
                     width="24"

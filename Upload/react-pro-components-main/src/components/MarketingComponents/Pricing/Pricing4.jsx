@@ -106,7 +106,9 @@ const PricingCard = ({
               <a
                 href={buttonLink}
                 className={`mb-[18px] inline-block rounded-md px-7 py-2 text-base font-medium text-white ${
-                  active ? "bg-secondary hover:bg-secondary/90" : "bg-primary hover:bg-primary/90"
+                  active
+                    ? "bg-secondary hover:bg-secondary/90"
+                    : "bg-primary hover:bg-primary/90"
                 }`}
               >
                 {buttonText}

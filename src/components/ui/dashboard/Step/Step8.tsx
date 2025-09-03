@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Step8 = () => {
   return (
@@ -32,11 +32,7 @@ export default Step8;
 const SingleStep = ({ number, name, details, done }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div
-        className={`${
-          done ? "border-primary" : "border-[#E7E7E7]"
-        } mb-8 border-b-[3px]`}
-      >
+      <div className={`${done ? 'border-primary' : 'border-[#E7E7E7]'} mb-8 border-b-[3px]`}>
         <span className="border-stroke mb-[18px] inline-block border py-1 px-4 text-sm font-medium text-black">
           {number}
         </span>

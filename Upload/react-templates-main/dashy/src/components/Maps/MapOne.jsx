@@ -60,7 +60,7 @@ const MapOne = () => {
         </div>
 
         <div className="h-[260px]">
-          <div id="mapFour" className="mapFour overflow-visible!"></div>
+          <div id="mapFour" className="overflow-visible! mapFour"></div>
         </div>
       </div>
     </>

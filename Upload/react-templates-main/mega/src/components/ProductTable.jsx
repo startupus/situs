@@ -55,7 +55,7 @@ const ProductTable = () => {
             <input
               type="text"
               placeholder="Search here..."
-              className="h-[50px] w-full rounded-lg border border-stroke bg-white pl-14 pr-6 text-base text-body-color outline-hidden focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+              className="outline-hidden h-[50px] w-full rounded-lg border border-stroke bg-white pl-14 pr-6 text-base text-body-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
             />
             <span className="absolute left-6 top-1/2 -translate-y-1/2">
               <svg

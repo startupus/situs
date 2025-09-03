@@ -13,13 +13,13 @@ const UserTabs: React.FC<UserTabsProps> = ({ activeTab, onTabChange }) => {
     { id: 'users' as TabId, name: 'Пользователи', icon: FiUsers },
     { id: 'roles' as TabId, name: 'Роли и права', icon: FiShield },
     { id: 'settings' as TabId, name: 'Настройки', icon: FiSettings },
-    { id: 'invites' as TabId, name: 'Приглашения', icon: FiMail }
+    { id: 'invites' as TabId, name: 'Приглашения', icon: FiMail },
   ];
 
   return (
     <div className="border-b border-gray-200 dark:border-gray-700">
       <nav className="-mb-px flex space-x-8">
-        {tabs.map(tab => {
+        {tabs.map((tab) => {
           const IconComponent = tab.icon;
           return (
             <button

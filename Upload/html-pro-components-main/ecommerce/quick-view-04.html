@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,7 +27,7 @@
       <div class="container mx-auto py-14 text-center">
         <button
           @click=" modalOpen = true "
-          class="rounded-md bg-primary py-3 px-7 text-base font-medium text-white hover:bg-blue-dark"
+          class="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
         >
           Quick View
         </button>
@@ -35,12 +35,14 @@
 
       <div
         x-show="modalOpen"
-        class="absolute top-0 left-0 min-h-screen w-full bg-gray-2 dark:bg-dark py-20 lg:py-[120px]"
+        class="absolute left-0 top-0 min-h-screen w-full bg-gray-2 py-20 dark:bg-dark lg:py-[120px]"
       >
         <div class="container mx-auto">
           <div class="-mx-4 flex justify-center">
             <div class="w-full px-4 xl:w-11/12 2xl:w-10/12">
-              <div class="relative overflow-hidden bg-white dark:bg-dark-2 border border-stroke dark:border-dark-3">
+              <div
+                class="relative overflow-hidden border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
+              >
                 <div class="items-center lg:flex">
                   <div class="mb-12 w-full lg:mb-0 lg:max-w-[500px]">
                     <img
@@ -50,21 +52,25 @@
                     />
                   </div>
 
-                  <div class="w-full py-5 px-5 text-center lg:ml-14">
+                  <div class="w-full px-5 py-5 text-center lg:ml-14">
                     <div class="mx-auto lg:max-w-[350px]">
                       <h3
-                        class="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:leading-[40px] xl:text-[28px]"
+                        class="mb-[10px] text-xl font-semibold text-dark dark:text-white xl:text-[28px] xl:leading-[40px]"
                       >
                         Trendy Woody Door with handle lock
                       </h3>
 
-                      <p class="mb-5 text-base font-medium text-dark dark:text-white">
+                      <p
+                        class="mb-5 text-base font-medium text-dark dark:text-white"
+                      >
                         <span class="pr-0.5"> Availability: </span>
                         <span class="text-green"> In Stock </span>
                       </p>
 
                       <div class="mb-5">
-                        <h4 class="mb-3 text-base text-body-color dark:text-dark-6">
+                        <h4
+                          class="mb-3 text-base text-body-color dark:text-dark-6"
+                        >
                           Choose Color
                         </h4>
                         <div class="flex items-center justify-center gap-3">
@@ -95,9 +101,7 @@
                               for="color2"
                               class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-4 border-dark"
                             >
-                              <span
-                                class="h-8 w-8 rounded-full bg-dark"
-                              ></span>
+                              <span class="h-8 w-8 rounded-full bg-dark"></span>
                             </label>
                           </div>
                           <div class="relative">
@@ -130,59 +134,59 @@
                               quantity: 1
                             }
                           "
-                          class="mb-[14px] inline-flex items-center rounded-sm border border-stroke dark:border-dark-3 text-base font-medium text-dark dark:text-white"
+                          class="mb-[14px] inline-flex items-center rounded-sm border border-stroke text-base font-medium text-dark dark:border-dark-3 dark:text-white"
                         >
                           <span
                             @click=" quantity > 1 && quantity-- "
-                            class="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
+                            class="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                           >
-                            <svg 
-                              width="12" 
-                              height="12" 
-                              viewBox="0 0 12 12" 
-                              fill="none" 
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                               class="fill-current"
                             >
-                              <path 
-                                d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z" 
+                              <path
+                                d="M11.0626 6.43135H0.937598C0.712598 6.43135 0.506348 6.24385 0.506348 6.0001C0.506348 5.7751 0.693848 5.56885 0.937598 5.56885H11.0626C11.2876 5.56885 11.4938 5.75635 11.4938 6.0001C11.4938 6.2251 11.2876 6.43135 11.0626 6.43135Z"
                               />
-                            </svg>                      
+                            </svg>
                           </span>
-                          <span class="py-3 px-4 w-[98px] border-x border-stroke dark:border-dark-3" x-text="quantity"> </span>
+                          <span
+                            class="w-[98px] border-x border-stroke px-4 py-3 dark:border-dark-3"
+                            x-text="quantity"
+                          >
+                          </span>
                           <span
                             @click=" quantity++ "
-                            class="cursor-pointer select-none flex items-center justify-center w-9 h-12 text-dark dark:text-white"
+                            class="flex h-12 w-9 cursor-pointer select-none items-center justify-center text-dark dark:text-white"
                           >
-                            <svg 
-                              width="12" 
-                              height="12" 
-                              viewBox="0 0 12 12" 
-                              fill="none" 
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                               class="fill-current"
                             >
                               <g clip-path="url(#clip0_1032_24236)">
-                              <path 
-                                d="M11.2501 5.5876H6.43135V0.750098C6.43135 0.525098 6.24385 0.318848 6.0001 0.318848C5.7751 0.318848 5.56885 0.506348 5.56885 0.750098V5.5876H0.750098C0.525098 5.5876 0.318848 5.7751 0.318848 6.01885C0.318848 6.24385 0.506348 6.4501 0.750098 6.4501H5.5876V11.2501C5.5876 11.4751 5.7751 11.6813 6.01885 11.6813C6.24385 11.6813 6.4501 11.4938 6.4501 11.2501V6.43135H11.2501C11.4751 6.43135 11.6813 6.24385 11.6813 6.0001C11.6813 5.7751 11.4751 5.5876 11.2501 5.5876Z" 
-                              />
+                                <path
+                                  d="M11.2501 5.5876H6.43135V0.750098C6.43135 0.525098 6.24385 0.318848 6.0001 0.318848C5.7751 0.318848 5.56885 0.506348 5.56885 0.750098V5.5876H0.750098C0.525098 5.5876 0.318848 5.7751 0.318848 6.01885C0.318848 6.24385 0.506348 6.4501 0.750098 6.4501H5.5876V11.2501C5.5876 11.4751 5.7751 11.6813 6.01885 11.6813C6.24385 11.6813 6.4501 11.4938 6.4501 11.2501V6.43135H11.2501C11.4751 6.43135 11.6813 6.24385 11.6813 6.0001C11.6813 5.7751 11.4751 5.5876 11.2501 5.5876Z"
+                                />
                               </g>
                               <defs>
                                 <clipPath id="clip0_1032_24236">
-                                  <rect 
-                                    width="12" 
-                                    height="12" 
-                                    fill="white"
-                                  />
+                                  <rect width="12" height="12" fill="white" />
                                 </clipPath>
                               </defs>
-                            </svg>                      
+                            </svg>
                           </span>
                         </div>
                       </div>
                       <div class="mb-2 text-center">
                         <button
-                          class="inline-flex items-center justify-center rounded-md bg-primary py-3 px-7 text-center text-base font-medium text-white hover:bg-blue-dark md:px-10"
+                          class="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark md:px-10"
                         >
                           Add to Cart
                         </button>
@@ -190,7 +194,7 @@
 
                       <a
                         href="javascript:void(0)"
-                        class="inline-block py-2 text-base font-medium text-body-color dark:text-dark-6 hover:text-primary hover:underline"
+                        class="inline-block py-2 text-base font-medium text-body-color hover:text-primary hover:underline dark:text-dark-6"
                       >
                         View Full Details
                       </a>

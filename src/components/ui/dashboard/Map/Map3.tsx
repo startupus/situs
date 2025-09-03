@@ -1,39 +1,39 @@
-import jsVectorMap from "jsvectormap";
-import "jsvectormap/dist/css/jsvectormap.css";
-import React, { useEffect } from "react";
-import "./us-aea-en";
+import jsVectorMap from 'jsvectormap';
+import 'jsvectormap/dist/css/jsvectormap.css';
+import React, { useEffect } from 'react';
+import './us-aea-en';
 
 const Map3 = () => {
   useEffect(() => {
     new jsVectorMap({
-      selector: "#mapOne",
-      map: "us_aea_en",
+      selector: '#mapOne',
+      map: 'us_aea_en',
       zoomButtons: true,
 
       regionStyle: {
         initial: {
-          fill: "#C8D0D8",
+          fill: '#C8D0D8',
         },
         hover: {
           fillOpacity: 1,
-          fill: "#3056D3",
+          fill: '#3056D3',
         },
       },
       regionLabelStyle: {
         initial: {
-          fontFamily: "Satoshi",
-          fontWeight: "semibold",
-          fill: "#fff",
+          fontFamily: 'Satoshi',
+          fontWeight: 'semibold',
+          fill: '#fff',
         },
         hover: {
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
 
       labels: {
         regions: {
           render(code) {
-            return code.split("-")[1];
+            return code.split('-')[1];
           },
         },
       },
@@ -85,13 +85,8 @@ const Map3 = () => {
       <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
         <div className="mx-auto px-4 md:container">
           <div className="mx-auto w-full max-w-[560px] overflow-hidden rounded-lg border border-stroke bg-white px-[30px] py-6 dark:border-dark-3 dark:bg-dark-2">
-            <h4 className="mb-8 text-xl font-semibold text-dark dark:text-white">
-              Region labels
-            </h4>
-            <div
-              id="mapOne"
-              className="mapThree mapOne h-[260px] overflow-visible"
-            ></div>
+            <h4 className="mb-8 text-xl font-semibold text-dark dark:text-white">Region labels</h4>
+            <div id="mapOne" className="mapThree mapOne h-[260px] overflow-visible"></div>
           </div>
         </div>
       </section>

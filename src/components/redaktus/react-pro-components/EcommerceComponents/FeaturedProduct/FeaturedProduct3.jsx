@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FeaturedProduct3 = () => {
   return (
@@ -11,8 +11,8 @@ const FeaturedProduct3 = () => {
                 Featured Products
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit
-                amet molestie nunc. Vestibulum tempus justo.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet molestie nunc. Vestibulum tempus
+                justo.
               </p>
             </div>
           </div>
@@ -51,17 +51,7 @@ const FeaturedProduct3 = () => {
 
 export default FeaturedProduct3;
 
-const SingleFeaturedProduct = ({
-  img,
-  link,
-  subtitle,
-  title,
-  price,
-  prevPrice,
-  discount,
-  newItem,
-  hotItem,
-}) => {
+const SingleFeaturedProduct = ({ img, link, subtitle, title, price, prevPrice, discount, newItem, hotItem }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
       <div className="mb-10 overflow-hidden rounded-lg border border-stroke bg-white hover:shadow-card-2 dark:border-dark-3 dark:bg-dark-2">
@@ -89,15 +79,9 @@ const SingleFeaturedProduct = ({
               {title}
             </a>
           </h3>
-          <p className="mb-5 text-base text-body-color dark:text-dark-6">
-            {subtitle}
-          </p>
+          <p className="mb-5 text-base text-body-color dark:text-dark-6">{subtitle}</p>
           <p className="text-lg font-medium text-dark dark:text-white">
-            {prevPrice && (
-              <span className="mr-[10px] text-body-color line-through dark:text-dark-6">
-                {prevPrice}
-              </span>
-            )}
+            {prevPrice && <span className="mr-[10px] text-body-color line-through dark:text-dark-6">{prevPrice}</span>}
             <span>{price}</span>
           </p>
         </div>

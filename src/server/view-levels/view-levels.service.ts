@@ -16,7 +16,7 @@ export class ViewLevelsService {
    */
   async create(createViewLevelDto: CreateViewLevelDto): Promise<ViewLevel> {
     const groupIds = JSON.stringify(createViewLevelDto.groupIds || []);
-    
+
     const viewLevel = await this.prisma.viewLevel.create({
       data: {
         title: createViewLevelDto.title,
@@ -37,7 +37,7 @@ export class ViewLevelsService {
       orderBy: { ordering: 'asc' },
     });
 
-    return Promise.all(viewLevels.map(level => this.enrichViewLevelData(level)));
+    return Promise.all(viewLevels.map((level) => this.enrichViewLevelData(level)));
   }
 
   /**
@@ -124,7 +124,7 @@ export class ViewLevelsService {
         where: { id: { in: groupIds } },
         select: { title: true },
       });
-      groups.push(...userGroups.map(g => g.title));
+      groups.push(...userGroups.map((g) => g.title));
     }
 
     return {

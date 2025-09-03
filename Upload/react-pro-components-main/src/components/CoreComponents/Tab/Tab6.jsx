@@ -10,20 +10,20 @@ const Tab6 = () => {
   return (
     <section className="py-20 lg:py-[120px]">
       <div className="container">
-        <div className="flex flex-wrap -mx-4">
+        <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="bg-dark mb-14 w-full">
+            <div className="mb-14 w-full bg-dark">
               <div className="flex flex-wrap">
                 <button
                   onClick={() => handleTabOpen("home")}
-                  className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center px-6 py-3 text-sm font-medium text-white hover:bg-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "home" ? "bg-primary" : ""
                   }`}
                 >
                   <span
-                    className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white group-hover:text-body-color ${
                       open === "home"
-                        ? "bg-white text-body-color border-white"
+                        ? "border-white bg-white text-body-color"
                         : ""
                     }`}
                   >
@@ -33,14 +33,14 @@ const Tab6 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("about")}
-                  className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center px-6 py-3 text-sm font-medium text-white hover:bg-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "about" ? "bg-primary" : ""
                   }`}
                 >
                   <span
-                    className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white group-hover:text-body-color ${
                       open === "about"
-                        ? "bg-white text-body-color border-white"
+                        ? "border-white bg-white text-body-color"
                         : ""
                     }`}
                   >
@@ -50,14 +50,14 @@ const Tab6 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("team")}
-                  className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center px-6 py-3 text-sm font-medium text-white hover:bg-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "team" ? "bg-primary" : ""
                   }`}
                 >
                   <span
-                    className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white group-hover:text-body-color ${
                       open === "team"
-                        ? "bg-white text-body-color border-white"
+                        ? "border-white bg-white text-body-color"
                         : ""
                     }`}
                   >
@@ -67,14 +67,14 @@ const Tab6 = () => {
                 </button>
                 <button
                   onClick={() => handleTabOpen("company")}
-                  className={`group hover:bg-primary flex items-center py-3 px-6 text-sm font-medium text-white md:text-base lg:py-4 lg:px-12 ${
+                  className={`group flex items-center px-6 py-3 text-sm font-medium text-white hover:bg-primary md:text-base lg:px-12 lg:py-4 ${
                     open === "company" ? "bg-primary" : ""
                   }`}
                 >
                   <span
-                    className={`group-hover:text-body-color mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white ${
+                    className={`mr-2 flex h-[30px] w-[30px] items-center justify-center rounded-full border border-[#b7b7b7] text-sm group-hover:border-white group-hover:bg-white group-hover:text-body-color ${
                       open === "company"
-                        ? "bg-white text-body-color border-white"
+                        ? "border-white bg-white text-body-color"
                         : ""
                     }`}
                   >
@@ -119,7 +119,7 @@ const TabContent = ({ open, tabCategory, details }) => {
   return (
     <div>
       <div
-        className={`text-body-color p-6 text-base leading-relaxed ${
+        className={`p-6 text-base leading-relaxed text-body-color ${
           open === tabCategory ? "block" : "hidden"
         } `}
       >

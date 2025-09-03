@@ -1,5 +1,5 @@
-import { types } from 'redaktus/frontend'
-import { badgeColors, bgColors, bulletColors } from './colors'
+import { types } from 'redaktus/frontend';
+import { badgeColors, bgColors, bulletColors } from './colors';
 
 export const BackgroundColorsSideEditProps: types.SideEditProp = {
   name: 'bg',
@@ -18,7 +18,7 @@ export const BackgroundColorsSideEditProps: types.SideEditProp = {
       bgColors.dark,
     ],
   },
-}
+};
 
 export const ContainerSizeSideEditProps: types.SideEditProp = {
   name: 'width',
@@ -33,7 +33,7 @@ export const ContainerSizeSideEditProps: types.SideEditProp = {
       { value: 'full', label: 'Fullwidth' },
     ],
   },
-}
+};
 
 export const BadgeColorsSideEditProps = {
   name: 'color',
@@ -42,14 +42,9 @@ export const BadgeColorsSideEditProps = {
   shouldRefreshText: true,
   selectOptions: {
     display: types.OptionsDisplay.Color,
-    options: [
-      badgeColors.gray,
-      badgeColors.pink,
-      badgeColors.blue,
-      badgeColors.green,
-    ],
+    options: [badgeColors.gray, badgeColors.pink, badgeColors.blue, badgeColors.green],
   },
-}
+};
 
 export const BulletColorsSideEditProps = {
   name: 'color',
@@ -67,4 +62,4 @@ export const BulletColorsSideEditProps = {
       bulletColors.greenLight,
     ],
   },
-}
+};

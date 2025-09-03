@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Calender3 = () => {
   return (
@@ -203,9 +203,7 @@ export default Calender3;
 const WeekRow = ({ children }) => {
   return (
     <thead>
-      <tr className="text-sm font-normal text-body-color dark:text-dark-6">
-        {children}
-      </tr>
+      <tr className="text-sm font-normal text-body-color dark:text-dark-6">{children}</tr>
     </thead>
   );
 };
@@ -222,7 +220,7 @@ const Day = ({ active, number }) => {
       <span className="text-dark dark:text-white"></span>
       <span
         className={`${
-          active ? "bg-primary text-white" : "text-dark dark:text-white"
+          active ? 'bg-primary text-white' : 'text-dark dark:text-white'
         } max-w-9 mx-auto flex h-9 items-center justify-center text-sm font-medium`}
       >
         {number}

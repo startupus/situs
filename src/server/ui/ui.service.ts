@@ -29,33 +29,38 @@ export class UiService {
   private matchDynamicPath(template: string, actualPath: string): boolean {
     const templateSegments = template.split('/').filter(Boolean);
     const actualSegments = actualPath.split('/').filter(Boolean);
-    
+
     if (templateSegments.length !== actualSegments.length) return false;
-    
+
     for (let i = 0; i < templateSegments.length; i++) {
       const templateSeg = templateSegments[i];
       const actualSeg = actualSegments[i];
-      
+
       // Если сегмент шаблона начинается с :, это динамический параметр
       if (templateSeg.startsWith(':')) {
         continue; // Любое значение подходит
       }
-      
+
       // Иначе должно быть точное совпадение
       if (templateSeg !== actualSeg) {
         return false;
       }
     }
-    
+
     return true;
   }
 
   /**
    * Резолв заголовка и крошек из системного меню админки (situs-admin → admin-sidebar)
    */
-  private async resolveFromAdminMenu(path: string): Promise<{ title?: string; breadcrumbs?: Array<{ label: string; to?: string }> }> {
+  private async resolveFromAdminMenu(
+    path: string,
+  ): Promise<{ title?: string; breadcrumbs?: Array<{ label: string; to?: string }> }> {
     try {
-      const adminProject = await this.prisma.project.findUnique({ where: { slug: 'situs-admin' }, select: { id: true } });
+      const adminProject = await this.prisma.project.findUnique({
+        where: { slug: 'situs-admin' },
+        select: { id: true },
+      });
       if (!adminProject) return {};
 
       const adminSidebar = await this.prisma.menuType.findUnique({
@@ -72,15 +77,13 @@ export class UiService {
       });
 
       // Сначала пробуем точное совпадение
-      let item = menuItems.find(item => item.externalUrl === path);
-      
+      let item = menuItems.find((item) => item.externalUrl === path);
+
       // Если не найдено, пробуем динамические сегменты
       if (!item) {
-        item = menuItems.find(item => 
-          item.externalUrl && this.matchDynamicPath(item.externalUrl, path)
-        );
+        item = menuItems.find((item) => item.externalUrl && this.matchDynamicPath(item.externalUrl, path));
       }
-      
+
       if (!item) return {};
 
       const breadcrumbs: Array<{ label: string; to?: string }> = [];
@@ -108,44 +111,47 @@ export class UiService {
   /**
    * Резолв из AdminScreen (системный продукт ADMIN в системном проекте)
    */
-  private async resolveFromAdminScreens(path: string): Promise<{ 
-    title?: string; 
-    breadcrumbs?: Array<{ label: string; to?: string }>; 
-    seo?: { title?: string; description?: string; keywords?: string } 
+  private async resolveFromAdminScreens(path: string): Promise<{
+    title?: string;
+    breadcrumbs?: Array<{ label: string; to?: string }>;
+    seo?: { title?: string; description?: string; keywords?: string };
   }> {
     try {
-      const adminProject = await this.prisma.project.findUnique({ where: { slug: 'situs-admin' }, select: { id: true } });
-      if (!adminProject) return {};
-      
-      // Сначала пробуем точное совпадение
-      let screen = await this.prisma.adminScreen.findFirst({ 
-        where: { projectId: adminProject.id, path, isActive: true }
+      const adminProject = await this.prisma.project.findUnique({
+        where: { slug: 'situs-admin' },
+        select: { id: true },
       });
-      
+      if (!adminProject) return {};
+
+      // Сначала пробуем точное совпадение
+      let screen = await this.prisma.adminScreen.findFirst({
+        where: { projectId: adminProject.id, path, isActive: true },
+      });
+
       // Если не найдено, пробуем динамические сегменты
       if (!screen) {
         const allScreens = await this.prisma.adminScreen.findMany({
-          where: { projectId: adminProject.id, isActive: true }
+          where: { projectId: adminProject.id, isActive: true },
         });
-        
-        screen = allScreens.find(s => s.path && this.matchDynamicPath(s.path, path)) || null;
+
+        screen = allScreens.find((s) => s.path && this.matchDynamicPath(s.path, path)) || null;
       }
-      
+
       if (!screen) return {};
-      
+
       // Крошки: пока одноуровневые (можно расширить по category)
       const breadcrumbs: Array<{ label: string; to?: string }> = [];
-      
+
       // SEO поля из AdminScreen
       const seo: { title?: string; description?: string; keywords?: string } = {};
       if ((screen as any).metaTitle) seo.title = (screen as any).metaTitle;
       if ((screen as any).metaDescription) seo.description = (screen as any).metaDescription;
       if ((screen as any).metaKeywords) seo.keywords = (screen as any).metaKeywords;
-      
-      return { 
-        title: screen.title, 
+
+      return {
+        title: screen.title,
         breadcrumbs,
-        seo: Object.keys(seo).length > 0 ? seo : undefined
+        seo: Object.keys(seo).length > 0 ? seo : undefined,
       };
     } catch {
       return {};
@@ -171,7 +177,7 @@ export class UiService {
       // eslint-disable-next-line no-console
       console.warn('[UI] admin-sidebar is empty. Ensure situs-admin seeds are applied');
     }
-    return items.map(i => ({
+    return items.map((i) => ({
       title: i.title,
       to: i.externalUrl || '#',
       params: i.parameters ? JSON.parse(i.parameters) : undefined,
@@ -194,7 +200,7 @@ export class UiService {
       orderBy: { orderIndex: 'asc' },
       select: { title: true, externalUrl: true, parameters: true, icon: true, iconLibrary: true },
     });
-    return items.map(i => ({
+    return items.map((i) => ({
       title: i.title,
       to: i.externalUrl || '#',
       params: i.parameters ? JSON.parse(i.parameters) : undefined,
@@ -217,16 +223,27 @@ export class UiService {
       orderBy: { orderIndex: 'asc' },
       select: { title: true, externalUrl: true, parameters: true },
     });
-    return items.map(i => ({ title: i.title, to: i.externalUrl || '#', params: i.parameters ? JSON.parse(i.parameters) : undefined }));
+    return items.map((i) => ({
+      title: i.title,
+      to: i.externalUrl || '#',
+      params: i.parameters ? JSON.parse(i.parameters) : undefined,
+    }));
   }
 
   // Project sidebar для конкретного проекта (тип: admin-sidebar | project-sidebar)
-  async getProjectSidebar(projectId: string, type: string = 'admin-sidebar'): Promise<Array<{ title: string; to: string }>> {
+  async getProjectSidebar(
+    projectId: string,
+    type: string = 'admin-sidebar',
+  ): Promise<Array<{ title: string; to: string }>> {
     if (!projectId) return [];
     // projectId может быть id или slug
-    let project = await this.prisma.project.findUnique({ where: { id: projectId }, select: { id: true } }).catch(() => null);
+    let project = await this.prisma.project
+      .findUnique({ where: { id: projectId }, select: { id: true } })
+      .catch(() => null);
     if (!project) {
-      project = await this.prisma.project.findUnique({ where: { slug: projectId }, select: { id: true } }).catch(() => null);
+      project = await this.prisma.project
+        .findUnique({ where: { slug: projectId }, select: { id: true } })
+        .catch(() => null);
     }
     if (!project) return [];
 
@@ -240,7 +257,7 @@ export class UiService {
       orderBy: { orderIndex: 'asc' },
       select: { title: true, externalUrl: true, parameters: true, icon: true, iconLibrary: true },
     });
-    return items.map(i => ({
+    return items.map((i) => ({
       title: i.title,
       to: i.externalUrl || '#',
       params: i.parameters ? JSON.parse(i.parameters) : undefined,
@@ -274,10 +291,10 @@ export class UiService {
     if (!segs[0] || segs[0] !== 'projects') {
       const fromScreens = await this.resolveFromAdminScreens(safePath);
       if (fromScreens.title) {
-        const result = { 
-          title: fromScreens.title, 
+        const result = {
+          title: fromScreens.title,
           breadcrumbs: fromScreens.breadcrumbs || [],
-          seo: fromScreens.seo
+          seo: fromScreens.seo,
         };
         this.setToCache(cacheKey, result);
         return result;
@@ -293,9 +310,13 @@ export class UiService {
     if (segs[0] === 'projects' && segs[1]) {
       const idOrSlug = segs[1];
       // Надёжно резолвим проект по id или slug
-      let project = await this.prisma.project.findUnique({ where: { id: idOrSlug }, select: { name: true, slug: true, id: true } }).catch(() => null);
+      let project = await this.prisma.project
+        .findUnique({ where: { id: idOrSlug }, select: { name: true, slug: true, id: true } })
+        .catch(() => null);
       if (!project) {
-        project = await this.prisma.project.findUnique({ where: { slug: idOrSlug }, select: { name: true, slug: true, id: true } }).catch(() => null);
+        project = await this.prisma.project
+          .findUnique({ where: { slug: idOrSlug }, select: { name: true, slug: true, id: true } })
+          .catch(() => null);
       }
       const projectName = project?.name || 'Проект';
       const projectSlug = project?.slug || idOrSlug;
@@ -410,5 +431,3 @@ export class UiService {
     return result;
   }
 }
-
-

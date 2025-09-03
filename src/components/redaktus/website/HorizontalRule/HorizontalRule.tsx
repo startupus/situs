@@ -1,16 +1,13 @@
-import React from 'react'
-import * as types from 'redaktus/types'
-import blockNames from '../blockNames'
-import Container, { Size } from 'website/layout/Container'
-import Section from 'website/layout/Section'
-import {
-  BackgroundColorsSideEditProps,
-  ContainerSizeSideEditProps,
-} from 'website/LayoutSideProps'
+import React from 'react';
+import * as types from 'redaktus/types';
+import blockNames from '../blockNames';
+import Container, { Size } from 'website/layout/Container';
+import Section from 'website/layout/Section';
+import { BackgroundColorsSideEditProps, ContainerSizeSideEditProps } from 'website/LayoutSideProps';
 
 interface HorizontalRuleProps {
-  width?: Size
-  bg?: { color: string; className: string }
+  width?: Size;
+  bg?: { color: string; className: string };
 }
 
 const HorizontalRule: types.Brick<HorizontalRuleProps> = ({ width, bg }) => {
@@ -20,15 +17,14 @@ const HorizontalRule: types.Brick<HorizontalRuleProps> = ({ width, bg }) => {
         <hr />
       </Container>
     </Section>
-  )
-}
+  );
+};
 
 HorizontalRule.schema = {
   name: blockNames.HorizontalRule,
   label: 'Horizontal Rule',
   category: 'rb-ui website',
-  sideEditProps: [
-    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-}
+  sideEditProps: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
+};
 
-export default HorizontalRule
+export default HorizontalRule;

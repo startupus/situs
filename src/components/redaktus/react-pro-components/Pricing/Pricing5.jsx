@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Pricing5 = () => {
   return (
@@ -43,27 +43,15 @@ const Pricing5 = () => {
                   <tbody>
                     <tr>
                       <PricingListTItle>Key Features</PricingListTItle>
-                      <PricingListTItle styles="text-center">
-                        Features Limits
-                      </PricingListTItle>
-                      <PricingListTItle styles="text-center">
-                        Features Limits
-                      </PricingListTItle>
-                      <PricingListTItle styles="text-center">
-                        Features Limits
-                      </PricingListTItle>
+                      <PricingListTItle styles="text-center">Features Limits</PricingListTItle>
+                      <PricingListTItle styles="text-center">Features Limits</PricingListTItle>
+                      <PricingListTItle styles="text-center">Features Limits</PricingListTItle>
                     </tr>
                     <tr>
                       <PricingData>Seats</PricingData>
-                      <PricingData styles="text-center">
-                        1 Developer
-                      </PricingData>
-                      <PricingData styles="text-center">
-                        5 Developer
-                      </PricingData>
-                      <PricingData styles="text-center">
-                        20 Developer
-                      </PricingData>
+                      <PricingData styles="text-center">1 Developer</PricingData>
+                      <PricingData styles="text-center">5 Developer</PricingData>
+                      <PricingData styles="text-center">20 Developer</PricingData>
                     </tr>
                     <tr>
                       <PricingData>Domains/Products</PricingData>
@@ -94,19 +82,8 @@ const Pricing5 = () => {
               </div>
               <div>
                 <span className="absolute left-0 top-0 z-[-1]">
-                  <svg
-                    width="213"
-                    height="188"
-                    viewBox="0 0 213 188"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="75"
-                      cy="50"
-                      r="138"
-                      fill="url(#paint0_linear)"
-                    ></circle>
+                  <svg width="213" height="188" viewBox="0 0 213 188" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="75" cy="50" r="138" fill="url(#paint0_linear)"></circle>
                     <defs>
                       <linearGradient
                         id="paint0_linear"
@@ -117,23 +94,13 @@ const Pricing5 = () => {
                         gradientUnits="userSpaceOnUse"
                       >
                         <stop stopColor="#3056D3" stopOpacity="0.15"></stop>
-                        <stop
-                          offset="1"
-                          stopColor="#C4C4C4"
-                          stopOpacity="0"
-                        ></stop>
+                        <stop offset="1" stopColor="#C4C4C4" stopOpacity="0"></stop>
                       </linearGradient>
                     </defs>
                   </svg>
                 </span>
                 <span className="absolute left-11 top-[120px] z-[-1]">
-                  <svg
-                    width="50"
-                    height="109"
-                    viewBox="0 0 50 109"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="50" height="109" viewBox="0 0 50 109" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle
                       cx="47.71"
                       cy="107.259"
@@ -371,34 +338,20 @@ const Pricing5 = () => {
 
 export default Pricing5;
 
-const PricingTopItem = ({
-  active,
-  type,
-  price,
-  subscription,
-  subtitle,
-  buttonLink,
-  button,
-}) => {
+const PricingTopItem = ({ active, type, price, subscription, subtitle, buttonLink, button }) => {
   return (
     <th className="w-1/4 min-w-[200px] px-5 xl:pt-6">
       <div className="mb-10 text-left">
-        <span className="mb-[18px] text-lg font-medium text-dark dark:text-white">
-          {type}
-        </span>
+        <span className="mb-[18px] text-lg font-medium text-dark dark:text-white">{type}</span>
         <h4 className="mb-3 text-[28px] font-bold text-dark dark:text-white lg:text-[32px]">
           <span className="pr-2"> {price} </span>
-          <span className="text-base font-medium text-body-color dark:text-dark-6">
-            {subscription}
-          </span>
+          <span className="text-base font-medium text-body-color dark:text-dark-6">{subscription}</span>
         </h4>
-        <p className="mb-6 text-sm font-normal text-body-color dark:text-dark-6">
-          {subtitle}
-        </p>
+        <p className="mb-6 text-sm font-normal text-body-color dark:text-dark-6">{subtitle}</p>
         <a
           href={buttonLink}
           className={`block w-full rounded-md p-3 text-center text-base font-medium text-white transition ${
-            active ? "bg-secondary hover:bg-secondary/90" : "bg-primary hover:bg-primary/90"
+            active ? 'bg-secondary hover:bg-secondary/90' : 'bg-primary hover:bg-primary/90'
           }`}
         >
           {button}
@@ -412,13 +365,7 @@ const CheckedData = () => {
   return (
     <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
       <p className="flex justify-center text-center text-base text-body-color">
-        <svg
-          width="25"
-          height="25"
-          viewBox="0 0 25 25"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.5 24.5312C5.85937 24.5312 0.507812 19.1406 0.507812 12.5C0.507812 5.85937 5.85937 0.507812 12.5 0.507812C19.1406 0.507812 24.5312 5.85937 24.5312 12.5C24.5312 19.1406 19.1406 24.5312 12.5 24.5312ZM12.5 1.875C6.64062 1.875 1.875 6.64062 1.875 12.5C1.875 18.3594 6.64062 23.1641 12.5 23.1641C18.3594 23.1641 23.1641 18.3594 23.1641 12.5C23.1641 6.64062 18.3594 1.875 12.5 1.875Z"
             fill="#13C296"
@@ -436,13 +383,7 @@ const NotCheckedData = () => {
   return (
     <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
       <p className="flex justify-center text-center text-base text-body-color">
-        <svg
-          width="25"
-          height="25"
-          viewBox="0 0 25 25"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.4797 0C5.56911 0 0 5.56911 0 12.4797C0 19.3902 5.56911 25 12.4797 25C19.3902 25 25 19.3902 25 12.4797C25 5.56911 19.3902 0 12.4797 0ZM12.4797 23.5772C6.38211 23.5772 1.42276 18.5772 1.42276 12.4797C1.42276 6.38211 6.38211 1.42276 12.4797 1.42276C18.5772 1.42276 23.5772 6.38211 23.5772 12.4797C23.5772 18.5772 18.5772 23.5772 12.4797 23.5772Z"
             fill="#FF9494"
@@ -460,11 +401,7 @@ const NotCheckedData = () => {
 const PricingListTItle = ({ children, styles }) => {
   return (
     <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
-      <h5
-        className={`text-base font-medium text-dark dark:text-white ${styles}`}
-      >
-        {children}
-      </h5>
+      <h5 className={`text-base font-medium text-dark dark:text-white ${styles}`}>{children}</h5>
     </td>
   );
 };
@@ -472,9 +409,7 @@ const PricingListTItle = ({ children, styles }) => {
 const PricingData = ({ styles, children }) => {
   return (
     <td className="border-t border-[#EEEEEE] px-5 py-5 dark:border-dark-3">
-      <p className={`text-base text-body-color dark:text-dark-6 ${styles}`}>
-        {children}
-      </p>
+      <p className={`text-base text-body-color dark:text-dark-6 ${styles}`}>{children}</p>
     </td>
   );
 };

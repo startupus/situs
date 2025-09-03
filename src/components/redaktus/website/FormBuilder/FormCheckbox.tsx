@@ -1,20 +1,20 @@
-import clsx from 'clsx'
-import * as React from 'react'
-import * as types from 'redaktus/types'
-import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
-import blockNames from '../blockNames'
+import clsx from 'clsx';
+import * as React from 'react';
+import * as types from 'redaktus/types';
+import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import blockNames from '../blockNames';
 
 export interface FormCheckboxProps {
-  register: UseFormRegister<any>
-  fieldName: string
-  label: string
-  isRequired: boolean
-  key: string
+  register: UseFormRegister<any>;
+  fieldName: string;
+  label: string;
+  isRequired: boolean;
+  key: string;
   errors: FieldErrorsImpl<{
-    [x: string]: any
-  }>
-  requiredError?: string
-  columns: 'one' | 'two'
+    [x: string]: any;
+  }>;
+  requiredError?: string;
+  columns: 'one' | 'two';
 }
 
 const FormCheckbox: types.Brick<FormCheckboxProps> = ({
@@ -46,8 +46,8 @@ const FormCheckbox: types.Brick<FormCheckboxProps> = ({
         {errors[fieldName]?.type === 'required' && requiredError}
       </span>
     </div>
-  )
-}
+  );
+};
 
 FormCheckbox.schema = {
   name: blockNames.FormCheckbox,
@@ -96,6 +96,6 @@ FormCheckbox.schema = {
       label: 'Error required',
     },
   ],
-}
+};
 
-export default FormCheckbox
+export default FormCheckbox;

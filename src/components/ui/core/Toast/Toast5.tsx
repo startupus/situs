@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Toast5() {
   return (
@@ -6,13 +6,7 @@ export default function Toast5() {
       <div className="mx-auto px-4 sm:container">
         <div className="relative flex max-w-[422px] items-center rounded-lg border border-green-light-4 bg-white p-5 dark:border-green dark:bg-dark-2">
           <div className="mr-5 flex h-[60px] w-full max-w-[60px] items-center justify-center rounded-[5px] bg-green">
-            <svg
-              width={34}
-              height={34}
-              viewBox="0 0 34 34"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width={34} height={34} viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1088_26002)">
                 <path
                   d="M24.5969 18.7531H9.40312C9.03125 18.7531 8.65937 18.9125 8.44687 19.2313C8.23437 19.55 8.12812 19.9219 8.23437 20.2938C9.35 24.225 12.9625 26.9875 17 26.9875C21.1437 26.9875 24.65 24.3313 25.7656 20.2938C25.8719 19.9219 25.8187 19.55 25.5531 19.2313C25.3406 18.9125 24.9687 18.7531 24.5969 18.7531ZM17 24.5438C14.5562 24.5438 12.3781 23.2156 11.1562 21.1438H22.8437C21.675 23.2156 19.4969 24.5438 17 24.5438Z"
@@ -40,12 +34,8 @@ export default function Toast5() {
           </div>
           <div className="flex w-full items-center justify-between">
             <div>
-              <h6 className="mb-0.5 text-base font-semibold text-dark dark:text-white sm:text-lg">
-                Success
-              </h6>
-              <p className="text-sm text-body-color dark:text-dark-6">
-                Items added to your cart
-              </p>
+              <h6 className="mb-0.5 text-base font-semibold text-dark dark:text-white sm:text-lg">Success</h6>
+              <p className="text-sm text-body-color dark:text-dark-6">Items added to your cart</p>
             </div>
             <button className="text-dark-5 hover:text-green dark:text-dark-6">
               <svg

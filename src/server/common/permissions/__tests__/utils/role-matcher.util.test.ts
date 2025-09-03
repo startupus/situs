@@ -12,7 +12,7 @@ import {
   isAgencyRole,
   isAdminRole,
   getRoleDisplayName,
-  getRoleDescription
+  getRoleDescription,
 } from '../../utils/role-matcher.util';
 
 describe('RoleMatcherUtil', () => {

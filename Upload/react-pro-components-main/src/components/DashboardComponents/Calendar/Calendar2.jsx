@@ -13,7 +13,7 @@ const Calender2 = () => {
               <select
                 name=""
                 id=""
-                className="relative z-20 h-11 appearance-none rounded-[5px] border border-stroke bg-transparent pl-5 pr-10 text-dark outline-hidden dark:border-dark-3 dark:text-white"
+                className="outline-hidden relative z-20 h-11 appearance-none rounded-[5px] border border-stroke bg-transparent pl-5 pr-10 text-dark dark:border-dark-3 dark:text-white"
               >
                 <option value="">Week</option>
                 <option value="">Month</option>

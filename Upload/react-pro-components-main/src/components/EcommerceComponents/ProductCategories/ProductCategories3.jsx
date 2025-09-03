@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductCategories3 = () => {
   return (
-    <section className="bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] dark:bg-dark">
+    <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-1/2">
@@ -50,14 +50,14 @@ const CategoriesItem = ({ bigImg, link, img, title, subtitle }) => {
         alt="category"
         className="h-full w-full object-cover object-center"
       />
-      <div className="absolute top-0 left-0 h-full w-full py-10 px-6 sm:px-10">
+      <div className="absolute left-0 top-0 h-full w-full px-6 py-10 sm:px-10">
         <div className="max-w-[400px]">
-          <span className="text-body-color mb-3 block text-base font-medium">
+          <span className="mb-3 block text-base font-medium text-body-color">
             {subtitle}
           </span>
           <a
             href={link}
-            className="text-xl font-semibold text-dark lg:text-2xl xl:leading-10 xl:text-[28px]"
+            className="text-xl font-semibold text-dark lg:text-2xl xl:text-[28px] xl:leading-10"
           >
             {title}
           </a>

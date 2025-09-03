@@ -13,10 +13,7 @@ export interface TestimonialBlockProps {
   onUpdate: (updates: Partial<TestimonialBlockProps>) => void;
 }
 
-export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
-  testimonials,
-  onUpdate
-}) => {
+export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({ testimonials, onUpdate }) => {
   const updateTestimonial = (index: number, updates: Partial<TestimonialBlockProps['testimonials'][0]>) => {
     const newTestimonials = [...testimonials];
     newTestimonials[index] = { ...newTestimonials[index], ...updates };
@@ -40,7 +37,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                       alt={testimonial.name}
                     />
                   </div>
-                  
+
                   <div className="w-full">
                     <div className="mb-6 flex items-center">
                       <div className="flex">
@@ -59,7 +56,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                         ))}
                       </div>
                     </div>
-                    
+
                     <Text
                       propName={`testimonials.${index}.details`}
                       value={testimonial.details}
@@ -73,7 +70,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                         </p>
                       )}
                     />
-                    
+
                     <div className="flex items-center">
                       <div className="mr-4">
                         <RichText
@@ -89,7 +86,7 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
                             </h4>
                           )}
                         />
-                        
+
                         <Text
                           propName={`testimonials.${index}.position`}
                           value={testimonial.position}
@@ -116,4 +113,4 @@ export const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
   );
 };
 
-export default TestimonialBlock; 
+export default TestimonialBlock;

@@ -12,7 +12,7 @@ export default function Clipboard4() {
               eius atque sint totam minus voluptatum quibusdam pariatur ut
               perferendis commodi eos vero ipsum, nostrum doloribus quae.
               Dolores incidunt earum ad."
-              className="w-full rounded-lg border border-stroke bg-gray-1 p-5 leading-relaxed text-body-color outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+              className="outline-hidden w-full rounded-lg border border-stroke bg-gray-1 p-5 leading-relaxed text-body-color duration-200 focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
             />
             <button className="absolute right-5 top-5 inline-flex h-8 items-center justify-center gap-1 rounded-md border border-stroke bg-white px-2.5 py-1.5 text-sm font-medium text-dark duration-200 hover:bg-dark hover:text-white dark:border-dark-3">
               <span>

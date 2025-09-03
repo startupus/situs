@@ -12,29 +12,29 @@ jest.mock('../../config/roles.config', () => ({
       id: 'SUPER_ADMIN',
       name: 'Супер администратор',
       level: 100,
-      permissions: ['*']
+      permissions: ['*'],
     },
     STAFF: {
       id: 'STAFF',
       name: 'Персонал',
       level: 80,
       inheritsFrom: 'BUSINESS',
-      permissions: ['system.admin', 'user.view.all']
+      permissions: ['system.admin', 'user.view.all'],
     },
     AGENCY: {
       id: 'AGENCY',
       name: 'Агентство',
       level: 60,
       inheritsFrom: 'BUSINESS',
-      permissions: ['agency.clients.manage', 'project.view.clients']
+      permissions: ['agency.clients.manage', 'project.view.clients'],
     },
     BUSINESS: {
       id: 'BUSINESS',
       name: 'Бизнес-пользователь',
       level: 40,
-      permissions: ['project.edit.own', 'user.view.own']
-    }
-  }
+      permissions: ['project.edit.own', 'user.view.own'],
+    },
+  },
 }));
 
 describe('RoleHierarchyService', () => {
@@ -110,7 +110,7 @@ describe('RoleHierarchyService', () => {
   describe('getRoleInfo', () => {
     it('должен возвращать информацию о роли', () => {
       const roleInfo = service.getRoleInfo('AGENCY');
-      
+
       expect(roleInfo).toBeDefined();
       expect(roleInfo?.id).toBe('AGENCY');
       expect(roleInfo?.name).toBe('Агентство');
@@ -127,12 +127,12 @@ describe('RoleHierarchyService', () => {
   describe('getAllRoles', () => {
     it('должен возвращать все роли', () => {
       const roles = service.getAllRoles();
-      
+
       expect(roles).toHaveLength(4);
-      expect(roles.map(r => r.id)).toContain('SUPER_ADMIN');
-      expect(roles.map(r => r.id)).toContain('STAFF');
-      expect(roles.map(r => r.id)).toContain('AGENCY');
-      expect(roles.map(r => r.id)).toContain('BUSINESS');
+      expect(roles.map((r) => r.id)).toContain('SUPER_ADMIN');
+      expect(roles.map((r) => r.id)).toContain('STAFF');
+      expect(roles.map((r) => r.id)).toContain('AGENCY');
+      expect(roles.map((r) => r.id)).toContain('BUSINESS');
     });
   });
 
@@ -167,7 +167,7 @@ describe('RoleHierarchyService', () => {
       const result = await service.checkRoleLimitations('BUSINESS', {
         projectsCount: 10,
         clientsCount: 5,
-        storageUsed: 15000
+        storageUsed: 15000,
       });
 
       // Проверяем, что метод работает (конкретные лимиты зависят от конфига)

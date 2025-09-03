@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ProductCategories3 = () => {
   return (
@@ -41,24 +41,15 @@ const CategoriesItem = ({ bigImg, link, img, title, subtitle }) => {
     <div
       className={` ${
         bigImg
-          ? "relative mb-10 sm:h-[500px] lg:h-[440px] xl:h-[500px]"
-          : "relative mb-10 h-[180px] sm:h-[230px] lg:h-[200px] xl:h-[230px]"
+          ? 'relative mb-10 sm:h-[500px] lg:h-[440px] xl:h-[500px]'
+          : 'relative mb-10 h-[180px] sm:h-[230px] lg:h-[200px] xl:h-[230px]'
       }`}
     >
-      <img
-        src={img}
-        alt="category"
-        className="h-full w-full object-cover object-center"
-      />
+      <img src={img} alt="category" className="h-full w-full object-cover object-center" />
       <div className="absolute top-0 left-0 h-full w-full py-10 px-6 sm:px-10">
         <div className="max-w-[400px]">
-          <span className="text-body-color mb-3 block text-base font-medium">
-            {subtitle}
-          </span>
-          <a
-            href={link}
-            className="text-xl font-semibold text-dark lg:text-2xl xl:leading-10 xl:text-[28px]"
-          >
+          <span className="text-body-color mb-3 block text-base font-medium">{subtitle}</span>
+          <a href={link} className="text-xl font-semibold text-dark lg:text-2xl xl:leading-10 xl:text-[28px]">
             {title}
           </a>
         </div>

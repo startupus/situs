@@ -271,10 +271,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`shadow-1 dark:bg-dark-2 dark:shadow-box-dark absolute top-0 left-0 z-40 flex h-full min-h-screen w-full max-w-[90px] flex-col justify-between bg-white duration-200 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`absolute left-0 top-0 z-40 flex h-full min-h-screen w-full max-w-[90px] flex-col justify-between bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div>
-          <div className="px-7 pt-10 pb-9">
+          <div className="px-7 pb-9 pt-10">
             <Link to="/">
               <img src={logo} alt="logo" className="h-8 w-8" />
             </Link>
@@ -286,13 +286,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <li key={index} className="group relative">
                     <Link
                       to={item.link}
-                      className="text-body-color hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6 relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium duration-200"
+                      className="relative flex items-center justify-center border-r-4 border-transparent px-9 py-3 text-base font-medium text-body-color duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary dark:text-dark-6"
                     >
                       <span>{item.icon}</span>
                     </Link>
 
-                    <span className="text-body-color shadow-1 dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark invisible absolute top-1/2 left-[115%] -translate-y-1/2 rounded-[5px] bg-white px-[14px] py-[6px] text-sm whitespace-nowrap group-hover:visible">
-                      <span className="dark:text-dark-2 absolute top-1/2 -left-2 -translate-y-1/2 text-white">
+                    <span className="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark">
+                      <span className="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2">
                         <svg
                           width="9"
                           height="12"
@@ -309,7 +309,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   </li>
                 ) : (
                   <li key={index}>
-                    <div className="bg-stroke dark:bg-dark-3 mx-7 my-3 h-[1px]"></div>
+                    <div className="mx-7 my-3 h-[1px] bg-stroke dark:bg-dark-3"></div>
                   </li>
                 ),
               )}
@@ -332,7 +332,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div
         onClick={handleSidebarToggle}
-        className={`fixed top-0 left-0 z-30 h-screen w-full bg-black/80 xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-30 h-screen w-full bg-black/80 xl:hidden ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       ></div>
     </>
   );

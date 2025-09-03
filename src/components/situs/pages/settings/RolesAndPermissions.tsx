@@ -52,7 +52,7 @@ const RolesAndPermissions: React.FC = () => {
           level: 100,
           permissions: ['*'],
           isSystem: true,
-          usersCount: 1
+          usersCount: 1,
         },
         {
           id: 'STAFF',
@@ -63,7 +63,7 @@ const RolesAndPermissions: React.FC = () => {
           inheritsFrom: 'AGENCY',
           permissions: ['system.admin', 'project.view.all', 'user.view.all'],
           isSystem: true,
-          usersCount: 3
+          usersCount: 3,
         },
         {
           id: 'AGENCY',
@@ -77,10 +77,10 @@ const RolesAndPermissions: React.FC = () => {
             maxProjects: 100,
             maxClients: 50,
             maxStorage: 100000,
-            allowedComponents: ['projects', 'users', 'orders', 'analytics', 'billing']
+            allowedComponents: ['projects', 'users', 'orders', 'analytics', 'billing'],
           },
           isSystem: true,
-          usersCount: 5
+          usersCount: 5,
         },
         {
           id: 'BUSINESS',
@@ -93,19 +93,54 @@ const RolesAndPermissions: React.FC = () => {
             maxProjects: 5,
             maxClients: 0,
             maxStorage: 10000,
-            allowedComponents: ['projects', 'orders', 'analytics']
+            allowedComponents: ['projects', 'orders', 'analytics'],
           },
           isSystem: true,
-          usersCount: 12
-        }
+          usersCount: 12,
+        },
       ];
 
       const mockPermissions: Permission[] = [
-        { id: 'project.create', name: 'project.create', displayName: 'Создание проектов', description: 'Может создавать новые проекты', category: 'Проекты', isSystem: true },
-        { id: 'project.view.own', name: 'project.view.own', displayName: 'Просмотр собственных проектов', description: 'Может просматривать свои проекты', category: 'Проекты', isSystem: true },
-        { id: 'project.edit.own', name: 'project.edit.own', displayName: 'Редактирование собственных проектов', description: 'Может редактировать свои проекты', category: 'Проекты', isSystem: true },
-        { id: 'user.view.own', name: 'user.view.own', displayName: 'Просмотр профиля', description: 'Может просматривать свой профиль', category: 'Пользователи', isSystem: true },
-        { id: 'user.create.clients', name: 'user.create.clients', displayName: 'Создание клиентов', description: 'Может создавать пользователей-клиентов', category: 'Пользователи', isSystem: true }
+        {
+          id: 'project.create',
+          name: 'project.create',
+          displayName: 'Создание проектов',
+          description: 'Может создавать новые проекты',
+          category: 'Проекты',
+          isSystem: true,
+        },
+        {
+          id: 'project.view.own',
+          name: 'project.view.own',
+          displayName: 'Просмотр собственных проектов',
+          description: 'Может просматривать свои проекты',
+          category: 'Проекты',
+          isSystem: true,
+        },
+        {
+          id: 'project.edit.own',
+          name: 'project.edit.own',
+          displayName: 'Редактирование собственных проектов',
+          description: 'Может редактировать свои проекты',
+          category: 'Проекты',
+          isSystem: true,
+        },
+        {
+          id: 'user.view.own',
+          name: 'user.view.own',
+          displayName: 'Просмотр профиля',
+          description: 'Может просматривать свой профиль',
+          category: 'Пользователи',
+          isSystem: true,
+        },
+        {
+          id: 'user.create.clients',
+          name: 'user.create.clients',
+          displayName: 'Создание клиентов',
+          description: 'Может создавать пользователей-клиентов',
+          category: 'Пользователи',
+          isSystem: true,
+        },
       ];
 
       setRoles(mockRoles);
@@ -133,7 +168,7 @@ const RolesAndPermissions: React.FC = () => {
 
   const getPermissionsByCategory = () => {
     const categories: Record<string, Permission[]> = {};
-    permissions.forEach(permission => {
+    permissions.forEach((permission) => {
       if (!categories[permission.category]) {
         categories[permission.category] = [];
       }
@@ -154,12 +189,8 @@ const RolesAndPermissions: React.FC = () => {
     <div className="space-y-6">
       {/* Заголовок */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Роли и права доступа
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-2">
-          Управление системой ролей и разрешений пользователей
-        </p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Роли и права доступа</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-2">Управление системой ролей и разрешений пользователей</p>
       </div>
 
       {/* Табы */}
@@ -204,11 +235,9 @@ const RolesAndPermissions: React.FC = () => {
           {/* Действия */}
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600 dark:text-gray-400">Всего ролей: {roles.length}</span>
               <span className="text-sm text-gray-600 dark:text-gray-400">
-                Всего ролей: {roles.length}
-              </span>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Системных: {roles.filter(r => r.isSystem).length}
+                Системных: {roles.filter((r) => r.isSystem).length}
               </span>
             </div>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
@@ -218,7 +247,7 @@ const RolesAndPermissions: React.FC = () => {
 
           {/* Список ролей */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {roles.map(role => (
+            {roles.map((role) => (
               <div
                 key={role.id}
                 className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer"
@@ -229,21 +258,15 @@ const RolesAndPermissions: React.FC = () => {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {role.displayName}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                      {role.name}
-                    </p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{role.displayName}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{role.name}</p>
                   </div>
                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${getRoleLevelColor(role)}`}>
                     {getRoleLevel(role)}
                   </span>
                 </div>
 
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  {role.description}
-                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{role.description}</p>
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
@@ -270,9 +293,7 @@ const RolesAndPermissions: React.FC = () => {
 
                 {role.limitations && (
                   <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                      Ограничения:
-                    </h4>
+                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Ограничения:</h4>
                     <div className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
                       {role.limitations.maxProjects !== undefined && (
                         <div>Проектов: {role.limitations.maxProjects === -1 ? '∞' : role.limitations.maxProjects}</div>
@@ -281,7 +302,9 @@ const RolesAndPermissions: React.FC = () => {
                         <div>Клиентов: {role.limitations.maxClients === -1 ? '∞' : role.limitations.maxClients}</div>
                       )}
                       {role.limitations.maxStorage !== undefined && (
-                        <div>Хранилище: {role.limitations.maxStorage === -1 ? '∞' : `${role.limitations.maxStorage} MB`}</div>
+                        <div>
+                          Хранилище: {role.limitations.maxStorage === -1 ? '∞' : `${role.limitations.maxStorage} MB`}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -297,11 +320,9 @@ const RolesAndPermissions: React.FC = () => {
           {/* Действия */}
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600 dark:text-gray-400">Всего прав: {permissions.length}</span>
               <span className="text-sm text-gray-600 dark:text-gray-400">
-                Всего прав: {permissions.length}
-              </span>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Системных: {permissions.filter(p => p.isSystem).length}
+                Системных: {permissions.filter((p) => p.isSystem).length}
               </span>
             </div>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
@@ -312,27 +333,24 @@ const RolesAndPermissions: React.FC = () => {
           {/* Права по категориям */}
           <div className="space-y-6">
             {Object.entries(getPermissionsByCategory()).map(([category, categoryPermissions]) => (
-              <div key={category} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+              <div
+                key={category}
+                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6"
+              >
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   {category} ({categoryPermissions.length})
                 </h3>
                 <div className="grid gap-4 md:grid-cols-2">
-                  {categoryPermissions.map(permission => (
+                  {categoryPermissions.map((permission) => (
                     <div
                       key={permission.id}
                       className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="font-medium text-gray-900 dark:text-white">
-                            {permission.displayName}
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                            {permission.name}
-                          </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                            {permission.description}
-                          </p>
+                          <h4 className="font-medium text-gray-900 dark:text-white">{permission.displayName}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{permission.name}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">{permission.description}</p>
                         </div>
                         {permission.isSystem && (
                           <span className="ml-2 px-2 py-1 text-xs font-medium text-blue-600 bg-blue-100 dark:text-blue-400 dark:bg-blue-900/20 rounded-full">
@@ -352,29 +370,21 @@ const RolesAndPermissions: React.FC = () => {
       {activeTab === 'hierarchy' && (
         <div className="space-y-6">
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-              Иерархия ролей
-            </h3>
-            
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Иерархия ролей</h3>
+
             <div className="space-y-4">
               {roles
                 .sort((a, b) => b.level - a.level)
                 .map((role, index) => (
                   <div key={role.id} className="flex items-center space-x-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                        {role.level}
-                      </span>
+                      <span className="text-sm font-medium text-blue-600 dark:text-blue-400">{role.level}</span>
                     </div>
                     <div className="flex-1 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="font-medium text-gray-900 dark:text-white">
-                            {role.displayName}
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {role.description}
-                          </p>
+                          <h4 className="font-medium text-gray-900 dark:text-white">{role.displayName}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{role.description}</p>
                           {role.inheritsFrom && (
                             <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
                               ↳ Наследует права от {role.inheritsFrom}

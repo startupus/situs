@@ -7,16 +7,19 @@
 ## 📊 ТЕКУЩИЙ СТАТУС
 
 ✅ **ЗАВЕРШЕНО:**
+
 - Core Components (~200 компонентов) - полностью интегрированы
-- Dashboard Components (~114 компонентов) - полностью интегрированы  
+- Dashboard Components (~114 компонентов) - полностью интегрированы
 - AI Components (~20 компонентов) - полностью интегрированы
 
 🔄 **ТРЕБУЕТ ИНТЕГРАЦИИ:**
+
 - **Application Components** (~98 компонентов) - 10 категорий
 
 ## 📁 ГДЕ ВЗЯТЬ ИСХОДНИКИ
 
 **Архив (только для чтения):**
+
 ```
 Upload/react-pro-components-main/src/components/ApplicationComponents/
 ├── Blog/             # ← 10 компонентов (Blog1.jsx - Blog8.jsx + BlogDetails1-2.jsx)
@@ -34,6 +37,7 @@ Upload/react-pro-components-main/src/components/ApplicationComponents/
 ## 📂 КУДА ПОЛОЖИТЬ
 
 ### 1. Core компоненты (адаптированные .jsx → .tsx):
+
 ```
 src/components/ui/core/application/
 ├── Blog/
@@ -74,6 +78,7 @@ src/components/ui/core/application/
 ```
 
 ### 2. Theme обертки:
+
 ```
 src/components/ui/application/
 ├── ThemeBlogs.tsx
@@ -96,14 +101,16 @@ src/components/ui/application/
 **Конкретный пример для Blog1:**
 
 1. **Открыть исходник:**
+
    ```
    Upload/react-pro-components-main/src/components/ApplicationComponents/Blog/Blog1.jsx
    ```
 
 2. **Скопировать код** (начинается так):
+
    ```jsx
    import React from "react";
-   
+
    const Blog = () => {
      return (
        <>
@@ -118,6 +125,7 @@ src/components/ui/application/
    ```
 
 3. **Создать файл:**
+
    ```
    src/components/ui/core/application/Blog/Blog1.tsx
    ```
@@ -130,7 +138,7 @@ src/components/ui/application/
 
 ```tsx
 // src/components/ui/core/application/Blog/Blog1.tsx
-import React from "react";
+import React from 'react';
 
 // 1. Добавить TypeScript интерфейс
 interface Blog1Props {
@@ -147,9 +155,7 @@ const Blog1: React.FC<Blog1Props> = ({ className = '' }) => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-                <span className="mb-2 block text-lg font-semibold text-primary">
-                  Our Blogs
-                </span>
+                <span className="mb-2 block text-lg font-semibold text-primary">Our Blogs</span>
                 {/* ... ВЕСЬ ОСТАЛЬНОЙ КОД ИЗ ИСХОДНИКА БЕЗ ИЗМЕНЕНИЙ ... */}
               </div>
             </div>
@@ -165,12 +171,14 @@ export default Blog1;
 ```
 
 **Важные изменения:**
+
 - `const Blog` → `const Blog1: React.FC<Blog1Props>`
 - Добавить `className` в корневой элемент
 - `export default Blog` → `export default Blog1`
 - Остальной код **НЕ ТРОГАТЬ**
 
 ### Шаг 3: Создать Theme обертку
+
 ```tsx
 // src/components/ui/application/ThemeBlogs.tsx
 import React from 'react';
@@ -181,22 +189,19 @@ import Blog2 from '../core/application/Blog/Blog2';
 // Утилита для адаптации под глобальную тему
 const adaptBlogProps = (props: any) => ({
   ...props,
-  className: `${props.className || ''} transition-colors duration-200`
+  className: `${props.className || ''} transition-colors duration-200`,
 });
 
 // Theme обертки
-export const ThemeBlog1: React.FC<any> = (props) => (
-  <Blog1 {...adaptBlogProps(props)} />
-);
+export const ThemeBlog1: React.FC<any> = (props) => <Blog1 {...adaptBlogProps(props)} />;
 
-export const ThemeBlog2: React.FC<any> = (props) => (
-  <Blog2 {...adaptBlogProps(props)} />
-);
+export const ThemeBlog2: React.FC<any> = (props) => <Blog2 {...adaptBlogProps(props)} />;
 
 // ... остальные Blog компоненты
 ```
 
 ### Шаг 4: Добавить экспорты
+
 ```tsx
 // src/components/ui/application/index.ts
 export {
@@ -209,7 +214,7 @@ export {
   ThemeBlog7,
   ThemeBlog8,
   ThemeBlogDetails1,
-  ThemeBlogDetails2
+  ThemeBlogDetails2,
 } from './ThemeBlogs';
 
 export {
@@ -222,6 +227,7 @@ export {
 ```
 
 ### Шаг 5: Обновить главный index.ts
+
 ```tsx
 // src/components/ui/index.ts
 // Добавить в конец файла:
@@ -229,11 +235,12 @@ export * from './application';
 ```
 
 ### Шаг 6: Добавить в демо-страницу
+
 ```tsx
 // src/components/situs/pages/settings/AppearanceDemoSimple.tsx
 
 // 1. Добавить импорт:
-import { 
+import {
   ThemeBlog1,
   ThemeBlog2,
   ThemeCard1,
@@ -242,10 +249,12 @@ import {
 } from '@/components/ui/application';
 
 // 2. Добавить секцию в демо:
-{/* Application Components */}
+{
+  /* Application Components */
+}
 <div className="space-y-8">
   <h3 className="text-xl font-bold">Application Components</h3>
-  
+
   <div className="space-y-6">
     <div>
       <h4 className="font-medium mb-3">Blog Components</h4>
@@ -254,7 +263,7 @@ import {
         <ThemeBlog2 />
       </div>
     </div>
-    
+
     <div>
       <h4 className="font-medium mb-3">Card Components</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -262,60 +271,65 @@ import {
         <ThemeCard2 />
       </div>
     </div>
-    
+
     {/* ... остальные категории */}
   </div>
-</div>
+</div>;
 ```
 
 ## 📋 ДЕТАЛЬНЫЙ ПЛАН ПО КАТЕГОРИЯМ
 
+### 2. Card Components (16 компонентов)
 
-### 2. Card Components (16 компонентов) 
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Card/`
 - **Цель:** `src/components/ui/core/application/Card/`
 - **Theme файл:** `src/components/ui/application/ThemeCards.tsx`
 - **Компоненты:** Card1-16
 
 ### 3. Contact Components (14 компонентов)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Contact/`
 - **Цель:** `src/components/ui/core/application/Contact/`
 - **Theme файл:** `src/components/ui/application/ThemeContacts.tsx`
 - **Компоненты:** Contact1-14
 
 ### 4. Error Components (8 компонентов)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Error/`
 - **Цель:** `src/components/ui/core/application/Error/`
 - **Theme файл:** `src/components/ui/application/ThemeErrors.tsx`
 - **Компоненты:** Error1-8
 
-
-
 ### 6. Modal Components (11 компонентов)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Modal/`
 - **Цель:** `src/components/ui/core/application/Modal/`
 - **Theme файл:** `src/components/ui/application/ThemeModals.tsx`
 - **Компоненты:** Modal1-11
 
 ### 7. Navbar Components (8 компонентов)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Navbar/`
 - **Цель:** `src/components/ui/core/application/Navbar/`
 - **Theme файл:** `src/components/ui/application/ThemeNavbars.tsx`
 - **Компоненты:** Navbar1-8
 
 ### 8. Signin Components (8 компонентов)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Signin/`
 - **Цель:** `src/components/ui/core/application/Signin/`
 - **Theme файл:** `src/components/ui/application/ThemeSignins.tsx`
 - **Компоненты:** Signin1-8
 
 ### 9. Table Components (12 компонентов)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/Table/`
 - **Цель:** `src/components/ui/core/application/Table/`
 - **Theme файл:** `src/components/ui/application/ThemeTables.tsx`
 - **Компоненты:** Table1-12
 
 ### 10. TableGrid Components (4 компонента)
+
 - **Исходники:** `Upload/react-pro-components-main/src/components/ApplicationComponents/TableGrid/`
 - **Цель:** `src/components/ui/core/application/TableGrid/`
 - **Theme файл:** `src/components/ui/application/ThemeTableGrids.tsx`
@@ -324,6 +338,7 @@ import {
 ## ⚠️ ВАЖНЫЕ ПРАВИЛА
 
 ### ✅ МОЖНО:
+
 - Создавать новые файлы в `src/components/ui/core/application/`
 - Создавать новые файлы в `src/components/ui/application/`
 - Адаптировать .jsx код под TypeScript (.tsx)
@@ -332,6 +347,7 @@ import {
 - Добавлять className пропсы для кастомизации
 
 ### ❌ НЕЛЬЗЯ:
+
 - **Изменять файлы в Upload/** (архив только для чтения!)
 - Удалять существующие рабочие компоненты
 - Ломать существующую архитектуру проекта
@@ -341,10 +357,12 @@ import {
 ## 🧪 ТЕСТИРОВАНИЕ
 
 ### Где тестировать:
+
 **Демо-страница:** `src/components/situs/pages/settings/AppearanceDemoSimple.tsx`
 **URL для тестирования:** `http://localhost:5177/demo/components`
 
 ### Как тестировать:
+
 1. **Запустить проект:** `npm run dev:situs`
 2. **Открыть демо:** `http://localhost:5177/demo/components`
 3. **Найти секцию Application Components** (добавить если нет)
@@ -356,6 +374,7 @@ import {
 ## 📊 КРИТЕРИИ ГОТОВНОСТИ
 
 Категория считается готовой, когда:
+
 - ✅ Все компоненты скопированы и адаптированы (.jsx → .tsx)
 - ✅ Создан Theme файл с обертками
 - ✅ Добавлены экспорты в index.ts
@@ -383,9 +402,10 @@ import {
 **Результат:** `src/components/ui/dashboard/Calendar/Calendar1.tsx`
 
 **Сравните структуру:**
+
 ```tsx
 // src/components/ui/dashboard/Calendar/Calendar1.tsx
-import React from "react";
+import React from 'react';
 
 const Calender1 = () => {
   return (
@@ -405,6 +425,7 @@ export default Calender1;
 **Это правильный пример** - исходный код сохранен, только добавлена TypeScript типизация.
 
 ### Демо-страница пример:
+
 Посмотрите как Dashboard компоненты добавлены в `AppearanceDemoSimple.tsx` (строки 800-900) - используйте такой же подход для Application компонентов.
 
 **Успехов в интеграции! 🚀**

@@ -46,7 +46,7 @@ const SingleProduct = ({ img, link, title, subtitle, price }) => {
             <h3>
               <a
                 href={link}
-                className="mb-2 block text-base font-semibold leading-tight! text-dark hover:text-primary dark:text-white xs:text-lg"
+                className="leading-tight! mb-2 block text-base font-semibold text-dark hover:text-primary dark:text-white xs:text-lg"
               >
                 {title}
               </a>

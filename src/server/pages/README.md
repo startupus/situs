@@ -4,6 +4,7 @@
 Все выборки выполняются через `Page.productId` с фильтром `Product.type = 'WEBSITE'`.
 
 ## Состав папки
+
 - `pages.module.ts` — модуль NestJS, подключает контроллеры.
 - `pages.controller.ts` — общий контроллер страниц:
   - `GET /api/pages?projectId=&page=&limit=` — список страниц Website (опционально по проекту).
@@ -14,6 +15,7 @@
   - `PATCH /api/projects/:projectId/pages/reorder` — сохранение порядка (DnD), тело: `{ ids: string[] }` (DTO `ReorderPagesDto`).
 
 ## Контракты API (кратко)
+
 - Список страниц:
   - Параметры: `page` (>=1), `limit` (1..100)
   - Сортировка: `orderIndex ASC, updatedAt DESC`
@@ -32,6 +34,7 @@
   - Ответ: `{ "success": true, "data": { "updated": 3 } }`
 
 ## Модель данных (Prisma)
+
 - `Page.productId → Product.id`
 - `Product.projectId → Project.id`
 - `Product.type = 'WEBSITE'` — только такие продукты имеют `Page`
@@ -40,10 +43,12 @@
 Прямая связь `Page.projectId` не используется.
 
 ## Зависимости
+
 - `PrismaService` — `src/server/database/prisma.service.ts`
 - Глобальные пайпы/фильтры/интерсепторы — `src/server/common/*`
 
 ## Ближайшие задачи
+
 - Валидация DTO (`class-validator`) для create/update страниц
 - Полный CRUD: создание/удаление/редактирование страниц Website
 - Поиск/фильтры/пагинация (согласовать с frontend)
@@ -51,4 +56,5 @@
 - Idempotent сиды демо‑страниц при пустом Website
 
 ## Примечания
+
 - Dev API: `http://localhost:3002` (см. корневой README: прокси Vite на 3002)

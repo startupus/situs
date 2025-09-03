@@ -1,5 +1,5 @@
-import { Link as RouterLink, useLocation } from 'react-router-dom'
-import * as types from 'redaktus/types'
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import * as types from 'redaktus/types';
 
 const NextLink: types.RenderLocalLink = ({
   href,
@@ -9,21 +9,21 @@ const NextLink: types.RenderLocalLink = ({
   activeClassName,
   children,
 }) => {
-  const location = useLocation()
+  const location = useLocation();
 
-  let anchorClassName = ''
+  let anchorClassName = '';
 
   if (location.pathname === href) {
-    anchorClassName = `${className} ${activeClassName}`
+    anchorClassName = `${className} ${activeClassName}`;
   } else {
-    anchorClassName = className || ""
+    anchorClassName = className || '';
   }
 
   return (
     <RouterLink to={href} className={anchorClassName}>
       {children}
     </RouterLink>
-  )
-}
+  );
+};
 
-export default NextLink
+export default NextLink;

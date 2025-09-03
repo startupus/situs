@@ -5,7 +5,10 @@ const FRONTEND_BASE = process.env.FRONTEND_BASE || 'http://localhost:5177';
 const PROJECT_ID = process.env.PROJECT_ID || 'startapus-ecosystem';
 
 test.describe('Menu manager: plus button and icon save', () => {
-  test('Plus button opens correct modal on items or types tab and autoselects/creates main type', async ({ page, request }) => {
+  test('Plus button opens correct modal on items or types tab and autoselects/creates main type', async ({
+    page,
+    request,
+  }) => {
     await page.goto(`${FRONTEND_BASE}/projects/${PROJECT_ID}/settings/menu?tab=items`);
 
     // На вкладке items по умолчанию: клик по "+" должен открыть модал создания пункта
@@ -80,5 +83,3 @@ test.describe('Menu manager: plus button and icon save', () => {
     await expect(page.locator('[data-testid="menu-preview"]').locator('svg').first()).toBeVisible();
   });
 });
-
-

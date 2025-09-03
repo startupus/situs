@@ -761,7 +761,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        className="w-full rounded-lg border border-transparent bg-white/20 px-[14px] py-3 text-base text-white placeholder-white/60 outline-hidden focus:border-white focus-visible:shadow-none"
+        className="outline-hidden w-full rounded-lg border border-transparent bg-white/20 px-[14px] py-3 text-base text-white placeholder-white/60 focus:border-white focus-visible:shadow-none"
       />
     </div>
   );
@@ -775,7 +775,7 @@ const TextArea = ({ row, placeholder, name, defaultValue, labelTitle }) => {
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="w-full resize-none rounded-lg border border-transparent bg-white/20 px-[14px] py-3 text-base text-white placeholder-white/60 outline-hidden focus:border-white focus-visible:shadow-none"
+          className="outline-hidden w-full resize-none rounded-lg border border-transparent bg-white/20 px-[14px] py-3 text-base text-white placeholder-white/60 focus:border-white focus-visible:shadow-none"
           defaultValue={defaultValue}
         />
         <label className="mt-6 block text-base font-medium text-white">

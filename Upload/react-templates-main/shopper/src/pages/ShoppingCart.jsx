@@ -30,9 +30,9 @@ const ShoppingCart = () => {
     <>
       <Breadcrumb pageName="Shopping Cart" />
 
-      <section className="dark:bg-dark bg-white pt-24 pb-[120px]">
+      <section className="bg-white pb-[120px] pt-24 dark:bg-dark">
         <div className="container mx-auto">
-          <h2 className="text-dark mb-[60px] text-2xl font-semibold sm:text-3xl md:text-4xl dark:text-white">
+          <h2 className="mb-[60px] text-2xl font-semibold text-dark dark:text-white sm:text-3xl md:text-4xl">
             Shopping cart
           </h2>
 
@@ -42,9 +42,9 @@ const ShoppingCart = () => {
                 {cartItems.map((item, index) => (
                   <div
                     key={index}
-                    className="border-stroke dark:border-dark-3 justify-between border-b pb-9 last:border-b-0 md:flex"
+                    className="justify-between border-b border-stroke pb-9 last:border-b-0 dark:border-dark-3 md:flex"
                   >
-                    <div className="mr-8 mb-6 h-[180px] w-full max-w-[150px] md:mb-0">
+                    <div className="mb-6 mr-8 h-[180px] w-full max-w-[150px] md:mb-0">
                       <img
                         src={item.image}
                         alt="product"
@@ -54,42 +54,42 @@ const ShoppingCart = () => {
 
                     <div className="flex w-full flex-col justify-between">
                       <div className="mb-4 w-full justify-between sm:flex">
-                        <div className="mr-4 mb-4">
+                        <div className="mb-4 mr-4">
                           <h3>
                             <Link
                               to={item.link}
-                              className="text-dark hover:text-primary mb-3 block text-lg font-semibold sm:text-xl dark:text-white"
+                              className="mb-3 block text-lg font-semibold text-dark hover:text-primary dark:text-white sm:text-xl"
                             >
                               {item.name}
                             </Link>
                           </h3>
-                          <p className="text-body-color dark:text-dark-6 mb-[5px] text-base font-medium">
+                          <p className="mb-[5px] text-base font-medium text-body-color dark:text-dark-6">
                             Color: {item.color}
                           </p>
-                          <p className="text-body-color dark:text-dark-6 mb-[5px] text-base font-medium">
+                          <p className="mb-[5px] text-base font-medium text-body-color dark:text-dark-6">
                             Size: {item.size}
                           </p>
-                          <p className="text-green text-base font-medium">
+                          <p className="text-base font-medium text-green">
                             In Stock
                           </p>
                         </div>
-                        <div className="mr-4 mb-4">
-                          <p className="text-body-color dark:text-dark-6 mb-[10px] text-base font-medium">
+                        <div className="mb-4 mr-4">
+                          <p className="mb-[10px] text-base font-medium text-body-color dark:text-dark-6">
                             Each
                           </p>
-                          <p className="text-dark text-xl font-semibold dark:text-white">
+                          <p className="text-xl font-semibold text-dark dark:text-white">
                             ${item.price}
                           </p>
                         </div>
                         <div className="mr-4">
                           <label
                             htmlFor=""
-                            className="text-body-color dark:text-dark-6 mb-[10px] block text-base font-medium"
+                            className="mb-[10px] block text-base font-medium text-body-color dark:text-dark-6"
                           >
                             Quantity
                           </label>
                           <div className="relative inline-block">
-                            <select className="border-stroke text-body-color focus:border-primary active:border-primary dark:border-dark-3 w-full appearance-none border bg-transparent py-[6px] pr-[52px] pl-4 text-sm font-medium outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]">
+                            <select className="outline-hidden w-full appearance-none border border-stroke bg-transparent py-[6px] pl-4 pr-[52px] text-sm font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
                               <option value="" className="dark:bg-dark-2">
                                 1
                               </option>
@@ -103,7 +103,7 @@ const ShoppingCart = () => {
                                 4
                               </option>
                             </select>
-                            <span className="text-body-color dark:text-dark-6 absolute top-1/2 right-[10px] -translate-y-1/2">
+                            <span className="absolute right-[10px] top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                               <svg
                                 width="14"
                                 height="14"
@@ -119,10 +119,10 @@ const ShoppingCart = () => {
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <button className="border-gray-7 text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 border-[0.5px] px-4 py-1 text-sm transition hover:text-white">
+                        <button className="border-[0.5px] border-gray-7 px-4 py-1 text-sm text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6">
                           Edit
                         </button>
-                        <button className="border-gray-7 text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 border-[0.5px] px-4 py-1 text-sm transition hover:text-white">
+                        <button className="border-[0.5px] border-gray-7 px-4 py-1 text-sm text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6">
                           Remove
                         </button>
                       </div>
@@ -135,67 +135,67 @@ const ShoppingCart = () => {
             <div className="w-full px-4 lg:w-4/12">
               <div className="2xl:pl-8">
                 <div>
-                  <h3 className="text-dark mb-5 text-xl font-semibold dark:text-white">
+                  <h3 className="mb-5 text-xl font-semibold text-dark dark:text-white">
                     Apply Coupon to get discount!
                   </h3>
                   <form className="flex">
                     <input
                       type="email"
-                      className="border-stroke text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 mr-3 mb-3 h-10 w-full border bg-transparent px-4 text-sm outline-hidden focus-visible:shadow-none"
+                      className="outline-hidden mb-3 mr-3 h-10 w-full border border-stroke bg-transparent px-4 text-sm text-body-color focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-dark-6"
                       placeholder="Coupon code"
                     />
-                    <button className="bg-primary hover:bg-blue-dark mb-3 h-10 px-[22px] text-sm font-semibold text-white transition">
+                    <button className="mb-3 h-10 bg-primary px-[22px] text-sm font-semibold text-white transition hover:bg-blue-dark">
                       Submit
                     </button>
                   </form>
                 </div>
 
-                <div className="border-stroke dark:border-dark-3 -mx-1 border-b py-6">
+                <div className="-mx-1 border-b border-stroke py-6 dark:border-dark-3">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-dark text-base font-medium dark:text-white">
+                      <p className="text-base font-medium text-dark dark:text-white">
                         Subtotal
                       </p>
                     </div>
                     <div className="px-1">
-                      <p className="text-dark text-base font-medium dark:text-white">
+                      <p className="text-base font-medium text-dark dark:text-white">
                         $96.00
                       </p>
                     </div>
                   </div>
                   <div className="mb-4 flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-dark text-base font-medium dark:text-white">
+                      <p className="text-base font-medium text-dark dark:text-white">
                         Shipping Cost (+)
                       </p>
                     </div>
                     <div className="px-1">
-                      <p className="text-dark text-base font-medium dark:text-white">
+                      <p className="text-base font-medium text-dark dark:text-white">
                         $14.00
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="px-1">
-                      <p className="text-dark text-base font-medium dark:text-white">
+                      <p className="text-base font-medium text-dark dark:text-white">
                         Discount (-)
                       </p>
                     </div>
                     <div className="px-1">
-                      <p className="text-dark text-base font-medium dark:text-white">
+                      <p className="text-base font-medium text-dark dark:text-white">
                         $9.00
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="-mx-1 flex items-center justify-between pt-6 pb-8">
+                <div className="-mx-1 flex items-center justify-between pb-8 pt-6">
                   <div className="px-1">
-                    <p className="text-dark text-base font-medium dark:text-white">
+                    <p className="text-base font-medium text-dark dark:text-white">
                       Estimated Total
                     </p>
                   </div>
                   <div className="px-1">
-                    <p className="text-dark text-base font-medium dark:text-white">
+                    <p className="text-base font-medium text-dark dark:text-white">
                       $110.00
                     </p>
                   </div>
@@ -204,12 +204,12 @@ const ShoppingCart = () => {
                 <div className="mb-3">
                   <Link
                     to="/order-summary"
-                    className="bg-primary hover:bg-blue-dark flex w-full items-center justify-center px-10 py-3 text-center text-base font-medium text-white"
+                    className="flex w-full items-center justify-center bg-primary px-10 py-3 text-center text-base font-medium text-white hover:bg-blue-dark"
                   >
                     Checkout
                   </Link>
                 </div>
-                <p className="text-body-color dark:text-dark-6 text-center text-base">
+                <p className="text-center text-base text-body-color dark:text-dark-6">
                   <span>You&apos;re</span>
                   <span className="px-0.5 text-[#DC2626]"> $10.05 </span>
                   <span>away from free shipping!</span>

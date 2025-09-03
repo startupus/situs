@@ -21,5 +21,3 @@ test.describe('System project protection', () => {
     expect(patchOwner.status()).toBe(403);
   });
 });
-
-

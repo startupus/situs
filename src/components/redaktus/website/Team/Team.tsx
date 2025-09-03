@@ -1,48 +1,36 @@
-import * as React from 'react'
-import { Repeater } from 'redaktus/core'
-import * as types from 'redaktus/types'
+import * as React from 'react';
+import { Repeater } from 'redaktus/core';
+import * as types from 'redaktus/types';
 
-import classNames from 'classnames'
-import Container, { Size } from '../layout/Container'
-import Section, { Border } from '../layout/Section'
-import { bgColors } from '../colors'
-import blockNames from '../blockNames'
-import {
-  BackgroundColorsSideEditProps,
-  ContainerSizeSideEditProps,
-} from 'website/LayoutSideProps'
+import classNames from 'classnames';
+import Container, { Size } from '../layout/Container';
+import Section, { Border } from '../layout/Section';
+import { bgColors } from '../colors';
+import blockNames from '../blockNames';
+import { BackgroundColorsSideEditProps, ContainerSizeSideEditProps } from 'website/LayoutSideProps';
 
 export interface TeamProps {
-  bg?: { color: string; className: string }
-  width?: Size
+  bg?: { color: string; className: string };
+  width?: Size;
 }
 
-const Team: types.Brick<TeamProps> = ({
-  bg = bgColors.white.value,
-  width = 'lg',
-}) => {
+const Team: types.Brick<TeamProps> = ({ bg = bgColors.white.value, width = 'lg' }) => {
   return (
     <Section bg={bg}>
-      <Container
-        size={width}
-        className={classNames(
-          'py-12 flex flex-wrap justify-center items-center'
-        )}
-      >
+      <Container size={width} className={classNames('py-12 flex flex-wrap justify-center items-center')}>
         <div className="flex w-full mx-auto mt-10 flex-wrap justify-center mb-6 w- max-w-4xl">
           <Repeater propName="teamItem" />
         </div>
       </Container>
     </Section>
-  )
-}
+  );
+};
 Team.schema = {
   name: blockNames.Team,
   label: 'Team',
   category: 'rb-ui website',
   playgroundLinkLabel: 'View source code on Github',
-  playgroundLinkUrl:
-    'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Team/Team.tsx',
+  playgroundLinkUrl: 'https://github.com/Redaktus/redaktus-ui/blob/master/src/website/Team/Team.tsx',
 
   getDefaultProps: () => ({
     bg: {
@@ -58,10 +46,8 @@ Team.schema = {
         duty: 'Frontend Designer',
         picture: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
         },
         twitter: '',
         github: '',
@@ -76,10 +62,8 @@ Team.schema = {
         linkedin: '',
         picture: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
         },
       },
       {
@@ -90,10 +74,8 @@ Team.schema = {
         linkedin: '',
         picture: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
         },
       },
       {
@@ -104,10 +86,8 @@ Team.schema = {
         linkedin: '',
         picture: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
         },
       },
       {
@@ -118,12 +98,11 @@ Team.schema = {
         linkedin: '',
         picture: {
           src: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      placeholderSrc:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
-      srcSet:
-            'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          placeholderSrc: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
+          srcSet: 'https://via.placeholder.com/400x300/cccccc/666666?text=Demo+Image',
         },
-      }],
+      },
+    ],
   }),
   repeaterItems: [
     {
@@ -133,8 +112,8 @@ Team.schema = {
       itemLabel: 'Member',
       min: 0,
       max: 5,
-    }],
-  sideEditProps: [
-    BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
-}
-export default Team
+    },
+  ],
+  sideEditProps: [BackgroundColorsSideEditProps, ContainerSizeSideEditProps],
+};
+export default Team;

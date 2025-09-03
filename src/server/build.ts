@@ -21,14 +21,13 @@ if (existsSync(DIST_DIR)) {
 
 try {
   // Компилируем TypeScript с правильными декораторами
-  execSync('npx tsc --project tsconfig.json', { 
+  execSync('npx tsc --project tsconfig.json', {
     cwd: SRC_DIR,
-    stdio: 'inherit'
+    stdio: 'inherit',
   });
-  
+
   console.log('✅ Компиляция завершена');
   console.log('🚀 Запуск: node dist/main.js');
-  
 } catch (error) {
   console.error('❌ Ошибка компиляции:', error);
   process.exit(1);

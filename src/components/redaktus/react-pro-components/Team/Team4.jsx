@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Team4 = () => {
   return (
@@ -7,15 +7,13 @@ const Team4 = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-[70px]">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Our Team
-              </span>
+              <span className="mb-2 block text-lg font-semibold text-primary">Our Team</span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Our Creative Team
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration
+                in some form.
               </p>
             </div>
           </div>
@@ -63,15 +61,7 @@ const Team4 = () => {
 
 export default Team4;
 
-const TeamCard = ({
-  imageSrc,
-  name,
-  profession,
-  details,
-  facebookLink,
-  twitterLink,
-  instagramLink,
-}) => {
+const TeamCard = ({ imageSrc, name, profession, details, facebookLink, twitterLink, instagramLink }) => {
   return (
     <div className="w-full px-4 lg:w-1/2">
       <div className="mx-auto mb-10 max-w-[320px] items-stretch sm:flex sm:max-w-full">
@@ -80,24 +70,14 @@ const TeamCard = ({
         </div>
         <div className="relative flex w-full items-center">
           <div className="py-4">
-            <h4 className="mb-1 text-lg font-semibold text-dark dark:text-white">
-              {name}
-            </h4>
+            <h4 className="mb-1 text-lg font-semibold text-dark dark:text-white">{name}</h4>
             <h6 className="mb-[14px] text-xs font-medium uppercase leading-[1.66] text-body-color dark:text-dark-6">
               {profession}
             </h6>
-            <p className="mb-5 max-w-[290px] text-sm text-body-color dark:text-dark-6">
-              {details}
-            </p>
+            <p className="mb-5 max-w-[290px] text-sm text-body-color dark:text-dark-6">{details}</p>
             <div className="flex items-center gap-[14px]">
               <a href={facebookLink}>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16Z"
                     fill="#4064AC"
@@ -109,13 +89,7 @@ const TeamCard = ({
                 </svg>
               </a>
               <a href={twitterLink}>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
@@ -129,13 +103,7 @@ const TeamCard = ({
                 </svg>
               </a>
               <a href={instagramLink}>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M15.8862 31.7723C24.6598 31.7723 31.7723 24.6598 31.7723 15.8862C31.7723 7.11248 24.6598 0 15.8862 0C7.11248 0 0 7.11248 0 15.8862C0 24.6598 7.11248 31.7723 15.8862 31.7723Z"
                     fill="#D9377B"
@@ -157,188 +125,32 @@ const TeamCard = ({
             </div>
           </div>
           <div className="absolute bottom-0 right-0">
-            <svg
-              width="68"
-              height="68"
-              viewBox="0 0 68 68"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="9.82911"
-                cy="57.9829"
-                r="1.29337"
-                transform="rotate(-45 9.82911 57.9829)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="17.8765"
-                cy="66.0308"
-                r="1.29337"
-                transform="rotate(-45 17.8765 66.0308)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="1.82911"
-                cy="65.8291"
-                r="1.29337"
-                transform="rotate(-45 1.82911 65.8291)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="17.877"
-                cy="49.9348"
-                r="1.29337"
-                transform="rotate(-45 17.877 49.9348)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="25.9248"
-                cy="57.9824"
-                r="1.29337"
-                transform="rotate(-45 25.9248 57.9824)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="33.9736"
-                cy="66.0312"
-                r="1.29337"
-                transform="rotate(-45 33.9736 66.0312)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="25.9248"
-                cy="41.8867"
-                r="1.29337"
-                transform="rotate(-45 25.9248 41.8867)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="49.8862"
-                cy="17.9255"
-                r="1.29337"
-                transform="rotate(-45 49.8862 17.9255)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="33.9727"
-                cy="49.9346"
-                r="1.29337"
-                transform="rotate(-45 33.9727 49.9346)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="57.9341"
-                cy="25.9731"
-                r="1.29337"
-                transform="rotate(-45 57.9341 25.9731)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="42.0215"
-                cy="57.9834"
-                r="1.29337"
-                transform="rotate(-45 42.0215 57.9834)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="65.9829"
-                cy="34.022"
-                r="1.29337"
-                transform="rotate(-45 65.9829 34.022)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="50.0689"
-                cy="66.0305"
-                r="1.29337"
-                transform="rotate(-45 50.0689 66.0305)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="33.9731"
-                cy="33.8386"
-                r="1.29337"
-                transform="rotate(-45 33.9731 33.8386)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="57.9346"
-                cy="9.87744"
-                r="1.29337"
-                transform="rotate(-45 57.9346 9.87744)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="42.021"
-                cy="41.8865"
-                r="1.29337"
-                transform="rotate(-45 42.021 41.8865)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="65.9824"
-                cy="17.925"
-                r="1.29337"
-                transform="rotate(-45 65.9824 17.925)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="50.0698"
-                cy="49.9351"
-                r="1.29337"
-                transform="rotate(-45 50.0698 49.9351)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="58.1167"
-                cy="57.9824"
-                r="1.29337"
-                transform="rotate(-45 58.1167 57.9824)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="66.165"
-                cy="66.0308"
-                r="1.29337"
-                transform="rotate(-45 66.165 66.0308)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="42.021"
-                cy="25.7905"
-                r="1.29337"
-                transform="rotate(-45 42.021 25.7905)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="65.9824"
-                cy="1.8291"
-                r="1.29337"
-                transform="rotate(-45 65.9824 1.8291)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="50.0689"
-                cy="33.8384"
-                r="1.29337"
-                transform="rotate(-45 50.0689 33.8384)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="58.1177"
-                cy="41.8872"
-                r="1.29337"
-                transform="rotate(-45 58.1177 41.8872)"
-                fill="#3056D3"
-              />
-              <circle
-                cx="66.165"
-                cy="49.9343"
-                r="1.29337"
-                transform="rotate(-45 66.165 49.9343)"
-                fill="#3056D3"
-              />
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9.82911" cy="57.9829" r="1.29337" transform="rotate(-45 9.82911 57.9829)" fill="#3056D3" />
+              <circle cx="17.8765" cy="66.0308" r="1.29337" transform="rotate(-45 17.8765 66.0308)" fill="#3056D3" />
+              <circle cx="1.82911" cy="65.8291" r="1.29337" transform="rotate(-45 1.82911 65.8291)" fill="#3056D3" />
+              <circle cx="17.877" cy="49.9348" r="1.29337" transform="rotate(-45 17.877 49.9348)" fill="#3056D3" />
+              <circle cx="25.9248" cy="57.9824" r="1.29337" transform="rotate(-45 25.9248 57.9824)" fill="#3056D3" />
+              <circle cx="33.9736" cy="66.0312" r="1.29337" transform="rotate(-45 33.9736 66.0312)" fill="#3056D3" />
+              <circle cx="25.9248" cy="41.8867" r="1.29337" transform="rotate(-45 25.9248 41.8867)" fill="#3056D3" />
+              <circle cx="49.8862" cy="17.9255" r="1.29337" transform="rotate(-45 49.8862 17.9255)" fill="#3056D3" />
+              <circle cx="33.9727" cy="49.9346" r="1.29337" transform="rotate(-45 33.9727 49.9346)" fill="#3056D3" />
+              <circle cx="57.9341" cy="25.9731" r="1.29337" transform="rotate(-45 57.9341 25.9731)" fill="#3056D3" />
+              <circle cx="42.0215" cy="57.9834" r="1.29337" transform="rotate(-45 42.0215 57.9834)" fill="#3056D3" />
+              <circle cx="65.9829" cy="34.022" r="1.29337" transform="rotate(-45 65.9829 34.022)" fill="#3056D3" />
+              <circle cx="50.0689" cy="66.0305" r="1.29337" transform="rotate(-45 50.0689 66.0305)" fill="#3056D3" />
+              <circle cx="33.9731" cy="33.8386" r="1.29337" transform="rotate(-45 33.9731 33.8386)" fill="#3056D3" />
+              <circle cx="57.9346" cy="9.87744" r="1.29337" transform="rotate(-45 57.9346 9.87744)" fill="#3056D3" />
+              <circle cx="42.021" cy="41.8865" r="1.29337" transform="rotate(-45 42.021 41.8865)" fill="#3056D3" />
+              <circle cx="65.9824" cy="17.925" r="1.29337" transform="rotate(-45 65.9824 17.925)" fill="#3056D3" />
+              <circle cx="50.0698" cy="49.9351" r="1.29337" transform="rotate(-45 50.0698 49.9351)" fill="#3056D3" />
+              <circle cx="58.1167" cy="57.9824" r="1.29337" transform="rotate(-45 58.1167 57.9824)" fill="#3056D3" />
+              <circle cx="66.165" cy="66.0308" r="1.29337" transform="rotate(-45 66.165 66.0308)" fill="#3056D3" />
+              <circle cx="42.021" cy="25.7905" r="1.29337" transform="rotate(-45 42.021 25.7905)" fill="#3056D3" />
+              <circle cx="65.9824" cy="1.8291" r="1.29337" transform="rotate(-45 65.9824 1.8291)" fill="#3056D3" />
+              <circle cx="50.0689" cy="33.8384" r="1.29337" transform="rotate(-45 50.0689 33.8384)" fill="#3056D3" />
+              <circle cx="58.1177" cy="41.8872" r="1.29337" transform="rotate(-45 58.1177 41.8872)" fill="#3056D3" />
+              <circle cx="66.165" cy="49.9343" r="1.29337" transform="rotate(-45 66.165 49.9343)" fill="#3056D3" />
             </svg>
           </div>
         </div>

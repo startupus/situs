@@ -3,11 +3,11 @@ import React from "react";
 const About1 = () => {
   return (
     <>
-      <section className="overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] bg-white dark:bg-dark">
+      <section className="overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
-          <div className="flex flex-wrap items-center justify-between -mx-4">
+          <div className="-mx-4 flex flex-wrap items-center justify-between">
             <div className="w-full px-4 lg:w-6/12">
-              <div className="flex items-center -mx-3 sm:-mx-4">
+              <div className="-mx-3 flex items-center sm:-mx-4">
                 <div className="w-full px-3 sm:px-4 xl:w-1/2">
                   <div className="py-3 sm:py-4">
                     <img
@@ -31,7 +31,7 @@ const About1 = () => {
                       alt=""
                       className="w-full rounded-2xl"
                     />
-                    <span className="absolute -right-7 -bottom-7 z-[-1]">
+                    <span className="absolute -bottom-7 -right-7 z-[-1]">
                       <svg
                         width={134}
                         height={106}
@@ -608,7 +608,7 @@ const About1 = () => {
 
             <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div className="mt-10 lg:mt-0">
-                <span className="block mb-4 text-lg font-semibold text-primary">
+                <span className="mb-4 block text-lg font-semibold text-primary">
                   Why Choose Us
                 </span>
                 <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
@@ -626,7 +626,7 @@ const About1 = () => {
                 </p>
                 <a
                   href="/#"
-                  className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-transparent rounded-md px-7 bg-primary hover:bg-primary/90"
+                  className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-primary/90"
                 >
                   Get Started
                 </a>

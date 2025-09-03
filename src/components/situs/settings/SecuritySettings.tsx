@@ -11,28 +11,20 @@ interface SecuritySettingsProps {
 const SecuritySettings: React.FC<SecuritySettingsProps> = ({ handleSave }) => {
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg dark:bg-dark-2">
-      <h3 className="text-xl font-semibold text-dark dark:text-white mb-6">
-        Безопасность
-      </h3>
-      
+      <h3 className="text-xl font-semibold text-dark dark:text-white mb-6">Безопасность</h3>
+
       <div className="space-y-8">
         {/* Двухфакторная аутентификация */}
         <div className="bg-gray-50 dark:bg-dark rounded-lg p-6">
           <div className="flex items-center space-x-3 mb-4">
             <FaShieldAlt className="text-primary" />
-            <h4 className="text-lg font-semibold text-dark dark:text-white">
-              Двухфакторная аутентификация
-            </h4>
+            <h4 className="text-lg font-semibold text-dark dark:text-white">Двухфакторная аутентификация</h4>
           </div>
-          <p className="text-body-color dark:text-dark-6 mb-4">
-            Дополнительный уровень защиты вашего аккаунта
-          </p>
-          
+          <p className="text-body-color dark:text-dark-6 mb-4">Дополнительный уровень защиты вашего аккаунта</p>
+
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-dark dark:text-white font-medium">
-                Статус: Отключена
-              </p>
+              <p className="text-sm text-dark dark:text-white font-medium">Статус: Отключена</p>
               <p className="text-xs text-body-color dark:text-dark-6">
                 Рекомендуем включить для повышения безопасности
               </p>
@@ -47,49 +39,31 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({ handleSave }) => {
         <div className="bg-gray-50 dark:bg-dark rounded-lg p-6">
           <div className="flex items-center space-x-3 mb-4">
             <FaKey className="text-primary" />
-            <h4 className="text-lg font-semibold text-dark dark:text-white">
-              Управление паролями
-            </h4>
+            <h4 className="text-lg font-semibold text-dark dark:text-white">Управление паролями</h4>
           </div>
-          <p className="text-body-color dark:text-dark-6 mb-4">
-            Настройки политики паролей и их безопасности
-          </p>
-          
+          <p className="text-body-color dark:text-dark-6 mb-4">Настройки политики паролей и их безопасности</p>
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h5 className="font-medium text-dark dark:text-white">
-                  Сложность пароля
-                </h5>
+                <h5 className="font-medium text-dark dark:text-white">Сложность пароля</h5>
                 <p className="text-sm text-body-color dark:text-dark-6">
                   Требовать сложные пароли для всех пользователей
                 </p>
               </div>
               <label className="relative inline-flex cursor-pointer items-center">
-                <input
-                  type="checkbox"
-                  defaultChecked={true}
-                  className="peer sr-only"
-                />
+                <input type="checkbox" defaultChecked={true} className="peer sr-only" />
                 <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700"></div>
               </label>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div>
-                <h5 className="font-medium text-dark dark:text-white">
-                  Автосмена пароля
-                </h5>
-                <p className="text-sm text-body-color dark:text-dark-6">
-                  Требовать смену пароля каждые 90 дней
-                </p>
+                <h5 className="font-medium text-dark dark:text-white">Автосмена пароля</h5>
+                <p className="text-sm text-body-color dark:text-dark-6">Требовать смену пароля каждые 90 дней</p>
               </div>
               <label className="relative inline-flex cursor-pointer items-center">
-                <input
-                  type="checkbox"
-                  defaultChecked={false}
-                  className="peer sr-only"
-                />
+                <input type="checkbox" defaultChecked={false} className="peer sr-only" />
                 <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700"></div>
               </label>
             </div>
@@ -100,19 +74,13 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({ handleSave }) => {
         <div className="bg-gray-50 dark:bg-dark rounded-lg p-6">
           <div className="flex items-center space-x-3 mb-4">
             <FaUserLock className="text-primary" />
-            <h4 className="text-lg font-semibold text-dark dark:text-white">
-              Сессии и доступ
-            </h4>
+            <h4 className="text-lg font-semibold text-dark dark:text-white">Сессии и доступ</h4>
           </div>
-          <p className="text-body-color dark:text-dark-6 mb-4">
-            Управление активными сессиями и политиками доступа
-          </p>
-          
+          <p className="text-body-color dark:text-dark-6 mb-4">Управление активными сессиями и политиками доступа</p>
+
           <div className="space-y-4">
             <div>
-              <label className="mb-2 block text-sm font-medium text-dark dark:text-white">
-                Время сессии (минуты)
-              </label>
+              <label className="mb-2 block text-sm font-medium text-dark dark:text-white">Время сессии (минуты)</label>
               <input
                 type="number"
                 defaultValue={480}
@@ -124,22 +92,16 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({ handleSave }) => {
                 Автоматический выход из системы при неактивности
               </p>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div>
-                <h5 className="font-medium text-dark dark:text-white">
-                  Одновременные сессии
-                </h5>
+                <h5 className="font-medium text-dark dark:text-white">Одновременные сессии</h5>
                 <p className="text-sm text-body-color dark:text-dark-6">
                   Разрешить несколько активных сессий для одного пользователя
                 </p>
               </div>
               <label className="relative inline-flex cursor-pointer items-center">
-                <input
-                  type="checkbox"
-                  defaultChecked={true}
-                  className="peer sr-only"
-                />
+                <input type="checkbox" defaultChecked={true} className="peer sr-only" />
                 <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700"></div>
               </label>
             </div>
@@ -150,22 +112,14 @@ const SecuritySettings: React.FC<SecuritySettingsProps> = ({ handleSave }) => {
         <div className="bg-gray-50 dark:bg-dark rounded-lg p-6">
           <div className="flex items-center space-x-3 mb-4">
             <FaHistory className="text-primary" />
-            <h4 className="text-lg font-semibold text-dark dark:text-white">
-              Журнал аудита
-            </h4>
+            <h4 className="text-lg font-semibold text-dark dark:text-white">Журнал аудита</h4>
           </div>
-          <p className="text-body-color dark:text-dark-6 mb-4">
-            Логирование действий пользователей для безопасности
-          </p>
-          
+          <p className="text-body-color dark:text-dark-6 mb-4">Логирование действий пользователей для безопасности</p>
+
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-dark dark:text-white font-medium">
-                Ведение журнала включено
-              </p>
-              <p className="text-xs text-body-color dark:text-dark-6">
-                Записываются все важные действия пользователей
-              </p>
+              <p className="text-sm text-dark dark:text-white font-medium">Ведение журнала включено</p>
+              <p className="text-xs text-body-color dark:text-dark-6">Записываются все важные действия пользователей</p>
             </div>
             <button className="px-4 py-2 bg-gray-200 text-dark rounded-lg hover:bg-gray-300 transition-colors dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
               Просмотреть журнал

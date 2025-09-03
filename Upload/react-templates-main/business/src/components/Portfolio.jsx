@@ -78,18 +78,18 @@ const Portfolio = () => {
   };
 
   return (
-    <section className="dark:bg-dark pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+    <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-              <span className="text-primary mb-2 block text-lg font-semibold">
+              <span className="mb-2 block text-lg font-semibold text-primary">
                 Our Portfolio
               </span>
-              <h2 className="text-dark mb-3 text-3xl leading-[1.208] font-bold sm:text-4xl md:text-[40px]">
+              <h2 className="mb-3 text-3xl font-bold leading-[1.208] text-dark sm:text-4xl md:text-[40px]">
                 Our Recent Projects
               </h2>
-              <p className="text-body-color dark:text-dark-6 text-base">
+              <p className="text-base text-body-color dark:text-dark-6">
                 There are many variations of passages of Lorem Ipsum available
                 but the majority have suffered alteration in some form.
               </p>
@@ -107,7 +107,7 @@ const Portfolio = () => {
                     className={`inline-block rounded-lg px-5 py-2 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
                       selectedCategory === category
                         ? "bg-primary text-white"
-                        : "text-body-color hover:bg-primary dark:text-dark-6 hover:text-white dark:hover:text-white"
+                        : "text-body-color hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                     }`}
                   >
                     {category}
@@ -125,16 +125,16 @@ const Portfolio = () => {
                 <div className="overflow-hidden rounded-[10px]">
                   <img src={item.image} alt="portfolio" className="w-full" />
                 </div>
-                <div className="shadow-portfolio dark:bg-dark-2 dark:shadow-box-dark relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center">
-                  <span className="text-primary mb-2 block text-sm font-medium">
+                <div className="relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center shadow-portfolio dark:bg-dark-2 dark:shadow-box-dark">
+                  <span className="mb-2 block text-sm font-medium text-primary">
                     {item.category}
                   </span>
-                  <h3 className="text-dark mb-5 text-xl font-bold dark:text-white">
+                  <h3 className="mb-5 text-xl font-bold text-dark dark:text-white">
                     {item.title}
                   </h3>
                   <Link
                     to={item.buttonLink}
-                    className="border-stroke text-body-color hover:border-primary hover:bg-primary dark:border-dark-3 dark:text-dark-6 inline-block rounded-md border px-7 py-[10px] text-sm font-medium transition hover:text-white dark:hover:text-white"
+                    className="inline-block rounded-md border border-stroke px-7 py-[10px] text-sm font-medium text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6 dark:hover:text-white"
                   >
                     {item.buttonText}
                   </Link>

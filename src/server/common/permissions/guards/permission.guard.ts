@@ -6,7 +6,7 @@ import type { Permission } from '../types';
 
 /**
  * Компактный Guard для проверки детальных прав доступа
- * 
+ *
  * Заменяет старые RolesGuard и PoliciesGuard
  * Поддерживает все типы проверок прав
  */
@@ -14,12 +14,12 @@ import type { Permission } from '../types';
 export class PermissionGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    
+
     // Test режим: проверяем тестовый токен
     if (this.isTestMode(request)) {
       return true;
@@ -49,28 +49,23 @@ export class PermissionGuard implements CanActivate {
    * Проверка тестового режима
    */
   private isTestMode(request: any): boolean {
-    return process.env.NODE_ENV === 'test' && 
-           request.headers.authorization === `Bearer ${process.env.AUTH_TEST_TOKEN || 'test-token-12345'}`;
+    return (
+      process.env.NODE_ENV === 'test' &&
+      request.headers.authorization === `Bearer ${process.env.AUTH_TEST_TOKEN || 'test-token-12345'}`
+    );
   }
 
   /**
    * Получение требуемого права из метаданных
    */
   private getRequiredPermission(context: ExecutionContext): any {
-    return this.reflector.getAllAndOverride<Permission | any>(
-      'permission',
-      [context.getHandler(), context.getClass()]
-    );
+    return this.reflector.getAllAndOverride<Permission | any>('permission', [context.getHandler(), context.getClass()]);
   }
 
   /**
    * Проверка прав в зависимости от типа
    */
-  private async checkPermissions(
-    user: any,
-    requiredPermission: any,
-    request: any
-  ): Promise<boolean> {
+  private async checkPermissions(user: any, requiredPermission: any, request: any): Promise<boolean> {
     if (typeof requiredPermission === 'string') {
       return this.checkSinglePermission(user, requiredPermission as Permission, request);
     }
@@ -92,11 +87,7 @@ export class PermissionGuard implements CanActivate {
   /**
    * Проверка одного права
    */
-  private async checkSinglePermission(
-    user: any,
-    permission: Permission,
-    request: any
-  ): Promise<boolean> {
+  private async checkSinglePermission(user: any, permission: Permission, request: any): Promise<boolean> {
     const context = buildContextFromRequest(permission, request);
     const result = await this.permissionsService.checkPermission(user.id, context);
     return result.allowed;
@@ -105,11 +96,7 @@ export class PermissionGuard implements CanActivate {
   /**
    * Проверка любого из прав (OR)
    */
-  private async checkAnyPermission(
-    user: any,
-    permissions: Permission[],
-    request: any
-  ): Promise<boolean> {
+  private async checkAnyPermission(user: any, permissions: Permission[], request: any): Promise<boolean> {
     for (const permission of permissions) {
       if (await this.checkSinglePermission(user, permission, request)) {
         return true;
@@ -121,11 +108,7 @@ export class PermissionGuard implements CanActivate {
   /**
    * Проверка всех прав (AND)
    */
-  private async checkAllPermissions(
-    user: any,
-    permissions: Permission[],
-    request: any
-  ): Promise<boolean> {
+  private async checkAllPermissions(user: any, permissions: Permission[], request: any): Promise<boolean> {
     for (const permission of permissions) {
       if (!(await this.checkSinglePermission(user, permission, request))) {
         return false;
@@ -137,13 +120,9 @@ export class PermissionGuard implements CanActivate {
   /**
    * Проверка владения ресурсом
    */
-  private async checkOwnership(
-    user: any,
-    resourceType: string,
-    request: any
-  ): Promise<boolean> {
+  private async checkOwnership(user: any, resourceType: string, request: any): Promise<boolean> {
     const resourceId = request.params.id || request.params.projectId || request.params.accountId;
-    
+
     if (!resourceId) return false;
 
     if (resourceType === 'project') {
@@ -156,17 +135,13 @@ export class PermissionGuard implements CanActivate {
   /**
    * Проверка агентского доступа
    */
-  private async checkAgencyAccess(
-    user: any,
-    scope: string,
-    request: any
-  ): Promise<boolean> {
+  private async checkAgencyAccess(user: any, scope: string, request: any): Promise<boolean> {
     if (user.globalRole !== 'AGENCY') {
       return false;
     }
 
     const clientId = request.params.clientId || request.query.clientId;
-    
+
     if (scope === 'clients' && clientId) {
       return this.permissionsService['contextResolverService'].isAgencyClient(user.id, clientId);
     }

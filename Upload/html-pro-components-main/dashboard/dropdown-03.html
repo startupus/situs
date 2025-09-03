@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,7 +16,7 @@
   </head>
   <body>
     <!-- ======= Dropdown ======== -->
-    <section class="bg-gray-2 dark:bg-dark py-20">
+    <section class="bg-gray-2 py-20 dark:bg-dark">
       <div class="container">
         <div class="flex items-center justify-center">
           <div
@@ -30,7 +30,7 @@
               @click.prevent="dropdownOpen = ! dropdownOpen"
             >
               <span
-                class="absolute -top-0.5 -right-0.5 z-10 h-2 w-2 rounded-full bg-red-500"
+                class="absolute -right-0.5 -top-0.5 z-10 h-2 w-2 rounded-full bg-red-500"
               >
                 <span
                   class="absolute -z-10 inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"
@@ -38,7 +38,7 @@
               </span>
 
               <svg
-                class="fill-body-color dark:fill-dark-6 duration-300 ease-in-out hover:fill-primary"
+                class="fill-body-color duration-300 ease-in-out hover:fill-primary dark:fill-dark-6"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -63,10 +63,14 @@
             <!-- Dropdown Start -->
             <div
               x-show="dropdownOpen"
-              class="absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 shadow-card sm:-right-[34px] sm:w-[360px]"
+              class="absolute -right-[120px] mt-4 flex h-[460px] w-[290px] flex-col gap-1 rounded-lg bg-white shadow-card dark:bg-dark-2 sm:-right-[34px] sm:w-[360px]"
             >
-              <div class="border-b border-stroke dark:border-dark-3 py-[22px] px-6">
-                <h5 class="font-semibold text-dark dark:text-white">Message (02)</h5>
+              <div
+                class="border-b border-stroke px-6 py-[22px] dark:border-dark-3"
+              >
+                <h5 class="font-semibold text-dark dark:text-white">
+                  Message (02)
+                </h5>
               </div>
 
               <ul
@@ -85,18 +89,24 @@
                         class="h-full w-full rounded-full object-cover object-center"
                       />
                       <span
-                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white dark:border-dark-2 bg-green"
+                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white bg-green dark:border-dark-2"
                       ></span>
                     </div>
 
                     <div>
-                      <h6 class="font-medium text-dark dark:text-white">Craig Baptista</h6>
-                      <p class="mt-0.5 text-sm text-body-color dark:text-dark-6">Lorem ipsum has been th...</p>
+                      <h6 class="font-medium text-dark dark:text-white">
+                        Craig Baptista
+                      </h6>
+                      <p
+                        class="mt-0.5 text-sm text-body-color dark:text-dark-6"
+                      >
+                        Lorem ipsum has been th...
+                      </p>
                     </div>
                   </a>
                   <div class="flex items-center gap-2">
                     <span
-                      class="rounded-3xl bg-primary py-1 px-2 text-xs font-semibold text-white"
+                      class="rounded-3xl bg-primary px-2 py-1 text-xs font-semibold text-white"
                       >03</span
                     >
 
@@ -142,26 +152,26 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-40 space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-40 space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           View Profile
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Message
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Message
                         </button>
@@ -182,18 +192,24 @@
                         class="h-full w-full rounded-full object-cover object-center"
                       />
                       <span
-                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white dark:border-dark-2 bg-green"
+                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white bg-green dark:border-dark-2"
                       ></span>
                     </div>
 
                     <div>
-                      <h6 class="font-medium text-dark dark:text-white">Maren Lipshutz</h6>
-                      <p class="mt-0.5 text-sm text-body-color dark:text-dark-6">Lorem ipsum has been th...</p>
+                      <h6 class="font-medium text-dark dark:text-white">
+                        Maren Lipshutz
+                      </h6>
+                      <p
+                        class="mt-0.5 text-sm text-body-color dark:text-dark-6"
+                      >
+                        Lorem ipsum has been th...
+                      </p>
                     </div>
                   </a>
                   <div class="flex items-center gap-2">
                     <span
-                      class="rounded-3xl bg-primary py-1 px-2 text-xs font-semibold text-white"
+                      class="rounded-3xl bg-primary px-2 py-1 text-xs font-semibold text-white"
                       >01</span
                     >
 
@@ -239,26 +255,26 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-40 space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-40 space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           View Profile
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Message
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Message
                         </button>
@@ -279,13 +295,19 @@
                         class="h-full w-full rounded-full object-cover object-center"
                       />
                       <span
-                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white dark:border-dark-2 bg-red"
+                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white bg-red dark:border-dark-2"
                       ></span>
                     </div>
 
                     <div>
-                      <h6 class="font-medium text-dark dark:text-white">Craig Baptista</h6>
-                      <p class="mt-0.5 text-sm text-body-color dark:text-dark-6">Lorem ipsum has been th...</p>
+                      <h6 class="font-medium text-dark dark:text-white">
+                        Craig Baptista
+                      </h6>
+                      <p
+                        class="mt-0.5 text-sm text-body-color dark:text-dark-6"
+                      >
+                        Lorem ipsum has been th...
+                      </p>
                     </div>
                   </a>
                   <div class="flex items-center gap-2">
@@ -331,26 +353,26 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-40 space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-40 space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           View Profile
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Message
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Message
                         </button>
@@ -371,13 +393,19 @@
                         class="h-full w-full rounded-full object-cover object-center"
                       />
                       <span
-                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white dark:border-dark-2 bg-green"
+                        class="absolute bottom-0 right-0 z-50 h-3.5 w-3.5 rounded-full border-2 border-white bg-green dark:border-dark-2"
                       ></span>
                     </div>
 
                     <div>
-                      <h6 class="font-medium text-dark dark:text-white">Craig Baptista</h6>
-                      <p class="mt-0.5 text-sm text-body-color dark:text-dark-6">Lorem ipsum has been th...</p>
+                      <h6 class="font-medium text-dark dark:text-white">
+                        Craig Baptista
+                      </h6>
+                      <p
+                        class="mt-0.5 text-sm text-body-color dark:text-dark-6"
+                      >
+                        Lorem ipsum has been th...
+                      </p>
                     </div>
                   </a>
                   <div class="flex items-center gap-2">
@@ -423,26 +451,26 @@
                       </button>
 
                       <div
-                        class="absolute right-0 top-full z-999 mt-5 w-40 space-y-1 rounded-sm border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5"
+                        class="z-999 absolute right-0 top-full mt-5 w-40 space-y-1 rounded-sm border border-stroke bg-white p-2 shadow group-last:bottom-full group-last:top-auto group-last:mb-5 dark:border-dark-3 dark:bg-dark-2"
                         x-show="openDropDown"
                       >
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           View Profile
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Mark As Unread
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Delete Message
                         </button>
                         <button
-                          class="w-full rounded-sm py-2 px-3 text-left text-dark dark:text-white text-sm hover:bg-gray-2 dark:hover:bg-dark"
+                          class="w-full rounded-sm px-3 py-2 text-left text-sm text-dark hover:bg-gray-2 dark:text-white dark:hover:bg-dark"
                         >
                           Block Message
                         </button>
@@ -453,7 +481,7 @@
               </ul>
 
               <div
-                class="absolute bottom-0 z-50 w-full rounded-b-lg border-t border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-3"
+                class="absolute bottom-0 z-50 w-full rounded-b-lg border-t border-stroke bg-white p-3 dark:border-dark-3 dark:bg-dark-2"
               >
                 <a
                   href="javascript:void(0)"

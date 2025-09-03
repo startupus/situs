@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Step3 = () => {
   return (
@@ -26,22 +26,16 @@ const SingleStep = ({ number, name, done }) => {
     <div className="group relative px-3 text-center sm:px-6 md:px-10 lg:px-[50px]">
       <span
         className={`${
-          done && "bg-primary"
+          done && 'bg-primary'
         } absolute -right-[45px] top-[16px] block h-[2px] w-[90px] bg-gray group-last:hidden sm:-right-[70px] sm:w-[140px] md:-right-[75px] md:w-[150px]`}
       ></span>
       <span
         className={`${
-          done && "border-primary bg-primary text-white"
+          done && 'border-primary bg-primary text-white'
         } relative z-10 mx-auto mb-[10px] flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 border-[#e7e7e7] bg-gray text-base font-medium text-black`}
       >
         {done ? (
-          <svg
-            width={16}
-            height={12}
-            viewBox="0 0 16 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width={16} height={12} viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -53,9 +47,7 @@ const SingleStep = ({ number, name, done }) => {
           number
         )}
       </span>
-      <span className="text-[10px] font-medium text-body-color sm:text-base">
-        {name}
-      </span>
+      <span className="text-[10px] font-medium text-body-color sm:text-base">{name}</span>
     </div>
   );
 };

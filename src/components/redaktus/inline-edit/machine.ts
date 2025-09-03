@@ -1,9 +1,9 @@
 // Redaktus Inline Edit Machine - заглушка без xstate
 
 interface MachineConfig {
-  value: string
-  onSave: (value: string) => void
-  onCancel: () => void
+  value: string;
+  onSave: (value: string) => void;
+  onCancel: () => void;
 }
 
 const getInlineEditMachine = (config: MachineConfig) => {
@@ -11,13 +11,13 @@ const getInlineEditMachine = (config: MachineConfig) => {
     initial: 'idle',
     states: {
       idle: {
-        on: { EDIT: 'editing' }
+        on: { EDIT: 'editing' },
       },
       editing: {
-        on: { SAVE: 'idle', CANCEL: 'idle' }
-      }
-    }
-  }
-}
+        on: { SAVE: 'idle', CANCEL: 'idle' },
+      },
+    },
+  };
+};
 
-export default getInlineEditMachine 
+export default getInlineEditMachine;

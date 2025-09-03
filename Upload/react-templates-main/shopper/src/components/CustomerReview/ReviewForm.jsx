@@ -23,10 +23,10 @@ const ReviewForm = () => {
   return (
     <>
       <div className="py-8 sm:py-9">
-        <h4 className="text-dark mb-5 text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl dark:text-white">
+        <h4 className="mb-5 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
           Write a Review
         </h4>
-        <p className="text-dark mb-[10px] text-base font-medium dark:text-white">
+        <p className="mb-[10px] text-base font-medium text-dark dark:text-white">
           Click on star to review
         </p>
         <div className="mb-8 flex items-center">
@@ -88,13 +88,13 @@ const ReviewForm = () => {
                     <textarea
                       rows="6"
                       placeholder={item.placeholder}
-                      className="border-stroke text-body-color placeholder:text-dark-5 focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary dark:placeholder:text-dark-6 w-full rounded-md border bg-transparent px-5 py-5 outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-5 text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6 dark:placeholder:text-dark-6 dark:focus:border-primary"
                     ></textarea>
                   ) : (
                     <input
                       type={item.type}
                       placeholder={item.placeholder}
-                      className="border-stroke text-body-color placeholder:text-dark-5 focus:border-primary active:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary dark:placeholder:text-dark-6 w-full rounded-md border bg-transparent px-5 py-3 outline-hidden transition disabled:cursor-default disabled:bg-[#F5F7FD]"
+                      className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6 dark:placeholder:text-dark-6 dark:focus:border-primary"
                     />
                   )}
                 </div>
@@ -102,7 +102,7 @@ const ReviewForm = () => {
             ))}
 
             <div className="w-full px-3">
-              <button className="bg-primary hover:bg-blue-dark inline-flex items-center justify-center rounded-md px-7 py-[13px] text-center text-base font-medium text-white">
+              <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-[13px] text-center text-base font-medium text-white hover:bg-blue-dark">
                 Submit Review
               </button>
             </div>

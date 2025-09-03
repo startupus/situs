@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const SuccessAlert3 = () => {
   return (
@@ -7,13 +7,7 @@ const SuccessAlert3 = () => {
         <div className="rounded-md bg-[#C4F9E2] p-4">
           <p className="flex items-center text-sm font-medium text-[#004434]">
             <span className="pr-3">
-              <svg
-                width={20}
-                height={20}
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx={10} cy={10} r={10} fill="#00B078" />
                 <path
                   fillRule="evenodd"

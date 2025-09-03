@@ -30,7 +30,7 @@ const HorizontalMenu4 = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="shadow-product w-full rounded-sm border border-body-color/30 bg-white/5 py-[5px] pl-4 pr-10 text-sm font-medium text-dark-6 outline-hidden"
+                  className="shadow-product outline-hidden w-full rounded-sm border border-body-color/30 bg-white/5 py-[5px] pl-4 pr-10 text-sm font-medium text-dark-6"
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2">
                   <svg

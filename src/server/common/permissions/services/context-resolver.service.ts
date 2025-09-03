@@ -4,7 +4,7 @@ import type { PermissionContext, PermissionCheckResult } from '../types';
 
 /**
  * Сервис для резолвинга контекста проверки прав
- * 
+ *
  * Отвечает за:
  * - Проверку владения ресурсами
  * - Проверку агентских отношений
@@ -18,13 +18,10 @@ export class ContextResolverService {
   /**
    * Проверяет владение проектом
    */
-  async checkProjectOwnership(
-    userId: string, 
-    projectId: string
-  ): Promise<boolean> {
+  async checkProjectOwnership(userId: string, projectId: string): Promise<boolean> {
     const project = await this.prisma.project.findUnique({
       where: { id: projectId },
-      select: { ownerId: true }
+      select: { ownerId: true },
     });
 
     return project?.ownerId === userId;
@@ -33,66 +30,57 @@ export class ContextResolverService {
   /**
    * Проверяет доступ к проекту через ProjectAccess
    */
-  async checkProjectAccess(
-    userId: string, 
-    projectId: string
-  ): Promise<{ hasAccess: boolean; role?: string }> {
+  async checkProjectAccess(userId: string, projectId: string): Promise<{ hasAccess: boolean; role?: string }> {
     const access = await this.prisma.projectAccess.findFirst({
-      where: { projectId, userId }
+      where: { projectId, userId },
     });
 
     return {
       hasAccess: !!access,
-      role: access?.role
+      role: access?.role,
     };
   }
 
   /**
    * Проверяет членство в аккаунте
    */
-  async checkAccountMembership(
-    userId: string, 
-    accountId: string
-  ): Promise<{ isMember: boolean; role?: string }> {
+  async checkAccountMembership(userId: string, accountId: string): Promise<{ isMember: boolean; role?: string }> {
     const membership = await this.prisma.accountMembership.findFirst({
-      where: { accountId, userId }
+      where: { accountId, userId },
     });
 
     return {
       isMember: !!membership,
-      role: membership?.role
+      role: membership?.role,
     };
   }
 
   /**
    * Проверяет агентские отношения
    */
-  async checkAgencyClientRelation(
-    agencyUserId: string, 
-    clientUserId: string
-  ): Promise<boolean> {
+  async checkAgencyClientRelation(agencyUserId: string, clientUserId: string): Promise<boolean> {
     // Получаем аккаунты пользователей
     const agencyUser = await this.prisma.user.findUnique({
       where: { id: agencyUserId },
-      include: { ownedAccounts: true }
+      include: { ownedAccounts: true },
     });
 
     const clientUser = await this.prisma.user.findUnique({
       where: { id: clientUserId },
-      include: { ownedAccounts: true }
+      include: { ownedAccounts: true },
     });
 
     if (!agencyUser || !clientUser) return false;
 
     // Проверяем связи между аккаунтами
-    const agencyAccountIds = agencyUser.ownedAccounts.map(acc => acc.id);
-    const clientAccountIds = clientUser.ownedAccounts.map(acc => acc.id);
+    const agencyAccountIds = agencyUser.ownedAccounts.map((acc) => acc.id);
+    const clientAccountIds = clientUser.ownedAccounts.map((acc) => acc.id);
 
     const relation = await this.prisma.agencyClient.findFirst({
       where: {
         agencyAccountId: { in: agencyAccountIds },
-        clientAccountId: { in: clientAccountIds }
-      }
+        clientAccountId: { in: clientAccountIds },
+      },
     });
 
     return !!relation;
@@ -105,13 +93,13 @@ export class ContextResolverService {
     // Собственные проекты
     const ownedProjects = await this.prisma.project.findMany({
       where: { ownerId: userId },
-      select: { id: true }
+      select: { id: true },
     });
 
     // Проекты через ProjectAccess
     const accessedProjects = await this.prisma.projectAccess.findMany({
       where: { userId },
-      select: { projectId: true }
+      select: { projectId: true },
     });
 
     // Проекты через членство в аккаунтах
@@ -119,17 +107,17 @@ export class ContextResolverService {
       where: {
         account: {
           members: {
-            some: { userId }
-          }
-        }
+            some: { userId },
+          },
+        },
       },
-      select: { id: true }
+      select: { id: true },
     });
 
     const projectIds = [
-      ...ownedProjects.map(p => p.id),
-      ...accessedProjects.map(a => a.projectId),
-      ...accountProjects.map(p => p.id)
+      ...ownedProjects.map((p) => p.id),
+      ...accessedProjects.map((a) => a.projectId),
+      ...accountProjects.map((p) => p.id),
     ];
 
     return [...new Set(projectIds)];
@@ -148,22 +136,22 @@ export class ContextResolverService {
               include: {
                 client: {
                   include: {
-                    owner: true
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+                    owner: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     if (!agencyUser) return [];
 
     const clientIds: string[] = [];
-    
-    agencyUser.ownedAccounts.forEach(account => {
-      account.clients.forEach(relation => {
+
+    agencyUser.ownedAccounts.forEach((account) => {
+      account.clients.forEach((relation) => {
         clientIds.push(relation.client.owner.id);
       });
     });
@@ -182,10 +170,7 @@ export class ContextResolverService {
   /**
    * Резолвит полный контекст для проверки прав
    */
-  async resolveFullContext(
-    userId: string,
-    baseContext: PermissionContext
-  ): Promise<PermissionContext> {
+  async resolveFullContext(userId: string, baseContext: PermissionContext): Promise<PermissionContext> {
     const resolvedContext = { ...baseContext };
 
     // Добавляем ownerId если не указан

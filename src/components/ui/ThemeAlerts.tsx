@@ -1,6 +1,6 @@
 // src/components/ui/ThemeAlerts.tsx
 import React from 'react';
-import { 
+import {
   AttentionAlert1,
   AttentionAlert2,
   AttentionAlert3,
@@ -13,7 +13,7 @@ import {
   SuccessAlert4,
   WarningAlert1,
   WarningAlert2,
-  WarningAlert3
+  WarningAlert3,
 } from './core';
 import { withTheme } from './ThemeWrapper';
 

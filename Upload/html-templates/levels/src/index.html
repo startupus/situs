@@ -17,10 +17,10 @@
   <body>
     <section
       x-data="{openDropDown: false, sidebarOpen: false}"
-      class="bg-gray-2 dark:bg-dark relative flex min-h-screen w-full items-start"
+      class="relative flex min-h-screen w-full items-start bg-gray-2 dark:bg-dark"
     >
       <div
-        class="dark:bg-dark-2 shadow-1 dark:shadow-box-dark fixed top-0 left-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white duration-200 xl:translate-x-0"
+        class="fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0"
         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
       >
         <div>
@@ -33,10 +33,10 @@
               />
             </div>
             <div>
-              <h6 class="text-dark text-sm font-medium dark:text-white">
+              <h6 class="text-sm font-medium text-dark dark:text-white">
                 Musharof
               </h6>
-              <p class="text-body-color dark:text-dark-6 text-xs">
+              <p class="text-xs text-body-color dark:text-dark-6">
                 Good Day 👋
               </p>
             </div>
@@ -47,9 +47,9 @@
               <input
                 type="text"
                 placeholder="Search here..."
-                class="border-stroke dark:border-dark-3 bg-gray-1 dark:bg-dark text-secondary-color focus:border-primary dark:focus:border-primary h-11 w-full rounded-md border-[.5px] pr-9 pl-5 text-sm outline-none"
+                class="h-11 w-full rounded-md border-[.5px] border-stroke bg-gray-1 pl-5 pr-9 text-sm text-secondary-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:focus:border-primary"
               />
-              <button class="absolute top-1/2 right-4 -translate-y-1/2">
+              <button class="absolute right-4 top-1/2 -translate-y-1/2">
                 <svg
                   width="16"
                   height="16"
@@ -73,7 +73,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="pr-[10px]">
                       <svg
@@ -95,7 +95,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="pr-[10px]">
                       <svg
@@ -126,7 +126,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="pr-[10px]">
                       <svg
@@ -151,7 +151,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="pr-[10px]">
                       <svg
@@ -173,7 +173,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center justify-between rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center justify-between rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="flex items-center">
                       <span class="pr-[10px]">
@@ -196,17 +196,17 @@
                       <img
                         src="assets/images/avatar/image-01.jpg"
                         alt="avatar"
-                        class="dark:border-dark-3 h-[18px] w-[18px] rounded-full border border-white"
+                        class="h-[18px] w-[18px] rounded-full border border-white dark:border-dark-3"
                       />
                       <img
                         src="assets/images/avatar/image-02.jpg"
                         alt="avatar"
-                        class="dark:border-dark-3 -ml-[6px] h-[18px] w-[18px] rounded-full border border-white"
+                        class="-ml-[6px] h-[18px] w-[18px] rounded-full border border-white dark:border-dark-3"
                       />
                       <img
                         src="assets/images/avatar/image-03.jpg"
                         alt="avatar"
-                        class="dark:border-dark-3 -ml-[6px] h-[18px] w-[18px] rounded-full border border-white"
+                        class="-ml-[6px] h-[18px] w-[18px] rounded-full border border-white dark:border-dark-3"
                       />
                       <span
                         class="ml-[10px] flex h-[18px] w-[18px] items-center justify-center rounded-full bg-[#FF3D3D] text-[10px] font-semibold text-white"
@@ -219,7 +219,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="pr-[10px]">
                       <svg
@@ -241,7 +241,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-body-color dark:text-dark-6 hover:bg-primary relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium duration-200 hover:text-white dark:hover:text-white"
+                    class="relative flex items-center rounded-[5px] px-[18px] py-[10px] text-base font-medium text-body-color duration-200 hover:bg-primary hover:text-white dark:text-dark-6 dark:hover:text-white"
                   >
                     <span class="pr-[10px]">
                       <svg
@@ -272,9 +272,9 @@
           </div>
         </div>
 
-        <div class="border-stroke dark:border-dark-3 m-8 mt-6 border-t pt-6">
+        <div class="m-8 mt-6 border-t border-stroke pt-6 dark:border-dark-3">
           <div
-            class="bg-gray-2 dark:bg-dark flex h-[42px] w-full items-center justify-evenly rounded-md"
+            class="flex h-[42px] w-full items-center justify-evenly rounded-md bg-gray-2 dark:bg-dark"
           >
             <a
               href="javascript:void(0)"
@@ -421,18 +421,18 @@
           <div class="flex items-center justify-evenly pt-6">
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary text-sm font-medium"
+              class="text-sm font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
             >
               Privacy
             </a>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary text-sm font-medium"
+              class="text-sm font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
             >
               Terms
             </a>
             <button
-              class="text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary text-sm font-medium"
+              class="text-sm font-medium text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
             >
               Log out
             </button>
@@ -442,15 +442,15 @@
       <div
         @click="sidebarOpen = !sidebarOpen"
         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-        class="bg-dark/80 fixed top-0 left-0 z-30 h-screen w-full xl:hidden"
+        class="fixed left-0 top-0 z-30 h-screen w-full bg-dark/80 xl:hidden"
       ></div>
       <div class="w-full xl:pl-[300px]">
         <!-- ====== Horizontal Menu Section Start -->
-        <header x-data="{navbarOpen: false}" class="bg-primary w-full">
+        <header x-data="{navbarOpen: false}" class="w-full bg-primary">
           <div class="relative mx-auto w-full pl-[60px] md:pl-[70px] xl:pl-0">
             <button
               @click="sidebarOpen = !sidebarOpen"
-              class="absolute top-1/2 left-4 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded bg-white/8 text-white xl:hidden"
+              class="bg-white/8 absolute left-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded text-white xl:hidden"
             >
               <svg
                 width="20"
@@ -494,7 +494,7 @@
                   >
                     <button
                       @click="navbarOpen = !navbarOpen"
-                      class="flex h-9 w-9 items-center justify-center rounded bg-white/8 text-white"
+                      class="bg-white/8 flex h-9 w-9 items-center justify-center rounded text-white"
                     >
                       <svg
                         width="20"
@@ -525,7 +525,7 @@
                     </button>
                     <nav
                       :class="navbarOpen ? 'visible opacity-100 top-full' : 'invisible opacity-0 top-[120%]'"
-                      class="bg-primary shadow-card-2 absolute left-0 mt-2 w-[250px] rounded duration-200"
+                      class="absolute left-0 mt-2 w-[250px] rounded bg-primary shadow-card-2 duration-200"
                     >
                       <ul class="space-y-5 px-5 py-6">
                         <li>
@@ -570,10 +570,10 @@
                     <input
                       type="text"
                       placeholder="Search..."
-                      class="placeholder-opacity-50 h-9 w-full rounded border border-transparent bg-white/8 pr-4 pl-10 text-sm font-medium text-white placeholder-white outline-none focus:border-white"
+                      class="bg-white/8 h-9 w-full rounded border border-transparent pl-10 pr-4 text-sm font-medium text-white placeholder-white placeholder-opacity-50 outline-none focus:border-white"
                     />
                     <button
-                      class="absolute top-1/2 left-4 -translate-y-1/2 text-white opacity-50"
+                      class="absolute left-4 top-1/2 -translate-y-1/2 text-white opacity-50"
                     >
                       <svg
                         width="14"
@@ -633,7 +633,7 @@
                     <div class="relative mr-4 hidden sm:block">
                       <a href="javascript:void(0)" class="relative block">
                         <span
-                          class="absolute -top-2 -right-[6px] block rounded-full bg-red-400 px-[6px] text-xs font-medium text-white"
+                          class="absolute -right-[6px] -top-2 block rounded-full bg-red-400 px-[6px] text-xs font-medium text-white"
                         >
                           3
                         </span>
@@ -665,10 +665,10 @@
                         <img
                           src="./assets/images/avatar/image-04.jpg"
                           alt="avatar"
-                          class="border-opacity-20 h-8 w-8 rounded-full border-2 border-white object-cover object-center"
+                          class="h-8 w-8 rounded-full border-2 border-white border-opacity-20 object-cover object-center"
                         />
                         <span
-                          class="pr-[5px] pl-2 text-sm font-medium text-white"
+                          class="pl-2 pr-[5px] text-sm font-medium text-white"
                         >
                           Patrick
                         </span>
@@ -691,23 +691,23 @@
                       </div>
 
                       <div
-                        class="dark:bg-dark-2 shadow-card-2 invisible absolute top-[120%] right-0 mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100"
+                        class="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2"
                       >
                         <a
                           href="javascript:void(0)"
-                          class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark hover:text-primary block rounded px-4 py-2 text-sm font-medium"
+                          class="block rounded px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
                         >
                           Account Settings
                         </a>
                         <a
                           href="javascript:void(0)"
-                          class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark hover:text-primary block rounded px-4 py-2 text-sm font-medium"
+                          class="block rounded px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
                         >
                           Dashboard
                         </a>
                         <a
                           href="javascript:void(0)"
-                          class="text-body-color dark:text-dark-6 hover:bg-gray-2 dark:hover:bg-dark hover:text-primary block rounded px-4 py-2 text-sm font-medium"
+                          class="block rounded px-4 py-2 text-sm font-medium text-body-color hover:bg-gray-2 hover:text-primary dark:text-dark-6 dark:hover:bg-dark"
                         >
                           Sign Out
                         </a>
@@ -723,14 +723,14 @@
         <div class="p-[30px]">
           <div class="w-full">
             <div
-              class="dark:bg-dark-2 shadow-1 dark:shadow-box-dark mb-8 flex flex-wrap rounded-lg bg-white"
+              class="mb-8 flex flex-wrap rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark"
             >
               <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/2 2xl:w-1/4">
                 <div
-                  class="border-stroke dark:border-dark-3 flex py-6 pr-9 pl-6 sm:border-r"
+                  class="flex border-stroke py-6 pl-6 pr-9 dark:border-dark-3 sm:border-r"
                 >
                   <div
-                    class="bg-purple/[0.08] text-purple xs:mr-[18px] xs:h-[50px] xs:max-w-[50px] mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px]"
+                    class="mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px] bg-purple/[0.08] text-purple xs:mr-[18px] xs:h-[50px] xs:max-w-[50px]"
                   >
                     <svg
                       width="24"
@@ -748,14 +748,14 @@
 
                   <div class="flex w-full justify-between">
                     <div>
-                      <p class="text-purple text-base font-medium">Design</p>
-                      <span class="text-body-color dark:text-dark-6 text-sm">
+                      <p class="text-base font-medium text-purple">Design</p>
+                      <span class="text-sm text-body-color dark:text-dark-6">
                         17 files
                       </span>
                     </div>
                     <div>
                       <span
-                        class="text-dark text-sm font-medium dark:text-white"
+                        class="text-sm font-medium text-dark dark:text-white"
                       >
                         459 MB
                       </span>
@@ -766,10 +766,10 @@
 
               <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/2 2xl:w-1/4">
                 <div
-                  class="border-stroke dark:border-dark-3 flex py-6 pr-9 pl-6 lg:border-r"
+                  class="flex border-stroke py-6 pl-6 pr-9 dark:border-dark-3 lg:border-r"
                 >
                   <div
-                    class="bg-green/[0.08] text-green xs:mr-[18px] xs:h-[50px] xs:max-w-[50px] mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px]"
+                    class="mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px] bg-green/[0.08] text-green xs:mr-[18px] xs:h-[50px] xs:max-w-[50px]"
                   >
                     <svg
                       width="22"
@@ -790,14 +790,14 @@
 
                   <div class="flex w-full justify-between">
                     <div>
-                      <p class="text-green text-base font-medium">Image</p>
-                      <span class="text-body-color dark:text-dark-6 text-sm">
+                      <p class="text-base font-medium text-green">Image</p>
+                      <span class="text-sm text-body-color dark:text-dark-6">
                         12 files
                       </span>
                     </div>
                     <div>
                       <span
-                        class="text-dark text-sm font-medium dark:text-white"
+                        class="text-sm font-medium text-dark dark:text-white"
                       >
                         120 MB
                       </span>
@@ -808,10 +808,10 @@
 
               <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/2 2xl:w-1/4">
                 <div
-                  class="border-stroke dark:border-dark-3 flex py-6 pr-9 pl-6 sm:border-r"
+                  class="flex border-stroke py-6 pl-6 pr-9 dark:border-dark-3 sm:border-r"
                 >
                   <div
-                    class="bg-blue/[0.08] text-blue xs:mr-[18px] xs:h-[50px] xs:max-w-[50px] mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px]"
+                    class="mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px] bg-blue/[0.08] text-blue xs:mr-[18px] xs:h-[50px] xs:max-w-[50px]"
                   >
                     <svg
                       width="24"
@@ -829,14 +829,14 @@
 
                   <div class="flex w-full justify-between">
                     <div>
-                      <p class="text-blue text-base font-medium">Music</p>
-                      <span class="text-body-color dark:text-dark-6 text-sm">
+                      <p class="text-base font-medium text-blue">Music</p>
+                      <span class="text-sm text-body-color dark:text-dark-6">
                         34 files
                       </span>
                     </div>
                     <div>
                       <span
-                        class="text-dark text-sm font-medium dark:text-white"
+                        class="text-sm font-medium text-dark dark:text-white"
                       >
                         359 MB
                       </span>
@@ -847,10 +847,10 @@
 
               <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/2 2xl:w-1/4">
                 <div
-                  class="border-stroke dark:border-dark-3 flex py-6 pr-9 pl-6 lg:border-r"
+                  class="flex border-stroke py-6 pl-6 pr-9 dark:border-dark-3 lg:border-r"
                 >
                   <div
-                    class="bg-yellow-dark/[0.08] text-yellow-dark xs:mr-[18px] xs:h-[50px] xs:max-w-[50px] mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px]"
+                    class="mr-3 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[7px] bg-yellow-dark/[0.08] text-yellow-dark xs:mr-[18px] xs:h-[50px] xs:max-w-[50px]"
                   >
                     <svg
                       width="24"
@@ -874,14 +874,14 @@
 
                   <div class="flex w-full justify-between">
                     <div>
-                      <p class="text-yellow-dark text-base font-medium">Docs</p>
-                      <span class="text-body-color dark:text-dark-6 text-sm">
+                      <p class="text-base font-medium text-yellow-dark">Docs</p>
+                      <span class="text-sm text-body-color dark:text-dark-6">
                         78 files
                       </span>
                     </div>
                     <div>
                       <span
-                        class="text-dark text-sm font-medium dark:text-white"
+                        class="text-sm font-medium text-dark dark:text-white"
                       >
                         237 MB
                       </span>
@@ -896,12 +896,12 @@
             <div class="-mx-4 flex flex-wrap">
               <div class="w-full px-4 2xl:w-2/3">
                 <div
-                  class="border-stroke dark:border-dark-3 dark:bg-dark-2 mb-8 w-full rounded-lg border bg-white px-5 pt-[30px] pb-5 sm:px-[30px]"
+                  class="mb-8 w-full rounded-lg border border-stroke bg-white px-5 pb-5 pt-[30px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]"
                 >
                   <div class="flex justify-between">
                     <div>
                       <h5
-                        class="text-dark mb-6 text-xl font-semibold dark:text-white"
+                        class="mb-6 text-xl font-semibold text-dark dark:text-white"
                       >
                         Activity Chart
                       </h5>
@@ -913,7 +913,7 @@
                         <select
                           name=""
                           id=""
-                          class="border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 relative z-20 inline-flex appearance-none rounded-md border bg-transparent py-[7px] pr-10 pl-3 text-base outline-none"
+                          class="relative z-20 inline-flex appearance-none rounded-md border border-stroke bg-transparent py-[7px] pl-3 pr-10 text-base text-body-color outline-none dark:border-dark-3 dark:text-dark-6"
                         >
                           <option value="" class="dark:bg-dark-2">
                             Monthly
@@ -923,7 +923,7 @@
                           </option>
                         </select>
                         <span
-                          class="text-body-color dark:text-dark-6 absolute top-1/2 right-3 z-10 -translate-y-1/2"
+                          class="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-body-color dark:text-dark-6"
                         >
                           <svg
                             width="18"
@@ -951,10 +951,10 @@
                 <div class="-mx-4 flex flex-wrap">
                   <div class="w-full px-4 md:w-1/2 2xl:w-full">
                     <div
-                      class="border-stroke dark:border-dark-3 dark:bg-dark-2 relative mb-8 w-full rounded-lg border bg-white px-5 py-6 sm:px-[30px]"
+                      class="relative mb-8 w-full rounded-lg border border-stroke bg-white px-5 py-6 dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]"
                     >
                       <button
-                        class="bg-secondary absolute top-[41%] -right-[22px] -rotate-90 rounded-t-md px-4 py-1 text-sm font-medium text-white"
+                        class="absolute -right-[22px] top-[41%] -rotate-90 rounded-t-md bg-secondary px-4 py-1 text-sm font-medium text-white"
                       >
                         Clean
                       </button>
@@ -965,22 +965,22 @@
 
                         <div class="w-full">
                           <p
-                            class="text-dark mb-2 text-xl leading-none font-semibold dark:text-white"
+                            class="mb-2 text-xl font-semibold leading-none text-dark dark:text-white"
                           >
                             Available Storage
                           </p>
                           <p
-                            class="text-dark text-sm font-medium dark:text-white"
+                            class="text-sm font-medium text-dark dark:text-white"
                           >
                             <span>150</span>
                             <span
-                              class="text-body-color dark:text-dark-6 text-xs"
+                              class="text-xs text-body-color dark:text-dark-6"
                             >
                               GB
                             </span>
                             <span>/ 512</span>
                             <span
-                              class="text-body-color dark:text-dark-6 text-xs"
+                              class="text-xs text-body-color dark:text-dark-6"
                             >
                               GB
                             </span>
@@ -992,12 +992,12 @@
 
                   <div class="w-full px-4 md:w-1/2 2xl:w-full">
                     <div
-                      class="border-stroke dark:border-dark-3 dark:bg-dark-2 mx-auto mb-8 w-full max-w-[350px] rounded-[10px] border bg-white p-[30px]"
+                      class="mx-auto mb-8 w-full max-w-[350px] rounded-[10px] border border-stroke bg-white p-[30px] dark:border-dark-3 dark:bg-dark-2"
                     >
                       <div class="space-y-[18px]">
                         <div class="flex items-center">
                           <div
-                            class="text-primary mr-4 flex h-10 w-full max-w-[40px] items-center justify-center rounded bg-[#f6f6f8] dark:bg-white/5"
+                            class="mr-4 flex h-10 w-full max-w-[40px] items-center justify-center rounded bg-[#f6f6f8] text-primary dark:bg-white/5"
                           >
                             <svg
                               width="20"
@@ -1023,19 +1023,19 @@
                               class="mb-[10px] flex items-center justify-between"
                             >
                               <p
-                                class="text-dark text-sm font-medium dark:text-white"
+                                class="text-sm font-medium text-dark dark:text-white"
                               >
                                 Media
                               </p>
-                              <p class="text-dark text-sm dark:text-white">
+                              <p class="text-sm text-dark dark:text-white">
                                 85GB
                               </p>
                             </div>
                             <div
-                              class="dark:bg-dark-3 relative block h-[5px] w-full rounded-full bg-[#E6E9ED]"
+                              class="relative block h-[5px] w-full rounded-full bg-[#E6E9ED] dark:bg-dark-3"
                             >
                               <div
-                                class="bg-primary absolute top-0 left-0 block h-full w-[80%] rounded-full"
+                                class="absolute left-0 top-0 block h-full w-[80%] rounded-full bg-primary"
                               ></div>
                             </div>
                           </div>
@@ -1072,19 +1072,19 @@
                               class="mb-[10px] flex items-center justify-between"
                             >
                               <p
-                                class="text-dark text-sm font-medium dark:text-white"
+                                class="text-sm font-medium text-dark dark:text-white"
                               >
                                 Documents
                               </p>
-                              <p class="text-dark text-sm dark:text-white">
+                              <p class="text-sm text-dark dark:text-white">
                                 25GB
                               </p>
                             </div>
                             <div
-                              class="dark:bg-dark-3 relative block h-[5px] w-full rounded-full bg-[#E6E9ED]"
+                              class="relative block h-[5px] w-full rounded-full bg-[#E6E9ED] dark:bg-dark-3"
                             >
                               <div
-                                class="absolute top-0 left-0 block h-full w-[60%] rounded-full bg-[#F2994A]"
+                                class="absolute left-0 top-0 block h-full w-[60%] rounded-full bg-[#F2994A]"
                               ></div>
                             </div>
                           </div>
@@ -1099,7 +1099,7 @@
 
           <div class="w-full">
             <div
-              class="border-stroke dark:border-dark-3 dark:bg-dark-2 w-full overflow-x-auto border bg-white"
+              class="w-full overflow-x-auto border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2"
             >
               <table class="table w-full">
                 <tbody>
@@ -1107,7 +1107,7 @@
                     <td class="min-w-[250px] py-[18px] pl-6">
                       <div class="flex items-center">
                         <div
-                          class="text-dark bg-gray-2 dark:bg-dark mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full dark:text-white"
+                          class="mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-gray-2 text-dark dark:bg-dark dark:text-white"
                         >
                           <svg
                             width="22"
@@ -1132,7 +1132,7 @@
                           </svg>
                         </div>
                         <p
-                          class="text-dark text-base font-medium dark:text-white"
+                          class="text-base font-medium text-dark dark:text-white"
                         >
                           Content-script.txt
                         </p>
@@ -1140,13 +1140,13 @@
                     </td>
 
                     <td class="min-w-[130px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         File size: 455KB
                       </p>
                     </td>
 
                     <td class="min-w-[220px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         Uploaded on: 25 Nov, 2025
                       </p>
                     </td>
@@ -1154,7 +1154,7 @@
                     <td class="py-[18px] pr-6 text-right">
                       <a
                         href="javascript:void(0)"
-                        class="bg-primary hover:bg-blue-dark rounded-md px-7 py-3 text-base font-medium text-white"
+                        class="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Download
                       </a>
@@ -1165,7 +1165,7 @@
                     <td class="min-w-[250px] py-[18px] pl-6">
                       <div class="flex items-center">
                         <div
-                          class="text-dark bg-gray-2 dark:bg-dark mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full dark:text-white"
+                          class="mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-gray-2 text-dark dark:bg-dark dark:text-white"
                         >
                           <svg
                             width="22"
@@ -1187,7 +1187,7 @@
                           </svg>
                         </div>
                         <p
-                          class="text-dark text-base font-medium dark:text-white"
+                          class="text-base font-medium text-dark dark:text-white"
                         >
                           E-commerce.apk
                         </p>
@@ -1195,13 +1195,13 @@
                     </td>
 
                     <td class="min-w-[130px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         File size: 55MB
                       </p>
                     </td>
 
                     <td class="min-w-[220px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         Uploaded on: 13 Dec, 2025
                       </p>
                     </td>
@@ -1209,7 +1209,7 @@
                     <td class="py-[18px] pr-6 text-right">
                       <a
                         href="javascript:void(0)"
-                        class="bg-primary hover:bg-blue-dark rounded-md px-7 py-3 text-base font-medium text-white"
+                        class="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Download
                       </a>
@@ -1220,7 +1220,7 @@
                     <td class="min-w-[250px] py-[18px] pl-6">
                       <div class="flex items-center">
                         <div
-                          class="text-dark bg-gray-2 dark:bg-dark mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full dark:text-white"
+                          class="mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-gray-2 text-dark dark:bg-dark dark:text-white"
                         >
                           <svg
                             width="22"
@@ -1245,7 +1245,7 @@
                           </svg>
                         </div>
                         <p
-                          class="text-dark text-base font-medium dark:text-white"
+                          class="text-base font-medium text-dark dark:text-white"
                         >
                           Random-text.doc
                         </p>
@@ -1253,13 +1253,13 @@
                     </td>
 
                     <td class="min-w-[130px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         File size: 455KB
                       </p>
                     </td>
 
                     <td class="min-w-[220px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         Uploaded on: 25 Nov, 2025
                       </p>
                     </td>
@@ -1267,7 +1267,7 @@
                     <td class="py-[18px] pr-6 text-right">
                       <a
                         href="javascript:void(0)"
-                        class="bg-primary hover:bg-blue-dark rounded-md px-7 py-3 text-base font-medium text-white"
+                        class="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Download
                       </a>
@@ -1277,7 +1277,7 @@
                     <td class="min-w-[250px] py-[18px] pl-6">
                       <div class="flex items-center">
                         <div
-                          class="text-dark bg-gray-2 dark:bg-dark mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full dark:text-white"
+                          class="mr-[18px] flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-gray-2 text-dark dark:bg-dark dark:text-white"
                         >
                           <svg
                             width="22"
@@ -1302,7 +1302,7 @@
                           </svg>
                         </div>
                         <p
-                          class="text-dark text-base font-medium dark:text-white"
+                          class="text-base font-medium text-dark dark:text-white"
                         >
                           Random-text.doc
                         </p>
@@ -1310,13 +1310,13 @@
                     </td>
 
                     <td class="min-w-[130px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         File size: 455KB
                       </p>
                     </td>
 
                     <td class="min-w-[220px] py-[18px]">
-                      <p class="text-body-color dark:text-dark-6 text-base">
+                      <p class="text-base text-body-color dark:text-dark-6">
                         Uploaded on: 25 Nov, 2025
                       </p>
                     </td>
@@ -1324,7 +1324,7 @@
                     <td class="py-[18px] pr-6 text-right">
                       <a
                         href="javascript:void(0)"
-                        class="bg-primary hover:bg-blue-dark rounded-md px-7 py-3 text-base font-medium text-white"
+                        class="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-blue-dark"
                       >
                         Download
                       </a>
@@ -1341,9 +1341,9 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="shadow-1 dark:bg-dark-3 dark:shadow-box-dark fixed right-10 bottom-10 flex h-11 w-11 items-center justify-center rounded bg-white"
+      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
     >
-      <span class="text-body-color block dark:hidden">
+      <span class="block text-body-color dark:hidden">
         <svg
           class="fill-current"
           width="24"

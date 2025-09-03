@@ -82,11 +82,11 @@ const DetailsBox = () => {
 
   return (
     <>
-      <h2 className="mb-4 text-xl font-semibold text-dark sm:text-4xl lg:text-3xl xl:text-4xl dark:text-white">
+      <h2 className="mb-4 text-xl font-semibold text-dark dark:text-white sm:text-4xl lg:text-3xl xl:text-4xl">
         Leather Sneakers For Women
       </h2>
 
-      <p className="flex items-center mb-5 text-base font-medium">
+      <p className="mb-5 flex items-center text-base font-medium">
         <span className="pr-2 text-dark dark:text-white"> 5.0 </span>
         <span className="pr-2">
           <svg
@@ -127,7 +127,7 @@ const DetailsBox = () => {
 
           <div className="flex items-center">
             {colorOptions.map((color, index) => (
-              <div className="mr-[10px] mb-4" key={index}>
+              <div className="mb-4 mr-[10px]" key={index}>
                 <input
                   type="radio"
                   name={color.name}
@@ -168,17 +168,17 @@ const DetailsBox = () => {
 
           <div className="flex items-center">
             {sizeOptions.map((sizeOption, index) => (
-              <div className="mr-[10px] mb-4" key={index}>
+              <div className="mb-4 mr-[10px]" key={index}>
                 <input
                   type="radio"
                   name={sizeOption.name}
                   id={sizeOption.id}
-                  className="sr-only filter-size"
+                  className="filter-size sr-only"
                   onChange={() => handleSize(sizeOption.id)}
                 />
                 <label
                   htmlFor={sizeOption.id}
-                  className={`hover:border-primary hover:bg-primary inline-block cursor-pointer border px-3 py-1 text-base font-medium hover:text-white ${selectSize === sizeOption.id ? "border-primary bg-primary text-white" : "border-stroke text-dark dark:border-dark-3 dark:text-white"}`}
+                  className={`inline-block cursor-pointer border px-3 py-1 text-base font-medium hover:border-primary hover:bg-primary hover:text-white ${selectSize === sizeOption.id ? "border-primary bg-primary text-white" : "border-stroke text-dark dark:border-dark-3 dark:text-white"}`}
                 >
                   {sizeOption.label}
                 </label>
@@ -188,8 +188,8 @@ const DetailsBox = () => {
         </div>
       </div>
 
-      <div className="pt-2 mb-8">
-        <button className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white bg-dark-2 hover:bg-dark-2/90">
+      <div className="mb-8 pt-2">
+        <button className="flex w-full items-center justify-center bg-dark-2 px-10 py-3 text-center text-base font-medium text-white hover:bg-dark-2/90">
           Add to Beg
         </button>
       </div>
@@ -202,7 +202,7 @@ const DetailsBox = () => {
           >
             <button
               onClick={() => handleTab(index)}
-              className="flex items-center justify-between w-full mb-4 text-left"
+              className="mb-4 flex w-full items-center justify-between text-left"
             >
               <span className="text-base font-medium text-dark dark:text-white">
                 {tab.title}
@@ -214,7 +214,7 @@ const DetailsBox = () => {
 
             {activeTab === index && (
               <div>
-                <p className="mb-4 text-basem text-body-color dark:text-dark-6">
+                <p className="text-basem mb-4 text-body-color dark:text-dark-6">
                   {tab.content}
                 </p>
               </div>

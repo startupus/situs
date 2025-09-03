@@ -16,5 +16,3 @@ export class IntegrationRegistry {
     return this.providers.get(key);
   }
 }
-
-

@@ -199,7 +199,7 @@ const Checkout4 = () => {
                   <input
                     type="text"
                     placeholder="Coupon code"
-                    className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-20 font-medium text-body-color outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
+                    className="outline-hidden w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-20 font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-6"
                   />
                   <button className="absolute right-3 top-1/2 mb-3 h-[34px] -translate-y-1/2 rounded-sm bg-primary px-5 text-sm font-semibold text-white transition hover:bg-blue-dark">
                     Apply
@@ -248,7 +248,7 @@ const InputGroup = ({ type, placeholder, labelTitle }) => {
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color outline-hidden transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-5"
+        className="outline-hidden w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-body-color transition placeholder:text-dark-5 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3 dark:text-dark-5"
       />
     </div>
   );
@@ -264,7 +264,7 @@ const SelectGroup = ({ labelTitle }) => {
         {labelTitle}
       </label>
       <div className="relative">
-        <select className="w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
+        <select className="outline-hidden w-full appearance-none rounded-md border border-stroke bg-transparent px-5 py-3 font-medium text-dark-5 transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] dark:border-dark-3">
           <option value="" className="dark:bg-dark-2">
             United States
           </option>

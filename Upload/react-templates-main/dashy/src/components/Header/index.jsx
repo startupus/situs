@@ -11,9 +11,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
             }}
-            className="absolute left-4 top-1/2 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-lg
-          border border-stroke bg-white text-dark hover:bg-gray dark:border-dark-3 dark:bg-dark-2 dark:text-white
-          dark:hover:bg-dark-3 xl:hidden"
+            className="absolute left-4 top-1/2 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-lg border border-stroke bg-white text-dark hover:bg-gray dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:bg-dark-3 xl:hidden"
           >
             <svg
               width="20"
@@ -63,7 +61,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
               <input
                 type="text"
                 placeholder="Type to search..."
-                className="w-full bg-transparent text-base text-body-color outline-hidden dark:text-dark-6"
+                className="outline-hidden w-full bg-transparent text-base text-body-color dark:text-dark-6"
               />
             </div>
           </div>

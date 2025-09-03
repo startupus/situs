@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const OrderSummary2 = () => {
   return (
@@ -11,9 +11,7 @@ const OrderSummary2 = () => {
                 <h2 className="mb-4 text-3xl font-semibold text-dark dark:text-white sm:text-4xl">
                   Your Order Confirmed!
                 </h2>
-                <p className="text-dark dark:text-white mb-2 text-lg font-medium">
-                  HI, Musharof
-                </p>
+                <p className="text-dark dark:text-white mb-2 text-lg font-medium">HI, Musharof</p>
                 <p className="text-body-color dark:text-dark-6 text-base">
                   Your order has been confirmed and will be shipping soon.
                 </p>
@@ -22,8 +20,7 @@ const OrderSummary2 = () => {
             <div className="w-full px-4 md:w-1/2">
               <div className="mb-14 max-w-[400px] md:ml-auto md:text-right">
                 <p className="text-body-color dark:text-dark-6 mb-[10px] text-base">
-                  We'll send you shipping confirmation when your item(s) are on
-                  the way!
+                  We'll send you shipping confirmation when your item(s) are on the way!
                 </p>
                 <h3 className="text-xl font-semibold text-dark dark:text-white">Thank You!</h3>
               </div>
@@ -32,32 +29,20 @@ const OrderSummary2 = () => {
 
           <div className="flex flex-wrap">
             <div className="mr-16 mb-10">
-              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
-                Order Date
-              </h3>
-              <p className="text-body-color dark:text-dark-6 text-base">
-                25 March, 2025
-              </p>
+              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">Order Date</h3>
+              <p className="text-body-color dark:text-dark-6 text-base">25 March, 2025</p>
             </div>
             <div className="mr-16 mb-10">
-              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
-                Order Number
-              </h3>
+              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">Order Number</h3>
               <p className="text-body-color dark:text-dark-6 text-base">#1278532</p>
             </div>
             <div className="mr-16 mb-10">
               <h3 className="mb-1 text-base font-medium text-dark dark:text-white">Payment</h3>
-              <p className="text-body-color dark:text-dark-6 text-base">
-                VISA - 3324
-              </p>
+              <p className="text-body-color dark:text-dark-6 text-base">VISA - 3324</p>
             </div>
             <div className="mr-16 mb-10">
-              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">
-                Shipping Address
-              </h3>
-              <p className="text-body-color dark:text-dark-6 text-base">
-                New York, USA 2707 Davis Anenue
-              </p>
+              <h3 className="mb-1 text-base font-medium text-dark dark:text-white">Shipping Address</h3>
+              <p className="text-body-color dark:text-dark-6 text-base">New York, USA 2707 Davis Anenue</p>
             </div>
           </div>
 
@@ -114,11 +99,7 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
   return (
     <div className="items-center border-y border-stroke dark:border-dark-3 py-8 sm:flex">
       <div className="mb-3 mr-6 h-20 w-full max-w-[80px] sm:mb-0 rounded-sm overflow-hidden">
-        <img
-          src={img}
-          alt="product"
-          className="h-full w-full object-cover object-center"
-        />
+        <img src={img} alt="product" className="h-full w-full object-cover object-center" />
       </div>
       <div className="w-full items-center justify-between md:flex">
         <div className="mb-3 md:mb-0">
@@ -134,9 +115,7 @@ const ProductItem = ({ img, link, title, color, size, number, price }) => {
           </p>
         </div>
         <div className="flex items-center md:justify-end">
-          <p className="mr-20 text-base font-medium text-dark dark:text-white">
-            Qty: {number}
-          </p>
+          <p className="mr-20 text-base font-medium text-dark dark:text-white">Qty: {number}</p>
           <p className="mr-5 text-base font-medium text-dark dark:text-white">{price}</p>
         </div>
       </div>

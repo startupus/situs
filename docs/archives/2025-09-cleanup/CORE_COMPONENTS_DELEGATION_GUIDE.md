@@ -5,6 +5,7 @@
 **Цель:** Интегрировать 200+ Core Components в глобальную тему проекта Situs
 
 **Текущее состояние:**
+
 - ✅ 13 Theme Components работают
 - ✅ Select1 из Core Components работает (эталон)
 - ❌ 200+ Core Components отключены в демо-странице
@@ -15,18 +16,22 @@
 ## 🎯 Приоритетный план (начинать по порядку)
 
 ### 1️⃣ Badges (НАЧАТЬ ЗДЕСЬ - самые простые)
+
 - **Файлы:** `src/components/ui/core/Badges/` → создать `src/components/ui/ThemeBadges.tsx`
 - **Компоненты:** DangerBadge, DarkBadge, GrayBadge, InfoBadge, LightBadge, PrimaryBadge, SecondaryBadge, SuccessBadge, WarningBadge (9 штук)
 
 ### 2️⃣ Buttons (расширить существующий)
+
 - **Файл:** расширить `src/components/ui/ThemeButton.tsx`
 - **Компоненты:** 33 различных кнопки
 
 ### 3️⃣ Alerts + Avatars
+
 - **Файлы:** создать `ThemeAlerts.tsx` и `ThemeAvatars.tsx`
 - **Компоненты:** 5 Alert + 5 Avatar = 10 компонентов
 
 ### 4️⃣ Остальные (по мере готовности)
+
 - Breadcrumbs (12), Checkboxes (5), Forms (4), Progress (3), Spinners (4), Tooltips (3), Paginations (5)
 
 ## 🔧 Шаблон работы (копировать и адаптировать)
@@ -36,16 +41,16 @@
 ```typescript
 // src/components/ui/ThemeBadges.tsx
 import React from 'react';
-import { 
-  DangerBadge, 
-  DarkBadge, 
-  GrayBadge, 
-  InfoBadge, 
-  LightBadge, 
-  PrimaryBadge, 
-  SecondaryBadge, 
-  SuccessBadge, 
-  WarningBadge 
+import {
+  DangerBadge,
+  DarkBadge,
+  GrayBadge,
+  InfoBadge,
+  LightBadge,
+  PrimaryBadge,
+  SecondaryBadge,
+  SuccessBadge,
+  WarningBadge
 } from './core';
 
 // Утилита для адаптации стилей под глобальную тему
@@ -97,16 +102,16 @@ export const ThemeWarningBadge: React.FC<any> = (props) => (
 ```typescript
 // src/components/ui/index.ts
 // Добавить в конец файла:
-export { 
-  ThemeDangerBadge, 
-  ThemeDarkBadge, 
-  ThemeGrayBadge, 
-  ThemeInfoBadge, 
-  ThemeLightBadge, 
-  ThemePrimaryBadge, 
-  ThemeSecondaryBadge, 
-  ThemeSuccessBadge, 
-  ThemeWarningBadge 
+export {
+  ThemeDangerBadge,
+  ThemeDarkBadge,
+  ThemeGrayBadge,
+  ThemeInfoBadge,
+  ThemeLightBadge,
+  ThemePrimaryBadge,
+  ThemeSecondaryBadge,
+  ThemeSuccessBadge,
+  ThemeWarningBadge,
 } from './ThemeBadges';
 ```
 
@@ -116,12 +121,12 @@ export {
 // src/components/situs/pages/settings/AppearanceDemoSimple.tsx
 
 // 1. Добавить импорт:
-import { 
-  ThemeDangerBadge, 
-  ThemePrimaryBadge, 
-  ThemeSuccessBadge, 
-  ThemeWarningBadge, 
-  ThemeInfoBadge 
+import {
+  ThemeDangerBadge,
+  ThemePrimaryBadge,
+  ThemeSuccessBadge,
+  ThemeWarningBadge,
+  ThemeInfoBadge
 } from '@/components/ui';
 
 // 2. Найти закомментированную секцию Core Components и заменить на:
@@ -144,6 +149,7 @@ import {
 ## 📁 Структура файлов
 
 ### Исходники (НЕ ИЗМЕНЯТЬ!):
+
 ```
 src/components/ui/core/
 ├── Badges/           # ← НАЧАТЬ ЗДЕСЬ (9 компонентов)
@@ -163,6 +169,7 @@ src/components/ui/core/
 ```
 
 ### Целевые файлы (СОЗДАВАТЬ!):
+
 ```
 src/components/ui/
 ├── ThemeBadges.tsx      # ← Создать первым
@@ -189,6 +196,7 @@ http://localhost:5177/demo/components
 ## ⚠️ Правила и ограничения
 
 ### ✅ МОЖНО:
+
 - Создавать новые файлы в `src/components/ui/`
 - Расширять существующие Theme компоненты
 - Добавлять экспорты в `index.ts`
@@ -196,6 +204,7 @@ http://localhost:5177/demo/components
 - Адаптировать стили под глобальную тему
 
 ### ❌ НЕЛЬЗЯ:
+
 - Изменять файлы в `src/components/ui/core/`
 - Ломать существующие Theme компоненты
 - Изменять структуру проекта
@@ -205,13 +214,15 @@ http://localhost:5177/demo/components
 ## 🎯 Эталонные примеры
 
 ### Рабочие компоненты для изучения:
+
 - `src/components/ui/ThemeButton.tsx` - как правильно делать Theme компоненты
 - `src/components/ui/core/Selects/Select1.tsx` - единственный рабочий Core Component
 - `src/components/ui/index.ts` - как правильно экспортировать
 
 ### Стилевая система проекта:
+
 - `src/styles/interface-themes.css` - стили интерфейса
-- `src/styles/canvas-themes.css` - стили канваса  
+- `src/styles/canvas-themes.css` - стили канваса
 - `src/styles/theme-components.css` - стили компонентов
 
 ## 📊 Прогресс трекинг
@@ -238,6 +249,7 @@ http://localhost:5177/demo/components
 ## 🆘 Решение проблем
 
 ### Ошибка импорта:
+
 ```typescript
 // ПРАВИЛЬНО:
 import { BadgeName } from './core/Badges/BadgeName';
@@ -247,21 +259,24 @@ import { BadgeName } from './core';
 ```
 
 ### Компонент не отображается:
+
 ```typescript
 // Проверить экспорт в index.ts:
 export { ThemeBadgeName } from './ThemeBadges';
 ```
 
 ### Стили не применяются:
+
 ```typescript
 // Добавить базовые классы:
 const adaptProps = (props) => ({
   ...props,
-  className: `${props.className || ''} transition-colors duration-200`
+  className: `${props.className || ''} transition-colors duration-200`,
 });
 ```
 
 ### Ошибки сборки:
+
 ```bash
 # Очистить кэш Vite:
 rm -rf node_modules/.vite
@@ -271,6 +286,7 @@ npm run dev:situs
 ## 🎯 Критерии готовности
 
 Компонент готов, когда:
+
 1. ✅ Создана обертка с префиксом `Theme`
 2. ✅ Добавлен экспорт в `index.ts`
 3. ✅ Работает в демо-странице
@@ -289,6 +305,7 @@ npm run dev:situs
 ## 📞 Техническая поддержка
 
 При возникновении проблем:
+
 1. Изучить эталонные примеры (ThemeButton.tsx, Select1.tsx)
 2. Проверить паттерны в `src/components/ui/`
 3. Тестировать на `/demo/components`

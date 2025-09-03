@@ -13,13 +13,7 @@ export class ProductsService {
   /**
    * Список продуктов с фильтрами и пагинацией
    */
-  async findAll(query: {
-    page?: number;
-    limit?: number;
-    type?: string;
-    status?: string;
-    projectId?: string;
-  }) {
+  async findAll(query: { page?: number; limit?: number; type?: string; status?: string; projectId?: string }) {
     const { page = 1, limit = 20, type, status, projectId } = query;
     const skip = (page - 1) * limit;
 
@@ -76,7 +70,13 @@ export class ProductsService {
   }
 
   /** Создать продукт глобально (с указанием projectId) */
-  async create(data: { name: string; description?: string; type: string | ProductType; projectId: string; settings?: string }) {
+  async create(data: {
+    name: string;
+    description?: string;
+    type: string | ProductType;
+    projectId: string;
+    settings?: string;
+  }) {
     if (!data.projectId) {
       throw new BadRequestException('projectId обязателен');
     }
@@ -93,7 +93,13 @@ export class ProductsService {
   /** Обновить продукт */
   async update(
     id: string,
-    data: Partial<{ name: string; description?: string; type: string | ProductType; status: string | ProductStatus; settings?: string }>
+    data: Partial<{
+      name: string;
+      description?: string;
+      type: string | ProductType;
+      status: string | ProductStatus;
+      settings?: string;
+    }>,
   ) {
     const exists = await this.prisma.product.findUnique({ where: { id } });
     if (!exists) {
@@ -119,12 +125,18 @@ export class ProductsService {
   }
 
   /** Список продуктов проекта */
-  async findByProject(projectId: string, query: { page?: number; limit?: number; type?: string; status?: string } = {}) {
+  async findByProject(
+    projectId: string,
+    query: { page?: number; limit?: number; type?: string; status?: string } = {},
+  ) {
     return this.findAll({ ...query, projectId });
   }
 
   /** Создать продукт в проекте */
-  async createInProject(projectId: string, data: { name: string; description?: string; type: string | ProductType; settings?: string }) {
+  async createInProject(
+    projectId: string,
+    data: { name: string; description?: string; type: string | ProductType; settings?: string },
+  ) {
     const project = await this.prisma.project.findUnique({ where: { id: projectId } });
     if (!project) {
       throw new NotFoundException('Проект не найден');
@@ -142,7 +154,11 @@ export class ProductsService {
     // Автосоздание типовых страниц для WEBSITE
     if (product.type === ProductType.WEBSITE) {
       try {
-        const commonPageData = { status: PageStatus.DRAFT as any, pageType: PageType.PAGE as any, content: '{}' } as const;
+        const commonPageData = {
+          status: PageStatus.DRAFT as any,
+          pageType: PageType.PAGE as any,
+          content: '{}',
+        } as const;
         const pagesToCreate: Array<{ title: string; slug: string; isHomePage?: boolean }> = [
           { title: 'Главная', slug: 'home', isHomePage: true },
           { title: 'О компании', slug: 'about' },
@@ -163,7 +179,7 @@ export class ProductsService {
               product: { connect: { id: product.id } },
             };
             return this.prisma.page.create({ data });
-          })
+          }),
         );
       } catch (e: any) {
         // Не блокируем создание продукта, если страницы не создались
@@ -179,7 +195,13 @@ export class ProductsService {
   async updateInProject(
     projectId: string,
     productId: string,
-    data: Partial<{ name: string; description?: string; type: string | ProductType; status: string | ProductStatus; settings?: string }>
+    data: Partial<{
+      name: string;
+      description?: string;
+      type: string | ProductType;
+      status: string | ProductStatus;
+      settings?: string;
+    }>,
   ) {
     const exists = await this.prisma.product.findFirst({ where: { id: productId, projectId } });
     if (!exists) {
@@ -222,5 +244,3 @@ export class ProductsService {
     throw new BadRequestException(`Некорректный статус продукта: ${status}`);
   }
 }
-
-

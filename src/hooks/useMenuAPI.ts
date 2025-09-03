@@ -15,7 +15,7 @@ export const useMenuAPI = (projectId: string) => {
       const response = await fetch('/api/menu-items', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
@@ -38,7 +38,7 @@ export const useMenuAPI = (projectId: string) => {
       const response = await fetch(`/api/menu-items/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates)
+        body: JSON.stringify(updates),
       });
 
       const result = await response.json();
@@ -59,7 +59,7 @@ export const useMenuAPI = (projectId: string) => {
   const handleDeleteMenuItem = async (itemId: string) => {
     try {
       const response = await fetch(`/api/menu-items/${itemId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       });
 
       const result = await response.json();
@@ -77,25 +77,29 @@ export const useMenuAPI = (projectId: string) => {
   /**
    * Изменение порядка пунктов меню
    */
-  const handleReorderItems = async (reorderedItems: MenuItemData[] | Array<{
-    id: string;
-    orderIndex: number;
-    level: number;
-    parentId: string | null;
-  }>) => {
+  const handleReorderItems = async (
+    reorderedItems:
+      | MenuItemData[]
+      | Array<{
+          id: string;
+          orderIndex: number;
+          level: number;
+          parentId: string | null;
+        }>,
+  ) => {
     try {
       // Преобразуем MenuItemData[] в нужный формат
-      const itemsToSend = reorderedItems.map(item => ({
+      const itemsToSend = reorderedItems.map((item) => ({
         id: item.id,
         orderIndex: item.orderIndex || 0,
         level: item.level || 1,
-        parentId: item.parentId || null
+        parentId: item.parentId || null,
       }));
 
       const response = await fetch('/api/menu-items/reorder', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: itemsToSend })
+        body: JSON.stringify({ items: itemsToSend }),
       });
 
       const result = await response.json();
@@ -120,7 +124,7 @@ export const useMenuAPI = (projectId: string) => {
       const response = await fetch('/api/menu-types', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
@@ -138,23 +142,26 @@ export const useMenuAPI = (projectId: string) => {
   /**
    * Обновление типа меню
    */
-  const handleUpdateMenuType = async (typeId: string, updates: { 
-    title?: string; 
-    name?: string; 
-    description?: string; 
-    isActive?: boolean 
-  }) => {
+  const handleUpdateMenuType = async (
+    typeId: string,
+    updates: {
+      title?: string;
+      name?: string;
+      description?: string;
+      isActive?: boolean;
+    },
+  ) => {
     try {
       // Добавляем projectId к данным обновления
       const updateData = {
         ...updates,
-        projectId
+        projectId,
       };
 
       const response = await fetch(`/api/menu-types/${typeId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updateData)
+        body: JSON.stringify(updateData),
       });
 
       const result = await response.json();
@@ -175,7 +182,7 @@ export const useMenuAPI = (projectId: string) => {
   const handleDeleteMenuType = async (typeId: string) => {
     try {
       const response = await fetch(`/api/menu-types/${typeId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       });
 
       const result = await response.json();
@@ -198,7 +205,7 @@ export const useMenuAPI = (projectId: string) => {
       const response = await fetch(`/api/menu-types/${typeId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ isActive, projectId })
+        body: JSON.stringify({ isActive, projectId }),
       });
 
       const result = await response.json();
@@ -221,24 +228,24 @@ export const useMenuAPI = (projectId: string) => {
   const handleBatchToggleMenuTypeStatus = async (typeIds: string[], isActive: boolean) => {
     try {
       // Выполняем запросы параллельно для всех выбранных типов
-      const promises = typeIds.map(typeId => 
+      const promises = typeIds.map((typeId) =>
         fetch(`/api/menu-types/${typeId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ isActive, projectId })
-        })
+          body: JSON.stringify({ isActive, projectId }),
+        }),
       );
 
       const responses = await Promise.all(promises);
-      const results = await Promise.all(responses.map(r => r.json()));
-      
+      const results = await Promise.all(responses.map((r) => r.json()));
+
       // Проверяем, что все запросы успешны
-      const failedResults = results.filter(r => !r.success);
+      const failedResults = results.filter((r) => !r.success);
       if (failedResults.length > 0) {
         throw new Error(`Ошибка изменения статуса ${failedResults.length} типов меню`);
       }
 
-      return results.map(r => r.data);
+      return results.map((r) => r.data);
     } catch (error) {
       console.error('Ошибка пакетного изменения статуса типов меню:', error);
       throw error;
@@ -251,22 +258,22 @@ export const useMenuAPI = (projectId: string) => {
   const handleBatchDeleteMenuTypes = async (typeIds: string[]) => {
     try {
       // Выполняем запросы параллельно для всех выбранных типов
-      const promises = typeIds.map(typeId => 
+      const promises = typeIds.map((typeId) =>
         fetch(`/api/menu-types/${typeId}`, {
-          method: 'DELETE'
-        })
+          method: 'DELETE',
+        }),
       );
 
       const responses = await Promise.all(promises);
-      const results = await Promise.all(responses.map(r => r.json()));
-      
+      const results = await Promise.all(responses.map((r) => r.json()));
+
       // Проверяем, что все запросы успешны
-      const failedResults = results.filter(r => !r.success);
+      const failedResults = results.filter((r) => !r.success);
       if (failedResults.length > 0) {
         throw new Error(`Ошибка удаления ${failedResults.length} типов меню`);
       }
 
-      return results.map(r => r.data);
+      return results.map((r) => r.data);
     } catch (error) {
       console.error('Ошибка пакетного удаления типов меню:', error);
       throw error;
@@ -279,24 +286,24 @@ export const useMenuAPI = (projectId: string) => {
   const handleBatchToggleMenuItemStatus = async (itemIds: string[], isActive: boolean) => {
     try {
       // Выполняем запросы параллельно для всех выбранных пунктов
-      const promises = itemIds.map(itemId => 
+      const promises = itemIds.map((itemId) =>
         fetch(`/api/menu-items/${itemId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ isPublished: isActive })
-        })
+          body: JSON.stringify({ isPublished: isActive }),
+        }),
       );
 
       const responses = await Promise.all(promises);
-      const results = await Promise.all(responses.map(r => r.json()));
-      
+      const results = await Promise.all(responses.map((r) => r.json()));
+
       // Проверяем, что все запросы успешны
-      const failedResults = results.filter(r => !r.success);
+      const failedResults = results.filter((r) => !r.success);
       if (failedResults.length > 0) {
         throw new Error(`Ошибка изменения статуса ${failedResults.length} пунктов меню`);
       }
 
-      return results.map(r => r.data);
+      return results.map((r) => r.data);
     } catch (error) {
       console.error('Ошибка пакетного изменения статуса пунктов меню:', error);
       throw error;
@@ -309,22 +316,22 @@ export const useMenuAPI = (projectId: string) => {
   const handleBatchDeleteMenuItems = async (itemIds: string[]) => {
     try {
       // Выполняем запросы параллельно для всех выбранных пунктов
-      const promises = itemIds.map(itemId => 
+      const promises = itemIds.map((itemId) =>
         fetch(`/api/menu-items/${itemId}`, {
-          method: 'DELETE'
-        })
+          method: 'DELETE',
+        }),
       );
 
       const responses = await Promise.all(promises);
-      const results = await Promise.all(responses.map(r => r.json()));
-      
+      const results = await Promise.all(responses.map((r) => r.json()));
+
       // Проверяем, что все запросы успешны
-      const failedResults = results.filter(r => !r.success);
+      const failedResults = results.filter((r) => !r.success);
       if (failedResults.length > 0) {
         throw new Error(`Ошибка удаления ${failedResults.length} пунктов меню`);
       }
 
-      return results.map(r => r.data);
+      return results.map((r) => r.data);
     } catch (error) {
       console.error('Ошибка пакетного удаления пунктов меню:', error);
       throw error;
@@ -338,7 +345,7 @@ export const useMenuAPI = (projectId: string) => {
     try {
       const response = await fetch(`/api/menu-items?projectId=${projectId}`);
       const data = await response.json();
-      
+
       if (!data.success) {
         throw new Error(data.error || 'Ошибка загрузки пунктов меню');
       }
@@ -356,22 +363,22 @@ export const useMenuAPI = (projectId: string) => {
     handleUpdateMenuItem,
     handleDeleteMenuItem,
     handleReorderItems,
-    
+
     // Типы меню
     handleCreateMenuType,
     handleUpdateMenuType,
     handleDeleteMenuType,
     handleToggleMenuTypeStatus,
-    
+
     // Пакетные операции - типы меню
     handleBatchToggleMenuTypeStatus,
     handleBatchDeleteMenuTypes,
-    
+
     // Пакетные операции - пункты меню
     handleBatchToggleMenuItemStatus,
     handleBatchDeleteMenuItems,
-    
+
     // Утилиты
-    loadAllMenuItems
+    loadAllMenuItems,
   };
 };

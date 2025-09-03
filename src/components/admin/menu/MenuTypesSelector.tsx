@@ -17,7 +17,7 @@ const MenuTypesSelector: React.FC<MenuTypesSelectorProps> = ({
   menuTypes,
   selectedMenuType,
   onMenuTypeChange,
-  onMenuTypesUpdate
+  onMenuTypesUpdate,
 }) => {
   const [showCreateTypeModal, setShowCreateTypeModal] = useState(false);
 
@@ -27,7 +27,7 @@ const MenuTypesSelector: React.FC<MenuTypesSelectorProps> = ({
       const response = await fetch('http://localhost:3002/api/menu-types', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
@@ -48,10 +48,7 @@ const MenuTypesSelector: React.FC<MenuTypesSelectorProps> = ({
     <div className="mb-6">
       <div className="flex items-center gap-4">
         <div className="flex-1 max-w-md">
-          <label
-            htmlFor="menu-type-select"
-            className="mb-2 block text-base font-medium text-dark dark:text-white"
-          >
+          <label htmlFor="menu-type-select" className="mb-2 block text-base font-medium text-dark dark:text-white">
             Тип меню
           </label>
           <div className="relative">
@@ -76,13 +73,7 @@ const MenuTypesSelector: React.FC<MenuTypesSelectorProps> = ({
               <option value="__create_new__">+ Создать новый тип</option>
             </select>
             <span className="pointer-events-none absolute right-0 top-0 flex h-full w-12 items-center justify-center text-dark-5">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M2.29645 5.15354L2.29642 5.15357L2.30065 5.1577L7.65065 10.3827L8.00167 10.7255L8.35105 10.381L13.7011 5.10603L13.7011 5.10604L13.7036 5.10354C13.7221 5.08499 13.7386 5.08124 13.75 5.08124C13.7614 5.08124 13.7779 5.08499 13.7964 5.10354C13.815 5.12209 13.8188 5.13859 13.8188 5.14999C13.8188 5.1612 13.8151 5.17734 13.7974 5.19552L8.04956 10.8433L8.04955 10.8433L8.04645 10.8464C8.01604 10.8768 7.99596 10.8921 7.98519 10.8992C7.97756 10.8983 7.97267 10.8968 7.96862 10.8952C7.96236 10.8929 7.94954 10.887 7.92882 10.8721L2.20263 5.2455C2.18488 5.22733 2.18125 5.2112 2.18125 5.19999C2.18125 5.18859 2.18501 5.17209 2.20355 5.15354C2.2221 5.13499 2.2386 5.13124 2.25 5.13124C2.2614 5.13124 2.2779 5.13499 2.29645 5.15354Z"
                   fill="currentColor"
@@ -113,19 +104,15 @@ interface CreateMenuTypeModalProps {
   onCreate: (data: CreateMenuTypeRequest) => void;
 }
 
-const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
-  projectId,
-  onClose,
-  onCreate
-}) => {
+const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({ projectId, onClose, onCreate }) => {
   const [formData, setFormData] = useState<Partial<CreateMenuTypeRequest>>({
     isActive: true,
-    projectId
+    projectId,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.title) {
       alert('Заполните обязательные поля');
       return;
@@ -140,11 +127,39 @@ const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
       .toLowerCase()
       .replace(/[а-я]/g, (char) => {
         const map: { [key: string]: string } = {
-          'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo',
-          'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
-          'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
-          'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch',
-          'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'
+          а: 'a',
+          б: 'b',
+          в: 'v',
+          г: 'g',
+          д: 'd',
+          е: 'e',
+          ё: 'yo',
+          ж: 'zh',
+          з: 'z',
+          и: 'i',
+          й: 'y',
+          к: 'k',
+          л: 'l',
+          м: 'm',
+          н: 'n',
+          о: 'o',
+          п: 'p',
+          р: 'r',
+          с: 's',
+          т: 't',
+          у: 'u',
+          ф: 'f',
+          х: 'h',
+          ц: 'ts',
+          ч: 'ch',
+          ш: 'sh',
+          щ: 'sch',
+          ъ: '',
+          ы: 'y',
+          ь: '',
+          э: 'e',
+          ю: 'yu',
+          я: 'ya',
         };
         return map[char] || char;
       })
@@ -157,15 +172,10 @@ const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-dark-2 rounded-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium text-dark dark:text-white">
-            Создать тип меню
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white"
-          >
+          <h3 className="text-lg font-medium text-dark dark:text-white">Создать тип меню</h3>
+          <button onClick={onClose} className="text-body-color dark:text-dark-6 hover:text-dark dark:hover:text-white">
             <svg width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
         </div>
@@ -173,18 +183,16 @@ const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Название типа меню */}
           <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Название типа меню *
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Название типа меню *</label>
             <input
               type="text"
               value={formData.title || ''}
               onChange={(e) => {
                 const title = e.target.value;
-                setFormData(prev => ({
+                setFormData((prev) => ({
                   ...prev,
                   title,
-                  name: generateName(title)
+                  name: generateName(title),
                 }));
               }}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
@@ -194,13 +202,11 @@ const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
 
           {/* Системное имя */}
           <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Системное имя *
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Системное имя *</label>
             <input
               type="text"
               value={formData.name || ''}
-              onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
               placeholder="main, footer, sidebar..."
             />
@@ -211,12 +217,10 @@ const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
 
           {/* Описание */}
           <div>
-            <label className="block text-sm font-medium text-dark dark:text-white mb-2">
-              Описание
-            </label>
+            <label className="block text-sm font-medium text-dark dark:text-white mb-2">Описание</label>
             <textarea
               value={formData.description || ''}
-              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
               className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-3 text-dark dark:text-white"
               placeholder="Краткое описание назначения меню"
               rows={3}
@@ -229,7 +233,7 @@ const CreateMenuTypeModal: React.FC<CreateMenuTypeModalProps> = ({
               type="checkbox"
               id="isActive"
               checked={formData.isActive || false}
-              onChange={(e) => setFormData(prev => ({ ...prev, isActive: e.target.checked }))}
+              onChange={(e) => setFormData((prev) => ({ ...prev, isActive: e.target.checked }))}
               className="w-4 h-4 text-primary bg-white border-stroke dark:border-dark-3 rounded focus:ring-primary"
             />
             <label htmlFor="isActive" className="text-sm font-medium text-dark dark:text-white">

@@ -18,7 +18,7 @@ const Newsletter3 = () => {
             <input
               type="email"
               placeholder="Your email address"
-              className="w-full border border-stroke bg-white px-6 py-3 text-base text-body-color outline-hidden focus:border-primary"
+              className="outline-hidden w-full border border-stroke bg-white px-6 py-3 text-base text-body-color focus:border-primary"
             />
             <button className="w-full whitespace-nowrap border border-transparent bg-primary px-7 py-3 text-center text-base font-medium uppercase text-white hover:bg-primary/90 sm:inline-block sm:w-auto">
               Sign up

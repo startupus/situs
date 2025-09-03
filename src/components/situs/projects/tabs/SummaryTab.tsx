@@ -15,7 +15,10 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ projectId }) => {
           { label: 'Показы', value: '—' },
           { label: 'Новые пользователи', value: '—' },
         ].map((card) => (
-          <div key={card.label} className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4">
+          <div
+            key={card.label}
+            className="rounded-xl border border-stroke dark:border-dark-3 bg-white dark:bg-dark-2 p-4"
+          >
             <div className="text-sm text-body-color dark:text-dark-6">{card.label}</div>
             <div className="mt-1 text-2xl font-semibold text-dark dark:text-white">{card.value}</div>
           </div>
@@ -36,5 +39,3 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ projectId }) => {
 };
 
 export default SummaryTab;
-
-
