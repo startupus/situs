@@ -28,6 +28,8 @@
     "test:ci": "npm run test:backend && npm run test:e2e",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --fix src --ext ts,tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "check-components": "node scripts/check-components.cjs",
@@ -67,6 +69,7 @@
     "deploy:api": "npm run nestjs:build && pm2 start ecosystem.config.cjs",
     "deploy:api:restart": "pm2 restart situs-api",
     "deploy:api:stop": "pm2 stop situs-api && pm2 delete situs-api || true",
+    "hooks:install": "git config core.hooksPath .githooks || true && chmod +x .githooks/* || true",
     "nestjs:start": "node -r ts-node/register dist/server/main.js",
     "nestjs:test": "tsx --tsconfig tsconfig.server.json src/server/main.ts",
     "test:jest": "jest",
@@ -74,7 +77,8 @@
     "test:jest:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "_tmpEcho": "1",
-    "db:seed:acl": "tsx prisma/seed-acl.ts"
+    "db:seed:acl": "tsx prisma/seed-acl.ts",
+    "commitlint": "commitlint --from=HEAD~1 --to=HEAD"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -159,6 +163,8 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@chromatic-com/storybook": "^3.2.4",
     "@nestjs/testing": "^11.1.6",
     "@playwright/test": "^1.41.0",
@@ -201,6 +207,7 @@
     "jsdom": "^26.1.0",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.6",
+    "prettier": "^3.3.3",
     "prisma": "^6.13.0",
     "storybook": "^8.5.4",
     "supertest": "^7.1.4",
