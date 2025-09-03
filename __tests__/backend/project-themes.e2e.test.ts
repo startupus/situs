@@ -1,7 +1,9 @@
+import 'reflect-metadata';
 import { beforeAll, afterAll, describe, it, expect } from 'vitest';
 import { Test } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { TestAppModule } from '@/server/test/test-app.module';
+import request from 'supertest';
 
 let app: INestApplication;
 
@@ -20,20 +22,15 @@ afterAll(async () => {
 describe('Project Themes E2E (MVP)', () => {
   it('GET /api/health', async () => {
     const server = app.getHttpServer();
-    const res = await fetch('http://localhost/api/health');
-    // fetch relative to localhost might not work in test env; use server.inject alternative if needed
-    expect(res.status === 200 || res.status === 404).toBeTruthy();
+    const res = await request(server).get('/api/health');
+    expect([200, 404]).toContain(res.status);
   });
 
   it('GET/PUT /api/projects/:id/theme', async () => {
     const server = app.getHttpServer();
     // GET default
-    let r = await fetch('http://localhost/api/projects/e2e/theme');
-    // Fallback if absolute URL fails: use server's addressless fetch via Request
-    if (!r || !r.ok) {
-      r = await fetch((server as any).address ? `http://127.0.0.1:${(server as any).address().port}/api/projects/e2e/theme` : 'http://127.0.0.1/api/projects/e2e/theme').catch(() => ({ ok: false, status: 0 } as any));
-    }
-    expect(r && (r.ok || r.status === 404)).toBeTruthy();
+    let r = await request(server).get('/api/projects/e2e/theme');
+    expect([200, 404]).toContain(r.status);
 
     // PUT minimal valid dto
     const body = {
@@ -52,8 +49,8 @@ describe('Project Themes E2E (MVP)', () => {
         }
       }
     };
-    let p = await fetch('http://127.0.0.1/api/projects/e2e/theme', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-    expect(p && (p.ok || p.status === 404)).toBeTruthy();
+    let p = await request(server).put('/api/projects/e2e/theme').send(body);
+    expect([200, 404]).toContain(p.status);
   });
 });
 
