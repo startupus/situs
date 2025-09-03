@@ -39,18 +39,24 @@ describe('ProjectsService.update', () => {
 
   it('throws BadRequest on duplicate name for same owner', async () => {
     prisma.user.findUnique.mockResolvedValue({ id: 'owner-1' });
+    // target by id
+    prisma.project.findUnique
+      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }) // target
+      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }); // existingProject by id
     prisma.project.findFirst
-      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }) // existingProject
-      .mockResolvedValueOnce({ id: 'p2', name: 'B', ownerId: 'owner-1' }); // duplicate
+      .mockResolvedValueOnce(null) // target by slug fallback
+      .mockResolvedValueOnce({ id: 'p2', name: 'B', ownerId: 'owner-1' }); // duplicate name
     await expect(service.update('p1', { name: 'B' } as any, 'owner-1')).rejects.toThrow('уже существует');
   });
 
   it('updates customDomain with uniqueness check', async () => {
     prisma.user.findUnique.mockResolvedValue({ id: 'owner-1' });
+    prisma.project.findUnique
+      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }) // target
+      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }); // existingProject
     prisma.project.findFirst
-      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }) // existingProject
-      .mockResolvedValueOnce(null); // duplicate check for customDomain
-    prisma.project.findUnique.mockResolvedValue(null);
+      .mockResolvedValueOnce(null) // target by slug fallback
+      .mockResolvedValueOnce(null); // duplicate customDomain
     prisma.project.update.mockResolvedValue({ id: 'p1', name: 'A', status: 'ACTIVE', updatedAt: new Date(), isPublished: false });
     const res = await service.update('p1', { customDomain: 'example.com' } as any, 'owner-1');
     expect(res.id).toBe('p1');
@@ -59,7 +65,10 @@ describe('ProjectsService.update', () => {
 
   it('maps status and publishes SSE events', async () => {
     prisma.user.findUnique.mockResolvedValue({ id: 'owner-1' });
-    prisma.project.findFirst.mockResolvedValue({ id: 'p1', name: 'A', ownerId: 'owner-1', status: 'ACTIVE' });
+    prisma.project.findUnique
+      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }) // target
+      .mockResolvedValueOnce({ id: 'p1', name: 'A', ownerId: 'owner-1' }); // existingProject
+    prisma.project.findFirst.mockResolvedValueOnce(null); // slug fallback
     prisma.project.update.mockResolvedValue({ id: 'p1', name: 'A', status: 'ACTIVE', updatedAt: new Date(), isPublished: true });
     await service.update('p1', { status: 'ACTIVE', isPublished: true } as any, 'owner-1');
     expect(realtime.publishProjectStatus).toHaveBeenCalledWith('p1', 'ACTIVE');
