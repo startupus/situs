@@ -5,6 +5,8 @@ import { useTheme } from '../../../../contexts/ThemeContext';
 import ThemeCard from './theme/ThemeCard';
 import TemplateCard from './theme/TemplateCard';
 import useThemeTemplates from '../../../../hooks/useThemeTemplates';
+import useProjectThemes from '../../../../hooks/useProjectThemes';
+import ThemePreview from './theme/ThemePreview';
 
 interface BasicThemeFormProps {
   value: any;
@@ -77,6 +79,8 @@ const ProjectThemeManager: React.FC = () => {
   const [usage, setUsage] = useState<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number } | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'editor' | 'templates' | 'import'>('overview');
   const { templates, isLoading: templatesLoading, installTemplate } = useThemeTemplates({ limit: 12 });
+  const { themes, activeTheme, loading: themesLoading, createTheme, activateTheme, reload: reloadThemes } = useProjectThemes(effectiveProjectId);
+  const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
 
   const effectiveProjectId = useMemo(() => projectId as string, [projectId]);
 
@@ -256,11 +260,54 @@ const ProjectThemeManager: React.FC = () => {
             </div>
           )}
 
+          {/* Темы проекта (Фаза 2) */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="font-semibold text-dark dark:text-white">Темы проекта</div>
+              <div className="flex items-center gap-2">
+                <button
+                  className="px-3 py-2 text-sm border rounded-lg"
+                  onClick={async () => {
+                    if (!serverTheme) return;
+                    try {
+                      await createTheme({ name: serverTheme.name || 'Новая тема', type: 'public', config: serverTheme });
+                      setNotice({ type: 'success', text: 'Тема сохранена в каталог проекта' });
+                    } catch (e: any) {
+                      setNotice({ type: 'error', text: e?.message || 'Ошибка создания темы' });
+                    }
+                  }}
+                >
+                  Сохранить как новую тему
+                </button>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {themes.map((t) => (
+                <ThemeCard
+                  key={t.id}
+                  theme={t.config}
+                  onSelect={async () => { try { await activateTheme(t.id); setNotice({ type: 'success', text: 'Тема активирована' }); } catch (e: any) { setNotice({ type: 'error', text: e?.message || 'Ошибка активации' }); } }}
+                  onPreview={(cfg) => { setServerTheme(cfg); if (previewMode) { try { updateThemeVariant('light', cfg.colors.light as any); updateThemeVariant('dark', cfg.colors.dark as any); } catch {} } }}
+                  actions={t.isActive ? <span className="text-xs text-green-600">Активна</span> : null}
+                />
+              ))}
+            </div>
+          </div>
+
           {/* Предустановленные темы в виде карточек */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {settings.availableThemes.map((t) => (
-              <ThemeCard key={t.id} theme={t} onSelect={handleSelectPreset} onPreview={(th) => previewMode && setServerTheme(th)} />
-            ))}
+          <div className="space-y-2">
+            <div className="font-semibold text-dark dark:text-white">Предустановленные темы</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {settings.availableThemes.map((t) => (
+                <ThemeCard key={t.id} theme={t} onSelect={handleSelectPreset} onPreview={(th) => previewMode && setServerTheme(th)} />
+              ))}
+            </div>
+          </div>
+
+          {/* Превью устройства */}
+          <div className="space-y-2">
+            <div className="font-semibold text-dark dark:text-white">Предпросмотр</div>
+            <ThemePreview theme={serverTheme} device={device} onDeviceChange={setDevice} />
           </div>
         </>
       )}

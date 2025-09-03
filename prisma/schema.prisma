@@ -200,6 +200,9 @@ model Project {
   // Project-level settings (общие для всех продуктов)
   settings String? @default("{\"theme\":\"auto\",\"language\":\"ru\"}") // JSON as string
   theme    String? @default("{\"primaryColor\":\"#3B82F6\",\"secondaryColor\":\"#8B5CF6\"}") // JSON as string
+  // Расширенные настройки тем (Фаза 2)
+  activeThemeId String? @unique
+  themeSettings String? @default("{}") // JSON as string
   
   // Уровень доступа к проекту
   accessLevel AccessLevel @default(PUBLIC)
@@ -223,6 +226,9 @@ model Project {
   customAccessLevels CustomAccessLevel[] // Кастомные уровни доступа
   adminScreens AdminScreen[]
   integrations Integration[]
+  // Отношения с темами проекта
+  themes      ProjectTheme[] @relation("ProjectToThemes")
+  activeTheme ProjectTheme?  @relation("ActiveTheme", fields: [activeThemeId], references: [id])
   
   @@map("projects")
 }
@@ -416,6 +422,45 @@ model Media {
   user    User    @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
   
   @@map("media")
+}
+
+model ProjectTheme {
+  id            String   @id @default(cuid())
+  projectId     String
+  name          String
+  description   String?
+  type          String   @default("public")
+  isActive      Boolean  @default(false)
+  isDefault     Boolean  @default(false)
+  config        Json
+  templateFiles Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  createdBy     String?
+
+  project       Project  @relation("ProjectToThemes", fields: [projectId], references: [id], onDelete: Cascade)
+  // Обратная связь для активной темы
+  projectActive Project? @relation("ActiveTheme")
+
+  @@index([projectId])
+  @@map("project_themes")
+}
+
+model ThemeTemplate {
+  id            String   @id @default(cuid())
+  name          String
+  description   String?
+  category      String?
+  previewImage  String?
+  config        Json
+  templateFiles Json?
+  isBuiltIn     Boolean  @default(false)
+  isPublic      Boolean  @default(false)
+  downloads     Int      @default(0)
+  createdAt     DateTime @default(now())
+  createdBy     String?
+
+  @@map("theme_templates")
 }
 
 /// Shop/E-commerce модели
