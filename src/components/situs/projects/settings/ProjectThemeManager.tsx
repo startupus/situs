@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import projectsApi from '../../../../api/services/projects.api';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '../../../../contexts/ThemeContext';
+import ThemeCard from './theme/ThemeCard';
+import TemplateCard from './theme/TemplateCard';
+import useThemeTemplates from '../../../../hooks/useThemeTemplates';
 
 interface BasicThemeFormProps {
   value: any;
@@ -72,6 +75,8 @@ const ProjectThemeManager: React.FC = () => {
   const [previewMode, setPreviewMode] = useState<boolean>(false);
   const [notice, setNotice] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [usage, setUsage] = useState<{ lastUpdatedAt?: string; lastThemeId?: string; timesSaved?: number } | null>(null);
+  const [activeTab, setActiveTab] = useState<'overview' | 'editor' | 'templates' | 'import'>('overview');
+  const { templates, isLoading: templatesLoading, installTemplate } = useThemeTemplates({ limit: 12 });
 
   const effectiveProjectId = useMemo(() => projectId as string, [projectId]);
 
@@ -166,6 +171,15 @@ const ProjectThemeManager: React.FC = () => {
     }
   };
 
+  const TabButton: React.FC<{ id: typeof activeTab; title: string }> = ({ id, title }) => (
+    <button
+      onClick={() => setActiveTab(id)}
+      className={`px-3 py-2 text-sm rounded-lg border ${activeTab === id ? 'border-primary text-primary' : 'border-stroke dark:border-dark-3 hover:bg-gray-50 dark:hover:bg-dark-3'}`}
+    >
+      {title}
+    </button>
+  );
+
   if (loading) {
     return <div className="p-6 text-body-color dark:text-dark-6">Загрузка темы...</div>;
   }
@@ -184,6 +198,10 @@ const ProjectThemeManager: React.FC = () => {
           <p className="text-body-color dark:text-dark-6">Переключение предустановленных тем, настройка палитры и сохранение</p>
         </div>
         <div className="flex items-center gap-2">
+          <TabButton id="overview" title="Обзор" />
+          <TabButton id="editor" title="Редактор" />
+          <TabButton id="templates" title="Шаблоны" />
+          <TabButton id="import" title="Импорт/Экспорт" />
           <button
             onClick={togglePreview}
             className={`px-3 py-2 border rounded-lg text-sm ${previewMode ? 'border-primary text-primary' : 'border-stroke hover:bg-gray-50 dark:hover:bg-dark-3'}`}
@@ -218,172 +236,210 @@ const ProjectThemeManager: React.FC = () => {
         </div>
       )}
 
-      {/* Статистика использования */}
-      {!!usage && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
-            <div className="text-xs text-body-color dark:text-dark-6">Последнее обновление</div>
-            <div className="text-sm text-dark dark:text-white font-medium">{usage.lastUpdatedAt ? new Date(usage.lastUpdatedAt).toLocaleString() : '—'}</div>
+      {activeTab === 'overview' && (
+        <>
+          {/* Статистика использования */}
+          {!!usage && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
+                <div className="text-xs text-body-color dark:text-dark-6">Последнее обновление</div>
+                <div className="text-sm text-dark dark:text-white font-medium">{usage.lastUpdatedAt ? new Date(usage.lastUpdatedAt).toLocaleString() : '—'}</div>
+              </div>
+              <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
+                <div className="text-xs text-body-color dark:text-dark-6">Последняя тема</div>
+                <div className="text-sm text-dark dark:text-white font-medium">{usage.lastThemeId || '—'}</div>
+              </div>
+              <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
+                <div className="text-xs text-body-color dark:text-dark-6">Сохранений</div>
+                <div className="text-sm text-dark dark:text-white font-medium">{usage.timesSaved ?? 0}</div>
+              </div>
+            </div>
+          )}
+
+          {/* Предустановленные темы в виде карточек */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {settings.availableThemes.map((t) => (
+              <ThemeCard key={t.id} theme={t} onSelect={handleSelectPreset} onPreview={(th) => previewMode && setServerTheme(th)} />
+            ))}
           </div>
-          <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
-            <div className="text-xs text-body-color dark:text-dark-6">Последняя тема</div>
-            <div className="text-sm text-dark dark:text-white font-medium">{usage.lastThemeId || '—'}</div>
+        </>
+      )}
+
+      {activeTab === 'editor' && (
+        <>
+          {/* Выбор предустановленных тем */}
+          <div className="space-y-3">
+            <label className="block text-sm font-medium text-dark dark:text-white">Предустановленная тема</label>
+            <select
+              value={currentTheme.id}
+              onChange={(e) => handleSelectPreset(e.target.value)}
+              className="w-full max-w-sm rounded-lg border border-stroke px-3 py-2 dark:border-dark-3 dark:bg-dark dark:text-white"
+            >
+              {settings.availableThemes.map((t) => (
+                <option key={t.id} value={t.id}>{t.name}</option>
+              ))}
+            </select>
+            <p className="text-xs text-body-color dark:text-dark-6">Можно настроить палитру ниже и сохранить как активную для проекта.</p>
           </div>
-          <div className="rounded-lg border border-stroke dark:border-dark-3 p-3">
-            <div className="text-xs text-body-color dark:text-dark-6">Сохранений</div>
-            <div className="text-sm text-dark dark:text-white font-medium">{usage.timesSaved ?? 0}</div>
+
+          {/* Редактор палитры (MVP) */}
+          <BasicThemeForm value={serverTheme} onChange={setServerTheme} />
+        </>
+      )}
+
+      {activeTab === 'editor' && (
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              setServerTheme(serverTheme);
+              setNotice({ type: 'success', text: 'Сброшено к последнему сохранению' });
+            }}
+            className="px-3 py-2 rounded-lg border border-stroke hover:bg-gray-50 dark:hover:bg-dark-3"
+          >
+            Сбросить к сохранённому
+          </button>
+        </div>
+      )}
+
+      {activeTab === 'overview' && (
+        <div className="space-y-4">
+          <div className="font-semibold text-dark dark:text-white">Предпросмотр элементов</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              className="rounded-xl border p-4"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                color: 'var(--color-text)',
+                borderColor: 'var(--color-border)'
+              }}
+            >
+              <div className="text-lg font-semibold mb-1">Карточка</div>
+              <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                Пример текста. Проверьте контраст и читабельность.
+              </div>
+              <div className="mt-3 flex gap-2">
+                <button
+                  className="px-3 py-2 rounded-lg text-white"
+                  style={{ backgroundColor: 'var(--color-primary)' }}
+                >
+                  Кнопка
+                </button>
+                <button
+                  className="px-3 py-2 rounded-lg"
+                  style={{
+                    color: 'var(--color-primary)',
+                    border: '1px solid var(--color-primary)'
+                  }}
+                >
+                  Обводка
+                </button>
+              </div>
+            </div>
+
+            <div
+              className="rounded-xl border p-4 space-y-3"
+              style={{ borderColor: 'var(--color-border)' }}
+            >
+              <label className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>Поле ввода</label>
+              <input
+                type="text"
+                placeholder="Текст..."
+                className="w-full rounded-lg px-3 py-2"
+                style={{
+                  backgroundColor: 'var(--color-surface)',
+                  color: 'var(--color-text)',
+                  border: '1px solid var(--color-border)'
+                }}
+              />
+              <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                Подпись/подсказка
+              </div>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Выбор предустановленных тем */}
-      <div className="space-y-3">
-        <label className="block text-sm font-medium text-dark dark:text-white">Предустановленная тема</label>
-        <select
-          value={currentTheme.id}
-          onChange={(e) => handleSelectPreset(e.target.value)}
-          className="w-full max-w-sm rounded-lg border border-stroke px-3 py-2 dark:border-dark-3 dark:bg-dark dark:text-white"
-        >
-          {settings.availableThemes.map((t) => (
-            <option key={t.id} value={t.id}>{t.name}</option>
-          ))}
-        </select>
-        <p className="text-xs text-body-color dark:text-dark-6">Можно настроить палитру ниже и сохранить как активную для проекта.</p>
-      </div>
-
-      {/* Редактор палитры (MVP) */}
-      <BasicThemeForm value={serverTheme} onChange={setServerTheme} />
-
-      {/* Кнопки управления */}
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => {
-            setServerTheme(serverTheme);
-            setNotice({ type: 'success', text: 'Сброшено к последнему сохранению' });
-          }}
-          className="px-3 py-2 rounded-lg border border-stroke hover:bg-gray-50 dark:hover:bg-dark-3"
-        >
-          Сбросить к сохранённому
-        </button>
-      </div>
-
-      {/* Блок предпросмотра UI элементов */}
-      <div className="space-y-4">
-        <div className="font-semibold text-dark dark:text-white">Предпросмотр элементов</div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Карточка */}
-          <div
-            className="rounded-xl border p-4"
-            style={{
-              backgroundColor: 'var(--color-surface)',
-              color: 'var(--color-text)',
-              borderColor: 'var(--color-border)'
-            }}
-          >
-            <div className="text-lg font-semibold mb-1">Карточка</div>
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              Пример текста. Проверьте контраст и читабельность.
-            </div>
-            <div className="mt-3 flex gap-2">
-              <button
-                className="px-3 py-2 rounded-lg text-white"
-                style={{ backgroundColor: 'var(--color-primary)' }}
-              >
-                Кнопка
-              </button>
-              <button
-                className="px-3 py-2 rounded-lg"
-                style={{
-                  color: 'var(--color-primary)',
-                  border: '1px solid var(--color-primary)'
+      {activeTab === 'templates' && (
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {templates.map(tpl => (
+              <TemplateCard
+                key={tpl.id}
+                template={tpl}
+                onInstall={(id) => {
+                  const cfg = installTemplate(id);
+                  if (cfg) {
+                    setServerTheme(cfg);
+                    setActiveTab('editor');
+                    setNotice({ type: 'success', text: 'Шаблон установлен. Отредактируйте и сохраните.' });
+                  }
                 }}
-              >
-                Обводка
-              </button>
-            </div>
+              />
+            ))}
           </div>
-
-          {/* Формы */}
-          <div
-            className="rounded-xl border p-4 space-y-3"
-            style={{ borderColor: 'var(--color-border)' }}
-          >
-            <label className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>Поле ввода</label>
-            <input
-              type="text"
-              placeholder="Текст..."
-              className="w-full rounded-lg px-3 py-2"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                color: 'var(--color-text)',
-                border: '1px solid var(--color-border)'
-              }}
-            />
-            <div className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              Подпись/подсказка
-            </div>
-          </div>
+          {templatesLoading && <div className="text-sm text-body-color dark:text-dark-6">Загрузка шаблонов...</div>}
         </div>
-      </div>
+      )}
 
-      {/* Импорт / Экспорт темы (MVP) */}
-      <div className="space-y-3">
-        <div className="font-semibold text-dark dark:text-white">Импорт/Экспорт</div>
-        <div className="flex items-center gap-3 flex-wrap">
-          <button
-            onClick={() => {
-              try {
-                const dataStr = JSON.stringify(serverTheme, null, 2);
-                const blob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'project-theme.json';
-                a.click();
-                URL.revokeObjectURL(url);
-                setNotice({ type: 'success', text: 'Экспорт выполнен' });
-              } catch (e: any) {
-                setNotice({ type: 'error', text: e?.message || 'Ошибка экспорта' });
-              }
-            }}
-            className="px-3 py-2 rounded-lg border border-stroke hover:bg-gray-50 dark:hover:bg-dark-3"
-          >
-            Экспорт JSON
-          </button>
-          <label className="px-3 py-2 rounded-lg border border-stroke cursor-pointer hover:bg-gray-50 dark:hover:bg-dark-3">
-            Импорт JSON
-            <input
-              type="file"
-              accept="application/json"
-              className="hidden"
-              onChange={async (e) => {
+      {activeTab === 'import' && (
+        <div className="space-y-3">
+          <div className="font-semibold text-dark dark:text-white">Импорт/Экспорт</div>
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              onClick={() => {
                 try {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  const text = await file.text();
-                  const parsed = JSON.parse(text);
-                  const imported = parsed?.theme || parsed;
-                  if (!imported?.colors?.light || !imported?.colors?.dark) {
-                    throw new Error('Неверный формат файла темы');
-                  }
-                  setServerTheme(imported);
-                  if (previewMode) {
-                    try {
-                      updateThemeVariant('light', imported.colors.light as any);
-                      updateThemeVariant('dark', imported.colors.dark as any);
-                    } catch {}
-                  }
-                  setNotice({ type: 'success', text: 'Тема импортирована (не забывайте сохранить)' });
-                } catch (err: any) {
-                  setNotice({ type: 'error', text: err?.message || 'Ошибка импорта' });
-                } finally {
-                  e.currentTarget.value = '';
+                  const dataStr = JSON.stringify(serverTheme, null, 2);
+                  const blob = new Blob([dataStr], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'project-theme.json';
+                  a.click();
+                  URL.revokeObjectURL(url);
+                  setNotice({ type: 'success', text: 'Экспорт выполнен' });
+                } catch (e: any) {
+                  setNotice({ type: 'error', text: e?.message || 'Ошибка экспорта' });
                 }
               }}
-            />
-          </label>
+              className="px-3 py-2 rounded-lg border border-stroke hover:bg-gray-50 dark:hover:bg-dark-3"
+            >
+              Экспорт JSON
+            </button>
+            <label className="px-3 py-2 rounded-lg border border-stroke cursor-pointer hover:bg-gray-50 dark:hover:bg-dark-3">
+              Импорт JSON
+              <input
+                type="file"
+                accept="application/json"
+                className="hidden"
+                onChange={async (e) => {
+                  try {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const text = await file.text();
+                    const parsed = JSON.parse(text);
+                    const imported = parsed?.theme || parsed;
+                    if (!imported?.colors?.light || !imported?.colors?.dark) {
+                      throw new Error('Неверный формат файла темы');
+                    }
+                    setServerTheme(imported);
+                    if (previewMode) {
+                      try {
+                        updateThemeVariant('light', imported.colors.light as any);
+                        updateThemeVariant('dark', imported.colors.dark as any);
+                      } catch {}
+                    }
+                    setNotice({ type: 'success', text: 'Тема импортирована (не забывайте сохранить)' });
+                  } catch (err: any) {
+                    setNotice({ type: 'error', text: err?.message || 'Ошибка импорта' });
+                  } finally {
+                    e.currentTarget.value = '';
+                  }
+                }}
+              />
+            </label>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

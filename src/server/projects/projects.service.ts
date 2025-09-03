@@ -153,10 +153,10 @@ export class ProjectsService {
   sanitizeThemeConfig(themeConfig: any): any {
     const clone = JSON.parse(JSON.stringify(themeConfig || {}));
     if (clone && typeof clone.customCss === 'string') {
-      let css = clone.customCss;
+      let css: string = clone.customCss;
       // Запрещаем @import и url(javascript:)
       css = css.replace(/@import[^;]+;?/gi, '');
-      css = css.replace(/url\(([^)]+)\)/gi, (m, p1) => {
+      css = css.replace(/url\(([^)]+)\)/gi, (m: string, p1: string) => {
         const val = String(p1 || '').replace(/["']/g, '').trim();
         if (/^javascript:/i.test(val)) return 'url(about:blank)';
         return `url(${p1})`;
