@@ -1,7 +1,0 @@
-LOAD DATABASE
-     FROM sqlite:///data/dev.db
-     INTO postgresql://situs:situs_password@situs-postgres:5432/situs
- WITH data only,
-      batch rows = 1000,
-      on error stop
- SET work_mem to '64MB', maintenance_work_mem to '256MB';

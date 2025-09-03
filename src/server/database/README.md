@@ -7,7 +7,7 @@
 - `prisma.service.ts` — инициализация Prisma, lifecycle hooks
 
 ## Окружение
-- `DATABASE_URL` — см. `.env` (dev: SQLite `prisma/dev.db`)
+- `DATABASE_URL` — см. `.env` (PostgreSQL)
 - Генерация клиента: `npx prisma generate`
 - Синхронизация схемы: `npx prisma db push`
 

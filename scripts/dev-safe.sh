@@ -62,8 +62,8 @@ ENV_FILE="../.env"
 if [ ! -f "$ENV_FILE" ]; then
     log_warning ".env file not found, creating basic one..."
     cat > "$ENV_FILE" << EOF
-# Database
-DATABASE_URL="file:./prisma/dev.db"
+# Database (PostgreSQL)
+DATABASE_URL="postgresql://situs:situs_password@localhost:5432/situs?schema=public"
 
 # Server
 PORT=3001
@@ -89,15 +89,9 @@ fi
 log_success "Prisma schema valid"
 
 # 5. Проверяем и создаем базу данных
-log_info "Checking database..."
-if [ ! -f "prisma/dev.db" ]; then
-    log_warning "Database not found, creating..."
-    npx prisma db push --force-reset
-    log_success "Database created"
-else
-    log_info "Applying pending migrations..."
-    npx prisma db push 2>/dev/null || true
-fi
+log_info "Syncing database schema (PostgreSQL)..."
+npx prisma db push 2>/dev/null || true
+log_success "Database schema synced"
 
 # 6. Генерируем Prisma Client
 log_info "Generating Prisma Client..."
@@ -138,7 +132,7 @@ log_info "Starting backend server..."
 log_success "🚀 Backend starting on port 3001"
 
 # Запускаем с правильными переменными окружения
-export DATABASE_URL="file:../prisma/dev.db"
+export DATABASE_URL="postgresql://situs:situs_password@localhost:5432/situs?schema=public"
 export PORT=3001
 export NODE_ENV=development
 

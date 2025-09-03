@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { PrismaClient, ProjectStatus, UserRole, UserStatus, ProductType, PageStatus, PageType } from '@prisma/client';
+import { PrismaClient, ProjectStatus, GlobalRole, UserStatus, ProductType, ProductStatus, PageStatus, PageType } from '@prisma/client';
 
 const prisma = new PrismaClient({ log: ['warn', 'error'] });
 
@@ -22,7 +22,7 @@ async function ensureDemoOwner() {
       username,
       email,
       password: 'dev-password',
-      role: UserRole.BUSINESS,
+      globalRole: GlobalRole.BUSINESS,
       status: UserStatus.ACTIVE,
     },
   });
@@ -65,7 +65,7 @@ async function main() {
         name: 'Website',
         description: 'Корпоративный сайт проекта',
         type: ProductType.WEBSITE,
-        status: 'ACTIVE',
+        status: ProductStatus.ACTIVE,
         projectId: created.id,
         settings: '{}',
       },

@@ -1,4 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+// Опциональное подключение локального плагина. В Docker сборке отключаем через TG_PLUGIN=off
+const tgPlugin = (() => {
+  try {
+    if (process.env.TG_PLUGIN === 'off') return null;
+    return require("./Upload/react-pro-components-main/plugin.js");
+  } catch (_e) {
+    return null;
+  }
+})();
+
 export default {
   content: [
     "./index.html",
@@ -21,7 +31,7 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#4C1D95", // Фиолетовый для админки
+          DEFAULT: "#2881C6", // Обновлённый основной цвет проекта
         },
         secondary: {
           DEFAULT: "#13C296",
@@ -135,7 +145,7 @@ export default {
     },
   },
   plugins: [
-    require("./Upload/react-pro-components-main/plugin.js"),
+    tgPlugin,
     require("tailwindcss-animate"),
-  ],
+  ].filter(Boolean),
 } 

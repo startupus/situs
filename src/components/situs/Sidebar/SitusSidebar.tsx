@@ -292,8 +292,8 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
               </Link>
             ) : (
               <Link to="/">
-                <div className="h-8 w-8 bg-primary rounded flex items-center justify-center text-white font-bold text-lg">
-                  S
+                <div className="h-8 w-8 rounded flex items-center justify-center overflow-hidden">
+                  <img src="/logo.svg" alt="Situs" className="h-8 w-8 object-contain" />
                 </div>
               </Link>
             )}

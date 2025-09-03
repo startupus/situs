@@ -59,7 +59,7 @@ Git pre-commit hook автоматически выполняет:
 
 ```env
 # Database
-DATABASE_URL="file:./prisma/dev.db"
+DATABASE_URL="postgresql://situs:situs_password@localhost:5432/situs?schema=public"
 
 # Server
 PORT=3001
@@ -118,7 +118,7 @@ cd backend && npx prisma generate
 ```bash
 # Пересоздание БД
 cd backend
-rm -f ../prisma/dev.db
+echo "PostgreSQL only"
 npx prisma db push --force-reset
 ```
 

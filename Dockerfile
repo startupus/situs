@@ -1,4 +1,4 @@
-# Simple backend container (NestJS + Prisma SQLite)
+# Backend container (NestJS + Prisma PostgreSQL)
 FROM node:20-alpine AS base
 ENV NODE_ENV=development
 WORKDIR /app

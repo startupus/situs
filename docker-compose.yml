@@ -27,6 +27,8 @@ services:
     image: postgres:15
     container_name: situs-postgres-test
     restart: always
+    profiles:
+      - test
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-situs_test}
       POSTGRES_USER: ${POSTGRES_USER:-situs}
@@ -126,6 +128,8 @@ services:
     networks:
       - situs-network
       - default
+    profiles:
+      - migrate
 
 volumes:
   postgres_data:

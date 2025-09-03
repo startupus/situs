@@ -8,9 +8,9 @@
 /* ===== CSS ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ ===== */
 :root {
   /* Основные цвета темы - будут перезаписаны ThemeProvider */
-  --color-primary: #4C1D95;
-  --color-primary-hover: #7C3AED;
-  --color-primary-active: #5B21B6;
+  --color-primary: #2881C6;
+  --color-primary-hover: #3B92D4;
+  --color-primary-active: #1F6AA3;
   --color-secondary: #13c296;
   --color-accent: #9055FD;
   
@@ -43,9 +43,9 @@
 /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
 html.dark {
   /* Основные цвета темы для темного режима */
-  --color-primary: #7C3AED;
-  --color-primary-hover: #8B5CF6;
-  --color-primary-active: #6D28D9;
+  --color-primary: #2881C6;
+  --color-primary-hover: #3B92D4;
+  --color-primary-active: #1F6AA3;
   --color-secondary: #10B981;
   --color-accent: #A855F7;
   
@@ -328,7 +328,7 @@ body {
 
 /* Стили для hover:bg-blue-dark */
 .redaktus-canvas .hover\:bg-blue-dark:hover {
-  background-color: #1B44C8 !important;
+  background-color: var(--color-primary-active) !important;
 }
 
 /* Светлая тема - переопределяем только критичные классы */

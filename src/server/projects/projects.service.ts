@@ -89,9 +89,9 @@ export class ProjectsService {
       name: 'Стандартная тема',
       colors: {
         light: {
-          primary: '#4C1D95',
-          primaryHover: '#7C3AED',
-          primaryActive: '#5B21B6',
+          primary: '#2881C6',
+          primaryHover: '#3B92D4',
+          primaryActive: '#1F6AA3',
           secondary: '#13C296',
           accent: '#9055FD',
           success: '#22AD5C',
@@ -106,9 +106,9 @@ export class ProjectsService {
           borderLight: '#F3F4F6'
         },
         dark: {
-          primary: '#8B5CF6',
-          primaryHover: '#A78BFA',
-          primaryActive: '#7C3AED',
+          primary: '#2881C6',
+          primaryHover: '#3B92D4',
+          primaryActive: '#1F6AA3',
           secondary: '#10B981',
           accent: '#34D399',
           success: '#34D399',
@@ -119,8 +119,8 @@ export class ProjectsService {
           surface: '#1E1E3F',
           text: '#F1F5F9',
           textSecondary: '#CBD5E1',
-          border: '#4C1D95',
-          borderLight: '#6D28D9'
+          border: '#1F6AA3',
+          borderLight: '#3B92D4'
         }
       }
     };

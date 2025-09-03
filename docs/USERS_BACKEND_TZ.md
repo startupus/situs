@@ -6,7 +6,7 @@
 - Обеспечить фронту стабильные API для страницы `/users` и связанных функций: список, статистика, фильтры/сортировка/пагинация, массовые операции, управление ролями/статусами, группы пользователей (Joomla-like), уровни доступа (view levels), внешние провайдеры, приглашения, настройки.
 
 ## Технологии и окружение
-- NestJS (REST, Swagger), Prisma ORM (SQLite dev; совместимо с PostgreSQL prod), JWT аутентификация, RBAC.
+- NestJS (REST, Swagger), Prisma ORM (PostgreSQL), JWT аутентификация, RBAC.
 - Глобальный префикс: `/api`.
 - Формат ответов: ApiResponse.
 - CORS по `.env` (`CORS_ORIGINS`). Порт API: `PORT=3002`.
@@ -149,7 +149,7 @@
 
 ## Инструкция для ИИ-агента: пошагово «что делать и откуда брать»
 1) Настроить окружение:
-   - `.env`: `PORT=3002`, `DATABASE_URL=file:./prisma/dev.db`, `CORS_ORIGINS=...`.
+   - `.env`: `PORT=3002`, `DATABASE_URL=postgresql://<user>:<pass>@localhost:5432/situs?schema=public`, `CORS_ORIGINS=...`.
    - Команды: `npx prisma db push && npx prisma generate`.
    - Старт API: `npm run serve:api:dist` (или dev режим).
 2) Реализовать/проверить Users API:

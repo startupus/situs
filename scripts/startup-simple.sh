@@ -36,21 +36,18 @@ fi
 log_success "Порт 3001 свободен"
 
 # 3. ПРОВЕРЯЕМ БАЗУ ДАННЫХ (минимально)
-log_info "Проверка базы данных..."
-if [ ! -f "../prisma/dev.db" ]; then
-    log_info "Создаем базу данных..."
-    cd ..
-    npx prisma db push --force-reset >/dev/null 2>&1 || true
-    cd backend
-fi
-log_success "База данных готова"
+log_info "Синхронизация схемы БД (PostgreSQL)..."
+cd ..
+npx prisma db push >/dev/null 2>&1 || true
+cd backend
+log_success "Схема БД синхронизирована"
 
 # 4. ЗАПУСКАЕМ СЕРВЕР С ТАЙМАУТОМ
 log_info "Запуск backend сервера..."
 cd backend
 
 # Запускаем с правильными переменными
-export DATABASE_URL="file:../prisma/dev.db"
+export DATABASE_URL="postgresql://situs:situs_password@localhost:5432/situs?schema=public"
 export PORT=3001
 export NODE_ENV=development
 

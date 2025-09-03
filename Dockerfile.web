@@ -1,5 +1,7 @@
 # Frontend build and Nginx serve
 FROM node:20-alpine AS build
+ARG TG_PLUGIN=off
+ENV TG_PLUGIN=${TG_PLUGIN}
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps

@@ -6,7 +6,7 @@
 /* Глобальные переменные для тем - совместимость с TailGrids */
 :root {
   /* Классическая синяя тема (по умолчанию) */
-  --color-primary: #1E40AF;
+  --color-primary: #2881C6;
   --color-secondary: #059669;
   --color-accent: #7C3AED;
   --color-success: #22AD5C;
@@ -15,7 +15,7 @@
   --color-info: #2D68F8;
   
   /* Дублирование без префикса для максимальной совместимости */
-  --primary: #1E40AF;
+  --primary: #2881C6;
   --secondary: #059669;
   --accent: #7C3AED;
   --success: #22AD5C;
