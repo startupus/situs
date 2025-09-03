@@ -40,6 +40,60 @@ npm run dev:situs
 - **Backend API**: http://localhost:3002
 - **API Health Check**: http://localhost:3002/health
 
+### Проверка работоспособности
+
+```bash
+# Автоматическая проверка всех сервисов
+node scripts/health-monitor.js
+
+# Или через npm script
+npm run health:check
+```
+
+### Основные npm скрипты
+
+```bash
+# Разработка
+npm run dev:situs          # Frontend (Vite, порт 5177)
+npm run dev:api:watch      # Backend (NestJS, порт 3002)
+npm run dev:full           # Оба сервиса одновременно
+```
+
+# Сборка
+
+npm run build # Frontend сборка
+npm run build:safe # Сборка с проверкой TypeScript
+npm run nestjs:build # Backend сборка
+
+```
+
+# Окружения
+npm run env:dev            # Настройка development
+npm run env:prod           # Настройка production
+npm run env:docker         # Настройка Docker
+```
+
+# Валидация и мониторинг
+
+npm run validate:build # Валидация конфигурации
+npm run validate:pre-deploy # Полная проверка перед деплоем
+npm run health:check # Быстрая проверка сервисов
+
+```
+
+# Тестирование
+npm run test:e2e           # E2E тесты (Playwright)
+npm run test               # Unit тесты (Vitest)
+```
+
+# База данных
+
+npm run db:push # Синхронизация схемы
+npm run db:seed:admin # Сид админ данных
+npm run db:seed:demo # Демо данные
+
+```
+
 ## ✨ Основные возможности
 
 ### 🔐 Система аутентификации
@@ -81,24 +135,26 @@ npm run dev:situs
 ## 📁 Структура проекта
 
 ```
+
 Situs/
-├── src/                    # Frontend React приложение
-│   ├── api/               # API слой
-│   ├── components/        # React компоненты
-│   ├── contexts/          # React контексты
-│   ├── pages/             # Страницы приложения
-│   └── ...
-├── src/server/            # Backend (NestJS, единый бэкенд)
-│   ├── projects/          # Проекты (CRUD, статус, доступы, события)
-│   ├── pages/             # Website Pages API (список/PUT/reorder)
-│   ├── realtime/          # Глобальная шина событий (SSE)
-│   ├── database/          # Prisma service и модуль БД
-│   ├── common/            # Фильтры/интерсепторы/пайпы
-│   ├── health/            # Контроллер здоровья
-│   └── main.ts            # Точка входа Nest
-├── docs/                  # Документация
+├── src/ # Frontend React приложение
+│ ├── api/ # API слой
+│ ├── components/ # React компоненты
+│ ├── contexts/ # React контексты
+│ ├── pages/ # Страницы приложения
+│ └── ...
+├── src/server/ # Backend (NestJS, единый бэкенд)
+│ ├── projects/ # Проекты (CRUD, статус, доступы, события)
+│ ├── pages/ # Website Pages API (список/PUT/reorder)
+│ ├── realtime/ # Глобальная шина событий (SSE)
+│ ├── database/ # Prisma service и модуль БД
+│ ├── common/ # Фильтры/интерсепторы/пайпы
+│ ├── health/ # Контроллер здоровья
+│ └── main.ts # Точка входа Nest
+├── docs/ # Документация
 └── ...
-```
+
+````
 
 ### Где что лежит (быстрый навигатор)
 
@@ -182,6 +238,11 @@ Situs/
   - PostgreSQL 15 — основная база данных
   - `scripts/` — сиды/утилиты (`seed-demo-projects.ts` и пр.)
 
+- Мониторинг и автоматизация
+  - `scripts/health-monitor.js` — автоматический мониторинг здоровья сервисов
+  - `scripts/setup-environment.sh` — настройка окружений (dev/prod/docker)
+  - `scripts/validate-build.js` — валидация сборки с уведомлениями об ошибках
+
 - Тестирование
   - `tests/e2e/` — Playwright E2E
   - `tests/unit/`, `tests/integration/`, `src/api/__tests__/` — unit/integration
@@ -207,6 +268,14 @@ Situs/
 - **Prisma** (PostgreSQL)
 - Модульная архитектура: projects, pages (Website), realtime, health, database, common
 - Реалтайм через SSE: эндпоинт `GET /api/projects/events` (text/event-stream)
+
+### Мониторинг и Health Checks
+
+- **Health Monitor Service**: `scripts/health-monitor.js`
+- **Автоматическая диагностика** всех сервисов (API, Frontend, Prisma Studio)
+- **Мониторинг Docker контейнеров** и системных ресурсов
+- **Генерация отчетов** для анализа проблем и трендов
+- **Непрерывный мониторинг** в production окружениях
 
 #### Security & Access
 
@@ -382,7 +451,7 @@ Situs/
 
 ```bash
 PORT=3002 npm run serve:api:dist
-```
+````
 
 Проверка здоровья: `http://localhost:3002/health`
 
@@ -734,6 +803,340 @@ npx playwright test
 - **Мемоизация**: `useCallback` и `useMemo` для оптимизации рендеринга
 - **Виртуализация**: Для больших списков данных
 - **Кэширование**: Разумное кэширование API запросов
+
+## 🔍 Мониторинг и Health Checks
+
+### Health Monitor Service
+
+Проект включает в себя автоматизированную систему мониторинга здоровья сервисов через `scripts/health-monitor.js`. Этот сервис критически важен для обеспечения стабильности и быстрой диагностики проблем в различных окружениях.
+
+#### Назначение Health Monitor
+
+- **Автоматическая диагностика** состояния всех сервисов (API, Frontend, Prisma Studio)
+- **Мониторинг Docker контейнеров** и их health status
+- **Проверка системных ресурсов** (диск, память, версии Node.js/npm)
+- **Генерация отчетов** для анализа проблем и трендов
+- **Непрерывный мониторинг** в production окружениях
+
+#### Использование
+
+```bash
+# Разовый health check
+node scripts/health-monitor.js
+
+# Непрерывный мониторинг (каждые 30 секунд)
+node scripts/health-monitor.js --continuous
+
+# Быстрая проверка через npm script
+npm run health:check
+```
+
+#### Структура отчета
+
+Health Monitor генерирует детальный JSON отчет (`health-report.json`) с информацией о:
+
+- Статусе всех сервисов (healthy/unhealthy)
+- Состоянии Docker контейнеров
+- Системных ресурсах
+- Временных метках и окружении
+- Общем статусе здоровья системы
+
+---
+
+## 📋 Правила разработки
+
+### 🚨 Критические принципы для предотвращения ошибок
+
+#### 1. Обязательные проверки перед коммитом
+
+```bash
+# ВСЕГДА выполняйте перед коммитом:
+npm run validate:build      # Валидация конфигурации
+npm run health:check        # Проверка сервисов
+npm run test:e2e           # E2E тесты
+```
+
+#### 2. Работа с окружениями
+
+**ЗАПРЕЩЕНО**:
+
+- ❌ Ручное редактирование `.env` файлов
+- ❌ Хардкод переменных окружения в коде
+- ❌ Использование `NODE_ENV=development` в production
+
+**ОБЯЗАТЕЛЬНО**:
+
+- ✅ Использовать `./scripts/setup-environment.sh [environment]`
+- ✅ Всегда указывать `NODE_ENV=production` в Docker
+- ✅ Проверять переменные через `npm run validate:build`
+
+#### 3. Стандарты кодирования
+
+##### TypeScript
+
+```typescript
+// ✅ ПРАВИЛЬНО - строгая типизация
+interface ServiceConfig {
+  name: string;
+  url: string;
+  timeout: number;
+  expectedStatus: number;
+}
+
+// ❌ НЕПРАВИЛЬНО - any типы
+function checkService(config: any): any {
+  // ...
+}
+```
+
+##### Error Handling
+
+```typescript
+// ✅ ПРАВИЛЬНО - обработка ошибок с fallback
+const checkServiceHealth = async (service: ServiceConfig) => {
+  try {
+    const response = await makeRequest(service.url, service.timeout);
+    return { success: true, response };
+  } catch (error) {
+    log.error(`${service.name} health check failed: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+};
+
+// ❌ НЕПРАВИЛЬНО - игнорирование ошибок
+const checkService = async (url: string) => {
+  const response = await fetch(url); // Может упасть!
+  return response.json();
+};
+```
+
+##### Logging
+
+```typescript
+// ✅ ПРАВИЛЬНО - структурированное логирование
+log.info(`Checking ${service.name} (attempt ${attempt}/${maxRetries})...`);
+log.success(`${service.name} is healthy`);
+log.error(`${service.name} health check failed: ${error.message}`);
+
+// ❌ НЕПРАВИЛЬНО - console.log без контекста
+console.log('Service check');
+console.log('OK');
+console.log('Error');
+```
+
+#### 4. Требования к тестированию
+
+##### Обязательные тесты
+
+```bash
+# Перед каждым PR:
+npm run test:e2e                    # E2E тесты
+npm run validate:build             # Валидация сборки
+node scripts/health-monitor.js     # Health check
+```
+
+##### E2E тесты для критических компонентов
+
+```typescript
+// ✅ ОБЯЗАТЕЛЬНО тестировать:
+test('Menu displays correctly in all environments', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('nav a[href="/"]')).toBeVisible();
+  await expect(page.locator('nav a[href="/projects"]')).toBeVisible();
+});
+
+test('API health endpoint responds correctly', async ({ page }) => {
+  const response = await page.request.get('/api/health');
+  expect(response.status()).toBe(200);
+  const data = await response.json();
+  expect(data.status).toBe('ok');
+});
+```
+
+#### 5. Согласование изменений
+
+##### Workflow для изменений
+
+1. **Создание feature branch** от `main`
+2. **Локальная валидация**: `npm run validate:build`
+3. **Тестирование**: `npm run test:e2e`
+4. **Health check**: `node scripts/health-monitor.js`
+5. **Code review** с фокусом на:
+   - Правильность обработки ошибок
+   - Соответствие стандартам логирования
+   - Влияние на health checks
+   - Совместимость с разными окружениями
+
+##### Критерии для merge
+
+- ✅ Все тесты проходят
+- ✅ Health monitor показывает healthy status
+- ✅ Валидация сборки успешна
+- ✅ Нет breaking changes в API
+- ✅ Документация обновлена
+
+---
+
+## ⚠️ Типичные ошибки и их предотвращение
+
+### 1. Проблемы с окружениями
+
+#### Ошибка: "Menu not displaying in production"
+
+```bash
+# ❌ ПРОБЛЕМА: NODE_ENV=development в Docker
+ENV NODE_ENV=development
+
+# ✅ РЕШЕНИЕ: Правильная настройка окружения
+./scripts/setup-environment.sh docker
+# Проверяет NODE_ENV=production в Docker
+```
+
+#### Ошибка: "API not responding"
+
+```bash
+# ❌ ПРОБЛЕМА: Неправильные CORS настройки
+CORS_ORIGINS=http://localhost:3000
+
+# ✅ РЕШЕНИЕ: Использование правильного env файла
+npm run env:prod  # Устанавливает правильные CORS_ORIGINS
+```
+
+### 2. Проблемы с Health Checks
+
+#### Ошибка: "Health check timeout"
+
+```typescript
+// ❌ ПРОБЛЕМА: Слишком короткий timeout
+const response = await fetch('/api/health', { timeout: 1000 });
+
+// ✅ РЕШЕНИЕ: Адекватный timeout с retry
+const response = await makeRequest('/api/health', 5000);
+// makeRequest включает retry логику
+```
+
+#### Ошибка: "Service marked as unhealthy"
+
+```typescript
+// ❌ ПРОБЛЕМА: Игнорирование ошибок
+const checkHealth = async () => {
+  try {
+    await fetch('/api/health');
+  } catch (error) {
+    // Игнорируем ошибку!
+  }
+};
+
+// ✅ РЕШЕНИЕ: Правильная обработка с fallback
+const checkHealth = async () => {
+  try {
+    const response = await makeRequest('/api/health');
+    return { success: true, response };
+  } catch (error) {
+    log.error(`Health check failed: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+};
+```
+
+### 3. Проблемы с мониторингом
+
+#### Ошибка: "Health monitor not detecting issues"
+
+```bash
+# ❌ ПРОБЛЕМА: Запуск без continuous режима
+node scripts/health-monitor.js  # Только разовая проверка
+
+# ✅ РЕШЕНИЕ: Непрерывный мониторинг
+node scripts/health-monitor.js --continuous
+```
+
+#### Ошибка: "False positive health reports"
+
+```typescript
+// ❌ ПРОБЛЕМА: Неполная проверка сервиса
+const checkService = async (url: string) => {
+  const response = await fetch(url);
+  return response.ok; // Только HTTP статус!
+};
+
+// ✅ РЕШЕНИЕ: Комплексная проверка
+const checkService = async (service: ServiceConfig) => {
+  const response = await makeRequest(service.url, service.timeout);
+
+  // Проверяем статус код
+  if (response.status !== service.expectedStatus) {
+    throw new Error(`Expected ${service.expectedStatus}, got ${response.status}`);
+  }
+
+  // Проверяем тело ответа
+  if (service.expectedBody) {
+    const body = JSON.parse(response.body);
+    for (const [key, expectedValue] of Object.entries(service.expectedBody)) {
+      if (body[key] !== expectedValue) {
+        throw new Error(`Expected ${key}=${expectedValue}, got ${body[key]}`);
+      }
+    }
+  }
+
+  return { success: true, response };
+};
+```
+
+---
+
+## 🎯 Рекомендации для новых участников команды
+
+### Первые шаги
+
+1. **Изучите health monitor**:
+
+   ```bash
+   # Запустите и изучите отчет
+   node scripts/health-monitor.js
+   cat health-report.json
+   ```
+
+2. **Настройте окружение**:
+
+   ```bash
+   # Используйте автоматическую настройку
+   ./scripts/setup-environment.sh development
+   ```
+
+3. **Проверьте работоспособность**:
+   ```bash
+   # Полная валидация
+   npm run validate:pre-deploy
+   ```
+
+### Принципы работы
+
+- **Всегда используйте health monitor** перед деплоем
+- **Не игнорируйте предупреждения** в логах
+- **Тестируйте в разных окружениях** (dev, docker, production)
+- **Документируйте изменения** в health checks
+- **Следуйте стандартам логирования** для лучшей диагностики
+
+### Полезные команды
+
+```bash
+# Быстрая диагностика
+npm run health:check
+
+# Полная валидация
+npm run validate:pre-deploy
+
+# Настройка окружения
+npm run env:dev    # Development
+npm run env:prod   # Production
+npm run env:docker # Docker
+
+# Непрерывный мониторинг
+node scripts/health-monitor.js --continuous
+```
+
+---
 
 ## 📄 Лицензия
 

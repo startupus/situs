@@ -126,7 +126,7 @@ const HorizontalMenu4 = () => {
 
 export default HorizontalMenu4;
 
-const NavItem = ({ link, menu }) => {
+const NavItem = ({ link, menu }: { link: string; menu: string }) => {
   return (
     <li>
       <a
@@ -139,7 +139,7 @@ const NavItem = ({ link, menu }) => {
   );
 };
 
-const DropdownItem = ({ link, name }) => {
+const DropdownItem = ({ link, name }: { link: string; name: string }) => {
   return (
     <a
       href={link}

@@ -45,7 +45,18 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
   const [adminItems, setAdminItems] = useState<AdminItem[] | null>(null);
   const [systemProjectItems, setSystemProjectItems] = useState<AdminItem[] | null>(null);
   const [projectItems, setProjectItems] = useState<AdminItem[] | null>(null);
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const sseRef = useRef<EventSource | null>(null);
+
+  // Fallback меню для случаев недоступности API
+  const fallbackAdminItems: AdminItem[] = [
+    { title: 'Дашборд', to: '/', icon: 'FiGrid', iconLibrary: 'fi' },
+    { title: 'Проекты', to: '/projects', icon: 'FiFolder', iconLibrary: 'fi' },
+    { title: 'Пользователи', to: '/users', icon: 'FiUsers', iconLibrary: 'fi' },
+    { title: 'Заказы', to: '/orders', icon: 'FiShoppingCart', iconLibrary: 'fi' },
+    { title: 'Настройки', to: '/profile-settings', icon: 'FiSettings', iconLibrary: 'fi' },
+  ];
 
   // Резолв иконки из настроек пункта меню (icon + iconLibrary)
   const resolveIconNode = useCallback((item?: { icon?: string; iconLibrary?: string }, fallback?: React.ReactNode) => {
@@ -111,21 +122,43 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
     let aborted = false;
     (async () => {
       try {
+        setIsLoading(true);
+        setApiError(null);
+
+        // Отладочная информация
+        console.log('[SIDEBAR] Loading admin menu...', {
+          environment: process.env.NODE_ENV,
+          apiEndpoint: '/api/ui/admin-sidebar',
+          timestamp: new Date().toISOString(),
+        });
+
         const res = await fetch('/api/ui/admin-sidebar');
         const json = await res.json();
+
         if (!aborted && json?.success && Array.isArray(json.data)) {
           setAdminItems(json.data as AdminItem[]);
+          console.log('[SIDEBAR] Admin menu loaded successfully:', json.data.length, 'items');
+
           if (!json.data.length) {
-            try {
-              console.warn('[SIDEBAR] admin-sidebar is empty at init');
-            } catch {}
+            console.warn('[SIDEBAR] admin-sidebar is empty at init - using fallback');
+            setAdminItems(fallbackAdminItems);
           }
         } else {
-          try {
-            console.warn('[SIDEBAR] failed to load admin-sidebar at init');
-          } catch {}
+          console.warn('[SIDEBAR] Invalid API response - using fallback menu');
+          setApiError('Invalid API response');
+          setAdminItems(fallbackAdminItems);
         }
-      } catch {}
+      } catch (error) {
+        console.error('[SIDEBAR] Failed to load admin-sidebar:', error);
+        if (!aborted) {
+          setApiError(error instanceof Error ? error.message : 'Network error');
+          setAdminItems(fallbackAdminItems);
+        }
+      } finally {
+        if (!aborted) {
+          setIsLoading(false);
+        }
+      }
     })();
     return () => {
       aborted = true;
@@ -271,6 +304,23 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
 
   const topItems: SitusNavItem[] = useMemo(() => {
     if (projectId) return [];
+
+    // Если загружается - показываем fallback меню
+    if (isLoading) {
+      return fallbackAdminItems.map((mi) => {
+        const fallback =
+          mi.title === 'Проекты' ? (
+            <FiFolder size={18} aria-hidden />
+          ) : mi.title === 'Пользователи' ? (
+            <FiUsers size={18} aria-hidden />
+          ) : (
+            <FiGrid size={18} aria-hidden />
+          );
+        const iconNode = resolveIconNode(mi, fallback);
+        return { divider: false, link: mi.to, text: mi.title, icon: iconNode } as SitusNavItem;
+      });
+    }
+
     if (adminItems?.length) {
       const mapped = adminItems.map((mi) => {
         const fallback =
@@ -286,9 +336,21 @@ const SitusSidebar: React.FC<SitusSidebarProps> = ({ sidebarOpen, setSidebarOpen
       });
       return mapped;
     }
-    // Без локального фолбэка возвращаем пустой список, чтобы навигация полагалась только на API
-    return [];
-  }, [projectId, adminItems, resolveIconNode]);
+
+    // В случае ошибки или пустого ответа - используем fallback
+    return fallbackAdminItems.map((mi) => {
+      const fallback =
+        mi.title === 'Проекты' ? (
+          <FiFolder size={18} aria-hidden />
+        ) : mi.title === 'Пользователи' ? (
+          <FiUsers size={18} aria-hidden />
+        ) : (
+          <FiGrid size={18} aria-hidden />
+        );
+      const iconNode = resolveIconNode(mi, fallback);
+      return { divider: false, link: mi.to, text: mi.title, icon: iconNode } as SitusNavItem;
+    });
+  }, [projectId, adminItems, resolveIconNode, isLoading, fallbackAdminItems]);
 
   const computedOpen = typeof sidebarOpen === 'boolean' ? sidebarOpen : !!isOpen;
 

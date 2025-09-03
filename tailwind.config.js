@@ -10,7 +10,13 @@ const tgPlugin = (() => {
 })();
 
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    // Исключаем node_modules для производительности
+    '!./src/**/node_modules/**',
+    '!./node_modules/**',
+  ],
   darkMode: 'class', // Для поддержки изолированных тем интерфейса и канваса
   theme: {
     screens: {

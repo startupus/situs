@@ -34,8 +34,9 @@ export default defineConfig({
     strictPort: true,
     host: true,
     hmr: {
-      port: 24678, // Используем отдельный порт для HMR
+      port: process.env.VITE_HMR_PORT ? parseInt(process.env.VITE_HMR_PORT) : 24678,
       host: 'localhost',
+      clientPort: process.env.VITE_HMR_CLIENT_PORT ? parseInt(process.env.VITE_HMR_CLIENT_PORT) : undefined,
     },
     proxy: {
       '/api': {

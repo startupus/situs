@@ -115,7 +115,7 @@ const HorizontalMenu3 = () => {
 
 export default HorizontalMenu3;
 
-const SubmenuItem = ({ link, name }) => {
+const SubmenuItem = ({ link, name }: { link: string; name: string }) => {
   return (
     <a
       href={link}
