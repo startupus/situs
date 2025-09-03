@@ -38,6 +38,8 @@ import { UiModule } from './ui/ui.module';
 import { AdminScreensModule } from './admin-screens/admin-screens.module';
 import { IntegrationsModule } from './integrations/integrations.module';
 import { DemoModule } from './demo/demo.module';
+import { TenantModule } from './tenant/tenant.module';
+import { TenantMonitoringModule } from './monitoring/tenant-monitoring.module';
 
 /**
  * Основной модуль приложения
@@ -108,6 +110,10 @@ import { DemoModule } from './demo/demo.module';
     AdminScreensModule,
     IntegrationsModule,
     DemoModule,
+
+    // Multi-tenant system
+    TenantModule,
+    TenantMonitoringModule,
 
     // MCP модуль временно отключён в dev, чтобы не блокировать сборку
     // SitusMcpModule,
