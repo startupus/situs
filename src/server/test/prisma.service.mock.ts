@@ -9,7 +9,7 @@ export class PrismaServiceMock {
   }
 
   project = {
-    findUnique: async: any => (args: any) => {
+    findUnique: async (args: any) => {
       const where = args?.where || {};
       const id = where.id ?? null;
       const slug = where.slug ?? null;
@@ -28,7 +28,7 @@ export class PrismaServiceMock {
       }
       return row as any;
     },
-    findFirst: async: any => (args: any) => {
+    findFirst: async (args: any) => {
       const where = args?.where || {};
       const list = [...this.projects.values()].filter((p) => {
         let ok = true;
@@ -45,7 +45,7 @@ export class PrismaServiceMock {
       });
       return list[0] || null;
     },
-    update: async: any => (args: any) => {
+    update: async (args: any) => {
       const id = args?.where?.id;
       const row = this.projects.get(String(id));
       if (!row) throw new Error('Not found');
