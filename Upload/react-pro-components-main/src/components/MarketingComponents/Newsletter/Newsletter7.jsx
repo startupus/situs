@@ -35,7 +35,7 @@ const Newsletter7 = () => {
         <div className="mx-auto px-4 md:container">
           <div
             ref={divRef}
-            className="relative mx-auto w-full max-w-[480px] rounded-lg bg-white p-8 shadow-four dark:bg-dark-2 sm:p-[50px]"
+            className="shadow-four relative mx-auto w-full max-w-[480px] rounded-lg bg-white p-8 dark:bg-dark-2 sm:p-[50px]"
           >
             <button
               onClick={() => setModalOpen(false)}

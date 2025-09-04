@@ -71,9 +71,36 @@ const DashboardDropdown = () => {
               }`}
             >
               <ul className="flex flex-col gap-5 border-b border-stroke dark:border-dark-3 py-[30px] px-6">
-                <DropdownItem link="/#">My Profile</DropdownItem>
-                <DropdownItem link="/#">My Contacts</DropdownItem>
-                <DropdownItem link="/#">Account Settings</DropdownItem>
+                <DropdownItem
+                  {...({
+                    link: '/#',
+                    profile: true,
+                    contact: false,
+                    settings: false,
+                    logout: false,
+                    children: 'My Profile',
+                  } as any)}
+                />
+                <DropdownItem
+                  {...({
+                    link: '/#',
+                    profile: false,
+                    contact: true,
+                    settings: false,
+                    logout: false,
+                    children: 'My Contacts',
+                  } as any)}
+                />
+                <DropdownItem
+                  {...({
+                    link: '/#',
+                    profile: false,
+                    contact: false,
+                    settings: true,
+                    logout: false,
+                    children: 'Account Settings',
+                  } as any)}
+                />
               </ul>
               <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium text-body-color dark:text-dark-6 duration-300 ease-in-out hover:text-primary lg:text-base">
                 <svg

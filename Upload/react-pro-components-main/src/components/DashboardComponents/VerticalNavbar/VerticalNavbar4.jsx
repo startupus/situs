@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 const VerticalNavbar4 = () => {
   return (
     <section className="h-screen bg-white">
-      <div className="flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-gray-2 shadow-card">
+      <div className="shadow-card flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-gray-2">
         <div>
           <div className="px-10 pb-9 pt-10">
             <a href="/#">
@@ -326,7 +326,7 @@ const VerticalNavbar4 = () => {
         </div>
 
         <div className="px-6 py-10">
-          <div className="flex items-center rounded-lg bg-white p-4 shadow-three">
+          <div className="shadow-three flex items-center rounded-lg bg-white p-4">
             <div className="mr-4 h-[50px] w-full max-w-[50px] rounded-full">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-05.jpg"

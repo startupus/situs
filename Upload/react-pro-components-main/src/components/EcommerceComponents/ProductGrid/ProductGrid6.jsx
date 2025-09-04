@@ -49,7 +49,7 @@ const SingleProduct = ({
 }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="mb-10 overflow-hidden rounded-lg border border-[#e7e7e7] bg-white hover:shadow-card-2 dark:border-dark-3 dark:bg-dark-2">
+      <div className="hover:shadow-card-2 mb-10 overflow-hidden rounded-lg border border-[#e7e7e7] bg-white dark:border-dark-3 dark:bg-dark-2">
         <div className="relative">
           <img src={img} alt="product" className="w-full" />
           {newItem && (

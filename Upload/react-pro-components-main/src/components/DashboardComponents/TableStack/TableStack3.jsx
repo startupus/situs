@@ -75,7 +75,7 @@ const TableStackWrapper = ({ title, children }) => {
           </div>
         </div>
       </div>
-      <div className="w-full overflow-x-auto border border-stroke bg-white py-[15px] shadow-three">
+      <div className="shadow-three w-full overflow-x-auto border border-stroke bg-white py-[15px]">
         <table className="table w-full">
           <tbody>{children}</tbody>
         </table>

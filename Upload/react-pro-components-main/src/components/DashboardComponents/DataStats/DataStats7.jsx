@@ -93,7 +93,7 @@ export default DataStats7;
 const DataStatsCard = ({ children, name, number, icon }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="mb-8 flex items-center rounded-sm bg-white p-4 shadow-pricing-4 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="shadow-pricing-4 dark:shadow-box-dark mb-8 flex items-center rounded-sm bg-white p-4 dark:bg-dark-2">
         <div className="flex w-full items-center">
           <div className="mr-3 flex h-[44px] w-full max-w-[44px] items-center justify-center rounded-sm bg-primary/5 text-primary xs:mr-5 xs:h-[54px] xs:max-w-[54px] lg:mr-4 lg:h-[44px] lg:max-w-[44px] xl:mr-5 xl:h-[54px] xl:max-w-[54px]">
             {icon}

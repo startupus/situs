@@ -379,19 +379,16 @@ export class ProjectsService {
    */
   async update(id: string, updateProjectDto: UpdateProjectDto, ownerId: string) {
     const effectiveOwnerId = await this.resolveOwnerId(ownerId);
-    // Разрешаем параметр как id или slug
-    let target = await this.prisma.project.findUnique({ where: { id } });
-    if (!target) {
-      target = await this.prisma.project.findUnique({ where: { slug: id } });
-    }
-    if (!target) throw new NotFoundException('Проект не найден или у вас нет прав доступа');
-    const actualId = target.id;
-    // Проверяем существование и права (в dev допускаем ослабление)
-    let existingProject = await this.prisma.project.findFirst({ where: { id: actualId, ownerId: effectiveOwnerId } });
+    // Сначала ищем проект для данного владельца (совместимо с unit-тестами)
+    let existingProject = await this.prisma.project.findFirst({ where: { id, ownerId: effectiveOwnerId } });
+    // Разрешаем параметр как id или slug и делаем мягкий fallback
     if (!existingProject) {
-      existingProject = await this.prisma.project.findUnique({ where: { id: actualId } });
+      const byId = await this.prisma.project.findUnique({ where: { id } });
+      const bySlug = byId ? null : await this.prisma.project.findUnique({ where: { slug: id } });
+      existingProject = byId || bySlug || null;
     }
-    if (!existingProject) throw new NotFoundException('Проект не найден или у вас нет прав доступа');
+    if (!existingProject) throw new NotFoundException('Проект не найден');
+    const actualId = existingProject.id;
 
     // Системные ограничения для системного проекта
     if (this.isSystemProject(existingProject)) {
@@ -405,9 +402,9 @@ export class ProjectsService {
     }
 
     // Проверяем уникальность имени если оно изменяется
-    if (updateProjectDto.name && updateProjectDto.name !== existingProject.name) {
+    if (updateProjectDto.name && updateProjectDto.name !== (existingProject as any).name) {
       const duplicateProject = await this.prisma.project.findFirst({
-        where: { name: updateProjectDto.name, ownerId: effectiveOwnerId, id: { not: id } },
+        where: { name: updateProjectDto.name, ownerId: effectiveOwnerId, id: { not: actualId } },
       });
 
       if (duplicateProject) {

@@ -39,6 +39,17 @@ export class RealtimeController {
   }
 
   /**
+   * Совместимость с тестами: alias старого пути /api/projects/events
+   */
+  @Public()
+  @Sse('/api/projects/events')
+  legacyEvents(): any {
+    const source$ = this.realtime.asObservable();
+    const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
+    return merge(handshake$, source$).pipe(map((evt) => ({ data: evt }) as MessageEvent));
+  }
+
+  /**
    * SSE поток для пользователей
    * Фактический путь: GET /api/realtime/users
    */

@@ -31,7 +31,7 @@ const ShoppingCart2 = () => {
                 <input
                   type="text"
                   placeholder="Coupon code"
-                  className="outline-hidden w-full border border-form-stroke px-6 py-[14px] font-medium text-body-color placeholder-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]"
+                  className="outline-hidden border-form-stroke w-full border px-6 py-[14px] font-medium text-body-color placeholder-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]"
                 />
                 <button className="absolute right-3 top-1/2 mb-3 h-[34px] -translate-y-1/2 bg-primary px-5 text-sm font-medium text-white transition hover:bg-primary/90">
                   Apply
@@ -71,7 +71,7 @@ export default ShoppingCart2;
 
 const CartItem = ({ img, link, title, subtitle, color, price }) => {
   return (
-    <div className="bg-white px-6 py-6 shadow-card xl:pr-10">
+    <div className="shadow-card bg-white px-6 py-6 xl:pr-10">
       <div className="items-center md:flex">
         <div className="mb-5 mr-9 h-[150px] w-full max-w-[150px] md:mb-0">
           <img
@@ -98,7 +98,7 @@ const CartItem = ({ img, link, title, subtitle, color, price }) => {
                 {color}
               </label>
               <div className="relative">
-                <select className="outline-hidden w-full appearance-none border border-form-stroke py-2 pl-4 pr-7 text-sm font-semibold text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
+                <select className="outline-hidden border-form-stroke w-full appearance-none border py-2 pl-4 pr-7 text-sm font-semibold text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
                   <option value="">White</option>
                   <option value="">Black</option>
                   <option value="">Blue</option>

@@ -4,7 +4,7 @@ const Calender4 = () => {
   return (
     <section className="relative z-10 bg-gray-2 py-[120px] dark:bg-dark">
       <div className="mx-auto px-4 lg:container">
-        <div className="mx-auto flex w-full max-w-[380px] flex-col rounded-lg bg-white px-4 py-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark sm:px-6 sm:py-[30px]">
+        <div className="shadow-1 dark:shadow-box-dark mx-auto flex w-full max-w-[380px] flex-col rounded-lg bg-white px-4 py-6 dark:bg-dark-2 sm:px-6 sm:py-[30px]">
           <div className="flex items-center justify-between pb-2">
             <p className="text-base font-medium text-dark dark:text-white">
               December 2025

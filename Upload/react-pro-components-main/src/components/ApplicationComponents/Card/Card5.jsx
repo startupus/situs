@@ -48,7 +48,7 @@ export default Card5;
 const SingleCard = ({ image, CardDescription, CardTitle, titleHref, meta }) => {
   return (
     <div className="w-full px-4 md:w-1/2 xl:w-1/3">
-      <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card">
+      <div className="shadow-1 hover:shadow-3 dark:shadow-card mb-10 overflow-hidden rounded-lg bg-white duration-300 dark:bg-dark-2">
         <img src={image} alt="image" className="w-full" />
         <div className="px-6 py-8 sm:p-8">
           <h3>
@@ -62,7 +62,7 @@ const SingleCard = ({ image, CardDescription, CardTitle, titleHref, meta }) => {
           <p className="mb-5 text-base font-medium leading-relaxed text-body-color dark:text-dark-6">
             {CardDescription}
           </p>
-          <div className="flex flex-wrap items-center rounded-md bg-tg-bg px-2 py-1 dark:bg-dark-3">
+          <div className="bg-tg-bg flex flex-wrap items-center rounded-md px-2 py-1 dark:bg-dark-3">
             {meta.map((item, i) => (
               <a
                 key={i}

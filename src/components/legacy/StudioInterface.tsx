@@ -163,7 +163,9 @@ export function StudioInterface() {
                       }}
                     >
                       <div className="font-medium text-sm">{page.title}</div>
-                      <div className="text-xs text-gray-500">{page.isHomePage ? '🏠 Главная' : `/${page.slug}`}</div>
+                      <div className="text-xs text-gray-500">
+                        {(page as any).isHomePage ? '🏠 Главная' : `/${page.slug}`}
+                      </div>
                     </div>
                   ))}
 
@@ -177,9 +179,10 @@ export function StudioInterface() {
                           title,
                           slug,
                           content: [],
-                          isHomePage: false,
-                          isPublished: false,
-                        });
+                          publishedAt: null,
+                          meta: {},
+                          status: 'DRAFT',
+                        } as any);
                       }
                     }}
                     className="w-full p-2 mt-2 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded text-sm text-gray-500 hover:border-gray-400 hover:text-gray-600"
@@ -206,7 +209,7 @@ export function StudioInterface() {
                   <div>
                     <span className="font-medium">{state.currentPage.title}</span>
                     <span className="text-sm text-gray-500 ml-2">
-                      ({state.currentPage.isHomePage ? 'Главная' : state.currentPage.slug})
+                      ({state.currentPage.slug === 'home' ? 'Главная' : state.currentPage.slug})
                     </span>
                   </div>
                 )}

@@ -11,7 +11,7 @@ const Cookies4 = () => {
     <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       {Open && (
         <div className="container">
-          <div className="relative ml-auto w-full max-w-[350px] overflow-hidden rounded-lg bg-white px-6 py-10 text-center shadow-1 dark:bg-dark-2 dark:shadow-box-dark xs:px-10">
+          <div className="shadow-1 dark:shadow-box-dark relative ml-auto w-full max-w-[350px] overflow-hidden rounded-lg bg-white px-6 py-10 text-center dark:bg-dark-2 xs:px-10">
             <button
               onClick={handleOpen}
               className="absolute right-6 top-6 text-body-color dark:text-dark-6"

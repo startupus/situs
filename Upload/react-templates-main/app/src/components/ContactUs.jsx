@@ -31,7 +31,7 @@ const ContactUs = () => {
     <>
       <section className="relative z-40 bg-white py-20 dark:bg-dark lg:py-[120px]">
         <div className="container mx-auto">
-          <div className="relative bg-white shadow-contact-3 dark:bg-dark-2">
+          <div className="shadow-contact-3 relative bg-white dark:bg-dark-2">
             <div className="-mx-4 flex flex-row-reverse flex-wrap items-stretch lg:flex-row">
               <div className="w-full px-4 lg:w-4/12">
                 <div className="relative z-40 flex h-full w-full items-end overflow-hidden bg-primary 2xl:max-w-[370px]">

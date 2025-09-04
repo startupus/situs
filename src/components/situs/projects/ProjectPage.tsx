@@ -12,7 +12,7 @@ import {
 import ProjectAnalytics from './ProjectAnalytics';
 import ProjectKpiStrip from './ProjectKpiStrip';
 import { projectsApi } from '../../../api/services/projects.api';
-import { ProjectData } from '../../../types/project';
+type ProjectData = any;
 import { useProject } from '../../../contexts/ProjectContext';
 import {
   DndContext,

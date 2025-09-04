@@ -51,7 +51,7 @@ const SingleCard = ({
 }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="mb-10 rounded-lg bg-white px-4 pb-6 pt-5 shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card">
+      <div className="shadow-1 hover:shadow-3 dark:shadow-card mb-10 rounded-lg bg-white px-4 pb-6 pt-5 duration-300 dark:bg-dark-2">
         <div className="mb-5 flex items-center px-[10px]">
           <div className="mr-3 h-10 w-full max-w-[40px] overflow-hidden rounded-full">
             <img

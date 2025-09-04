@@ -8,7 +8,7 @@ const TextareaGroup = ({ labelTitle, placeholder, value }) => {
       </label>
       <div className="relative">
         <textarea
-          rows="8"
+          rows={8}
           placeholder={placeholder}
           className="w-full rounded-md border border-[#E0E0E0] p-5 pl-12 text-base text-black outline-hidden focus:border-primary"
           defaultValue={value}

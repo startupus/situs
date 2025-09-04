@@ -76,7 +76,7 @@ const CartDropdown = () => {
           <div
             className={`absolute right-0 top-full mt-3 w-[330px] ${openDropDown ? "block" : "hidden"}`}
           >
-            <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+            <div className="shadow-1 dark:shadow-box-dark overflow-hidden rounded-lg bg-white p-8 dark:bg-dark-2">
               <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
                 {cartList.map((item, index) => (
                   <div

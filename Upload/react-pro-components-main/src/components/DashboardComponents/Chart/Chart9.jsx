@@ -183,7 +183,7 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
+        className={`shadow-card absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 dark:bg-dark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

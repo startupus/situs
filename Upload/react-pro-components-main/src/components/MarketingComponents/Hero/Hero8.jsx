@@ -33,7 +33,7 @@ const Hero8 = () => {
                   <li>
                     <a
                       href="/#"
-                      className="inline-flex items-center rounded-full bg-white px-6 py-3 text-base font-medium text-primary shadow-1 hover:bg-gray-2 hover:text-body-color"
+                      className="shadow-1 inline-flex items-center rounded-full bg-white px-6 py-3 text-base font-medium text-primary hover:bg-gray-2 hover:text-body-color"
                     >
                       Explore Services
                       <span className="ml-2">

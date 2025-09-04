@@ -9,8 +9,8 @@ const Step3 = () => {
             <div className="-mx-3 flex items-center justify-center sm:-mx-6 md:-mx-10 lg:-mx-[50px]">
               <SingleStep done number="1" name="Customer" />
               <SingleStep done number="2" name="Shipping" />
-              <SingleStep number="3" name="Payment" />
-              <SingleStep number="4" name="Confirm" />
+              <SingleStep done={false} number="3" name="Payment" />
+              <SingleStep done={false} number="4" name="Confirm" />
             </div>
           </div>
         </div>

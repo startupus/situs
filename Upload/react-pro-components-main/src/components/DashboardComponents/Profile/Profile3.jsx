@@ -4,7 +4,7 @@ const Profile3 = () => {
   return (
     <section className="bg-gray-2 py-24 dark:bg-dark">
       <div className="mx-auto px-4 md:container">
-        <div className="mx-auto w-full max-w-[370px] overflow-hidden rounded-lg border border-stroke bg-white shadow-card dark:border-dark-3 dark:bg-dark-2">
+        <div className="shadow-card mx-auto w-full max-w-[370px] overflow-hidden rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
           <div className="px-3 pb-8 pt-10">
             <div className="mx-auto mb-5 h-[130px] w-full max-w-[130px] overflow-hidden rounded-full">
               <img

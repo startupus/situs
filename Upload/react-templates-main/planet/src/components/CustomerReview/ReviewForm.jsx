@@ -22,7 +22,7 @@ const formItems = [
 const ReviewForm = () => {
   return (
     <>
-      <div className="mb-9 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="shadow-1 dark:shadow-box-dark mb-9 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
         <div className="px-6 py-8 sm:py-9 md:px-8 xl:px-9">
           <h4 className="mb-5 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
             Write a Review

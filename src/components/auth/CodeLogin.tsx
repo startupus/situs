@@ -258,7 +258,7 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
         />
       ) : (
         <ThemeInput
-          type="tel"
+          type="text"
           placeholder="+7 (900) 123-45-67"
           value={form.phone}
           onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -269,7 +269,7 @@ export const CodeLogin: React.FC<CodeLoginProps> = ({ onLogin, onBack }) => {
 
       {error && <ThemeAlert type="error">{error}</ThemeAlert>}
 
-      <ThemeButton onClick={handleSendCode} loading={loading} className="w-full" size="lg">
+      <ThemeButton onClick={handleSendCode} className="w-full" size="lg">
         Отправить код
       </ThemeButton>
 

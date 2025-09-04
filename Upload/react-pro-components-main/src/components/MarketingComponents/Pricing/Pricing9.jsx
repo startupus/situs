@@ -92,7 +92,7 @@ const PricingCard = ({
   return (
     <>
       <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-        <div className="relative z-10 mb-10 overflow-hidden bg-white px-6 py-12 text-center shadow-pricing-7 dark:bg-dark-2 sm:px-12 lg:px-6 xl:px-[50px]">
+        <div className="shadow-pricing-7 relative z-10 mb-10 overflow-hidden bg-white px-6 py-12 text-center dark:bg-dark-2 sm:px-12 lg:px-6 xl:px-[50px]">
           {active && (
             <p className="absolute -right-9 top-5 inline-flex rotate-45 bg-primary px-12 py-2 text-base font-medium text-white">
               Popular

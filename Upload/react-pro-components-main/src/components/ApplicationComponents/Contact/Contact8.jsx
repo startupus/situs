@@ -19,7 +19,7 @@ const Contact8 = () => {
         </div>
         <div className="-mx-4 flex">
           <div className="w-full px-4">
-            <div className="relative mx-auto w-full max-w-[770px] border border-form-stroke bg-white px-6 py-10 shadow-[0px_0px_40px_0px_rgba(0,0,0,0.05)] dark:border-dark-3 dark:bg-dark-2 sm:px-[65px] sm:py-[60px] md:p-10 lg:px-[65px] lg:py-[60px]">
+            <div className="border-form-stroke relative mx-auto w-full max-w-[770px] border bg-white px-6 py-10 shadow-[0px_0px_40px_0px_rgba(0,0,0,0.05)] dark:border-dark-3 dark:bg-dark-2 sm:px-[65px] sm:py-[60px] md:p-10 lg:px-[65px] lg:py-[60px]">
               <form>
                 <div className="-mx-4 flex flex-wrap">
                   <InputBox
@@ -972,7 +972,7 @@ const InputBox = ({ type, placeholder, name, labelTitle }) => {
           type={type}
           placeholder={placeholder}
           name={name}
-          className="outline-hidden w-full border border-stroke bg-transparent px-6 py-4 text-body-color placeholder-secondary-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
+          className="outline-hidden placeholder-secondary-color w-full border border-stroke bg-transparent px-6 py-4 text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
         />
       </div>
     </div>
@@ -990,7 +990,7 @@ const TextArea = ({ row, placeholder, name, defaultValue, labelTitle }) => {
           rows={row}
           placeholder={placeholder}
           name={name}
-          className="outline-hidden w-full resize-none border border-stroke bg-transparent px-6 py-4 text-body-color placeholder-secondary-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
+          className="outline-hidden placeholder-secondary-color w-full resize-none border border-stroke bg-transparent px-6 py-4 text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6"
           defaultValue={defaultValue}
         />
       </div>

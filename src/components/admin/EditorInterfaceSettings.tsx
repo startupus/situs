@@ -182,7 +182,7 @@ const EditorInterfaceSettings: React.FC = () => {
                     <label className="flex items-center">
                       <input
                         type="checkbox"
-                        checked={interfaceTheme === 'system'}
+                        checked={false}
                         onChange={() => {
                           // Логика переключения на системную тему
                         }}

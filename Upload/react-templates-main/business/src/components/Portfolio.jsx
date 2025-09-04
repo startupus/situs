@@ -125,7 +125,7 @@ const Portfolio = () => {
                 <div className="overflow-hidden rounded-[10px]">
                   <img src={item.image} alt="portfolio" className="w-full" />
                 </div>
-                <div className="relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center shadow-portfolio dark:bg-dark-2 dark:shadow-box-dark">
+                <div className="shadow-portfolio dark:shadow-box-dark relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center dark:bg-dark-2">
                   <span className="mb-2 block text-sm font-medium text-primary">
                     {item.category}
                   </span>

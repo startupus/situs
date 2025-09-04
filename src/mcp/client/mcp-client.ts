@@ -25,7 +25,7 @@ export class SitusMcpClient {
    */
   async connect(): Promise<void> {
     try {
-      await this.client.connect();
+      await this.client.connect({} as any);
       this.isConnected = true;
       console.log('✅ Подключение к MCP серверу установлено');
     } catch (error) {
@@ -59,7 +59,7 @@ export class SitusMcpClient {
         arguments: arguments_,
       });
 
-      const response = await this.client.callTool(request);
+      const response = await this.client.callTool({ ...request.params, name: request.params.name });
       return response.content;
     } catch (error) {
       console.error(`❌ Ошибка выполнения инструмента ${toolName}:`, error);

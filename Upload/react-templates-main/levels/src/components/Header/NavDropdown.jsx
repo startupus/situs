@@ -64,7 +64,7 @@ const NavDropdown = () => {
 
       <ClickOutside onClick={() => setOpenDropDown(false)}>
         <nav
-          className={`absolute left-0 mt-2 w-[250px] rounded-sm bg-primary shadow-card-2 duration-200 ${openDropDown ? "visible top-full opacity-100" : "invisible top-[120%] opacity-0"}`}
+          className={`shadow-card-2 absolute left-0 mt-2 w-[250px] rounded-sm bg-primary duration-200 ${openDropDown ? "visible top-full opacity-100" : "invisible top-[120%] opacity-0"}`}
         >
           <ul className="space-y-5 px-5 py-6">
             {navList.map((item, index) => (

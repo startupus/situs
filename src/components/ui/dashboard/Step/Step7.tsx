@@ -6,8 +6,8 @@ const Step7 = () => {
       <div className="container mx-auto">
         <div className="flex w-full flex-wrap items-center lg:justify-center">
           <SingleStep done number="1" name="Earings and Taxes" />
-          <SingleStep number="2" name="Review Payments" />
-          <SingleStep number="3" name="Complete Payment" />
+          <SingleStep done={false} number="2" name="Review Payments" />
+          <SingleStep done={false} number="3" name="Complete Payment" />
         </div>
       </div>
     </section>

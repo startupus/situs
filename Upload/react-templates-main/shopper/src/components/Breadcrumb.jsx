@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Breadcrumb = ({ pageName }) => {
   return (
     <>
-      <section className="border-y border-light dark:border-dark-3 dark:bg-dark">
+      <section className="border-light border-y dark:border-dark-3 dark:bg-dark">
         <div className="container mx-auto">
           <div className="w-full">
             <div className="px-4 py-4 sm:px-6 md:px-8 md:py-5">

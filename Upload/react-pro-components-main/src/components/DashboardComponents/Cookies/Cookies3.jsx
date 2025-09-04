@@ -32,7 +32,7 @@ const Cookies3 = () => {
                   <div className="mb-2 flex items-center space-x-4">
                     <button
                       onClick={handleHide}
-                      className="inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-body-color shadow-1 hover:bg-gray-2 dark:bg-dark dark:text-dark-6 dark:shadow-none dark:hover:bg-dark-3"
+                      className="shadow-1 inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-body-color hover:bg-gray-2 dark:bg-dark dark:text-dark-6 dark:shadow-none dark:hover:bg-dark-3"
                     >
                       Accept Cookies
                     </button>

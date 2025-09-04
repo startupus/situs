@@ -7,7 +7,7 @@ export default function Clipboard4() {
         <div className="mx-auto w-full max-w-[500px]">
           <div className="relative">
             <textarea
-              rows="6"
+              rows={6}
               value="www.tailgrids.com/figma"
               className="w-full rounded-lg border border-stroke bg-gray-1 p-5 leading-relaxed text-body-color outline-hidden duration-200 focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
             >

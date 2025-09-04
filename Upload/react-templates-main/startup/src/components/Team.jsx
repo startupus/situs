@@ -44,7 +44,7 @@ const teamItems = [
 const Team = () => {
   return (
     <>
-      <section className="overflow-hidden bg-tg-bg pb-20 pt-20 dark:bg-dark-2 lg:pb-[120px] lg:pt-[120px]">
+      <section className="bg-tg-bg overflow-hidden pb-20 pt-20 dark:bg-dark-2 lg:pb-[120px] lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
@@ -65,7 +65,7 @@ const Team = () => {
 
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4 xl:w-10/12 2xl:w-9/12">
-              <div className="relative flex flex-wrap rounded-[10px] bg-white px-6 pt-10 shadow-team dark:bg-dark">
+              <div className="shadow-team relative flex flex-wrap rounded-[10px] bg-white px-6 pt-10 dark:bg-dark">
                 {teamItems.map((item, index) => (
                   <div key={index} className="w-full px-4 sm:w-1/2 lg:w-1/4">
                     <div className="mx-auto mb-10 max-w-[200px]">

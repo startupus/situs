@@ -50,7 +50,7 @@ const chatList = [
 const ChatBox = () => {
   return (
     <>
-      <div className="mx-auto max-w-[400px] rounded-lg bg-white py-[30px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="shadow-1 dark:shadow-box-dark mx-auto max-w-[400px] rounded-lg bg-white py-[30px] dark:bg-dark-2">
         <div className="mb-8 flex items-center justify-between px-[30px]">
           <h3 className="text-xl font-semibold text-dark dark:text-white">
             Chats

@@ -48,7 +48,7 @@ const Chart8 = () => {
           <div className="flex items-center">
             <div className="w-full">
               <div id="chartOne" className="-ml-5">
-                <ReactApexChart options={options} series={series} type="radialBar" height={150} />
+                <ReactApexChart options={options as any} series={series as any} type="radialBar" height={150} />
               </div>
             </div>
             <div className="w-full">

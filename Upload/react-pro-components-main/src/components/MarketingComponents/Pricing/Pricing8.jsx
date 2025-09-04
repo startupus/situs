@@ -87,8 +87,8 @@ const PricingCard = ({
       <div
         className={` ${
           active
-            ? `relative z-10 mb-10 overflow-hidden rounded-xl bg-primary px-7 py-10 text-center shadow-card sm:px-9`
-            : `relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-7 py-10 text-center shadow-pricing-6 dark:bg-dark-2 sm:px-9`
+            ? `shadow-card relative z-10 mb-10 overflow-hidden rounded-xl bg-primary px-7 py-10 text-center sm:px-9`
+            : `shadow-pricing-6 relative z-10 mb-10 overflow-hidden rounded-xl bg-white px-7 py-10 text-center dark:bg-dark-2 sm:px-9`
         } `}
       >
         <span

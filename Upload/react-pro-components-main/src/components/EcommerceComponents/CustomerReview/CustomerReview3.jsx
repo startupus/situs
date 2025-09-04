@@ -6,7 +6,7 @@ const CustomerReview3 = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-5/12">
-            <div className="mb-10 overflow-hidden rounded-lg bg-white px-8 py-10 text-center shadow-three dark:bg-dark-2 dark:shadow-box-dark lg:mb-0 xl:px-[60px]">
+            <div className="shadow-three dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white px-8 py-10 text-center dark:bg-dark-2 lg:mb-0 xl:px-[60px]">
               <h3 className="mb-5 font-semibold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[1.43]">
                 Customer reviews
               </h3>
@@ -119,7 +119,7 @@ const CustomerReview3 = () => {
               replyButton="Reply"
             />
 
-            <div className="mb-9 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+            <div className="shadow-1 dark:shadow-box-dark mb-9 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
               <div className="px-6 py-8 sm:py-9 md:px-8 xl:px-9">
                 <h4 className="mb-5 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                   Write a Review
@@ -188,7 +188,7 @@ const ReviewItem = ({
   replyButton,
 }) => {
   return (
-    <div className="mb-9 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+    <div className="shadow-1 dark:shadow-box-dark mb-9 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
       <div className="px-6 py-8 sm:py-10 md:px-8 xl:px-10">
         <h4 className="mb-[18px] text-lg font-semibold text-dark dark:text-white sm:text-xl">
           {title}

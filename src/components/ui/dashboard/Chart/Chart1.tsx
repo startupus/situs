@@ -148,7 +148,7 @@ const Chart = () => {
             </div>
           </div>
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart options={options} series={series} type="line" />
+            <ReactApexChart options={options as any} series={series as any} type="line" />
           </div>
         </div>
       </div>

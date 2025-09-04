@@ -7,6 +7,7 @@ const DataStats2 = () => {
       <div className="mx-auto px-4 md:container">
         <div className="-mx-4 flex flex-wrap">
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             name="Bitcoin"
             color="#F2994A"
             rate="0.223245 BTC"
@@ -31,6 +32,7 @@ const DataStats2 = () => {
             <Chart name="Bitcoin" color="#F2994A" />
           </DataStatsCard>
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             name="LITECOIN"
             color="#627EEA"
             rate="0.93245 ETH"
@@ -56,6 +58,7 @@ const DataStats2 = () => {
             <Chart name="LITECOIN" color="#627EEA" />
           </DataStatsCard>
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             name="ETHEREUM"
             color="#345d9d"
             rate="0.64347 LTC"
@@ -84,6 +87,7 @@ const DataStats2 = () => {
             <Chart name="ETHEREUM" color="#345d9d" />
           </DataStatsCard>
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             name="RIPPLE"
             color="#9b51e0"
             rate="0.53453 RIP"
@@ -292,7 +296,7 @@ const Chart = (props) => {
 
   return (
     <div id="chartOne" className="-mx-[11px]">
-      <ReactApexChart options={options} series={series} type="area" height={90} />
+      <ReactApexChart options={options as any} series={series} type="area" height={90} />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const SelectBox = () => {
           <h3 className="mb-6 text-lg font-medium text-dark dark:text-white">
             Team Members
           </h3>
-          <div className="w-full max-w-[375px] space-y-[10px] rounded-md bg-white p-4 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+          <div className="shadow-1 dark:shadow-box-dark w-full max-w-[375px] space-y-[10px] rounded-md bg-white p-4 dark:bg-dark-2">
             <SelectBoxItem
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/box-select/box-select-01/image-01.png"
               name="Henry Dholi"

@@ -201,7 +201,7 @@ const ProductCard = ({
   children,
 }) => {
   return (
-    <div className="rounded-[5px] border-[.5px] border-stroke bg-white p-[10px] shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+    <div className="shadow-1 dark:shadow-box-dark rounded-[5px] border-[.5px] border-stroke bg-white p-[10px] dark:border-dark-3 dark:bg-dark-2">
       <a href={link} className="block">
         <img src={image} alt="product" className="w-full rounded-[5px]" />
       </a>

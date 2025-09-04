@@ -53,7 +53,7 @@ const Modal4 = () => {
           ref={modal}
           onFocus={() => setModalOpen(true)}
           onBlur={() => setModalOpen(false)}
-          className="mx-auto max-w-[465px] rounded-[10px] bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-three"
+          className="shadow-1 dark:shadow-three mx-auto max-w-[465px] rounded-[10px] bg-white p-8 dark:bg-dark-2"
         >
           <div className="mb-9 overflow-hidden rounded-md border border-stroke dark:border-dark-3">
             <img
@@ -78,7 +78,7 @@ const Modal4 = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setModalOpen(false)}
-                className="h-12 w-full rounded-md bg-white text-center text-base font-medium text-body-color shadow-1 hover:bg-gray-2 dark:bg-white/5 dark:text-white dark:shadow-3 dark:hover:bg-white/10"
+                className="shadow-1 dark:shadow-3 h-12 w-full rounded-md bg-white text-center text-base font-medium text-body-color hover:bg-gray-2 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
               >
                 Skip
               </button>

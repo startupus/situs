@@ -81,7 +81,7 @@ const DashboardDropdown = () => {
               ref={dropdown}
               onFocus={() => setDropdownOpen(true)}
               onBlur={() => setDropdownOpen(false)}
-              className={`absolute right-0 mt-4 flex w-[250px] flex-col gap-1 rounded-lg bg-white shadow-card dark:bg-dark-2 ${
+              className={`shadow-card absolute right-0 mt-4 flex w-[250px] flex-col gap-1 rounded-lg bg-white dark:bg-dark-2 ${
                 dropdownOpen === true ? "block" : "hidden"
               }`}
             >

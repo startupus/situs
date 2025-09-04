@@ -57,7 +57,12 @@ async function bootstrap() {
     } catch {}
 
     // Глобальный префикс для API
-    app.setGlobalPrefix('api');
+    app.setGlobalPrefix('api', {
+      exclude: [
+        { path: 'robots.txt', method: (require('@nestjs/common') as any).RequestMethod.GET },
+        { path: 'sitemap.xml', method: (require('@nestjs/common') as any).RequestMethod.GET },
+      ],
+    });
     console.log('[BOOT] Global prefix set to /api');
 
     // Глобальные пайпы/фильтры/интерцепторы

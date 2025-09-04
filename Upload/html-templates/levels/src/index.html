@@ -20,7 +20,7 @@
       class="relative flex min-h-screen w-full items-start bg-gray-2 dark:bg-dark"
     >
       <div
-        class="fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0"
+        class="shadow-1 dark:shadow-box-dark fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white duration-200 dark:bg-dark-2 xl:translate-x-0"
         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
       >
         <div>
@@ -47,7 +47,7 @@
               <input
                 type="text"
                 placeholder="Search here..."
-                class="h-11 w-full rounded-md border-[.5px] border-stroke bg-gray-1 pl-5 pr-9 text-sm text-secondary-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:focus:border-primary"
+                class="text-secondary-color h-11 w-full rounded-md border-[.5px] border-stroke bg-gray-1 pl-5 pr-9 text-sm outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:focus:border-primary"
               />
               <button class="absolute right-4 top-1/2 -translate-y-1/2">
                 <svg
@@ -525,7 +525,7 @@
                     </button>
                     <nav
                       :class="navbarOpen ? 'visible opacity-100 top-full' : 'invisible opacity-0 top-[120%]'"
-                      class="absolute left-0 mt-2 w-[250px] rounded bg-primary shadow-card-2 duration-200"
+                      class="shadow-card-2 absolute left-0 mt-2 w-[250px] rounded bg-primary duration-200"
                     >
                       <ul class="space-y-5 px-5 py-6">
                         <li>
@@ -691,7 +691,7 @@
                       </div>
 
                       <div
-                        class="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2"
+                        class="shadow-card-2 invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2"
                       >
                         <a
                           href="javascript:void(0)"
@@ -723,7 +723,7 @@
         <div class="p-[30px]">
           <div class="w-full">
             <div
-              class="mb-8 flex flex-wrap rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark"
+              class="shadow-1 dark:shadow-box-dark mb-8 flex flex-wrap rounded-lg bg-white dark:bg-dark-2"
             >
               <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/2 2xl:w-1/4">
                 <div
@@ -1341,7 +1341,7 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
+      class="shadow-1 dark:shadow-box-dark fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white dark:bg-dark-3"
     >
       <span class="block text-body-color dark:hidden">
         <svg

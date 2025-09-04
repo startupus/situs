@@ -6,11 +6,11 @@ const Step = () => {
       <section className="overflow-hidden py-20 lg:py-[120px]">
         <div className="mx-auto px-4 sm:container">
           <div className="-mx-3 flex items-center justify-center sm:-mx-7 md:-mx-10 lg:-mx-[50px]">
-            <SingleStep done number="1" name="Step 1" />
-            <SingleStep ongoing number="2" name="Step 2" />
-            <SingleStep number="3" name="Step 3" />
-            <SingleStep number="4" name="Step 4" />
-            <SingleStep number="5" name="Step 5" />
+            <SingleStep done ongoing={false} number="1" name="Step 1" />
+            <SingleStep done={false} ongoing number="2" name="Step 2" />
+            <SingleStep done={false} ongoing={false} number="3" name="Step 3" />
+            <SingleStep done={false} ongoing={false} number="4" name="Step 4" />
+            <SingleStep done={false} ongoing={false} number="5" name="Step 5" />
           </div>
         </div>
       </section>

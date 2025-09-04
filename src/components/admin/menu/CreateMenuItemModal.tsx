@@ -19,7 +19,7 @@ interface ViewOption {
   value: string;
   label: string;
   description: string;
-  component: string;
+  component: any;
 }
 
 const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, parentItems, onClose, onCreate }) => {
@@ -129,7 +129,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
   };
 
   // Получение предустановленных значений для компонента
-  const getComponentDefaults = (component: string) => {
+  const getComponentDefaults = (component: any) => {
     switch (component) {
       case 'Website':
         return { view: 'page', targetId: '' };
@@ -177,7 +177,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                 value={formData.title || ''}
                 onChange={(e) => {
                   const title = e.target.value;
-                  setFormData((prev) => ({
+                  setFormData((prev: any) => ({
                     ...prev,
                     title,
                     alias: generateAlias(title),
@@ -194,7 +194,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
               <input
                 type="text"
                 value={formData.alias || ''}
-                onChange={(e) => setFormData((prev) => ({ ...prev, alias: e.target.value }))}
+                onChange={(e) => setFormData((prev: any) => ({ ...prev, alias: e.target.value }))}
                 className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 placeholder="url-alias"
               />
@@ -209,7 +209,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
               <div className="relative z-20">
                 <select
                   value={formData.type || 'COMPONENT'}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, type: e.target.value as any }))}
+                  onChange={(e) => setFormData((prev: any) => ({ ...prev, type: e.target.value as any }))}
                   className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 >
                   <option value="COMPONENT" className="dark:bg-dark-2">
@@ -242,7 +242,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                   onChange={(e) => {
                     const parentId = e.target.value || undefined;
                     const parent = parentItems.find((item) => item.id === parentId);
-                    setFormData((prev) => ({
+                    setFormData((prev: any) => ({
                       ...prev,
                       parentId,
                       level: parent ? parent.level + 1 : 1,
@@ -292,7 +292,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                         const component = e.target.value;
                         const defaults = getComponentDefaults(component);
                         const defaultIcon = getDefaultIconForMenuType(formData.type, component);
-                        setFormData((prev) => ({
+                        setFormData((prev: any) => ({
                           ...prev,
                           component,
                           view: '',
@@ -331,7 +331,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                   <div className="relative z-20">
                     <select
                       value={formData.view || ''}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, view: e.target.value, targetId: '' }))}
+                      onChange={(e) => setFormData((prev: any) => ({ ...prev, view: e.target.value, targetId: '' }))}
                       className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                       disabled={!formData.component}
                     >
@@ -361,7 +361,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                   <input
                     type="text"
                     value={formData.targetId || ''}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, targetId: e.target.value }))}
+                    onChange={(e) => setFormData((prev: any) => ({ ...prev, targetId: e.target.value }))}
                     className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                     placeholder="Дополнительные параметры (опционально)"
                   />
@@ -435,7 +435,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                 <input
                   type="url"
                   value={formData.externalUrl || ''}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, externalUrl: e.target.value }))}
+                  onChange={(e) => setFormData((prev: any) => ({ ...prev, externalUrl: e.target.value }))}
                   className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                   placeholder="https://example.com"
                 />
@@ -481,7 +481,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                 {formData.icon && (
                   <button
                     type="button"
-                    onClick={() => setFormData((prev) => ({ ...prev, icon: undefined }))}
+                    onClick={() => setFormData((prev: any) => ({ ...prev, icon: undefined }))}
                     className="px-4 py-2 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-sm font-medium"
                   >
                     Убрать
@@ -499,7 +499,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
               <div className="relative z-20">
                 <select
                   value={formData.accessLevel || 'PUBLIC'}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, accessLevel: e.target.value as any }))}
+                  onChange={(e) => setFormData((prev: any) => ({ ...prev, accessLevel: e.target.value as any }))}
                   className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 >
                   <option value="PUBLIC" className="dark:bg-dark-2">
@@ -527,7 +527,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
               <div className="relative z-20">
                 <select
                   value={formData.language || '*'}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, language: e.target.value }))}
+                  onChange={(e) => setFormData((prev: any) => ({ ...prev, language: e.target.value }))}
                   className="relative z-20 w-full appearance-none rounded-md border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                 >
                   <option value="*" className="dark:bg-dark-2">
@@ -562,7 +562,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                 <input
                   type="text"
                   value={formData.metaTitle || ''}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, metaTitle: e.target.value }))}
+                  onChange={(e) => setFormData((prev: any) => ({ ...prev, metaTitle: e.target.value }))}
                   className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                   placeholder="Заголовок для поисковых систем"
                 />
@@ -574,7 +574,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
                 </label>
                 <textarea
                   value={formData.metaDescription || ''}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, metaDescription: e.target.value }))}
+                  onChange={(e) => setFormData((prev: any) => ({ ...prev, metaDescription: e.target.value }))}
                   className="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-hidden transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
                   placeholder="Описание для поисковых систем"
                   rows={3}
@@ -609,7 +609,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ menuTypeId, p
           selectedIcon={formData.icon}
           selectedLibrary={formData.iconLibrary}
           onSelect={(icon, library) => {
-            setFormData((prev) => ({ ...prev, icon, iconLibrary: library }));
+            setFormData((prev: any) => ({ ...prev, icon, iconLibrary: library }));
           }}
           onClose={() => setShowIconSelector(false)}
         />

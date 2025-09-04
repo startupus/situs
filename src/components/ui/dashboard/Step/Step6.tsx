@@ -5,9 +5,9 @@ const Step6 = () => {
     <section className="overflow-hidden py-20 lg:py-[120px]">
       <div className="mx-auto px-4 sm:container">
         <div className="flex flex-wrap gap-[30px]">
-          <SingleStep done number="Step 1" name="Credit line Assignment" status="Completed" />
-          <SingleStep inProgress number="Step 2" name="Bank Acceptance" status="In Progress" />
-          <SingleStep number="Step 3" name="Bank Acceptance" status="Pending" />
+          <SingleStep done inProgress={false} number="Step 1" name="Credit line Assignment" status="Completed" />
+          <SingleStep done={false} inProgress number="Step 2" name="Bank Acceptance" status="In Progress" />
+          <SingleStep done={false} inProgress={false} number="Step 3" name="Bank Acceptance" status="Pending" />
         </div>
       </div>
     </section>

@@ -72,6 +72,7 @@ const DashboardDropdown3 = () => {
               </div>
               <ul className="no-scrollbar flex h-auto flex-col gap-2 overflow-y-auto px-4 pb-20 pt-4">
                 <DropdownItem
+                  {...({ totalMsg: 0, active: false } as any)}
                   active
                   totalMsg="03"
                   link="/#"
@@ -87,6 +88,7 @@ const DashboardDropdown3 = () => {
                   </InnerDropdown>
                 </DropdownItem>
                 <DropdownItem
+                  {...({ totalMsg: 0, active: false } as any)}
                   active
                   totalMsg="01"
                   link="/#"
@@ -102,6 +104,7 @@ const DashboardDropdown3 = () => {
                   </InnerDropdown>
                 </DropdownItem>
                 <DropdownItem
+                  {...({ totalMsg: 0, active: false } as any)}
                   link="/#"
                   img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-03.jpg"
                   name="Craig Baptista"
@@ -115,6 +118,7 @@ const DashboardDropdown3 = () => {
                   </InnerDropdown>
                 </DropdownItem>
                 <DropdownItem
+                  {...({ totalMsg: 0, active: false } as any)}
                   link="/#"
                   img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-04.jpg"
                   name="Maren Lipshutz"

@@ -149,45 +149,45 @@ const Calender3 = () => {
               </WeekRow>
               <tbody>
                 <DayRow>
-                  <Day number="01" />
-                  <Day number="02" />
-                  <Day number="03" />
-                  <Day number="04" />
-                  <Day number="05" />
-                  <Day number="06" />
+                  <Day number="01" active={false} />
+                  <Day number="02" active={false} />
+                  <Day number="03" active={false} />
+                  <Day number="04" active={false} />
+                  <Day number="05" active={false} />
+                  <Day number="06" active={false} />
                   <Day number="07" active />
                 </DayRow>
                 <DayRow>
-                  <Day number="08" />
-                  <Day number="09" />
-                  <Day number="10" />
-                  <Day number="11" />
-                  <Day number="12" />
-                  <Day number="13" />
-                  <Day number="14" />
+                  <Day number="08" active={false} />
+                  <Day number="09" active={false} />
+                  <Day number="10" active={false} />
+                  <Day number="11" active={false} />
+                  <Day number="12" active={false} />
+                  <Day number="13" active={false} />
+                  <Day number="14" active={false} />
                 </DayRow>
                 <DayRow>
-                  <Day number="15" />
-                  <Day number="16" />
-                  <Day number="17" />
-                  <Day number="18" />
-                  <Day number="19" />
-                  <Day number="20" />
-                  <Day number="21" />
+                  <Day number="15" active={false} />
+                  <Day number="16" active={false} />
+                  <Day number="17" active={false} />
+                  <Day number="18" active={false} />
+                  <Day number="19" active={false} />
+                  <Day number="20" active={false} />
+                  <Day number="21" active={false} />
                 </DayRow>
                 <DayRow>
-                  <Day number="22" />
-                  <Day number="23" />
-                  <Day number="24" />
-                  <Day number="25" />
-                  <Day number="26" />
-                  <Day number="27" />
-                  <Day number="28" />
+                  <Day number="22" active={false} />
+                  <Day number="23" active={false} />
+                  <Day number="24" active={false} />
+                  <Day number="25" active={false} />
+                  <Day number="26" active={false} />
+                  <Day number="27" active={false} />
+                  <Day number="28" active={false} />
                 </DayRow>
                 <DayRow>
-                  <Day number="29" />
-                  <Day number="30" />
-                  <Day number="31" />
+                  <Day number="29" active={false} />
+                  <Day number="30" active={false} />
+                  <Day number="31" active={false} />
                 </DayRow>
               </tbody>
             </table>

@@ -4,7 +4,7 @@
  */
 
 import { apiClient, ApiResponse, ApiUtils } from '../client';
-import { User, UserRole, UserStatus, UserFilters as UserFiltersType, UserStats } from '../../types/users';
+import { User, UserStatus, UserFilters as UserFiltersType, UserStats } from '../../types/users';
 
 export interface UserProfile {
   firstName?: string;
@@ -32,13 +32,13 @@ export interface CreateUserData {
   username: string;
   email: string;
   password: string;
-  role?: UserRole;
+  role?: string;
 }
 
 export interface UpdateUserData {
   username?: string;
   email?: string;
-  role?: UserRole;
+  role?: string;
   status?: UserStatus;
   profile?: Partial<UserProfile>;
 }
@@ -82,8 +82,8 @@ const mockUsers: User[] = [
     firstName: 'Дмитрий',
     lastName: 'Иванов',
     avatar: '/images/avatars/admin.jpg',
-    role: 'super_admin',
-    status: 'active',
+    globalRole: 'SUPER_ADMIN',
+    status: 'ACTIVE',
     createdAt: new Date('2024-01-01T10:00:00Z'),
     updatedAt: new Date('2024-12-23T15:30:00Z'),
     lastLoginAt: new Date('2024-12-23T15:30:00Z'),
@@ -101,8 +101,8 @@ const mockUsers: User[] = [
     firstName: 'Анна',
     lastName: 'Петрова',
     avatar: '/images/avatars/manager.jpg',
-    role: 'company_admin',
-    status: 'active',
+    globalRole: 'COMPANY_ADMIN' as any,
+    status: 'ACTIVE',
     createdAt: new Date('2024-02-15T09:00:00Z'),
     updatedAt: new Date('2024-12-20T12:15:00Z'),
     lastLoginAt: new Date('2024-12-20T12:15:00Z'),
@@ -120,8 +120,8 @@ const mockUsers: User[] = [
     firstName: 'Алексей',
     lastName: 'Козлов',
     avatar: '/images/avatars/developer.jpg',
-    role: 'editor',
-    status: 'active',
+    globalRole: 'EDITOR' as any,
+    status: 'ACTIVE',
     createdAt: new Date('2024-03-10T14:20:00Z'),
     updatedAt: new Date('2024-12-22T16:45:00Z'),
     lastLoginAt: new Date('2024-12-22T16:45:00Z'),
@@ -139,8 +139,8 @@ const mockUsers: User[] = [
     firstName: 'Мария',
     lastName: 'Сидорова',
     avatar: '/images/avatars/designer.jpg',
-    role: 'editor',
-    status: 'inactive',
+    globalRole: 'EDITOR' as any,
+    status: 'INACTIVE',
     createdAt: new Date('2024-04-05T11:30:00Z'),
     updatedAt: new Date('2024-12-18T10:15:00Z'),
     lastLoginAt: new Date('2024-12-10T14:20:00Z'),
@@ -158,8 +158,8 @@ const mockUsers: User[] = [
     firstName: 'Игорь',
     lastName: 'Новиков',
     avatar: '/images/avatars/tester.jpg',
-    role: 'client',
-    status: 'suspended',
+    globalRole: 'CLIENT' as any,
+    status: 'SUSPENDED',
     createdAt: new Date('2024-05-20T16:45:00Z'),
     updatedAt: new Date('2024-12-15T13:20:00Z'),
     lastLoginAt: new Date('2024-12-01T09:30:00Z'),
@@ -183,7 +183,7 @@ class UsersApiService {
   async login(credentials: AuthCredentials): Promise<AuthResponse> {
     try {
       const res = await apiClient.post<AuthResponse>(`${this.authEndpoint}/login`, credentials);
-      const data = res.data || (res as any);
+      const data = (res as any).data || (res as any);
       if (typeof window !== 'undefined' && data?.token) {
         localStorage.setItem('auth_token', data.token);
       }
@@ -200,7 +200,7 @@ class UsersApiService {
   async register(userData: CreateUserData): Promise<AuthResponse> {
     try {
       const res = await apiClient.post<AuthResponse>(`${this.authEndpoint}/register`, userData as any);
-      const data = res.data || (res as any);
+      const data = (res as any).data || (res as any);
       if (typeof window !== 'undefined' && data?.token) {
         localStorage.setItem('auth_token', data.token);
       }
@@ -227,7 +227,7 @@ class UsersApiService {
   async getCurrentUser(): Promise<User> {
     try {
       const res = await apiClient.get<User>(`/api/users/me`);
-      const data = res.data || (res as any);
+      const data = (res as any).data || (res as any);
       return data;
     } catch (error) {
       console.error('Get Current User API Error:', error);
@@ -258,7 +258,7 @@ class UsersApiService {
       }
 
       if (filters?.role) {
-        filteredUsers = filteredUsers.filter((user) => user.role === filters.role);
+        filteredUsers = filteredUsers.filter((user) => user.globalRole === filters.role);
       }
 
       if (filters?.status) {
@@ -347,8 +347,8 @@ class UsersApiService {
         email: data.email,
         firstName: '',
         lastName: '',
-        role: data.role || 'client',
-        status: 'active',
+        globalRole: (data.role || 'client') as any,
+        status: 'ACTIVE',
         createdAt: new Date(),
         updatedAt: new Date(),
         isEmailVerified: false,

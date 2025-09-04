@@ -19,13 +19,13 @@ const adaptSpinnerProps = (props: SpinnerProps) => ({
 });
 
 // Spinner Variants
-export const ThemeSpinner1: React.FC<SpinnerProps> = (props) => <Spinner1 {...adaptSpinnerProps(props)} />;
+export const ThemeSpinner1: React.FC<SpinnerProps> = (props) => <Spinner1 {...(adaptSpinnerProps(props) as any)} />;
 
-export const ThemeSpinner2: React.FC<SpinnerProps> = (props) => <Spinner2 {...adaptSpinnerProps(props)} />;
+export const ThemeSpinner2: React.FC<SpinnerProps> = (props) => <Spinner2 {...(adaptSpinnerProps(props) as any)} />;
 
-export const ThemeSpinner3: React.FC<SpinnerProps> = (props) => <Spinner3 {...adaptSpinnerProps(props)} />;
+export const ThemeSpinner3: React.FC<SpinnerProps> = (props) => <Spinner3 {...(adaptSpinnerProps(props) as any)} />;
 
-export const ThemeSpinner4: React.FC<SpinnerProps> = (props) => <Spinner4 {...adaptSpinnerProps(props)} />;
+export const ThemeSpinner4: React.FC<SpinnerProps> = (props) => <Spinner4 {...(adaptSpinnerProps(props) as any)} />;
 
 // Экспорт всех Spinner компонентов как единый объект для удобства
 export const ThemeSpinners = {

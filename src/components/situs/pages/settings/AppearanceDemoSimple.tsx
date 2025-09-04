@@ -284,15 +284,7 @@ const AppearanceDemoSimple: React.FC = () => {
 
       <div className="max-w-7xl mx-auto p-6">
         {/* Theme Components - Наши кастомные компоненты */}
-        <DemoSection
-          title={
-            <>
-              <FiLayers className="inline mr-2" />
-              Theme Components (Кастомные)
-            </>
-          }
-          id="theme-components"
-        >
+        <DemoSection title="Demo Section" id="theme-components">
           <ComponentDemo title="Alerts" id="theme-alerts">
             <ThemeAlert type="success" title="Успех">
               Операция выполнена успешно
@@ -355,15 +347,7 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Core Components */}
-        <DemoSection
-          title={
-            <>
-              <FiSettings className="inline mr-2" />
-              Core Components
-            </>
-          }
-          id="core-components"
-        >
+        <DemoSection title="Demo Section" id="core-components">
           <ComponentDemo title="Core Badges" id="core-badges">
             <div className="w-full space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1034,15 +1018,7 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Dashboard Components */}
-        <DemoSection
-          title={
-            <>
-              <FiBarChart2 className="inline mr-2" />
-              Dashboard Components
-            </>
-          }
-          id="dashboard-components"
-        >
+        <DemoSection title="Demo Section" id="dashboard-components">
           <ComponentDemo title="Calendar" id="dashboard-calendar">
             <div className="space-y-6">
               <div>
@@ -1136,15 +1112,7 @@ const AppearanceDemoSimple: React.FC = () => {
         </DemoSection>
 
         {/* Кнопки действий */}
-        <DemoSection
-          title={
-            <>
-              <FiTool className="inline mr-2" />
-              Кнопки действий
-            </>
-          }
-          id="action-buttons"
-        >
+        <DemoSection title="Demo Section" id="action-buttons">
           <ComponentDemo title="ThemeActionButtons" id="theme-action-buttons">
             <div className="space-y-4">
               <div className="flex items-center gap-4">

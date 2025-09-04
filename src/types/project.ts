@@ -105,7 +105,7 @@ export interface UpdateProjectData {
   description?: string;
   domain?: string;
   template?: string;
-  type?: Project['type'];
+  type?: string;
   status?: Project['status'];
   settings?: Partial<Project['settings']>;
   pages?: ProjectPage[];

@@ -113,7 +113,7 @@ const PricingCard = ({
               >
                 {buttonText}
               </a>
-              <p className="text-base text-secondary-color">{subscription}</p>
+              <p className="text-secondary-color text-base">{subscription}</p>
             </div>
           </div>
         </div>

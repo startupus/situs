@@ -19,7 +19,7 @@ const Progress = ({
         <div className="-mx-4 flex flex-wrap justify-between">
           <div className="w-full px-4 lg:w-5/12">
             <div className="">
-              <div className="relative h-[10px] w-full rounded-2xl bg-light">
+              <div className="bg-light relative h-[10px] w-full rounded-2xl">
                 <div
                   className={`absolute left-0 top-0 h-full w-1/2 rounded-2xl ${
                     (primary && `bg-primary`) ||
@@ -31,7 +31,7 @@ const Progress = ({
                   } bg-primary`}
                 />
                 {ShowValue && (
-                  <div className="relative h-[10px] w-full rounded-2xl bg-light">
+                  <div className="bg-light relative h-[10px] w-full rounded-2xl">
                     <div
                       className={`absolute left-0 top-0 h-full w-1/2 rounded-2xl ${
                         (primary && `bg-primary`) ||
@@ -69,7 +69,7 @@ const Progress = ({
                 )}
 
                 {ShowValueInside && (
-                  <div className="relative h-4 w-full rounded-2xl bg-light">
+                  <div className="bg-light relative h-4 w-full rounded-2xl">
                     <div
                       className={`absolute left-0 top-0 flex h-full w-1/2 items-center justify-center rounded-2xl text-xs font-semibold text-white ${
                         (primary && `bg-primary`) ||

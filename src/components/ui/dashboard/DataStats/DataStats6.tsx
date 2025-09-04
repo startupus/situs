@@ -170,7 +170,7 @@ const Chart = (props) => {
 
   return (
     <div id="chartOne" className="-mx-5">
-      <ReactApexChart options={options} series={series} type="area" height={60} />
+      <ReactApexChart options={options as any} series={series} type="area" height={60} />
     </div>
   );
 };

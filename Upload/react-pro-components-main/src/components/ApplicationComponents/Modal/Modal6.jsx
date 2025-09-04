@@ -53,7 +53,7 @@ const Modal6 = () => {
           ref={modal}
           onFocus={() => setModalOpen(true)}
           onBlur={() => setModalOpen(false)}
-          className="relative mx-auto w-full max-w-[445px] rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-3"
+          className="shadow-1 dark:shadow-3 relative mx-auto w-full max-w-[445px] rounded-lg bg-white p-8 dark:bg-dark-2"
         >
           <h3 className="mb-6 border-b border-stroke pb-5 text-2xl font-semibold text-dark dark:border-dark-3 dark:text-white sm:text-[28px]">
             Share Modal

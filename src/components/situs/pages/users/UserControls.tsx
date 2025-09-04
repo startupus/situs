@@ -75,7 +75,7 @@ const UserControls: React.FC<UserControlsProps> = ({
               <ThemeButton onClick={() => onBulkAction('activate')} variant="success" size="sm">
                 Активировать ({selectedUsers.length})
               </ThemeButton>
-              <ThemeButton onClick={() => onBulkAction('suspend')} variant="warning" size="sm">
+              <ThemeButton onClick={() => onBulkAction('suspend')} variant="danger" size="sm">
                 Заблокировать
               </ThemeButton>
               <ThemeButton onClick={() => onBulkAction('delete')} variant="danger" size="sm">

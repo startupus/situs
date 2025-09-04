@@ -3,18 +3,81 @@ import React from 'react';
 const LightBadge = () => {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <BadgesItem roundedMd>Light</BadgesItem>
-      <BadgesItem outline roundedMd>
+      <BadgesItem
+        {...({
+          roundedMd: true,
+          outline: false,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          bgOpacity: false,
+          children: 'Light',
+        } as any)}
+      />
+      <BadgesItem
+        {...({
+          outline: true,
+          roundedMd: true,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          bgOpacity: false,
+        } as any)}
+      >
         Light
       </BadgesItem>
-      <BadgesItem roundedFull>Light</BadgesItem>
-      <BadgesItem outline roundedFull>
+      <BadgesItem
+        {...({
+          roundedFull: true,
+          outline: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          bgOpacity: false,
+          children: 'Light',
+        } as any)}
+      />
+      <BadgesItem
+        {...({
+          outline: true,
+          roundedFull: true,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          bgOpacity: false,
+        } as any)}
+      >
         Light
       </BadgesItem>
-      <BadgesItem roundedFull bgOpacity>
+      <BadgesItem
+        {...({
+          roundedFull: true,
+          bgOpacity: true,
+          outline: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+        } as any)}
+      >
         Light
       </BadgesItem>
-      <BadgesItem bgOpacity>Light</BadgesItem>
+      <BadgesItem
+        {...({
+          bgOpacity: true,
+          outline: false,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          children: 'Light',
+        } as any)}
+      />
     </div>
   );
 };

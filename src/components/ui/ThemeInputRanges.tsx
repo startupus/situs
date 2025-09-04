@@ -27,11 +27,17 @@ const adaptInputRangeProps = (props: InputRangeProps) => ({
 });
 
 // InputRange Variants
-export const ThemeInputRange1: React.FC<InputRangeProps> = (props) => <InputRange1 {...adaptInputRangeProps(props)} />;
+export const ThemeInputRange1: React.FC<InputRangeProps> = (props) => (
+  <InputRange1 {...(adaptInputRangeProps(props) as any)} />
+);
 
-export const ThemeInputRange2: React.FC<InputRangeProps> = (props) => <InputRange2 {...adaptInputRangeProps(props)} />;
+export const ThemeInputRange2: React.FC<InputRangeProps> = (props) => (
+  <InputRange2 {...(adaptInputRangeProps(props) as any)} />
+);
 
-export const ThemeInputRange3: React.FC<InputRangeProps> = (props) => <InputRange3 {...adaptInputRangeProps(props)} />;
+export const ThemeInputRange3: React.FC<InputRangeProps> = (props) => (
+  <InputRange3 {...(adaptInputRangeProps(props) as any)} />
+);
 
 // Экспорт всех InputRange компонентов как единый объект для удобства
 export const ThemeInputRanges = {

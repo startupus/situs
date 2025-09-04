@@ -66,7 +66,7 @@ const Testimonial = () => {
               <SwiperSlide key={index}>
                 <div className="relative z-10 flex justify-center">
                   <div className="relative w-full pb-16 md:w-11/12 md:pb-0 lg:w-10/12 xl:w-8/12">
-                    <div className="relative z-10 items-center overflow-hidden bg-white shadow-testimonial dark:bg-dark-2 md:flex">
+                    <div className="shadow-testimonial relative z-10 items-center overflow-hidden bg-white dark:bg-dark-2 md:flex">
                       <div className="w-full max-w-[150px] px-6 pt-10 sm:px-10 md:max-w-[270px] md:px-0 md:pt-0">
                         <img src={item.image} alt="image" className="w-full" />
                       </div>
@@ -110,7 +110,7 @@ const Testimonial = () => {
 
             <button
               onClick={handlePrev}
-              className="absolute left-0 top-full z-10 flex h-10 w-10 items-center justify-center bg-white text-dark shadow-input transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-left-12 md:top-1/2 lg:left-0"
+              className="shadow-input absolute left-0 top-full z-10 flex h-10 w-10 items-center justify-center bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-left-12 md:top-1/2 lg:left-0"
             >
               <svg
                 width="20"
@@ -129,7 +129,7 @@ const Testimonial = () => {
 
             <button
               onClick={handleNext}
-              className="absolute left-auto right-0 top-full z-10 flex h-10 w-10 items-center justify-center bg-white text-dark shadow-input transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-right-12 md:top-1/2 lg:right-0"
+              className="shadow-input absolute left-auto right-0 top-full z-10 flex h-10 w-10 items-center justify-center bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-right-12 md:top-1/2 lg:right-0"
             >
               <svg
                 width="20"

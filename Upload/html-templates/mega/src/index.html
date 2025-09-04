@@ -23,7 +23,7 @@
       class="relative flex min-h-screen w-full items-start bg-gray dark:bg-dark"
     >
       <div
-        class="fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-card duration-200 dark:bg-dark-2 xl:translate-x-0"
+        class="shadow-card fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white duration-200 dark:bg-dark-2 xl:translate-x-0"
         :class="sidebarOpen ? '-translate-x-full' : 'translate-x-0'"
       >
         <div>
@@ -260,7 +260,7 @@
                   <input
                     type="text"
                     placeholder="Search..."
-                    class="w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                    class="text-secondary-color w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                   />
                   <span
                     class="absolute right-4 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6"
@@ -373,7 +373,7 @@
                 </div>
 
                 <div
-                  class="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2"
+                  class="shadow-card-2 invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2"
                 >
                   <a
                     href="javascript:void(0)"
@@ -897,7 +897,7 @@
                       </td>
                       <td class="px-4 py-6">
                         <p
-                          class="inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium text-yellow-dark-2"
+                          class="text-yellow-dark-2 inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium"
                         >
                           Pending
                         </p>
@@ -946,7 +946,7 @@
                       </td>
                       <td class="px-4 py-6">
                         <p
-                          class="inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium text-yellow-dark-2"
+                          class="text-yellow-dark-2 inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium"
                         >
                           Pending
                         </p>
@@ -1035,7 +1035,7 @@
                       </td>
                       <td class="px-4 py-6">
                         <p
-                          class="inline-flex items-center justify-center rounded-full bg-green-light-6 px-[14px] py-1 text-sm font-medium text-green-dark"
+                          class="bg-green-light-6 inline-flex items-center justify-center rounded-full px-[14px] py-1 text-sm font-medium text-green-dark"
                         >
                           Shipped
                         </p>
@@ -1053,7 +1053,7 @@
     <!-- Theme Switcher Start -->
     <button
       id="theme-toggle"
-      class="fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark"
+      class="shadow-1 dark:shadow-box-dark fixed bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded bg-white dark:bg-dark-3"
     >
       <span class="block text-body-color dark:hidden">
         <svg

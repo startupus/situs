@@ -132,14 +132,18 @@ export function SitusPlatform() {
                     <h3 className="text-lg font-semibold">{site.name}</h3>
                     <span
                       className={`px-2 py-1 text-xs rounded ${
-                        site.status === 'published'
+                        (site as any).status === 'published'
                           ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                          : site.status === 'draft'
+                          : (site as any).status === 'draft'
                             ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
                             : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
                       }`}
                     >
-                      {site.status === 'published' ? 'Опубликован' : site.status === 'draft' ? 'Черновик' : 'Архив'}
+                      {(site as any).status === 'published'
+                        ? 'Опубликован'
+                        : (site as any).status === 'draft'
+                          ? 'Черновик'
+                          : 'Архив'}
                     </span>
                   </div>
 

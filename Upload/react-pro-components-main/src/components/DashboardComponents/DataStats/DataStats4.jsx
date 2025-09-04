@@ -4,7 +4,7 @@ const DataStats4 = () => {
   return (
     <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto px-4 md:container">
-        <div className="flex flex-wrap rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+        <div className="shadow-1 dark:shadow-box-dark flex flex-wrap rounded-lg bg-white dark:bg-dark-2">
           <DataStatsCard
             color="#8646F4"
             name="Design"

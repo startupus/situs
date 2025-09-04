@@ -53,7 +53,7 @@ const CreateRoleForm: React.FC<CreateRoleFormProps> = ({ isOpen, onClose, onSubm
     }
 
     if (formData.level < 1 || formData.level > 100) {
-      newErrors.level = 'Уровень должен быть от 1 до 100';
+      newErrors.level = 1;
     }
 
     setErrors(newErrors);

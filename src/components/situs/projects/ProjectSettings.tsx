@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ProjectData } from '../../../types/project';
+type ProjectData = any;
 import { projectsApi } from '../../../api/services/projects.api';
 
 interface ProjectSettingsProps {

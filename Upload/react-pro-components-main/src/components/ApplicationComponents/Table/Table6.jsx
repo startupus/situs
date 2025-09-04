@@ -102,7 +102,7 @@ const TableBody = ({ data }) => {
           </td>
           <td className="border-b border-stroke px-4 py-5 dark:border-dark-3">
             {row.paid && (
-              <p className="inline-flex rounded-full bg-green-light-6 px-3 py-1 text-sm font-medium text-green-dark">
+              <p className="bg-green-light-6 inline-flex rounded-full px-3 py-1 text-sm font-medium text-green-dark">
                 Paid
               </p>
             )}
@@ -112,7 +112,7 @@ const TableBody = ({ data }) => {
               </p>
             )}
             {row.pending && (
-              <p className="inline-flex rounded-full bg-yellow-light-4 px-3 py-1 text-sm font-medium text-yellow-dark-2">
+              <p className="text-yellow-dark-2 inline-flex rounded-full bg-yellow-light-4 px-3 py-1 text-sm font-medium">
                 Pending
               </p>
             )}

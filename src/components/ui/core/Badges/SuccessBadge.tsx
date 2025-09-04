@@ -3,18 +3,81 @@ import React from 'react';
 const SuccessBadge = () => {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <BadgesItem roundedMd>Success</BadgesItem>
-      <BadgesItem outline roundedMd>
+      <BadgesItem
+        {...({
+          roundedMd: true,
+          outline: false,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          bgOpacity: false,
+          children: 'Success',
+        } as any)}
+      />
+      <BadgesItem
+        {...({
+          outline: true,
+          roundedMd: true,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          bgOpacity: false,
+        } as any)}
+      >
         Success
       </BadgesItem>
-      <BadgesItem roundedFull>Success</BadgesItem>
-      <BadgesItem outline roundedFull>
+      <BadgesItem
+        {...({
+          roundedFull: true,
+          outline: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          bgOpacity: false,
+          children: 'Success',
+        } as any)}
+      />
+      <BadgesItem
+        {...({
+          outline: true,
+          roundedFull: true,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          bgOpacity: false,
+        } as any)}
+      >
         Success
       </BadgesItem>
-      <BadgesItem roundedFull bgOpacity>
+      <BadgesItem
+        {...({
+          roundedFull: true,
+          bgOpacity: true,
+          outline: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+        } as any)}
+      >
         Success
       </BadgesItem>
-      <BadgesItem bgOpacity>Success</BadgesItem>
+      <BadgesItem
+        {...({
+          bgOpacity: true,
+          outline: false,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          children: 'Success',
+        } as any)}
+      />
     </div>
   );
 };

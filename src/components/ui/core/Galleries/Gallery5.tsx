@@ -31,22 +31,22 @@ export default function Gallery5() {
   const [activeIndex, setActiveIndex] = useState(1);
 
   return (
-    <section class="bg-white py-20 dark:bg-dark">
-      <div class="container">
+    <section className="bg-white py-20 dark:bg-dark">
+      <div className="container">
         <div>
-          <div class="mb-6">
-            <div class="overflow-hidden rounded-xl">
+          <div className="mb-6">
+            <div className="overflow-hidden rounded-xl">
               {galleryData.map((item, i) => (
                 <img
                   key={i}
                   src={item?.image}
                   alt={item?.alt}
-                  class={`w-full object-cover object-center ${activeIndex === item?.id ? 'block' : 'hidden'}`}
+                  className={`w-full object-cover object-center ${activeIndex === item?.id ? 'block' : 'hidden'}`}
                 />
               ))}
             </div>
           </div>
-          <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
             {galleryData.map((gallery, i) => (
               <button
                 key={i}
@@ -55,7 +55,7 @@ export default function Gallery5() {
                   activeIndex === gallery?.id ? 'border-primary' : 'border-transparent'
                 } overflow-hidden rounded-lg border lg:rounded-xl`}
               >
-                <img src={gallery?.thumbnail} alt={gallery?.alt} class="w-full object-cover object-center" />
+                <img src={gallery?.thumbnail} alt={gallery?.alt} className="w-full object-cover object-center" />
               </button>
             ))}
           </div>

@@ -77,7 +77,7 @@ const TableGridItem = ({
 }) => {
   return (
     <div className="w-full px-4 lg:w-1/2">
-      <div className="mb-8 rounded-lg border border-stroke bg-white shadow-1 hover:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:shadow-3">
+      <div className="shadow-1 dark:shadow-3 mb-8 rounded-lg border border-stroke bg-white hover:shadow-none dark:border-dark-3 dark:bg-dark-2">
         <div className="items-center justify-between border-b border-stroke p-5 dark:border-dark-3 sm:flex">
           <div className="flex items-center">
             <div className="mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-sm">

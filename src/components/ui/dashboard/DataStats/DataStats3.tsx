@@ -6,6 +6,7 @@ const DataStats3 = () => {
       <div className="mx-auto px-4 md:container">
         <div className="-mx-4 flex flex-wrap">
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             total="$12,489"
             totalTitle="Total Balance"
             increment="0.43%"
@@ -19,6 +20,7 @@ const DataStats3 = () => {
             }
           />
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             total="$2,572"
             totalTitle="Total Sales"
             increment="0.39%"
@@ -40,6 +42,7 @@ const DataStats3 = () => {
             }
           />
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             total="582"
             totalTitle="Total Customers"
             decrement="0.23%"
@@ -53,6 +56,7 @@ const DataStats3 = () => {
             }
           />
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             total="489"
             totalTitle="Total Orders"
             increment="0.49%"

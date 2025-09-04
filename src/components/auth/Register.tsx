@@ -275,7 +275,7 @@ const Register: React.FC = () => {
         <div className="relative">
           <FaPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
           <input
-            type="tel"
+            type="text"
             value={form.phone}
             onChange={(e) => handleInputChange('phone', e.target.value)}
             className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-100"
@@ -285,7 +285,7 @@ const Register: React.FC = () => {
         </div>
       )}
 
-      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full" loading={loading}>
+      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full">
         Далее
       </ThemeButton>
     </div>
@@ -306,7 +306,7 @@ const Register: React.FC = () => {
               }, 500);
             }
           }}
-          error={error}
+          error={!!error}
         />
       </div>
     </div>
@@ -349,7 +349,7 @@ const Register: React.FC = () => {
         <p className="text-red-600 dark:text-red-400 text-sm">Пароли не совпадают</p>
       )}
 
-      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full" loading={loading}>
+      <ThemeButton onClick={handleNext} disabled={!validateForm() || loading} className="w-full">
         Создать аккаунт
       </ThemeButton>
     </div>
@@ -418,7 +418,7 @@ const Register: React.FC = () => {
           {/* Ошибка */}
           {error && (
             <div className="mb-6">
-              <ThemeAlert variant="error">{error}</ThemeAlert>
+              <ThemeAlert type="error">{error}</ThemeAlert>
             </div>
           )}
 

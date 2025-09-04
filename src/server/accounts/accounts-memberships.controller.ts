@@ -3,7 +3,7 @@ import { PrismaService } from '../database/prisma.service';
 import { CreateAccountMembershipDto } from './dto/create-account-membership.dto';
 import { Scopes } from '../common/decorators/roles.decorator';
 
-@Controller('api/account-memberships')
+@Controller('account-memberships')
 export class AccountMembershipsController {
   constructor(private readonly prisma: PrismaService) {}
 

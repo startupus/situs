@@ -25,7 +25,7 @@ const ProjectPages: React.FC<ProjectPagesProps> = ({ project }) => {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const filteredPages = project.pages.filter((page) => {
+  const filteredPages = (project as any).pages.filter((page) => {
     const matchesSearch =
       page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       page.slug.toLowerCase().includes(searchTerm.toLowerCase());

@@ -51,7 +51,7 @@ const SelectBoxItem = ({ id, name, img, price, title, time }) => {
         />
         <label
           htmlFor={id}
-          className={`flex cursor-pointer items-center overflow-hidden rounded-lg border-2 p-[14px] shadow-1 dark:shadow-box-dark sm:px-[22px] ${isChecked ? "border-primary bg-primary/5" : "border-transparent bg-white dark:bg-dark-2"}`}
+          className={`shadow-1 dark:shadow-box-dark flex cursor-pointer items-center overflow-hidden rounded-lg border-2 p-[14px] sm:px-[22px] ${isChecked ? "border-primary bg-primary/5" : "border-transparent bg-white dark:bg-dark-2"}`}
         >
           <div className="mr-5">
             <img src={img} alt="author" className="h-[18px]" />

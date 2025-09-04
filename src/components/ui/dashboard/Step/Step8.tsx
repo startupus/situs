@@ -12,11 +12,13 @@ const Step8 = () => {
             details="Lorem ipsum dolor sit standta amet consectetur adipiscing elit."
           />
           <SingleStep
+            done={false}
             number="Step 2"
             name="Setup Account"
             details="Lorem ipsum dolor sit standta amet consectetur adipiscing elit."
           />
           <SingleStep
+            done={false}
             number="Step 3"
             name="Start Using"
             details="Lorem ipsum dolor sit standta amet consectetur adipiscing elit."

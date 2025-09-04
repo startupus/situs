@@ -80,7 +80,7 @@ const PricingPlans = () => {
           <div className="-mx-4 flex flex-wrap justify-center">
             {plans.map((item, index) => (
               <div key={index} className="w-full px-4 md:w-1/2 lg:w-1/3">
-                <div className="relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 border-stroke bg-white px-8 py-10 shadow-pricing dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]">
+                <div className="shadow-pricing relative z-10 mb-10 overflow-hidden rounded-[10px] border-2 border-stroke bg-white px-8 py-10 dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:p-[50px]">
                   <span className="mb-3 block text-lg font-semibold text-primary">
                     {item.name}
                   </span>

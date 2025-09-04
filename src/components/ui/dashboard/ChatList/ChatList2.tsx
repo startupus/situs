@@ -32,26 +32,29 @@ const ChatList2 = () => {
 
           <div className="space-y-3">
             <ChatItem
-              active
+              {...({ active: true, number: 0 } as any)}
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-01.png"
               name="Danish Hebo"
               text="Hello devid, how are you today?"
               time="Dec, 8"
               number="5"
+              active={false}
             />
             <ChatItem
-              active
+              {...({ active: true, number: 0 } as any)}
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-02.png"
               name="Mariya Desoja"
               text="How are you today?"
               time="Dec, 8"
+              active={false}
             />
             <ChatItem
-              active
+              {...({ active: true, number: 0 } as any)}
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-03.png"
               name="Jenny Wilson"
               text="I'm waiting for you response!"
               time="Dec, 8"
+              active={false}
             />
             <ChatItem
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-04.png"
@@ -59,13 +62,15 @@ const ChatList2 = () => {
               text="What do you think about it?"
               time="Dec, 8"
               number="2"
+              active={false}
             />
             <ChatItem
-              active
+              {...({ active: true, number: 0 } as any)}
               img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-05.png"
               name="Jubin Jack"
               text="I really love that!"
               time="Dec, 8"
+              active={false}
             />
           </div>
         </div>

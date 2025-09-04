@@ -55,7 +55,7 @@ const Testimonial2 = () => {
 
           <button
             onClick={handlePrev}
-            className="absolute left-[35%] top-full flex h-10 w-10 items-center justify-center bg-white text-dark shadow-input transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-left-12 md:top-1/2 lg:-left-16"
+            className="shadow-input absolute left-[35%] top-full flex h-10 w-10 items-center justify-center bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-left-12 md:top-1/2 lg:-left-16"
           >
             <svg
               width="20"
@@ -74,7 +74,7 @@ const Testimonial2 = () => {
 
           <button
             onClick={handleNext}
-            className="absolute left-auto right-[35%] top-full flex h-10 w-10 items-center justify-center bg-white text-dark shadow-input transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-right-12 md:top-1/2 lg:-right-16"
+            className="shadow-input absolute left-auto right-[35%] top-full flex h-10 w-10 items-center justify-center bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white md:-right-12 md:top-1/2 lg:-right-16"
           >
             <svg
               width="20"
@@ -102,7 +102,7 @@ const SingleTestimonial = ({ image, details, name, position }) => {
   return (
     <div className="relative z-10 flex justify-center">
       <div className="relative w-full pb-16 md:w-11/12 md:pb-0 lg:w-10/12 xl:w-8/12">
-        <div className="relative z-10 items-center overflow-hidden bg-white shadow-testimonial dark:bg-dark-2 md:flex">
+        <div className="shadow-testimonial relative z-10 items-center overflow-hidden bg-white dark:bg-dark-2 md:flex">
           <div className="w-full max-w-[150px] px-6 pt-10 sm:px-10 md:max-w-[270px] md:px-0 md:pt-0">
             <img src={image} alt="image" className="w-full" />
           </div>

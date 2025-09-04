@@ -75,7 +75,7 @@ const FooterTop = () => {
                 className="w-full px-4 last:border-r-0 md:w-1/3 md:border-r md:border-stroke md:dark:border-dark-3"
               >
                 <div className="mb-[60px] text-center md:mt-[60px]">
-                  <div className="mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white shadow-1 dark:bg-dark-2 dark:shadow-none">
+                  <div className="shadow-1 mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white dark:bg-dark-2 dark:shadow-none">
                     {item.icon}
                   </div>
 

@@ -4,7 +4,7 @@ const SuccessAlert1 = () => {
   return (
     <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="flex w-full rounded-lg border-l-[6px] border-green bg-white px-7 py-8 shadow-1 dark:bg-dark-2 md:p-9">
+        <div className="shadow-1 flex w-full rounded-lg border-l-[6px] border-green bg-white px-7 py-8 dark:bg-dark-2 md:p-9">
           <div className="mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md bg-green/10">
             <svg
               width="18"

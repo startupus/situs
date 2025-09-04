@@ -89,7 +89,6 @@ const Profile3 = () => {
               <a
                 href="/#"
                 className="flex h-5 w-5 items-center justify-center text-[#98A6AD] hover:text-primary"
-                name="social-icon"
                 aria-label="social-icon"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -99,7 +98,6 @@ const Profile3 = () => {
               <a
                 href="/#"
                 className="flex h-5 w-5 items-center justify-center text-[#98A6AD] hover:text-primary"
-                name="social-icon"
                 aria-label="social-icon"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -109,7 +107,6 @@ const Profile3 = () => {
               <a
                 href="/#"
                 className="flex h-5 w-5 items-center justify-center text-[#98A6AD] hover:text-primary"
-                name="social-icon"
                 aria-label="social-icon"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -119,7 +116,6 @@ const Profile3 = () => {
               <a
                 href="/#"
                 className="flex h-5 w-5 items-center justify-center text-[#98A6AD] hover:text-primary"
-                name="social-icon"
                 aria-label="social-icon"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">

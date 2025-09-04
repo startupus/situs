@@ -198,6 +198,8 @@ const SitusUsers: React.FC = () => {
           />
 
           <UserTable
+            onEditUser={() => {}}
+            onDeleteUser={() => {}}
             users={filteredUsers}
             selectedUsers={selectedUsers}
             onSelectUser={handleSelectUser}

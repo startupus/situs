@@ -240,7 +240,7 @@ export const useUsers = () => {
 
       if (response.error) {
         console.error('Ошибка создания пользователя:', response.error);
-        throw new Error(response.error.message);
+        throw new Error(typeof response.error === 'string' ? response.error : 'Ошибка');
       }
 
       // Добавляем нового пользователя в локальное состояние

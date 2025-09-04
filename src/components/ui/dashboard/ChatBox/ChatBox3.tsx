@@ -60,6 +60,8 @@ const ChatBox3 = () => {
                 name="Nagita salavina"
                 time="1d"
                 text="Hi, are we going on new year's holiday? we can visite india."
+                audio=""
+                pictures={[]}
               />
               <Chat
                 img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-box/chat-box-03/image-01.jpg"
@@ -67,6 +69,7 @@ const ChatBox3 = () => {
                 time="1d"
                 audio="/#"
                 pictures={pictures}
+                text=""
               />
               <Reply
                 name="You"

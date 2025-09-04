@@ -50,6 +50,7 @@ const VerticalNavbar6 = () => {
             <nav>
               <ul>
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -68,6 +69,7 @@ const VerticalNavbar6 = () => {
                   menu="Home"
                 />
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -96,6 +98,7 @@ const VerticalNavbar6 = () => {
                   menu="Dashboard"
                 />
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -124,6 +127,7 @@ const VerticalNavbar6 = () => {
                   menu="Calendar "
                 />
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -138,6 +142,7 @@ const VerticalNavbar6 = () => {
                 />
 
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -160,6 +165,7 @@ const VerticalNavbar6 = () => {
                   message="5"
                 />
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={20} viewBox="0 0 18 20" className="fill-current">
@@ -179,6 +185,7 @@ const VerticalNavbar6 = () => {
                   menu="Notification"
                 />
                 <NavItem
+                  {...({ submenu: false, message: '', avatar1: '', avatar2: '', avatar3: '', children: null } as any)}
                   link="/#"
                   icon={
                     <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">

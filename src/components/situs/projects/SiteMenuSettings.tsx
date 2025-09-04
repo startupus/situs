@@ -30,7 +30,7 @@ interface MenuConfig {
 
 const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }) => {
   const [menuConfig, setMenuConfig] = useState<MenuConfig>({
-    items: project.pages.map((page, index) => ({
+    items: (project as any).pages.map((page, index) => ({
       id: page.id,
       title: page.title,
       type: 'page',
@@ -272,7 +272,7 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
                         <div className="font-medium text-dark dark:text-white">{item.title}</div>
                         <div className="text-xs text-body-color dark:text-dark-6">
                           {item.type === 'page' && item.pageId && (
-                            <>Страница: {project.pages.find((p) => p.id === item.pageId)?.slug}</>
+                            <>Страница: {(project as any).pages.find((p) => p.id === item.pageId)?.slug}</>
                           )}
                           {item.type === 'link' && item.url && <>Ссылка: {item.url}</>}
                         </div>
@@ -354,7 +354,7 @@ const SiteMenuSettings: React.FC<SiteMenuSettingsProps> = ({ project, onUpdate }
                     className="w-full px-3 py-2 border border-stroke dark:border-dark-3 rounded-lg bg-white dark:bg-dark-2 text-dark dark:text-white focus:border-primary focus:outline-none transition-colors"
                   >
                     <option value="">Выберите страницу</option>
-                    {project.pages.map((page) => (
+                    {(project as any).pages.map((page) => (
                       <option key={page.id} value={page.id}>
                         {page.title} ({page.slug})
                       </option>

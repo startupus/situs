@@ -121,7 +121,7 @@ const StatsItem = ({ user, title, icon }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4">
       <div className="mb-10 text-center">
-        <div className="mx-auto mb-8 flex h-[90px] w-[90px] items-center justify-center rounded-[15px] bg-white text-primary shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+        <div className="shadow-1 dark:shadow-box-dark mx-auto mb-8 flex h-[90px] w-[90px] items-center justify-center rounded-[15px] bg-white text-primary dark:bg-dark-2">
           {icon}
         </div>
         <div>

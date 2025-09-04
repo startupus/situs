@@ -55,7 +55,7 @@ const Testimonials = () => {
           <div className="-mx-4 flex flex-wrap justify-center">
             {testimonialItems.map((item, index) => (
               <div key={index} className="w-full px-4 md:w-1/2">
-                <div className="relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 shadow-testimonial-6 dark:bg-dark-2 dark:shadow-none sm:p-10 md:px-6 md:py-10 lg:p-10">
+                <div className="shadow-testimonial-6 relative mb-10 overflow-hidden rounded-[10px] bg-white p-8 dark:bg-dark-2 dark:shadow-none sm:p-10 md:px-6 md:py-10 lg:p-10">
                   <div className="mb-10 flex items-center">
                     <div className="mr-5 h-20 w-full max-w-[80px] overflow-hidden rounded-sm md:h-[60px] md:max-w-[60px] lg:h-20 lg:max-w-[80px]">
                       <img src={item.image} alt="image" className="w-full" />

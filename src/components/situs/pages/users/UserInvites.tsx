@@ -69,7 +69,7 @@ const UserInvites: React.FC<UserInvitesProps> = ({ onSendInvitations }) => {
 
       await InvitationsAPI.createInvitations({
         emails,
-        role: inviteForm.role,
+        globalRole: inviteForm.role,
         message: inviteForm.message || undefined,
         channel: 'EMAIL',
         expiresAt,
@@ -272,7 +272,7 @@ const UserInvites: React.FC<UserInvitesProps> = ({ onSendInvitations }) => {
                     </td>
                     <td className="px-6 py-4">
                       <ThemeBadge variant="info" size="sm">
-                        {getRoleText(invitation.role)}
+                        {getRoleText(invitation.globalRole)}
                       </ThemeBadge>
                     </td>
                     <td className="px-6 py-4">
@@ -283,7 +283,7 @@ const UserInvites: React.FC<UserInvitesProps> = ({ onSendInvitations }) => {
                             : invitation.status === 'ACCEPTED'
                               ? 'success'
                               : invitation.status === 'EXPIRED'
-                                ? 'error'
+                                ? 'danger'
                                 : 'secondary'
                         }
                         size="sm"
@@ -305,8 +305,8 @@ const UserInvites: React.FC<UserInvitesProps> = ({ onSendInvitations }) => {
                         onDelete={() => handleDeleteInvitation(invitation.id)}
                         editTitle="Переотправить приглашение"
                         deleteTitle="Удалить приглашение"
-                        editIcon={<FiRefreshCw />}
-                        showEdit={invitation.status === 'PENDING'}
+
+                        /* showEdit={invitation.status === "PENDING"} */
                       />
                     </td>
                   </tr>

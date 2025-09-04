@@ -47,7 +47,7 @@ const ProductGrid = () => {
     <>
       {productList.map((item, index) => (
         <div key={index} className="w-full px-4 md:w-1/2">
-          <div className="mb-10 overflow-hidden rounded-lg border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+          <div className="shadow-1 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
             <div>
               <img src={item.image} alt="product" className="w-full" />
             </div>

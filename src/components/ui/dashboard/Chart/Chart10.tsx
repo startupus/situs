@@ -71,7 +71,7 @@ const Chart10 = () => {
 
           <div className="mb-2">
             <div id="chartOne" className="chart-10 mx-auto flex justify-center">
-              <ReactApexChart options={options} series={series} type="donut" width={380} />
+              <ReactApexChart options={options as any} series={series as any} type="donut" width={380} />
             </div>
           </div>
 

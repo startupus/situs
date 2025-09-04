@@ -36,34 +36,52 @@ const adaptBreadcrumbProps = (props: BreadcrumbProps) => ({
 });
 
 // Breadcrumb Variants
-export const ThemeBreadcrumb1: React.FC<BreadcrumbProps> = (props) => <Breadcrumb1 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb1: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb1 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb2: React.FC<BreadcrumbProps> = (props) => <Breadcrumb2 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb2: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb2 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb3: React.FC<BreadcrumbProps> = (props) => <Breadcrumb3 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb3: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb3 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb4: React.FC<BreadcrumbProps> = (props) => <Breadcrumb4 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb4: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb4 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb5: React.FC<BreadcrumbProps> = (props) => <Breadcrumb5 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb5: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb5 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb6: React.FC<BreadcrumbProps> = (props) => <Breadcrumb6 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb6: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb6 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb7: React.FC<BreadcrumbProps> = (props) => <Breadcrumb7 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb7: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb7 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb8: React.FC<BreadcrumbProps> = (props) => <Breadcrumb8 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb8: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb8 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
-export const ThemeBreadcrumb9: React.FC<BreadcrumbProps> = (props) => <Breadcrumb9 {...adaptBreadcrumbProps(props)} />;
+export const ThemeBreadcrumb9: React.FC<BreadcrumbProps> = (props) => (
+  <Breadcrumb9 {...(adaptBreadcrumbProps(props) as any)} />
+);
 
 export const ThemeBreadcrumb10: React.FC<BreadcrumbProps> = (props) => (
-  <Breadcrumb10 {...adaptBreadcrumbProps(props)} />
+  <Breadcrumb10 {...(adaptBreadcrumbProps(props) as any)} />
 );
 
 export const ThemeBreadcrumb11: React.FC<BreadcrumbProps> = (props) => (
-  <Breadcrumb11 {...adaptBreadcrumbProps(props)} />
+  <Breadcrumb11 {...(adaptBreadcrumbProps(props) as any)} />
 );
 
 export const ThemeBreadcrumb12: React.FC<BreadcrumbProps> = (props) => (
-  <Breadcrumb12 {...adaptBreadcrumbProps(props)} />
+  <Breadcrumb12 {...(adaptBreadcrumbProps(props) as any)} />
 );
 
 // Экспорт всех Breadcrumb компонентов как единый объект для удобства

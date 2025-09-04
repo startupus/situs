@@ -4,7 +4,7 @@ export default function Toast2() {
   return (
     <section className="bg-gray-2 py-[60px] dark:bg-dark">
       <div className="mx-auto px-4 sm:container">
-        <div className="relative flex max-w-[422px] items-center rounded-lg border border-stroke bg-white p-4 py-[18px] shadow-pricing-4 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-[30px]">
+        <div className="shadow-pricing-4 dark:shadow-box-dark relative flex max-w-[422px] items-center rounded-lg border border-stroke bg-white p-4 py-[18px] dark:border-dark-3 dark:bg-dark-2 sm:px-[30px]">
           <div className="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-full bg-green">
             <svg
               width={24}

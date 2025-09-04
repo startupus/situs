@@ -61,6 +61,16 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          router: ['react-router', 'react-router-dom'],
+          vendor_ui: ['react-icons'],
+        },
+      },
+    },
   },
   optimizeDeps: {
     exclude: ['react-app-polyfill', '@reach/router', 'react-bricks-ui'],

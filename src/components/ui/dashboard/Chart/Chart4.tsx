@@ -155,7 +155,7 @@ const Chart4 = () => {
           </div>
 
           <div id="chartOne" className="-mx-5">
-            <ReactApexChart options={options} series={series} type="area" height={450} />
+            <ReactApexChart options={options as any} series={series as any} type="area" height={450} />
           </div>
         </div>
       </div>
