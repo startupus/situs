@@ -15,7 +15,7 @@ async function main() {
       username: 'admin',
       email: 'admin@startapus.com',
       password: adminPassword,
-      role: 'ADMIN',
+      globalRole: 'SUPER_ADMIN',
       status: 'ACTIVE',
     },
   });
@@ -29,7 +29,7 @@ async function main() {
       username: 'dmitriy',
       email: 'dmitriy@startapus.com',
       password: userPassword,
-      role: 'BUSINESS',
+      globalRole: 'BUSINESS',
       status: 'ACTIVE',
     },
   });
