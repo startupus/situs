@@ -457,6 +457,8 @@ model ThemeTemplate {
   isBuiltIn     Boolean  @default(false)
   isPublic      Boolean  @default(false)
   downloads     Int      @default(0)
+  ratingSum     Int      @default(0)
+  ratingCount   Int      @default(0)
   createdAt     DateTime @default(now())
   createdBy     String?
 
