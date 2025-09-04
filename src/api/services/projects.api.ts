@@ -240,6 +240,78 @@ class ProjectsApiService {
     }
   }
 
+  // === ФАЗА 2: Мульти-темность ===
+  async listProjectThemes(projectId: string): Promise<any[]> {
+    try {
+      const response = await apiClient.get<ApiResponse<any[]>>(
+        `${this.baseEndpoint}/${projectId}/themes`
+      );
+      if (ApiUtils.isSuccess(response)) {
+        return response.data as any[];
+      }
+      throw new Error(response.error || 'Ошибка при загрузке тем проекта');
+    } catch (error) {
+      console.error('List Project Themes API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  async createProjectTheme(projectId: string, data: any): Promise<any> {
+    try {
+      const response = await apiClient.post<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/themes`,
+        data
+      );
+      if (ApiUtils.isSuccess(response)) return response.data;
+      throw new Error(response.error || 'Ошибка при создании темы');
+    } catch (error) {
+      console.error('Create Project Theme API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  async updateProjectThemeById(projectId: string, themeId: string, data: any): Promise<any> {
+    try {
+      const response = await apiClient.put<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/themes/${themeId}`,
+        data
+      );
+      if (ApiUtils.isSuccess(response)) return response.data;
+      throw new Error(response.error || 'Ошибка при обновлении темы');
+    } catch (error) {
+      console.error('Update Project Theme API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  async deleteProjectTheme(projectId: string, themeId: string): Promise<void> {
+    try {
+      const response = await apiClient.delete<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/themes/${themeId}`
+      );
+      if (!ApiUtils.isSuccess(response)) {
+        throw new Error(response.error || 'Ошибка при удалении темы');
+      }
+    } catch (error) {
+      console.error('Delete Project Theme API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
+  async activateProjectTheme(projectId: string, themeId: string): Promise<void> {
+    try {
+      const response = await apiClient.post<ApiResponse<any>>(
+        `${this.baseEndpoint}/${projectId}/themes/${themeId}/activate`
+      );
+      if (!ApiUtils.isSuccess(response)) {
+        throw new Error(response.error || 'Ошибка при активации темы');
+      }
+    } catch (error) {
+      console.error('Activate Project Theme API Error:', error);
+      throw new Error(ApiUtils.handleError(error));
+    }
+  }
+
   /**
    * Обновить домены проекта (base domain / customDomain)
    */

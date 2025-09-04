@@ -30,6 +30,7 @@ import { UpdateProjectAccessDto } from './dto/update-project-access.dto';
 // import { SimpleJwtGuard } from '../auth/guards/simple-jwt.guard'; // Временно отключено
 import { Roles, Scopes } from '../common/decorators/roles.decorator';
 import { ThemeConfigDto } from './dto/theme-config.dto';
+import { CreateProjectThemeDto, UpdateProjectThemeDto } from './dto/project-theme.dto';
 
 /**
  * Контроллер проектов
@@ -170,6 +171,63 @@ export class ProjectsController {
     const safe = this.projectsService.sanitizeThemeConfig(body);
     const result = await this.projectsService.updateProjectThemeConfig(id, safe);
     return { success: result.success } as const;
+  }
+
+  /**
+   * Список тем проекта (Фаза 2)
+   */
+  @Get(':id/themes')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_READ')
+  async listProjectThemes(@Param('id') id: string) {
+    const themes = await this.projectsService.listProjectThemes(id);
+    return { success: true, data: themes } as const;
+  }
+
+  /**
+   * Создание темы проекта
+   */
+  @Post(':id/themes')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_WRITE')
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+  async createProjectTheme(@Param('id') id: string, @Body() dto: CreateProjectThemeDto) {
+    const created = await this.projectsService.createProjectTheme(id, dto);
+    return { success: true, data: created } as const;
+  }
+
+  /**
+   * Обновление темы проекта
+   */
+  @Put(':id/themes/:themeId')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_WRITE')
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+  async updateProjectThemeById(@Param('id') id: string, @Param('themeId') themeId: string, @Body() dto: UpdateProjectThemeDto) {
+    const updated = await this.projectsService.updateProjectThemeById(id, themeId, dto);
+    return { success: true, data: updated } as const;
+  }
+
+  /**
+   * Удаление темы проекта
+   */
+  @Delete(':id/themes/:themeId')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_WRITE')
+  async deleteProjectTheme(@Param('id') id: string, @Param('themeId') themeId: string) {
+    await this.projectsService.deleteProjectTheme(id, themeId);
+    return { success: true } as const;
+  }
+
+  /**
+   * Активация темы
+   */
+  @Post(':id/themes/:themeId/activate')
+  @Roles('BUSINESS','AGENCY','STAFF','SUPER_ADMIN')
+  @Scopes('PROJECT_WRITE')
+  async activateProjectTheme(@Param('id') id: string, @Param('themeId') themeId: string) {
+    await this.projectsService.activateProjectTheme(id, themeId);
+    return { success: true } as const;
   }
 
   /**

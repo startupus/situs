@@ -6,6 +6,7 @@ import { PrismaService } from '../database/prisma.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ProjectQueryDto } from './dto/project-query.dto';
+import { CreateProjectThemeDto, UpdateProjectThemeDto } from './dto/project-theme.dto';
 
 /**
  * Сервис проектов
@@ -153,10 +154,10 @@ export class ProjectsService {
   sanitizeThemeConfig(themeConfig: any): any {
     const clone = JSON.parse(JSON.stringify(themeConfig || {}));
     if (clone && typeof clone.customCss === 'string') {
-      let css = clone.customCss;
+      let css: string = clone.customCss;
       // Запрещаем @import и url(javascript:)
       css = css.replace(/@import[^;]+;?/gi, '');
-      css = css.replace(/url\(([^)]+)\)/gi, (m, p1) => {
+      css = css.replace(/url\(([^)]+)\)/gi, (m: string, p1: string) => {
         const val = String(p1 || '').replace(/["']/g, '').trim();
         if (/^javascript:/i.test(val)) return 'url(about:blank)';
         return `url(${p1})`;
@@ -166,6 +167,84 @@ export class ProjectsService {
       clone.customCss = css;
     }
     return clone;
+  }
+
+  /**
+   * ФАЗА 2: Темы проекта — список
+   */
+  async listProjectThemes(projectId: string) {
+    const themes = await this.prisma.projectTheme.findMany({
+      where: { projectId },
+      orderBy: { createdAt: 'desc' }
+    });
+    return themes.map(t => ({
+      id: t.id,
+      name: t.name,
+      description: t.description || undefined,
+      type: t.type as any,
+      isActive: t.isActive,
+      isDefault: t.isDefault,
+      config: typeof t.config === 'string' ? JSON.parse(t.config as any) : (t.config as any),
+      createdAt: t.createdAt,
+      updatedAt: t.updatedAt
+    }));
+  }
+
+  /**
+   * Создание темы проекта
+   */
+  async createProjectTheme(projectId: string, dto: CreateProjectThemeDto) {
+    const safeConfig = this.sanitizeThemeConfig(dto.config);
+    const created = await this.prisma.projectTheme.create({
+      data: {
+        projectId,
+        name: dto.name,
+        description: dto.description,
+        type: dto.type,
+        isDefault: Boolean(dto.isDefault),
+        config: safeConfig as any,
+      }
+    });
+    return { ...created, config: safeConfig };
+  }
+
+  /**
+   * Обновление темы проекта
+   */
+  async updateProjectThemeById(projectId: string, themeId: string, dto: UpdateProjectThemeDto) {
+    // Минимальная проверка принадлежности
+    const existing = await this.prisma.projectTheme.findFirst({ where: { id: themeId, projectId } });
+    if (!existing) throw new NotFoundException('Тема не найдена');
+
+    const data: any = {};
+    if (dto.name !== undefined) data.name = dto.name;
+    if (dto.description !== undefined) data.description = dto.description;
+    if (dto.type !== undefined) data.type = dto.type;
+    if (dto.isDefault !== undefined) data.isDefault = dto.isDefault;
+    if (dto.config !== undefined) data.config = this.sanitizeThemeConfig(dto.config) as any;
+
+    const updated = await this.prisma.projectTheme.update({ where: { id: themeId }, data });
+    return { ...updated, config: (data.config ?? existing.config) };
+  }
+
+  /**
+   * Удаление темы проекта
+   */
+  async deleteProjectTheme(projectId: string, themeId: string) {
+    const existing = await this.prisma.projectTheme.findFirst({ where: { id: themeId, projectId } });
+    if (!existing) return;
+    await this.prisma.projectTheme.delete({ where: { id: themeId } });
+  }
+
+  /**
+   * Активация темы проекта
+   */
+  async activateProjectTheme(projectId: string, themeId: string) {
+    const existing = await this.prisma.projectTheme.findFirst({ where: { id: themeId, projectId } });
+    if (!existing) throw new NotFoundException('Тема не найдена');
+    await this.prisma.project.update({ where: { id: projectId }, data: { activeThemeId: themeId } });
+    await this.prisma.projectTheme.updateMany({ where: { projectId }, data: { isActive: false } });
+    await this.prisma.projectTheme.update({ where: { id: themeId }, data: { isActive: true } });
   }
 
   /**
