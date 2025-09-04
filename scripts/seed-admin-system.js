@@ -1,5 +1,6 @@
-import { PrismaClient, ProjectStatus, MenuItemType, GlobalRole } from '@prisma/client';
-
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const client_1 = require('@prisma/client');
 /**
  * Сид системного проекта админки и базовой навигации.
  * - Создаёт проект со slug "situs-admin" (в settings помечаем isSystemAdmin=true)
@@ -7,37 +8,36 @@ import { PrismaClient, ProjectStatus, MenuItemType, GlobalRole } from '@prisma/c
  * - Создаёт минимальные пункты меню (Проекты, Пользователи)
  */
 async function main() {
-  const prisma = new PrismaClient();
+  const prisma = new client_1.PrismaClient();
   try {
     console.log('🌱 Seeding system admin project...');
-
     // 1) Владелец — берём SUPER_ADMIN, иначе первого пользователя
     let owner =
-      (await prisma.user.findFirst({ where: { globalRole: GlobalRole.SUPER_ADMIN }, orderBy: { createdAt: 'asc' } })) ||
-      (await prisma.user.findFirst({ orderBy: { createdAt: 'asc' } }));
-
+      (await prisma.user.findFirst({
+        where: { globalRole: client_1.GlobalRole.SUPER_ADMIN },
+        orderBy: { createdAt: 'asc' },
+      })) || (await prisma.user.findFirst({ orderBy: { createdAt: 'asc' } }));
     // Если нет ни одного пользователя — создаём системного администратора
     if (!owner) {
       owner = await prisma.user.upsert({
         where: { email: 'admin@situs.local' },
-        update: { globalRole: GlobalRole.SUPER_ADMIN, status: 'ACTIVE' },
+        update: { globalRole: client_1.GlobalRole.SUPER_ADMIN, status: 'ACTIVE' },
         create: {
           username: 'admin',
           email: 'admin@situs.local',
           password: 'admin',
-          globalRole: GlobalRole.SUPER_ADMIN,
+          globalRole: client_1.GlobalRole.SUPER_ADMIN,
           status: 'ACTIVE',
         },
       });
     }
-
     // 2) Проект situs-admin
     const project = await prisma.project.upsert({
       where: { slug: 'situs-admin' },
       update: {
         name: 'Situs Admin',
         description: 'Системный проект админки',
-        status: ProjectStatus.ACTIVE,
+        status: client_1.ProjectStatus.ACTIVE,
         isSystemAdmin: true,
         settings: JSON.stringify({ isSystemAdmin: true, language: 'ru' }),
       },
@@ -46,61 +46,54 @@ async function main() {
         description: 'Системный проект админки',
         slug: 'situs-admin',
         ownerId: owner.id,
-        status: ProjectStatus.ACTIVE,
+        status: client_1.ProjectStatus.ACTIVE,
         isPublished: false,
         isSystemAdmin: true,
         settings: JSON.stringify({ isSystemAdmin: true, language: 'ru' }),
       },
     });
     console.log('📦 Project ready:', project.id);
-
     // 3) Типы меню
     const adminSidebar = await prisma.menuType.upsert({
       where: { projectId_name: { projectId: project.id, name: 'admin-sidebar' } },
       update: { title: 'Admin Sidebar' },
       create: { projectId: project.id, name: 'admin-sidebar', title: 'Admin Sidebar' },
     });
-
     const adminTop = await prisma.menuType.upsert({
       where: { projectId_name: { projectId: project.id, name: 'admin-top' } },
       update: { title: 'Admin Top' },
       create: { projectId: project.id, name: 'admin-top', title: 'Admin Top' },
     });
-
     // Меню пользователя (дропдаун в интерфейсе админки)
     const adminUser = await prisma.menuType.upsert({
       where: { projectId_name: { projectId: project.id, name: 'admin-user' } },
       update: { title: 'Admin User Menu' },
       create: { projectId: project.id, name: 'admin-user', title: 'Admin User Menu' },
     });
-
     // Шаблон проектной навигации для всех проектов системы (используется в сайдбаре проекта)
     const projectSidebar = await prisma.menuType.upsert({
       where: { projectId_name: { projectId: project.id, name: 'project-sidebar' } },
       update: { title: 'Project Sidebar' },
       create: { projectId: project.id, name: 'project-sidebar', title: 'Project Sidebar' },
     });
-
     // Левое меню сайтбара (основная навигация сайта)
     const siteSidebar = await prisma.menuType.upsert({
       where: { projectId_name: { projectId: project.id, name: 'site-sidebar' } },
       update: { title: 'Site Sidebar' },
       create: { projectId: project.id, name: 'site-sidebar', title: 'Site Sidebar' },
     });
-
     // Левое меню для мобильных устройств
     const mobileSidebar = await prisma.menuType.upsert({
       where: { projectId_name: { projectId: project.id, name: 'mobile-sidebar' } },
       update: { title: 'Mobile Sidebar' },
       create: { projectId: project.id, name: 'mobile-sidebar', title: 'Mobile Sidebar' },
     });
-
     // 4) Пункты меню admin-sidebar
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'dashboard' } },
       update: {
         title: 'Дашборд',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/',
         orderIndex: 0,
         level: 1,
@@ -112,7 +105,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Дашборд',
         alias: 'dashboard',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/',
         orderIndex: 0,
         level: 1,
@@ -121,12 +114,11 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'projects' } },
       update: {
         title: 'Проекты',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/projects',
         orderIndex: 0,
         level: 1,
@@ -138,7 +130,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Проекты',
         alias: 'projects',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/projects',
         orderIndex: 0,
         level: 1,
@@ -147,12 +139,11 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'orders' } },
       update: {
         title: 'Заказы',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/orders',
         orderIndex: 2,
         level: 1,
@@ -164,7 +155,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Заказы',
         alias: 'orders',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/orders',
         orderIndex: 2,
         level: 1,
@@ -173,12 +164,11 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'marketing' } },
       update: {
         title: 'Маркетинг',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/marketing',
         orderIndex: 3,
         level: 1,
@@ -190,7 +180,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Маркетинг',
         alias: 'marketing',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/marketing',
         orderIndex: 3,
         level: 1,
@@ -199,12 +189,11 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'users' } },
       update: {
         title: 'Пользователи',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/users',
         orderIndex: 1,
         level: 1,
@@ -216,7 +205,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Пользователи',
         alias: 'users',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/users',
         orderIndex: 1,
         level: 1,
@@ -225,12 +214,11 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'support' } },
       update: {
         title: 'Поддержка',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/support',
         orderIndex: 4,
         level: 1,
@@ -242,7 +230,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Поддержка',
         alias: 'support',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/support',
         orderIndex: 4,
         level: 1,
@@ -251,12 +239,11 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminSidebar.id, alias: 'settings' } },
       update: {
         title: 'Настройки',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/profile-settings',
         orderIndex: 5,
         level: 1,
@@ -268,7 +255,7 @@ async function main() {
         menuTypeId: adminSidebar.id,
         title: 'Настройки',
         alias: 'settings',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/profile-settings',
         orderIndex: 5,
         level: 1,
@@ -277,16 +264,8 @@ async function main() {
         iconLibrary: 'fi',
       },
     });
-
     // Пункты меню project-sidebar (шаблон): пути начинаются с /project и маппятся на /projects/:id/**
-    const projectSidebarItems: Array<{
-      alias: string;
-      title: string;
-      path: string;
-      orderIndex: number;
-      icon?: string;
-      iconLibrary?: string;
-    }> = [
+    const projectSidebarItems = [
       { alias: 'overview', title: 'Обзор', path: '/project', orderIndex: 0, icon: 'FiGrid', iconLibrary: 'fi' },
       {
         alias: 'pages',
@@ -335,38 +314,30 @@ async function main() {
         where: { menuTypeId_alias: { menuTypeId: projectSidebar.id, alias: it.alias } },
         update: {
           title: it.title,
-          type: MenuItemType.URL,
+          type: client_1.MenuItemType.URL,
           externalUrl: it.path,
           orderIndex: it.orderIndex,
           level: 1,
           isPublished: true,
           icon: it.icon,
-          iconLibrary: it.iconLibrary as any,
+          iconLibrary: it.iconLibrary,
         },
         create: {
           menuTypeId: projectSidebar.id,
           title: it.title,
           alias: it.alias,
-          type: MenuItemType.URL,
+          type: client_1.MenuItemType.URL,
           externalUrl: it.path,
           orderIndex: it.orderIndex,
           level: 1,
           isPublished: true,
           icon: it.icon,
-          iconLibrary: it.iconLibrary as any,
+          iconLibrary: it.iconLibrary,
         },
       });
     }
-
     // Пункты меню site-sidebar (левое меню сайта)
-    const siteSidebarItems: Array<{
-      alias: string;
-      title: string;
-      path: string;
-      orderIndex: number;
-      icon?: string;
-      iconLibrary?: string;
-    }> = [
+    const siteSidebarItems = [
       { alias: 'home', title: 'Главная', path: '/', orderIndex: 0, icon: 'FiHome', iconLibrary: 'fi' },
       { alias: 'projects', title: 'Проекты', path: '/projects', orderIndex: 1, icon: 'FiFolder', iconLibrary: 'fi' },
       { alias: 'templates', title: 'Шаблоны', path: '/templates', orderIndex: 2, icon: 'FiLayers', iconLibrary: 'fi' },
@@ -383,44 +354,35 @@ async function main() {
       { alias: 'help', title: 'Помощь', path: '/help', orderIndex: 6, icon: 'FiHelpCircle', iconLibrary: 'fi' },
       { alias: 'contact', title: 'Контакты', path: '/contact', orderIndex: 7, icon: 'FiMail', iconLibrary: 'fi' },
     ];
-
     for (const item of siteSidebarItems) {
       await prisma.menuItem.upsert({
         where: { menuTypeId_alias: { menuTypeId: siteSidebar.id, alias: item.alias } },
         update: {
           title: item.title,
-          type: MenuItemType.URL,
+          type: client_1.MenuItemType.URL,
           externalUrl: item.path,
           orderIndex: item.orderIndex,
           level: 1,
           isPublished: true,
           icon: item.icon,
-          iconLibrary: item.iconLibrary as any,
+          iconLibrary: item.iconLibrary,
         },
         create: {
           menuTypeId: siteSidebar.id,
           title: item.title,
           alias: item.alias,
-          type: MenuItemType.URL,
+          type: client_1.MenuItemType.URL,
           externalUrl: item.path,
           orderIndex: item.orderIndex,
           level: 1,
           isPublished: true,
           icon: item.icon,
-          iconLibrary: item.iconLibrary as any,
+          iconLibrary: item.iconLibrary,
         },
       });
     }
-
     // Пункты меню mobile-sidebar (мобильное меню)
-    const mobileSidebarItems: Array<{
-      alias: string;
-      title: string;
-      path: string;
-      orderIndex: number;
-      icon?: string;
-      iconLibrary?: string;
-    }> = [
+    const mobileSidebarItems = [
       { alias: 'home', title: 'Главная', path: '/', orderIndex: 0, icon: 'FiHome', iconLibrary: 'fi' },
       { alias: 'projects', title: 'Проекты', path: '/projects', orderIndex: 1, icon: 'FiFolder', iconLibrary: 'fi' },
       { alias: 'templates', title: 'Шаблоны', path: '/templates', orderIndex: 2, icon: 'FiLayers', iconLibrary: 'fi' },
@@ -437,43 +399,40 @@ async function main() {
       { alias: 'help', title: 'Помощь', path: '/help', orderIndex: 6, icon: 'FiHelpCircle', iconLibrary: 'fi' },
       { alias: 'contact', title: 'Контакты', path: '/contact', orderIndex: 7, icon: 'FiMail', iconLibrary: 'fi' },
     ];
-
     for (const item of mobileSidebarItems) {
       await prisma.menuItem.upsert({
         where: { menuTypeId_alias: { menuTypeId: mobileSidebar.id, alias: item.alias } },
         update: {
           title: item.title,
-          type: MenuItemType.URL,
+          type: client_1.MenuItemType.URL,
           externalUrl: item.path,
           orderIndex: item.orderIndex,
           level: 1,
           isPublished: true,
           icon: item.icon,
-          iconLibrary: item.iconLibrary as any,
+          iconLibrary: item.iconLibrary,
         },
         create: {
           menuTypeId: mobileSidebar.id,
           title: item.title,
           alias: item.alias,
-          type: MenuItemType.URL,
+          type: client_1.MenuItemType.URL,
           externalUrl: item.path,
           orderIndex: item.orderIndex,
           level: 1,
           isPublished: true,
           icon: item.icon,
-          iconLibrary: item.iconLibrary as any,
+          iconLibrary: item.iconLibrary,
         },
       });
     }
-
     // 5) admin-top (пока без элементов — опционально)
-
     // 5.1) admin-user — элементы дропдауна пользователя
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'notifications' } },
       update: {
         title: 'Уведомления',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/profile-settings?tab=notifications',
         orderIndex: 0,
         level: 1,
@@ -483,19 +442,18 @@ async function main() {
         menuTypeId: adminUser.id,
         title: 'Уведомления',
         alias: 'notifications',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/profile-settings?tab=notifications',
         orderIndex: 0,
         level: 1,
         isPublished: true,
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'profile-settings' } },
       update: {
         title: 'Настройки профиля',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/profile-settings',
         orderIndex: 1,
         level: 1,
@@ -505,19 +463,18 @@ async function main() {
         menuTypeId: adminUser.id,
         title: 'Настройки профиля',
         alias: 'profile-settings',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/profile-settings',
         orderIndex: 1,
         level: 1,
         isPublished: true,
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'dashboard' } },
       update: {
         title: 'Дашборд',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/',
         orderIndex: 2,
         level: 1,
@@ -527,19 +484,18 @@ async function main() {
         menuTypeId: adminUser.id,
         title: 'Дашборд',
         alias: 'dashboard',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/',
         orderIndex: 2,
         level: 1,
         isPublished: true,
       },
     });
-
     await prisma.menuItem.upsert({
       where: { menuTypeId_alias: { menuTypeId: adminUser.id, alias: 'logout' } },
       update: {
         title: 'Выйти',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/auth/logout',
         orderIndex: 3,
         level: 1,
@@ -550,7 +506,7 @@ async function main() {
         menuTypeId: adminUser.id,
         title: 'Выйти',
         alias: 'logout',
-        type: MenuItemType.URL,
+        type: client_1.MenuItemType.URL,
         externalUrl: '/auth/logout',
         orderIndex: 3,
         level: 1,
@@ -561,16 +517,15 @@ async function main() {
     // 6) Продукт ADMIN и базовые экраны
     const adminProduct = await prisma.product.upsert({
       where: { projectId_name: { projectId: project.id, name: 'Admin' } },
-      update: { type: 'ADMIN' as any },
+      update: { type: 'ADMIN' },
       create: {
         projectId: project.id,
         name: 'Admin',
         description: 'Системный компонент админки',
-        type: 'ADMIN' as any,
+        type: 'ADMIN',
         settings: '{}',
       },
     });
-
     const screens = [
       { title: 'Дашборд', alias: 'dashboard', path: '/', orderIndex: 0, icon: 'Grid' },
       { title: 'Проекты', alias: 'projects', path: '/projects', orderIndex: 1, icon: 'Folder' },
@@ -582,12 +537,11 @@ async function main() {
     ];
     for (const s of screens) {
       await prisma.adminScreen.upsert({
-        where: { projectId_alias: { projectId: project.id, alias: s.alias } as any },
+        where: { projectId_alias: { projectId: project.id, alias: s.alias } },
         update: { title: s.title, path: s.path, orderIndex: s.orderIndex, icon: s.icon, isActive: true },
         create: { ...s, projectId: project.id, productId: adminProduct.id, isActive: true },
       });
     }
-
     console.log(
       '✅ System admin project seeded with menu types and admin screens:',
       adminSidebar.name,
@@ -595,11 +549,10 @@ async function main() {
       siteSidebar.name,
       mobileSidebar.name,
     );
-
     // 7) Communication settings: enable EMAIL with a dev SMTP stub
     try {
       await prisma.communicationSettings.upsert({
-        where: { channel: 'EMAIL' as any },
+        where: { channel: 'EMAIL' },
         update: {
           enabled: true,
           config: {
@@ -616,7 +569,7 @@ async function main() {
           reminderTemplate: undefined,
         },
         create: {
-          channel: 'EMAIL' as any,
+          channel: 'EMAIL',
           enabled: true,
           config: {
             host: process.env.SMTP_HOST || 'localhost',
@@ -632,9 +585,8 @@ async function main() {
       });
       console.log('📮 Communication EMAIL settings ensured');
     } catch (e) {
-      console.warn('⚠️ Failed to seed communication settings:', (e as any)?.message || e);
+      console.warn('⚠️ Failed to seed communication settings:', e?.message || e);
     }
-
     // 8) Integrations: ensure EMAIL_SMTP and N8N placeholders for situs-admin
     try {
       // EMAIL_SMTP (placeholder, not active)
@@ -642,53 +594,51 @@ async function main() {
         where: {
           projectId_provider_instanceKey: {
             projectId: project.id,
-            provider: 'EMAIL_SMTP' as any,
+            provider: 'EMAIL_SMTP',
             instanceKey: 'default',
-          } as any,
+          },
         },
         update: {},
         create: {
           projectId: project.id,
-          provider: 'EMAIL_SMTP' as any,
+          provider: 'EMAIL_SMTP',
           instanceKey: 'default',
           title: 'Email (SMTP)',
           isActive: false,
-          status: 'DISABLED' as any,
+          status: 'DISABLED',
           config: {},
         },
       });
-
       // N8N (placeholder, not active)
       await prisma.integration.upsert({
         where: {
           projectId_provider_instanceKey: {
             projectId: project.id,
-            provider: 'N8N' as any,
+            provider: 'N8N',
             instanceKey: 'default',
-          } as any,
+          },
         },
         update: {},
         create: {
           projectId: project.id,
-          provider: 'N8N' as any,
+          provider: 'N8N',
           instanceKey: 'default',
           title: 'n8n (external)',
           isActive: false,
-          status: 'DISABLED' as any,
+          status: 'DISABLED',
           config: { baseUrl: process.env.N8N_BASE_URL || '' },
         },
       });
       console.log('🔌 Integrations placeholders ensured (EMAIL_SMTP, N8N)');
     } catch (e) {
-      console.warn('⚠️ Failed to seed integrations:', (e as any)?.message || e);
+      console.warn('⚠️ Failed to seed integrations:', e?.message || e);
     }
   } catch (e) {
     console.error('❌ Error seeding system admin project:', e);
     process.exit(1);
   }
 }
-
 main().finally(async () => {
-  const prisma = new PrismaClient();
+  const prisma = new client_1.PrismaClient();
   await prisma.$disconnect();
 });

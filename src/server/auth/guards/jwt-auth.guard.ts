@@ -15,37 +15,37 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   canActivate(context: ExecutionContext) {
-    // Явное включение dev-пользователя через флаг окружения (работает в любом NODE_ENV)
+    const req = context.switchToHttp().getRequest();
+
+    // КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Dev-байпас только для localhost + development
     const enableDevUserRaw = process.env.ENABLE_DEV_USER || '';
     const enableDevUser = enableDevUserRaw === '1' || enableDevUserRaw.toLowerCase() === 'true';
-    if (enableDevUser) {
-      const req = context.switchToHttp().getRequest();
-      if (!req.user) {
-        (req as any).user = {
-          id: 'dev-user-id',
-          email: 'dev@situs.local',
-          name: 'Dev User',
-          globalRole: 'SUPER_ADMIN',
-          scopes: ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'],
-        };
-      }
-      return true;
-    }
 
-    // В development режимe: разрешаем доступ и подставляем dev-пользователя,
-    // чтобы downstream-guards (PermissionGuard) видели req.user
-    if (process.env.NODE_ENV === 'development') {
-      const req = context.switchToHttp().getRequest();
-      if (!req.user) {
-        (req as any).user = {
-          id: 'dev-user-id',
-          email: 'dev@situs.local',
-          name: 'Dev User',
-          globalRole: 'SUPER_ADMIN',
-          scopes: ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'],
-        };
+    if (enableDevUser && process.env.NODE_ENV === 'development') {
+      // Проверяем, что запрос идет с localhost
+      const clientIP = req.ip || req.connection?.remoteAddress || req.socket?.remoteAddress;
+      const isLocalhost =
+        clientIP === '127.0.0.1' ||
+        clientIP === '::1' ||
+        clientIP === '::ffff:127.0.0.1' ||
+        req.headers['x-forwarded-for'] === '127.0.0.1' ||
+        req.headers['host']?.includes('localhost');
+
+      if (isLocalhost) {
+        if (!req.user) {
+          (req as any).user = {
+            id: 'dev-user-id',
+            email: 'dev@situs.local',
+            name: 'Dev User',
+            globalRole: 'SUPER_ADMIN',
+            scopes: ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'],
+          };
+        }
+        return true;
+      } else {
+        // Логируем попытку доступа с внешнего IP
+        console.warn(`🚨 SECURITY: Dev bypass attempt from external IP: ${clientIP}`);
       }
-      return true;
     }
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
@@ -53,7 +53,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     ]);
     if (isPublic) return true;
 
-    const req = context.switchToHttp().getRequest();
     const url: string = req.originalUrl || req.url || '';
 
     // Test token bypass (only in test env)

@@ -59,14 +59,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: runtime
+      target: production
     container_name: situs-api-prod
     environment:
       NODE_ENV: production
       VITE_ENV: production
-      # В локальном окружении используем уже инициализированную БД/роль из volume
-      DATABASE_URL: postgresql://situs:situs_password@postgres:5432/situs?schema=public
-      ENABLE_DEV_USER: '1'
+      # Production БД с правильными credentials
+      DATABASE_URL: postgresql://situs_user:${POSTGRES_PASSWORD}@postgres:5432/situs_production
+      # DEV-ФЛАГИ УБРАНЫ - только для dev/override
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: 7d

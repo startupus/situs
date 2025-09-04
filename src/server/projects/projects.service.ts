@@ -133,14 +133,22 @@ export class ProjectsService {
 
   /**
    * Получение всех проектов с пагинацией и фильтрами
+   * КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Фильтрация по пользователю и тенанту
    */
-  async findAll(query: ProjectQueryDto) {
+  async findAll(query: ProjectQueryDto, userId?: string, tenantId?: string) {
     const { page = 1, limit = 20, status, ownerId, search, isPublished } = query;
     const skip = (page - 1) * limit;
 
-    // Строим условия поиска
+    // Строим условия поиска с обязательной фильтрацией
     const where: Prisma.ProjectWhereInput = {
-      // Показываем все проекты, включая удаленные (с особым UI)
+      // КРИТИЧНО: Фильтрация по владельцу или системный проект
+      OR: [
+        // Системный проект доступен всем
+        { isSystemAdmin: true },
+        // Проекты владельца
+        { ownerId: userId || ownerId },
+        // TODO: Добавить фильтрацию по тенанту когда будет реализована
+      ],
     };
     if (status) where.status = this.mapProjectStatus(status);
     if (ownerId) where.ownerId = ownerId;
@@ -376,18 +384,24 @@ export class ProjectsService {
 
   /**
    * Обновление проекта
+   * КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Строгая проверка владения
    */
   async update(id: string, updateProjectDto: UpdateProjectDto, ownerId: string) {
     const effectiveOwnerId = await this.resolveOwnerId(ownerId);
-    // Сначала ищем проект для данного владельца (совместимо с unit-тестами)
-    let existingProject = await this.prisma.project.findFirst({ where: { id, ownerId: effectiveOwnerId } });
-    // Разрешаем параметр как id или slug и делаем мягкий fallback
+
+    // КРИТИЧНО: Строгая проверка владения - никаких fallback'ов!
+    let existingProject = await this.prisma.project.findFirst({
+      where: {
+        OR: [
+          { id, ownerId: effectiveOwnerId },
+          { slug: id, ownerId: effectiveOwnerId },
+        ],
+      },
+    });
+
     if (!existingProject) {
-      const byId = await this.prisma.project.findUnique({ where: { id } });
-      const bySlug = byId ? null : await this.prisma.project.findUnique({ where: { slug: id } });
-      existingProject = byId || bySlug || null;
+      throw new ForbiddenException('Проект не найден или у вас нет прав на его изменение');
     }
-    if (!existingProject) throw new NotFoundException('Проект не найден');
     const actualId = existingProject.id;
 
     // Системные ограничения для системного проекта
@@ -480,12 +494,24 @@ export class ProjectsService {
 
   /**
    * Удаление проекта
+   * КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Строгая проверка владения
    */
   async remove(id: string, ownerId: string) {
-    // Разрешаем параметр как id или slug
-    let existingProject = await this.prisma.project.findUnique({ where: { id } });
-    if (!existingProject) existingProject = await this.prisma.project.findUnique({ where: { slug: id } });
-    if (!existingProject) throw new NotFoundException('Проект не найден');
+    const effectiveOwnerId = await this.resolveOwnerId(ownerId);
+
+    // КРИТИЧНО: Строгая проверка владения - никаких fallback'ов!
+    let existingProject = await this.prisma.project.findFirst({
+      where: {
+        OR: [
+          { id, ownerId: effectiveOwnerId },
+          { slug: id, ownerId: effectiveOwnerId },
+        ],
+      },
+    });
+
+    if (!existingProject) {
+      throw new ForbiddenException('Проект не найден или у вас нет прав на его удаление');
+    }
 
     // Блокируем удаление системного проекта админки
     if (this.isSystemProject(existingProject as any)) {

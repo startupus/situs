@@ -22,6 +22,7 @@ RUN npm install -D prisma @prisma/client --legacy-peer-deps || true
 COPY tsconfig.json tsconfig.server.json ./
 COPY prisma ./prisma
 COPY src ./src
+COPY scripts ./scripts
 
 # Generate Prisma client with proper URL
 ENV DATABASE_URL=postgresql://situs:situs_password@postgres:5432/situs?schema=public
@@ -31,10 +32,13 @@ RUN npx prisma generate --schema=./prisma/schema.prisma
 RUN npm run nestjs:build
 
 # Production stage
-FROM node:20-alpine AS runtime
+FROM node:20-alpine AS production
 
 # Install system dependencies
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl bash
+
+# Install ts-node for running TypeScript scripts
+RUN npm install -g ts-node
 
 WORKDIR /app
 
@@ -43,11 +47,11 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/scripts ./scripts
 
 # Environment variables
 ENV NODE_ENV=production
 ENV PORT=3002
-ENV DATABASE_URL=postgresql://situs:situs_password@postgres:5432/situs?schema=public
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
@@ -56,7 +60,11 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
 # Expose port
 EXPOSE 3002
 
-# Start command with proper error handling
-CMD ["sh", "-c", "npx prisma migrate deploy || npx prisma db push; node dist/server/main.js"]
+# Use custom entrypoint for migrations and auto-seed
+ENTRYPOINT ["./scripts/docker-entrypoint.sh"]
+CMD ["node", "dist/server/main.js"]
+
+# Runtime stage (alias for production)
+FROM production AS runtime
 
 

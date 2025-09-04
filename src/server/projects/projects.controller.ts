@@ -71,7 +71,10 @@ export class ProjectsController {
   // @ApiOperation({ summary: 'Получение списка проектов' })
   // @ApiResponse({ status: 200, description: 'Список проектов с пагинацией' })
   async findAll(@Query() query: ProjectQueryDto, @Request() req: any) {
-    const result = await this.projectsService.findAll(query);
+    // КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Передаем userId для фильтрации
+    const userId = req.user?.id;
+    const tenantId = req.tenantId; // TODO: Получить из middleware
+    const result = await this.projectsService.findAll(query, userId, tenantId);
     // Адаптируем данные для совместимости с фронтом: name -> title
     const adaptedProjects = result.projects.map((project: any) => ({
       ...project,

@@ -57,9 +57,29 @@ export class PermissionGuard implements CanActivate {
 
   /**
    * Получение требуемого права из метаданных
+   * КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Поддержка @Roles и @Scopes
    */
   private getRequiredPermission(context: ExecutionContext): any {
-    return this.reflector.getAllAndOverride<Permission | any>('permission', [context.getHandler(), context.getClass()]);
+    // Сначала проверяем детальные права
+    const permission = this.reflector.getAllAndOverride<Permission | any>('permission', [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (permission) return permission;
+
+    // Затем проверяем роли и скоупы
+    const roles = this.reflector.getAllAndOverride<string[]>('roles', [context.getHandler(), context.getClass()]);
+    const scopes = this.reflector.getAllAndOverride<string[]>('scopes', [context.getHandler(), context.getClass()]);
+
+    if (roles || scopes) {
+      return {
+        type: 'roles_and_scopes',
+        roles: roles || [],
+        scopes: scopes || [],
+      };
+    }
+
+    return null;
   }
 
   /**
@@ -79,6 +99,8 @@ export class PermissionGuard implements CanActivate {
         return this.checkOwnership(user, requiredPermission.resourceType, request);
       case 'agency':
         return this.checkAgencyAccess(user, requiredPermission.scope, request);
+      case 'roles_and_scopes':
+        return this.checkRolesAndScopes(user, requiredPermission.roles, requiredPermission.scopes);
       default:
         return false;
     }
@@ -144,6 +166,31 @@ export class PermissionGuard implements CanActivate {
 
     if (scope === 'clients' && clientId) {
       return this.permissionsService['contextResolverService'].isAgencyClient(user.id, clientId);
+    }
+
+    return true;
+  }
+
+  /**
+   * Проверка ролей и скоупов
+   * КРИТИЧЕСКАЯ БЕЗОПАСНОСТЬ: Правильная обработка @Roles и @Scopes
+   */
+  private async checkRolesAndScopes(user: any, requiredRoles: string[], requiredScopes: string[]): Promise<boolean> {
+    // Проверяем роли
+    if (requiredRoles.length > 0) {
+      const hasRequiredRole = requiredRoles.includes(user.globalRole);
+      if (!hasRequiredRole) {
+        return false;
+      }
+    }
+
+    // Проверяем скоупы
+    if (requiredScopes.length > 0) {
+      const userScopes = user.scopes || [];
+      const hasRequiredScope = requiredScopes.some((scope) => userScopes.includes(scope));
+      if (!hasRequiredScope) {
+        return false;
+      }
     }
 
     return true;

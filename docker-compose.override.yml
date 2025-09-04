@@ -1,0 +1,66 @@
+# Docker Compose Override для локальной разработки
+# Этот файл автоматически применяется при запуске docker-compose up
+# Содержит dev-специфичные настройки, которые НЕ должны попадать в production
+
+version: '3.8'
+
+services:
+  # Backend API - dev настройки
+  situs-api:
+    environment:
+      # Dev-флаги для локальной разработки
+      ENABLE_DEV_USER: '1'
+      NODE_ENV: development
+      VITE_ENV: development
+      # Локальная БД для dev
+      DATABASE_URL: postgresql://situs:situs_password@postgres:5432/situs?schema=public
+      # Dev JWT секрет (НЕ для production!)
+      JWT_SECRET: 'dev_local_jwt_secret_change_me_please_at_least_32_chars'
+      # Dev CORS (разрешает все origins)
+      CORS_ORIGINS: 'http://localhost:5177,http://localhost:3000,http://localhost'
+    # Dev порты
+    ports:
+      - '3002:3002'
+    # Dev логирование
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '5'
+
+  # Frontend - dev настройки
+  situs-web:
+    environment:
+      # Dev API URL
+      VITE_API_URL: 'http://localhost:3002'
+      VITE_WS_URL: 'http://localhost:3002'
+    # Dev порты
+    ports:
+      - '5178:80'
+
+  # Postgres - dev настройки
+  postgres:
+    environment:
+      # Dev пароли (НЕ для production!)
+      POSTGRES_PASSWORD: 'situs_password'
+      POSTGRES_USER: 'situs'
+      POSTGRES_DB: 'situs'
+    # Dev порты
+    ports:
+      - '5432:5432'
+    # Dev volumes для персистентности
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+  # Redis - dev настройки
+  redis:
+    environment:
+      # Dev пароль (НЕ для production!)
+      REDIS_PASSWORD: 'redis_pass'
+    # Dev порты
+    ports:
+      - '6379:6379'
+
+volumes:
+  postgres_dev_data:
+    driver: local
