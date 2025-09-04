@@ -21,7 +21,7 @@ const Cookies1 = () => {
               <button className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white hover:bg-blue-dark">
                 Accept
               </button>
-              <button className="inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-body-color shadow-1 hover:bg-primary hover:text-white dark:bg-dark dark:text-dark-6 dark:shadow-none">
+              <button className="shadow-1 inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-body-color hover:bg-primary hover:text-white dark:bg-dark dark:text-dark-6 dark:shadow-none">
                 Close
               </button>
             </div>

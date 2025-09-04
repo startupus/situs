@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { usersApi, User, AuthCredentials, CreateUserData } from '../api/services/users.api';
+import { usersApi, AuthCredentials, CreateUserData } from '../api/services/users.api';
 import { ApiUtils } from '../api/client';
 
 interface UserContextType {
-  user: User | null;
+  user: any | null;
   loading: boolean;
   error: string | null;
   login: (credentials: AuthCredentials) => Promise<void>;
@@ -17,7 +17,7 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

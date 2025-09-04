@@ -5,24 +5,24 @@ import { TenantStatus, TenantRole, TenantPermission } from '../types/tenant';
  * Tenant validation schemas using Zod
  */
 
-export const TenantIdSchema = z.string()
+export const TenantIdSchema = z
+  .string()
   .min(2, 'Tenant ID must be at least 2 characters')
   .max(50, 'Tenant ID must be at most 50 characters')
   .regex(/^[a-zA-Z0-9_-]+$/, 'Tenant ID can only contain letters, numbers, hyphens, and underscores');
 
-export const TenantNameSchema = z.string()
+export const TenantNameSchema = z
+  .string()
   .min(1, 'Tenant name is required')
   .max(100, 'Tenant name must be at most 100 characters');
 
-export const TenantSlugSchema = z.string()
+export const TenantSlugSchema = z
+  .string()
   .min(2, 'Tenant slug must be at least 2 characters')
   .max(50, 'Tenant slug must be at most 50 characters')
   .regex(/^[a-z0-9-]+$/, 'Tenant slug can only contain lowercase letters, numbers, and hyphens');
 
-export const TenantDomainSchema = z.string()
-  .url('Invalid domain format')
-  .optional()
-  .or(z.literal(''));
+export const TenantDomainSchema = z.string().url('Invalid domain format').optional().or(z.literal(''));
 
 export const TenantStatusSchema = z.nativeEnum(TenantStatus);
 
@@ -31,21 +31,33 @@ export const TenantRoleSchema = z.nativeEnum(TenantRole);
 export const TenantPermissionSchema = z.nativeEnum(TenantPermission);
 
 export const TenantSettingsSchema = z.object({
-  theme: z.object({
-    primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format').optional(),
-    secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format').optional(),
-    logo: z.string().url('Invalid logo URL').optional(),
-  }).optional(),
-  features: z.object({
-    multiLanguage: z.boolean().optional(),
-    customDomain: z.boolean().optional(),
-    advancedAnalytics: z.boolean().optional(),
-  }).optional(),
-  branding: z.object({
-    companyName: z.string().max(100).optional(),
-    supportEmail: z.string().email('Invalid email format').optional(),
-    customCss: z.string().max(10000, 'CSS too large').optional(),
-  }).optional(),
+  theme: z
+    .object({
+      primaryColor: z
+        .string()
+        .regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format')
+        .optional(),
+      secondaryColor: z
+        .string()
+        .regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format')
+        .optional(),
+      logo: z.string().url('Invalid logo URL').optional(),
+    })
+    .optional(),
+  features: z
+    .object({
+      multiLanguage: z.boolean().optional(),
+      customDomain: z.boolean().optional(),
+      advancedAnalytics: z.boolean().optional(),
+    })
+    .optional(),
+  branding: z
+    .object({
+      companyName: z.string().max(100).optional(),
+      supportEmail: z.string().email('Invalid email format').optional(),
+      customCss: z.string().max(10000, 'CSS too large').optional(),
+    })
+    .optional(),
 });
 
 export const TenantLimitsSchema = z.object({

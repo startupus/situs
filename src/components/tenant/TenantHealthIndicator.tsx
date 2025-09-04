@@ -37,25 +37,45 @@ export function TenantHealthIndicator({ className = '', showDetails = true }: Te
       case 'HEALTHY':
         return (
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         );
       case 'WARNING':
         return (
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+            />
           </svg>
         );
       case 'CRITICAL':
         return (
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         );
       default:
         return (
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         );
     }
@@ -78,12 +98,8 @@ export function TenantHealthIndicator({ className = '', showDetails = true }: Te
     <div className={`flex items-center space-x-3 ${className}`}>
       <div className="flex items-center space-x-2">
         <div className={`w-3 h-3 rounded-full ${getStatusColor(health.status)}`}></div>
-        <span className="text-sm font-medium text-gray-900">
-          {getStatusText(health.status)}
-        </span>
-        <span className="text-sm text-gray-500">
-          ({health.score}%)
-        </span>
+        <span className="text-sm font-medium text-gray-900">{getStatusText(health.status)}</span>
+        <span className="text-sm text-gray-500">({health.score}%)</span>
       </div>
 
       {showDetails && (
@@ -95,15 +111,18 @@ export function TenantHealthIndicator({ className = '', showDetails = true }: Te
             title="Refresh health status"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
             </svg>
           </button>
         </div>
       )}
 
-      <div className="flex items-center space-x-1">
-        {getStatusIcon(health.status)}
-      </div>
+      <div className="flex items-center space-x-1">{getStatusIcon(health.status)}</div>
     </div>
   );
 }
@@ -114,7 +133,9 @@ export function TenantHealthBadge({ className = '' }: { className?: string }) {
 
   if (!health) {
     return (
-      <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 ${className}`}>
+      <div
+        className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 ${className}`}
+      >
         <div className="w-2 h-2 bg-gray-300 rounded-full mr-1 animate-pulse"></div>
         Checking...
       </div>
@@ -135,12 +156,20 @@ export function TenantHealthBadge({ className = '' }: { className?: string }) {
   };
 
   return (
-    <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(health.status)} ${className}`}>
-      <div className={`w-2 h-2 rounded-full mr-1 ${
-        health.status === 'HEALTHY' ? 'bg-green-500' :
-        health.status === 'WARNING' ? 'bg-yellow-500' :
-        health.status === 'CRITICAL' ? 'bg-red-500' : 'bg-gray-500'
-      }`}></div>
+    <div
+      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(health.status)} ${className}`}
+    >
+      <div
+        className={`w-2 h-2 rounded-full mr-1 ${
+          health.status === 'HEALTHY'
+            ? 'bg-green-500'
+            : health.status === 'WARNING'
+              ? 'bg-yellow-500'
+              : health.status === 'CRITICAL'
+                ? 'bg-red-500'
+                : 'bg-gray-500'
+        }`}
+      ></div>
       {health.status} ({health.score}%)
     </div>
   );

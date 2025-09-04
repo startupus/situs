@@ -13,12 +13,15 @@ const SelectBox3 = () => {
               title="Same as Personal"
               address1="New York, USA"
               address2="2707 Davis Anenue"
+              subtitle=""
             />
             <SelectBoxItem
               name="one"
               id="two"
               title="Standard Shipping"
               subtitle="Create an account now to have multiple address."
+              address1=""
+              address2=""
             />
           </div>
         </div>

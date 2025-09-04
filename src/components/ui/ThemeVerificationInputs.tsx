@@ -25,19 +25,19 @@ const adaptVerificationCodeInputProps = (props: VerificationCodeInputProps) => (
 
 // VerificationCodeInput Variants
 export const ThemeVerificationCodeInput1: React.FC<VerificationCodeInputProps> = (props) => (
-  <VerificationCodeInput1 {...adaptVerificationCodeInputProps(props)} />
+  <VerificationCodeInput1 {...(adaptVerificationCodeInputProps(props) as any)} />
 );
 
 export const ThemeVerificationCodeInput2: React.FC<VerificationCodeInputProps> = (props) => (
-  <VerificationCodeInput2 {...adaptVerificationCodeInputProps(props)} />
+  <VerificationCodeInput2 {...(adaptVerificationCodeInputProps(props) as any)} />
 );
 
 export const ThemeVerificationCodeInput3: React.FC<VerificationCodeInputProps> = (props) => (
-  <VerificationCodeInput3 {...adaptVerificationCodeInputProps(props)} />
+  <VerificationCodeInput3 {...(adaptVerificationCodeInputProps(props) as any)} />
 );
 
 export const ThemeVerificationCodeInput4: React.FC<VerificationCodeInputProps> = (props) => (
-  <VerificationCodeInput4 {...adaptVerificationCodeInputProps(props)} />
+  <VerificationCodeInput4 {...(adaptVerificationCodeInputProps(props) as any)} />
 );
 
 // Экспорт всех VerificationCodeInput компонентов как единый объект для удобства

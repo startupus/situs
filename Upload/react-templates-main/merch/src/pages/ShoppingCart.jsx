@@ -63,7 +63,7 @@ const ShoppingCart = () => {
             {cartItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white px-6 py-6 shadow-1 dark:bg-dark-2 dark:shadow-box-dark xl:pr-10"
+                className="shadow-1 dark:shadow-box-dark bg-white px-6 py-6 dark:bg-dark-2 xl:pr-10"
               >
                 <div className="items-center md:flex">
                   <div className="mb-5 mr-9 h-[150px] w-full max-w-[150px] md:mb-0">

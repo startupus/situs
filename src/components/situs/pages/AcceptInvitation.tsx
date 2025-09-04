@@ -262,11 +262,9 @@ const AcceptInvitation: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="max-w-md w-full mx-auto p-6">
-          <ThemeAlert
-            type="error"
-            title="Приглашение не найдено"
-            message={error || 'Приглашение недействительно или истекло'}
-          />
+          <ThemeAlert type="error" title="Приглашение не найдено">
+            Error
+          </ThemeAlert>
         </div>
       </div>
     );
@@ -364,13 +362,15 @@ const AcceptInvitation: React.FC = () => {
 
           {error && (
             <div className="mb-4">
-              <ThemeAlert type="error" message={error} />
+              <ThemeAlert type="error">Ошибка</ThemeAlert>
             </div>
           )}
 
           {success && (
             <div className="mb-4">
-              <ThemeAlert type="success" title="Аккаунт создан!" message="Перенаправляем вас в систему..." />
+              <ThemeAlert type="success" title="Аккаунт создан!">
+                Успешно
+              </ThemeAlert>
             </div>
           )}
 

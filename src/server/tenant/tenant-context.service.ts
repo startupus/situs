@@ -1,165 +1,114 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { Injectable, Scope, Inject, Logger } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
+import { TenantContext } from '../../types/tenant/tenant-context.types';
 
-export interface TenantContext {
-  tenantId: string;
-  userId?: string;
-  projectId?: string;
-  accountId?: string;
-}
-
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class TenantContextService {
   private readonly logger = new Logger(TenantContextService.name);
-  private readonly tenantContext = new Map<string, TenantContext>();
+  private tenantContext: TenantContext | null = null;
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(REQUEST) private request: Request) {}
 
   /**
    * Set tenant context for current request
    */
-  async setTenantContext(
-    tenantId: string,
-    userId?: string,
-    projectId?: string,
-    accountId?: string
-  ): Promise<void> {
-    try {
-      // Validate tenant exists and user has access
-      if (userId) {
-        const hasAccess = await this.validateTenantAccess(userId, tenantId);
-        if (!hasAccess) {
-          throw new Error(`User ${userId} does not have access to tenant ${tenantId}`);
-        }
-      }
-
-      // Set PostgreSQL session variable for RLS
-      await this.prisma.$executeRaw`SELECT set_tenant_context(${tenantId})`;
-
-      // Store context in memory for current request
-      const context: TenantContext = {
-        tenantId,
-        userId,
-        projectId,
-        accountId,
-      };
-
-      this.tenantContext.set(this.getContextKey(), context);
-      
-      this.logger.debug(`Tenant context set: ${tenantId}`, { context });
-    } catch (error) {
-      this.logger.error(`Failed to set tenant context: ${error.message}`, error.stack);
-      throw error;
-    }
+  setTenantContext(context: TenantContext): void {
+    this.tenantContext = context;
+    this.logger.debug(`Set tenant context: ${context.tenantId}`);
   }
 
   /**
-   * Get current tenant context
+   * Get tenant context for current request
    */
-  getCurrentTenantContext(): TenantContext | null {
-    return this.tenantContext.get(this.getContextKey()) || null;
+  getTenantContext(): TenantContext | null {
+    return this.tenantContext;
   }
 
   /**
-   * Get current tenant ID
+   * Get tenant ID for current request
    */
-  getCurrentTenantId(): string | null {
-    const context = this.getCurrentTenantContext();
-    return context?.tenantId || null;
+  getTenantId(): string | null {
+    return this.tenantContext?.tenantId || null;
   }
 
   /**
-   * Get current user ID
+   * Check if tenant context exists
    */
-  getCurrentUserId(): string | null {
-    const context = this.getCurrentTenantContext();
-    return context?.userId || null;
-  }
-
-  /**
-   * Get current project ID
-   */
-  getCurrentProjectId(): string | null {
-    const context = this.getCurrentTenantContext();
-    return context?.projectId || null;
-  }
-
-  /**
-   * Get current account ID
-   */
-  getCurrentAccountId(): string | null {
-    const context = this.getCurrentTenantContext();
-    return context?.accountId || null;
+  hasTenantContext(): boolean {
+    return this.tenantContext !== null;
   }
 
   /**
    * Clear tenant context
    */
   clearTenantContext(): void {
-    this.tenantContext.delete(this.getContextKey());
-    this.logger.debug('Tenant context cleared');
+    this.tenantContext = null;
+    this.logger.debug('Cleared tenant context');
   }
 
   /**
-   * Validate user has access to tenant
+   * Get user ID from tenant context
    */
-  private async validateTenantAccess(userId: string, tenantId: string): Promise<boolean> {
-    try {
-      const result = await this.prisma.$queryRaw<[{ validate_tenant_access: boolean }]>`
-        SELECT validate_tenant_access(${userId}, ${tenantId}) as validate_tenant_access
-      `;
-      
-      return result[0]?.validate_tenant_access || false;
-    } catch (error) {
-      this.logger.error(`Failed to validate tenant access: ${error.message}`, error.stack);
+  getUserId(): string | null {
+    return this.tenantContext?.userId || null;
+  }
+
+  /**
+   * Get project ID from tenant context
+   */
+  getProjectId(): string | null {
+    return this.tenantContext?.projectId || null;
+  }
+
+  /**
+   * Get account ID from tenant context
+   */
+  getAccountId(): string | null {
+    return this.tenantContext?.accountId || null;
+  }
+
+  /**
+   * Update tenant context with additional data
+   */
+  updateTenantContext(updates: Partial<TenantContext>): void {
+    if (this.tenantContext) {
+      this.tenantContext = { ...this.tenantContext, ...updates };
+      this.logger.debug(`Updated tenant context: ${this.tenantContext.tenantId}`);
+    }
+  }
+
+  /**
+   * Validate tenant context
+   */
+  validateTenantContext(): boolean {
+    if (!this.tenantContext) {
+      this.logger.warn('No tenant context available');
       return false;
     }
-  }
 
-  /**
-   * Get context key for current request
-   * In a real application, this would use request ID or similar
-   */
-  private getContextKey(): string {
-    // For now, use a simple key. In production, use request ID
-    return 'current_request';
-  }
-
-  /**
-   * Create tenant-aware Prisma client
-   */
-  getTenantAwarePrisma() {
-    const tenantId = this.getCurrentTenantId();
-    if (!tenantId) {
-      throw new Error('No tenant context set');
+    if (!this.tenantContext.tenantId) {
+      this.logger.warn('Tenant context missing tenantId');
+      return false;
     }
 
-    return this.prisma;
+    return true;
   }
 
   /**
-   * Execute query with tenant context
+   * Get tenant context summary for logging
    */
-  async executeWithTenantContext<T>(
-    tenantId: string,
-    operation: (prisma: PrismaService) => Promise<T>
-  ): Promise<T> {
-    const originalContext = this.getCurrentTenantContext();
-    
-    try {
-      await this.setTenantContext(tenantId);
-      return await operation(this.prisma);
-    } finally {
-      if (originalContext) {
-        await this.setTenantContext(
-          originalContext.tenantId,
-          originalContext.userId,
-          originalContext.projectId,
-          originalContext.accountId
-        );
-      } else {
-        this.clearTenantContext();
-      }
+  getContextSummary(): Record<string, any> {
+    if (!this.tenantContext) {
+      return { hasContext: false };
     }
+
+    return {
+      hasContext: true,
+      tenantId: this.tenantContext.tenantId,
+      userId: this.tenantContext.userId || 'anonymous',
+      projectId: this.tenantContext.projectId || 'none',
+      accountId: this.tenantContext.accountId || 'none',
+    };
   }
 }

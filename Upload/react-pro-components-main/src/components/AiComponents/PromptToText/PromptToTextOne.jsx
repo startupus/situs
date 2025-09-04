@@ -21,7 +21,7 @@ function PromptToTextOne() {
                   porttitor ex viverra. Vivamus odio nunc
                 </p>
 
-                <button className="inline-flex items-center justify-center gap-2 text-sm text-secondary-color hover:text-primary">
+                <button className="text-secondary-color inline-flex items-center justify-center gap-2 text-sm hover:text-primary">
                   <svg
                     width="18"
                     height="18"
@@ -84,7 +84,7 @@ function PromptToTextOne() {
                   urna fermentum, bibendum eros et, cursus enim.
                 </p>
 
-                <button className="inline-flex items-center justify-center gap-2 text-sm text-secondary-color hover:text-primary">
+                <button className="text-secondary-color inline-flex items-center justify-center gap-2 text-sm hover:text-primary">
                   <svg
                     width="18"
                     height="18"

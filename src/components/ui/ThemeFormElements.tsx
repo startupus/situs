@@ -31,19 +31,19 @@ const adaptFormElementProps = (props: FormElementProps) => ({
 
 // FormElement Variants
 export const ThemeFormElementInput: React.FC<FormElementProps> = (props) => (
-  <FormElementInput {...adaptFormElementProps(props)} />
+  <FormElementInput {...(adaptFormElementProps(props) as any)} />
 );
 
 export const ThemeFormElementSelect: React.FC<FormElementProps> = (props) => (
-  <FormElementSelect {...adaptFormElementProps(props)} />
+  <FormElementSelect {...(adaptFormElementProps(props) as any)} />
 );
 
 export const ThemeFormElementTextarea: React.FC<FormElementProps> = (props) => (
-  <FormElementTextarea {...adaptFormElementProps(props)} />
+  <FormElementTextarea {...(adaptFormElementProps(props) as any)} />
 );
 
 export const ThemeFormElementFileUpload: React.FC<FormElementProps> = (props) => (
-  <FormElementFileUpload {...adaptFormElementProps(props)} />
+  <FormElementFileUpload {...(adaptFormElementProps(props) as any)} />
 );
 
 // Экспорт всех FormElement компонентов как единый объект для удобства

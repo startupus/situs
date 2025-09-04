@@ -6,7 +6,7 @@ const Pricing5 = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="relative z-10 overflow-hidden rounded-xl bg-white p-11 shadow-pricing-3 dark:bg-dark-2">
+            <div className="shadow-pricing-3 relative z-10 overflow-hidden rounded-xl bg-white p-11 dark:bg-dark-2">
               <div className="w-full overflow-x-auto">
                 <table className="table-auto">
                   <thead>

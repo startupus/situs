@@ -73,16 +73,16 @@ export enum TenantPermission {
   EDIT_PROJECT = 'EDIT_PROJECT',
   DELETE_PROJECT = 'DELETE_PROJECT',
   VIEW_PROJECT = 'VIEW_PROJECT',
-  
+
   // User permissions
   INVITE_USERS = 'INVITE_USERS',
   MANAGE_USERS = 'MANAGE_USERS',
   VIEW_USERS = 'VIEW_USERS',
-  
+
   // Settings permissions
   MANAGE_SETTINGS = 'MANAGE_SETTINGS',
   VIEW_SETTINGS = 'VIEW_SETTINGS',
-  
+
   // Billing permissions
   MANAGE_BILLING = 'MANAGE_BILLING',
   VIEW_BILLING = 'VIEW_BILLING',

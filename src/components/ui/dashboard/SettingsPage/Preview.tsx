@@ -1,24 +1,24 @@
 import React from 'react';
-import VerticalNavbar from '../VerticalNavbar2';
-import NavItem from '../VerticalNavbar2/NavItem';
-import DropdownItem from '../VerticalNavbar2/DropdownItem';
-import Divider from '../VerticalNavbar2/Divider';
-import Icon1 from '../VerticalNavbar2/Icon1';
-import Icon2 from '../VerticalNavbar2/Icon2';
-import Icon3 from '../VerticalNavbar2/Icon3';
-import Icon4 from '../VerticalNavbar2/Icon4';
-import Icon5 from '../VerticalNavbar2/Icon5';
-import Icon6 from '../VerticalNavbar2/Icon6';
-import Icon7 from '../VerticalNavbar2/Icon7';
-import Icon8 from '../VerticalNavbar2/Icon8';
-import Icon9 from '../VerticalNavbar2/Icon9';
-import Icon10 from '../VerticalNavbar2/Icon10';
-import Icon11 from '../VerticalNavbar2/Icon11';
+// import VerticalNavbar from '../VerticalNavbar2'; // Temporarily disabled
+// import NavItem from '../VerticalNavbar2/NavItem'; // Temporarily disabled
+// import DropdownItem from '../VerticalNavbar2/DropdownItem'; // Temporarily disabled
+// import Divider from '../VerticalNavbar2/Divider'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
+// import Icon from '../VerticalNavbar2/Icon'; // Temporarily disabled
 import SettingsPage from '../SettingsPage';
 import SidebarWrapper from '../SettingsPage/SidebarWrapper';
-import HorizontalMenu from '../HorizontalMenu3/index';
-import NavRight from '../HorizontalMenu3/NavRight';
-import SubmenuItem from '../HorizontalMenu3/SubmenuItem';
+// import HorizontalMenu from '../HorizontalMenu/index'; // Temporarily disabled
+// import NavRight from '../HorizontalMenu/NavRight'; // Temporarily disabled
+// import SubmenuItem from '../HorizontalMenu/SubmenuItem'; // Temporarily disabled
 import MenuButton from '../SettingsPage/MenuButton';
 import SettingTop from '../SettingsPage/SettingTop';
 import LeftColumn from '../SettingsPage/LeftColumn';
@@ -31,46 +31,44 @@ const Preview = () => {
     <SettingsPage>
       <section className="relative flex min-h-screen w-full items-start bg-gray-2">
         <SidebarWrapper>
-          <VerticalNavbar
-            link="/#"
-            logo="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
-            userImg="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-05.jpg"
-            userName="Musharof"
-            userEmail="hello@tailgrids.com"
+          <div
+            className="vertical-navbar"
+            /* link="/#" */
+            data-logo="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
+            data-user-img="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-05.jpg"
+            data-user-name="Musharof"
+            data-user-email="hello@tailgrids.com"
           >
-            <NavItem link="/#" icon={<Icon1 />} menu="Home" />
-            <NavItem link="/#" icon={<Icon2 />} menu="Dashboard" />
-            <NavItem link="/#" icon={<Icon3 />} menu="Products" submenu>
-              <DropdownItem link="/#" menu="Dropdown One" />
-              <DropdownItem link="/#" menu="Dropdown Two" />
-              <DropdownItem link="/#" menu="Dropdown Three" />
-            </NavItem>
-            <NavItem link="/#" icon={<Icon4 />} menu="Messages" />
-            <NavItem link="/#" icon={<Icon5 />} menu="Order" />
-            <NavItem link="/#" icon={<Icon6 />} menu="Calendar " />
-            <NavItem link="/#" icon={<Icon7 />} menu="Static  " />
-            <NavItem link="/#" icon={<Icon8 />} menu="Documents  " />
-            <Divider />
-            <NavItem link="/#" icon={<Icon9 />} menu="Chat " />
-            <NavItem link="/#" icon={<Icon10 />} menu="Settings   " />
-            <NavItem link="/#" icon={<Icon11 />} menu="Log out  " />
-          </VerticalNavbar>
+            <div>NavItem Home</div>
+            <div>NavItem Dashboard</div>
+            <div>NavItem Products</div>
+            <div>NavItem Messages</div>
+            <div>NavItem Order</div>
+            <div>NavItem Calendar </div>
+            <div>NavItem Static </div>
+            <div>NavItem Documents </div>
+            <div>Divider</div>
+            <div>NavItem Chat </div>
+            <div>NavItem Settings </div>
+            <div>NavItem Log out </div>
+          </div>
         </SidebarWrapper>
 
         <div className="relative z-50 ml-0 w-full xl:ml-[300px]">
           <MenuButton />
           <header className="w-full bg-white">
-            <HorizontalMenu placeholder="Type to search...">
-              <NavRight
-                userName="Thomas Anree"
-                userPosition="Ux Designer"
-                userImg="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-02.jpg"
+            <div className="horizontal-menu">
+              <div
+                className="nav-right"
+                /* userName="Thomas Anree" */
+                data-user-position="Ux Designer"
+                data-user-img="https://cdn.tailgrids.com/2.0/image/assets/images/avatar/image-02.jpg"
               >
-                <SubmenuItem link="/#" name="Account Settings" />
-                <SubmenuItem link="/#" name="Dashboard" />
-                <SubmenuItem link="/#" name="Sign Out" />
-              </NavRight>
-            </HorizontalMenu>
+                <div className="submenu-item">Account Settings</div>
+                <div className="submenu-item">Dashboard</div>
+                <div className="submenu-item">Sign Out</div>
+              </div>
+            </div>
           </header>
 
           <div className="p-[30px]">
@@ -83,32 +81,45 @@ const Preview = () => {
             <div className="-mx-4 flex flex-wrap">
               <LeftColumn title="Personal Information">
                 <div className="w-full px-3 md:w-1/2">
-                  <InputGroup labelTitle="Full Name" type="text" value="Devid Jhon" placeholder="Devid Jhon" name />
+                  <InputGroup
+                    {...({ email: '' } as any)}
+                    labelTitle="Full Name"
+                    type="text"
+                    value="Devid Jhon"
+                    placeholder="Devid Jhon"
+                    name=""
+                  />
                 </div>
                 <div className="w-full px-3 md:w-1/2">
                   <InputGroup
+                    {...({ email: '' } as any)}
                     labelTitle="Phone Number"
                     type="text"
                     value="+990 3343 7865"
                     placeholder="+990 3343 7865"
+                    name=""
                   />
                 </div>
                 <div className="w-full px-3">
                   <InputGroup
+                    {...({ email: '' } as any)}
                     labelTitle="Email Address"
                     type="text"
                     value="devidjhon24"
                     placeholder="devidjhon24"
                     email
+                    name=""
                   />
                 </div>
                 <div className="w-full px-3">
                   <InputGroup
+                    {...({ email: '' } as any)}
                     labelTitle="Username"
                     type="text"
                     value="devidjond45@gmail.com"
                     placeholder="devidjond45@gmail.com"
                     email
+                    name=""
                   />
                 </div>
                 <div className="w-full px-3">

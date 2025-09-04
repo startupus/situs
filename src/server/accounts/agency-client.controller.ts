@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, BadRequestException } from 
 import { PrismaService } from '../database/prisma.service';
 import { Scopes } from '../common/decorators/roles.decorator';
 
-@Controller('api/agency-clients')
+@Controller('agency-clients')
 export class AgencyClientController {
   constructor(private readonly prisma: PrismaService) {}
 

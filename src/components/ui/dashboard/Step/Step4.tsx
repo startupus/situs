@@ -50,7 +50,7 @@ const Step4 = () => {
   return (
     <section className="py-14 lg:py-20">
       <div id="chartOne" className="-mx-[11px]">
-        <ReactApexChart options={options} series={series} type="radialBar" height={200} />
+        <ReactApexChart options={options as any} series={series} type="radialBar" height={200} />
       </div>
     </section>
   );

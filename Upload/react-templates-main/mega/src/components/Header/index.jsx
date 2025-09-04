@@ -50,7 +50,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="outline-hidden w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                  className="outline-hidden text-secondary-color w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                   <svg

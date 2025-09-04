@@ -26,7 +26,7 @@ const Hero6 = () => {
                   <li>
                     <a
                       href="/#"
-                      className="group mr-4 inline-flex h-[70px] items-center justify-center rounded-xl bg-white py-[10px] pl-[10px] pr-5 text-center text-base font-medium text-dark shadow-btn transition duration-200 hover:text-primary hover:shadow-lg dark:bg-dark dark:text-white"
+                      className="shadow-btn group mr-4 inline-flex h-[70px] items-center justify-center rounded-xl bg-white py-[10px] pl-[10px] pr-5 text-center text-base font-medium text-dark transition duration-200 hover:text-primary hover:shadow-lg dark:bg-dark dark:text-white"
                     >
                       <span className="mr-4 text-dark group-hover:text-primary dark:text-dark-2">
                         <svg

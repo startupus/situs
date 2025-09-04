@@ -87,7 +87,7 @@ const DataStats = () => {
 
   return (
     <>
-      <div className="mb-8 flex flex-wrap rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="shadow-1 dark:shadow-box-dark mb-8 flex flex-wrap rounded-lg bg-white dark:bg-dark-2">
         {dataStatsList.map((item, index) => (
           <div
             key={index}

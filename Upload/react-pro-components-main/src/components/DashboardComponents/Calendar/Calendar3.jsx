@@ -8,10 +8,10 @@ const Calender3 = () => {
           <div className="relative mx-auto mb-5 w-full max-w-[370px]">
             <input
               type="date"
-              className="custom-input-date outline-hidden h-[50px] w-full appearance-none rounded-md border border-stroke bg-white px-5 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
+              className="custom-input-date outline-hidden text-secondary-color h-[50px] w-full appearance-none rounded-md border border-stroke bg-white px-5 focus:border-primary dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6"
             />
 
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-secondary-color dark:text-dark-6">
+            <span className="text-secondary-color absolute right-4 top-1/2 -translate-y-1/2 dark:text-dark-6">
               <svg
                 width="16"
                 height="16"
@@ -34,7 +34,7 @@ const Calender3 = () => {
               </svg>
             </span>
           </div>
-          <div className="relative mx-auto w-full max-w-[370px] rounded-sm border border-stroke bg-white p-6 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:p-[30px]">
+          <div className="shadow-testimonial-6 dark:shadow-box-dark relative mx-auto w-full max-w-[370px] rounded-sm border border-stroke bg-white p-6 dark:border-dark-3 dark:bg-dark-2 sm:p-[30px]">
             <div className="mb-3 flex items-center space-x-5">
               <div className="relative inline-flex">
                 <select

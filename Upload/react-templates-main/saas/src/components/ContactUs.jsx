@@ -111,7 +111,7 @@ const ContactUs = () => {
             </div>
 
             <div className="w-full px-4 lg:w-6/12 xl:w-5/12">
-              <div className="rounded-lg bg-white px-8 py-12 shadow-3 dark:bg-dark-2 sm:p-[60px] lg:px-12 xl:p-[60px]">
+              <div className="shadow-3 rounded-lg bg-white px-8 py-12 dark:bg-dark-2 sm:p-[60px] lg:px-12 xl:p-[60px]">
                 <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white sm:text-[28px]">
                   Send us a Message
                 </h3>

@@ -25,7 +25,7 @@ const Signin3 = () => {
                 <h2 className="mb-3 text-3xl font-bold text-dark dark:text-white">
                   Welcome to TailGrids
                 </h2>
-                <p className="mb-14 text-base text-secondary-color dark:text-dark-7 xl:mb-20">
+                <p className="text-secondary-color mb-14 text-base dark:text-dark-7 xl:mb-20">
                   <span className="sm:block">
                     We make it easy for everyone to
                   </span>

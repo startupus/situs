@@ -28,7 +28,7 @@ const RecentProduct4 = () => {
             </div>
           </div>
           <div className="w-full px-4 lg:w-1/2 2xl:w-5/12">
-            <div className="rounded-3xl border-8 border-white bg-white shadow-testimonial-6 dark:shadow-box-dark">
+            <div className="shadow-testimonial-6 dark:shadow-box-dark rounded-3xl border-8 border-white bg-white">
               <img
                 src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/products/recent-products-04/product-01.jpg"
                 alt="Recent Product"

@@ -12,7 +12,7 @@ const ShippingOption = () => {
         Shipping Details
       </h3>
 
-      <div className="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10">
+      <div className="shadow-testimonial-6 dark:shadow-box-dark overflow-hidden rounded-lg border border-stroke bg-white px-6 py-10 dark:border-dark-3 dark:bg-dark-2 sm:px-10">
         <h4 className="mb-[22px] text-lg font-semibold text-dark dark:text-white">
           Shipping Address
         </h4>
@@ -28,7 +28,7 @@ const ShippingOption = () => {
               />
               <label
                 htmlFor="shippingAddress1"
-                className={`block cursor-pointer overflow-hidden rounded-md border px-6 py-5 ${address === 1 ? "border-transparent bg-primary/5 shadow-border" : "border-stroke dark:border-dark-3"}`}
+                className={`block cursor-pointer overflow-hidden rounded-md border px-6 py-5 ${address === 1 ? "shadow-border border-transparent bg-primary/5" : "border-stroke dark:border-dark-3"}`}
               >
                 <span
                   className={`mb-[6px] block text-sm font-semibold sm:text-base md:text-sm lg:text-base ${address === 1 ? "text-primary" : "text-dark dark:text-white"}`}
@@ -54,7 +54,7 @@ const ShippingOption = () => {
               />
               <label
                 htmlFor="shippingAddress2"
-                className={`block cursor-pointer overflow-hidden rounded-lg border px-6 py-5 ${address === 2 ? "border-transparent bg-primary/5 shadow-border" : "border-stroke dark:border-dark-3"}`}
+                className={`block cursor-pointer overflow-hidden rounded-lg border px-6 py-5 ${address === 2 ? "shadow-border border-transparent bg-primary/5" : "border-stroke dark:border-dark-3"}`}
               >
                 <span
                   className={`mb-[6px] block text-sm font-semibold sm:text-base md:text-sm lg:text-base ${address === 2 ? "text-primary" : "text-dark dark:text-white"}`}
@@ -84,7 +84,7 @@ const ShippingOption = () => {
               />
               <label
                 htmlFor="shipping1"
-                className={`flex cursor-pointer items-center overflow-hidden rounded-lg border px-6 py-5 ${method === 1 ? "border-transparent bg-primary/5 shadow-border" : "border-stroke shadow-1 dark:border-dark-3 dark:shadow-none"}`}
+                className={`flex cursor-pointer items-center overflow-hidden rounded-lg border px-6 py-5 ${method === 1 ? "shadow-border border-transparent bg-primary/5" : "shadow-1 border-stroke dark:border-dark-3 dark:shadow-none"}`}
               >
                 <div className="mr-5 w-full max-w-[40px] sm:max-w-[65px]">
                   <img src={fedex} alt="fedex" />
@@ -115,7 +115,7 @@ const ShippingOption = () => {
               />
               <label
                 htmlFor="shipping2"
-                className={`flex cursor-pointer items-center overflow-hidden rounded-lg border px-6 py-5 ${method === 2 ? "border-transparent bg-primary/5 shadow-border" : "border-stroke shadow-1 dark:border-dark-3 dark:shadow-none"}`}
+                className={`flex cursor-pointer items-center overflow-hidden rounded-lg border px-6 py-5 ${method === 2 ? "shadow-border border-transparent bg-primary/5" : "shadow-1 border-stroke dark:border-dark-3 dark:shadow-none"}`}
               >
                 <div className="mr-5 w-full max-w-[40px] sm:max-w-[65px]">
                   <img src={dhl} alt="fedex" />

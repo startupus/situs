@@ -11,7 +11,7 @@ const ShoppingCart2 = () => {
             link="/#"
             title="Modern Lounge Chair"
             subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            Color="Color"
+            color="Color"
             price="$158.99"
           />
           <CartItem
@@ -19,7 +19,7 @@ const ShoppingCart2 = () => {
             link="/#"
             title="Mini Basic Table Lamp"
             subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            Color="Color"
+            color="Color"
             price="$158.99"
           />
 

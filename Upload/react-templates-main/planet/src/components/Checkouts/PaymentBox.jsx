@@ -22,7 +22,7 @@ const PaymentBox = () => {
 
   return (
     <>
-      <div className="mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="shadow-testimonial-6 dark:shadow-box-dark mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
         <div className="bg-[#f9f9f9] px-6 py-[18px] dark:bg-dark-4 2xl:px-8">
           <h3 className="text-2xl font-bold text-dark dark:text-white">
             Payment

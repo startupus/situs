@@ -390,7 +390,7 @@ const SitusOrders: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Проект</h3>
-                  <p className="text-gray-900 dark:text-white">{selectedOrder.customer.name}</p>
+                  <p className="text-gray-900 dark:text-white">{(selectedOrder as any).customer.name}</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Статус</h3>
@@ -402,8 +402,8 @@ const SitusOrders: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Клиент</h3>
-                  <p className="text-gray-900 dark:text-white">{selectedOrder.customerName}</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{selectedOrder.customerEmail}</p>
+                  <p className="text-gray-900 dark:text-white">{(selectedOrder as any).customerName}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{(selectedOrder as any).customerEmail}</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Сумма</h3>
@@ -415,7 +415,7 @@ const SitusOrders: React.FC = () => {
 
               <div>
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Описание</h3>
-                <p className="text-gray-900 dark:text-white">{selectedOrder.customer.name}</p>
+                <p className="text-gray-900 dark:text-white">{(selectedOrder as any).customer.name}</p>
               </div>
 
               {selectedOrder.items && selectedOrder.items.length > 0 && (

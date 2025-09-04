@@ -37,7 +37,7 @@ export default CustomerReview;
 
 const SingleCustomerReview = ({ img, name, date, rating, title, details }) => {
   return (
-    <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+    <div className="shadow-1 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
       <div className="items-center justify-between border-b border-stroke px-6 pt-5 dark:border-dark-3 sm:flex md:px-8">
         <div className="mb-4 flex items-center">
           <div className="mr-4 h-14 w-14 overflow-hidden rounded-full">

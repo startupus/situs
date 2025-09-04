@@ -50,48 +50,48 @@ const Calender2 = () => {
               <tbody>
                 <DayRow>
                   <Day number="01" active eventTitle="Redesign Website" eventDate="1 Dec - 2 Dec" />
-                  <Day number="02" />
-                  <Day number="03" />
-                  <Day number="04" />
-                  <Day number="05" />
-                  <Day number="06" />
-                  <Day number="07" />
+                  <Day {...({ number: '02', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '03', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '04', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '05', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '06', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '07', active: false, eventTitle: '', eventDate: '' } as any)} />
                 </DayRow>
                 <DayRow>
-                  <Day number="08" />
-                  <Day number="09" />
-                  <Day number="10" />
-                  <Day number="11" />
-                  <Day number="12" />
-                  <Day number="13" />
-                  <Day number="14" />
+                  <Day {...({ number: '08', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '09', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '10', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '11', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '12', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '13', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '14', active: false, eventTitle: '', eventDate: '' } as any)} />
                 </DayRow>
                 <DayRow>
-                  <Day number="15" />
-                  <Day number="16" />
-                  <Day number="17" />
-                  <Day number="18" />
-                  <Day number="19" />
-                  <Day number="20" />
-                  <Day number="21" />
+                  <Day {...({ number: '15', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '16', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '17', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '18', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '19', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '20', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '21', active: false, eventTitle: '', eventDate: '' } as any)} />
                 </DayRow>
                 <DayRow>
-                  <Day number="22" />
-                  <Day number="23" />
-                  <Day number="24" />
-                  <Day number="25" />
-                  <Day number="26" />
-                  <Day number="27" />
-                  <Day number="28" />
+                  <Day {...({ number: '22', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '23', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '24', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '25', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '26', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '27', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '28', active: false, eventTitle: '', eventDate: '' } as any)} />
                 </DayRow>
                 <DayRow>
-                  <Day number="29" />
-                  <Day number="30" />
-                  <Day number="31" />
-                  <Day number="01" />
-                  <Day number="02" />
-                  <Day number="03" />
-                  <Day number="04" />
+                  <Day {...({ number: '29', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '30', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '31', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '01', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '02', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '03', active: false, eventTitle: '', eventDate: '' } as any)} />
+                  <Day {...({ number: '04', active: false, eventTitle: '', eventDate: '' } as any)} />
                 </DayRow>
               </tbody>
             </table>

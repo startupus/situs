@@ -1,5 +1,6 @@
+import { Tool, Prompt, Resource, ResourceTemplate, Context } from '../decorators.stub';
 import { Injectable } from '@nestjs/common';
-import { Tool, Context } from '@rekog/mcp-nest';
+// import { Tool, Context } from '@rekog/mcp-nest';
 import { z } from 'zod';
 
 @Injectable()

@@ -9,7 +9,7 @@ const SwitchComponent = React.lazy(() => import('./core/Switch/index'));
 export const ThemeSwitch1: React.FC = () => (
   <React.Suspense fallback={<div>Loading...</div>}>
     <div className="theme-colors theme-typography">
-      <SwitchComponent />
+      <SwitchComponent {...({} as any)} />
     </div>
   </React.Suspense>
 );

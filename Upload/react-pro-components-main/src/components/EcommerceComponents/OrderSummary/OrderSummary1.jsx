@@ -7,7 +7,7 @@ const OrderSummary = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 xl:w-8/12">
             <div>
-              <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+              <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-10 dark:border-dark-3 dark:bg-dark-2">
                 <h4 className="mb-[5px] text-2xl font-semibold text-dark dark:text-white">
                   Order #15478
                 </h4>
@@ -91,7 +91,7 @@ const OrderSummary = () => {
           {/*  */}
           <div className="w-full px-4 xl:w-4/12">
             <div>
-              <div className="overflow-hidden rounded-[10px] border border-stroke bg-white p-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+              <div className="shadow-testimonial-6 dark:shadow-box-dark overflow-hidden rounded-[10px] border border-stroke bg-white p-10 dark:border-dark-3 dark:bg-dark-2">
                 <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white xl:text-2xl">
                   Customer
                 </h3>

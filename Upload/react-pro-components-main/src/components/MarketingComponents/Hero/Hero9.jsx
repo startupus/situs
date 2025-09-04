@@ -26,7 +26,7 @@ const Hero9 = () => {
                 </p>
                 <a
                   href="/#"
-                  className="inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-dark shadow-1 transition hover:bg-gray-2 hover:text-body-color"
+                  className="shadow-1 inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-center text-base font-medium text-dark transition hover:bg-gray-2 hover:text-body-color"
                 >
                   Discover More
                 </a>

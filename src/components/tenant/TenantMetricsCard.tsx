@@ -33,7 +33,12 @@ export function TenantMetricsCard({ className = '' }: TenantMetricsCardProps) {
         <div className="text-center">
           <div className="text-red-500 mb-2">
             <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              />
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Metrics</h3>
@@ -93,30 +98,22 @@ export function TenantMetricsCard({ className = '' }: TenantMetricsCardProps) {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div className="text-center">
-          <div className="text-2xl font-bold text-blue-600 mb-1">
-            {metrics.activeUsers}
-          </div>
+          <div className="text-2xl font-bold text-blue-600 mb-1">{metrics.activeUsers}</div>
           <div className="text-sm text-gray-500">Active Users</div>
         </div>
 
         <div className="text-center">
-          <div className="text-2xl font-bold text-green-600 mb-1">
-            {metrics.totalProjects}
-          </div>
+          <div className="text-2xl font-bold text-green-600 mb-1">{metrics.totalProjects}</div>
           <div className="text-sm text-gray-500">Projects</div>
         </div>
 
         <div className="text-center">
-          <div className="text-2xl font-bold text-purple-600 mb-1">
-            {metrics.totalPages}
-          </div>
+          <div className="text-2xl font-bold text-purple-600 mb-1">{metrics.totalPages}</div>
           <div className="text-sm text-gray-500">Pages</div>
         </div>
 
         <div className="text-center">
-          <div className="text-2xl font-bold text-orange-600 mb-1">
-            {formatStorage(metrics.storageUsed)}
-          </div>
+          <div className="text-2xl font-bold text-orange-600 mb-1">{formatStorage(metrics.storageUsed)}</div>
           <div className="text-sm text-gray-500">Storage Used</div>
         </div>
       </div>
@@ -132,16 +129,12 @@ export function TenantMetricsCard({ className = '' }: TenantMetricsCardProps) {
             <div className="text-sm text-gray-900">{formatDate(metrics.lastActivity)}</div>
           </div>
         </div>
-        
+
         <div className="mt-3">
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className={`h-2 rounded-full transition-all duration-300 ${
-                metrics.healthScore >= 80
-                  ? 'bg-green-500'
-                  : metrics.healthScore >= 50
-                  ? 'bg-yellow-500'
-                  : 'bg-red-500'
+                metrics.healthScore >= 80 ? 'bg-green-500' : metrics.healthScore >= 50 ? 'bg-yellow-500' : 'bg-red-500'
               }`}
               style={{ width: `${metrics.healthScore}%` }}
             ></div>

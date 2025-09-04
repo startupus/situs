@@ -106,7 +106,7 @@ const Navbar = () => {
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <Link
                 to="#"
-                className="rounded-md bg-white px-7 py-3 text-base font-medium text-primary shadow-1 hover:bg-gray-2 hover:text-body-color dark:shadow-none"
+                className="shadow-1 rounded-md bg-white px-7 py-3 text-base font-medium text-primary hover:bg-gray-2 hover:text-body-color dark:shadow-none"
               >
                 Get Started
               </Link>

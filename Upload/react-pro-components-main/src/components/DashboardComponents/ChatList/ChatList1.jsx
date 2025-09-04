@@ -4,7 +4,7 @@ const ChatList = () => {
   return (
     <section className="bg-gray-2 py-[90px] dark:bg-dark">
       <div className="mx-auto px-4 md:container">
-        <div className="mx-auto max-w-[335px] rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+        <div className="shadow-1 dark:shadow-box-dark mx-auto max-w-[335px] rounded-lg bg-white dark:bg-dark-2">
           <div className="border-b border-stroke p-5 dark:border-dark-3">
             <h3 className="text-xl font-medium text-dark dark:text-dark-6">
               <span>Active Conversations</span>

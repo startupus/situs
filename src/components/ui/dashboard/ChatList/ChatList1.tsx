@@ -37,33 +37,34 @@ const ChatList = () => {
 
             <div className="space-y-[10px]">
               <ChatItem
-                active
                 img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-01.png"
                 name="Henry Dholi"
                 text="I cam across your profile and..."
+                active={false}
               />
               <ChatItem
-                active
                 img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-02.png"
                 name="Mariya Desoja"
                 text="I like your confidence 💪"
+                active={false}
               />
               <ChatItem
-                active
                 img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-03.png"
                 name="Robert Jhon"
                 text="Can you share your offer?"
+                active={false}
               />
               <ChatItem
                 img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-04.png"
                 name="Cody Fisher"
                 text="I'm waiting for you response!"
+                active={false}
               />
               <ChatItem
-                active
                 img="https://cdn.tailgrids.com/2.0/image/dashboard/images/chat-list/image-05.png"
                 name="Jenny Wilson"
                 text="I'm waiting for you response!"
+                active={false}
               />
             </div>
           </div>

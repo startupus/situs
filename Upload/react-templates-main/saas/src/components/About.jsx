@@ -21,7 +21,7 @@ const serviceItems = [
 const About = () => {
   return (
     <>
-      <section className="relative bg-tg-bg pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
+      <section className="bg-tg-bg relative pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 mb-10 flex flex-wrap items-center lg:mb-[60px]">
             <div className="w-full px-4 lg:w-6/12">

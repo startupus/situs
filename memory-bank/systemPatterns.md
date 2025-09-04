@@ -52,7 +52,7 @@
 ## Event-driven Patterns
 
 - **Event Bus**: Centralized event system with RxJS Subjects
-- **Event Types**: Standardized event naming (project*\*, integration*_, user\__)
+- **Event Types**: Standardized event naming (project*\*, integration*\_, user\_\_)
 - **Event Handlers**: Async event processing with error handling
 - **Event Store**: Persistent event storage with PostgreSQL
 - **Event Middleware**: Processing pipeline for event transformation

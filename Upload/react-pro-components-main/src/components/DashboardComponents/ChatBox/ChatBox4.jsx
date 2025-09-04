@@ -65,7 +65,7 @@ const ChatBox4 = () => {
               <input
                 type="text"
                 placeholder="Type something here..."
-                className="outline-hidden h-[58px] w-full rounded-[10px] border border-transparent bg-white pl-[60px] pr-[100px] text-base text-body-color shadow-chat-box focus:border-secondary dark:bg-dark dark:text-dark-6"
+                className="outline-hidden shadow-chat-box h-[58px] w-full rounded-[10px] border border-transparent bg-white pl-[60px] pr-[100px] text-base text-body-color focus:border-secondary dark:bg-dark dark:text-dark-6"
               />
 
               <button className="absolute left-6 top-1/2 -translate-y-1/2 text-body-color hover:text-primary dark:text-dark-6">
@@ -272,7 +272,7 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
+        className={`shadow-card absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 dark:bg-dark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

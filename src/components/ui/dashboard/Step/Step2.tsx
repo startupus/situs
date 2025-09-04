@@ -7,21 +7,22 @@ const Step2 = () => {
         <div className="mx-auto w-full max-w-[920px]">
           <SingleStep
             done
+            ongoing={false}
             number="1"
-            name="Step 1"
             title="Step one title"
             details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at sagittis sapien, eget sodales arcu. Aenean arcu velit, tincidunt ut enim vitae, scelerisque tempus lorem."
           />
           <SingleStep
+            done={false}
             ongoing
             number="2"
-            name="Step 2"
             title="Step two title"
             details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at sagittis sapien, eget sodales arcu. Aenean arcu velit, tincidunt ut enim vitae, scelerisque tempus lorem."
           />
           <SingleStep
+            done={false}
+            ongoing={false}
             number="3"
-            name="Step 3"
             title="Step three title"
             details="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque at sagittis sapien, eget sodales arcu. Aenean arcu velit, tincidunt ut enim vitae, scelerisque tempus lorem."
           />

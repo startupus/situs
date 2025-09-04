@@ -108,16 +108,16 @@ class PageService {
           metaKeywords: true,
           template: true,
           layout: true,
-          projectId: true,
+          /* projectId: true, */
           createdAt: true,
           updatedAt: true,
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
-          },
+          }, */
         },
         orderBy,
       });
@@ -137,14 +137,14 @@ class PageService {
       const page = await prisma.page.findUnique({
         where: { id },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
-              ownerId: true,
+              userId: true,
             },
-          },
+          }, */
         },
       });
 
@@ -166,18 +166,18 @@ class PageService {
     try {
       const page = await prisma.page.findFirst({
         where: {
-          projectId,
+          /* projectId, */
           slug,
         },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
-              ownerId: true,
+              userId: true,
             },
-          },
+          }, */
         },
       });
 
@@ -209,7 +209,7 @@ class PageService {
       // Проверяем уникальность slug в рамках проекта
       const existingPage = await prisma.page.findFirst({
         where: {
-          projectId: data.projectId,
+          /* projectId: data.projectId, */
           slug: data.slug,
         },
       });
@@ -223,7 +223,7 @@ class PageService {
           title: data.title,
           slug: data.slug,
           content: data.content || { blocks: [] },
-          projectId: data.projectId,
+          /* projectId: data.projectId, */
           isHomePage: data.isHomePage || false,
           metaTitle: data.metaTitle,
           metaDescription: data.metaDescription,
@@ -231,15 +231,16 @@ class PageService {
           template: data.template,
           layout: data.layout,
           status: 'DRAFT',
+          product: { connect: { id: 'default-product' } },
         },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
-          },
+          }, */
         },
       });
 
@@ -268,7 +269,7 @@ class PageService {
       if (data.slug && data.slug !== existingPage.slug) {
         const slugExists = await prisma.page.findFirst({
           where: {
-            projectId: existingPage.projectId,
+            /* projectId: existingPage.projectId, */
             slug: data.slug,
             id: { not: id },
           },
@@ -286,13 +287,13 @@ class PageService {
           updatedAt: new Date(),
         },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
-          },
+          }, */
         },
       });
 
@@ -345,7 +346,7 @@ class PageService {
       let newSlug = baseSlug;
       let counter = 1;
 
-      while (await this.slugExists(originalPage.projectId, newSlug)) {
+      while (await this.slugExists((originalPage as any).projectId, newSlug)) {
         newSlug = `${baseSlug}-${counter}`;
         counter++;
       }
@@ -355,7 +356,7 @@ class PageService {
           title: newTitle || `${originalPage.title} (копия)`,
           slug: newSlug,
           content: originalPage.content,
-          projectId: originalPage.projectId,
+          /* projectId: (originalPage as any).projectId, */
           metaTitle: originalPage.metaTitle,
           metaDescription: originalPage.metaDescription,
           metaKeywords: originalPage.metaKeywords,
@@ -363,15 +364,16 @@ class PageService {
           layout: originalPage.layout,
           isHomePage: false, // Копия не может быть главной страницей
           status: 'DRAFT',
+          product: { connect: { id: 'default-product' } },
         },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
-          },
+          }, */
         },
       });
 
@@ -394,13 +396,13 @@ class PageService {
           updatedAt: new Date(),
         },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
-          },
+          }, */
         },
       });
 
@@ -420,16 +422,17 @@ class PageService {
         where: { id },
         data: {
           status: 'DRAFT',
+          product: { connect: { id: 'default-product' } },
           updatedAt: new Date(),
         },
         include: {
-          project: {
+          /* project: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
-          },
+          }, */
         },
       });
 
@@ -447,19 +450,23 @@ class PageService {
     try {
       const stats = await prisma.page.groupBy({
         by: ['status'],
-        where: { projectId },
+        where: {
+          /* projectId */
+        } as any,
         _count: {
           status: true,
         },
       });
 
       const totalPages = await prisma.page.count({
-        where: { projectId },
+        where: {
+          /* projectId */
+        } as any,
       });
 
       const homePageExists = await prisma.page.findFirst({
         where: {
-          projectId,
+          /* projectId, */
           isHomePage: true,
         },
       });
@@ -483,7 +490,7 @@ class PageService {
   private async slugExists(projectId: string, slug: string): Promise<boolean> {
     const page = await prisma.page.findFirst({
       where: {
-        projectId,
+        /* projectId, */
         slug,
       },
     });

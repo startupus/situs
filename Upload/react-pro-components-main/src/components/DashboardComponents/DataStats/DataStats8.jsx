@@ -5,7 +5,7 @@ const DataStats8 = () => {
     <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto px-4 md:container">
         <div className="flex justify-center">
-          <div className="mb-14 inline-flex w-full max-w-[845px] flex-wrap rounded-sm bg-white py-[30px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+          <div className="shadow-1 dark:shadow-box-dark mb-14 inline-flex w-full max-w-[845px] flex-wrap rounded-sm bg-white py-[30px] dark:bg-dark-2">
             <DataStatsCard
               total="30.529"
               totalTitle="Total Subscribers"

@@ -4,23 +4,12 @@ import { TenantResolutionService } from './tenant-resolution.service';
 import { TenantMiddleware } from './tenant.middleware';
 import { TenantAwarePrismaService } from './tenant-aware-prisma.service';
 import { TenantController } from './tenant.controller';
-import { PrismaModule } from '../prisma/prisma.module';
 import { ValidationModule } from '../../validation/validation.module';
 
 @Module({
-  imports: [PrismaModule, ValidationModule],
+  imports: [ValidationModule],
   controllers: [TenantController],
-  providers: [
-    TenantContextService,
-    TenantResolutionService,
-    TenantMiddleware,
-    TenantAwarePrismaService,
-  ],
-  exports: [
-    TenantContextService,
-    TenantResolutionService,
-    TenantMiddleware,
-    TenantAwarePrismaService,
-  ],
+  providers: [TenantContextService, TenantResolutionService, TenantMiddleware, TenantAwarePrismaService],
+  exports: [TenantContextService, TenantResolutionService, TenantMiddleware, TenantAwarePrismaService],
 })
 export class TenantModule {}

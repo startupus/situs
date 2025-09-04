@@ -6,7 +6,7 @@ const Breadcrumb = ({ pageName }) => {
     <>
       <section className="bg-tg-bg pt-10 dark:bg-dark">
         <div className="container mx-auto">
-          <div className="rounded-lg border border-light bg-white px-4 py-4 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-card sm:px-6 md:px-8 md:py-5">
+          <div className="border-light shadow-1 dark:shadow-card rounded-lg border bg-white px-4 py-4 dark:border-dark-3 dark:bg-dark-2 sm:px-6 md:px-8 md:py-5">
             <ul className="flex items-center">
               <li className="flex items-center">
                 <Link

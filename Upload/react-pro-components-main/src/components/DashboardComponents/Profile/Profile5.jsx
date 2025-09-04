@@ -83,7 +83,7 @@ const Profile5 = () => {
             <p className="mb-[18px] text-base font-medium text-body-color dark:text-dark-6">
               Ui/Ux Designer
             </p>
-            <div className="-mx-[18px] mb-5 inline-flex rounded-sm bg-white py-[10px] shadow-profile-5 dark:bg-dark-2">
+            <div className="shadow-profile-5 -mx-[18px] mb-5 inline-flex rounded-sm bg-white py-[10px] dark:bg-dark-2">
               <div className="border-r border-stroke px-[18px] dark:text-dark-3">
                 <p className="text-sm text-body-color dark:text-dark-6">
                   <span className="text-base font-semibold text-dark dark:text-white">

@@ -13,22 +13,22 @@ const VerticalNavbar = () => {
 
           <nav>
             <ul>
-              <NavItem link="/#" menu="Home" />
-              <NavItem link="/#" menu="Dashboard" />
+              <NavItem link="/#" menu="Home" submenu={false} children={null} />
+              <NavItem link="/#" menu="Dashboard" submenu={false} children={null} />
               <NavItem link="/#" menu="Products" submenu>
                 <DropdownItem link="/#" menu="Dropdown One" />
                 <DropdownItem link="/#" menu="Dropdown Two" />
                 <DropdownItem link="/#" menu="Dropdown Three" />
               </NavItem>
-              <NavItem link="/#" menu="Messages" />
-              <NavItem link="/#" menu="Order" />
-              <NavItem link="/#" menu="Calendar " />
-              <NavItem link="/#" menu="Static  " />
-              <NavItem link="/#" menu="Documents  " />
+              <NavItem link="/#" menu="Messages" submenu={false} children={null} />
+              <NavItem link="/#" menu="Order" submenu={false} children={null} />
+              <NavItem link="/#" menu="Calendar " submenu={false} children={null} />
+              <NavItem link="/#" menu="Static  " submenu={false} children={null} />
+              <NavItem link="/#" menu="Documents  " submenu={false} children={null} />
               <Divider />
-              <NavItem link="/#" menu="Chat " />
-              <NavItem link="/#" menu="Settings   " />
-              <NavItem link="/#" menu="Log out  " />
+              <NavItem link="/#" menu="Chat " submenu={false} children={null} />
+              <NavItem link="/#" menu="Settings   " submenu={false} children={null} />
+              <NavItem link="/#" menu="Log out  " submenu={false} children={null} />
             </ul>
           </nav>
         </div>

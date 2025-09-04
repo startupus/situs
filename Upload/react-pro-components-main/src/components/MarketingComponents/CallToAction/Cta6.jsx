@@ -19,7 +19,7 @@ const Cta6 = () => {
               <div className="flex flex-wrap lg:justify-end">
                 <a
                   href="/#"
-                  className="my-1 mr-4 inline-block rounded-md border border-transparent bg-white px-7 py-3 text-base font-medium text-primary transition hover:text-primary hover:shadow-1"
+                  className="hover:shadow-1 my-1 mr-4 inline-block rounded-md border border-transparent bg-white px-7 py-3 text-base font-medium text-primary transition hover:text-primary"
                 >
                   Get Pro Version
                 </a>

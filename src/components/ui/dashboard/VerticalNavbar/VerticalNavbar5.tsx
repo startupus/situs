@@ -14,6 +14,7 @@ const VerticalNavbar5 = () => {
           <nav className="px-6">
             <ul>
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -32,6 +33,7 @@ const VerticalNavbar5 = () => {
                 menu="Home"
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -60,6 +62,7 @@ const VerticalNavbar5 = () => {
                 menu="Dashboard"
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -83,6 +86,7 @@ const VerticalNavbar5 = () => {
                 menu="Products"
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -102,6 +106,7 @@ const VerticalNavbar5 = () => {
                 message="03"
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -125,6 +130,7 @@ const VerticalNavbar5 = () => {
                 menu="Order"
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -153,6 +159,7 @@ const VerticalNavbar5 = () => {
                 menu="Calendar "
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -171,6 +178,7 @@ const VerticalNavbar5 = () => {
                 menu="Static  "
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -205,6 +213,7 @@ const VerticalNavbar5 = () => {
               />
               <Divider />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -218,6 +227,7 @@ const VerticalNavbar5 = () => {
                 menu="Chat "
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">
@@ -236,6 +246,7 @@ const VerticalNavbar5 = () => {
                 menu="Settings   "
               />
               <NavItem
+                {...({ submenu: false, message: '', children: null } as any)}
                 link="/#"
                 icon={
                   <svg width={18} height={18} viewBox="0 0 18 18" className="fill-current">

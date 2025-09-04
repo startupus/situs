@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 export type InterfaceTheme = 'light' | 'dark';
 
 export const useInterfaceTheme = () => {
-  const [theme, setTheme] = useState<InterfaceTheme>('system');
+  const [theme, setTheme] = useState<InterfaceTheme>('light' as any);
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
   // Применяем тему ТОЛЬКО к интерфейсу редактора

@@ -51,8 +51,8 @@ export default function Services5() {
 const ServiceCard = ({ number, title, details }) => {
   return (
     <div className="w-full px-4 md:w-1/2 xl:w-1/4">
-      <div className="group relative mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 py-11 text-center duration-200 hover:-translate-y-2 hover:border-transparent hover:shadow-feature dark:border-dark-3 dark:bg-dark-2">
-        <div className="mx-auto mb-9 flex h-20 w-20 items-center justify-center rounded-full border border-stroke text-3xl font-semibold text-dark drop-shadow-feature group-hover:border-primary group-hover:bg-primary group-hover:text-white dark:border-dark-3 dark:text-white">
+      <div className="hover:shadow-feature group relative mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 py-11 text-center duration-200 hover:-translate-y-2 hover:border-transparent dark:border-dark-3 dark:bg-dark-2">
+        <div className="drop-shadow-feature mx-auto mb-9 flex h-20 w-20 items-center justify-center rounded-full border border-stroke text-3xl font-semibold text-dark group-hover:border-primary group-hover:bg-primary group-hover:text-white dark:border-dark-3 dark:text-white">
           {number}
         </div>
         <h4 className="mb-[14px] text-lg font-semibold uppercase text-primary">

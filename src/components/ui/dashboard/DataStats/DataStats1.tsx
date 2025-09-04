@@ -6,6 +6,7 @@ const DataStats = () => {
       <div className="mx-auto px-4 md:container">
         <div className="-mx-4 flex flex-wrap">
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             color="#13C296"
             title="New Orders"
             subtitle="This week"
@@ -22,6 +23,7 @@ const DataStats = () => {
             }
           />
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             color="#3758F9"
             title="New Customers"
             subtitle="This week"
@@ -46,6 +48,7 @@ const DataStats = () => {
             }
           />
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             color="#F2994A"
             title="Online Orders"
             subtitle="This week"
@@ -62,6 +65,7 @@ const DataStats = () => {
             }
           />
           <DataStatsCard
+            {...({ decrement: '0%' } as any)}
             color="#9B51E0"
             title="Offline Orders"
             subtitle="This week"

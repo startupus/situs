@@ -121,7 +121,7 @@ const ProductCarousel = () => {
           >
             {productItems.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+                <div className="shadow-1 dark:shadow-box-dark overflow-hidden rounded-lg bg-white dark:bg-dark-2">
                   <div>
                     <img src={item.image} alt="product" className="w-full" />
                   </div>

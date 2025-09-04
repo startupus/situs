@@ -6,6 +6,7 @@ const DataStats4 = () => {
       <div className="mx-auto px-4 md:container">
         <div className="flex flex-wrap rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
           <DataStatsCard
+            {...({ classNames: '' } as any)}
             color="#8646F4"
             name="Design"
             number="17 files"
@@ -21,6 +22,7 @@ const DataStats4 = () => {
           />
 
           <DataStatsCard
+            {...({ classNames: '' } as any)}
             color="#22AD5C"
             name="Design"
             number="17 files"
@@ -40,6 +42,7 @@ const DataStats4 = () => {
           />
 
           <DataStatsCard
+            {...({ classNames: '' } as any)}
             color="#2D68F8"
             name="Design"
             number="17 files"
@@ -55,6 +58,7 @@ const DataStats4 = () => {
           />
 
           <DataStatsCard
+            {...({ classNames: '' } as any)}
             color="#F59E0B"
             name="Design"
             number="17 files"

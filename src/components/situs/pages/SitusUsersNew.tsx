@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { usersApi, User, UserFilters, UsersListResponse } from '../../../api/services/users.api';
+import { usersApi, UserFilters, UsersListResponse } from '../../../api/services/users.api';
 import { projectsApi } from '../../../api/services/projects.api';
 import { Project } from '../../../types/project';
 import UserModal from '../components/UserModal';
@@ -11,13 +11,13 @@ import { ThemePermissionsModal } from '../../ui';
  */
 const SitusUsersNew: React.FC = () => {
   // Состояние компонента
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [filters, setFilters] = useState<UserFilters>({});
   const [showUserModal, setShowUserModal] = useState(false);
   const [showPermissionsModal, setShowPermissionsModal] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [editingUser, setEditingUser] = useState<any | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
@@ -78,7 +78,7 @@ const SitusUsersNew: React.FC = () => {
     setShowUserModal(true);
   };
 
-  const handleEditUser = (user: User) => {
+  const handleEditUser = (user: any) => {
     setEditingUser(user);
     setShowUserModal(true);
   };
@@ -390,9 +390,10 @@ const SitusUsersNew: React.FC = () => {
 
       {showPermissionsModal && (
         <ThemePermissionsModal
+          role={null}
+          permissions={[]}
           isOpen={showPermissionsModal}
           onClose={() => setShowPermissionsModal(false)}
-          userId=""
           onSave={() => {}}
         />
       )}

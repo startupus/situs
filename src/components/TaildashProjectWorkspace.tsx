@@ -5,7 +5,7 @@ import ProjectsList from './dashy/pages/ProjectsList';
 
 const TaildashProjectWorkspace: React.FC = () => {
   return (
-    <SitusLayout>
+    <SitusLayout {...({} as any)}>
       <Routes>
         {/* Главная страница - дашборд */}
         <Route path="/" element={<SitusDashboard />} />

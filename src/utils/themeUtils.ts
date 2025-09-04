@@ -13,33 +13,33 @@ export const generateCSSVariables = (theme: ThemeConfig): string => {
   return `
     :root {
       /* Основные цвета */
-      --color-primary: ${colors.primary};
-      --color-primary-hover: ${colors.primaryHover};
-      --color-primary-active: ${colors.primaryActive};
-      --color-secondary: ${colors.secondary};
-      --color-accent: ${colors.accent};
+      --color-primary: ${(colors as any).primary};
+      --color-primary-hover: ${(colors as any).primaryHover};
+      --color-primary-active: ${(colors as any).primaryActive};
+      --color-secondary: ${(colors as any).secondary};
+      --color-accent: ${(colors as any).accent};
       
       /* Статусные цвета */
-      --color-success: ${colors.success};
-      --color-warning: ${colors.warning};
-      --color-error: ${colors.error};
-      --color-info: ${colors.info};
+      --color-success: ${(colors as any).success};
+      --color-warning: ${(colors as any).warning};
+      --color-error: ${(colors as any).error};
+      --color-info: ${(colors as any).info};
       
       /* Базовые цвета */
-      --color-background: ${colors.background};
-      --color-surface: ${colors.surface};
-      --color-text: ${colors.text};
-      --color-text-secondary: ${colors.textSecondary};
-      --color-border: ${colors.border};
-      --color-border-light: ${colors.borderLight};
+      --color-background: ${(colors as any).background};
+      --color-surface: ${(colors as any).surface};
+      --color-text: ${(colors as any).text};
+      --color-text-secondary: ${(colors as any).textSecondary};
+      --color-border: ${(colors as any).border};
+      --color-border-light: ${(colors as any).borderLight};
       
       /* Совместимость с существующими переменными */
-      --color-body-color: ${colors.textSecondary};
-      --color-dark: ${colors.text};
-      --color-gray-3: ${colors.borderLight};
-      --color-dark-5: ${colors.textSecondary};
-      --color-dark-6: ${colors.textSecondary};
-      --color-blue-dark: ${colors.primaryActive};
+      --color-body-color: ${(colors as any).textSecondary};
+      --color-dark: ${(colors as any).text};
+      --color-gray-3: ${(colors as any).borderLight};
+      --color-dark-5: ${(colors as any).textSecondary};
+      --color-dark-6: ${(colors as any).textSecondary};
+      --color-blue-dark: ${(colors as any).primaryActive};
     }
   `.trim();
 };
@@ -53,88 +53,88 @@ export const generateTailwindCSS = (theme: ThemeConfig): string => {
   return `
     @layer utilities {
       .bg-primary {
-        background-color: ${colors.primary};
+        background-color: ${(colors as any).primary};
       }
       
       .bg-primary-hover {
-        background-color: ${colors.primaryHover};
+        background-color: ${(colors as any).primaryHover};
       }
       
       .bg-primary-active {
-        background-color: ${colors.primaryActive};
+        background-color: ${(colors as any).primaryActive};
       }
       
       .text-primary {
-        color: ${colors.primary};
+        color: ${(colors as any).primary};
       }
       
       .border-primary {
-        border-color: ${colors.primary};
+        border-color: ${(colors as any).primary};
       }
       
       .bg-secondary {
-        background-color: ${colors.secondary};
+        background-color: ${(colors as any).secondary};
       }
       
       .text-secondary {
-        color: ${colors.secondary};
+        color: ${(colors as any).secondary};
       }
       
       .border-secondary {
-        border-color: ${colors.secondary};
+        border-color: ${(colors as any).secondary};
       }
       
       .bg-success {
-        background-color: ${colors.success};
+        background-color: ${(colors as any).success};
       }
       
       .text-success {
-        color: ${colors.success};
+        color: ${(colors as any).success};
       }
       
       .bg-warning {
-        background-color: ${colors.warning};
+        background-color: ${(colors as any).warning};
       }
       
       .text-warning {
-        color: ${colors.warning};
+        color: ${(colors as any).warning};
       }
       
       .bg-error {
-        background-color: ${colors.error};
+        background-color: ${(colors as any).error};
       }
       
       .text-error {
-        color: ${colors.error};
+        color: ${(colors as any).error};
       }
       
       .bg-surface {
-        background-color: ${colors.surface};
+        background-color: ${(colors as any).surface};
       }
       
       .text-body-color {
-        color: ${colors.textSecondary};
+        color: ${(colors as any).textSecondary};
       }
       
       .border-stroke {
-        border-color: ${colors.border};
+        border-color: ${(colors as any).border};
       }
       
       /* Hover состояния */
       .hover\\:bg-primary:hover {
-        background-color: ${colors.primary};
+        background-color: ${(colors as any).primary};
       }
       
       .hover\\:bg-primary-hover:hover {
-        background-color: ${colors.primaryHover};
+        background-color: ${(colors as any).primaryHover};
       }
       
       .hover\\:text-primary:hover {
-        color: ${colors.primary};
+        color: ${(colors as any).primary};
       }
       
       .hover\\:border-primary:hover {
-        border-color: ${colors.primary};
+        border-color: ${(colors as any).primary};
       }
     }
   `.trim();

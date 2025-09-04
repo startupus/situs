@@ -24,11 +24,17 @@ const adaptPaginationProps = (props: PaginationProps) => ({
 });
 
 // Pagination Variants
-export const ThemePagination1: React.FC<PaginationProps> = (props) => <Pagination1 {...adaptPaginationProps(props)} />;
+export const ThemePagination1: React.FC<PaginationProps> = (props) => (
+  <Pagination1 {...(adaptPaginationProps(props) as any)} />
+);
 
-export const ThemePagination2: React.FC<PaginationProps> = (props) => <Pagination2 {...adaptPaginationProps(props)} />;
+export const ThemePagination2: React.FC<PaginationProps> = (props) => (
+  <Pagination2 {...(adaptPaginationProps(props) as any)} />
+);
 
-export const ThemePagination3: React.FC<PaginationProps> = (props) => <Pagination3 {...adaptPaginationProps(props)} />;
+export const ThemePagination3: React.FC<PaginationProps> = (props) => (
+  <Pagination3 {...(adaptPaginationProps(props) as any)} />
+);
 
 // Экспорт всех Pagination компонентов как единый объект для удобства
 export const ThemePaginations = {

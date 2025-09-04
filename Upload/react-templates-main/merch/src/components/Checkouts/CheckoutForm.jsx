@@ -258,7 +258,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-5 py-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark xl:p-9">
+      <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-5 py-8 dark:border-dark-3 dark:bg-dark-2 xl:p-9">
         {formSteps.map((step, stepIndex) => (
           <div
             key={stepIndex}

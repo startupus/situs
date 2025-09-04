@@ -45,49 +45,49 @@ const Calender4 = () => {
             <Week name="Su" />
           </WeekRow>
           <DayRow>
-            <Day number="" />
-            <Day number="" />
-            <Day number="01" />
-            <Day number="02" />
-            <Day number="03" />
-            <Day number="04" />
-            <Day number="05" />
+            <Day number="" active={false} />
+            <Day number="" active={false} />
+            <Day number="01" active={false} />
+            <Day number="02" active={false} />
+            <Day number="03" active={false} />
+            <Day number="04" active={false} />
+            <Day number="05" active={false} />
           </DayRow>
           <DayRow>
-            <Day number="06" />
+            <Day number="06" active={false} />
             <Day number="07" active />
-            <Day number="08" />
-            <Day number="09" />
-            <Day number="10" />
-            <Day number="11" />
-            <Day number="12" />
+            <Day number="08" active={false} />
+            <Day number="09" active={false} />
+            <Day number="10" active={false} />
+            <Day number="11" active={false} />
+            <Day number="12" active={false} />
           </DayRow>
           <DayRow>
-            <Day number="13" />
-            <Day number="14" />
-            <Day number="15" />
-            <Day number="16" />
-            <Day number="17" />
-            <Day number="18" />
-            <Day number="19" />
+            <Day number="13" active={false} />
+            <Day number="14" active={false} />
+            <Day number="15" active={false} />
+            <Day number="16" active={false} />
+            <Day number="17" active={false} />
+            <Day number="18" active={false} />
+            <Day number="19" active={false} />
           </DayRow>
           <DayRow>
-            <Day number="20" />
-            <Day number="21" />
-            <Day number="22" />
-            <Day number="23" />
-            <Day number="24" />
-            <Day number="25" />
-            <Day number="26" />
+            <Day number="20" active={false} />
+            <Day number="21" active={false} />
+            <Day number="22" active={false} />
+            <Day number="23" active={false} />
+            <Day number="24" active={false} />
+            <Day number="25" active={false} />
+            <Day number="26" active={false} />
           </DayRow>
           <DayRow>
-            <Day number="27" />
-            <Day number="28" />
-            <Day number="29" />
-            <Day number="30" />
-            <Day number="31" />
-            <Day number="" />
-            <Day number="" />
+            <Day number="27" active={false} />
+            <Day number="28" active={false} />
+            <Day number="29" active={false} />
+            <Day number="30" active={false} />
+            <Day number="31" active={false} />
+            <Day number="" active={false} />
+            <Day number="" active={false} />
           </DayRow>
 
           <div className="flex items-center justify-center space-x-3 pt-4 sm:space-x-4">

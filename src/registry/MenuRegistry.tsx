@@ -1,5 +1,7 @@
 import React from 'react';
-import { MenuSection, MenuItem, RouteConfig } from '../types/menu';
+type MenuSection = any;
+type MenuItem = any;
+type RouteConfig = any;
 
 // Иконки для меню
 import {

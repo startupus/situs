@@ -61,7 +61,7 @@ const Table9 = () => {
   return (
     <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto px-4 lg:container">
-        <div className="rounded-lg bg-white shadow-card dark:bg-dark-2">
+        <div className="shadow-card rounded-lg bg-white dark:bg-dark-2">
           <div className="max-w-full overflow-x-auto">
             <table className="w-full table-auto">
               <TableHead headers={headers} />
@@ -222,7 +222,7 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark dark:shadow-card ${
+        className={`dark:shadow-card absolute right-0 top-full z-40 w-[200px] space-y-1 rounded border border-stroke bg-white p-2 dark:border-dark-3 dark:bg-dark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

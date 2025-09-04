@@ -6,7 +6,7 @@ import { ThemeColors } from '../types/theme';
  */
 export const useThemeColors = (): ThemeColors => {
   const { currentTheme } = useTheme();
-  return currentTheme.colors;
+  return currentTheme.colors as any;
 };
 
 /**

@@ -15,6 +15,23 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   canActivate(context: ExecutionContext) {
+    // Явное включение dev-пользователя через флаг окружения (работает в любом NODE_ENV)
+    const enableDevUserRaw = process.env.ENABLE_DEV_USER || '';
+    const enableDevUser = enableDevUserRaw === '1' || enableDevUserRaw.toLowerCase() === 'true';
+    if (enableDevUser) {
+      const req = context.switchToHttp().getRequest();
+      if (!req.user) {
+        (req as any).user = {
+          id: 'dev-user-id',
+          email: 'dev@situs.local',
+          name: 'Dev User',
+          globalRole: 'SUPER_ADMIN',
+          scopes: ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'],
+        };
+      }
+      return true;
+    }
+
     // В development режимe: разрешаем доступ и подставляем dev-пользователя,
     // чтобы downstream-guards (PermissionGuard) видели req.user
     if (process.env.NODE_ENV === 'development') {

@@ -112,7 +112,7 @@ const TableBody = ({ data }) => {
           </td>
           <td className="border-t border-stroke px-4 py-5 pr-11 text-right dark:border-dark-3">
             <div className="relative">
-              <select className="outline-hidden appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color shadow-1 dark:bg-dark-3 dark:text-dark-6 dark:shadow-card">
+              <select className="outline-hidden shadow-1 dark:shadow-card appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm text-body-color dark:bg-dark-3 dark:text-dark-6">
                 <option value="Action" disabled>
                   Action
                 </option>

@@ -6,7 +6,7 @@ let useClickOutside = (handler) => {
 
   useEffect(() => {
     let maybeHandler = (event) => {
-      if (!domNode.current.contains(event.target)) {
+      if (domNode.current && !(domNode.current as HTMLElement).contains(event.target as Node)) {
         handler();
       }
     };
@@ -32,7 +32,7 @@ const Dropdown2 = () => {
   return (
     <>
       {/* <!-- ====== Dropdowns Section Start --> */}
-      <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20 dark:bg-dark">
+      <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 dark:bg-dark">
         <div className="container">
           <div className="flex flex-wrap -mx-4">
             {/* one */}

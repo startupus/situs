@@ -23,7 +23,7 @@ const Team5 = () => {
 
         <div className="-mx-4 flex flex-wrap justify-center">
           <div className="w-full px-4 xl:w-10/12 2xl:w-9/12">
-            <div className="relative flex flex-wrap rounded-[10px] bg-white px-6 pt-10 shadow-team dark:bg-dark-2">
+            <div className="shadow-team relative flex flex-wrap rounded-[10px] bg-white px-6 pt-10 dark:bg-dark-2">
               <TeamCard
                 imageSrc="https://cdn.tailgrids.com/1.0/assets/images/team/team-05/image-01.jpg"
                 name="Melissa Tatcher"

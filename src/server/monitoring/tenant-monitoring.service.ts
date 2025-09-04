@@ -45,7 +45,7 @@ export class TenantMonitoringService {
     try {
       // Get all tenants (this would need a global context or admin service)
       const tenants = await this.getAllTenants();
-      
+
       for (const tenant of tenants) {
         await this.collectMetricsForTenant(tenant.id);
       }
@@ -131,7 +131,7 @@ export class TenantMonitoringService {
 
     try {
       const tenants = await this.getAllTenants();
-      
+
       for (const tenant of tenants) {
         await this.checkAlertsForTenant(tenant.id);
       }
@@ -163,7 +163,8 @@ export class TenantMonitoringService {
       }
 
       // Storage alerts
-      if (metrics.storageUsed > 1000000000) { // 1GB
+      if (metrics.storageUsed > 1000000000) {
+        // 1GB
         alerts.push({
           id: `storage-${tenantId}-${Date.now()}`,
           tenantId,
@@ -194,9 +195,9 @@ export class TenantMonitoringService {
       if (alerts.length > 0) {
         const existingAlerts = this.alertsCache.get(tenantId) || [];
         this.alertsCache.set(tenantId, [...existingAlerts, ...alerts]);
-        
+
         // Log critical alerts
-        const criticalAlerts = alerts.filter(a => a.severity === 'CRITICAL');
+        const criticalAlerts = alerts.filter((a) => a.severity === 'CRITICAL');
         if (criticalAlerts.length > 0) {
           this.logger.warn(`Critical alerts for tenant ${tenantId}:`, criticalAlerts);
         }
@@ -228,8 +229,8 @@ export class TenantMonitoringService {
     }
 
     const alerts = this.alertsCache.get(tenantId) || [];
-    const alertIndex = alerts.findIndex(a => a.id === alertId);
-    
+    const alertIndex = alerts.findIndex((a) => a.id === alertId);
+
     if (alertIndex !== -1) {
       alerts[alertIndex].resolved = true;
       this.alertsCache.set(tenantId, alerts);
@@ -271,13 +272,11 @@ export class TenantMonitoringService {
       this.prisma.page.findFirst({ orderBy: { updatedAt: 'desc' }, select: { updatedAt: true } }),
     ]);
 
-    const dates = [
-      lastUserUpdate?.updatedAt,
-      lastProjectUpdate?.updatedAt,
-      lastPageUpdate?.updatedAt,
-    ].filter(Boolean) as Date[];
+    const dates = [lastUserUpdate?.updatedAt, lastProjectUpdate?.updatedAt, lastPageUpdate?.updatedAt].filter(
+      Boolean,
+    ) as Date[];
 
-    return dates.length > 0 ? new Date(Math.max(...dates.map(d => d.getTime()))) : new Date();
+    return dates.length > 0 ? new Date(Math.max(...dates.map((d) => d.getTime()))) : new Date();
   }
 
   /**
@@ -295,17 +294,18 @@ export class TenantMonitoringService {
     // Deduct points for low activity
     const hoursSinceActivity = (Date.now() - metrics.lastActivity.getTime()) / (1000 * 60 * 60);
     if (hoursSinceActivity > 24) {
-      score -= Math.min(30, hoursSinceActivity / 24 * 5);
+      score -= Math.min(30, (hoursSinceActivity / 24) * 5);
     }
 
     // Deduct points for high storage usage
-    if (metrics.storageUsed > 500000000) { // 500MB
-      score -= Math.min(20, (metrics.storageUsed - 500000000) / 100000000 * 5);
+    if (metrics.storageUsed > 500000000) {
+      // 500MB
+      score -= Math.min(20, ((metrics.storageUsed - 500000000) / 100000000) * 5);
     }
 
     // Deduct points for too many users (potential abuse)
     if (metrics.userCount > 50) {
-      score -= Math.min(15, (metrics.userCount - 50) / 10 * 2);
+      score -= Math.min(15, ((metrics.userCount - 50) / 10) * 2);
     }
 
     return Math.max(0, Math.round(score));

@@ -3,7 +3,7 @@ import { apiClient } from '../client';
 export interface Invitation {
   id: string;
   email: string;
-  role: string;
+  globalRole: string;
   status: 'PENDING' | 'ACCEPTED' | 'EXPIRED' | 'CANCELLED';
   token: string;
   message?: string;
@@ -29,7 +29,7 @@ export interface Invitation {
 
 export interface CreateInvitationRequest {
   emails: string[];
-  role: string;
+  globalRole: string;
   message?: string;
   channel: string;
   expiresAt?: string;
@@ -55,7 +55,7 @@ export class InvitationsAPI {
    */
   static async createInvitations(data: CreateInvitationRequest): Promise<Invitation[]> {
     const response = await apiClient.post('/api/invitations', data);
-    return response.data;
+    return (response as any).data;
   }
 
   /**
@@ -68,7 +68,7 @@ export class InvitationsAPI {
     email?: string;
   }): Promise<InvitationsListResponse> {
     const response = await apiClient.get('/api/invitations', params);
-    return response;
+    return response as any;
   }
 
   /**
@@ -76,7 +76,7 @@ export class InvitationsAPI {
    */
   static async getInvitation(id: string): Promise<Invitation> {
     const response = await apiClient.get(`/api/invitations/${id}`);
-    return response.data;
+    return (response as any).data;
   }
 
   /**
@@ -84,7 +84,7 @@ export class InvitationsAPI {
    */
   static async getInvitationByToken(token: string): Promise<Invitation> {
     const response = await apiClient.get(`/api/invitations/by-token/${token}`);
-    return response;
+    return response as any;
   }
 
   /**
@@ -95,7 +95,7 @@ export class InvitationsAPI {
     invitation: Invitation;
   }> {
     const response = await apiClient.post('/api/invitations/accept', data);
-    return response;
+    return response as any;
   }
 
   /**
@@ -110,7 +110,7 @@ export class InvitationsAPI {
     },
   ): Promise<Invitation> {
     const response = await apiClient.patch(`/api/invitations/${id}`, data);
-    return response.data;
+    return (response as any).data;
   }
 
   /**
@@ -118,7 +118,7 @@ export class InvitationsAPI {
    */
   static async cancelInvitation(id: string): Promise<Invitation> {
     const response = await apiClient.post(`/api/invitations/${id}/cancel`);
-    return response.data;
+    return (response as any).data;
   }
 
   /**
@@ -126,7 +126,7 @@ export class InvitationsAPI {
    */
   static async resendInvitation(id: string): Promise<Invitation> {
     const response = await apiClient.post(`/api/invitations/${id}/resend`);
-    return response.data;
+    return (response as any).data;
   }
 
   /**

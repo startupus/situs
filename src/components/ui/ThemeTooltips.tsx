@@ -22,11 +22,11 @@ const adaptTooltipProps = (props: TooltipProps) => ({
 });
 
 // Tooltip Variants
-export const ThemeTooltip1: React.FC<TooltipProps> = (props) => <Tooltip1 {...adaptTooltipProps(props)} />;
+export const ThemeTooltip1: React.FC<TooltipProps> = (props) => <Tooltip1 {...(adaptTooltipProps(props) as any)} />;
 
-export const ThemeTooltip2: React.FC<TooltipProps> = (props) => <Tooltip2 {...adaptTooltipProps(props)} />;
+export const ThemeTooltip2: React.FC<TooltipProps> = (props) => <Tooltip2 {...(adaptTooltipProps(props) as any)} />;
 
-export const ThemeTooltip3: React.FC<TooltipProps> = (props) => <Tooltip3 {...adaptTooltipProps(props)} />;
+export const ThemeTooltip3: React.FC<TooltipProps> = (props) => <Tooltip3 {...(adaptTooltipProps(props) as any)} />;
 
 // Экспорт всех Tooltip компонентов как единый объект для удобства
 export const ThemeTooltips = {

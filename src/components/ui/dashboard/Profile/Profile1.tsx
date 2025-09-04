@@ -72,7 +72,6 @@ const Profile = () => {
                     <a
                       href="/#"
                       className="text-body-color hover:text-primary dark:text-dark-6"
-                      name="social-icon"
                       aria-label="social-icon"
                     >
                       <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -82,7 +81,6 @@ const Profile = () => {
                     <a
                       href="/#"
                       className="text-body-color hover:text-primary dark:text-dark-6"
-                      name="social-icon"
                       aria-label="social-icon"
                     >
                       <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -92,7 +90,6 @@ const Profile = () => {
                     <a
                       href="/#"
                       className="text-body-color hover:text-primary dark:text-dark-6"
-                      name="social-icon"
                       aria-label="social-icon"
                     >
                       <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -102,7 +99,6 @@ const Profile = () => {
                     <a
                       href="/#"
                       className="text-body-color hover:text-primary dark:text-dark-6"
-                      name="social-icon"
                       aria-label="social-icon"
                     >
                       <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">
@@ -112,7 +108,6 @@ const Profile = () => {
                     <a
                       href="/#"
                       className="text-body-color hover:text-primary dark:text-dark-6"
-                      name="social-icon"
                       aria-label="social-icon"
                     >
                       <svg width="18" height="18" viewBox="0 0 18 18" className="fill-current">

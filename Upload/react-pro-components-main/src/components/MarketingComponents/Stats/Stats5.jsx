@@ -22,7 +22,7 @@ const Stats5 = () => {
 
       <div className="-mt-[100px]">
         <div className="mx-auto px-4 sm:container">
-          <div className="mx-auto flex max-w-[970px] flex-wrap items-center justify-center rounded-xl bg-white px-10 py-[65px] shadow-2 dark:bg-dark-2 dark:shadow-box-dark">
+          <div className="dark:shadow-box-dark mx-auto flex max-w-[970px] flex-wrap items-center justify-center rounded-xl bg-white px-10 py-[65px] shadow-2 dark:bg-dark-2">
             <StatsItem count="220" title="Projects" />
             <StatsItem count="150K" title="Earned" />
             <StatsItem count="24/7" title="Delivery" />

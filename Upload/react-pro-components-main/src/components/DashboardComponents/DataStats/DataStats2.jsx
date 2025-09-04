@@ -153,7 +153,7 @@ const DataStatsCard = ({
 }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4">
-      <div className="mb-8 rounded-[5px] bg-white p-4 shadow-pricing-4 dark:bg-dark-2 dark:shadow-box-dark">
+      <div className="shadow-pricing-4 dark:shadow-box-dark mb-8 rounded-[5px] bg-white p-4 dark:bg-dark-2">
         <div className="flex items-center justify-between">
           <p className="text-xs font-medium uppercase text-dark dark:text-white">
             {name}
@@ -280,7 +280,7 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
+        className={`shadow-card absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 dark:bg-dark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

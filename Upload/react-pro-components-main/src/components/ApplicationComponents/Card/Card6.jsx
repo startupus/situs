@@ -42,7 +42,7 @@ const SingleCard = ({
 }) => {
   return (
     <div className="w-full px-4 lg:w-10/12 xl:w-8/12 2xl:w-7/12">
-      <div className="relative z-10 mb-10 block items-center overflow-hidden rounded-lg shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card sm:items-stretch md:flex md:items-center xl:items-stretch">
+      <div className="shadow-1 hover:shadow-3 dark:shadow-card relative z-10 mb-10 block items-center overflow-hidden rounded-lg duration-300 dark:bg-dark-2 sm:items-stretch md:flex md:items-center xl:items-stretch">
         <div className="h-[250px] w-full md:h-full md:max-w-[320px] lg:max-w-[335px]">
           <img
             src={image}

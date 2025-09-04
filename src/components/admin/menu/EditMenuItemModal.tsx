@@ -96,7 +96,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({ item, onClose, on
       const result = await response.json();
       if (result.success) {
         // Передаём наверх обновлённый объект с нормализованными параметрами
-        onUpdate({ ...item, ...formData, parameters: parsedParameters as any });
+        onUpdate({ ...item, ...formData, parameters: parsedParameters as any } as any);
         onClose();
       } else {
         setError(result.error || 'Ошибка обновления пункта меню');
@@ -109,7 +109,7 @@ const EditMenuItemModal: React.FC<EditMenuItemModalProps> = ({ item, onClose, on
   };
 
   const handleChange = (field: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev: any) => ({ ...prev, [field]: value }));
   };
 
   return (

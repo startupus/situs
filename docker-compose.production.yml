@@ -9,26 +9,26 @@ services:
       POSTGRES_DB: situs_production
       POSTGRES_USER: situs_user
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+      POSTGRES_INITDB_ARGS: '--encoding=UTF-8 --lc-collate=C --lc-ctype=C'
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
       - situs-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U situs_user -d situs_production"]
+      test: ['CMD-SHELL', 'pg_isready -U situs_user -d situs_production']
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
   # Redis Cache
   redis:
@@ -38,33 +38,35 @@ services:
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - '6379:6379'
     networks:
       - situs-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
   # Backend API
   situs-api:
     build:
       context: .
       dockerfile: Dockerfile
-      target: production
+      target: runtime
     container_name: situs-api-prod
     environment:
       NODE_ENV: production
       VITE_ENV: production
-      DATABASE_URL: postgresql://situs_user:${POSTGRES_PASSWORD}@postgres:5432/situs_production
+      # В локальном окружении используем уже инициализированную БД/роль из volume
+      DATABASE_URL: postgresql://situs:situs_password@postgres:5432/situs?schema=public
+      ENABLE_DEV_USER: '1'
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: 7d
@@ -80,7 +82,7 @@ services:
       - ./uploads:/app/uploads
       - ./logs:/app/logs
     ports:
-      - "3002:3002"
+      - '3002:3002'
     networks:
       - situs-network
     depends_on:
@@ -90,16 +92,16 @@ services:
         condition: service_healthy
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:3002/health']
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 60s
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
   # Frontend Web
   situs-web:
@@ -118,8 +120,8 @@ services:
     volumes:
       - ./public:/app/public:ro
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     networks:
       - situs-network
     depends_on:
@@ -127,50 +129,50 @@ services:
         condition: service_healthy
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      test: ['CMD', 'curl', '-f', 'http://localhost/health']
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
   # Prisma Studio (Development/Admin tool)
   prisma-studio:
     build:
       context: .
       dockerfile: Dockerfile
-      target: production
+      target: runtime
     container_name: situs-prisma-studio-prod
     command: npx prisma studio --hostname 0.0.0.0 --port 5555
     environment:
       NODE_ENV: production
       DATABASE_URL: postgresql://situs_user:${POSTGRES_PASSWORD}@postgres:5432/situs_production
     ports:
-      - "5555:5555"
+      - '5555:5555'
     networks:
       - situs-network
     depends_on:
       postgres:
         condition: service_healthy
-    restart: "no"
+    restart: 'no'
     profiles:
       - admin
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
   # Health Monitor
   health-monitor:
     build:
       context: .
       dockerfile: Dockerfile
-      target: production
+      target: runtime
     container_name: situs-health-monitor-prod
     command: node scripts/health-monitor.js
     environment:
@@ -195,10 +197,10 @@ services:
       - redis
     restart: unless-stopped
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
 volumes:
   postgres_data:
@@ -211,4 +213,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 172.25.0.0/16

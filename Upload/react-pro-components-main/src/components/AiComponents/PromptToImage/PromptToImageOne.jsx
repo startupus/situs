@@ -153,12 +153,12 @@ function PromptToImageOne() {
             </div>
           </div>
           <div className="px-6 pb-10">
-            <p className="mb-5 text-base text-body-color dark:text-secondary-color">
+            <p className="dark:text-secondary-color mb-5 text-base text-body-color">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
               ultrices augue sit amet odio posuere, sit amet porttitor ex
               viverra. Vivamus odio nunc
             </p>
-            <button className="inline-flex items-center justify-center gap-2 text-sm text-secondary-color hover:text-primary">
+            <button className="text-secondary-color inline-flex items-center justify-center gap-2 text-sm hover:text-primary">
               <svg
                 width="19"
                 height="18"

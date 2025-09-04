@@ -19,7 +19,7 @@ const Switcher13 = () => {
         <span className="mr-[18px] text-sm font-medium text-black">
           Switch Version
         </span>
-        <div className="flex h-[46px] w-[82px] items-center justify-center rounded-md bg-white shadow-card">
+        <div className="shadow-card flex h-[46px] w-[82px] items-center justify-center rounded-md bg-white">
           <span
             className={`flex h-9 w-9 items-center justify-center rounded ${
               !isChecked ? "bg-primary text-white" : "text-body-color"

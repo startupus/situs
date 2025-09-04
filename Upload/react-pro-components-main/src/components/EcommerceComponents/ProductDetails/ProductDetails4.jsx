@@ -68,7 +68,7 @@ const ProductDetails4 = () => {
                   } h-full min-h-[250px] w-full object-cover object-center`}
                 />
               </div>
-              <div className="absolute bottom-6 left-1/2 mx-auto inline-flex -translate-x-1/2 space-x-[6px] rounded-full bg-white px-[18px] py-[10px] shadow-testimonial-6 dark:bg-dark-2 dark:shadow-box-dark">
+              <div className="shadow-testimonial-6 dark:shadow-box-dark absolute bottom-6 left-1/2 mx-auto inline-flex -translate-x-1/2 space-x-[6px] rounded-full bg-white px-[18px] py-[10px] dark:bg-dark-2">
                 <button
                   onClick={() => {
                     setProductOne(true);

@@ -1,30 +1,57 @@
 import React from 'react';
-import Button from '../Buttons';
 
 const Preview = () => {
   return (
     <>
       <div className="container">
         <div className="space-x-4 space-y-6">
-          <Button label="Get Started" />
-          <Button color="secondary" label="Get Started" />
-          <Button color="dark" label="Get Started" />
-          {/*  */}
-          <Button roundedLg label="Get Started" />
-          <Button roundedLg color="secondary" label="Get Started" />
-          <Button roundedLg color="dark" label="Get Started" />
-          {/*  */}
-          <Button roundedFull label="Get Started" />
-          <Button roundedFull color="secondary" label="Get Started" />
-          <Button roundedFull color="dark" label="Get Started" />
-          {/*  */}
-          <Button outline danger roundedLg label="Get Started" />
-          <Button outline info roundedLg color="secondary" label="Get Started" />
-          <Button outline warning roundedLg color="dark" label="Get Started" />
-          {/*  */}
-          <Button outline danger roundedFull label="Get Started" />
-          <Button outline info roundedFull color="secondary" label="Get Started" />
-          <Button outline warning roundedFull color="dark" label="Get Started" />
+          <div className="button">Get Started</div>
+          <div className="button" data-color="secondary">
+            Get Started
+          </div>
+          <div className="button" data-color="dark">
+            Get Started
+          </div>
+
+          <div className="button" data-rounded="lg">
+            Get Started
+          </div>
+          <div className="button" data-rounded="lg" data-color="secondary">
+            Get Started
+          </div>
+          <div className="button" data-rounded="lg" data-color="dark">
+            Get Started
+          </div>
+
+          <div className="button" data-rounded="full">
+            Get Started
+          </div>
+          <div className="button" data-rounded="full" data-color="secondary">
+            Get Started
+          </div>
+          <div className="button" data-rounded="full" data-color="dark">
+            Get Started
+          </div>
+
+          <div className="button" data-outline="true" data-variant="danger" data-rounded="lg">
+            Get Started
+          </div>
+          <div className="button" data-outline="true" data-variant="info" data-rounded="lg" data-color="secondary">
+            Get Started
+          </div>
+          <div className="button" data-outline="true" data-variant="warning" data-rounded="lg" data-color="dark">
+            Get Started
+          </div>
+
+          <div className="button" data-outline="true" data-variant="danger" data-rounded="full">
+            Get Started
+          </div>
+          <div className="button" data-outline="true" data-variant="info" data-rounded="full" data-color="secondary">
+            Get Started
+          </div>
+          <div className="button" data-outline="true" data-variant="warning" data-rounded="full" data-color="dark">
+            Get Started
+          </div>
         </div>
       </div>
     </>

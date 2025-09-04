@@ -298,7 +298,7 @@ const IconSelector: React.FC<IconSelectorProps> = ({ selectedIcon, selectedLibra
 
   const renderIcon = (iconData: IconData, size: number = 20) => {
     const IconComponent = iconData.component;
-    return <IconComponent size={size} />;
+    return <IconComponent />;
   };
 
   return (

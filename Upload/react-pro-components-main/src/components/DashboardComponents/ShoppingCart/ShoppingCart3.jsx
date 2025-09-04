@@ -85,7 +85,7 @@ const ShoppingCart3 = () => {
                 <input
                   type="text"
                   placeholder="Coupon code"
-                  className="outline-hidden mb-3 flex h-10 w-full items-center rounded-sm border border-form-stroke px-6 text-sm font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] xs:mr-4"
+                  className="outline-hidden border-form-stroke mb-3 flex h-10 w-full items-center rounded-sm border px-6 text-sm font-medium text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD] xs:mr-4"
                 />
                 <button className="mb-3 h-10 rounded-sm bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90">
                   Apply

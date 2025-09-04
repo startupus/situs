@@ -43,49 +43,49 @@ const Calender1 = () => {
             <Week name="Su" />
           </WeekRow>
           <DayRow>
-            <Day number="30" otherMonth />
-            <Day number="31" otherMonth />
-            <Day number="01" />
-            <Day number="02" />
-            <Day number="03" />
-            <Day number="04" />
-            <Day number="05" />
+            <Day {...({ number: '30', otherMonth: true, active: false } as any)} />
+            <Day {...({ number: '31', otherMonth: true, active: false } as any)} />
+            <Day {...({ number: '01', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '02', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '03', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '04', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '05', otherMonth: false, active: false } as any)} />
           </DayRow>
           <DayRow>
-            <Day number="06" />
-            <Day number="07" active />
-            <Day number="08" />
-            <Day number="09" />
-            <Day number="10" />
-            <Day number="11" />
-            <Day number="12" />
+            <Day {...({ number: '06', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '07', otherMonth: false, active: true } as any)} />
+            <Day {...({ number: '08', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '09', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '10', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '11', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '12', otherMonth: false, active: false } as any)} />
           </DayRow>
           <DayRow>
-            <Day number="13" />
-            <Day number="14" />
-            <Day number="15" />
-            <Day number="16" />
-            <Day number="17" />
-            <Day number="18" />
-            <Day number="19" />
+            <Day {...({ number: '13', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '14', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '15', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '16', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '17', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '18', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '19', otherMonth: false, active: false } as any)} />
           </DayRow>
           <DayRow>
-            <Day number="20" />
-            <Day number="21" />
-            <Day number="22" />
-            <Day number="23" />
-            <Day number="24" />
-            <Day number="25" />
-            <Day number="26" />
+            <Day {...({ number: '20', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '21', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '22', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '23', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '24', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '25', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '26', otherMonth: false, active: false } as any)} />
           </DayRow>
           <DayRow>
-            <Day number="27" />
-            <Day number="28" />
-            <Day number="29" />
-            <Day number="30" />
-            <Day number="31" />
-            <Day number="01" otherMonth />
-            <Day number="02" otherMonth />
+            <Day {...({ number: '27', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '28', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '29', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '30', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '31', otherMonth: false, active: false } as any)} />
+            <Day {...({ number: '01', otherMonth: true, active: false } as any)} />
+            <Day {...({ number: '02', otherMonth: true, active: false } as any)} />
           </DayRow>
 
           <div className="flex items-center space-x-3 pt-4 sm:space-x-5">

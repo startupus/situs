@@ -44,7 +44,7 @@
 
 - **Current Implementation**: RealtimeEventsService with RxJS Subjects
 - **SSE Endpoints**: `/api/projects/events`, `/api/realtime/integrations`, `/api/realtime/users`
-- **Event Types**: 20+ types including project*\*, integration*_, user\__
+- **Event Types**: 20+ types including project*\*, integration*\_, user\_\_
 - **Frontend Integration**: React hooks for SSE consumption
 - **Multi-tenant**: Event isolation by projectId
 - **Transport**: Server-Sent Events with fallback mechanisms

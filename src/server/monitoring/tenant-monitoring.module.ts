@@ -5,10 +5,7 @@ import { TenantMonitoringController } from './tenant-monitoring.controller';
 import { TenantModule } from '../tenant/tenant.module';
 
 @Module({
-  imports: [
-    ScheduleModule.forRoot(),
-    TenantModule,
-  ],
+  imports: [ScheduleModule.forRoot(), TenantModule],
   controllers: [TenantMonitoringController],
   providers: [TenantMonitoringService],
   exports: [TenantMonitoringService],

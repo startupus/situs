@@ -129,7 +129,7 @@ const DataStatsCard = ({
 }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4">
-      <div className="mb-8 rounded-[5px] bg-white p-5 shadow-1 dark:bg-dark-2 dark:shadow-box-dark lg:p-4 xl:p-5">
+      <div className="shadow-1 dark:shadow-box-dark mb-8 rounded-[5px] bg-white p-5 dark:bg-dark-2 lg:p-4 xl:p-5">
         <div className="mb-5 flex items-center">
           <div
             className={`relative mr-[14px] flex h-[50px] w-[50px] items-center justify-center`}

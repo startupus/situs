@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 const VerticalNavbar6 = () => {
   return (
     <section className="h-screen bg-gray-2">
-      <div className="flex h-screen w-full max-w-[280px] flex-col justify-between overflow-y-scroll bg-white shadow-card">
+      <div className="shadow-card flex h-screen w-full max-w-[280px] flex-col justify-between overflow-y-scroll bg-white">
         {/* top */}
         <div>
           <div className="flex items-center p-8">

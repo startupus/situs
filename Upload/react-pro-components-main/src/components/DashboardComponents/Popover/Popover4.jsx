@@ -12,7 +12,7 @@ const Popover4 = () => {
             Popover Text
           </a>
           <div className="invisible absolute left-0 top-full w-full opacity-0 group-hover:visible group-hover:opacity-100 sm:w-[530px] lg:left-full lg:top-1/2 lg:-translate-y-1/2">
-            <div className="relative rounded-md bg-white text-left shadow-testimonial-6 dark:bg-dark-2 dark:shadow-box-dark lg:ml-5">
+            <div className="shadow-testimonial-6 dark:shadow-box-dark relative rounded-md bg-white text-left dark:bg-dark-2 lg:ml-5">
               <span className="absolute -left-3 top-1/2 hidden -translate-y-1/2 text-white dark:text-dark-2 lg:block">
                 <svg
                   width={13}

@@ -6,10 +6,10 @@ const DataStats8 = () => {
       <div className="mx-auto px-4 md:container">
         <div className="flex justify-center">
           <div className="mb-14 inline-flex w-full max-w-[845px] flex-wrap rounded-sm bg-white py-[30px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
-            <DataStatsCard total="30.529" totalTitle="Total Subscribers" increment="+8%" />
-            <DataStatsCard total="129K" totalTitle="Total Likes" increment="+58%" />
-            <DataStatsCard total="4,341" totalTitle="Total Comments" increment="+8%" />
-            <DataStatsCard total="30.529" totalTitle="Total Saved" decrement="-10%" />
+            <DataStatsCard total="30.529" totalTitle="Total Subscribers" increment="+8%" decrement="" />
+            <DataStatsCard total="129K" totalTitle="Total Likes" increment="+58%" decrement="" />
+            <DataStatsCard total="4,341" totalTitle="Total Comments" increment="+8%" decrement="" />
+            <DataStatsCard total="30.529" totalTitle="Total Saved" decrement="-10%" increment="" />
           </div>
         </div>
       </div>

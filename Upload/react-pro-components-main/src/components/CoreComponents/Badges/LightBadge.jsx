@@ -42,7 +42,7 @@ const BadgesItem = ({
               (roundedSm && `rounded-xs`) ||
               (roundedMd && `rounded-md`) ||
               (bgOpacity && `bg-gray-3/50`)
-            } border-light text-dark dark:text-light`
+            } border-light dark:text-light text-dark`
           : `bg-gray-3 ${
               (roundedFull && `rounded-full`) ||
               (roundedLg && `rounded-lg`) ||

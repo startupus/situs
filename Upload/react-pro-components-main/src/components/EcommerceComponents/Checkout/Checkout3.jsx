@@ -10,7 +10,7 @@ const Checkout3 = () => {
               Shopping Cart
             </h3>
 
-            <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+            <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
               <div className="mb-8 max-w-full overflow-x-auto border-b border-stroke dark:border-dark-3">
                 <table className="w-full table-auto">
                   <thead>
@@ -115,7 +115,7 @@ const Checkout3 = () => {
                 Payment Info
               </h3>
 
-              <div className="overflow-hidden rounded-lg border border-stroke bg-white p-9 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
+              <div className="shadow-testimonial-6 dark:shadow-box-dark overflow-hidden rounded-lg border border-stroke bg-white p-9 dark:border-dark-3 dark:bg-dark-2">
                 <h3 className="mb-6 text-xl font-semibold text-dark dark:text-white">
                   Payment Method
                 </h3>

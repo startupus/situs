@@ -62,7 +62,7 @@ const ProductGrid = () => {
       <div className="-mx-4 flex flex-wrap">
         {productList.map((item, index) => (
           <div key={index} className="h-full w-full px-4 md:w-1/2 xl:w-1/3">
-            <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
+            <div className="shadow-1 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
               <div className="relative">
                 <img src={item.image} alt="product" className="w-full" />
                 {item.discount && (
@@ -93,7 +93,7 @@ const ProductGrid = () => {
                 <p className="text-lg font-medium text-dark dark:text-white">
                   {item.priceBeforeDiscount && (
                     <span>
-                      <span className="text-base text-secondary-color line-through dark:text-dark-6">
+                      <span className="text-secondary-color text-base line-through dark:text-dark-6">
                         {item.price}
                         {"  "}
                       </span>

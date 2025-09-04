@@ -5,10 +5,10 @@ const Step5 = () => {
     <section className="overflow-hidden py-20 lg:py-[120px]">
       <div className="mx-auto px-4 sm:container">
         <div className="mx-auto w-max">
-          <SingleStep done number="Step 1" name="Create Account" />
-          <SingleStep inProgress number="Step 2" name="Login" />
-          <SingleStep number="Step 3" name="Payment" />
-          <SingleStep number="Step 4" name="Confirm" />
+          <SingleStep done number="Step 1" name="Create Account" inProgress={false} />
+          <SingleStep done={false} number="Step 2" name="Login" inProgress={false} />
+          <SingleStep done={false} number="Step 3" name="Payment" inProgress={false} />
+          <SingleStep done={false} number="Step 4" name="Confirm" inProgress={false} />
         </div>
       </div>
     </section>

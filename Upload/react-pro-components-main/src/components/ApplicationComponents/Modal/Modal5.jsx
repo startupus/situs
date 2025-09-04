@@ -53,7 +53,7 @@ const Modal5 = () => {
           ref={modal}
           onFocus={() => setModalOpen(true)}
           onBlur={() => setModalOpen(false)}
-          className="mx-auto max-w-[560px] rounded-[10px] bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-3"
+          className="shadow-1 dark:shadow-3 mx-auto max-w-[560px] rounded-[10px] bg-white p-8 dark:bg-dark-2"
         >
           <h3 className="mb-5 flex text-lg font-semibold text-dark dark:text-white sm:text-xl">
             <span className="inline-block pr-[10px]">
@@ -95,7 +95,7 @@ const Modal5 = () => {
           <div className="flex items-center justify-end space-x-1">
             <button
               onClick={() => setModalOpen(false)}
-              className="rounded-md bg-white px-5 py-2 text-sm font-medium text-dark shadow-1 hover:bg-red-dark hover:text-white dark:bg-white/5 dark:text-white dark:shadow-3"
+              className="shadow-1 dark:shadow-3 rounded-md bg-white px-5 py-2 text-sm font-medium text-dark hover:bg-red-dark hover:text-white dark:bg-white/5 dark:text-white"
             >
               Cancel
             </button>

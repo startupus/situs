@@ -15,6 +15,10 @@ import {
   Req,
   BadRequestException,
 } from '@nestjs/common';
+import { Sse, MessageEvent } from '@nestjs/common';
+import { Public } from '../common/decorators/public.decorator';
+import { merge, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 // import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProjectsService } from './projects.service';
@@ -106,6 +110,17 @@ export class ProjectsController {
       where: { customDomain: domain, id: excludeProjectId ? { not: excludeProjectId } : undefined } as any,
     });
     return { success: true, data: { domain, available: !existing } };
+  }
+
+  /**
+   * SSE поток совместимости: GET /api/projects/events
+   */
+  @Public()
+  @Sse('events')
+  sseEvents(): any {
+    const source$ = this.realtime?.asObservable();
+    const handshake$ = of({ type: 'sse_connected', payload: { ts: new Date().toISOString() } });
+    return merge(handshake$, source$ || of()).pipe(map((evt) => ({ data: evt }) as MessageEvent));
   }
 
   /**

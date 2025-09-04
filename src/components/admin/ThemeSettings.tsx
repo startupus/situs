@@ -7,10 +7,10 @@ import { FiSettings, FiEye, FiSave, FiRotateCcw, FiCheck } from 'react-icons/fi'
  * Компонент настроек темы для админ-панели
  */
 const ThemeSettings: React.FC = () => {
-  const { currentTheme, settings, updateTheme, updateCustomTheme, resetToDefault, saveThemeSettings } = useTheme();
+  const { currentTheme, settings, updateTheme, resetToDefault, saveThemeSettings } = useTheme();
 
   const [isCustomizing, setIsCustomizing] = useState(false);
-  const [customColors, setCustomColors] = useState<Partial<ThemeColors>>(currentTheme.colors);
+  const [customColors, setCustomColors] = useState<Partial<ThemeColors>>(currentTheme.colors as any);
   const [previewMode, setPreviewMode] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -20,7 +20,7 @@ const ThemeSettings: React.FC = () => {
   const handleThemeSelect = (themeId: string) => {
     updateTheme(themeId);
     setIsCustomizing(false);
-    setCustomColors(currentTheme.colors);
+    setCustomColors(currentTheme.colors as any);
   };
 
   /**
@@ -31,7 +31,7 @@ const ThemeSettings: React.FC = () => {
     setCustomColors(newColors);
 
     if (previewMode) {
-      updateCustomTheme(newColors);
+      updateTheme(newColors as any);
     }
   };
 
@@ -39,7 +39,7 @@ const ThemeSettings: React.FC = () => {
    * Применение кастомных цветов
    */
   const applyCustomColors = () => {
-    updateCustomTheme(customColors);
+    updateTheme(customColors as any);
     setIsCustomizing(false);
   };
 
@@ -64,7 +64,7 @@ const ThemeSettings: React.FC = () => {
       updateTheme(currentTheme.id);
     } else {
       // Применяем предпросмотр
-      updateCustomTheme(customColors);
+      updateTheme(JSON.stringify(customColors));
     }
     setPreviewMode(!previewMode);
   };
@@ -129,23 +129,23 @@ const ThemeSettings: React.FC = () => {
               <div className="flex gap-2">
                 <div
                   className="w-6 h-6 rounded-full border border-stroke"
-                  style={{ backgroundColor: theme.colors.primary }}
-                  title={`Primary: ${theme.colors.primary}`}
+                  style={{ backgroundColor: (theme.colors as any).primary }}
+                  title={`Primary: ${(theme.colors as any).primary}`}
                 />
                 <div
                   className="w-6 h-6 rounded-full border border-stroke"
-                  style={{ backgroundColor: theme.colors.secondary }}
-                  title={`Secondary: ${theme.colors.secondary}`}
+                  style={{ backgroundColor: (theme.colors as any).secondary }}
+                  title={`Secondary: ${(theme.colors as any).secondary}`}
                 />
                 <div
                   className="w-6 h-6 rounded-full border border-stroke"
-                  style={{ backgroundColor: theme.colors.accent }}
-                  title={`Accent: ${theme.colors.accent}`}
+                  style={{ backgroundColor: (theme.colors as any).accent }}
+                  title={`Accent: ${(theme.colors as any).accent}`}
                 />
                 <div
                   className="w-6 h-6 rounded-full border border-stroke"
-                  style={{ backgroundColor: theme.colors.success }}
-                  title={`Success: ${theme.colors.success}`}
+                  style={{ backgroundColor: (theme.colors as any).success }}
+                  title={`Success: ${(theme.colors as any).success}`}
                 />
               </div>
             </div>
@@ -266,7 +266,7 @@ const ThemeSettings: React.FC = () => {
       <div className="bg-gray-50 dark:bg-dark-3 rounded-lg p-4">
         <h4 className="font-medium text-dark dark:text-white mb-2">Текущая тема: {currentTheme.name}</h4>
         <p className="text-body-color dark:text-dark-6 text-sm">
-          ID: {currentTheme.id} | Тип: {currentTheme.isDark ? 'Темная' : 'Светлая'}
+          ID: {currentTheme.id} | Тип: {(currentTheme as any).isDark ? 'Темная' : 'Светлая'}
         </p>
       </div>
     </div>

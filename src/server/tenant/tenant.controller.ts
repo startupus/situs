@@ -1,11 +1,11 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Put, 
-  Delete, 
-  Body, 
-  Param, 
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
   Query,
   UseGuards,
   UseInterceptors,
@@ -19,11 +19,11 @@ import { TenantAwarePrismaService } from './tenant-aware-prisma.service';
 import { TenantGuard } from './tenant.guard';
 import { Tenant, TenantId, TenantMethod } from './tenant.decorator';
 import { ValidationService } from '../../validation/validation.service';
-import { 
-  CreateTenantSchema, 
+import {
+  CreateTenantSchema,
   UpdateTenantSchema,
   CreateTenantInput,
-  UpdateTenantInput 
+  UpdateTenantInput,
 } from '../../validation/tenant-validation.schemas';
 
 @ApiTags('Tenant Management')
@@ -41,16 +41,12 @@ export class TenantController {
   @Get('info')
   @ApiOperation({ summary: 'Get current tenant information' })
   @ApiResponse({ status: 200, description: 'Tenant information retrieved successfully' })
-  async getTenantInfo(
-    @Tenant() tenant: any,
-    @TenantId() tenantId: string,
-    @TenantMethod() method: string,
-  ) {
+  async getTenantInfo(@Tenant() tenant: any, @TenantId() tenantId: string, @TenantMethod() method: string) {
     return {
       tenantId,
       method,
       confidence: tenant.confidence,
-      context: this.tenantContextService.getCurrentTenantContext(),
+      context: this.tenantContextService.getTenantContext(),
     };
   }
 
@@ -92,12 +88,13 @@ export class TenantController {
         message: 'Tenant created successfully',
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       return {
         success: false,
         error: {
           code: 'CREATE_ERROR',
           message: 'Failed to create tenant',
-          details: error.message,
+          details: err.message,
         },
       };
     }
@@ -108,10 +105,7 @@ export class TenantController {
   @ApiResponse({ status: 200, description: 'Tenant updated successfully' })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
   @ApiResponse({ status: 404, description: 'Tenant not found' })
-  async updateTenant(
-    @Param('id') id: string,
-    @Body() updateTenantDto: UpdateTenantInput,
-  ) {
+  async updateTenant(@Param('id') id: string, @Body() updateTenantDto: UpdateTenantInput) {
     // Validate input
     const validation = this.validationService.validate(UpdateTenantSchema, updateTenantDto);
     if (!validation.success) {
@@ -133,12 +127,13 @@ export class TenantController {
         message: 'Tenant updated successfully',
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       return {
         success: false,
         error: {
           code: 'UPDATE_ERROR',
           message: 'Failed to update tenant',
-          details: error.message,
+          details: err.message,
         },
       };
     }
@@ -153,12 +148,14 @@ export class TenantController {
     @Query('search') search?: string,
   ) {
     try {
-      const where = search ? {
-        OR: [
-          { name: { contains: search, mode: 'insensitive' } },
-          { description: { contains: search, mode: 'insensitive' } },
-        ],
-      } : {};
+      const where = search
+        ? {
+            OR: [
+              { name: { contains: search, mode: 'insensitive' } },
+              { description: { contains: search, mode: 'insensitive' } },
+            ],
+          }
+        : {};
 
       const [projects, total] = await Promise.all([
         this.tenantAwarePrisma.findMany('project', where, {
@@ -182,12 +179,13 @@ export class TenantController {
         },
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       return {
         success: false,
         error: {
           code: 'FETCH_ERROR',
           message: 'Failed to fetch projects',
-          details: error.message,
+          details: err.message,
         },
       };
     }
@@ -234,12 +232,13 @@ export class TenantController {
         },
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       return {
         success: false,
         error: {
           code: 'FETCH_ERROR',
           message: 'Failed to fetch users',
-          details: error.message,
+          details: err.message,
         },
       };
     }
@@ -258,12 +257,13 @@ export class TenantController {
         message: 'Tenant deleted successfully',
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       return {
         success: false,
         error: {
           code: 'DELETE_ERROR',
           message: 'Failed to delete tenant',
-          details: error.message,
+          details: err.message,
         },
       };
     }

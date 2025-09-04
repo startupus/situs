@@ -45,7 +45,7 @@
 
 - **Current Implementation**: RealtimeEventsService with RxJS Subjects
 - **SSE Transport**: Server-Sent Events for real-time updates
-- **Event Types**: 20+ standardized event types (project*\*, integration*_, user\__)
+- **Event Types**: 20+ standardized event types (project*\*, integration*\_, user\_\_)
 - **Multi-tenant Events**: Event isolation by projectId
 - **Cross-browser Sync**: Real-time updates across different browsers/contexts
 - **Frontend Integration**: React hooks for SSE consumption

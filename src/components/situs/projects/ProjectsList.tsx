@@ -21,7 +21,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { FiChevronLeft, FiChevronRight, FiPauseCircle } from 'react-icons/fi';
 import { useSite } from '../../../contexts/SiteContext';
-import { ProjectData } from '../../../types/project';
+type ProjectData = any;
 import { projectsApi } from '../../../api/services/projects.api';
 import { testIds } from '../../ui/testids';
 

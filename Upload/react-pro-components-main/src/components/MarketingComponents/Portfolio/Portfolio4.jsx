@@ -72,7 +72,7 @@ const Portfolio4 = () => {
               </Swiper>
               <div>
                 <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                  <button className="absolute left-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-left-12 md:top-1/2 lg:-left-16">
+                  <button className="drop-shadow-portfolio absolute left-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-left-12 md:top-1/2 lg:-left-16">
                     <svg
                       width={22}
                       height={22}
@@ -89,7 +89,7 @@ const Portfolio4 = () => {
                   </button>
                 </div>
                 <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                  <button className="absolute left-auto right-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color drop-shadow-portfolio transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-right-12 md:top-1/2 lg:-right-16">
+                  <button className="drop-shadow-portfolio absolute left-auto right-[30%] top-full flex h-[54px] w-[54px] items-center justify-center rounded-full bg-white text-body-color transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-dark-6 dark:drop-shadow-none md:-right-12 md:top-1/2 lg:-right-16">
                     <svg
                       width={22}
                       height={22}

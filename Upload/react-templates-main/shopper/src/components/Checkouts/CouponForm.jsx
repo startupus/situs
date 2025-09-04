@@ -1,7 +1,7 @@
 const CouponForm = () => {
   return (
     <>
-      <div className="mb-10 overflow-hidden rounded-lg border border-stroke px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 lg:px-8 2xl:px-10">
+      <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg border border-stroke px-6 py-10 dark:border-dark-3 dark:bg-dark-2 sm:px-10 lg:px-8 2xl:px-10">
         <div className="mb-8 border-b border-stroke pb-3 dark:border-dark-3">
           <h3 className="mb-1 text-lg font-semibold text-dark dark:text-white">
             Coupon Code

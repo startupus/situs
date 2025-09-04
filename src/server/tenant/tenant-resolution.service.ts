@@ -54,9 +54,9 @@ export class TenantResolutionService {
       const defaultResult = this.resolveDefaultTenant();
       this.logger.debug(`Tenant resolved from default: ${defaultResult.tenantId}`);
       return defaultResult;
-
     } catch (error) {
-      this.logger.error(`Failed to resolve tenant: ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Failed to resolve tenant: ${err.message}`, err.stack);
       return this.resolveDefaultTenant();
     }
   }
@@ -77,7 +77,7 @@ export class TenantResolutionService {
     return {
       tenantId: subdomain,
       method: 'subdomain',
-      confidence: 'high'
+      confidence: 'high',
     };
   }
 
@@ -91,7 +91,7 @@ export class TenantResolutionService {
     return {
       tenantId,
       method: 'header',
-      confidence: 'high'
+      confidence: 'high',
     };
   }
 
@@ -101,7 +101,7 @@ export class TenantResolutionService {
   private resolveFromPath(request: Request): TenantResolutionResult | null {
     const path = request.path;
     const tenantPathMatch = path.match(/^\/tenant\/([^\/]+)/);
-    
+
     if (!tenantPathMatch) return null;
 
     const tenantId = tenantPathMatch[1];
@@ -110,7 +110,7 @@ export class TenantResolutionService {
     return {
       tenantId,
       method: 'path',
-      confidence: 'medium'
+      confidence: 'medium',
     };
   }
 
@@ -124,16 +124,17 @@ export class TenantResolutionService {
 
       const token = authHeader.substring(7);
       const payload = this.decodeJWT(token);
-      
+
       if (!payload?.tenantId || !this.isValidTenantId(payload.tenantId)) return null;
 
       return {
         tenantId: payload.tenantId,
         method: 'jwt',
-        confidence: 'high'
+        confidence: 'high',
       };
     } catch (error) {
-      this.logger.warn(`Failed to decode JWT: ${error.message}`);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.warn(`Failed to decode JWT: ${err.message}`);
       return null;
     }
   }
@@ -145,7 +146,7 @@ export class TenantResolutionService {
     return {
       tenantId: 'default',
       method: 'default',
-      confidence: 'low'
+      confidence: 'low',
     };
   }
 
@@ -155,7 +156,7 @@ export class TenantResolutionService {
   private extractSubdomain(host: string): string | null {
     const parts = host.split('.');
     if (parts.length < 3) return null;
-    
+
     return parts[0];
   }
 
@@ -190,7 +191,7 @@ export class TenantResolutionService {
   private cacheTenantResult(key: string, tenantId: string): void {
     this.tenantCache.set(key, {
       tenantId,
-      expires: Date.now() + this.CACHE_TTL
+      expires: Date.now() + this.CACHE_TTL,
     });
   }
 
@@ -223,7 +224,7 @@ export class TenantResolutionService {
   getCacheStats(): { size: number; entries: string[] } {
     return {
       size: this.tenantCache.size,
-      entries: Array.from(this.tenantCache.keys())
+      entries: Array.from(this.tenantCache.keys()),
     };
   }
 }

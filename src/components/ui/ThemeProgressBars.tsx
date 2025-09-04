@@ -24,15 +24,15 @@ const adaptProgressBarProps = (props: ProgressBarProps) => ({
 
 // ProgressBar Variants
 export const ThemeProgressBar1: React.FC<ProgressBarProps> = (props) => (
-  <ProgressBar1 {...adaptProgressBarProps(props)} />
+  <ProgressBar1 {...(adaptProgressBarProps(props) as any)} />
 );
 
 export const ThemeProgressBar2: React.FC<ProgressBarProps> = (props) => (
-  <ProgressBar2 {...adaptProgressBarProps(props)} />
+  <ProgressBar2 {...(adaptProgressBarProps(props) as any)} />
 );
 
 export const ThemeProgressBar3: React.FC<ProgressBarProps> = (props) => (
-  <ProgressBar3 {...adaptProgressBarProps(props)} />
+  <ProgressBar3 {...(adaptProgressBarProps(props) as any)} />
 );
 
 // Экспорт всех ProgressBar компонентов как единый объект для удобства

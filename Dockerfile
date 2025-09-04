@@ -8,14 +8,15 @@ RUN apk add --no-cache libc6-compat curl
 WORKDIR /app
 
 # Environment setup
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 ENV PRISMA_GENERATE_SKIP_AUTOINSTALL=true
 
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install all dependencies (including dev for build)
+# Install all dependencies (including dev for build) and ensure prisma toolchain exists
 RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+RUN npm install -D prisma @prisma/client --legacy-peer-deps || true
 
 # Copy source files
 COPY tsconfig.json tsconfig.server.json ./

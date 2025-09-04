@@ -7,7 +7,7 @@ const SidebarWrapper = ({ children }) => {
       {({ sidebarOpen, setSidebarOpen, sidebar }) => (
         <div
           ref={sidebar}
-          className={`z-90 fixed left-0 top-0 flex h-screen w-full max-w-[300px] flex-col justify-between bg-white shadow-card duration-200 xl:translate-x-0 ${
+          className={`z-90 shadow-card fixed left-0 top-0 flex h-screen w-full max-w-[300px] flex-col justify-between bg-white duration-200 xl:translate-x-0 ${
             sidebarOpen ? "-translate-x-full" : "translate-x-0"
           }`}
         >

@@ -3,18 +3,81 @@ import React from 'react';
 const GrayBadge = () => {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <BadgesItem roundedMd>Gray</BadgesItem>
-      <BadgesItem outline roundedMd>
+      <BadgesItem
+        {...({
+          roundedMd: true,
+          outline: false,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          bgOpacity: false,
+          children: 'Gray',
+        } as any)}
+      />
+      <BadgesItem
+        {...({
+          outline: true,
+          roundedMd: true,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          bgOpacity: false,
+        } as any)}
+      >
         Gray
       </BadgesItem>
-      <BadgesItem roundedFull>Gray</BadgesItem>
-      <BadgesItem outline roundedFull>
+      <BadgesItem
+        {...({
+          roundedFull: true,
+          outline: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          bgOpacity: false,
+          children: 'Gray',
+        } as any)}
+      />
+      <BadgesItem
+        {...({
+          outline: true,
+          roundedFull: true,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          bgOpacity: false,
+        } as any)}
+      >
         Gray
       </BadgesItem>
-      <BadgesItem roundedFull bgOpacity>
+      <BadgesItem
+        {...({
+          roundedFull: true,
+          bgOpacity: true,
+          outline: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+        } as any)}
+      >
         Gray
       </BadgesItem>
-      <BadgesItem bgOpacity>Gray</BadgesItem>
+      <BadgesItem
+        {...({
+          bgOpacity: true,
+          outline: false,
+          roundedFull: false,
+          roundedLg: false,
+          roundedNone: false,
+          roundedSm: false,
+          roundedMd: false,
+          children: 'Gray',
+        } as any)}
+      />
     </div>
   );
 };

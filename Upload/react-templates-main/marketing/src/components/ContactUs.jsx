@@ -53,7 +53,7 @@ const ContactUs = () => {
           </div>
           <div className="-mx-4 flex">
             <div className="w-full px-4">
-              <div className="relative z-20 mx-auto w-full max-w-[770px] border border-form-stroke bg-white px-6 py-10 shadow-[0px_0px_40px_0px_rgba(0,0,0,0.05)] dark:border-dark-3 dark:bg-dark sm:px-[65px] sm:py-[60px] md:p-10 lg:px-[65px] lg:py-[60px]">
+              <div className="border-form-stroke relative z-20 mx-auto w-full max-w-[770px] border bg-white px-6 py-10 shadow-[0px_0px_40px_0px_rgba(0,0,0,0.05)] dark:border-dark-3 dark:bg-dark sm:px-[65px] sm:py-[60px] md:p-10 lg:px-[65px] lg:py-[60px]">
                 <form>
                   <div className="-mx-4 flex flex-wrap">
                     {formItems.map((item, index) =>
@@ -71,7 +71,7 @@ const ContactUs = () => {
                               name={item.id}
                               placeholder={item.placeholder}
                               rows="6"
-                              className="outline-hidden w-full resize-none border border-stroke bg-transparent px-6 py-4 text-body-color placeholder-secondary-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
+                              className="outline-hidden placeholder-secondary-color w-full resize-none border border-stroke bg-transparent px-6 py-4 text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                             ></textarea>
                           </div>
                         </div>
@@ -89,7 +89,7 @@ const ContactUs = () => {
                               type={item.type}
                               name={item.id}
                               placeholder={item.placeholder}
-                              className="outline-hidden w-full border border-stroke bg-transparent px-6 py-4 text-body-color placeholder-secondary-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
+                              className="outline-hidden placeholder-secondary-color w-full border border-stroke bg-transparent px-6 py-4 text-body-color focus:border-primary dark:border-dark-3 dark:text-dark-6 dark:focus:border-primary"
                             />
                           </div>
                         </div>

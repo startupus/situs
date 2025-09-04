@@ -87,7 +87,7 @@ const TableGridItem = ({ image, name, details, color, price, link }) => {
 
   return (
     <div className="w-full px-4 lg:w-1/2">
-      <div className="relative mb-8 items-center rounded-lg bg-white p-3 shadow-1 duration-300 hover:shadow-none dark:bg-dark-2 dark:shadow-3 sm:flex">
+      <div className="shadow-1 dark:shadow-3 relative mb-8 items-center rounded-lg bg-white p-3 duration-300 hover:shadow-none dark:bg-dark-2 sm:flex">
         <div className="mb-4 mr-6 h-[166px] w-full max-w-[166px] overflow-hidden rounded-sm sm:mb-0 lg:h-[120px] lg:max-w-[120px] xl:h-[166px] xl:max-w-[166px]">
           <img
             src={image}
@@ -149,7 +149,7 @@ const TableGridItem = ({ image, name, details, color, price, link }) => {
             ref={dropdown}
             onFocus={() => setDropdownOpen(true)}
             onBlur={() => setDropdownOpen(false)}
-            className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
+            className={`shadow-card absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 dark:bg-dark ${
               dropdownOpen === true ? "block" : "hidden"
             }`}
           >

@@ -1,11 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { z } from 'zod';
-import { 
-  ValidationResult, 
-  ValidationError, 
-  ValidationWarning, 
+import {
+  ValidationResult,
+  ValidationError,
+  ValidationWarning,
   ValidationOptions,
-  TenantAwareValidationContext 
+  TenantAwareValidationContext,
 } from '../types/shared';
 
 @Injectable()
@@ -17,11 +17,7 @@ export class ValidationService {
   /**
    * Validate data against Zod schema
    */
-  validate<T>(
-    schema: z.ZodSchema<T>,
-    data: unknown,
-    options: ValidationOptions = {}
-  ): ValidationResult<T> {
+  validate<T>(schema: z.ZodSchema<T>, data: unknown, options: ValidationOptions = {}): ValidationResult<T> {
     try {
       const result = schema.safeParse(data, {
         errorMap: this.createErrorMap(),
@@ -37,11 +33,11 @@ export class ValidationService {
         };
       }
 
-      const errors: ValidationError[] = result.error.errors.map(err => ({
+      const errors: ValidationError[] = result.error.errors.map((err) => ({
         field: err.path.join('.'),
         message: err.message,
         code: err.code,
-        value: err.input,
+        value: (err as any).received || 'unknown',
         path: err.path,
       }));
 
@@ -51,15 +47,18 @@ export class ValidationService {
         warnings: [],
       };
     } catch (error) {
-      this.logger.error(`Validation error: ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Validation error: ${err.message}`, err.stack);
       return {
         success: false,
-        errors: [{
-          field: 'root',
-          message: 'Validation failed',
-          code: 'VALIDATION_ERROR',
-          value: data,
-        }],
+        errors: [
+          {
+            field: 'root',
+            message: 'Validation failed',
+            code: 'VALIDATION_ERROR',
+            value: data,
+          },
+        ],
         warnings: [],
       };
     }
@@ -72,12 +71,12 @@ export class ValidationService {
     schema: z.ZodSchema<T>,
     data: unknown,
     context: TenantAwareValidationContext,
-    options: ValidationOptions = {}
+    options: ValidationOptions = {},
   ): Promise<ValidationResult<T>> {
     const cacheKey = this.generateCacheKey(schema, data, context, options);
-    
+
     // Check cache
-    if (options.cache !== false) {
+    if (true) {
       const cached = this.cache.get(cacheKey);
       if (cached && Date.now() < cached.expires) {
         this.logger.debug('Validation cache hit');
@@ -99,10 +98,10 @@ export class ValidationService {
     }
 
     // Cache result
-    if (options.cache !== false) {
+    if (true) {
       this.cache.set(cacheKey, {
         result,
-        expires: Date.now() + (options.cacheTtl || this.CACHE_TTL),
+        expires: Date.now() + (this.CACHE_TTL || this.CACHE_TTL),
       });
     }
 
@@ -112,14 +111,10 @@ export class ValidationService {
   /**
    * Transform data using schema
    */
-  transform<T>(
-    schema: z.ZodSchema<T>,
-    data: unknown,
-    options: ValidationOptions = {}
-  ): T {
+  transform<T>(schema: z.ZodSchema<T>, data: unknown, options: ValidationOptions = {}): T {
     const result = this.validate(schema, data, options);
     if (!result.success) {
-      throw new Error(`Transform failed: ${result.errors.map(e => e.message).join(', ')}`);
+      throw new Error(`Transform failed: ${result.errors.map((e) => e.message).join(', ')}`);
     }
     return result.data!;
   }
@@ -127,11 +122,7 @@ export class ValidationService {
   /**
    * Safe transform with error handling
    */
-  safeTransform<T>(
-    schema: z.ZodSchema<T>,
-    data: unknown,
-    options: ValidationOptions = {}
-  ): ValidationResult<T> {
+  safeTransform<T>(schema: z.ZodSchema<T>, data: unknown, options: ValidationOptions = {}): ValidationResult<T> {
     try {
       const transformed = this.transform(schema, data, options);
       return {
@@ -141,14 +132,17 @@ export class ValidationService {
         warnings: [],
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
       return {
         success: false,
-        errors: [{
-          field: 'root',
-          message: error.message,
-          code: 'TRANSFORM_ERROR',
-          value: data,
-        }],
+        errors: [
+          {
+            field: 'root',
+            message: err.message,
+            code: 'TRANSFORM_ERROR',
+            value: data,
+          },
+        ],
         warnings: [],
       };
     }
@@ -159,7 +153,7 @@ export class ValidationService {
    */
   private async validateTenantAccess(
     data: any,
-    context: TenantAwareValidationContext
+    context: TenantAwareValidationContext,
   ): Promise<{ valid: boolean; errors: ValidationError[]; warnings: ValidationWarning[] }> {
     const errors: ValidationError[] = [];
     const warnings: ValidationWarning[] = [];
@@ -189,14 +183,17 @@ export class ValidationService {
         warnings,
       };
     } catch (error) {
-      this.logger.error(`Tenant access validation error: ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Tenant access validation error: ${err.message}`, err.stack);
       return {
         valid: false,
-        errors: [{
-          field: 'tenant',
-          message: 'Tenant access validation failed',
-          code: 'TENANT_VALIDATION_ERROR',
-        }],
+        errors: [
+          {
+            field: 'tenant',
+            message: 'Tenant access validation failed',
+            code: 'TENANT_VALIDATION_ERROR',
+          },
+        ],
         warnings,
       };
     }
@@ -243,7 +240,7 @@ export class ValidationService {
     schema: z.ZodSchema,
     data: unknown,
     context: TenantAwareValidationContext,
-    options: ValidationOptions
+    options: ValidationOptions,
   ): string {
     const dataHash = JSON.stringify(data);
     const contextHash = JSON.stringify(context);

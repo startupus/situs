@@ -64,7 +64,7 @@ const ProductTab = () => {
                   <div key={productIndex}>
                     <button
                       onClick={handleModalOpen}
-                      className="absolute right-6 top-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-white text-dark shadow-card drop-shadow-three dark:bg-dark-2 dark:text-white"
+                      className="shadow-card drop-shadow-three absolute right-6 top-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-white text-dark dark:bg-dark-2 dark:text-white"
                     >
                       <svg
                         width="24"

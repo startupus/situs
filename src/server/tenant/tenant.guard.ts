@@ -55,7 +55,8 @@ export class TenantGuard implements CanActivate {
         const payload = this.decodeJWT(token);
         return payload?.userId || payload?.sub || null;
       } catch (error) {
-        this.logger.debug(`Failed to extract user ID from token: ${error.message}`);
+        const err = error instanceof Error ? error : new Error(String(error));
+        this.logger.debug(`Failed to extract user ID from token: ${err.message}`);
       }
     }
 
@@ -70,10 +71,11 @@ export class TenantGuard implements CanActivate {
     try {
       // This would typically check against a user-tenant mapping table
       // For now, we'll use the tenant context service validation
-      const currentTenantId = this.tenantContextService.getCurrentTenantId();
+      const currentTenantId = this.tenantContextService.getTenantId();
       return currentTenantId === tenantId;
     } catch (error) {
-      this.logger.error(`Failed to validate user tenant access: ${error.message}`, error.stack);
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error(`Failed to validate user tenant access: ${err.message}`, err.stack);
       return false;
     }
   }

@@ -8,7 +8,7 @@ import { EditorThemeProvider } from '../../contexts/EditorThemeContext';
 import { ProjectThemeProvider } from '../../contexts/ProjectThemeContext';
 import { LanguageProvider } from '../../contexts/LanguageContext';
 import { ProjectManager, useProjectManager } from './ProjectManager';
-import { PageData, ProjectData } from '../../types/project';
+// import { PageData, ProjectData } from '../../types/project';
 import { projectsApi } from '../../api/services/projects.api';
 
 // Импорт изолированных CSS тем
@@ -292,8 +292,8 @@ const EditorContent: React.FC = () => {
   };
 
   const [currentPageLanguage, setCurrentPageLanguage] = useState<string>('ru'); // Язык текущей страницы
-  const [currentProject, setCurrentProject] = useState<ProjectData | null>(null);
-  const [projectPages, setProjectPages] = useState<PageData[]>([]);
+  const [currentProject, setCurrentProject] = useState<any | null>(null);
+  const [projectPages, setProjectPages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState<any>({
@@ -337,7 +337,7 @@ const EditorContent: React.FC = () => {
       console.log('🚀 Загрузка проекта:', urlParams.projectId);
 
       // 1) Пробуем загрузить проект, но не блокируем UI при ошибке
-      let loadedProject: ProjectData | null = null;
+      let loadedProject: any | null = null;
       try {
         loadedProject = await projectsApi.getProject(urlParams.projectId);
         setCurrentProject(loadedProject);
@@ -452,7 +452,9 @@ const EditorContent: React.FC = () => {
   // Автосохранение
   const { isSaving, lastSaved, saveError, saveNow } = useAutoSave(currentPage, {
     delay: 3000, // 3 секунды
-    onSave: savePage,
+    onSave: async (data) => {
+      await savePage(data);
+    },
     enabled: true,
   });
 

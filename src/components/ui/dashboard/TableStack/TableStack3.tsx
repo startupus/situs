@@ -17,6 +17,7 @@ const TableStack3 = () => {
             name="Apple Watch Series 7"
             details="50m water resistant"
             price="$400"
+            shipped={false}
           />
           <StackItem
             img="https://cdn.tailgrids.com/2.0/image/dashboard/images/prodcuts-list/image-03.jpg"

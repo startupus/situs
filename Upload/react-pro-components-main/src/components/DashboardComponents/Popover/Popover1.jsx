@@ -24,7 +24,7 @@ const Popover = () => {
               />
             </div>
             <div className="invisible absolute left-1/2 top-[110%] w-[250px] -translate-x-1/2 opacity-0 group-hover:visible group-hover:opacity-100 xs:w-[330px] lg:left-full lg:top-0 lg:translate-x-0">
-              <div className="shadow-product relative ml-3 rounded-lg bg-white dark:bg-dark-2 dark:shadow-box-dark">
+              <div className="shadow-product dark:shadow-box-dark relative ml-3 rounded-lg bg-white dark:bg-dark-2">
                 <span className="absolute -top-3 left-1/2 block -translate-x-1/2 rotate-90 text-white dark:text-dark-2 lg:-left-[11px] lg:top-8 lg:translate-x-0 lg:rotate-0">
                   <svg
                     width="11"

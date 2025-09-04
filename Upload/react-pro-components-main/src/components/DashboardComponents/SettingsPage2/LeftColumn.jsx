@@ -3,7 +3,7 @@ import React from "react";
 const LeftColumn = ({ title, subtitle, img, children }) => {
   return (
     <div className="w-full px-5 md:w-1/2">
-      <div className="mb-8 rounded-lg border border-stroke bg-white p-7 shadow-two sm:p-10 md:mb-0 md:p-7 lg:p-10">
+      <div className="shadow-two mb-8 rounded-lg border border-stroke bg-white p-7 sm:p-10 md:mb-0 md:p-7 lg:p-10">
         <h3 className="mb-2 text-2xl font-semibold text-black">{title}</h3>
         <p className="mb-6 text-base text-body-color">{subtitle}</p>
         <form>

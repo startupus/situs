@@ -72,6 +72,7 @@ const DashboardDropdown2 = () => {
               </div>
               <ul className="flex h-auto flex-col gap-2 overflow-y-auto px-4 pb-20 pt-4">
                 <DropdownItem
+                  {...({ totalMsg: 0 } as any)}
                   link="/#"
                   img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-01.jpg"
                   name="Mahmudul added"
@@ -87,6 +88,7 @@ const DashboardDropdown2 = () => {
                   </InnerDropdown>
                 </DropdownItem>
                 <DropdownItem
+                  {...({ totalMsg: 0 } as any)}
                   link="/#"
                   img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-02.jpg"
                   name="Mahmudul added"
@@ -102,6 +104,7 @@ const DashboardDropdown2 = () => {
                   </InnerDropdown>
                 </DropdownItem>
                 <DropdownItem
+                  {...({ totalMsg: 0 } as any)}
                   link="/#"
                   img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-03.jpg"
                   name="Mahmudul added"
@@ -117,6 +120,7 @@ const DashboardDropdown2 = () => {
                   </InnerDropdown>
                 </DropdownItem>
                 <DropdownItem
+                  {...({ totalMsg: 0 } as any)}
                   link="/#"
                   img="https://cdn.tailgrids.com/2.0/image/dashboard/images/avatar/image-04.jpg"
                   name="Mahmudul added"

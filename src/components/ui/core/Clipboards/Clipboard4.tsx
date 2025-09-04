@@ -7,7 +7,7 @@ export default function Clipboard4() {
         <div className="mx-auto w-full max-w-[500px]">
           <div className="relative">
             <textarea
-              rows="6"
+              rows={6}
               value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
               eius atque sint totam minus voluptatum quibusdam pariatur ut
               perferendis commodi eos vero ipsum, nostrum doloribus quae.

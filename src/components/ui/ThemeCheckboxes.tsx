@@ -22,15 +22,15 @@ const adaptCheckboxProps = (props: CheckboxProps) => ({
 });
 
 // Checkbox Variants
-export const ThemeCheckbox1: React.FC<CheckboxProps> = (props) => <Checkbox1 {...adaptCheckboxProps(props)} />;
+export const ThemeCheckbox1: React.FC<CheckboxProps> = (props) => <Checkbox1 {...(adaptCheckboxProps(props) as any)} />;
 
-export const ThemeCheckbox2: React.FC<CheckboxProps> = (props) => <Checkbox2 {...adaptCheckboxProps(props)} />;
+export const ThemeCheckbox2: React.FC<CheckboxProps> = (props) => <Checkbox2 {...(adaptCheckboxProps(props) as any)} />;
 
-export const ThemeCheckbox3: React.FC<CheckboxProps> = (props) => <Checkbox3 {...adaptCheckboxProps(props)} />;
+export const ThemeCheckbox3: React.FC<CheckboxProps> = (props) => <Checkbox3 {...(adaptCheckboxProps(props) as any)} />;
 
-export const ThemeCheckbox4: React.FC<CheckboxProps> = (props) => <Checkbox4 {...adaptCheckboxProps(props)} />;
+export const ThemeCheckbox4: React.FC<CheckboxProps> = (props) => <Checkbox4 {...(adaptCheckboxProps(props) as any)} />;
 
-export const ThemeCheckbox5: React.FC<CheckboxProps> = (props) => <Checkbox5 {...adaptCheckboxProps(props)} />;
+export const ThemeCheckbox5: React.FC<CheckboxProps> = (props) => <Checkbox5 {...(adaptCheckboxProps(props) as any)} />;
 
 // Экспорт всех Checkbox компонентов как единый объект для удобства
 export const ThemeCheckboxes = {

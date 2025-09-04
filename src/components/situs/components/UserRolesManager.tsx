@@ -161,7 +161,7 @@ const UserRolesManager: React.FC<UserRolesManagerProps> = ({ user, currentUser, 
             <div>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Управление ролями пользователя</h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                {user.name} ({user.email})
+                {(user as any).name} ({user.email})
               </p>
             </div>
             <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">

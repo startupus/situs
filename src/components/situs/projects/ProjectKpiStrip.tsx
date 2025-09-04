@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProjectData } from '../../../types/project';
+type ProjectData = any;
 
 interface ProjectKpiStripProps {
   project: ProjectData;

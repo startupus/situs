@@ -18,7 +18,7 @@ const Switcher2 = () => {
             className="sr-only"
           />
           <div className="h-5 w-14 rounded-full bg-[#E5E7EB] shadow-inner"></div>
-          <div className="dot absolute -top-1 left-0 h-7 w-7 rounded-full bg-white shadow-switch-1 transition"></div>
+          <div className="dot shadow-switch-1 absolute -top-1 left-0 h-7 w-7 rounded-full bg-white transition"></div>
         </div>
       </label>
     </>

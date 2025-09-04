@@ -6,6 +6,7 @@ const TableStack2 = () => {
       <div className="container mx-auto">
         <TableStackWrapper title="Download Files">
           <StackItem
+            apk=""
             fileName="Content-script.txt"
             fileSize="File size: 455KB"
             date="Uploaded on: 25 Nov, 2025"
@@ -21,6 +22,7 @@ const TableStack2 = () => {
             buttonText="Download"
           />
           <StackItem
+            apk=""
             fileName="Random-text.doc"
             fileSize="File size: 455KB"
             date="Uploaded on: 23 Dec, 2025"
@@ -28,6 +30,7 @@ const TableStack2 = () => {
             buttonText="Download"
           />
           <StackItem
+            apk=""
             fileName="Random-text.doc"
             fileSize="File size: 455KB"
             date="Uploaded on: 23 Dec, 2025"
