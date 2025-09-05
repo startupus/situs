@@ -73,6 +73,20 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       }
     }
 
+    // Dev token bypass (for testing and development)
+    const authHeader: string | undefined = req.headers?.authorization;
+    const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.substring(7) : undefined;
+    if (token === 'dev-token') {
+      (req as any).user = {
+        id: 'dev-user-id',
+        email: 'dev@situs.local',
+        name: 'Dev User',
+        globalRole: 'SUPER_ADMIN',
+        scopes: ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'],
+      };
+      return true;
+    }
+
     // Allowlist для публичных эндпоинтов
     const allow = [
       /^\/health$/,

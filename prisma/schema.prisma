@@ -192,6 +192,9 @@ model Project {
   // Системный проект админки
   isSystemAdmin Boolean   @default(false)
   
+  // Multi-tenant support
+  tenantId    String?     // Tenant isolation - projects belong to specific tenant
+  
   // Domain settings - ключевое отличие от старой схемы
   domain       String?     // situs subdomain (example.situs.com)
   customDomain String?     // custom domain (example.com)

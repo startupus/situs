@@ -141,13 +141,14 @@ export class ProjectsService {
 
     // Строим условия поиска с обязательной фильтрацией
     const where: Prisma.ProjectWhereInput = {
-      // КРИТИЧНО: Фильтрация по владельцу или системный проект
+      // КРИТИЧНО: Фильтрация по владельцу, тенанту или системный проект
       OR: [
         // Системный проект доступен всем
         { isSystemAdmin: true },
         // Проекты владельца
         { ownerId: userId || ownerId },
-        // TODO: Добавить фильтрацию по тенанту когда будет реализована в схеме
+        // Проекты тенанта (если указан)
+        ...(tenantId ? [{ tenantId }] : []),
       ],
     };
     if (status) where.status = this.mapProjectStatus(status);
@@ -218,12 +219,13 @@ export class ProjectsService {
           { id: idOrSlug },
           { slug: idOrSlug }
         ],
-        // Проверяем доступ: системный проект или владелец
+        // Проверяем доступ: системный проект, владелец или тенант
         AND: [
           {
             OR: [
               { isSystemAdmin: true },
-              { ownerId: userId }
+              { ownerId: userId },
+              ...(tenantId ? [{ tenantId }] : [])
             ]
           }
         ]
@@ -257,7 +259,7 @@ export class ProjectsService {
   /**
    * Создание нового проекта
    */
-  async create(createProjectDto: CreateProjectDto, ownerId: string) {
+  async create(createProjectDto: CreateProjectDto, ownerId: string, tenantId?: string) {
     const { name, description, settings = {} as any } = createProjectDto;
     const effectiveOwnerId = await this.resolveOwnerId(ownerId);
 
@@ -281,6 +283,7 @@ export class ProjectsService {
           description: description ?? null,
           settings: JSON.stringify(settings),
           ownerId: effectiveOwnerId,
+          tenantId, // Устанавливаем tenantId при создании
           status: ProjectStatus.ACTIVE,
           slug,
         },
