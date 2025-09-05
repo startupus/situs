@@ -12,7 +12,7 @@ const Tab8 = () => {
       <div className="container">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="shadow-card rounded-[10px] bg-white p-6">
+            <div className="rounded-[10px] bg-white p-6 shadow-card">
               <div className="border-b border-stroke pb-2">
                 <div className="-mx-[6px] flex flex-col flex-wrap sm:flex-row">
                   <div className="px-[6px] pb-3">

@@ -4,8 +4,8 @@ const InfoAlert1 = () => {
   return (
     <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="shadow-1 flex w-full rounded-lg border-l-[6px] border-transparent bg-white px-7 py-8 dark:bg-dark-2 md:p-9">
-          <div className="bg-cyan-light-2/30 text-cyan-dark mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md">
+        <div className="flex w-full rounded-lg border-l-[6px] border-transparent bg-white px-7 py-8 shadow-1 dark:bg-dark-2 md:p-9">
+          <div className="mr-5 flex h-[34px] w-full max-w-[34px] items-center justify-center rounded-md bg-cyan-light-2/30 text-cyan-dark">
             <svg
               width="18"
               height="18"
@@ -28,7 +28,7 @@ const InfoAlert1 = () => {
             </svg>
           </div>
           <div className="w-full">
-            <h5 className="text-cyan-dark mb-3 text-lg font-semibold">
+            <h5 className="mb-3 text-lg font-semibold text-cyan-dark">
               Important Notice
             </h5>
             <p className="text-base leading-relaxed text-body-color dark:text-dark-6">

@@ -60,7 +60,7 @@ const QuickView = () => {
                 <div className="w-full px-4 xl:w-11/12 2xl:w-10/12">
                   <div
                     ref={menuRef}
-                    className="shadow-quick-view dark:shadow-box-dark relative overflow-hidden rounded-lg bg-white p-4 dark:bg-dark-2 xs:p-[22px]"
+                    className="shadow-quick-view relative overflow-hidden rounded-lg bg-white p-4 dark:bg-dark-2 dark:shadow-box-dark xs:p-[22px]"
                   >
                     <button
                       onClick={() => setOpen(false)}

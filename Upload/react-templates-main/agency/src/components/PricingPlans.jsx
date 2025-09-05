@@ -54,7 +54,7 @@ const plans = [
 const PricingPlans = () => {
   return (
     <>
-      <section className="bg-tg-bg relative z-20 overflow-hidden pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]">
+      <section className="relative z-20 overflow-hidden bg-tg-bg pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
@@ -82,8 +82,8 @@ const PricingPlans = () => {
                 <div
                   className={`relative z-10 mb-10 overflow-hidden rounded-xl px-8 py-10 text-center sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] ${
                     item.popular
-                      ? "bg-linear-to-b shadow-pricing bg-primary from-primary to-[#179BEE] xl:pb-10 xl:pt-[55px]"
-                      : "drop-shadow-pricing border-2 border-[#D4DEFF] bg-white dark:border-dark-3 dark:bg-dark-2 xl:pb-[50px] xl:pt-[45px]"
+                      ? "bg-linear-to-b bg-primary from-primary to-[#179BEE] shadow-pricing xl:pb-10 xl:pt-[55px]"
+                      : "border-2 border-[#D4DEFF] bg-white drop-shadow-pricing dark:border-dark-3 dark:bg-dark-2 xl:pb-[50px] xl:pt-[45px]"
                   } ${index === 0 && "lg:rounded-r-none lg:border-r-0"} ${index === plans.length - 1 && "lg:rounded-l-none lg:border-l-0"}`}
                 >
                   {item.popular && (
@@ -123,7 +123,7 @@ const PricingPlans = () => {
                   <div className="w-full">
                     <Link
                       to={item.button.link}
-                      className={`shadow-1 inline-block rounded-full border px-[50px] py-3 text-center text-base font-medium text-primary transition ${
+                      className={`inline-block rounded-full border px-[50px] py-3 text-center text-base font-medium text-primary shadow-1 transition ${
                         item.popular
                           ? "border-white bg-white hover:bg-gray-2 hover:text-body-color"
                           : "border-stroke bg-transparent hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:shadow-none"

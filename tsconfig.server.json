@@ -14,9 +14,10 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "useDefineForClassFields": false,
+    "composite": true,
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/server/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+  "include": ["src/server/**/*", "src/types/**/*", "src/validation/**/*"],
+  "exclude": ["node_modules", "dist", "src/server/dist", "**/*.test.ts", "**/*.spec.ts"]
 }

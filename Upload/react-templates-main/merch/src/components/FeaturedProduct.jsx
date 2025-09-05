@@ -58,7 +58,7 @@ const FeaturedProduct = () => {
 
                     <div className="bg-linear-to-t absolute bottom-0 left-0 flex h-3/4 w-full items-end from-[#212C36B2] to-[#212B3600] p-8 opacity-0 transition-all group-hover:opacity-100">
                       <div className="flex items-center space-x-3">
-                        <button className="shadow-1 flex h-9 w-9 items-center justify-center rounded-sm bg-white text-center text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
+                        <button className="flex h-9 w-9 items-center justify-center rounded-sm bg-white text-center text-dark shadow-1 hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
                           <svg
                             width="18"
                             height="18"
@@ -81,7 +81,7 @@ const FeaturedProduct = () => {
                             />
                           </svg>
                         </button>
-                        <button className="shadow-1 flex h-9 w-9 items-center justify-center rounded-sm bg-white text-center text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
+                        <button className="flex h-9 w-9 items-center justify-center rounded-sm bg-white text-center text-dark shadow-1 hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
                           <svg
                             width="18"
                             height="18"
@@ -100,7 +100,7 @@ const FeaturedProduct = () => {
                             />
                           </svg>
                         </button>
-                        <button className="shadow-1 flex h-9 w-9 items-center justify-center rounded-sm bg-white text-center text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
+                        <button className="flex h-9 w-9 items-center justify-center rounded-sm bg-white text-center text-dark shadow-1 hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
                           <svg
                             width="18"
                             height="18"

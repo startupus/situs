@@ -37,25 +37,25 @@ const TooltipItem = ({ children, tooltipsText, position }) => {
           <div
             className={` ${
               (position === "right" &&
-                `border-light absolute left-full top-1/2 z-20 ml-3 -translate-y-1/2 whitespace-nowrap rounded-sm border bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`) ||
+                `absolute left-full top-1/2 z-20 ml-3 -translate-y-1/2 whitespace-nowrap rounded-sm border border-light bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`) ||
               (position === "top" &&
-                `border-light absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded-sm border bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`) ||
+                `absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded-sm border border-light bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`) ||
               (position === "left" &&
-                `border-light absolute right-full top-1/2 z-20 mr-3 -translate-y-1/2 whitespace-nowrap rounded-sm border bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`) ||
+                `absolute right-full top-1/2 z-20 mr-3 -translate-y-1/2 whitespace-nowrap rounded-sm border border-light bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`) ||
               (position === "bottom" &&
-                `border-light absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded-sm border bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`)
+                `absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded-sm border border-light bg-white px-4 py-[6px] text-sm font-semibold text-body-color opacity-0 group-hover:opacity-100`)
             }`}
           >
             <span
               className={` ${
                 (position === "right" &&
-                  `border-light absolute -left-1 top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45 rounded-r-sm border-b border-l bg-white`) ||
+                  `absolute -left-1 top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45 rounded-r-sm border-b border-l border-light bg-white`) ||
                 (position === "top" &&
-                  `border-light absolute -bottom-1 left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-l-sm border-b border-r bg-white`) ||
+                  `absolute -bottom-1 left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-l-sm border-b border-r border-light bg-white`) ||
                 (position === "left" &&
-                  `rounded-xs border-light absolute -right-1 top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45 border-r border-t bg-white`) ||
+                  `rounded-xs absolute -right-1 top-1/2 -z-10 h-2 w-2 -translate-y-1/2 rotate-45 border-r border-t border-light bg-white`) ||
                 (position === "bottom" &&
-                  `rounded-xs border-light absolute -top-1 left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 border-l border-t bg-white`)
+                  `rounded-xs absolute -top-1 left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 border-l border-t border-light bg-white`)
               } `}
             ></span>
             {tooltipsText}

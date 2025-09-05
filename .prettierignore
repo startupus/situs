@@ -11,3 +11,14 @@ prisma/dev.db
 **/.cache/**
 **/*.min.js
 **/*.min.css
+logs
+health-reports
+public
+Upload
+uploads
+src/types/**/*.d.ts
+src/types/**/*.js
+src/types/**/*.map
+src/validation/**/*.d.ts
+src/validation/**/*.js
+src/validation/**/*.map

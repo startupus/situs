@@ -147,7 +147,7 @@ export default ProductCarousel5;
 
 const ProductCard = ({ image, details, link, name, price, reviews }) => {
   return (
-    <div className="shadow-1 dark:shadow-box-dark overflow-hidden rounded-lg bg-white dark:bg-dark-2">
+    <div className="overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
       <div>
         <img src={image} alt="product" className="w-full" />
       </div>

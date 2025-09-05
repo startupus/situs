@@ -12,7 +12,7 @@ const Checkout4 = () => {
                   Payment Information
                 </h3>
 
-                <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 py-10 dark:border-dark-3 dark:bg-dark-2 sm:px-10">
+                <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10">
                   <h4 className="mb-8 text-lg font-semibold text-dark dark:text-white">
                     Personal Details
                   </h4>
@@ -100,7 +100,7 @@ const Checkout4 = () => {
                 <h3 className="mb-8 text-xl font-semibold text-dark dark:text-white sm:text-[28px] sm:leading-[40px]">
                   Shipping Details
                 </h3>
-                <div className="shadow-testimonial-6 dark:shadow-box-dark overflow-hidden rounded-lg border border-stroke bg-white px-6 py-10 dark:border-dark-3 dark:bg-dark-2 sm:px-10">
+                <div className="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10">
                   <h4 className="mb-[22px] text-lg font-semibold text-dark dark:text-white">
                     Shipping Address
                   </h4>
@@ -185,7 +185,7 @@ const Checkout4 = () => {
                 </button>
               </div>
 
-              <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg border border-stroke px-6 py-10 dark:border-dark-3 dark:bg-dark-2 sm:px-10 lg:px-8 2xl:px-10">
+              <div className="mb-10 overflow-hidden rounded-lg border border-stroke px-6 py-10 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 lg:px-8 2xl:px-10">
                 <div className="mb-8 border-b border-stroke pb-3 dark:border-dark-3">
                   <h3 className="mb-1 text-lg font-semibold text-dark dark:text-white">
                     Coupon Code

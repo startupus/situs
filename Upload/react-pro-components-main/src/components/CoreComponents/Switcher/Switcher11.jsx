@@ -9,7 +9,7 @@ const Switcher11 = () => {
 
   return (
     <>
-      <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white p-1">
+      <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white p-1 shadow-card">
         <input
           type="checkbox"
           className="sr-only"

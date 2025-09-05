@@ -52,7 +52,7 @@ function Modal8() {
             onBlur={() => setModalOpen(false)}
             class="relative mx-auto w-full max-w-[400px] rounded-xl bg-white p-6 shadow-xl dark:bg-dark-2"
           >
-            <div class="bg-green-light-6 mb-5 flex aspect-square w-12 items-center justify-center rounded-full text-green">
+            <div class="mb-5 flex aspect-square w-12 items-center justify-center rounded-full bg-green-light-6 text-green">
               <svg
                 width="24"
                 height="24"

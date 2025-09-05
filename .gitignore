@@ -29,3 +29,7 @@ playwright-report/
 .env
 prisma/dev.db
 prisma/prisma/dev.db
+
+# Ignore large vendor archive
+Upload/react-pro-components-main.zip
+

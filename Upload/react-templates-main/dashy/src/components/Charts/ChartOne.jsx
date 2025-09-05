@@ -164,13 +164,13 @@ const ChartOne = () => {
           </div>
           <div className="flex w-full max-w-[180px] justify-end">
             <div className="inline-flex items-center rounded-md border-[0.5px] border-stroke bg-[#F5F7FA] p-[6px] dark:border-dark-3 dark:bg-dark">
-              <button className="shadow-card rounded-sm bg-white px-3 py-1 text-sm text-dark dark:bg-dark-2 dark:text-white">
+              <button className="rounded-sm bg-white px-3 py-1 text-sm text-dark shadow-card dark:bg-dark-2 dark:text-white">
                 Day
               </button>
-              <button className="hover:shadow-card rounded-sm px-3 py-1 text-sm text-dark hover:bg-white dark:text-white dark:hover:bg-dark-2">
+              <button className="rounded-sm px-3 py-1 text-sm text-dark hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-dark-2">
                 Week
               </button>
-              <button className="hover:shadow-card rounded-sm px-3 py-1 text-sm text-dark hover:bg-white dark:text-white dark:hover:bg-dark-2">
+              <button className="rounded-sm px-3 py-1 text-sm text-dark hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-dark-2">
                 Month
               </button>
             </div>

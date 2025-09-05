@@ -24,7 +24,7 @@ const starCountList = [
 const ReviewOverviewBox = () => {
   return (
     <>
-      <div className="shadow-three dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white px-8 py-10 text-center dark:bg-dark-2 lg:mb-0 xl:px-[60px]">
+      <div className="mb-10 overflow-hidden rounded-lg bg-white px-8 py-10 text-center shadow-three dark:bg-dark-2 dark:shadow-box-dark lg:mb-0 xl:px-[60px]">
         <h3 className="mb-5 font-semibold text-dark dark:text-white lg:text-2xl xl:text-[28px] xl:leading-[1.43]">
           Customer reviews
         </h3>

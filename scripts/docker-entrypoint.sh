@@ -66,6 +66,39 @@ run_auto_seed() {
     fi
 }
 
+# Дополнительные сиды демо-данных (идемпотентно)
+run_demo_seeds() {
+    log "🌱 Running demo seeds..."
+
+    # Startapus demo content
+    if npx tsx scripts/seed-startapus.ts; then
+        log "✅ Demo seed (startapus) completed"
+    else
+        log "⚠️ Demo seed (startapus) failed"
+    fi
+
+    # Simple demo projects (Demo Project 1..N)
+    if npx tsx scripts/seed-demo-projects.ts; then
+        log "✅ Demo seed (projects) completed"
+    else
+        log "⚠️ Demo seed (projects) failed"
+    fi
+
+    # View levels
+    if npx tsx scripts/seed-view-levels.ts; then
+        log "✅ Demo seed (view-levels) completed"
+    else
+        log "⚠️ Demo seed (view-levels) failed"
+    fi
+
+    # User groups
+    if npx tsx scripts/seed-user-groups.ts; then
+        log "✅ Demo seed (user-groups) completed"
+    else
+        log "⚠️ Demo seed (user-groups) failed"
+    fi
+}
+
 # Генерация Prisma клиента
 generate_prisma_client() {
     log "🔧 Generating Prisma client..."
@@ -93,6 +126,9 @@ main() {
     
     # 4. Авто-сид (только если системный проект не существует)
     run_auto_seed
+
+    # 4.1 Дополнительные демо-данные
+    run_demo_seeds
     
     log "🎉 Initialization completed, starting application..."
     

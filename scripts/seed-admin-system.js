@@ -1,6 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 const client_1 = require('@prisma/client');
+const bcrypt = require('bcryptjs');
 /**
  * Сид системного проекта админки и базовой навигации.
  * - Создаёт проект со slug "situs-admin" (в settings помечаем isSystemAdmin=true)
@@ -19,13 +20,18 @@ async function main() {
       })) || (await prisma.user.findFirst({ orderBy: { createdAt: 'asc' } }));
     // Если нет ни одного пользователя — создаём системного администратора
     if (!owner) {
+      const hashed = await bcrypt.hash('admin', 12);
       owner = await prisma.user.upsert({
         where: { email: 'admin@situs.local' },
-        update: { globalRole: client_1.GlobalRole.SUPER_ADMIN, status: 'ACTIVE' },
+        update: {
+          globalRole: client_1.GlobalRole.SUPER_ADMIN,
+          status: 'ACTIVE',
+          password: hashed,
+        },
         create: {
           username: 'admin',
           email: 'admin@situs.local',
-          password: 'admin',
+          password: hashed,
           globalRole: client_1.GlobalRole.SUPER_ADMIN,
           status: 'ACTIVE',
         },

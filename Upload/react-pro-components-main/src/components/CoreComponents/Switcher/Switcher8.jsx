@@ -22,7 +22,7 @@ const Switcher8 = () => {
               isChecked ? "bg-[#EAEEFB]" : "bg-dark"
             }`}
           ></div>
-          <div className="dot shadow-switch-1 absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white transition">
+          <div className="dot absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-switch-1 transition">
             <span
               className={`active h-4 w-4 rounded-full border ${
                 isChecked ? "border-white bg-primary" : "border-dark bg-white"

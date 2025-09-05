@@ -19,7 +19,7 @@ const Switcher5 = () => {
           />
           <div className="h-5 w-14 rounded-full bg-[#E5E7EB] shadow-inner"></div>
           <div
-            className={`dot shadow-switch-1 absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full transition ${
+            className={`dot absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full shadow-switch-1 transition ${
               isChecked ? "bg-white!" : "bg-white"
             }`}
           >

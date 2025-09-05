@@ -2,7 +2,7 @@ import React from "react";
 
 const Team8 = () => {
   return (
-    <section className="bg-tg-bg overflow-hidden pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
+    <section className="overflow-hidden bg-tg-bg pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -78,10 +78,10 @@ const TeamCard = ({
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4">
       <div className="group mb-8">
-        <div className="shadow-team-2 relative z-20 mx-auto h-[130px] w-[130px] overflow-hidden rounded-full border-[10px] border-white bg-white dark:border-dark-3 dark:bg-dark-3">
+        <div className="relative z-20 mx-auto h-[130px] w-[130px] overflow-hidden rounded-full border-[10px] border-white bg-white shadow-team-2 dark:border-dark-3 dark:bg-dark-3">
           <img src={imageSrc} alt="team" className="w-full" />
         </div>
-        <div className="shadow-card relative z-10 -mt-16 overflow-hidden rounded-md bg-primary px-8 pb-8 pt-24 text-center lg:px-5 xl:px-8">
+        <div className="relative z-10 -mt-16 overflow-hidden rounded-md bg-primary px-8 pb-8 pt-24 text-center shadow-card lg:px-5 xl:px-8">
           <h3 className="mb-1 text-lg font-semibold text-white">{name}</h3>
           <p className="mb-5 text-sm text-[#D6DDF6]">{profession}</p>
           <p className="mb-5 text-sm text-[#D6DDF6]">{details}</p>

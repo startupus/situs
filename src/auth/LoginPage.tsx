@@ -42,13 +42,20 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         throw new Error('Неверные учетные данные');
       }
 
-      const { user, token } = await response.json();
+      const data = await response.json();
+      const accessToken: string | undefined = data?.tokens?.accessToken || data?.token;
+      const refreshToken: string | undefined = data?.tokens?.refreshToken;
 
-      // Сохраняем токен
-      localStorage.setItem('auth-token', token);
+      if (!accessToken) {
+        throw new Error('Не удалось получить токен аутентификации');
+      }
+
+      // Сохраняем токены в соответствии с клиентом API
+      localStorage.setItem('auth_token', accessToken);
+      if (refreshToken) localStorage.setItem('auth_refresh_token', refreshToken);
 
       // Уведомляем родительский компонент
-      onLogin?.(user);
+      onLogin?.(data?.user);
 
       // Переходим к списку проектов
       navigate('/projects');

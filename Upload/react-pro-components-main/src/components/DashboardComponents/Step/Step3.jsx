@@ -5,7 +5,7 @@ const Step3 = () => {
     <>
       <section className="overflow-hidden bg-gray-2 py-20 lg:py-[120px]">
         <div className="mx-auto px-4 text-center sm:container">
-          <div className="shadow-two mx-auto inline-flex justify-center rounded-lg bg-white px-5 py-7 sm:px-10 sm:py-9">
+          <div className="mx-auto inline-flex justify-center rounded-lg bg-white px-5 py-7 shadow-two sm:px-10 sm:py-9">
             <div className="-mx-3 flex items-center justify-center sm:-mx-6 md:-mx-10 lg:-mx-[50px]">
               <SingleStep done number="1" name="Customer" />
               <SingleStep done number="2" name="Shipping" />

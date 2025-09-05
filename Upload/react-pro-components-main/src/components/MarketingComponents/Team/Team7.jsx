@@ -2,7 +2,7 @@ import React from "react";
 
 const Team7 = () => {
   return (
-    <section className="bg-tg-bg overflow-hidden pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
+    <section className="overflow-hidden bg-tg-bg pb-20 pt-20 dark:bg-dark lg:pb-[120px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -72,7 +72,7 @@ const TeamCard = ({
 }) => {
   return (
     <div className="w-full px-4 sm:w-1/2 lg:w-1/4 xl:w-1/4">
-      <div className="shadow-1 dark:shadow-box-dark group mb-8 rounded-[5px] bg-white px-5 pb-10 pt-12 dark:bg-dark-2">
+      <div className="group mb-8 rounded-[5px] bg-white px-5 pb-10 pt-12 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
         <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
           <img
             src={imageSrc}

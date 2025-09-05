@@ -173,7 +173,7 @@ const PortfolioCard = ({
           <div className="overflow-hidden rounded-[10px]">
             <img src={ImageHref} alt="portfolio" className="w-full" />
           </div>
-          <div className="shadow-portfolio dark:shadow-box-dark relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center dark:bg-dark-2">
+          <div className="relative z-10 mx-7 -mt-20 rounded-lg bg-white px-3 py-[34px] text-center shadow-portfolio dark:bg-dark-2 dark:shadow-box-dark">
             <span className="mb-2 block text-sm font-medium text-primary">
               {category}
             </span>

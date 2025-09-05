@@ -198,7 +198,7 @@ const TableBody = ({ data }) => {
           </td>
           <td className="px-4 py-6">
             {row.status === "pending" && (
-              <p className="text-yellow-dark-2 inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium">
+              <p className="inline-flex items-center justify-center rounded-full bg-yellow-light-4 px-[14px] py-1 text-sm font-medium text-yellow-dark-2">
                 Pending
               </p>
             )}
@@ -208,7 +208,7 @@ const TableBody = ({ data }) => {
               </p>
             )}
             {row.status === "shipped" && (
-              <p className="bg-green-light-6 inline-flex items-center justify-center rounded-full px-[14px] py-1 text-sm font-medium text-green-dark">
+              <p className="inline-flex items-center justify-center rounded-full bg-green-light-6 px-[14px] py-1 text-sm font-medium text-green-dark">
                 Shipped
               </p>
             )}

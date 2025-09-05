@@ -8,7 +8,7 @@ const Contact5 = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 md:w-1/3">
               <div className="mb-10 text-center">
-                <div className="bg-tg-bg mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
+                <div className="mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-tg-bg text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
                   <svg
                     width="43"
                     height="42"
@@ -37,7 +37,7 @@ const Contact5 = () => {
             </div>
             <div className="w-full px-4 md:w-1/3">
               <div className="mb-10 text-center">
-                <div className="bg-tg-bg mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
+                <div className="mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-tg-bg text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
                   <svg
                     width="42"
                     height="42"
@@ -74,7 +74,7 @@ const Contact5 = () => {
             </div>
             <div className="w-full px-4 md:w-1/3">
               <div className="mb-10 text-center">
-                <div className="bg-tg-bg mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
+                <div className="mx-auto mb-5 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-tg-bg text-primary dark:bg-white/5 sm:h-[130px] sm:w-[130px]">
                   <svg
                     width="42"
                     height="42"

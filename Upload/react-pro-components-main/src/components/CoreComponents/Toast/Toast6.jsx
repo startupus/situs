@@ -4,7 +4,7 @@ export default function Toast6() {
   return (
     <section className="bg-gray-2 py-[60px] dark:bg-dark">
       <div className="mx-auto px-4 sm:container">
-        <div className="shadow-1 dark:shadow-box-dark relative max-w-[520px] items-center justify-between rounded-lg border border-stroke bg-white px-5 py-4 dark:border-dark-3 dark:bg-dark-2 sm:flex">
+        <div className="relative max-w-[520px] items-center justify-between rounded-lg border border-stroke bg-white px-5 py-4 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark sm:flex">
           <div className="mb-4 flex items-center sm:mb-0">
             <div className="mr-[18px] h-[54px] w-full max-w-[54px] overflow-hidden rounded-full">
               <img

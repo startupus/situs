@@ -4,7 +4,7 @@ const ChatList2 = () => {
   return (
     <section className="bg-gray-2 py-[90px] dark:bg-dark">
       <div className="mx-auto px-4 md:container">
-        <div className="shadow-1 dark:shadow-box-dark mx-auto max-w-[400px] rounded-lg bg-white px-6 py-8 dark:bg-dark-2">
+        <div className="mx-auto max-w-[400px] rounded-lg bg-white px-6 py-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
           <div className="mb-8 flex items-center justify-between">
             <h3 className="text-xl font-semibold text-dark dark:text-white">
               Messages
@@ -134,7 +134,7 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`shadow-card absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 dark:bg-dark ${
+        className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

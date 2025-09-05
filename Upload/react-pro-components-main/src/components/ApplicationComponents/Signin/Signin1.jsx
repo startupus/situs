@@ -30,7 +30,7 @@ const Signin = () => {
                   />
                 </div>
               </form>
-              <p className="text-secondary-color mb-6 text-base dark:text-dark-7">
+              <p className="mb-6 text-base text-secondary-color dark:text-dark-7">
                 Connect With
               </p>
               <ul className="-mx-2 mb-12 flex justify-between">

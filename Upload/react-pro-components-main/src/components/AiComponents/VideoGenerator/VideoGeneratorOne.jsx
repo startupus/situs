@@ -18,7 +18,7 @@ function VideoGeneratorOne() {
                   Craft a captivating video effortlessly with our
                   state-of-the-art Talking Avatar Video Creator!
                 </p>
-                <button className="text-secondary-color inline-flex items-center gap-2 text-sm duration-200 hover:text-dark dark:hover:text-white">
+                <button className="inline-flex items-center gap-2 text-sm text-secondary-color duration-200 hover:text-dark dark:hover:text-white">
                   <span>
                     <svg
                       width="18"

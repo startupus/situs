@@ -22,7 +22,7 @@ const HorizontalMenu3 = () => {
               <input
                 type="text"
                 placeholder="Type to search..."
-                className="outline-hidden text-secondary-color w-full bg-transparent text-base dark:text-dark-6"
+                className="outline-hidden w-full bg-transparent text-base text-secondary-color dark:text-dark-6"
               />
             </div>
           </div>
@@ -111,7 +111,7 @@ const HorizontalMenu3 = () => {
                   </svg>
                 </span>
               </button>
-              <div className="shadow-card-2 invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
+              <div className="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
                 <SubmenuItem link="/#" name="Account Settings" />
                 <SubmenuItem link="/#" name="Dashboard" />
                 <SubmenuItem link="/#" name="Sign Out" />

@@ -20,7 +20,7 @@ const HorizontalMenu2 = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="outline-hidden text-secondary-color w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                  className="outline-hidden w-full rounded-lg border border-stroke bg-gray-2 py-[10px] pl-5 pr-10 text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-body-color dark:text-dark-6">
                   <svg
@@ -108,7 +108,7 @@ const HorizontalMenu2 = () => {
                   className="h-full w-full rounded-full object-cover object-center"
                 />
               </button>
-              <div className="shadow-card-2 invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
+              <div className="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
                 <SubmenuItem link="/#" name="Account Settings" />
                 <SubmenuItem link="/#" name="Dashboard" />
                 <SubmenuItem link="/#" name="Sign Out" />

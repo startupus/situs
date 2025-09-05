@@ -35,7 +35,7 @@ const Hero7 = () => {
                     </a>
                     <a
                       href="/#"
-                      className="shadow-1 inline-flex items-center bg-white px-6 py-3 text-base font-medium text-dark hover:text-primary dark:bg-dark-2 dark:text-white dark:shadow-none"
+                      className="inline-flex items-center bg-white px-6 py-3 text-base font-medium text-dark shadow-1 hover:text-primary dark:bg-dark-2 dark:text-white dark:shadow-none"
                     >
                       Explore Services
                       <span className="ml-2">

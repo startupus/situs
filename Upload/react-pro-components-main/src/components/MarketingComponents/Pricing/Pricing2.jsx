@@ -89,8 +89,8 @@ const PricingCard = ({
       <div
         className={` ${
           active
-            ? "bg-linear-to-b shadow-pricing relative z-10 mb-10 overflow-hidden rounded-xl bg-primary from-primary to-[#179BEE] px-8 py-10 text-center sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-10 xl:pt-[55px]"
-            : `drop-shadow-pricing relative z-10 mb-10 overflow-hidden rounded-xl border-2 border-[#D4DEFF] bg-white px-8 py-10 text-center dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-[50px] xl:pt-[45px]`
+            ? "bg-linear-to-b relative z-10 mb-10 overflow-hidden rounded-xl bg-primary from-primary to-[#179BEE] px-8 py-10 text-center shadow-pricing sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-10 xl:pt-[55px]"
+            : `relative z-10 mb-10 overflow-hidden rounded-xl border-2 border-[#D4DEFF] bg-white px-8 py-10 text-center drop-shadow-pricing dark:border-dark-3 dark:bg-dark-2 sm:p-12 lg:px-6 lg:py-10 xl:px-[50px] xl:pb-[50px] xl:pt-[45px]`
         } ${first && "lg:rounded-r-none lg:border-r-0"} ${
           last && "lg:rounded-l-none lg:border-l-0"
         } `}
@@ -120,8 +120,8 @@ const PricingCard = ({
             href="/#"
             className={` ${
               active
-                ? "shadow-1 inline-block rounded-full border border-white bg-white px-[50px] py-3 text-center text-base font-medium text-primary transition hover:bg-gray-2 hover:text-body-color"
-                : "shadow-1 inline-block rounded-full border border-stroke bg-transparent px-[50px] py-3 text-center text-base font-medium text-primary transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:shadow-none"
+                ? "inline-block rounded-full border border-white bg-white px-[50px] py-3 text-center text-base font-medium text-primary shadow-1 transition hover:bg-gray-2 hover:text-body-color"
+                : "inline-block rounded-full border border-stroke bg-transparent px-[50px] py-3 text-center text-base font-medium text-primary shadow-1 transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:shadow-none"
             } `}
           >
             {buttonText}

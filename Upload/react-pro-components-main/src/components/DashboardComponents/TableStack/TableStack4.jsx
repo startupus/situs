@@ -56,7 +56,7 @@ const TableStackItem = ({
   officePlace,
 }) => {
   return (
-    <div className="shadow-three mx-auto mb-8 w-full max-w-[570px] rounded-lg bg-white">
+    <div className="mx-auto mb-8 w-full max-w-[570px] rounded-lg bg-white shadow-three">
       <div className="flex flex-wrap justify-between border-b border-stroke px-6 pt-5">
         <h3 className="mb-5 mr-4 text-xl font-medium text-black">{title}</h3>
         <div className="mb-5 flex items-center space-x-4">

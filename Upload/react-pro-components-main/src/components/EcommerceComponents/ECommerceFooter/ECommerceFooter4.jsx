@@ -277,7 +277,7 @@ const FooterTopItem = ({ icon, title, subtitle }) => {
   return (
     <div className="w-full border-stroke px-4 dark:border-dark-3 md:w-1/3 md:even:border-x">
       <div className="mb-[60px] text-center md:mt-[60px]">
-        <div className="shadow-1 mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white dark:bg-dark-2 dark:shadow-none">
+        <div className="mx-auto mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-white shadow-1 dark:bg-dark-2 dark:shadow-none">
           {icon}
         </div>
         <div>

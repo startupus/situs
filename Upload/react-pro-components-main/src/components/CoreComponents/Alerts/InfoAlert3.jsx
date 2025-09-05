@@ -4,8 +4,8 @@ const InfoAlert3 = () => {
   return (
     <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
-        <div className="border-l-cyan-dark flex max-w-[655px] items-center rounded-md border-l-[6px] bg-white p-5 pl-6 dark:bg-dark-2">
-          <div className="bg-cyan-dark mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full text-white">
+        <div className="flex max-w-[655px] items-center rounded-md border-l-[6px] border-l-cyan-dark bg-white p-5 pl-6 dark:bg-dark-2">
+          <div className="mr-5 flex h-[36px] w-full max-w-[36px] items-center justify-center rounded-full bg-cyan-dark text-white">
             <svg
               width="18"
               height="18"

@@ -110,7 +110,7 @@ const Testimonial4 = () => {
             </SwiperSlide>
             <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-3">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="shadow-btn-3 flex h-12 w-12 items-center justify-center bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
+                <button className="flex h-12 w-12 items-center justify-center bg-white text-dark shadow-btn-3 transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
                   <svg
                     width="22"
                     height="22"
@@ -127,7 +127,7 @@ const Testimonial4 = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="shadow-btn-3 flex h-12 w-12 items-center justify-center bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
+                <button className="flex h-12 w-12 items-center justify-center bg-white text-dark shadow-btn-3 transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white dark:shadow-none">
                   <svg
                     width="22"
                     height="22"
@@ -171,7 +171,7 @@ const SingleTestimonial = ({ image, details, name, position }) => {
   return (
     <div className="relative flex justify-center">
       <div className="relative w-full pb-16">
-        <div className="shadow-testimonial-5 dark:shadow-box-dark mb-10 bg-white p-8 dark:bg-dark-2 lg:px-6 lg:py-8 xl:p-8">
+        <div className="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8">
           <div className="mb-5 flex items-center">
             <span className="mr-1">{starIcon}</span>
             <span className="mr-1">{starIcon}</span>
@@ -190,7 +190,7 @@ const SingleTestimonial = ({ image, details, name, position }) => {
               <h5 className="mb-0.5 text-sm font-semibold text-dark dark:text-white">
                 {name}
               </h5>
-              <p className="text-secondary-color text-xs dark:text-dark-6">
+              <p className="text-xs text-secondary-color dark:text-dark-6">
                 {position}
               </p>
             </div>

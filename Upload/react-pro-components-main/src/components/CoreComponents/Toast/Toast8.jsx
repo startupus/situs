@@ -5,7 +5,7 @@ export default function Toast8() {
     <section className="bg-gray-2 py-[60px] dark:bg-dark">
       <div className="mx-auto px-4 sm:container">
         <div className="flex justify-end">
-          <div className="shadow-1 dark:shadow-box-dark relative flex w-full max-w-[460px] items-center overflow-hidden rounded-lg bg-white px-5 py-[18px] dark:bg-dark-2">
+          <div className="relative flex w-full max-w-[460px] items-center overflow-hidden rounded-lg bg-white px-5 py-[18px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
             <span className="absolute bottom-0 left-0 block h-[3px] w-full bg-stroke dark:bg-dark-3">
               <span className="absolute left-0 top-0 h-full w-3/4 bg-primary"></span>
             </span>

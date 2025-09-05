@@ -270,7 +270,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`shadow-1 dark:shadow-box-dark fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white duration-200 dark:bg-dark-2 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`fixed left-0 top-0 z-40 flex h-screen w-full max-w-[300px] flex-col justify-between overflow-y-scroll bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div>
           <div className="flex items-center p-8">
@@ -297,7 +297,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <input
                 type="text"
                 placeholder="Search here..."
-                className="outline-hidden text-secondary-color h-11 w-full rounded-md border-[.5px] border-stroke bg-gray-1 pl-5 pr-9 text-sm focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white"
+                className="outline-hidden h-11 w-full rounded-md border-[.5px] border-stroke bg-gray-1 pl-5 pr-9 text-sm text-secondary-color focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-white"
               />
               <button className="absolute right-4 top-1/2 -translate-y-1/2">
                 <svg

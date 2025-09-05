@@ -47,7 +47,7 @@ const Filter2 = () => {
             </div>
 
             <div className="w-full px-4 lg:w-8/12">
-              <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 rounded-[10px] border border-stroke bg-white p-5 dark:border-dark-3 dark:bg-dark-2">
+              <div className="mb-10 rounded-[10px] border border-stroke bg-white p-5 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
                 <div className="-mx-4 flex flex-wrap items-center justify-between">
                   <div className="w-full px-4 md:w-9/12 lg:w-9/12 xl:w-8/12">
                     <div className="items-center sm:flex">
@@ -207,7 +207,7 @@ export default Filter2;
 
 const SidebarCard = ({ title, children }) => {
   return (
-    <div className="shadow-testimonial-6 dark:shadow-box-dark mb-9 rounded-[10px] border border-stroke bg-white px-8 pb-8 pt-6 dark:border-dark-3 dark:bg-dark-2 lg:px-6 xl:px-8">
+    <div className="mb-9 rounded-[10px] border border-stroke bg-white px-8 pb-8 pt-6 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 xl:px-8">
       <h3 className="border-b border-stroke pb-[18px] text-lg font-semibold text-dark dark:border-dark-3 dark:text-white">
         {title}
       </h3>
@@ -236,7 +236,7 @@ const CheckboxGroup = ({ title, id }) => {
         type="radio"
         name="size"
         id={id}
-        className="filter-size peer sr-only"
+        className="peer filter-size sr-only"
       ></input>
       <label
         htmlFor={id}

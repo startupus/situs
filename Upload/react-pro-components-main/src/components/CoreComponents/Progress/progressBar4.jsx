@@ -25,7 +25,7 @@ const ProgressBar4 = () => {
       </div>
       <div className="mb-8">
         <div className="relative h-2.5 w-full rounded-2xl bg-stroke dark:bg-dark-3">
-          <div className="bg-cyan absolute left-0 top-0 h-full w-[45%] rounded-2xl"></div>
+          <div className="absolute left-0 top-0 h-full w-[45%] rounded-2xl bg-cyan"></div>
         </div>
       </div>
     </div>

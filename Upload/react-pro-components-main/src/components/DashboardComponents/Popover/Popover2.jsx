@@ -11,7 +11,7 @@ const Popover2 = () => {
           >
             Popover Text
           </a>
-          <div className="dark:shadow-box-dark invisible absolute left-0 right-0 top-full mx-auto w-[312px] rounded-sm bg-white text-center opacity-0 shadow-2 group-hover:visible group-hover:opacity-100 dark:bg-dark-2">
+          <div className="invisible absolute left-0 right-0 top-full mx-auto w-[312px] rounded-sm bg-white text-center opacity-0 shadow-2 group-hover:visible group-hover:opacity-100 dark:bg-dark-2 dark:shadow-box-dark">
             <span className="absolute -top-[9px] left-1/2 -translate-x-1/2 text-white dark:text-dark-2">
               <svg
                 width={18}

@@ -21,7 +21,7 @@ function CodeGeneratorOne() {
                 <p className="mb-4 text-base text-body-color dark:text-dark-6">
                   Create a 5 Column table with HTML Css and js
                 </p>
-                <button className="text-secondary-color inline-flex items-center gap-2 text-sm duration-200 hover:text-dark dark:hover:text-white">
+                <button className="inline-flex items-center gap-2 text-sm text-secondary-color duration-200 hover:text-dark dark:hover:text-white">
                   <span>
                     <svg
                       width="18"

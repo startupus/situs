@@ -271,7 +271,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <div
-        className={`shadow-1 dark:shadow-box-dark absolute left-0 top-0 z-40 flex h-full min-h-screen w-full max-w-[90px] flex-col justify-between bg-white duration-200 dark:bg-dark-2 xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
+        className={`absolute left-0 top-0 z-40 flex h-full min-h-screen w-full max-w-[90px] flex-col justify-between bg-white shadow-1 duration-200 dark:bg-dark-2 dark:shadow-box-dark xl:translate-x-0 ${sidebarOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div>
           <div className="px-7 pb-9 pt-10">
@@ -291,7 +291,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       <span>{item.icon}</span>
                     </Link>
 
-                    <span className="shadow-1 dark:shadow-box-dark invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color group-hover:visible dark:bg-dark-2 dark:text-dark-6">
+                    <span className="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[6px] text-sm text-body-color shadow-1 group-hover:visible dark:bg-dark-2 dark:text-dark-6 dark:shadow-box-dark">
                       <span className="absolute -left-2 top-1/2 -translate-y-1/2 text-white dark:text-dark-2">
                         <svg
                           width="9"

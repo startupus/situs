@@ -118,7 +118,7 @@ const AvatarItem = ({ img, name, arrow, active, children }) => {
           ref={dropdown}
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
-          className={`shadow-card dark:shadow-box-dark absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 dark:bg-dark-2 ${
+          className={`absolute right-0 top-full z-40 w-[200px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark-2 dark:shadow-box-dark ${
             dropdownOpen === true ? "block" : "hidden"
           }`}
         >

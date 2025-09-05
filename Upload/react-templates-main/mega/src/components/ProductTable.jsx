@@ -197,7 +197,7 @@ const ProductTable = () => {
                   </td>
                   <td className="px-4 py-6">
                     <p
-                      className={`inline-flex items-center justify-center rounded-full px-[14px] py-1 text-sm font-medium ${item.status === "Pending" && "text-yellow-dark-2 bg-yellow-light-4"} ${item.status === "Cancelled" && "bg-red-light-5 text-red-dark"} ${item.status === "Shipped" && "bg-green-light-6 text-green-dark"}`}
+                      className={`inline-flex items-center justify-center rounded-full px-[14px] py-1 text-sm font-medium ${item.status === "Pending" && "bg-yellow-light-4 text-yellow-dark-2"} ${item.status === "Cancelled" && "bg-red-light-5 text-red-dark"} ${item.status === "Shipped" && "bg-green-light-6 text-green-dark"}`}
                     >
                       {item.status}
                     </p>

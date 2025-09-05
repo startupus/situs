@@ -32,6 +32,7 @@ import { envValidationSchema } from './config/env.validation';
 import { corsConfig } from './config/cors.config';
 import { rateLimitConfig } from './config/rate-limit.config';
 import { accessConfig } from './config/access.config';
+import { pathsConfig } from './config/paths.config';
 import { RolesGuard } from './common/guards/roles.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UiModule } from './ui/ui.module';
@@ -56,7 +57,7 @@ import { TenantMonitoringModule } from './monitoring/tenant-monitoring.module';
     // Конфигурация приложения
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, jwtConfig, databaseConfig, corsConfig, rateLimitConfig, accessConfig],
+      load: [appConfig, jwtConfig, databaseConfig, corsConfig, rateLimitConfig, accessConfig, pathsConfig],
       envFilePath: ['.env.local', '.env'],
       validationSchema: envValidationSchema,
     }),

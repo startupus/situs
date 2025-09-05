@@ -12,7 +12,7 @@ declare global {
 
 /**
  * Middleware для извлечения tenant ID из заголовков запроса
- * 
+ *
  * Поддерживает несколько стратегий:
  * - x-tenant-id заголовок
  * - subdomain (например, tenant1.example.com)
@@ -24,7 +24,7 @@ export class TenantResolverMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     // 1. Проверяем заголовок x-tenant-id
     let tenantId = req.headers['x-tenant-id'] as string;
-    
+
     if (tenantId) {
       req.tenantId = tenantId;
       next();
@@ -86,8 +86,8 @@ export class TenantResolverMiddleware implements NestMiddleware {
       const jsonPayload = decodeURIComponent(
         atob(base64)
           .split('')
-          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join(''),
       );
       return JSON.parse(jsonPayload);
     } catch (error) {

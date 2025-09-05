@@ -48,6 +48,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/scripts ./scripts
+# Include demo-data used by seed scripts
+COPY --from=builder /app/src/server/demo-data ./src/server/demo-data
 
 # Environment variables
 ENV NODE_ENV=production

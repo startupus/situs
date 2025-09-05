@@ -85,7 +85,7 @@ const HorizontalMenu6 = () => {
                     dropdownOpen === true
                       ? "visible top-full opacity-100"
                       : "invisible top-[120%] opacity-0"
-                  } shadow-card-2 absolute left-0 mt-2 w-[250px] rounded bg-primary duration-200`}
+                  } absolute left-0 mt-2 w-[250px] rounded bg-primary shadow-card-2 duration-200`}
                 >
                   <ul className="space-y-5 px-5 py-6">
                     <NavItem link="/#" menu="Dashboard" />
@@ -221,7 +221,7 @@ const HorizontalMenu6 = () => {
                     </svg>
                   </span>
                 </div>
-                <div className="shadow-card-2 invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
+                <div className="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
                   <DropdownItem link="/#" name="Account Settings" />
                   <DropdownItem link="/#" name="Dashboard" />
                   <DropdownItem link="/#" name="Sign Out" />

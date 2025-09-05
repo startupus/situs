@@ -34,7 +34,7 @@ export default Card11;
 const SingleCard = ({ image, CardDescription, CardTitle, titleHref }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="shadow-1 hover:shadow-3 dark:shadow-card mb-10 rounded-lg bg-white p-4 pb-6 duration-300 dark:bg-dark-2">
+      <div className="mb-10 rounded-lg bg-white p-4 pb-6 shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card">
         <div className="mb-6 w-full overflow-hidden rounded-md">
           <img
             src={image}

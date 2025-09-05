@@ -215,7 +215,7 @@ const ECommerceNavbar5 = () => {
                         !isWishlist && "hidden"
                       }`}
                     >
-                      <div className="shadow-1 dark:shadow-box-dark overflow-hidden rounded-lg border border-stroke bg-white px-6 py-8 dark:border-dark-3 dark:bg-dark-2">
+                      <div className="overflow-hidden rounded-lg border border-stroke bg-white px-6 py-8 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
                         <div className="border-b border-stroke pb-3 dark:border-dark-3">
                           <div className="-mx-1 flex items-center justify-between pb-4">
                             <CartItem
@@ -278,7 +278,7 @@ const ECommerceNavbar5 = () => {
                         !isCartOpen && "hidden"
                       }`}
                     >
-                      <div className="shadow-1 dark:shadow-box-dark overflow-hidden rounded-lg bg-white p-8 dark:bg-dark-2">
+                      <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
                         <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
                           <div className="-mx-1 flex items-center justify-between pb-4">
                             <CartItem

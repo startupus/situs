@@ -90,7 +90,7 @@ const ProductCard = ({ subtitle, title, details, link, img, bgColor }) => {
             <div className="w-full max-w-[36px] text-right">
               <a
                 href={link}
-                className="drop-shadow-three flex h-[34px] w-[34px] items-center justify-center rounded-full bg-white text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white"
+                className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-white text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white"
               >
                 <svg
                   width={16}

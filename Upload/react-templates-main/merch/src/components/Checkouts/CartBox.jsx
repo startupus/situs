@@ -27,7 +27,7 @@ const cartList = [
 const CartBox = () => {
   return (
     <>
-      <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-8 dark:border-dark-3 dark:bg-dark-2">
+      <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
         <div className="mb-4 border-b border-stroke pb-4 dark:border-dark-3">
           <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
             Shopping Cart

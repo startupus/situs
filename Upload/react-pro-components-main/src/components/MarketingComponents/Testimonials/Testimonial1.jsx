@@ -42,7 +42,7 @@ const Testimonial = () => {
             </SwiperSlide>
             <div className="absolute left-0 right-0 z-10 flex items-center justify-center gap-5 sm:bottom-0">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="d hover:drop-shadow-testimonial flex h-[60px] w-[60px] items-center justify-center rounded-full border border-stroke bg-white text-dark transition-all hover:border-transparent dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:drop-shadow-none">
+                <button className="d flex h-[60px] w-[60px] items-center justify-center rounded-full border border-stroke bg-white text-dark transition-all hover:border-transparent hover:drop-shadow-testimonial dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:drop-shadow-none">
                   <svg
                     width="20"
                     height="21"
@@ -59,7 +59,7 @@ const Testimonial = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="d hover:drop-shadow-testimonial flex h-[60px] w-[60px] items-center justify-center rounded-full border border-stroke bg-white text-dark transition-all hover:border-transparent dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:drop-shadow-none">
+                <button className="d flex h-[60px] w-[60px] items-center justify-center rounded-full border border-stroke bg-white text-dark transition-all hover:border-transparent hover:drop-shadow-testimonial dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:hover:drop-shadow-none">
                   <svg
                     width="20"
                     height="21"

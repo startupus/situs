@@ -34,9 +34,35 @@ PORT=3002 npm run serve:api:dist
 npm run dev:situs
 ```
 
+### Запуск в Docker (рекомендуется для демо)
+
+```bash
+# 1) Поднять стек (Postgres, API, Web)
+docker compose up -d --build
+
+# 2) Проверка здоровья API
+curl -sf http://localhost:3002/health && echo "API OK"
+
+# 3) Открыть UI
+# Веб-интерфейс доступен на http://localhost:5178/
+open http://localhost:5178/projects 2>/dev/null || xdg-open http://localhost:5178/projects 2>/dev/null || true
+```
+
+Учётные данные для входа:
+
+- Email: `qa+admin2@situs.local` Пароль: `Admin123!`
+- Email: `admin@situs.local` Пароль: `Admin123!`
+
+Примечания:
+
+- Контейнер API автоматически накатывает миграции и сиды (системный проект админки, демо‑проекты, стартовые меню).
+- Проксирование `/api` настроено через Nginx в контейнере `situs-web`.
+- UI по умолчанию на порту `5178` (см. `docker-compose.yml`).
+
 ### Доступ к приложению
 
-- **Frontend**: http://localhost:5177
+- **Frontend (dev)**: http://localhost:5177
+- **Frontend (Docker)**: http://localhost:5178
 - **Backend API**: http://localhost:3002
 - **API Health Check**: http://localhost:3002/health
 

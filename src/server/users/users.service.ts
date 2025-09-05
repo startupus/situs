@@ -41,8 +41,13 @@ export class UsersService {
           : 'INACTIVE'
         : (createUserDto.status as any) || 'PENDING';
 
-    // Хешируем пароль если он предоставлен
-    const hashedPassword = createUserDto.password ? await this.hashPassword(createUserDto.password) : null;
+    // Хешируем пароль если он предоставлен (избегаем двойного хэширования)
+    let hashedPassword: string | null = null;
+    if (createUserDto.password) {
+      const pwd = createUserDto.password;
+      const looksHashed = /^\$2[aby]?\$\d{2}\$[./A-Za-z0-9]{53}$/.test(pwd);
+      hashedPassword = looksHashed ? pwd : await this.hashPassword(pwd);
+    }
 
     const user = await this.prisma.user.create({
       data: {

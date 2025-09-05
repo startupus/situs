@@ -68,7 +68,7 @@ const ChatBox2 = () => {
               />
             </div>
 
-            <form className="shadow-team-3 dark:shadow-box-dark flex items-center justify-between space-x-[14px] rounded-md bg-white p-4 dark:bg-dark-2">
+            <form className="flex items-center justify-between space-x-[14px] rounded-md bg-white p-4 shadow-team-3 dark:bg-dark-2 dark:shadow-box-dark">
               <button className="text-body-color dark:text-dark-6">
                 <svg
                   width="18"
@@ -168,7 +168,7 @@ const Chat = ({ img, time, text, activePartner }) => {
       </div>
 
       <div>
-        <div className="shadow-card mb-[10px] inline-block rounded-[5px] bg-white px-5 py-3 dark:bg-dark-3">
+        <div className="mb-[10px] inline-block rounded-[5px] bg-white px-5 py-3 shadow-card dark:bg-dark-3">
           <p className="text-base text-body-color dark:text-dark-6">{text}</p>
         </div>
         <span className="block text-sm text-body-color dark:text-dark-6">
@@ -183,7 +183,7 @@ const Reply = ({ img, time, text, active }) => {
   return (
     <div className={`ml-auto flex w-full max-w-[470px] justify-end`}>
       <div>
-        <div className="shadow-card mb-[10px] inline-block rounded-sm bg-dark px-5 py-3">
+        <div className="mb-[10px] inline-block rounded-sm bg-dark px-5 py-3 shadow-card">
           <p className="text-base text-white">{text}</p>
         </div>
         <span className="block text-right text-sm text-body-color dark:text-dark-6">

@@ -37,7 +37,7 @@ function BlogItem({ tag, publishedDate, title, paragraph }) {
       <div className="mb-8 rounded-xl bg-dark-2 p-8">
         <div className="mb-5 flex items-center gap-3">
           <span className="text-base uppercase text-white"> {tag} </span>
-          <span className="bg-secondary-color block aspect-square h-1.5 w-1.5 rounded-full"></span>
+          <span className="block aspect-square h-1.5 w-1.5 rounded-full bg-secondary-color"></span>
           <span className="text-dark-6"> {publishedDate} </span>
         </div>
         <a

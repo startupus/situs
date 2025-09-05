@@ -70,7 +70,7 @@ const Hero13 = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
                 <div className="mb-6 flex items-center space-x-4">
-                  <button className="shadow-btn-2 flex h-[50px] w-[50px] items-center justify-center rounded-md border border-stroke bg-transparent text-sm font-medium text-body-color dark:border-dark-3 dark:text-dark-6 sm:w-auto sm:px-7">
+                  <button className="flex h-[50px] w-[50px] items-center justify-center rounded-md border border-stroke bg-transparent text-sm font-medium text-body-color shadow-btn-2 dark:border-dark-3 dark:text-dark-6 sm:w-auto sm:px-7">
                     <span className="sm:pr-3">
                       <svg
                         width="18"
@@ -152,7 +152,7 @@ const Hero13 = () => {
                   </button>
                 </div>
                 <div className="relative z-10 mb-8 flex items-center justify-center">
-                  <span className="bg-form-stroke absolute left-0 top-1/2 -z-10 hidden h-px w-full -translate-y-1/2 sm:block"></span>
+                  <span className="absolute left-0 top-1/2 -z-10 hidden h-px w-full -translate-y-1/2 bg-form-stroke sm:block"></span>
                   <p className="bg-white text-base font-medium text-body-color dark:bg-dark-2 dark:text-dark-6 sm:px-4">
                     Or create account with email
                   </p>
@@ -273,7 +273,7 @@ const Navbar = () => {
             <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
               <a
                 href="/#"
-                className="shadow-1 rounded-md bg-white px-7 py-3 text-base font-medium text-primary hover:bg-gray-2 hover:text-body-color dark:shadow-none"
+                className="rounded-md bg-white px-7 py-3 text-base font-medium text-primary shadow-1 hover:bg-gray-2 hover:text-body-color dark:shadow-none"
               >
                 Get Started
               </a>

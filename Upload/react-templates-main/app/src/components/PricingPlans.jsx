@@ -66,7 +66,7 @@ const PricingPlans = () => {
             </div>
           </div>
 
-          <div className="shadow-pricing-3 relative z-10 overflow-hidden rounded-xl bg-white p-11 dark:bg-dark-2">
+          <div className="relative z-10 overflow-hidden rounded-xl bg-white p-11 shadow-pricing-3 dark:bg-dark-2">
             <div className="w-full overflow-x-auto">
               <table className="table-auto">
                 <thead>

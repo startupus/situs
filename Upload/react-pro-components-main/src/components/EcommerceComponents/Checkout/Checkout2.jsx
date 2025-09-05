@@ -6,7 +6,7 @@ const Checkout2 = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
-            <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-8 dark:border-dark-3 dark:bg-dark-2">
+            <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white p-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
               <div className="mb-4 border-b border-stroke pb-4 dark:border-dark-3">
                 <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
                   Shopping Cart
@@ -110,7 +110,7 @@ const Checkout2 = () => {
               </div>
             </div>
 
-            <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-8 pb-8 pt-6 dark:border-dark-3 dark:bg-dark-2">
+            <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-8 pb-8 pt-6 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
               <div className="mb-8 border-b border-stroke pb-4 dark:border-dark-3">
                 <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
                   Coupon Code
@@ -134,7 +134,7 @@ const Checkout2 = () => {
           </div>
 
           <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
-            <div className="shadow-testimonial-6 dark:shadow-box-dark mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-5 py-8 dark:border-dark-3 dark:bg-dark-2 xl:p-9">
+            <div className="mb-10 overflow-hidden rounded-[10px] border border-stroke bg-white px-5 py-8 shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark xl:p-9">
               <FormStep title="Your Personal Details">
                 <InputGroup
                   labelTitle="First Name"

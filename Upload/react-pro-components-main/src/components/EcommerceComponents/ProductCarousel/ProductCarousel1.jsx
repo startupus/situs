@@ -127,7 +127,7 @@ const ProductCarousel = () => {
 
             <div className="absolute -left-5 -right-[22px] top-1/2 z-50 flex -translate-y-16 items-center justify-between sm:-left-[24px]">
               <div className="prev-arrow cursor-pointer" onClick={handlePrev}>
-                <button className="shadow-input mx-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
+                <button className="mx-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-dark shadow-input transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
                   <svg
                     width={20}
                     height={20}
@@ -141,7 +141,7 @@ const ProductCarousel = () => {
                 </button>
               </div>
               <div className="next-arrow cursor-pointer" onClick={handleNext}>
-                <button className="shadow-input mx-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-dark transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
+                <button className="mx-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-dark shadow-input transition-all hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
                   <svg
                     width={20}
                     height={20}
@@ -211,7 +211,7 @@ const ProductCard = ({ image, newItem, hotItem, link, name, price }) => {
         )}
         <div className="absolute bottom-7 left-0 right-0 mx-auto flex w-full items-center justify-center space-x-3">
           <div className="group relative">
-            <button className="drop-shadow-three mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
+            <button className="mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
               <svg
                 width={18}
                 height={18}
@@ -225,13 +225,13 @@ const ProductCard = ({ image, newItem, hotItem, link, name, price }) => {
                 <path d="M16.3687 0.506226H14.85C14.175 0.506226 13.5843 1.01248 13.5 1.68748L13.05 4.92185H1.9406C1.65935 4.92185 1.3781 5.06248 1.18122 5.28748C1.01247 5.51248 0.928096 5.82185 1.01247 6.1031C1.01247 6.13123 1.01247 6.13123 1.01247 6.15935L2.75622 11.4187C2.86872 11.8125 3.23435 12.0937 3.65622 12.0937H11.4187C12.4593 12.0937 13.3593 11.3062 13.5 10.2656L14.6812 1.85623C14.6812 1.79998 14.7375 1.77185 14.7937 1.77185H16.3125C16.65 1.77185 16.9593 1.4906 16.9593 1.12498C16.9593 0.759351 16.7062 0.506226 16.3687 0.506226ZM12.2906 10.0687C12.2343 10.4906 11.8687 10.8 11.4468 10.8H3.90935L2.3906 6.18748H12.8531L12.2906 10.0687Z" />
               </svg>
             </button>
-            <div className="shadow-1 absolute -top-full left-1/2 z-50 mb-10 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[5px] text-sm text-dark opacity-0 group-hover:opacity-100 dark:bg-dark-2 dark:text-white dark:shadow-none">
+            <div className="absolute -top-full left-1/2 z-50 mb-10 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[5px] text-sm text-dark opacity-0 shadow-1 group-hover:opacity-100 dark:bg-dark-2 dark:text-white dark:shadow-none">
               <div className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-white dark:bg-dark-2"></div>
               <span>Add to Card</span>
             </div>
           </div>
           <div className="group relative">
-            <button className="drop-shadow-three mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
+            <button className="mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
               <svg
                 width={18}
                 height={18}
@@ -244,13 +244,13 @@ const ProductCard = ({ image, newItem, hotItem, link, name, price }) => {
                 <path d="M17.2125 8.01567C15.6094 5.62505 13.3875 3.2063 9 3.2063C4.6125 3.2063 2.39062 5.62505 0.7875 8.01567C0.39375 8.6063 0.39375 9.3938 0.7875 9.98442C2.39062 12.3469 4.6125 14.7938 9 14.7938C13.3875 14.7938 15.6094 12.3469 17.2125 9.98442C17.6063 9.36567 17.6063 8.6063 17.2125 8.01567ZM16.1719 9.2813C14.1187 12.2907 12.0656 13.5282 9 13.5282C5.93438 13.5282 3.88125 12.2907 1.82812 9.2813C1.71563 9.11255 1.71563 8.88755 1.82812 8.7188C3.88125 5.70942 5.93438 4.47192 9 4.47192C12.0656 4.47192 14.1187 5.70942 16.1719 8.7188C16.2563 8.88755 16.2563 9.11255 16.1719 9.2813Z" />
               </svg>
             </button>
-            <div className="shadow-1 absolute -top-full left-1/2 z-50 mb-10 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[5px] text-sm text-dark opacity-0 group-hover:opacity-100 dark:bg-dark-2 dark:text-white dark:shadow-none">
+            <div className="absolute -top-full left-1/2 z-50 mb-10 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[5px] text-sm text-dark opacity-0 shadow-1 group-hover:opacity-100 dark:bg-dark-2 dark:text-white dark:shadow-none">
               <div className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-white dark:bg-dark-2"></div>
               <span>Quick View</span>
             </div>
           </div>
           <div className="group relative">
-            <button className="drop-shadow-three mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
+            <button className="mx-auto mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-white text-center text-dark drop-shadow-three hover:bg-primary hover:text-white dark:bg-dark-2 dark:text-white">
               <svg
                 width={18}
                 height={18}
@@ -262,7 +262,7 @@ const ProductCard = ({ image, newItem, hotItem, link, name, price }) => {
                 <path d="M8.99998 16.5938C8.63435 16.5938 8.26873 16.4531 7.98748 16.2C7.3406 15.6375 6.74998 15.1313 6.2156 14.6813C4.61248 13.3031 3.20623 12.15 2.22185 10.9688C1.06873 9.5625 0.506226 8.24062 0.506226 6.75C0.506226 5.31562 1.01248 3.96563 1.91248 2.98125C2.8406 1.96875 4.13435 1.40625 5.51248 1.40625C6.5531 1.40625 7.53748 1.74375 8.38123 2.39062C8.60623 2.55938 8.8031 2.72812 8.99998 2.95312C9.19685 2.75625 9.39373 2.55938 9.61873 2.39062C10.4625 1.74375 11.4187 1.40625 12.4875 1.40625C13.8937 1.40625 15.1594 1.96875 16.0875 2.98125C17.0156 3.96563 17.4937 5.31562 17.4937 6.75C17.4937 8.24062 16.9594 9.5625 15.7781 10.9688C14.7937 12.15 13.3875 13.3313 11.7844 14.6813C11.25 15.1313 10.6312 15.6656 9.98435 16.2C9.73123 16.4531 9.3656 16.5938 8.99998 16.5938ZM5.51248 2.67188C4.47185 2.67188 3.5156 3.09375 2.81248 3.825C2.13748 4.58438 1.77185 5.625 1.77185 6.75C1.77185 7.90312 2.22185 9 3.1781 10.1531C4.10623 11.25 5.45623 12.4031 7.0031 13.725C7.53748 14.175 8.15623 14.7094 8.8031 15.2719C8.9156 15.3562 9.08435 15.3562 9.19685 15.2719C9.84373 14.7094 10.4625 14.2031 10.9969 13.725C12.5719 12.375 13.9219 11.25 14.8219 10.1531C15.7781 9 16.2281 7.90312 16.2281 6.75C16.2281 5.625 15.8344 4.58437 15.1594 3.85312C14.4562 3.09375 13.5 2.67188 12.4875 2.67188C11.7281 2.67188 11.025 2.925 10.4062 3.375C10.1531 3.57188 9.9281 3.79688 9.7031 4.05C9.53435 4.24687 9.28123 4.3875 8.99998 4.3875C8.71873 4.3875 8.49373 4.275 8.29685 4.05C8.07185 3.79688 7.84685 3.57188 7.59373 3.375C7.0031 2.925 6.29998 2.67188 5.51248 2.67188Z" />
               </svg>
             </button>
-            <div className="shadow-1 absolute -top-full left-1/2 z-50 mb-10 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[5px] text-sm text-dark opacity-0 group-hover:opacity-100 dark:bg-dark-2 dark:text-white dark:shadow-none">
+            <div className="absolute -top-full left-1/2 z-50 mb-10 -translate-x-1/2 whitespace-nowrap rounded-[5px] bg-white px-[14px] py-[5px] text-sm text-dark opacity-0 shadow-1 group-hover:opacity-100 dark:bg-dark-2 dark:text-white dark:shadow-none">
               <div className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-white dark:bg-dark-2"></div>
               <span>Favorite</span>
             </div>

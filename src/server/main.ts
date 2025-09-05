@@ -1,7 +1,8 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { AppModule } from './app.module';
+// NOTE: Do not import AppModule at top-level to avoid eager side-effects during minimal boot
+import { Module, Controller, Get } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
@@ -28,10 +29,35 @@ process.on('unhandledRejection', (reason) => {
  * - Swagger документацию
  * - Глобальные фильтры и интерцепторы
  */
+let __keepAlive: any | undefined;
+
 async function bootstrap() {
   try {
     console.log('[BOOT] Creating Nest application...');
-    const app = await NestFactory.create(AppModule);
+    // Minimal fallback module for diagnostics
+    @Controller()
+    class MinimalController {
+      @Get('/health')
+      health() {
+        return { status: 'ok', ts: new Date().toISOString() } as const;
+      }
+      @Get('/')
+      root() {
+        return { ok: true, service: 'situs-api(minimal)' } as const;
+      }
+    }
+    @Module({ controllers: [MinimalController] })
+    class MinimalModule {}
+
+    const useMinimal = process.env.SITUS_BOOT_MINIMAL === '1';
+    const RootModule: any = useMinimal ? MinimalModule : require('./app.module').AppModule;
+
+    // Keep event loop alive during bootstrap under tsx until server listens
+    __keepAlive = setInterval(() => {}, 1 << 30);
+    const app = await NestFactory.create(RootModule, {
+      bufferLogs: false,
+      logger: ['log', 'error', 'warn', 'debug', 'verbose'],
+    });
     console.log('[BOOT] Nest application created');
 
     console.log('[BOOT] Application created successfully, starting configuration...');
@@ -39,24 +65,53 @@ async function bootstrap() {
     // Минимальная конфигурация для стабильного запуска
 
     // CORS настройки
-    const configService = app.get(ConfigService);
-    const corsConfig = configService.get('cors');
-    const origins = corsConfig.origins || [];
-    
-    // В production режиме origins обязательны
-    if (corsConfig.isProduction && origins.length === 0) {
-      throw new Error('CORS_ORIGINS must be configured in production environment');
+    let corsConfig: any = null;
+    let pathsConfig: any = null;
+    try {
+      const configService = app.get(ConfigService);
+      corsConfig = configService.get('cors') as any;
+      pathsConfig = configService.get('paths') as any;
+    } catch {}
+    try {
+      const rawOrigins = corsConfig && 'origins' in corsConfig ? corsConfig.origins : undefined;
+      let originOption: any;
+      if (Array.isArray(rawOrigins)) {
+        originOption = rawOrigins.length ? rawOrigins : corsConfig.isProduction ? false : true;
+      } else if (typeof rawOrigins === 'boolean') {
+        originOption = rawOrigins;
+      } else if (typeof rawOrigins === 'string') {
+        const list = rawOrigins
+          .split(',')
+          .map((s: string) => s.trim())
+          .filter(Boolean);
+        originOption = list.length ? list : corsConfig.isProduction ? false : true;
+      } else {
+        originOption = corsConfig && corsConfig.isProduction ? false : true;
+      }
+      app.enableCors({
+        origin: originOption,
+        credentials: corsConfig?.allowCredentials,
+        methods: corsConfig?.allowedMethods,
+        allowedHeaders: corsConfig?.allowedHeaders,
+        exposedHeaders: corsConfig?.exposedHeaders,
+        maxAge: corsConfig?.maxAge,
+      });
+      console.log('[BOOT] CORS enabled with origin =', originOption);
+    } catch (e) {
+      console.error('[BOOT] CORS setup failed, enabling permissive CORS for development:', (e as any)?.message || e);
+      app.enableCors({ origin: true, credentials: true });
     }
-    
-    app.enableCors({
-      origin: origins.length ? origins : (corsConfig.isProduction ? false : true),
-      credentials: corsConfig.allowCredentials,
-      methods: corsConfig.allowedMethods,
-      allowedHeaders: corsConfig.allowedHeaders,
-      exposedHeaders: corsConfig.exposedHeaders,
-      maxAge: corsConfig.maxAge,
-    });
-    console.log('[BOOT] CORS enabled with', origins.length ? origins : (corsConfig.isProduction ? 'none (production)' : 'any (development)'));
+    console.log(
+      '[BOOT] Paths config loaded:',
+      pathsConfig
+        ? {
+            environment: pathsConfig.environment,
+            isDocker: pathsConfig.isDocker,
+            apiBaseUrl: pathsConfig.api?.baseUrl,
+            frontendBaseUrl: pathsConfig.frontend?.baseUrl,
+          }
+        : 'no paths config',
+    );
 
     // Trust proxy для корректного Host/X-Forwarded-Host
     try {
@@ -116,8 +171,10 @@ async function bootstrap() {
     const port = Number(process.env.PORT || 3002);
     console.log(`[BOOT] About to listen on port ${port}`);
 
+    // Явная инициализация перед listen для лучшей диагностики
+    await app.init();
     try {
-      await app.listen(port);
+      await app.listen(port, '0.0.0.0');
       console.log(`[BOOT] Server started successfully on port ${port}`);
     } catch (error) {
       console.error('[BOOT] Failed to start server:', error);
@@ -141,6 +198,10 @@ async function bootstrap() {
   } catch (error) {
     console.error('[BOOT] Bootstrap failed:', error);
     process.exit(1);
+  } finally {
+    try {
+      if (__keepAlive) clearInterval(__keepAlive);
+    } catch {}
   }
 }
 
@@ -166,3 +227,15 @@ bootstrap().catch((error) => {
   console.error('❌ Ошибка запуска сервера:', error);
   process.exit(1);
 });
+
+// Диагностика преждевременного завершения цикла событий (dev-only)
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    process.on('beforeExit', (code) => {
+      try {
+        const handles = (process as any)._getActiveHandles?.() || [];
+        console.warn('[DIAG] beforeExit code =', code, 'activeHandles =', handles.length);
+      } catch {}
+    });
+  } catch {}
+}

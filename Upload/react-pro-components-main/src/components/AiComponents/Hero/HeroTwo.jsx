@@ -7,7 +7,7 @@ function HeroTwo() {
 
       <section className="relative z-10 overflow-hidden bg-white pb-10 dark:bg-dark">
         <div className="mx-auto w-full px-4 md:px-6 lg:px-10">
-          <div className="dark:bg-dark-700 relative z-10 overflow-hidden rounded-[20px] bg-[#EEF2FF] py-[70px]">
+          <div className="relative z-10 overflow-hidden rounded-[20px] bg-[#EEF2FF] py-[70px] dark:bg-dark-700">
             <div className="container">
               <div className="-mx-4 flex flex-wrap items-center">
                 <div className="w-full px-4 lg:w-1/2">

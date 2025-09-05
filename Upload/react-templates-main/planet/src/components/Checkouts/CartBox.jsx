@@ -35,7 +35,7 @@ const CartBox = () => {
       <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white">
         Your Order
       </h3>
-      <div className="shadow-testimonial-6 dark:shadow-box-dark mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white dark:border-dark-3 dark:bg-dark-2">
+      <div className="mb-8 overflow-hidden rounded-[10px] border border-stroke bg-white shadow-testimonial-6 dark:border-dark-3 dark:bg-dark-2 dark:shadow-box-dark">
         <div className="flex items-center justify-between bg-[#f9f9f9] px-6 py-[18px] dark:bg-dark-4 2xl:px-8">
           <p className="text-base font-medium text-dark dark:text-white">
             Product

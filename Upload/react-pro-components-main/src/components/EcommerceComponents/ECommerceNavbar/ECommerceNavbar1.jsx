@@ -110,7 +110,7 @@ const ECommerceNavbar = () => {
                       <input
                         type="text"
                         placeholder="Search Components or UI"
-                        className="outline-hidden shadow-1 w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color focus:border-primary focus-visible:shadow-none dark:bg-dark-2 dark:text-dark-6 dark:shadow-none"
+                        className="outline-hidden w-full rounded-md border border-transparent bg-white py-4 pl-5 pr-8 text-body-color shadow-1 focus:border-primary focus-visible:shadow-none dark:bg-dark-2 dark:text-dark-6 dark:shadow-none"
                       />
                       <button className="absolute right-5 top-1/2 -translate-y-1/2 text-body-color">
                         <svg
@@ -161,7 +161,7 @@ const ECommerceNavbar = () => {
                       !isCartOpen && "hidden"
                     }`}
                   >
-                    <div className="shadow-1 dark:shadow-box-dark overflow-hidden rounded-lg bg-white p-8 dark:bg-dark-2">
+                    <div className="overflow-hidden rounded-lg bg-white p-8 shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
                       <div className="mb-5 border-b border-stroke pb-3 dark:border-dark-3">
                         <div className="-mx-1 flex items-center justify-between pb-4">
                           <CartItem

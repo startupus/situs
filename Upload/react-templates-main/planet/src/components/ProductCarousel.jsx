@@ -133,7 +133,7 @@ const ProductCarousel = () => {
           >
             {productList.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="shadow-1 dark:shadow-box-dark mb-10 overflow-hidden rounded-lg bg-white dark:bg-dark-2">
+                <div className="mb-10 overflow-hidden rounded-lg bg-white shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
                   <div className="relative">
                     <img src={item.image} alt="product" className="w-full" />
                     {item.discount && (
@@ -164,7 +164,7 @@ const ProductCarousel = () => {
                     <p className="text-lg font-medium text-dark dark:text-white">
                       {item.priceBeforeDiscount && (
                         <span>
-                          <span className="text-secondary-color text-base line-through dark:text-dark-6">
+                          <span className="text-base text-secondary-color line-through dark:text-dark-6">
                             {item.price}
                             {"  "}
                           </span>

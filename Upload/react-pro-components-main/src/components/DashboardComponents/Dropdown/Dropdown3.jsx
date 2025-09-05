@@ -58,7 +58,7 @@ const Dropdown3 = () => {
                     </span>
                   </button>
                   <div
-                    className={`shadow-1 dark:shadow-box-dark absolute left-0 z-40 mt-2 w-full rounded-md bg-dark py-[10px] transition-all dark:bg-dark-2 ${
+                    className={`absolute left-0 z-40 mt-2 w-full rounded-md bg-dark py-[10px] shadow-1 transition-all dark:bg-dark-2 dark:shadow-box-dark ${
                       dropdownOpen
                         ? "visible top-full opacity-100"
                         : "invisible top-[110%] opacity-0"

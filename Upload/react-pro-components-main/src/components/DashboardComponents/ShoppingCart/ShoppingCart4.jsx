@@ -40,7 +40,7 @@ const ShoppingCart4 = () => {
                 <form className="flex">
                   <input
                     type="email"
-                    className="outline-hidden border-form-stroke mb-3 mr-3 h-[48px] w-full border bg-white px-5 text-base font-medium text-body-color focus:border-primary focus-visible:shadow-none"
+                    className="outline-hidden mb-3 mr-3 h-[48px] w-full border border-form-stroke bg-white px-5 text-base font-medium text-body-color focus:border-primary focus-visible:shadow-none"
                     placeholder="Coupon code"
                   />
                   <button className="mb-3 h-[48px] bg-primary px-6 text-base font-medium text-white transition hover:bg-primary/90">
@@ -142,7 +142,7 @@ const CartItem = ({ img, link, title, size, color, price, stock }) => {
               Quantity
             </label>
             <div className="relative inline-block">
-              <select className="outline-hidden border-form-stroke w-full appearance-none border py-1 pl-4 pr-7 text-sm font-semibold text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
+              <select className="outline-hidden w-full appearance-none border border-form-stroke py-1 pl-4 pr-7 text-sm font-semibold text-body-color transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]">
                 <option value="">1</option>
                 <option value="">2</option>
                 <option value="">3</option>

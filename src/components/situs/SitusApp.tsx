@@ -27,6 +27,7 @@ import Register from '../auth/Register';
 import ProjectSettingsPlaceholder from './projects/settings/ProjectSettingsPlaceholder';
 import ProjectThemeManager from './projects/settings/ProjectThemeManager';
 import ProjectIntegrationsPage from './projects/settings/ProjectIntegrationsPage';
+import ProjectDomainSettings from './projects/settings/ProjectDomainSettings';
 
 const SitusApp: React.FC = () => {
   console.log('SitusApp component rendered');
@@ -53,10 +54,7 @@ const SitusApp: React.FC = () => {
         <Route path="projects/:projectId/settings" element={<ProjectSettingsPlaceholder title="Настройки проекта" />} />
         <Route path="projects/:projectId/settings/menu" element={<MenuManager />} />
         <Route path="projects/:projectId/settings/seo" element={<ProjectSettingsPlaceholder title="SEO настройки" />} />
-        <Route
-          path="projects/:projectId/settings/domain"
-          element={<ProjectSettingsPlaceholder title="Домен и публикация" />}
-        />
+        <Route path="projects/:projectId/settings/domain" element={<ProjectDomainSettings />} />
         <Route path="projects/:projectId/settings/theme" element={<ProjectThemeManager />} />
         <Route path="projects/:projectId/settings/integrations" element={<ProjectIntegrationsPage />} />
         <Route

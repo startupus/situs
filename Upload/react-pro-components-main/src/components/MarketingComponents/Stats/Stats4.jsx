@@ -39,7 +39,7 @@ export default Stats4;
 const StatsItem = ({ user, title }) => {
   return (
     <div className="w-full px-3 xs:w-1/2 md:px-4">
-      <div className="shadow-three group mb-6 rounded-[5px] bg-white px-4 py-6 text-center hover:bg-primary dark:bg-dark-2 md:mb-8">
+      <div className="group mb-6 rounded-[5px] bg-white px-4 py-6 text-center shadow-three hover:bg-primary dark:bg-dark-2 md:mb-8">
         <h4 className="mb-1 text-2xl font-bold leading-tight text-dark group-hover:text-white dark:text-white sm:text-[28px]">
           {user}
         </h4>

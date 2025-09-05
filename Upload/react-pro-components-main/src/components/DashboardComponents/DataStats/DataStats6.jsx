@@ -5,7 +5,7 @@ const DataStats6 = () => {
   return (
     <section className="bg-gray-2 py-20 dark:bg-dark lg:py-[120px]">
       <div className="mx-auto px-4 md:container">
-        <div className="shadow-1 dark:shadow-box-dark ml-auto w-full space-y-6 rounded-lg bg-white p-[30px] dark:bg-dark-2 xs:max-w-[350px]">
+        <div className="ml-auto w-full space-y-6 rounded-lg bg-white p-[30px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark xs:max-w-[350px]">
           <DataStatsCard
             name="New Sales"
             number="1,253"

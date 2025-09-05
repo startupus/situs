@@ -107,7 +107,7 @@ export default DataStats9;
 
 const DataStatsCard = ({ icon, color, name, number }) => {
   return (
-    <div className="shadow-1 dark:shadow-box-dark flex min-w-[180px] items-center rounded-lg bg-white p-[22px] dark:bg-dark-2">
+    <div className="flex min-w-[180px] items-center rounded-lg bg-white p-[22px] shadow-1 dark:bg-dark-2 dark:shadow-box-dark">
       <div
         className="mr-4 flex h-11 w-full max-w-[44px] items-center justify-center rounded-[10px] text-white"
         style={{ backgroundColor: color }}

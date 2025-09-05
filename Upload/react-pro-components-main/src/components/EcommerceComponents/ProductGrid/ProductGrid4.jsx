@@ -70,7 +70,7 @@ const SingleProduct = ({
 }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-      <div className="shadow-card mb-10 rounded-md border-[.5px] border-[#e7e7e7] bg-white p-[10px] dark:border-dark-3 dark:bg-dark-3">
+      <div className="mb-10 rounded-md border-[.5px] border-[#e7e7e7] bg-white p-[10px] shadow-card dark:border-dark-3 dark:bg-dark-3">
         <a href={link} className="block">
           <img src={img} alt="product" className="w-full" />
         </a>

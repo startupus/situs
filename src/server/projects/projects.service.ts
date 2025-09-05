@@ -215,20 +215,13 @@ export class ProjectsService {
     // Сначала пробуем как ID
     let project = await this.prisma.project.findFirst({
       where: {
-        OR: [
-          { id: idOrSlug },
-          { slug: idOrSlug }
-        ],
+        OR: [{ id: idOrSlug }, { slug: idOrSlug }],
         // Проверяем доступ: системный проект, владелец или тенант
         AND: [
           {
-            OR: [
-              { isSystemAdmin: true },
-              { ownerId: userId },
-              ...(tenantId ? [{ tenantId }] : [])
-            ]
-          }
-        ]
+            OR: [{ isSystemAdmin: true }, { ownerId: userId }, ...(tenantId ? [{ tenantId }] : [])],
+          },
+        ],
       },
       select: {
         id: true,

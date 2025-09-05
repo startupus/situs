@@ -118,7 +118,7 @@ services:
       dockerfile: Dockerfile.web
     container_name: situs-web
     ports:
-      - '5177:5177'
+      - '5178:80'
     depends_on:
       - situs-api
     networks:

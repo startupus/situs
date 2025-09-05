@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 /**
  * E2E тесты для tenant-scope функциональности
- * 
+ *
  * Проверяют:
  * - Фильтрацию проектов по тенанту
  * - Изоляцию данных между тенантами
@@ -19,22 +19,22 @@ test.describe('Tenant Scope Tests', () => {
     await page.route('**/api/**', async (route) => {
       const request = route.request();
       const headers = request.headers();
-      
+
       // Добавляем заголовок тенанта
       const modifiedHeaders = {
         ...headers,
-        'x-tenant-id': 'tenant-1'
+        'x-tenant-id': 'tenant-1',
       };
-      
+
       await route.continue({ headers: modifiedHeaders });
     });
 
     await page.goto('http://localhost:5178/projects');
-    
+
     // Проверяем, что загрузились только проекты для tenant-1
     const projects = page.locator('[data-testid="project-item"]');
     const count = await projects.count();
-    
+
     // Должен быть только системный проект (доступен всем тенантам)
     expect(count).toBe(1);
     await expect(page.locator('text=Situs Admin system')).toBeVisible();
@@ -46,12 +46,12 @@ test.describe('Tenant Scope Tests', () => {
     await tenant1Context.route('**/api/**', async (route) => {
       const request = route.request();
       const headers = request.headers();
-      
+
       const modifiedHeaders = {
         ...headers,
-        'x-tenant-id': 'tenant-1'
+        'x-tenant-id': 'tenant-1',
       };
-      
+
       await route.continue({ headers: modifiedHeaders });
     });
 
@@ -60,19 +60,19 @@ test.describe('Tenant Scope Tests', () => {
     await tenant2Context.route('**/api/**', async (route) => {
       const request = route.request();
       const headers = request.headers();
-      
+
       const modifiedHeaders = {
         ...headers,
-        'x-tenant-id': 'tenant-2'
+        'x-tenant-id': 'tenant-2',
       };
-      
+
       await route.continue({ headers: modifiedHeaders });
     });
 
     // Проверяем, что данные изолированы
     await tenant1Context.goto('http://localhost:5178/projects');
     await tenant2Context.goto('http://localhost:5178/projects');
-    
+
     // Оба должны видеть только системный проект
     await expect(tenant1Context.locator('text=Situs Admin system')).toBeVisible();
     await expect(tenant2Context.locator('text=Situs Admin system')).toBeVisible();
@@ -81,7 +81,7 @@ test.describe('Tenant Scope Tests', () => {
   test('should handle missing tenant gracefully', async ({ page }) => {
     // Запрос без заголовка тенанта
     await page.goto('http://localhost:5178/projects');
-    
+
     // Должен работать с дефолтным тенантом или системным
     await expect(page.locator('h1')).toContainText('Проекты');
   });
@@ -91,17 +91,17 @@ test.describe('Tenant Scope Tests', () => {
     await page.route('**/api/**', async (route) => {
       const request = route.request();
       const headers = request.headers();
-      
+
       const modifiedHeaders = {
         ...headers,
-        'x-tenant-id': 'invalid-tenant-format!@#'
+        'x-tenant-id': 'invalid-tenant-format!@#',
       };
-      
+
       await route.continue({ headers: modifiedHeaders });
     });
 
     const response = await page.request.get('http://localhost:5178/api/projects');
-    
+
     // Должен быть 400 Bad Request
     expect(response.status()).toBe(400);
   });
@@ -111,12 +111,12 @@ test.describe('Tenant Scope Tests', () => {
     await page.route('**/api/**', async (route) => {
       const request = route.request();
       const headers = request.headers();
-      
+
       const modifiedHeaders = {
         ...headers,
-        'x-tenant-id': 'tenant-1'
+        'x-tenant-id': 'tenant-1',
       };
-      
+
       await route.continue({ headers: modifiedHeaders });
     });
 

@@ -5,7 +5,7 @@ const Breadcrumb2 = () => {
     <div className="bg-white py-10 dark:bg-dark">
       <div className="container">
         <div className="mb-8 w-full">
-          <div className="border-light bg-tg-bg shadow-1 dark:shadow-card rounded-lg border px-4 py-4 dark:border-dark-3 dark:bg-dark-2 sm:px-6 md:px-8 md:py-5">
+          <div className="rounded-lg border border-light bg-tg-bg px-4 py-4 shadow-1 dark:border-dark-3 dark:bg-dark-2 dark:shadow-card sm:px-6 md:px-8 md:py-5">
             <ul className="flex items-center">
               <li className="flex items-center">
                 <a

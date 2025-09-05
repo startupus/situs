@@ -153,7 +153,10 @@ export class ProjectsController {
   @Post()
   async create(@Body() createProjectDto: CreateProjectDto, @Request() req: any) {
     const tenantId = req.tenantId; // Получаем tenantId из middleware
-    return { success: true, data: await this.projectsService.create(createProjectDto, req.user?.id ?? 'owner-dev', tenantId) };
+    return {
+      success: true,
+      data: await this.projectsService.create(createProjectDto, req.user?.id ?? 'owner-dev', tenantId),
+    };
   }
 
   /**

@@ -4,7 +4,7 @@ const Profile = () => {
   return (
     <section className="bg-gray-2 py-24 dark:bg-dark">
       <div className="mx-auto px-4 md:container">
-        <div className="shadow-card mx-auto w-full max-w-[970px] overflow-hidden rounded-sm bg-white dark:bg-dark-2">
+        <div className="mx-auto w-full max-w-[970px] overflow-hidden rounded-sm bg-white shadow-card dark:bg-dark-2">
           <div className="relative z-20 h-[140px] sm:h-[160px] md:h-auto">
             <img
               src="https://cdn.tailgrids.com/2.0/image/dashboard/images/profiles/profile-01/cover.jpg"
@@ -45,7 +45,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="flex flex-wrap px-5 pb-9 pt-6 sm:px-9 md:flex-nowrap">
-            <div className="shadow-card relative -top-14 z-30 h-[120px] w-full max-w-[120px] rounded-full border-4 border-white dark:border-dark sm:h-[160px] sm:max-w-[160px]">
+            <div className="relative -top-14 z-30 h-[120px] w-full max-w-[120px] rounded-full border-4 border-white shadow-card dark:border-dark sm:h-[160px] sm:max-w-[160px]">
               <img
                 src="https://cdn.tailgrids.com/2.0/image/dashboard/images/profiles/profile-01/profile.png"
                 alt="profile"

@@ -80,7 +80,7 @@ export default DataStats5;
 const DataStatsCard = ({ icon, name, number }) => {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-      <div className="shadow-1 dark:shadow-box-dark relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 dark:bg-dark-2 sm:px-10 md:px-6 xl:px-10">
+      <div className="relative mb-8 flex items-center rounded-[10px] bg-white px-6 py-10 shadow-1 dark:bg-dark-2 dark:shadow-box-dark sm:px-10 md:px-6 xl:px-10">
         <div className="mr-4 flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-full bg-primary text-white sm:mr-6 sm:h-[60px] sm:max-w-[60px] md:mr-4 md:h-[50px] md:max-w-[50px] xl:mr-6 xl:h-[60px] xl:max-w-[60px]">
           {icon}
         </div>
@@ -156,7 +156,7 @@ const Dropdown = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`shadow-card absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 dark:bg-dark ${
+        className={`absolute right-0 top-full z-40 w-[150px] space-y-1 rounded bg-white p-2 shadow-card dark:bg-dark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

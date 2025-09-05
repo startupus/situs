@@ -1,0 +1,127 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: situs-postgres
+    environment:
+      POSTGRES_DB: situs
+      POSTGRES_USER: situs
+      POSTGRES_PASSWORD: situs_password
+    ports:
+      - '55432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - situs-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U situs -d situs']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: situs-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - situs-network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  situs-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: situs-api
+    environment:
+      - NODE_ENV=production
+      - DOCKER_ENV=true
+      - CONTAINER=true
+      - DATABASE_URL=postgresql://situs:situs_password@postgres:5432/situs?schema=public
+      - REDIS_URL=redis://redis:6379
+      - API_BASE_URL=http://localhost:3002
+      - API_INTERNAL_URL=http://situs-api:3002
+      - FRONTEND_BASE_URL=http://localhost:5177
+      - FRONTEND_INTERNAL_URL=http://situs-web:5177
+      - CORS_ORIGINS=http://localhost:5177,http://situs-web:5177,http://situs-frontend:5177
+    ports:
+      - '3002:3002'
+    volumes:
+      - ./uploads:/app/uploads
+      - ./public:/app/public
+      - ./logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - situs-network
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3002/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend Web
+  situs-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: situs-web
+    environment:
+      - NODE_ENV=production
+      - DOCKER_ENV=true
+      - CONTAINER=true
+      - VITE_API_BASE_URL=http://localhost:3002
+      - VITE_FRONTEND_BASE_URL=http://localhost:5177
+      - VITE_STATIC_BASE_URL=http://localhost:3002/static
+      - VITE_MEDIA_BASE_URL=http://localhost:3002/media
+      - VITE_WS_BASE_URL=ws://localhost:3002
+      - VITE_SSE_BASE_URL=http://localhost:3002/api/realtime
+    ports:
+      - '5177:5177'
+    depends_on:
+      situs-api:
+        condition: service_healthy
+    networks:
+      - situs-network
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:5177']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: situs-nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - situs-api
+      - situs-web
+    networks:
+      - situs-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  situs-network:
+    driver: bridge

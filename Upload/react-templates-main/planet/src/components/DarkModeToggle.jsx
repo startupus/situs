@@ -12,7 +12,7 @@ const Switcher = () => {
 
   return (
     <>
-      <div className="shadow-1 dark:shadow-box-dark fixed bottom-10 right-10 z-40 flex h-11 w-11 items-center justify-center rounded-sm bg-white dark:bg-dark-3">
+      <div className="fixed bottom-10 right-10 z-40 flex h-11 w-11 items-center justify-center rounded-sm bg-white shadow-1 dark:bg-dark-3 dark:shadow-box-dark">
         <label
           htmlFor="themeSwitcher"
           className="inline-flex cursor-pointer items-center"

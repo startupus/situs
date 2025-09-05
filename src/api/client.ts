@@ -1,7 +1,10 @@
 /**
  * Centralized API Client для Situs Platform
  * Следует принципам Strapi CMS для стандартизированного API
+ * Использует универсальную конфигурацию путей
  */
+
+import { pathUtils } from '../lib/pathUtils';
 
 interface ApiResponse<T = any> {
   success: boolean;
@@ -38,11 +41,11 @@ class ApiClient {
   private getBaseURL(): string {
     // В браузере по умолчанию работаем через тот же origin, чтобы избежать CORS и использовать Vite proxy
     if (typeof window !== 'undefined') {
-      // Принудительно используем относительный путь
+      // Принудительно используем относительный путь для Vite proxy
       return '';
     }
-    // На сервере читаем из переменных окружения, иначе localhost (используется редко)
-    return process.env.API_BASE_URL || 'http://localhost:3002';
+    // На сервере используем универсальную конфигурацию путей
+    return pathUtils.createApiUrl('');
   }
 
   /**
@@ -129,7 +132,7 @@ class ApiClient {
       // Попробуем fallback в dev: прямое обращение к бэку, минуя Vite proxy
       if (typeof window !== 'undefined' && !isAbsolute && endpoint.startsWith('/api/')) {
         try {
-          const directUrl = `http://localhost:3002${endpoint}`;
+          const directUrl = pathUtils.createApiUrl(endpoint);
           const retryResp = await fetch(directUrl, config);
           if (retryResp.ok) {
             const txt = await retryResp.text();

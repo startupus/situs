@@ -3,7 +3,7 @@ import React from "react";
 const VerticalNavbar3 = () => {
   return (
     <section className="min-h-screen bg-gray-2">
-      <div className="shadow-card flex min-h-screen w-full max-w-[90px] flex-col justify-between bg-white">
+      <div className="flex min-h-screen w-full max-w-[90px] flex-col justify-between bg-white shadow-card">
         <div>
           <div className="px-7 pb-9 pt-10">
             <a href="/#">
@@ -346,7 +346,7 @@ const NavItem = ({ menu, link, icon }) => {
       >
         <span>{icon}</span>
       </a>
-      <span className="drop-shadow-tooltip invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-white px-[10px] py-1 text-sm font-medium text-body-color group-hover:visible">
+      <span className="invisible absolute left-[115%] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-white px-[10px] py-1 text-sm font-medium text-body-color drop-shadow-tooltip group-hover:visible">
         <span className="absolute -left-2 top-1/2 -translate-y-1/2">
           <svg
             width="9"

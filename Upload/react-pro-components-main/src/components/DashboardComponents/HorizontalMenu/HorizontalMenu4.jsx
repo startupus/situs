@@ -133,7 +133,7 @@ const HorizontalMenu4 = () => {
                     />
                   </div>
                 </a>
-                <div className="shadow-card-2 invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
+                <div className="invisible absolute right-0 top-[120%] mt-3 w-[200px] space-y-2 rounded-sm bg-white p-3 opacity-0 shadow-card-2 duration-200 group-hover:visible group-hover:top-full group-hover:opacity-100 dark:bg-dark-2">
                   <DropdownItem link="/#" name="Account Settings" />
                   <DropdownItem link="/#" name="Dashboard" />
                   <DropdownItem link="/#" name="Sign Out" />

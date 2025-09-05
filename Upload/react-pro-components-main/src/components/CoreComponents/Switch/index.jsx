@@ -38,7 +38,7 @@ const Switch = ({
             <div className="relative">
               <input id="toogleTwo" type="checkbox" className="sr-only" />
               <div className="h-5 w-14 rounded-full bg-[#E5E7EB] shadow-inner" />
-              <div className="dot shadow-switch-1 absolute -top-1 left-0 h-7 w-7 rounded-full bg-white transition" />
+              <div className="dot absolute -top-1 left-0 h-7 w-7 rounded-full bg-white shadow-switch-1 transition" />
             </div>
           </label>
         </div>
@@ -112,7 +112,7 @@ const Switch = ({
             <div className="relative">
               <input id="toggleFive" type="checkbox" className="sr-only" />
               <div className="h-5 w-14 rounded-full bg-[#E5E7EB] shadow-inner" />
-              <div className="dot shadow-switch-1 absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white transition">
+              <div className="dot absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-switch-1 transition">
                 <span className="active h-4 w-4 rounded-full bg-[#E5E7EB]" />
               </div>
             </div>
@@ -156,7 +156,7 @@ const Switch = ({
             <div className="relative">
               <input id="toggleEight" type="checkbox" className="sr-only" />
               <div className="box h-5 w-14 rounded-full bg-dark shadow-inner transition" />
-              <div className="dot shadow-switch-1 absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white transition">
+              <div className="dot absolute -top-1 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-switch-1 transition">
                 <span className="active h-4 w-4 rounded-full border border-dark bg-white" />
               </div>
             </div>

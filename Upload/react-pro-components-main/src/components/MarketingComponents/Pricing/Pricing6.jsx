@@ -112,7 +112,7 @@ const PricingCard = ({
   return (
     <>
       <div className="w-full px-4 md:w-1/2 xl:w-1/4">
-        <div className="shadow-pricing-4 rounded-xl border border-stroke bg-white p-8 dark:border-dark-3 dark:bg-dark-2">
+        <div className="rounded-xl border border-stroke bg-white p-8 shadow-pricing-4 dark:border-dark-3 dark:bg-dark-2">
           <div className="border-b border-stroke pb-8 dark:border-dark-3">
             <div className="mb-6 flex justify-between">
               <div>

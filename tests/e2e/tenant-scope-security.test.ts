@@ -28,7 +28,7 @@ test.describe('Tenant-Scope Security Tests', () => {
         headers: {
           'Content-Type': 'application/json',
           'X-Tenant-Id': 'tenant1',
-          'Authorization': 'Bearer dev-token', // Dev bypass для тестов
+          Authorization: 'Bearer dev-token', // Dev bypass для тестов
         },
       });
       expect(response.ok()).toBeTruthy();
@@ -46,7 +46,7 @@ test.describe('Tenant-Scope Security Tests', () => {
         headers: {
           'Content-Type': 'application/json',
           'X-Tenant-Id': 'tenant2',
-          'Authorization': 'Bearer dev-token',
+          Authorization: 'Bearer dev-token',
         },
       });
       expect(response.ok()).toBeTruthy();
@@ -58,12 +58,12 @@ test.describe('Tenant-Scope Security Tests', () => {
     const tenant1Response = await request.get(`${API_BASE_URL}/projects`, {
       headers: {
         'X-Tenant-Id': 'tenant1',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
     expect(tenant1Response.ok()).toBeTruthy();
     const tenant1Data = await tenant1Response.json();
-    
+
     // Должны видеть только проекты tenant1 + системный проект
     const tenant1ProjectNames = tenant1Data.data.projects.map((p: any) => p.name);
     expect(tenant1ProjectNames).toContain('Tenant1 Project 1');
@@ -77,12 +77,12 @@ test.describe('Tenant-Scope Security Tests', () => {
     const tenant2Response = await request.get(`${API_BASE_URL}/projects`, {
       headers: {
         'X-Tenant-Id': 'tenant2',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
     expect(tenant2Response.ok()).toBeTruthy();
     const tenant2Data = await tenant2Response.json();
-    
+
     const tenant2ProjectNames = tenant2Data.data.projects.map((p: any) => p.name);
     expect(tenant2ProjectNames).toContain('Tenant2 Project 1');
     expect(tenant2ProjectNames).toContain('Tenant2 Project 2');
@@ -102,7 +102,7 @@ test.describe('Tenant-Scope Security Tests', () => {
       headers: {
         'Content-Type': 'application/json',
         'X-Tenant-Id': 'tenant1',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
     expect(createResponse.ok()).toBeTruthy();
@@ -113,10 +113,10 @@ test.describe('Tenant-Scope Security Tests', () => {
     const accessResponse = await request.get(`${API_BASE_URL}/projects/${projectId}`, {
       headers: {
         'X-Tenant-Id': 'tenant2',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
-    
+
     // Должны получить 404 или 403
     expect([404, 403]).toContain(accessResponse.status());
   });
@@ -126,12 +126,12 @@ test.describe('Tenant-Scope Security Tests', () => {
     const tenant1Response = await request.get(`${API_BASE_URL}/projects`, {
       headers: {
         'X-Tenant-Id': 'tenant1',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
     expect(tenant1Response.ok()).toBeTruthy();
     const tenant1Data = await tenant1Response.json();
-    
+
     // Должен быть системный проект
     const systemProject = tenant1Data.data.projects.find((p: any) => p.isSystemAdmin);
     expect(systemProject).toBeTruthy();
@@ -141,12 +141,12 @@ test.describe('Tenant-Scope Security Tests', () => {
     const tenant2Response = await request.get(`${API_BASE_URL}/projects`, {
       headers: {
         'X-Tenant-Id': 'tenant2',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
     expect(tenant2Response.ok()).toBeTruthy();
     const tenant2Data = await tenant2Response.json();
-    
+
     const systemProject2 = tenant2Data.data.projects.find((p: any) => p.isSystemAdmin);
     expect(systemProject2).toBeTruthy();
     expect(systemProject2.id).toBe(systemProject.id);
@@ -162,7 +162,7 @@ test.describe('Tenant-Scope Security Tests', () => {
       headers: {
         'Content-Type': 'application/json',
         'X-Tenant-Id': 'tenant1',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
     expect(createResponse.ok()).toBeTruthy();
@@ -174,10 +174,10 @@ test.describe('Tenant-Scope Security Tests', () => {
       headers: {
         'X-Tenant-Id': 'tenant1', // Правильный tenant
         'X-Forwarded-For': '192.168.1.100', // Попытка подмены IP
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
-    
+
     // Должны получить доступ (правильный tenant)
     expect(spoofResponse.ok()).toBeTruthy();
 
@@ -185,10 +185,10 @@ test.describe('Tenant-Scope Security Tests', () => {
     const wrongTenantResponse = await request.get(`${API_BASE_URL}/projects/${projectId}`, {
       headers: {
         'X-Tenant-Id': 'tenant2', // Неправильный tenant
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
-    
+
     // Должны получить 404 или 403
     expect([404, 403]).toContain(wrongTenantResponse.status());
   });
@@ -197,10 +197,10 @@ test.describe('Tenant-Scope Security Tests', () => {
     // Запрос без tenant header должен работать (fallback к user-based filtering)
     const response = await request.get(`${API_BASE_URL}/projects`, {
       headers: {
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
-    
+
     // Должны получить ответ (системные проекты + проекты пользователя)
     expect(response.ok()).toBeTruthy();
     const data = await response.json();
@@ -218,10 +218,10 @@ test.describe('Tenant-Scope Security Tests', () => {
       headers: {
         'Content-Type': 'application/json',
         'X-Tenant-Id': 'invalid-tenant-id-with-special-chars!@#$%',
-        'Authorization': 'Bearer dev-token',
+        Authorization: 'Bearer dev-token',
       },
     });
-    
+
     // Должны получить ошибку валидации
     expect([400, 422]).toContain(response.status());
   });

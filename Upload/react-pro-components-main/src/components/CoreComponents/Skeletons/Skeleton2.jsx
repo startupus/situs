@@ -5,7 +5,7 @@ export default function Skeleton2() {
     <section className="bg-white py-20 dark:bg-dark">
       <div className="container">
         <div className="mx-auto w-full max-w-[370px]">
-          <div className="bg-linear-to-r text-secondary-color mb-7 flex h-[200px] w-full items-center justify-center rounded-xl from-gray-1 to-gray-4 dark:from-dark-4 dark:to-dark-5">
+          <div className="bg-linear-to-r mb-7 flex h-[200px] w-full items-center justify-center rounded-xl from-gray-1 to-gray-4 text-secondary-color dark:from-dark-4 dark:to-dark-5">
             <svg
               width="28"
               height="31"
