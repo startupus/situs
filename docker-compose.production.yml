@@ -34,7 +34,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: situs-redis-prod
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-default_redis_password}
     volumes:
       - redis_data:/data
     ports:
@@ -67,7 +67,7 @@ services:
       # Production БД с правильными credentials
       DATABASE_URL: postgresql://situs_user:${POSTGRES_PASSWORD}@postgres:5432/situs_production
       # DEV-ФЛАГИ УБРАНЫ - только для dev/override
-      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      REDIS_URL: redis://:${REDIS_PASSWORD:-default_redis_password}@redis:6379
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: 7d
       CORS_ORIGINS: ${CORS_ORIGINS}

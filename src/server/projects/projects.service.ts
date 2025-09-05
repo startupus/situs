@@ -141,14 +141,13 @@ export class ProjectsService {
 
     // Строим условия поиска с обязательной фильтрацией
     const where: Prisma.ProjectWhereInput = {
-      // КРИТИЧНО: Фильтрация по владельцу, тенанту или системный проект
+      // КРИТИЧНО: Фильтрация по владельцу или системный проект
       OR: [
         // Системный проект доступен всем
         { isSystemAdmin: true },
         // Проекты владельца
         { ownerId: userId || ownerId },
-        // Проекты тенанта (если указан)
-        ...(tenantId ? [{ tenantId }] : []),
+        // TODO: Добавить фильтрацию по тенанту когда будет реализована в схеме
       ],
     };
     if (status) where.status = this.mapProjectStatus(status);
@@ -219,11 +218,14 @@ export class ProjectsService {
           { id: idOrSlug },
           { slug: idOrSlug }
         ],
-        // Проверяем доступ: системный проект, владелец или тенант
-        OR: [
-          { isSystemAdmin: true },
-          { ownerId: userId },
-          ...(tenantId ? [{ tenantId }] : [])
+        // Проверяем доступ: системный проект или владелец
+        AND: [
+          {
+            OR: [
+              { isSystemAdmin: true },
+              { ownerId: userId }
+            ]
+          }
         ]
       },
       select: {

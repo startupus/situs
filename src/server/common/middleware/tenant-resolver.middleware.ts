@@ -1,6 +1,15 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
+// Расширяем интерфейс Request для добавления tenantId
+declare global {
+  namespace Express {
+    interface Request {
+      tenantId?: string;
+    }
+  }
+}
+
 /**
  * Middleware для извлечения tenant ID из заголовков запроса
  * 
