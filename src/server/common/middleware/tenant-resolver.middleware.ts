@@ -1,38 +1,88 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { PrismaService } from '../../database/prisma.service';
 
 /**
- * Middleware для резолвинга арендатора по Host/домену
- * Добавляет в request контекст projectId/productId если домен привязан
+ * Middleware для извлечения tenant ID из заголовков запроса
+ * 
+ * Поддерживает несколько стратегий:
+ * - x-tenant-id заголовок
+ * - subdomain (например, tenant1.example.com)
+ * - path parameter (/api/tenant/tenant1/projects)
+ * - JWT token payload
  */
 @Injectable()
 export class TenantResolverMiddleware implements NestMiddleware {
-  constructor(private readonly prisma: PrismaService) {}
+  use(req: Request, res: Response, next: NextFunction) {
+    // 1. Проверяем заголовок x-tenant-id
+    let tenantId = req.headers['x-tenant-id'] as string;
+    
+    if (tenantId) {
+      req.tenantId = tenantId;
+      next();
+      return;
+    }
 
-  async use(req: Request, _res: Response, next: NextFunction) {
-    try {
-      const host = (req.headers['x-forwarded-host'] as string) || (req.headers['host'] as string) || '';
-      const hostname = host.split(':')[0];
-      const parts = hostname.split('.');
-      const tenant: any = { host: hostname, subdomain: parts.length > 2 ? parts[0] : undefined };
-
-      // Попытка найти проект по customDomain или domain
-      if (hostname) {
-        try {
-          const project = await this.prisma.project.findFirst({
-            where: { OR: [{ customDomain: hostname }, { domain: hostname }] },
-          });
-          if (project) {
-            tenant.projectId = project.id;
-            // Найти Website продукт данного проекта
-            const website = await this.prisma.product.findFirst({ where: { projectId: project.id, type: 'WEBSITE' } });
-            if (website) tenant.productId = website.id;
-          }
-        } catch {}
+    // 2. Проверяем subdomain
+    const host = req.headers.host;
+    if (host) {
+      const subdomain = this.extractSubdomain(host);
+      if (subdomain && subdomain !== 'www' && subdomain !== 'api') {
+        req.tenantId = subdomain;
+        next();
+        return;
       }
-      (req as any).tenant = tenant;
-    } catch {}
+    }
+
+    // 3. Проверяем path parameter
+    const pathMatch = req.path.match(/^\/api\/tenant\/([^\/]+)/);
+    if (pathMatch) {
+      req.tenantId = pathMatch[1];
+      next();
+      return;
+    }
+
+    // 4. Проверяем JWT token payload
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      try {
+        const token = authHeader.substring(7);
+        const payload = this.parseJwtPayload(token);
+        if (payload.tenantId) {
+          req.tenantId = payload.tenantId;
+          next();
+          return;
+        }
+      } catch (error) {
+        // Игнорируем ошибки парсинга JWT
+      }
+    }
+
+    // 5. Если tenant не найден, используем дефолтный
+    req.tenantId = 'default';
     next();
+  }
+
+  private extractSubdomain(host: string): string | null {
+    const parts = host.split('.');
+    if (parts.length >= 3) {
+      return parts[0];
+    }
+    return null;
+  }
+
+  private parseJwtPayload(token: string): any {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      return {};
+    }
   }
 }

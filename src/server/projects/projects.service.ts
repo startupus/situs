@@ -141,13 +141,14 @@ export class ProjectsService {
 
     // Строим условия поиска с обязательной фильтрацией
     const where: Prisma.ProjectWhereInput = {
-      // КРИТИЧНО: Фильтрация по владельцу или системный проект
+      // КРИТИЧНО: Фильтрация по владельцу, тенанту или системный проект
       OR: [
         // Системный проект доступен всем
         { isSystemAdmin: true },
         // Проекты владельца
         { ownerId: userId || ownerId },
-        // TODO: Добавить фильтрацию по тенанту когда будет реализована
+        // Проекты тенанта (если указан)
+        ...(tenantId ? [{ tenantId }] : []),
       ],
     };
     if (status) where.status = this.mapProjectStatus(status);
@@ -208,12 +209,23 @@ export class ProjectsService {
   }
 
   /**
-   * Получение проекта по ID
+   * Получение проекта по ID с проверкой доступа
    */
-  async findOne(idOrSlug: string) {
+  async findOne(idOrSlug: string, userId?: string, tenantId?: string) {
     // Сначала пробуем как ID
-    let project = await this.prisma.project.findUnique({
-      where: { id: idOrSlug },
+    let project = await this.prisma.project.findFirst({
+      where: {
+        OR: [
+          { id: idOrSlug },
+          { slug: idOrSlug }
+        ],
+        // Проверяем доступ: системный проект, владелец или тенант
+        OR: [
+          { isSystemAdmin: true },
+          { ownerId: userId },
+          ...(tenantId ? [{ tenantId }] : [])
+        ]
+      },
       select: {
         id: true,
         name: true,
@@ -233,32 +245,8 @@ export class ProjectsService {
       },
     });
 
-    // Если по ID не нашли — пробуем как slug
     if (!project) {
-      project = await this.prisma.project.findUnique({
-        where: { slug: idOrSlug },
-        select: {
-          id: true,
-          name: true,
-          description: true,
-          slug: true,
-          domain: true,
-          customDomain: true,
-          isPublished: true,
-          settings: true,
-          theme: true,
-          ownerId: true,
-          status: true,
-          createdAt: true,
-          updatedAt: true,
-          products: { select: { id: true, type: true, status: true } },
-          _count: { select: { products: true } },
-        },
-      });
-    }
-
-    if (!project) {
-      throw new NotFoundException('Проект не найден');
+      throw new NotFoundException('Проект не найден или у вас нет прав на его просмотр');
     }
 
     return project;

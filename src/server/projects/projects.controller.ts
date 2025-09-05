@@ -130,8 +130,12 @@ export class ProjectsController {
    * Получение проекта по ID
    */
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return { success: true, data: await this.projectsService.findOne(id) };
+  @Roles('BUSINESS', 'AGENCY', 'STAFF', 'SUPER_ADMIN')
+  @Scopes('PROJECT_READ')
+  async findOne(@Param('id') id: string, @Request() req: any) {
+    const userId = req.user?.id;
+    const tenantId = req.tenantId;
+    return { success: true, data: await this.projectsService.findOne(id, userId, tenantId) };
   }
 
   /**

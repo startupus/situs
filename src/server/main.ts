@@ -40,14 +40,23 @@ async function bootstrap() {
 
     // CORS настройки
     const configService = app.get(ConfigService);
-    const origins = configService.get<string[]>('cors.origins') || [];
+    const corsConfig = configService.get('cors');
+    const origins = corsConfig.origins || [];
+    
+    // В production режиме origins обязательны
+    if (corsConfig.isProduction && origins.length === 0) {
+      throw new Error('CORS_ORIGINS must be configured in production environment');
+    }
+    
     app.enableCors({
-      origin: origins.length ? origins : true,
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
+      origin: origins.length ? origins : (corsConfig.isProduction ? false : true),
+      credentials: corsConfig.allowCredentials,
+      methods: corsConfig.allowedMethods,
+      allowedHeaders: corsConfig.allowedHeaders,
+      exposedHeaders: corsConfig.exposedHeaders,
+      maxAge: corsConfig.maxAge,
     });
-    console.log('[BOOT] CORS enabled with', origins.length ? origins : 'any');
+    console.log('[BOOT] CORS enabled with', origins.length ? origins : (corsConfig.isProduction ? 'none (production)' : 'any (development)'));
 
     // Trust proxy для корректного Host/X-Forwarded-Host
     try {

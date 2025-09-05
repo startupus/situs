@@ -8,6 +8,29 @@ function parseOrigins(input: string | undefined): string[] {
     .filter(Boolean);
 }
 
-export const corsConfig = registerAs('cors', () => ({
-  origins: parseOrigins(process.env.CORS_ORIGINS),
-}));
+export const corsConfig = registerAs('cors', () => {
+  const isProduction = process.env.NODE_ENV === 'production';
+  const origins = parseOrigins(process.env.CORS_ORIGINS);
+  
+  // В production режиме CORS origins обязательны
+  if (isProduction && origins.length === 0) {
+    throw new Error('CORS_ORIGINS must be configured in production environment');
+  }
+  
+  return {
+    origins,
+    isProduction,
+    // Дополнительные настройки для production
+    allowCredentials: true,
+    allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type', 
+      'Authorization', 
+      'X-Requested-With',
+      'Accept',
+      'Origin'
+    ],
+    exposedHeaders: ['X-Total-Count'],
+    maxAge: isProduction ? 86400 : 0, // 24 часа в production, без кеша в dev
+  };
+});
