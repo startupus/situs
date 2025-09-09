@@ -1,12 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import SitusSidebar from '../Sidebar/SitusSidebar';
 import SitusHeader from '../Header/SitusHeader';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, Navigate } from 'react-router-dom';
 
 interface SitusMainLayoutProps {}
 
 const SitusMainLayout: React.FC<SitusMainLayoutProps> = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Редирект на страницу логина, если пользователь не авторизован
+  const tokenMissing = (() => {
+    try {
+      const accessToken = localStorage.getItem('auth_token');
+      return !accessToken;
+    } catch {
+      return true;
+    }
+  })();
+  if (tokenMissing) {
+    const next = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`/login?next=${next}`} replace />;
+  }
 
   return (
     <>

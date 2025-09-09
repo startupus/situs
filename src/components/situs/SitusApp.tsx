@@ -24,6 +24,7 @@ import AcceptInvitation from './pages/AcceptInvitation';
 import { LoginPage } from '../../auth/LoginPage';
 import ForgotPassword from '../auth/ForgotPassword';
 import Register from '../auth/Register';
+import LogoutPage from '../../auth/LogoutPage';
 import ProjectSettingsPlaceholder from './projects/settings/ProjectSettingsPlaceholder';
 import ProjectThemeManager from './projects/settings/ProjectThemeManager';
 import ProjectIntegrationsPage from './projects/settings/ProjectIntegrationsPage';
@@ -37,6 +38,7 @@ const SitusApp: React.FC = () => {
       {/* Публичные страницы (без layout) */}
       <Route path="/accept-invitation" element={<AcceptInvitation />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/auth/logout" element={<LogoutPage />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/register" element={<Register />} />
 

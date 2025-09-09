@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Request, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Request, HttpCode, HttpStatus, Res } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -11,7 +11,7 @@ import { VerifyCodeDto } from './dto/verify-code.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
-import { Request as ExpressRequest } from 'express';
+import { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { Public } from '../common/decorators/public.decorator';
 
 /**
@@ -59,8 +59,39 @@ export class AuthController {
     type: AuthResponseDto,
   })
   @ApiResponse({ status: 401, description: 'Неверные учетные данные' })
-  async login(@Body() _loginDto: LoginDto, @Request() req: ExpressRequest): Promise<AuthResponseDto> {
-    return this.authService.login((req as any).user);
+  async login(
+    @Body() _loginDto: LoginDto,
+    @Request() req: ExpressRequest,
+    @Res({ passthrough: true }) res: ExpressResponse,
+  ): Promise<AuthResponseDto> {
+    const result = await this.authService.login((req as any).user);
+    try {
+      // Устанавливаем HttpOnly cookies для Nginx-редиректов и SSR
+      const isProd = process.env.NODE_ENV === 'production';
+      const accessMaxAgeMs = (() => {
+        // По умолчанию 15 минут
+        return 15 * 60 * 1000;
+      })();
+      const refreshMaxAgeMs = (() => {
+        // По умолчанию 7 дней
+        return 7 * 24 * 60 * 60 * 1000;
+      })();
+      res.cookie('situs_at', result.tokens.accessToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: isProd,
+        path: '/',
+        maxAge: accessMaxAgeMs,
+      });
+      res.cookie('situs_rt', result.tokens.refreshToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: isProd,
+        path: '/',
+        maxAge: refreshMaxAgeMs,
+      });
+    } catch {}
+    return result;
   }
 
   /**
@@ -74,6 +105,21 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Не авторизован' })
   async getProfile(@Request() req: ExpressRequest) {
     return (req as any).user;
+  }
+
+  /**
+   * Выход из системы — очищает cookies
+   */
+  @Public()
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  async logout(@Res({ passthrough: true }) res: ExpressResponse) {
+    try {
+      const isProd = process.env.NODE_ENV === 'production';
+      res.cookie('situs_at', '', { httpOnly: true, sameSite: 'lax', secure: isProd, path: '/', maxAge: 0 });
+      res.cookie('situs_rt', '', { httpOnly: true, sameSite: 'lax', secure: isProd, path: '/', maxAge: 0 });
+    } catch {}
+    return { success: true } as any;
   }
 
   /**

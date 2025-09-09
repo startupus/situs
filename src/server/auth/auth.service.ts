@@ -107,12 +107,32 @@ export class AuthService {
    * Генерация JWT токенов
    */
   private async generateTokens(user: any): Promise<AuthResponseDto> {
+    // Определяем глобальную роль и соответствующие ей скоупы доступа
+    const globalRole = ((user.globalRole || (user as any).global_role || 'BUSINESS') as string)
+      .toString()
+      .toUpperCase();
+
+    const scopesByRole = (role: string): string[] => {
+      switch (role) {
+        case 'SUPER_ADMIN':
+          return ['PROJECT_READ', 'PROJECT_WRITE', 'PROJECT_ADMIN'];
+        case 'STAFF':
+          return ['PROJECT_READ', 'PROJECT_WRITE'];
+        case 'AGENCY':
+          return ['PROJECT_READ', 'PROJECT_WRITE'];
+        case 'BUSINESS':
+        default:
+          // Минимально необходимый скоуп для чтения списка проектов
+          return ['PROJECT_READ'];
+      }
+    };
+
     const payload = {
       sub: user.id,
       email: user.email,
       name: user.name,
-      globalRole: user.globalRole || 'BUSINESS',
-      scopes: [],
+      globalRole,
+      scopes: scopesByRole(globalRole),
     };
 
     const [accessToken, refreshToken] = await Promise.all([

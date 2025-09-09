@@ -36,10 +36,13 @@ const SitusUserDropdown: React.FC = () => {
   const userName = 'Администратор Системы';
   const userRole = 'Системный администратор';
   const onClickItem = (item: UserMenuItem) => (e: React.MouseEvent) => {
-    if (item?.params?.action === 'logout') {
+    if (item?.params?.action === 'logout' || item?.to === '/auth/logout' || item?.title?.toLowerCase() === 'выйти') {
       e.preventDefault();
-      usersApi.logout();
-      navigate('/');
+      try {
+        usersApi.logout();
+      } catch {}
+      const next = encodeURIComponent(window.location.pathname + window.location.search);
+      navigate(`/login?next=${next}`, { replace: true });
       return;
     }
   };

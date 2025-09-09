@@ -1,0 +1,4 @@
+services:
+  situs-api:
+    environment:
+      - CORS_ORIGINS=http://localhost:5177,http://localhost:5178,http://situs-web,http://situs-web:80

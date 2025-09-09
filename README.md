@@ -48,10 +48,40 @@ curl -sf http://localhost:3002/health && echo "API OK"
 open http://localhost:5178/projects 2>/dev/null || xdg-open http://localhost:5178/projects 2>/dev/null || true
 ```
 
-Учётные данные для входа:
+Учётные данные для входа (проверены):
 
-- Email: `qa+admin2@situs.local` Пароль: `Admin123!`
 - Email: `admin@situs.local` Пароль: `Admin123!`
+- Email: `qa+admin2@situs.local` Пароль: `Admin123!`
+
+Сброс пароля (админ/QA):
+
+- Через API: `POST /api/auth/login` возвращает JWT; пароли хранятся в bcrypt.
+- Если необходимо принудительно установить пароль для пользователя:
+
+```sql
+-- Выполнить в контейнере БД (docker exec -it situs-postgres psql -U situs -d situs)
+UPDATE users
+SET password = '$2b$12$bSjEn9zrIzOKaXLqi/NsB.qo96ORr8pZtV/iorbdo5wSN6mxotqL2' -- bcrypt("Admin123!")
+WHERE email IN ('admin@situs.local', 'qa+admin2@situs.local');
+```
+
+Или через контейнер API (Prisma):
+
+```bash
+docker exec situs-api node - <<'NODE'
+(async () => {
+  const { PrismaClient } = require('@prisma/client');
+  const prisma = new PrismaClient();
+  const hash = '$2b$12$bSjEn9zrIzOKaXLqi/NsB.qo96ORr8pZtV/iorbdo5wSN6mxotqL2'; // Admin123!
+  await prisma.user.updateMany({ where: { email: { in: ['admin@situs.local', 'qa+admin2@situs.local'] } }, data: { password: hash } });
+  await prisma.$disconnect();
+  console.log('Passwords updated');
+})();
+NODE
+```
+
+Примечание: токены теперь содержат корректные scopes согласно глобальной роли (SUPER_ADMIN/STAFF/AGENCY/BUSINESS),
+что обеспечивает доступ к списку проектов по `PROJECT_READ`.
 
 Примечания:
 

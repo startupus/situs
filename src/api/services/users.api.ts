@@ -217,7 +217,11 @@ class UsersApiService {
   logout(): void {
     // Очищаем токен из localStorage
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('auth_token');
+      try {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_refresh_token');
+        localStorage.removeItem('situs:sub-id');
+      } catch {}
     }
   }
 
