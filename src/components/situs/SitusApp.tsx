@@ -29,6 +29,7 @@ import ProjectSettingsPlaceholder from './projects/settings/ProjectSettingsPlace
 import ProjectThemeManager from './projects/settings/ProjectThemeManager';
 import ProjectIntegrationsPage from './projects/settings/ProjectIntegrationsPage';
 import ProjectDomainSettings from './projects/settings/ProjectDomainSettings';
+import AuthGuard from '../auth/AuthGuard';
 
 const SitusApp: React.FC = () => {
   console.log('SitusApp component rendered');
@@ -42,7 +43,14 @@ const SitusApp: React.FC = () => {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/" element={<SitusMainLayout />}>
+      <Route 
+        path="/" 
+        element={
+          <AuthGuard validateToken={true}>
+            <SitusMainLayout />
+          </AuthGuard>
+        }
+      >
         {/* Главная страница - дашборд */}
         <Route index element={<SitusDashboard />} />
 

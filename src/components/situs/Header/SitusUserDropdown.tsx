@@ -33,8 +33,40 @@ const SitusUserDropdown: React.FC = () => {
     };
   }, []);
 
-  const userName = 'Администратор Системы';
-  const userRole = 'Системный администратор';
+  // Получаем данные пользователя из токена или API
+  const [userName, setUserName] = useState<string>('');
+  const [userRole, setUserRole] = useState<string>('');
+  const [userInitials, setUserInitials] = useState<string>('');
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+          // Парсим JWT для получения базовых данных
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          const name = payload.name || payload.email?.split('@')[0] || 'Пользователь';
+          const role = payload.globalRole === 'SUPER_ADMIN' ? 'Супер администратор' :
+                      payload.globalRole === 'STAFF' ? 'Сотрудник' :
+                      payload.globalRole === 'AGENCY' ? 'Агентство' : 'Бизнес пользователь';
+          
+          const initials = name.trim().split(/\s+/).slice(0, 2)
+            .map((s: string) => s.charAt(0).toUpperCase()).join('') || 'У';
+          
+          setUserName(name);
+          setUserRole(role);
+          setUserInitials(initials);
+        }
+      } catch {
+        // При ошибке парсинга не показываем данные
+        setUserName('');
+        setUserRole('');
+        setUserInitials('');
+      }
+    };
+    
+    loadUserData();
+  }, []);
   const onClickItem = (item: UserMenuItem) => (e: React.MouseEvent) => {
     if (item?.params?.action === 'logout' || item?.to === '/auth/logout' || item?.title?.toLowerCase() === 'выйти') {
       e.preventDefault();
